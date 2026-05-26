@@ -4,6 +4,22 @@
 
 ---
 
+## v13 wave 2 — SHIPPED ✓ (May 26, 2026)
+
+- [x] **Sprite parity pass** — Baggie Barb got her own palette (faded purple house dress, gray hair, beige skin) and no longer shares launderlady. cubscout / jogger / busker / dogwalker each got a distinct palette in PALS (they had npcStyles entries but were falling through to PALS.tony — every "ambient pedestrian" looked like a small tony).
+- [x] **PINKY POLENTA** — new rival supply vendor at a new BUS STOP zone. Sells "house cut" packets ($4 each, $18 for 5 — cheaper than Barb but soap-prone). Sprite uses new `pinky` palette (olive skin, yellow undershirt, gold accent, slick-back hair).
+- [x] **THE MATHEMATICIAN** — under the highway underpass. Calculates live cook EV based on brain/rocked-up state. Every 3rd interaction reveals a hidden system tip (5 tips total). New `math` palette + `glasses` accessory option in `makeNPC`.
+- [x] **COUSIN BRENDAN** — rookie cop mini-boss. Spawns at wanted ≥ 2 with 30% chance (capped at 1 instance). 55 HP, 2.3 speed, 50-damage taser on 4s recharge. Drops $30 cash pile on death. New `brendan` palette.
+- [x] **Dirty-packet economy** — `P.dirtySupplies` counter tracks pinky-sourced packets within `P.supplies`. `doCook` consumes dirty first and applies weighted soap rate (`(dirtyUsed*0.25 + cleanUsed*0.12)/n`). Forward-compatible save (key unchanged).
+- [x] **Achievements** — `DUE_DEALER_SYSTEM` (buy from pinky once), `BADGE_MONEY` (defeat brendan).
+- [x] **Barb's passive aside** — first pinky purchase flips `state.barbAside`; next barb visit prepends a one-line aside. Flag consumed on display, persisted in save.
+- [x] **CHATTER** — added ambient lines for pinky / math / brendan.
+- [x] **VIBE.md** identity table extended with the 3 new NPCs (all 4 columns filled).
+
+Notes from shipping: backed off from inventing a new "dirty packet" inventory item — `P.supplies` is a top-level scalar, not in `P.inventory`, so a parallel `P.dirtySupplies` counter fit the existing pattern cleaner. There is no canonical bus station in the world, so a small BUS STOP zone was added between the block, marketplace, and laundromat — natural foot-traffic crossroads, not on top of any existing vendor.
+
+---
+
 ## v12 — SHIPPED ✓ (May 23, 2026)
 
 - [x] **Copper heist wired in** — rank gate removed; the brutus jr. door is the gate. (was: rank ≥ 4)

@@ -230,6 +230,9 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | LOUD LARRY | just loud | the projects | fights, big damage |
 | STRIPE | rival dealer, sells soap | the projects | $8 rocks, 40% are soap |
 | THE PIGEON KING | one foot, unblinking | wanders | trades secrets for $2 bread |
+| PINKY POLENTA | mangled italian, says "you no like?" once per visit | rival supply at the bus stop | sells house cut packets $4 each, 5 for $18 — soap-prone |
+| THE MATHEMATICIAN | monotone, numerate, occasionally biblical | under the highway underpass | calculates your cook EV; every 3rd visit reveals a hidden system |
+| COUSIN BRENDAN | yells he is brendan, name-drops uncle dean | rookie cop, spawns at wanted ≥ 2 | tasers for 50 (4s recharge); drops a $30 rookie badge on death |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 

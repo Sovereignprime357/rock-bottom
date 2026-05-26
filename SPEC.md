@@ -44,7 +44,8 @@ The game is also a VibeKoded portfolio piece — a demonstration of building an 
 | Cash | 0-∞ | None | N/A | `$N` |
 | Rocks | 0-∞ | None | N/A | `🪨 N` |
 | Pure Copper | 0-∞ | None | N/A | `🪙 N` — stolen from abandoned bldg |
-| Supplies | 0-∞ | None | N/A | `🧪 N` — unmarked packets from Baggie Barb |
+| Supplies | 0-∞ | None | N/A | `🧪 N` — unmarked packets from Baggie Barb (clean) or Pinky Polenta (dirty/house cut) |
+| Dirty Supplies | 0 ≤ N ≤ Supplies | None | N/A | counter within Supplies; consumed first by `doCook`; ramps post-roll soap rate |
 | Shakes | 0-100 | Climbs +0.0025/ms passively, +0.05/ms sprinting | At 100, 1.5% chance per tick of 2 damage | bar, red above 70 |
 | Cred | 0-∞ | None (losses only from in-game events) | N/A | gates ranks |
 | Brain | 0-100 | Decays from drug use and trauma | N/A | currently cosmetic, future: gates dialogue |
@@ -64,7 +65,7 @@ steal copper → sell to Yuri → buy packets from Baggie Barb → cook at the c
 | shaky hands special | 1 (needs shakes ≥ 60) | ignored | 0.55 | 0.45 |
 | cook all | 5+ | yes | 0.15 + bb*0.18 | 0.18 - bb*0.10 |
 
-`bb = clamp((brain-30)/70, -0.4, 0.6)`, minus 0.25 if rocked-up (shaky scientist). Each cook costs 1-6 brain and adds 2*n shakes (except shakes special). 12% post-roll soap chance. Cooking 3+ at once has a 35% wanted+1 (the smell).
+`bb = clamp((brain-30)/70, -0.4, 0.6)`, minus 0.25 if rocked-up (shaky scientist). Each cook costs 1-6 brain and adds 2*n shakes (except shakes special). Post-roll soap chance is weighted by packet source: clean (Barb) = 12%, dirty (Pinky's house cut) = 25%. The rate for a batch is `(dirtyUsed*0.25 + cleanUsed*0.12) / n`; dirty packets are consumed first. Cooking 3+ at once has a 35% wanted+1 (the smell).
 
 Stripe buys rocks at $6 each (1) or bulk (3+); resells them at his $8.
 
@@ -144,8 +145,15 @@ See `VIBE.md` for full identity registry. Mechanical spec:
 - **Always hostile in zone:** Brutus (scrap yard only)
 - **Hostile if seen, aggros on damage:** Lurch, Sherri, Paulie, Loud Larry
 - **Spawned hostile:** Cops (when `wanted >= 1`)
-- **Vendor/peaceful:** Tony, Yuri, Pete, Mom, Possum, Priest, Conductor, Stripe, Pigeon
+- **Vendor/peaceful:** Tony, Yuri, Pete, Mom, Possum, Priest, Conductor, Stripe, Pigeon, Barb, Pinky, Mathematician
   - Hitting a peaceful NPC → they go hostile, wanted +1
+
+### Cousin Brendan (v13 wave 2 mini-boss)
+- Spawn rule: in `manageCops`, when wanted ≥ 2 and no live Brendan exists, the next spawning cop has a 30% chance to be Brendan. Hard cap: 1 Brendan at a time.
+- Stats: HP 55, speed 2.3, taser dmg 50.
+- Taser state machine: `taserChargeT` accumulates dt up to 4000ms whenever Brendan is in aggro/chase. On touch, if `taserChargeT >= 4000`, fires (50 dmg, blue particle burst, 1000ms attackCd) and resets the timer. Below 4000 he just chases.
+- Drop: a $30 cash pile at his body (re-using the cash-pile pickup mechanic — the "rookie badge").
+- Unlocks: `BADGE_MONEY` achievement; first kill broadcasts "uncle dean is posting on facebook again."
 
 ---
 
@@ -326,3 +334,5 @@ The following are NOT in v3 and should be considered for v4+ via DELEGATION.md:
 | v2 | May 2026 | Top-down Zelda-style canvas game, emoji sprites, real-time combat |
 | v3 | May 2026 | Pixel-art player, synth audio, boss fight, cops, rocked-up status, save system, title screen, 3 new zones, 5 new NPCs |
 | v12 | May 2026 | Wired copper heist (no rank gate). Baggie Barb vendor. Cooking minigame at the crate. Stripe buys rocks. THE FINISHER quest. Save v9. |
+| v13 wave 1 | May 2026 | Housekeeping fork from v12. Dead rank-gate collision skip removed. README, .gitattributes, title refreshed. |
+| v13 wave 2 | May 2026 | Sprite parity: Barb gets her own palette; cubscout/jogger/busker/dogwalker get distinct palettes (were rendering with tony's). 3 new NPCs: PINKY POLENTA (rival supply, dirty packets, soap-weighted cook math), THE MATHEMATICIAN (cook-EV oracle, discoverability reveals every 3rd visit), COUSIN BRENDAN (rookie-cop mini-boss with taser recharge state machine). New BUS STOP zone. Achievements: DUE_DEALER_SYSTEM, BADGE_MONEY. New `glasses` accessory for makeNPC. Save key unchanged. |

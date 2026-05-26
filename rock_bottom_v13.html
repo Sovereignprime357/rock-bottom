@@ -273,6 +273,8 @@ const ZONES = [
   { id: 'projects',    name: 'THE PROJECTS',        x: 100,  y: 1700, w: 600, h: 180, color: '#1c1c20', label: '#a0a0c0' },
   { id: 'underpass',   name: 'HIGHWAY UNDERPASS',   x: 1020, y: 240,  w: 380, h: 220, color: '#1a1a1c', label: '#888888' },
   { id: 'laundromat',  name: 'THE LAUNDROMAT',      x: 1480, y: 1080, w: 320, h: 200, color: '#3a3a44', label: '#88c0ff' },
+  // v13 wave 2 — small transit-zone for pinky polenta. between the block / market / laundromat.
+  { id: 'busstop',     name: 'BUS STOP',            x: 1240, y: 1080, w: 220, h: 180, color: '#2a2820', label: '#888888' },
 ];
 
 // ---------- buildings (solid props) ----------
@@ -351,6 +353,9 @@ const CHATTER = {
   busker: ["la la la", "for tips.", "i wrote this one."],
   dogwalker: ["paisley. no.", "leave it.", "paisley LEAVE IT."],
   cop: ["sir.", "sir please.", "10-4."],
+  pinky: ["amore.", "you no like?", "is house cut.", "lira. lira lira.", "buongiorno mi crackhead."],
+  math: ["expectation.", "carry the two.", "you a coin flip.", "the numbers know.", "thirty seven percent."],
+  brendan: ["it's me!! it's brendan!!", "uncle dean said!!", "stop!!", "i didn't want this beat!!"],
 };
 
 // ---------- equipment ----------
@@ -388,6 +393,8 @@ const ACHIEVEMENTS = {
   not_a_phase:          { name:"NOT A PHASE",          flav:"hit a 5x combo." },
   tuesday_again:        { name:"TUESDAY, AGAIN",       flav:"survive 7 in-game days." },
   compliment_the_face:  { name:"COMPLIMENT THE FACE",  flav:"compliment paulie 5 times." },
+  due_dealer_system:    { name:"DUE DEALER SYSTEM",    flav:"buy from pinky polenta once. you have options now." },
+  badge_money:          { name:"BADGE MONEY",          flav:"put cousin brendan on the ground." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -654,6 +661,15 @@ const PALS = {
   foodtruck: ['transparent','#1a0805','#3a1810','#603020','#a04830','#d4c896','#d06030','#fff'],
   priestson: ['transparent','#1a0820','#2a2030','#4a3040','#80708a','#d4c896','#88c0ff','#fff'],
   karaoke: ['transparent','#1a0820','#3a1850','#603080','#a050c0','#d4c896','#e8c040','#fff'],
+  // v13 wave 2 — converting the last four emoji-era styles and giving barb her own skin
+  cubscout: ['transparent','#1a1810','#2828a8','#e8c0a0','#2a5028','#e8c040','#20202a','#fff'],
+  jogger: ['transparent','#1a0810','#c8a850','#f0c8b0','#d488d4','#f8a8c8','#1a1a20','#fff'],
+  busker: ['transparent','#1a1008','#5a3018','#d4a878','#8a6840','#604030','#283848','#fff'],
+  dogwalker: ['transparent','#1a1010','#604020','#e8c8a8','#e8a880','#88c0ff','#4a4848','#fff'],
+  barb: ['transparent','#20182a','#b0a8a0','#c0a890','#8a6080','#c898c0','#4a3040','#fff'],
+  pinky: ['transparent','#0a0805','#180810','#c08850','#c8b070','#e8c040','#2a1810','#d4c896'],
+  math: ['transparent','#0a0a08','#2a1810','#b09078','#c8b8a0','#6a6a5a','#6a5a4a','#d4c896'],
+  brendan: ['transparent','#000','#0a0a28','#2838c0','#4048e8','#f4d8b8','#181828','#fff'],
 };
 
 // 16x16 pixel art helpers — parse a row string of 0-7 (dot=transparent)
@@ -952,6 +968,11 @@ function makeNPC(opts={}) {
       body[9] = '....AATTTTAA....';
       body[10] = '...TAATTTTAAT...';
     }
+    if (accessory === 'glasses') {
+      // square wire-frame glasses — accent frames bracketing each eye, skin nose bridge between
+      body[5] = '....ASeASeSA....';
+      body[4] = '.....AAAAAA.....';
+    }
     body = applyVars(body, {H:H, S:S, T:T, P:P, A:A, E:E, C:C2, O:'1', e:'1'});
     return parseGrid(body);
   };
@@ -997,6 +1018,11 @@ function buildSprites() {
     foodtruck: { hat:5, skin:3, shirt:6, pants:6, accent:5, wide:true, accessory:'badge' },
     priestson: { hat:5, skin:5, shirt:2, pants:1, accent:6, thin:true, cap:true },
     karaoke:   { hat:5, skin:3, shirt:6, pants:2, accent:4 },
+    // v13 wave 2
+    barb:      { hat:2, skin:3, shirt:4, pants:6, accent:5, wide:true },
+    pinky:     { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true },
+    math:      { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true, accessory:'glasses' },
+    brendan:   { hat:3, skin:5, shirt:3, pants:6, accent:7, cap:true, accessory:'badge', accColor:5, thin:true },
   };
   Object.entries(npcStyles).forEach(([k, opts]) => {
     const frames = makeNPC(opts);
@@ -1140,7 +1166,7 @@ async function saveGame() {
     await window.storage.set(SAVE_KEY, {
       version: 9,
       player: {
-        x: P.x, y: P.y, hp: P.hp, cash: P.cash, rocks: P.rocks, copper: P.copper, supplies: P.supplies||0, shakes: P.shakes,
+        x: P.x, y: P.y, hp: P.hp, cash: P.cash, rocks: P.rocks, copper: P.copper, supplies: P.supplies||0, dirtySupplies: P.dirtySupplies||0, shakes: P.shakes,
         cred: P.cred, brain: P.brain, wanted: P.wanted, rank: P.rank,
         inventory: P.inventory, lifetime: P.lifetime, tonyOffenses: P.tonyOffenses,
         equip: P.equip, cartMounted: P.cartMounted,
@@ -1155,6 +1181,7 @@ async function saveGame() {
       dayTime: state.dayTime,
       weather: state.weather,
       lootedDumpsters: PROPS.filter(p=>p.type==='dumpster' && p.looted).map(p=>p.x+','+p.y),
+      barbAside: !!state.barbAside,
     });
   } catch(e) {}
 }
@@ -1167,6 +1194,7 @@ async function loadGame() {
     P.attackCd = 0; P.hitFlash = 0; P.iframes = 0;
     P.facing = P.facing || 'down';
     P.supplies = P.supplies || 0;
+    P.dirtySupplies = Math.min(P.dirtySupplies || 0, P.supplies);
     P.lifetime.rocksCooked = P.lifetime.rocksCooked || 0;
     P.lifetime.rocksFenced = P.lifetime.rocksFenced || 0;
     P.equip = P.equip || { shoes:null, hat:null, coat:null };
@@ -1177,7 +1205,9 @@ async function loadGame() {
       possumProphecies: 0, brutusDeaths: 0, churchDonations: 0,
       rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
       plateStolen: 0, stripeBetrayed: 0, pigeonTrade: 0,
+      pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
     }, sv.counters || {});
+    state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
     state.day = sv.day ?? 1;
     state.dayTime = sv.dayTime ?? 0;
@@ -1194,7 +1224,7 @@ const P = {
   facing: 'down', frame: 0, frameT: 0,
   vx: 0, vy: 0, speed: 2.2,
   hp: 100, maxHp: 100,
-  cash: 25, rocks: 0, copper: 0, supplies: 0,
+  cash: 25, rocks: 0, copper: 0, supplies: 0, dirtySupplies: 0,
   shakes: 20, cred: 0, brain: 70,
   wanted: 0, wantedT: 0, rank: 0,
   attackCd: 0, attacking: 0, hitFlash: 0, iframes: 0,
@@ -1282,7 +1312,9 @@ const state = {
     possumProphecies: 0, brutusDeaths: 0, churchDonations: 0,
     rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
     plateStolen: 0, stripeBetrayed: 0,
+    pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
   },
+  barbAside: false,
 };
 
 // ---------- dialogue / toast helpers ----------
@@ -1339,7 +1371,7 @@ function renderInventory() {
     <div class="row"><span>cash</span><span>$${P.cash}</span></div>
     <div class="row"><span>rocks</span><span>🪨 ${P.rocks}</span></div>
     <div class="row"><span>pure copper</span><span>🪙 ${P.copper}</span></div>
-    <div class="row"><span>raw supplies</span><span>🧪 ${P.supplies||0}</span></div>
+    <div class="row"><span>raw supplies</span><span>🧪 ${P.supplies||0}${(P.dirtySupplies||0)>0 ? ` (${P.dirtySupplies} house cut)` : ''}</span></div>
     <div class="row"><span>hp</span><span>${Math.round(P.hp)} / ${P.maxHp}</span></div>
     <div class="row"><span>shakes</span><span>${P.shakes.toFixed(0)}</span></div>
     <div class="row"><span>brain</span><span>${P.brain.toFixed(0)}</span></div>
@@ -1580,9 +1612,17 @@ function spawnNpcs() {
       } },
     // --- v8 new NPCs ---
     // --- v12 new vendor: the supply ---
-    { id:'barb', name:'BAGGIE BARB', sprite:'launderlady', x:1540, y:1190, w:28,h:32, color:'#8a6080',
+    { id:'barb', name:'BAGGIE BARB', sprite:'barb', x:1540, y:1190, w:28,h:32, color:'#8a6080',
       hp:80, maxHp:80, speed:0, hostile:false, vendor:true,
       interact: barbDialogue },
+    // v13 wave 2 — rival supply at the bus stop
+    { id:'pinky', name:'PINKY POLENTA', sprite:'pinky', x:1330, y:1160, w:26,h:32, color:'#c8b070',
+      hp:70, maxHp:70, speed:0, hostile:false, vendor:true,
+      interact: pinkyDialogue },
+    // v13 wave 2 — the mathematician, under the highway underpass
+    { id:'math', name:'THE MATHEMATICIAN', sprite:'math', x:1340, y:380, w:26,h:32, color:'#6a5a4a',
+      hp:60, maxHp:60, speed:0, hostile:false,
+      interact: mathematicianDialogue },
     { id:'laundromat_lady', name:'LAUNDROMAT LADY', sprite:'launderlady', x:1720, y:1180, w:28,h:32, color:'#3a3a44',
       hp:60, maxHp:60, speed:0, hostile:false,
       interact: (n)=> dialogue('LAUNDROMAT LADY', "she is folding the same shirt.\nshe has been folding the same shirt.\nthe shirt is hers, you think.", [
@@ -2033,7 +2073,17 @@ function barbDialogue() {
     "she is, in fact, someone's grandma. somewhere.",
     "the bingo dauber on the table has never been used for bingo.",
   ];
-  dialogue('BAGGIE BARB', "what.\n" + flav[Math.floor(Math.random()*flav.length)], [
+  let aside = '';
+  if (state.barbAside) {
+    const asides = [
+      "\n(she taps the pen.)\n'pinky's salt is salt. just salt.\nmine has more salt.'",
+      "\n(she does not look up.)\n'i hear pinky undercuts.\nhe will. eventually. cut himself.'",
+      "\n(the dauber moves an inch.)\n'pinky calls it amore. it is not.'",
+    ];
+    aside = asides[Math.floor(Math.random()*asides.length)];
+    state.barbAside = false;
+  }
+  dialogue('BAGGIE BARB', "what.\n" + flav[Math.floor(Math.random()*flav.length)] + aside, [
     { label: P.cash>=5 ? "buy 1 packet. $5. (unmarked.)" : "a packet is $5.", disabled: P.cash<5, action: () => {
       P.cash -= 5; P.supplies = (P.supplies||0) + 1;
       toast("- $5\n+ 1 packet (unmarked)\nshe does not look up.");
@@ -2060,10 +2110,107 @@ function barbDialogue() {
   ]);
 }
 
+// ---------- PINKY POLENTA (rival supply, house cut) ----------
+function pinkyDialogue() {
+  const flav = [
+    "buongiorno mi crackhead.",
+    "the cut is amore.",
+    "is fresh. from the house.",
+    "i price in lira sometimes. twenty four thousand. is four dollars. same number.",
+    "pinky no negotiate. pinky also a little negotiate.",
+  ];
+  const onBuy = () => {
+    if (!state.counters.pinkyFirstBuy) {
+      state.counters.pinkyFirstBuy = 1;
+      state.barbAside = true;
+      unlockAchievement('due_dealer_system');
+      broadcastNews("DUE DEALER SYSTEM OBSERVED. THE NEIGHBORHOOD HAS OPTIONS NOW.");
+      feedPost("two packet guys. one block. choose your fighter.", '@crackheadcent');
+    }
+  };
+  dialogue('PINKY POLENTA', flav[Math.floor(Math.random()*flav.length)] + "\nhe smells of cologne and onion.\nhe is always saying it once.", [
+    { label: P.cash>=4 ? "buy 1 house cut packet. $4." : "house cut is $4.", disabled: P.cash<4, action: () => {
+      P.cash -= 4;
+      P.supplies = (P.supplies||0) + 1;
+      P.dirtySupplies = (P.dirtySupplies||0) + 1;
+      onBuy();
+      toast("- $4\n+ 1 packet (house cut)\nhe winks. with both eyes.");
+      audio.coin(); saveGame();
+    }},
+    { label: P.cash>=18 ? "buy 5 packets bulk. $18." : "5 packets bulk is $18.", disabled: P.cash<18, action: () => {
+      P.cash -= 18;
+      P.supplies = (P.supplies||0) + 5;
+      P.dirtySupplies = (P.dirtySupplies||0) + 5;
+      onBuy();
+      toast("- $18\n+ 5 packets (house cut)\nhe says 'amore.' he says it three times.");
+      audio.coin(); saveGame();
+    }},
+    { label: "you no like?", action: () => {
+      toast("he is delighted you said it back.\n'you no like? you go barb.'\nhe says it once more under his breath.");
+    }},
+    { label: "ask about the cut.", action: () => {
+      toast("'is house. is what house had.'\nhe gestures behind him.\nthere is no house.");
+    }},
+    { label: "leave.", action: () => {} },
+  ]);
+}
+
+// ---------- THE MATHEMATICIAN (under the underpass) ----------
+function mathematicianDialogue() {
+  state.counters.mathInteractions = (state.counters.mathInteractions||0) + 1;
+  const count = state.counters.mathInteractions;
+
+  // live EV calc — mirrors doCook's slow-mode math
+  let bb = clamp((P.brain - 30) / 70, -0.4, 0.6);
+  if (P.rockedT > 0) bb -= 0.25;
+  const slowDbl = clamp(0.08 + bb*0.15, 0, 0.7);
+  const slowBrn = clamp(0.10 - bb*0.08, 0.02, 0.5);
+  const evRocks = 1 - slowBrn + slowDbl;
+  const evCash = evRocks * 6;       // stripe fences at $6
+  const evNet = evCash - 5;          // minus barb's $5/packet
+  const pct = Math.round(evRocks * 100);
+  const dirty = P.dirtySupplies || 0;
+
+  const stateLines = [
+    `${pct} percent of two. you a coin flip with a busted edge.`,
+    `brain ${Math.round(P.brain)}. ${P.rockedT>0 ? "rocked up. shaky scientist. minus point two five. don't." : "shaky mode equals minus point one eight. don't."}`,
+    `expectation: a buck ${Math.max(0, evNet).toFixed(2).slice(2)}. you smoke it you lose two dollars and a year.`,
+    `the math says barb. the math also says you sell. the math is a coward.`,
+    `tony charges ten. you cook for five. the gap is moral.`,
+  ];
+  if (dirty > 0) {
+    stateLines.push(`${dirty} dirty in the bag. soap rate twenty five. pinky knows what he did.`);
+  }
+
+  let lead = stateLines[Math.floor(Math.random()*stateLines.length)];
+  let tip = null;
+  if (count % 3 === 0) {
+    const tipIdx = Math.floor(count / 3) - 1;
+    const tips = [
+      "the cook brain factor: brain minus thirty over seventy. minus point two five if you smoked first. they don't print that anywhere.",
+      "stripe's coin lands soap two of every five tosses. forty percent. you knew. you kept buying.",
+      "tony's patience is three. you short him three times. the corner becomes arena. simple math.",
+      "twenty two coins are on the ground. you have stepped on most of them already. hold F. the math is green.",
+      "the priest's son is half tic-tac, half rock. exactly half. fifty fifty. flip your coin.",
+    ];
+    if (tipIdx >= 0 && tipIdx < tips.length) tip = tips[tipIdx];
+  }
+
+  dialogue('THE MATHEMATICIAN', "he looks up from a clipboard.\n" + lead + (tip ? "\n\n· the numbers know what you did ·\n" + tip : ""), [
+    { label: "ask for another number.", action: () => mathematicianDialogue() },
+    { label: "ask what he calculates.", action: () => {
+      toast("'expectation.'\nhe taps the clipboard.\n'i do not predict. i only count.'");
+    }},
+    { label: "leave.", action: () => {} },
+  ]);
+}
+
 // ---------- COOK (the finisher) ----------
 function cookBatchMenu() {
   const have = P.supplies || 0;
-  dialogue('THE CRATE (KITCHEN)', `you have ${have} packet${have===1?'':'s'}.\nthe crate is a kitchen now.\nbrain: ${Math.round(P.brain)} · shakes: ${Math.round(P.shakes)}.`, [
+  const dirty = Math.min(P.dirtySupplies||0, have);
+  const dirtyLine = dirty > 0 ? `\n${dirty} of them are pinky's house cut. (dirty first.)` : '';
+  dialogue('THE CRATE (KITCHEN)', `you have ${have} packet${have===1?'':'s'}.${dirtyLine}\nthe crate is a kitchen now.\nbrain: ${Math.round(P.brain)} · shakes: ${Math.round(P.shakes)}.`, [
     { label: have>=1 ? "low and slow. (1 packet, safe.)" : "you have no packets.", disabled: have<1, action: () => doCook(1, 'slow') },
     { label: have>=3 ? "fast cook. (3 packets, risky.)" : "fast cook (need 3 packets.)", disabled: have<3, action: () => doCook(3, 'fast') },
     { label: have>=1 && P.shakes >= 60 ? "shaky hands special. (1 packet, all-or-nothing.)" : (P.shakes<60 ? "shakes too steady for the special." : "need a packet."), disabled: have<1 || P.shakes<60, action: () => doCook(1, 'shakes') },
@@ -2076,6 +2223,9 @@ function doCook(n, mode) {
   // brainBoost: a clearer head cooks better. rocked-up cooks WORSE. comedy.
   let bb = clamp((P.brain - 30) / 70, -0.4, 0.6);
   if (P.rockedT > 0) bb -= 0.25;          // rocked-up = shaky scientist
+  // v13 wave 2 — dirty packets (pinky's house cut) consumed first, harsher soap rate
+  const dirtyUsed = Math.min(n, P.dirtySupplies||0);
+  const cleanUsed = n - dirtyUsed;
   let rocks = 0, burnt = 0, soap = 0;
   for (let i=0;i<n;i++) {
     let dbl, brn;
@@ -2089,9 +2239,12 @@ function doCook(n, mode) {
     else if (r < brn + dbl) rocks += 2;
     else rocks++;
   }
-  // small chance one rock turns out soap (mostly slow / all modes)
-  if (mode !== 'shakes' && rocks > 0 && Math.random() < 0.12) { soap = 1; rocks--; }
+  // post-roll soap: barb's clean packets land soap at 12%, pinky's house cut at 25%.
+  // weighted average across the batch — preserves barb's flow exactly when no dirty packets used.
+  const soapRate = n > 0 ? (dirtyUsed * 0.25 + cleanUsed * 0.12) / n : 0;
+  if (mode !== 'shakes' && rocks > 0 && Math.random() < soapRate) { soap = 1; rocks--; }
   P.supplies = Math.max(0, (P.supplies||0) - n);
+  P.dirtySupplies = Math.max(0, (P.dirtySupplies||0) - dirtyUsed);
   P.rocks += rocks;
   if (soap) P.inventory.push({id:'soap', n:'a small bar of soap (oops)', q:1});
   P.brain = Math.max(0, P.brain - Math.min(6, 1 + n));       // fumes
@@ -2239,7 +2392,24 @@ function onNpcDeath(n) {
       setTimeout(spawnBrutusOlder, 1500);
     }
   }
-  if (n.isCop) { P.cred += 10; P.wanted = Math.min(3, P.wanted+1); P.lifetime.copsKilled++; toast('+ 10 cred · wanted +1\na cop is on the ground.'); }
+  if (n.isCop) {
+    P.cred += 10; P.wanted = Math.min(3, P.wanted+1); P.lifetime.copsKilled++;
+    if (n.isBrendan) {
+      // drops a "rookie badge" — uses the existing cash-pile pickup mechanic. $30.
+      cashPiles.push({ id:'cp_brendan_'+Math.random().toString(36).slice(2,6), x:n.x+n.w/2, y:n.y+n.h/2+8, amt:30, collected:false });
+      unlockAchievement('badge_money');
+      if (!state.counters.brendanFirstKill) {
+        state.counters.brendanFirstKill = 1;
+        feedPost("uncle dean is posting on facebook again.", '@local_eyewitness');
+        broadcastNews("LOCAL ROOKIE DOWN. UNCLE DEAN POSTING. FAMILY GROUP CHAT GOES QUIET.");
+      } else {
+        feedPost("brendan again. the family is going to have words.", '@local_eyewitness');
+      }
+      toast('+ 10 cred · wanted +1\ncousin brendan is on the ground.\nhis badge fell out. it is yours now.');
+    } else {
+      toast('+ 10 cred · wanted +1\na cop is on the ground.');
+    }
+  }
   else { P.cred += 3; toast('+ 3 cred\n'+n.name+' is on the ground.'); }
   // alley kill counter for hustles
   if (['lurch','sherri','paulie'].includes(n.id)) {
@@ -2320,7 +2490,17 @@ function manageCops(dt) {
     const liveCops = npcs.filter(n=>n.isCop && !n.dead).length;
     if (liveCops < targetCops) {
       audio.copSiren();
-      const cop = {
+      // v13 wave 2 — at wanted ≥ 2, one spawning cop has a 30% chance of being cousin brendan.
+      // hard cap at one brendan on the map at a time.
+      const liveBrendan = npcs.find(n => n.isBrendan && !n.dead);
+      const spawnBrendan = (P.wanted >= 2) && !liveBrendan && (Math.random() < 0.3);
+      const cop = spawnBrendan ? {
+        id:'brendan_'+Math.random().toString(36).slice(2,6), name:'COUSIN BRENDAN', sprite:'brendan',
+        x: P.x + (Math.random()<.5?-400:400), y: P.y + (Math.random()<.5?-300:300),
+        w:26, h:30, color:'#2838c0', hp:55, maxHp:55, speed:2.3, dmg:50,
+        hostile:true, aggro:true, isCop:true, isBrendan:true, taserChargeT:0,
+        attackCd:0, wanderT:0, targetX:0, targetY:0, showHp:true,
+      } : {
         id:'cop_'+Math.random().toString(36).slice(2,6), name:'COP', sprite:'cop',
         x: P.x + (Math.random()<.5?-400:400), y: P.y + (Math.random()<.5?-300:300),
         w:28, h:32, color:'#1818a0', hp:60, maxHp:60, speed:1.5, dmg:10,
@@ -2329,6 +2509,13 @@ function manageCops(dt) {
       cop.x = clamp(cop.x, 40, WORLD.w-40);
       cop.y = clamp(cop.y, 40, WORLD.h-40);
       npcs.push(cop);
+      if (spawnBrendan) {
+        const lines = [
+          "stop! it's me!! it's brendan!!",
+          "uncle dean said don't make him come down here!!",
+        ];
+        setTimeout(() => toast("· COUSIN BRENDAN ARRIVES ·\n" + lines[Math.floor(Math.random()*lines.length)], 3200), 500);
+      }
     }
   } else {
     P.wantedT = 0;
@@ -2689,10 +2876,24 @@ function updateWorld(dt) {
         n.y += (pdy/len) * n.speed * (dt/16);
         isMoving = true;
       }
+      // v13 wave 2 — brendan's taser charges over 4 seconds; only zaps when ready.
+      if (n.isBrendan) {
+        n.taserChargeT = Math.min(4000, (n.taserChargeT||0) + dt);
+      }
       // touch damage
       if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && n.attackCd===0) {
-        damagePlayer(n.dmg||8, n);
-        n.attackCd = 800;
+        if (n.isBrendan) {
+          if (n.taserChargeT >= 4000) {
+            damagePlayer(50, n);
+            n.taserChargeT = 0;
+            n.attackCd = 1000;
+            audio.copSiren();
+            for (let i=0;i<10;i++) particles.push({x:P.x+P.w/2,y:P.y+P.h/2,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,life:400,c:'#88c0ff',sz:3,glow:true});
+          }
+        } else {
+          damagePlayer(n.dmg||8, n);
+          n.attackCd = 800;
+        }
       }
     } else if (n.patrol) {
       // patrol along path
