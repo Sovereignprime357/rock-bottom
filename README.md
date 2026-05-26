@@ -1,60 +1,53 @@
 # ROCK BOTTOM — The Crackhead's Odyssey
 
-> A top-down Zelda-style action game where you play a crackhead trying to score rocks from a local dealer. Satirical Adult Swim comedy. Single HTML file. Built by VibeKoded.
+> A top-down satirical action game where you play a crackhead trying to score rocks from a local dealer. Single HTML file. Zero dependencies. Double-click to play. Built by VibeKoded.
 
 ## What it is
 
 You wake up on the sidewalk. Your mouth tastes like a battery. It is approximately Tuesday. The shakes are climbing. The only person who can help you is Tre Bag Tony at the corner. He charges $10 a rock and does not negotiate, except sometimes he does.
 
-Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the abandoned building. Survive the cops. Defeat Tre Bag Tony. Become CRACK LORD SUPREME.
+Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the abandoned building. Cook your own at the crate. Survive the cops. Defeat Tre Bag Tony. Become CRACK LORD SUPREME.
 
-## What it is NOT
+## Technical shape
 
-- Not a glorification of addiction.
-- Not a "drug education" tool.
-- Not mean-spirited. The protagonist is a clown in a comedy. Treat him with the dignity of a clown.
-- Not Rick and Morty. There is no "smart" undercurrent. The stupidity IS the show.
-- Not Family Guy. No cutaway gags. The world is continuous.
+- **One file.** `rock_bottom_v13.html` — HTML, CSS, JS, sprites, audio, all inline.
+- **Zero deps.** No CDN. No npm. No build step. No framework. Vanilla JS, Canvas 2D, Web Audio.
+- **How to run:** double-click the file. Or drag it into a browser. That is the install process.
+- **Saves:** `window.storage` (Claude.ai artifact API). Falls back to in-memory if missing.
+- **Browser:** any evergreen Chromium/Firefox/Safari. Desktop and mobile both supported (touch D-pad on mobile).
 
-## Current version
+## Current shipped build
 
-**v3** ships:
+**v13** — wave 1 housekeeping done. v12 → v13 forked, dead rank-gate collision code removed, docs synced. Wave 2+ is queued in `DELEGATION.md`.
 
-- Top-down action RPG with WASD movement
-- Real-time fist combat (SPACE swings, hitbox in facing direction)
-- Pixel-art player sprite, 4 directions × 2 walk frames, gold-tinted palette swap when rocked-up
-- Synthesized chiptune SFX via Web Audio
-- 7 zones: The Block, Scrap Yard, Pawn Shop, Dealer's Corner, Marketplace, Back Alley, Abandoned Building, Church, Projects
-- 15+ named NPCs with full identity (Tre Bag Tony, Yuri, Brutus, Pete, Lurch, Spider-Bite Sherri, Paulie The Face, Chatty Dave, Whole Foods Mom, The Possum, Father O'Malley, The Conductor, Loud Larry, Stripe, The Pigeon King)
-- Wanted level system (1-3 stars) with chasing cops and arrest cutscene
-- Rocked-up status effect (18s buff, then 8s crash)
-- Multi-phase boss fight against Tre Bag Tony (bottles → shoe → bare-knuckle)
-- Copper heist mini-game (3 stages, gated at Block Captain rank)
-- Persistent save via window.storage
-- Title screen, inventory panel, minimap
-- Live AI-generated chaos events via Anthropic API (the possum)
+## Version lineage
 
-## File system
+`rock_bottom_v4.html` through `rock_bottom_v13.html` are all preserved in the repo. v3 was the original public ship; everything since is in-house iteration. Latest = highest number. Older versions are kept for diff archeology, not because they still work — play the latest.
 
-This handoff pack contains:
+## Design docs (read in this order)
 
 | File | Role |
 |------|------|
 | `README.md` | This file. Quick orientation. |
-| `VIBE.md` | **THE SOUL.** The tone bible. Read this first, read it twice. |
-| `SPEC.md` | Behavioral contract. Systems, resources, invariants, edge cases. |
-| `CLAUDE.md` | Operating constraints for the agent picking this up. |
-| `DELEGATION.md` | Prioritized backlog. What ships in v4. |
-| `rock_bottom_v3.html` | The shipped game. The current spec made real. |
+| `VIBE.md` | **THE SOUL.** Tone bible. Read it twice. Lowercase NPCs, cursed names, no fourth-wall breaks. |
+| `SPEC.md` | Behavioral contract. Resources, zones, invariants, edge cases. |
+| `CLAUDE.md` | Operating constraints for the agent. Hard rules vs soft rules. |
+| `DELEGATION.md` | Prioritized backlog. What ships next. |
+| `BRAIN.md` | Append-only session log. What was changed, why, what was tried, what's next. |
 
-## Read order for a fresh agent
+## A fresh agent's read order
 
 1. README.md (you are here)
 2. **VIBE.md** — internalize the voice before doing anything else
 3. SPEC.md — understand the systems before changing them
-4. Play `rock_bottom_v3.html` end-to-end at least once (smoke a rock, fight a crackhead, get arrested, beat the boss)
+4. Play the latest `rock_bottom_v{N}.html` end-to-end (smoke a rock, fight a crackhead, get arrested, cook a batch, beat the boss)
 5. CLAUDE.md — operating rules
-6. DELEGATION.md — pick a task
+6. DELEGATION.md — pick a task off the top
+7. BRAIN.md — context for what just happened
+
+## Tone, one line
+
+the game does not editorialize. the possum knows. lowercase only. the bit lands flat.
 
 ## Owner
 
