@@ -2,6 +2,131 @@
 
 ---
 
+## Session 2026-05-26 · v13 wave 6.5 — economy balance pass (SHIPPED)
+
+### WHAT
+Three operator-found infinite-loop exploits closed; full audit sweep of every resource-granting NPC; daily reset wiring put in place. ALL edits landed on `rock_bottom_v13.html` (no v14 fork). SAVE_KEY untouched.
+
+### WHAT CHANGED (HIGH LEVEL)
+
+**Exploit 1 — Whole Foods Mom (kombucha lady)** — `momDialogue` (line ~2468). The three productive branches were ungated:
+- "accept $10 and pity" (+$10)
+- "ask for $20" (40% +$20 / 60% -2 brain)
+- "compliment her kombucha" (+5 cred)
+Fix: ask-money branches (both share a single slot) gated once-per-day via `state.counters.kombuchaAskDay === state.day`. Compliment branch gated separately via `kombuchaComplimentDay`. Both consumed branches surface VIBE refusal lines ("you've been by. she remembers." / "she is tired of her kombucha. she is tired of you."). Productive toasts append "come back tomorrow."
+
+**Exploit 2 — tic tacs cure shakes** — `priestDialogue` (line ~2534). The accept-tic-tac branch called `P.shakes = Math.max(0, P.shakes-30)` — undercutting the entire withdrawal lever. Fix: removed the shakes line. Replaced with `P.brain = Math.min(100, P.brain+5)` (small sober buff, fits priest-as-not-quite-doctor framing). Canonical toast `"the tic tac is gone. the shakes do not care."` priest_mercy quest still completes on accept. The $5 donation branch was also caught in the audit and gated daily via `priestDonateDay` (was the secondary +3 cred grind once Mom's cash was capped).
+
+**Exploit 3 — Barb / Stripe arbitrage** — `barbDialogue` (line ~2865) + `stripeDialogue` (line ~2648). Two-sided gate:
+- **Stripe** (`stripeFencedToday`): rocks 0-3 fence at full ($6), rocks 4-6 at $4, rocks 7-9 at floor $2, rocks 10+ closes fence for the day. Single-rock sell uses the current bracket. Bulk sell runs a while-loop applying per-rock pricing and breaks on close.
+- **Barb** (`barbPacketsToday`): 6-packet/day cap. Single = 1, bulk = 5. When remaining < 5, the bulk button is replaced with its own refusal. At cap, both buttons collapse into a single "she is tired" refusal.
+
+Tiered VIBE refusal lines at brackets:
+- Stripe rock 4: `"stripe is taking less today. stripe is taking what stripe takes."`
+- Stripe rock 7: `"stripe is done. stripe is done with rocks. go away."`
+- Stripe rock 10: `"stripe will not buy from you today. tomorrow."`
+- Barb at cap: `"she's tired. come back tomorrow. she has 14 across to think about."`
+- Barb bulk-impossible: `"she taps the pen. 'i'm not weighing five out tonight. come back tomorrow.'"`
+
+**Audit sweep — additional gates added:**
+- `lurchDialogue` (line ~2375): "give a dollar" +2 cred now 1×/day via `lurchDollarDay`. Refusal: `"lurch is full. of dollars. he is staring at the wall. come back tomorrow."`
+- `sherriDialogue` (line ~2387): "pretend to see the spider" +1 cred now 1×/day via `sherriSpiderDay`. Refusal: `"sherri's sleeve is already down. the spider is sleeping. come back tomorrow."`
+- `paulieDialogue` (line ~2398): "compliment the face" +1 cred now 1×/day via `paulieFaceDay`. Refusal: `"paulie nods. the face is satisfied. the face has been complimented today. come back tomorrow."` (lifetime `pauliCompliments` counter still ticks for the achievement gate at 5.)
+- `peteDialogue` (line ~2305): all sell-to-Pete branches gated by a $200/day cash cap via `peteCashToday`. New `tryPay(amount)` helper clips payout when near the cap so the player gets partial money on the last sale that crosses the line, full refusal once empty. Refusal: `"pete is empty. pete is eating. come back tomorrow."` Food sale (sell-to-player) NOT gated — pete spending player money is fine.
+- `startHeist` (line ~6928): 3-heist/day cap via `heistsToday`. Closes the conductor-arbitrage path. Refusal dialog: `"the door is half off. there is no air coming out. brutus jr. is awake and watching the door. not tonight."`
+
+**Daily reset wiring** — new helper `resetDailyCounters()` at line ~6927 (just above `startHeist`):
+```js
+const DAILY_COUNTER_KEYS = [
+  'stripeFencedToday', 'barbPacketsToday', 'peteCashToday', 'heistsToday',
+];
+function resetDailyCounters() {
+  for (const k of DAILY_COUNTER_KEYS) state.counters[k] = 0;
+}
+```
+Called from `updateWorld` inside the day-tick branch (line ~4111-4120, after `rollHustles()`). The `*Day` (day-stamp) counters self-reset via `=== state.day` comparison so they don't need explicit zeroing.
+
+**Save backward-compat** — added new counter fields to all 3 init sites:
+1. Load `Object.assign` defaults at line ~1434
+2. Top-level `state.counters` literal at line ~1597
+3. `startGame` fresh-save reset at line ~7381
+
+SAVE_KEY unchanged. Old saves load forward — new fields default to 0 → gates open as if it's day 1.
+
+### DECIDED, REASONING
+
+- **Why a day-stamp pattern (`*Day === state.day`) instead of a boolean reset on day-tick**: cheaper to write (no reset code per counter), more robust (a missed reset can't desync the gate), and reads like English in the gate check. Limitation: only works for "1×/day max" gates. Accumulating gates (Stripe ladder, Barb cap, Pete cap, heist cap) still need explicit reset, hence the `resetDailyCounters()` helper for those 4 counters only.
+- **Why Stripe's price ladder steps down rather than a hard cap at the start**: comedy + design. A hard cap ("stripe is done after rock 3") would feel bait-and-switch. Watching the price degrade ($6 → $4 → $2 → closed) communicates the dynamic naturally and pushes the player toward day-rotation. Also lets Mathematician tie a future tip to "stripe gets less per rock today."
+- **Why Pete cap = $200 and not lower**: he buys $15/copper, $20/license plate, $1/sock, $1/junk. A successful copper heist nets 8-12 copper = $120-180 at Pete (vs $200-300 at Yuri). $200 means one full Pete-sell of a good heist works; the *second* heist would partially clip. That's the intended pressure.
+- **Why heist cap = 3 and not lower**: a player needs the heist to fail occasionally without burning a day. 3 attempts gives ~70%×3 = ~85% chance of at least one success, but also lets a competent player grind copper aggressively early. 4+ would re-enable the conductor grind; 1-2 would feel punishing on lockpick-fail.
+- **Why Pinky stays uncapped**: explicit design call. Barb caps; Pinky doesn't. Pinky's dirty packets carry double the soap rate (0.25 vs 0.12), which is the inherent cost. If both were capped, the cook loop dies on bad days. Documented as an invariant.
+- **Why tic tac became +5 brain, not zero effect**: zero effect makes the priest's accept branch dead weight — the player would skip it. A small sober buff keeps the priest visit on the loop (priest_mercy quest still wants to fire) but doesn't undercut the addiction lever. Brain is also the cooking-EV input so this is a small cook-prep buff, which is on-theme for the priest as a (failed) caretaker figure.
+- **Why donations got pulled into the audit even though they weren't a listed exploit**: cred gates. Once Mom's $5 cred / day is capped, $5 → +3 cred at the church becomes the new infinite cred trickle (player has any source of $5 → grind cred). Daily-capping the donation closes that loop too. The audit pass is doing its job.
+- **Why pause for a daily-cap on the food sale at Pete (sell-to-player)**: didn't. Player paying $3 for food is a money sink, not a grant. Only sells-TO-Pete are gated. The Stripe-buys-rock branch ($8 to player) and Big Guy's cart trade are similarly NOT gated — these consume player resources.
+- **Why Mom's "$10 ask" and "$20 ask" share a slot rather than each having their own daily**: the brief's wording (`"ask for $10 / $20"` as a single phrase with `/`) plus the structural reading that both are "ask Mom for money today" — semantically one beat. Separate slots would feel like a loophole. The compliment is a different beat (validation, not money), so it gets its own slot.
+
+### COUNTEREXAMPLE HUNT
+
+- Old save (wave 6) loads forward: new counter fields default to 0 via `Object.assign`. `state.day` defaults to 1. Day-stamp checks `0 === 1 → false` so gates are open. ✓
+- New save day 1: ask Mom for $10 → `kombuchaAskDay = 1`. Try $20 → button replaced with refusal line. ✓
+- New save day 1: compliment Mom → `kombuchaComplimentDay = 1`. Re-open dialogue → compliment button now refusal. Ask-money branch still available. ✓
+- Day rollover: `state.day` increments 1 → 2. Mom's `kombuchaAskDay` is still 1; `1 === 2 → false` → branch re-opens. ✓
+- Tic tac accept: P.brain goes up 5 (clamped at 100); P.shakes UNCHANGED; P.rockedT UNCHANGED. ✓
+- priest_mercy quest: still flips done on first accept regardless of brain max. ✓
+- Stripe rocks 0-2 fenced today, sell 1 rock: price `$6`. Counter → 3. Toast no tail. ✓
+- Stripe rock 4: counter was 3, fence price = $4, counter → 4, toast carries "stripe is taking less today." ✓
+- Stripe bulk-sell with 5 rocks and 0 fenced today: rock 1-3 at $6 ($18), rock 4-5 at $4 ($8). Total $26. After: counter = 5. ✓
+- Stripe bulk-sell with 10 rocks and 0 fenced: rocks 1-3 at $6, 4-6 at $4, 7-9 at $2, rock 10 at $2 → counter hits 10 → break. Total: 18+12+6+2=$38. Player has 0 rocks left. Tail toast: "stripe will not buy from you today. tomorrow." ✓
+- Stripe bulk-sell with 5 rocks and `stripeFencedToday=9`: rock 1 at $2, counter → 10 → break. Total $2. Player has 4 rocks remaining. Tail: "stripe will not buy from you today." ✓
+- Re-open Stripe dialogue with counter = 10: both sell buttons collapse into "(closed today.)" refusal. Buy-from-stripe still works (player paying Stripe is fine). ✓
+- Barb buy 1 packet × 6: counter → 6. Re-open: both buy buttons replaced with "she is tired" refusal. ✓
+- Barb buy 5-pack on counter=0: counter → 5, remaining=1, single still available, bulk gone next open. ✓
+- Barb buy 5-pack on counter=2: would push to 7, but the bulk button is hidden because `remaining=4 < 5`. Single still available (would push counter to 3). ✓
+- Pete sell 1 copper with `peteCashToday=190`: tryPay(15) clips to 10. P.copper--, P.cash += 10. Counter → 200. Toast "pete is almost empty." ✓
+- Pete sell another copper: tryPay(15) returns 0 → refusal toast, P.copper unchanged. ✓
+- Pete sells 5 junk worth $5 with peteCashToday=198: tryPay(5) clips to 2. taken = min(5, 2) = 2. Counter → 200. Player loses 2 junk (not 5), gets $2. ✓
+- Heist attempt with heistsToday=3: refusal dialog fires, mode does NOT change. ✓
+- Heist attempt with heistsToday=2: increments to 3 inside startHeist, opens stage 1 normally. ✓
+- Day rollover during a heist run: heist counter for THAT heist stays at 3 (incremented before dawn). After dawn, counter resets to 0. Doesn't double-bill. ✓
+- Lurch / Sherri / Paulie cred grants: each 1×/day, refusal lines on second attempt. paulieCompliments lifetime counter still ticks (achievement gate intact). ✓
+- Priest donation $5: 1×/day via priestDonateDay. Repeat tries get the new "the lord has counted today" refusal. ✓
+- Mom is at night: existing daytime gate fires first ("she is at the wine bar with kelly"), no new logic touches it. ✓
+- Save / reload mid-day: counter values persist via `state.counters` serialization. Reload restores. Gates intact. ✓
+- Save / reload across day rollover (player saves, exits, comes back next day): when player returns, state.day is whatever was saved. day-tick must fire to advance. So technically gates DON'T reset on reload alone — they reset on the next dawn after reload. Acceptable behavior.
+
+### TRIED, ABANDONED
+
+- Considered making the kombucha ask-money use two separate counters (one for $10, one for $20). Decided one slot is the right read of the brief (`"ask for $10 / $20"` is one beat). Player picks risk-tier per day.
+- Considered making Stripe's fence price degrade with `P.lifetime.rocksFenced` (career counter) instead of daily. Abandoned: punishes long-running saves and never resets. Daily volume is the right axis — the joke is "stripe is having a long day," not "stripe is sick of you forever."
+- Considered a single `lastResetDay` sentinel instead of separate `*Day` per counter. Abandoned: the per-counter day-stamp doubles as "was this used today?" — cleaner read at the gate site, no extra state needed.
+- Considered making Pinky's house-cut packets also count toward a daily cap (separate from Barb). Abandoned per brief ("recommend: keep Pinky ungated"). Documented as intentional asymmetry.
+- Considered gating Dave's $8 pickpocket. Abandoned: Dave wakes up after one pickpocket and never re-sleeps (no `asleep = true` reassignment exists). Self-gated. ✓
+- Considered gating Possum's small prophecy effects (+$2 / -3 brain / +1 cred / nothing). Abandoned: each effect is small AND requires the Anthropic API call AND grants are 25% each. Real-life rate-limited by API. The +1 cred is the only grant; capping it would be over-correction.
+
+### NEXT
+
+- Day/night cycle currently 4 minutes (2 day / 2 night). The new daily caps reset every 4 minutes, which means a patient player can still grind by just waiting. Consider whether the day cycle should be longer in a future wave. Operator call.
+- The Mom dialogue could use one of the Mathematician's tips: "she gives once a day. ask once. or the loop closes." — would teach the new gate via the existing tip channel.
+- Stripe's ladder is currently silent in his idle dialogue — could add a flavor line referencing how much he's bought today ("stripe has done his rocks today" / "stripe is open for business").
+- The "intro chain" assumes new saves start at $0 and the player works UP. Verify that the new gates don't break the intro chain (intro_remember = $10 = mom's pity gets them there in 1 ask, which is still legal day 1). Tested implicitly via reading the intro chain code — defaults to false / 0 counters → first interaction works.
+- Pete cap at $200 might be tight for late-game heists; could be raised to $300 after telemetry. Watch.
+
+### GOTCHA
+
+- `state.day` must be a NUMBER at all gate sites — load defaults to `sv.day ?? 1`, startGame inits to 1. If a future feature reads `state.day` as a string ("day 7") the `===` check breaks. Don't.
+- `resetDailyCounters()` is called from inside `updateWorld`'s day-tick branch. If a future feature triggers a day-rollover from a different code path (debug button, cheat code, etc.), it MUST also call `resetDailyCounters()` or the accumulating counters will desync.
+- The `*Day` day-stamp pattern requires `state.day >= 1` always. If a future feature ever sets `state.day = 0` for any reason (boss intro? cutscene?), the gates will appear to reset (since `0 === 0` is true with default 0 counter). Don't.
+- Pete's `tryPay()` mutates `state.counters.peteCashToday` directly. If you add a new sell-to-Pete branch, USE `tryPay()` — don't bypass it or you'll silently break the cap.
+- Stripe's bulk-sell while-loop increments `state.counters.stripeFencedToday` per rock — if you add a new fence path (e.g. a "fence soap rocks" branch later), it must also increment this counter, otherwise the player has a side channel that's untracked.
+- Pinky stays ungated by INVARIANT. Don't add `pinkyPacketsToday` without a corresponding SPEC update + invariant removal.
+- The `dayCount` and `state.day` are different things — `P.lifetime.dayCount` tracks lifetime day-rolls (achievement gate at 7), `state.day` is current day number. The gates use `state.day`. Don't confuse them.
+
+---
+
+## Session 2026-05-26 · v13 wave 6 — map depth + scrap yard (SHIPPED)
+
+---
+
 ## Session 2026-05-26 · v13 wave 6 — map depth + scrap yard (SHIPPED)
 
 ### WHAT

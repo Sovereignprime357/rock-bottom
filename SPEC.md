@@ -583,6 +583,93 @@ Per-dumpster 90s `diveCdT` cooldown after a dig. Auto-resets `looted` flag via `
 
 ---
 
+## KNOWN EXPLOITS (v13 wave 6) — CLOSED in wave 6.5
+
+Operator playtest of wave 6 surfaced three infinite-loop exploits where NPCs hand out cash/items/cred without a daily, cooldown, or cred gate. Wave 6.5 closes all three.
+
+1. **Kombucha lady (Whole Foods Mom / marketplace) — unlimited ask + compliment.** `momDialogue` had three ungated branches (accept $10, ask $20, compliment kombucha +5 cred). Spam-cycle = unlimited money + cred. **CLOSED:** ask-money branch (both $10 and $20 share one slot) once-per-day via `state.counters.kombuchaAskDay`; compliment branch once-per-day via `state.counters.kombuchaComplimentDay`. Consumed branches replaced with VIBE refusal lines ("she remembers because she has nothing else to do" / "she is tired of you").
+2. **Tic tacs cure shakes.** `priestDialogue` had `P.shakes = Math.max(0, P.shakes-30)` on accept-the-tic-tac — undercutting the core addiction lever. **CLOSED:** removed the shakes line. Tic tacs now give `+5 brain` (small sober buff). Canonical toast: `"the tic tac is gone. the shakes do not care."` Priest_mercy quest still completes the same way (any acceptance counts).
+3. **Barb → Stripe arbitrage.** Buy packets from Barb → cook → fence to Stripe. No daily ceiling on either end. **CLOSED — two-sided gate:**
+   - **Stripe** (`state.counters.stripeFencedToday`): first 3 rocks at $6, rocks 4-6 at $4, rocks 7-9 at $2 floor, 10+ closes fence entirely until dawn. Tiered toasts at brackets 4 / 7 / 10.
+   - **Barb** (`state.counters.barbPacketsToday`): 6-packet/day cap. Single = 1, bulk = 5. Bulk hidden when remaining < 5 with its own refusal. At cap: "she's tired. come back tomorrow. she has 14 across to think about."
+
+The accumulating counters (`stripeFencedToday`, `barbPacketsToday`, `peteCashToday`, `heistsToday`) reset on the day-tick via `resetDailyCounters()` invoked from `updateWorld` when `state.day` increments. The day-stamp counters (`*Day` fields) self-reset via `=== state.day` comparison and don't need explicit zeroing.
+
+Save backward-compat preserved (new counter fields default to 0 via `Object.assign`; SAVE_KEY unchanged).
+
+**Status (wave 6.5):** CLOSED on all three. See ECONOMY GATES section below.
+
+---
+
+## ECONOMY GATES (v13 wave 6.5)
+
+Comprehensive audit of every NPC / interaction that can grant cash, items, cred, or status. Resource sinks (player pays vendor) are not gated — those are self-limiting by player cash. Only resource GRANTS (vendor pays player or grants cred/items) need gating.
+
+### Daily-gated grants
+
+| NPC / interaction | Grant | Gate | Counter |
+|---|---|---|---|
+| Whole Foods Mom — accept $10 | +$10 | 1×/day, shared slot with ask $20 | `kombuchaAskDay` |
+| Whole Foods Mom — ask $20 | +$20 (40%) or -2 brain | 1×/day, shared with $10 | `kombuchaAskDay` |
+| Whole Foods Mom — compliment kombucha | +5 cred | 1×/day | `kombuchaComplimentDay` |
+| Father O'Malley — donate $5 | +3 cred + $5 to churchDonations | 1×/day | `priestDonateDay` |
+| Father O'Malley — accept tic-tac | +5 brain (was -30 shakes) | none (small grant) | n/a |
+| Lurch — give a dollar | -$1, +2 cred (net +2 cred per save day) | 1×/day | `lurchDollarDay` |
+| Sherri — pretend to see spider | +1 cred | 1×/day | `sherriSpiderDay` |
+| Paulie — compliment the face | +1 cred + paulieCompliments++ | 1×/day | `paulieFaceDay` |
+| Stripe — fence rocks | $6 → $4 → $2 → closed | volume-gated (3 / 3 / 3 / +1 cap) | `stripeFencedToday` (max 10) |
+| Baggie Barb — buy packets | +1 or +5 supplies | 6 packets/day | `barbPacketsToday` |
+| Pawn Shop Pete — sell items | various $ | $200 cash/day cap | `peteCashToday` |
+| Abandoned Building — heist | +2-4 copper | 3 heists/day | `heistsToday` |
+
+### Already gated (pre-wave-6.5)
+
+| NPC / interaction | Gate type | Notes |
+|---|---|---|
+| Tre Bag Tony — buy rock | money sink (player pays) | not a grant |
+| Tony — short / boss | one-shot triggers | tonyOffenses-cap, then boss spawn |
+| Yuri — sell copper $25 | gated by P.copper supply | copper is gated by heist cap above |
+| Pete — buy copper $15 | gated by P.copper + Pete cap | sell-to-Pete also gated by `peteCashToday` |
+| Pete — torch sale | one-shot per save | `peteTorchStocked / peteTorchSold` |
+| The Conductor — sell 3 copper $90 | gated by P.copper supply | with heist cap = ~$270/day max |
+| Father O'Malley — steal plate | RNG ±, wanted+1 on fail, one-trigger fallen-priest path | escalates to mini-boss |
+| Brutus / Brutus_older — torch drop | 25% night-only, one-shot via `dumpsterPropaneAwarded` + `hasPropane()` | |
+| Dumpster dig — loot table | 90s per-dumpster cooldown (`diveCdT`) | propane no-dupe gate |
+| Trash can kick — loot | 60s per-can cooldown (`cdT`) | |
+| Public phone — answer | 4-8min ring scheduler, 30s answer window | no cash grant (lore + rare $50 cash-pile plant at fixed spot) |
+| Cash piles | one-time per save (`state.cashPilesCollected`) | not respawned |
+| Pigeon King — $2 for secret | money sink | not a grant |
+| Pigeon Crown — pickup | one-shot per save | quest item |
+| Stripe's Package — open / deliver | one-shot per save | mutually-exclusive outcomes |
+| Barb's Crossword — return | one-shot per save | +1 free packet |
+| Daily hustles | reset on `state.day++` via `rollHustles()` | already daily |
+| Possum prophecy | one of 4 micro-effects (+$2 / -3 brain / +1 cred / nothing) | very small grant, kept ungated as flavor |
+| Dave — pickpocket $8 | one-shot per save (Dave wakes once, never re-sleeps) | self-gated |
+| Big Guy — cart trade | one-shot per save (5 copper for cart) | |
+| Karaoke Mike — sing $5 | money sink (player pays into rhythm minigame) | |
+| Priest's Son — buy "tic-tac" $10 | money sink (50% rock, 50% nothing) | net negative EV |
+| The Mathematician — interaction | pure flavor (no resource grant) | EV oracle only |
+| Pinky Polenta — buy packets | INTENTIONALLY UNGATED | the "overflow supply" lane. Barb caps at 6, Pinky stays uncapped as the dirty-but-available alternative. Soap rate × 0.25 (vs Barb's × 0.12) is the trade-off. |
+| Cousin Brendan — kill | $30 cash pile, one-time `brendanFirstKill` achievement | wanted-escalation gate |
+| Cop kill | +10 cred + 2 wanted | cred grant offset by escalation cost |
+
+### Design notes
+
+- **Pinky stays ungated** by design. Barb is the "patient, capped, cleaner" supply; Pinky is the "always-on, dirty, smaller per-packet" supply. If both were daily-capped, the cook loop dies. The asymmetry IS the system.
+- **Heist cap = 3/day** chosen so the Conductor floor caps at ~$270/day (3 × 3-copper bundles × $90 ÷ 3). With Stripe's $6→$0 ladder and Barb's 6-packet ceiling, the daily cash ceiling is bounded and the player needs day rollover to hit higher numbers.
+- **Pete cap = $200/day** — high enough to absorb 1-2 successful copper heists' worth of pure copper at his price, low enough that grinding socks ($1 each) for cred is no longer viable.
+- **Tic tacs**: shakes are the addiction-lever knob. The tic-tac's job is now FLAVOR + a small sober buff (+5 brain) — the priest is not your harm-reduction clinic.
+
+### Invariants (wave 6.5)
+
+1. **Daily counters reset on day-tick.** `resetDailyCounters()` is called inside the day-increment branch of `updateWorld` before any other day-roll work (weather, hustles).
+2. **Day-stamp counters are self-resetting.** `*Day` counters compare `=== state.day`, so when `state.day++` they become stale and the gates open without an explicit reset.
+3. **Save backward-compat.** All new counter fields default to 0 via `Object.assign` in load. Old saves don't see consumed gates on first load.
+4. **Tic tacs grant no shakes / no rockedT side effects.** The priest's healing branch is brain-only.
+5. **Pinky is the deliberate ungated overflow lane.** Do not add a daily cap to Pinky without removing it from Barb (or finding another asymmetry).
+
+---
+
 ## CHANGE LOG
 
 | Version | Date | Major changes |

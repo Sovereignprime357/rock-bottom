@@ -1439,6 +1439,11 @@ async function loadGame() {
       pigeonVisits: 0, stripeVisits: 0, barbVisits: 0, introCashEarned: 0,
       // v13 wave 5 — fallen priest counters
       priestVisits: 0, plateStealAttempts: 0, churchVisits: 0, omalleyFallenSurviveT: 0,
+      // v13 wave 6.5 — economy gate counters. defaults 0 keep old saves working;
+      // *Today fields reset at dawn via resetDailyCounters(); *Day fields self-reset.
+      kombuchaAskDay: 0, kombuchaComplimentDay: 0,
+      priestDonateDay: 0, lurchDollarDay: 0, sherriSpiderDay: 0, paulieFaceDay: 0,
+      stripeFencedToday: 0, barbPacketsToday: 0, peteCashToday: 0, heistsToday: 0,
     }, sv.counters || {});
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
@@ -1606,6 +1611,12 @@ const state = {
     // v13 wave 5 — fallen-priest side quest tracking
     priestVisits: 0, plateStealAttempts: 0, churchVisits: 0,
     omalleyFallenSurviveT: 0,
+    // v13 wave 6.5 — economy gate counters.
+    // *Day fields hold the day-stamp of last use (self-reset via === state.day).
+    // *Today fields accumulate counts and reset at dawn via resetDailyCounters().
+    kombuchaAskDay: 0, kombuchaComplimentDay: 0,
+    priestDonateDay: 0, lurchDollarDay: 0, sherriSpiderDay: 0, paulieFaceDay: 0,
+    stripeFencedToday: 0, barbPacketsToday: 0, peteCashToday: 0, heistsToday: 0,
   },
   barbAside: false,
   // v13 wave 3 — discoverability + quest-state additions
@@ -2308,21 +2319,49 @@ function peteDialogue() {
     state.flags.peteTorchStocked = true;
   }
   const torchAvail = state.flags && state.flags.peteTorchStocked && !state.flags.peteTorchSold && !hasPropane();
+  // v13 wave 6.5 — pete has a daily cash cap. $200/day across all sells to him.
+  // sells become "pete is empty. pete is eating." once cap hit. resets at dawn.
+  const PETE_CAP = 200;
+  const peteCash = state.counters.peteCashToday || 0;
+  const peteRoom = Math.max(0, PETE_CAP - peteCash);
+  const peteEmpty = peteRoom <= 0;
+  const tryPay = (amount) => {
+    // returns actual amount pete pays out (clipped to his daily cash) and updates counter.
+    const room = Math.max(0, PETE_CAP - (state.counters.peteCashToday||0));
+    const pay = Math.min(amount, room);
+    if (pay > 0) state.counters.peteCashToday = (state.counters.peteCashToday||0) + pay;
+    return pay;
+  };
+  const peteEmptyLine = "pete is empty. pete is eating.\ncome back tomorrow.";
   const opts = [
-    { label: 'sell 1 PURE COPPER. $15.', disabled: P.copper<1, action: () => {
-      P.copper--; P.cash += 15; state.counters.peteSold = (state.counters.peteSold||0)+1;
-      toast("pete weighs it for 11 minutes.\n- 1 pure copper\n+ $15"); audio.coin(); saveGame();
-    }},
-    { label: 'pawn a sock. $1.', action: () => {
-      P.cash += 1; state.counters.peteSold = (state.counters.peteSold||0)+1;
-      toast('+ $1\n(it is wet.)'); audio.coin();
-    }},
-    { label: P.inventory.find(i=>i.id==='license') ? 'sell license plate. $20.' : 'ask about plates.', disabled: !P.inventory.find(i=>i.id==='license'), action: () => {
-      P.inventory = P.inventory.filter(i=>i.id!=='license');
-      P.cash += 20; state.counters.peteSold = (state.counters.peteSold||0)+1;
-      toast('+ $20\n(do not ask where it came from.)'); audio.coin(); saveGame();
-    }},
+    peteEmpty
+      ? { label: 'sell 1 PURE COPPER. (pete is empty.)', action: () => { toast(peteEmptyLine, 3000); }}
+      : { label: 'sell 1 PURE COPPER. $15.', disabled: P.copper<1, action: () => {
+          const pay = tryPay(15);
+          if (pay <= 0) { toast(peteEmptyLine, 3000); return; }
+          P.copper--; P.cash += pay; state.counters.peteSold = (state.counters.peteSold||0)+1;
+          toast("pete weighs it for 11 minutes.\n- 1 pure copper\n+ $"+pay+(pay<15?"\npete is almost empty.":""), 2800);
+          audio.coin(); saveGame();
+        }},
+    peteEmpty
+      ? { label: 'pawn a sock. (pete is empty.)', action: () => { toast(peteEmptyLine, 3000); }}
+      : { label: 'pawn a sock. $1.', action: () => {
+          const pay = tryPay(1);
+          if (pay <= 0) { toast(peteEmptyLine, 3000); return; }
+          P.cash += pay; state.counters.peteSold = (state.counters.peteSold||0)+1;
+          toast('+ $'+pay+'\n(it is wet.)'); audio.coin();
+        }},
+    peteEmpty
+      ? { label: 'sell license plate. (pete is empty.)', disabled: !P.inventory.find(i=>i.id==='license'), action: () => { toast(peteEmptyLine, 3000); }}
+      : { label: P.inventory.find(i=>i.id==='license') ? 'sell license plate. $20.' : 'ask about plates.', disabled: !P.inventory.find(i=>i.id==='license'), action: () => {
+          const pay = tryPay(20);
+          if (pay <= 0) { toast(peteEmptyLine, 3000); return; }
+          P.inventory = P.inventory.filter(i=>i.id!=='license');
+          P.cash += pay; state.counters.peteSold = (state.counters.peteSold||0)+1;
+          toast('+ $'+pay+(pay<20?"\npete is almost empty.":"\n(do not ask where it came from.)")); audio.coin(); saveGame();
+        }},
     // v13 wave 6 — pete sells generic food ($3). a junk inventory item with one use (feed the dog).
+    // (note: this is pete SELLING TO player, not buying. not gated by pete's daily cash cap.)
     { label: P.cash>=3 ? 'buy food. $3. (canned. unmarked.)' : "food is $3.",
       disabled: P.cash<3,
       action: () => {
@@ -2334,19 +2373,26 @@ function peteDialogue() {
         saveGame();
       }
     },
-    // v13 wave 6 — pete buys junk
-    { label: P.inventory.find(i=>i.id==='junk') ? 'sell junk. $1 each.' : 'ask about junk.',
-      disabled: !P.inventory.find(i=>i.id==='junk'),
-      action: () => {
-        const junks = P.inventory.filter(i=>i.id==='junk');
-        P.inventory = P.inventory.filter(i=>i.id!=='junk');
-        const got = junks.length * 1;
-        P.cash += got;
-        state.counters.peteSold = (state.counters.peteSold||0)+1;
-        toast("- "+junks.length+" junk\n+ $"+got+"\npete weighs each piece. it takes a while.", 2800);
-        audio.coin(); saveGame();
-      }
-    },
+    // v13 wave 6 — pete buys junk (subject to daily cash cap)
+    peteEmpty
+      ? { label: 'sell junk. (pete is empty.)', disabled: !P.inventory.find(i=>i.id==='junk'), action: () => { toast(peteEmptyLine, 3000); }}
+      : { label: P.inventory.find(i=>i.id==='junk') ? 'sell junk. $1 each.' : 'ask about junk.',
+          disabled: !P.inventory.find(i=>i.id==='junk'),
+          action: () => {
+            const junks = P.inventory.filter(i=>i.id==='junk');
+            const want = junks.length * 1;
+            const pay = tryPay(want);
+            if (pay <= 0) { toast(peteEmptyLine, 3000); return; }
+            // only consume the junks pete actually paid for (1:1)
+            const taken = Math.min(junks.length, pay);
+            let removed = 0;
+            P.inventory = P.inventory.filter(i => { if (i.id==='junk' && removed<taken) { removed++; return false; } return true; });
+            P.cash += pay;
+            state.counters.peteSold = (state.counters.peteSold||0)+1;
+            toast("- "+taken+" junk\n+ $"+pay+(pay<want?"\npete is almost empty.":"\npete weighs each piece. it takes a while."), 2800);
+            audio.coin(); saveGame();
+          }
+        },
   ];
   if (torchAvail) {
     opts.push({
@@ -2373,10 +2419,17 @@ function peteDialogue() {
 }
 
 function lurchDialogue(n) {
+  // v13 wave 6.5 — the dollar exchange is daily-capped (was an infinite cred trickle).
+  const gaveToday = (state.counters.lurchDollarDay||0) === state.day;
   dialogue('LURCH', "you got a dollar.\nhe smells like ham.", [
-    { label: P.cash>=1 ? 'give a dollar. (+2 cred)' : "you don't have a dollar.", disabled: P.cash<1, action: () => {
-      P.cash--; P.cred += 2; toast('- $1\n+ 2 cred\nlurch immediately forgets.'); saveGame();
-    }},
+    gaveToday
+      ? { label: 'give a dollar. (he has forgotten you specifically.)', action: () => {
+          toast("lurch is full. of dollars.\nhe is staring at the wall.\ncome back tomorrow.", 3000);
+        }}
+      : { label: P.cash>=1 ? 'give a dollar. (+2 cred)' : "you don't have a dollar.", disabled: P.cash<1, action: () => {
+          P.cash--; P.cred += 2; state.counters.lurchDollarDay = state.day;
+          toast('- $1\n+ 2 cred\nlurch immediately forgets.\ncome back tomorrow.'); saveGame();
+        }},
     { label: 'lie. say you have a dollar.', action: () => {
       toast("lurch nods. waits. lurch is still waiting.\n(the lie did not work. he is just waiting.)");
     }},
@@ -2385,10 +2438,17 @@ function lurchDialogue(n) {
   ]);
 }
 function sherriDialogue(n) {
+  // v13 wave 6.5 — spider cred grant is daily-capped.
+  const sawToday = (state.counters.sherriSpiderDay||0) === state.day;
   dialogue('SPIDER-BITE SHERRI', "you seen the spider.\nshe is rolling her sleeve back down.", [
-    { label: 'pretend to see the spider.', action: () => {
-      P.cred += 1; toast('sherri respects you. (+1 cred)');
-    }},
+    sawToday
+      ? { label: 'pretend to see the spider. (she has shown you today.)', action: () => {
+          toast("sherri's sleeve is already down.\nthe spider is sleeping.\ncome back tomorrow.", 3000);
+        }}
+      : { label: 'pretend to see the spider.', action: () => {
+          P.cred += 1; state.counters.sherriSpiderDay = state.day;
+          toast('sherri respects you. (+1 cred)\ncome back tomorrow.'); saveGame();
+        }},
     { label: 'tell her there is no spider.', action: () => {
       aggroNpc(n); toast("the spider is back.\nshe is hostile now.");
     }},
@@ -2396,12 +2456,20 @@ function sherriDialogue(n) {
   ]);
 }
 function paulieDialogue(n) {
+  // v13 wave 6.5 — the face compliment is daily-capped (was an infinite cred trickle).
+  const flatteredToday = (state.counters.paulieFaceDay||0) === state.day;
   dialogue('PAULIE THE FACE', "the face.\nit is. it really is. just the face.", [
-    { label: 'compliment the face. (+1 cred)', action: () => {
-      P.cred++; state.counters.pauliCompliments++;
-      if (state.counters.pauliCompliments >= 5) unlockAchievement('compliment_the_face');
-      toast("paulie does not smile but the face changes.\n+ 1 cred");
-    }},
+    flatteredToday
+      ? { label: 'compliment the face. (the face has heard.)', action: () => {
+          toast("paulie nods. the face is satisfied.\nthe face has been complimented today.\ncome back tomorrow.", 3000);
+        }}
+      : { label: 'compliment the face. (+1 cred)', action: () => {
+          P.cred++; state.counters.pauliCompliments++;
+          state.counters.paulieFaceDay = state.day;
+          if (state.counters.pauliCompliments >= 5) unlockAchievement('compliment_the_face');
+          toast("paulie does not smile but the face changes.\n+ 1 cred\ncome back tomorrow.");
+          saveGame();
+        }},
     { label: 'fight.', action: () => { aggroNpc(n); }},
     { label: 'leave.', action: () => {} },
   ]);
@@ -2471,20 +2539,42 @@ function momDialogue() {
     dialogue('WHOLE FOODS MOM', "she is not here at night.\nshe is at the wine bar with kelly.", [{label:'leave.',action:()=>{}}]);
     return;
   }
-  dialogue('WHOLE FOODS MOM', "oh. oh sweetie.\nshe is wearing vibram five-fingers.\nshe is holding kombucha.", [
-    { label: 'accept $10 and pity. (+$10)', action: () => {
-      P.cash += 10; toast("+ $10\nshe will tell ben about you tonight.\nben will not care."); audio.coin();
-    }},
-    { label: 'ask for $20.', action: () => {
-      if (Math.random()<0.4) { P.cash += 20; toast('+ $20\nshe pauses. she sighs. she gives.\nben will be furious.'); audio.coin(); }
-      else { toast("she explains capitalism for 4 minutes.\nyou leave with no money and -2 brain.");
+  // v13 wave 6.5 — daily-cap the ask + compliment branches. each branch fires at most once per
+  // dayCount. when consumed, the option is replaced with a refusal line so the player sees the gate.
+  const askedToday = (state.counters.kombuchaAskDay||0) === state.day;
+  const complimentedToday = (state.counters.kombuchaComplimentDay||0) === state.day;
+  const opts = [];
+  if (!askedToday) {
+    opts.push({ label: 'accept $10 and pity. (+$10)', action: () => {
+      P.cash += 10; state.counters.kombuchaAskDay = state.day;
+      toast("+ $10\nshe will tell ben about you tonight.\nben will not care.\ncome back tomorrow."); audio.coin();
+      saveGame();
+    }});
+    opts.push({ label: 'ask for $20.', action: () => {
+      state.counters.kombuchaAskDay = state.day;
+      if (Math.random()<0.4) { P.cash += 20; toast('+ $20\nshe pauses. she sighs. she gives.\nben will be furious.\ncome back tomorrow.'); audio.coin(); }
+      else { toast("she explains capitalism for 4 minutes.\nyou leave with no money and -2 brain.\ncome back tomorrow.");
         P.brain = Math.max(0, P.brain-2); }
-    }},
-    { label: 'compliment her kombucha. (+5 cred)', action: () => {
-      P.cred += 5; toast("she lights up.\nshe tells you it's lavender.\nyou agree it is lavender.\n+ 5 cred");
-    }},
-    { label: 'leave.', action: () => {} },
-  ]);
+      saveGame();
+    }});
+  } else {
+    opts.push({ label: 'ask her for money. (she remembers.)', action: () => {
+      toast("you've been by. she remembers.\nshe remembers because she has nothing else to do.\ncome back tomorrow.", 3600);
+    }});
+  }
+  if (!complimentedToday) {
+    opts.push({ label: 'compliment her kombucha. (+5 cred)', action: () => {
+      P.cred += 5; state.counters.kombuchaComplimentDay = state.day;
+      toast("she lights up.\nshe tells you it's lavender.\nyou agree it is lavender.\n+ 5 cred\ncome back tomorrow.");
+      saveGame();
+    }});
+  } else {
+    opts.push({ label: 'compliment her kombucha again.', action: () => {
+      toast("she has heard about her kombucha today.\nshe is tired of her kombucha.\nshe is tired of you.", 3600);
+    }});
+  }
+  opts.push({ label: 'leave.', action: () => {} });
+  dialogue('WHOLE FOODS MOM', "oh. oh sweetie.\nshe is wearing vibram five-fingers.\nshe is holding kombucha.", opts);
 }
 
 async function possumDialogue() {
@@ -2531,17 +2621,28 @@ function priestDialogue() {
       [{ label: 'leave.', action: () => {} }]);
     return;
   }
+  // v13 wave 6.5 — donation cred is daily-capped (was an infinite cred grind via mom/sock farming).
+  const donatedToday = (state.counters.priestDonateDay||0) === state.day;
   dialogue("FATHER O'MALLEY", "medicine. open your mouth.\nhe is holding a tic-tac.", [
-    { label: 'accept the blessed tic-tac. (-30 shakes)', action: () => {
-      P.shakes = Math.max(0, P.shakes-30); toast('- 30 shakes\nit is, in fact, just a tic-tac.\n(it works anyway.)');
+    // v13 wave 6.5 — tic-tac is a TASTE, not a withdrawal substitute. removed shakes reduction;
+    // gives a small +5 brain (sober person buff) and acknowledges that the shakes do not care.
+    // the canonical line: the shakes do not care.
+    { label: 'accept the blessed tic-tac. (+5 brain)', action: () => {
+      P.brain = Math.min(100, P.brain+5);
+      toast('the tic tac is gone.\nthe shakes do not care.');
       if (!state.quests.priest_mercy.done) { state.quests.priest_mercy.done = true; questToast("THE PRIEST'S MERCY"); }
       saveGame();
     }},
-    { label: P.cash>=5 ? 'donate $5. (+3 cred)' : 'donate $5.', disabled: P.cash<5, action: () => {
-      P.cash-=5; P.cred+=3; state.counters.churchDonations += 5;
-      if (state.counters.churchDonations >= 100) unlockAchievement('ecclesiastes');
-      toast('- $5\n+ 3 cred\nthe lord notices. then forgets.'); saveGame();
-    }},
+    donatedToday
+      ? { label: "donate $5. (the lord heard already.)", action: () => {
+          toast("father o'malley nods.\n'the lord has counted today.\ncome back tomorrow.'", 3000);
+        }}
+      : { label: P.cash>=5 ? 'donate $5. (+3 cred)' : 'donate $5.', disabled: P.cash<5, action: () => {
+          P.cash-=5; P.cred+=3; state.counters.churchDonations += 5;
+          state.counters.priestDonateDay = state.day;
+          if (state.counters.churchDonations >= 100) unlockAchievement('ecclesiastes');
+          toast('- $5\n+ 3 cred\nthe lord notices. then forgets.\ncome back tomorrow.'); saveGame();
+        }},
     { label: 'steal the collection plate.', action: () => {
       state.counters.plateStealAttempts = (state.counters.plateStealAttempts||0) + 1;
       // v13 wave 5 — after 4+ priest visits AND a steal attempt, the priest stops being the priest.
@@ -2670,7 +2771,18 @@ function stripeDialogue() {
   }
 
   const buyP = vendorPrice(8);
-  const sellP = vendorPrice(6);
+  // v13 wave 6.5 — stripe's fence price degrades with daily volume.
+  // first 3 rocks: full $6. rocks 4-6: $4. rocks 7-9: $2 floor. 10+: closed for the day.
+  // helper returns the $ per rock at index (0-based) and the message for the bracket.
+  const fencedToday = state.counters.stripeFencedToday || 0;
+  const fencePerRock = (idx) => {
+    if (idx < 3) return vendorPrice(6);
+    if (idx < 6) return vendorPrice(4);
+    return Math.max(1, vendorPrice(2));
+  };
+  const fenceClosed = fencedToday >= 10;
+  // preview the immediate next-rock rate for the label
+  const nextSellP = fencePerRock(fencedToday);
   const opts = [
     { label: P.cash>=buyP ? `buy stripe's rock. $${buyP}.` : "you can't afford it.", disabled: P.cash<buyP, action: () => {
       P.cash -= buyP;
@@ -2687,19 +2799,48 @@ function stripeDialogue() {
       }
       saveGame();
     }},
-    { label: P.rocks>=1 ? `sell 1 rock to stripe. $${sellP}.` : "you have no rocks to sell.", disabled: P.rocks<1, action: () => {
-      P.rocks--; P.cash += sellP;
-      P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + 1;
-      toast(`- 1 rock\n+ $${sellP}\nstripe pockets it.\nit will be $${buyP} by morning.`);
-      audio.coin(); saveGame();
-    }},
-    { label: P.rocks>=3 ? `sell all rocks. $${P.rocks*sellP} bulk.` : "stripe wants 3+ for a bulk deal.", disabled: P.rocks<3, action: () => {
-      const sellAll = P.rocks; P.cash += sellAll*sellP; P.rocks = 0;
-      P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + sellAll;
-      toast(`- ${sellAll} rocks\n+ $${sellAll*sellP}\nstripe stacks them with his.\nthe stack is now his stack.`);
-      audio.coin(); saveGame();
-    }},
   ];
+  if (fenceClosed) {
+    opts.push({ label: 'sell rocks to stripe. (closed today.)', action: () => {
+      toast("stripe will not buy from you today.\ntomorrow.", 3000);
+    }});
+  } else {
+    opts.push({ label: P.rocks>=1 ? `sell 1 rock to stripe. $${nextSellP}.` : "you have no rocks to sell.", disabled: P.rocks<1, action: () => {
+      const px = fencePerRock(state.counters.stripeFencedToday||0);
+      P.rocks--; P.cash += px;
+      state.counters.stripeFencedToday = (state.counters.stripeFencedToday||0) + 1;
+      P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + 1;
+      const ft = state.counters.stripeFencedToday;
+      let tail = '';
+      if (ft === 4) tail = "\nstripe is taking less today.\nstripe is taking what stripe takes.";
+      else if (ft === 7) tail = "\nstripe is done.\nstripe is done with rocks.\ngo away.";
+      else if (ft === 10) tail = "\nstripe will not buy from you today.\ntomorrow.";
+      toast(`- 1 rock\n+ $${px}${tail || `\nstripe pockets it.\nit will be $${buyP} by morning.`}`);
+      audio.coin(); saveGame();
+    }});
+    opts.push({ label: P.rocks>=3 ? `sell rocks bulk. ($${nextSellP}/rock, gating.)` : "stripe wants 3+ for a bulk deal.", disabled: P.rocks<3, action: () => {
+      let totalCash = 0; let sold = 0; let hitClose = false; let hitDegrade1 = false; let hitDegrade2 = false;
+      while (P.rocks > 0 && (state.counters.stripeFencedToday||0) < 10) {
+        const before = state.counters.stripeFencedToday||0;
+        const px = fencePerRock(before);
+        P.rocks--; sold++;
+        totalCash += px;
+        state.counters.stripeFencedToday = before + 1;
+        const after = state.counters.stripeFencedToday;
+        if (after === 4) hitDegrade1 = true;
+        if (after === 7) hitDegrade2 = true;
+        if (after === 10) { hitClose = true; break; }
+      }
+      P.cash += totalCash;
+      P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + sold;
+      let tail = '';
+      if (hitClose) tail = "\nstripe will not buy from you today.\ntomorrow.";
+      else if (hitDegrade2) tail = "\nstripe is done.\nstripe is done with rocks.";
+      else if (hitDegrade1) tail = "\nstripe is taking less today.\nstripe is taking what stripe takes.";
+      toast(`- ${sold} rocks\n+ $${totalCash}\nstripe stacks them with his.\nthe stack is now his stack.${tail}`, 4200);
+      audio.coin(); saveGame();
+    }});
+  }
   // v13 wave 3 — package quest offer on 3rd+ visit
   if (q && !q.done && !q.available && state.counters.stripeVisits >= 3) {
     opts.push({ label: "stripe leans in. listen.", action: () => offerStripePackage() });
@@ -2884,21 +3025,45 @@ function barbDialogue() {
   }
   const singlePrice = vendorPrice(5);
   const bulkPrice = vendorPrice(22);
-  const opts = [
-    { label: P.cash>=singlePrice ? `buy 1 packet. $${singlePrice}. (unmarked.)` : `a packet is $${singlePrice}.`, disabled: P.cash<singlePrice, action: () => {
+  // v13 wave 6.5 — barb has a 6-packet/day cap. single counts as 1, bulk counts as 5.
+  // if buying would exceed cap, refuse with a vibe line + a "14 across" callback.
+  const packetsToday = state.counters.barbPacketsToday || 0;
+  const remaining = Math.max(0, 6 - packetsToday);
+  const atCap = remaining === 0;
+  const opts = [];
+  if (atCap) {
+    opts.push({ label: 'buy packets. (she is tired.)', action: () => {
+      toast("she's tired.\ncome back tomorrow.\nshe has 14 across to think about.", 3600);
+    }});
+  } else {
+    // single packet — available unless at cap
+    opts.push({ label: P.cash>=singlePrice ? `buy 1 packet. $${singlePrice}. (unmarked.)` : `a packet is $${singlePrice}.`, disabled: P.cash<singlePrice, action: () => {
       P.cash -= singlePrice; P.supplies = (P.supplies||0) + 1;
-      toast(`- $${singlePrice}\n+ 1 packet (unmarked)\nshe does not look up.`);
+      state.counters.barbPacketsToday = (state.counters.barbPacketsToday||0) + 1;
+      const left = 6 - state.counters.barbPacketsToday;
+      const tail = left <= 0 ? "\nshe stops writing.\nshe's tired.\ncome back tomorrow." : '';
+      toast(`- $${singlePrice}\n+ 1 packet (unmarked)\nshe does not look up.${tail}`);
       audio.coin(); saveGame();
-    }},
-    { label: P.cash>=bulkPrice ? `buy 5 packets. $${bulkPrice}. (bulk.)` : `5 packets is $${bulkPrice}.`, disabled: P.cash<bulkPrice, action: () => {
-      P.cash -= bulkPrice; P.supplies = (P.supplies||0) + 5;
-      toast(`- $${bulkPrice}\n+ 5 packets\nshe writes '14 across' in pen.`);
-      audio.coin(); saveGame();
-    }},
-    { label: "ask what's in them.", action: () => {
-      toast("she does not look up.\n'salt.'\nyou both know.\nyou both agree to not.");
-    }},
-  ];
+    }});
+    // bulk — only show if 5 will fit under cap (i.e. remaining >= 5)
+    if (remaining >= 5) {
+      opts.push({ label: P.cash>=bulkPrice ? `buy 5 packets. $${bulkPrice}. (bulk.)` : `5 packets is $${bulkPrice}.`, disabled: P.cash<bulkPrice, action: () => {
+        P.cash -= bulkPrice; P.supplies = (P.supplies||0) + 5;
+        state.counters.barbPacketsToday = (state.counters.barbPacketsToday||0) + 5;
+        const left = 6 - state.counters.barbPacketsToday;
+        const tail = left <= 0 ? "\nshe stops writing.\nshe's tired.\ncome back tomorrow." : '';
+        toast(`- $${bulkPrice}\n+ 5 packets\nshe writes '14 across' in pen.${tail}`);
+        audio.coin(); saveGame();
+      }});
+    } else {
+      opts.push({ label: 'buy 5 packets bulk. (not today.)', action: () => {
+        toast("she taps the pen.\n'i'm not weighing five out tonight.\ncome back tomorrow.'", 3200);
+      }});
+    }
+  }
+  opts.push({ label: "ask what's in them.", action: () => {
+    toast("she does not look up.\n'salt.'\nyou both know.\nyou both agree to not.");
+  }});
   // v13 wave 3 — quest C: barb_crossword
   const q = state.quests.barb_crossword;
   if (q && q.done) {
@@ -4111,6 +4276,10 @@ function updateWorld(dt) {
     state.dayTime -= 1; state.day++; P.lifetime.dayCount = state.day;
     rollWeather();
     rollHustles();
+    // v13 wave 6.5 — daily-reset accumulating counters at dawn (the *Today fields).
+    // the *Day fields (kombuchaAskDay, priestDonateDay, etc.) self-reset via
+    // "=== state.day" comparison, so they don't need to be zeroed.
+    resetDailyCounters();
     if (state.day >= 7) unlockAchievement('tuesday_again');
     toast('· day ' + state.day + ' ·\n' + (state.weather==='rain'?'it is raining.':state.weather==='fog'?'fog.':'a tuesday.'), 2400);
     broadcastNews('day ' + state.day + ' has arrived. weather: ' + state.weather + '.');
@@ -6924,8 +7093,31 @@ function answerPublicPhone() {
   saveGame();
 }
 
+// ---------- v13 wave 6.5 — daily counter reset ----------
+// called from updateWorld when state.day increments. iterates over the accumulating
+// "today" counters and zeros them. the per-day "*Day" counters (kombuchaAskDay etc)
+// self-reset via "=== state.day" comparison, so they don't need explicit reset.
+const DAILY_COUNTER_KEYS = [
+  'stripeFencedToday', // exploit 3a (stripe fence price ladder)
+  'barbPacketsToday',  // exploit 3b (barb supply cap)
+  'peteCashToday',     // audit (pete daily $200 cap)
+  'heistsToday',       // audit (heist daily cap = 3)
+];
+function resetDailyCounters() {
+  for (const k of DAILY_COUNTER_KEYS) state.counters[k] = 0;
+}
+
 // ---------- HEIST (simple 3-stage) ----------
 async function startHeist() {
+  // v13 wave 6.5 — heist has a daily cap (3/day). closes the conductor-arbitrage grind path.
+  // 3 heists × 2-4 copper × ($90 / 3 copper) caps the conductor floor at ~$270 / day.
+  if ((state.counters.heistsToday||0) >= 3) {
+    dialogue('ABANDONED BUILDING', "the door is half off.\nthere is no air coming out.\nbrutus jr. is awake and watching the door.\nnot tonight.", [
+      { label: 'come back tomorrow.', action: () => { state.mode = 'playing'; }},
+    ]);
+    return;
+  }
+  state.counters.heistsToday = (state.counters.heistsToday||0) + 1;
   state.mode = 'heist';
   await heistStage(1);
 }
@@ -7386,6 +7578,10 @@ function startGame(loaded) {
       tacosEaten: 0, laundryDone: 0, bigPan: 0,
       pigeonVisits: 0, stripeVisits: 0, barbVisits: 0, introCashEarned: 0,
       pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
+      // v13 wave 6.5 — economy gates
+      kombuchaAskDay: 0, kombuchaComplimentDay: 0,
+      priestDonateDay: 0, lurchDollarDay: 0, sherriSpiderDay: 0, paulieFaceDay: 0,
+      stripeFencedToday: 0, barbPacketsToday: 0, peteCashToday: 0, heistsToday: 0,
     };
     Object.values(state.quests).forEach(q => { q.done = false; if (q.available === true) q.available = q.intro?undefined:false; });
     state.day = 1; state.dayTime = 0.35;

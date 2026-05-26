@@ -4,6 +4,20 @@
 
 ---
 
+## v13 wave 6.5 — SHIPPED ✓ (May 26, 2026) — economy balance pass
+
+- [x] **Exploit 1: kombucha lady / mom infinite loop** — `momDialogue` ask-money (both $10 and $20 share a slot) gated 1×/day via `state.counters.kombuchaAskDay`; compliment kombucha gated 1×/day via `kombuchaComplimentDay`. Consumed branches surface VIBE refusal lines so the player sees the gate. Toast suffixes "come back tomorrow." on the productive paths.
+- [x] **Exploit 2: tic tacs cure shakes** — `priestDialogue` accept-tic-tac branch no longer reduces `P.shakes`. New behavior: +5 brain (small sober buff). Canonical toast: `"the tic tac is gone. the shakes do not care."` Priest_mercy quest still completes on accept. Donation branch also gated 1×/day via `priestDonateDay` (closes the $5 → +3 cred grind once Mom's $10 is also capped).
+- [x] **Exploit 3: Barb→Stripe arbitrage** — two-sided gate. **Stripe** (`stripeFencedToday`): tiered $6 / $4 / $2 / closed at rocks 0-3 / 4-6 / 7-9 / 10+. Bulk-sell loop applies the ladder per-rock and breaks on close. **Barb** (`barbPacketsToday`): 6-packet daily cap. Single = 1, bulk = 5. Bulk button hidden when remaining < 5 (own refusal). All four bracket tiers carry distinct VIBE refusal lines.
+- [x] **Audit sweep gates** — `lurchDollarDay`, `sherriSpiderDay`, `paulieFaceDay` daily 1×/day on the small cred grants (was infinite cred trickle when paired with infinite mom-cash). `peteCashToday` $200/day cap on all sells to Pete (clipped payouts when near cap, full refusal at empty). `heistsToday` 3-heist/day cap on the abandoned-building copper run (closes the conductor-arbitrage path).
+- [x] **Daily reset wiring** — new `resetDailyCounters()` helper iterates over `DAILY_COUNTER_KEYS = ['stripeFencedToday','barbPacketsToday','peteCashToday','heistsToday']`. Called from `updateWorld` inside the `state.dayTime >= 1` branch (day-tick) right after `rollHustles()`. Day-stamp counters (`*Day` fields) self-reset via `=== state.day` and don't need explicit reset.
+- [x] **Save backward-compat** — new counter fields added to all 3 counter-init sites (load `Object.assign` defaults, top-level state init, `startGame` fresh-save reset). SAVE_KEY unchanged. Old saves load forward; new fields default to 0 → gates open as if it's day 1.
+- [x] **SPEC.md** — added `## KNOWN EXPLOITS (v13 wave 6) — CLOSED in wave 6.5` block + a comprehensive `## ECONOMY GATES (v13 wave 6.5)` audit table covering every grant-side NPC. Pinky Polenta deliberately documented as the intentionally-ungated "overflow supply" lane.
+
+Notes from shipping: Mom and the "kombucha lady" turned out to be the same NPC (`momDialogue`), so both exploits land on the same dialogue function. Daily-stamp counters (`*Day`) are cheaper than booleans + explicit reset — comparing `=== state.day` self-resets across day rollover without polluting `resetDailyCounters()`. Stripe's per-rock tier on bulk sell is computed inside the while-loop so a mid-batch crossing of $6→$4 charges correctly. Pete's daily cap uses a `tryPay` helper that clips the payout if the counter would exceed cap — the player gets partial money on the last sale that crosses the line, not a hard reject. Pinky kept ungated by design — Barb is the "capped, clean" lane; Pinky is the "uncapped, dirty" lane. Removing that asymmetry would kill the cook loop on bad days.
+
+---
+
 ## v13 wave 6 — SHIPPED ✓ (May 26, 2026)
 
 - [x] **Highway Underpass finish pass** — cracked-concrete `TILE_PALETTES.underpass` (oilstain + concrete flags, drawGroundTile fracture lines + black oil ellipses); 4 tents (varied tarp colors) as new `drawProp` branch; cardboard sign at (1340,412) next to The Mathematician ("WILL TRADE WORDS FOR MATH"); 3 sodium-orange light patches in `drawUnderpass` via additive radial gradients; one-shot first-entry echo line ("the air changes. you can hear yourself walk.") + feed post gated by `state.flags.underpassEntered`.
