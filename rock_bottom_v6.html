@@ -1,0 +1,3177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ROCK BOTTOM v6</title>
+<style>
+  :root {
+    --piss: #e8c040;
+    --mold: #4a5028;
+    --asphalt: #1a1810;
+    --brown: #604020;
+    --cream: #d4c896;
+    --rust: #8a3a3a;
+    --purple: #d488d4;
+    --copper: #d06030;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000;color:var(--cream);font-family:'Courier New',monospace;overflow:hidden;height:100%;width:100%}
+  body{display:flex;align-items:center;justify-content:center;cursor:crosshair}
+  #stage{position:relative;width:800px;height:600px;max-width:100vw;max-height:100vh;background:#000;box-shadow:0 0 80px rgba(232,192,64,.08)}
+  canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+  /* Overlays */
+  .ui{position:absolute;color:var(--cream);text-shadow:1px 1px 0 #000;pointer-events:none;font-size:11px;line-height:1.3}
+  #hud{top:26px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  #hud .col{display:flex;flex-direction:column;gap:2px}
+  #hud .right{align-items:flex-end;text-align:right}
+  .hearts{letter-spacing:1px;color:var(--rust)}
+  .bar{display:inline-block;width:80px;height:6px;background:#220;border:1px solid #553;vertical-align:middle;margin-left:4px;position:relative}
+  .bar i{display:block;height:100%;background:var(--purple)}
+  .bar.shake i{background:linear-gradient(90deg,#e8c040,#d488d4)}
+  .bar.brain i{background:#a2c0d4}
+  .stars{color:#5aa0ff}
+  #toast{bottom:60px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);border:1px solid var(--cream);padding:8px 14px;font-size:12px;letter-spacing:1px;max-width:560px;text-align:center;opacity:0;transition:opacity .25s;white-space:pre-wrap}
+  #toast.show{opacity:1}
+  #dialogue{bottom:8px;left:8px;right:8px;background:rgba(0,0,0,.92);border:2px solid var(--piss);padding:12px 16px;font-size:13px;pointer-events:auto;display:none}
+  #dialogue.show{display:block}
+  #dialogue .name{color:var(--piss);font-weight:bold;margin-bottom:4px;letter-spacing:2px}
+  #dialogue .text{color:var(--cream);margin-bottom:10px;line-height:1.5;white-space:pre-wrap}
+  #dialogue .opts{display:flex;flex-direction:column;gap:4px}
+  #dialogue .opt{cursor:pointer;padding:4px 8px;border-left:2px solid #443;color:var(--cream)}
+  #dialogue .opt:hover{border-left-color:var(--piss);background:rgba(232,192,64,.08);color:var(--piss)}
+  #dialogue .opt.disabled{opacity:.4;cursor:not-allowed}
+  #dialogue .opt b{color:var(--piss)}
+  #panel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.95);border:2px solid var(--piss);padding:18px 22px;font-size:12px;pointer-events:auto;display:none;min-width:380px;max-width:560px;max-height:80vh;overflow-y:auto}
+  #panel.show{display:block}
+  #panel h2{color:var(--piss);letter-spacing:3px;margin-bottom:10px;font-size:14px}
+  #panel .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #443}
+  #panel .row span:last-child{color:var(--piss)}
+  #panel .sec{margin-top:12px;color:var(--copper);letter-spacing:2px;border-bottom:1px solid #443;padding-bottom:2px;margin-bottom:4px}
+  #panel .quest{padding:6px 0;border-bottom:1px dotted #443}
+  #panel .quest.done{opacity:.55}
+  #panel .quest.done .qtitle{text-decoration:line-through}
+  #panel .qtitle{color:var(--piss);letter-spacing:1px}
+  #panel .qflav{color:var(--cream);font-size:11px;margin-top:2px;line-height:1.4}
+  #panel .close{color:#776;text-align:right;font-size:10px;margin-top:10px;letter-spacing:2px}
+
+  #title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at center, #1a1810 0%, #000 100%);z-index:50;pointer-events:auto;cursor:pointer}
+  #title.hide{display:none}
+  #title h1{color:var(--piss);font-size:48px;letter-spacing:8px;margin-bottom:6px;text-shadow:4px 4px 0 var(--rust),0 0 24px rgba(232,192,64,.5)}
+  #title .sub{color:var(--cream);font-size:12px;letter-spacing:4px;margin-bottom:24px;opacity:.7}
+  #title .start{color:var(--cream);font-size:14px;letter-spacing:3px;animation:blink 1.2s infinite;margin-bottom:6px}
+  #title .load{color:#776;font-size:11px;letter-spacing:2px;cursor:pointer;margin-top:6px}
+  #title .load:hover{color:var(--piss)}
+  #title .credit{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#443;font-size:10px;letter-spacing:3px}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.25}}
+
+  /* CRT effects */
+  #scanlines{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 3px);z-index:30;mix-blend-mode:multiply}
+  #flicker{position:absolute;inset:0;pointer-events:none;background:rgba(255,220,140,.02);z-index:31;animation:flick 8s infinite}
+  @keyframes flick{0%,97%,100%{opacity:.4}98%{opacity:.7}99%{opacity:.2}}
+  #vignette{position:absolute;inset:0;pointer-events:none;z-index:32;box-shadow:inset 0 0 100px 20px #000}
+  #daynight{position:absolute;inset:0;pointer-events:none;z-index:28;transition:background 1.5s linear;mix-blend-mode:multiply}
+  #flash{position:absolute;inset:0;pointer-events:none;z-index:29;opacity:0}
+  #tweaker{position:absolute;inset:0;pointer-events:none;z-index:27;background:radial-gradient(ellipse,rgba(80,200,80,.18),rgba(80,200,80,.45));opacity:0;transition:opacity .25s;mix-blend-mode:screen}
+  #tweaker.on{opacity:1}
+
+  #minimap{position:absolute;bottom:8px;right:8px;width:120px;height:96px;border:1px solid #443;background:rgba(0,0,0,.6);z-index:20}
+
+  /* News ticker */
+  #ticker{position:absolute;top:0;left:0;right:0;height:18px;background:rgba(10,8,5,.92);border-bottom:1px solid #443;overflow:hidden;z-index:21;font-size:11px;letter-spacing:1px;display:flex;align-items:center;padding:0 8px}
+  #ticker .badge{background:var(--rust);color:#000;padding:1px 6px;margin-right:8px;font-weight:bold;font-size:9px;letter-spacing:2px;flex-shrink:0}
+  #ticker .strip{flex:1;overflow:hidden;white-space:nowrap;position:relative;height:14px}
+  #ticker .tape{position:absolute;white-space:nowrap;color:var(--cream);animation:ticker 60s linear infinite;will-change:transform}
+  @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+  #ticker .sep{color:var(--copper);margin:0 14px}
+
+  /* Phone feed */
+  #phonebox{position:absolute;top:120px;right:8px;width:220px;background:rgba(10,8,5,.92);border:1px solid var(--piss);font-size:10px;letter-spacing:0;padding:6px 8px;z-index:21;display:none;font-family:Courier New,monospace}
+  #phonebox.show{display:block}
+  #phonebox .ph{color:var(--piss);letter-spacing:2px;font-size:9px;margin-bottom:4px;font-weight:bold}
+  #phonebox .post{padding:3px 0;border-bottom:1px dotted #443;line-height:1.4;color:var(--cream)}
+  #phonebox .post b{color:var(--piss)}
+  #phonebox .post:last-child{border-bottom:none}
+
+  /* CRT power-on */
+  #poweron{position:absolute;inset:0;z-index:60;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .4s}
+  #poweron.gone{opacity:0;pointer-events:none}
+  #poweron .line{width:80%;height:2px;background:#fff;animation:scanin 1.4s ease-in-out forwards}
+  @keyframes scanin{0%{height:2px;width:80%;opacity:.9}50%{height:80%;width:80%;opacity:.7}100%{height:100%;width:100%;opacity:0}}
+  #poweron.gone .line{display:none}
+
+  .keyhint{color:#665;font-size:10px;letter-spacing:1px}
+
+  @media (max-width: 820px){#stage{width:100vw;height:75vh}}
+</style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="game" width="800" height="600"></canvas>
+    <div id="daynight" class="ui"></div>
+    <div id="tweaker" class="ui"></div>
+    <div id="flash" class="ui"></div>
+    <div id="vignette" class="ui"></div>
+    <div id="scanlines" class="ui"></div>
+    <div id="flicker" class="ui"></div>
+    <canvas id="minimap" width="120" height="96"></canvas>
+    <div id="ticker" class="ui">
+      <span class="badge">LIVE @ 4</span>
+      <div class="strip"><div class="tape" id="tape">good evening. tony has not blinked since 1994.</div></div>
+    </div>
+    <div id="phonebox">
+      <div class="ph">📱 LOCAL FEED · DAY <span id="phDay">1</span></div>
+      <div id="phPosts"></div>
+    </div>
+    <div id="hud" class="ui">
+      <div class="col">
+        <div><span class="hearts" id="hp">♥♥♥♥♥</span></div>
+        <div>$<span id="cash">0</span> &nbsp; 🪨<span id="rocks">0</span> &nbsp; 🪙<span id="copper">0</span></div>
+        <div>shakes<span class="bar shake"><i id="shakeBar"></i></span></div>
+        <div>brain<span class="bar brain"><i id="brainBar"></i></span></div>
+      </div>
+      <div class="col right">
+        <div><span id="rankName">stem-tip sucker</span> · <span id="cred">0</span> cred</div>
+        <div><span class="stars" id="wanted"></span></div>
+        <div id="timeOfDay" style="color:#776">tuesday · day</div>
+        <div class="keyhint">wasd · space · e · i · q · f · p· m</div>
+      </div>
+    </div>
+    <div id="toast" class="ui"></div>
+    <div id="panel" class="ui"></div>
+    <div id="dialogue" class="ui"></div>
+    <div id="title">
+      <pre style="color:#d4c896;font-size:9px;line-height:1;letter-spacing:0;margin-bottom:14px;text-shadow:1px 1px 0 #000;opacity:.6">
+        _____
+       /  _  \\___
+      |  / \\    /
+      | ( o )(o )
+      |  \\_/    \\
+       \\___|  ___>
+           \\/   the possum knows</pre>
+      <h1>ROCK BOTTOM</h1>
+      <div class="sub">the crackhead's odyssey · v6</div>
+      <div class="start">[ SPACE ] begin</div>
+      <div class="load" id="loadBtn" style="display:none">[ L ] load save</div>
+      <div class="credit">vibekoded · the possum knows</div>
+    </div>
+    <div id="poweron"><div class="line"></div></div>
+  </div>
+
+<script>
+/* ============================================================
+   ROCK BOTTOM v4 — single-file build
+   no frameworks. no cdn. one file. the possum knows.
+   ============================================================ */
+(() => {
+'use strict';
+
+// ---------- window.storage shim ----------
+if (!window.storage) {
+  // best-effort shim — try chrome.storage-style API first, fall back to in-memory
+  const mem = {};
+  window.storage = {
+    set: async (k, v) => { mem[k] = JSON.stringify(v); try { localStorage.setItem('__rb_'+k, mem[k]); } catch(e){} },
+    get: async (k) => {
+      if (mem[k] !== undefined) return { value: JSON.parse(mem[k]) };
+      try { const s = localStorage.getItem('__rb_'+k); if (s) return { value: JSON.parse(s) }; } catch(e){}
+      return null;
+    },
+  };
+}
+
+// ---------- constants ----------
+const W = 800, H = 600;
+const WORLD = { w: 2200, h: 1900 };
+const TILE = 64;
+const RANKS = [
+  { cred: 0,   name: 'stem-tip sucker' },
+  { cred: 10,  name: 'sidewalk tweaker' },
+  { cred: 25,  name: 'alley rat' },
+  { cred: 50,  name: 'strip-mall fiend' },
+  { cred: 100, name: 'block captain' },
+  { cred: 200, name: 'pipe prophet' },
+  { cred: 400, name: 'the glass mayor' },
+  { cred: 800, name: 'CRACK LORD SUPREME' },
+];
+
+// ---------- zones ----------
+const ZONES = [
+  { id: 'block',       name: 'THE BLOCK',           x: 880,  y: 720,  w: 340, h: 240, color: '#3a3220', label: '#e8c040' },
+  { id: 'scrap',       name: 'SCRAP YARD',          x: 100,  y: 80,   w: 520, h: 360, color: '#3a2f1a', label: '#d06030' },
+  { id: 'pawn',        name: 'PAWN SHOP',           x: 130,  y: 580,  w: 260, h: 200, color: '#2a2a18', label: '#c08820' },
+  { id: 'dealer',      name: "DEALER'S CORNER",     x: 1460, y: 780,  w: 320, h: 250, color: '#3a1810', label: '#d06030' },
+  { id: 'abandoned',   name: 'ABANDONED BUILDING',  x: 1500, y: 100,  w: 480, h: 360, color: '#241818', label: '#8a3a3a', locked: true },
+  { id: 'market',      name: 'MARKETPLACE',         x: 700,  y: 1380, w: 720, h: 260, color: '#2a3a20', label: '#a8c030' },
+  { id: 'alley',       name: 'BACK ALLEY',          x: 100,  y: 1280, w: 540, h: 380, color: '#181818', label: '#8a3a3a' },
+  { id: 'church',      name: 'CHURCH',              x: 1600, y: 1300, w: 380, h: 320, color: '#241c2a', label: '#d488d4' },
+  { id: 'projects',    name: 'THE PROJECTS',        x: 100,  y: 1700, w: 600, h: 180, color: '#1c1c20', label: '#a0a0c0' },
+  { id: 'underpass',   name: 'HIGHWAY UNDERPASS',   x: 1020, y: 240,  w: 380, h: 220, color: '#1a1a1c', label: '#888888' },
+];
+
+// ---------- buildings (solid props) ----------
+const BUILDINGS = [
+  // pawn shop building
+  { x: 180, y: 620, w: 160, h: 100, color: '#3a2a1a', border: '#1a1008', name: 'PAWN', solid: true },
+  // dealer corner storefront
+  { x: 1520, y: 820, w: 200, h: 110, color: '#4a2018', border: '#1a0805', name: 'CORNER', solid: true },
+  // abandoned building
+  { x: 1560, y: 160, w: 360, h: 240, color: '#1a1010', border: '#3a1010', name: '', locked: true, solid: true },
+  // church
+  { x: 1680, y: 1360, w: 240, h: 200, color: '#2a1f3a', border: '#0a0518', name: 'CHURCH', solid: true, doorGap: true },
+  // scrap yard fence is handled separately
+];
+
+// ---------- props (decoration + interactables) ----------
+const PROPS = [
+  // dumpsters — interactable (dumpster dive)
+  { type:'dumpster', x:140,  y:1320, w:36, h:24, color:'#2a3818', looted:false },
+  { type:'dumpster', x:440,  y:1640, w:36, h:24, color:'#3a2818', looted:false },
+  { type:'dumpster', x:1340, y:1480, w:36, h:24, color:'#2a2818', looted:false },
+  { type:'dumpster', x:1620, y:280,  w:36, h:24, color:'#2a3818', looted:false },
+  { type:'dumpster', x:780,  y:240,  w:36, h:24, color:'#2a2828', looted:false },
+  // shopping cart (rideable)
+  { type:'cart', x:1100, y:1520, w:24, h:20, color:'#888', mounted:false },
+  // lamp posts
+  { type:'lamp', x:740,  y:840 }, { type:'lamp', x:1340, y:840 },
+  { type:'lamp', x:1740, y:1100 },{ type:'lamp', x:240,  y:1100 },
+  { type:'lamp', x:1600, y:1700 },{ type:'lamp', x:840,  y:1700 },
+  { type:'lamp', x:340,  y:560 }, { type:'lamp', x:1500, y:560 },
+  { type:'lamp', x:1240, y:340 }, { type:'lamp', x:1100, y:1200 },
+  // fire hydrants
+  { type:'hydrant', x:680,  y:920 }, { type:'hydrant', x:1480, y:1200 },
+  { type:'hydrant', x:280,  y:1240 },{ type:'hydrant', x:1740, y:1660 },
+  // mailboxes
+  { type:'mailbox', x:920,  y:1100 },{ type:'mailbox', x:1500, y:1000 },
+  { type:'mailbox', x:440,  y:840 },
+  // traffic cones
+  { type:'cone', x:1080, y:340 },{ type:'cone', x:1200, y:380 },
+  { type:'cone', x:1360, y:420 },{ type:'cone', x:380,  y:380 },
+  // trash piles
+  { type:'trash', x:240, y:1500 },{ type:'trash', x:380, y:1620 },
+  { type:'trash', x:120, y:1380 },{ type:'trash', x:1640, y:340 },
+  { type:'trash', x:1800, y:240 },
+  // milk crate at THE BLOCK
+  { type:'crate', x:1050, y:880 },{ type:'crate', x:1080, y:870 },
+  // syringes
+  { type:'syringe', x:280, y:1440 },{ type:'syringe', x:520, y:1540 },
+  { type:'syringe', x:420, y:1340 },
+  // broken bottles
+  { type:'bottle', x:340, y:1620 },{ type:'bottle', x:580, y:1380 },
+  { type:'bottle', x:1380, y:1520 },
+];
+
+// ---------- ambient chatter ----------
+const CHATTER = {
+  tony: ["$10.", "no.", "three coats.", "what.", "i said $10."],
+  yuri: ["bring metal.", "BRUTUS remember.", "what you want.", "no, you owe."],
+  pete: ["one second.", "weighing.", "still weighing."],
+  lurch: ["you got a dollar.", "smells like ham.", "i used to be normal."],
+  sherri: ["the spider.", "did you see it.", "down my arm again."],
+  paulie: ["the face.", "look at the face.", "do you like the face."],
+  dave: ["...", "pigeons......", "they coordinate."],
+  mom: ["oh sweetie.", "is your mom worried.", "kombucha?"],
+  possum: ["...", "the helmet is osha."],
+  priest: ["medicine.", "open your mouth.", "blessed are the tic-tacs."],
+  conductor: ["the train.", "it has always been coming.", "the schedule lied."],
+  larry: ["WHAT.", "I SAID WHAT.", "LOUDER."],
+  stripe: ["$8 a rock.", "stripe got the deal.", "for sure not soap."],
+  pigeon: ["coo.", "bread.", "$2."],
+  biggu: ["tall.", "i am tall.", "i am the big guy."],
+  cubscout: ["popcorn?", "$8 a tin.", "my mom is in the car."],
+  jogger: ["heart rate 142.", "splits.", "5k."],
+  busker: ["la la la", "for tips.", "i wrote this one."],
+  dogwalker: ["paisley. no.", "leave it.", "paisley LEAVE IT."],
+  cop: ["sir.", "sir please.", "10-4."],
+};
+
+// ---------- equipment ----------
+const EQUIPMENT = {
+  airpods:       { slot:'shoes', n:"a single airpod (left)",      speed: 0,    cred: -1, hp: 0 },
+  crocs:         { slot:'shoes', n:"one croc (red)",               speed: 0.6,  cred: -5, hp: 0 },
+  walmart_sneak: { slot:'shoes', n:"walmart sneakers",              speed: 0.2,  cred: 0,  hp: 0 },
+  vibrams:       { slot:'shoes', n:"vibram five-fingers",           speed: 0.4,  cred: -3, hp: 0 },
+  mesh_cap:      { slot:'hat',   n:"a mesh hat (HONK IF U LOVE PETE)", speed:0, cred: 2,  hp: 0 },
+  ski_mask:      { slot:'hat',   n:"a ski mask in june",            speed: 0,   cred: 4,  hp: 0 },
+  helmet:        { slot:'hat',   n:"a tiny construction helmet",    speed: 0,   cred: 6,  hp: 8 },
+  cowboy:        { slot:'hat',   n:"a cowboy hat (decorative)",     speed: 0,   cred: 3,  hp: 0 },
+  trench:        { slot:'coat',  n:"a trench coat",                  speed:-0.1, cred: 3,  hp: 8 },
+  windbreaker:   { slot:'coat',  n:"a faded windbreaker",            speed: 0.1, cred: 1,  hp: 4 },
+  bathrobe:      { slot:'coat',  n:"a hotel bathrobe (yours now)",   speed: 0,   cred:-2,  hp: 6 },
+  parka:         { slot:'coat',  n:"a parka in august",              speed:-0.2, cred: 4,  hp: 12 },
+};
+
+// ---------- achievements ----------
+const ACHIEVEMENTS = {
+  i_have_seen_horrors:  { name:"I HAVE SEEN HORRORS",  flav:"view 10 possum prophecies." },
+  mayor_of_4th:         { name:"MAYOR OF 4TH STREET",  flav:"defeat all 3 alley crackheads in one run." },
+  tonys_worst:          { name:"TONY'S WORST CUSTOMER",flav:"buy 50 rocks." },
+  brutus_remembers:     { name:"BRUTUS REMEMBERS",     flav:"die to brutus 3 times." },
+  ecclesiastes:         { name:"ECCLESIASTES",         flav:"donate $100 total to the church." },
+  judas:                { name:"JUDAS",                flav:"steal plate AND betray stripe." },
+  the_conductor_knows:  { name:"THE CONDUCTOR KNOWS",  flav:"wait by the conductor for 60 seconds." },
+  glass_mayor:          { name:"GLASS MAYOR",          flav:"reach pipe prophet rank." },
+  copper_singer:        { name:"COPPER SINGER",        flav:"strip 10 pure copper total." },
+  the_route:            { name:"THE ROUTE",            flav:"pet the possum (you do not)." },
+  one_foot:             { name:"ONE FOOT",             flav:"trade $20 with the pigeon king." },
+  cart_baron:           { name:"CART BARON",           flav:"own the shopping cart." },
+  not_a_phase:          { name:"NOT A PHASE",          flav:"hit a 5x combo." },
+  tuesday_again:        { name:"TUESDAY, AGAIN",       flav:"survive 7 in-game days." },
+  compliment_the_face:  { name:"COMPLIMENT THE FACE",  flav:"compliment paulie 5 times." },
+};
+
+// ---------- news ticker ----------
+const NEWS_POOL = [
+  "good evening. tony has not blinked since 1994.",
+  "weather: tuesday. with a 40% chance of more tuesday.",
+  "local pigeon demands $2. economists call it 'fair'.",
+  "the train is coming. the train will never be here. more at 11.",
+  "father o'malley refuses comment on whether tic-tacs are medicine.",
+  "yuri says: 'BRUTUS remember.' yuri did not elaborate.",
+  "an entire family of crackheads moved into the alley. they were already there.",
+  "the conductor's pocket watch is set to a year that does not exist yet.",
+  "possum spotted wearing tiny construction helmet. osha 'cautiously optimistic'.",
+  "marketplace stall #3 sells only umbrellas. weather forecast: lawsuit.",
+  "stripe insists rock is real. lab tests inconclusive (it is soap).",
+  "the abandoned building is humming. b flat. it has been for 12 years.",
+  "pete weighed a single sock for 11 minutes. the sock did not survive.",
+  "loud larry remains loud. doctors stunned.",
+  "whole foods mom is worried. about you. specifically.",
+  "the big guy is, in fact, tall. updates as they happen.",
+  "in sports: nothing. the team has not arrived. the team does not exist.",
+  "horoscope: avoid copper. embrace copper. you will trade copper.",
+  "BREAKING: a dachshund in a blazer was seen entering the church.",
+  "the pigeon king has named a successor. the successor is also a pigeon.",
+];
+const newsState = { current: [], idx: 0, t: 0 };
+function rotateNews() {
+  const tape = document.getElementById('tape');
+  if (!tape) return;
+  // build a rotating string of 4-6 news items
+  const items = [];
+  for (let i=0;i<5;i++) items.push(NEWS_POOL[(newsState.idx + i) % NEWS_POOL.length]);
+  newsState.idx = (newsState.idx + 1) % NEWS_POOL.length;
+  tape.textContent = items.join('   ◆   ');
+}
+function broadcastNews(line) {
+  const tape = document.getElementById('tape');
+  if (!tape) return;
+  tape.textContent = '· BREAKING · ' + line + '   ◆   ' + tape.textContent;
+}
+
+// ---------- phone feed ----------
+const phoneState = { posts: [], visible: false };
+const FEED_HANDLES = [
+  '@crackheadcent','@tony_observer','@possum_official','@pawn_pete','@the_corner',
+  '@father_o','@conductor_eta','@stripe_certified','@whole_foods_mom_irl','@pigeon_news',
+  '@yuri_metals','@lurch_thoughts','@brutus_blog','@the_alley_post','@cubscout_mom',
+];
+function feedPost(text, handle) {
+  const h = handle || FEED_HANDLES[Math.floor(Math.random()*FEED_HANDLES.length)];
+  phoneState.posts.unshift({ h, t: text, day: state.day });
+  while (phoneState.posts.length > 8) phoneState.posts.pop();
+  renderPhone();
+}
+function renderPhone() {
+  const box = document.getElementById('phonebox');
+  const list = document.getElementById('phPosts');
+  const day = document.getElementById('phDay');
+  if (!box || !list) return;
+  box.classList.toggle('show', phoneState.visible && state.mode==='playing');
+  day.textContent = state.day;
+  list.innerHTML = phoneState.posts.map(p => `<div class="post"><b>${p.h}</b><br>${p.t}</div>`).join('');
+}
+
+// ---------- world events (random absurd spawns) ----------
+const WORLD_EVENTS = [
+  { id:'forklift_possum', text:"a possum drives a forklift through the marketplace.\nhe has a clipboard. he is doing inventory." },
+  { id:'cloud_yell', text:"a man yells at a cloud.\na child watches. respects you immediately. (+2 cred)", effect: () => { P.cred += 2; } },
+  { id:'doordash', text:"a doordash driver hands you a bag and runs.\ninside: a single chicken nugget and someone's $400 sushi platter.\n(+$12)", effect: () => { P.cash += 12; } },
+  { id:'car_alarm', text:"a car alarm goes off.\nit plays a song that has lyrics. no one acknowledges this.", sfx:'glassBreak' },
+  { id:'chimichanga', text:"a chimichanga rolls past you.\nit is talking. it has opinions about a man named greg." },
+  { id:'horse_nod', text:"a cop on horseback nods at you. the horse also nods.\ndisturbing levels of agreement." },
+  { id:'pothole_say', text:"a pothole says your full legal name.\nyou did not give it your full legal name." },
+  { id:'pigeon_road', text:"a pigeon stands in the road.\nthree cars wait. it is the pigeon king's nephew." },
+  { id:'forget_year', text:"you forget what year it is for 4 minutes.\nwhen you come back, you are holding a traffic cone.\n(- 3 brain)", effect: () => { P.brain = Math.max(0, P.brain-3); P.inventory.push({id:'cone', n:'a traffic cone', q:1}); } },
+  { id:'puddle_wave', text:"you see your reflection in a puddle.\nhe waves. you don't wave back.\nhe waves harder." },
+  { id:'pigeon_change', text:"a pigeon shits exactly $4.20 in change directly on your head.\nthe pigeon nods. you nod. the exchange is complete.\n(+$4)", effect: () => { P.cash += 4; } },
+  { id:'sushi_wedding', text:"a wedding procession crosses the street.\nthe bride is unaccompanied. the groom is a vending machine." },
+  { id:'sandwich_lecture', text:"a sandwich lectures you about logistics for 8 seconds.\nyou nod. you understand none of it. you feel taller.\n(+1 cred)", effect: () => { P.cred += 1; } },
+  { id:'siren_distant', text:"sirens. far away. somebody else's problem.", sfx:'copSiren' },
+  { id:'tony_blinks', text:"tony blinks.\nyou see it.\nit is the only thing.\n(+5 cred)", effect: () => { P.cred += 5; broadcastNews("EYEWITNESS: TONY BLINKED. UNCONFIRMED."); } },
+  { id:'dachshund', text:"a dachshund in a blazer hands you a receipt.\nit is for a haircut you did not get." },
+];
+function fireRandomEvent() {
+  const ev = WORLD_EVENTS[Math.floor(Math.random()*WORLD_EVENTS.length)];
+  toast(ev.text, 5500);
+  if (ev.effect) ev.effect();
+  if (ev.sfx) audio[ev.sfx]();
+  feedPost(ev.text.split('\n')[0].toLowerCase(), '@local_eyewitness');
+  if (Math.random() < 0.3) broadcastNews(ev.text.split('\n')[0]);
+}
+
+// ---------- NPCs canonical data ----------
+// pixel-art sprite as palette-indexed strings (16x16)
+const PALS = {
+  player: ['transparent','#2a1f10','#604020','#a07050','#e8c040','#d4c896','#1a1810','#3a2820'],
+  player_high: ['transparent','#5a4020','#a07020','#e8c040','#fff0a0','#fff8d0','#3a2810','#7a5020'],
+  tony: ['transparent','#1a0805','#3a1818','#5a2820','#8a3a3a','#d4c896','#603020','#000'],
+  yuri: ['transparent','#1a1008','#4a2818','#8a3a18','#d4c896','#e8c040','#5a3018','#000'],
+  brutus: ['transparent','#000','#3a2018','#603020','#a07050','#1a0805','#d4c896','#8a3018'],
+  pete: ['transparent','#1a1008','#4a4028','#8a7050','#d4c896','#604020','#a08840','#000'],
+  lurch: ['transparent','#1a0810','#3a2030','#604040','#a07060','#d4c896','#2a1810','#fff'],
+  sherri: ['transparent','#1a0808','#3a1820','#603030','#a05050','#d4c896','#d488d4','#000'],
+  paulie: ['transparent','#1a0808','#5a3030','#8a5050','#d4a880','#d4c896','#603020','#000'],
+  dave: ['transparent','#1a1008','#3a2818','#604020','#a07050','#d4c896','#88663a','#000'],
+  mom: ['transparent','#1a0810','#503040','#80a050','#a8c030','#d4c896','#d488d4','#fff'],
+  possum: ['transparent','#1a0805','#3a2820','#604030','#a08868','#d4c896','#e8c040','#88c0ff'],
+  priest: ['transparent','#000','#1a1020','#2a2030','#4a3040','#d4c896','#d488d4','#fff'],
+  conductor: ['transparent','#1a1010','#3a2820','#604030','#a07050','#d4c896','#8a3a3a','#604030'],
+  larry: ['transparent','#1a0808','#3a1818','#8a3030','#d4c896','#e8c040','#d06030','#fff'],
+  stripe: ['transparent','#0a0a18','#1a1828','#3a3848','#7a7888','#d4c896','#e8c040','#d4d4d4'],
+  pigeon: ['transparent','#1a1810','#3a3828','#605840','#888070','#d4c896','#d06030','#fff'],
+  cop: ['transparent','#000','#080820','#1818a0','#2828d0','#d4c896','#e8c040','#fff'],
+  biggu: ['transparent','#1a1008','#3a2818','#604030','#a08060','#d4c896','#604020','#000'],
+  horsecop: ['transparent','#000','#080820','#1818a0','#2828d0','#d4c896','#604030','#fff'],
+  vapelord: ['transparent','#1a0820','#3a1850','#603080','#a050c0','#d4c896','#d488d4','#fff'],
+  mayorscousin: ['transparent','#1a1008','#3a2818','#604030','#a07050','#d4c896','#8a3a3a','#fff'],
+  phoneguy: ['transparent','#1a1008','#3a2818','#604030','#a07050','#d4c896','#88c0ff','#fff'],
+  pothole: ['transparent','#000','#0a0805','#1a1810','#2a2818','#3a3828','#604020','#fff'],
+};
+
+// 16x16 pixel art helpers — parse a row string of 0-7 (dot=transparent)
+function parseGrid(rows) {
+  return rows.map(r => r.split('').map(c => c === '.' ? 0 : parseInt(c)));
+}
+function applyVars(rows, vars) {
+  return rows.map(r => {
+    let out = r;
+    for (const k in vars) out = out.split(k).join(vars[k]);
+    return out;
+  });
+}
+
+// player sprites — 4 directions, 3 walk frames each (idle / left-step / right-step)
+function makePlayer() {
+  const base = (frame, dir) => {
+    const H=1, K=4, S=2, T=4, P=6, A=5, E=6, F=3, X=7;
+    // hoodie crackhead — gaunt, hoodie up, milkcrate energy
+    let body = [
+      '................',
+      '.......HHH......',
+      '......HHHHH.....',
+      '.....HHHHHHH....',
+      '.....HSSSSSH....',
+      '.....HSeSeSH....',
+      '.....HSSSSSH....',
+      '.....HHSSSHH....',
+      '....TTTTTTTT....',
+      '....TTAAAATT....',
+      '...TTTTTTTTTT...',
+      '...STTTTTTTTS...',
+      '....TTTTTTTT....',
+      '....PPPPPPPP....',
+      '....PP....PP....',
+      '....EE....EE....',
+    ];
+    if (dir === 'up') {
+      body[4] = '.....HHHHHHH....';
+      body[5] = '.....HHHHHHH....';
+      body[6] = '.....HSSSSSH....';
+      body[7] = '.....HHSSSHH....';
+    }
+    if (dir === 'left') {
+      body[5] = '.....HeSSSSH....';
+    }
+    if (dir === 'right') {
+      body[5] = '.....HSSSSeH....';
+    }
+    // walk frames — leg position shift
+    if (frame === 1) {
+      body[13] = '....PPP.PPPP....';
+      body[14] = '....PP....PP....';
+      body[15] = '....EE....EE....';
+    } else if (frame === 2) {
+      body[13] = '....PPPP.PPP....';
+      body[14] = '....PP....PP....';
+      body[15] = '....EE....EE....';
+    }
+    // arm sway during walk
+    if (frame === 1) body[11] = '..STTTTTTTTTS...';
+    if (frame === 2) body[11] = '...STTTTTTTTS...';
+    body = applyVars(body, {H:H, S:S, T:T, P:P, A:A, E:E});
+    return parseGrid(body);
+  };
+  return {
+    down:  [base(0,'down'),  base(1,'down'),  base(2,'down')],
+    up:    [base(0,'up'),    base(1,'up'),    base(2,'up')],
+    left:  [base(0,'left'),  base(1,'left'),  base(2,'left')],
+    right: [base(0,'right'), base(1,'right'), base(2,'right')],
+  };
+}
+
+// Render palette-indexed sprite to a 32×32 offscreen canvas (16×16 scaled 2x)
+function rasterize(grid, palette) {
+  const c = document.createElement('canvas');
+  c.width = 32; c.height = 32;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  for (let y=0;y<16;y++) for (let x=0;x<16;x++) {
+    const idx = grid[y][x];
+    if (idx === 0) continue;
+    const col = palette[idx];
+    if (!col || col === 'transparent') continue;
+    ctx.fillStyle = col;
+    ctx.fillRect(x*2, y*2, 2, 2);
+  }
+  return c;
+}
+
+// Quadruped (Brutus) — 14 year old mostly blind dog. 2-frame trot.
+function makeDog() {
+  const B=3, D=2, E=1, T=4, M=7;
+  const f = (frame) => parseGrid(applyVars([
+    '................',
+    '...BBBB.........',
+    '..BBBBBBB.......',
+    '..BBM.MBBBBBB...',
+    '..BBBBBBBBBBBB..',
+    '.BBBBBBBBBBBBBT.',
+    '..BBBBBBBBBBBB..',
+    '..BBBBBBBBBBBB..',
+    '..D..D...D..D...',
+    '..D..D...D..D...',
+    frame===0 ? '..D..D...D..D...' : '...D.....D......',
+    frame===0 ? '..E..E...E..E...' : '...E..D..E..D...',
+    frame===0 ? '................' : '..........E..E..',
+    '................',
+    '................',
+    '................',
+  ], {B:B, D:D, E:E, T:T, M:M}));
+  return [f(0), f(1)];
+}
+
+// Pigeon — small, one foot per VIBE
+function makePigeon() {
+  const f = (frame) => parseGrid(applyVars([
+    '................',
+    '................',
+    '................',
+    '......HHHO......',
+    '.....HHHHHHF....',
+    '....BBBBBBBB....',
+    '...BBBBBBBBBB...',
+    '...BBBBBBBBBB...',
+    '....BBBBBBBB....',
+    frame===0 ? '......F.F.......' : '......FF........',
+    frame===0 ? '......F.F.......' : '......F.........',
+    '................',
+    '................',
+    '................',
+    '................',
+    '................',
+  ], {H:'2', O:'6', B:'3', F:'6'}));
+  return [f(0), f(1)];
+}
+
+// Possum — flat brown lump, dignified, tiny construction helmet
+function makePossum() {
+  const f = (frame) => parseGrid(applyVars([
+    '................',
+    '.....OOOOO......',
+    '.....OPPPPO.....',
+    '.....OPPPPO.....',
+    '....HHHHHHH.....',
+    '...HFFFFFFF.....',
+    '..HFFOoOOoOF....',
+    '..HFFFFFFFFFF...',
+    '.HFFFFFFFFFFFF..',
+    '.HFFFFFFFFFFFFt.',
+    '..HFFFFFFFFFFF..',
+    frame===0 ? '..D..D....D..D..' : '...D..D....D..D.',
+    '................',
+    '................',
+    '................',
+    '................',
+  ], {O:'6', P:'7', H:'2', F:'4', o:'1', D:'3', t:'2'}));
+  return [f(0), f(1)];
+}
+
+// Generic humanoid NPC with style options
+// opts:
+//   hat,skin,shirt,pants,accent  — palette indices (1-7)
+//   tall: bool (add rows up top)
+//   wide: bool (extend body sides)
+//   bald: bool (flatter head, skin showing)
+//   yelling: bool (open mouth)
+//   hood: bool (hood drape over face)
+//   coats: 1-3 (layered shirts/colors)
+//   cap: bool (square hat top)
+//   accessory: 'cross' | 'pipe' | 'kombucha' | 'badge' | 'sash' | null
+//   beard: bool
+//   thin: bool (narrower body)
+function makeNPC(opts={}) {
+  const H = opts.hat ?? 1, S = opts.skin ?? 3, T = opts.shirt ?? 4, P = opts.pants ?? 6, A = opts.accent ?? 5;
+  const C2 = opts.shirt2 ?? T;
+  const ACC = opts.accColor ?? 5;
+  const E = 6; // boots/feet color index
+  const isWide = opts.wide, isTall = opts.tall, isThin = opts.thin;
+  const isBald = opts.bald, isHood = opts.hood;
+  const isYell = opts.yelling, hasBeard = opts.beard;
+  const cap = opts.cap;
+  const coats = opts.coats ?? 1;
+  const accessory = opts.accessory;
+
+  const f = (frame) => {
+    // head row layout
+    let headTop = '......1111......';
+    let headW1  = '.....111111.....';
+    if (isTall) { headTop = '......2222......'; }
+    if (cap) {
+      headTop = '....1111111111..';
+      headW1  = '....1111111111..';
+    }
+    if (isHood) {
+      headTop = '.....HHHHHH.....';
+      headW1  = '....HHHHHHHH....';
+    }
+    let row3 = isBald ? '.....SSSSSS.....' : '.....HHHHHH.....';
+    let row4 = '.....SSSSSS.....';
+    let eyes = isYell ? '.....SOOOOS.....' : '.....SeSeS......';
+    let row6 = '.....SSSSSS.....';
+    if (hasBeard) row6 = '.....1S11S1.....'; // brown beard
+    if (isHood) { row3 = '.....HHHHHH.....'; row4 = '.....HSSSSH.....'; eyes = '.....HSeSeH.....'; row6 = '.....HSSSSH.....'; }
+    // body
+    let body = [
+      '................',
+      headTop,
+      headW1,
+      row3,
+      row4,
+      eyes,
+      row6,
+      isWide ? '....TTTTTTTTTT..' : '....TTTTTTTT....',
+      coats >= 2 ? '....CCTTTTTTCC..' : '....TTAAAATT....',
+      coats >= 3 ? '...CCCCTTTTCCC..' : '...TTTTTTTTT....',
+      '...STTTTTTTTS...',
+      isWide ? '...STTTTTTTTTS..' : '...STTTTTTTS....',
+      '....TTTTTTTT....',
+      '....PPPPPPPP....',
+      '....PP....PP....',
+      '....EE....EE....',
+    ];
+    if (isThin) {
+      body[7]  = '.....TTTTTT.....';
+      body[8]  = '....TTAATT......';
+      body[9]  = '....TTTTTT......';
+      body[10] = '....STTTTS......';
+      body[11] = '....STTTTS......';
+      body[12] = '.....TTTT.......';
+      body[13] = '.....PPPP.......';
+      body[14] = '.....P..P.......';
+      body[15] = '.....E..E.......';
+    }
+    // walk frames — staggered legs
+    if (frame === 1) {
+      body[14] = '....PPP.PPPP....';
+      body[15] = '....EE.....P....';
+    } else if (frame === 2) {
+      body[14] = '....PPPP.PPP....';
+      body[15] = '....P.....EE....';
+    }
+    // accessory overlays
+    if (accessory === 'cross') {
+      body[9]  = '...TTTTAATTT....';
+      body[11] = '...STTTAATTS....';
+    }
+    if (accessory === 'kombucha') {
+      body[11] = '...STTTTTTTKS...'.replace(/K/g, A);
+      body[12] = '....TTTTTTTK....'.replace(/K/g, A);
+    }
+    if (accessory === 'badge') {
+      body[9] = '....TTAAAATB....'.replace(/B/g, ACC);
+    }
+    if (accessory === 'sash') {
+      body[9] = '....AATTTTAA....';
+      body[10] = '...TAATTTTAAT...';
+    }
+    body = applyVars(body, {H:H, S:S, T:T, P:P, A:A, E:E, C:C2, O:'1', e:'1'});
+    return parseGrid(body);
+  };
+  return [f(0), f(1), f(2)];
+}
+
+// Build the SPRITE_CACHE
+const SPRITE_CACHE = {};
+function buildSprites() {
+  // player — 3 walk frames per direction, normal + rocked-up palette
+  const p = makePlayer();
+  ['down','up','left','right'].forEach(d => {
+    p[d].forEach((g,i) => {
+      SPRITE_CACHE['player_'+d+'_'+i] = rasterize(g, PALS.player);
+      SPRITE_CACHE['playerhi_'+d+'_'+i] = rasterize(g, PALS.player_high);
+    });
+  });
+  // NPCs — distinctive styles, 3-frame walks
+  const npcStyles = {
+    tony:      { hat:6, skin:3, shirt:4, pants:6, accent:5, coats:3, shirt2:7 },          // three coats, never blinks
+    yuri:      { hat:6, skin:3, shirt:2, pants:6, accent:5, bald:true, beard:true },      // bald, beard
+    pete:      { hat:2, skin:3, shirt:6, pants:5, accent:4, wide:true },                  // wide, behind glass
+    lurch:     { hat:1, skin:3, shirt:6, pants:6, accent:5, tall:true },                  // 7ft tall
+    sherri:    { hat:6, skin:3, shirt:6, pants:2, accent:5, thin:true },                  // thin, fast
+    paulie:    { hat:1, skin:4, shirt:3, pants:6, accent:5 },                             // the face
+    dave:      { hat:2, skin:3, shirt:6, pants:6, accent:5 },                             // sleeps
+    mom:       { hat:6, skin:5, shirt:4, pants:5, accent:6, accessory:'kombucha' },       // kombucha
+    priest:    { hat:1, skin:5, shirt:1, pants:1, accent:6, accessory:'cross' },          // collar + cross
+    conductor: { hat:6, skin:3, shirt:6, pants:1, accent:5, cap:true },                   // train cap
+    larry:     { hat:5, skin:3, shirt:6, pants:2, accent:4, yelling:true, wide:true },    // YELLING
+    stripe:    { hat:5, skin:3, shirt:6, pants:2, accent:4, hood:true },                  // hood up
+    cop:       { hat:3, skin:5, shirt:3, pants:1, accent:7, cap:true, accessory:'badge', accColor:5 },
+    biggu:     { hat:5, skin:3, shirt:6, pants:6, accent:5, tall:true, wide:true },       // tall AND big
+    cubscout:  { hat:5, skin:5, shirt:4, pants:1, accent:7, accessory:'sash', thin:true },
+    jogger:    { hat:5, skin:5, shirt:4, pants:1, accent:7, thin:true },
+    busker:    { hat:5, skin:3, shirt:4, pants:6, accent:7 },
+    dogwalker: { hat:6, skin:5, shirt:4, pants:1, accent:6 },
+    vapelord:  { hat:5, skin:3, shirt:2, pants:1, accent:6, hood:true, accessory:'kombucha' },
+    mayorscousin: { hat:1, skin:3, shirt:6, pants:1, accent:5, coats:2, shirt2:5 },
+    phoneguy:  { hat:5, skin:3, shirt:2, pants:6, accent:7, thin:true },
+  };
+  Object.entries(npcStyles).forEach(([k, opts]) => {
+    const frames = makeNPC(opts);
+    frames.forEach((g, i) => {
+      SPRITE_CACHE[k+'_'+i] = rasterize(g, PALS[k] || PALS.tony);
+    });
+  });
+  // possum, brutus, pigeon — special silhouettes, 2-frame
+  const possum = makePossum();
+  possum.forEach((g,i) => { SPRITE_CACHE['possum_'+i] = rasterize(g, PALS.possum); });
+  const dog = makeDog();
+  dog.forEach((g,i) => { SPRITE_CACHE['brutus_'+i] = rasterize(g, PALS.brutus); });
+  const pig = makePigeon();
+  pig.forEach((g,i) => { SPRITE_CACHE['pigeon_'+i] = rasterize(g, PALS.pigeon); });
+
+  // horse cop — horse with cop on top (special)
+  const hc = makeHorseCop();
+  hc.forEach((g,i) => { SPRITE_CACHE['horsecop_'+i] = rasterize(g, PALS.horsecop); });
+  // pothole — a hole that talks
+  SPRITE_CACHE['pothole_0'] = rasterize(makePothole(0), PALS.pothole);
+  SPRITE_CACHE['pothole_1'] = rasterize(makePothole(1), PALS.pothole);
+  SPRITE_CACHE['pothole_2'] = rasterize(makePothole(2), PALS.pothole);
+}
+
+function makeHorseCop() {
+  // 16x16 sprite, horse body + cop torso on top
+  const f = (frame) => parseGrid(applyVars([
+    '...HHHH.........', // cop hat
+    '...HHHH.........',
+    '....SSSS........', // cop face
+    '....SeSe........',
+    '....cccc........', // cop torso
+    '...cBccBc.......', // badge
+    '...cccccc.......',
+    '..HHHHHHHHH.....', // horse back
+    '..HHHHHHHHHHH...',
+    '.HHHHHHHHHHHHM..',
+    '.HHHHHHHHHHHHH..',
+    '.HHHHHHHHHHHHH..',
+    frame===0 ? '.DD..D.D..D.D...' : '.D.D.DD..DD.D...',
+    frame===0 ? '.DD..D.D..D.D...' : '.D.D.DD..DD.D...',
+    '.EE..E.E..E.E...',
+    '................',
+  ], {H:'6', S:'5', e:'1', c:'3', B:'7', M:'7', D:'3', E:'1'}));
+  return [f(0), f(1)];
+}
+
+function makePothole(frame) {
+  // dark oval, slightly animating shape (it's TALKING)
+  const open = frame === 1 ? 'eeee' : (frame === 2 ? 'EEEE' : 'eEEe');
+  return parseGrid(applyVars([
+    '................',
+    '................',
+    '................',
+    '................',
+    '................',
+    '................',
+    '.....2222.......',
+    '....222222......',
+    '...22XXXX22.....'.replace(/XXXX/g, open),
+    '...22XXXX22.....'.replace(/XXXX/g, open),
+    '....222222......',
+    '.....2222.......',
+    '................',
+    '................',
+    '................',
+    '................',
+  ], {e:'1', E:'1'}));
+}
+
+// ---------- audio ----------
+const audio = {
+  ctx: null,
+  ready: false,
+  muted: false,
+  init() {
+    if (this.ready) return;
+    try {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      this.ready = true;
+    } catch(e) {}
+  },
+  tone(freq, dur=0.1, type='square', vol=0.08, slide=null) {
+    if (!this.ready || this.muted) return;
+    const t = this.ctx.currentTime;
+    const o = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, t);
+    if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(slide,20), t+dur);
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+    o.connect(g).connect(this.ctx.destination);
+    o.start(t); o.stop(t+dur+0.02);
+  },
+  noise(dur=0.08, vol=0.06) {
+    if (!this.ready || this.muted) return;
+    const t = this.ctx.currentTime;
+    const buf = this.ctx.createBuffer(1, this.ctx.sampleRate*dur, this.ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i=0;i<d.length;i++) d[i] = (Math.random()*2-1) * (1 - i/d.length);
+    const s = this.ctx.createBufferSource();
+    s.buffer = buf;
+    const g = this.ctx.createGain();
+    g.gain.value = vol;
+    s.connect(g).connect(this.ctx.destination);
+    s.start(t);
+  },
+  hit() { this.tone(180,.08,'square',.1,60); this.noise(.06,.08); },
+  hurt() { this.tone(220,.18,'sawtooth',.1,80); },
+  pickup() { this.tone(800,.06,'square',.07); setTimeout(()=>this.tone(1200,.06,'square',.07),60); },
+  coin() { this.tone(494,.08,'square',.08); setTimeout(()=>this.tone(659,.12,'square',.08),80); },
+  rockUp() {
+    [440, 554, 659, 880].forEach((f,i)=> setTimeout(()=>this.tone(f,.18,'triangle',.09), i*100));
+  },
+  crash() { this.tone(440,.6,'sawtooth',.08,110); },
+  death() {
+    [440,330,247,165].forEach((f,i)=> setTimeout(()=>this.tone(f,.32,'sawtooth',.09), i*220));
+  },
+  rankUp() {
+    [523,659,784,1047].forEach((f,i)=> setTimeout(()=>this.tone(f,.16,'square',.08), i*80));
+  },
+  dialogue() { this.tone(660,.04,'square',.05); },
+  copSiren() { this.tone(900,.18,'sine',.06,500); setTimeout(()=>this.tone(500,.18,'sine',.06,900),200); },
+  bossRoar() { this.tone(80,.45,'sawtooth',.12,40); this.noise(.35,.1); },
+  glassBreak() {
+    for (let i=0;i<6;i++) setTimeout(()=>this.tone(2000+Math.random()*2000,.05,'square',.05,800), i*30);
+    this.noise(.2,.08);
+  },
+  cricket() { this.tone(2200+Math.random()*400, .04, 'triangle', .025, 1800); },
+  traffic() { this.tone(60+Math.random()*30, .35, 'sawtooth', .025, 40); },
+  carDoor() { this.tone(120, .08, 'square', .04, 80); this.tone(80, .06, 'sawtooth', .03, 50); },
+  cough() { this.noise(.12, .03); this.tone(220+Math.random()*40, .08, 'sawtooth', .03, 110); },
+  dogBark() { this.tone(280, .06, 'square', .04, 180); setTimeout(()=>this.tone(240,.06,'square',.04,160), 80); },
+};
+
+// ---------- save/load ----------
+const SAVE_KEY = 'rockbottom_save_v5';
+async function saveGame() {
+  try {
+    await window.storage.set(SAVE_KEY, {
+      version: 5,
+      player: {
+        x: P.x, y: P.y, hp: P.hp, cash: P.cash, rocks: P.rocks, copper: P.copper, shakes: P.shakes,
+        cred: P.cred, brain: P.brain, wanted: P.wanted, rank: P.rank,
+        inventory: P.inventory, lifetime: P.lifetime, tonyOffenses: P.tonyOffenses,
+        equip: P.equip, cartMounted: P.cartMounted,
+      },
+      npcsKilled: npcs.filter(n=>n.dead).map(n=>n.id),
+      cashPilesCollected: Array.from(state.cashPilesCollected),
+      achievements: Array.from(state.achievements),
+      counters: state.counters,
+      quests: state.quests,
+      day: state.day,
+      dayTime: state.dayTime,
+      weather: state.weather,
+      lootedDumpsters: PROPS.filter(p=>p.type==='dumpster' && p.looted).map(p=>p.x+','+p.y),
+    });
+  } catch(e) {}
+}
+async function loadGame() {
+  try {
+    const s = await window.storage.get(SAVE_KEY);
+    if (!s || !s.value || s.value.version < 5) return false;
+    const sv = s.value;
+    Object.assign(P, sv.player);
+    P.attackCd = 0; P.hitFlash = 0; P.iframes = 0;
+    P.facing = P.facing || 'down';
+    P.equip = P.equip || { shoes:null, hat:null, coat:null };
+    (sv.npcsKilled||[]).forEach(id => { const n = npcs.find(x=>x.id===id); if (n) n.dead = true; });
+    state.cashPilesCollected = new Set(sv.cashPilesCollected || []);
+    state.achievements = new Set(sv.achievements || []);
+    state.counters = Object.assign({
+      possumProphecies: 0, brutusDeaths: 0, churchDonations: 0,
+      rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
+      plateStolen: 0, stripeBetrayed: 0, pigeonTrade: 0,
+    }, sv.counters || {});
+    state.quests = Object.assign({}, state.quests, sv.quests || {});
+    state.day = sv.day ?? 1;
+    state.dayTime = sv.dayTime ?? 0;
+    state.weather = sv.weather || 'clear';
+    const looted = new Set(sv.lootedDumpsters || []);
+    PROPS.filter(p=>p.type==='dumpster').forEach(p => { if (looted.has(p.x+','+p.y)) p.looted = true; });
+    return true;
+  } catch(e) { return false; }
+}
+
+// ---------- world state ----------
+const P = {
+  x: 1050, y: 840, w: 24, h: 28,
+  facing: 'down', frame: 0, frameT: 0,
+  vx: 0, vy: 0, speed: 2.2,
+  hp: 100, maxHp: 100,
+  cash: 5, rocks: 0, copper: 0,
+  shakes: 20, cred: 0, brain: 70,
+  wanted: 0, wantedT: 0, rank: 0,
+  attackCd: 0, attacking: 0, hitFlash: 0, iframes: 0,
+  rockedT: 0, crashT: 0,
+  inventory: [], lifetime: { rocksSmoked: 0, copsKilled: 0, arrests: 0, dayCount: 0 },
+  tonyOffenses: 0,
+  cartMounted: false,
+  equip: { shoes:null, hat:null, coat:null },
+};
+
+// Grant achievement helper
+function unlockAchievement(id) {
+  if (state.achievements.has(id)) return;
+  if (!ACHIEVEMENTS[id]) return;
+  state.achievements.add(id);
+  toast('· ACHIEVEMENT ·\n'+ACHIEVEMENTS[id].name, 3000);
+  audio.rankUp();
+  saveGame();
+}
+
+// Equipment stat application — recompute derived stats
+function applyEquipStats() {
+  let baseSpeed = 2.2;
+  let baseHp = P.cartMounted ? 110 : 100;
+  let credBonus = 0;
+  for (const slot in P.equip) {
+    const id = P.equip[slot];
+    if (!id || !EQUIPMENT[id]) continue;
+    const e = EQUIPMENT[id];
+    baseSpeed += (e.speed||0);
+    baseHp += (e.hp||0);
+    credBonus += (e.cred||0);
+  }
+  if (P.cartMounted) baseSpeed += 0.6;
+  P.speed = Math.max(0.8, baseSpeed);
+  P.maxHp = baseHp;
+  if (P.hp > P.maxHp) P.hp = P.maxHp;
+  P.credBonus = credBonus;
+}
+
+// Weather selection per day
+function rollWeather() {
+  const r = Math.random();
+  if (r < 0.65) state.weather = 'clear';
+  else if (r < 0.88) state.weather = 'rain';
+  else state.weather = 'fog';
+}
+
+let npcs = [];
+let particles = [];
+let cashPiles = [];
+const state = {
+  mode: 'title',                       // title | playing | dialogue | inv | quest | heist | boss | tweakerVision
+  bossActive: false, bossPhase: 0,
+  bossNPC: null,
+  cam: { x: 0, y: 0 },
+  keys: new Set(),
+  toastT: 0,
+  shake: 0,
+  tweakerT: 0, tweakerCdT: 0,
+  day: 1, dayTime: 0,
+  weather: 'clear',                    // clear | rain | fog
+  rainT: 0,
+  flash: 0, flashColor: '#fff',
+  combo: 0, comboT: 0,
+  hitPause: 0,
+  carEngineT: 0,
+  conductorWaitT: 0,
+  quests: {
+    first_rock:    { title: 'THE FIRST ROCK',         done: false, flav: 'buy a rock from tre bag tony. that is the entire quest.' },
+    copper_sings:  { title: 'THE COPPER SINGS',       done: false, flav: 'strip copper from the abandoned building. in b flat.' },
+    conductor:     { title: "THE CONDUCTOR'S BARGAIN", done: false, flav: 'sell 3 pure copper to the conductor. he is still waiting.' },
+    priest_mercy:  { title: "THE PRIEST'S MERCY",     done: false, flav: "accept a blessed tic-tac. let father o'malley help." },
+    fallen_king:   { title: 'THE FALLEN KING',        done: false, flav: 'defeat tre bag tony at the corner. take what you can.' },
+  },
+  cashPilesCollected: new Set(),
+  achievements: new Set(),
+  counters: {
+    possumProphecies: 0, brutusDeaths: 0, churchDonations: 0,
+    rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
+    plateStolen: 0, stripeBetrayed: 0,
+  },
+};
+
+// ---------- dialogue / toast helpers ----------
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+function toast(msg, ms=2200) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms);
+}
+
+const dialogueEl = document.getElementById('dialogue');
+let activeDialogue = null;
+function dialogue(name, text, opts) {
+  activeDialogue = { name, text, opts };
+  dialogueEl.innerHTML = `<div class="name">${name}</div><div class="text">${text}</div><div class="opts"></div>`;
+  const optsBox = dialogueEl.querySelector('.opts');
+  opts.forEach((o, i) => {
+    const div = document.createElement('div');
+    div.className = 'opt' + (o.disabled ? ' disabled' : '');
+    div.innerHTML = `<b>${i+1}.</b> ${o.label}`;
+    div.onclick = () => { if (!o.disabled) { audio.dialogue(); closeDialogue(); o.action && o.action(); } };
+    optsBox.appendChild(div);
+  });
+  dialogueEl.classList.add('show');
+  state.mode = 'dialogue';
+}
+function closeDialogue() {
+  activeDialogue = null;
+  dialogueEl.classList.remove('show');
+  if (state.mode === 'dialogue') state.mode = 'playing';
+}
+
+// ---------- panel (inventory + quest) ----------
+const panelEl = document.getElementById('panel');
+function renderInventory() {
+  const r = RANKS[P.rank];
+  const lt = P.lifetime;
+  const eq = P.equip;
+  const slotLabel = (slot) => {
+    const id = eq[slot];
+    if (!id || !EQUIPMENT[id]) return '<span style="color:#665">(none)</span>';
+    return EQUIPMENT[id].n;
+  };
+  const achList = Object.entries(ACHIEVEMENTS).map(([k,a]) => {
+    const got = state.achievements.has(k);
+    return `<div class="row" style="${got?'':'opacity:.35'}"><span>${got?'✓':'·'} ${a.name}</span><span style="color:#776;font-size:9px">${a.flav}</span></div>`;
+  }).join('');
+  panelEl.innerHTML = `
+    <h2>INVENTORY · ${r.name.toUpperCase()}</h2>
+    <div class="row"><span>cash</span><span>$${P.cash}</span></div>
+    <div class="row"><span>rocks</span><span>🪨 ${P.rocks}</span></div>
+    <div class="row"><span>pure copper</span><span>🪙 ${P.copper}</span></div>
+    <div class="row"><span>hp</span><span>${Math.round(P.hp)} / ${P.maxHp}</span></div>
+    <div class="row"><span>shakes</span><span>${P.shakes.toFixed(0)}</span></div>
+    <div class="row"><span>brain</span><span>${P.brain.toFixed(0)}</span></div>
+    <div class="row"><span>cred</span><span>${P.cred}${P.credBonus?` (+${P.credBonus})`:''}</span></div>
+    <div class="row"><span>wanted</span><span>${'★'.repeat(P.wanted)||'-'}</span></div>
+    <div class="row"><span>cart</span><span>${P.cartMounted?'mounted':'-'}</span></div>
+    <div class="sec">EQUIPMENT</div>
+    <div class="row"><span>hat</span><span>${slotLabel('hat')}</span></div>
+    <div class="row"><span>coat</span><span>${slotLabel('coat')}</span></div>
+    <div class="row"><span>shoes</span><span>${slotLabel('shoes')}</span></div>
+    <div class="sec">ITEMS</div>
+    ${P.inventory.length ? P.inventory.map(i=>`<div class="row"><span>${i.n}</span><span>x${i.q||1}</span></div>`).join('') : '<div class="row"><span>nothing</span><span>(yet)</span></div>'}
+    <div class="sec">LIFETIME</div>
+    <div class="row"><span>rocks smoked</span><span>${lt.rocksSmoked||0}</span></div>
+    <div class="row"><span>cops killed</span><span>${lt.copsKilled||0}</span></div>
+    <div class="row"><span>arrests</span><span>${lt.arrests||0}</span></div>
+    <div class="row"><span>day</span><span>${state.day}</span></div>
+    <div class="row"><span>weather</span><span>${state.weather}</span></div>
+    <div class="sec">CURSED ACCOLADES · ${state.achievements.size}/${Object.keys(ACHIEVEMENTS).length}</div>
+    ${achList}
+    <div class="close">[ i / esc ] close</div>`;
+  panelEl.classList.add('show');
+}
+function renderQuests() {
+  const qs = Object.values(state.quests);
+  const doneCount = qs.filter(q=>q.done).length;
+  panelEl.innerHTML = `
+    <h2>QUESTS · ${doneCount}/${qs.length}</h2>
+    ${qs.map(q => `<div class="quest ${q.done?'done':''}">
+      <div class="qtitle">${q.done?'✓ ':'· '}${q.title}</div>
+      <div class="qflav">${q.flav}</div></div>`).join('')}
+    ${doneCount === qs.length ? '<div class="sec" style="color:var(--piss)">YOU HAVE DONE EVERYTHING THAT CAN BE DONE.</div>' : ''}
+    <div class="close">[ q / esc ] close</div>`;
+  panelEl.classList.add('show');
+}
+function closePanel() {
+  panelEl.classList.remove('show');
+  if (state.mode === 'inv' || state.mode === 'quest') state.mode = 'playing';
+}
+
+// ---------- helpers ----------
+function rectsOverlap(a,b){ return a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y; }
+function dist2(a,b){ const dx=a.x-b.x, dy=a.y-b.y; return dx*dx+dy*dy; }
+function clamp(v,lo,hi){ return Math.max(lo, Math.min(hi, v)); }
+
+function inZone(x,y,id) {
+  const z = ZONES.find(z=>z.id===id);
+  if (!z) return false;
+  return x>=z.x && x<=z.x+z.w && y>=z.y && y<=z.y+z.h;
+}
+
+function isNight() { return state.dayTime < 0.25 || state.dayTime > 0.75; }
+
+// ---------- NPCs setup ----------
+function spawnNpcs() {
+  npcs = [
+    { id:'tony', name:'TRE BAG TONY', sprite:'tony', x:1620, y:870, w:28,h:32, color:'#3a1810',
+      hp:120, maxHp:120, speed:0, hostile:false, vendor:true,
+      interact: tonyDialogue },
+    { id:'yuri', name:'YURI', sprite:'yuri', x:300, y:200, w:28,h:32, color:'#4a2818',
+      hp:60, maxHp:60, speed:0, hostile:false, vendor:true,
+      interact: yuriDialogue },
+    { id:'brutus', name:'BRUTUS', sprite:'brutus', x:480, y:280, w:32,h:24, color:'#604020',
+      hp:50, maxHp:50, speed:1.6, hostile:false, dmg:10, zoneOnly:{x:100,y:80,w:520,h:360},
+      interact: null },
+    { id:'pete', name:'PAWN SHOP PETE', sprite:'pete', x:250, y:700, w:28,h:32, color:'#4a4028',
+      hp:80, maxHp:80, speed:0, hostile:false, vendor:true,
+      interact: peteDialogue },
+    { id:'lurch', name:'LURCH', sprite:'lurch', x:200, y:1400, w:28,h:34, color:'#3a2030',
+      hp:60, maxHp:60, speed:1.5, hostile:false, aggroOnHit:true, dmg:9, wander:true,
+      interact: lurchDialogue },
+    { id:'sherri', name:'SPIDER-BITE SHERRI', sprite:'sherri', x:350, y:1480, w:26,h:30, color:'#3a1820',
+      hp:50, maxHp:50, speed:2.2, hostile:false, aggroOnHit:true, dmg:7, wander:true,
+      interact: sherriDialogue },
+    { id:'paulie', name:'PAULIE THE FACE', sprite:'paulie', x:450, y:1560, w:28,h:32, color:'#5a3030',
+      hp:70, maxHp:70, speed:1.7, hostile:false, aggroOnHit:true, dmg:10, wander:true,
+      interact: paulieDialogue },
+    { id:'dave', name:'CHATTY DAVE', sprite:'dave', x:900, y:1480, w:28,h:32, color:'#3a2818',
+      hp:40, maxHp:40, speed:0, hostile:false, asleep:true,
+      interact: daveDialogue },
+    { id:'mom', name:'WHOLE FOODS MOM', sprite:'mom', x:1200, y:1480, w:28,h:32, color:'#80a050',
+      hp:60, maxHp:60, speed:0, hostile:false,
+      interact: momDialogue },
+    { id:'possum', name:'THE POSSUM', sprite:'possum', x:600, y:1500, w:28,h:24, color:'#604030',
+      hp:20, maxHp:20, speed:0, hostile:false,
+      interact: possumDialogue },
+    { id:'priest', name:"FATHER O'MALLEY", sprite:'priest', x:1800, y:1460, w:28,h:32, color:'#2a2030',
+      hp:80, maxHp:80, speed:0, hostile:false,
+      interact: priestDialogue },
+    { id:'conductor', name:'THE CONDUCTOR', sprite:'conductor', x:240, y:1780, w:28,h:32, color:'#604030',
+      hp:60, maxHp:60, speed:0, hostile:false,
+      interact: conductorDialogue },
+    { id:'larry', name:'LOUD LARRY', sprite:'larry', x:440, y:1780, w:28,h:32, color:'#8a3030',
+      hp:90, maxHp:90, speed:1.4, hostile:false, aggroOnHit:true, dmg:14,
+      interact: larryDialogue },
+    { id:'stripe', name:'STRIPE', sprite:'stripe', x:620, y:1780, w:28,h:32, color:'#3a3848',
+      hp:70, maxHp:70, speed:0, hostile:false, vendor:true,
+      interact: stripeDialogue },
+    { id:'pigeon', name:'THE PIGEON KING', sprite:'pigeon', x:1000, y:1000, w:24,h:20, color:'#605840',
+      hp:10, maxHp:10, speed:0.8, hostile:false, wander:true,
+      interact: pigeonDialogue },
+    { id:'biggu', name:'THE BIG GUY', sprite:'biggu', x:1200, y:340, w:32,h:38, color:'#604030',
+      hp:120, maxHp:120, speed:0, hostile:false,
+      interact: bigguDialogue },
+    // ambient walking NPCs
+    { id:'cubscout', name:'CUBSCOUT', sprite:'cubscout', x:780, y:1500, w:22,h:26, color:'#604020',
+      hp:30, maxHp:30, speed:1.2, hostile:false,
+      daytimeOnly:true,
+      patrol:[{x:760,y:1450},{x:1200,y:1450},{x:1200,y:1580},{x:760,y:1580}],
+      interact: (n)=> dialogue('CUBSCOUT', "popcorn?\n$8 a tin.\nhis mom is in the car.", [
+        { label: P.cash>=8?'buy popcorn. $8.':"you don't have $8.", disabled: P.cash<8, action: ()=>{
+          P.cash -= 8; P.cred += 4;
+          toast('- $8\n+ 4 cred\nyou ate a fistful in the parking lot.'); audio.coin();
+        }},
+        { label: 'ask if his mom knows about this.', action: () => toast("she is on her phone.\nshe has been on her phone for 11 minutes.") },
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'jogger', name:'JOGGER', sprite:'jogger', x:1200, y:600, w:22,h:26, color:'#4a5028',
+      hp:40, maxHp:40, speed:2.4, hostile:false,
+      patrol:[{x:760,y:600},{x:1500,y:600},{x:1500,y:1100},{x:760,y:1100}],
+      interact: (n)=> dialogue('JOGGER', "heart rate 142.\nshe does not stop. she is talking through it.", [
+        { label: 'ask for $1.', action: ()=>{
+          if (Math.random()<.4) { P.cash++; toast('+ $1\nshe gave you a dollar she did not need.'); }
+          else { toast('she ran faster.\nthe ground absorbed your dignity.'); }
+        }},
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'dogwalker', name:'DOG WALKER (PAISLEY)', sprite:'dogwalker', x:980, y:1200, w:22,h:26, color:'#604030',
+      hp:40, maxHp:40, speed:0.9, hostile:false,
+      patrol:[{x:900,y:1180},{x:1400,y:1180},{x:1400,y:1320},{x:900,y:1320}],
+      interact: (n)=> dialogue('DOG WALKER', "paisley. no. paisley LEAVE IT.\npaisley is a small dog made of fur.", [
+        { label: 'pet paisley.', action: ()=>{
+          P.cred++; toast('+ 1 cred\npaisley accepts you. tolerantly.');
+        }},
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'busker', name:'BUSKER', sprite:'busker', x:1100, y:1500, w:24,h:28, color:'#604020',
+      hp:50, maxHp:50, speed:0, hostile:false,
+      interact: (n)=> dialogue('BUSKER', "he is playing a song he wrote.\nit has no chorus.\nhe has a guitar case open at his feet.", [
+        { label: P.cash>=1?'tip $1.':"you don't have $1.", disabled: P.cash<1, action: ()=>{
+          P.cash--; P.cred++; toast('- $1\n+ 1 cred\nhe nods without losing the beat.');
+        }},
+        { label: 'request a different song.', action: ()=> toast("he plays the same song faster.\nthis is the new song now.") },
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    // — new NPCs in v6 —
+    { id:'horsecop', name:'HORSE COP', sprite:'horsecop', x:1320, y:1080, w:36,h:32, color:'#1818a0',
+      hp:120, maxHp:120, speed:0, hostile:false,
+      patrol:[{x:1200,y:1080},{x:1500,y:1080},{x:1500,y:1240},{x:1200,y:1240}],
+      interact: (n)=> dialogue('HORSE COP', "a cop on horseback nods at you.\nthe horse also nods.\ndisturbing levels of agreement.", [
+        { label: 'nod back.', action: ()=>{
+          P.cred += 2; toast("you nod. the horse nods.\nthe cop nods. you are all nodding.\n+ 2 cred");
+        }},
+        { label: 'compliment the horse.', action: ()=>{
+          P.cred += 3; toast("the horse looks pleased.\nthe cop is jealous.\n+ 3 cred");
+          feedPost("complimented the horse cop's horse. the horse was visibly pleased.", '@local_eyewitness');
+        }},
+        { label: 'try to pet the horse.', action: ()=>{
+          if (Math.random()<.4) { P.cred += 4; toast("the horse permits it.\nthe cop says nothing.\n+ 4 cred"); }
+          else { P.hp -= 6; P.wanted = Math.min(3, P.wanted+1); toast("the horse rears.\nyou eat curb.\n- 6 hp · wanted +1"); }
+        }},
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'vapelord', name:'THE VAPE LORD', sprite:'vapelord', x:840, y:1100, w:28,h:32, color:'#3a1850',
+      hp:60, maxHp:60, speed:0, hostile:false,
+      interact: (n)=> dialogue('THE VAPE LORD', "he is exhaling watermelon mist.\nhe trades in juice.\nhe has a small dragon on his back.\nthe dragon is also vaping.", [
+        { label: P.cash>=6?'buy a pod. $6. (+10 brain)':"you don't have $6.", disabled: P.cash<6, action: ()=>{
+          P.cash -= 6; P.brain = Math.min(100, P.brain+10);
+          toast('- $6\n+ 10 brain\nthe flavor is "spectrum".\nyou cannot taste it. that is the flavor.');
+        }},
+        { label: 'ask for a free hit.', action: ()=>{
+          toast("the vape lord says nothing.\nthe dragon stares.\nyou leave.");
+        }},
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'pothole', name:'A POTHOLE (TALKING)', sprite:'pothole', x:980, y:920, w:32,h:18, color:'#0a0805',
+      hp:9999, maxHp:9999, speed:0, hostile:false,
+      interact: (n)=> dialogue('A POTHOLE', "the pothole says your full legal name.\nyou did not give it your full legal name.", [
+        { label: 'argue with the pothole.', action: ()=>{
+          P.brain = Math.max(0, P.brain-4);
+          toast("- 4 brain\nthe pothole has more facts than you do.\nthe pothole is also correct.");
+        }},
+        { label: 'throw something in it.', action: ()=>{
+          if (P.cash>=1) { P.cash--; P.cred++; toast("- $1\n+ 1 cred\nthe pothole accepts.\nthe pothole says 'thank you' in your mother's voice."); }
+          else toast("you have nothing to throw.\nthe pothole understands. the pothole is patient.");
+        }},
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'mayorscousin', name:"MAYOR'S COUSIN", sprite:'mayorscousin', x:1340, y:1500, w:28,h:32, color:'#604020',
+      hp:50, maxHp:50, speed:0, hostile:false,
+      interact: (n)=> dialogue("THE MAYOR'S COUSIN", "he knows the mayor.\nhe is wearing a suit jacket.\nhe is not wearing pants.", [
+        { label: 'ask about the mayor.', action: ()=>{
+          toast("the mayor is, in fact, his cousin.\nthe mayor does not return his calls.\nthis information is true and useless.");
+        }},
+        { label: 'ask for a favor.', action: ()=>{
+          if (Math.random()<.3) { P.wanted = Math.max(0, P.wanted-1); toast("a phone call is made.\nthe heat dies down.\n- 1 wanted"); }
+          else toast("he makes a phone call.\nthe phone is a piece of bread.");
+        }},
+        { label: P.cash>=5?'bribe him. $5.':"you don't have $5.", disabled: P.cash<5, action: ()=>{
+          P.cash -= 5; P.cred += 8;
+          toast("- $5\n+ 8 cred\nhe whispers 'i'll remember this.'\nhe will not.");
+        }},
+        { label: 'leave.', action:()=>{} },
+      ]) },
+    { id:'phoneguy', name:'THE PHONE GUY', sprite:'phoneguy', x:1180, y:1480, w:24,h:28, color:'#3a2818',
+      hp:30, maxHp:30, speed:0, hostile:false,
+      interact: (n)=> {
+        if (!phoneState.visible) { phoneState.visible = true; renderPhone(); }
+        dialogue('THE PHONE GUY', "he is on his phone.\nhe has been on his phone.\nhe sees you. he tweets about you.", [
+          { label: 'ask what he\'s posting.', action: ()=>{
+            const posts = [
+              "tagged a man at the corner. he didn't notice.",
+              "live-posting a possum. 4 likes.",
+              "the conductor is trending in zone 2.",
+              "father o'malley followed me back.",
+              "pawn pete weighed a sock again. 11 min. 2 hearts.",
+            ];
+            feedPost(posts[Math.floor(Math.random()*posts.length)], '@phone_guy');
+            toast("he flips the phone toward you. you see it.\nyou are in the post.\n(press P to view feed)");
+          }},
+          { label: P.cash>=3?'give him content. $3. (+post)':"you don't have $3.", disabled: P.cash<3, action: ()=>{
+            P.cash -= 3;
+            feedPost("a man paid me $3 to make him famous. he is. for like 30 seconds.", '@phone_guy');
+            toast("- $3\nhe posts about you.\nthe post does numbers.\nthe numbers are 3.");
+          }},
+          { label: 'leave.', action:()=>{} },
+        ]);
+      } },
+  ];
+  npcs.forEach(n => { n.hpMax = n.maxHp; n.attackCd=0; n.targetX=n.x; n.targetY=n.y; n.wanderT=0; n.showHp=false; });
+}
+
+// hidden cash piles
+function spawnCashPiles() {
+  // 18 piles scattered in non-obvious spots
+  const spots = [
+    {x:140,y:130,a:3},{x:580,y:420,a:2},{x:160,y:760,a:4},{x:380,y:780,a:3},
+    {x:1540,y:840,a:5},{x:1760,y:980,a:2},{x:1620,y:160,a:4},{x:1940,y:380,a:5},
+    {x:1380,y:1620,a:3},{x:780,y:1620,a:2},{x:110,y:1640,a:4},{x:600,y:1310,a:3},
+    {x:1640,y:1320,a:5},{x:1940,y:1600,a:4},{x:120,y:1860,a:2},{x:680,y:1860,a:3},
+    {x:1040,y:260,a:3},{x:1380,y:440,a:4},
+  ];
+  cashPiles = spots.map((s,i)=>({ id:'cp_'+i, x:s.x, y:s.y, amt:s.a, collected:state.cashPilesCollected.has('cp_'+i)}));
+}
+
+// ---------- DIALOGUES ----------
+function tonyDialogue(n) {
+  const lines = [
+    "what.",
+    "$10. you know the number.",
+    "you again. of course.",
+    "three coats. ten dollars. simple math.",
+  ];
+  const txt = `${lines[Math.floor(Math.random()*lines.length)]}\n\ntony does not blink. tony is wearing three coats.`;
+  dialogue('TRE BAG TONY', txt, [
+    { label: 'buy a rock. $10.', disabled: P.cash<10, action: () => {
+      P.cash -= 10; P.rocks++; P.tonyOffenses = Math.max(0, P.tonyOffenses-1);
+      state.counters.rocksBought++;
+      if (state.counters.rocksBought >= 50) unlockAchievement('tonys_worst');
+      toast('- $10\n+ 1 rock');
+      audio.coin();
+      if (!state.quests.first_rock.done) { state.quests.first_rock.done = true; questToast('THE FIRST ROCK'); }
+      saveGame();
+    }},
+    { label: P.tonyOffenses > 2 ? 'short him. ($5)' : 'short him. ($5)', disabled: P.cash<5, action: () => {
+      P.cash -= 5;
+      P.tonyOffenses++;
+      if (P.tonyOffenses < 3) {
+        toast("tony stares. takes the $5. does not give a rock.\nyou now owe a kind of debt.");
+      } else {
+        toast("tony's eye twitches. he remembers.\nthe boss fight will come.");
+        spawnBoss();
+      }
+      saveGame();
+    }},
+    { label: 'try to negotiate.', action: () => {
+      toast('tony explains, slowly, that he does not negotiate.\nhe is, in fact, negotiating right now.\n(this changes nothing.)');
+    }},
+    { label: P.cred >= 100 ? 'challenge for the corner. (boss)' : 'try to take the corner. (need 100 cred)', disabled: P.cred < 100, action: () => {
+      toast('tony tears off his coat. then another coat.\nthen a third coat.');
+      spawnBoss();
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function yuriDialogue() {
+  dialogue('YURI', "what you bring, idiot.", [
+    { label: `sell 1 PURE COPPER. $25.`, disabled: P.copper<1, action: () => {
+      P.copper--; P.cash += 25; toast('- 1 pure copper\n+ $25'); audio.coin(); saveGame();
+    }},
+    { label: 'sell all pure copper.', disabled: P.copper<1, action: () => {
+      const got = P.copper * 25; P.cash += got; toast(`- ${P.copper} pure copper\n+ $${got}`); P.copper = 0; audio.coin(); saveGame();
+    }},
+    { label: 'ask about brutus.', action: () => {
+      toast("yuri does not look up.\n'BRUTUS REMEMBER. you know what you did.'\n(you do not.)");
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function peteDialogue() {
+  dialogue('PAWN SHOP PETE', "one second. eating.\npete is eating a hot pocket. behind glass.", [
+    { label: 'sell 1 PURE COPPER. $15.', disabled: P.copper<1, action: () => {
+      P.copper--; P.cash += 15; toast("pete weighs it for 11 minutes.\n- 1 pure copper\n+ $15"); audio.coin(); saveGame();
+    }},
+    { label: 'pawn a sock. $1.', action: () => {
+      P.cash += 1; toast('+ $1\n(it is wet.)'); audio.coin();
+    }},
+    { label: P.inventory.find(i=>i.id==='license') ? 'sell license plate. $20.' : 'ask about plates.', disabled: !P.inventory.find(i=>i.id==='license'), action: () => {
+      P.inventory = P.inventory.filter(i=>i.id!=='license');
+      P.cash += 20; toast('+ $20\n(do not ask where it came from.)'); audio.coin(); saveGame();
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function lurchDialogue(n) {
+  dialogue('LURCH', "you got a dollar.\nhe smells like ham.", [
+    { label: P.cash>=1 ? 'give a dollar. (+2 cred)' : "you don't have a dollar.", disabled: P.cash<1, action: () => {
+      P.cash--; P.cred += 2; toast('- $1\n+ 2 cred\nlurch immediately forgets.'); saveGame();
+    }},
+    { label: 'lie. say you have a dollar.', action: () => {
+      toast("lurch nods. waits. lurch is still waiting.\n(the lie did not work. he is just waiting.)");
+    }},
+    { label: 'fight.', action: () => { aggroNpc(n); toast('lurch swings. so do you. it begins.'); }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+function sherriDialogue(n) {
+  dialogue('SPIDER-BITE SHERRI', "you seen the spider.\nshe is rolling her sleeve back down.", [
+    { label: 'pretend to see the spider.', action: () => {
+      P.cred += 1; toast('sherri respects you. (+1 cred)');
+    }},
+    { label: 'tell her there is no spider.', action: () => {
+      aggroNpc(n); toast("the spider is back.\nshe is hostile now.");
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+function paulieDialogue(n) {
+  dialogue('PAULIE THE FACE', "the face.\nit is. it really is. just the face.", [
+    { label: 'compliment the face. (+1 cred)', action: () => {
+      P.cred++; state.counters.pauliCompliments++;
+      if (state.counters.pauliCompliments >= 5) unlockAchievement('compliment_the_face');
+      toast("paulie does not smile but the face changes.\n+ 1 cred");
+    }},
+    { label: 'fight.', action: () => { aggroNpc(n); }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+function daveDialogue(n) {
+  if (n.asleep) {
+    dialogue('CHATTY DAVE', "dave is asleep. his wallet is half out.", [
+      { label: 'pickpocket. (+$8)', action: () => {
+        if (Math.random()<0.7) {
+          P.cash += 8; toast('+ $8\ndave keeps sleeping.'); audio.coin();
+        } else {
+          n.asleep = false; n.hostile = true; n.aggro = true; P.wanted = Math.min(3, P.wanted+1);
+          toast('DAVE WAKES UP.\nyou sprint. he chases.');
+        }
+      }},
+      { label: 'wake him up.', action: () => {
+        n.asleep = false; toast("dave wakes up. he is talking immediately.");
+      }},
+      { label: 'leave.', action: () => {} },
+    ]);
+  } else {
+    dialogue('CHATTY DAVE', "dave is explaining a theory about pigeons.\nthe theory has 17 parts.", [
+      { label: 'listen for a while. (-5 brain)', action: () => {
+        P.brain = Math.max(0, P.brain-5); toast('- 5 brain\nyou know more about pigeons now.\nthis was not free.');
+      }},
+      { label: 'leave.', action: () => {} },
+    ]);
+  }
+}
+function momDialogue() {
+  const isDaylight = !isNight();
+  if (!isDaylight) {
+    dialogue('WHOLE FOODS MOM', "she is not here at night.\nshe is at the wine bar with kelly.", [{label:'leave.',action:()=>{}}]);
+    return;
+  }
+  dialogue('WHOLE FOODS MOM', "oh. oh sweetie.\nshe is wearing vibram five-fingers.\nshe is holding kombucha.", [
+    { label: 'accept $5 and pity. (+$5)', action: () => {
+      P.cash += 5; toast("+ $5\nshe will tell ben about you tonight.\nben will not care."); audio.coin();
+    }},
+    { label: 'ask for $20.', action: () => {
+      toast("she explains capitalism for 4 minutes.\nyou leave with no money and -2 brain.");
+      P.brain = Math.max(0, P.brain-2);
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+async function possumDialogue() {
+  dialogue('THE POSSUM', "a possum wearing a tiny construction helmet looks up.\nhe is calculating something.", [
+    { label: 'request a prophecy.', action: async () => {
+      toast('the possum is thinking. give him a second.', 1500);
+      let line = "the possum is busy. try again later.";
+      try {
+        if (window.claude && window.claude.complete) {
+          const t = await window.claude.complete({
+            messages: [{
+              role:'user',
+              content: `You are the POSSUM in a satirical Adult Swim-style game (Aqua Teen Hunger Force tone). Output ONE flat absurd in-world event, 1-3 sentences, lowercase, present tense, no second person past "you", no quotes, no editorializing. The event must be specific and mundane-with-an-impossible-detail. Example tones: "a possum wearing a tiny construction helmet emerges from a drain. looks you dead in the eye. retreats." or "a dachshund in a blazer hands you a receipt. it is for a haircut you did not get." No real drugs, no real places, no slurs. Output ONLY the event text, nothing else.`
+            }]
+          });
+          if (t && typeof t === 'string') line = t.trim().toLowerCase().replace(/^["']|["']$/g,'');
+        }
+      } catch(e) {}
+      toast(line, 5500);
+      state.counters.possumProphecies++;
+      if (state.counters.possumProphecies >= 10) unlockAchievement('i_have_seen_horrors');
+      // small effect
+      const eff = Math.floor(Math.random()*4);
+      if (eff===0) { P.cash += 2; toast(line + '\n+ $2', 5500); }
+      else if (eff===1) { P.brain = Math.max(0, P.brain-3); }
+      else if (eff===2) { P.cred++; }
+    }},
+    { label: 'pet the possum.', action: () => { toast("you do not pet the possum.\nthe possum decides this."); unlockAchievement('the_route'); }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function priestDialogue() {
+  dialogue("FATHER O'MALLEY", "medicine. open your mouth.\nhe is holding a tic-tac.", [
+    { label: 'accept the blessed tic-tac. (-30 shakes)', action: () => {
+      P.shakes = Math.max(0, P.shakes-30); toast('- 30 shakes\nit is, in fact, just a tic-tac.\n(it works anyway.)');
+      if (!state.quests.priest_mercy.done) { state.quests.priest_mercy.done = true; questToast("THE PRIEST'S MERCY"); }
+      saveGame();
+    }},
+    { label: P.cash>=5 ? 'donate $5. (+3 cred)' : 'donate $5.', disabled: P.cash<5, action: () => {
+      P.cash-=5; P.cred+=3; state.counters.churchDonations += 5;
+      if (state.counters.churchDonations >= 100) unlockAchievement('ecclesiastes');
+      toast('- $5\n+ 3 cred\nthe lord notices. then forgets.'); saveGame();
+    }},
+    { label: 'steal the collection plate.', action: () => {
+      if (Math.random()<0.55) {
+        P.cash += 22; state.counters.plateStolen++;
+        if (state.counters.plateStolen >= 1 && state.counters.stripeBetrayed >= 1) unlockAchievement('judas');
+        toast('+ $22\n(the lord is busy.)'); audio.pickup();
+      } else {
+        P.hp -= 12; P.wanted = Math.min(3, P.wanted+1); toast("father o'malley smites you.\n- 12 hp · wanted +1"); audio.hurt();
+      }
+      saveGame();
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function conductorDialogue() {
+  dialogue('THE CONDUCTOR', "the train is coming.\nit has always been coming.\nit will never be here.", [
+    { label: 'sell 3 PURE COPPER. $90.', disabled: P.copper<3, action: () => {
+      P.copper -= 3; P.cash += 90; toast('- 3 pure copper\n+ $90\nthe conductor nods at no one.'); audio.coin();
+      if (!state.quests.conductor.done) { state.quests.conductor.done = true; questToast("THE CONDUCTOR'S BARGAIN"); }
+      saveGame();
+    }},
+    { label: 'ask when the train arrives.', action: () => {
+      toast("the conductor does not answer.\nthe conductor is the answer.");
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function larryDialogue(n) {
+  dialogue('LOUD LARRY', "WHAT.\nWHAT.\nWHAT WHAT WHAT.", [
+    { label: 'match volume. (+1 cred)', action: () => {
+      P.cred++; toast("YOU YELL BACK.\nlarry respects this.\n+ 1 cred");
+    }},
+    { label: 'fight.', action: () => { aggroNpc(n); }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function stripeDialogue() {
+  dialogue('STRIPE', "$8 a rock. stripe got the deal.\nstripe is wearing a faded windbreaker.", [
+    { label: P.cash>=8 ? "buy stripe's rock. $8." : "you can't afford it.", disabled: P.cash<8, action: () => {
+      P.cash -= 8;
+      if (Math.random()<0.4) {
+        toast("- $8\n(it is soap. you keep it. it is soap.)");
+        P.inventory.push({id:'soap',n:'a small bar of soap',q:1});
+        // tony respects you slightly
+        P.tonyOffenses = Math.max(0, P.tonyOffenses-1);
+      } else {
+        P.rocks++; toast('- $8\n+ 1 rock\n(yeah it\'s probably real.)'); audio.coin();
+      }
+      saveGame();
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function pigeonDialogue() {
+  dialogue('THE PIGEON KING', "one foot.\nunblinking.\nhe wants the bread.", [
+    { label: P.cash>=2 ? 'pay $2 for a secret.' : "you don't have $2.", disabled: P.cash<2, action: () => {
+      P.cash -= 2;
+      state.counters.pigeonTrade = (state.counters.pigeonTrade||0) + 2;
+      if (state.counters.pigeonTrade >= 20) unlockAchievement('one_foot');
+      const secrets = [
+        "the copper sings in b flat.\nyou are not crazy.",
+        "yuri is going home to a family.\nthis is information.",
+        "pete is on his lunch break. forever.",
+        "the possum has a route.\nyou are on it.",
+        "tony has, in fact, blinked. once. in 1994.",
+        "father o'malley is not real.\nhe is. but also not.",
+      ];
+      toast(secrets[Math.floor(Math.random()*secrets.length)], 4500);
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function bigguDialogue() {
+  dialogue('THE BIG GUY', "i am the big guy.\nhe is, in fact, tall.\nhe lives under here.", [
+    { label: P.copper>=5 ? 'trade 5 PURE COPPER for the cart.' : "you need 5 pure copper.", disabled: P.copper<5, action: () => {
+      P.copper -= 5; P.cartMounted = true; P.speed = 2.8; P.maxHp = 110; if (P.hp > P.maxHp) P.hp = P.maxHp;
+      toast("- 5 pure copper\n+ THE BIG GUY'S CART\n+1 speed. +10 max hp.\n(the wheels do not align.)");
+      saveGame();
+    }},
+    { label: 'ask how tall.', action: () => {
+      toast("tall.\nthat is the answer he gives. tall.");
+    }},
+    { label: 'leave.', action: () => {} },
+  ]);
+}
+
+function aggroNpc(n) {
+  n.hostile = true; n.aggro = true; n.dmg = n.dmg||8;
+  P.wanted = Math.min(3, P.wanted+1);
+}
+function questToast(title) { toast('· QUEST COMPLETE ·\n'+title); audio.rankUp(); }
+
+// ---------- SPAWN BOSS ----------
+function spawnBoss() {
+  if (state.bossActive) return;
+  state.bossActive = true;
+  state.bossPhase = 1;
+  const tony = npcs.find(n=>n.id==='tony');
+  if (!tony) return;
+  state.bossNPC = tony;
+  tony.hostile = true; tony.aggro = true; tony.maxHp = 200; tony.hp = 200; tony.speed = 1.8;
+  tony.dmg = 12; tony.color = '#5a2018';
+  tony.coatsOff = 0;
+  audio.bossRoar();
+  toast("tony tears off coat #1. then coat #2.\nthe corner is now arena.", 3500);
+  broadcastNews("BREAKING: TRE BAG TONY IS REMOVING COATS. NEIGHBORHOOD WATCHES.");
+  feedPost("tony is fighting at the corner. he had three coats. now two.", '@the_corner');
+}
+
+// ---------- COMBAT ----------
+function playerAttack() {
+  if (P.attackCd > 0) return;
+  P.attackCd = 280;
+  P.attacking = 160;
+  audio.hit();
+  const reach = 36;
+  const hit = { x: P.x, y: P.y, w: reach, h: 4 };
+  if (P.facing==='down')  { hit.x = P.x + P.w/2 - 4; hit.y = P.y + P.h; hit.w = 8; hit.h = reach; }
+  if (P.facing==='up')    { hit.x = P.x + P.w/2 - 4; hit.y = P.y - reach; hit.w = 8; hit.h = reach; }
+  if (P.facing==='left')  { hit.x = P.x - reach; hit.y = P.y + P.h/2 - 4; hit.w = reach; hit.h = 8; }
+  if (P.facing==='right') { hit.x = P.x + P.w; hit.y = P.y + P.h/2 - 4; hit.w = reach; hit.h = 8; }
+  let connected = false;
+  for (const n of npcs) {
+    if (n.dead) continue;
+    if (rectsOverlap(hit, n)) {
+      const dmg = Math.floor((14 + Math.random()*8) * (P.rockedT>0 ? 1.5 : 1) * (P.cartMounted ? 1.3 : 1));
+      n.hp -= dmg; n.showHp = true; n.hitFlash = 200;
+      connected = true;
+      state.shake = Math.max(state.shake, 4);
+      state.hitPause = 40; // freeze frame
+      // peaceful NPC hit -> wanted up
+      if (!n.hostile && !n.aggroOnHit) { P.wanted = Math.min(3, P.wanted+1); toast(n.name + " did not deserve that.\nwanted +1"); }
+      if (n.aggroOnHit && !n.aggro) { n.hostile = true; n.aggro = true; }
+      // particles — sparks + blood drops
+      for (let i=0;i<8;i++) particles.push({x:n.x+n.w/2,y:n.y+n.h/2,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,life:300,c:'#e8c040',sz:3});
+      for (let i=0;i<3;i++) particles.push({x:n.x+n.w/2,y:n.y+n.h/2,vx:(Math.random()-.5)*3,vy:(Math.random()-.5)*3-1,life:600,c:'#8a3a3a',sz:2,gravity:0.15});
+      // knockback
+      if (P.facing==='down') n.y += 6;
+      if (P.facing==='up') n.y -= 6;
+      if (P.facing==='left') n.x -= 6;
+      if (P.facing==='right') n.x += 6;
+      if (n.hp <= 0) onNpcDeath(n);
+    }
+  }
+  if (connected) {
+    state.combo++;
+    state.comboT = 1800;
+    if (state.combo >= 3) state.shake = Math.max(state.shake, 6);
+    if (state.combo === 5) {
+      P.cred += 3; toast('· 5x COMBO ·\n+ 3 cred', 1400); unlockAchievement('not_a_phase');
+    } else if (state.combo === 10) {
+      P.cred += 10; toast('· 10x COMBO ·\n+ 10 cred', 1600);
+    }
+  } else {
+    state.combo = 0;
+  }
+}
+
+function onNpcDeath(n) {
+  n.dead = true;
+  audio.hurt();
+  if (n.id === 'tony' && state.bossActive) {
+    state.bossActive = false;
+    state.bossPhase = 0;
+    P.cred += 200;
+    state.quests.fallen_king.done = true; questToast('THE FALLEN KING');
+    toast("tony is on the ground.\nthe corner is yours.\nyou get tuesdays and thursdays.", 5500);
+    setTimeout(() => endingScreen(), 4000);
+    return;
+  }
+  if (n.isCop) { P.cred += 10; P.wanted = Math.min(3, P.wanted+1); P.lifetime.copsKilled++; toast('+ 10 cred · wanted +1\na cop is on the ground.'); }
+  else { P.cred += 3; toast('+ 3 cred\n'+n.name+' is on the ground.'); }
+  // mayor_of_4th — all 3 alley NPCs defeated this run
+  const alleyDead = ['lurch','sherri','paulie'].every(id => npcs.find(x=>x.id===id)?.dead);
+  if (alleyDead) unlockAchievement('mayor_of_4th');
+  // stripe betrayed
+  if (n.id === 'stripe') {
+    state.counters.stripeBetrayed++;
+    if (state.counters.plateStolen >= 1 && state.counters.stripeBetrayed >= 1) unlockAchievement('judas');
+  }
+  // drops
+  if (n.id !== 'cop' && Math.random()<0.5) { P.cash += 2 + Math.floor(Math.random()*5); toast('+ a few dollars', 1400); }
+  saveGame();
+}
+
+function damagePlayer(amount, src) {
+  if (P.iframes > 0) return;
+  P.hp -= amount;
+  P.iframes = 500;
+  P.hitFlash = 250;
+  audio.hurt();
+  state.flash = 1; state.flashColor = 'rgba(160,40,40,.4)';
+  state.shake = 8;
+  state.combo = 0; // break combo
+  if (src) {
+    const dx = P.x - src.x, dy = P.y - src.y;
+    const len = Math.sqrt(dx*dx+dy*dy)||1;
+    P.x += (dx/len)*8; P.y += (dy/len)*8;
+  }
+  if (P.hp <= 0) {
+    if (src && src.id === 'brutus') {
+      state.counters.brutusDeaths++;
+      if (state.counters.brutusDeaths >= 3) unlockAchievement('brutus_remembers');
+    }
+    if (src && src.isCop) arrestScene();
+    else die();
+  }
+}
+
+function die() {
+  audio.death();
+  P.hp = 60; P.shakes = 30; P.cred = Math.max(0, P.cred-10); P.wanted = 0;
+  P.x = 1050; P.y = 840; P.iframes = 1000;
+  // cops vanish
+  npcs = npcs.filter(n => !n.isCop);
+  toast('you wake up at the block.\nyour mouth tastes like a battery.\nit is approximately tuesday.', 3500);
+  saveGame();
+}
+
+function arrestScene() {
+  P.lifetime.arrests = (P.lifetime.arrests||0)+1;
+  const lostCash = Math.floor(P.cash * 0.7);
+  P.cash -= lostCash; P.rocks = 0; P.shakes = 100; P.wanted = 0; P.hp = 40;
+  P.x = 1050; P.y = 840;
+  npcs = npcs.filter(n => !n.isCop);
+  toast(`arrested.\n- $${lostCash} · - all rocks\nthey didn't check your sock.`, 4000);
+  feedPost("arrested again. they did not check the sock. the sock is safe.", '@crackheadcent');
+  saveGame();
+}
+
+// ---------- WANTED & COPS ----------
+function manageCops(dt) {
+  if (P.wanted > 0) {
+    P.wantedT += dt;
+    // decay -1 every 30s
+    if (P.wantedT >= 30000) {
+      P.wantedT = 0; P.wanted--;
+      if (P.wanted === 0) toast('the heat dies down.\nfor now.', 1500);
+    }
+    const targetCops = P.wanted;
+    const liveCops = npcs.filter(n=>n.isCop && !n.dead).length;
+    if (liveCops < targetCops) {
+      audio.copSiren();
+      const cop = {
+        id:'cop_'+Math.random().toString(36).slice(2,6), name:'COP', sprite:'cop',
+        x: P.x + (Math.random()<.5?-400:400), y: P.y + (Math.random()<.5?-300:300),
+        w:28, h:32, color:'#1818a0', hp:80, maxHp:80, speed:1.8, dmg:18,
+        hostile:true, aggro:true, isCop:true, attackCd:0, wanderT:0, targetX:0, targetY:0, showHp:true,
+      };
+      cop.x = clamp(cop.x, 40, WORLD.w-40);
+      cop.y = clamp(cop.y, 40, WORLD.h-40);
+      npcs.push(cop);
+    }
+  } else {
+    P.wantedT = 0;
+  }
+}
+
+// ---------- UPDATE ----------
+let last = 0;
+function update(now) {
+  const dt = Math.min(50, now - last); last = now;
+  if (state.mode === 'playing' && state.hitPause <= 0) {
+    updateWorld(dt);
+  } else if (state.hitPause > 0) {
+    // freeze frame — only decay timers
+    state.hitPause -= dt;
+  }
+  drawAll();
+  requestAnimationFrame(update);
+}
+
+function updateWorld(dt) {
+  // input
+  let vx=0, vy=0;
+  if (state.keys.has('w') || state.keys.has('arrowup')) { vy = -1; P.facing = 'up'; }
+  if (state.keys.has('s') || state.keys.has('arrowdown')) { vy = 1; P.facing = 'down'; }
+  if (state.keys.has('a') || state.keys.has('arrowleft')) { vx = -1; P.facing = 'left'; }
+  if (state.keys.has('d') || state.keys.has('arrowright')) { vx = 1; P.facing = 'right'; }
+  if (vx && vy) { vx *= 0.7071; vy *= 0.7071; }
+  let spd = P.speed;
+  if (P.rockedT>0) spd *= 1.8;
+  if (P.crashT>0) spd *= 0.5;
+  let sprinting = state.keys.has('shift');
+  if (sprinting && (vx||vy)) spd *= 1.7;
+  const newX = P.x + vx*spd*(dt/16);
+  const newY = P.y + vy*spd*(dt/16);
+  // collision against buildings
+  let blockedX=false, blockedY=false;
+  const r = { x: newX, y: P.y, w: P.w, h: P.h };
+  for (const b of BUILDINGS) {
+    if (!b.solid) continue;
+    if (b.locked && P.rank>=4 && b.x>1500 && b.x<1600) continue;
+    if (b.doorGap && newY+P.h > b.y+b.h-30 && newY+P.h < b.y+b.h+30 && newX+P.w/2 > b.x+b.w/2-30 && newX+P.w/2 < b.x+b.w/2+30) continue;
+    if (rectsOverlap(r, b)) { blockedX = true; break; }
+  }
+  const r2 = { x: P.x, y: newY, w: P.w, h: P.h };
+  for (const b of BUILDINGS) {
+    if (!b.solid) continue;
+    if (b.locked && P.rank>=4 && b.x>1500 && b.x<1600) continue;
+    if (b.doorGap && newY+P.h > b.y+b.h-30 && newY+P.h < b.y+b.h+30 && P.x+P.w/2 > b.x+b.w/2-30 && P.x+P.w/2 < b.x+b.w/2+30) continue;
+    if (rectsOverlap(r2, b)) { blockedY = true; break; }
+  }
+  if (!blockedX) P.x = newX;
+  if (!blockedY) P.y = newY;
+  P.x = clamp(P.x, 0, WORLD.w - P.w);
+  P.y = clamp(P.y, 0, WORLD.h - P.h);
+
+  // anim
+  if (vx || vy) {
+    P.frameT += dt;
+    if (P.frameT > 140) { P.frameT = 0; P.frame = (P.frame||0)+1; if (P.frame>2) P.frame=1; }
+  } else { P.frame = 0; P.frameT = 0; }
+
+  // shakes
+  P.shakes += 0.0025 * dt;
+  if (sprinting && (vx||vy)) P.shakes += 0.05 * dt;
+  P.shakes = clamp(P.shakes, 0, 100);
+  if (P.shakes >= 100 && Math.random() < 0.015) damagePlayer(2);
+
+  // wanted timer
+  manageCops(dt);
+
+  // status effects
+  if (P.rockedT > 0) {
+    P.rockedT -= dt;
+    if (P.rockedT <= 0) {
+      P.rockedT = 0; P.crashT = 8000;
+      P.shakes = clamp(P.shakes+30, 0, 100);
+      audio.crash();
+      state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
+      toast('the crash arrives.\non schedule.', 2200);
+    }
+  } else if (P.crashT > 0) {
+    P.crashT -= dt;
+    if (P.crashT <= 0) P.crashT = 0;
+  }
+  if (P.attackCd > 0) P.attackCd -= dt;
+  if (P.attacking > 0) P.attacking -= dt;
+  if (P.iframes > 0) P.iframes -= dt;
+  if (P.hitFlash > 0) P.hitFlash -= dt;
+
+  // tweaker vision
+  if (state.tweakerCdT > 0) state.tweakerCdT -= dt;
+  if (state.keys.has('f') && state.tweakerT > 0 && P.brain > 0) {
+    state.tweakerT -= dt;
+    P.brain = Math.max(0, P.brain - dt*0.002);
+    if (P.brain <= 0) {
+      state.tweakerT = 0;
+      toast('your brain has nothing left to give.', 1800);
+    }
+  } else if (!state.keys.has('f')) {
+    state.tweakerT = 0;
+  }
+  document.getElementById('tweaker').classList.toggle('on', state.tweakerT > 0);
+
+  // day/night cycle — 4 min cycle
+  state.dayTime += dt / 240000;
+  if (state.dayTime >= 1) {
+    state.dayTime -= 1; state.day++; P.lifetime.dayCount = state.day;
+    rollWeather();
+    if (state.day >= 7) unlockAchievement('tuesday_again');
+    toast('· day ' + state.day + ' ·\n' + (state.weather==='rain'?'it is raining.':state.weather==='fog'?'fog.':'a tuesday.'), 2400);
+    broadcastNews('day ' + state.day + ' has arrived. weather: ' + state.weather + '.');
+    feedPost("it is day "+state.day+". this is somehow your life.", '@crackheadcent');
+  }
+  applyDayNight();
+
+  // random world events — every 25-50s
+  state.eventT = (state.eventT||25000) - dt;
+  if (state.eventT <= 0) {
+    state.eventT = 25000 + Math.random()*25000;
+    fireRandomEvent();
+  }
+
+  // ambient SFX scheduler
+  state.ambientT = (state.ambientT||4000) - dt;
+  if (state.ambientT <= 0) {
+    state.ambientT = 3500 + Math.random()*4500;
+    const r = Math.random();
+    if (isNight()) {
+      if (r < 0.5) audio.cricket();
+      else if (r < 0.7) audio.dogBark();
+      else if (r < 0.85) audio.cough();
+      else audio.carDoor();
+    } else {
+      if (r < 0.4) audio.traffic();
+      else if (r < 0.6) audio.dogBark();
+      else if (r < 0.75) audio.cough();
+      else audio.carDoor();
+    }
+    if (P.wanted > 0 && Math.random()<0.3) audio.copSiren();
+  }
+
+  // weather effects
+  if (state.weather === 'rain') P.shakes += 0.001 * dt;
+
+  // combo decay
+  if (state.combo > 0) {
+    state.comboT -= dt;
+    if (state.comboT <= 0) state.combo = 0;
+  }
+
+  // hit pause
+  if (state.hitPause > 0) state.hitPause -= dt;
+
+  // conductor wait achievement
+  const conductor = npcs.find(n=>n.id==='conductor');
+  if (conductor && !conductor.dead) {
+    const dx = (P.x+P.w/2) - (conductor.x+conductor.w/2), dy = (P.y+P.h/2) - (conductor.y+conductor.h/2);
+    if (dx*dx + dy*dy < 80*80) {
+      state.conductorWaitT += dt;
+      if (state.conductorWaitT >= 60000) unlockAchievement('the_conductor_knows');
+    } else state.conductorWaitT = 0;
+  }
+
+  // cash piles — auto-collect when near or visible by tweaker
+  for (const c of cashPiles) {
+    if (c.collected) continue;
+    const dx = (P.x+P.w/2) - c.x, dy = (P.y+P.h/2) - c.y;
+    if (dx*dx + dy*dy < 14*14) {
+      c.collected = true; state.cashPilesCollected.add(c.id);
+      P.cash += c.amt; audio.pickup();
+      toast(`+ $${c.amt}\n(found in a corner.)`, 1400);
+    }
+  }
+
+  // hide pawn at night
+  const pete = npcs.find(n=>n.id==='pete');
+  if (pete) pete.shopClosed = isNight();
+
+  // NPC AI + walk-frame anim + chatter
+  for (const n of npcs) {
+    if (n.dead) continue;
+    n.attackCd = Math.max(0, (n.attackCd||0) - dt);
+    if (n.hitFlash) n.hitFlash = Math.max(0, n.hitFlash - dt);
+    if (n.chatterT > 0) n.chatterT -= dt;
+    // ambient chatter
+    n.chatterCd = (n.chatterCd||0) - dt;
+    if (n.chatterCd <= 0 && !n.asleep && !n.aggro) {
+      n.chatterCd = 7000 + Math.random()*9000;
+      const dx2 = (P.x+P.w/2) - (n.x+n.w/2), dy2 = (P.y+P.h/2) - (n.y+n.h/2);
+      if (dx2*dx2 + dy2*dy2 < 380*380 && CHATTER[n.id]) {
+        const lines = CHATTER[n.id];
+        n.chatter = lines[Math.floor(Math.random()*lines.length)];
+        n.chatterT = 2600;
+      }
+    }
+
+    const pdx = (P.x+P.w/2) - (n.x+n.w/2);
+    const pdy = (P.y+P.h/2) - (n.y+n.h/2);
+    const pd2 = pdx*pdx + pdy*pdy;
+
+    // zoneOnly hostility
+    if (n.zoneOnly && !n.aggro) {
+      const z = n.zoneOnly;
+      const px = P.x+P.w/2, py = P.y+P.h/2;
+      n.hostile = (px>=z.x && px<=z.x+z.w && py>=z.y && py<=z.y+z.h);
+    }
+
+    let isMoving = false;
+    // aggro chase
+    if (n.aggro || (n.hostile && pd2 < 360*360)) {
+      if (n.speed > 0) {
+        const len = Math.sqrt(pd2)||1;
+        n.x += (pdx/len) * n.speed * (dt/16);
+        n.y += (pdy/len) * n.speed * (dt/16);
+        isMoving = true;
+      }
+      // touch damage
+      if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && n.attackCd===0) {
+        damagePlayer(n.dmg||8, n);
+        n.attackCd = 800;
+      }
+    } else if (n.patrol) {
+      // patrol along path
+      n.patrolT = (n.patrolT||0) + dt;
+      const tgt = n.patrol[Math.floor((n.patrolT/2000) % n.patrol.length)];
+      const tdx = tgt.x - n.x, tdy = tgt.y - n.y;
+      const tlen = Math.sqrt(tdx*tdx+tdy*tdy);
+      if (tlen > 4) {
+        n.x += (tdx/tlen) * (n.speed||1) * (dt/16);
+        n.y += (tdy/tlen) * (n.speed||1) * (dt/16);
+        isMoving = true;
+      }
+    } else if (n.wander && n.speed > 0) {
+      n.wanderT = (n.wanderT||0) - dt;
+      if (n.wanderT <= 0) {
+        n.wanderT = 1500 + Math.random()*2000;
+        n.targetX = n.x + (Math.random()-.5) * 120;
+        n.targetY = n.y + (Math.random()-.5) * 120;
+      }
+      const tdx = n.targetX - n.x, tdy = n.targetY - n.y;
+      const tlen = Math.sqrt(tdx*tdx+tdy*tdy);
+      if (tlen > 4) {
+        n.x += (tdx/tlen) * n.speed*0.4 * (dt/16);
+        n.y += (tdy/tlen) * n.speed*0.4 * (dt/16);
+        isMoving = true;
+      }
+    }
+    // frame anim
+    if (isMoving) {
+      n.frameT = (n.frameT||0) + dt;
+      if (n.frameT > 200) { n.frameT = 0; n.frame = (n.frame||0)+1; if (n.frame>2) n.frame=1; }
+    } else { n.frame = 0; n.frameT = 0; }
+    // pothole "talks" — cycles frames always
+    if (n.id === 'pothole') n.frame = Math.floor(performance.now()/220) % 3;
+    // cart roadkill
+    if (P.cartMounted && rectsOverlap({x:P.x-4,y:P.y-4,w:P.w+8,h:P.h+8}, n) && n.attackCd===0 && (n.hostile||n.aggro)) {
+      n.hp -= 14; n.hitFlash = 180; n.attackCd = 600;
+      const ang = Math.atan2(n.y-P.y, n.x-P.x);
+      n.x += Math.cos(ang)*10; n.y += Math.sin(ang)*10;
+      audio.hit();
+      if (n.hp <= 0) onNpcDeath(n);
+    }
+  }
+
+  // particles
+  for (let i=particles.length-1;i>=0;i--) {
+    const p = particles[i];
+    p.life -= dt;
+    p.x += p.vx; p.y += p.vy;
+    p.vx *= 0.92; p.vy *= 0.92;
+    if (p.gravity) p.vy += p.gravity;
+    if (p.life <= 0) particles.splice(i,1);
+  }
+  // particle pool cap
+  if (particles.length > 220) particles.splice(0, particles.length - 220);
+
+  // boss phase transitions — coats fly off as health drops
+  if (state.bossActive && state.bossNPC && !state.bossNPC.dead) {
+    const b = state.bossNPC;
+    const pct = b.hp / b.maxHp;
+    let newPhase = state.bossPhase;
+    if (pct < 0.7 && state.bossPhase < 2) newPhase = 2;
+    if (pct < 0.4 && state.bossPhase < 3) newPhase = 3;
+    if (pct < 0.15 && state.bossPhase < 4) newPhase = 4;
+    if (newPhase !== state.bossPhase) {
+      state.bossPhase = newPhase;
+      const lines = {
+        2: ["tony tears off coat #2.\nhe is faster now.", () => { b.speed = 2.4; }],
+        3: ["tony tears off coat #3.\nhe throws his shoe at you. it connects.", () => { b.speed = 2.8; b.dmg = 16; damagePlayer(8, b); }],
+        4: ["tony is bare-knuckle.\nhis face is the same face it was. it is just there now.", () => { b.speed = 3.0; b.dmg = 18; }],
+      };
+      const [t, fx] = lines[newPhase] || ["", null];
+      if (t) toast(t, 3000);
+      if (fx) fx();
+      audio.bossRoar();
+      state.shake = 12;
+      const coatColors = {2: '#4a2018', 3: '#3a1810', 4: '#2a1010'};
+      const cc = coatColors[newPhase] || '#5a2020';
+      for (let i=0;i<24;i++) {
+        particles.push({
+          x: b.x+b.w/2, y: b.y+b.h/2,
+          vx: (Math.random()-.5)*10, vy: (Math.random()-.7)*8,
+          life: 1400, c: cc, sz: 5, gravity: 0.25,
+        });
+      }
+      broadcastNews("BREAKING: TRE BAG TONY DOWN TO " + (4-newPhase+1) + " COATS.");
+      feedPost("tony is on coat " + (4-newPhase+1) + ". this is happening live.", '@the_corner');
+    }
+  }
+
+  // rank progression
+  while (P.rank < RANKS.length-1 && P.cred >= RANKS[P.rank+1].cred) {
+    P.rank++;
+    audio.rankUp();
+    toast('· RANK UP ·\n' + RANKS[P.rank].name.toUpperCase(), 3000);
+    feedPost('promoted to ' + RANKS[P.rank].name + '. the corner watches.', '@the_corner');
+    broadcastNews(RANKS[P.rank].name.toUpperCase() + ' has been promoted. the streets react with mild interest.');
+    if (P.rank >= 5) unlockAchievement('glass_mayor');
+    saveGame();
+  }
+  if (P.rank >= 4) {
+    const ab = BUILDINGS.find(b=>b.locked);
+    if (ab) ab.locked = false; // unlocked
+  }
+
+  // camera
+  state.cam.x = clamp(P.x + P.w/2 - W/2, 0, WORLD.w - W);
+  state.cam.y = clamp(P.y + P.h/2 - H/2, 0, WORLD.h - H);
+
+  // shake
+  if (state.shake > 0) state.shake *= 0.9;
+  if (state.flash > 0) state.flash -= dt/1000;
+  if (state.flash < 0) state.flash = 0;
+
+  // auto-save every 45s
+  state.autoSaveT = (state.autoSaveT||0) + dt;
+  if (state.autoSaveT > 45000) { state.autoSaveT = 0; saveGame(); }
+
+  // interact / smoke at block
+  // handled via keypress handler
+
+  // update HUD
+  updateHUD();
+}
+
+function applyDayNight() {
+  const t = state.dayTime;
+  const dnEl = document.getElementById('daynight');
+  // canvas drawLighting handles the heavy darkening at night.
+  // CSS overlay does only the subtle warm/cool tinting.
+  let r=0,g=0,b=0,a=0;
+  if (t < 0.2) { r=40;g=50;b=100; a = 0.18; }
+  else if (t < 0.3) { const k = (t-0.2)/0.1; r=120+k*100; g=80+k*60; b=80-k*40; a = 0.15 - k*0.1; }
+  else if (t < 0.7) { r=255;g=240;b=180; a = 0.05; }
+  else if (t < 0.8) { const k = (t-0.7)/0.1; r=240-k*80;g=140-k*60;b=80; a = 0.05 + k*0.13; }
+  else { r=40;g=50;b=100; a = 0.18; }
+  dnEl.style.background = `rgba(${r|0},${g|0},${b|0},${a.toFixed(3)})`;
+  const tEl = document.getElementById('timeOfDay');
+  const phase = t<0.2?'night':t<0.3?'dawn':t<0.7?'day':t<0.8?'dusk':'night';
+  tEl.textContent = `day ${state.day} · ${phase} · ${state.weather}`;
+}
+
+// ---------- HUD ----------
+function updateHUD() {
+  const hearts = Math.max(0, Math.ceil(P.hp/20));
+  document.getElementById('hp').textContent = '♥'.repeat(hearts) + '♡'.repeat(5-hearts);
+  document.getElementById('cash').textContent = P.cash;
+  document.getElementById('rocks').textContent = P.rocks;
+  document.getElementById('copper').textContent = P.copper;
+  document.getElementById('shakeBar').style.width = P.shakes + '%';
+  document.getElementById('brainBar').style.width = P.brain + '%';
+  document.getElementById('rankName').textContent = RANKS[P.rank].name;
+  document.getElementById('cred').textContent = P.cred;
+  document.getElementById('wanted').textContent = '★'.repeat(P.wanted);
+}
+
+// ---------- RENDER ----------
+const cv = document.getElementById('game');
+const ctx = cv.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
+function drawAll() {
+  ctx.fillStyle = '#0a0805';
+  ctx.fillRect(0,0,W,H);
+  if (state.mode === 'title') return; // title is DOM overlay
+  ctx.save();
+  const sx = (state.shake>0?(Math.random()-.5)*state.shake:0);
+  const sy = (state.shake>0?(Math.random()-.5)*state.shake:0);
+  ctx.translate(-state.cam.x + sx, -state.cam.y + sy);
+  // ground tiles
+  const startX = Math.floor(state.cam.x/TILE)*TILE;
+  const startY = Math.floor(state.cam.y/TILE)*TILE;
+  for (let x=startX; x<state.cam.x+W+TILE; x+=TILE) {
+    for (let y=startY; y<state.cam.y+H+TILE; y+=TILE) {
+      const k = ((x/TILE)+(y/TILE)) % 2;
+      ctx.fillStyle = k ? '#1a1810' : '#181610';
+      ctx.fillRect(x,y,TILE,TILE);
+      // procedural grime
+      if (((x*7 + y*13) % 97) < 8) {
+        ctx.fillStyle = 'rgba(40,30,20,.6)';
+        ctx.fillRect(x+8, y+12, 12, 8);
+      }
+    }
+  }
+  // zones (dashed border + tinted fill)
+  for (const z of ZONES) {
+    ctx.fillStyle = z.color + '55';
+    ctx.fillRect(z.x, z.y, z.w, z.h);
+    ctx.setLineDash([6,4]);
+    ctx.strokeStyle = z.label;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(z.x+1, z.y+1, z.w-2, z.h-2);
+    ctx.setLineDash([]);
+    ctx.fillStyle = z.label;
+    ctx.font = '11px Courier New';
+    ctx.fillText(z.name, z.x+8, z.y+18);
+  }
+  // scrap yard fence (perimeter except south gap)
+  drawScrapFence();
+  // underpass concrete + rebar
+  drawUnderpass();
+  // buildings
+  for (const b of BUILDINGS) {
+    ctx.fillStyle = b.color;
+    ctx.fillRect(b.x, b.y, b.w, b.h);
+    ctx.strokeStyle = b.border;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(b.x+1, b.y+1, b.w-2, b.h-2);
+    // windows
+    if (!b.locked || P.rank >= 4) {
+      const winY = b.y + 14;
+      const winH = 14;
+      const winN = Math.floor(b.w / 36);
+      for (let i=0;i<winN;i++) {
+        const wx = b.x + 12 + i*36;
+        const lit = isNight() ? 1 : 0.4;
+        ctx.fillStyle = `rgba(232,192,64,${lit})`;
+        ctx.fillRect(wx, winY, 16, winH);
+        ctx.strokeStyle = '#1a1008'; ctx.lineWidth = 1;
+        ctx.strokeRect(wx, winY, 16, winH);
+        // cross panes
+        ctx.beginPath();
+        ctx.moveTo(wx+8, winY); ctx.lineTo(wx+8, winY+winH);
+        ctx.moveTo(wx, winY+winH/2); ctx.lineTo(wx+16, winY+winH/2);
+        ctx.stroke();
+        // silhouette inside (pete in pawn, priest in church, tony's tv on)
+        if (b.name === 'PAWN' && i === 0) {
+          ctx.fillStyle = '#3a2818';
+          ctx.fillRect(wx+4, winY+4, 8, 8); // pete head behind glass
+        }
+        if (b.name === 'CHURCH' && i === Math.floor(winN/2)) {
+          ctx.fillStyle = '#2a2030';
+          ctx.fillRect(wx+5, winY+3, 6, 9); // priest
+          ctx.fillStyle = '#d488d4';
+          ctx.fillRect(wx+7, winY+5, 2, 2);
+        }
+        if (b.name === 'CORNER') {
+          ctx.fillStyle = '#000';
+          ctx.fillRect(wx+2, winY+2, 12, 10); // dark interior
+          // tv flicker
+          const flick = Math.sin(performance.now()/120 + i)>0;
+          ctx.fillStyle = flick ? '#88c0ff' : '#445';
+          ctx.fillRect(wx+5, winY+5, 6, 4);
+        }
+      }
+    }
+    if (b.name) {
+      ctx.fillStyle = '#d4c896';
+      ctx.font = 'bold 11px Courier New';
+      ctx.fillText(b.name, b.x+8, b.y+10);
+    }
+    if (b.locked && P.rank < 4) {
+      // boarded planks
+      ctx.strokeStyle = '#5a3a1a';
+      ctx.lineWidth = 4;
+      for (let i=0;i<3;i++) {
+        ctx.beginPath();
+        ctx.moveTo(b.x+10, b.y+b.h/2 - 14 + i*14);
+        ctx.lineTo(b.x+b.w-10, b.y+b.h/2 - 8 + i*14);
+        ctx.stroke();
+      }
+      ctx.font = '16px monospace';
+      ctx.fillText('🔒', b.x+b.w/2-8, b.y+b.h/2+6);
+      ctx.font = '9px Courier New';
+      ctx.fillStyle = '#8a3a3a';
+      ctx.fillText('RANK 4+', b.x+b.w/2-22, b.y+b.h-8);
+    }
+    if (b.doorGap) {
+      ctx.fillStyle = '#0a0518';
+      ctx.fillRect(b.x+b.w/2-25, b.y+b.h-6, 50, 8);
+    }
+  }
+  // marketplace stalls (decoration only)
+  drawMarketStalls();
+
+  // procedural graffiti on building walls
+  drawGraffiti();
+
+  // props (dumpsters, lamps, hydrants, etc.)
+  drawProps();
+
+  // hidden cash piles — only render under tweaker vision OR if close
+  for (const c of cashPiles) {
+    if (c.collected) continue;
+    const dx = (P.x+P.w/2) - c.x, dy = (P.y+P.h/2) - c.y;
+    const close = (dx*dx + dy*dy) < 60*60;
+    if (state.tweakerT > 0 || close) {
+      ctx.fillStyle = state.tweakerT>0 ? '#80ff80' : '#e8c040';
+      ctx.fillRect(c.x-4, c.y-3, 8, 6);
+      ctx.fillStyle = '#604020';
+      ctx.fillRect(c.x-3, c.y-2, 6, 1);
+    }
+  }
+
+  // NPCs
+  for (const n of npcs.sort((a,b)=>(a.y+a.h)-(b.y+b.h))) {
+    if (n.dead) continue;
+    if (n.id==='mom' && isNight()) continue;
+    if (n.id==='pete' && isNight()) continue;
+    if (n.daytimeOnly && isNight()) continue;
+    // camera cull
+    if (n.x < state.cam.x-60 || n.x > state.cam.x+W+40 || n.y < state.cam.y-60 || n.y > state.cam.y+H+40) continue;
+    drawNpc(n);
+  }
+  // particles
+  for (const p of particles) {
+    ctx.fillStyle = p.c;
+    const s = p.sz || 4;
+    ctx.fillRect(p.x-s/2, p.y-s/2, s, s);
+  }
+  // player sprite
+  drawPlayer();
+  // attack swing visual
+  if (P.attacking > 0) {
+    ctx.fillStyle = `rgba(232,192,64,${P.attacking/160 * 0.5})`;
+    const a = { x: P.x+P.w/2-20, y: P.y+P.h/2-20, w: 40, h: 40 };
+    if (P.facing==='down')  ctx.fillRect(P.x-4, P.y+P.h, P.w+8, 36);
+    if (P.facing==='up')    ctx.fillRect(P.x-4, P.y-36, P.w+8, 36);
+    if (P.facing==='left')  ctx.fillRect(P.x-36, P.y-4, 36, P.h+8);
+    if (P.facing==='right') ctx.fillRect(P.x+P.w, P.y-4, 36, P.h+8);
+  }
+
+  ctx.restore();
+
+  // lighting (screen-space pass — uses cam offsets)
+  drawLighting();
+  // weather
+  drawWeather();
+
+  // flash overlay
+  if (state.flash > 0) {
+    ctx.fillStyle = state.flashColor;
+    ctx.globalAlpha = Math.min(1, state.flash);
+    ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha = 1;
+  }
+  // status overlays
+  if (P.rockedT > 0) {
+    ctx.fillStyle = `rgba(232,192,64,${0.08 + Math.sin(performance.now()/120)*0.04})`;
+    ctx.fillRect(0,0,W,H);
+  }
+  if (P.crashT > 0) {
+    ctx.fillStyle = 'rgba(180,80,180,.18)';
+    ctx.fillRect(0,0,W,H);
+  }
+  if (P.hp <= 30) {
+    ctx.fillStyle = `rgba(160,40,40,${0.08 + Math.sin(performance.now()/200)*0.05})`;
+    ctx.fillRect(0,0,W,H);
+  }
+
+  // boss UI
+  if (state.bossActive && state.bossNPC && !state.bossNPC.dead) {
+    const b = state.bossNPC;
+    ctx.fillStyle = 'rgba(0,0,0,.7)';
+    ctx.fillRect(W/2-160, 8, 320, 32);
+    ctx.strokeStyle = '#8a3a3a';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(W/2-160, 8, 320, 32);
+    ctx.fillStyle = '#d4c896';
+    ctx.font = 'bold 12px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('TRE BAG TONY · '+b.hp+'/'+b.maxHp, W/2, 22);
+    ctx.fillStyle = '#8a3a3a';
+    ctx.fillRect(W/2-150, 28, 300*(b.hp/b.maxHp), 8);
+    ctx.textAlign = 'left';
+  }
+
+  // combo display
+  if (state.combo >= 2) {
+    const fade = Math.min(1, state.comboT/1000);
+    ctx.fillStyle = `rgba(232,192,64,${fade})`;
+    ctx.font = 'bold ' + (16 + state.combo*2) + 'px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText(state.combo + 'x', W/2, H-80);
+    ctx.font = '10px Courier New';
+    ctx.fillText('combo', W/2, H-66);
+    ctx.textAlign = 'left';
+  }
+
+  // low-HP edge vignette
+  if (P.hp <= 30) {
+    const intensity = (1 - P.hp/30) * 0.6 + Math.sin(performance.now()/300)*0.1;
+    const g = ctx.createRadialGradient(W/2, H/2, 150, W/2, H/2, 460);
+    g.addColorStop(0, 'rgba(160,40,40,0)');
+    g.addColorStop(1, `rgba(160,40,40,${intensity})`);
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,W,H);
+  }
+
+  // shakes-max wobble
+  if (P.shakes >= 90) {
+    ctx.fillStyle = 'rgba(212,136,212,.08)';
+    ctx.fillRect(0,0,W,H);
+  }
+
+  // weather under HUD
+  // already drawn after restore
+
+  // minimap
+  drawMinimap();
+}
+
+function drawScrapFence() {
+  const z = ZONES.find(z=>z.id==='scrap');
+  ctx.strokeStyle = '#3a2818';
+  ctx.lineWidth = 4;
+  // top
+  ctx.beginPath(); ctx.moveTo(z.x, z.y); ctx.lineTo(z.x+z.w, z.y); ctx.stroke();
+  // left
+  ctx.beginPath(); ctx.moveTo(z.x, z.y); ctx.lineTo(z.x, z.y+z.h); ctx.stroke();
+  // right
+  ctx.beginPath(); ctx.moveTo(z.x+z.w, z.y); ctx.lineTo(z.x+z.w, z.y+z.h); ctx.stroke();
+  // south with gap (140px gap centered)
+  const gapX = z.x+z.w/2 - 70;
+  ctx.beginPath(); ctx.moveTo(z.x, z.y+z.h); ctx.lineTo(gapX, z.y+z.h); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(gapX+140, z.y+z.h); ctx.lineTo(z.x+z.w, z.y+z.h); ctx.stroke();
+  // chainlink texture
+  ctx.strokeStyle = 'rgba(80,60,40,.5)';
+  ctx.lineWidth = 1;
+  for (let x=z.x; x<z.x+z.w; x+=10) {
+    ctx.beginPath(); ctx.moveTo(x, z.y); ctx.lineTo(x, z.y+10); ctx.stroke();
+  }
+  // scrap piles
+  for (let i=0;i<8;i++) {
+    const px = z.x + 40 + ((i*73)%(z.w-80));
+    const py = z.y + 50 + ((i*97)%(z.h-100));
+    ctx.fillStyle = '#604020';
+    ctx.fillRect(px, py, 24, 14);
+    ctx.fillStyle = '#d06030';
+    ctx.fillRect(px+4, py+3, 8, 3);
+  }
+}
+
+function drawUnderpass() {
+  const z = ZONES.find(z=>z.id==='underpass');
+  if (!z) return;
+  ctx.fillStyle = '#28282a';
+  ctx.fillRect(z.x, z.y, z.w, z.h);
+  // overhead beams
+  ctx.fillStyle = '#1a1a1c';
+  for (let i=0;i<5;i++) {
+    ctx.fillRect(z.x + 20 + i*70, z.y+10, 6, z.h-20);
+  }
+  // rebar
+  ctx.strokeStyle = '#a08060';
+  ctx.lineWidth = 2;
+  for (let i=0;i<3;i++) {
+    ctx.beginPath();
+    ctx.moveTo(z.x+40+i*100, z.y+z.h-30);
+    ctx.lineTo(z.x+90+i*100, z.y+z.h-60);
+    ctx.stroke();
+  }
+  // car shadow rumble — every 8s a "car" sweeps overhead visually
+  const phase = ((Date.now()/8000)%1);
+  if (phase < 0.2) {
+    const cx = z.x + phase*z.w*6;
+    ctx.fillStyle = 'rgba(0,0,0,.5)';
+    ctx.fillRect(cx, z.y-10, 120, 8);
+  }
+}
+
+function drawMarketStalls() {
+  const z = ZONES.find(z=>z.id==='market');
+  for (let i=0;i<4;i++) {
+    const px = z.x + 80 + i*160;
+    const py = z.y + 60;
+    ctx.fillStyle = '#5a4828';
+    ctx.fillRect(px, py, 90, 30);
+    ctx.strokeStyle = '#1a1008';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(px, py, 90, 30);
+    // umbrella
+    ctx.fillStyle = ['#8a3a3a','#4a5028','#604020','#a8c030'][i];
+    ctx.fillRect(px-8, py-10, 106, 12);
+  }
+}
+
+// Procedural graffiti — generated once and cached
+let GRAFFITI = null;
+function buildGraffiti() {
+  const tags = [
+    "HONK IF U LOVE PETE","I LOST A TOOTH HERE","DON'T TRUST STRIPE","TONY 4 EVER",
+    "RIP DAVE (still alive)","THE COPPER SINGS","WAS HERE 2003","FREE PAULIE",
+    "BRUTUS IS NICE","MOM WORRIED","THE TRAIN COMES","TIC TAC LIES",
+    "POSSUM PRESIDENT","STRIPE = SOAP","YURI IS WATCHING","YELL LOUDER",
+    "ONE FOOT NATION","SIDEWALK COMMITTEE","I OWE TONY","BLOCK CAPTAIN HENRY",
+  ];
+  const targets = [];
+  // pawn, corner, abandoned, church walls
+  [BUILDINGS[0], BUILDINGS[1], BUILDINGS[2], BUILDINGS[3]].forEach(b => {
+    for (let i=0;i<5;i++) {
+      const side = Math.random()<.5 ? 'side':'bottom';
+      let x, y;
+      if (side==='side') { x = b.x + 4 + Math.random()*(b.w-60); y = b.y + 20 + Math.random()*(b.h-40); }
+      else { x = b.x + 4 + Math.random()*(b.w-60); y = b.y + b.h - 12 - Math.random()*16; }
+      targets.push({
+        x, y,
+        text: tags[Math.floor(Math.random()*tags.length)],
+        col: ['#d4c896','#e8c040','#d488d4','#a8c030'][Math.floor(Math.random()*4)],
+        rot: (Math.random()-.5)*0.3,
+      });
+    }
+  });
+  GRAFFITI = targets;
+}
+function drawGraffiti() {
+  if (!GRAFFITI) buildGraffiti();
+  ctx.font = '9px Courier New';
+  for (const g of GRAFFITI) {
+    ctx.save();
+    ctx.translate(g.x, g.y);
+    ctx.rotate(g.rot);
+    ctx.fillStyle = g.col;
+    ctx.globalAlpha = 0.7;
+    ctx.fillText(g.text, 0, 0);
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+}
+
+function drawProps() {
+  for (const p of PROPS) {
+    // cull
+    if (p.x < state.cam.x-40 || p.x > state.cam.x+W+40 || p.y < state.cam.y-40 || p.y > state.cam.y+H+40) continue;
+    drawProp(p);
+  }
+}
+
+function drawProp(p) {
+  if (p.type === 'dumpster') {
+    ctx.fillStyle = p.looted ? '#1a1810' : p.color;
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    ctx.strokeStyle = '#0a0805'; ctx.lineWidth = 2;
+    ctx.strokeRect(p.x, p.y, p.w, p.h);
+    // lid
+    ctx.fillStyle = '#0a0805';
+    ctx.fillRect(p.x-2, p.y-4, p.w+4, 4);
+    // flies
+    if (!p.looted) {
+      ctx.fillStyle = '#222';
+      const t = performance.now()/200;
+      for (let i=0;i<3;i++) {
+        const fx = p.x + 6 + Math.sin(t+i*2)*8;
+        const fy = p.y - 10 + Math.cos(t*1.3+i)*4;
+        ctx.fillRect(fx, fy, 2, 2);
+      }
+    }
+    // label
+    ctx.font = '8px Courier New';
+    ctx.fillStyle = '#665';
+    ctx.fillText('TRASH', p.x+2, p.y+14);
+  }
+  else if (p.type === 'cart') {
+    if (p.mounted) return; // mounted on player
+    ctx.fillStyle = '#888';
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    // grid pattern
+    ctx.strokeStyle = '#444'; ctx.lineWidth = 1;
+    for (let i=4; i<p.w; i+=4) {
+      ctx.beginPath(); ctx.moveTo(p.x+i, p.y); ctx.lineTo(p.x+i, p.y+p.h); ctx.stroke();
+    }
+    // handle
+    ctx.fillStyle = '#666';
+    ctx.fillRect(p.x-2, p.y-6, 28, 3);
+    // wheels
+    ctx.fillStyle = '#000';
+    ctx.fillRect(p.x+2, p.y+p.h, 4, 4);
+    ctx.fillRect(p.x+p.w-6, p.y+p.h, 4, 4);
+    // glint
+    ctx.fillStyle = '#ccc';
+    ctx.fillRect(p.x+2, p.y+2, 2, 2);
+  }
+  else if (p.type === 'lamp') {
+    // post
+    ctx.fillStyle = '#3a3528';
+    ctx.fillRect(p.x-1, p.y-30, 3, 30);
+    // head
+    ctx.fillStyle = '#5a4828';
+    ctx.fillRect(p.x-5, p.y-36, 11, 8);
+    // bulb glow during night (rendered in lighting pass)
+    if (isNight()) {
+      ctx.fillStyle = '#fff0a0';
+      ctx.fillRect(p.x-2, p.y-32, 5, 4);
+    }
+  }
+  else if (p.type === 'hydrant') {
+    ctx.fillStyle = '#8a3a3a';
+    ctx.fillRect(p.x-4, p.y-10, 8, 12);
+    ctx.fillStyle = '#a04848';
+    ctx.fillRect(p.x-6, p.y-12, 12, 4);
+    ctx.fillStyle = '#5a2020';
+    ctx.fillRect(p.x-6, p.y-2, 12, 4);
+  }
+  else if (p.type === 'mailbox') {
+    ctx.fillStyle = '#1818a0';
+    ctx.fillRect(p.x-6, p.y-12, 12, 12);
+    ctx.fillStyle = '#0a0a60';
+    ctx.fillRect(p.x-1, p.y, 2, 6);
+  }
+  else if (p.type === 'cone') {
+    ctx.fillStyle = '#d06030';
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y-12);
+    ctx.lineTo(p.x-5, p.y);
+    ctx.lineTo(p.x+5, p.y);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#fff0a0';
+    ctx.fillRect(p.x-3, p.y-7, 6, 2);
+  }
+  else if (p.type === 'trash') {
+    ctx.fillStyle = '#3a2818';
+    ctx.fillRect(p.x-6, p.y-4, 12, 8);
+    ctx.fillStyle = '#5a4030';
+    ctx.fillRect(p.x-2, p.y-6, 4, 4);
+    ctx.fillStyle = '#d4c896';
+    ctx.fillRect(p.x+2, p.y-2, 2, 2);
+  }
+  else if (p.type === 'crate') {
+    ctx.fillStyle = '#604020';
+    ctx.fillRect(p.x, p.y, 24, 16);
+    ctx.strokeStyle = '#3a2010';
+    ctx.lineWidth = 1;
+    for (let i=4;i<24;i+=4) {
+      ctx.beginPath(); ctx.moveTo(p.x+i, p.y); ctx.lineTo(p.x+i, p.y+16); ctx.stroke();
+    }
+    for (let i=4;i<16;i+=4) {
+      ctx.beginPath(); ctx.moveTo(p.x, p.y+i); ctx.lineTo(p.x+24, p.y+i); ctx.stroke();
+    }
+  }
+  else if (p.type === 'syringe') {
+    ctx.fillStyle = '#d4c896';
+    ctx.fillRect(p.x-3, p.y, 7, 2);
+    ctx.fillStyle = '#a08868';
+    ctx.fillRect(p.x+4, p.y, 3, 2);
+  }
+  else if (p.type === 'bottle') {
+    ctx.fillStyle = '#3a5028';
+    ctx.fillRect(p.x-3, p.y-2, 4, 6);
+    ctx.fillStyle = '#5a7038';
+    ctx.fillRect(p.x+1, p.y+1, 3, 2);
+    ctx.fillStyle = '#a8c030';
+    ctx.fillRect(p.x-4, p.y+4, 8, 1);
+  }
+}
+
+// Lighting + weather overlay (rendered AFTER everything in world space)
+function drawLighting() {
+  if (isNight()) {
+    // darkness mask
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const octx = off.getContext('2d');
+    octx.fillStyle = 'rgba(0,0,0,.72)';
+    octx.fillRect(0,0,W,H);
+    octx.globalCompositeOperation = 'destination-out';
+    // lamps
+    for (const p of PROPS) {
+      if (p.type !== 'lamp') continue;
+      const sx = p.x - state.cam.x;
+      const sy = p.y - 32 - state.cam.y;
+      if (sx<-130||sx>W+130||sy<-130||sy>H+130) continue;
+      const g = octx.createRadialGradient(sx, sy, 8, sx, sy, 120);
+      g.addColorStop(0, 'rgba(0,0,0,1)');
+      g.addColorStop(0.45, 'rgba(0,0,0,.7)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      octx.fillStyle = g;
+      octx.fillRect(sx-120, sy-120, 240, 240);
+    }
+    // player light
+    const px = P.x+P.w/2 - state.cam.x, py = P.y+P.h/2 - state.cam.y;
+    const g = octx.createRadialGradient(px, py, 10, px, py, 90);
+    g.addColorStop(0, 'rgba(0,0,0,.85)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    octx.fillStyle = g;
+    octx.fillRect(px-90, py-90, 180, 180);
+    // rocked-up extra glow
+    if (P.rockedT > 0) {
+      const g2 = octx.createRadialGradient(px, py, 20, px, py, 130);
+      g2.addColorStop(0, 'rgba(0,0,0,1)');
+      g2.addColorStop(1, 'rgba(0,0,0,0)');
+      octx.fillStyle = g2;
+      octx.fillRect(px-130, py-130, 260, 260);
+    }
+    octx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(off, 0, 0);
+    // warm lamp glow overlay (additive)
+    ctx.globalCompositeOperation = 'lighter';
+    for (const p of PROPS) {
+      if (p.type !== 'lamp') continue;
+      const sx = p.x - state.cam.x;
+      const sy = p.y - 32 - state.cam.y;
+      if (sx<-80||sx>W+80||sy<-80||sy>H+80) continue;
+      const gg = ctx.createRadialGradient(sx, sy, 4, sx, sy, 70);
+      gg.addColorStop(0, 'rgba(255,220,140,.55)');
+      gg.addColorStop(.4, 'rgba(255,200,80,.2)');
+      gg.addColorStop(1, 'rgba(255,200,80,0)');
+      ctx.fillStyle = gg;
+      ctx.fillRect(sx-70, sy-70, 140, 140);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+}
+
+// Weather (rain)
+function drawWeather() {
+  if (state.weather === 'rain') {
+    ctx.strokeStyle = 'rgba(180,200,220,.5)';
+    ctx.lineWidth = 1;
+    const t = performance.now() / 30;
+    for (let i=0;i<160;i++) {
+      const x = ((i*73 + t) % W);
+      const y = ((i*47 + t*1.4) % H);
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x-3, y+10);
+      ctx.stroke();
+    }
+  }
+  if (state.weather === 'fog') {
+    ctx.fillStyle = 'rgba(180,180,180,.18)';
+    ctx.fillRect(0,0,W,H);
+    // viewport-edge fog
+    const g = ctx.createRadialGradient(W/2, H/2, 80, W/2, H/2, 360);
+    g.addColorStop(0, 'rgba(180,180,180,0)');
+    g.addColorStop(1, 'rgba(180,180,180,.5)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,W,H);
+  }
+}
+
+function drawNpc(n) {
+  // body shadow
+  ctx.fillStyle = 'rgba(0,0,0,.4)';
+  ctx.fillRect(n.x+2, n.y+n.h-2, n.w-4, 3);
+  // sprite (with walk frame)
+  const frame = n.frame || 0;
+  const sp = SPRITE_CACHE[n.sprite+'_'+frame] || SPRITE_CACHE[n.sprite+'_0'];
+  if (sp) {
+    if (n.hitFlash) ctx.globalCompositeOperation = 'lighter';
+    ctx.drawImage(sp, n.x-2, n.y-4, 32, 32);
+    ctx.globalCompositeOperation = 'source-over';
+  } else {
+    ctx.fillStyle = n.color;
+    ctx.fillRect(n.x, n.y, n.w, n.h);
+  }
+  // asleep "Z"
+  if (n.asleep) {
+    ctx.fillStyle = '#d4c896';
+    ctx.font = '10px Courier New';
+    const zT = Math.sin(performance.now()/600) * 2;
+    ctx.fillText('z', n.x+n.w, n.y+zT);
+    ctx.fillText('z', n.x+n.w+4, n.y-6-zT);
+  }
+  // name
+  ctx.font = '10px Courier New';
+  ctx.fillStyle = (n.hostile||n.aggro) ? '#d04040' : '#d4c896';
+  ctx.textAlign = 'center';
+  ctx.fillText(n.name, n.x+n.w/2, n.y-6);
+  ctx.textAlign = 'left';
+  // hp bar
+  if (n.showHp && n.hp < n.maxHp) {
+    ctx.fillStyle = '#220';
+    ctx.fillRect(n.x, n.y-4, n.w, 3);
+    ctx.fillStyle = '#d04040';
+    ctx.fillRect(n.x, n.y-4, n.w*(n.hp/n.maxHp), 3);
+  }
+  // aggro "!"
+  if (n.aggro) {
+    ctx.fillStyle = '#e8c040';
+    ctx.font = 'bold 14px Courier New';
+    ctx.fillText('!', n.x+n.w+2, n.y+8);
+  }
+  // chatter bubble
+  if (n.chatterT > 0 && n.chatter) {
+    const tw = n.chatter.length * 5.4 + 8;
+    ctx.fillStyle = 'rgba(0,0,0,.85)';
+    ctx.fillRect(n.x+n.w/2 - tw/2, n.y-26, tw, 14);
+    ctx.strokeStyle = '#665';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(n.x+n.w/2 - tw/2, n.y-26, tw, 14);
+    ctx.fillStyle = '#d4c896';
+    ctx.font = '9px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText(n.chatter, n.x+n.w/2, n.y-16);
+    ctx.textAlign = 'left';
+  }
+}
+
+function drawPlayer() {
+  // shadow
+  ctx.fillStyle = 'rgba(0,0,0,.5)';
+  ctx.fillRect(P.x+2, P.y+P.h-2, P.w-4, 4);
+  // cart underlay
+  if (P.cartMounted) {
+    ctx.fillStyle = '#888';
+    ctx.fillRect(P.x-4, P.y+P.h-12, P.w+8, 14);
+    ctx.strokeStyle = '#555'; ctx.lineWidth = 1;
+    for (let i=2;i<P.w+8;i+=3) {
+      ctx.beginPath(); ctx.moveTo(P.x-4+i, P.y+P.h-12); ctx.lineTo(P.x-4+i, P.y+P.h+2); ctx.stroke();
+    }
+    ctx.fillStyle = '#000';
+    ctx.fillRect(P.x-2, P.y+P.h+2, 4, 3);
+    ctx.fillRect(P.x+P.w-2, P.y+P.h+2, 4, 3);
+  }
+  const dir = P.facing, f = P.frame;
+  // rocked-up ghost trail (3 frames back, chromatic split)
+  if (P.rockedT > 0) {
+    const t = performance.now();
+    // push trail history
+    if (!P.trail) P.trail = [];
+    P.trail.push({ x: P.x, y: P.y, dir, f });
+    if (P.trail.length > 6) P.trail.shift();
+    for (let i=0;i<P.trail.length-1;i++) {
+      const tr = P.trail[i];
+      const alpha = (i/P.trail.length) * 0.35;
+      const sp = SPRITE_CACHE['playerhi_' + tr.dir + '_' + tr.f];
+      if (sp) {
+        ctx.globalAlpha = alpha;
+        // RGB-shifted ghost trio (chromatic aberration)
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.drawImage(sp, tr.x-2 + (i-3), tr.y-4, 32, 32);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    }
+    ctx.globalAlpha = 1;
+  } else if (P.trail) {
+    P.trail.length = 0;
+  }
+  const key = (P.rockedT > 0 ? 'playerhi_' : 'player_') + dir + '_' + f;
+  const sp = SPRITE_CACHE[key];
+  if (sp) {
+    if (P.hitFlash > 0 || (P.iframes>0 && Math.floor(P.iframes/80)%2)) {
+      ctx.globalAlpha = 0.5;
+    }
+    // chromatic split when rocked
+    if (P.rockedT > 0) {
+      const shake = Math.sin(performance.now()/60) * 1.2;
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = 0.5;
+      ctx.drawImage(sp, P.x-2 + shake, P.y-4, 32, 32);
+      ctx.drawImage(sp, P.x-2 - shake, P.y-4, 32, 32);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+    }
+    ctx.drawImage(sp, P.x-2, P.y-4, 32, 32);
+    ctx.globalAlpha = 1;
+  } else {
+    ctx.fillStyle = '#604020';
+    ctx.fillRect(P.x, P.y, P.w, P.h);
+  }
+  // rocked-up aura
+  if (P.rockedT > 0) {
+    ctx.strokeStyle = `rgba(232,192,64,${0.4 + Math.sin(performance.now()/120)*0.3})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(P.x+P.w/2, P.y+P.h/2, 22 + Math.sin(performance.now()/200)*2, 0, Math.PI*2);
+    ctx.stroke();
+    // pulsing inner ring
+    ctx.strokeStyle = `rgba(255,240,180,${0.2 + Math.sin(performance.now()/80)*0.15})`;
+    ctx.beginPath();
+    ctx.arc(P.x+P.w/2, P.y+P.h/2, 16 + Math.sin(performance.now()/100)*1.5, 0, Math.PI*2);
+    ctx.stroke();
+  }
+}
+
+const mm = document.getElementById('minimap');
+const mmctx = mm.getContext('2d');
+function drawMinimap() {
+  const sx = 120/WORLD.w, sy = 96/WORLD.h;
+  mmctx.fillStyle = '#000';
+  mmctx.fillRect(0,0,120,96);
+  for (const z of ZONES) {
+    mmctx.fillStyle = z.color;
+    mmctx.fillRect(z.x*sx, z.y*sy, z.w*sx, z.h*sy);
+  }
+  for (const n of npcs) {
+    if (n.dead) continue;
+    if (n.id==='tony') mmctx.fillStyle = '#d06030';
+    else if (n.isCop) mmctx.fillStyle = '#5aa0ff';
+    else if (n.hostile||n.aggro) mmctx.fillStyle = '#d04040';
+    else mmctx.fillStyle = '#88aa66';
+    mmctx.fillRect(n.x*sx-1, n.y*sy-1, 2, 2);
+  }
+  // player
+  mmctx.fillStyle = '#e8c040';
+  mmctx.fillRect(P.x*sx-1, P.y*sy-1, 3, 3);
+  // viewport box
+  mmctx.strokeStyle = 'rgba(232,192,64,.4)';
+  mmctx.lineWidth = 1;
+  mmctx.strokeRect(state.cam.x*sx, state.cam.y*sy, W*sx, H*sy);
+}
+
+// ---------- ENDING ----------
+function endingScreen() {
+  state.mode = 'title';
+  const t = document.getElementById('title');
+  t.classList.remove('hide');
+  t.innerHTML = `
+    <h1 style="color:#d06030;font-size:36px">CRACK LORD SUPREME</h1>
+    <div class="sub">the corner is yours · you get tuesdays and thursdays</div>
+    <div class="start">[ SPACE ] start again</div>
+    <div class="credit">vibekoded · the possum still knows</div>`;
+  // wipe save
+  window.storage.set(SAVE_KEY, null);
+}
+
+// ---------- INTERACT ----------
+function tryInteract() {
+  // shopping cart mount/dismount
+  const cart = PROPS.find(p => p.type==='cart');
+  if (cart) {
+    if (P.cartMounted) {
+      // dismount near player
+      const dx = (P.x+P.w/2) - cart.x, dy = (P.y+P.h/2) - cart.y;
+      if (cart.mounted === 'me') {
+        P.cartMounted = false; cart.mounted = false;
+        cart.x = P.x + 4; cart.y = P.y + 8;
+        applyEquipStats();
+        toast('you abandon the cart.\nit rolls slightly. accuses you.', 1800);
+        return;
+      }
+    } else {
+      const dx = (P.x+P.w/2) - cart.x, dy = (P.y+P.h/2) - cart.y;
+      if (dx*dx + dy*dy < 36*36) {
+        P.cartMounted = true; cart.mounted = 'me';
+        applyEquipStats();
+        unlockAchievement('cart_baron');
+        toast('+ shopping cart\n+1 speed. you can hit people now.', 2200);
+        return;
+      }
+    }
+  }
+  // dumpster dive
+  for (const p of PROPS) {
+    if (p.type !== 'dumpster') continue;
+    const dx = (P.x+P.w/2) - (p.x+p.w/2), dy = (P.y+P.h/2) - (p.y+p.h/2);
+    if (dx*dx + dy*dy < 44*44) {
+      if (p.looted) { toast('the dumpster is empty.\nyou look anyway.', 1500); return; }
+      startDumpsterDive(p);
+      return;
+    }
+  }
+  // smoke at block
+  if (inZone(P.x+P.w/2, P.y+P.h/2, 'block')) {
+    if (P.rocks <= 0) { toast('you reach for a rock that is not there.', 1400); return; }
+    if (P.rockedT > 0) { toast('you are already up.', 1200); return; }
+    P.rocks--; P.rockedT = 18000; P.crashT = 0; P.shakes = Math.max(0, P.shakes-50);
+    P.brain = Math.max(0, P.brain-4); P.lifetime.rocksSmoked++;
+    P.cred += 1;
+    audio.rockUp();
+    state.flash = 1; state.flashColor = 'rgba(232,192,64,.5)';
+    toast('· smoke a rock ·\nthe sun moves.\nbrain -4. shakes -50.', 2500);
+    feedPost("smoked a rock at the block. for the bit.", '@crackheadcent');
+    saveGame();
+    return;
+  }
+  // abandoned heist trigger
+  const heistB = BUILDINGS.find(b=>b.locked);
+  if (P.rank >= 4 && heistB) {
+    const cx = P.x+P.w/2, cy = P.y+P.h/2;
+    if (cx > heistB.x-20 && cx < heistB.x+heistB.w+20 && cy > heistB.y-20 && cy < heistB.y+heistB.h+20) {
+      startHeist(); return;
+    }
+  }
+  // NPC interact (closest within 60px)
+  let best = null, bestD = 60*60;
+  for (const n of npcs) {
+    if (n.dead || !n.interact) continue;
+    const dx = (P.x+P.w/2) - (n.x+n.w/2), dy = (P.y+P.h/2) - (n.y+n.h/2);
+    const d2 = dx*dx+dy*dy;
+    if (d2 < bestD) { bestD = d2; best = n; }
+  }
+  if (best) {
+    if (best.id === 'pete' && best.shopClosed) {
+      toast("pete is sleeping inside.\n'we open at 6.'", 1800); return;
+    }
+    best.interact(best);
+  }
+}
+
+// ---------- DUMPSTER DIVE ----------
+function startDumpsterDive(dumpster) {
+  state.mode = 'dialogue';
+  const items = [];
+  const trashPool = [
+    {n:'half a chimichanga', q:'eat', heal:8},
+    {n:'a wet sock', q:'sell'},
+    {n:'a license plate', q:'item', id:'license'},
+    {n:'a hot pocket sleeve', q:'sell'},
+    {n:'a tooth (gold)', q:'sell', val:15},
+    {n:'a strange shoe', q:'equip', id:'crocs'},
+    {n:'a parka in august', q:'equip', id:'parka'},
+    {n:'a single airpod', q:'equip', id:'airpods'},
+    {n:'a mesh hat', q:'equip', id:'mesh_cap'},
+    {n:'a cowboy hat', q:'equip', id:'cowboy'},
+    {n:'a hotel bathrobe', q:'equip', id:'bathrobe'},
+    {n:'a windbreaker', q:'equip', id:'windbreaker'},
+    {n:'a flashlight (dead)', q:'item'},
+    {n:'a receipt', q:'item'},
+    {n:'a possum (alive)', q:'event', what:'possum'},
+    {n:'someone\'s wedding ring', q:'sell', val:18},
+    {n:'a cubscout sash', q:'equip', id:'cowboy'},
+  ];
+  // 3 random items
+  for (let i=0;i<3;i++) items.push(trashPool[Math.floor(Math.random()*trashPool.length)]);
+  dialogue('THE DUMPSTER', "you are inside a dumpster.\nyou find three things.\nyou can take one.", items.map((it,idx) => ({
+    label: it.n + (it.q==='sell'?' (sell)':it.q==='eat'?' (eat)':it.q==='equip'?' (wear)':''),
+    action: () => {
+      if (it.q === 'eat') { P.hp = Math.min(P.maxHp, P.hp + (it.heal||5)); toast('+ '+it.heal+' hp\n(it tastes like the dumpster.)'); }
+      else if (it.q === 'sell') { const v = it.val || (3 + Math.floor(Math.random()*4)); P.cash += v; toast('+ $'+v+'\n('+it.n+'.)'); audio.coin(); }
+      else if (it.q === 'item') { P.inventory.push({id: it.id||it.n.replace(/\W/g,''), n: it.n, q: 1}); toast('+ '+it.n); }
+      else if (it.q === 'equip' && it.id && EQUIPMENT[it.id]) {
+        const slot = EQUIPMENT[it.id].slot;
+        P.equip[slot] = it.id; applyEquipStats();
+        toast('+ EQUIPPED · '+EQUIPMENT[it.id].n);
+      }
+      else if (it.q === 'event' && it.what === 'possum') {
+        toast("a possum.\nhe is annoyed.\nhe leaves through the lid.");
+        possumDialogue();
+      }
+      dumpster.looted = true;
+      saveGame();
+    }
+  })).concat([{label:'climb out.', action:()=>{ dumpster.looted = true; toast('you climb out.\nno one saw.\n(some saw.)'); }}]));
+}
+
+// ---------- HEIST (simple 3-stage) ----------
+async function startHeist() {
+  state.mode = 'heist';
+  await heistStage(1);
+}
+async function heistStage(stage) {
+  return new Promise(resolve => {
+    if (stage === 1) {
+      dialogue('ABANDONED BUILDING', "the door is half off.\nbrutus jr. is inside. he is asleep.\nyou hear pipes singing in b flat.", [
+        { label: 'sneak past brutus jr.', action: () => {
+          if (Math.random()<0.7) { toast('you sneak. brutus jr. dreams of a tennis ball.'); heistStage(2); }
+          else { toast('BRUTUS JR. WAKES UP. he is a puppy. he is FURIOUS.'); P.hp -= 10; if (P.hp<=0) die(); else heistStage(2); }
+          resolve();
+        }},
+        { label: P.inventory.find(i=>i.id==='soap') ? 'throw soap as distraction.' : "throw something (you have nothing useful).", disabled: !P.inventory.find(i=>i.id==='soap'), action: () => {
+          P.inventory = P.inventory.filter(i=>i.id!=='soap');
+          toast('brutus jr. licks the soap. is consumed.'); heistStage(2); resolve();
+        }},
+        { label: P.cash>=3 ? 'pay $3 for a chimichanga distraction.' : "you don't have $3.", disabled: P.cash<3, action: () => {
+          P.cash -= 3; toast("the chimichanga is talking.\nbrutus jr. listens."); heistStage(2); resolve();
+        }},
+        { label: 'leave.', action: () => { state.mode='playing'; resolve(); }},
+      ]);
+    } else if (stage === 2) {
+      dialogue('THE COPPER PIPES', "the pipes hum.\nin b flat.\nthey are waiting.", [
+        { label: 'strip them.', action: () => {
+          const got = 2 + Math.floor(Math.random()*3);
+          P.copper += got; audio.glassBreak();
+          state.counters.copperStripped += got;
+          if (state.counters.copperStripped >= 10) unlockAchievement('copper_singer');
+          toast(`+ ${got} pure copper\nthe singing stops.\nyou feel watched.`);
+          if (!state.quests.copper_sings.done) { state.quests.copper_sings.done = true; questToast('THE COPPER SINGS'); }
+          heistStage(3); resolve();
+        }},
+        { label: 'listen to them sing.', action: () => {
+          P.brain = Math.min(100, P.brain+8); toast('+ 8 brain\nthey know your name now.');
+          heistStage(3); resolve();
+        }},
+        { label: 'leave.', action: () => { state.mode='playing'; resolve(); }},
+      ]);
+    } else {
+      dialogue('GETAWAY', "the floor creaks.\nthere is a window.\nthere is also a door.", [
+        { label: 'window. fast.', action: () => {
+          if (Math.random()<0.8) { toast('you jump. the landing is bad but legal.'); P.hp -= 3; }
+          else { toast('the glass breaks. so does your dignity.'); P.hp -= 12; audio.glassBreak(); P.wanted = Math.min(3,P.wanted+1); }
+          if (P.hp<=0) die();
+          state.mode = 'playing'; saveGame(); resolve();
+        }},
+        { label: 'door. slow.', action: () => {
+          if (Math.random()<0.5) { toast('a cop is waiting on the other side.\nyou run.'); P.wanted = Math.min(3,P.wanted+2); }
+          else { toast('you walk out like you own the place.\n(you do not.)'); }
+          state.mode = 'playing'; saveGame(); resolve();
+        }},
+      ]);
+    }
+  });
+}
+
+// ---------- INPUT ----------
+window.addEventListener('keydown', async (e) => {
+  const k = e.key.toLowerCase();
+  // title screen
+  if (state.mode === 'title') {
+    if (k === ' ' || k === 'spacebar') { e.preventDefault(); audio.init(); startGame(false); return; }
+    if (k === 'l') { audio.init(); const ok = await loadGame(); if (ok) startGame(true); else toast('no save.', 1200); return; }
+    return;
+  }
+  // global
+  if (k === 'm') { audio.muted = !audio.muted; toast(audio.muted?'muted.':'unmuted.', 800); return; }
+  if (k === 'escape') {
+    if (state.mode === 'dialogue') closeDialogue();
+    else if (state.mode === 'inv' || state.mode === 'quest') closePanel();
+    return;
+  }
+  if (state.mode === 'dialogue') {
+    // 1-9 select dialogue option
+    const n = parseInt(k);
+    if (n>=1 && n<=9 && activeDialogue && activeDialogue.opts[n-1]) {
+      const o = activeDialogue.opts[n-1];
+      if (!o.disabled) { audio.dialogue(); closeDialogue(); o.action && o.action(); }
+    }
+    return;
+  }
+  if (k === 'i') {
+    if (state.mode==='inv') { closePanel(); }
+    else if (state.mode==='quest') { closePanel(); state.mode='inv'; renderInventory(); }
+    else { state.mode='inv'; renderInventory(); }
+    return;
+  }
+  if (k === 'q') {
+    if (state.mode==='quest') { closePanel(); }
+    else if (state.mode==='inv') { closePanel(); state.mode='quest'; renderQuests(); }
+    else { state.mode='quest'; renderQuests(); }
+    return;
+  }
+  if (k === 'p') {
+    phoneState.visible = !phoneState.visible;
+    renderPhone();
+    return;
+  }
+  // play mode keys
+  if (state.mode !== 'playing') return;
+  state.keys.add(k);
+  if (k === ' ' || k === 'spacebar') { e.preventDefault(); playerAttack(); }
+  if (k === 'e') tryInteract();
+  if (k === 'f') {
+    if (state.tweakerCdT > 0 || P.brain <= 0) {
+      if (P.brain <= 0) toast('your brain has nothing left to give.', 1500);
+    } else if (state.tweakerT === 0) {
+      state.tweakerT = 3000; state.tweakerCdT = 6000;
+      // small cost on activation
+      P.brain = Math.max(0, P.brain - 5);
+    }
+  }
+});
+window.addEventListener('keyup', (e) => {
+  state.keys.delete(e.key.toLowerCase());
+});
+
+// ---------- START ----------
+function startGame(loaded) {
+  document.getElementById('title').classList.add('hide');
+  if (!loaded) {
+    // fresh save state
+    state.cashPilesCollected = new Set();
+    state.achievements = new Set();
+    state.counters = {
+      possumProphecies: 0, brutusDeaths: 0, churchDonations: 0,
+      rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
+      plateStolen: 0, stripeBetrayed: 0, pigeonTrade: 0,
+    };
+    Object.values(state.quests).forEach(q => q.done = false);
+    state.day = 1; state.dayTime = 0.35;
+    state.weather = 'clear';
+    state.combo = 0;
+    P.equip = { shoes:null, hat:null, coat:null };
+    P.cartMounted = false;
+  }
+  spawnNpcs();
+  spawnCashPiles();
+  applyEquipStats();
+  state.mode = 'playing';
+  toast('you wake up on the sidewalk.\nyour mouth tastes like a battery.', 3000);
+  // initial feed posts
+  feedPost("woke up.\nstill in the neighborhood.\nfeels like a tuesday.", '@crackheadcent');
+  feedPost("good morning. tony has not blinked.", '@tony_observer');
+  broadcastNews("good evening. " + RANKS[P.rank].name + " is once again at large.");
+}
+
+// ---------- INIT ----------
+buildSprites();
+updateHUD();
+rotateNews();
+setInterval(rotateNews, 50000);
+// CRT power-on auto-dismiss
+setTimeout(() => { const p = document.getElementById('poweron'); if (p) p.classList.add('gone'); }, 800);
+
+// detect existing save for title screen
+(async () => {
+  const s = await window.storage.get(SAVE_KEY);
+  if (s && s.value) document.getElementById('loadBtn').style.display = 'block';
+})();
+
+requestAnimationFrame(update);
+
+// debug accessor
+window._rb = { P, npcs, state };
+})();
+</script>
+</body>
+</html>
