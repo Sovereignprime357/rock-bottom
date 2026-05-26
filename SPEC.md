@@ -53,26 +53,70 @@ The game is also a VibeKoded portfolio piece — a demonstration of building an 
 
 ---
 
-## COOKING (v12) — the finisher loop
+## COOKING (v13 wave 4) — the heat minigame
 
 At THE BLOCK, with `P.supplies > 0`, the milk crate becomes a kitchen. The cycle:
-steal copper → sell to Yuri → buy packets from Baggie Barb → cook at the crate → smoke or fence to Stripe → repeat.
+steal copper → sell to Yuri → buy packets from Baggie Barb → cook at the crate via THE HEAT minigame → smoke or fence to Stripe → repeat.
 
-| Mode | Packets | Brain mod | 2-rock chance | Burn chance |
-|------|---------|-----------|---------------|-------------|
-| low and slow | 1 | yes | 0.08 + bb*0.15 | 0.10 - bb*0.08 |
-| fast cook | 3 | yes | 0.35 + bb*0.20 | 0.30 - bb*0.10 |
-| shaky hands special | 1 (needs shakes ≥ 60) | ignored | 0.55 | 0.45 |
-| cook all | 5+ | yes | 0.15 + bb*0.18 | 0.18 - bb*0.10 |
+### Cook modes (5)
 
-`bb = clamp((brain-30)/70, -0.4, 0.6)`, minus 0.25 if rocked-up (shaky scientist). Each cook costs 1-6 brain and adds 2*n shakes (except shakes special). Post-roll soap chance is weighted by packet source: clean (Barb) = 12%, dirty (Pinky's house cut) = 25%. The rate for a batch is `(dirtyUsed*0.25 + cleanUsed*0.12) / n`; dirty packets are consumed first. Cooking 3+ at once has a 35% wanted+1 (the smell).
+| Mode | Packets | Fill ms | Sweet center | Spread | Base width | Burn zone |
+|------|---------|---------|--------------|--------|------------|-----------|
+| low and slow | 1 | 4000 | 0.55 | ±0.05 | 0.22 | 0.08 |
+| fast cook | 3 | 2400 | 0.70 | ±0.05 | 0.16 | 0.08 |
+| shaky hands special | 1 (needs shakes ≥ 60) | 1800 | 0.78 | ±0.07 | 0.10 | 0.08 |
+| cook all | 5+ | 3200 | 0.65 | ±0.05 | 0.13 | 0.08 |
+| propane (unlock) | 1 | 1200 | 0.65 | ±0.05 | 0.08 | 0.15 |
 
-Stripe buys rocks at $6 each (1) or bulk (3+); resells them at his $8.
+`width = clamp(baseWidth + bb*0.10, 0.05, 0.40); if (rockedUp) width -= 0.06;`
+`bb = clamp((brain-30)/70, -0.4, 0.6)`.
+
+### Outcomes from the heat (distance d from sweet-spot center, half-width halfW)
+
+| Outcome | Trigger | Modifiers |
+|---------|---------|-----------|
+| PERFECT | d ≤ halfW | yield × 1.15, soap rate × 0.70, unlock THE_HEAT_HELD |
+| OK | d ≤ halfW × 1.8 | baseline math |
+| BAD | d ≤ halfW × 3.0 | yield × 0.60 (floor), soap rate × 1.50 |
+| BURN | needle in top burnZone OR no input within 1s | 0 rocks, brain -10, wanted +1, 2s smoke overlay, unlock CONTROLLED_BURN |
+| UNDERCOOK | needle < 0.20 OR pre-emptive lock < 0.25 | 0 rocks, supplies consumed flat |
+| SOAP-ROCK | far miss (d > halfW × 3.0) and not burn/cold, 15% chance | yield × 0.5 (floor), all rocks tagged as soap (P.soapRocks); other 85% of far-miss → BAD |
+
+### Yield base math (per packet, preserved from v12/v13)
+
+| Mode | 2-rock chance | Burn chance |
+|------|---------------|-------------|
+| slow | 0.08 + bb*0.15 | 0.10 - bb*0.08 |
+| fast | 0.35 + bb*0.20 | 0.30 - bb*0.10 |
+| shakes | 0.55 | 0.45 (ignores brain) |
+| all  | 0.15 + bb*0.18 | 0.18 - bb*0.10 |
+| propane | 0.30 + bb*0.20 | 0.20 - bb*0.10, ×1.30 yield bonus |
+
+Each cook costs 1-6 brain and adds 2*n shakes (except shakes special). Post-roll soap rate is `(dirtyUsed*0.25 + cleanUsed*0.12) / n * soapAdjust`; dirty (Pinky's house cut) consumed first. Cooking 3+ at once has a 35% wanted+1 (the smell), but only on OK or PERFECT (BAD/BURN already bump wanted).
+
+ESC during the minigame consumes supplies and gives 0 rocks. Tap/click on canvas or press SPACE to lock the needle.
+
+Stripe buys real rocks at $6 each (1) or bulk (3+); resells at his $8. Stripe does not fence soap rocks (they live on P.soapRocks, parallel to P.rocks).
+
+### Soap rocks
+
+`P.soapRocks` is a parallel FIFO counter to `P.rocks`. The HUD `🪨` count shows the total of both — soap is indistinguishable in inventory. When smoking, soap rocks burn first: they consume the smoke action without granting rocked-up, shake relief, brain hit, or cred. They unlock SOAP_TONGUE and trigger the canonical line: "you smoke it. it's soap. you knew. you smoked it anyway."
+
+### Propane torch (4th mode unlock)
+
+`EQUIPMENT.propane_torch` is a `slot:'tool'` item (new tool slot added to `P.equip`). Acquisition:
+- 25% drop on a night-time kill of BRUTUS or BRUTUS THE OLDER. Uses the existing cash-pile pickup pattern with `tool:'propane_torch'` field; the pickup loop branches on that field and equips the torch directly. Always-visible pickup (a brass body + pilot flame sprite).
+- Pete's pawn shop stocks one once player reaches rank ≥ 3 (`state.flags.peteTorchStocked` flips on dialogue open). Sells for $80. One and done (`state.flags.peteTorchSold`).
+
+Owning the torch (`P.equip.tool === 'propane_torch'` via `hasPropane()`) reveals the 5th cookBatchMenu option.
 
 **Invariants:**
 - Cooking only at THE BLOCK (matches the smoke invariant)
 - The crash always follows the high (cooking does not bypass)
 - Supplies are cook-only; no street value
+- The bb brain modulation continues to apply on yield/burn rolls under the heat minigame
+- Soap rocks never trigger rocked-up — they are silent in the smoke
+- Pete's torch is one-time per save
 
 ---
 

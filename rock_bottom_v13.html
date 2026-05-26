@@ -376,6 +376,9 @@ const EQUIPMENT = {
   // recognize the bird-blessing and shave 10% off the base price. charisma is a hidden field
   // summed across equipment in applyEquipStats.
   pigeon_crown:  { slot:'hat',   n:"the pigeon king's crown (cursed)", speed: 0, cred: -3, hp: 0, charisma: 1 },
+  // v13 wave 4 — propane torch unlocks the 4th cook mode. fits in the new 'tool' slot.
+  // no movement / hp / cred mods — it's a kitchen tool, not a fit.
+  propane_torch: { slot:'tool',  n:"a propane torch (dented)",        speed: 0, cred: 0,  hp: 0 },
 };
 
 // ---------- v13 wave 3: discoverability + vendor index ----------
@@ -444,6 +447,10 @@ const ACHIEVEMENTS = {
   exact_change:         { name:"EXACT CHANGE",         flav:"deliver stripe's package. don't open it." },
   what_s_in_the_box:    { name:"WHAT'S IN THE BOX",    flav:"open stripe's package. find out." },
   seven_across:         { name:"SEVEN ACROSS",         flav:"return barb's missing crossword. fourteen across was BLAME." },
+  // v13 wave 4 — the heat minigame achievements
+  the_heat_held:        { name:"THE HEAT HELD",        flav:"perfect a cook. the needle was steady. so were you." },
+  soap_tongue:          { name:"SOAP TONGUE",          flav:"smoke a soap rock. you knew. you knew." },
+  controlled_burn:      { name:"CONTROLLED BURN",      flav:"burn a batch and still walk away. the smell stays." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -1243,6 +1250,7 @@ async function saveGame() {
         equip: P.equip, cartMounted: P.cartMounted,
         weapon: P.weapon, brutusDefeated: P.brutusDefeated, stripeLoyalty: P.stripeLoyalty,
         charisma: P.charisma||0,
+        soapRocks: P.soapRocks||0,
       },
       npcsKilled: npcs.filter(n=>n.dead).map(n=>n.id),
       cashPilesCollected: Array.from(state.cashPilesCollected),
@@ -1273,7 +1281,8 @@ async function loadGame() {
     P.dirtySupplies = Math.min(P.dirtySupplies || 0, P.supplies);
     P.lifetime.rocksCooked = P.lifetime.rocksCooked || 0;
     P.lifetime.rocksFenced = P.lifetime.rocksFenced || 0;
-    P.equip = P.equip || { shoes:null, hat:null, coat:null };
+    P.equip = Object.assign({ shoes:null, hat:null, coat:null, tool:null }, P.equip || {});
+    P.soapRocks = Math.max(0, P.soapRocks||0);
     (sv.npcsKilled||[]).forEach(id => { const n = npcs.find(x=>x.id===id); if (n) n.dead = true; });
     state.cashPilesCollected = new Set(sv.cashPilesCollected || []);
     state.achievements = new Set(sv.achievements || []);
@@ -1291,6 +1300,8 @@ async function loadGame() {
     state.flags = Object.assign({
       introDone: true, momIntroFired: true, hasStripePackage: false,
       stripeBetrayed: false, daveHasCrossword: false, hasCrossword: false, crownSpotIdx: -1,
+      // v13 wave 4 — pete keeps the torch stocked once rank>=3. peteTorchSold flips on first buy.
+      peteTorchStocked: false, peteTorchSold: false,
     }, sv.flags || {});
     state.crownPickup = sv.crownPickup || null;
     P.charisma = sv.player && sv.player.charisma || 0;
@@ -1317,13 +1328,16 @@ const P = {
   inventory: [], lifetime: { rocksSmoked: 0, copsKilled: 0, arrests: 0, dayCount: 0, rocksCooked: 0, rocksFenced: 0 },
   tonyOffenses: 0,
   cartMounted: false,
-  equip: { shoes:null, hat:null, coat:null },
+  equip: { shoes:null, hat:null, coat:null, tool:null },
   weapon: 'fists',
   brutusDefeated: 0,    // counter for Brutus Older trigger
   stripeLoyalty: 0,     // counter for co-op ending
   // v13 wave 3 — charisma is summed from equipment (see applyEquipStats).
   // 1+ trips the vendor 10% discount via vendorPrice().
   charisma: 0,
+  // v13 wave 4 — soap rocks tracked as a parallel FIFO counter to P.rocks.
+  // smoked first; produce no rocked-up effect; trigger SOAP_TONGUE.
+  soapRocks: 0,
 };
 
 // Grant achievement helper
@@ -1387,6 +1401,9 @@ const state = {
   hitPause: 0,
   carEngineT: 0,
   conductorWaitT: 0,
+  // v13 wave 4 — heat minigame state. heat=null when not active.
+  heat: null,
+  smokeT: 0,
   quests: {
     // v13 wave 3 — "the day you arrived" intro chain (auto-given on new save, suppresses normal world until done)
     intro_remember:{ title: "I DON'T REMEMBER",        done: false, intro: true, flav: 'find ten dollars somewhere on the block.' },
@@ -1428,6 +1445,9 @@ const state = {
     daveHasCrossword: false,
     hasCrossword: false,
     crownSpotIdx: -1,
+    // v13 wave 4 — propane torch acquisition tracking
+    peteTorchStocked: false,    // flipped true once rank>=3 (pete stocks one)
+    peteTorchSold: false,       // flipped true on the buy (one and done)
   },
   crownPickup: null,            // {x, y, collected} — only present while pigeon_crown quest active
 };
@@ -1484,7 +1504,7 @@ function renderInventory() {
   panelEl.innerHTML = `
     <h2>INVENTORY · ${r.name.toUpperCase()}</h2>
     <div class="row"><span>cash</span><span>$${P.cash}</span></div>
-    <div class="row"><span>rocks</span><span>🪨 ${P.rocks}</span></div>
+    <div class="row"><span>rocks</span><span>🪨 ${(P.rocks||0) + (P.soapRocks||0)}</span></div>
     <div class="row"><span>pure copper</span><span>🪙 ${P.copper}</span></div>
     <div class="row"><span>raw supplies</span><span>🧪 ${P.supplies||0}${(P.dirtySupplies||0)>0 ? ` (${P.dirtySupplies} house cut)` : ''}</span></div>
     <div class="row"><span>hp</span><span>${Math.round(P.hp)} / ${P.maxHp}</span></div>
@@ -1498,6 +1518,7 @@ function renderInventory() {
     <div class="row"><span>hat</span><span>${slotLabel('hat')}</span></div>
     <div class="row"><span>coat</span><span>${slotLabel('coat')}</span></div>
     <div class="row"><span>shoes</span><span>${slotLabel('shoes')}</span></div>
+    <div class="row"><span>tool</span><span>${slotLabel('tool')}</span></div>
     <div class="sec">ITEMS</div>
     ${P.inventory.length ? P.inventory.map(i=>`<div class="row"><span>${i.n}</span><span>x${i.q||1}</span></div>`).join('') : '<div class="row"><span>nothing</span><span>(yet)</span></div>'}
     <div class="sec">LIFETIME</div>
@@ -1959,7 +1980,12 @@ function yuriDialogue() {
 }
 
 function peteDialogue() {
-  dialogue('PAWN SHOP PETE', "one second. eating.\npete is eating a hot pocket. behind glass.", [
+  // v13 wave 4 — once player hits rank>=3, pete stocks the propane torch. one and done.
+  if (P.rank >= 3 && state.flags && !state.flags.peteTorchStocked) {
+    state.flags.peteTorchStocked = true;
+  }
+  const torchAvail = state.flags && state.flags.peteTorchStocked && !state.flags.peteTorchSold && !hasPropane();
+  const opts = [
     { label: 'sell 1 PURE COPPER. $15.', disabled: P.copper<1, action: () => {
       P.copper--; P.cash += 15; state.counters.peteSold = (state.counters.peteSold||0)+1;
       toast("pete weighs it for 11 minutes.\n- 1 pure copper\n+ $15"); audio.coin(); saveGame();
@@ -1973,8 +1999,29 @@ function peteDialogue() {
       P.cash += 20; state.counters.peteSold = (state.counters.peteSold||0)+1;
       toast('+ $20\n(do not ask where it came from.)'); audio.coin(); saveGame();
     }},
-    { label: 'leave.', action: () => {} },
-  ]);
+  ];
+  if (torchAvail) {
+    opts.push({
+      label: P.cash >= 80 ? "buy the propane torch. $80." : "the propane torch is $80. you don't have it.",
+      disabled: P.cash < 80,
+      action: () => {
+        P.cash -= 80;
+        P.equip.tool = 'propane_torch';
+        applyEquipStats();
+        state.flags.peteTorchSold = true;
+        audio.coin();
+        toast("- $80\n+ a propane torch (dented)\npete does not explain where he got it.\n(equipped.)", 4200);
+        feedPost("bought a torch off pete. pete is eating.", '@crackheadcent');
+        saveGame();
+      }
+    });
+  } else if (P.rank >= 3 && state.flags && state.flags.peteTorchSold) {
+    opts.push({ label: "ask about the torch again.", action: () => {
+      toast("'sold the one.\ngo find your own.'\npete is still eating.", 2400);
+    }});
+  }
+  opts.push({ label: 'leave.', action: () => {} });
+  dialogue('PAWN SHOP PETE', "one second. eating.\npete is eating a hot pocket. behind glass.", opts);
 }
 
 function lurchDialogue(n) {
@@ -2574,48 +2621,273 @@ function mathematicianDialogue() {
 }
 
 // ---------- COOK (the finisher) ----------
+// v13 wave 4: cook is now a real-time canvas skill check called THE HEAT.
+// cookBatchMenu picks the mode + packet count, startHeatMini runs the bar,
+// resolveHeatOutcome reads needle vs sweet spot, applyCookOutcome does the math.
+
+// per-mode heat configuration. fillMs = full-bar travel time; sweetCenter = base sweet-spot center
+// (fraction of bar); sweetSpread = ± random jitter; baseWidth = sweet-spot width before brain mod;
+// burnZone = top fraction of bar that auto-burns.
+const COOK_MODES = {
+  slow:    { fillMs: 4000, sweetCenter: 0.55, sweetSpread: 0.05, baseWidth: 0.22, burnZone: 0.08 },
+  fast:    { fillMs: 2400, sweetCenter: 0.70, sweetSpread: 0.05, baseWidth: 0.16, burnZone: 0.08 },
+  shakes:  { fillMs: 1800, sweetCenter: 0.78, sweetSpread: 0.07, baseWidth: 0.10, burnZone: 0.08 },
+  all:     { fillMs: 3200, sweetCenter: 0.65, sweetSpread: 0.05, baseWidth: 0.13, burnZone: 0.08 },
+  propane: { fillMs: 1200, sweetCenter: 0.65, sweetSpread: 0.05, baseWidth: 0.08, burnZone: 0.15 },
+};
+
+function hasPropane() { return P.equip && P.equip.tool === 'propane_torch'; }
+
 function cookBatchMenu() {
   const have = P.supplies || 0;
   const dirty = Math.min(P.dirtySupplies||0, have);
   const dirtyLine = dirty > 0 ? `\n${dirty} of them are pinky's house cut. (dirty first.)` : '';
-  dialogue('THE CRATE (KITCHEN)', `you have ${have} packet${have===1?'':'s'}.${dirtyLine}\nthe crate is a kitchen now.\nbrain: ${Math.round(P.brain)} · shakes: ${Math.round(P.shakes)}.`, [
-    { label: have>=1 ? "low and slow. (1 packet, safe.)" : "you have no packets.", disabled: have<1, action: () => doCook(1, 'slow') },
-    { label: have>=3 ? "fast cook. (3 packets, risky.)" : "fast cook (need 3 packets.)", disabled: have<3, action: () => doCook(3, 'fast') },
-    { label: have>=1 && P.shakes >= 60 ? "shaky hands special. (1 packet, all-or-nothing.)" : (P.shakes<60 ? "shakes too steady for the special." : "need a packet."), disabled: have<1 || P.shakes<60, action: () => doCook(1, 'shakes') },
-    { label: have>=5 ? `cook all (${have} packets).` : `cook all (need 5+ packets.)`, disabled: have<5, action: () => doCook(have, 'all') },
-    { label: "leave.", action: () => {} },
-  ]);
+  // predictor — 1 short flavor line tailored to current brain/rocked/dirty state.
+  const brain = P.brain;
+  const rocked = P.rockedT > 0;
+  const predictor = pickHeatPredictor(brain, rocked, dirty);
+  const torch = hasPropane();
+  const opts = [
+    { label: have>=1 ? "low and slow. (1 packet, safe.)" : "you have no packets.", disabled: have<1, action: () => startHeatMini(1, 'slow') },
+    { label: have>=3 ? "fast cook. (3 packets, risky.)" : "fast cook (need 3 packets.)", disabled: have<3, action: () => startHeatMini(3, 'fast') },
+    { label: have>=1 && P.shakes >= 60 ? "shaky hands special. (1 packet, all-or-nothing.)" : (P.shakes<60 ? "shakes too steady for the special." : "need a packet."), disabled: have<1 || P.shakes<60, action: () => startHeatMini(1, 'shakes') },
+    { label: have>=5 ? `cook all (${have} packets).` : `cook all (need 5+ packets.)`, disabled: have<5, action: () => startHeatMini(have, 'all') },
+  ];
+  if (torch) {
+    opts.push({
+      label: have>=1 ? "propane. (1 packet. tight bar. big yield.)" : "propane. (need a packet.)",
+      disabled: have<1,
+      action: () => startHeatMini(1, 'propane')
+    });
+  }
+  opts.push({ label: "leave.", action: () => {} });
+  const torchLine = torch
+    ? `\npropane. you bought it. or you found it. it doesn't care.`
+    : '';
+  dialogue('THE CRATE (KITCHEN)',
+    `you have ${have} packet${have===1?'':'s'}.${dirtyLine}\nthe crate is a kitchen now.\nbrain: ${Math.round(P.brain)} · shakes: ${Math.round(P.shakes)}.\n${predictor}${torchLine}`,
+    opts);
 }
 
-function doCook(n, mode) {
-  // brainBoost: a clearer head cooks better. rocked-up cooks WORSE. comedy.
+function pickHeatPredictor(brain, rocked, dirty) {
+  // up to 6 contextual flavor lines, never more than one
+  if (rocked && dirty > 0)                return "rocked + dirty → good luck.";
+  if (rocked)                             return "rocked → hands aren't yours. the bar shrinks.";
+  if (brain >= 70 && dirty === 0)         return "sober + clean → wider sweet spot.";
+  if (brain >= 70 && dirty > 0)           return "sober. but pinky in the bag. the cut argues with the math.";
+  if (brain <= 30 && dirty > 0)           return "zonked + dirty → the smoke writes its own ending.";
+  if (brain <= 30)                        return "zonked → narrow window. read the needle.";
+  if (dirty > 0)                          return "dirty packets first. soap is louder.";
+  return "the heat is the heat. the needle is the needle.";
+}
+
+// ---------- THE HEAT minigame ----------
+function startHeatMini(n, mode) {
+  // close any active dialogue first (cookBatchMenu opened one)
+  closeDialogue();
+  const cfg = COOK_MODES[mode] || COOK_MODES.slow;
+  // sweet-spot width math: base + brain mod, rocked penalty, floor 0.05 ceil 0.40
   let bb = clamp((P.brain - 30) / 70, -0.4, 0.6);
-  if (P.rockedT > 0) bb -= 0.25;          // rocked-up = shaky scientist
-  // v13 wave 2 — dirty packets (pinky's house cut) consumed first, harsher soap rate
+  let width = cfg.baseWidth + bb * 0.10;
+  if (P.rockedT > 0) width -= 0.06;
+  width = clamp(width, 0.05, 0.40);
+  // sweet-spot center: base ± random spread, clamped so it never sits on the edges
+  const center = clamp(cfg.sweetCenter + (Math.random()*2 - 1) * cfg.sweetSpread, 0.10, 0.95);
+  state.heat = {
+    active: true,
+    mode, n,
+    fillMs: cfg.fillMs,
+    burnZone: cfg.burnZone,
+    sweetCenter: center,
+    sweetHalf: width / 2,
+    progress: 0,           // current needle position 0..1
+    t: 0,                  // elapsed ms
+    phase: 'fill',         // fill -> hold -> resolve
+    lockedAt: null,
+    outcome: null,
+    holdT: 0,              // 600ms reveal hold after lock
+    idleAfterFill: 1000,   // 1s grace after bar fully fills, then auto-burn
+  };
+  state.mode = 'cookmini';
+  // brief chiptune cue so the player knows the minigame started
+  if (audio && audio.dialogue) audio.dialogue();
+}
+
+function updateHeatMini(dt) {
+  const h = state.heat;
+  if (!h || !h.active) return;
+  if (h.phase === 'fill') {
+    h.t += dt;
+    h.progress = Math.min(1, h.t / h.fillMs);
+    if (h.progress >= 1) {
+      h.phase = 'idle';   // bar is full; auto-burn after idleAfterFill ms
+    }
+  } else if (h.phase === 'idle') {
+    h.idleAfterFill -= dt;
+    if (h.idleAfterFill <= 0) {
+      // no input — auto-burn at the top of the bar
+      h.lockedAt = 1.0;
+      lockHeatMini();
+    }
+  } else if (h.phase === 'hold') {
+    h.holdT -= dt;
+    if (h.holdT <= 0) finalizeHeatMini();
+  }
+}
+
+function lockHeatMini() {
+  const h = state.heat;
+  if (!h || !h.active || (h.phase !== 'fill' && h.phase !== 'idle')) return;
+  if (h.lockedAt === null) h.lockedAt = clamp(h.progress, 0, 1);
+  h.phase = 'hold';
+  h.holdT = 600;
+  h.outcome = resolveHeatOutcome(h);
+  // ledger cue per outcome — keep them short, no melodies
+  if (h.outcome === 'perfect') audio.coin();
+  else if (h.outcome === 'ok') audio.pickup();
+  else if (h.outcome === 'burn') audio.hurt();
+  else audio.glassBreak();
+}
+
+function bailHeatMini() {
+  const h = state.heat;
+  if (!h || !h.active) return;
+  // supplies still consumed — you walked away
+  const n = h.n;
+  const dirtyUsed = Math.min(n, P.dirtySupplies||0);
+  P.supplies = Math.max(0, (P.supplies||0) - n);
+  P.dirtySupplies = Math.max(0, (P.dirtySupplies||0) - dirtyUsed);
+  state.heat = null;
+  state.mode = 'playing';
+  toast("you walked away.\nthe supplies don't walk back.", 2800);
+  feedPost("walked away from a half-cooked batch. the crate is patient.", '@blocklog');
+  saveGame();
+}
+
+function resolveHeatOutcome(h) {
+  const x = h.lockedAt;
+  const center = h.sweetCenter;
+  const halfW = h.sweetHalf;
+  const d = Math.abs(x - center);
+  // pre-emptive lock (under 25%) = undercook regardless of distance
+  if (x < 0.25 && d > halfW) return 'undercook';
+  // burn-black: top of the bar (mode-dependent)
+  if (x >= 1.0 - h.burnZone) return 'burn';
+  if (d <= halfW)            return 'perfect';
+  if (d <= halfW * 1.8)      return 'ok';
+  if (d <= halfW * 3.0)      return 'bad';
+  // far miss — too cold = undercook, otherwise small chance of soap-rock, else bad
+  if (x < 0.20)              return 'undercook';
+  if (Math.random() < 0.15)  return 'soaprock';
+  return 'bad';
+}
+
+function finalizeHeatMini() {
+  const h = state.heat;
+  if (!h) return;
+  state.heat = null;
+  state.mode = 'playing';
+  applyCookOutcome(h.n, h.mode, h.outcome);
+}
+
+// preserve the doCook math contract — sweet-spot outcome modifies yield and soap rate,
+// but the bb-brain modulation and dirty-packet weighting still apply on top.
+function applyCookOutcome(n, mode, outcome) {
+  // bb math — preserved from v12/v13.
+  let bb = clamp((P.brain - 30) / 70, -0.4, 0.6);
+  if (P.rockedT > 0) bb -= 0.25;
   const dirtyUsed = Math.min(n, P.dirtySupplies||0);
   const cleanUsed = n - dirtyUsed;
+
+  // BURN: supplies consumed, 0 rocks, smoke fills the screen, wanted+1, brain -10.
+  if (outcome === 'burn') {
+    P.supplies = Math.max(0, (P.supplies||0) - n);
+    P.dirtySupplies = Math.max(0, (P.dirtySupplies||0) - dirtyUsed);
+    P.brain = Math.max(0, P.brain - 10);
+    P.wanted = Math.min(3, P.wanted + 1);
+    state.smokeT = 2000;
+    audio.hurt(); audio.glassBreak();
+    toast("the smoke is in the floor.\nit is in your hair.\nit will be in your hair on tuesday.", 4200);
+    if (Math.random() < 0.5) feedPost("someone burnt the block. it's bad out here.", '@crackheadcent');
+    // CONTROLLED_BURN — survive a burn (player is technically still upright)
+    unlockAchievement('controlled_burn');
+    if (n >= 3) unlockAchievement('arson_of_nothing');
+    saveGame();
+    return;
+  }
+  // UNDERCOOK: supplies consumed, 0 rocks. flat.
+  if (outcome === 'undercook') {
+    P.supplies = Math.max(0, (P.supplies||0) - n);
+    P.dirtySupplies = Math.max(0, (P.dirtySupplies||0) - dirtyUsed);
+    audio.hurt();
+    toast("it never set.\nyou waited.\nnothing crystallized.\nyou sit. you don't move.", 4200);
+    if (Math.random() < 0.5) feedPost("nothing happened today. it counts.", '@blocklog');
+    saveGame();
+    return;
+  }
+  // SOAP-ROCK: supplies consumed, yield = BAD-cook yield * 0.5, but rocks tagged as soap.
+  if (outcome === 'soaprock') {
+    // base bad math first
+    let rocks = 0, burnt = 0;
+    for (let i=0;i<n;i++) {
+      let dbl, brn;
+      if (mode === 'slow')         { dbl = 0.08 + bb*0.15; brn = 0.10 - bb*0.08; }
+      else if (mode === 'fast')    { dbl = 0.35 + bb*0.20; brn = 0.30 - bb*0.10; }
+      else if (mode === 'shakes')  { dbl = 0.55;           brn = 0.45; }
+      else if (mode === 'propane') { dbl = 0.30 + bb*0.20; brn = 0.20 - bb*0.10; }
+      else                         { dbl = 0.15 + bb*0.18; brn = 0.18 - bb*0.10; }
+      dbl = clamp(dbl, 0, 0.7); brn = clamp(brn, 0.02, 0.5);
+      const r = Math.random();
+      if (r < brn) burnt++;
+      else if (r < brn + dbl) rocks += 2;
+      else rocks++;
+    }
+    rocks = Math.floor(rocks * 0.5);
+    P.supplies = Math.max(0, (P.supplies||0) - n);
+    P.dirtySupplies = Math.max(0, (P.dirtySupplies||0) - dirtyUsed);
+    P.soapRocks = (P.soapRocks||0) + rocks;
+    P.brain = Math.max(0, P.brain - Math.min(6, 1 + n));
+    P.shakes = Math.min(100, P.shakes + 2 * n);
+    audio.hurt();
+    toast(`· batch ·\n- ${n} packet${n===1?'':'s'}\n+ ${rocks} 'rock${rocks===1?'':'s'}'\nit looks right. it isn't.`, 4200);
+    if (Math.random() < 0.5) feedPost("cut is talking.", '@hardcandy');
+    saveGame();
+    return;
+  }
+
+  // PERFECT / OK / BAD — the real cook math, with outcome multipliers.
+  const yieldMult  = outcome === 'perfect' ? 1.15 : outcome === 'bad' ? 0.60 : 1.00;
+  const soapAdjust = outcome === 'perfect' ? 0.70 : outcome === 'bad' ? 1.50 : 1.00;
+
   let rocks = 0, burnt = 0, soap = 0;
   for (let i=0;i<n;i++) {
     let dbl, brn;
-    if (mode === 'slow')        { dbl = 0.08 + bb*0.15; brn = 0.10 - bb*0.08; }
-    else if (mode === 'fast')   { dbl = 0.35 + bb*0.20; brn = 0.30 - bb*0.10; }
-    else if (mode === 'shakes') { dbl = 0.55;           brn = 0.45; }   // ignores brain
-    else                        { dbl = 0.15 + bb*0.18; brn = 0.18 - bb*0.10; }
+    if (mode === 'slow')         { dbl = 0.08 + bb*0.15; brn = 0.10 - bb*0.08; }
+    else if (mode === 'fast')    { dbl = 0.35 + bb*0.20; brn = 0.30 - bb*0.10; }
+    else if (mode === 'shakes')  { dbl = 0.55;           brn = 0.45; }   // ignores brain
+    else if (mode === 'propane') { dbl = 0.30 + bb*0.20; brn = 0.20 - bb*0.10; }   // tight, hot
+    else                         { dbl = 0.15 + bb*0.18; brn = 0.18 - bb*0.10; }
     dbl = clamp(dbl, 0, 0.7); brn = clamp(brn, 0.02, 0.5);
     const r = Math.random();
     if (r < brn) burnt++;
     else if (r < brn + dbl) rocks += 2;
     else rocks++;
   }
-  // post-roll soap: barb's clean packets land soap at 12%, pinky's house cut at 25%.
-  // weighted average across the batch — preserves barb's flow exactly when no dirty packets used.
-  const soapRate = n > 0 ? (dirtyUsed * 0.25 + cleanUsed * 0.12) / n : 0;
+
+  // apply per-mode yield bonus (propane = 1.30 × base) then per-outcome multiplier
+  if (mode === 'propane') rocks = Math.floor(rocks * 1.30);
+  rocks = Math.max(0, Math.floor(rocks * yieldMult));
+
+  // soap rate: weighted average, adjusted by outcome
+  const baseRate = n > 0 ? (dirtyUsed * 0.25 + cleanUsed * 0.12) / n : 0;
+  const soapRate = clamp(baseRate * soapAdjust, 0, 1);
   if (mode !== 'shakes' && rocks > 0 && Math.random() < soapRate) { soap = 1; rocks--; }
+
   P.supplies = Math.max(0, (P.supplies||0) - n);
   P.dirtySupplies = Math.max(0, (P.dirtySupplies||0) - dirtyUsed);
   P.rocks += rocks;
   if (soap) P.inventory.push({id:'soap', n:'a small bar of soap (oops)', q:1});
-  P.brain = Math.max(0, P.brain - Math.min(6, 1 + n));       // fumes
+  P.brain = Math.max(0, P.brain - Math.min(6, 1 + n));
   P.shakes = Math.min(100, P.shakes + (mode==='shakes' ? 0 : 2 * n));
   P.lifetime.rocksCooked = (P.lifetime.rocksCooked||0) + rocks;
 
@@ -2623,32 +2895,160 @@ function doCook(n, mode) {
   if (burnt > 0) audio.hurt();
   audio.glassBreak();
 
-  // quest + achievement
   if (rocks > 0 && state.quests.finisher && !state.quests.finisher.done) {
     state.quests.finisher.done = true; questToast('THE FINISHER');
   }
   if ((P.lifetime.rocksCooked||0) >= 10) unlockAchievement('chef');
   if (burnt === n && n >= 3) unlockAchievement('arson_of_nothing');
+  if (outcome === 'perfect') unlockAchievement('the_heat_held');
 
   const lines = [`- ${n} packet${n===1?'':'s'}`];
   if (rocks > 0) lines.push(`+ ${rocks} rock${rocks===1?'':'s'}`);
   if (soap > 0)  lines.push(`+ 1 'rock' (it's soap. it happens.)`);
   if (burnt > 0) lines.push(`burnt ${burnt}.\nthe crate has a smell now.`);
 
-  let flav;
-  if (rocks === 0)             flav = "the smoke goes up.\nthe possum disapproves.\nfrom somewhere.";
-  else if (rocks >= n*2-1)     flav = "a clean batch.\nthe pipes sing in b flat.\nyou hear them. they hear you.";
-  else if (burnt > 0)          flav = "some of it cooked.\nsome of it is now wall.";
-  else                         flav = "you have rocks.\nthe rocks are yours.\nyou made them.";
-  toast(`· batch ·\n${lines.join('\n')}\n${flav}`, 4000);
-  feedPost(rocks>0 ? `cooked ${rocks} on the crate. the crate is a kitchen.` : `cooked nothing. burnt the crate.`, '@crackheadcent');
+  let header;
+  if (outcome === 'perfect') header = "the heat held.";
+  else if (outcome === 'ok') header = "close enough. the rock is the rock.";
+  else                       header = "the smell is wrong. you did this wrong.";
 
-  // smell: cooking in bulk attracts attention
-  if (n >= 3 && Math.random() < 0.35) {
+  toast(`· batch ·\n${header}\n${lines.join('\n')}`, 4200);
+
+  // feed broadcasts — gated to ~50% per outcome so they don't spam
+  if (Math.random() < 0.5) {
+    if (outcome === 'perfect')   feedPost("the chef. quiet today. respect.", '@hardcandy');
+    else if (outcome === 'ok')   feedPost(`cooked ${rocks} on the crate. the crate is a kitchen.`, '@crackheadcent');
+    else                         feedPost("the smell is wrong on the block.", '@blocklog');
+  }
+
+  // smell: cooking in bulk attracts attention — only on OK / PERFECT (bad/burn handle their own bumps)
+  if (n >= 3 && (outcome === 'perfect' || outcome === 'ok') && Math.random() < 0.35) {
     P.wanted = Math.min(3, P.wanted + 1);
     setTimeout(()=>toast("a neighbor opens a window.\nthe neighbor closes the window.\nwanted +1.", 2800), 2200);
   }
   saveGame();
+}
+
+// ---------- HEAT minigame render ----------
+function drawHeatMini() {
+  const h = state.heat;
+  if (!h || !h.active) return;
+  // panel — same language as dialogue overlay: dark slab, dirty cream text
+  const PW = 480, PH = 240;
+  const px = (W - PW) / 2, py = (H - PH) / 2;
+  ctx.fillStyle = 'rgba(0,0,0,.78)';
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#1a1810';
+  ctx.fillRect(px, py, PW, PH);
+  ctx.strokeStyle = '#e8c040';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(px+1, py+1, PW-2, PH-2);
+
+  // title
+  ctx.fillStyle = '#e8c040';
+  ctx.font = 'bold 16px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('the heat.', W/2, py + 28);
+  // subtitle
+  const cleanCount = Math.max(0, h.n - Math.min(h.n, P.dirtySupplies||0));
+  const dirtyCount = h.n - cleanCount;
+  const modeLabel = ({slow:'low and slow', fast:'fast cook', shakes:'shaky special', all:'cook all', propane:'propane'})[h.mode] || h.mode;
+  const subtitle = `${modeLabel} — ${h.n} packet${h.n===1?'':'s'} — clean × ${cleanCount} + dirty × ${dirtyCount}`;
+  ctx.fillStyle = '#d4c896';
+  ctx.font = '11px Courier New';
+  ctx.fillText(subtitle, W/2, py + 48);
+
+  // the bar
+  const BW = 400, BH = 28;
+  const bx = (W - BW) / 2, by = py + 90;
+  // gradient: blue → green → yellow → red → black
+  const grad = ctx.createLinearGradient(bx, 0, bx + BW, 0);
+  grad.addColorStop(0.00, '#2848a0');
+  grad.addColorStop(0.30, '#4a8830');
+  grad.addColorStop(0.55, '#d4b820');
+  grad.addColorStop(0.82, '#c84020');
+  grad.addColorStop(0.96, '#1a0a08');
+  grad.addColorStop(1.00, '#000');
+  ctx.fillStyle = grad;
+  ctx.fillRect(bx, by, BW, BH);
+  // burn-zone marker (thin red bracket at top of bar)
+  const bzX = bx + BW * (1 - h.burnZone);
+  ctx.fillStyle = 'rgba(160,40,40,.4)';
+  ctx.fillRect(bzX, by, BW - (bzX - bx), BH);
+
+  // sweet-spot region (raised + white tick above)
+  const sx1 = bx + BW * (h.sweetCenter - h.sweetHalf);
+  const sx2 = bx + BW * (h.sweetCenter + h.sweetHalf);
+  ctx.fillStyle = 'rgba(212,200,150,.18)';
+  ctx.fillRect(sx1, by - 4, sx2 - sx1, BH + 8);
+  ctx.strokeStyle = '#d4c896';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(sx1, by - 4, sx2 - sx1, BH + 8);
+  // tick mark
+  ctx.fillStyle = '#d4c896';
+  ctx.fillRect(bx + BW * h.sweetCenter - 1, by - 10, 2, 6);
+
+  // bar border
+  ctx.strokeStyle = '#604020';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(bx, by, BW, BH);
+
+  // needle
+  const needleX = bx + BW * h.progress;
+  ctx.fillStyle = '#d4c896';
+  ctx.fillRect(needleX - 1, by - 6, 2, BH + 12);
+  // locked-in indicator
+  if (h.lockedAt !== null) {
+    const lx = bx + BW * h.lockedAt;
+    ctx.fillStyle = '#e8c040';
+    ctx.fillRect(lx - 2, by - 8, 4, BH + 16);
+  }
+
+  // helper line
+  ctx.fillStyle = '#776';
+  ctx.font = '10px Courier New';
+  ctx.fillText(
+    h.phase === 'fill' ? 'space / tap — lock the heat. esc — walk away.' :
+    h.phase === 'idle' ? "you're letting it burn. tap to save it." :
+    h.outcome ? '· ' + heatOutcomeLabel(h.outcome) + ' ·' : '',
+    W/2, by + BH + 28);
+
+  // reveal phase — show outcome label larger
+  if (h.phase === 'hold' && h.outcome) {
+    ctx.fillStyle = h.outcome === 'perfect' ? '#e8c040'
+                   : h.outcome === 'burn'    ? '#8a3a3a'
+                   : h.outcome === 'soaprock'? '#d488d4'
+                   : '#d4c896';
+    ctx.font = 'bold 18px Courier New';
+    ctx.fillText(heatOutcomeLabel(h.outcome).toUpperCase(), W/2, by + BH + 56);
+  }
+  ctx.textAlign = 'left';
+}
+
+function heatOutcomeLabel(o) {
+  return ({perfect:'perfect.', ok:'ok.', bad:'bad cook.', burn:'burnt.', undercook:'never set.', soaprock:'soap.'})[o] || o;
+}
+
+// smoke overlay — 2s after a burn
+function drawSmokeOverlay() {
+  if (!state.smokeT || state.smokeT <= 0) return;
+  const a = Math.min(1, state.smokeT / 2000);
+  // gray haze layered with darker blobs
+  ctx.fillStyle = `rgba(180,170,160,${a * 0.85})`;
+  ctx.fillRect(0, 0, W, H);
+  // a few wandering smudges
+  for (let i = 0; i < 6; i++) {
+    const t = performance.now() / 600 + i;
+    const x = ((Math.sin(t * 1.3 + i) * 0.5 + 0.5) * W);
+    const y = ((Math.cos(t * 0.9 + i) * 0.5 + 0.5) * H);
+    ctx.fillStyle = `rgba(60,52,44,${a * 0.6})`;
+    ctx.beginPath(); ctx.arc(x, y, 90 + (i%3)*20, 0, Math.PI*2); ctx.fill();
+  }
+  ctx.fillStyle = '#1a1810';
+  ctx.font = 'bold 14px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText("the smoke is in the floor.", W/2, H/2);
+  ctx.textAlign = 'left';
 }
 
 function aggroNpc(n) {
@@ -2813,6 +3213,16 @@ function onNpcDeath(n) {
       setTimeout(spawnBrutusOlder, 1500);
     }
   }
+  // v13 wave 4 — propane torch drops 25% on a night-time brutus kill (regular or older).
+  // uses the existing cash-pile pickup pattern, with a `tool` field that triggers equip-on-pickup.
+  if ((n.id === 'brutus' || n.id === 'brutus_older') && isNight() && !hasPropane() && Math.random() < 0.25) {
+    cashPiles.push({
+      id:'cp_torch_'+Math.random().toString(36).slice(2,6),
+      x: n.x + n.w/2, y: n.y + n.h/2 + 8,
+      amt: 0, tool: 'propane_torch', collected: false,
+    });
+    toast("something falls off his collar.\nit smells like a parking lot.", 2400);
+  }
   if (n.isCop) {
     P.cred += 10; P.wanted = Math.min(3, P.wanted+1); P.lifetime.copsKilled++;
     if (n.isBrendan) {
@@ -2960,7 +3370,11 @@ function update(now) {
     } else if (state.hitPause > 0) {
       // freeze frame — only decay timers
       state.hitPause -= dt;
+    } else if (state.mode === 'cookmini') {
+      updateHeatMini(dt);
     }
+    // smoke overlay countdown (post-burn, runs regardless of mode)
+    if (state.smokeT > 0) state.smokeT = Math.max(0, state.smokeT - dt);
     drawAll();
   } catch (err) {
     console.error('update error', err);
@@ -3214,6 +3628,18 @@ function updateWorld(dt) {
     const dx = (P.x+P.w/2) - c.x, dy = (P.y+P.h/2) - c.y;
     if (dx*dx + dy*dy < 14*14) {
       c.collected = true; state.cashPilesCollected.add(c.id);
+      // v13 wave 4 — propane torch pickup (a 'cash pile' variant tagged with tool)
+      if (c.tool === 'propane_torch') {
+        if (!hasPropane()) {
+          P.equip.tool = 'propane_torch';
+          applyEquipStats();
+          audio.pickup();
+          toast("+ a propane torch (dented)\n(equipped.)\nit doesn't care.", 3400);
+          feedPost("picked up a torch. found it. don't ask.", '@crackheadcent');
+          saveGame();
+        }
+        continue;
+      }
       P.cash += c.amt; audio.pickup();
       // v13 wave 3 — intro_remember accumulator (counts only day-1 cash gains during intro)
       if (state.flags && !state.flags.introDone) {
@@ -3540,7 +3966,8 @@ function updateHUD() {
   const hearts = Math.max(0, Math.ceil(P.hp/20));
   document.getElementById('hp').textContent = '♥'.repeat(hearts) + '♡'.repeat(5-hearts);
   document.getElementById('cash').textContent = P.cash;
-  document.getElementById('rocks').textContent = P.rocks;
+  // v13 wave 4 — soap rocks look like real rocks in the HUD count. truth is in the smoke.
+  document.getElementById('rocks').textContent = (P.rocks||0) + (P.soapRocks||0);
   document.getElementById('copper').textContent = P.copper;
   document.getElementById('supplies').textContent = P.supplies || 0;
   document.getElementById('shakeBar').style.width = P.shakes + '%';
@@ -3615,7 +4042,21 @@ function drawAll() {
     const close = (dx*dx + dy*dy) < 60*60;
     // intro pile is always visible (it's the tutorial breadcrumb)
     const alwaysVisible = !!c.intro;
-    if (state.tweakerT > 0 || close || alwaysVisible) {
+    if (state.tweakerT > 0 || close || alwaysVisible || c.tool) {
+      // v13 wave 4 — torch pickups are always visible (a brutus drop in the dark is hard enough to find)
+      if (c.tool === 'propane_torch') {
+        const t = (Math.sin(performance.now()/180)+1)/2;
+        // brass body
+        ctx.fillStyle = '#c08038';
+        ctx.fillRect(c.x-5, c.y-4, 10, 8);
+        // valve
+        ctx.fillStyle = '#604020';
+        ctx.fillRect(c.x-2, c.y-7, 4, 3);
+        // pilot flame
+        ctx.fillStyle = `rgba(232,192,64,${0.6 + t*0.4})`;
+        ctx.fillRect(c.x-1, c.y-11, 2, 4);
+        continue;
+      }
       ctx.fillStyle = state.tweakerT>0 ? '#80ff80' : '#e8c040';
       ctx.fillRect(c.x-4, c.y-3, 8, 6);
       ctx.fillStyle = '#604020';
@@ -3768,6 +4209,11 @@ function drawAll() {
 
   // minimap
   drawMinimap();
+
+  // v13 wave 4 — smoke overlay from a burnt cook (sits above gameplay, below the heat mini)
+  if (state.smokeT > 0) drawSmokeOverlay();
+  // v13 wave 4 — the heat minigame panel (only when mode === 'cookmini')
+  if (state.mode === 'cookmini') drawHeatMini();
 }
 
 function drawScrapFence() {
@@ -4991,10 +5437,26 @@ function spawnBrutusOlder() {
 }
 function blockMenu() {
   const opts = [];
+  // v13 wave 4 — soap rocks smoke first (FIFO with the real rocks).
+  // looks identical in inventory; the truth comes when you light it.
+  const totalRocks = (P.rocks||0) + (P.soapRocks||0);
   opts.push({
-    label: P.rocks > 0 ? "smoke a rock. (-1 rock, +18s rocked-up)" : "smoke a rock. (you have none.)",
-    disabled: P.rocks <= 0 || P.rockedT > 0,
+    label: totalRocks > 0 ? "smoke a rock. (-1 rock, +18s rocked-up)" : "smoke a rock. (you have none.)",
+    disabled: totalRocks <= 0 || P.rockedT > 0,
     action: () => {
+      if ((P.soapRocks||0) > 0) {
+        // soap rock — no rocked-up effect, no shakes relief, no cred. you knew.
+        P.soapRocks--;
+        P.lifetime.rocksSmoked++;
+        audio.hurt(); audio.glassBreak();
+        toast("you smoke it. it's soap.\nyou knew. you smoked it anyway.", 3600);
+        feedPost("smoked soap. tasted it. did it again.", '@crackheadcent');
+        unlockAchievement('soap_tongue');
+        // intro chain still completes — the loop is the loop
+        completeIntroSmoke();
+        saveGame();
+        return;
+      }
       P.rocks--; P.rockedT = 18000; P.crashT = 0; P.shakes = Math.max(0, P.shakes-50);
       P.brain = Math.max(0, P.brain-4); P.lifetime.rocksSmoked++;
       P.cred += 1;
@@ -5152,6 +5614,15 @@ window.addEventListener('keydown', async (e) => {
   if (k === 'escape') {
     if (state.mode === 'dialogue') closeDialogue();
     else if (state.mode === 'inv' || state.mode === 'quest') closePanel();
+    else if (state.mode === 'cookmini') { e.preventDefault(); bailHeatMini(); }
+    return;
+  }
+  // v13 wave 4 — heat minigame: SPACE / 1 locks the needle
+  if (state.mode === 'cookmini') {
+    if (k === ' ' || k === 'spacebar' || k === '1' || k === 'enter') {
+      e.preventDefault();
+      lockHeatMini();
+    }
     return;
   }
   if (state.mode === 'dialogue') {
@@ -5418,6 +5889,14 @@ function setupMobile() {
   }, {passive:false});
   // prevent canvas touch from scrolling
   document.getElementById('game').addEventListener('touchstart', e => e.preventDefault(), {passive:false});
+  // v13 wave 4 — tap anywhere on canvas to lock during the heat minigame
+  const onCookTap = (e) => {
+    if (state.mode !== 'cookmini') return;
+    e.preventDefault();
+    lockHeatMini();
+  };
+  document.getElementById('game').addEventListener('pointerdown', onCookTap);
+  document.getElementById('game').addEventListener('touchstart', onCookTap, {passive:false});
   // global block double-tap zoom
   document.addEventListener('gesturestart', e => e.preventDefault());
   document.addEventListener('dblclick', e => e.preventDefault());

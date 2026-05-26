@@ -4,6 +4,22 @@
 
 ---
 
+## v13 wave 4 — SHIPPED ✓ (May 26, 2026)
+
+- [x] **THE HEAT minigame** — `cookBatchMenu` now routes to `startHeatMini(n, mode)` instead of `doCook`. Real-time canvas skill check: gradient bar fills over `fillMs` (mode-dependent: slow=4000ms, fast=2400ms, shakes=1800ms, all=3200ms, propane=1200ms). Lock with SPACE / 1 / Enter / canvas tap; ESC bails (supplies still consumed). 1s grace after fill → auto-burn. 600ms outcome hold reveals the verdict before resuming play.
+- [x] **6 outcomes** — PERFECT (yield × 1.15, soap × 0.70), OK (baseline), BAD (yield × 0.60, soap × 1.50), BURN (zero rocks, brain -10, wanted +1, 2s smoke overlay), UNDERCOOK (zero rocks, supplies flat), SOAP-ROCK (15% chance on far miss; yield × 0.5, all rocks tagged as soap). Sweet-spot width = `baseWidth + bb*0.10`, rocked penalty -0.06, clamp [0.05, 0.40] — the bb-brain modulation and dirty-packet weighting from v12/v13 wave 2 are preserved on top.
+- [x] **Soap-rocks loop (`P.soapRocks`)** — parallel scalar counter to `P.rocks`. HUD shows the sum (concealed). FIFO smoke: when player smokes at the crate, soap rocks burn FIRST and silently — no rocked-up, no shakes relief, no brain hit, no cred. Canonical toast: "you smoke it. it's soap. you knew. you smoked it anyway." Unlocks SOAP_TONGUE.
+- [x] **Propane torch + 4th cook mode** — `EQUIPMENT.propane_torch` (new `tool` slot on `P.equip`). Two acquisitions: (a) 25% drop on a NIGHT-ONLY brutus / brutus_older kill via `cashPiles` with `tool: 'propane_torch'` field (always-visible pickup, brass body + pulsing pilot flame); (b) Pete pawn at rank ≥ 3 stocks one at $80, one-and-done (`peteTorchStocked` / `peteTorchSold` flags). Owning the torch reveals the 5th `cookBatchMenu` option: "propane. (1 packet. tight bar. big yield.)" — tightest sweet (0.08 base) + biggest burn zone (0.15) + × 1.30 yield bonus.
+- [x] **Heat-minigame canvas overlay** — 480×240 dark slab, dirty cream type, blue→green→yellow→red→black gradient bar (400×28), highlighted sweet-spot region + white tick, red burn-zone bracket, dirty cream needle, gold locked-in marker, mode-colored outcome label (gold/maroon/violet/cream).
+- [x] **Cook predictor lines** — `pickHeatPredictor(brain, rocked, dirty)` surfaces 1 of 8 flavor lines in the menu describing the current cooking state ("rocked → hands aren't yours. the bar shrinks.", "sober + clean → wider sweet spot.", etc.).
+- [x] **2s smoke overlay on BURN** — `state.smokeT = 2000` triggers a fullscreen haze + 6 wandering smudges + the line "the smoke is in the floor." Decays in the main loop regardless of game mode.
+- [x] **3 new achievements** — THE HEAT HELD (perfect a cook), SOAP TONGUE (smoke a soap rock), CONTROLLED BURN (survive a burn).
+- [x] **`hasPropane()` helper** — single source of truth (`P.equip.tool === 'propane_torch'`). Used by cookBatchMenu (gate the 5th option), onNpcDeath (skip dupe drops), peteDialogue (gate the buy / ask-again branches), and cash-pile pickup (skip if already owned).
+
+Notes from shipping: the bb math + per-mode yield/burn rolls + dirty-packet weighted soap rate from v12/v13 are preserved EXACTLY — the new outcome is just a multiplier on top of the existing rolls. Save key (`rockbottom_save_v8`) unchanged; `soapRocks` and `equip.tool` default safely on load. The `state.heat` minigame state is intentionally NOT persisted — saving mid-cook drops you back at `'playing'` with supplies as last saved. The propane brutus drop is night-only because the torch has a "found in the dark" identity; the cash-pile render branch is always-visible so a 25% night drop isn't punishingly easy to miss. Pete's stock gate is rank 3 (strip-mall fiend) — earlier feels premature, later and the loop has already converged.
+
+---
+
 ## v13 wave 3 — SHIPPED ✓ (May 26, 2026)
 
 - [x] **Discoverability layer** — `state.metVendors` Set tracks first dialogue per vendor. Bobbing "?" floater above unmet vendors (13 canonical NPC ids), fades on first interaction. Q-key gets a "PEOPLE YOU'VE MET" section showing only met vendors with their zone + one-line tagline (`VENDOR_INDEX_META`).

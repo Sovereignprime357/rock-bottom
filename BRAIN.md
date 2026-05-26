@@ -2,6 +2,111 @@
 
 ---
 
+## Session 2026-05-26 · v13 wave 4 · the heat minigame + soap-rock loop + propane
+
+### WHAT
+Replaced the v12-era dialogue-driven cook with a real-time canvas skill check (THE HEAT). Five outcomes (PERFECT / OK / BAD / BURN / UNDERCOOK / SOAP-ROCK) gate the existing yield + soap math instead of replacing it. Added a parallel `P.soapRocks` counter that smokes first and silently — the canonical "you knew. you smoked it anyway." Introduced the 4th cook mode (`propane`) gated on a new `EQUIPMENT.propane_torch` (slot: `tool`). Two acquisition paths: 25% night-only drop from BRUTUS / BRUTUS THE OLDER, OR Pete pawn-shop stock at rank ≥ 3 for $80, one-and-done. Three new achievements (THE HEAT HELD / SOAP TONGUE / CONTROLLED BURN). Save key unchanged. Existing saves load forward — `soapRocks` defaults to 0, `equip.tool` defaults to null.
+
+### WHY
+1. **Cook needed teeth.** v12's `doCook` was four dialogue options with hidden RNG — players reported it felt like "press a button, get rocks." A real-time skill check makes the brain modulation (`bb` factor) and rocked-up penalty *visible* — the sweet-spot bar literally shrinks. Same math, now legible.
+2. **Soap-rocks needed a loop.** v12's 12% soap-on-cook just pushed `{id:'soap'}` into inventory as a flavor item. The brief asked for soap rocks that *behave* like rocks until you smoke them. A parallel FIFO counter (`P.soapRocks`) — indistinguishable in the HUD — turns the failure path into a comedic mid-loop beat instead of an inventory pellet.
+3. **Propane is the prestige tool.** A 4th cook mode with the tightest sweet-spot + biggest yield needed a *unique* acquisition story. Pete's pawn at $80 is the "i earned this" path; the 25% night-Brutus drop is the "i found this in the dark" path. Both feed the same equip slot. The kitchen tool, not a fit — it gives no speed/cred/hp.
+
+### WHAT CHANGED
+
+1. **`COOK_MODES` table (line 2631)** — 5 modes (`slow / fast / shakes / all / propane`) parameterized by `fillMs / sweetCenter / sweetSpread / baseWidth / burnZone`. Propane is the only mode with a wider burn zone (0.15 vs 0.08) — high reward, high risk.
+2. **`startHeatMini(n, mode)` at line 2685** — opens `state.heat` with a 3-phase state machine (`fill` → `idle` (1s grace) → `hold` (600ms reveal)), pre-computes sweet-spot center (jittered ±spread) and half-width (`baseWidth + bb*0.10`, rocked penalty -0.06, clamp [0.05, 0.40]). Sets `state.mode = 'cookmini'`. Plays `audio.dialogue` as start cue. Closes any active dialogue first (cookBatchMenu opened one).
+3. **`updateHeatMini(dt)` at line 2716** — called from the main loop only when `state.mode === 'cookmini'` (line 3373). Fill phase ramps `progress 0→1`; idle phase counts down 1000ms then auto-burns at `progress=1.0`; hold phase counts down 600ms then calls `finalizeHeatMini`.
+4. **`lockHeatMini()` at line 2738** — bound to SPACE / 1 / Enter (keydown, line 5621-5626) AND `pointerdown` / `touchstart` on the canvas (mobile, line 5892-5899). Snaps `lockedAt = progress`, transitions to `hold`, calls `resolveHeatOutcome`, plays an outcome-specific cue (coin/pickup/hurt/glassBreak).
+5. **`bailHeatMini()` at line 2752** — ESC during minigame. Supplies + dirty consumed, zero rocks, dedicated walked-away toast. The crate is patient.
+6. **`resolveHeatOutcome(h)` at line 2767** — pure function. Distance `d = |x - center|`. Pre-emptive lock < 0.25 outside sweet = undercook. Top burn-zone = burn. `d ≤ halfW` = perfect; `≤ halfW × 1.8` = ok; `≤ halfW × 3.0` = bad. Far miss + cold lock (`x < 0.20`) = undercook; otherwise 15% soap-rock, else bad.
+7. **`applyCookOutcome(n, mode, outcome)` at line 2795** — 4 branches (burn / undercook / soaprock / perfect-ok-bad). The bb-brain math + dirty-packet weighting + per-mode yield/burn rolls are **preserved verbatim from v12/v13 wave 2**, then multiplied by outcome modifiers (perfect: yield × 1.15 + soap × 0.70; bad: yield × 0.60 floor + soap × 1.50). Propane gets a flat × 1.30 yield bonus before outcome mult. Soap rate is the same weighted average `(dirtyUsed*0.25 + cleanUsed*0.12)/n`, now scaled by `soapAdjust`.
+8. **`drawHeatMini()` at line 2933** — canvas overlay panel (480×240, dirty cream on dark slab), bar with blue→green→yellow→red→black gradient, sweet-spot region highlighted (raised + white tick above), red burn-zone bracket at top, dirty cream needle, gold locked-in marker. Outcome label renders 18px during hold phase, color-coded (gold/maroon/violet/cream).
+9. **`drawSmokeOverlay()` at line 3033** — 2s post-burn full-screen gray haze with 6 sin-walked smudges. Renders regardless of mode (countdown runs in main loop at line 3377).
+10. **`hasPropane()` helper at line 2639** — single source of truth: `P.equip.tool === 'propane_torch'`. Used by `cookBatchMenu` to gate the 5th option AND by `onNpcDeath` to skip dupe drops AND by `peteDialogue` to gate the buy/ask-again branch.
+11. **`cookBatchMenu()` rewrite at line 2641** — same 4 options as v13 wave 2 (slow/fast/shakes/all), now each routes to `startHeatMini(n, mode)` instead of `doCook(mode, n)`. Conditionally appends propane option when `hasPropane()`. Adds a contextual flavor `predictor` line via `pickHeatPredictor(brain, rocked, dirty)` — 8 outcomes covering rocked+dirty / rocked / sober+clean / sober+dirty / zonked+dirty / zonked / dirty / default.
+12. **`pickHeatPredictor()` at line 2672** — the in-dialogue tells. "rocked + dirty → good luck." / "rocked → hands aren't yours. the bar shrinks." / "sober + clean → wider sweet spot." / "sober. but pinky in the bag. the cut argues with the math." / "zonked + dirty → the smoke writes its own ending." / "zonked → narrow window. read the needle." / "dirty packets first. soap is louder." / "the heat is the heat. the needle is the needle."
+13. **`P.soapRocks` counter** — added to player init (line 1340), save (line 1253), load (line 1285). HUD reads `🪨 ${(P.rocks||0) + (P.soapRocks||0)}` (lines 1507, 3970) — soap is invisible in inventory.
+14. **`blockMenu` smoke branch at line 5440-5471** — `totalRocks = rocks + soapRocks`. When player smokes and `soapRocks > 0`, FIFO branch fires: decrement `soapRocks`, increment `rocksSmoked` lifetime, play `audio.hurt()` + `audio.glassBreak()` (the cursed combo — chiptune for "you fucked up"), toast the canonical line, feed post, unlock SOAP_TONGUE, complete intro_smoke if active (the loop is the loop). Real rocks branch is unchanged.
+15. **`EQUIPMENT.propane_torch` at line 381** — `slot: 'tool'`, all stat mods zero. New `tool` slot added to `P.equip` and to the load defaults: `Object.assign({ shoes:null, hat:null, coat:null, tool:null }, P.equip || {})` (line 1284).
+16. **Brutus drop at line 3216-3225** — in `onNpcDeath`, after the `brutus_older` and `brutus` death handlers, a single guarded block: `isNight() && !hasPropane() && Math.random() < 0.25`. Pushes a `cashPiles` entry with `tool: 'propane_torch'` field and `amt: 0`. Dedicated toast: "something falls off his collar.\nit smells like a parking lot."
+17. **Cash-pile branches at line 3631-3642 (pickup) and 4047-4059 (render)** — pickup branch: when `c.tool === 'propane_torch'` and `!hasPropane()`, sets `P.equip.tool = 'propane_torch'`, calls `applyEquipStats()`, pickup sfx, equip toast. Render branch: always-visible regardless of tweaker vision (a night Brutus drop in the dark would be too punishing to gate), brass body + valve + sin-pulsed pilot flame.
+18. **`peteDialogue` at line 1982-2024** — gates on `P.rank >= 3` flipping `state.flags.peteTorchStocked = true` on dialogue open. Buy branch checks `peteTorchStocked && !peteTorchSold && !hasPropane()`. On purchase: -$80, equip, `peteTorchSold = true`, feed post. Post-sale branch shows "ask about the torch again." with a "sold the one. go find your own." reply.
+19. **3 new achievements (lines 450-453)** — `the_heat_held` (perfect a cook), `soap_tongue` (smoke a soap rock), `controlled_burn` (survive a burn).
+20. **SPEC.md update (line 56-120)** — full COOKING section: 5-mode table with all parameters, outcome trigger/modifier table, base yield math table per mode, soap-rock + propane subsections, invariants. The bb/dirty math is restated for the record since it carries over.
+
+### DECIDED, REASONING
+
+- **Why preserve v12's per-packet roll math under the new outcome wrapper, not redesign yield from scratch**: the original economy is well-tuned. Existing saves have rocked-up loops built around the slow/fast yield curves. A redesign would invalidate player intuition. The cleaner refactor is "outcome multiplies the existing math" — the bb factor still matters, the dirty soap rate still matters, just gated by a skill check now.
+- **Why `idleAfterFill = 1000ms` not auto-burn-at-fill**: a 0ms grace would feel punishing for new players who hesitate. 1s gives the player one beat to read the needle and tap. Past 1s, you let it burn — and CONTROLLED_BURN unlocks anyway, so it's not pure punishment.
+- **Why 600ms hold phase (the outcome reveal)**: long enough to read the colored outcome label, short enough that the player doesn't get bored. Matches the dialogue close cadence elsewhere in the game.
+- **Why parallel `P.soapRocks` scalar instead of tagging individual rocks**: the HUD is one number. Two scalars with FIFO smoke ordering preserves that. Tagging individual rocks would require either an array of rock objects (heavy refactor) or a tag list (sync nightmare with `P.rocks`). The scalar pair is the smallest change that delivers the comedic invariant: "you can't tell from the inventory."
+- **Why soap rocks burn FIRST (FIFO) not LAST or random**: comedy. The player notices on smoke #1. If soap burned last the player would never know the batch was tainted. If random, the cursed feeling is diffuse. FIFO makes the failure crisp and immediate.
+- **Why `audio.hurt() + audio.glassBreak()` on soap smoke, not a dedicated synth**: matches v12's "cursed combo" idiom for failure-but-not-death. A new synth would have to communicate "you knew" — better to recycle the existing two-tone cue.
+- **Why the propane torch grants no speed/cred/hp**: it's a kitchen tool. Stacking stat bonuses on it would make it a *strictly better* hat/coat/shoe at $80, breaking the equipment economy. Zero stats = pure cook unlock. The yield × 1.30 + tightest sweet spot is the reward.
+- **Why pete stocks the torch at rank 3 not earlier**: rank 3 = $50 cred = "strip-mall fiend" — the player has cooked enough to want the upgrade. Earlier and it'd feel premature. Later and the slow/fast/all loop has already converged.
+- **Why the brutus drop is night-only**: the propane torch has a "found-in-the-dark" identity. Day Brutus drops feel ordinary. Night Brutus + 25% rare drop + the cash-pile toast ("smells like a parking lot") sells the "this fell off something disreputable" framing.
+- **Why ESC bails (not auto-undercooks)**: the player needs an escape hatch for a misclick. Supplies still consumed = no exploit (you can't dodge a bad bar to retry). Walked-away toast + feed post = comedic acknowledgment.
+- **Why `state.smokeT` countdown runs regardless of mode (line 3377)**: the overlay should keep fading even if the player opens an inventory panel mid-haze. Tied to the global update loop, not the cookmini phase.
+
+### TRIED, ABANDONED
+
+- Considered making the needle bounce back-and-forth (pong-style) instead of one-shot fill. Abandoned: bounce gives infinite re-tries which kills the tension. One-shot lock = one commitment.
+- Considered putting soap rocks in `P.inventory` with an id like `'rock_soap'`. Abandoned: the HUD shows `P.rocks` not inventory rock-count, and `blockMenu` reads `P.rocks` for the smoke gate. Two scalars (`rocks` / `soapRocks`) is the smallest delta.
+- Considered making propane a *consumable* (gas runs out, refill at pete). Abandoned: the equipment slot pattern is "permanent unlock." A consumable would need a new system (gas meter, refill UI, depletion math). The torch is a tool, not ammo.
+- Considered showing a soap-rock count *somewhere* (inventory panel? a debug toast?). Abandoned: the joke requires concealment. Reveal would make the player game it ("oh I have 3 soap, smoke them last").
+- Considered a sweet-spot that *moves* during the fill (oscillates). Abandoned: the sweet-spot jitter at start (±spread) already adds replay variance. A moving spot would make `shakes` mode unplayable.
+- Considered gating the propane mode behind a cook-count milestone (e.g. "cook 20 rocks unlocks it"). Abandoned: gating by item is more legible — you can *see* the torch in your equip panel. A milestone gate is invisible.
+
+### COUNTEREXAMPLE HUNT
+
+- v13 wave 3 save loads into wave 4: `P.soapRocks = Math.max(0, P.soapRocks||0)` defaults to 0; `P.equip.tool` defaults to null via `Object.assign({...tool:null}, ...)`. Old saves carry no torch, no soap rocks. ✓
+- Cook with 0 brain (zonked, no rocked): `bb = clamp((0-30)/70, -0.4, 0.6) = -0.4`. Slow width = `0.22 + (-0.4)*0.10 = 0.18`. Clamped above 0.05. Still playable, just hard. ✓
+- Cook while rocked + zonked: `width = 0.18 - 0.06 = 0.12`. Floor clamp still passes. Hardest legitimate state. ✓
+- Cook propane while sober (brain=100, no rocked): `bb = 0.6`. Width = `0.08 + 0.06 = 0.14`. Still narrow, still tighter than fast cook. Propane stays the *tightest* mode regardless of brain. ✓
+- ESC during the minigame: supplies + dirty consumed (dirty floor at 0). `state.heat = null`. mode reverts to `'playing'`. Save fires. Re-entering `cookBatchMenu` shows the new supplies count. ✓
+- Lock at exact sweet center: `d=0 ≤ halfW` → perfect. THE_HEAT_HELD unlocks first time. ✓
+- Lock at progress=0.05 (very early, far from center): `x < 0.25 && d > halfW` → undercook. Zero rocks. ✓
+- No input at all, bar fills to 1.0: `idle` phase counts down 1000ms then `lockedAt = 1.0` → top burn-zone → burn. Toast + smoke overlay + CONTROLLED_BURN unlock. ✓
+- Soap rock generated (15% on far miss): `P.soapRocks += rocks`. HUD `🪨` increments. Player smokes → soap branch fires first → toast → SOAP_TONGUE. ✓
+- Smoke with rocks=0, soapRocks=2: gate is `totalRocks > 0`, button enabled, soap branch fires. ✓
+- Smoke with rocks=2, soapRocks=2: FIFO — soap goes first (twice), then real rocks. ✓
+- Intro player who happens to soap-rock-cook before intro_smoke: soap branch calls `completeIntroSmoke()` regardless. Player still progresses. The loop is the loop. ✓
+- Brutus dies during day: `isNight()` returns false. No torch pile. ✓
+- Brutus dies at night, player already has torch: `hasPropane()` returns true. Skip. No dupe. ✓
+- Brutus dies at night, RNG fails 25%: no pile. Standard cred + cash drops only. ✓
+- Pete dialogue at rank 2: torch branch gated off. Standard pete options only. ✓
+- Pete dialogue at rank 3, first open: `peteTorchStocked = true` flips. Buy option appears. ✓
+- Pete buy at $79: button disabled label "the propane torch is $80. you don't have it." ✓
+- Pete buy succeeds: `peteTorchSold = true`. Re-open dialogue → "ask about the torch again." → "sold the one. go find your own." ✓
+- Player buys from pete THEN gets a brutus drop: pickup checks `!hasPropane()`, skips. No second torch in inventory. The pile still consumes from `cashPiles` (collected=true) so it doesn't re-trigger. ✓
+- Player picks up brutus drop THEN visits pete at rank 3: `peteTorchStocked` flips but buy branch checks `!hasPropane()` and falls through to "ask about the torch again." ✓
+- Cook 5 packets with 3 dirty: `dirtyUsed=3, cleanUsed=2`. baseRate = `(3*0.25 + 2*0.12)/5 = 0.198`. Perfect outcome: soapAdjust=0.70 → 0.139. Bad: 1.50 → 0.297. Math survives. ✓
+- Cook propane (n=1) perfect: rocks rolled, × 1.30 propane bonus, × 1.15 perfect multiplier, soap rate 0.12 × 0.70 = 0.084 chance of soap. ✓
+- Save during cookmini phase: `state.heat` is not serialized — re-loading drops you back into `'playing'` mode with no minigame in flight. Supplies match whatever was true at last `saveGame()` call. (cookmini state is ephemeral by design.) ✓
+- Audio not initialized yet (first interaction was the smoke action): `audio.dialogue` is wrapped in `if (audio && audio.dialogue)`. Falls through silently. ✓
+
+### NEXT
+
+- The minigame visualization is functional but could use polish: a brief tutorial pulse the first time `cookmini` opens for a new save (one-shot, `state.flags.heatTutorialShown`). Currently the helper line at the bottom carries the load.
+- Boss music (v4 backlog #11) still untouched. The heat minigame would actually benefit from a tense looping bassline during the `fill` phase.
+- The "ask the mathematician about the heat" path is unwritten — Math's dialogue could add a 6th tip that reveals the sweet-spot center math. Speculative.
+- Stripe's fence does NOT touch `P.soapRocks` (per spec — "Stripe does not fence soap rocks"). Possible micro-feature: a single dialogue branch where stripe sniffs a soap rock and laughs. Pure flavor.
+- Watch for the propane mode becoming dominant once the player owns the torch. If late-game telemetry shows >80% propane cook rate, consider reducing the × 1.30 yield bonus to × 1.15.
+
+### GOTCHA
+
+- `state.heat` is NOT in the save schema. If a player saves mid-cook, reload drops them at `'playing'` mode with supplies in whatever state `saveGame()` last persisted them. We don't call `saveGame()` from inside the minigame loop — only on resolve/bail. This is intentional. Don't add a save-mid-minigame.
+- The propane torch pickup branches exist in TWO places (line 3631 auto-collect, line 4047 render). If you add a third tool item, both branches need updates. Consider extracting a `TOOL_PICKUPS` registry if a 2nd tool ever lands.
+- `audio.dialogue` is called inside `startHeatMini` as the start cue — it's the same SFX used for menu open. Don't "fix" this to a new synth without also updating the dialogue-open call site (they share intent: a soft attention pull).
+- `state.smokeT` decay runs in the main loop, not gated by mode. If you add a new mode that *should* pause the smoke (e.g. a fullscreen menu), wrap the decrement at line 3377.
+- The HUD line `(P.rocks||0) + (P.soapRocks||0)` appears at lines 1507 (inventory panel) and 3970 (HUD bar). Both must agree. Don't change one without the other.
+- `bailHeatMini` consumes supplies but does NOT play `audio.glassBreak` — soft exit. If a player wants a louder "i quit" feedback, that'd be a follow-up.
+- The minigame uses SPACE for both lock AND the title-screen-start. The mode check at line 5621 (`state.mode === 'cookmini'`) short-circuits before the global hotkeys. Don't reorder the keydown branches.
+- `hasPropane()` returns truthy on `P.equip.tool === 'propane_torch'`. If a future tool slot equips something else (a lighter? a butane refill?), `hasPropane` would still return false correctly — but the cook menu propane branch ONLY tests `hasPropane()`. New tools won't accidentally unlock propane mode.
+
+---
+
 ## Session 2026-05-26 · v13 wave 3 · discoverability + onboarding + side quests
 
 ### WHAT
