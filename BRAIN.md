@@ -2,6 +2,95 @@
 
 ---
 
+## Session 2026-05-26 · v13 wave 3 · discoverability + onboarding + side quests
+
+### WHAT
+Closed v13 wave 3 in one pass: vendor discoverability layer (the "?" floater + people-met index), a forced 3-quest "the day you arrived" intro chain on new saves (with hustle/event/phone suppression until done), the mom first-day phone tip, three NPC-offered side quests (pigeon_crown, stripe_package, barb_crossword), a hidden `charisma` stat plumbed through vendor pricing, a Q-key UI overhaul with quest-status tri-state and reward previews, 4 new achievements, the pigeon_crown cursed hat, and the `knife` weapon (a possible package-open outcome). Save key unchanged. Existing saves load as `introDone = true` and skip the intro.
+
+### WHY
+1. **Discoverability layer** — the world was content-dense but unmarked. Players have been finishing playthroughs without meeting half the vendors. The "?" floater + people-met index is the lowest-vibe-cost solution: no tutorial UI, no quest pointer, just one bobbing question mark per unmet vendor. It fades on first dialogue, never to return. The people-met index in Q reinforces the "you remember who you met" framing — Disco-Elysium-style notebook, not GameFAQs.
+2. **Intro chain** — new players land at THE BLOCK with no idea what to do. The 3-quest chain (find $10 → meet tony → smoke a rock) is the canonical loop in miniature. Suppressing hustles/events/phone during the chain keeps day 1 focused. Once intro_smoke fires, the whole world opens up.
+3. **Side quests** — `state.quests` had 6 entries but only 2 had real bespoke content (FINISHER, FALLEN_KING). The 3 new side quests give the late-mid game (when hustles repeat and the cook loop converges) actual story-shaped hooks. Each is gated on dialogue visit count so they emerge naturally as the player explores.
+4. **Charisma** — the brief asked for a hidden stat. Tying it to a single equipment piece (the cursed crown) keeps the math simple: 0 charisma is normal, 1+ is "you wear the crown, you pay less, you eat the cred hit." Future equipment can layer in without redesign.
+
+### WHAT CHANGED
+
+1. **`VENDOR_FLOATER_IDS` / `VENDOR_INDEX_META`** — canonical 13-id list of vendors that get the "?" floater and appear in the people-met index. Excludes ambient pedestrians (cubscout/jogger/busker/dogwalker), dave (steal target), and pure flavor NPCs (possum, pigeon, phoneguy, pothole, etc.). The exact list is from the brief; lurch/sherri are intentionally omitted.
+2. **`state.metVendors` Set** — saved/loaded as an Array. `tryInteract` adds `best.id` to it whenever the player opens a tracked vendor's dialogue. First-time addition triggers a save.
+3. **"?" floater render** — added in `drawNpc`. Skipped on hostile/aggro'd NPCs (would clash with "!"). Gentle sin-based bob, two-pass black outline + piss-yellow fill.
+4. **`renderQuests()` overhaul** — split into HUSTLES + QUESTS (ACTIVE/AVAILABLE/DONE) + PEOPLE YOU'VE MET. Quest entries show reward preview text from a static `QUEST_REWARDS` map.
+5. **Intro chain** — 3 new quests in `state.quests` (intro_remember, intro_tony, intro_smoke), each with `intro: true` and `available: false` (chained sequentially). `state.flags.introDone` gates hustle/event/phone suppression. `rollHustles` early-returns during intro. `updateWorld` skips `fireRandomEvent` and skips ambient `ringPhone` during intro. The mom tip uses a separate `state.momTipT` countdown that fires once.
+6. **`completeIntroSmoke()`** — called from `blockMenu`'s smoke action. Sets `introDone = true`, rolls the first real hustle set, broadcasts a welcome news line.
+7. **Intro $10 cash pile** — appended to `cashPiles` in `spawnCashPiles` when `!introDone`. Special `intro: true` flag makes it always-visible with a pulsing glow. Pickup adds to `state.counters.introCashEarned` and calls `tryCompleteIntroRemember`. Also: `updateWorld` runs an alt completion check (any `P.cash >= 10` during intro completes intro_remember) so non-pile income paths also work.
+8. **Mom first-day tip** — `fireMomIntroTipOnce()` calls `ringPhone(MOM_TIP_CALL)`. The `ringPhone` signature was extended with an optional `forced` call object so the tip fires through the intro suppression filter.
+9. **`pigeonDialogue`** — visit counter (`state.counters.pigeonVisits`). On visit 2+ if quest not started, offers crown quest. On accept: `startPigeonCrownQuest()` picks one of 6 candidate spots via `pickCrownSpot()` (seeded into `state.flags.crownSpotIdx`), spawns `state.crownPickup`.
+10. **Crown render + pickup** — drawn directly in `drawAll` (between cash piles and NPCs), shaped like a tiny gold crown with a purple gem. Pickup zone 18×18px. Pickup equips the hat directly (no inventory step), unlocks HEAD_THAT_WEARS.
+11. **`stripeDialogue`** — visit counter (`state.counters.stripeVisits`). On visit 3+, surfaces "stripe leans in. listen." option → `offerStripePackage()`. Mid-quest (`hasStripePackage`), the dialogue becomes a single "go to the conductor" line. Post-betrayal (`stripeBetrayed`), dialogue is the hostile-but-still-talking variant: `"stripe knows. stripe has friends. stripe is patient."` No fencing, no transactions.
+12. **Stripe package delivery** — auto-triggers in `updateWorld` when player is within 60px of conductor with `hasStripePackage`. Removes the package, awards $40+3 cred, opens a final conductor dialogue with the canonical line: `"stripe's name. stripe's money. you are stripe's leg. it is monday."`
+13. **`openStripePackage()`** — surfaced via `blockMenu` when `hasStripePackage` is true. Rolls one of 4 outcomes (35/30/25/10). Always unlocks WHAT_S_IN_THE_BOX, always sets `stripeBetrayed = true`, always closes the quest as done.
+14. **`barbDialogue`** — visit counter (`state.counters.barbVisits`). On visit 2+ if quest not started, sets `daveHasCrossword = true` and slips the hint into barb's flav. Return path: when player has crossword in inventory, top of barb's dialogue prepends a "give barb her crossword back" option. Post-completion, the dialogue has a permanent "ask what 14 across was" branch that reveals the BLAME line.
+15. **`daveDialogue`** — added a "demand the saturday crossword" option when quest is active and dave hasn't been resolved yet. cred ≥ 3 = free hand-over; otherwise sub-dialog for $20 ransom or fight. Killing dave (already aggro pipeline) also drops the crossword in `onNpcDeath`.
+16. **`vendorPrice(base)`** — helper for charisma-aware pricing. Plumbed into tony's $10, barb's $5/$22, pinky's $4/$18, stripe's $8 buy / $6 fence. Discount only kicks in at `P.charisma >= 1`.
+17. **EQUIPMENT.pigeon_crown** — new entry. -3 cred, +1 charisma. `applyEquipStats` now sums charisma the same way it sums cred/hp.
+18. **WEAPONS.knife** — new entry. dmg 14, reach 8. Used by `pickupWeapon('knife')` from the package-open knife outcome.
+19. **ACHIEVEMENTS** — 4 new: HEAD_THAT_WEARS, EXACT_CHANGE, WHAT_S_IN_THE_BOX, SEVEN_ACROSS.
+20. **Save/load** — `metVendors` (Array↔Set), `flags`, `crownPickup`, `charisma` on player, plus the new counters. Defaults in load are gentle (existing saves get `introDone: true` so they don't reload into the intro).
+21. **Q-key UI** — `renderQuests()` now produces the tri-state quest panel + people-met index. Built off pair-iteration `Object.entries(state.quests)` so each quest can route to its reward preview.
+
+### DECIDED, REASONING
+
+- **Why 13 vendors not 14+**: the brief gave an exact list. Lurch/Sherri/Possum/Pigeon were left off deliberately — they're not "vendor" enough. Lurch begs $1, Sherri is paranoid, possum is the AI oracle, pigeon is a secret-seller. Following the brief; the index can grow later.
+- **Why the intro pile is always-visible**: tweaker vision is mid-game content (player learns to hold F via the mathematician's tip). Day-1 player has no idea F exists. Making the intro pile always-visible (with a pulse glow) is a one-time exception that reads as a tutorial breadcrumb.
+- **Why $0 starting cash on new saves**: the brief said "find ten dollars" — that doesn't work if the player already has $25. Resetting to $0 makes the intro_remember objective meaningful. After intro_smoke completes, the player has whatever they earned (the $10 pile + the $0 starting).
+- **Why crown spawns are per-save-seeded not per-quest-roll**: replay value. If every save picked a random spot, the spots would be predictable across replays. Per-save seed means each playthrough hides the crown somewhere different.
+- **Why open-package UX is at the block, not from an inventory "use" action**: the inventory panel is HTML innerHTML with no per-item action handlers. Adding click-handlers to inventory items would require a structural refactor. Surfacing the option from `blockMenu` instead is narratively cleaner anyway — "open it where no one is watching" matches the crate's home-base framing.
+- **Why a hostile-text branch for stripe instead of full hostile NPC**: stripe is the co-op partner. Making him aggro would conflict with the rank-up co-op ending path (which requires 5 loyalty + a peaceful interaction). The text-only hostile branch closes the fence without nuking the ending.
+- **Why the mom tip isn't part of `PHONE_CALL_LINES`**: it's one-shot and forced. Mixing it into the random rotation would either spam or hide it. Separate timer + separate call object.
+- **Why charisma is hidden and not displayed in the HUD**: the brief says "hidden charisma field." Inventory panel does show the charisma value indirectly (via the equipped crown). The price discount is visible the moment the player opens tony's dialogue and sees $9 instead of $10 — that's the reveal.
+- **Why barb's "ask 14 across" branch persists post-completion**: the BLAME line is the comedic payoff. Players should be able to revisit it. It's gated behind `q.done` so it doesn't fire pre-quest.
+
+### TRIED, ABANDONED
+
+- Considered storing the package as a `state.flags.hasStripePackage` boolean only and NOT putting it in `P.inventory`. Abandoned: showing it in the inventory list reinforces "you have something. it is here." The dialogue option to open it at the block now references the item, which feels more grounded.
+- Considered showing the people-met index as a separate Q key (Q opens quests, P opens people). Abandoned: P is already the phone feed. Adding a third panel-toggle would fragment the mobile UI. Unifying into the Q panel is denser but cleaner.
+- Considered making `pigeon_crown` give +2 charisma so prices were 20% off. Abandoned: 10% is enough to feel real, 20% breaks the math elsewhere. Keep the dial low.
+- Considered intercepting `P.cash` writes via a setter to track intro_remember accumulation precisely. Abandoned: per-frame check (`P.cash >= 10` during intro) is functionally equivalent and far simpler.
+
+### COUNTEREXAMPLE HUNT
+
+- v12/wave-2 save loads into v13 wave 3: `state.flags` defaults to `introDone: true`, `metVendors` defaults to empty Set (player will see "?" floaters on every vendor they haven't visited yet — actually that's a feature, not a bug). ✓
+- New save flow: P.cash=0, intro_remember active, $10 pile visible at (1180, 870), pickup → quest complete → intro_tony available → tony dialogue opens → intro_tony complete → intro_smoke available → smoke at crate → intro_smoke complete → introDone = true → hustles roll → world events un-suppress. ✓
+- Charisma off (no crown): vendorPrice(10) returns 10. tony's UI shows "buy a rock. $10." ✓
+- Charisma on (crown equipped): vendorPrice(10) returns 9. tony's UI shows "buy a rock. $9." ✓
+- Stripe package: pick up → run to conductor 60px → auto-delivery dialog → +$40 +3 cred → EXACT_CHANGE. ✓
+- Stripe package open: pick up → return to block → blockMenu offers "open" → roll → either rocks/soap/knife/wire → stripeBetrayed = true → future stripe dialogues show the patient-friends line, no fencing. ✓
+- Barb crossword: visit 1 (normal) → visit 2 (aside drops, daveHasCrossword=true) → visit dave (option appears) → cred>=3 ? free : ransom/fight → return to barb → quest complete + free packet + BLAME reveal. ✓
+- Pigeon crown: visit pigeon 1 (normal) → visit 2 (offer surfaces with `last seen: …`) → accept → crown spawns → pickup → cursed hat equips → -3 cred but tony charges $9. ✓
+- Killing dave with crossword still on him: `onNpcDeath` checks `daveHasCrossword`, drops crossword into inventory. ✓
+- Mom tip on existing save: `momIntroFired` defaults true → tip never fires. ✓
+- Mom tip on new save: momTipT starts at 30000, decrements to 0 in updateWorld, fires once, momIntroFired=true persists across save. ✓
+- Intro suppression: introActive flag short-circuits fireRandomEvent + ambient ringPhone. rollHustles early-returns. ✓
+- The "?" floater on hostile lurch/paulie: skipped (the `!n.aggro && !n.hostile` guard). ✓
+- Loading after intro_smoke completion: introDone=true persisted, rollHustles works normally. ✓
+
+### NEXT (the v13 campaign continued)
+
+- Wave 4 brief is TBD. Likely candidates from DELEGATION.md backlog: NPC pixel sprites (still emoji for most), tweaker vision polish (now competing with the always-visible intro pile), or weapon variety (knife is the second non-fist; could expand the trade-up tree).
+- The abandoned-building "RANK 4+" cosmetic gate is STILL untouched. Original wave-1 debt. Probably wave 4 or 5.
+- Charisma is currently single-source (crown). If we add a second piece (rumor: a charm bracelet, a "fancy" tie at the laundromat), the discount could stack — verify the price math doesn't go below $1 (the `Math.max(1, ...)` floor in vendorPrice catches it).
+- Consider a fourth side quest tied to The Mathematician (he has the perfect tone for one — "the numbers want a thing from you").
+
+### GOTCHA
+
+- `state.metVendors` is a Set in memory and an Array on disk. Always read with `Array.from(...)` on save and `new Set(arr)` on load.
+- `state.quests` is merged via `Object.assign({}, state.quests, sv.quests)` so new quest defaults survive into old saves (the wave 2 pattern). But: a `q.available` field that's `false` in defaults will be overwritten by `undefined` in old saves if the save didn't have it. Watch for this on future quest additions — better to set `available: false` explicitly in both the default and the load-time fixup.
+- `vendorPrice` is called at dialogue-render time, not at click time. If the player un-equips the crown after opening tony's dialogue but before clicking buy, the UI still shows the discounted price. The transaction itself reads `vendorPrice(10)` again (so it'd revert) but the LABEL would be stale. Minor edge case; acceptable.
+- The stripe `stripeBetrayed` flag is set both on `openStripePackage()` AND on the existing kill path (`state.counters.stripeBetrayed`). Two flags overlap conceptually but mean different things: the counter is for the JUDAS achievement (plate+stripe death), the flag is for the package opening. Don't unify them.
+- The Q-key panel's "AVAILABLE" section will be empty for most of the playthrough since quests transition active → done quickly. That's fine — empty section just hides itself (`latentPairs.length ? … : ''`).
+- New saves start at $0 cash — this is intentional but means a player who quits during intro will reload to $0 + whatever they earned. The intro quest auto-completes on `P.cash >= 10` regardless of source, so they're not soft-locked.
+
+---
+
 ## Session 2026-05-26 · v13 wave 2 · sprite parity + three new NPCs
 
 ### WHAT

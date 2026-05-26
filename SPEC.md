@@ -240,6 +240,42 @@ See `VIBE.md` for full identity registry. Mechanical spec:
 
 ---
 
+## QUESTS (v13 wave 3)
+
+The quest infrastructure is a flat object `state.quests` keyed by quest id. Each quest has `{ title, flav, done, available?, intro? }`. `available` is the "told but not started" state used by the new tri-state UI (active / available / done). `intro: true` marks an intro-chain quest.
+
+### Intro chain (FORCED on new saves)
+
+The intro chain is three quests auto-given when a new save begins. While any intro quest is undone, hustle generation, world events, and ambient phone calls are suppressed (the mom intro tip is exempt — it fires regardless ~30s into a new save). New saves also start at $0 cash.
+
+| id | objective | completion | reward |
+|----|-----------|------------|--------|
+| intro_remember | find ten dollars somewhere on the block. | pick up the $10 pile spawned in THE BLOCK OR accumulate $10 cash from any source | +1 cred, toast "you arrive somewhere by walking. who knew." |
+| intro_tony | the man at the corner has a job for you. | open Tony's dialogue once | +1 cred, toast "he charges ten dollars. that is the price. he does not negotiate. sometimes he does." |
+| intro_smoke | the crate is for sitting. the rock is for smoking. | smoke 1 rock at the crate | +2 cred, toast "you understand the loop." + sets `state.flags.introDone = true`, un-suppresses world systems |
+
+Existing saves load with `introDone = true` defaulted-on and skip the intro chain.
+
+### Side quests (standalone, NPC-offered)
+
+| id | hook | objective | reward | achievement |
+|----|------|-----------|--------|-------------|
+| pigeon_crown | pigeon king dialogue ≥2 → offers quest | pick up the crown from 1 of 6 deterministic spots (seed: `state.flags.crownSpotIdx`) | the cursed crown hat: -3 cred BUT +1 charisma (10% vendor discount) | HEAD_THAT_WEARS |
+| stripe_package | stripe dialogue ≥3 → offers quest | deliver to conductor (auto on 60px proximity) OR open at the crate | deliver: +$40 +3 cred. open: 35% brick (+5 rocks), 30% 2 soaps, 25% knife (weapon), 10% wire bait (+2 wanted) | EXACT_CHANGE (deliver) or WHAT_S_IN_THE_BOX (open) — open sets `state.flags.stripeBetrayed = true`, closes fencing |
+| barb_crossword | barb dialogue ≥2 → quietly sets `state.flags.daveHasCrossword = true` | demand from dave (cred ≥3 = free; else $20 ransom or fight); return to barb | +1 clean packet, unique "BLAME" reveal dialog | SEVEN_ACROSS |
+
+### Discoverability layer
+
+`VENDOR_FLOATER_IDS` is a canonical Set of 13 NPC ids (tony, yuri, pete, barb, biggu, conductor, larry, paulie, stripe, mom, priest, pinky, math). For each id NOT in `state.metVendors`, a bobbing semi-transparent "?" renders ~16px above the NPC head. First call to `interact` from `tryInteract` adds the id to `state.metVendors` and saves. The Q-key panel surfaces only met vendors in its "PEOPLE YOU'VE MET" section — never a list of all vendors (preserves discovery).
+
+### Q-key UI
+
+`renderQuests()` now renders three sections: HUSTLES, QUESTS (split into ACTIVE / AVAILABLE / DONE), and PEOPLE YOU'VE MET (only `state.metVendors` entries, with zone + tagline from `VENDOR_INDEX_META`). Quest entries show reward preview text.
+
+## CHARISMA (v13 wave 3)
+
+`P.charisma` is summed from `EQUIPMENT[id].charisma` across all equipped slots in `applyEquipStats()`. Currently only `pigeon_crown` has `charisma: 1`. The `vendorPrice(base)` helper returns `Math.max(1, Math.round(base * 0.9))` when `P.charisma >= 1`, else `base`. Plumbed into Tony's $10 rock, Barb's $5/$22 packets, Pinky's $4/$18 packets, and Stripe's $8 buy / $6 fence.
+
 ## INVARIANTS
 
 These properties MUST hold across all builds. Violating any of these breaks the game spec.
@@ -256,6 +292,9 @@ These properties MUST hold across all builds. Violating any of these breaks the 
 10. **The crash always follows the high** — rocked-up cannot expire without triggering crash
 11. **The boss is defeatable in <90 seconds for a competent player** — it's a comedy fight, not a tactical RPG fight
 12. **Save uses window.storage, NEVER localStorage** — Claude.ai artifacts do not support localStorage
+13. **Intro chain cannot be re-triggered** — once `state.flags.introDone` is true, it stays true. The chain is one-shot per save.
+14. **Existing saves never re-enter the intro** — load defaults `introDone: true` so v12/early-v13 saves skip the chain entirely.
+15. **Charisma discount applies only on the way out** — `vendorPrice(base)` is consulted at the moment of dialogue rendering; transactions in-flight don't refund or re-tax if charisma changes mid-trade.
 
 ---
 
@@ -336,3 +375,4 @@ The following are NOT in v3 and should be considered for v4+ via DELEGATION.md:
 | v12 | May 2026 | Wired copper heist (no rank gate). Baggie Barb vendor. Cooking minigame at the crate. Stripe buys rocks. THE FINISHER quest. Save v9. |
 | v13 wave 1 | May 2026 | Housekeeping fork from v12. Dead rank-gate collision skip removed. README, .gitattributes, title refreshed. |
 | v13 wave 2 | May 2026 | Sprite parity: Barb gets her own palette; cubscout/jogger/busker/dogwalker get distinct palettes (were rendering with tony's). 3 new NPCs: PINKY POLENTA (rival supply, dirty packets, soap-weighted cook math), THE MATHEMATICIAN (cook-EV oracle, discoverability reveals every 3rd visit), COUSIN BRENDAN (rookie-cop mini-boss with taser recharge state machine). New BUS STOP zone. Achievements: DUE_DEALER_SYSTEM, BADGE_MONEY. New `glasses` accessory for makeNPC. Save key unchanged. |
+| v13 wave 3 | May 2026 | Discoverability layer + onboarding chain + 3 side quests + Q-key UI overhaul. New: `state.metVendors` Set with `?` floaters above unmet vendor NPCs; first-day mom phone tip; intro 3-quest chain (intro_remember / intro_tony / intro_smoke) FORCED on new saves that suppresses hustles/events/phone calls until introDone; 3 side quests (pigeon_crown, stripe_package, barb_crossword); hidden `charisma` stat on P (driven by equipment, currently only pigeon_crown=+1) wired into vendor pricing via `vendorPrice(base)` helper used in tony/barb/pinky/stripe; new equipment `pigeon_crown` (-3 cred, +1 charisma); new weapon `knife` (a possible stripe-package outcome); 4 new achievements (HEAD_THAT_WEARS, EXACT_CHANGE, WHAT_S_IN_THE_BOX, SEVEN_ACROSS). New saves start at $0. Save key unchanged. |

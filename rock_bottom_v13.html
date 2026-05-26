@@ -215,7 +215,7 @@
        \\___|  ___>
            \\/   the possum knows</pre>
       <h1>ROCK BOTTOM</h1>
-      <div class="sub">the crackhead's odyssey · v12</div>
+      <div class="sub">the crackhead's odyssey · v13</div>
       <div class="start">[ SPACE ] begin</div>
       <div class="load" id="loadBtn" style="display:none">[ L ] load save</div>
       <div class="credit">vibekoded · the possum knows</div>
@@ -372,7 +372,52 @@ const EQUIPMENT = {
   windbreaker:   { slot:'coat',  n:"a faded windbreaker",            speed: 0.1, cred: 1,  hp: 4 },
   bathrobe:      { slot:'coat',  n:"a hotel bathrobe (yours now)",   speed: 0,   cred:-2,  hp: 6 },
   parka:         { slot:'coat',  n:"a parka in august",              speed:-0.2, cred: 4,  hp: 12 },
+  // v13 wave 3 — the pigeon king's lost crown. cursed: -3 cred for the wearer. but vendors
+  // recognize the bird-blessing and shave 10% off the base price. charisma is a hidden field
+  // summed across equipment in applyEquipStats.
+  pigeon_crown:  { slot:'hat',   n:"the pigeon king's crown (cursed)", speed: 0, cred: -3, hp: 0, charisma: 1 },
 };
+
+// ---------- v13 wave 3: discoverability + vendor index ----------
+// the canonical list of NPCs that get the "?" floater + appear in the people-met index.
+// excludes ambient pedestrians (cubscout/jogger/busker/dogwalker), dave (the steal target),
+// and the rest of the random-flavor crew.
+const VENDOR_FLOATER_IDS = new Set([
+  'tony','yuri','pete','barb','biggu','conductor','larry','paulie','stripe','mom','priest','pinky','math'
+]);
+const VENDOR_INDEX_META = {
+  tony:      { zone:'the block (the corner)',     tag:'rocks ten dollars. simple math.' },
+  yuri:      { zone:'scrap yard',                 tag:'copper at $25 a piece. brutus remembers.' },
+  pete:      { zone:'pawn shop',                  tag:'$15 copper. one second. weighing.' },
+  barb:      { zone:'the laundromat',             tag:'packets $5. the crossword. she does not look up.' },
+  biggu:     { zone:'highway underpass',          tag:'tall. trades the cart for 5 copper.' },
+  conductor: { zone:'the projects',               tag:'3 copper for $90. the train is coming.' },
+  larry:     { zone:'the projects',               tag:'WHAT. fights. yells. big damage.' },
+  paulie:    { zone:'back alley',                 tag:'the face. it is, in fact, just the face.' },
+  stripe:    { zone:'the projects',               tag:'$8 rocks. 40% soap. fences yours at $6.' },
+  mom:       { zone:'marketplace (daytime)',      tag:'$10 and pity. likes lavender kombucha.' },
+  priest:    { zone:'the church',                 tag:'blessed tic-tacs. -30 shakes. donate for cred.' },
+  pinky:     { zone:'the bus stop',               tag:'house cut packets $4. dirty. amore.' },
+  math:      { zone:'highway underpass',          tag:'the math. expectation. every third number is a tip.' },
+};
+
+// pigeon king's lost crown — 6 candidate locations, picked deterministically when the quest starts.
+const CROWN_SPOTS = [
+  { x: 1900, y: 440, where: 'behind the abandoned building' },
+  { x: 340,  y: 612, where: 'on a pawn-shop sill' },
+  { x: 150,  y: 1290,where: 'next to the alley dumpster' },
+  { x: 160,  y: 410, where: 'against the scrap-yard fence' },
+  { x: 1880, y: 1340,where: 'in the church gutter' },
+  { x: 1380, y: 460, where: 'under the underpass rebar' },
+];
+
+// vendor base prices are routed through this so the pigeon crown can shave 10% off.
+// charisma >= 1 → 10% off, rounded to nearest dollar, floor of $1.
+function vendorPrice(base) {
+  const c = (P && P.charisma) || 0;
+  if (c >= 1) return Math.max(1, Math.round(base * 0.9));
+  return base;
+}
 
 // ---------- achievements ----------
 const ACHIEVEMENTS = {
@@ -395,6 +440,10 @@ const ACHIEVEMENTS = {
   compliment_the_face:  { name:"COMPLIMENT THE FACE",  flav:"compliment paulie 5 times." },
   due_dealer_system:    { name:"DUE DEALER SYSTEM",    flav:"buy from pinky polenta once. you have options now." },
   badge_money:          { name:"BADGE MONEY",          flav:"put cousin brendan on the ground." },
+  head_that_wears:      { name:"HEAD THAT WEARS",      flav:"return the pigeon king's lost crown. wear it." },
+  exact_change:         { name:"EXACT CHANGE",         flav:"deliver stripe's package. don't open it." },
+  what_s_in_the_box:    { name:"WHAT'S IN THE BOX",    flav:"open stripe's package. find out." },
+  seven_across:         { name:"SEVEN ACROSS",         flav:"return barb's missing crossword. fourteen across was BLAME." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -415,6 +464,12 @@ const HUSTLE_TEMPLATES = [
   { id:'laundry_1',   desc:"do a load of laundry.",       check:()=>(state.counters.laundryDone||0) - (state.hustleSnapshot?.laundryDone||0) >= 1, reward:{cash:5, cred:1}, key:'laundryDone' },
 ];
 function rollHustles() {
+  // v13 wave 3 — suppress hustle generation during the intro chain so day 1 stays focused.
+  if (state.flags && !state.flags.introDone) {
+    state.hustles = [];
+    state.hustleSnapshot = state.hustleSnapshot || {};
+    return;
+  }
   // pick 3 random, store their starting counter values as snapshot
   const pool = [...HUSTLE_TEMPLATES].sort(()=>Math.random()-.5).slice(0,3);
   state.hustleSnapshot = {
@@ -474,13 +529,29 @@ const PHONE_CALL_LINES = [
   { from:'YURI', text:"BRUTUS REMEMBER.\n*click*", action:() => {} },
   { from:'YOUR OWN VOICE', text:"hey.\nit's you.\nyou should drink water.\n(+10 brain)", action:() => { P.brain = Math.min(100, P.brain + 10); } },
 ];
-function ringPhone() {
+function ringPhone(forced) {
   if (state.mode !== 'playing') return;
-  const call = PHONE_CALL_LINES[Math.floor(Math.random()*PHONE_CALL_LINES.length)];
+  // v13 wave 3 — `forced` lets the intro mom-tip fire even during the suppression window.
+  const call = forced || PHONE_CALL_LINES[Math.floor(Math.random()*PHONE_CALL_LINES.length)];
   audio.dialogue();
   toast('📞 incoming call · ' + call.from + '\n\n' + call.text, 5500);
   feedPost('phone call from ' + call.from.toLowerCase() + '.', '@phone_guy');
   if (call.action) call.action();
+}
+
+// v13 wave 3 — mom's first-day tip. fires ~30s after a new save begins. only fires once per save.
+const MOM_TIP_CALL = {
+  from: 'YOUR MOM',
+  text: "remember tony likes you.\nyou said you'd come see him.\nyou said it twice.",
+  action: () => {}
+};
+function fireMomIntroTipOnce() {
+  if (!state.flags) return;
+  if (state.flags.momIntroFired) return;
+  if (state.mode !== 'playing') return;
+  state.flags.momIntroFired = true;
+  ringPhone(MOM_TIP_CALL);
+  saveGame();
 }
 
 // ---------- PET POSSUM follower ----------
@@ -1171,6 +1242,7 @@ async function saveGame() {
         inventory: P.inventory, lifetime: P.lifetime, tonyOffenses: P.tonyOffenses,
         equip: P.equip, cartMounted: P.cartMounted,
         weapon: P.weapon, brutusDefeated: P.brutusDefeated, stripeLoyalty: P.stripeLoyalty,
+        charisma: P.charisma||0,
       },
       npcsKilled: npcs.filter(n=>n.dead).map(n=>n.id),
       cashPilesCollected: Array.from(state.cashPilesCollected),
@@ -1182,6 +1254,10 @@ async function saveGame() {
       weather: state.weather,
       lootedDumpsters: PROPS.filter(p=>p.type==='dumpster' && p.looted).map(p=>p.x+','+p.y),
       barbAside: !!state.barbAside,
+      // v13 wave 3
+      metVendors: Array.from(state.metVendors || []),
+      flags: state.flags || {},
+      crownPickup: state.crownPickup || null,
     });
   } catch(e) {}
 }
@@ -1206,9 +1282,18 @@ async function loadGame() {
       rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
       plateStolen: 0, stripeBetrayed: 0, pigeonTrade: 0,
       pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
+      pigeonVisits: 0, stripeVisits: 0, barbVisits: 0, introCashEarned: 0,
     }, sv.counters || {});
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
+    // v13 wave 3 — discoverability + flags + crown state. existing saves default to introDone=true.
+    state.metVendors = new Set(sv.metVendors || []);
+    state.flags = Object.assign({
+      introDone: true, momIntroFired: true, hasStripePackage: false,
+      stripeBetrayed: false, daveHasCrossword: false, hasCrossword: false, crownSpotIdx: -1,
+    }, sv.flags || {});
+    state.crownPickup = sv.crownPickup || null;
+    P.charisma = sv.player && sv.player.charisma || 0;
     state.day = sv.day ?? 1;
     state.dayTime = sv.dayTime ?? 0;
     state.weather = sv.weather || 'clear';
@@ -1236,6 +1321,9 @@ const P = {
   weapon: 'fists',
   brutusDefeated: 0,    // counter for Brutus Older trigger
   stripeLoyalty: 0,     // counter for co-op ending
+  // v13 wave 3 — charisma is summed from equipment (see applyEquipStats).
+  // 1+ trips the vendor 10% discount via vendorPrice().
+  charisma: 0,
 };
 
 // Grant achievement helper
@@ -1253,6 +1341,7 @@ function applyEquipStats() {
   let baseSpeed = 2.2;
   let baseHp = P.cartMounted ? 110 : 100;
   let credBonus = 0;
+  let charisma = 0;
   for (const slot in P.equip) {
     const id = P.equip[slot];
     if (!id || !EQUIPMENT[id]) continue;
@@ -1260,12 +1349,14 @@ function applyEquipStats() {
     baseSpeed += (e.speed||0);
     baseHp += (e.hp||0);
     credBonus += (e.cred||0);
+    charisma += (e.charisma||0);
   }
   if (P.cartMounted) baseSpeed += 0.6;
   P.speed = Math.max(0.8, baseSpeed);
   P.maxHp = baseHp;
   if (P.hp > P.maxHp) P.hp = P.maxHp;
   P.credBonus = credBonus;
+  P.charisma = charisma;
 }
 
 // Weather selection per day
@@ -1297,12 +1388,20 @@ const state = {
   carEngineT: 0,
   conductorWaitT: 0,
   quests: {
+    // v13 wave 3 — "the day you arrived" intro chain (auto-given on new save, suppresses normal world until done)
+    intro_remember:{ title: "I DON'T REMEMBER",        done: false, intro: true, flav: 'find ten dollars somewhere on the block.' },
+    intro_tony:    { title: 'THE MAN AT THE CORNER',  done: false, intro: true, available: false, flav: 'the man at the corner has a job for you. go see him.' },
+    intro_smoke:   { title: 'YOU SMOKE THE ROCK',     done: false, intro: true, available: false, flav: 'the crate is for sitting. the rock is for smoking.' },
     first_rock:    { title: 'THE FIRST ROCK',         done: false, flav: 'buy a rock from tre bag tony. that is the entire quest.' },
     copper_sings:  { title: 'THE COPPER SINGS',       done: false, flav: 'strip copper from the abandoned building. in b flat.' },
     finisher:      { title: 'THE FINISHER',           done: false, flav: 'cook a rock on the crate. the crate is the kitchen now.' },
     conductor:     { title: "THE CONDUCTOR'S BARGAIN", done: false, flav: 'sell 3 pure copper to the conductor. he is still waiting.' },
     priest_mercy:  { title: "THE PRIEST'S MERCY",     done: false, flav: "accept a blessed tic-tac. let father o'malley help." },
     fallen_king:   { title: 'THE FALLEN KING',        done: false, flav: 'defeat tre bag tony at the corner. take what you can.' },
+    // v13 wave 3 — standalone side quests, offered by NPCs after repeat visits.
+    pigeon_crown:  { title: "THE PIGEON KING'S LOST CROWN", done: false, available: false, flav: "find the crown. the pigeons grieve." },
+    stripe_package:{ title: "STRIPE'S PACKAGE",       done: false, available: false, flav: "take the package to the conductor. don't open it." },
+    barb_crossword:{ title: "BARB'S MISSING CROSSWORD",done: false, available: false, flav: "find the saturday crossword. she is unwell without it." },
   },
   cashPilesCollected: new Set(),
   achievements: new Set(),
@@ -1313,8 +1412,24 @@ const state = {
     rocksBought: 0, copperStripped: 0, pauliCompliments: 0,
     plateStolen: 0, stripeBetrayed: 0,
     pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
+    // v13 wave 3 — dialogue-visit counts to gate side-quest offers
+    pigeonVisits: 0, stripeVisits: 0, barbVisits: 0,
+    // intro_remember tracks cash earned during day 1
+    introCashEarned: 0,
   },
   barbAside: false,
+  // v13 wave 3 — discoverability + quest-state additions
+  metVendors: new Set(),
+  flags: {
+    introDone: true,            // existing saves default-on; new saves set false in startGame
+    momIntroFired: false,
+    hasStripePackage: false,
+    stripeBetrayed: false,
+    daveHasCrossword: false,
+    hasCrossword: false,
+    crownSpotIdx: -1,
+  },
+  crownPickup: null,            // {x, y, collected} — only present while pigeon_crown quest active
 };
 
 // ---------- dialogue / toast helpers ----------
@@ -1400,19 +1515,74 @@ function renderInventory() {
 }
 function renderQuests() {
   const qs = Object.values(state.quests);
-  const doneCount = qs.filter(q=>q.done).length;
-  const hustles = state.hustles || [];
+  // a quest is ACTIVE if (a) not done, AND (b) either no `available` field or available===true,
+  // AND (c) not an undone intro that depends on a prior intro step still incomplete.
+  const isActive = (q) => !q.done && (q.available === undefined || q.available === true);
+  const isAvailableButLatent = (q) => !q.done && q.available === false;
+  const active   = qs.filter(isActive);
+  const latent   = qs.filter(isAvailableButLatent);
+  const done     = qs.filter(q => q.done);
+  const hustles  = state.hustles || [];
+  // reward preview map — purely cosmetic, mirrors the in-line rewards in the actual handlers.
+  const QUEST_REWARDS = {
+    intro_remember:  '+1 cred',
+    intro_tony:      '+1 cred',
+    intro_smoke:     '+2 cred',
+    pigeon_crown:    'the crown (cursed hat)',
+    stripe_package:  '$40 + 3 cred OR a brick. depends.',
+    barb_crossword:  '+ 1 clean packet',
+    first_rock:      '—',
+    copper_sings:    '—',
+    finisher:        '—',
+    conductor:       '—',
+    priest_mercy:    '—',
+    fallen_king:     'the corner',
+  };
+  const renderQ = (q, key) => {
+    const r = QUEST_REWARDS[key] || '—';
+    return `<div class="quest ${q.done?'done':''}">
+      <div class="qtitle">${q.done?'✓ ':'· '}${q.title}</div>
+      <div class="qflav">${q.flav}${q.done?'':`\n<span style="color:#776">reward: ${r}</span>`}</div>
+    </div>`;
+  };
+  // build people-met list (uses the canonical VENDOR_INDEX_META — only met vendors appear)
+  const metKeys = Array.from(state.metVendors || []);
+  const peopleHtml = metKeys.length === 0
+    ? '<div class="quest"><div class="qflav" style="color:#776">no one yet. walk.</div></div>'
+    : metKeys
+        .filter(k => VENDOR_INDEX_META[k])
+        .map(k => {
+          const m = VENDOR_INDEX_META[k];
+          const nm = (npcs.find(n=>n.id===k)||{}).name || k.toUpperCase();
+          return `<div class="quest">
+            <div class="qtitle">${nm}</div>
+            <div class="qflav">${m.zone}\n<span style="color:#776">${m.tag}</span></div>
+          </div>`;
+        }).join('');
+  // pair quest keys back so renderQ can pick the right reward
+  const qPairs = Object.entries(state.quests);
+  const activePairs = qPairs.filter(([_,q]) => isActive(q));
+  const latentPairs = qPairs.filter(([_,q]) => isAvailableButLatent(q));
+  const donePairs   = qPairs.filter(([_,q]) => q.done);
   panelEl.innerHTML = `
     <h2>HUSTLES · DAY ${state.day}</h2>
     ${hustles.length ? hustles.map(h => `<div class="quest ${h.done?'done':''}">
       <div class="qtitle">${h.done?'✓ ':'· '}${h.desc}</div>
       <div class="qflav">reward: ${Object.entries(h.reward).map(([k,v])=>'+'+v+' '+k).join(' · ')}</div>
     </div>`).join('') : '<div class="quest"><div class="qflav">no hustles today.</div></div>'}
-    <h2 style="margin-top:14px">QUESTS · ${doneCount}/${qs.length}</h2>
-    ${qs.map(q => `<div class="quest ${q.done?'done':''}">
-      <div class="qtitle">${q.done?'✓ ':'· '}${q.title}</div>
-      <div class="qflav">${q.flav}</div></div>`).join('')}
-    ${doneCount === qs.length ? '<div class="sec" style="color:var(--piss)">YOU HAVE DONE EVERYTHING THAT CAN BE DONE.</div>' : ''}
+
+    <h2 style="margin-top:14px">QUESTS · ACTIVE · ${active.length}</h2>
+    ${activePairs.length ? activePairs.map(([k,q])=>renderQ(q,k)).join('') : '<div class="quest"><div class="qflav" style="color:#776">none active.</div></div>'}
+
+    ${latentPairs.length ? `<h2 style="margin-top:14px">QUESTS · AVAILABLE · ${latent.length}</h2>
+    ${latentPairs.map(([k,q])=>renderQ(q,k)).join('')}` : ''}
+
+    ${donePairs.length ? `<h2 style="margin-top:14px;opacity:.6">QUESTS · DONE · ${done.length}</h2>
+    <div style="opacity:.55">${donePairs.map(([k,q])=>renderQ(q,k)).join('')}</div>` : ''}
+
+    <h2 style="margin-top:18px">PEOPLE YOU'VE MET · ${metKeys.length}/${VENDOR_FLOATER_IDS.size}</h2>
+    ${peopleHtml}
+
     <div class="close">[ q / esc ] close</div>`;
   panelEl.classList.add('show');
 }
@@ -1719,6 +1889,14 @@ function spawnCashPiles() {
     {x:260,y:1700,a:6},{x:1800,y:1180,a:7},
   ];
   cashPiles = spots.map((s,i)=>({ id:'cp_'+i, x:s.x, y:s.y, amt:s.a, collected:state.cashPilesCollected.has('cp_'+i)}));
+  // v13 wave 3 — intro_remember plant: guaranteed $10 pile inside THE BLOCK, just outside the crate.
+  // crate is at (1050, 880). place pile at (1180, 870) — visible from spawn, not under the crate.
+  if (state.flags && !state.flags.introDone) {
+    const introId = 'cp_intro_remember';
+    if (!state.cashPilesCollected.has(introId)) {
+      cashPiles.push({ id: introId, x: 1180, y: 870, amt: 10, collected: false, intro: true });
+    }
+  }
 }
 
 // ---------- DIALOGUES ----------
@@ -1729,13 +1907,16 @@ function tonyDialogue(n) {
     "you again. of course.",
     "three coats. ten dollars. simple math.",
   ];
-  const txt = `${lines[Math.floor(Math.random()*lines.length)]}\n\ntony does not blink. tony is wearing three coats.`;
+  const rockPrice = vendorPrice(10);
+  const discount = rockPrice < 10;
+  const charismaTag = discount ? "\nhe looks at your hat once. then twice. then not again." : '';
+  const txt = `${lines[Math.floor(Math.random()*lines.length)]}\n\ntony does not blink. tony is wearing three coats.${charismaTag}`;
   dialogue('TRE BAG TONY', txt, [
-    { label: 'buy a rock. $10.', disabled: P.cash<10, action: () => {
-      P.cash -= 10; P.rocks++; P.tonyOffenses = Math.max(0, P.tonyOffenses-1);
+    { label: `buy a rock. $${rockPrice}.`, disabled: P.cash<rockPrice, action: () => {
+      P.cash -= rockPrice; P.rocks++; P.tonyOffenses = Math.max(0, P.tonyOffenses-1);
       state.counters.rocksBought++;
       if (state.counters.rocksBought >= 50) unlockAchievement('tonys_worst');
-      toast('- $10\n+ 1 rock');
+      toast(`- $${rockPrice}\n+ 1 rock${discount?'\n(the crown got you a discount.\nhe is not happy about it.)':''}`);
       audio.coin();
       if (!state.quests.first_rock.done) { state.quests.first_rock.done = true; questToast('THE FIRST ROCK'); }
       saveGame();
@@ -1831,8 +2012,41 @@ function paulieDialogue(n) {
   ]);
 }
 function daveDialogue(n) {
+  // v13 wave 3 — barb's crossword quest: dave has it. demand it back.
+  const q = state.quests.barb_crossword;
+  const daveHasIt = q && q.available && !q.done && state.flags.daveHasCrossword && !state.flags.hasCrossword;
+  const crosswordOption = daveHasIt ? [{
+    label: "demand the saturday crossword.",
+    action: () => {
+      if (P.cred >= 3) {
+        state.flags.daveHasCrossword = false;
+        state.flags.hasCrossword = true;
+        P.inventory.push({id:'crossword', n:"barb's saturday crossword", q:1});
+        toast("dave does the math.\nhe hands you a folded newspaper.\n'i thought she wouldn't notice.\nshe did.'\n+ saturday crossword", 4200);
+        saveGame();
+      } else {
+        dialogue('CHATTY DAVE', "dave looks at you up and down.\n'$20 or fight.\nor walk. that is a third thing.'", [
+          { label: P.cash>=20 ? "pay $20 ransom." : "you don't have $20.", disabled: P.cash<20, action: () => {
+            P.cash -= 20;
+            state.flags.daveHasCrossword = false;
+            state.flags.hasCrossword = true;
+            P.inventory.push({id:'crossword', n:"barb's saturday crossword", q:1});
+            toast("- $20\n+ saturday crossword\nhe pockets your cash.\nhe is whistling.");
+            saveGame();
+          }},
+          { label: "fight him.", action: () => {
+            n.asleep = false; aggroNpc(n);
+            toast("dave is hostile now.\nhe still has the crossword.\nbeat him until it falls out.");
+          }},
+          { label: "leave.", action: () => {} },
+        ]);
+      }
+    }
+  }] : [];
+
   if (n.asleep) {
     dialogue('CHATTY DAVE', "dave is asleep. his wallet is half out.", [
+      ...crosswordOption,
       { label: 'pickpocket. (+$8)', action: () => {
         if (Math.random()<0.7) {
           P.cash += 8; toast('+ $8\ndave keeps sleeping.'); audio.coin();
@@ -1848,6 +2062,7 @@ function daveDialogue(n) {
     ]);
   } else {
     dialogue('CHATTY DAVE', "dave is explaining a theory about pigeons.\nthe theory has 17 parts.", [
+      ...crosswordOption,
       { label: 'listen for a while. (-5 brain)', action: () => {
         P.brain = Math.max(0, P.brain-5); toast('- 5 brain\nyou know more about pigeons now.\nthis was not free.');
       }},
@@ -1961,36 +2176,67 @@ function larryDialogue(n) {
 }
 
 function stripeDialogue() {
-  dialogue('STRIPE', "$8 a rock. stripe got the deal.\nstripe is wearing a faded windbreaker.", [
-    { label: P.cash>=8 ? "buy stripe's rock. $8." : "you can't afford it.", disabled: P.cash<8, action: () => {
-      P.cash -= 8;
+  // v13 wave 3 — visit-counter feeds package side quest after 3 visits.
+  state.counters.stripeVisits = (state.counters.stripeVisits||0) + 1;
+  const q = state.quests.stripe_package;
+
+  // betrayed branch — once the player opened the package, stripe knows. fencing is closed.
+  if (state.flags.stripeBetrayed) {
+    dialogue('STRIPE', "stripe knows.\nstripe has friends.\nstripe is patient.\nthe windbreaker is still.", [
+      { label: 'try to apologize.', action: () => {
+        toast("stripe does not blink.\n(this is not tony's not-blinking.\nthis is different.)");
+      }},
+      { label: 'leave.', action: () => {} },
+    ]);
+    return;
+  }
+
+  // package mid-quest: stripe waiting for delivery
+  if (state.flags.hasStripePackage) {
+    dialogue('STRIPE', "you have it.\nyou have not delivered it.\nthe conductor is in the projects.\nhe does not move.", [
+      { label: 'leave.', action: () => {} },
+    ]);
+    return;
+  }
+
+  const buyP = vendorPrice(8);
+  const sellP = vendorPrice(6);
+  const opts = [
+    { label: P.cash>=buyP ? `buy stripe's rock. $${buyP}.` : "you can't afford it.", disabled: P.cash<buyP, action: () => {
+      P.cash -= buyP;
       P.stripeLoyalty = (P.stripeLoyalty||0) + 1;
       if (Math.random()<0.4) {
-        toast("- $8\n(it is soap. you keep it. it is soap.)");
+        toast(`- $${buyP}\n(it is soap. you keep it. it is soap.)`);
         P.inventory.push({id:'soap',n:'a small bar of soap',q:1});
         P.tonyOffenses = Math.max(0, P.tonyOffenses-1);
       } else {
-        P.rocks++; toast('- $8\n+ 1 rock\n(yeah it\'s probably real.)'); audio.coin();
+        P.rocks++; toast(`- $${buyP}\n+ 1 rock\n(yeah it\'s probably real.)`); audio.coin();
       }
-      // co-op trigger
       if (P.stripeLoyalty === 5) {
         toast("stripe nods slowly.\nhe sees you.\nhe has a proposal.", 3000);
       }
       saveGame();
     }},
-    { label: P.rocks>=1 ? "sell 1 rock to stripe. $6." : "you have no rocks to sell.", disabled: P.rocks<1, action: () => {
-      P.rocks--; P.cash += 6;
+    { label: P.rocks>=1 ? `sell 1 rock to stripe. $${sellP}.` : "you have no rocks to sell.", disabled: P.rocks<1, action: () => {
+      P.rocks--; P.cash += sellP;
       P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + 1;
-      toast("- 1 rock\n+ $6\nstripe pockets it.\nit will be $8 by morning.");
+      toast(`- 1 rock\n+ $${sellP}\nstripe pockets it.\nit will be $${buyP} by morning.`);
       audio.coin(); saveGame();
     }},
-    { label: P.rocks>=3 ? `sell all rocks. $${P.rocks*6} bulk.` : "stripe wants 3+ for a bulk deal.", disabled: P.rocks<3, action: () => {
-      const sellAll = P.rocks; P.cash += sellAll*6; P.rocks = 0;
+    { label: P.rocks>=3 ? `sell all rocks. $${P.rocks*sellP} bulk.` : "stripe wants 3+ for a bulk deal.", disabled: P.rocks<3, action: () => {
+      const sellAll = P.rocks; P.cash += sellAll*sellP; P.rocks = 0;
       P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + sellAll;
-      toast(`- ${sellAll} rocks\n+ $${sellAll*6}\nstripe stacks them with his.\nthe stack is now his stack.`);
+      toast(`- ${sellAll} rocks\n+ $${sellAll*sellP}\nstripe stacks them with his.\nthe stack is now his stack.`);
       audio.coin(); saveGame();
     }},
-    { label: P.stripeLoyalty >= 5 ? "ask stripe about the corner." : "ask stripe about himself.", action: () => {
+  ];
+  // v13 wave 3 — package quest offer on 3rd+ visit
+  if (q && !q.done && !q.available && state.counters.stripeVisits >= 3) {
+    opts.push({ label: "stripe leans in. listen.", action: () => offerStripePackage() });
+  } else if (q && q.available && !q.done && !state.flags.hasStripePackage) {
+    opts.push({ label: "ask about the package again.", action: () => offerStripePackage() });
+  }
+  opts.push({ label: P.stripeLoyalty >= 5 ? "ask stripe about the corner." : "ask stripe about himself.", action: () => {
       if (P.stripeLoyalty >= 5) {
         dialogue('STRIPE', "yo. we should team up.\ntake tony's corner.\nyou get tuesdays and thursdays.\ni get the rest.\nyou ride at my side. on me. with me.", [
           { label: 'agree. ride with stripe.', action: () => { spawnCoopBoss(); }},
@@ -1999,9 +2245,68 @@ function stripeDialogue() {
       } else {
         toast("'stripe is stripe.'\nhe stares.\nthe windbreaker rustles.");
       }
+    }});
+  opts.push({ label: 'leave.', action: () => {} });
+  dialogue('STRIPE', "$8 a rock. stripe got the deal.\nstripe is wearing a faded windbreaker.", opts);
+}
+
+// v13 wave 3 — stripe's package side quest
+function offerStripePackage() {
+  const q = state.quests.stripe_package;
+  if (!q) return;
+  dialogue('STRIPE', "stripe got a package.\ngoes to the conductor in the projects.\nstripe's name. stripe's money.\ndon't open it.\ndon't.", [
+    { label: 'take it.', action: () => {
+      q.available = true;
+      state.flags.hasStripePackage = true;
+      P.inventory.push({id:'stripe_package', n:"stripe's sealed package", q:1});
+      toast("+ stripe's package\nbrown paper. greasy in one corner.\ntake it to the conductor.\ndon't.", 4000);
+      saveGame();
     }},
-    { label: 'leave.', action: () => {} },
+    { label: 'pass. (offer holds.)', action: () => {
+      toast("'next time.'\nstripe shrugs.\nthe windbreaker stays still.");
+    }},
   ]);
+}
+
+// v13 wave 3 — opening stripe's package (from blockMenu when alone)
+function openStripePackage() {
+  const r = Math.random();
+  state.flags.hasStripePackage = false;
+  P.inventory = P.inventory.filter(i => i.id !== 'stripe_package');
+  unlockAchievement('what_s_in_the_box');
+  if (state.quests.stripe_package && !state.quests.stripe_package.done) {
+    state.quests.stripe_package.done = true; // quest closes either way
+  }
+  state.flags.stripeBetrayed = true;
+  if (r < 0.35) {
+    // a brick of clean rocks
+    P.rocks += 5;
+    audio.coin();
+    dialogue('THE PACKAGE', "you tear it open.\nfive rocks. wrapped in newsprint.\nthe newsprint is from 2003.\n\n+ 5 rocks\nstripe knows. stripe will know.", [
+      { label: 'leave.', action: () => {} },
+    ]);
+  } else if (r < 0.65) {
+    // 2 soap
+    P.inventory.push({id:'soap',n:'a small bar of soap',q:1});
+    P.inventory.push({id:'soap',n:'a small bar of soap',q:1});
+    dialogue('THE PACKAGE', "you tear it open.\ntwo bars of soap.\nthey smell like cherries.\n\n+ 2 soaps\nstripe knows. stripe will know.", [
+      { label: 'leave.', action: () => {} },
+    ]);
+  } else if (r < 0.90) {
+    // a knife (new weapon)
+    pickupWeapon('knife');
+    dialogue('THE PACKAGE', "you tear it open.\nit is a knife.\nthe handle is wrapped in electrical tape.\n\n+ a knife\nstripe knows. stripe will know.", [
+      { label: 'leave.', action: () => {} },
+    ]);
+  } else {
+    // a wire — bait. wanted +2. cops arrive.
+    P.wanted = Math.min(3, P.wanted + 2);
+    audio.copSiren();
+    dialogue('THE PACKAGE', "you tear it open.\nit is a wire.\na small bag of nothing taped to it.\n\nthe package was bait.\nwanted +2.\nstripe knows. stripe will know.", [
+      { label: 'sprint.', action: () => {} },
+    ]);
+  }
+  saveGame();
 }
 
 function spawnCoopBoss() {
@@ -2031,7 +2336,10 @@ function spawnCoopBoss() {
 }
 
 function pigeonDialogue() {
-  dialogue('THE PIGEON KING', "one foot.\nunblinking.\nhe wants the bread.", [
+  // v13 wave 3 — visit count drives the crown side-quest offer (2+ visits)
+  state.counters.pigeonVisits = (state.counters.pigeonVisits||0) + 1;
+  const q = state.quests.pigeon_crown;
+  const opts = [
     { label: P.cash>=2 ? 'pay $2 for a secret.' : "you don't have $2.", disabled: P.cash<2, action: () => {
       P.cash -= 2;
       state.counters.pigeonTrade = (state.counters.pigeonTrade||0) + 2;
@@ -2046,8 +2354,27 @@ function pigeonDialogue() {
       ];
       toast(secrets[Math.floor(Math.random()*secrets.length)], 4500);
     }},
-    { label: 'leave.', action: () => {} },
-  ]);
+  ];
+  let headerExtra = '';
+  if (q && !q.done && !q.available && state.counters.pigeonVisits >= 2) {
+    headerExtra = "\nhe regards you.\nhis crown is missing.\nit has been missing for some time.";
+    opts.push({ label: "ask about the crown.", action: () => {
+      const spot = pickCrownSpot();
+      dialogue('THE PIGEON KING', `the crown fell.\nthe pigeons grieve.\nhe says where it might be.\n\nlast seen: ${spot.where}.`, [
+        { label: 'accept the search.', action: () => {
+          startPigeonCrownQuest();
+          toast("the pigeons watch you leave.\nyou are on a route now.", 3000);
+        }},
+        { label: 'decline.', action: () => { toast("the pigeons watch you leave.\nthey are not impressed."); }},
+      ]);
+    }});
+  } else if (q && q.available && !q.done) {
+    headerExtra = "\nhe has not blinked since you accepted.\nthe crown is still missing.";
+  } else if (q && q.done) {
+    headerExtra = "\nthe crown is back. the pigeons walk in formation now.";
+  }
+  opts.push({ label: 'leave.', action: () => {} });
+  dialogue('THE PIGEON KING', "one foot.\nunblinking.\nhe wants the bread." + headerExtra, opts);
 }
 
 function bigguDialogue() {
@@ -2066,6 +2393,8 @@ function bigguDialogue() {
 
 // ---------- BAGGIE BARB (the supply) ----------
 function barbDialogue() {
+  // v13 wave 3 — visit count drives the crossword side-quest offer (+2 visits = offer + start)
+  state.counters.barbVisits = (state.counters.barbVisits||0) + 1;
   const flav = [
     "she does not look up. she is doing the crossword.",
     "her cart has three packets and a romance novel.",
@@ -2083,21 +2412,57 @@ function barbDialogue() {
     aside = asides[Math.floor(Math.random()*asides.length)];
     state.barbAside = false;
   }
-  dialogue('BAGGIE BARB', "what.\n" + flav[Math.floor(Math.random()*flav.length)] + aside, [
-    { label: P.cash>=5 ? "buy 1 packet. $5. (unmarked.)" : "a packet is $5.", disabled: P.cash<5, action: () => {
-      P.cash -= 5; P.supplies = (P.supplies||0) + 1;
-      toast("- $5\n+ 1 packet (unmarked)\nshe does not look up.");
+  const singlePrice = vendorPrice(5);
+  const bulkPrice = vendorPrice(22);
+  const opts = [
+    { label: P.cash>=singlePrice ? `buy 1 packet. $${singlePrice}. (unmarked.)` : `a packet is $${singlePrice}.`, disabled: P.cash<singlePrice, action: () => {
+      P.cash -= singlePrice; P.supplies = (P.supplies||0) + 1;
+      toast(`- $${singlePrice}\n+ 1 packet (unmarked)\nshe does not look up.`);
       audio.coin(); saveGame();
     }},
-    { label: P.cash>=22 ? "buy 5 packets. $22. (bulk.)" : "5 packets is $22.", disabled: P.cash<22, action: () => {
-      P.cash -= 22; P.supplies = (P.supplies||0) + 5;
-      toast("- $22\n+ 5 packets\nshe writes '14 across' in pen.");
+    { label: P.cash>=bulkPrice ? `buy 5 packets. $${bulkPrice}. (bulk.)` : `5 packets is $${bulkPrice}.`, disabled: P.cash<bulkPrice, action: () => {
+      P.cash -= bulkPrice; P.supplies = (P.supplies||0) + 5;
+      toast(`- $${bulkPrice}\n+ 5 packets\nshe writes '14 across' in pen.`);
       audio.coin(); saveGame();
     }},
     { label: "ask what's in them.", action: () => {
       toast("she does not look up.\n'salt.'\nyou both know.\nyou both agree to not.");
     }},
-    { label: "ask what 14 across is.", action: () => {
+  ];
+  // v13 wave 3 — quest C: barb_crossword
+  const q = state.quests.barb_crossword;
+  if (q && q.done) {
+    // post-completion easter egg branch
+    opts.push({ label: "ask what 14 across was.", action: () => {
+      dialogue('BAGGIE BARB', "she looks up. her eyes are dry and the lashes are stuck.\n'fourteen across. five letters. begins with a B.\nit was BLAME.\nit's always BLAME.'\nshe looks back down.", [
+        { label: 'leave.', action: () => {} },
+      ]);
+    }});
+  } else if (q && q.available && state.flags.hasCrossword) {
+    // returning the stolen crossword
+    opts.unshift({ label: "give barb her crossword back.", action: () => {
+      state.flags.hasCrossword = false;
+      P.inventory = P.inventory.filter(i => i.id !== 'crossword');
+      P.supplies = (P.supplies||0) + 1; // free clean packet
+      q.done = true;
+      questToast("BARB'S MISSING CROSSWORD");
+      unlockAchievement('seven_across');
+      audio.coin();
+      dialogue('BAGGIE BARB', "she takes it. for the first time in years she looks up.\nher eyes are dry and the lashes are stuck.\n'fourteen across. five letters. begins with a B.\nit was BLAME.\nit's always BLAME.'\nshe looks back down.\n\n+ 1 packet (free.)", [
+        { label: 'leave.', action: () => {} },
+      ]);
+      saveGame();
+    }});
+  } else if (q && !q.available && state.counters.barbVisits >= 2) {
+    // hook: offer the side quest after the second visit
+    q.available = true;
+    state.flags.daveHasCrossword = true;
+    aside += "\n(her hand pauses over the puzzle.)\n'somebody took my saturday.\ni need it back. i am not well without it.'";
+    saveGame();
+  }
+  // standard "14 across" flavor (only if quest not active)
+  if (!q || (!q.available && !q.done)) {
+    opts.push({ label: "ask what 14 across is.", action: () => {
       const clues = [
         "'a flightless bird.' 3 letters.\nit is EMU. it is always EMU.",
         "'a man with a plan.' 4 letters.\nshe writes BARB.\nyou do not correct her.",
@@ -2105,9 +2470,10 @@ function barbDialogue() {
         "'opposite of clean.' 5 letters.\nshe writes BARB again.",
       ];
       toast(clues[Math.floor(Math.random()*clues.length)], 3800);
-    }},
-    { label: "leave.", action: () => {} },
-  ]);
+    }});
+  }
+  opts.push({ label: "leave.", action: () => {} });
+  dialogue('BAGGIE BARB', "what.\n" + flav[Math.floor(Math.random()*flav.length)] + aside, opts);
 }
 
 // ---------- PINKY POLENTA (rival supply, house cut) ----------
@@ -2128,21 +2494,23 @@ function pinkyDialogue() {
       feedPost("two packet guys. one block. choose your fighter.", '@crackheadcent');
     }
   };
+  const oneP = vendorPrice(4);
+  const fiveP = vendorPrice(18);
   dialogue('PINKY POLENTA', flav[Math.floor(Math.random()*flav.length)] + "\nhe smells of cologne and onion.\nhe is always saying it once.", [
-    { label: P.cash>=4 ? "buy 1 house cut packet. $4." : "house cut is $4.", disabled: P.cash<4, action: () => {
-      P.cash -= 4;
+    { label: P.cash>=oneP ? `buy 1 house cut packet. $${oneP}.` : `house cut is $${oneP}.`, disabled: P.cash<oneP, action: () => {
+      P.cash -= oneP;
       P.supplies = (P.supplies||0) + 1;
       P.dirtySupplies = (P.dirtySupplies||0) + 1;
       onBuy();
-      toast("- $4\n+ 1 packet (house cut)\nhe winks. with both eyes.");
+      toast(`- $${oneP}\n+ 1 packet (house cut)\nhe winks. with both eyes.`);
       audio.coin(); saveGame();
     }},
-    { label: P.cash>=18 ? "buy 5 packets bulk. $18." : "5 packets bulk is $18.", disabled: P.cash<18, action: () => {
-      P.cash -= 18;
+    { label: P.cash>=fiveP ? `buy 5 packets bulk. $${fiveP}.` : `5 packets bulk is $${fiveP}.`, disabled: P.cash<fiveP, action: () => {
+      P.cash -= fiveP;
       P.supplies = (P.supplies||0) + 5;
       P.dirtySupplies = (P.dirtySupplies||0) + 5;
       onBuy();
-      toast("- $18\n+ 5 packets (house cut)\nhe says 'amore.' he says it three times.");
+      toast(`- $${fiveP}\n+ 5 packets (house cut)\nhe says 'amore.' he says it three times.`);
       audio.coin(); saveGame();
     }},
     { label: "you no like?", action: () => {
@@ -2289,6 +2657,59 @@ function aggroNpc(n) {
 }
 function questToast(title) { toast('· QUEST COMPLETE ·\n'+title); audio.rankUp(); }
 
+// ---------- v13 wave 3: intro chain helpers ----------
+function tryCompleteIntroRemember() {
+  const q = state.quests.intro_remember;
+  if (!q || q.done) return;
+  const earned = (state.counters && state.counters.introCashEarned) || 0;
+  if (earned >= 10) {
+    q.done = true;
+    P.cred += 1;
+    questToast("I DON'T REMEMBER");
+    toast("you arrive somewhere by walking. who knew.", 2600);
+    // unlock intro_tony as the next available step
+    if (state.quests.intro_tony) state.quests.intro_tony.available = true;
+    saveGame();
+  }
+}
+
+function completeIntroSmoke() {
+  const q = state.quests.intro_smoke;
+  if (!q || q.done) return;
+  q.done = true;
+  P.cred += 2;
+  questToast('YOU SMOKE THE ROCK');
+  toast("you understand the loop.\nthe loop understands you.\nneither of you is happy about it.", 4200);
+  // un-suppress everything
+  if (!state.flags) state.flags = {};
+  state.flags.introDone = true;
+  // roll the first real set of hustles now that the world is open
+  rollHustles();
+  broadcastNews("the neighborhood notices you arrived. the neighborhood does not care.");
+  feedPost("smoked one on the crate.\nthe sun moved.\nthe loop greeted me.", '@crackheadcent');
+  saveGame();
+}
+
+// v13 wave 3 — pick a crown spot from the 6 candidates using a per-save seed so the location
+// is deterministic for the playthrough but varies between saves.
+function pickCrownSpot() {
+  // seed from day + character init time fingerprint (already-baked counter)
+  if (state.flags && state.flags.crownSpotIdx >= 0 && state.flags.crownSpotIdx < CROWN_SPOTS.length) {
+    return CROWN_SPOTS[state.flags.crownSpotIdx];
+  }
+  const idx = Math.floor(Math.random() * CROWN_SPOTS.length);
+  state.flags.crownSpotIdx = idx;
+  return CROWN_SPOTS[idx];
+}
+function startPigeonCrownQuest() {
+  const q = state.quests.pigeon_crown;
+  if (!q || q.done) return;
+  q.available = true;
+  const spot = pickCrownSpot();
+  state.crownPickup = { x: spot.x, y: spot.y, collected: false };
+  saveGame();
+}
+
 // ---------- SPAWN BOSS ----------
 function spawnBoss() {
   if (state.bossActive) return;
@@ -2414,6 +2835,13 @@ function onNpcDeath(n) {
   // alley kill counter for hustles
   if (['lurch','sherri','paulie'].includes(n.id)) {
     state.counters.alleyKills = (state.counters.alleyKills||0) + 1;
+  }
+  // v13 wave 3 — dave drops the crossword if he had it
+  if (n.id === 'dave' && state.flags && state.flags.daveHasCrossword && !state.flags.hasCrossword) {
+    state.flags.daveHasCrossword = false;
+    state.flags.hasCrossword = true;
+    P.inventory.push({id:'crossword', n:"barb's saturday crossword", q:1});
+    toast("a folded newspaper falls out of his coat.\n+ saturday crossword", 3000);
   }
   // mayor_of_4th — all 3 alley NPCs defeated this run
   const alleyDead = ['lurch','sherri','paulie'].every(id => npcs.find(x=>x.id===id)?.dead);
@@ -2682,11 +3110,22 @@ function updateWorld(dt) {
   }
   applyDayNight();
 
+  // v13 wave 3 — intro chain suppression. during the intro, suppress ambient phone calls,
+  // random world events, and hustle generation so day 1 is focused on the three intro beats.
+  // the mom intro tip is a separate forced timer (see momTipT below) and is NOT gated by this.
+  const introActive = state.flags && !state.flags.introDone;
+
   // phone calls every 90-240s
   state.phoneT = (state.phoneT||120000) - dt;
   if (state.phoneT <= 0) {
     state.phoneT = 90000 + Math.random()*150000;
-    if (Math.random() < 0.8) ringPhone();
+    if (!introActive && Math.random() < 0.8) ringPhone();
+  }
+
+  // v13 wave 3 — mom intro tip timer (~30s after game start, once per save)
+  if (state.flags && !state.flags.momIntroFired) {
+    state.momTipT = (state.momTipT == null ? 30000 : state.momTipT) - dt;
+    if (state.momTipT <= 0) fireMomIntroTipOnce();
   }
 
   // continuous hustle check (cheap, only re-evaluates undone hustles)
@@ -2697,7 +3136,7 @@ function updateWorld(dt) {
   state.eventT = (state.eventT||15000) - dt;
   if (state.eventT <= 0) {
     state.eventT = 15000 + Math.random()*20000;
-    fireRandomEvent();
+    if (!introActive) fireRandomEvent();
   }
 
   // ambient SFX scheduler
@@ -2776,7 +3215,67 @@ function updateWorld(dt) {
     if (dx*dx + dy*dy < 14*14) {
       c.collected = true; state.cashPilesCollected.add(c.id);
       P.cash += c.amt; audio.pickup();
-      toast(`+ $${c.amt}\n(found in a corner.)`, 1400);
+      // v13 wave 3 — intro_remember accumulator (counts only day-1 cash gains during intro)
+      if (state.flags && !state.flags.introDone) {
+        state.counters.introCashEarned = (state.counters.introCashEarned||0) + c.amt;
+      }
+      toast(c.intro ? `+ $${c.amt}\nyou bend down. the ten dollars is yours now.\n(it was always there.)` : `+ $${c.amt}\n(found in a corner.)`, c.intro?2400:1400);
+      tryCompleteIntroRemember();
+      saveGame();
+    }
+  }
+
+  // v13 wave 3 — intro_remember alt completion: any cash >= $10 during the intro
+  // (new save starts at $0; any source that gets you to $10 closes the loop).
+  if (state.flags && !state.flags.introDone && state.quests.intro_remember && !state.quests.intro_remember.done) {
+    if (P.cash >= 10) {
+      state.counters.introCashEarned = Math.max(state.counters.introCashEarned||0, 10);
+      tryCompleteIntroRemember();
+    }
+  }
+
+  // v13 wave 3 — pigeon crown world pickup. drawn in render pass.
+  if (state.crownPickup && !state.crownPickup.collected) {
+    const cp = state.crownPickup;
+    const dx = (P.x+P.w/2) - cp.x, dy = (P.y+P.h/2) - cp.y;
+    if (dx*dx + dy*dy < 18*18) {
+      cp.collected = true;
+      const slot = EQUIPMENT.pigeon_crown.slot;
+      P.equip[slot] = 'pigeon_crown';
+      applyEquipStats();
+      audio.coin();
+      toast("· the crown ·\nit is heavier than it looks.\nthe pigeons stop walking. they watch.\n+ EQUIPPED · the pigeon king's crown", 4500);
+      if (!state.quests.pigeon_crown.done) {
+        state.quests.pigeon_crown.done = true;
+        questToast("THE PIGEON KING'S LOST CROWN");
+        unlockAchievement('head_that_wears');
+      }
+      saveGame();
+    }
+  }
+
+  // v13 wave 3 — stripe's package auto-delivery near the conductor (within 60px)
+  if (state.flags && state.flags.hasStripePackage && state.mode === 'playing') {
+    const cn = npcs.find(n=>n.id==='conductor');
+    if (cn && !cn.dead) {
+      const dx2 = (P.x+P.w/2)-(cn.x+cn.w/2);
+      const dy2 = (P.y+P.h/2)-(cn.y+cn.h/2);
+      if (dx2*dx2+dy2*dy2 < 60*60) {
+        state.flags.hasStripePackage = false;
+        P.inventory = P.inventory.filter(i => i.id !== 'stripe_package');
+        if (state.quests.stripe_package && !state.quests.stripe_package.done) {
+          state.quests.stripe_package.done = true;
+          P.cash += 40; P.cred += 3;
+          questToast("STRIPE'S PACKAGE");
+          unlockAchievement('exact_change');
+        }
+        audio.coin();
+        dialogue('THE CONDUCTOR',
+          "the conductor unfolds the package without looking at it.\n'stripe's name. stripe's money.\nyou are stripe's leg.\nit is monday.'", [
+            { label: '+$40 · +3 cred · leave.', action: () => {} },
+          ]);
+        saveGame();
+      }
     }
   }
 
@@ -3114,12 +3613,41 @@ function drawAll() {
     if (c.collected) continue;
     const dx = (P.x+P.w/2) - c.x, dy = (P.y+P.h/2) - c.y;
     const close = (dx*dx + dy*dy) < 60*60;
-    if (state.tweakerT > 0 || close) {
+    // intro pile is always visible (it's the tutorial breadcrumb)
+    const alwaysVisible = !!c.intro;
+    if (state.tweakerT > 0 || close || alwaysVisible) {
       ctx.fillStyle = state.tweakerT>0 ? '#80ff80' : '#e8c040';
       ctx.fillRect(c.x-4, c.y-3, 8, 6);
       ctx.fillStyle = '#604020';
       ctx.fillRect(c.x-3, c.y-2, 6, 1);
+      // gentle pulse glow on the intro pile so day-1 player notices it
+      if (alwaysVisible) {
+        const t = (Math.sin(performance.now()/220)+1)/2;
+        ctx.fillStyle = `rgba(232,192,64,${0.18 + t*0.18})`;
+        ctx.fillRect(c.x-8, c.y-6, 16, 12);
+      }
     }
+  }
+
+  // v13 wave 3 — pigeon crown world pickup (visible whenever the quest is active)
+  if (state.crownPickup && !state.crownPickup.collected) {
+    const cp = state.crownPickup;
+    const t = performance.now()/200;
+    const bob = Math.sin(t)*2;
+    // base
+    ctx.fillStyle = '#a07a18';
+    ctx.fillRect(cp.x-7, cp.y-3+bob, 14, 5);
+    // band points
+    ctx.fillStyle = '#e8c040';
+    ctx.fillRect(cp.x-7, cp.y-8+bob, 3, 6);
+    ctx.fillRect(cp.x-2, cp.y-9+bob, 3, 7);
+    ctx.fillRect(cp.x+3, cp.y-8+bob, 3, 6);
+    // gem
+    ctx.fillStyle = '#d488d4';
+    ctx.fillRect(cp.x-1, cp.y-7+bob, 2, 2);
+    // halo
+    ctx.fillStyle = `rgba(232,192,64,${0.2 + Math.sin(t*1.5)*0.12})`;
+    ctx.fillRect(cp.x-12, cp.y-12+bob, 24, 18);
   }
 
   // NPCs
@@ -3960,6 +4488,23 @@ function drawNpc(n) {
     ctx.font = 'bold 14px Courier New';
     ctx.fillText('!', n.x+n.w+2, n.y+8 + bounce);
   }
+  // v13 wave 3 — unvisited-vendor "?" floater. fades on first dialogue open.
+  // never on hostile or aggro'd npcs (would clash with the aggro "!" and read weird).
+  if (VENDOR_FLOATER_IDS.has(n.id) && !state.metVendors.has(n.id) && !n.aggro && !n.hostile) {
+    const bob = Math.sin(performance.now()/360 + (n.x*0.013)) * 2;
+    const fy = n.y - 16 + bob;
+    const fx = n.x + n.w/2;
+    ctx.save();
+    ctx.globalAlpha = 0.78;
+    ctx.fillStyle = '#0a0805';
+    ctx.font = 'bold 16px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('?', fx+1, fy+1);
+    ctx.fillStyle = '#e8c040';
+    ctx.fillText('?', fx, fy);
+    ctx.textAlign = 'left';
+    ctx.restore();
+  }
   // chatter bubble
   if (n.chatterT > 0 && n.chatter) {
     const tw = n.chatter.length * 5.4 + 8;
@@ -4188,6 +4733,21 @@ function tryInteract() {
     if (best.id === 'pete' && best.shopClosed) {
       toast("pete is sleeping inside.\n'we open at 6.'", 1800); return;
     }
+    // v13 wave 3 — first-time interaction with a tracked vendor lifts the "?" floater
+    // and adds them to the people-met index.
+    if (VENDOR_FLOATER_IDS.has(best.id)) {
+      const first = !state.metVendors.has(best.id);
+      state.metVendors.add(best.id);
+      if (first) saveGame();
+      // intro_tony auto-completes the moment the player opens tony's dialogue
+      if (best.id === 'tony' && state.quests.intro_tony && state.quests.intro_tony.available && !state.quests.intro_tony.done) {
+        state.quests.intro_tony.done = true;
+        P.cred += 1;
+        questToast('THE MAN AT THE CORNER');
+        toast("he charges ten dollars. that is the price.\nhe does not negotiate. sometimes he does.", 3400);
+        if (state.quests.intro_smoke) state.quests.intro_smoke.available = true;
+      }
+    }
     best.interact(best);
   }
 }
@@ -4326,6 +4886,8 @@ const WEAPONS = {
   shoe:         { n:"a shoe (tony's)",      dmg: 10, reach: 14, cd: 340, swing:'sole' },
   baguette:     { n:"a stale baguette",     dmg: 4,  reach: 16, cd: 240, swing:'crumble' },
   microphone:   { n:"a karaoke microphone (just the cord)", dmg: 7, reach: 18, cd: 360, swing:'whip' },
+  // v13 wave 3 — stripe's bait knife (possible outcome of opening the package)
+  knife:        { n:"a knife (handle taped)",   dmg: 14, reach: 8,  cd: 260, swing:'stab' },
 };
 
 function pickupWeapon(id) {
@@ -4440,9 +5002,18 @@ function blockMenu() {
       state.flash = 1; state.flashColor = 'rgba(232,192,64,.5)';
       toast('· smoke a rock ·\nthe sun moves.\nbrain -4. shakes -50.', 2500);
       feedPost("smoked a rock at the block. for the bit.", '@crackheadcent');
+      // v13 wave 3 — completes the intro chain
+      completeIntroSmoke();
       saveGame();
     }
   });
+  // v13 wave 3 — open stripe's package "alone, where no one sees" (the block is home)
+  if (state.flags && state.flags.hasStripePackage) {
+    opts.push({
+      label: "open stripe's package. (alone, no one is watching.)",
+      action: () => openStripePackage()
+    });
+  }
   opts.push({
     label: "sleep until morning. (+50 hp · +25 brain · -1 wanted)",
     action: () => {
@@ -4661,8 +5232,10 @@ function startGame(loaded) {
       plateStolen: 0, stripeBetrayed: 0, pigeonTrade: 0,
       peteSold: 0, alleyKills: 0, dumpDives: 0, slept: 0,
       tacosEaten: 0, laundryDone: 0, bigPan: 0,
+      pigeonVisits: 0, stripeVisits: 0, barbVisits: 0, introCashEarned: 0,
+      pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
     };
-    Object.values(state.quests).forEach(q => q.done = false);
+    Object.values(state.quests).forEach(q => { q.done = false; if (q.available === true) q.available = q.intro?undefined:false; });
     state.day = 1; state.dayTime = 0.35;
     state.weather = 'clear';
     state.combo = 0;
@@ -4670,13 +5243,35 @@ function startGame(loaded) {
     P.cartMounted = false;
     P.hasPossum = false;
     state.hustles = null;
+    // v13 wave 3 — fresh save state for discoverability + intro chain
+    state.metVendors = new Set();
+    state.flags = {
+      introDone: false, momIntroFired: false, hasStripePackage: false,
+      stripeBetrayed: false, daveHasCrossword: false, hasCrossword: false, crownSpotIdx: -1,
+    };
+    state.crownPickup = null;
+    state.momTipT = 30000; // ~30s into the new save
+    // intro chain seeds
+    if (state.quests.intro_remember) { state.quests.intro_remember.available = undefined; state.quests.intro_remember.done = false; }
+    if (state.quests.intro_tony)     { state.quests.intro_tony.available = false; state.quests.intro_tony.done = false; }
+    if (state.quests.intro_smoke)    { state.quests.intro_smoke.available = false; state.quests.intro_smoke.done = false; }
+    // new save starts broke. find the ten dollars.
+    P.cash = 0;
+    P.charisma = 0;
+    P.barbAside = false;
+    state.barbAside = false;
   }
   spawnNpcs();
   spawnCashPiles();
   applyEquipStats();
   rollHustles();
   state.mode = 'playing';
-  toast('you wake up on the sidewalk.\nyour mouth tastes like a battery.\n(Q to see today\'s hustles.)', 3500);
+  // v13 wave 3 — different first-toast for the intro
+  if (!loaded && state.flags && !state.flags.introDone) {
+    toast("you wake up on the sidewalk.\nyour mouth tastes like a battery.\nyou do not remember.\n(Q to see what's next.)", 4200);
+  } else {
+    toast('you wake up on the sidewalk.\nyour mouth tastes like a battery.\n(Q to see today\'s hustles.)', 3500);
+  }
   // initial feed posts
   feedPost("woke up.\nstill in the neighborhood.\nfeels like a tuesday.", '@crackheadcent');
   feedPost("good morning. tony has not blinked.", '@tony_observer');

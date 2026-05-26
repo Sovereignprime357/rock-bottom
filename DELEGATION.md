@@ -4,6 +4,23 @@
 
 ---
 
+## v13 wave 3 — SHIPPED ✓ (May 26, 2026)
+
+- [x] **Discoverability layer** — `state.metVendors` Set tracks first dialogue per vendor. Bobbing "?" floater above unmet vendors (13 canonical NPC ids), fades on first interaction. Q-key gets a "PEOPLE YOU'VE MET" section showing only met vendors with their zone + one-line tagline (`VENDOR_INDEX_META`).
+- [x] **"The day you arrived" 3-quest intro chain** — `intro_remember` / `intro_tony` / `intro_smoke`, FORCED on new saves. Suppresses hustles + random events + ambient phone calls until `state.flags.introDone = true`. $10 pile guaranteed in THE BLOCK. New saves start at $0 cash. Existing saves default `introDone = true` and skip.
+- [x] **Mom first-day phone tip** — fires once ~30s into a new save (`state.flags.momIntroFired`), exempt from intro suppression.
+- [x] **Side quest: `pigeon_crown`** — pigeon king offers after 2 visits. Spawns crown at 1 of 6 deterministic spots. Pickup adds cursed hat (-3 cred, +1 charisma) and unlocks HEAD_THAT_WEARS.
+- [x] **Side quest: `stripe_package`** — stripe offers after 3 visits. Deliver to conductor (auto on proximity) for +$40 +3 cred + EXACT_CHANGE. Or open at the crate for one of 4 outcomes (brick / soaps / knife / wire bait) + WHAT_S_IN_THE_BOX. Opening permanently sets `stripeBetrayed` flag — stripe goes hostile-text, fencing closed.
+- [x] **Side quest: `barb_crossword`** — barb mentions on visit 2 (sets `daveHasCrossword`). Demand from dave: cred ≥3 free, else $20 ransom or fight. Killing dave also drops it. Return to barb for free packet + the "BLAME" reveal + SEVEN_ACROSS.
+- [x] **Charisma stat** — hidden field on P, summed from EQUIPMENT charisma values via `applyEquipStats()`. Currently only `pigeon_crown` provides +1. `vendorPrice(base)` helper applies 10% discount when ≥1. Plumbed into tony/barb/pinky/stripe price calc.
+- [x] **Q-key UI overhaul** — tri-state QUESTS (active / available / done) with reward preview, plus the PEOPLE YOU'VE MET index.
+- [x] **4 new achievements** — HEAD_THAT_WEARS, EXACT_CHANGE, WHAT_S_IN_THE_BOX, SEVEN_ACROSS.
+- [x] **New weapon: `knife`** — dmg 14, reach 8, cd 260. A possible drop from opening stripe's package.
+
+Notes from shipping: the intro chain auto-completion threshold for `intro_remember` is "any cash >= $10" since the player starts at $0 — this preserves the brief's "any source" path while keeping the dedicated $10 pile as the discoverable breadcrumb. The pile is always-visible (not gated behind tweaker vision) with a gentle pulse glow to read as the tutorial target. Crown locations use a per-save seed (`state.flags.crownSpotIdx`) so the spot is deterministic for the playthrough but varies between saves. The stripe-package "open" UX is surfaced exclusively from the BLOCK's `blockMenu` ("open stripe's package. alone, no one is watching.") — the block is home, opening it anywhere else would feel weird.
+
+---
+
 ## v13 wave 2 — SHIPPED ✓ (May 26, 2026)
 
 - [x] **Sprite parity pass** — Baggie Barb got her own palette (faded purple house dress, gray hair, beige skin) and no longer shares launderlady. cubscout / jogger / busker / dogwalker each got a distinct palette in PALS (they had npcStyles entries but were falling through to PALS.tony — every "ambient pedestrian" looked like a small tony).
@@ -134,7 +151,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 3-4 hours
 
 ### 5. Quest log UI (Q key)
-**Status:** Backlog
+**Status:** Shipped in v13 wave 3 (with onboarding chain + side quests + people-met index). Original spec below preserved for archeology.
 **Why:** Without it, players don't know about The Conductor's copper trade, Father O'Malley's tic-tac, etc.
 **Spec:**
 - Press Q: opens quest panel (same style as inventory)
