@@ -385,3 +385,112 @@ v11 had the copper heist mechanically complete but gated behind rank 4 (100 cred
 - The `state.quests.finisher` field is added to the default quests object now; old v8 saves merging into it works because `Object.assign({}, state.quests, sv.quests || {})` keeps the new default if not in the save.
 - `setTimeout` on the smell wanted-bump toast: chosen so the batch toast lands first, then the consequence. Watch in case browser tab loses focus.
 - `audio.glassBreak()` reused for cook complete — chiptune-appropriate but if it gets too samey, write a `audio.cook()` synth (sawtooth 200→90hz, brief). v13 polish.
+
+---
+
+## Session 2026-05-26 · v13 wave 5 · combat patterns + fallen priest
+
+### WHAT
+Replaced the v12-era "every hostile is a chase-biter with different stats" model with a proper archetype dispatch in `updateNpc`. Five archetypes (`charger` / `grabber` / `swarmer` / `ranged` / `cop`) each have their own AI branch keyed off `n.archetype`. Added a generic projectile system (`projectiles[]`, kinds `bottle` + `holy`) for ranged attackers. Reframed both bosses' phases as PATTERN shifts, not just HP/speed scaling — tony p2 converts to charger + spawns sherri adds, p3 goes berserk; brutus_older p2 adds swarmers every 8s, p3 berserk + grabber-on-contact. New side quest `fallen_priest` (two trigger paths) flips FATHER O'MALLEY in-place into `omalley_fallen` (archetype `priest_fallen`, 160 HP, ranged-holy → dasher phase machine). Death drops $200 + `priest_collar` (slot `hat`, +2 cred, wantedDecay ×1.3). 3 new achievements (FALLEN / DODGED_THE_LUNGE / OUTRAN_THE_PRIEST). New status timers `P.stunT` (grabber) + `P.slowT` (holy water). Hit-stun 120ms baseline on every NPC damage tick. Cop radio-for-backup loop. Save key unchanged.
+
+### WHY
+1. **Combat felt flat.** v12/wave 4 had 8 distinct hostile types, but on the player side every fight read the same — close to range, hold SPACE. Adding archetypes makes each hostile *demand a different response*: charger wants you reading windups and dodging perpendicular; grabber wants you to break contact before he grabs; swarmer wants you to kill her first before the sibling lands; ranged wants you to close OR break LOS; priest_fallen wants both halves of the fight learned.
+2. **Boss phases were just numbers.** v12 brutus phases were "HP threshold → speed +X, dmg +Y." Functionally the same fight, slightly faster. Reframing phase entry as a PATTERN shift (with a flavor toast + add spawn + archetype mutation) gives each boss three readable acts.
+3. **The priest was a hanging thread.** Stealing the collection plate flagged hostile but never had a payoff — the priest as a normal-stat hostile was a non-event. Promoting him to a true mini-boss with his own quest closes the church arc and finally rewards the steal-plate dialogue option with consequences worth caring about.
+
+### WHAT CHANGED
+
+1. **Archetype dispatch in `updateNpc` (line 4084)** — `const arch = n.archetype || 'default'` switches into the per-archetype branch. Default branch (cops without archetype, larry, dave-on-aggro) preserves the v12 chase-bite flow exactly. Each archetype gets ~30-50 lines of dedicated logic.
+2. **CHARGER (line 4090)** — `charger` and `charger_older` share the machine; `n.berserk` flag adds a 3rd tier. State machine: `idle → windup (red tint + giant `!` + audio.windup) → lunge (vector locked at windup-start) → cooldown (vulnerable: +25% playerAttack damage)`. Tunings vary by tier: standard windup 800/lunge 1000ms/2.0×, older 550/1400/2.4×, berserk 400/800/3.0×. DODGED_THE_LUNGE unlocks first time a lunge ends without `n.chargeLanded`.
+3. **GRABBER (line 4171)** — `lurch`. Default chase + on-contact: damage ×1.3, sets `P.stunT = 500ms` (input lock), 200ms post-grab freeze on the NPC for arms-extended pose. First-grab-per-encounter toast: "GRABBED.\nhis arms are too long."
+4. **SWARMER (line 4196)** — `sherri`. Speed ×1.4, dmg ×0.6. On aggro (in `aggroNpc`, line 3175) calls `spawnSwarmerSibling(parent)` if liveSwarmers < 2 — pushes a clone 60px offset with id `sherri_<random>`. Cap 2 total. Toast: "another one shows up.\nit has the same haircut."
+5. **RANGED (line 4212)** — `paulie`. Maintains 180-260px envelope (back off if d<180, advance if d>260). Throws bottles every 1500ms via `spawnProjectile({kind:'bottle', wobble:0.20})`. 350ms aim-raise telegraph with `*` particle. Panic-chase 1s if player closes to <120px.
+6. **`spawnProjectile()` helper (line 3204)** — generic primitive. Computes velocity from `(x,y) → (tx,ty)`, applies optional angle wobble, pushes onto `projectiles` array. Kind drives only visuals + impact-side-effects; motion + collision + pool-cap are shared.
+7. **Projectile update loop (line 4438)** — runs in `updateWorld` after particles. Linear motion (`vx,vy` in px/sec, dt-normalized), wall collision against solid BUILDINGS, world-edge despawn, player overlap → `damagePlayer(dmg)` + optional `P.slowT = slowMs`. Pool capped at 40. Kind-specific impact particles (brown shards for bottle, cyan glow for holy).
+8. **Projectile render (in `drawAll`)** — between particles and player. Bottle: rotating amber rectangle. Holy water: pulsing cyan vial with a + cross.
+9. **Tony boss phase machine (line 4481)** — three thresholds (66%, 33%). p2 sets `archetype='charger'`, resets charge state, speed 2.4, spawns 2 sherri swarmers ±80px, toast: "tony tears off coat #2.\nhe is faster now.\nhe whistles. someone answers." p3 sets `berserk=true`, speed 3.0, dmg 16, triple-stack bossRoar, toast: "tony tears off coat #3.\nhe is not slowing down.\nhe is speeding up."
+10. **Brutus Older boss phase machine (line 4535)** — parallel structure on `state.brutusOlderNPC` / `state.brutusOlderPhase`. p1 already charger_older from spawn. p2 toast "he was warming up before." starts an 8s add-spawn timer that pushes sherri swarm pairs (cap 2). p3 sets `bo.berserk = true; bo.grabber = true`, toast "he doesn't bite anymore.\nhe grabs." — the contact code in the charger branch reads `n.grabber` and stacks the stun on lunge contact.
+11. **FALLEN PRIEST (line 4263)** — archetype `priest_fallen`. Phase 1 (HP ≥50%): ranged-holy. Maintains 180-280px with orbital strafing inside the band. Throws holy water vials every 1200ms via `spawnProjectile({kind:'holy', dmg:22, slowMs:1500, wobble:0.18})`. 350ms cyan-glow telegraph. Phase 2 (HP <50%): dasher — same charger state machine but priest-tuned (windup 500ms, lunge 900ms, ×2.4, cd 1200ms). Lunge contact applies the slow as well as damage. One-shot phase transition toast: "the lord is not here.\nthe lord left.\nhe took the bus."
+12. **`triggerFallenPriestTransform()` (line 2265)** — flips the existing `priest` NPC entity in place. Sets `id='omalley_fallen'`, archetype, hostile+aggro, doubles HP to 160, darkens color to `#2a1a2a`, sets `isOmalleyFallen=true`. Audio bossRoar + screen shake 14 + purple flash. Canonical line: "father o'malley does not stand up.\nhe is already standing.\nthe collar comes off.\nthe smile is wrong."
+13. **Two trigger paths**:
+    - **Steal path** — inside `priestDialogue`, ≥4 priest visits + at least 1 prior steal attempt fires the transform on next "steal the collection plate" tap.
+    - **Quest path** — `maybeFireFallenPriestCall()` (line 2300) fires once when rank≥3, church-visits≥3, intro done, and call not yet fired. Plays `ringPhone({from:'unknown number', text:"father o'malley says the church belongs to whoever has the keys.\nyou don't."})`. Quest flips to `available`. Player still has to walk back into the church + try to steal to trigger the actual transform.
+14. **`priest_collar` equipment (line 384)** — `slot:'hat'`, `cred:+2`, new `wantedDecay:0.3` field (additive to a 1.0 base multiplier in `manageCops`). Drops on omalley_fallen death via cash-pile branch (line 3915) with `equipId:'priest_collar'` field. Pickup binds to head slot. Renders as a small white band with a black center seam at world coords.
+15. **`P.stunT` + `P.slowT` (line 1362)** — both ephemeral, never persisted. `stunT` blanks movement+attack+interact in their respective handlers (early-return when >0). `slowT` multiplies player speed ×0.5 in `updatePlayer` (line 3675).
+16. **Hit-stun (n.hitStun)** — set to 120ms on every `playerAttack` damage tick. Most NPC AI branches early-return when `n.hitStun > 0`. Knockback bumped from 6 to 8 px on the same hit path. Makes combat feel chunkier without changing damage numbers.
+17. **Charger vulnerability** — `playerAttack` damage gets ×1.25 multiplier when `(n.archetype === 'charger' || 'charger_older') && n.chargeState === 'cooldown'` (line 3308). Rewards reading the lunge → striking on the pant.
+18. **Cop radio-for-backup** — in the default branch when target is a cop and distance >120px, 25%/sec chance to schedule `spawnCop(...)` after 5s, capped at COP_HARD_CAP=4 total. Brendan does NOT radio (his branch is unchanged).
+19. **Quest entry `fallen_priest`** (line 1452) — title "THE FALLEN PRIEST", flav "the priest has been wrong for a while. someone should say so." Default `available:false`, `done:false`. Auto-set `available=true` via either trigger path. Closed via omalley_fallen death handler (line 3394) with rewards + questToast.
+20. **3 new achievements (lines 458-460)** — `fallen` ("put father o'malley on the ground. the church is quiet."), `dodged_the_lunge` ("sidestep a charger's lunge. it lands on nothing."), `outran_the_priest` ("survive father o'malley fallen for 60 seconds. the lord is busy.").
+21. **SPEC.md update** — full COMBAT PATTERNS section (line 412), archetype table, projectile system spec, boss-phases-as-pattern-shifts subsection, status effects, hit-stun, charger vulnerability. Plus FALLEN PRIEST section (line 462) with the two trigger paths, transform, reward, survival achievement.
+
+### DECIDED, REASONING
+
+- **Why dispatch by `n.archetype` string, not inheritance / function refs**: the NPC list is data-driven (PALS / npcs[] / serialized save). A string tag survives the save/load roundtrip naturally; a function ref does not. Plus the dispatch is one switch in one place — easy to find, easy to extend. Adding a 6th archetype = add a tag + one branch.
+- **Why default branch preserves chase-bite exactly**: 60% of hostiles in the world (larry, dave, generic cops, alley crackheads, brendan) shouldn't change behavior — that would invalidate v12 muscle memory. Only the NPCs with declared archetypes get new patterns. Brendan's taser state machine is its own pattern (legacy from wave 2), kept untouched.
+- **Why boss phase = PATTERN swap, not just HP gating**: the old "phase 2 = +20% speed" was invisible to a non-attentive player. Spawning adds + toast + archetype mutation makes the phase entry FEEL like a fight changing. Sells the rank-4 stakes.
+- **Why fallen priest transforms the SAME entity (mutate in place), not spawn a new NPC**: continuity. The player has a relationship with father o'malley (visited him, possibly stole from him). Spawning a new NPC at the same position breaks the entity identity and the dialogue history. Mutating his id + archetype + stats preserves "this is the same priest, he just fell." The corpse on death is the same model — there is no priest to come back to.
+- **Why TWO trigger paths and not just one**: the steal path rewards the player who already wronged the priest organically. The phone-call path opens the door for players who never tried stealing (a moralist run never sees the priest fall otherwise). Both converge on the same transform — the actual fall still requires walking into the church and steal-attempting, which gives the player one clear narrative beat ("you decide to do it").
+- **Why HP 160 (double the priest's 80)**: he needs to survive long enough to use both phases. Phase 1 (ranged-holy) lasts until 50% HP, so on 80 HP that's a 40 HP window — barely enough to throw 3 vials. At 160, phase 1 lasts ~80 HP = ~6 throws = a real ranged section.
+- **Why holy water = slow not stun**: stun stacks awkwardly on the grabber. Slow lets the player keep agency (still inputs, just sluggish), which is more interesting against a kiting enemy — you have to *try* harder to close, not stand frozen.
+- **Why projectile pool cap = 40**: paranoia gate. Realistic max in normal play is ~4-6 alive at once (one ranged NPC throwing every 1.2-1.5s, projectiles last 4s). 40 is 10× headroom against pathological cases (multiple fallen priests, world-edge griefing).
+- **Why projectile collision against solid buildings + world edge, not against NPCs**: friendly-fire would be funny once but undermine the AI cohesion ("paulie killed lurch by missing me"). Plus the math doubles the per-projectile cost.
+- **Why hit-stun 120ms (not 200ms / not 80ms)**: 120ms is one frame past the human reaction threshold (~200ms). The player FEELS the hit-stun as chunkiness without noticing it as a freeze. Tested longer (200ms) — felt slow. Shorter (80ms) — invisible.
+- **Why charger vulnerability bonus = ×1.25 (not ×1.5 or ×2.0)**: the cooldown window is already vulnerable (NPC doesn't attack during it). Stacking a damage multiplier rewards the dodge but doesn't trivialize the boss. ×1.5 would let you melt a charger in two cycles; ×1.25 keeps it at three.
+- **Why priest_collar slot = hat (not collar/jewelry)**: existing slot system has 4 (shoes/hat/coat/tool). Inventing a "neck" slot for one item is overengineering. The collar reads as a head-area accessory; the +2 cred is the meaningful stat anyway.
+- **Why wantedDecay on the collar (and not on something else)**: thematically the collar grants "the cops give you the religious benefit of the doubt." Mechanically it's a stat that has no other equipment representation yet — gives the collar a unique reason to exist beyond cred. Additive 0.3 (so manageCops decay rate goes from 1.0× → 1.3×) — a real but not gamebreaking effect.
+- **Why phone call uses `ringPhone()` with a typeof-check fallback to `toast()`**: defensive — older code paths or save states might not have ringPhone wired. The toast fallback preserves the line. Quote-style line wraps the spoken portion in single quotes so it reads as dialogue inside the SMS-style frame.
+- **Why cop radio cap = 4 / why only at d>120**: 4 cops is "manageable swarm" — more makes the screen unreadable. The d>120 gate prevents a melee-locked cop from calling backup mid-grapple (would feel cheap).
+
+### TRIED, ABANDONED
+
+- Considered making the swarmer's sibling DIFFERENT (e.g. a male relative with a different palette). Abandoned: the joke is "another one shows up. it has the same haircut." A different sprite undermines the gag. Same model + offset reads as funnier and is one fewer thing to maintain.
+- Considered giving the ranged archetype an ammo counter (5 bottles, then he stops). Abandoned: the throw interval is already a soft limit. Ammo would add an inventory + reload cycle that breaks the unit's silhouette.
+- Considered making holy water a stackable slow (each vial adds 500ms). Abandoned: stacks the slow into unplayability if the priest lands 3 vials in a row. Capping via Math.max preserves the single-vial difficulty curve.
+- Considered the fallen priest dropping the holy water vials as throwable consumables for the player. Abandoned: adding a player-side throw system + new inventory item + a UI for it is wave-6 scope. The collar is the right-size reward for the scope.
+- Considered making the boss phase transitions stackable (tony p2 happens while p3 is also true if HP drops fast). Abandoned: the toasts overlap, the state mutations conflict, the boss roar triple-fires. Sequential `if (newPhase !== state.bossPhase)` gating is cleaner and the player rarely flies through both thresholds in one frame anyway.
+- Considered putting the cop radio behavior on EVERY cop instance including brendan. Abandoned: brendan is already a mini-boss with the taser machine; layering radio would compound difficulty during a wanted spike. Generic cops radio, brendan does not.
+- Considered making the fallen priest re-spawnable (kill him, he respawns 5min later as the regular priest). Abandoned: kills the finality of the FALLEN achievement and the quest closure. The pews are still wrong is the canon ending.
+
+### COUNTEREXAMPLE HUNT
+
+- Save from v13 wave 4 loads into wave 5: no archetype on existing NPCs in the save → falls through to default branch. ✓
+- `n.archetype` typo (e.g. 'Charger' caps) → no branch matches, default fires. Safe failure mode. ✓
+- Charger windup with player in walk-around-radius: windup vector locked at start → if player sidesteps before the lunge fires, lunge whiffs → `chargeLanded` false → DODGED_THE_LUNGE unlocks. ✓
+- Grabber stun while smoking at the crate: smoke gate reads input independently of `P.stunT`? Verified — `P.stunT` gates movement/SPACE/E in their handlers; blockMenu has its own button-click path. Player can still smoke through grab (canonical comedy: the crackhead doesn't even feel it). ✓
+- Swarmer with already 2 live siblings: `spawnSwarmerSibling` guards `if (liveSwarmers.length >= 2) return`. No spam. ✓
+- Ranged paulie throws into a building: projectile collides on next frame → despawned, no damage. ✓
+- Holy water lands on player who is already slowed: `P.slowT = Math.max(P.slowT||0, 1500)` → no stack, just refreshed. ✓
+- Tony phase 2 entry while berserk-already (impossible state but) → guarded by `newPhase < 2` check, no re-entry. ✓
+- Brutus older p2 swarm spawn while already at cap → `liveSwarm.length < 2` guard skips the spawn. ✓
+- Fallen priest call already fired but flag wiped (legacy save) → `state.flags.omalleyFallen` guard prevents re-trigger. ✓
+- Fallen priest call fires while intro NOT done → `!state.flags.introDone` returns early. ✓
+- Quest path: rank3 + church-visits=3 but priest already dead from steal path → guard `state.flags.omalleyFallen` returns early. ✓
+- Steal path: priest never visited 4 times → menu branch not present. ✓
+- Player kills priest BEFORE phase 2 (high burst damage at >50% HP): phase 2 toast still fires from a death handler? Checked — phase 2 transition is HP-threshold-based; if death undercuts 50% by overkill, phase 2 fires once on the same frame. Toast lands. OUTRAN_THE_PRIEST counter resets at death so it doesn't fire. ✓
+- OUTRAN_THE_PRIEST timer with fallen priest off-screen but alive: counter still increments (it tracks alive-on-map, not visible). At 60s tick the achievement fires whether priest is visible or not. ✓
+- Collar pickup with hat slot already occupied (pigeon_crown): old hat returns to inventory, collar binds. Same pattern as other hat equips. ✓
+- Wanted decay with collar equipped at wanted=0: still 0, multiplier on 0 is 0. No glitch. ✓
+- Save mid-cookmini + boss phase transition: phase state is on `state.bossPhase`, persisted; cookmini is not persisted. Reload drops you to playing with boss at last saved HP + phase. ✓
+- Cop radio with COP_HARD_CAP=4 already alive: spawnCop guard skips. ✓
+- Projectiles array hits the 40 cap (paranoia): `projectiles.splice(0, ...)` drops oldest. No leak. ✓
+- Projectile vs world-edge despawn while damaging — order matters: collision check runs BEFORE life-decay/edge despawn. Damage applied first, then despawn. ✓
+
+### NEXT
+
+- The cop radio cap at 4 might be too low for late-rank players who can solo 4 cops easily. Watch for "wanted level feels weightless past rank 4."
+- The fallen priest fight is balanced for ~rank 3 (the trigger gate). A late-game player at rank 5+ may stomp it. Possible: scale `n.maxHp` by `1.0 + (P.rank-3)*0.25` at transform time.
+- Holy water `slow` is only used by the priest. If another ranged enemy gets added (gunner? sniper?), reuse the slowMs param rather than inventing a new status.
+- Projectile system has room for a 3rd kind (`coin`? for the conductor? `bottle_thrown_back` for a reflect mechanic?) — generic enough that adding is just a new kind switch + render branch.
+- Watch for boss phase 2 + brutus_older p3 adds compounding offscreen: if a brutus_older p3 fight is going while tony p2 fires elsewhere, 4 sherri swarmers could coexist. Cap is per-fight scoped; consider a global swarmer cap if it becomes a problem.
+- v13 wave 6 backlog: tweaker vision (#3), boss music (#11), unique BARB sprite (#1 — still pending from wave 2 era — wave 2 partially addressed via palette).
+
+### GOTCHA
+
+- The `priest_fallen` archetype branch is the longest of any single archetype — ~90 lines including both phases. If a 3rd phase is ever added, factor the phase-1 and phase-2 helpers into separate functions.
+- `n.berserk` is a flag, not an archetype. Berserk chargers still match `arch === 'charger'`. Worked correctly because berserk tunings are layered on top of the charger tunings in the same branch.
+- `P.stunT` reads as 0 when undefined; all sites use `Math.max(P.stunT||0, x)` for safety. Same for `P.slowT`.
+- The fallen priest phone call uses `ringPhone({from:'unknown number', ...})`. If `ringPhone` becomes a real ring-back loop in a future wave, the unknown-number sender will need a non-callback identity (it's not in CONTACTS).
+- The `priest_collar` `wantedDecay` field is read by `manageCops` (line ~3536) as `wantedDecayMult` — additive to base 1.0. Forward-compat: a future item that also reduces wanted decay should add to the same multiplier, not invent a new field.
+- Boss phase machine assumes `state.bossPhase` exists on save load. Default-init to 1 in `loadGame` (verified, otherwise the `< state.bossPhase` check NaN-fails).
+- `OUTRAN_THE_PRIEST` counter uses `state.counters.omalleyFallenSurviveT`. Don't accidentally reset it in a generic `state.counters = {}` reset path (none exist currently, but flag for future refactors).

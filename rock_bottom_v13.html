@@ -379,6 +379,9 @@ const EQUIPMENT = {
   // v13 wave 4 — propane torch unlocks the 4th cook mode. fits in the new 'tool' slot.
   // no movement / hp / cred mods — it's a kitchen tool, not a fit.
   propane_torch: { slot:'tool',  n:"a propane torch (dented)",        speed: 0, cred: 0,  hp: 0 },
+  // v13 wave 5 — taken from father o'malley fallen. cred for showing up in a thing you didn't earn.
+  // wantedDecay is a multiplier on the cop-decay timer (1.3 = 30% faster) applied in manageCops.
+  priest_collar: { slot:'hat',   n:"the priest's collar (reversed)",  speed: 0, cred: 2,  hp: 0, wantedDecay: 0.3 },
 };
 
 // ---------- v13 wave 3: discoverability + vendor index ----------
@@ -451,6 +454,10 @@ const ACHIEVEMENTS = {
   the_heat_held:        { name:"THE HEAT HELD",        flav:"perfect a cook. the needle was steady. so were you." },
   soap_tongue:          { name:"SOAP TONGUE",          flav:"smoke a soap rock. you knew. you knew." },
   controlled_burn:      { name:"CONTROLLED BURN",      flav:"burn a batch and still walk away. the smell stays." },
+  // v13 wave 5 — combat depth achievements
+  fallen:               { name:"FALLEN",               flav:"put father o'malley on the ground. the church is quiet." },
+  dodged_the_lunge:     { name:"DODGED THE LUNGE",     flav:"sidestep a charger's lunge. it lands on nothing." },
+  outran_the_priest:    { name:"OUTRAN THE PRIEST",    flav:"survive father o'malley fallen for 60 seconds. the lord is busy." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -1235,6 +1242,13 @@ const audio = {
   carDoor() { this.tone(120, .08, 'square', .04, 80); this.tone(80, .06, 'sawtooth', .03, 50); },
   cough() { this.noise(.12, .03); this.tone(220+Math.random()*40, .08, 'sawtooth', .03, 110); },
   dogBark() { this.tone(280, .06, 'square', .04, 180); setTimeout(()=>this.tone(240,.06,'square',.04,160), 80); },
+  // v13 wave 5 — combat depth cues
+  windup() { this.tone(150,.45,'sawtooth',.06,70); this.noise(.25,.03); },
+  bottleThrow() { this.tone(360,.07,'square',.05,260); },
+  bottleHit() { for (let i=0;i<5;i++) setTimeout(()=>this.tone(1800+Math.random()*1600,.04,'square',.04,800), i*22); this.noise(.08,.04); },
+  holyWaterThrow() { this.tone(660,.10,'triangle',.05); setTimeout(()=>this.tone(880,.08,'triangle',.04),50); },
+  holyWaterHit() { this.tone(440,.16,'sine',.05,220); this.tone(880,.20,'sine',.04,660); this.noise(.08,.03); },
+  radio() { this.tone(1600,.03,'square',.04); setTimeout(()=>this.tone(1200,.04,'square',.03),40); this.noise(.04,.02); },
 };
 
 // ---------- save/load ----------
@@ -1283,6 +1297,8 @@ async function loadGame() {
     P.lifetime.rocksFenced = P.lifetime.rocksFenced || 0;
     P.equip = Object.assign({ shoes:null, hat:null, coat:null, tool:null }, P.equip || {});
     P.soapRocks = Math.max(0, P.soapRocks||0);
+    // v13 wave 5 — status timers are ephemeral; never restored from save (start clean).
+    P.stunT = 0; P.slowT = 0;
     (sv.npcsKilled||[]).forEach(id => { const n = npcs.find(x=>x.id===id); if (n) n.dead = true; });
     state.cashPilesCollected = new Set(sv.cashPilesCollected || []);
     state.achievements = new Set(sv.achievements || []);
@@ -1292,6 +1308,8 @@ async function loadGame() {
       plateStolen: 0, stripeBetrayed: 0, pigeonTrade: 0,
       pinkyFirstBuy: 0, mathInteractions: 0, brendanFirstKill: 0,
       pigeonVisits: 0, stripeVisits: 0, barbVisits: 0, introCashEarned: 0,
+      // v13 wave 5 — fallen priest counters
+      priestVisits: 0, plateStealAttempts: 0, churchVisits: 0, omalleyFallenSurviveT: 0,
     }, sv.counters || {});
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
@@ -1302,6 +1320,8 @@ async function loadGame() {
       stripeBetrayed: false, daveHasCrossword: false, hasCrossword: false, crownSpotIdx: -1,
       // v13 wave 4 — pete keeps the torch stocked once rank>=3. peteTorchSold flips on first buy.
       peteTorchStocked: false, peteTorchSold: false,
+      // v13 wave 5 — fallen priest
+      omalleyFallen: false, omalleyFallenDead: false, fallenPriestCallFired: false,
     }, sv.flags || {});
     state.crownPickup = sv.crownPickup || null;
     P.charisma = sv.player && sv.player.charisma || 0;
@@ -1338,6 +1358,9 @@ const P = {
   // v13 wave 4 — soap rocks tracked as a parallel FIFO counter to P.rocks.
   // smoked first; produce no rocked-up effect; trigger SOAP_TONGUE.
   soapRocks: 0,
+  // v13 wave 5 — combat-pattern status timers.
+  // stunT: lurch's grab freezes input for 500ms. slowT: priest holy water = ×0.5 speed for 1500ms.
+  stunT: 0, slowT: 0,
 };
 
 // Grant achievement helper
@@ -1356,6 +1379,7 @@ function applyEquipStats() {
   let baseHp = P.cartMounted ? 110 : 100;
   let credBonus = 0;
   let charisma = 0;
+  let wantedDecayMult = 1.0;
   for (const slot in P.equip) {
     const id = P.equip[slot];
     if (!id || !EQUIPMENT[id]) continue;
@@ -1364,6 +1388,7 @@ function applyEquipStats() {
     baseHp += (e.hp||0);
     credBonus += (e.cred||0);
     charisma += (e.charisma||0);
+    wantedDecayMult += (e.wantedDecay||0);
   }
   if (P.cartMounted) baseSpeed += 0.6;
   P.speed = Math.max(0.8, baseSpeed);
@@ -1371,6 +1396,8 @@ function applyEquipStats() {
   if (P.hp > P.maxHp) P.hp = P.maxHp;
   P.credBonus = credBonus;
   P.charisma = charisma;
+  // v13 wave 5 — priest's collar shaves time off the wanted decay clock.
+  P.wantedDecayMult = wantedDecayMult;
 }
 
 // Weather selection per day
@@ -1384,6 +1411,8 @@ function rollWeather() {
 let npcs = [];
 let particles = [];
 let cashPiles = [];
+// v13 wave 5 — combat depth: generic projectile primitive. {x,y,vx,vy,dmg,slowMs,kind,from,life,rot,rotVel}
+let projectiles = [];
 const state = {
   mode: 'title',                       // title | playing | dialogue | inv | quest | heist | boss | tweakerVision
   bossActive: false, bossPhase: 0,
@@ -1419,6 +1448,8 @@ const state = {
     pigeon_crown:  { title: "THE PIGEON KING'S LOST CROWN", done: false, available: false, flav: "find the crown. the pigeons grieve." },
     stripe_package:{ title: "STRIPE'S PACKAGE",       done: false, available: false, flav: "take the package to the conductor. don't open it." },
     barb_crossword:{ title: "BARB'S MISSING CROSSWORD",done: false, available: false, flav: "find the saturday crossword. she is unwell without it." },
+    // v13 wave 5 — fallen priest. opens via phone call (rank ≥3 + church visits ≥3) OR auto if you steal the plate enough.
+    fallen_priest:{ title: "THE FALLEN PRIEST",        done: false, available: false, flav: "the priest has been wrong for a while. someone should say so." },
   },
   cashPilesCollected: new Set(),
   achievements: new Set(),
@@ -1433,6 +1464,9 @@ const state = {
     pigeonVisits: 0, stripeVisits: 0, barbVisits: 0,
     // intro_remember tracks cash earned during day 1
     introCashEarned: 0,
+    // v13 wave 5 — fallen-priest side quest tracking
+    priestVisits: 0, plateStealAttempts: 0, churchVisits: 0,
+    omalleyFallenSurviveT: 0,
   },
   barbAside: false,
   // v13 wave 3 — discoverability + quest-state additions
@@ -1448,6 +1482,10 @@ const state = {
     // v13 wave 4 — propane torch acquisition tracking
     peteTorchStocked: false,    // flipped true once rank>=3 (pete stocks one)
     peteTorchSold: false,       // flipped true on the buy (one and done)
+    // v13 wave 5 — fallen priest flags
+    omalleyFallen: false,       // priest has transformed (any path)
+    omalleyFallenDead: false,   // mini-boss defeated, collar awarded
+    fallenPriestCallFired: false, // unknown-number phone call fired (quest hook)
   },
   crownPickup: null,            // {x, y, collected} — only present while pigeon_crown quest active
 };
@@ -1637,18 +1675,22 @@ function spawnNpcs() {
       interact: yuriDialogue },
     { id:'brutus', name:'BRUTUS', sprite:'brutus', x:480, y:280, w:32,h:24, color:'#604020',
       hp:50, maxHp:50, speed:1.4, hostile:false, dmg:7, zoneOnly:{x:100,y:80,w:520,h:360},
+      archetype:'charger',
       interact: null },
     { id:'pete', name:'PAWN SHOP PETE', sprite:'pete', x:250, y:700, w:28,h:32, color:'#4a4028',
       hp:80, maxHp:80, speed:0, hostile:false, vendor:true,
       interact: peteDialogue },
     { id:'lurch', name:'LURCH', sprite:'lurch', x:200, y:1400, w:28,h:34, color:'#3a2030',
       hp:55, maxHp:55, speed:1.4, hostile:false, aggroOnHit:true, dmg:6, wander:true,
+      archetype:'grabber',
       interact: lurchDialogue },
     { id:'sherri', name:'SPIDER-BITE SHERRI', sprite:'sherri', x:350, y:1480, w:26,h:30, color:'#3a1820',
       hp:45, maxHp:45, speed:2.0, hostile:false, aggroOnHit:true, dmg:5, wander:true,
+      archetype:'swarmer',
       interact: sherriDialogue },
     { id:'paulie', name:'PAULIE THE FACE', sprite:'paulie', x:450, y:1560, w:28,h:32, color:'#5a3030',
       hp:60, maxHp:60, speed:1.5, hostile:false, aggroOnHit:true, dmg:7, wander:true,
+      archetype:'ranged',
       interact: paulieDialogue },
     { id:'dave', name:'CHATTY DAVE', sprite:'dave', x:900, y:1480, w:28,h:32, color:'#3a2818',
       hp:40, maxHp:40, speed:0, hostile:false, asleep:true,
@@ -2173,6 +2215,16 @@ async function possumDialogue() {
 }
 
 function priestDialogue() {
+  // v13 wave 5 — track visit + plate-steal counts so the fallen priest can trigger.
+  state.counters.priestVisits = (state.counters.priestVisits||0) + 1;
+  // already-fallen branch: if he transformed (anywhere), opening his dialogue does nothing —
+  // the entity is no longer the priest. defensive: should never fire (priest_fallen has no interact).
+  if (state.flags && state.flags.omalleyFallen && !state.flags.omalleyFallenDead) {
+    dialogue("FATHER O'MALLEY",
+      "the collar is on the floor.\nthe smile is wrong.\nthe medicine is no longer offered.",
+      [{ label: 'leave.', action: () => {} }]);
+    return;
+  }
   dialogue("FATHER O'MALLEY", "medicine. open your mouth.\nhe is holding a tic-tac.", [
     { label: 'accept the blessed tic-tac. (-30 shakes)', action: () => {
       P.shakes = Math.max(0, P.shakes-30); toast('- 30 shakes\nit is, in fact, just a tic-tac.\n(it works anyway.)');
@@ -2185,6 +2237,15 @@ function priestDialogue() {
       toast('- $5\n+ 3 cred\nthe lord notices. then forgets.'); saveGame();
     }},
     { label: 'steal the collection plate.', action: () => {
+      state.counters.plateStealAttempts = (state.counters.plateStealAttempts||0) + 1;
+      // v13 wave 5 — after 4+ priest visits AND a steal attempt, the priest stops being the priest.
+      // this is the auto-trigger path. condition: priestVisits>=4 AND plateStealAttempts>=1.
+      if ((state.counters.priestVisits||0) >= 4
+          && (state.counters.plateStealAttempts||0) >= 1
+          && state.flags && !state.flags.omalleyFallen) {
+        triggerFallenPriestTransform();
+        return;
+      }
       if (Math.random()<0.55) {
         P.cash += 22; state.counters.plateStolen++;
         if (state.counters.plateStolen >= 1 && state.counters.stripeBetrayed >= 1) unlockAchievement('judas');
@@ -2196,6 +2257,62 @@ function priestDialogue() {
     }},
     { label: 'leave.', action: () => {} },
   ]);
+}
+
+// v13 wave 5 — fallen priest transform. flips the existing priest NPC in-place: same entity,
+// new id ('omalley_fallen'), hostile + aggro, archetype 'priest_fallen', HP doubled.
+// canonical line: "father o'malley does not stand up. he is already standing.\nthe collar comes off.\nthe smile is wrong."
+function triggerFallenPriestTransform() {
+  const n = npcs.find(x => x.id === 'priest');
+  if (!n || n.dead) return;
+  if (state.flags.omalleyFallen) return;
+  state.flags.omalleyFallen = true;
+  // make the side quest active if it wasn't already
+  if (state.quests.fallen_priest && !state.quests.fallen_priest.done) {
+    state.quests.fallen_priest.available = true;
+  }
+  // transform in place
+  n.id = 'omalley_fallen';
+  n.name = "FATHER O'MALLEY (FALLEN)";
+  n.archetype = 'priest_fallen';
+  n.hostile = true; n.aggro = true;
+  n.maxHp = 160; n.hp = 160;
+  n.speed = 1.6;
+  n.dmg = 22;
+  n.color = '#2a1a2a';
+  n.showHp = true;
+  n.isOmalleyFallen = true;
+  n.attackCd = 0;
+  // reset combat scratch
+  n.chargeState = 'idle'; n.chargeT = 0; n.chargeCdT = 0;
+  audio.bossRoar();
+  state.shake = 14;
+  state.flash = 1; state.flashColor = 'rgba(120,40,140,.35)';
+  toast("father o'malley does not stand up.\nhe is already standing.\nthe collar comes off.\nthe smile is wrong.", 5500);
+  broadcastNews("PRIEST AT CHURCH 'NOT BEHAVING AS EXPECTED.' WITNESSES UNCLEAR.");
+  feedPost("father o'malley turned. the collar is on the floor.", '@crackheadcent');
+  saveGame();
+}
+
+// v13 wave 5 — phone-call quest hook for the fallen priest. fires once when:
+//   rank >= 3, church visits >= 3, !introActive, !already-fallen, !call-already-fired.
+// the player gets a phone toast that opens the quest. completion = killing the fallen priest.
+function maybeFireFallenPriestCall() {
+  if (!state.flags || state.flags.fallenPriestCallFired) return;
+  if (state.flags.omalleyFallen) return;
+  if (P.rank < 3) return;
+  if ((state.counters.churchVisits||0) < 3) return;
+  if (state.flags && !state.flags.introDone) return;
+  state.flags.fallenPriestCallFired = true;
+  if (state.quests.fallen_priest && !state.quests.fallen_priest.done) {
+    state.quests.fallen_priest.available = true;
+  }
+  if (typeof ringPhone === 'function') {
+    ringPhone({ from: 'unknown number', text: "father o'malley says the church belongs to whoever has the keys.\nyou don't." });
+  } else {
+    toast("unknown number:\n'father o'malley says the church belongs to whoever has the keys.\nyou don't.'", 5000);
+  }
+  saveGame();
 }
 
 function conductorDialogue() {
@@ -3054,6 +3171,48 @@ function drawSmokeOverlay() {
 function aggroNpc(n) {
   n.hostile = true; n.aggro = true; n.dmg = n.dmg||8;
   P.wanted = Math.min(3, P.wanted+1);
+  // v13 wave 5 — swarmer: aggro'ing sherri calls her cousin if none is nearby.
+  if (n.archetype === 'swarmer' && n.id === 'sherri') spawnSwarmerSibling(n);
+}
+
+// v13 wave 5 — swarm pair: spawn a clone of sherri 60px to the side.
+// cap: 2 live sherris on the map.
+function spawnSwarmerSibling(parent) {
+  const liveSwarmers = npcs.filter(n => n.archetype === 'swarmer' && !n.dead && (n.id === 'sherri' || n.id.startsWith('sherri_')));
+  if (liveSwarmers.length >= 2) return;
+  // also require no other live sherri within 400px (preserves the "her cousin shows up" feel
+  // — if another sherri is already nearby don't double-spawn)
+  for (const s of liveSwarmers) {
+    if (s === parent) continue;
+    const dx = s.x - parent.x, dy = s.y - parent.y;
+    if (dx*dx + dy*dy < 400*400) return;
+  }
+  const sib = {
+    id: 'sherri_'+Math.random().toString(36).slice(2,6),
+    name: 'SPIDER-BITE SHERRI', sprite: 'sherri',
+    x: parent.x + 60, y: parent.y,
+    w: 26, h: 30, color: '#3a1820',
+    hp: 45, maxHp: 45, speed: 2.0, hostile: true, aggro: true,
+    aggroOnHit: true, dmg: 5, wander: true,
+    archetype: 'swarmer', attackCd: 0, showHp: false,
+  };
+  npcs.push(sib);
+  setTimeout(() => toast("another one shows up.\nit has the same haircut.", 2400), 200);
+}
+
+// v13 wave 5 — generic projectile spawn used by ranged + fallen-priest patterns.
+function spawnProjectile({x, y, tx, ty, speed=320, dmg=15, slowMs=0, kind='bottle', from=null, wobble=0}) {
+  let dx = tx - x, dy = ty - y;
+  const len = Math.sqrt(dx*dx+dy*dy) || 1;
+  // angle wobble (paulie misses often)
+  let ang = Math.atan2(dy, dx);
+  if (wobble) ang += (Math.random()-0.5) * wobble;
+  const vx = Math.cos(ang) * speed, vy = Math.sin(ang) * speed;
+  projectiles.push({
+    x, y, vx, vy, dmg, slowMs, kind, from,
+    rot: ang, rotVel: kind === 'holy' ? 0.05 : 0.25,
+    life: 4000,
+  });
 }
 function questToast(title) { toast('· QUEST COMPLETE ·\n'+title); audio.rankUp(); }
 
@@ -3145,25 +3304,30 @@ function playerAttack() {
     if (n.dead) continue;
     if (rectsOverlap(hit, n)) {
       const baseDmg = 14 + Math.random()*8;
-      const dmg = Math.floor((baseDmg + w.dmg) * (P.rockedT>0 ? 1.5 : 1) * (P.cartMounted ? 1.3 : 1));
+      // v13 wave 5 — charger cooldown is the vulnerable window. +25% damage on chargers panting.
+      const vulnMult = ((n.archetype === 'charger' || n.archetype === 'charger_older') && n.chargeState === 'cooldown') ? 1.25 : 1.0;
+      const dmg = Math.floor((baseDmg + w.dmg) * (P.rockedT>0 ? 1.5 : 1) * (P.cartMounted ? 1.3 : 1) * vulnMult);
       n.hp -= dmg; n.showHp = true; n.hitFlash = 200;
+      // v13 wave 5 — chunky hit-stun: freeze + tint white + slight knockback for 120ms
+      n.hitStun = 120;
       connected = true;
       state.shake = Math.max(state.shake, 4);
       state.hitPause = 40; // freeze frame
       // peaceful NPC hit -> wanted up
       if (!n.hostile && !n.aggroOnHit) { P.wanted = Math.min(3, P.wanted+1); toast(n.name + " did not deserve that.\nwanted +1"); }
-      if (n.aggroOnHit && !n.aggro) { n.hostile = true; n.aggro = true; }
+      if (n.aggroOnHit && !n.aggro) { n.hostile = true; n.aggro = true; if (n.archetype === 'swarmer' && n.id === 'sherri') spawnSwarmerSibling(n); }
       // particles — sparks + blood drops, weapon-tinted, additive glow
       const sparkC = w.sings ? '#ffaa60' : '#fff080';
       for (let i=0;i<8;i++) particles.push({x:n.x+n.w/2,y:n.y+n.h/2,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,life:300,c:sparkC,sz:3,glow:true});
       for (let i=0;i<3;i++) particles.push({x:n.x+n.w/2,y:n.y+n.h/2,vx:(Math.random()-.5)*3,vy:(Math.random()-.5)*3-1,life:600,c:'#8a3a3a',sz:2,gravity:0.15});
       // big glow ring on hit
       particles.push({x:n.x+n.w/2,y:n.y+n.h/2,vx:0,vy:0,life:200,c:sparkC,sz:14,glow:true});
-      // knockback
-      if (P.facing==='down') n.y += 6;
-      if (P.facing==='up') n.y -= 6;
-      if (P.facing==='left') n.x -= 6;
-      if (P.facing==='right') n.x += 6;
+      // v13 wave 5 — bigger knockback (5-10px, away from player) for hit-stun feel
+      const kb = 8;
+      if (P.facing==='down') n.y += kb;
+      if (P.facing==='up') n.y -= kb;
+      if (P.facing==='left') n.x -= kb;
+      if (P.facing==='right') n.x += kb;
       if (n.hp <= 0) onNpcDeath(n);
     }
   }
@@ -3213,6 +3377,33 @@ function onNpcDeath(n) {
       setTimeout(spawnBrutusOlder, 1500);
     }
   }
+  // v13 wave 5 — fallen priest death: drops $200 cash + the priest's collar pickup.
+  // re-uses the cash-pile pickup pattern, with a collar variant tagged via `equip` field.
+  if (n.isOmalleyFallen) {
+    state.flags.omalleyFallenDead = true;
+    cashPiles.push({
+      id:'cp_plate_'+Math.random().toString(36).slice(2,6),
+      x: n.x + n.w/2 - 18, y: n.y + n.h/2 + 8,
+      amt: 200, collected: false,
+    });
+    cashPiles.push({
+      id:'cp_collar_'+Math.random().toString(36).slice(2,6),
+      x: n.x + n.w/2 + 18, y: n.y + n.h/2 + 8,
+      amt: 0, equip: 'priest_collar', collected: false,
+    });
+    if (state.quests.fallen_priest && !state.quests.fallen_priest.done) {
+      state.quests.fallen_priest.done = true;
+      state.quests.fallen_priest.available = false;
+      questToast("THE FALLEN PRIEST");
+    }
+    unlockAchievement('fallen');
+    toast("the church is quiet again.\nthe pews are still wrong.", 4200);
+    broadcastNews("PRIEST 'GONE'. CHURCH 'WEIRD NOW'. WITNESSES VAGUE.");
+    feedPost("the priest is on the ground. the collar is on the floor. you have both.", '@crackheadcent');
+    saveGame();
+    return;
+  }
+
   // v13 wave 4 — propane torch drops 25% on a night-time brutus kill (regular or older).
   // uses the existing cash-pile pickup pattern, with a `tool` field that triggers equip-on-pickup.
   if ((n.id === 'brutus' || n.id === 'brutus_older') && isNight() && !hasPropane() && Math.random() < 0.25) {
@@ -3316,17 +3507,43 @@ function arrestScene() {
 }
 
 // ---------- WANTED & COPS ----------
+// v13 wave 5 — global cop cap. existing intent was N=wanted but radio-for-backup
+// can push us past that. hard ceiling at 4 keeps the screen survivable.
+const COP_HARD_CAP = 4;
+function spawnCopAtEdge(reason) {
+  if (npcs.filter(n => n.isCop && !n.dead).length >= COP_HARD_CAP) return null;
+  // pick the nearest world edge to the player
+  const px = P.x+P.w/2, py = P.y+P.h/2;
+  const dl = px, dr = WORLD.w - px, du = py, dd = WORLD.h - py;
+  const m = Math.min(dl, dr, du, dd);
+  let x, y;
+  if (m === dl)      { x = 30;            y = clamp(py + (Math.random()-.5)*300, 40, WORLD.h-40); }
+  else if (m === dr) { x = WORLD.w - 30;  y = clamp(py + (Math.random()-.5)*300, 40, WORLD.h-40); }
+  else if (m === du) { y = 30;            x = clamp(px + (Math.random()-.5)*300, 40, WORLD.w-40); }
+  else               { y = WORLD.h - 30;  x = clamp(px + (Math.random()-.5)*300, 40, WORLD.w-40); }
+  const cop = {
+    id:'cop_'+Math.random().toString(36).slice(2,6), name:'COP', sprite:'cop',
+    x, y, w:28, h:32, color:'#1818a0', hp:60, maxHp:60, speed:1.5, dmg:10,
+    hostile:true, aggro:true, isCop:true, attackCd:0, wanderT:0, targetX:0, targetY:0, showHp:true,
+    archetype:'cop',
+  };
+  npcs.push(cop);
+  if (reason === 'radio') audio.copSiren();
+  return cop;
+}
 function manageCops(dt) {
   if (P.wanted > 0) {
-    P.wantedT += dt;
-    // decay -1 every 18s
+    // v13 wave 5 — priest's collar speeds wanted decay (wantedDecayMult > 1.0).
+    const decayMult = P.wantedDecayMult || 1.0;
+    P.wantedT += dt * decayMult;
+    // decay -1 every 18s (faster with collar)
     if (P.wantedT >= 18000) {
       P.wantedT = 0; P.wanted--;
       if (P.wanted === 0) toast('the heat dies down.\nfor now.', 1500);
     }
     const targetCops = P.wanted;
     const liveCops = npcs.filter(n=>n.isCop && !n.dead).length;
-    if (liveCops < targetCops) {
+    if (liveCops < targetCops && liveCops < COP_HARD_CAP) {
       audio.copSiren();
       // v13 wave 2 — at wanted ≥ 2, one spawning cop has a 30% chance of being cousin brendan.
       // hard cap at one brendan on the map at a time.
@@ -3337,12 +3554,13 @@ function manageCops(dt) {
         x: P.x + (Math.random()<.5?-400:400), y: P.y + (Math.random()<.5?-300:300),
         w:26, h:30, color:'#2838c0', hp:55, maxHp:55, speed:2.3, dmg:50,
         hostile:true, aggro:true, isCop:true, isBrendan:true, taserChargeT:0,
-        attackCd:0, wanderT:0, targetX:0, targetY:0, showHp:true,
+        attackCd:0, wanderT:0, targetX:0, targetY:0, showHp:true, archetype:'brendan',
       } : {
         id:'cop_'+Math.random().toString(36).slice(2,6), name:'COP', sprite:'cop',
         x: P.x + (Math.random()<.5?-400:400), y: P.y + (Math.random()<.5?-300:300),
         w:28, h:32, color:'#1818a0', hp:60, maxHp:60, speed:1.5, dmg:10,
         hostile:true, aggro:true, isCop:true, attackCd:0, wanderT:0, targetX:0, targetY:0, showHp:true,
+        archetype:'cop',
       };
       cop.x = clamp(cop.x, 40, WORLD.w-40);
       cop.y = clamp(cop.y, 40, WORLD.h-40);
@@ -3354,6 +3572,35 @@ function manageCops(dt) {
         ];
         setTimeout(() => toast("· COUSIN BRENDAN ARRIVES ·\n" + lines[Math.floor(Math.random()*lines.length)], 3200), 500);
       }
+    }
+    // v13 wave 5 — radio-for-backup. regular cops (not brendan) at >120px from player
+    // roll 25%/sec to radio in another cop. cap at 4 total. brendan does not radio.
+    for (const cop of npcs) {
+      if (!cop.isCop || cop.dead || cop.isBrendan) continue;
+      const cdx = (P.x+P.w/2) - (cop.x+cop.w/2), cdy = (P.y+P.h/2) - (cop.y+cop.h/2);
+      const cdist2 = cdx*cdx + cdy*cdy;
+      if (cdist2 < 120*120) { cop.radioT = 0; continue; }
+      cop.radioCdT = (cop.radioCdT||0) - dt;
+      cop.radioT = (cop.radioT||0) + dt;
+      // chance roll once per second window (25% per second)
+      if (cop.radioCdT <= 0 && Math.random() < 0.25 * (dt/1000)) {
+        cop.radioCdT = 5000; // 5s minimum between radios per cop
+        cop.radioVisualT = 800; // hand-to-ear pose
+        audio.radio();
+        // "*" particle above the cop's head
+        particles.push({x: cop.x+cop.w/2, y: cop.y-6, vx:0, vy:-0.4, life:700, c:'#88c0ff', sz:3, glow:true});
+        // backup arrives within 5 seconds
+        const delay = 800 + Math.random()*4000;
+        setTimeout(() => {
+          if (cop.dead) return; // canceled if the caller dies
+          if (P.wanted <= 0) return;
+          spawnCopAtEdge('radio');
+          if (npcs.filter(n=>n.isCop&&!n.dead).length <= COP_HARD_CAP) {
+            toast("more flashing lights.\nfrom somewhere.", 1800);
+          }
+        }, delay);
+      }
+      if (cop.radioVisualT) cop.radioVisualT = Math.max(0, cop.radioVisualT - dt);
     }
   } else {
     P.wantedT = 0;
@@ -3401,25 +3648,32 @@ function updateWorld(dt) {
       }
     }
   }
-  // input
+  // input — v13 wave 5: P.stunT gates ALL inputs (lurch grab, fallen priest grabs at p2).
   let vx=0, vy=0;
-  if (state.keys.has('w') || state.keys.has('arrowup')) { vy = -1; P.facing = 'up'; }
-  if (state.keys.has('s') || state.keys.has('arrowdown')) { vy = 1; P.facing = 'down'; }
-  if (state.keys.has('a') || state.keys.has('arrowleft')) { vx = -1; P.facing = 'left'; }
-  if (state.keys.has('d') || state.keys.has('arrowright')) { vx = 1; P.facing = 'right'; }
-  if (vx && vy) { vx *= 0.7071; vy *= 0.7071; }
-  // analog joystick input overrides keys when active
-  if (state.stickMag && state.stickMag > 0) {
-    vx = state.stickX * state.stickMag;
-    vy = state.stickY * state.stickMag;
-    // facing — derived from larger axis
-    if (Math.abs(vx) > Math.abs(vy)) P.facing = vx > 0 ? 'right' : 'left';
-    else P.facing = vy > 0 ? 'down' : 'up';
+  // tick status timers regardless
+  if (P.stunT > 0) P.stunT = Math.max(0, P.stunT - dt);
+  if (P.slowT > 0) P.slowT = Math.max(0, P.slowT - dt);
+  const stunned = P.stunT > 0;
+  if (!stunned) {
+    if (state.keys.has('w') || state.keys.has('arrowup')) { vy = -1; P.facing = 'up'; }
+    if (state.keys.has('s') || state.keys.has('arrowdown')) { vy = 1; P.facing = 'down'; }
+    if (state.keys.has('a') || state.keys.has('arrowleft')) { vx = -1; P.facing = 'left'; }
+    if (state.keys.has('d') || state.keys.has('arrowright')) { vx = 1; P.facing = 'right'; }
+    if (vx && vy) { vx *= 0.7071; vy *= 0.7071; }
+    // analog joystick input overrides keys when active
+    if (state.stickMag && state.stickMag > 0) {
+      vx = state.stickX * state.stickMag;
+      vy = state.stickY * state.stickMag;
+      // facing — derived from larger axis
+      if (Math.abs(vx) > Math.abs(vy)) P.facing = vx > 0 ? 'right' : 'left';
+      else P.facing = vy > 0 ? 'down' : 'up';
+    }
   }
   let spd = P.speed;
   if (P.rockedT>0) spd *= 1.8;
   if (P.crashT>0) spd *= 0.5;
-  let sprinting = state.keys.has('shift');
+  if (P.slowT>0) spd *= 0.5; // priest holy water slow
+  let sprinting = !stunned && state.keys.has('shift');
   if (sprinting && (vx||vy)) spd *= 1.7;
   const newX = P.x + vx*spd*(dt/16);
   const newY = P.y + vy*spd*(dt/16);
@@ -3612,6 +3866,24 @@ function updateWorld(dt) {
   // hit pause
   if (state.hitPause > 0) state.hitPause -= dt;
 
+  // v13 wave 5 — church visit counter (debounced edge — count one per entry, not per frame).
+  // gates the fallen-priest phone call trigger.
+  const inChurch = inZone(P.x+P.w/2, P.y+P.h/2, 'church');
+  if (inChurch && !state.inChurchPrev) {
+    state.counters.churchVisits = (state.counters.churchVisits||0) + 1;
+    maybeFireFallenPriestCall();
+  }
+  state.inChurchPrev = inChurch;
+
+  // v13 wave 5 — OUTRAN_THE_PRIEST survival timer (60s alive vs the fallen priest)
+  const fallen = npcs.find(n => n.isOmalleyFallen && !n.dead);
+  if (fallen) {
+    state.counters.omalleyFallenSurviveT = (state.counters.omalleyFallenSurviveT||0) + dt;
+    if (state.counters.omalleyFallenSurviveT >= 60000) unlockAchievement('outran_the_priest');
+  } else {
+    state.counters.omalleyFallenSurviveT = 0;
+  }
+
   // conductor wait achievement
   const conductor = npcs.find(n=>n.id==='conductor');
   if (conductor && !conductor.dead) {
@@ -3638,6 +3910,16 @@ function updateWorld(dt) {
           feedPost("picked up a torch. found it. don't ask.", '@crackheadcent');
           saveGame();
         }
+        continue;
+      }
+      // v13 wave 5 — equip drop (the priest's collar). generic equip-id-tagged pickup.
+      if (c.equip && EQUIPMENT[c.equip]) {
+        const slot = EQUIPMENT[c.equip].slot;
+        P.equip[slot] = c.equip;
+        applyEquipStats();
+        audio.coin();
+        toast("+ " + EQUIPMENT[c.equip].n + "\n(equipped.)", 3400);
+        saveGame();
         continue;
       }
       P.cash += c.amt; audio.pickup();
@@ -3714,6 +3996,8 @@ function updateWorld(dt) {
     if (n.dead) continue;
     n.attackCd = Math.max(0, (n.attackCd||0) - dt);
     if (n.hitFlash) n.hitFlash = Math.max(0, n.hitFlash - dt);
+    // v13 wave 5 — hit-stun freezes NPC AI for 120ms post-damage.
+    if (n.hitStun > 0) { n.hitStun = Math.max(0, n.hitStun - dt); continue; }
     if (n.chatterT > 0) n.chatterT -= dt;
     // ambient chatter
     n.chatterCd = (n.chatterCd||0) - dt;
@@ -3793,31 +4077,305 @@ function updateWorld(dt) {
         if (lenP > 80) { n.x += (dxP/lenP)*(n.speed||1.2)*(dt/16); n.y += (dyP/lenP)*(n.speed||1.2)*(dt/16); isMoving = true; }
       }
     }
-    // aggro chase
+    // aggro chase — v13 wave 5: archetype dispatch. patterns mutate the chase/touch flow.
+    // existing non-archetype'd NPCs fall through to the default chase-bite (unchanged behavior).
     else if (n.aggro || (n.hostile && pd2 < 360*360)) {
-      if (n.speed > 0) {
-        const len = Math.sqrt(pd2)||1;
-        n.x += (pdx/len) * n.speed * (dt/16);
-        n.y += (pdy/len) * n.speed * (dt/16);
-        isMoving = true;
-      }
-      // v13 wave 2 — brendan's taser charges over 4 seconds; only zaps when ready.
-      if (n.isBrendan) {
-        n.taserChargeT = Math.min(4000, (n.taserChargeT||0) + dt);
-      }
-      // touch damage
-      if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && n.attackCd===0) {
-        if (n.isBrendan) {
-          if (n.taserChargeT >= 4000) {
-            damagePlayer(50, n);
-            n.taserChargeT = 0;
-            n.attackCd = 1000;
-            audio.copSiren();
-            for (let i=0;i<10;i++) particles.push({x:P.x+P.w/2,y:P.y+P.h/2,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,life:400,c:'#88c0ff',sz:3,glow:true});
+      const len = Math.sqrt(pd2)||1;
+      const arch = n.archetype || 'default';
+
+      // ---------------- CHARGER (brutus, brutus_older) ----------------
+      // windup → lunge → cooldown state machine. brutus_older variant has shorter windup,
+      // longer lunge, bigger multiplier, longer cooldown — plus "berserk" variant when boss
+      // is in phase 3 (state.brutusOlderPhase>=3 or n.berserk flag).
+      if (arch === 'charger' || arch === 'charger_older') {
+        const older = (arch === 'charger_older');
+        const berserk = !!n.berserk;
+        // tunables per variant + phase
+        const windupMs = berserk ? 400 : (older ? 550 : 800);
+        const lungeMs  = berserk ? 800 : (older ? 1400 : 1000);
+        const lungeSpd = berserk ? 3.0 : (older ? 2.4 : 2.0);
+        const dmgMult  = berserk ? 2.0 : (older ? 1.8 : 1.5);
+        const cdMs     = berserk ? 600 : (older ? 1700 : 1400);
+
+        n.chargeState = n.chargeState || 'idle';
+        n.chargeT = n.chargeT || 0;
+        n.chargeCdT = Math.max(0, (n.chargeCdT||0) - dt);
+
+        if (n.chargeState === 'cooldown') {
+          n.chargeT -= dt;
+          if (n.chargeT <= 0) { n.chargeState = 'idle'; n.chargeT = 0; }
+          // panting — light wobble, no movement
+        }
+        else if (n.chargeState === 'windup') {
+          n.chargeT -= dt;
+          // visible tint pulse driven by hitFlash short bursts so existing renderer picks it up
+          if ((n.chargeT % 90) < 45) n.hitFlash = Math.max(n.hitFlash||0, 40);
+          if (n.chargeT <= 0) {
+            // commit the lunge — direction is fixed at windup START via stored vector
+            n.chargeState = 'lunge';
+            n.chargeT = lungeMs;
+            audio.bossRoar();
           }
-        } else {
+        }
+        else if (n.chargeState === 'lunge') {
+          n.chargeT -= dt;
+          if (n.lungeVx !== undefined) {
+            n.x += n.lungeVx * lungeSpd * (dt/16);
+            n.y += n.lungeVy * lungeSpd * (dt/16);
+            isMoving = true;
+          }
+          // hit detection during lunge
+          if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
+            damagePlayer(Math.floor((n.dmg||8) * dmgMult), n);
+            n.attackCd = 600;
+            n.chargeState = 'cooldown';
+            n.chargeT = cdMs;
+            n.chargeCdT = cdMs;
+            n.chargeLanded = true;
+          }
+          if (n.chargeT <= 0) {
+            // lunge missed — DODGED_THE_LUNGE achievement on first dodge
+            if (!n.chargeLanded) unlockAchievement('dodged_the_lunge');
+            n.chargeLanded = false;
+            n.chargeState = 'cooldown';
+            n.chargeT = cdMs;
+            n.chargeCdT = cdMs;
+          }
+        }
+        else {
+          // idle — slow chase, enter windup when in range
+          if (n.speed > 0) {
+            n.x += (pdx/len) * n.speed * (dt/16);
+            n.y += (pdy/len) * n.speed * (dt/16);
+            isMoving = true;
+          }
+          if (pd2 < 200*200 && n.chargeCdT <= 0) {
+            n.chargeState = 'windup';
+            n.chargeT = windupMs;
+            // freeze position; lock lunge vector toward player NOW
+            const llen = Math.sqrt(pd2) || 1;
+            n.lungeVx = pdx/llen;
+            n.lungeVy = pdy/llen;
+            audio.windup();
+          }
+        }
+        // touch damage outside the charge (passive bite while idle/chasing close)
+        if (n.chargeState === 'idle' && rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
           damagePlayer(n.dmg||8, n);
           n.attackCd = 800;
+        }
+      }
+
+      // ---------------- GRABBER (lurch) ----------------
+      // chase-bite at ×1.3 damage, applies 500ms stun on contact.
+      else if (arch === 'grabber') {
+        if (n.speed > 0) {
+          // lurch freezes briefly post-grab for the "arms-extended" beat
+          const grabFreeze = (n.grabFreezeT||0) > 0;
+          if (!grabFreeze) {
+            n.x += (pdx/len) * n.speed * (dt/16);
+            n.y += (pdy/len) * n.speed * (dt/16);
+            isMoving = true;
+          } else {
+            n.grabFreezeT = Math.max(0, (n.grabFreezeT||0) - dt);
+          }
+        }
+        if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
+          const dmg = Math.floor((n.dmg||8) * 1.3);
+          damagePlayer(dmg, n);
+          n.attackCd = 800;
+          n.grabFreezeT = 200;
+          P.stunT = Math.max(P.stunT||0, 500);
+          // toast only on first grab per encounter (avoid spam)
+          if (!n.grabbedOnce) { n.grabbedOnce = true; toast("GRABBED.\nhis arms are too long.", 1400); }
+        }
+      }
+
+      // ---------------- SWARMER (sherri) ----------------
+      // speed ×1.4, damage ×0.6. on aggro also calls a sibling (in aggroNpc).
+      else if (arch === 'swarmer') {
+        if (n.speed > 0) {
+          const swSpd = n.speed * 1.4;
+          n.x += (pdx/len) * swSpd * (dt/16);
+          n.y += (pdy/len) * swSpd * (dt/16);
+          isMoving = true;
+        }
+        if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
+          const dmg = Math.max(1, Math.floor((n.dmg||5) * 0.6));
+          damagePlayer(dmg, n);
+          n.attackCd = 700;
+        }
+      }
+
+      // ---------------- RANGED (paulie) ----------------
+      // keep 180-260px. throws bottles every 1500ms. panic-chase if player < 120px.
+      else if (arch === 'ranged') {
+        const d = Math.sqrt(pd2);
+        n.panicT = Math.max(0, (n.panicT||0) - dt);
+        n.throwT = (n.throwT||0) - dt;
+        n.throwAimT = Math.max(0, (n.throwAimT||0) - dt);
+        if (d < 120 && n.panicT <= 0) n.panicT = 1000; // panic for 1s when player closes
+        if (n.panicT > 0) {
+          // chase-bite for 1s
+          if (n.speed > 0) {
+            n.x += (pdx/len) * n.speed * (dt/16);
+            n.y += (pdy/len) * n.speed * (dt/16);
+            isMoving = true;
+          }
+          if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
+            damagePlayer(n.dmg||7, n);
+            n.attackCd = 800;
+          }
+        } else {
+          // kite to keep 180-260px
+          let mx = 0, my = 0;
+          if (d < 180) { mx = -pdx/len; my = -pdy/len; isMoving = true; }
+          else if (d > 260) { mx = pdx/len; my = pdy/len; isMoving = true; }
+          // strafe a bit when in band
+          else { const a = performance.now()/500; mx = -pdy/len * Math.sin(a); my = pdx/len * Math.sin(a); }
+          n.x += mx * (n.speed||1.5) * (dt/16);
+          n.y += my * (n.speed||1.5) * (dt/16);
+          // throw bottles
+          if (n.throwT <= 0 && d >= 160 && d <= 280) {
+            // 300ms aim-raise telegraph before the throw
+            if (n.throwAimT <= 0 && !n.aimingThrow) {
+              n.aimingThrow = true;
+              n.throwAimT = 300;
+              // tiny "*" particle
+              particles.push({x:n.x+n.w/2+8, y:n.y+4, vx:0, vy:-0.3, life:400, c:'#fff080', sz:2, glow:true});
+            } else if (n.aimingThrow && n.throwAimT <= 0) {
+              n.aimingThrow = false;
+              n.throwT = 1500;
+              spawnProjectile({
+                x: n.x+n.w/2, y: n.y+n.h/2,
+                tx: P.x+P.w/2, ty: P.y+P.h/2,
+                speed: 320, dmg: 15, kind: 'bottle', from: n, wobble: 0.35,
+              });
+              audio.bottleThrow();
+            }
+          }
+        }
+      }
+
+      // ---------------- FALLEN PRIEST (priest_fallen) ----------------
+      // phase 1 (≥50% hp): keep 180-280px, throw holy water vials every 1200ms (22 dmg + 1.5s slow).
+      // phase 2 (<50% hp): becomes a faster charger (×2.4 speed, 500ms windup, lunge applies slow).
+      else if (arch === 'priest_fallen') {
+        const pct = n.hp / n.maxHp;
+        const inPhase2 = pct < 0.5;
+        // phase transition once
+        if (inPhase2 && !n.fallenPhase2) {
+          n.fallenPhase2 = true;
+          audio.bossRoar();
+          state.shake = 12;
+          toast("the lord is not here.\nthe lord left.\nhe took the bus.", 4200);
+        }
+        if (!inPhase2) {
+          // ranged-holy
+          const d = Math.sqrt(pd2);
+          let mx = 0, my = 0;
+          if (d < 180) { mx = -pdx/len; my = -pdy/len; isMoving = true; }
+          else if (d > 280) { mx = pdx/len; my = pdy/len; isMoving = true; }
+          else { const a = performance.now()/600; mx = -pdy/len * Math.sin(a); my = pdx/len * Math.sin(a); }
+          n.x += mx * (n.speed||1.6) * (dt/16);
+          n.y += my * (n.speed||1.6) * (dt/16);
+          n.throwT = (n.throwT||0) - dt;
+          n.throwAimT = Math.max(0, (n.throwAimT||0) - dt);
+          if (n.throwT <= 0 && d >= 160 && d <= 300) {
+            if (n.throwAimT <= 0 && !n.aimingThrow) {
+              n.aimingThrow = true;
+              n.throwAimT = 350;
+              for (let i=0;i<4;i++) particles.push({x:n.x+n.w/2,y:n.y+8,vx:(Math.random()-.5)*1,vy:-Math.random()*1.5,life:500,c:'#a0d0ff',sz:2,glow:true});
+            } else if (n.aimingThrow && n.throwAimT <= 0) {
+              n.aimingThrow = false;
+              n.throwT = 1200;
+              spawnProjectile({
+                x: n.x+n.w/2, y: n.y+n.h/2,
+                tx: P.x+P.w/2, ty: P.y+P.h/2,
+                speed: 280, dmg: 22, slowMs: 1500, kind: 'holy', from: n, wobble: 0.18,
+              });
+              audio.holyWaterThrow();
+            }
+          }
+        } else {
+          // dasher — charger with priest tuning
+          n.chargeState = n.chargeState || 'idle';
+          n.chargeT = n.chargeT || 0;
+          n.chargeCdT = Math.max(0, (n.chargeCdT||0) - dt);
+          const windupMs = 500, lungeMs = 900, lungeSpd = 2.4, cdMs = 1200;
+          if (n.chargeState === 'cooldown') {
+            n.chargeT -= dt;
+            if (n.chargeT <= 0) { n.chargeState = 'idle'; }
+          } else if (n.chargeState === 'windup') {
+            n.chargeT -= dt;
+            if ((n.chargeT % 90) < 45) n.hitFlash = Math.max(n.hitFlash||0, 40);
+            if (n.chargeT <= 0) {
+              n.chargeState = 'lunge';
+              n.chargeT = lungeMs;
+            }
+          } else if (n.chargeState === 'lunge') {
+            n.chargeT -= dt;
+            if (n.lungeVx !== undefined) {
+              n.x += n.lungeVx * lungeSpd * (dt/16);
+              n.y += n.lungeVy * lungeSpd * (dt/16);
+              isMoving = true;
+            }
+            if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
+              damagePlayer(30, n);
+              P.slowT = Math.max(P.slowT||0, 1500);
+              n.attackCd = 600;
+              n.chargeState = 'cooldown';
+              n.chargeT = cdMs;
+              n.chargeLanded = true;
+            }
+            if (n.chargeT <= 0) {
+              if (!n.chargeLanded) unlockAchievement('dodged_the_lunge');
+              n.chargeLanded = false;
+              n.chargeState = 'cooldown';
+              n.chargeT = cdMs;
+            }
+          } else {
+            if (n.speed > 0) {
+              n.x += (pdx/len) * (n.speed||1.6) * (dt/16);
+              n.y += (pdy/len) * (n.speed||1.6) * (dt/16);
+              isMoving = true;
+            }
+            if (pd2 < 220*220 && n.chargeCdT <= 0) {
+              n.chargeState = 'windup';
+              n.chargeT = windupMs;
+              const llen = Math.sqrt(pd2) || 1;
+              n.lungeVx = pdx/llen; n.lungeVy = pdy/llen;
+              audio.windup();
+            }
+          }
+        }
+      }
+
+      // ---------------- DEFAULT chase-bite (cops, larry, dave when aggro'd, etc) ----------------
+      else {
+        if (n.speed > 0) {
+          n.x += (pdx/len) * n.speed * (dt/16);
+          n.y += (pdy/len) * n.speed * (dt/16);
+          isMoving = true;
+        }
+        // v13 wave 2 — brendan's taser charges over 4 seconds; only zaps when ready.
+        if (n.isBrendan) {
+          n.taserChargeT = Math.min(4000, (n.taserChargeT||0) + dt);
+        }
+        // touch damage
+        if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && n.attackCd===0) {
+          if (n.isBrendan) {
+            if (n.taserChargeT >= 4000) {
+              damagePlayer(50, n);
+              n.taserChargeT = 0;
+              n.attackCd = 1000;
+              audio.copSiren();
+              for (let i=0;i<10;i++) particles.push({x:P.x+P.w/2,y:P.y+P.h/2,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,life:400,c:'#88c0ff',sz:3,glow:true});
+            }
+          } else {
+            damagePlayer(n.dmg||8, n);
+            n.attackCd = 800;
+          }
         }
       }
     } else if (n.patrol) {
@@ -3875,27 +4433,90 @@ function updateWorld(dt) {
   // particle pool cap
   if (particles.length > 220) particles.splice(0, particles.length - 220);
 
-  // boss phase transitions — coats fly off as health drops
+  // v13 wave 5 — projectile update (bottles + holy water vials).
+  // generic primitive: kind drives only visuals + impact-side-effects, motion + collision are shared.
+  for (let i=projectiles.length-1; i>=0; i--) {
+    const pr = projectiles[i];
+    pr.life -= dt;
+    pr.x += pr.vx * (dt/1000);
+    pr.y += pr.vy * (dt/1000);
+    pr.rot += pr.rotVel;
+    let dead = false;
+    // wall (solid building) collision
+    for (const b of BUILDINGS) {
+      if (!b.solid) continue;
+      if (pr.x > b.x && pr.x < b.x+b.w && pr.y > b.y && pr.y < b.y+b.h) { dead = true; break; }
+    }
+    // world edge
+    if (!dead && (pr.x < 0 || pr.x > WORLD.w || pr.y < 0 || pr.y > WORLD.h)) dead = true;
+    // player hit
+    if (!dead && rectsOverlap({x:pr.x-4, y:pr.y-4, w:8, h:8}, P)) {
+      damagePlayer(pr.dmg, pr.from);
+      if (pr.slowMs > 0) P.slowT = Math.max(P.slowT||0, pr.slowMs);
+      if (pr.kind === 'bottle') {
+        audio.bottleHit();
+        for (let j=0;j<10;j++) particles.push({x:pr.x,y:pr.y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,life:380,c:'#a07020',sz:2});
+      } else if (pr.kind === 'holy') {
+        audio.holyWaterHit();
+        for (let j=0;j<12;j++) particles.push({x:pr.x,y:pr.y,vx:(Math.random()-.5)*4,vy:(Math.random()-.5)*4,life:500,c:'#a0d0ff',sz:3,glow:true});
+      }
+      dead = true;
+    }
+    if (!dead && pr.life <= 0) {
+      // expired mid-air — small fizzle, no damage
+      if (pr.kind === 'bottle') audio.bottleHit();
+      dead = true;
+    }
+    if (dead) projectiles.splice(i,1);
+  }
+  // projectile pool cap (paranoia)
+  if (projectiles.length > 40) projectiles.splice(0, projectiles.length - 40);
+
+  // boss phase transitions — v13 wave 5: phases now shift the ATTACK PATTERN, not just numbers.
+  // tony (rank-4 boss):
+  //   p1 (100-66%): standard chase-bite (default archetype).
+  //   p2 (66-33%): converts to CHARGER + spawns 2 sherri adds ("he whistles. someone answers.").
+  //   p3 (33-0%): BERSERK charger (windup 400ms, lunge ×3 speed, no breathing room).
+  // existing coat-tearing flavor is preserved on each phase entry.
   if (state.bossActive && state.bossNPC && !state.bossNPC.dead) {
     const b = state.bossNPC;
     const pct = b.hp / b.maxHp;
     let newPhase = state.bossPhase;
-    if (pct < 0.7 && state.bossPhase < 2) newPhase = 2;
-    if (pct < 0.4 && state.bossPhase < 3) newPhase = 3;
-    if (pct < 0.15 && state.bossPhase < 4) newPhase = 4;
+    if (pct < 0.66 && state.bossPhase < 2) newPhase = 2;
+    if (pct < 0.33 && state.bossPhase < 3) newPhase = 3;
     if (newPhase !== state.bossPhase) {
       state.bossPhase = newPhase;
-      const lines = {
-        2: ["tony tears off coat #2.\nhe is faster now.", () => { b.speed = 2.4; }],
-        3: ["tony tears off coat #3.\nhe throws his shoe at you. it connects.", () => { b.speed = 2.8; b.dmg = 16; damagePlayer(8, b); }],
-        4: ["tony is bare-knuckle.\nhis face is the same face it was. it is just there now.", () => { b.speed = 3.0; b.dmg = 18; }],
-      };
-      const [t, fx] = lines[newPhase] || ["", null];
-      if (t) toast(t, 3000);
-      if (fx) fx();
+      if (newPhase === 2) {
+        b.archetype = 'charger';
+        b.chargeState = 'idle'; b.chargeT = 0; b.chargeCdT = 0;
+        b.speed = 2.4;
+        toast("tony tears off coat #2.\nhe is faster now.\nhe whistles. someone answers.", 3200);
+        // spawn 2 sherri adds 80px to either side
+        const sherri1 = {
+          id: 'sherri_boss_'+Math.random().toString(36).slice(2,6),
+          name: 'SPIDER-BITE SHERRI', sprite: 'sherri',
+          x: b.x - 80, y: b.y, w: 26, h: 30, color: '#3a1820',
+          hp: 45, maxHp: 45, speed: 2.0, hostile: true, aggro: true,
+          aggroOnHit: true, dmg: 5, archetype: 'swarmer', attackCd: 0, showHp: false,
+        };
+        const sherri2 = { ...sherri1, id: 'sherri_boss_'+Math.random().toString(36).slice(2,6), x: b.x + 80 };
+        npcs.push(sherri1, sherri2);
+        broadcastNews("BREAKING: TRE BAG TONY DOWN TO 2 COATS. SOMETHING ELSE IS COMING.");
+        feedPost("tony is on coat 2. and somebody else just showed up.", '@the_corner');
+      } else if (newPhase === 3) {
+        b.archetype = 'charger';
+        b.berserk = true;
+        b.chargeState = 'idle'; b.chargeT = 0; b.chargeCdT = 0;
+        b.speed = 3.0; b.dmg = 16;
+        toast("tony tears off coat #3.\nhe is not slowing down.\nhe is speeding up.", 3500);
+        // bossRoar loops higher pitch — fake it with a 3-shot quick stack
+        audio.bossRoar(); setTimeout(()=>audio.bossRoar(), 200); setTimeout(()=>audio.bossRoar(), 420);
+        broadcastNews("BREAKING: TRE BAG TONY BARE-KNUCKLE. CALL TIME OF DEATH ALREADY.");
+        feedPost("tony has no coats. tony is lunging now. like a dog.", '@the_corner');
+      }
       audio.bossRoar();
       state.shake = 12;
-      const coatColors = {2: '#4a2018', 3: '#3a1810', 4: '#2a1010'};
+      const coatColors = {2: '#4a2018', 3: '#2a1010'};
       const cc = coatColors[newPhase] || '#5a2020';
       for (let i=0;i<24;i++) {
         particles.push({
@@ -3904,8 +4525,57 @@ function updateWorld(dt) {
           life: 1400, c: cc, sz: 5, gravity: 0.25,
         });
       }
-      broadcastNews("BREAKING: TRE BAG TONY DOWN TO " + (4-newPhase+1) + " COATS.");
-      feedPost("tony is on coat " + (4-newPhase+1) + ". this is happening live.", '@the_corner');
+    }
+  }
+
+  // v13 wave 5 — Brutus Older phase machine (parallel to boss tony).
+  //   p1 (100-50%): charger from the start (already archetype='charger_older').
+  //   p2 (50-25%): charger + spawns 1 sherri swarm pair every 8s.
+  //   p3 (25-0%): berserk charger + grabber-on-contact (HE STARTS GRABBING).
+  if (state.brutusOlderActive && state.brutusOlderNPC && !state.brutusOlderNPC.dead) {
+    const bo = state.brutusOlderNPC;
+    const pct = bo.hp / bo.maxHp;
+    state.brutusOlderPhase = state.brutusOlderPhase || 1;
+    let newP = state.brutusOlderPhase;
+    if (pct < 0.5 && state.brutusOlderPhase < 2) newP = 2;
+    if (pct < 0.25 && state.brutusOlderPhase < 3) newP = 3;
+    if (newP !== state.brutusOlderPhase) {
+      state.brutusOlderPhase = newP;
+      audio.bossRoar();
+      state.shake = 12;
+      for (let i=0;i<20;i++) particles.push({x:bo.x+bo.w/2,y:bo.y+bo.h/2,vx:(Math.random()-.5)*8,vy:(Math.random()-.7)*6,life:1200,c:'#8a3030',sz:5,gravity:0.2});
+      if (newP === 2) {
+        bo.addsT = 0;
+        toast("he was warming up before.", 3000);
+      } else if (newP === 3) {
+        bo.berserk = true;
+        bo.grabber = true;
+        bo.chargeState = 'idle';
+        toast("he doesn't bite anymore.\nhe grabs.", 3200);
+      }
+    }
+    // phase 2 adds — spawn a sherri swarm pair every 8s
+    if (state.brutusOlderPhase >= 2) {
+      bo.addsT = (bo.addsT||0) + dt;
+      if (bo.addsT >= 8000) {
+        bo.addsT = 0;
+        const liveSwarm = npcs.filter(n => n.archetype === 'swarmer' && !n.dead);
+        if (liveSwarm.length < 2) {
+          const a = {
+            id: 'sherri_brutus_'+Math.random().toString(36).slice(2,6),
+            name: 'SPIDER-BITE SHERRI', sprite: 'sherri',
+            x: bo.x - 60, y: bo.y + 20, w: 26, h: 30, color: '#3a1820',
+            hp: 45, maxHp: 45, speed: 2.0, hostile: true, aggro: true,
+            aggroOnHit: true, dmg: 5, archetype: 'swarmer', attackCd: 0, showHp: false,
+          };
+          npcs.push(a);
+        }
+      }
+    }
+    // phase 3 grabber-on-contact: apply stun on contact during cooldown (post-lunge)
+    if (state.brutusOlderPhase >= 3 && bo.chargeLanded) {
+      bo.chargeLanded = false; // consume
+      P.stunT = Math.max(P.stunT||0, 500);
     }
   }
 
@@ -4042,7 +4712,7 @@ function drawAll() {
     const close = (dx*dx + dy*dy) < 60*60;
     // intro pile is always visible (it's the tutorial breadcrumb)
     const alwaysVisible = !!c.intro;
-    if (state.tweakerT > 0 || close || alwaysVisible || c.tool) {
+    if (state.tweakerT > 0 || close || alwaysVisible || c.tool || c.equip) {
       // v13 wave 4 — torch pickups are always visible (a brutus drop in the dark is hard enough to find)
       if (c.tool === 'propane_torch') {
         const t = (Math.sin(performance.now()/180)+1)/2;
@@ -4055,6 +4725,20 @@ function drawAll() {
         // pilot flame
         ctx.fillStyle = `rgba(232,192,64,${0.6 + t*0.4})`;
         ctx.fillRect(c.x-1, c.y-11, 2, 4);
+        continue;
+      }
+      // v13 wave 5 — priest's collar pickup: small white band with a black center seam
+      if (c.equip === 'priest_collar') {
+        const t = (Math.sin(performance.now()/240)+1)/2;
+        // halo / glow
+        ctx.fillStyle = `rgba(212,200,150,${0.18 + t*0.16})`;
+        ctx.fillRect(c.x-9, c.y-9, 18, 18);
+        // white band
+        ctx.fillStyle = '#d4c896';
+        ctx.fillRect(c.x-6, c.y-3, 12, 4);
+        // reversed black tab
+        ctx.fillStyle = '#0a0805';
+        ctx.fillRect(c.x-2, c.y-2, 4, 2);
         continue;
       }
       ctx.fillStyle = state.tweakerT>0 ? '#80ff80' : '#e8c040';
@@ -4119,6 +4803,35 @@ function drawAll() {
     const s = p.sz || 4;
     ctx.fillRect(p.x-s/2, p.y-s/2, s, s);
   }
+  // v13 wave 5 — projectiles (bottles, holy water) rendered after particles, before player
+  for (const pr of projectiles) {
+    ctx.save();
+    ctx.translate(pr.x, pr.y);
+    ctx.rotate(pr.rot);
+    if (pr.kind === 'bottle') {
+      // body — brown glass
+      ctx.fillStyle = '#604020';
+      ctx.fillRect(-10, -4, 20, 8);
+      // shine line
+      ctx.fillStyle = '#a07020';
+      ctx.fillRect(-10, -3, 20, 1);
+      // neck
+      ctx.fillStyle = '#3a2010';
+      ctx.fillRect(8, -2, 3, 4);
+    } else if (pr.kind === 'holy') {
+      const t = (Math.sin(performance.now()/80)+1)/2;
+      // glow halo
+      ctx.fillStyle = `rgba(200,230,255,${0.18 + t*0.18})`;
+      ctx.fillRect(-10, -12, 20, 24);
+      // vial body
+      ctx.fillStyle = `rgba(160,200,240,${0.75 + t*0.25})`;
+      ctx.fillRect(-5, -8, 10, 16);
+      // cap
+      ctx.fillStyle = '#d4c896';
+      ctx.fillRect(-3, -10, 6, 2);
+    }
+    ctx.restore();
+  }
   // player sprite
   drawPlayer();
   // attack swing visual
@@ -4152,6 +4865,23 @@ function drawAll() {
   }
   if (P.crashT > 0) {
     ctx.fillStyle = 'rgba(180,80,180,.18)';
+    ctx.fillRect(0,0,W,H);
+  }
+  // v13 wave 5 — stun overlay: red corner border + center "GRABBED" floater
+  if (P.stunT > 0) {
+    const t = (Math.sin(performance.now()/80)+1)/2;
+    ctx.fillStyle = `rgba(208,64,64,${0.10 + t*0.10})`;
+    ctx.fillRect(0,0,W,8); ctx.fillRect(0,H-8,W,8);
+    ctx.fillRect(0,0,8,H); ctx.fillRect(W-8,0,8,H);
+    ctx.fillStyle = '#fff080';
+    ctx.font = 'bold 18px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('GRABBED', W/2, 50);
+    ctx.textAlign = 'left';
+  }
+  // v13 wave 5 — slow overlay: pale-blue veil for holy-water slow
+  if (P.slowT > 0) {
+    ctx.fillStyle = `rgba(160,200,240,${0.08 + Math.sin(performance.now()/220)*0.05})`;
     ctx.fillRect(0,0,W,H);
   }
   if (P.hp <= 30) {
@@ -4934,6 +5664,47 @@ function drawNpc(n) {
     ctx.font = 'bold 14px Courier New';
     ctx.fillText('!', n.x+n.w+2, n.y+8 + bounce);
   }
+  // v13 wave 5 — charger windup telegraph: red tint + giant white "!" floating up
+  if (n.chargeState === 'windup') {
+    const pulse = (Math.sin(performance.now()/60)+1)/2;
+    ctx.fillStyle = `rgba(208,64,64,${0.18 + pulse*0.22})`;
+    ctx.fillRect(n.x-3, n.y-5, n.w+6, n.h+8);
+    ctx.fillStyle = '#fff080';
+    ctx.font = 'bold 18px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('!', n.x+n.w/2, n.y - 12 - pulse*4);
+    ctx.textAlign = 'left';
+  }
+  // charger cooldown — soft panting visual
+  if (n.chargeState === 'cooldown') {
+    const t = (Math.sin(performance.now()/120)+1)/2;
+    ctx.fillStyle = `rgba(208,192,160,${0.10 + t*0.10})`;
+    ctx.fillRect(n.x-2, n.y-3, n.w+4, n.h+4);
+  }
+  // ranged / fallen-priest aim raise
+  if (n.aimingThrow) {
+    ctx.fillStyle = '#fff080';
+    ctx.font = 'bold 10px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('*', n.x+n.w/2, n.y - 10);
+    ctx.textAlign = 'left';
+  }
+  // cop radio (hand to ear)
+  if (n.radioVisualT > 0) {
+    ctx.fillStyle = '#88c0ff';
+    ctx.font = 'bold 11px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('*', n.x+n.w/2 + 8, n.y - 6 + Math.sin(performance.now()/100)*1);
+    ctx.textAlign = 'left';
+  }
+  // grabber freeze pose — small "✋" marker (text-safe fallback)
+  if (n.grabFreezeT > 0) {
+    ctx.fillStyle = '#d488d4';
+    ctx.font = 'bold 12px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('-<', n.x+n.w/2, n.y - 12);
+    ctx.textAlign = 'left';
+  }
   // v13 wave 3 — unvisited-vendor "?" floater. fades on first dialogue open.
   // never on hostile or aggro'd npcs (would clash with the aggro "!" and read weird).
   if (VENDOR_FLOATER_IDS.has(n.id) && !state.metVendors.has(n.id) && !n.aggro && !n.hostile) {
@@ -5423,6 +6194,9 @@ function spawnBrutusOlder() {
     hp:200, maxHp:200, speed:2.4, dmg:14,
     hostile:true, aggro:true, isBossB:true,
     showHp:true, attackCd:0, scale: 1.5,
+    // v13 wave 5 — charger from the start; grabber added at phase 3 via state.brutusOlderPhase
+    archetype:'charger_older',
+    addsT: 0,
   };
   b.x = clamp(b.x, 40, WORLD.w-80);
   b.y = clamp(b.y, 40, WORLD.h-60);
@@ -5654,6 +6428,9 @@ window.addEventListener('keydown', async (e) => {
   // play mode keys
   if (state.mode !== 'playing') return;
   state.keys.add(k);
+  // v13 wave 5 — stun gates all action inputs (SPACE attack, E interact). Movement is gated
+  // in updateWorld; menu/inv/mute keys above still work so the player can pause/leave.
+  if (P.stunT > 0) return;
   if (k === ' ' || k === 'spacebar') { e.preventDefault(); playerAttack(); }
   if (k === 'e') tryInteract();
   if (k === 'f') {

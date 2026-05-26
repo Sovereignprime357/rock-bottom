@@ -409,6 +409,79 @@ The following are NOT in v3 and should be considered for v4+ via DELEGATION.md:
 
 ---
 
+## COMBAT PATTERNS (v13 wave 5)
+
+Each hostile NPC archetype has a distinct attack pattern. Set via `n.archetype` at spawn (or — for transformed NPCs like the fallen priest — set at transformation). Non-archetype'd NPCs fall through to the default chase-bite (cops, larry, dave-on-aggro, etc).
+
+### Archetypes
+
+| Archetype | NPCs | Behavior |
+|-----------|------|----------|
+| `charger` | brutus | Windup 800ms (visible: red tint + giant `!`, audio.windup cue) → lunge 2.0× speed for 1.0s in vector locked at windup-start → cooldown 1.4s (vulnerable: +25% playerAttack damage). Damage ×1.5. Counter: dodge perpendicular during lunge. |
+| `charger_older` | brutus_older | Same machine but windup 550ms, lunge 1.4s, damage ×1.8, cooldown 1.7s. Boss-only. |
+| `grabber` | lurch | Default chase + on-contact stun: damage ×1.3, applies `P.stunT = 500ms`. All inputs gated while stunned (movement, SPACE, E). Lurch freezes for 200ms post-grab (arms-extended pose). |
+| `swarmer` | sherri | Speed ×1.4, damage ×0.6. On aggro (via `aggroNpc`), if no other live sherri within 400px, spawns a sibling 60px to the side (cap 2 total). Toast: "another one shows up. it has the same haircut." |
+| `ranged` | paulie | Maintains 180-260px from player. Throws bottles every 1500ms via the projectile system. 300ms aim-raise telegraph + `*` particle. 20% angle wobble (he misses). Panic-chase 1s if player closes to <120px. |
+| `cop` | cop | Default chase-bite + radio-for-backup: at >120px, 25%/s chance to radio in an additional cop within 5s. Cap 4 total (`COP_HARD_CAP`). Brendan does NOT radio. |
+| `brendan` | brendan | Unchanged from wave 2 (taser recharge state machine). |
+| `priest_fallen` | omalley_fallen | Phase 1 (≥50% HP): ranged-holy — kite 180-280px, throw holy water vials every 1200ms (22 dmg + 1.5s slow). Phase 2 (<50% HP): dasher — charger variant (windup 500ms, lunge ×2.4 speed), lunge applies slow on contact. |
+
+### Projectile system
+
+`projectiles` is a flat array, generic by `kind` ('bottle' | 'holy'). Update loop runs in `updateWorld` after particles: linear motion, wall collision (solid buildings), world-edge despawn, player overlap → `damagePlayer(dmg)` + optional `P.slowT = slowMs`. Pool capped at 40. Render path in `drawAll` after particles, before player. Spawn via `spawnProjectile({x, y, tx, ty, speed, dmg, slowMs, kind, from, wobble})`.
+
+### Boss phases as pattern shifts
+
+**Tony (rank-4 boss):**
+- P1 (100-66% HP): default chase-bite. Player learns the fight.
+- P2 (66-33% HP): converts `archetype = 'charger'` + spawns 2 sherri swarmer adds. Toast: "tony tears off coat #2.\nhe is faster now.\nhe whistles. someone answers."
+- P3 (33-0% HP): berserk charger (`n.berserk = true` — windup 400ms, lunge ×3, cooldown 600ms). Toast: "tony tears off coat #3.\nhe is not slowing down.\nhe is speeding up." Boss roar triple-stack on entry.
+
+**Brutus Older (boss 2):**
+- P1 (100-50%): charger from start.
+- P2 (50-25%): charger + spawns 1 sherri swarmer every 8s as adds. Toast: "he was warming up before."
+- P3 (25-0%): berserk + grabber-on-contact (post-lunge contact also applies 500ms stun). Toast: "he doesn't bite anymore.\nhe grabs."
+
+### Status effects (v13 wave 5 additions)
+
+- **Stun** (`P.stunT`): 500ms input lock (movement + SPACE attack + E interact). Triggered by grabber-on-contact or brutus_older P3.
+- **Slow** (`P.slowT`): 1500ms ×0.5 movement speed multiplier. Triggered by holy water projectile or fallen priest P2 lunge contact.
+
+Both status timers are ephemeral — never persisted to save.
+
+### Hit-stun
+
+`n.hitStun = 120ms` on every `playerAttack` damage tick. Freezes NPC AI for 120ms. Plus knockback bumped from 6 to 8 px. Makes combat feel chunkier without changing damage numbers.
+
+### Charger vulnerability
+
+`playerAttack` damage gets ×1.25 multiplier when target is `archetype in [charger, charger_older]` AND `chargeState === 'cooldown'`. Rewards good dodging.
+
+---
+
+## FALLEN PRIEST (v13 wave 5)
+
+Side quest `fallen_priest` + transformation of the existing `priest` NPC.
+
+### Trigger paths
+
+1. **Steal path**: priest visits ≥4 + at least 1 steal attempt (the "steal the collection plate" branch). Auto-fires `triggerFallenPriestTransform()` inside `priestDialogue`.
+2. **Quest path**: rank ≥3 + church visits (zone-entry counter, debounced edge) ≥3. Fires a one-shot phone call: `"unknown number: 'father o'malley says the church belongs to whoever has the keys. you don't.'"` Quest goes `available`. Player still has to walk back into the church and try to steal to trigger the actual transform (one path of completion).
+
+### Transform
+
+Same NPC entity: `n.id = 'omalley_fallen'`, name `"FATHER O'MALLEY (FALLEN)"`, `archetype = 'priest_fallen'`, HP doubled (160), darker palette tint via `n.color = '#2a1a2a'`. Canonical transform line: `"father o'malley does not stand up.\nhe is already standing.\nthe collar comes off.\nthe smile is wrong."`
+
+### Reward
+
+On death: $200 cash pile + `priest_collar` equip-tagged pickup (slot `hat`, cred +2, `wantedDecay: +0.3` — additive multiplier on the `manageCops` decay rate). Achievement `FALLEN`. Quest closes. Toast: `"the church is quiet again.\nthe pews are still wrong."`
+
+### Survival achievement
+
+`OUTRAN_THE_PRIEST`: survive 60 seconds with `n.isOmalleyFallen` alive on the map. Tracked via `state.counters.omalleyFallenSurviveT`.
+
+---
+
 ## CHANGE LOG
 
 | Version | Date | Major changes |
@@ -420,3 +493,5 @@ The following are NOT in v3 and should be considered for v4+ via DELEGATION.md:
 | v13 wave 1 | May 2026 | Housekeeping fork from v12. Dead rank-gate collision skip removed. README, .gitattributes, title refreshed. |
 | v13 wave 2 | May 2026 | Sprite parity: Barb gets her own palette; cubscout/jogger/busker/dogwalker get distinct palettes (were rendering with tony's). 3 new NPCs: PINKY POLENTA (rival supply, dirty packets, soap-weighted cook math), THE MATHEMATICIAN (cook-EV oracle, discoverability reveals every 3rd visit), COUSIN BRENDAN (rookie-cop mini-boss with taser recharge state machine). New BUS STOP zone. Achievements: DUE_DEALER_SYSTEM, BADGE_MONEY. New `glasses` accessory for makeNPC. Save key unchanged. |
 | v13 wave 3 | May 2026 | Discoverability layer + onboarding chain + 3 side quests + Q-key UI overhaul. New: `state.metVendors` Set with `?` floaters above unmet vendor NPCs; first-day mom phone tip; intro 3-quest chain (intro_remember / intro_tony / intro_smoke) FORCED on new saves that suppresses hustles/events/phone calls until introDone; 3 side quests (pigeon_crown, stripe_package, barb_crossword); hidden `charisma` stat on P (driven by equipment, currently only pigeon_crown=+1) wired into vendor pricing via `vendorPrice(base)` helper used in tony/barb/pinky/stripe; new equipment `pigeon_crown` (-3 cred, +1 charisma); new weapon `knife` (a possible stripe-package outcome); 4 new achievements (HEAD_THAT_WEARS, EXACT_CHANGE, WHAT_S_IN_THE_BOX, SEVEN_ACROSS). New saves start at $0. Save key unchanged. |
+| v13 wave 4 | May 2026 | THE HEAT minigame (real-time canvas skill check, 6 outcomes including SOAP-ROCK); parallel `P.soapRocks` FIFO counter (smoked first, silently); 4th cook mode `propane` gated on new `propane_torch` tool (two acquisitions: night-only brutus drop OR pete at rank 3 for $80); 3 new achievements (THE_HEAT_HELD, SOAP_TONGUE, CONTROLLED_BURN). Save key unchanged. |
+| v13 wave 5 | May 2026 | Combat depth pass. 5 archetypes (charger / grabber / swarmer / ranged / cop) with distinct patterns dispatched by `n.archetype`. New generic projectile system (`projectiles` array, kinds: bottle, holy). Boss phases reframed as pattern shifts (tony p2 = charger + sherri adds, p3 = berserk; brutus_older p2 = adds every 8s, p3 = grabber-on-contact). FATHER O'MALLEY FALLEN mini-boss + `fallen_priest` quest with two trigger paths (steal OR rank-3 phone call). New equipment `priest_collar` (+2 cred, +0.3 wantedDecay multiplier). 3 new achievements (FALLEN, DODGED_THE_LUNGE, OUTRAN_THE_PRIEST). New player status timers `P.stunT` + `P.slowT`. Cop radio-for-backup (25%/s at >120px, cap 4 cops). Hit-stun 120ms on every NPC damage. Save key unchanged. |
