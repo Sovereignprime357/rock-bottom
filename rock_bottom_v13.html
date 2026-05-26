@@ -329,7 +329,59 @@ const PROPS = [
   // broken bottles
   { type:'bottle', x:340, y:1620 },{ type:'bottle', x:580, y:1380 },
   { type:'bottle', x:1380, y:1520 },
+  // v13 wave 6 — highway underpass tent encampment (decorative, non-solid)
+  { type:'tent',   x:1060, y:330,  color:'#3a5a8a' },   // blue tarp
+  { type:'tent',   x:1120, y:380,  color:'#3a2a18' },   // brown trash bag tent
+  { type:'tent',   x:1230, y:350,  color:'#605850' },   // gray
+  { type:'tent',   x:1300, y:400,  color:'#4a3050' },   // purple sleeping bag pile
+  // v13 wave 6 — cardboard sign next to the mathematician (deepest interior)
+  { type:'cardsign', x:1340, y:412, text:'WILL TRADE\nWORDS FOR\nMATH' },
+  // v13 wave 6 — scrap yard depth: piles + car wrecks + the chained dog's leash post
+  { type:'scrap_pile', x:200, y:200, w:32, h:18, color:'#705028' },
+  { type:'scrap_pile', x:520, y:340, w:36, h:20, color:'#604028' },
+  { type:'scrap_pile', x:380, y:380, w:28, h:16, color:'#684830' },
+  { type:'scrap_pile', x:160, y:330, w:30, h:18, color:'#503820' },
+  { type:'car_wreck',  x:430, y:160, w:60, h:28, color:'#5a3030' },
+  { type:'car_wreck',  x:240, y:380, w:62, h:30, color:'#4a4838' },
+  { type:'leash_post', x:570, y:130 },   // the dog's post, dog spawns within 30px
+  // v13 wave 6 — the public phone (scrap yard, on a pole). interactive.
+  { type:'pay_phone', x:130, y:220 },
 ];
+
+// v13 wave 6 — interactive props. parallel array to PROPS; only the things that respond to E key
+// or to player attack get an entry here. each carries its own state (cooldown, broken, etc.).
+let interactiveProps = [];
+function initInteractiveProps() {
+  interactiveProps = [
+    // kickable trash cans — one per zone roughly. each carries cooldown + state.
+    { type:'trashcan', x: 980,  y: 800,  zone:'block',   cdT:0, tipT:0, rotPulse:0 },
+    { type:'trashcan', x: 1620, y: 980,  zone:'dealer',  cdT:0, tipT:0, rotPulse:0 },
+    { type:'trashcan', x: 220,  y: 700,  zone:'pawn',    cdT:0, tipT:0, rotPulse:0 },
+    { type:'trashcan', x: 820,  y: 1500, zone:'market',  cdT:0, tipT:0, rotPulse:0 },
+    { type:'trashcan', x: 300,  y: 1560, zone:'alley',   cdT:0, tipT:0, rotPulse:0 },
+    { type:'trashcan', x: 380,  y: 280,  zone:'scrap',   cdT:0, tipT:0, rotPulse:0 },
+  ];
+  // breakable bottles — scattered. respawned over time.
+  for (let i=0;i<8;i++) spawnBreakableBottle();
+}
+// spawn one breakable bottle in a random reachable spot
+function spawnBreakableBottle() {
+  // pool of candidate spots — clear of buildings.
+  const pool = [
+    {x:140, y:300}, {x:680, y:240}, {x:1100, y:540}, {x:1740, y:520},
+    {x:240, y:980}, {x:900, y:1100}, {x:1500, y:1240}, {x:1700, y:1180},
+    {x:320, y:1420},{x:540, y:1700}, {x:1100, y:1640}, {x:1380, y:1700},
+    {x:920, y:1820}, {x:280, y:1820}, {x:1700, y:920},  {x:1820, y:1380},
+  ];
+  const sp = pool[Math.floor(Math.random()*pool.length)];
+  // jitter to avoid overlapping bottles
+  interactiveProps.push({
+    type:'b_bottle',
+    x: sp.x + (Math.random()-.5)*40,
+    y: sp.y + (Math.random()-.5)*40,
+    broken: false,
+  });
+}
 
 // ---------- ambient chatter ----------
 const CHATTER = {
@@ -383,6 +435,70 @@ const EQUIPMENT = {
   // wantedDecay is a multiplier on the cop-decay timer (1.3 = 30% faster) applied in manageCops.
   priest_collar: { slot:'hat',   n:"the priest's collar (reversed)",  speed: 0, cred: 2,  hp: 0, wantedDecay: 0.3 },
 };
+
+// ---------- v13 wave 6: PUBLIC PHONE LINES + GRAFFITI LINES ----------
+// the pay phone in the scrap yard rings every 4-8 min. answer with E during the 30s window.
+// most are pure flavor; one (~10% roll) plants a $50 cash pile behind the church.
+const PUBLIC_PHONE_LINES = [
+  { text: "a voice. it has been waiting.\n'is this still working?\nthey took the rest of them down.'", action: () => {} },
+  { text: "a voice. it knows your name.\nit does not say your name.\nit just knows.", action: () => {} },
+  { text: "silence. then a long beep.\nthen nothing.\nyou hang up.", action: () => {} },
+  { text: "a voice: 'tell pinky the package is ready.'\nyou don't know what package.\nyou won't.", action: () => {} },
+  { text: "breathing. close breathing.\nyou hear your own breathing.\nyou are also on the other end.", action: () => {} },
+  { text: "'mom?'\nit is a child's voice.\nyou say 'yes.' you don't know why.", action: () => { P.brain = Math.max(0, P.brain - 4); } },
+  { text: "'this is dolores. is carl there.\ncarl owes me forty.\ntell carl i found out.'", action: () => {} },
+  { text: "a recording: 'press 1 for english.'\nyou press nothing.\nthe recording continues in english anyway.", action: () => {} },
+  { text: "'the soup kitchen is closed today.\nthe soup kitchen has been closed since 1998.\nyou are welcome anyway.'", action: () => { P.hp = Math.min(P.maxHp, P.hp + 4); } },
+  // 10% — plants a loaded dumpster behind the church
+  { text: "a voice: 'check the dumpster behind the church.\nthere is something for you.\ndo not bring anyone.'", planted: true, action: () => {
+      // plant a $50 cash pile behind the church (church is at 1680,1360 w240 h200; place behind = above)
+      const id = 'cp_phone_church_'+Date.now();
+      cashPiles.push({ id, x: 1800, y: 1320, amt: 50, collected: false, intro: false });
+      state.flags.churchLoadedDumpsterX = 1800;
+      state.flags.churchLoadedDumpsterY = 1320;
+      feedPost("got a tip on a dumpster behind the church. anonymous. probably a setup.", '@crackheadcent');
+    } },
+];
+
+// graffiti tags — lowercased fragments, cursed-mundane, no fourth-wall.
+const GRAFFITI_LINES = [
+  "if you are reading this you owe sherri money",
+  "crawdad on hudson",
+  "BAGGIE BARB CHEATS AT THE CROSSWORD",
+  "the priest knew. the priest knew.",
+  "call mom",
+  "the bus is late",
+  "don't trust pinky on tuesdays",
+  "yuri sees you in the metal",
+  "STRIPE LIED. STRIPE LIES.",
+  "ben is not your dad",
+  "the dog was here. the dog is here.",
+  "tony does not blink",
+  "i lost a sock here in 2011",
+  "the conductor is real",
+  "DAVE WAS RIGHT ABOUT THE PIGEONS",
+  "WHEN U SEE PAULIE LOOK AT THE FACE",
+  "i was a person once",
+  "FREE THE POSSUM (he is free)",
+  "carl owes dolores forty",
+  "the train is coming. the train is coming. the train is coming.",
+  "ECCLESIASTES 1:9",
+  "if found return to nobody",
+  "honk if you remember mondays",
+  "BRENDAN GOT TAZED HIMSELF",
+  "soap is a rock if you believe",
+  "BOOK 14 ACROSS IS BLAME",
+  "the underpass has ears",
+  "i traded a coat for a coat for a coat",
+  "PETE WEIGHED MY SOUL. $1.",
+  "the corner belongs to nobody",
+  "ROCK BOTTOM SAYS HI",
+  "i kissed lurch on a dare in 2007",
+  "the soup kitchen closed in 1998 (it is open)",
+  "MAYOR'S COUSIN IS NOT THE MAYOR",
+  "yell louder. larry is listening.",
+  "the pothole knows my name",
+];
 
 // ---------- v13 wave 3: discoverability + vendor index ----------
 // the canonical list of NPCs that get the "?" floater + appear in the people-met index.
@@ -458,6 +574,10 @@ const ACHIEVEMENTS = {
   fallen:               { name:"FALLEN",               flav:"put father o'malley on the ground. the church is quiet." },
   dodged_the_lunge:     { name:"DODGED THE LUNGE",     flav:"sidestep a charger's lunge. it lands on nothing." },
   outran_the_priest:    { name:"OUTRAN THE PRIEST",    flav:"survive father o'malley fallen for 60 seconds. the lord is busy." },
+  // v13 wave 6 — map depth + scrap yard
+  liberator:            { name:"LIBERATOR",            flav:"free the chained dog. he never looks back. he never needed to." },
+  the_piece_of_shit:    { name:"THE PIECE OF SHIT",    flav:"attacked the chained dog. there is a piece of shit out there. it is you." },
+  phone_booth_prophet:  { name:"PHONE BOOTH PROPHET",  flav:"answer five public phone calls. nobody is paying you. someone is calling." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -755,6 +875,8 @@ const PALS = {
   pinky: ['transparent','#0a0805','#180810','#c08850','#c8b070','#e8c040','#2a1810','#d4c896'],
   math: ['transparent','#0a0a08','#2a1810','#b09078','#c8b8a0','#6a6a5a','#6a5a4a','#d4c896'],
   brendan: ['transparent','#000','#0a0a28','#2838c0','#4048e8','#f4d8b8','#181828','#fff'],
+  // v13 wave 6 — scrap_dog: scrappy brown + black, mangier than brutus
+  scrap_dog: ['transparent','#000','#3a2010','#4a2810','#684830','#a08040','#d4c896','#181010'],
 };
 
 // 16x16 pixel art helpers — parse a row string of 0-7 (dot=transparent)
@@ -1120,6 +1242,8 @@ function buildSprites() {
   possum.forEach((g,i) => { SPRITE_CACHE['possum_'+i] = rasterize(g, PALS.possum); });
   const dog = makeDog();
   dog.forEach((g,i) => { SPRITE_CACHE['brutus_'+i] = rasterize(g, PALS.brutus); });
+  // v13 wave 6 — scrap_dog reuses the dog shape with a different (mangier) palette
+  dog.forEach((g,i) => { SPRITE_CACHE['scrap_dog_'+i] = rasterize(g, PALS.scrap_dog); });
   const pig = makePigeon();
   pig.forEach((g,i) => { SPRITE_CACHE['pigeon_'+i] = rasterize(g, PALS.pigeon); });
 
@@ -1249,6 +1373,8 @@ const audio = {
   holyWaterThrow() { this.tone(660,.10,'triangle',.05); setTimeout(()=>this.tone(880,.08,'triangle',.04),50); },
   holyWaterHit() { this.tone(440,.16,'sine',.05,220); this.tone(880,.20,'sine',.04,660); this.noise(.08,.03); },
   radio() { this.tone(1600,.03,'square',.04); setTimeout(()=>this.tone(1200,.04,'square',.03),40); this.noise(.04,.02); },
+  // v13 wave 6 — short percussive thump for kicked trash can
+  kick() { this.tone(80,.10,'square',.07,40); this.noise(.08,.05); },
 };
 
 // ---------- save/load ----------
@@ -1280,6 +1406,9 @@ async function saveGame() {
       metVendors: Array.from(state.metVendors || []),
       flags: state.flags || {},
       crownPickup: state.crownPickup || null,
+      // v13 wave 6 — graffiti layout + phone counter (quest state lives inside state.quests)
+      graffiti: state.graffiti || null,
+      publicPhoneAnswered: state.publicPhoneAnswered || 0,
     });
   } catch(e) {}
 }
@@ -1322,8 +1451,16 @@ async function loadGame() {
       peteTorchStocked: false, peteTorchSold: false,
       // v13 wave 5 — fallen priest
       omalleyFallen: false, omalleyFallenDead: false, fallenPriestCallFired: false,
+      // v13 wave 6 — map-depth flags. underpassEntered defaults to true on old saves
+      // so they don't get the first-entry toast on reload.
+      underpassEntered: true, dumpsterPropaneAwarded: false,
+      churchLoadedDumpsterX: 0, churchLoadedDumpsterY: 0,
     }, sv.flags || {});
     state.crownPickup = sv.crownPickup || null;
+    // v13 wave 6 — restore graffiti layout + phone counter; if missing, leave null so a fresh layout
+    // gets built on next drawGraffiti call (existing saves get one-time fresh tags — fine, decorative).
+    state.graffiti = sv.graffiti || null;
+    state.publicPhoneAnswered = sv.publicPhoneAnswered || 0;
     P.charisma = sv.player && sv.player.charisma || 0;
     state.day = sv.day ?? 1;
     state.dayTime = sv.dayTime ?? 0;
@@ -1450,6 +1587,8 @@ const state = {
     barb_crossword:{ title: "BARB'S MISSING CROSSWORD",done: false, available: false, flav: "find the saturday crossword. she is unwell without it." },
     // v13 wave 5 — fallen priest. opens via phone call (rank ≥3 + church visits ≥3) OR auto if you steal the plate enough.
     fallen_priest:{ title: "THE FALLEN PRIEST",        done: false, available: false, flav: "the priest has been wrong for a while. someone should say so." },
+    // v13 wave 6 — the chained scrap-yard dog. opens on first close approach. branches: fed | freed | left.
+    scrap_dog:    { title: "THE SCRAP YARD DOG",       done: false, available: false, state: 'idle', flav: "the dog. brown. matted. he blinks at you twice." },
   },
   cashPilesCollected: new Set(),
   achievements: new Set(),
@@ -1486,8 +1625,24 @@ const state = {
     omalleyFallen: false,       // priest has transformed (any path)
     omalleyFallenDead: false,   // mini-boss defeated, collar awarded
     fallenPriestCallFired: false, // unknown-number phone call fired (quest hook)
+    // v13 wave 6 — map-depth pass
+    underpassEntered: false,    // first-entry echo line + feed post fires once per save
+    dumpsterPropaneAwarded: false, // dumpster propane rare drop is one-and-done globally
+    churchLoadedDumpsterX: 0,   // when the phone "tell pinky" line fires, plant a $50 pile here
+    churchLoadedDumpsterY: 0,
+    petePropaneTorchOption: false, // (legacy alias — not used; reserved for future)
   },
   crownPickup: null,            // {x, y, collected} — only present while pigeon_crown quest active
+  // v13 wave 6 — graffiti tags placed once per save and persisted (replaces ephemeral GRAFFITI cache).
+  graffiti: null,
+  // v13 wave 6 — public phone ring timer + active-ring window
+  publicPhoneT: 240000 + Math.random()*240000, // 4-8min initial
+  phonePropRingT: 0,                            // counts up during the 30s answer window
+  publicPhoneAnswered: 0,                        // counter for PHONE_BOOTH_PROPHET
+  // v13 wave 6 — wandering freed-dog cooldown (state.quests.scrap_dog.state==='freed')
+  freedDogT: 0,                                  // ms until next possible reappearance
+  freedDogFollowT: 0,                            // ms remaining of current follow window
+  freedDogFirstReturn: false,                    // toast-once on first reappear
 };
 
 // ---------- dialogue / toast helpers ----------
@@ -1677,6 +1832,12 @@ function spawnNpcs() {
       hp:50, maxHp:50, speed:1.4, hostile:false, dmg:7, zoneOnly:{x:100,y:80,w:520,h:360},
       archetype:'charger',
       interact: null },
+    // v13 wave 6 — the chained scrap-yard dog. archetype 'passive' (does not aggro by default).
+    // chained to leash_post at (570,130). interact handled by scrapDogDialogue.
+    // becomes hostile only if attacked while chained.
+    { id:'scrap_dog', name:'THE DOG', sprite:'scrap_dog', x:580, y:150, w:26, h:20, color:'#684830',
+      hp:40, maxHp:40, speed:0, hostile:false, archetype:'passive', chained: true, tailWag:0,
+      interact: scrapDogDialogue },
     { id:'pete', name:'PAWN SHOP PETE', sprite:'pete', x:250, y:700, w:28,h:32, color:'#4a4028',
       hp:80, maxHp:80, speed:0, hostile:false, vendor:true,
       interact: peteDialogue },
@@ -2017,8 +2178,128 @@ function yuriDialogue() {
     { label: 'ask about brutus.', action: () => {
       toast("yuri does not look up.\n'BRUTUS REMEMBER. you know what you did.'\n(you do not.)");
     }},
+    { label: 'ask about the dog.', action: () => {
+      const dq = state.quests.scrap_dog;
+      if (!dq || dq.state === 'idle' || dq.state === 'left') {
+        toast("yuri does not look up.\n'the dog. is the dog.\nthe dog is fine.'");
+      } else if (dq.state === 'fed') {
+        toast("yuri does not look up.\n'somebody fed the dog.\nthe dog is no different.'\n(yuri pauses. is different.)");
+      } else if (dq.state === 'freed') {
+        toast("yuri looks up.\n'the dog is gone.'\nhe looks back down.\n'good for the dog.'");
+      }
+    }},
     { label: 'leave.', action: () => {} },
   ]);
+}
+
+// v13 wave 6 — the chained scrap-yard dog. 3 outcome branches.
+// Feed: -1 food, +1 cred, state='fed', stays chained but creates 200px cop-discomfort radius.
+// Free: triggers lockpick mini. Success: dog disappears, state='freed', LIBERATOR unlocked,
+//       dog can RANDOMLY reappear in any zone as a follower for ~60s.
+// Leave: state='left' (no penalty).
+// Attack-while-chained (player swing connects): becomes hostile, state='left',
+//   THE_PIECE_OF_SHIT + -5 cred (handled at the playerAttack site).
+function scrapDogDialogue(n) {
+  const q = state.quests.scrap_dog;
+  if (!q) return;
+  // mark quest as encountered
+  if (q.state === 'idle') q.available = true;
+  // already-resolved branches
+  if (q.state === 'fed') {
+    dialogue('THE DOG', "the dog. fed. matted but slightly less so.\nhe blinks. once. that's the whole interaction.", [
+      { label: 'pet him.', action: () => { toast("the dog accepts. tolerantly.\nthe chain rattles.", 1800); P.cred += 1; saveGame(); }},
+      { label: 'leave him.', action: () => {} },
+    ]);
+    return;
+  }
+  if (q.state === 'freed') {
+    dialogue('THE DOG (gone)', "the post is here.\nthe chain is on the ground.\nthe dog is not here.", [
+      { label: 'leave.', action: () => {} },
+    ]);
+    return;
+  }
+  if (q.state === 'left') {
+    if (n.dead) return;
+    dialogue('THE DOG', "the dog. still chained.\nhe blinks at you.\nhe has been waiting.", [
+      { label: 'feed him. (-1 food, +1 cred)', disabled: !P.inventory.find(i=>i.id==='food'), action: () => {
+        const i = P.inventory.findIndex(x=>x.id==='food'); if (i>=0) P.inventory.splice(i,1);
+        P.cred += 1;
+        q.state = 'fed'; q.done = true;
+        toast("he ate it without looking up.\nhe looks at you once.\nthen back to the food.", 3200);
+        feedPost("fed the scrap-yard dog.", '@crackheadcent');
+        saveGame();
+      }},
+      { label: 'free him. (lockpick.)', action: () => freeScrapDog() },
+      { label: 'leave.', action: () => {} },
+    ]);
+    return;
+  }
+  // first encounter
+  dialogue('THE DOG', "the dog. brown. matted.\nchained to a post that looks bored.\nhe blinks at you twice.", [
+    { label: P.inventory.find(i=>i.id==='food')
+        ? 'feed him. (-1 food, +1 cred)'
+        : 'feed him. (you have no food.)',
+      disabled: !P.inventory.find(i=>i.id==='food'),
+      action: () => {
+        const i = P.inventory.findIndex(x=>x.id==='food'); if (i>=0) P.inventory.splice(i,1);
+        P.cred += 1;
+        q.state = 'fed'; q.done = true;
+        toast("he ate it without looking up.\nhe looks at you once.\nthen back to the food.", 3200);
+        feedPost("fed the scrap-yard dog.", '@crackheadcent');
+        saveGame();
+      }
+    },
+    { label: 'free him. (lockpick.)', action: () => freeScrapDog() },
+    { label: 'leave him.', action: () => {
+      q.state = 'left'; q.done = true; q.available = false;
+      toast("the dog blinks again. you walk away.\nhe is still there.\nhe is still there.", 2600);
+      saveGame();
+    }},
+  ]);
+}
+
+function freeScrapDog() {
+  startLockpickMini(
+    () => {
+      const q = state.quests.scrap_dog; if (!q) return;
+      const dog = npcs.find(n => n.id === 'scrap_dog');
+      if (dog) { dog.dead = true; dog.chained = false; }
+      q.state = 'freed'; q.done = true; q.available = false;
+      state.freedDogT = 60000 + Math.random()*120000; // first reappear 1-3min later
+      audio.glassBreak();
+      unlockAchievement('liberator');
+      toast("CLICK. the lock falls.\nthe dog stands up.\nhe walks past you. he does not look at you.\nhe is gone.", 4400);
+      feedPost("freed the dog. the dog did not stay.", '@crackheadcent');
+      saveGame();
+    },
+    () => {
+      toast("the lock holds.\nthe dog watches.\nhe is patient. you are not.", 2400);
+    }
+  );
+}
+
+// v13 wave 6 — spawn the wandering freed-dog follower in a random zone close to the player.
+// follows for ~60s, then wanders off the screen.
+function spawnFreedDogFollower() {
+  // already present?
+  if (npcs.find(n => n.id === 'freed_dog_follower' && !n.dead)) return;
+  const offsetX = (Math.random()-.5)*120;
+  const offsetY = 80 + Math.random()*40;
+  npcs.push({
+    id: 'freed_dog_follower', name: 'THE DOG', sprite: 'scrap_dog',
+    x: P.x + offsetX, y: P.y + offsetY, w: 26, h: 20, color: '#684830',
+    hp: 40, maxHp: 40, speed: 1.4, hostile: false, archetype: 'passive',
+    isPet: true, freedFollower: true, frame: 0,
+    interact: (nn) => dialogue('THE DOG', "the dog.\nbrown. less matted.\nhe is here. for now.", [
+      { label: 'pet him.', action: () => { P.cred += 1; toast("he accepts.\nhe leans into it.\nthe wandering resumes.", 2400); }},
+      { label: 'leave.', action: () => {} },
+    ]),
+  });
+  if (!state.freedDogFirstReturn) {
+    state.freedDogFirstReturn = true;
+    toast("the dog is back.\nhe is here.\nfor now.", 3200);
+    feedPost("the dog came back today. just for a while.", '@crackheadcent');
+  }
 }
 
 function peteDialogue() {
@@ -2041,6 +2322,31 @@ function peteDialogue() {
       P.cash += 20; state.counters.peteSold = (state.counters.peteSold||0)+1;
       toast('+ $20\n(do not ask where it came from.)'); audio.coin(); saveGame();
     }},
+    // v13 wave 6 — pete sells generic food ($3). a junk inventory item with one use (feed the dog).
+    { label: P.cash>=3 ? 'buy food. $3. (canned. unmarked.)' : "food is $3.",
+      disabled: P.cash<3,
+      action: () => {
+        P.cash -= 3;
+        P.inventory.push({id:'food', n:'a can of food (unmarked)', q:1});
+        toast("- $3\n+ a can of food (unmarked).\npete keeps eating his hot pocket.", 2400);
+        audio.coin();
+        state.counters.peteSold = (state.counters.peteSold||0)+1;
+        saveGame();
+      }
+    },
+    // v13 wave 6 — pete buys junk
+    { label: P.inventory.find(i=>i.id==='junk') ? 'sell junk. $1 each.' : 'ask about junk.',
+      disabled: !P.inventory.find(i=>i.id==='junk'),
+      action: () => {
+        const junks = P.inventory.filter(i=>i.id==='junk');
+        P.inventory = P.inventory.filter(i=>i.id!=='junk');
+        const got = junks.length * 1;
+        P.cash += got;
+        state.counters.peteSold = (state.counters.peteSold||0)+1;
+        toast("- "+junks.length+" junk\n+ $"+got+"\npete weighs each piece. it takes a while.", 2800);
+        audio.coin(); saveGame();
+      }
+    },
   ];
   if (torchAvail) {
     opts.push({
@@ -3313,6 +3619,26 @@ function playerAttack() {
       connected = true;
       state.shake = Math.max(state.shake, 4);
       state.hitPause = 40; // freeze frame
+      // v13 wave 6 — attacking the chained scrap_dog: one-time achievement, -5 cred,
+      // dog becomes hostile and the quest closes as 'left' (no LIBERATOR ever).
+      if (n.id === 'scrap_dog' && n.chained) {
+        const q = state.quests.scrap_dog;
+        if (q && q.state !== 'left') {
+          q.state = 'left'; q.done = true; q.available = false;
+        }
+        if (!state.achievements.has('the_piece_of_shit')) {
+          P.cred = Math.max(-50, P.cred - 5);
+          unlockAchievement('the_piece_of_shit');
+          toast("the dog growls. low. wrong.\nyou hit a dog that was tied up.\n- 5 cred", 4000);
+          feedPost("there is a piece of shit out there. it is the man on the corner.", '@crackheadcent');
+        }
+        n.hostile = true; n.aggro = true;
+        // make him able to fight — give him speed and snap the chain (lose the leash render)
+        n.chained = false;
+        n.speed = 1.6; n.dmg = 6;
+        audio.hurt();
+        saveGame();
+      }
       // peaceful NPC hit -> wanted up
       if (!n.hostile && !n.aggroOnHit) { P.wanted = Math.min(3, P.wanted+1); toast(n.name + " did not deserve that.\nwanted +1"); }
       if (n.aggroOnHit && !n.aggro) { n.hostile = true; n.aggro = true; if (n.archetype === 'swarmer' && n.id === 'sherri') spawnSwarmerSibling(n); }
@@ -3329,6 +3655,22 @@ function playerAttack() {
       if (P.facing==='left') n.x -= kb;
       if (P.facing==='right') n.x += kb;
       if (n.hp <= 0) onNpcDeath(n);
+    }
+  }
+  // v13 wave 6 — breakable bottles in the swing arc shatter; 25% drop a broken_bottle weapon pickup.
+  for (const ip of interactiveProps) {
+    if (ip.type !== 'b_bottle' || ip.broken) continue;
+    const br = { x: ip.x-4, y: ip.y-12, w: 8, h: 16 };
+    if (rectsOverlap(hit, br)) {
+      ip.broken = true;
+      ip.respawnT = 60000 + Math.random()*60000;
+      audio.glassBreak();
+      // glass shard burst
+      for (let i=0;i<12;i++) particles.push({x:ip.x, y:ip.y-4, vx:(Math.random()-.5)*5, vy:-Math.random()*3-0.5, life:600, c:'rgba(180,200,220,.85)', sz:2, glow:true});
+      // 25% chance to drop the weapon
+      if (Math.random() < 0.25 && P.weapon !== 'broken_bottle') {
+        pickupWeapon('broken_bottle');
+      }
     }
   }
   if (connected) {
@@ -3807,6 +4149,119 @@ function updateWorld(dt) {
     if (!introActive) fireRandomEvent();
   }
 
+  // v13 wave 6 — interactive props: cooldown / tip-over animation tick + bottle respawn
+  for (const ip of interactiveProps) {
+    if (ip.type === 'trashcan') {
+      if (ip.cdT > 0) ip.cdT -= dt;
+      if (ip.tipT > 0) ip.tipT -= dt;
+      if (ip.rotPulse > 0) ip.rotPulse -= dt;
+    } else if (ip.type === 'b_bottle' && ip.broken) {
+      ip.respawnT -= dt;
+      if (ip.respawnT <= 0) {
+        // pop a fresh one in
+        ip.broken = false;
+        const pool = [
+          {x:140, y:300}, {x:680, y:240}, {x:1100, y:540}, {x:1740, y:520},
+          {x:240, y:980}, {x:900, y:1100}, {x:1500, y:1240}, {x:1700, y:1180},
+          {x:320, y:1420},{x:540, y:1700}, {x:1100, y:1640}, {x:1380, y:1700},
+        ];
+        const sp = pool[Math.floor(Math.random()*pool.length)];
+        ip.x = sp.x + (Math.random()-.5)*40;
+        ip.y = sp.y + (Math.random()-.5)*40;
+      }
+    }
+  }
+  // v13 wave 6 — dumpster cooldown tick (used to gate re-dig)
+  for (const p of PROPS) {
+    if (p.type === 'dumpster' && p.diveCdT > 0) {
+      p.diveCdT -= dt;
+      if (p.diveCdT <= 0) { p.looted = false; }
+    }
+  }
+
+  // v13 wave 6 — first-time underpass entry: echo line + feed post
+  if (state.flags && !state.flags.underpassEntered && state.mode === 'playing') {
+    if (inZone(P.x+P.w/2, P.y+P.h/2, 'underpass')) {
+      state.flags.underpassEntered = true;
+      feedPost("under the bridge. the bridge has ears.", '@crackheadcent');
+      toast("the air changes.\nyou can hear yourself walk.", 3600);
+      saveGame();
+    }
+  }
+
+  // v13 wave 6 — public phone ring scheduler. 4-8 min between rings. answer window 30s.
+  if (state.publicPhoneT == null) state.publicPhoneT = 240000 + Math.random()*240000;
+  if (state.phonePropRingT > 0) {
+    state.phonePropRingT -= dt;
+    if (state.phonePropRingT <= 0) {
+      state.phonePropRingT = 0;
+      // missed
+    }
+  } else {
+    state.publicPhoneT -= dt;
+    if (state.publicPhoneT <= 0 && state.mode === 'playing' && !introActive) {
+      state.publicPhoneT = 240000 + Math.random()*240000;
+      state.phonePropRingT = 30000; // 30s answer window
+      audio.dialogue();
+      feedPost("a phone is ringing in the scrap yard.", '@local_eyewitness');
+    }
+  }
+
+  // v13 wave 6 — fed dog: 200px cop-discomfort radius (cops at 0.5x speed near the chained dog).
+  // Applied here so it persists for the whole game regardless of dialogue state.
+  const fedDog = (state.quests.scrap_dog && state.quests.scrap_dog.state === 'fed')
+    ? npcs.find(n => n.id === 'scrap_dog' && !n.dead)
+    : null;
+  if (fedDog) {
+    for (const n of npcs) {
+      if (!n.cop && n.id !== 'brendan' && n.id !== 'horsecop') continue;
+      const dx = (n.x+n.w/2) - (fedDog.x+fedDog.w/2);
+      const dy = (n.y+n.h/2) - (fedDog.y+fedDog.h/2);
+      if (dx*dx + dy*dy < 200*200) {
+        n.dogSpookSlow = 1; // flag — read in cop AI for the 0.5x mult; cleared next frame
+      }
+    }
+  }
+  // also: fed wandering follower dog has the same radius
+  const followerDog = npcs.find(n => n.id === 'freed_dog_follower' && !n.dead);
+  if (followerDog) {
+    for (const n of npcs) {
+      if (!n.cop && n.id !== 'brendan' && n.id !== 'horsecop') continue;
+      const dx = (n.x+n.w/2) - (followerDog.x+followerDog.w/2);
+      const dy = (n.y+n.h/2) - (followerDog.y+followerDog.h/2);
+      if (dx*dx + dy*dy < 200*200) {
+        n.dogSpookSlow = 1;
+      }
+    }
+  }
+
+  // v13 wave 6 — freed dog wandering schedule. while state==='freed', a follower can spawn
+  // every 1-3 min. when present, follow window counts down ~60s before despawn.
+  if (state.quests.scrap_dog && state.quests.scrap_dog.state === 'freed') {
+    if (followerDog) {
+      state.freedDogFollowT -= dt;
+      if (state.freedDogFollowT <= 0) {
+        followerDog.dead = true; // walks off
+        state.freedDogT = 90000 + Math.random()*180000; // 1.5-4.5 min before next return
+      }
+    } else {
+      state.freedDogT -= dt;
+      if (state.freedDogT <= 0 && state.mode === 'playing') {
+        spawnFreedDogFollower();
+        state.freedDogFollowT = 60000; // ~60s follow window
+      }
+    }
+  }
+
+  // v13 wave 6 — tail wag + stand-up when player approaches chained dog
+  const sdog = npcs.find(n => n.id === 'scrap_dog' && !n.dead && n.chained);
+  if (sdog) {
+    const dx = (P.x+P.w/2) - (sdog.x+sdog.w/2);
+    const dy = (P.y+P.h/2) - (sdog.y+sdog.h/2);
+    const near = dx*dx + dy*dy < 100*100;
+    sdog.tailWag = near ? Math.min(1, (sdog.tailWag||0) + dt*0.003) : Math.max(0, (sdog.tailWag||0) - dt*0.002);
+  }
+
   // ambient SFX scheduler
   state.ambientT = (state.ambientT||4000) - dt;
   if (state.ambientT <= 0) {
@@ -4035,18 +4490,20 @@ function updateWorld(dt) {
         n.x -= (pdxP/pdistP) * 0.4 * (dt/16);
         n.y -= (pdyP/pdistP) * 0.4 * (dt/16);
       }
-      // periodic cash-pile reveal
-      n.revealT = (n.revealT||0) - dt;
-      if (n.revealT <= 0) {
-        n.revealT = 30000 + Math.random()*15000;
-        const uncollected = cashPiles.filter(c => !c.collected);
-        if (uncollected.length) {
-          const target = uncollected[Math.floor(Math.random()*uncollected.length)];
-          // teleport one cash pile near the player
-          target.x = P.x + (Math.random()-.5)*60;
-          target.y = P.y + 40 + Math.random()*30;
-          for (let i=0;i<6;i++) particles.push({x:target.x, y:target.y, vx:(Math.random()-.5)*3, vy:-Math.random()*3, life:600, c:'#e8c040', sz:3});
-          toast("the possum has placed something for you.\n(look around your feet.)", 2400);
+      // periodic cash-pile reveal — possum only (v13 wave 6: freed dog also uses isPet, skip for it).
+      if (n.id === 'pet_possum') {
+        n.revealT = (n.revealT||0) - dt;
+        if (n.revealT <= 0) {
+          n.revealT = 30000 + Math.random()*15000;
+          const uncollected = cashPiles.filter(c => !c.collected);
+          if (uncollected.length) {
+            const target = uncollected[Math.floor(Math.random()*uncollected.length)];
+            // teleport one cash pile near the player
+            target.x = P.x + (Math.random()-.5)*60;
+            target.y = P.y + 40 + Math.random()*30;
+            for (let i=0;i<6;i++) particles.push({x:target.x, y:target.y, vx:(Math.random()-.5)*3, vy:-Math.random()*3, life:600, c:'#e8c040', sz:3});
+            toast("the possum has placed something for you.\n(look around your feet.)", 2400);
+          }
         }
       }
     }
@@ -4354,10 +4811,15 @@ function updateWorld(dt) {
       // ---------------- DEFAULT chase-bite (cops, larry, dave when aggro'd, etc) ----------------
       else {
         if (n.speed > 0) {
-          n.x += (pdx/len) * n.speed * (dt/16);
-          n.y += (pdy/len) * n.speed * (dt/16);
+          // v13 wave 6 — fed/free dog cop-discomfort radius: cops at 0.5x speed near a friendly dog.
+          // dogSpookSlow flag is set in updateWorld each frame; cleared at the end of this branch.
+          const spookMult = (n.dogSpookSlow && (n.cop || n.id==='brendan' || n.id==='horsecop')) ? 0.5 : 1;
+          n.x += (pdx/len) * n.speed * spookMult * (dt/16);
+          n.y += (pdy/len) * n.speed * spookMult * (dt/16);
           isMoving = true;
         }
+        // clear the per-frame flag so it can be re-set next tick
+        if (n.dogSpookSlow) n.dogSpookSlow = 0;
         // v13 wave 2 — brendan's taser charges over 4 seconds; only zaps when ready.
         if (n.isBrendan) {
           n.taserChargeT = Math.min(4000, (n.taserChargeT||0) + dt);
@@ -4704,6 +5166,8 @@ function drawAll() {
 
   // props (dumpsters, lamps, hydrants, etc.)
   drawProps();
+  // v13 wave 6 — dog leash (rendered between props and NPCs so leash sits under dog)
+  drawDogLeash();
 
   // hidden cash piles — only render under tweaker vision OR if close
   for (const c of cashPiles) {
@@ -4996,6 +5460,25 @@ function drawUnderpass() {
     ctx.lineTo(z.x+90+i*100, z.y+z.h-60);
     ctx.stroke();
   }
+  // v13 wave 6 — sodium-orange light patches (always-on, additive in world space).
+  // makes the zone read as perpetually dim even in daytime.
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  const patches = [
+    { x: z.x + 80,  y: z.y + 80 },
+    { x: z.x + 220, y: z.y + 140 },
+    { x: z.x + 320, y: z.y + 70 },
+  ];
+  const t = (Math.sin(performance.now()/700)+1)/2;
+  for (const lp of patches) {
+    const g = ctx.createRadialGradient(lp.x, lp.y, 4, lp.x, lp.y, 70);
+    g.addColorStop(0, `rgba(232,140,40,${0.32 + t*0.08})`);
+    g.addColorStop(0.5, 'rgba(220,120,30,.18)');
+    g.addColorStop(1, 'rgba(220,120,30,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(lp.x-70, lp.y-70, 140, 140);
+  }
+  ctx.restore();
   // car shadow rumble — every 8s a "car" sweeps overhead visually
   const phase = ((Date.now()/8000)%1);
   if (phase < 0.2) {
@@ -5005,11 +5488,35 @@ function drawUnderpass() {
   }
 }
 
+// v13 wave 6 — render the chain leash from the leash_post to the scrap_dog
+function drawDogLeash() {
+  const post = PROPS.find(p => p.type === 'leash_post');
+  if (!post) return;
+  const dog = npcs.find(n => n.id === 'scrap_dog' && !n.dead);
+  if (!dog) return;
+  // simple zig-zag dark chain
+  ctx.strokeStyle = '#3a2810';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(post.x, post.y-8);
+  const midX = (post.x + dog.x+dog.w/2)/2;
+  const midY = (post.y-8 + dog.y+dog.h/2)/2 + 4;
+  ctx.lineTo(midX, midY);
+  ctx.lineTo(dog.x+dog.w/2, dog.y+dog.h/2);
+  ctx.stroke();
+  // chain "links" — small dots along the path
+  ctx.fillStyle = '#5a4828';
+  for (let i=0.15; i<1; i+=0.18) {
+    const lx = post.x*(1-i) + (dog.x+dog.w/2)*i;
+    const ly = (post.y-8)*(1-i) + (dog.y+dog.h/2)*i;
+    ctx.fillRect(lx-1, ly-1, 2, 2);
+  }
+}
+
 // ---------- Per-zone tile palettes (v10 visual overhaul) ----------
 const TILE_PALETTES = {
   default:    { base:['#1a1810','#181610'], grime:'rgba(40,30,20,.55)', crack:'rgba(8,6,4,.4)' },
   block:      { base:['#22201a','#1f1d18'], grime:'rgba(80,60,30,.35)', crack:'rgba(0,0,0,.5)', weed:true },
-  scrap:      { base:['#322a1a','#2c2418'], grime:'rgba(120,60,30,.4)', crack:'rgba(50,30,15,.5)' },
   pawn:       { base:['#2a2818','#28261a'], grime:'rgba(60,50,30,.35)', crack:'rgba(8,6,4,.6)' },
   dealer:     { base:['#2a1a15','#241814'], grime:'rgba(140,40,30,.3)', crack:'rgba(0,0,0,.55)' },
   abandoned:  { base:['#1c1818','#181414'], grime:'rgba(80,30,30,.45)', crack:'rgba(0,0,0,.65)' },
@@ -5017,8 +5524,11 @@ const TILE_PALETTES = {
   alley:      { base:['#161614','#131312'], grime:'rgba(20,60,80,.35)', crack:'rgba(0,0,0,.8)', puddle:true },
   church:     { base:['#262030','#221c2a'], grime:'rgba(80,60,100,.35)', crack:'rgba(0,0,0,.6)' },
   projects:   { base:['#1d1c20','#191820'], grime:'rgba(60,60,90,.3)', crack:'rgba(0,0,0,.6)' },
-  underpass:  { base:['#1d1d20','#191920'], grime:'rgba(40,40,40,.45)', crack:'rgba(0,0,0,.75)' },
+  // v13 wave 6 — underpass gets a heavier cracked-concrete palette: lighter base, oil stains, deeper cracks
+  underpass:  { base:['#2a2a2d','#252528'], grime:'rgba(20,18,14,.55)', crack:'rgba(0,0,0,.85)', concrete:true, oilstain:true },
   laundromat: { base:['#3a3a48','#34344a'], grime:'rgba(120,160,200,.18)', crack:'rgba(0,0,0,.4)', tile:true },
+  // v13 wave 6 — scrap yard pushed warmer dirt brown so it reads as Yuri's home turf, not generic concrete
+  scrap:      { base:['#3a2c1a','#322618'], grime:'rgba(120,60,30,.45)', crack:'rgba(50,30,15,.5)', dirt:true },
 };
 function zoneAt(wx, wy) {
   for (const z of ZONES) {
@@ -5086,6 +5596,40 @@ function drawGroundTile(x, y) {
     ctx.fillRect(wx, wy, 3, 4);
     ctx.fillStyle = '#3a5028';
     ctx.fillRect(wx+1, wy-1, 1, 2);
+  }
+  // v13 wave 6 — underpass: oil stains (black slick blobs) on top of the cracked concrete
+  if (pal.oilstain && (h % 137) < 6) {
+    const ox = x + 8 + (h % 36);
+    const oy = y + 10 + ((h>>2) % 30);
+    ctx.fillStyle = 'rgba(8,6,4,.72)';
+    ctx.beginPath();
+    ctx.ellipse(ox, oy, 7 + ((h>>3)%5), 4 + ((h>>5)%3), 0, 0, Math.PI*2);
+    ctx.fill();
+    // iridescent rainbow sheen on top
+    ctx.fillStyle = 'rgba(80,60,90,.25)';
+    ctx.fillRect(ox-3, oy-1, 6, 1);
+  }
+  // v13 wave 6 — underpass: cracked-concrete bigger fracture lines
+  if (pal.concrete && (h % 73) < 9) {
+    ctx.strokeStyle = 'rgba(0,0,0,.55)';
+    ctx.lineWidth = 1;
+    const cx1 = x + (h%TILE), cy1 = y + ((h>>4)%TILE);
+    ctx.beginPath();
+    ctx.moveTo(cx1, cy1);
+    ctx.lineTo(cx1 + 16, cy1 + 6);
+    ctx.lineTo(cx1 + 22, cy1 + 14);
+    ctx.lineTo(cx1 + 12, cy1 + 22);
+    ctx.stroke();
+  }
+  // v13 wave 6 — scrap yard: dirt mottling (warm clumps) reading as raked earth not pavement
+  if (pal.dirt && (h % 53) < 14) {
+    const dx = x + (h % TILE), dy = y + ((h>>3) % TILE);
+    ctx.fillStyle = 'rgba(100,60,28,.32)';
+    ctx.fillRect(dx, dy, 4, 3);
+    if ((h % 211) < 30) {
+      ctx.fillStyle = 'rgba(60,40,20,.5)';
+      ctx.fillRect(dx+1, dy+1, 2, 1);
+    }
   }
   // puddles in alley
   if (pal.puddle && (h % 167) < 5) {
@@ -5359,44 +5903,63 @@ function drawBuilding(b) {
   }
 }
 
-// Procedural graffiti — generated once and cached
-let GRAFFITI = null;
+// v13 wave 6 — Procedural graffiti — placed once per save and persisted via state.graffiti.
+// Uses GRAFFITI_LINES (35 voice-coherent fragments) and places 12-18 tags on building walls.
 function buildGraffiti() {
-  const tags = [
-    "HONK IF U LOVE PETE","I LOST A TOOTH HERE","DON'T TRUST STRIPE","TONY 4 EVER",
-    "RIP DAVE (still alive)","THE COPPER SINGS","WAS HERE 2003","FREE PAULIE",
-    "BRUTUS IS NICE","MOM WORRIED","THE TRAIN COMES","TIC TAC LIES",
-    "POSSUM PRESIDENT","STRIPE = SOAP","YURI IS WATCHING","YELL LOUDER",
-    "ONE FOOT NATION","SIDEWALK COMMITTEE","I OWE TONY","BLOCK CAPTAIN HENRY",
-  ];
-  const targets = [];
-  // pawn, corner, abandoned, church walls
-  [BUILDINGS[0], BUILDINGS[1], BUILDINGS[2], BUILDINGS[3]].forEach(b => {
-    for (let i=0;i<5;i++) {
-      const side = Math.random()<.5 ? 'side':'bottom';
-      let x, y;
-      if (side==='side') { x = b.x + 4 + Math.random()*(b.w-60); y = b.y + 20 + Math.random()*(b.h-40); }
-      else { x = b.x + 4 + Math.random()*(b.w-60); y = b.y + b.h - 12 - Math.random()*16; }
-      targets.push({
-        x, y,
-        text: tags[Math.floor(Math.random()*tags.length)],
-        col: ['#d4c896','#e8c040','#d488d4','#a8c030'][Math.floor(Math.random()*4)],
-        rot: (Math.random()-.5)*0.3,
-      });
+  // if saved layout exists, just reuse it
+  if (state.graffiti && state.graffiti.length) return;
+  const out = [];
+  const N = 12 + Math.floor(Math.random()*7); // 12-18
+  // candidate walls: every BUILDING, both side and bottom faces (not roof, not under awnings).
+  const walls = [];
+  for (const b of BUILDINGS) {
+    if (b.locked) continue; // skip the abandoned (boarded up — graffiti unreadable through planks)
+    // bottom strip
+    walls.push({ b, kind:'bottom' });
+    // both side strips
+    walls.push({ b, kind:'leftside' });
+    walls.push({ b, kind:'rightside' });
+  }
+  // chalk / spray colors (low-saturation)
+  const palette = ['#a89878','#88a070','#7080a0','#a08070','#9080a0','#c0a878'];
+  for (let i=0;i<N;i++) {
+    const wall = walls[Math.floor(Math.random()*walls.length)];
+    const b = wall.b;
+    const text = GRAFFITI_LINES[Math.floor(Math.random()*GRAFFITI_LINES.length)];
+    let x, y;
+    if (wall.kind === 'bottom') {
+      x = b.x + 6 + Math.random()*(b.w-80);
+      y = b.y + b.h - 8 - Math.random()*16;
+    } else if (wall.kind === 'leftside') {
+      x = b.x + 4;
+      y = b.y + 24 + Math.random()*(b.h-50);
+    } else {
+      x = b.x + b.w - 70;
+      y = b.y + 24 + Math.random()*(b.h-50);
     }
-  });
-  GRAFFITI = targets;
+    out.push({
+      x, y, text,
+      col: palette[Math.floor(Math.random()*palette.length)],
+      rot: ((Math.random()-.5) * 0.18), // -5° to +5° (radians ~0.087)
+      sz: 8 + Math.floor(Math.random()*3), // 8-10 px
+    });
+  }
+  state.graffiti = out;
 }
 function drawGraffiti() {
-  if (!GRAFFITI) buildGraffiti();
-  ctx.font = '9px Courier New';
-  for (const g of GRAFFITI) {
+  if (!state.graffiti || !state.graffiti.length) buildGraffiti();
+  if (!state.graffiti) return;
+  for (const g of state.graffiti) {
     ctx.save();
     ctx.translate(g.x, g.y);
     ctx.rotate(g.rot);
+    ctx.font = 'bold '+(g.sz||9)+'px Courier New';
     ctx.fillStyle = g.col;
-    ctx.globalAlpha = 0.7;
+    ctx.globalAlpha = 0.65;
     ctx.fillText(g.text, 0, 0);
+    // chalky double-pass for that spray-grit feel
+    ctx.globalAlpha = 0.18;
+    ctx.fillText(g.text, 0.5, 0.5);
     ctx.globalAlpha = 1;
     ctx.restore();
   }
@@ -5407,6 +5970,11 @@ function drawProps() {
     // cull
     if (p.x < state.cam.x-40 || p.x > state.cam.x+W+40 || p.y < state.cam.y-40 || p.y > state.cam.y+H+40) continue;
     drawProp(p);
+  }
+  // v13 wave 6 — interactive props pass (parallel array)
+  for (const ip of interactiveProps) {
+    if (ip.x < state.cam.x-40 || ip.x > state.cam.x+W+40 || ip.y < state.cam.y-40 || ip.y > state.cam.y+H+40) continue;
+    drawInteractiveProp(ip);
   }
 }
 
@@ -5525,6 +6093,216 @@ function drawProp(p) {
     ctx.fillRect(p.x+1, p.y+1, 3, 2);
     ctx.fillStyle = '#a8c030';
     ctx.fillRect(p.x-4, p.y+4, 8, 1);
+  }
+  // v13 wave 6 — tent (makeshift, varied palette)
+  else if (p.type === 'tent') {
+    // ground shadow
+    ctx.fillStyle = 'rgba(0,0,0,.35)';
+    ctx.fillRect(p.x-2, p.y+14, 28, 4);
+    // triangular tarp
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.moveTo(p.x+12, p.y-6);
+    ctx.lineTo(p.x-2, p.y+16);
+    ctx.lineTo(p.x+26, p.y+16);
+    ctx.closePath();
+    ctx.fill();
+    // dark seam down center
+    ctx.strokeStyle = 'rgba(0,0,0,.5)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(p.x+12, p.y-6); ctx.lineTo(p.x+12, p.y+16);
+    ctx.stroke();
+    // patches / duct tape
+    ctx.fillStyle = '#d4c896';
+    ctx.fillRect(p.x+4, p.y+6, 5, 2);
+    ctx.fillStyle = '#a08050';
+    ctx.fillRect(p.x+18, p.y+10, 4, 2);
+    // dark interior triangle (opening)
+    ctx.fillStyle = '#0a0805';
+    ctx.beginPath();
+    ctx.moveTo(p.x+12, p.y+4);
+    ctx.lineTo(p.x+6, p.y+16);
+    ctx.lineTo(p.x+18, p.y+16);
+    ctx.closePath();
+    ctx.fill();
+  }
+  // v13 wave 6 — cardboard sign (held / propped, hand-scrawled marker text)
+  else if (p.type === 'cardsign') {
+    ctx.fillStyle = '#a08050';
+    ctx.fillRect(p.x, p.y, 36, 22);
+    // creases / cardboard texture
+    ctx.fillStyle = '#604028';
+    ctx.fillRect(p.x, p.y+10, 36, 1);
+    ctx.fillRect(p.x+18, p.y, 1, 22);
+    // text — scrawled black marker
+    ctx.fillStyle = '#0a0805';
+    ctx.font = 'bold 5px Courier New';
+    const lines = (p.text || '').split('\n');
+    for (let i=0;i<lines.length;i++) ctx.fillText(lines[i], p.x+2, p.y+6 + i*6);
+  }
+  // v13 wave 6 — scrap pile (twisted metal)
+  else if (p.type === 'scrap_pile') {
+    ctx.fillStyle = p.color || '#604020';
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    // top-edge glints
+    ctx.fillStyle = '#a08040';
+    ctx.fillRect(p.x+2, p.y+1, 4, 2);
+    ctx.fillRect(p.x+p.w-8, p.y+2, 5, 2);
+    // rebar sticks
+    ctx.strokeStyle = '#a08060';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(p.x+4, p.y); ctx.lineTo(p.x+8, p.y-8);
+    ctx.moveTo(p.x+p.w-6, p.y); ctx.lineTo(p.x+p.w-2, p.y-10);
+    ctx.stroke();
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(p.x+2, p.y+p.h, p.w-4, 3);
+  }
+  // v13 wave 6 — car wreck (totaled sedan, on blocks)
+  else if (p.type === 'car_wreck') {
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.5)';
+    ctx.fillRect(p.x, p.y+p.h, p.w, 4);
+    // body
+    ctx.fillStyle = p.color || '#5a3030';
+    ctx.fillRect(p.x, p.y+6, p.w, p.h-10);
+    // roof / cabin
+    ctx.fillStyle = '#3a2020';
+    ctx.fillRect(p.x+10, p.y, p.w-20, 10);
+    // windows (smashed)
+    ctx.fillStyle = '#181818';
+    ctx.fillRect(p.x+12, p.y+2, p.w/2-14, 6);
+    ctx.fillRect(p.x+p.w/2+2, p.y+2, p.w/2-14, 6);
+    // missing wheels — sit on cinderblocks
+    ctx.fillStyle = '#3a3a3a';
+    ctx.fillRect(p.x+4, p.y+p.h-4, 6, 4);
+    ctx.fillRect(p.x+p.w-10, p.y+p.h-4, 6, 4);
+    // rust streaks
+    ctx.fillStyle = 'rgba(140,60,20,.5)';
+    ctx.fillRect(p.x+2, p.y+p.h/2, 1, p.h/2-4);
+    ctx.fillRect(p.x+p.w-4, p.y+p.h/2, 1, p.h/2-4);
+    // door dent
+    ctx.fillStyle = 'rgba(0,0,0,.45)';
+    ctx.fillRect(p.x+p.w/2-6, p.y+p.h/2, 12, 4);
+  }
+  // v13 wave 6 — leash post (dog is chained to this; rendered as small wooden post)
+  else if (p.type === 'leash_post') {
+    ctx.fillStyle = '#3a2818';
+    ctx.fillRect(p.x-2, p.y-10, 4, 12);
+    ctx.fillStyle = '#604028';
+    ctx.fillRect(p.x-3, p.y-12, 6, 3);
+    // chain link nub
+    ctx.fillStyle = '#888';
+    ctx.fillRect(p.x-1, p.y-8, 2, 2);
+  }
+  // v13 wave 6 — pay phone (rings randomly; can answer with E)
+  else if (p.type === 'pay_phone') {
+    const ringing = state.phonePropRingT > 0;
+    const sway = ringing ? Math.sin(performance.now()/40)*1.5 : 0;
+    // pole
+    ctx.fillStyle = '#3a3528';
+    ctx.fillRect(p.x-1, p.y, 3, 24);
+    // box
+    ctx.fillStyle = '#2a3a5a';
+    ctx.fillRect(p.x-10 + sway, p.y-22, 20, 26);
+    // dial / receiver outline
+    ctx.fillStyle = '#181818';
+    ctx.fillRect(p.x-7 + sway, p.y-20, 14, 6);
+    // coin slot
+    ctx.fillStyle = '#88a0c0';
+    ctx.fillRect(p.x-3 + sway, p.y-12, 6, 1);
+    // receiver
+    ctx.fillStyle = '#0a0805';
+    ctx.fillRect(p.x-8 + sway, p.y-8, 4, 8);
+    // rust accents
+    ctx.fillStyle = 'rgba(140,60,20,.55)';
+    ctx.fillRect(p.x-10 + sway, p.y-2, 4, 2);
+    ctx.fillRect(p.x+6 + sway, p.y-16, 4, 2);
+    // ring indicator: "?" floater above
+    if (ringing) {
+      const t = (Math.sin(performance.now()/120)+1)/2;
+      ctx.fillStyle = '#e8c040';
+      ctx.font = 'bold 14px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText('?', p.x + sway, p.y - 32 - t*4);
+      ctx.textAlign = 'left';
+      // sound-wave rings
+      ctx.strokeStyle = `rgba(232,192,64,${0.4 + t*0.4})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y-12, 16 + t*6, 0, Math.PI*2);
+      ctx.stroke();
+    }
+  }
+}
+
+// v13 wave 6 — interactive prop render dispatcher (kickable trash, breakable bottles)
+function drawInteractiveProp(p) {
+  if (p.type === 'trashcan') {
+    const rot = p.tipT > 0 ? Math.sin(p.tipT/30)*0.4 : 0;
+    const scale = p.rotPulse > 0 ? 1.0 + (p.rotPulse/200)*0.2 : 1.0;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(rot);
+    ctx.scale(scale, scale);
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(-12, 14, 24, 4);
+    // body (silver dented)
+    ctx.fillStyle = '#5a5a5a';
+    ctx.fillRect(-10, -16, 20, 30);
+    // dents (vertical creases)
+    ctx.fillStyle = '#3a3a3a';
+    ctx.fillRect(-8, -14, 1, 26);
+    ctx.fillRect(0, -14, 1, 26);
+    ctx.fillRect(6, -14, 1, 26);
+    // rim
+    ctx.fillStyle = '#888';
+    ctx.fillRect(-12, -18, 24, 4);
+    // contents (when not on cooldown)
+    if (p.cdT <= 0) {
+      ctx.fillStyle = '#3a2818';
+      ctx.fillRect(-8, -16, 16, 4);
+      ctx.fillStyle = '#d4c896';
+      ctx.fillRect(-6, -16, 3, 2);
+    }
+    // empty marker
+    if (p.cdT > 0) {
+      ctx.fillStyle = 'rgba(0,0,0,.6)';
+      ctx.fillRect(-10, -16, 20, 4);
+    }
+    ctx.restore();
+    // tiny "(E)" hint floater when player is close
+    const dx = (P.x+P.w/2) - p.x, dy = (P.y+P.h/2) - p.y;
+    if (dx*dx + dy*dy < 50*50 && p.cdT <= 0) {
+      ctx.fillStyle = '#e8c040';
+      ctx.font = '8px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText('(E) kick', p.x, p.y - 22);
+      ctx.textAlign = 'left';
+    }
+  } else if (p.type === 'b_bottle') {
+    if (p.broken) {
+      // glass shards on ground
+      ctx.fillStyle = 'rgba(180,200,220,.6)';
+      ctx.fillRect(p.x-3, p.y, 2, 1);
+      ctx.fillRect(p.x+1, p.y+1, 2, 1);
+      ctx.fillRect(p.x-1, p.y-1, 1, 1);
+    } else {
+      // upright bottle — green
+      ctx.fillStyle = '#3a6028';
+      ctx.fillRect(p.x-2, p.y-7, 4, 9);
+      ctx.fillStyle = '#5a8038';
+      ctx.fillRect(p.x-2, p.y-7, 1, 9);
+      // neck
+      ctx.fillStyle = '#3a6028';
+      ctx.fillRect(p.x-1, p.y-10, 2, 3);
+      // cap
+      ctx.fillStyle = '#888';
+      ctx.fillRect(p.x-1, p.y-11, 2, 1);
+    }
   }
 }
 
@@ -5869,6 +6647,25 @@ function endingScreen(kind) {
 
 // ---------- INTERACT ----------
 function tryInteract() {
+  // v13 wave 6 — kickable trash cans (E within 50px). 50% cash / 20% junk / 30% rats.
+  for (const ip of interactiveProps) {
+    if (ip.type !== 'trashcan') continue;
+    const ddx = (P.x+P.w/2) - ip.x, ddy = (P.y+P.h/2) - ip.y;
+    if (ddx*ddx + ddy*ddy < 50*50) {
+      if (ip.cdT > 0) { toast("the can is empty.\nyou kick it anyway.\nit barely moves.", 1500); return; }
+      kickTrashCan(ip);
+      return;
+    }
+  }
+  // v13 wave 6 — pay phone answer (E within 30px while ringing)
+  const phone = PROPS.find(p => p.type === 'pay_phone');
+  if (phone) {
+    const ddx = (P.x+P.w/2) - phone.x, ddy = (P.y+P.h/2) - phone.y;
+    if (ddx*ddx + ddy*ddy < 38*38 && state.phonePropRingT > 0) {
+      answerPublicPhone();
+      return;
+    }
+  }
   // shopping cart mount/dismount
   const cart = PROPS.find(p => p.type==='cart');
   if (cart) {
@@ -5970,6 +6767,7 @@ function tryInteract() {
 }
 
 // ---------- DUMPSTER DIVE ----------
+// v13 wave 6 — distance-from-block biases the loot. far dumpsters can drop a propane torch (rare).
 function startDumpsterDive(dumpster) {
   state.mode = 'dialogue';
   const items = [];
@@ -5997,8 +6795,39 @@ function startDumpsterDive(dumpster) {
     {n:'a possum (alive)', q:'event', what:'possum'},
     {n:"someone's wedding ring", q:'sell', val:22},
   ];
-  // 3 random items
-  for (let i=0;i<3;i++) items.push(trashPool[Math.floor(Math.random()*trashPool.length)]);
+  // v13 wave 6 — bias by distance from THE BLOCK center (1050, 840).
+  // close dumpsters lean toward nothing; far dumpsters carry the loot table.
+  const blockCx = 1050, blockCy = 840;
+  const dDist = Math.sqrt((dumpster.x-blockCx)**2 + (dumpster.y-blockCy)**2);
+  const farFactor = Math.min(1, dDist / 900); // 0 = next to block, 1 = max distance
+  // table: 30% nothing, 30% $1-4, 20% junk, 10% clean packet, 8% broken bottle, 2% propane (one-and-done)
+  // bias: closer dumpsters get higher nothing chance.
+  const r = Math.random();
+  const noNothingBoost = farFactor * 0.6; // far dumpsters have less "nothing"
+  const noneCut = 0.30 + (1 - farFactor) * 0.20; // close = 50% nothing, far = 30%
+  let lootPicked = null;
+  if (r < noneCut) {
+    lootPicked = {n:'nothing. dumpsters know.', q:'rats'};
+  } else if (r < noneCut + 0.30) {
+    lootPicked = {n:"$"+(1+Math.floor(Math.random()*4))+' in loose bills', q:'cash', val: 1+Math.floor(Math.random()*4)};
+  } else if (r < noneCut + 0.50) {
+    lootPicked = {n:'a piece of junk (sells $1)', q:'junkdrop'};
+  } else if (r < noneCut + 0.60) {
+    lootPicked = {n:'a clean packet of supply', q:'clean_packet'};
+  } else if (r < noneCut + 0.68) {
+    lootPicked = {n:'a broken bottle (weapon)', q:'bb_weapon'};
+  } else {
+    // remaining slice (~32% buffer) — propane only if far enough AND not already awarded
+    if (farFactor > 0.6 && !hasPropane() && !state.flags.dumpsterPropaneAwarded && Math.random() < 0.07) {
+      lootPicked = {n:'a propane torch (dented)', q:'torch_drop'};
+    } else {
+      // fall back to a random standard item from the trashPool
+      lootPicked = trashPool[Math.floor(Math.random()*trashPool.length)];
+    }
+  }
+  // 2 random fillers + the loot-table pick
+  for (let i=0;i<2;i++) items.push(trashPool[Math.floor(Math.random()*trashPool.length)]);
+  items.push(lootPicked);
   dialogue('THE DUMPSTER', "you are inside a dumpster.\nyou find three things.\nyou can take one.", items.map((it,idx) => ({
     label: it.n + (it.q==='sell'?' (sell)':it.q==='eat'?' (eat)':it.q==='cash'?' (take)':it.q==='equip'?' (wear)':''),
     action: () => {
@@ -6015,11 +6844,84 @@ function startDumpsterDive(dumpster) {
         toast("a possum.\nhe is annoyed.\nhe leaves through the lid.");
         possumDialogue();
       }
+      // v13 wave 6 — new loot-table outcomes
+      else if (it.q === 'rats') {
+        toast("the rats are upset.\nthey have lives.", 2000);
+        for (let i=0;i<10;i++) particles.push({x:dumpster.x+Math.random()*dumpster.w, y:dumpster.y, vx:(Math.random()-.5)*3, vy:-Math.random()*2-0.5, life:600, c:'#181010', sz:2});
+      }
+      else if (it.q === 'junkdrop') {
+        P.inventory.push({id:'junk', n:'a piece of junk', q:1});
+        toast("+ a piece of junk.\n(pete will take it. for one dollar.)", 2200);
+      }
+      else if (it.q === 'clean_packet') {
+        P.supplies = (P.supplies||0) + 1;
+        toast("+ a clean packet.\n(unmarked. you take it. you don't ask.)", 2400); audio.coin();
+      }
+      else if (it.q === 'bb_weapon') {
+        pickupWeapon('broken_bottle');
+        toast("+ a broken bottle.\nit cuts. you understand this.\n(weapon equipped.)", 2600);
+      }
+      else if (it.q === 'torch_drop') {
+        if (!hasPropane()) {
+          P.equip.tool = 'propane_torch';
+          applyEquipStats();
+          state.flags.dumpsterPropaneAwarded = true;
+          toast("+ a propane torch (dented).\nsomebody buried this.\n(equipped.)", 4400);
+          feedPost("found a torch in a dumpster. the dumpster knew.", '@crackheadcent');
+        } else {
+          toast("a torch. you already have one.\nyou close the lid.", 2000);
+        }
+      }
       dumpster.looted = true;
+      dumpster.diveCdT = 90000; // v13 wave 6 — 90s cooldown per dumpster after a dig
       state.counters.dumpDives = (state.counters.dumpDives||0) + 1;
       saveGame();
     }
   })).concat([{label:'climb out.', action:()=>{ dumpster.looted = true; toast('you climb out.\nno one saw.\n(some saw.)'); }}]));
+}
+
+// v13 wave 6 — kickable trash. RNG outcome + 60s cooldown + tip-over anim.
+function kickTrashCan(can) {
+  can.cdT = 60000;
+  can.tipT = 200;
+  can.rotPulse = 200;
+  audio.kick ? audio.kick() : audio.hit();
+  state.shake = Math.max(state.shake, 3);
+  const r = Math.random();
+  if (r < 0.5) {
+    // cash $2-5
+    const amt = 2 + Math.floor(Math.random()*4);
+    P.cash += amt;
+    audio.coin();
+    toast("- nothing\n+ $"+amt+"\nthe can falls. coins spill.", 2200);
+    // particles for cash poof
+    for (let i=0;i<6;i++) particles.push({x:can.x, y:can.y, vx:(Math.random()-.5)*3, vy:-Math.random()*2-1, life:600, c:'#e8c040', sz:3, glow:true});
+  } else if (r < 0.7) {
+    // junk
+    P.inventory.push({id:'junk', n:'a piece of junk', q:1});
+    toast("+ a piece of junk.\npete will take it. for one dollar.", 2400);
+  } else if (r < 0.8) {
+    // food (10% bonus drop)
+    P.inventory.push({id:'food', n:'a can of food (unmarked)', q:1});
+    toast("+ a can of food (unmarked).\nthe label is in a language.\nthe language is not yours.", 2600);
+  } else {
+    // rats
+    toast("the rats are upset. they have lives.", 2000);
+    for (let i=0;i<8;i++) particles.push({x:can.x+(Math.random()-.5)*16, y:can.y, vx:(Math.random()-.5)*4, vy:-Math.random()*2-0.5, life:700, c:'#181010', sz:2});
+  }
+  saveGame();
+}
+
+// v13 wave 6 — answer the public pay phone. randomly picks a PUBLIC_PHONE_LINE.
+function answerPublicPhone() {
+  state.phonePropRingT = 0;
+  state.publicPhoneAnswered = (state.publicPhoneAnswered||0) + 1;
+  audio.dialogue();
+  const line = PUBLIC_PHONE_LINES[Math.floor(Math.random()*PUBLIC_PHONE_LINES.length)];
+  toast("📞 PUBLIC PHONE\n\n"+line.text, 6000);
+  if (line.action) line.action();
+  if (state.publicPhoneAnswered >= 5) unlockAchievement('phone_booth_prophet');
+  saveGame();
 }
 
 // ---------- HEIST (simple 3-stage) ----------
@@ -6105,6 +7007,8 @@ const WEAPONS = {
   microphone:   { n:"a karaoke microphone (just the cord)", dmg: 7, reach: 18, cd: 360, swing:'whip' },
   // v13 wave 3 — stripe's bait knife (possible outcome of opening the package)
   knife:        { n:"a knife (handle taped)",   dmg: 14, reach: 8,  cd: 260, swing:'stab' },
+  // v13 wave 6 — drops from smashed bottles + (rare) dumpsters. dmg+8, reach short. it cuts.
+  broken_bottle:{ n:"a broken bottle",           dmg: 8,  reach: 6,  cd: 300, swing:'jagged' },
 };
 
 function pickupWeapon(id) {
@@ -6503,6 +7407,19 @@ function startGame(loaded) {
     if (state.quests.intro_remember) { state.quests.intro_remember.available = undefined; state.quests.intro_remember.done = false; }
     if (state.quests.intro_tony)     { state.quests.intro_tony.available = false; state.quests.intro_tony.done = false; }
     if (state.quests.intro_smoke)    { state.quests.intro_smoke.available = false; state.quests.intro_smoke.done = false; }
+    // v13 wave 6 — fresh save state for map-depth pass
+    state.flags.underpassEntered = false;
+    state.flags.dumpsterPropaneAwarded = false;
+    state.flags.churchLoadedDumpsterX = 0;
+    state.flags.churchLoadedDumpsterY = 0;
+    if (state.quests.scrap_dog) { state.quests.scrap_dog.state = 'idle'; state.quests.scrap_dog.done = false; state.quests.scrap_dog.available = false; }
+    state.graffiti = null; // build a fresh layout
+    state.publicPhoneT = 240000 + Math.random()*240000;
+    state.phonePropRingT = 0;
+    state.publicPhoneAnswered = 0;
+    state.freedDogT = 0;
+    state.freedDogFollowT = 0;
+    state.freedDogFirstReturn = false;
     // new save starts broke. find the ten dollars.
     P.cash = 0;
     P.charisma = 0;
@@ -6511,6 +7428,9 @@ function startGame(loaded) {
   }
   spawnNpcs();
   spawnCashPiles();
+  initInteractiveProps();
+  // v13 wave 6 — build (or re-use persisted) graffiti layout
+  buildGraffiti();
   applyEquipStats();
   rollHustles();
   state.mode = 'playing';
