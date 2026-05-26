@@ -4,6 +4,27 @@
 
 ---
 
+## v13 wave 6 — SHIPPED ✓ (May 26, 2026)
+
+- [x] **Highway Underpass finish pass** — cracked-concrete `TILE_PALETTES.underpass` (oilstain + concrete flags, drawGroundTile fracture lines + black oil ellipses); 4 tents (varied tarp colors) as new `drawProp` branch; cardboard sign at (1340,412) next to The Mathematician ("WILL TRADE WORDS FOR MATH"); 3 sodium-orange light patches in `drawUnderpass` via additive radial gradients; one-shot first-entry echo line ("the air changes. you can hear yourself walk.") + feed post gated by `state.flags.underpassEntered`.
+- [x] **SCRAP YARD depth pass** — judgment call: the zone already existed at (100,80,520,360), so no WORLD expansion needed. `TILE_PALETTES.scrap` reworked (dirt:true + warmer brown base + dirt mottling clumps in drawGroundTile). New `drawProp` branches for `scrap_pile` (twisted metal + rebar sticks), `car_wreck` (totaled sedan on cinderblocks), `leash_post` (small wooden post), `pay_phone` (rusty booth with rings indicator). Yuri stays at (300,200) — already in zone.
+- [x] **`scrap_dog` NPC** — chained at (580,150), archetype `'passive'`, leash rendered by new `drawDogLeash` between drawProps and NPC pass. New `PALS.scrap_dog` palette + sprite cache entry reusing `makeDog()` shapes. Tail wags when player approaches within 100px.
+- [x] **Interactive props system** — new `interactiveProps[]` array (parallel to PROPS) + `initInteractiveProps()` initializer (called from startGame). Update loop in `updateWorld` (cooldowns + bottle respawn).
+- [x] **Kickable trash cans** — 6 placed (one per major zone). E within 50px: 50% cash $2-5, 20% junk, 10% food, 20% rats burst. 60s cooldown + 200ms tip rotation. New `audio.kick()` synth.
+- [x] **Breakable bottles** — 8 placed at game start from 16 candidate spots, jittered ±20px. Shatter on player swing via `playerAttack` hit-box check. 12-particle glass burst + 25% chance to drop `broken_bottle` weapon (dmg+8 reach 6 cd 300). 60-120s respawn pool.
+- [x] **Dumpster dig loot table** — distance-from-block biased (close = 50% nothing, far = 30%). Categories: 30% cash $1-4, 20% junk, 10% clean packet, 8% broken_bottle weapon. Far dumpsters (farFactor>0.6) carry rare propane drop (no-dupe gated via `state.flags.dumpsterPropaneAwarded`). Per-dumpster 90s `diveCdT` cooldown.
+- [x] **Public phone** — one in SCRAP YARD at (130,220). Rings every 4-8 min for 30s. New `PUBLIC_PHONE_LINES` (10 cursed lines). Answer with E within 38px. `state.publicPhoneAnswered` counter unlocks PHONE_BOOTH_PROPHET at 5. One ~10% line plants a $50 cashPile at (1800,1320) behind the church.
+- [x] **Procedural graffiti** — `GRAFFITI_LINES` constant (36 voice fragments). `buildGraffiti` rewritten to walk every non-locked BUILDING and assign 12-18 tags to randomly-selected wall faces. Persisted via `state.graffiti` (save/load). `drawGraffiti` uses bold low-saturation chalk colors, -5°/+5° rotation, 0.18-alpha double-pass for grit feel. Renders between drawBuilding and drawProps. (Crosses off backlog item 18.)
+- [x] **`scrap_dog` side quest** — `state.quests.scrap_dog.state: 'idle'|'fed'|'freed'|'left'`. Three options: feed (consumes food, +1 cred, cop discomfort radius), free (lockpick → wandering follower + LIBERATOR), leave (no penalty). Attack-while-chained = one-time THE_PIECE_OF_SHIT + -5 cred, dog goes hostile. 200px cop-discomfort radius applied in updateWorld for both the chained-fed dog and the freed-wandering follower.
+- [x] **Wandering freed dog follower** — `spawnFreedDogFollower` adds an `isPet:true` NPC that follows for ~60s then despawns. Reuses the pet-possum follow-at-distance AI (cash-reveal side effect gated to possum only). 1-3min between reappearances. First reappear toast: "the dog is back. he is here. for now."
+- [x] **`food` item** — drops 10% from kicked cans, sold by Pete for $3, occasional dumpster bonus. Single-use (feed the dog).
+- [x] **3 new achievements** — `LIBERATOR`, `THE_PIECE_OF_SHIT`, `PHONE_BOOTH_PROPHET`.
+- [x] **Save backward-compat** — no SAVE_KEY bump. `graffiti` + `publicPhoneAnswered` + extended flags saved/loaded. Old saves default `underpassEntered: true` so they don't re-trigger the echo line on reload.
+
+Notes from shipping: the SCRAP YARD already existed; expansion turned out to be a populate-in-place pass, not a new zone. Yuri's spawn was already inside the scrap yard so he didn't need to move. The graffiti subsystem in v13 was hardcoded — wave 6 rewrote it to use the GRAFFITI_LINES constant + state persistence in one pass. The cop-discomfort radius is applied as a per-frame flag (`n.dogSpookSlow`) in `updateWorld` and read in the default chase-bite branch; no archetype touches needed. The propane torch now has 3 acquisition paths (night-brutus drop / pete pawn at rank ≥3 / rare far-dumpster drop) all guarded by the single `hasPropane()` helper.
+
+---
+
 ## v13 wave 5 — SHIPPED ✓ (May 26, 2026)
 
 - [x] **Archetype dispatch** — `n.archetype` string switches in `updateNpc` (line 4084) route hostiles into per-pattern AI branches. 5 archetypes (`charger`, `grabber`, `swarmer`, `ranged`, `cop`) plus `priest_fallen` for the new mini-boss. Non-archetype'd NPCs (larry, dave, alley crackheads, generic cops without backup behavior) fall through to the v12 chase-bite default — no behavior change for them.
@@ -144,18 +165,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 4-6 hours
 
 ### 2. Highway Underpass zone
-**Status:** Backlog
-**Why:** World feels small. One more zone with a distinct identity.
-**Spec:**
-- Position: top-center area (1000-1500, 200-500) — squeezed above the abandoned building
-- Visual: dim, concrete texture, drawn rebar prop
-- New NPC: **THE BIG GUY** — a guy who is big. Tic: tall. Relationship: lives under the underpass. Transaction: will trade his shopping cart (gives +5 inventory cap, +1 speed) for 5 PURE COPPER.
-- Random pickup: a single license plate (sells $20 at Pete)
-- Ambient SFX: car passing overhead (low rumble every 8s)
-**Invariants:**
-- Reachable from spawn within 60s of walking
-- Does not gate any other zone
-**Estimated effort:** 2-3 hours
+**Status:** Shipped — initial in v13 wave 2 (The Big Guy + The Mathematician + car rumble), depth pass in v13 wave 6 (cracked-concrete tile palette + oil stains, tent encampment, cardboard sign, sodium-orange light patches, first-entry echo line).
 
 ### 3. Tweaker Vision (hold F)
 **Status:** Backlog
@@ -350,13 +360,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 3-4 hours
 
 ### 18. Procedural graffiti
-**Status:** Backlog
-**Spec:**
-- 20-30 graffiti tags generated at game start, placed on building walls
-- Pool of phrases: cursed but mundane ("HONK IF U LOVE PETE," "I LOST A TOOTH HERE," "DON'T TRUST STRIPE," "TONY 4 EVER")
-- Some procedural: "[NAME] WAS HERE [YEAR]" with random crackhead names and years 1987-2024
-- Rendered as small white/yellow text rotated -10 to +10 degrees
-**Estimated effort:** 2-3 hours
+**Status:** Shipped in v13 wave 6. `GRAFFITI_LINES` (36 voice-coherent fragments), 12-18 tags placed on non-locked BUILDING walls at level load via `buildGraffiti`, persisted in `state.graffiti`. Low-saturation chalk colors, -5°/+5° rotation, 8-10px bold Courier with a 0.18-alpha double-pass for the grit feel. Renders between `drawBuilding` and `drawProps`.
 
 ---
 

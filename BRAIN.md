@@ -2,6 +2,102 @@
 
 ---
 
+## Session 2026-05-26 · v13 wave 6 — map depth + scrap yard (SHIPPED)
+
+### WHAT
+Five-part expansion to v13 widening the map's texture rather than its bounds. Highway Underpass got finished: cracked-concrete TILE_PALETTES entry with oil-stain mottling, 4 tent props, a cardboard sign next to The Mathematician, 3 sodium-orange light patches additively rendered in `drawUnderpass`, and a one-shot first-entry echo line ("the air changes. you can hear yourself walk."). The SCRAP YARD existed already; instead of expanding WORLD, the zone was deepened in place — new dirt-brown TILE_PALETTES entry, scrap_pile + car_wreck + leash_post + pay_phone props, and a chained `scrap_dog` NPC (archetype `passive`) at (580,150). Yuri stayed where he was — he's already in the scrap yard at (300,200). A new `interactiveProps[]` array sits parallel to `PROPS` and carries the kickable trash cans (6, one per zone-ish), respawning breakable bottles, and the dumpster cooldown — its update loop ticks in `updateWorld`. Dumpster dig was rewritten with a distance-from-block loot table that can rarely drop a propane torch (no-dupe gated). One pay phone in the scrap yard rings every 4-8min with one of 10 cursed PUBLIC_PHONE_LINES (one ~10% line plants a $50 cash pile behind the church). Procedural graffiti was rebuilt to use a 36-line GRAFFITI_LINES constant, placed 12-18 tags on building walls at level load, persisted in `state.graffiti`. The chained `scrap_dog` carries a 3-branch dialogue (feed → cop discomfort radius / free → lockpick + wandering follower / leave → no penalty); attacking the chained dog awards `THE_PIECE_OF_SHIT` + -5 cred (one-time). Three new achievements: `LIBERATOR`, `THE_PIECE_OF_SHIT`, `PHONE_BOOTH_PROPHET`. Save key unchanged.
+
+### WHAT CHANGED (HIGH LEVEL)
+
+**Part A — Highway Underpass finish pass**
+1. `TILE_PALETTES.underpass` (line ~5026) replaced: lighter base, `concrete:true` + `oilstain:true` flags. New branches in `drawGroundTile` (~line 5102+) render cracked-concrete fracture lines (longer than default) + black ellipse oil stains with iridescent sheen.
+2. `PROPS` extended with 4 tents (varied colors) at (1060..1300, 330..400) — non-solid, decorative. New `drawProp` branch for `'tent'` draws triangular tarp + patches + dark opening + ground shadow.
+3. Cardboard sign at (1340, 412) next to The Mathematician (he's at 1340,380). Renders as cardboard rectangle with 5px marker text "WILL TRADE / WORDS FOR / MATH".
+4. `drawUnderpass` extended with 3 sodium-orange light patches via additive radial gradients (always-on, sin-pulsed). Makes the zone read perpetually dim even in daytime.
+5. `state.flags.underpassEntered` boolean. First-entry detection in `updateWorld` fires the canonical echo line and feed post once per save. Old saves default to `true` so they don't re-trigger.
+
+**Part B — Scrap yard depth (no zone expansion needed; the SCRAP YARD already existed at (100,80,520,360))**
+1. `TILE_PALETTES.scrap` reworked: warmer dirt-brown base + `dirt:true` flag. `drawGroundTile` adds dirt mottling clumps.
+2. `PROPS` extended with 4 scrap_pile entries + 2 car_wreck entries + leash_post at (570,130) + pay_phone at (130,220). New `drawProp` branches for each (twisted metal w/ rebar sticks; totaled sedan on cinderblocks with smashed windows and rust streaks; small wooden post for the leash; rusty pay phone with rings indicator).
+3. `scrap_dog` NPC added in `spawnNpcs` at (580,150), archetype `'passive'`, `chained: true`, sprite uses new PALS.scrap_dog (scrappy brown + black) on the existing `makeDog()` shapes (added at `buildSprites`).
+4. New `drawDogLeash` renders a zigzag chain from leash_post to the dog, called between `drawProps` and the NPC pass in `drawAll`. While chained the dog has `tailWag` that ramps up when player is within 100px (tick in `updateWorld`).
+5. Yuri's "ask about the dog" branch added to his dialogue — three flavor lines tracking the dog's quest state (idle/fed/freed).
+
+**Part C — Interactive props system**
+1. New top-level `interactiveProps` array + `initInteractiveProps()` initializer (called from `startGame` after `spawnNpcs`).
+2. 6 kickable `trashcan` entries (one per major zone). Player E-press within 50px kicks: 50% cash $2-5, 20% junk item, 10% food item, 20% rats (particle burst + toast). 60s cooldown. 200ms tip rotation + 200ms scale pulse animation. New `audio.kick()` synth.
+3. 8 respawning `b_bottle` entries placed at game start, plus respawn from a pool of 16 candidate spots after a 60-120s broken-state. Player attack hit-box detection in `playerAttack` shatters them + 12 glass shard particles. 25% chance to drop a `broken_bottle` weapon (`dmg+8, reach 6, cd 300`).
+4. `startDumpsterDive` was rewritten with a distance-from-block loot table: `noneCut = 0.30 + (1-farFactor)*0.20` (close = 50% nothing, far = 30%). Far dumpsters (`farFactor>0.6`) carry a 7%-of-fallthrough chance to drop a propane torch (no-dupe gated via `state.flags.dumpsterPropaneAwarded` + `hasPropane()`). Each dumpster takes a 90s cooldown (`diveCdT`) after a dig — auto-resets via `updateWorld` ticker. New outcome handlers: rats, junkdrop, clean_packet, bb_weapon, torch_drop.
+5. One `pay_phone` prop in the scrap yard. Ring scheduler in `updateWorld` (4-8min between rings, 30s answer window). 10 cursed `PUBLIC_PHONE_LINES`. E-press within 38px → `answerPublicPhone()` rolls a random line; `state.publicPhoneAnswered` counter unlocks `PHONE_BOOTH_PROPHET` at 5. The 10% "tell pinky" line plants a $50 `cashPiles` entry at (1800,1320) behind the church.
+
+**Part D — Procedural graffiti**
+1. `GRAFFITI_LINES` constant — 36 voice-coherent fragments. Lowercase mundane (e.g. "if you are reading this you owe sherri money", "call mom", "crawdad on hudson"); some capitalized for emphasis (e.g. "BAGGIE BARB CHEATS AT THE CROSSWORD", "BOOK 14 ACROSS IS BLAME").
+2. `buildGraffiti` rewritten to walk every non-locked BUILDING and assign 12-18 tags to randomly-selected wall faces (bottom / leftside / rightside). Each tag carries x/y/text/col/rot/sz. Stored in `state.graffiti` so it persists in save (Array of plain objects, serializes cleanly).
+3. `drawGraffiti` renders bold low-saturation chalk/spray text with a small (-5°/+5°) rotation + a 0.18-alpha double-pass for the grit feel. Called between `drawBuilding` and `drawProps` in `drawAll` (already wired in v13 — re-used).
+4. Save/load: `graffiti` and `publicPhoneAnswered` added to the save object. Old saves with no graffiti get a fresh layout on next render.
+
+**Part E — scrap_dog side quest**
+1. `state.quests.scrap_dog` added with `state: 'idle' | 'fed' | 'freed' | 'left'`.
+2. `scrapDogDialogue` — three options: feed (consumes 1 food item, +1 cred), free (calls `startLockpickMini` — success kills the chained dog NPC + flips `state='freed'` + unlocks LIBERATOR + schedules first follower reappear in 1-3min), leave (state='left', no penalty).
+3. Cop discomfort radius (200px) applied in `updateWorld` whenever the chained dog (fed) OR the wandering follower is present — flags `n.dogSpookSlow = 1` on cops + brendan + horsecop in radius; the default chase-bite branch reads this and multiplies n.speed by 0.5 before clearing the flag at the end of the cop iteration.
+4. `spawnFreedDogFollower` spawns a new `freed_dog_follower` NPC (`isPet: true`, `freedFollower: true`) near the player, reuses the existing `n.isPet` follow-at-distance AI. The pet_possum's cash-reveal side effect was gated behind `n.id === 'pet_possum'` so the freed dog doesn't accidentally inherit it. ~60s follow window via `state.freedDogFollowT`. After despawn, next return 1.5-4.5min later.
+5. Attacking the chained dog (player swing connects, `n.id === 'scrap_dog' && n.chained`) — quest state flips to 'left', `THE_PIECE_OF_SHIT` unlocked one-time, -5 cred, dog becomes hostile (chain snaps visually — `n.chained=false` removes the leash render), gets speed 1.6 + dmg 6.
+6. New `food` inventory item — drops 10% from kicked cans, sold by Pete for $3, also a possible dumpster bonus (junk + food).
+
+### DECIDED, REASONING
+
+- **Why not expand WORLD bounds**: the SCRAP YARD already existed at (100,80,520,360). The brief authorized expansion if needed, but adding props in-place is cleaner — no camera/minimap math touch needed. Documented as a judgment call.
+- **Why the scrap_dog uses archetype 'passive' (a new string) not 'default'**: passive is documentation, not behavior — the dispatch falls through to default chase-bite, but the string communicates intent ("does not aggro by default"). Future audits searching for `archetype==='passive'` will find this NPC.
+- **Why graffiti goes through state.graffiti not a module-level cache**: persistence. Wave 3 added the discoverability layer based on save state; graffiti is the same instinct — the world should feel the same on reload. Old saves get a one-time fresh layout (acceptable).
+- **Why dumpsters use distance-from-block bias not zone-bias**: distance is continuous; zones are discrete. A dumpster on the edge of THE BLOCK shouldn't suddenly become a huge loot pinata. Linear distance falls off cleanly and keeps the math one variable.
+- **Why the dumpster propane is gated by `dumpsterPropaneAwarded`**: existing brutus night-drop + pete-rank-3 paths already exist for the propane torch; the dumpster path is the THIRD acquisition route. Without the gate a dedicated digger could chain-dig the torch. Once-per-save.
+- **Why the public phone "plant" line plants a real cashPile rather than something more fancy**: cashPiles already render + collect cleanly; piggybacking is the smallest possible delta. The pile is intentionally NOT marked `intro:true` so it's gated by proximity / tweaker-vision like normal piles — discovery is the gameplay.
+- **Why 36 GRAFFITI_LINES not 30**: the brief said 30-40. 36 lands in the sweet spot — wide enough that repeat tags across a build feel coincidental.
+- **Why `n.isPet` reused for the freed dog follower**: the follow-at-distance AI was already tested and tuned. Wrapping the cash-reveal side effect in `n.id === 'pet_possum'` was a one-line gate. Cheaper than building a new follower system.
+- **Why the chained-dog attack triggers a one-time achievement with permanent cred penalty**: the brief explicitly called for this. The achievement label IS the moral commentary ("there is a piece of shit out there. it is you."). No need to soften it.
+
+### TRIED, ABANDONED
+
+- Considered adding the scrap_dog with a `wantedDecay`-style flag that lowers player wanted while in radius. Abandoned: cop discomfort already does the same job geometrically (cops at half speed = effective wanted decay) without polluting more equipment math.
+- Considered making each kickable trash can a unique entity with per-zone flavor (alley can spits roaches, market can spits orange peels). Abandoned: tone overrun. Three outcomes (cash/junk/rats) sells the joke without bloating the loot table.
+- Considered separate cooldown buckets per dumpster vs global garbage truck reset. Kept BOTH — per-dumpster `diveCdT` (90s) + the existing `garbageTruckRumble` global reset. Garbage truck overrides the cooldown; per-dumpster cooldown handles repeat digs of the same can within one day.
+- Considered making the public phone show the toast through the existing `ringPhone` channel. Abandoned: that channel routes through the phoneState/feed display which doesn't fit a "public booth" vibe. Bespoke `answerPublicPhone()` keeps the public-booth call distinct from the cell-phone calls.
+
+### COUNTEREXAMPLE HUNT
+
+- Old save (v13 wave 5) loads forward: `state.flags.underpassEntered` defaults to true on load → no spurious first-entry toast. ✓
+- `state.quests.scrap_dog` survives `Object.assign({}, state.quests, sv.quests||{})` because in-memory defaults are merged first. Old saves missing the quest get the default `{state:'idle'}`. ✓
+- New save: scrap_dog starts at 'idle', dialogue offers all 3 options. ✓
+- Feed the dog with no food: option is `disabled: !P.inventory.find(i=>i.id==='food')`. ✓
+- Free the dog → lockpick succeeds: dog dies (NPC removed from npcs), state='freed', LIBERATOR unlocks, freedDogT = 60000-180000ms. ✓
+- Freed dog follower spawns: passes `npcs.find(n=>n.id==='freed_dog_follower')` guard so no duplicates. Disappears after 60s via `state.freedDogFollowT`. ✓
+- Attack chained dog: one-time THE_PIECE_OF_SHIT + -5 cred; subsequent attacks just damage the dog without re-applying penalty (guard: `!state.achievements.has('the_piece_of_shit')`). ✓
+- Pete sells food at $3 once player has $3: button enables, item lands in inventory. ✓
+- Kickable can on cooldown: shows "the can is empty" toast, no double-trigger. ✓
+- Breakable bottle on respawn: pool of 16 candidate spots, jittered ±20px. Same bottle can respawn at the same spot — fine, decorative. ✓
+- Dumpster dig propane drop, no-dupe: gated by `!hasPropane() && !state.flags.dumpsterPropaneAwarded`. After award, the flag stays. ✓
+- Public phone "tell pinky" plant fires twice (player answers two phones, both roll the 10% line): both plant a cash pile with unique `id: 'cp_phone_church_'+Date.now()`. No dedup, but each pile is independently collectable. Acceptable. ✓
+- Fed dog cop-discomfort radius: cop in radius gets `dogSpookSlow=1` set in `updateWorld`, read in default chase-bite (×0.5), cleared at end of branch. Re-set every frame from updateWorld → continuous effect. ✓
+- Freed dog (wandering follower) carries the same radius. ✓
+- Graffiti renders for an existing save: `state.graffiti` is null on first load forward, `drawGraffiti` calls `buildGraffiti` which lazily builds + caches in state. Next save persists the layout. ✓
+- PUBLIC_PHONE_LINES "tell pinky" plant when the church has already had a pile collected at that exact spot: the new pile uses a fresh unique id, so it doesn't collide. ✓
+
+### NEXT
+- Boss music (v4 backlog #11) still untouched — wave 6 didn't address it.
+- Day/night cycle's effect on the public phone (different lines at night?) is unexplored — could be a follow-up.
+- The Mathematician now has a cardboard sign visible from outside but his dialogue doesn't reference it. A one-line "the sign says what i do" branch would be cheap.
+- The `food` item is single-use (feed the dog). Could be eaten for HP if no dog available. Speculative.
+
+### GOTCHA
+- `state.graffiti` is an Array of plain objects on disk and in memory — serializes fine. Don't switch it to a Set.
+- The chained dog's `tailWag` field is ephemeral (not saved). On reload, the player has to approach again to re-trigger.
+- `state.publicPhoneT` is NOT saved — it resets to 4-8min on each load. Means a player can't strategy-cheese the phone by save-scumming. Intentional.
+- The freed dog follower NPC is appended to `npcs[]` at spawn time. If you save while a follower is present, the follower IS saved (npcs.dead filter doesn't catch it). On reload, the follower will be standing wherever it was, with no follow timer. Edge case — acceptable since followers are short-lived and the comedy still lands.
+- `audio.kick()` is a short percussive thump; if you add a new audio cue with similar parameters, give it a distinct name to avoid the existing dispatchers.
+- The `state.publicPhoneAnswered` counter is global across the campaign (not per-save). On NG+ it persists. Intentional — PHONE_BOOTH_PROPHET should stick.
+
+---
+
 ## Session 2026-05-26 · v13 wave 4 · the heat minigame + soap-rock loop + propane
 
 ### WHAT

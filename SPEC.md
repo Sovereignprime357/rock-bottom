@@ -482,6 +482,107 @@ On death: $200 cash pile + `priest_collar` equip-tagged pickup (slot `hat`, cred
 
 ---
 
+## MAP DEPTH + INTERACTIVE PROPS (v13 wave 6)
+
+### Highway Underpass
+
+Existing underpass zone (1020,240,380,220) gets a finish pass:
+
+- `TILE_PALETTES.underpass` carries `concrete:true` + `oilstain:true` flags. `drawGroundTile` adds longer fracture lines and black oil ellipses (with rainbow sheen).
+- `PROPS` adds 4 `tent` entries (varied tarp colors) and 1 `cardsign` next to The Mathematician ("WILL TRADE WORDS FOR MATH").
+- `drawUnderpass` renders 3 sodium-orange light patches via additive radial gradients (sin-pulsed). Always-on regardless of day/night.
+- First-entry detection in `updateWorld` fires once: canonical echo line `"the air changes.\nyou can hear yourself walk."` + feed post `"under the bridge. the bridge has ears."`. Gated by `state.flags.underpassEntered`. Old saves default to true.
+
+### Scrap Yard depth pass
+
+Existing zone (100,80,520,360). No WORLD expansion. New populates:
+
+- `TILE_PALETTES.scrap` carries `dirt:true` + warmer brown base. `drawGroundTile` adds dirt mottling clumps.
+- `PROPS` adds 4 `scrap_pile` (twisted metal + rebar sticks), 2 `car_wreck` (totaled sedan on cinderblocks), 1 `leash_post`, 1 `pay_phone`.
+- `scrap_dog` NPC at (580,150), archetype `'passive'` (does not aggro by default). Sprite uses new `PALS.scrap_dog` palette over the existing `makeDog()` shapes.
+- `drawDogLeash` renders the chain from `leash_post` to the dog between drawProps and the NPC pass.
+
+### Interactive props system
+
+New parallel array `interactiveProps[]` initialized via `initInteractiveProps()` from `startGame`. Update loop in `updateWorld` ticks cooldowns + bottle respawn.
+
+**Kickable trash cans** — 6 entries, one per major zone. Outcome on E within 50px:
+| Roll | Outcome |
+|------|---------|
+| 0.0-0.5 | cash $2-5 |
+| 0.5-0.7 | junk inventory item (sells to Pete for $1) |
+| 0.7-0.8 | food inventory item (single-use, feed the dog) |
+| 0.8-1.0 | rats particle burst + toast `"the rats are upset. they have lives."` |
+
+60s `cdT` cooldown + 200ms tip rotation + 200ms scale pulse. New `audio.kick()` synth.
+
+**Breakable bottles** — 8 placed at game start from a 16-spot candidate pool (jittered ±20px). Detected by `playerAttack` hitbox. On hit: 12-particle glass burst + 25% chance to drop `broken_bottle` weapon (dmg+8, reach 6, cd 300). 60-120s respawn.
+
+**Dumpster dig loot table** — `startDumpsterDive` was rewritten. Distance-from-block factor `farFactor = min(1, dist/900)` controls the "nothing" cut:
+
+| Loot | Rate (close → far) |
+|------|--------------------|
+| nothing (rats) | 50% close, 30% far |
+| cash $1-4 | 30% |
+| junk item | 20% |
+| clean packet (`P.supplies += 1`) | 10% |
+| broken_bottle weapon | 8% |
+| propane torch (no-dupe) | only if `farFactor > 0.6` AND `!hasPropane()` AND `!dumpsterPropaneAwarded`, 7% of fallthrough |
+
+Per-dumpster 90s `diveCdT` cooldown after a dig. Auto-resets `looted` flag via `updateWorld`.
+
+**Public phone** — one `pay_phone` prop in the scrap yard. Ring scheduler in `updateWorld`: 4-8 min between rings, 30s answer window (`state.phonePropRingT`). On E within 38px: random pull from `PUBLIC_PHONE_LINES` (10 cursed lines). Achievement `PHONE_BOOTH_PROPHET` at `publicPhoneAnswered >= 5`. One ~10% line plants a $50 cashPile at (1800,1320) behind the church.
+
+### Procedural graffiti
+
+`GRAFFITI_LINES` (36 voice-coherent fragments, lowercase mundane + occasional shouting-caps for emphasis).
+
+`buildGraffiti` walks every non-locked BUILDING and assigns 12-18 tags to randomly-selected wall faces (bottom / leftside / rightside). Each tag: `{x, y, text, col, rot, sz}`. Persisted in `state.graffiti` (Array of plain objects, serializes cleanly). Re-used on next `drawGraffiti` if already populated.
+
+`drawGraffiti` renders bold 8-10px Courier text with a low-saturation chalk color, -5°/+5° rotation, plus a 0.18-alpha double-pass for the grit feel. Called between `drawBuilding` and `drawProps` in `drawAll`.
+
+### Scrap dog side quest
+
+`state.quests.scrap_dog.state: 'idle' | 'fed' | 'freed' | 'left'`.
+
+| Choice | Effect |
+|--------|--------|
+| **Feed** | Consumes 1 food item, +1 cred, `state='fed'`. Chained dog stays; creates a 200px cop-discomfort radius (cops + brendan + horsecop at 0.5× speed inside the radius). |
+| **Free** | Triggers `startLockpickMini`. Success: dog NPC removed, `state='freed'`, `LIBERATOR` unlocked. Spawns `freed_dog_follower` (isPet:true, archetype:passive) at random intervals 1-3min later; follows ~60s, then wanders off. While follower is present, same 200px cop-discomfort radius applies. First reappear toast: `"the dog is back.\nhe is here.\nfor now."` |
+| **Leave** | `state='left'`. No penalty. Dog stays chained, dialogue still accessible. |
+| **Attack-while-chained** | One-time `THE_PIECE_OF_SHIT` achievement + permanent -5 cred + `state='left'`. Dog becomes hostile, chain snaps (n.chained=false), speed 1.6 + dmg 6. |
+
+### Food item
+
+`{id:'food', n:'a can of food (unmarked)', q:1}`. Drops 10% from kicked trash cans, sold by Pete at $3, possible dumpster bonus. Single-use (feed the dog). Single-use.
+
+### Achievements (new)
+
+| ID | Trigger |
+|----|---------|
+| `LIBERATOR` | Free the chained dog via successful lockpick. |
+| `THE_PIECE_OF_SHIT` | Attack the chained dog. One-time, permanent -5 cred. |
+| `PHONE_BOOTH_PROPHET` | Answer the public phone ≥5 times. Counter persists across NG+. |
+
+### Save backward-compat
+
+- `state.flags.underpassEntered` defaults to true on load (old saves don't re-trigger echo).
+- `state.flags.dumpsterPropaneAwarded` defaults false (existing save still gates the rare dumpster drop normally).
+- `state.quests.scrap_dog` defaults to `{state:'idle', done:false, available:false}` on missing.
+- `state.graffiti` defaults to null on missing; `drawGraffiti` lazily builds + caches.
+- `state.publicPhoneAnswered` defaults 0.
+- Save key unchanged (`rockbottom_save_v8`).
+
+### Invariants
+
+1. **Save backward-compat.** New saves load forward; old saves don't see the first-entry echo, can't accidentally double-mint propane.
+2. **Cop-discomfort radius is geometric, not zone-bound.** Either dog can be anywhere; the 200px radius is real-time.
+3. **Chained dog attack penalty is one-time.** Subsequent attacks just damage the dog without re-applying.
+4. **Propane no-dupe.** Dumpster propane drop is gated by `!hasPropane() && !dumpsterPropaneAwarded`. Brutus + Pete paths still gated by their existing flags.
+5. **Graffiti is persistent.** Once built and saved, the same tags appear on the same walls next session.
+
+---
+
 ## CHANGE LOG
 
 | Version | Date | Major changes |
@@ -495,3 +596,4 @@ On death: $200 cash pile + `priest_collar` equip-tagged pickup (slot `hat`, cred
 | v13 wave 3 | May 2026 | Discoverability layer + onboarding chain + 3 side quests + Q-key UI overhaul. New: `state.metVendors` Set with `?` floaters above unmet vendor NPCs; first-day mom phone tip; intro 3-quest chain (intro_remember / intro_tony / intro_smoke) FORCED on new saves that suppresses hustles/events/phone calls until introDone; 3 side quests (pigeon_crown, stripe_package, barb_crossword); hidden `charisma` stat on P (driven by equipment, currently only pigeon_crown=+1) wired into vendor pricing via `vendorPrice(base)` helper used in tony/barb/pinky/stripe; new equipment `pigeon_crown` (-3 cred, +1 charisma); new weapon `knife` (a possible stripe-package outcome); 4 new achievements (HEAD_THAT_WEARS, EXACT_CHANGE, WHAT_S_IN_THE_BOX, SEVEN_ACROSS). New saves start at $0. Save key unchanged. |
 | v13 wave 4 | May 2026 | THE HEAT minigame (real-time canvas skill check, 6 outcomes including SOAP-ROCK); parallel `P.soapRocks` FIFO counter (smoked first, silently); 4th cook mode `propane` gated on new `propane_torch` tool (two acquisitions: night-only brutus drop OR pete at rank 3 for $80); 3 new achievements (THE_HEAT_HELD, SOAP_TONGUE, CONTROLLED_BURN). Save key unchanged. |
 | v13 wave 5 | May 2026 | Combat depth pass. 5 archetypes (charger / grabber / swarmer / ranged / cop) with distinct patterns dispatched by `n.archetype`. New generic projectile system (`projectiles` array, kinds: bottle, holy). Boss phases reframed as pattern shifts (tony p2 = charger + sherri adds, p3 = berserk; brutus_older p2 = adds every 8s, p3 = grabber-on-contact). FATHER O'MALLEY FALLEN mini-boss + `fallen_priest` quest with two trigger paths (steal OR rank-3 phone call). New equipment `priest_collar` (+2 cred, +0.3 wantedDecay multiplier). 3 new achievements (FALLEN, DODGED_THE_LUNGE, OUTRAN_THE_PRIEST). New player status timers `P.stunT` + `P.slowT`. Cop radio-for-backup (25%/s at >120px, cap 4 cops). Hit-stun 120ms on every NPC damage. Save key unchanged. |
+| v13 wave 6 | May 2026 | Map depth pass. Highway Underpass: cracked-concrete tile palette + oil stains, 4 tents, cardboard sign next to The Mathematician, sodium-orange light patches, first-entry echo line. Scrap Yard depth: dirt-brown tile palette, scrap piles, 2 car wrecks, leash post, pay phone. New `scrap_dog` NPC (archetype `passive`, chained, leash render). Interactive props system (`interactiveProps[]` array): 6 kickable trash cans + 8 respawning breakable bottles + 1 pay phone. `startDumpsterDive` rewritten with distance-from-block loot table + rare propane drop (3rd acquisition path). Procedural graffiti rebuild: `GRAFFITI_LINES` (36) + 12-18 persisted tags via `state.graffiti`. `scrap_dog` side quest with 3 branches (feed/free/leave) + cop discomfort radius (200px). New `broken_bottle` weapon + `food` inventory item. 3 new achievements (LIBERATOR, THE_PIECE_OF_SHIT, PHONE_BOOTH_PROPHET). Save key unchanged. |
