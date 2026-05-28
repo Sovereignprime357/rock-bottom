@@ -226,13 +226,17 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | WHOLE FOODS MOM | vibram five-fingers, kombucha | marketplace | gives you $5 and pity |
 | THE POSSUM | tiny construction helmet | alley → world | trades secrets via AI prophecy |
 | FATHER O'MALLEY | priest, calls tic-tacs medicine | the church | dispenses "blessed tic-tacs" for shakes |
-| THE CONDUCTOR | waits for a train | the projects | buys 3 PURE COPPER for $90 |
+| THE CONDUCTOR | waits for a train | the train yard (relocated v13 wave 8a) | buys 3 PURE COPPER for $90 |
 | LOUD LARRY | just loud | the projects | fights, big damage |
 | STRIPE | rival dealer, sells soap | the projects | $8 rocks, 40% are soap |
-| THE PIGEON KING | one foot, unblinking | wanders | trades secrets for $2 bread |
+| THE PIGEON KING | one foot, unblinking | the park (relocated v13 wave 8a, near the fountain) | trades secrets for $2 bread |
 | PINKY POLENTA | mangled italian, says "you no like?" once per visit | rival supply at the bus stop | sells house cut packets $4 each, 5 for $18 — soap-prone |
 | THE MATHEMATICIAN | monotone, numerate, occasionally biblical | under the highway underpass | calculates your cook EV; every 3rd visit reveals a hidden system |
 | COUSIN BRENDAN | yells he is brendan, name-drops uncle dean | rookie cop, spawns at wanted ≥ 2 | tasers for 50 (4s recharge); drops a $30 rookie badge on death |
+| THE TRAIN HOPPER | wiry, gray beard, talks about bremerton | sleeping under the navy freight car in the train yard | lore-only. no resources. hidden at night. |
+| PARK BENCH PHILOSOPHER | old woman, feeds pigeons, asks one question per day | the park (near the fountain) | +1 spiritual once/day for engaging. no money changes hands. |
+| THE PRICE GUY | brimmed hat, perfectly still, "the price is the price" | skid row center (spawns every 3 days) | takes ALL your cash for a random outcome: knife / $200 / propane torch / a rock / nothing |
+| OLD SCHOOL BRUTUS | bigger dog, deeper rust, lived in the gym | the old school (spawned by ripping copper inside) | hp 250, dmg 35 grab-lunge. drops $80, 5 copper, a propane torch |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 

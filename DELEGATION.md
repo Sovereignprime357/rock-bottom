@@ -4,6 +4,19 @@
 
 ---
 
+## v13 wave 8a — SHIPPED ✓ (May 28, 2026) — world expansion + 4 new zones
+
+Lands on `rock_bottom_v13.html`. SAVE_KEY untouched. See SPEC.md `WORLD EXPANSION (v13 wave 8a)` for the contract; BRAIN.md wave 8a entry for judgment calls + counterexample hunt.
+
+- [x] **Part A — WORLD expanded** from 2200×1900 → 4400×3400. Every world-coord clamp routed through `WORLD.w` / `WORLD.h` (audit pass confirmed zero hardcoded refs in code). Camera + minimap math verified.
+- [x] **Part B1 — TRAIN YARD** (zone @ 260,2700,1100,560). Conductor relocated here. Train Hopper NPC + 3 freight_car props + chalk lore message. First-entry feed post. Night gate.
+- [x] **Part B2 — THE PARK** (zone @ 2400,900,620,500). Pigeon King relocated here. Park Bench Philosopher NPC + daily-cycle question (7-line cycle). Park bench sit mechanic (+1 brain/2s, BENCH_PRESS at 60s). Night-park hidden cash roll.
+- [x] **Part B3 — SKID ROW** (zone @ 2480,1520,900,720). 8 makeshift SHACK buildings + 3 ambient hostiles (skid_brutus_1 / skid_lurch / skid_sherri) + 5 tweaker-vision hidden cash piles + Price Guy random encounter (every 3 days).
+- [x] **Part B4 — THE OLD SCHOOL** (zone @ 3400,280,760,640). OLDSCHOOL building with modal-dialogue interior (Wave 7 pattern). Old School Brutus boss (hp 250, dmg 35). Schoolyard props + hidden $30 pile + mural.
+- [x] **Part C — wire-up**. 4 new achievements (school_s_out, bench_press, the_price_paid, train_hopped). Vendor index entries for Train Hopper + Philosopher. Faction tags. Phone-feed first-entry posts (4 zones). Save backward-compat (8 new flags + 1 new counter, defaults wired).
+
+---
+
 ## v13 wave 7 — SHIPPED ✓ (May 28, 2026) — faction rep + day events + hideouts
 
 Lands on `rock_bottom_v13.html`. SAVE_KEY untouched. See SPEC.md `FACTIONS`, `DAY EVENTS`, `HIDEOUTS` for the contract; BRAIN.md wave 7 entry for judgment calls.

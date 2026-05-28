@@ -4,6 +4,103 @@
 
 ---
 
+## WORLD EXPANSION (v13 wave 8a)
+
+**WORLD bounds:** `{ w: 4400, h: 3400 }` (up from 2200×1900). All existing zones keep their original x/y/w/h; the world grew around them. Every world-coord clamp (camera, projectile cull, cop spawn ring, player clamp, day-event NPC clamps, day-30 bus rehydrate) reads `WORLD.w` / `WORLD.h` exclusively. Minimap scale `(120/WORLD.w, 96/WORLD.h)` parameterized.
+
+### Zone table (v13 wave 8a additions)
+
+| Zone id | Name | Rect | Faction lean | Notes |
+|---------|------|------|--------------|-------|
+| trainyard | TRAIN YARD | 260,2700,1100,560 | spiritual | Conductor + Train Hopper. Tracks, freight cars, weeds, chalk lore. |
+| park | THE PARK | 2400,900,620,500 | neutral / street-at-night | Pigeon King + Philosopher. Fountain, benches, swings, trees. |
+| skidrow | SKID ROW | 2480,1520,900,720 | street, contested | Dense shacks + 3 hostiles + 5 hidden cash piles + Price Guy. |
+| oldschool | OLD SCHOOL | 3400,280,760,640 | scrap | OLDSCHOOL building, modal interior, OS Brutus boss, mural + schoolyard. |
+
+### New NPCs (v13 wave 8a)
+
+| id | name | location | type | faction | grants | gate |
+|----|------|----------|------|---------|--------|------|
+| train_hopper | THE TRAIN HOPPER | trainyard `(820,2940)` | lore | spiritual | TRAIN_HOPPED on first daytime talk | hidden at night (`daytimeOnly:true` + dialogue night-guard) |
+| philosopher | PARK BENCH PHILOSOPHER | park `(2680,1080)` | lore + rep | spiritual | +1 spiritual / day on engage | day-stamp via `state.counters.philosopherRepDay` |
+| os_brutus | OLD SCHOOL BRUTUS | spawned by interior copper-rip | boss | street | $80 + 5 copper + propane torch (no-dupe) + 50 cred + street +2 + SCHOOL_S_OUT | hp 250, dmg 35, archetype 'charger' (windup→lunge→grab pattern) |
+| price_guy | THE PRICE GUY | skidrow `(2940,1860)` | random encounter | neutral | RNG one-shot | spawns every `state.day % 3 === 0`, gated by `state.flags.priceGuyDay` |
+
+### Relocated NPCs (v13 wave 8a)
+
+- **Conductor**: `(240,1780)` THE PROJECTS → `(680,2960)` TRAIN YARD. Dialogue + 3-copper-for-$90 trade unchanged. Stripe's package-handoff lines updated to reference "the train yard." WORLD_EVENTS school_bus line updated.
+- **Pigeon King**: `(1000,1000)` → `(2700,1180)` THE PARK (near fountain). Crown side-quest + secrets dialogue unchanged.
+
+### Park bench sit mechanic
+
+- E within 50px of any `park_bench` PROP toggles `state.sittingOnBench`.
+- While sitting: +1 brain per 2 seconds (drift via `state.benchSitGainT`). Shakes UNCHANGED (calm, not a withdrawal cure).
+- 60 seconds continuous → BENCH_PRESS achievement.
+- After 60s, every 30s a random passerby toast fires (5 lines: philosopher said you'd be here / a pigeon walks past / a jogger passing on phone / the fountain coughs / you have been here a while).
+- State is ephemeral (NOT saved). Standing or reloading resets the timer.
+
+### Old School interior (modal dialogue)
+
+- E within 44px of door at `(3760,700)` opens `openOldSchoolInterior()`.
+- Two branches: "rip copper from the walls" (+2 copper, +1 to copper counter, 40% chance to spawn OS Brutus in the schoolyard outside) OR "leave."
+- Spawn check: only if no live os_brutus exists. Spawn closes the modal automatically so the fight happens in open space.
+
+### Price Guy RNG outcome table
+
+| Roll band | Outcome | Notes |
+|-----------|---------|-------|
+| 0.00 — 0.20 | + knife (P.weapon = 'knife') | the handle is warm |
+| 0.20 — 0.35 | + $200 | net positive on paper |
+| 0.35 — 0.45 (only if !hasPropane) | + propane torch | smells like a parking lot. falls through to next band if already owned. |
+| 0.45 — 0.70 | + 1 rock | "you suspect it is real" |
+| 0.70 — 1.00 | nothing | "he handed you nothing. he nods. you nod." |
+
+All branches set `state.flags.priceGuyVisits++`, unlock THE_PRICE_PAID, and trigger wanderOff. Walking away (not paying) has no penalty.
+
+### Phone-feed first-entry hooks
+
+| Zone | Handle | Line |
+|------|--------|------|
+| trainyard | @blocklog | trains stopped running here. they still come through. |
+| park | @hardcandy | the pigeons remember faces. the philosopher remembers names. |
+| skidrow | @crackheadcent | skid row knows you didn't ask first. |
+| oldschool | @blocklog | the old school still has copper in the walls. the school still has brutus in the gym. |
+
+Each gated by `state.flags.{trainYardEntered, parkEntered, skidRowEntered, oldSchoolEntered}` (defaults to false on fresh save, true on legacy save load).
+
+### New achievements (v13 wave 8a)
+
+- `school_s_out` — defeat the Old School Brutus.
+- `bench_press` — sit on a park bench for 60 continuous seconds.
+- `the_price_paid` — pay the Price Guy (any outcome).
+- `train_hopped` — talk to the Train Hopper.
+
+### New TILE_PALETTES branches
+
+- `trainyard` — gravel ballast flecks + horizontal steel-rail bands per tile.
+- `park` — green grass base + tuft sprites + occasional dandelion heads.
+- `skidrow` — darker cracked-concrete (reuses concrete flag) + cigarette-butt and wrapper flecks.
+- `oldschool` — playground tan + chalk smudges + weed:true tufts.
+
+### Invariants (v13 wave 8a additions)
+
+1. **WORLD parameterization** — every world-coord clamp reads `WORLD.w` / `WORLD.h`. No hardcoded world-dimension constants.
+2. **Existing zones unmoved** — every zone defined before v13 wave 8a keeps its original x/y/w/h. New zones live only in the expanded area (no overlap with original zones).
+3. **Conductor location** — referenced via `npcs.find(n=>n.id==='conductor')` everywhere. Stripe's package delivery uses proximity check (60px radius); the math is location-independent.
+4. **Train Hopper night gate** — hidden at night (`daytimeOnly:true`) AND interactable-but-rejecting at night via in-dialogue check.
+5. **Philosopher rep cap** — +1 spiritual once per day, gated by `state.counters.philosopherRepDay === state.day`.
+6. **Bench sit ephemeral** — not in save schema. Resets each session.
+7. **Price Guy cadence** — `state.day % 3 === 0` gate, one spawn per such day via `state.flags.priceGuyDay`. Old instances spliced on new-day spawn.
+8. **Park night cash** — at most one roll per night via `state.flags.parkNightCashDay`.
+9. **OS Brutus uniqueness** — at most one os_brutus alive at a time. Re-entering interior with him alive does not respawn.
+10. **OS Brutus drops** — propane torch is no-dupe gated (skipped if `hasPropane()` is true).
+
+---
+
+
+
+---
+
 ## WHAT
 
 Top-down action RPG built as a single HTML file. Pixel-art player sprite, emoji NPCs. 7+ zone walkable city, ~2200×1800 world with camera following player on 800×600 viewport. Real-time fist combat. Resource management (rocks, cash, shakes, cred, brain, wanted). Rank progression with one ascension boss. Persistent save via window.storage.

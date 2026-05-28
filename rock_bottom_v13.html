@@ -247,7 +247,10 @@ if (!window.storage) {
 
 // ---------- constants ----------
 const W = 800, H = 600;
-const WORLD = { w: 2200, h: 1900 };
+// v13 wave 8a — world expanded from 2200×1900 to 4400×3400 (~2× horizontal, ~1.8× vertical).
+// existing zones stay at their original x/y/w/h; the world grew around them. all camera
+// clamps + minimap scale read WORLD.w / WORLD.h, so the expansion is parameterized end-to-end.
+const WORLD = { w: 4400, h: 3400 };
 const TILE = 64;
 const RANKS = [
   { cred: 0,   name: 'stem-tip sucker' },
@@ -275,6 +278,15 @@ const ZONES = [
   { id: 'laundromat',  name: 'THE LAUNDROMAT',      x: 1480, y: 1080, w: 320, h: 200, color: '#3a3a44', label: '#88c0ff' },
   // v13 wave 2 — small transit-zone for pinky polenta. between the block / market / laundromat.
   { id: 'busstop',     name: 'BUS STOP',            x: 1240, y: 1080, w: 220, h: 180, color: '#2a2820', label: '#888888' },
+  // v13 wave 8a — four new zones placed in the expanded world space (existing zones unchanged).
+  // TRAIN YARD: far south-west. Conductor's real home. spiritual-leaning.
+  { id: 'trainyard',   name: 'TRAIN YARD',          x: 260,  y: 2700, w: 1100, h: 560, color: '#1f1c18', label: '#a8a090' },
+  // THE PARK: central-east in new space. neutral by day, street-leaning at night.
+  { id: 'park',        name: 'THE PARK',            x: 2400, y: 900,  w: 620,  h: 500, color: '#243a22', label: '#a8d088' },
+  // SKID ROW: east of marketplace. street faction, contested, dangerous.
+  { id: 'skidrow',     name: 'SKID ROW',            x: 2480, y: 1520, w: 900,  h: 720, color: '#1a1612', label: '#8a3a3a' },
+  // OLD SCHOOL: far north-east corner. scrap-leaning, optional boss zone.
+  { id: 'oldschool',   name: 'OLD SCHOOL',          x: 3400, y: 280,  w: 760,  h: 640, color: '#241a18', label: '#c08038' },
 ];
 
 // ---------- buildings (solid props) ----------
@@ -290,6 +302,17 @@ const BUILDINGS = [
   // laundromat (open south door)
   { x: 1520, y: 1100, w: 240, h: 130, color: '#3a3a44', border: '#222', name: 'LAUNDROMAT', solid: true, doorGap: true },
   // scrap yard fence is handled separately
+  // v13 wave 8a — OLD SCHOOL building (door gap on south face). interior is modal dialogue (openOldSchool).
+  { x: 3520, y: 380, w: 520, h: 340, color: '#3a2820', border: '#1a0805', name: 'OLDSCHOOL', solid: true, doorGap: true },
+  // v13 wave 8a — SKID ROW: a tight cluster of makeshift shacks to make the alley network feel constrained.
+  { x: 2540, y: 1660, w: 120, h: 70,  color: '#2a1a14', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 2720, y: 1740, w: 100, h: 80,  color: '#241814', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 2900, y: 1620, w: 130, h: 90,  color: '#1f1612', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 3120, y: 1720, w: 110, h: 70,  color: '#2a1814', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 2580, y: 1900, w: 140, h: 80,  color: '#241612', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 2900, y: 1980, w: 160, h: 80,  color: '#1c1410', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 3140, y: 1900, w: 130, h: 90,  color: '#241814', border: '#0a0805', name: 'SHACK', solid: true },
+  { x: 2780, y: 2080, w: 120, h: 80,  color: '#1a120e', border: '#0a0805', name: 'SHACK', solid: true },
 ];
 
 // ---------- props (decoration + interactables) ----------
@@ -346,6 +369,70 @@ const PROPS = [
   { type:'leash_post', x:570, y:130 },   // the dog's post, dog spawns within 30px
   // v13 wave 6 — the public phone (scrap yard, on a pole). interactive.
   { type:'pay_phone', x:130, y:220 },
+
+  // v13 wave 8a — TRAIN YARD props (zone @ 260,2700,1100,560)
+  // three freight cars as decorative non-solid silhouettes. player can walk through.
+  { type:'freight_car', x: 380,  y: 2820, w: 220, h: 64, color:'#5a2a20' },   // rust red
+  { type:'freight_car', x: 720,  y: 2900, w: 240, h: 64, color:'#2a3a5a' },   // navy blue
+  { type:'freight_car', x: 1040, y: 2780, w: 200, h: 60, color:'#3a4030' },   // moss green
+  // the chalk lore message on the side of the navy freight car
+  { type:'chalk_message', x: 760, y: 2898, text: 'the bus knows where\nthe train doesn\'t go' },
+  // weeds clumps — train yard
+  { type:'weeds', x: 540,  y: 2730 }, { type:'weeds', x: 990, y: 2880 },
+  { type:'weeds', x: 320,  y: 3100 }, { type:'weeds', x: 1230, y: 3060 },
+  { type:'weeds', x: 700,  y: 3180 }, { type:'weeds', x: 470,  y: 2980 },
+
+  // v13 wave 8a — THE PARK props (zone @ 2400,900,620,500)
+  // central fountain
+  { type:'fountain',     x: 2700, y: 1140 },
+  // park benches (4)
+  { type:'park_bench',   x: 2520, y: 1040, w: 40, h: 12 },
+  { type:'park_bench',   x: 2880, y: 1040, w: 40, h: 12 },
+  { type:'park_bench',   x: 2520, y: 1240, w: 40, h: 12 },
+  { type:'park_bench',   x: 2880, y: 1240, w: 40, h: 12 },
+  // swing set (creepy at night)
+  { type:'swing_set',    x: 2480, y: 1320 },
+  // broken drinking fountain
+  { type:'drink_fountain', x: 2820, y: 1340 },
+  // trees
+  { type:'tree', x: 2460, y: 950  }, { type:'tree', x: 2980, y: 970  },
+  { type:'tree', x: 2460, y: 1350 }, { type:'tree', x: 2980, y: 1330 },
+  { type:'tree', x: 2620, y: 970  }, { type:'tree', x: 2820, y: 970  },
+
+  // v13 wave 8a — SKID ROW props (zone @ 2480,1520,900,720)
+  // trash piles (graffiti density handled in buildGraffiti)
+  { type:'trash', x: 2580, y: 1620 }, { type:'trash', x: 2780, y: 1700 },
+  { type:'trash', x: 2980, y: 1680 }, { type:'trash', x: 3200, y: 1820 },
+  { type:'trash', x: 2640, y: 1900 }, { type:'trash', x: 2880, y: 2000 },
+  { type:'trash', x: 3100, y: 2080 }, { type:'trash', x: 2700, y: 2160 },
+  // a few dumpsters
+  { type:'dumpster', x: 2820, y: 1780, w:36, h:24, color:'#1a1a14', looted:false },
+  { type:'dumpster', x: 3100, y: 1980, w:36, h:24, color:'#1a1614', looted:false },
+  // a single bare bulb on a wire (one light source, intentionally sparse)
+  { type:'lamp', x: 2920, y: 1880 },
+  // broken bottles scattered
+  { type:'bottle', x: 2680, y: 1740 }, { type:'bottle', x: 3040, y: 1840 },
+  { type:'bottle', x: 2780, y: 2040 },
+  // syringes (this is skid row)
+  { type:'syringe', x: 2960, y: 1660 }, { type:'syringe', x: 3220, y: 1940 },
+
+  // v13 wave 8a — OLD SCHOOL props (zone @ 3400,280,760,640)
+  // mural on the south face of the school building. faded letters: "FUTU EA HE M C"
+  { type:'school_mural', x: 3530, y: 720, text: 'FUTU EA HE M C' },
+  // swing set in the schoolyard
+  { type:'swing_set', x: 3520, y: 800 },
+  // broken basketball hoop
+  { type:'broken_hoop', x: 3920, y: 540 },
+  // chain-link fence segments along the south edge
+  { type:'school_fence', x: 3420, y: 880, w: 720, h: 6 },
+  // tall weedy grass clumps
+  { type:'weeds', x: 3640, y: 350 }, { type:'weeds', x: 3820, y: 480 },
+  { type:'weeds', x: 3500, y: 620 }, { type:'weeds', x: 4040, y: 760 },
+  { type:'weeds', x: 3760, y: 820 }, { type:'weeds', x: 3960, y: 380 },
+  // broken-window props on the building face (small black squares)
+  { type:'broken_window', x: 3600, y: 460 }, { type:'broken_window', x: 3700, y: 460 },
+  { type:'broken_window', x: 3800, y: 460 }, { type:'broken_window', x: 3900, y: 460 },
+  { type:'broken_window', x: 4000, y: 460 },
 ];
 
 // v13 wave 6 — interactive props. parallel array to PROPS; only the things that respond to E key
@@ -505,7 +592,9 @@ const GRAFFITI_LINES = [
 // excludes ambient pedestrians (cubscout/jogger/busker/dogwalker), dave (the steal target),
 // and the rest of the random-flavor crew.
 const VENDOR_FLOATER_IDS = new Set([
-  'tony','yuri','pete','barb','biggu','conductor','larry','paulie','stripe','mom','priest','pinky','math'
+  'tony','yuri','pete','barb','biggu','conductor','larry','paulie','stripe','mom','priest','pinky','math',
+  // v13 wave 8a — new lore NPCs that should show up in the "people you've met" index
+  'train_hopper','philosopher'
 ]);
 const VENDOR_INDEX_META = {
   tony:      { zone:'the block (the corner)',     tag:'rocks ten dollars. simple math.' },
@@ -513,7 +602,8 @@ const VENDOR_INDEX_META = {
   pete:      { zone:'pawn shop',                  tag:'$15 copper. one second. weighing.' },
   barb:      { zone:'the laundromat',             tag:'packets $5. the crossword. she does not look up.' },
   biggu:     { zone:'highway underpass',          tag:'tall. trades the cart for 5 copper.' },
-  conductor: { zone:'the projects',               tag:'3 copper for $90. the train is coming.' },
+  // v13 wave 8a — conductor relocated to the train yard
+  conductor: { zone:'the train yard',             tag:'3 copper for $90. the train is coming.' },
   larry:     { zone:'the projects',               tag:'WHAT. fights. yells. big damage.' },
   paulie:    { zone:'back alley',                 tag:'the face. it is, in fact, just the face.' },
   stripe:    { zone:'the projects',               tag:'$8 rocks. 40% soap. fences yours at $6.' },
@@ -521,6 +611,9 @@ const VENDOR_INDEX_META = {
   priest:    { zone:'the church',                 tag:'blessed tic-tacs. -30 shakes. donate for cred.' },
   pinky:     { zone:'the bus stop',               tag:'house cut packets $4. dirty. amore.' },
   math:      { zone:'highway underpass',          tag:'the math. expectation. every third number is a tip.' },
+  // v13 wave 8a — new NPCs
+  train_hopper: { zone:'the train yard',          tag:'wiry. denim. stories about bremerton. no money changes hands.' },
+  philosopher:  { zone:'the park',                tag:'one question per day. +1 spiritual once daily for thinking about it.' },
 };
 
 // pigeon king's lost crown — 6 candidate locations, picked deterministically when the quest starts.
@@ -646,6 +739,11 @@ const ACHIEVEMENTS = {
   the_block_knows:      { name:"THE BLOCK KNOWS",      flav:"reach street LOVED. tony said your name three times today." },
   yuri_counts_you:      { name:"YURI COUNTS YOU IN",   flav:"reach scrap LOVED. pete wrote down a number. pete does not write down numbers." },
   mom_is_proud:         { name:"MOM IS PROUD",         flav:"reach spiritual LOVED. she told the women at trader joe's. they nodded." },
+  // v13 wave 8a — world expansion achievements
+  school_s_out:         { name:"SCHOOL'S OUT",         flav:"defeat old school brutus. the gym is quiet. the gym was loud." },
+  bench_press:          { name:"BENCH PRESS",          flav:"sit on a park bench for 60 continuous seconds. the bench remembers." },
+  the_price_paid:       { name:"THE PRICE PAID",       flav:"pay the price guy. you found out what the price was for." },
+  train_hopped:         { name:"TRAIN HOPPED",         flav:"talk to the train hopper. you heard about bremerton. you didn't go." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -908,7 +1006,7 @@ const WORLD_EVENTS = [
   { id:'twin_possums', text:"two possums in matching helmets walk by.\nthey are not twins. they are coworkers." },
   { id:'wedding_guy', text:"a man in a tuxedo sprints past you.\nhe is late for a wedding. or escaping one.\n(+$5)", effect: () => { P.cash += 5; } },
   { id:'pizza_box', text:"a pizza box flies past at head height.\ninside: a single tooth (gold).\n(+ a tooth (gold))", effect: () => { P.inventory.push({id:'gold_tooth', n:'a tooth (gold)', q:1}); } },
-  { id:'school_bus', text:"a school bus drives past.\nthe driver is the conductor.\nthe driver is also still at his post in the projects." },
+  { id:'school_bus', text:"a school bus drives past.\nthe driver is the conductor.\nthe driver is also still at his post in the train yard." },
   { id:'mom_drives_by', text:"a minivan slows down.\nthe driver looks at you.\nthe driver is your mom. she does not stop.\nyou wave. she pretends not to see.\n(-3 brain)", effect: () => { P.brain = Math.max(0, P.brain - 3); } },
   { id:'free_meatball', text:"a meatball rolls toward you.\nit is steaming.\nyou eat it. (+12 hp)", effect: () => { P.hp = Math.min(P.maxHp, P.hp + 12); } },
   { id:'man_with_sign', text:"a man holds a sign that says 'THE END.'\nthe sign is from a furniture store." },
@@ -969,6 +1067,14 @@ const PALS = {
   brendan: ['transparent','#000','#0a0a28','#2838c0','#4048e8','#f4d8b8','#181828','#fff'],
   // v13 wave 6 — scrap_dog: scrappy brown + black, mangier than brutus
   scrap_dog: ['transparent','#000','#3a2010','#4a2810','#684830','#a08040','#d4c896','#181010'],
+  // v13 wave 8a — train hopper: faded denim jacket + gray beard + dusty backpack
+  train_hopper: ['transparent','#0a0805','#3a3a4a','#5a5a78','#8a8898','#d4c896','#3a2818','#a09080'],
+  // v13 wave 8a — park bench philosopher: gray hair + brown coat + kindly face
+  philosopher:  ['transparent','#0a0805','#604838','#8a7868','#c8c0b8','#d4c896','#3a2820','#88a08c'],
+  // v13 wave 8a — price guy: black coat + hat brim + a stillness about him. mostly silhouette.
+  price_guy:    ['transparent','#000','#0a0808','#181818','#2a2a2a','#d4c896','#5a3030','#fff'],
+  // v13 wave 8a — old school brutus: bigger brutus palette w/ deeper rust + darker accents
+  os_brutus:    ['transparent','#000','#2a1810','#4a2818','#604030','#1a0805','#a08040','#5a2010'],
 };
 
 // 16x16 pixel art helpers — parse a row string of 0-7 (dot=transparent)
@@ -1322,6 +1428,13 @@ function buildSprites() {
     pinky:     { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true },
     math:      { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true, accessory:'glasses' },
     brendan:   { hat:3, skin:5, shirt:3, pants:6, accent:7, cap:true, accessory:'badge', accColor:5, thin:true },
+    // v13 wave 8a — train hopper: wiry, gray beard, faded jacket. accessory shows the backpack on his back via accent color.
+    train_hopper: { hat:2, skin:3, shirt:3, pants:6, accent:7, thin:true, beard:true },
+    // v13 wave 8a — philosopher: kindly old woman, gray hair under a hat, brown coat
+    philosopher:  { hat:6, skin:5, shirt:2, pants:6, accent:7, wide:true },
+    // v13 wave 8a — price guy: silhouette in a black coat. brim hat. unsettling.
+    price_guy:    { hat:1, skin:4, shirt:3, pants:3, accent:6, hood:true },
+    // v13 wave 8a — old school brutus reuses the dog sprite (handled below), this entry not used
   };
   Object.entries(npcStyles).forEach(([k, opts]) => {
     const frames = makeNPC(opts);
@@ -1336,6 +1449,8 @@ function buildSprites() {
   dog.forEach((g,i) => { SPRITE_CACHE['brutus_'+i] = rasterize(g, PALS.brutus); });
   // v13 wave 6 — scrap_dog reuses the dog shape with a different (mangier) palette
   dog.forEach((g,i) => { SPRITE_CACHE['scrap_dog_'+i] = rasterize(g, PALS.scrap_dog); });
+  // v13 wave 8a — old school brutus reuses the dog shape with the deeper-rust palette. boss-tier.
+  dog.forEach((g,i) => { SPRITE_CACHE['os_brutus_'+i] = rasterize(g, PALS.os_brutus); });
   const pig = makePigeon();
   pig.forEach((g,i) => { SPRITE_CACHE['pigeon_'+i] = rasterize(g, PALS.pigeon); });
 
@@ -1542,6 +1657,8 @@ async function loadGame() {
       kombuchaAskDay: 0, kombuchaComplimentDay: 0,
       priestDonateDay: 0, lurchDollarDay: 0, sherriSpiderDay: 0, paulieFaceDay: 0,
       stripeFencedToday: 0, barbPacketsToday: 0, peteCashToday: 0, heistsToday: 0,
+      // v13 wave 8a — philosopher gives +1 spiritual once/day; gated by day-stamp counter.
+      philosopherRepDay: 0,
     }, sv.counters || {});
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
@@ -1564,6 +1681,12 @@ async function loadGame() {
       silenceUntilT: 0,
       scrapHideoutOwned: false, momHideoutOwned: false,
       momRentDay: 0, scrapLoanDay: 0, momProudCallDay: 0,
+      // v13 wave 8a — world expansion + new zones. Old saves default-to-true on the entry
+      // flags so the first-entry toast doesn't fire on reload (matches the underpass pattern).
+      trainYardEntered: true, parkEntered: true, skidRowEntered: true, oldSchoolEntered: true,
+      trainHopperTalkedTo: false,
+      priceGuyDay: 0, priceGuyVisits: 0,
+      parkNightCashDay: 0,
     }, sv.flags || {});
     // v13 wave 7 — hideout storage chest survives death. default empty.
     state.hideoutStash = Object.assign({ rocks:0, copper:0, cash:0, items:[] }, sv.hideoutStash || {});
@@ -2012,7 +2135,9 @@ function spawnNpcs() {
     { id:'priest', name:"FATHER O'MALLEY", sprite:'priest', x:1800, y:1460, w:28,h:32, color:'#2a2030',
       hp:80, maxHp:80, speed:0, hostile:false,
       interact: priestDialogue },
-    { id:'conductor', name:'THE CONDUCTOR', sprite:'conductor', x:240, y:1780, w:28,h:32, color:'#604030',
+    // v13 wave 8a — Conductor moved from THE PROJECTS to the TRAIN YARD. his real home turf.
+    // dialogue + the 3-copper-for-$90 trade unchanged.
+    { id:'conductor', name:'THE CONDUCTOR', sprite:'conductor', x:680, y:2960, w:28,h:32, color:'#604030',
       hp:60, maxHp:60, speed:0, hostile:false,
       interact: conductorDialogue },
     { id:'larry', name:'LOUD LARRY', sprite:'larry', x:440, y:1780, w:28,h:32, color:'#8a3030',
@@ -2021,7 +2146,9 @@ function spawnNpcs() {
     { id:'stripe', name:'STRIPE', sprite:'stripe', x:620, y:1780, w:28,h:32, color:'#3a3848',
       hp:70, maxHp:70, speed:0, hostile:false, vendor:true,
       interact: stripeDialogue },
-    { id:'pigeon', name:'THE PIGEON KING', sprite:'pigeon', x:1000, y:1000, w:24,h:20, color:'#605840',
+    // v13 wave 8a — Pigeon King moved to THE PARK, near the central fountain. wanders inside the park.
+    // dialogue / secrets / crown quest unchanged. faction-rep is still neutral on interaction.
+    { id:'pigeon', name:'THE PIGEON KING', sprite:'pigeon', x:2700, y:1180, w:24,h:20, color:'#605840',
       hp:10, maxHp:10, speed:0.8, hostile:false, wander:true,
       interact: pigeonDialogue },
     { id:'biggu', name:'THE BIG GUY', sprite:'biggu', x:1200, y:340, w:32,h:38, color:'#604030',
@@ -2164,6 +2291,17 @@ function spawnNpcs() {
     { id:'math', name:'THE MATHEMATICIAN', sprite:'math', x:1340, y:380, w:26,h:32, color:'#6a5a4a',
       hp:60, maxHp:60, speed:0, hostile:false,
       interact: mathematicianDialogue },
+    // v13 wave 8a — THE TRAIN HOPPER, sleeping under the navy freight car in the train yard.
+    // lore-only NPC: no resources granted. tells stories about other towns. hidden at night (sleeping inside the car).
+    // daytimeOnly reuses the existing render filter (mom/pete pattern) — at night he's "inside the car".
+    { id:'train_hopper', name:'THE TRAIN HOPPER', sprite:'train_hopper', x:820, y:2940, w:26,h:32, color:'#5a4030',
+      hp:50, maxHp:50, speed:0, hostile:false, daytimeOnly:true,
+      interact: hopperDialogue },
+    // v13 wave 8a — THE PARK BENCH PHILOSOPHER, feeding pigeons near the fountain.
+    // daily question cycle (5-7 questions). +1 spiritual once/day for engaging.
+    { id:'philosopher', name:'PARK BENCH PHILOSOPHER', sprite:'philosopher', x:2680, y:1080, w:26,h:32, color:'#604838',
+      hp:55, maxHp:55, speed:0, hostile:false,
+      interact: philosopherDialogue },
     { id:'laundromat_lady', name:'LAUNDROMAT LADY', sprite:'launderlady', x:1720, y:1180, w:28,h:32, color:'#3a3a44',
       hp:60, maxHp:60, speed:0, hostile:false,
       interact: (n)=> dialogue('LAUNDROMAT LADY', "she is folding the same shirt.\nshe has been folding the same shirt.\nthe shirt is hers, you think.", [
@@ -2244,8 +2382,19 @@ function spawnNpcs() {
         }},
         { label: 'leave.', action:()=>{} },
       ]) },
+    // v13 wave 8a — SKID ROW ambient hostiles. variants of brutus/lurch/sherri,
+    // aggro on sight (n.hostile:true). street faction by archetype. high encounter rate.
+    { id:'skid_brutus_1', name:'BRUTUS (SKID)', sprite:'brutus', x: 2700, y: 1820, w:32,h:24, color:'#3a2810',
+      hp:60, maxHp:60, speed:1.5, hostile:true, aggro:true, dmg:7, zoneOnly:{x:2480,y:1520,w:900,h:720},
+      archetype:'charger', showHp:true },
+    { id:'skid_lurch',    name:'LURCH (SKID)',  sprite:'lurch',  x: 3020, y: 1940, w:28,h:34, color:'#3a2030',
+      hp:55, maxHp:55, speed:1.5, hostile:true, aggro:true, dmg:6, zoneOnly:{x:2480,y:1520,w:900,h:720},
+      archetype:'grabber', showHp:true },
+    { id:'skid_sherri',   name:'SHERRI (SKID)', sprite:'sherri', x: 2860, y: 2080, w:26,h:30, color:'#3a1820',
+      hp:45, maxHp:45, speed:2.1, hostile:true, aggro:true, dmg:5, zoneOnly:{x:2480,y:1520,w:900,h:720},
+      archetype:'swarmer', showHp:true },
   ];
-  npcs.forEach(n => { n.hpMax = n.maxHp; n.attackCd=0; n.targetX=n.x; n.targetY=n.y; n.wanderT=0; n.showHp=false; });
+  npcs.forEach(n => { n.hpMax = n.maxHp; n.attackCd=0; n.targetX=n.x; n.targetY=n.y; n.wanderT=0; n.showHp=n.showHp||false; });
 }
 
 // hidden cash piles
@@ -2258,6 +2407,11 @@ function spawnCashPiles() {
     {x:1640,y:1320,a:8},{x:1940,y:1600,a:6},{x:120,y:1860,a:4},{x:680,y:1860,a:5},
     {x:1040,y:260,a:5},{x:1380,y:440,a:6},{x:900,y:1080,a:4},{x:1500,y:660,a:5},
     {x:260,y:1700,a:6},{x:1800,y:1180,a:7},
+    // v13 wave 8a — SKID ROW hidden cash. 5 piles totaling ~$100. tweaker-vision gated like the rest.
+    {x:2620,y:1780,a:18},{x:2980,y:1820,a:22},{x:3200,y:1940,a:14},
+    {x:2780,y:2120,a:24},{x:3140,y:2140,a:20},
+    // v13 wave 8a — OLD SCHOOL hidden cash. one pile, $30, behind the building.
+    {x:3760,y:330,a:30},
   ];
   cashPiles = spots.map((s,i)=>({ id:'cp_'+i, x:s.x, y:s.y, amt:s.a, collected:state.cashPilesCollected.has('cp_'+i)}));
   // v13 wave 3 — intro_remember plant: guaranteed $10 pile inside THE BLOCK, just outside the crate.
@@ -2976,7 +3130,7 @@ function stripeDialogue() {
 
   // package mid-quest: stripe waiting for delivery
   if (state.flags.hasStripePackage) {
-    dialogue('STRIPE', "you have it.\nyou have not delivered it.\nthe conductor is in the projects.\nhe does not move.", [
+    dialogue('STRIPE', "you have it.\nyou have not delivered it.\nthe conductor is in the train yard.\nhe does not move.", [
       { label: 'leave.', action: () => {} },
     ]);
     return;
@@ -3094,12 +3248,12 @@ function stripeDialogue() {
 function offerStripePackage() {
   const q = state.quests.stripe_package;
   if (!q) return;
-  dialogue('STRIPE', "stripe got a package.\ngoes to the conductor in the projects.\nstripe's name. stripe's money.\ndon't open it.\ndon't.", [
+  dialogue('STRIPE', "stripe got a package.\ngoes to the conductor in the train yard.\nstripe's name. stripe's money.\ndon't open it.\ndon't.", [
     { label: 'take it.', action: () => {
       q.available = true;
       state.flags.hasStripePackage = true;
       P.inventory.push({id:'stripe_package', n:"stripe's sealed package", q:1});
-      toast("+ stripe's package\nbrown paper. greasy in one corner.\ntake it to the conductor.\ndon't.", 4000);
+      toast("+ stripe's package\nbrown paper. greasy in one corner.\ntake it to the conductor at the train yard.\ndon't.", 4000);
       saveGame();
     }},
     { label: 'pass. (offer holds.)', action: () => {
@@ -3449,6 +3603,239 @@ function mathematicianDialogue() {
     }},
     { label: "leave.", action: () => {} },
   ]);
+}
+
+// ---------- v13 wave 8a — TRAIN HOPPER ----------
+// lore-only NPC under the navy freight car. tells stories about other towns.
+// no resources granted (per the anti-grind rule). first-time talk unlocks TRAIN_HOPPED.
+// faction: SPIRITUAL.
+const HOPPER_LINES = [
+  "a place called bremerton.\nthey pay more for copper.\nthey don't ask where you got it.",
+  "i rode through laramie once.\nthe pigeons there don't have a king.\nthey have a council.",
+  "memphis. the river is a vendor.\nyou give it a coin. it gives you a different coin.\nthe coin is the same coin.",
+  "there is a town called good thunder.\nit is in minnesota.\nit is also a state of mind.\nyou are not in it.",
+  "a guy in stockton kept a possum.\nthe possum kept him.\nthat is how it works.",
+  "they say the trains stopped in '88.\nnobody told the trains.\nyou hear them.\nyou heard them.",
+  "i used to be a person with an address.\nthen i was a person without one.\nnow i am the address.",
+];
+function hopperDialogue(n) {
+  // hidden at night (sleeping inside the car) — drawNpc handles the gating via n.hidden flag.
+  if (isNight()) {
+    toast("the freight car is dark.\nyou hear breathing inside.\nyou do not wake him.", 2800);
+    return;
+  }
+  if (!state.flags.trainHopperTalkedTo) {
+    state.flags.trainHopperTalkedTo = true;
+    unlockAchievement('train_hopped');
+  }
+  const line = HOPPER_LINES[Math.floor(Math.random()*HOPPER_LINES.length)];
+  dialogue('THE TRAIN HOPPER',
+    "he is wiry. a beard the color of old steel.\nhe does not stand up.\n\n" + line,
+    [
+      { label: "ask about the trains.", action: () => {
+        toast("'they don't stop here anymore.\nthey come through.\nthey come through.'\n(- 2 brain)", 4200);
+        P.brain = Math.max(0, P.brain - 2);
+      }},
+      { label: "ask where he's been.", action: () => hopperDialogue(n) },
+      { label: "leave.", action: () => {} },
+    ]);
+}
+
+// ---------- v13 wave 8a — PARK BENCH PHILOSOPHER ----------
+// asks one philosophical question per day. +1 spiritual once/day. faction: SPIRITUAL.
+const PHILOSOPHER_QUESTIONS = [
+  "the pigeons came back today.\ndid you?",
+  "are you the man in the story\nor the man hearing it?",
+  "the bench is wet.\nthat means something.",
+  "a pigeon flew at me yesterday.\nit apologized.",
+  "if you keep walking the loop,\nyou eventually walk a different loop.\nyou should know.",
+  "i was a different person at noon.\nnoon was an hour ago.\nwho is asking.",
+  "the fountain has been running since 1994.\nthe water is the same water.\nthat is also you.",
+];
+function philosopherDialogue() {
+  // pick question by day (deterministic per-day cycle)
+  const qIdx = ((state.day - 1) % PHILOSOPHER_QUESTIONS.length + PHILOSOPHER_QUESTIONS.length) % PHILOSOPHER_QUESTIONS.length;
+  const q = PHILOSOPHER_QUESTIONS[qIdx];
+  const alreadyGavenRep = (state.counters.philosopherRepDay||0) === state.day;
+  dialogue('PARK BENCH PHILOSOPHER',
+    "an old woman feeding pigeons.\nbrown coat. gray hair.\nshe regards you with the patience of someone who has run out of patience.\n\n'" + q + "'",
+    [
+      { label: alreadyGavenRep ? "think about it. (you already did today.)" : "think about it. (+1 spiritual)", action: () => {
+        if (!alreadyGavenRep) {
+          state.counters.philosopherRepDay = state.day;
+          adjustFaction('spiritual', 1);
+          toast("you stand there.\nshe nods.\nthe pigeon nods.\n+ 1 spiritual", 3200);
+        } else {
+          toast("she has asked already today.\nshe is patient.\nthe pigeons are not.", 2800);
+        }
+      }},
+      { label: "ask why she's here.", action: () => {
+        toast("'i live in the building.\nthe bench is closer.\nthe pigeons remember faces.'", 3600);
+      }},
+      { label: "leave.", action: () => {} },
+    ]);
+}
+
+// ---------- v13 wave 8a — PARK BENCH SIT MECHANIC ----------
+// E within range of a park_bench toggles sit. while sitting: +1 brain/2s, shakes unchanged.
+// Long sits (>60s continuous) trigger BENCH_PRESS + may surface a passerby comment.
+function tryParkBenchSit() {
+  for (const p of PROPS) {
+    if (p.type !== 'park_bench') continue;
+    const ddx = (P.x+P.w/2) - (p.x+p.w/2), ddy = (P.y+P.h/2) - (p.y+p.h/2);
+    if (ddx*ddx + ddy*ddy < 50*50) {
+      if (state.sittingOnBench) {
+        // already sitting — stand
+        const sat = state.benchSitT || 0;
+        state.sittingOnBench = false;
+        state.benchSitT = 0;
+        toast("you stand up.\nthe bench remembers.\n(sat for " + Math.floor(sat/1000) + " seconds.)", 2400);
+      } else {
+        state.sittingOnBench = true;
+        state.benchSitT = 0;
+        state.benchSitGainT = 0;
+        state.benchSitPasserT = 0;
+        toast("you sit.\nthe pigeons consider you furniture.\nE to stand.", 2400);
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
+// ---------- v13 wave 8a — OLD SCHOOL interior (modal dialogue) ----------
+// Wave 7 hideout pattern. E on the school door opens a dialogue: extract copper (2/attempt,
+// 40% chance to spawn the OLD SCHOOL BRUTUS boss), or leave.
+const OLD_SCHOOL_DOOR = { x: 3760, y: 700, w: 24, h: 28 }; // south face, door gap of the OLDSCHOOL building
+function tryEnterOldSchool() {
+  const ddx = (P.x+P.w/2) - (OLD_SCHOOL_DOOR.x + OLD_SCHOOL_DOOR.w/2);
+  const ddy = (P.y+P.h/2) - (OLD_SCHOOL_DOOR.y + OLD_SCHOOL_DOOR.h/2);
+  if (ddx*ddx + ddy*ddy < 44*44) {
+    openOldSchoolInterior();
+    return true;
+  }
+  return false;
+}
+function openOldSchoolInterior() {
+  const brutusAlive = npcs.find(n => n.id === 'os_brutus' && !n.dead);
+  const intro = brutusAlive
+    ? "inside. dust. broken desks.\nyou hear something in the gym.\nit is breathing.\nit is large."
+    : "inside. dust. broken desks.\nthe gym is quiet.\nthe walls smell of pennies.";
+  dialogue("THE OLD SCHOOL",
+    intro,
+    [
+      { label: "rip copper from the walls. (40% spawn risk.)", action: () => {
+        P.copper += 2;
+        state.counters.copperStripped = (state.counters.copperStripped||0) + 2;
+        if (state.counters.copperStripped >= 10) unlockAchievement('copper_singer');
+        audio.glassBreak();
+        toast("+ 2 pure copper\nthe pipe groans.\nsomething hears it.", 3000);
+        // spawn risk
+        if (!brutusAlive && Math.random() < 0.4) {
+          spawnOldSchoolBrutus();
+          // close the interior — fight happens outside in the schoolyard
+          state.mode = 'playing';
+          return;
+        }
+        saveGame();
+        openOldSchoolInterior();
+      }},
+      { label: "leave.", action: () => { state.mode = 'playing'; }},
+    ]);
+}
+function spawnOldSchoolBrutus() {
+  if (npcs.find(n => n.id === 'os_brutus')) return;
+  // spawn just south of the door, in the schoolyard
+  const sb = {
+    id: 'os_brutus', name: 'OLD SCHOOL BRUTUS', sprite: 'os_brutus',
+    x: OLD_SCHOOL_DOOR.x - 30, y: OLD_SCHOOL_DOOR.y + 80, w: 36, h: 28,
+    color: '#604030',
+    hp: 250, maxHp: 250, speed: 1.5, hostile: true, aggro: true,
+    dmg: 35, archetype: 'charger', showHp: true,
+    // grab-lunge combined: charger windup → lunge → grabber freeze on hit
+    chargeState: 'idle', chargeT: 0, grabFreezeT: 0,
+    isOsBrutus: true,
+  };
+  npcs.push(sb);
+  toast("OLD SCHOOL BRUTUS is loose.\nhe was sleeping in the gym.\nhe is no longer sleeping.", 4200);
+  feedPost("@blocklog: old school brutus is up. someone tore copper out of the gym.", '@blocklog');
+  audio.glassBreak();
+  saveGame();
+}
+
+// ---------- v13 wave 8a — THE PRICE GUY (random encounter every ~3 days in SKID ROW) ----------
+// One-shot per day. Pays "the price" (all cash) for a single random outcome:
+// knife / $200 / propane torch / a rock / nothing. true gamble.
+function maybeSpawnPriceGuy() {
+  if (!state.flags) return;
+  // already spawned today
+  if (state.flags.priceGuyDay === state.day) return;
+  // every ~3 days — gated by day number
+  if (state.day % 3 !== 0) return;
+  // splice out any leftover price_guy from a prior day (walked-off or resolved)
+  for (let i = npcs.length - 1; i >= 0; i--) {
+    if (npcs[i].id === 'price_guy') npcs.splice(i, 1);
+  }
+  state.flags.priceGuyDay = state.day;
+  // spawn at the skid row center
+  const pg = {
+    id: 'price_guy', name: 'THE PRICE GUY', sprite: 'price_guy',
+    x: 2940, y: 1860, w: 26, h: 32, color: '#1a1818',
+    hp: 80, maxHp: 80, speed: 0, hostile: false,
+    isPriceGuy: true, hasFloater: '?',
+    interact: priceGuyDialogue,
+  };
+  npcs.push(pg);
+  feedPost("the price guy is back. nobody saw him arrive.", '@crackheadcent');
+}
+function priceGuyDialogue(n) {
+  // already paid this run-of-spawn? despawn message
+  if (n.priceResolved) {
+    dialogue("THE PRICE GUY", "he is gone.\nhe was here.", [{ label:'leave.', action:()=>{} }]);
+    return;
+  }
+  dialogue("THE PRICE GUY",
+    "the price guy. he has it. you have the price.\n\n'the price is what you have on you.\nall of it. or nothing.'",
+    [
+      { label: P.cash > 0 ? "pay the price. ($" + P.cash + ")" : "you have nothing to pay.", disabled: P.cash <= 0, action: () => {
+        state.flags.priceGuyVisits = (state.flags.priceGuyVisits || 0) + 1;
+        n.priceResolved = true;
+        const paid = P.cash;
+        P.cash = 0;
+        unlockAchievement('the_price_paid');
+        // RNG outcomes: knife (20%) / $200 (15%) / propane torch (10%, if not owned) / a rock (25%) / nothing (30%)
+        const r = Math.random();
+        if (r < 0.20) {
+          P.weapon = 'knife';
+          toast("you paid $" + paid + ".\nhe handed you a knife.\nthe handle is warm.\n(+ knife)", 4200);
+          feedPost("the price guy handed someone a knife. the someone walked away with it.", '@crackheadcent');
+        } else if (r < 0.35) {
+          P.cash += 200;
+          toast("you paid $" + paid + ".\nhe handed you $200.\nyou are net positive on this transaction.\nyou are not.\n(+ $200)", 5400);
+          feedPost("the price guy gave someone $200. the someone gave him $" + paid + ". the math is moral.", '@crackheadcent');
+        } else if (r < 0.45 && !hasPropane()) {
+          P.equip.tool = 'propane_torch';
+          applyEquipStats();
+          toast("you paid $" + paid + ".\nhe handed you a propane torch.\nit smells like a parking lot.\n(+ propane torch)", 5400);
+          feedPost("the price guy gave someone a propane torch. he had one. now they do.", '@crackheadcent');
+        } else if (r < 0.70) {
+          P.rocks++;
+          toast("you paid $" + paid + ".\nhe handed you a rock.\nyou suspect it is real.\n(+ 1 rock)", 4200);
+        } else {
+          toast("you paid $" + paid + ".\nhe handed you nothing.\nhe nods.\nyou nod. the transaction is complete.", 5400);
+        }
+        // despawn after a short delay so the player sees him "leave"
+        n.priceWalkOff = true;
+        n.speed = 1.4;
+        n.targetX = -80;
+        n.targetY = n.y;
+        n.wanderOff = true;
+        saveGame();
+      }},
+      { label: "walk away.", action: () => {
+        toast("he watches you leave.\nhe does not move.\nthe price was the price.", 2800);
+      }},
+    ]);
 }
 
 // ---------- COOK (the finisher) ----------
@@ -4120,6 +4507,36 @@ function onNpcDeath(n) {
     feedPost("the dog returned. then he didn't. legend.", '@crackheadcent');
     return;
   }
+  // v13 wave 8a — OLD SCHOOL BRUTUS death drops: $80 cash pile + 5 copper + guaranteed propane torch
+  // (no-dupe gated). street faction +2. SCHOOL_S_OUT achievement.
+  if (n.id === 'os_brutus') {
+    P.cred += 50;
+    adjustFaction('street', 2);
+    // cash pile
+    cashPiles.push({
+      id: 'cp_os_brutus_'+Math.random().toString(36).slice(2,6),
+      x: n.x + n.w/2 - 22, y: n.y + n.h/2 + 8,
+      amt: 80, collected: false,
+    });
+    // copper goes straight to inventory (he was sitting on it)
+    P.copper += 5;
+    state.counters.copperStripped = (state.counters.copperStripped||0) + 5;
+    if (state.counters.copperStripped >= 10) unlockAchievement('copper_singer');
+    // guaranteed propane torch (no-dupe gated)
+    if (!hasPropane()) {
+      cashPiles.push({
+        id: 'cp_os_torch_'+Math.random().toString(36).slice(2,6),
+        x: n.x + n.w/2 + 22, y: n.y + n.h/2 + 8,
+        amt: 0, tool: 'propane_torch', collected: false,
+      });
+    }
+    unlockAchievement('school_s_out');
+    toast("OLD SCHOOL BRUTUS IS DOWN.\n+ $80. + 5 copper. + a torch he had on him.\nthe gym is finally quiet.", 5500);
+    broadcastNews("THE OLD SCHOOL IS QUIET. SOMETHING LARGE NO LONGER LIVES IN THE GYM.");
+    feedPost("school's out. the old school is empty. the copper is gone.", '@blocklog');
+    saveGame();
+    return;
+  }
   // brutus killed — count toward Older trigger
   if (n.id === 'brutus') {
     P.brutusDefeated = (P.brutusDefeated||0) + 1;
@@ -4627,6 +5044,85 @@ function updateWorld(dt) {
       feedPost("under the bridge. the bridge has ears.", '@crackheadcent');
       toast("the air changes.\nyou can hear yourself walk.", 3600);
       saveGame();
+    }
+  }
+
+  // v13 wave 8a — first-time entry feed posts for the four new zones. once per save.
+  if (state.flags && state.mode === 'playing') {
+    const cx = P.x + P.w/2, cy = P.y + P.h/2;
+    if (!state.flags.trainYardEntered && inZone(cx, cy, 'trainyard')) {
+      state.flags.trainYardEntered = true;
+      feedPost("trains stopped running here. they still come through.", '@blocklog');
+      toast("the rails hum.\nthe rails are warm.\nthe rails are not used.", 4000);
+      saveGame();
+    } else if (!state.flags.parkEntered && inZone(cx, cy, 'park')) {
+      state.flags.parkEntered = true;
+      feedPost("the pigeons remember faces. the philosopher remembers names.", '@hardcandy');
+      toast("you are in the park.\nthe fountain is still running.", 3600);
+      saveGame();
+    } else if (!state.flags.skidRowEntered && inZone(cx, cy, 'skidrow')) {
+      state.flags.skidRowEntered = true;
+      feedPost("skid row knows you didn't ask first.", '@crackheadcent');
+      toast("the alleys are tight.\nthe air is heavier here.", 3600);
+      saveGame();
+    } else if (!state.flags.oldSchoolEntered && inZone(cx, cy, 'oldschool')) {
+      state.flags.oldSchoolEntered = true;
+      feedPost("the old school still has copper in the walls. the school still has brutus in the gym.", '@blocklog');
+      toast("the old school stands.\nthe paint is gone.\nthe building is not.", 3600);
+      saveGame();
+    }
+  }
+
+  // v13 wave 8a — park bench sit mechanic ticker.
+  // sitting: +1 brain per 2s. shakes unchanged. >60s: BENCH_PRESS achievement.
+  // every 30s past 60s, an ambient passer-by line may surface.
+  if (state.sittingOnBench) {
+    state.benchSitT = (state.benchSitT||0) + dt;
+    state.benchSitGainT = (state.benchSitGainT||0) + dt;
+    while (state.benchSitGainT >= 2000) {
+      state.benchSitGainT -= 2000;
+      P.brain = Math.min(100, P.brain + 1);
+    }
+    if (state.benchSitT >= 60000 && !state.achievements.has('bench_press')) {
+      unlockAchievement('bench_press');
+    }
+    if (state.benchSitT >= 60000) {
+      state.benchSitPasserT = (state.benchSitPasserT||0) + dt;
+      if (state.benchSitPasserT > 30000) {
+        state.benchSitPasserT = 0;
+        const lines = [
+          "the philosopher said you'd be here.\nshe was right.",
+          "a pigeon walks past.\nit nods.\nyou nod.",
+          "a jogger passes.\nshe is talking on the phone.\nshe is talking about you.",
+          "the fountain coughs.\nthe fountain continues.",
+          "you have been here a while.\nthe bench has been here longer.",
+        ];
+        toast(lines[Math.floor(Math.random()*lines.length)], 3200);
+      }
+    }
+  }
+
+  // v13 wave 8a — price guy daily spawn check (every 3 days, day start). gated by day % 3
+  // at the call site so we don't hammer maybeSpawnPriceGuy every frame on non-spawn days.
+  if (state.flags && state.mode === 'playing'
+      && state.day % 3 === 0
+      && state.flags.priceGuyDay !== state.day) {
+    maybeSpawnPriceGuy();
+  }
+
+  // v13 wave 8a — park night cash pile. 30% chance each new night, $20-40 at the swing set.
+  // gated by day-stamp so it rolls at most once per night.
+  if (state.flags && state.mode === 'playing' && isNight()) {
+    if (state.flags.parkNightCashDay !== state.day) {
+      state.flags.parkNightCashDay = state.day;
+      if (Math.random() < 0.30) {
+        const amt = 20 + Math.floor(Math.random() * 21);
+        cashPiles.push({
+          id: 'cp_park_night_' + state.day,
+          x: 2510, y: 1320, amt, collected: false,
+        });
+        feedPost("the swings move on their own at night. they don't.", '@crackheadcent');
+      }
     }
   }
 
@@ -5991,6 +6487,14 @@ const TILE_PALETTES = {
   laundromat: { base:['#3a3a48','#34344a'], grime:'rgba(120,160,200,.18)', crack:'rgba(0,0,0,.4)', tile:true },
   // v13 wave 6 — scrap yard pushed warmer dirt brown so it reads as Yuri's home turf, not generic concrete
   scrap:      { base:['#3a2c1a','#322618'], grime:'rgba(120,60,30,.45)', crack:'rgba(50,30,15,.5)', dirt:true },
+  // v13 wave 8a — train yard gets gravel ballast + steel-rail bands (drawn in drawGroundTile if tracks:true)
+  trainyard:  { base:['#2c2a26','#26241f'], grime:'rgba(90,80,60,.4)', crack:'rgba(0,0,0,.55)', tracks:true, gravel:true },
+  // v13 wave 8a — park gets a green grass palette + tufts/dandelions
+  park:       { base:['#2e4a26','#28401f'], grime:'rgba(80,140,50,.18)', crack:'rgba(0,0,0,.25)', grass:true },
+  // v13 wave 8a — skid row gets darker, oilier cracked asphalt than underpass + more trash flecks
+  skidrow:    { base:['#1f1d18','#1b1915'], grime:'rgba(30,18,10,.55)', crack:'rgba(0,0,0,.85)', concrete:true, skidtrash:true },
+  // v13 wave 8a — old school: weedy cracked playground concrete with chalk smudges
+  oldschool:  { base:['#2a201c','#241a16'], grime:'rgba(120,70,40,.3)', crack:'rgba(0,0,0,.55)', schoolyard:true, weed:true },
 };
 function zoneAt(wx, wy) {
   for (const z of ZONES) {
@@ -6103,6 +6607,67 @@ function drawGroundTile(x, y) {
     ctx.fill();
     ctx.fillStyle = 'rgba(180,200,220,.18)';
     ctx.fillRect(px2-6, py2-1, 5, 1);
+  }
+  // v13 wave 8a — train yard: gravel ballast (small dark flecks)
+  if (pal.gravel && (h % 41) < 18) {
+    const gx = x + (h % TILE), gy = y + ((h>>3) % TILE);
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(gx, gy, 2, 2);
+    if ((h % 113) < 30) {
+      ctx.fillStyle = 'rgba(120,100,80,.3)';
+      ctx.fillRect(gx+1, gy+1, 1, 1);
+    }
+  }
+  // v13 wave 8a — train yard: horizontal rail bands. each band is 4px tall every 48px on the tile.
+  // we render the bands as part of the ground tile so it's free per-tile work.
+  if (pal.tracks) {
+    // two parallel rails per tile row, with crossties between
+    const railY1 = y + 22;
+    const railY2 = y + 40;
+    // dark crosstie underneath (wood)
+    ctx.fillStyle = 'rgba(40,28,16,.55)';
+    for (let tx=0; tx<TILE; tx+=14) {
+      ctx.fillRect(x+tx+2, railY1-3, 8, railY2-railY1+6);
+    }
+    // steel rails
+    ctx.fillStyle = '#605c50';
+    ctx.fillRect(x, railY1, TILE, 2);
+    ctx.fillRect(x, railY2, TILE, 2);
+    // shine highlight on the rail head
+    ctx.fillStyle = 'rgba(180,170,150,.35)';
+    ctx.fillRect(x, railY1, TILE, 1);
+    ctx.fillRect(x, railY2, TILE, 1);
+  }
+  // v13 wave 8a — park: grass tufts + occasional dandelion
+  if (pal.grass && (h % 31) < 14) {
+    const gx = x + (h % TILE), gy = y + ((h>>4) % TILE);
+    ctx.fillStyle = '#3a6028';
+    ctx.fillRect(gx, gy, 1, 3);
+    ctx.fillRect(gx+1, gy-1, 1, 4);
+    ctx.fillRect(gx-1, gy, 1, 2);
+    if ((h % 211) < 9) {
+      // dandelion head
+      ctx.fillStyle = '#e8c040';
+      ctx.fillRect(gx+1, gy-3, 2, 2);
+    }
+  }
+  // v13 wave 8a — skid row: scattered trash flecks (cigarette butts, wrappers)
+  if (pal.skidtrash && (h % 47) < 7) {
+    const tx = x + (h % TILE), ty = y + ((h>>3) % TILE);
+    const flick = h & 1;
+    ctx.fillStyle = flick ? '#5a4030' : '#a08868';
+    ctx.fillRect(tx, ty, 3, 1);
+    if ((h % 113) < 20) {
+      ctx.fillStyle = '#d4c896';
+      ctx.fillRect(tx+1, ty, 1, 1);
+    }
+  }
+  // v13 wave 8a — old school: faint chalk smudges + hopscotch flecks
+  if (pal.schoolyard && (h % 79) < 5) {
+    const cx = x + (h % TILE), cy = y + ((h>>2) % TILE);
+    ctx.fillStyle = 'rgba(220,210,180,.25)';
+    ctx.fillRect(cx, cy, 4, 1);
+    ctx.fillRect(cx+1, cy+2, 2, 1);
   }
 }
 
@@ -6689,6 +7254,256 @@ function drawProp(p) {
     ctx.fillStyle = '#888';
     ctx.fillRect(p.x-1, p.y-8, 2, 2);
   }
+  // v13 wave 8a — TRAIN YARD: freight car (decorative, non-solid silhouette)
+  else if (p.type === 'freight_car') {
+    // ground shadow
+    ctx.fillStyle = 'rgba(0,0,0,.55)';
+    ctx.fillRect(p.x+4, p.y+p.h, p.w-8, 6);
+    // body
+    ctx.fillStyle = p.color || '#5a2a20';
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    // dark roof band
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(p.x, p.y, p.w, 6);
+    // rust streaks
+    ctx.fillStyle = 'rgba(140,60,20,.45)';
+    for (let i=14; i<p.w; i+=24) {
+      ctx.fillRect(p.x+i, p.y+8, 1, p.h-14);
+    }
+    // sliding door outline (center)
+    const doorW = 48;
+    const doorX = p.x + p.w/2 - doorW/2;
+    ctx.strokeStyle = 'rgba(0,0,0,.55)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(doorX, p.y+8, doorW, p.h-14);
+    // dark "inside" through the door gap (where the hopper sleeps)
+    ctx.fillStyle = '#080605';
+    ctx.fillRect(doorX+3, p.y+11, doorW-6, p.h-20);
+    // wheel trucks (small black blocks below)
+    ctx.fillStyle = '#0a0805';
+    ctx.fillRect(p.x+14,       p.y+p.h-2, 18, 5);
+    ctx.fillRect(p.x+p.w-32,   p.y+p.h-2, 18, 5);
+    // a faded paint stencil "RAILROAD" partial
+    ctx.fillStyle = 'rgba(220,210,180,.18)';
+    ctx.font = 'bold 7px Courier New';
+    ctx.fillText('RA  ROAD', p.x+12, p.y+22);
+  }
+  // v13 wave 8a — TRAIN YARD: chalk message on a freight car side
+  else if (p.type === 'chalk_message') {
+    ctx.fillStyle = 'rgba(220,210,180,.72)';
+    ctx.font = '7px Courier New';
+    const lines = (p.text || '').split('\n');
+    for (let i=0;i<lines.length;i++) ctx.fillText(lines[i], p.x, p.y + i*8);
+    // smudge ghosting
+    ctx.fillStyle = 'rgba(220,210,180,.22)';
+    for (let i=0;i<lines.length;i++) ctx.fillText(lines[i], p.x+1, p.y+1 + i*8);
+  }
+  // v13 wave 8a — generic tall-weeds clump (park / train yard / old school)
+  else if (p.type === 'weeds') {
+    ctx.fillStyle = '#2a3818';
+    ctx.fillRect(p.x-3, p.y, 1, 6);
+    ctx.fillRect(p.x, p.y-2, 1, 8);
+    ctx.fillRect(p.x+3, p.y-1, 1, 7);
+    ctx.fillStyle = '#3a5028';
+    ctx.fillRect(p.x-2, p.y-3, 1, 3);
+    ctx.fillRect(p.x+1, p.y-4, 1, 3);
+    ctx.fillRect(p.x+4, p.y-3, 1, 2);
+    // small base shadow
+    ctx.fillStyle = 'rgba(0,0,0,.3)';
+    ctx.fillRect(p.x-3, p.y+6, 8, 1);
+  }
+  // v13 wave 8a — THE PARK: stone fountain
+  else if (p.type === 'fountain') {
+    // base (octagonal-ish)
+    ctx.fillStyle = '#6a655a';
+    ctx.fillRect(p.x-20, p.y-4, 40, 18);
+    ctx.fillStyle = '#5a554a';
+    ctx.fillRect(p.x-22, p.y+10, 44, 4);
+    // water in the basin
+    const t = (Math.sin(performance.now()/600)+1)/2;
+    ctx.fillStyle = `rgba(100,150,200,${0.45+t*0.18})`;
+    ctx.fillRect(p.x-16, p.y, 32, 10);
+    // center stem
+    ctx.fillStyle = '#7a7568';
+    ctx.fillRect(p.x-3, p.y-16, 6, 16);
+    // upper bowl
+    ctx.fillStyle = '#8a8578';
+    ctx.fillRect(p.x-7, p.y-20, 14, 6);
+    // a thin "spout" sparkle
+    ctx.fillStyle = `rgba(200,220,240,${0.55+t*0.3})`;
+    ctx.fillRect(p.x-1, p.y-22, 2, 4);
+    // little base shadow
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(p.x-22, p.y+14, 44, 3);
+  }
+  // v13 wave 8a — THE PARK: bench (wood slats + iron frame)
+  else if (p.type === 'park_bench') {
+    // ground shadow
+    ctx.fillStyle = 'rgba(0,0,0,.35)';
+    ctx.fillRect(p.x+2, p.y+p.h, p.w-4, 3);
+    // back rest
+    ctx.fillStyle = '#5a4028';
+    ctx.fillRect(p.x, p.y-8, p.w, 3);
+    // seat
+    ctx.fillStyle = '#6a4828';
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    // slat gaps
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(p.x, p.y+3, p.w, 1);
+    ctx.fillRect(p.x, p.y+7, p.w, 1);
+    // iron legs
+    ctx.fillStyle = '#2a2520';
+    ctx.fillRect(p.x+1,       p.y, 2, p.h+4);
+    ctx.fillRect(p.x+p.w-3,   p.y, 2, p.h+4);
+    // (E) hint when close
+    const ddx = (P.x+P.w/2) - (p.x+p.w/2), ddy = (P.y+P.h/2) - (p.y+p.h/2);
+    if (ddx*ddx + ddy*ddy < 50*50 && !state.sittingOnBench) {
+      ctx.fillStyle = '#e8c040';
+      ctx.font = '8px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText('(E) sit', p.x+p.w/2, p.y-14);
+      ctx.textAlign = 'left';
+    }
+  }
+  // v13 wave 8a — THE PARK / OLD SCHOOL: swing set silhouette
+  else if (p.type === 'swing_set') {
+    // night red tint flag (drawn after) — but base is universal
+    // frame uprights
+    ctx.fillStyle = '#3a3a44';
+    ctx.fillRect(p.x,    p.y-26, 3, 28);
+    ctx.fillRect(p.x+60, p.y-26, 3, 28);
+    // crossbar
+    ctx.fillRect(p.x, p.y-26, 64, 3);
+    // chains + seats (two swings)
+    ctx.strokeStyle = '#888';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    // gentle sway
+    const s = Math.sin(performance.now()/1100)*1.5;
+    ctx.moveTo(p.x+14+s,   p.y-23); ctx.lineTo(p.x+14+s,   p.y-8);
+    ctx.moveTo(p.x+24+s,   p.y-23); ctx.lineTo(p.x+24+s,   p.y-8);
+    ctx.moveTo(p.x+40-s,   p.y-23); ctx.lineTo(p.x+40-s,   p.y-8);
+    ctx.moveTo(p.x+50-s,   p.y-23); ctx.lineTo(p.x+50-s,   p.y-8);
+    ctx.stroke();
+    // wooden seats
+    ctx.fillStyle = '#5a3818';
+    ctx.fillRect(p.x+12+s, p.y-8, 14, 2);
+    ctx.fillRect(p.x+38-s, p.y-8, 14, 2);
+    // night-only creepy red tint OR park-night tint (the park swings get it specifically)
+    if (isNight()) {
+      ctx.fillStyle = 'rgba(180,40,40,.18)';
+      ctx.fillRect(p.x-2, p.y-30, 68, 36);
+    }
+  }
+  // v13 wave 8a — THE PARK: drinking fountain (broken / dribbling)
+  else if (p.type === 'drink_fountain') {
+    ctx.fillStyle = '#5a554a';
+    ctx.fillRect(p.x-5, p.y, 10, 12);
+    ctx.fillStyle = '#6a655a';
+    ctx.fillRect(p.x-7, p.y-2, 14, 4);
+    // pipe nozzle
+    ctx.fillStyle = '#3a3528';
+    ctx.fillRect(p.x-1, p.y-5, 2, 4);
+    // rust drip
+    ctx.fillStyle = 'rgba(140,60,20,.6)';
+    ctx.fillRect(p.x-1, p.y+2, 2, 6);
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.3)';
+    ctx.fillRect(p.x-6, p.y+12, 12, 2);
+  }
+  // v13 wave 8a — THE PARK: tree (trunk + dark green canopy)
+  else if (p.type === 'tree') {
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y+18, 14, 4, 0, 0, Math.PI*2);
+    ctx.fill();
+    // trunk
+    ctx.fillStyle = '#3a2818';
+    ctx.fillRect(p.x-3, p.y, 6, 18);
+    // canopy (layered)
+    ctx.fillStyle = '#1f3a18';
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y-12, 18, 16, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillStyle = '#2a4a20';
+    ctx.beginPath();
+    ctx.ellipse(p.x-2, p.y-14, 14, 12, 0, 0, Math.PI*2);
+    ctx.fill();
+    // highlight
+    ctx.fillStyle = '#3a5a28';
+    ctx.fillRect(p.x-6, p.y-20, 4, 3);
+  }
+  // v13 wave 8a — OLD SCHOOL: mural (faded letters, scraped)
+  else if (p.type === 'school_mural') {
+    ctx.fillStyle = 'rgba(40,30,20,.55)';
+    ctx.fillRect(p.x-4, p.y-4, 200, 22);
+    ctx.fillStyle = 'rgba(220,200,150,.45)';
+    ctx.font = 'bold 11px Courier New';
+    ctx.fillText(p.text || '', p.x, p.y+8);
+    // scrape marks
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(p.x+30, p.y, 4, 14);
+    ctx.fillRect(p.x+80, p.y+2, 6, 12);
+    ctx.fillRect(p.x+130, p.y+1, 3, 13);
+  }
+  // v13 wave 8a — OLD SCHOOL: broken basketball hoop
+  else if (p.type === 'broken_hoop') {
+    // pole
+    ctx.fillStyle = '#3a3528';
+    ctx.fillRect(p.x-1, p.y, 3, 40);
+    // backboard
+    ctx.fillStyle = '#a08868';
+    ctx.fillRect(p.x-10, p.y-22, 24, 16);
+    ctx.fillStyle = '#604030';
+    ctx.fillRect(p.x-10, p.y-22, 24, 1);
+    ctx.fillRect(p.x-10, p.y-7,  24, 1);
+    // rim (bent down)
+    ctx.strokeStyle = '#c08038';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(p.x+2, p.y-8, 6, 0, Math.PI);
+    ctx.stroke();
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,.4)';
+    ctx.fillRect(p.x-3, p.y+40, 6, 2);
+  }
+  // v13 wave 8a — OLD SCHOOL: chain-link fence (drawn as a thin horizontal band of "X" patterns)
+  else if (p.type === 'school_fence') {
+    ctx.strokeStyle = 'rgba(140,140,140,.6)';
+    ctx.lineWidth = 1;
+    for (let fx=0; fx<p.w; fx+=8) {
+      ctx.beginPath();
+      ctx.moveTo(p.x+fx,     p.y);
+      ctx.lineTo(p.x+fx+8,   p.y+p.h);
+      ctx.moveTo(p.x+fx+8,   p.y);
+      ctx.lineTo(p.x+fx,     p.y+p.h);
+      ctx.stroke();
+    }
+    // top + bottom rails
+    ctx.fillStyle = '#666';
+    ctx.fillRect(p.x, p.y, p.w, 1);
+    ctx.fillRect(p.x, p.y+p.h-1, p.w, 1);
+  }
+  // v13 wave 8a — OLD SCHOOL: broken window (small dark rect on building face)
+  else if (p.type === 'broken_window') {
+    ctx.fillStyle = '#0a0805';
+    ctx.fillRect(p.x, p.y, 14, 10);
+    // jagged glass shards still in frame
+    ctx.fillStyle = 'rgba(180,200,220,.45)';
+    ctx.beginPath();
+    ctx.moveTo(p.x,    p.y);
+    ctx.lineTo(p.x+3,  p.y+5);
+    ctx.lineTo(p.x,    p.y+10);
+    ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(p.x+14, p.y);
+    ctx.lineTo(p.x+10, p.y+4);
+    ctx.lineTo(p.x+14, p.y+10);
+    ctx.closePath();
+    ctx.fill();
+  }
   // v13 wave 6 — pay phone (rings randomly; can answer with E)
   else if (p.type === 'pay_phone') {
     const ringing = state.phonePropRingT > 0;
@@ -7144,6 +7959,10 @@ function endingScreen(kind) {
 function tryInteract() {
   // v13 wave 7 — hideout doors (E within 40px while owned).
   if (tryEnterHideout()) return;
+  // v13 wave 8a — old school door (E within 44px). modal interior dialogue (hideout pattern).
+  if (tryEnterOldSchool()) return;
+  // v13 wave 8a — park bench sit toggle (E within 50px of any park_bench).
+  if (tryParkBenchSit()) return;
   // v13 wave 6 — kickable trash cans (E within 50px). 50% cash / 20% junk / 30% rats.
   for (const ip of interactiveProps) {
     if (ip.type !== 'trashcan') continue;
@@ -8105,6 +8924,8 @@ function startGame(loaded) {
       kombuchaAskDay: 0, kombuchaComplimentDay: 0,
       priestDonateDay: 0, lurchDollarDay: 0, sherriSpiderDay: 0, paulieFaceDay: 0,
       stripeFencedToday: 0, barbPacketsToday: 0, peteCashToday: 0, heistsToday: 0,
+      // v13 wave 8a — philosopher daily spiritual gate
+      philosopherRepDay: 0,
     };
     Object.values(state.quests).forEach(q => { q.done = false; if (q.available === true) q.available = q.intro?undefined:false; });
     state.day = 1; state.dayTime = 0.35;
@@ -8125,6 +8946,11 @@ function startGame(loaded) {
       silenceUntilT: 0,
       scrapHideoutOwned: false, momHideoutOwned: false,
       momRentDay: 0, scrapLoanDay: 0, momProudCallDay: 0,
+      // v13 wave 8a — fresh saves get the first-entry toasts as they discover the new zones.
+      trainYardEntered: false, parkEntered: false, skidRowEntered: false, oldSchoolEntered: false,
+      trainHopperTalkedTo: false,
+      priceGuyDay: 0, priceGuyVisits: 0,
+      parkNightCashDay: 0,
     };
     // v13 wave 7 — faction reputation + hideout chest
     P.faction = { street: 0, scrap: 0, spiritual: 0 };
