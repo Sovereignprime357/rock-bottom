@@ -2,6 +2,122 @@
 
 ---
 
+## v13 wave 8b — faction territory + bus pass (SHIPPED)
+
+Shipped 2026-05-28. Builds on Wave 8a's expanded world (4400×3400) and Wave 7's faction rep system. All edits on `rock_bottom_v13.html`, no v14 fork. SAVE_KEY untouched. Operator on mobile via Dispatch — no popups, smart defaults, text reports.
+
+### WHAT SHIPPED
+
+**Part A — Zone faction tagging.** Every ZONES entry now carries a `faction: 'street' | 'scrap' | 'spiritual' | 'neutral'` property (v13.html line 267-294). Helper `currentZone()` returns the player's current zone, resolving overlaps by **higher absolute faction tier wins** (LOVED street beats neutral spiritual; HATED scrap beats neutral street). `currentZoneFaction()` wraps it for the common case. Final mapping:
+
+| Zone | Faction | Reason |
+|------|---------|--------|
+| THE BLOCK | street | Tony's corner. |
+| DEALER'S CORNER | street | Stripe's lot. |
+| BACK ALLEY | street | Lurch / Sherri / Paulie. |
+| LAUNDROMAT | street | Barb. |
+| BUS STOP | street | Pinky. |
+| SKID ROW | street | Per Wave 8a brief. |
+| THE PROJECTS | street | Larry + Stripe. |
+| SCRAP YARD | scrap | Yuri + Brutus. |
+| PAWN SHOP | scrap | Pete. |
+| HIGHWAY UNDERPASS | scrap | Big Guy + Mathematician + tents. |
+| OLD SCHOOL | scrap | Per Wave 8a brief (copper). |
+| MARKETPLACE | spiritual | Mom's neighborhood. |
+| CHURCH | spiritual | Father O'Malley. |
+| THE PARK | spiritual | Philosopher + Pigeon King + fountain. |
+| TRAIN YARD | spiritual | Train Hopper + Conductor. |
+| ABANDONED BUILDING | neutral | Locked. |
+
+**Part B — Territory ticker** (`updateTerritory`, line ~720). Fires every 2 seconds while `state.mode === 'playing'`. Reads `factionTier(P.faction[zone.faction])`:
+
+- **HATED**: increments `state.territoryHeat`. At 30 (60s in zone) → `P.wanted = min(3, P.wanted+1)`, reset, plus toast. Ambient `feedPost` every ~30s. Heat resets on zone exit / faction-neutral zone / mode-change.
+- **NEUTRAL**: no effect, cash mult = 1.0.
+- **LIKED**: greeting on first close-pass (within 80px) of any known NPC, once per zone-entry. `state.territoryCashMult = 1.2`.
+- **LOVED**: +1 brain per 5 ticks (10s). Greetings ungated (10s per-NPC cooldown). `state.territoryCashMult = 1.4`. Once-per-day-per-faction ambient line via `state.flags.lovedAmbient_<faction>_day`.
+
+Cash mult is read by **dynamic** cash-pile drops in the territory: park-night swing-set pile (line ~5485) and OS Brutus death drop (line ~4854). Other drops (Brendan, Brutus torch, fallen priest) stay flat — they aren't always tied to a faction zone.
+
+Wired into `updateWorld` at line ~5398, immediately above the wave-6 underpass-entry block. Greeting NPC roster: `TERRITORY_NPC_TARGETS` Set with all 17 known vendors / lore NPCs.
+
+**Part C — Visual district identity.**
+- **Faction-themed graffiti pools**: new constants `SCRAP_GRAFFITI_LINES` (15) and `SPIRITUAL_GRAFFITI_LINES` (15) added after the original `GRAFFITI_LINES`. `buildGraffiti` now reads the zone at each building center and picks `pickGraffitiLine(faction)` from the right pool. `GRAFFITI_PALETTES` maps faction→color list (street muted red/pink, scrap rust orange, spiritual faded blue/white). Re-rendering only touches `g.col` from the new palettes — no per-frame cost.
+- **Poster system**: new state-persisted `state.posters` array. `buildPosters()` walks BUILDINGS in faction zones, places 1-3 posters per zone (16×24 rect on bottom/left/right wall face). `POSTER_LINES` provides 3 lines per faction. `drawPosters()` renders between graffiti and props. Persisted in save like graffiti; fresh build on new save / missing data. Called from `startGame` after `buildGraffiti`.
+- **Edge-glow** on zone-faction crossings: `state.borderGlowT` (ms, decays in updateWorld) + `state.borderGlowRect` + `state.borderGlowColor`. Arms when `state.lastZoneId !== state.territoryZoneId`. `drawBorderGlow()` renders a faction-tinted `strokeRect` of the destination zone (street red `#a04848`, scrap rust `#c08038`, spiritual gold `#d8c068`). 600ms fade. Drawn between posters and props.
+
+**Part D — Bus pass + cart cap.**
+- **Bus pass item**: `P.inventory` entry `{id:'bus_pass', n:'a bus pass', q:1}`. Helpers `hasBusPass()`, `giveBusPass(silent)`, `consumeBusPass()` (line ~3611). Strictly single — `giveBusPass` early-returns if one is already held.
+- **Acquisition path 1 (Pinky $20)**: `pinkyDialogue` now adds a "buy a bus pass. $20." option *only if* `!hasBusPass()` (line ~3596). Saves on purchase.
+- **Acquisition path 2 (Mom free at dawn)**: in `updateWorld` dawn-tick (line ~5295), if `P.faction.spiritual >= 10` and `state.flags.momBusPassDay !== state.day` and `!hasBusPass()`, gives one silently and surfaces `feedPost("@hardcandy: mom left a bus pass on the door. mom does not say where it came from.")` + delayed toast 6s later.
+- **Use flow**: Pinky's dialogue adds "use the bus pass." option when `hasBusPass()`. Triggers `openBusPassMenu()` which lists every `BUS_ZONE_TARGETS` entry the player has visited (uses Wave 6/8a `*Entered` flags + zones that are always known). Per option:
+  - **Disabled if in active combat**: `combatActive()` returns true when `P.wanted > 0` OR any hostile/aggro non-pet NPC is within 220px. Label tail: `the bus is not your friend right now.`
+  - **Disabled if already in target zone**: `the label — you're already where the bus is.`
+- Selecting a target: `consumeBusPass()`, set `state.flags.busPassUsedDay = state.day`, 0.5s black flash, teleport to zone center (clamped to WORLD bounds), camera snap, reset territory bookkeeping, second 0.5s flash, toast `"the bus took you. the bus does not explain how."`
+- Cooldown: `state.flags.busPassUsedDay` blocks re-use until dawn. Tooltip refusal: `"you already rode today. the bus does not run twice for you."`
+- **Cart speed cap**: changed `if (P.cartMounted) baseSpeed += 0.6;` → `baseSpeed = Math.min(baseSpeed * 1.7, baseSpeed + 1.5)` (line ~1843). With base 2.2, cart now gives 3.74 (was 2.8). Brief intent: scale cart with the larger world.
+- **Biggu cart trade fix**: replaced inline `P.speed = 2.8; P.maxHp = 110;` (line ~3603) with a single `applyEquipStats()` call so the new cap takes effect. Toast copy updated from "+1 speed" to "faster."
+
+### DECIDED, REASONING
+
+- **Why `currentZone()` uses higher-absolute-tier rather than first-match for overlaps**: most existing zones don't overlap (verified by reading the ZONES table), but if a future Wave 9 zone overlaps, this preserves the "loved-LOVED beats neutral" intent from the brief. Falling back to first-match would let zone declaration order silently shadow the faction logic.
+- **Why the cash-pile mult applies to amount, not spawn-rate**: rate is hard to retrofit on the static cash-pile set (22 piles seeded once at save start). The dynamic drops (park night, OS Brutus) are the only "respawn / random" piles — there `*cashMult` on the amount is the cleanest read of "this district pays better." Brendan / fallen-priest / brutus-torch drops stay flat because they happen wherever the kill lands, not necessarily in a faction zone.
+- **Why bus pass lives in Pinky's dialogue not a standalone bus-stop prop**: Pinky stands AT the bus stop coords. E on Pinky already opens his dialogue. Adding a new bus_stop prop within ~100px of Pinky would create UX conflict (which interact wins). Pinky's dialogue is the bus stop interface.
+- **Why bus pass is single-stack (`giveBusPass` early-returns if one held)**: the brief said "Stack: 1." Hoarding passes would defeat the daily-cooldown gate (player could just consume two in a row from inventory). Single ensures one-per-day.
+- **Why the mom free pass uses a 6-second delayed toast after the feed post**: dawn already fires a `day N` toast + weather toast. Stacking three toasts at once would overlap. Delayed toast surfaces after the rollover noise quiets.
+- **Why combat gating uses both `P.wanted > 0` AND nearby hostile check**: cops are the obvious "no fast travel" case (P.wanted). The nearby hostile check covers the alley crackheads / Brutus / chase-bite spawns who don't bump P.wanted but are clearly mid-combat. 220px is roughly the screen-half radius.
+- **Why teleport uses `state.flash` for fade not a custom transition**: the flash overlay already exists (line ~6650) with proper alpha math. Setting 0.5s pre-teleport, sleep, then 0.5s post-teleport reads as a quick blink. No new render layer.
+- **Why MARKETPLACE got spiritual not street**: mom is the only major NPC who lives there and the operator's brief explicitly lists "Mom's neighborhood" as spiritual. Other vendors that touch market (Pinky at the bus stop edge) are already in their own zones.
+- **Why THE PROJECTS is street not spiritual** (despite mom's apartment HIDEOUT door being nearby): the door coord `(1230, 1180)` is actually in MARKETPLACE bounds, not PROJECTS. Projects houses Larry (WHAT) and Stripe — clearly street.
+- **Why edge-glow uses `strokeRect` of full zone bounds, not "intersection line"**: the brief said "edge glow along the world-space rect intersection." For most zone pairs the shared edge is a single zone face, but rect intersection math is fiddly when zones don't actually touch (most don't). Tracing the destination zone's full outline reads as "this district lit up when you walked in" — same comedic beat, cleaner code.
+- **Why the bus pass cooldown is "used today" not "consumed and bought a new one"**: prevents the loop of "Pinky → buy → use → buy again → use again." Cooldown is on the ACT of riding, not the pass count. Even if the player got a free pass from Mom on the same day they used Pinky's, they can't ride twice.
+
+### COUNTEREXAMPLE HUNT
+
+- Old save (wave 8a) loads forward: new flags default to 0 via `Object.assign`. `state.posters` defaults null → `buildPosters` runs on next render. `state.territoryT` etc. ephemeral (undefined → 0 on first tick). ✓
+- Player walks into THE BLOCK with `P.faction.street = -12` (hated): after 30 ticks (60s), `P.wanted = 1`, toast fires. Walks out → heat resets. ✓
+- Player at street LOVED enters BLOCK, walks past Tony → greeting toast. Walks past Tony again 5s later → no greeting (LOVED is 10s per-NPC cooldown, not zone-entry gated, but still rate-limited). ✓
+- Player at spiritual LIKED enters CHURCH, walks past priest → greeting toast. Walks past priest second time same zone-entry → no greeting (LIKED is once-per-zone-entry). Walks out, walks back in → can be greeted again. ✓
+- Player at scrap LOVED night enters SCRAP YARD → loved ambient post fires once via `state.flags.lovedAmbient_scrap_day`. Walks out, back in same day → no second fire. Next day same zone → fires again. ✓
+- Player loads save with bus pass in inventory, talks to Pinky → "buy a bus pass" hidden, "use the bus pass" shown. Travels to alley → fade, teleport, fade, toast. ✓
+- Player tries to use bus pass while cops are chasing (P.wanted=2): menu shows zones grayed out with "the bus is not your friend right now." Pass NOT consumed. Cooldown NOT set. ✓
+- Player tries to teleport to current zone: grayed out with "you're already where the bus is." ✓
+- Player at spiritual=12 reaches dawn with no bus pass → Mom gives one, feed post + delayed toast. `momBusPassDay = today`. Next dawn → fires again. Same day, if pass is consumed and another dawn rolled (e.g., sleep through dawn) → mom drop fires too. ✓
+- Player at spiritual=8 (below liked threshold) → no Mom drop. Gets to 10 → next dawn drops. ✓
+- Player buys cart from biggu: `applyEquipStats()` runs → `P.speed = min(2.2 * 1.7, 2.2 + 1.5) = min(3.74, 3.7) = 3.7`. Mounted speed = 3.7. ✓
+- Player with shoes (+0.4 speed) + cart: base=2.6 → mounted = min(2.6*1.7=4.42, 2.6+1.5=4.1) = 4.1. ✓
+- Player exits bus stop zone via teleport: `state.territoryHeat=0`, greeting bookkeeping reset, zone-id reset. No leftover state. ✓
+- Player teleports to an undiscovered zone: option doesn't appear in BUS menu (gated by *Entered flags). ✓
+- Player opens bus menu, "put the pass away" → no consume, no cooldown set, returns to playing. ✓
+- Old save with no `state.posters` field loads: `state.posters = null`. First draw call → `buildPosters()` runs, populates state. Subsequent saves persist them. ✓
+- Edge-glow on rapid zone-bounce (player walking back and forth across a zone border): timer re-arms each crossing, glow re-tints. No flicker since strokeRect is independent each frame. ✓
+- Day 30 BUS event coexists with bus pass: bus driver NPC has its own `interact`; Pinky's dialogue is separate. Player at the bus stop can talk to either based on proximity. ✓
+
+### GOTCHA
+
+- `state.territoryCashMult` only affects the OS Brutus drop and the park-night cash pile. Other dynamic cashPiles.push sites (Brendan, Brutus torch, fallen priest collar/plate, etc.) are NOT scaled — they happen wherever the NPC dies, not necessarily inside a faction zone.
+- The bus pass cooldown `state.flags.busPassUsedDay` is a day-stamp pattern (compare `=== state.day`). Resets at dawn implicitly (no explicit reset call needed). If a future feature sets `state.day = 0`, the gate would erroneously open — don't do that.
+- The territory ticker uses `performance.now()` for the LOVED greeting per-NPC cooldown. If `performance` is not available (very old browsers), the code falls back to `Date.now()`. Both are monotonic enough for a 10s cooldown.
+- The `currentZone()` overlap resolution uses `Math.abs(tier)` — a HATED zone outranks LIKED only if |tier| is higher. If both have the same |tier|, the first matching zone wins (which is also fine — most zones don't overlap).
+- `combatActive()` excludes `n.isPet` so the pet_possum and freed_dog_follower don't trigger the gate. If a future feature adds a friendly companion, set `isPet: true` to keep them out of the combat check.
+- The cart speed cap formula `Math.min(baseSpeed * 1.7, baseSpeed + 1.5)` clamps the multiplicative side at +1.5 absolute. With future high-speed-shoes equipment (base could reach 3.0+), the multiplicative would give 5.1, but the `+1.5` cap brings it to 4.5. Intentional — the cart shouldn't outrun the cop AI.
+- `state.flash` is in SECONDS, not ms. The first cut of this code used `360` (interpreted as 360 seconds = 6 minutes of black screen). Fixed to `0.5`. If you add new flash calls, mind the unit.
+- The bus pass list `BUS_ZONE_TARGETS` is hardcoded and uses the existing wave 6/8a `*Entered` flags as visit-gates. The "always known" zones (block, market, scrap, alley, church, projects) have `flag: null` so they appear unconditionally. If a future zone needs visit-gating, add a `*Entered` flag in BOTH the load Object.assign defaults AND the startGame fresh-init block.
+- The Pinky bus pass sell option only appears if `!hasBusPass()`. If the player has one (from Mom), they see "use" only — Pinky won't sell a second pass that day even at $20. Intentional (single-stack invariant).
+- The day-30 BUS ending event still uses Pinky's coords. It does NOT interact with the bus_pass item — that's a one-way game-over. Don't accidentally couple them.
+
+### WHAT'S NEXT
+
+- Wave 9 could add a faction "rank" visual (badge / patch on the player sprite when LOVED in a faction). Currently the only feedback is the Q-panel rep bars + ambient lines.
+- The bus pass currently has no UI hint at the bus stop sign — player has to know to talk to Pinky. Could add a small bench / sign PROP with a floater "bus pass: E" prompt.
+- Territory greeting roster (TERRITORY_NPC_TARGETS) is hand-curated. Future NPCs need to be added explicitly or they won't trigger greetings.
+- Edge-glow currently only fires on entering a NEW zone. Could add a separate animation for LEAVING a hated district (the "you got out" feeling).
+- The cart cap (multiplicative + additive clamp) hasn't been telemetered. If late-game speed equipment plus cart feels slow, the `+1.5` cap could be raised.
+- Posters never animate. Could add a torn-corner flutter or a once-per-day "new poster appears" event.
+
+---
+
+---
+
 ## v13 wave 8a — world expansion + new zones (SHIPPED)
 
 Shipped 2026-05-28. All edits on `rock_bottom_v13.html` (no v14 fork). SAVE_KEY untouched. Forward-compatible save: every new flag/counter has a sensible default in both the load path and the startGame fresh-init path. Zero hardcoded world-dimension references found in code (the only `2200` / `1900` literals are toast durations, audio frequencies, or one CROWN_SPOTS coord that was already inside the original bounds).

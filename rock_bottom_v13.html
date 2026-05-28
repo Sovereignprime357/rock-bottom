@@ -264,29 +264,34 @@ const RANKS = [
 ];
 
 // ---------- zones ----------
+// v13 wave 8b — every zone tagged with a faction lean (street / scrap / spiritual / neutral).
+// drives the territory ticker (hated → heat, liked → small bonus, loved → bigger + ambient).
+// see currentZoneFaction() + updateTerritory().
 const ZONES = [
-  { id: 'block',       name: 'THE BLOCK',           x: 880,  y: 720,  w: 340, h: 240, color: '#3a3220', label: '#e8c040' },
-  { id: 'scrap',       name: 'SCRAP YARD',          x: 100,  y: 80,   w: 520, h: 360, color: '#3a2f1a', label: '#d06030' },
-  { id: 'pawn',        name: 'PAWN SHOP',           x: 130,  y: 580,  w: 260, h: 200, color: '#2a2a18', label: '#c08820' },
-  { id: 'dealer',      name: "DEALER'S CORNER",     x: 1460, y: 780,  w: 320, h: 250, color: '#3a1810', label: '#d06030' },
-  { id: 'abandoned',   name: 'ABANDONED BUILDING',  x: 1500, y: 100,  w: 480, h: 360, color: '#241818', label: '#8a3a3a', locked: true },
-  { id: 'market',      name: 'MARKETPLACE',         x: 700,  y: 1380, w: 720, h: 260, color: '#2a3a20', label: '#a8c030' },
-  { id: 'alley',       name: 'BACK ALLEY',          x: 100,  y: 1280, w: 540, h: 380, color: '#181818', label: '#8a3a3a' },
-  { id: 'church',      name: 'CHURCH',              x: 1600, y: 1300, w: 380, h: 320, color: '#241c2a', label: '#d488d4' },
-  { id: 'projects',    name: 'THE PROJECTS',        x: 100,  y: 1700, w: 600, h: 180, color: '#1c1c20', label: '#a0a0c0' },
-  { id: 'underpass',   name: 'HIGHWAY UNDERPASS',   x: 1020, y: 240,  w: 380, h: 220, color: '#1a1a1c', label: '#888888' },
-  { id: 'laundromat',  name: 'THE LAUNDROMAT',      x: 1480, y: 1080, w: 320, h: 200, color: '#3a3a44', label: '#88c0ff' },
+  { id: 'block',       name: 'THE BLOCK',           x: 880,  y: 720,  w: 340, h: 240, color: '#3a3220', label: '#e8c040', faction: 'street' },
+  { id: 'scrap',       name: 'SCRAP YARD',          x: 100,  y: 80,   w: 520, h: 360, color: '#3a2f1a', label: '#d06030', faction: 'scrap' },
+  { id: 'pawn',        name: 'PAWN SHOP',           x: 130,  y: 580,  w: 260, h: 200, color: '#2a2a18', label: '#c08820', faction: 'scrap' },
+  { id: 'dealer',      name: "DEALER'S CORNER",     x: 1460, y: 780,  w: 320, h: 250, color: '#3a1810', label: '#d06030', faction: 'street' },
+  { id: 'abandoned',   name: 'ABANDONED BUILDING',  x: 1500, y: 100,  w: 480, h: 360, color: '#241818', label: '#8a3a3a', locked: true, faction: 'neutral' },
+  // MARKETPLACE is mom's neighborhood (mom NPC stands here). spiritual per wave 8b.
+  { id: 'market',      name: 'MARKETPLACE',         x: 700,  y: 1380, w: 720, h: 260, color: '#2a3a20', label: '#a8c030', faction: 'spiritual' },
+  { id: 'alley',       name: 'BACK ALLEY',          x: 100,  y: 1280, w: 540, h: 380, color: '#181818', label: '#8a3a3a', faction: 'street' },
+  { id: 'church',      name: 'CHURCH',              x: 1600, y: 1300, w: 380, h: 320, color: '#241c2a', label: '#d488d4', faction: 'spiritual' },
+  // THE PROJECTS — larry + stripe live here. street-leaning, even though it's hardscrabble.
+  { id: 'projects',    name: 'THE PROJECTS',        x: 100,  y: 1700, w: 600, h: 180, color: '#1c1c20', label: '#a0a0c0', faction: 'street' },
+  { id: 'underpass',   name: 'HIGHWAY UNDERPASS',   x: 1020, y: 240,  w: 380, h: 220, color: '#1a1a1c', label: '#888888', faction: 'scrap' },
+  { id: 'laundromat',  name: 'THE LAUNDROMAT',      x: 1480, y: 1080, w: 320, h: 200, color: '#3a3a44', label: '#88c0ff', faction: 'street' },
   // v13 wave 2 — small transit-zone for pinky polenta. between the block / market / laundromat.
-  { id: 'busstop',     name: 'BUS STOP',            x: 1240, y: 1080, w: 220, h: 180, color: '#2a2820', label: '#888888' },
+  { id: 'busstop',     name: 'BUS STOP',            x: 1240, y: 1080, w: 220, h: 180, color: '#2a2820', label: '#888888', faction: 'street' },
   // v13 wave 8a — four new zones placed in the expanded world space (existing zones unchanged).
   // TRAIN YARD: far south-west. Conductor's real home. spiritual-leaning.
-  { id: 'trainyard',   name: 'TRAIN YARD',          x: 260,  y: 2700, w: 1100, h: 560, color: '#1f1c18', label: '#a8a090' },
-  // THE PARK: central-east in new space. neutral by day, street-leaning at night.
-  { id: 'park',        name: 'THE PARK',            x: 2400, y: 900,  w: 620,  h: 500, color: '#243a22', label: '#a8d088' },
+  { id: 'trainyard',   name: 'TRAIN YARD',          x: 260,  y: 2700, w: 1100, h: 560, color: '#1f1c18', label: '#a8a090', faction: 'spiritual' },
+  // THE PARK: central-east in new space. spiritual lean per wave 8b (bench, fountain, philosopher).
+  { id: 'park',        name: 'THE PARK',            x: 2400, y: 900,  w: 620,  h: 500, color: '#243a22', label: '#a8d088', faction: 'spiritual' },
   // SKID ROW: east of marketplace. street faction, contested, dangerous.
-  { id: 'skidrow',     name: 'SKID ROW',            x: 2480, y: 1520, w: 900,  h: 720, color: '#1a1612', label: '#8a3a3a' },
+  { id: 'skidrow',     name: 'SKID ROW',            x: 2480, y: 1520, w: 900,  h: 720, color: '#1a1612', label: '#8a3a3a', faction: 'street' },
   // OLD SCHOOL: far north-east corner. scrap-leaning, optional boss zone.
-  { id: 'oldschool',   name: 'OLD SCHOOL',          x: 3400, y: 280,  w: 760,  h: 640, color: '#241a18', label: '#c08038' },
+  { id: 'oldschool',   name: 'OLD SCHOOL',          x: 3400, y: 280,  w: 760,  h: 640, color: '#241a18', label: '#c08038', faction: 'scrap' },
 ];
 
 // ---------- buildings (solid props) ----------
@@ -587,6 +592,43 @@ const GRAFFITI_LINES = [
   "the pothole knows my name",
 ];
 
+// v13 wave 8b — faction-themed graffiti pools. buildGraffiti() picks per-zone-faction.
+// fallback (street default) is GRAFFITI_LINES above. these two are SCRAP and SPIRITUAL.
+const SCRAP_GRAFFITI_LINES = [
+  "5/8 inch socket missing",
+  "PETE TAKES NUMBERS",
+  "yuri's bird is plastic",
+  "the wire is copper. probably.",
+  "DO NOT TRUST THE SCALE",
+  "the dog is not the dog",
+  "WEIGHED IT TWICE STILL OWED",
+  "rebar is rebar.",
+  "if it bends it bends. so do you.",
+  "MAGNET CHECKED. MAGNET LIED.",
+  "pete owes me a dollar from 2009",
+  "the gate squeaks louder on wednesdays",
+  "BRUTUS COUNTS IN BARKS",
+  "every pipe used to be a wall",
+  "WIRES OUT OF THE WALLS GO INTO THE WALLS",
+];
+const SPIRITUAL_GRAFFITI_LINES = [
+  "FATHER O'MALLEY KNOWS",
+  "the bus does not come for sinners",
+  "pigeons remember",
+  "MOM IS LISTENING",
+  "the wages of sin are eleven dollars",
+  "the bench is a pew if you sit right",
+  "PRAY FOR DOLORES",
+  "the fountain agrees",
+  "GOD IS A WEDNESDAY",
+  "the possum saw and the possum spoke",
+  "we are here. we were here. we will be here.",
+  "BLESSED ARE THE BROKE",
+  "the philosopher said the same thing twice",
+  "kneel where the chalk is",
+  "AMEN MEANS COME BACK TOMORROW",
+];
+
 // ---------- v13 wave 3: discoverability + vendor index ----------
 // the canonical list of NPCs that get the "?" floater + appear in the people-met index.
 // excludes ambient pedestrians (cubscout/jogger/busker/dogwalker), dave (the steal target),
@@ -694,6 +736,157 @@ function applyRep(deltas) {
   if (!deltas) return;
   for (const k of FACTION_NAMES) {
     if (deltas[k]) adjustFaction(k, deltas[k]);
+  }
+}
+
+// ---------- v13 wave 8b — faction territory ----------
+// per-zone-faction NPC greetings. fire when player walks within ~80px of a known NPC inside
+// a LIKED or LOVED district. rate-limited per NPC per zone-entry (LIKED) or once per ~10s
+// per NPC (LOVED).
+const TERRITORY_GREETINGS = {
+  street: [
+    "tony nods from across the street.",
+    "pete sees you. pete waves with the bat.",
+    "barb glances up from the crossword.\nshe glances back down.",
+    "lurch lifts a finger.\nthat's the greeting.",
+    "sherri brushes a spider off you. there was no spider.",
+    "stripe pretends not to look. stripe looked.",
+    "paulie shows you the face.\nyou nod at the face.",
+  ],
+  scrap: [
+    "yuri counts you. counts twice.",
+    "pete writes a number down. it is not your number.",
+    "biggu raises a copper pipe. like a wave.",
+    "the conductor tips his cap.",
+    "the dog stops chewing. for a second.",
+    "the mathematician glances up.\nthen down.",
+    "a wreck creaks as you pass. it was not the wind.",
+  ],
+  spiritual: [
+    "the priest blesses you as you pass.",
+    "the philosopher nods like she knew.",
+    "mom waves from across the lot.",
+    "a pigeon walks beside you for two steps.",
+    "the train hopper salutes from the rails.",
+    "the possum sits upright.",
+    "the fountain coughs in time with you.",
+  ],
+};
+const TERRITORY_LOVED_LINES = {
+  street:    ["@hardcandy: tony's people made room.", "tony's people made room."],
+  scrap:     ["@blocklog: the yard knows your boots.", "the yard knows your boots."],
+  spiritual: ["@hardcandy: the bench is yours today.", "the bench is yours today."],
+};
+const TERRITORY_HATED_LINES = {
+  street:    ["@blocklog: you've been spotted on tony's block.", "you've been spotted."],
+  scrap:     ["@blocklog: the gate watched you walk in.", "the gate watched you."],
+  spiritual: ["@hardcandy: the bench did not move when you sat.", "the bench did not move."],
+};
+const TERRITORY_NPC_TARGETS = new Set([
+  'tony','yuri','pete','barb','lurch','sherri','paulie','stripe','priest','mom',
+  'pinky','conductor','biggu','math','train_hopper','philosopher','larry',
+]);
+function lovedAmbientKey(faction) { return 'lovedAmbient_'+faction+'_day'; }
+
+// ticker — fires every ~2s while player is in a faction-tagged zone and not in an interior mode.
+// hated: accumulate state.territoryHeat (cap at 60). at >=30 → wanted +1, reset, ambient line.
+// liked: greetings, +20% to a multiplier read by future cash-pile spawns (state.territoryCashMult).
+// loved: greetings (ungated), +1 brain / 10s, +40% cash mult, once-per-day-per-faction ambient line.
+function updateTerritory(dt) {
+  if (state.mode !== 'playing') return;
+  // additional defensive pauses: any open dialogue / interior modal / hideout / heist / boss / cook
+  // (state.mode handles all of these — when a modal opens it flips off 'playing').
+  if (!P.faction) P.faction = { street: 0, scrap: 0, spiritual: 0 };
+
+  state.territoryT = (state.territoryT || 0) + dt;
+  if (state.territoryT < 2000) return;
+  state.territoryT = 0;
+
+  const z = currentZone();
+  const faction = z ? (z.faction || 'neutral') : 'neutral';
+  // zone-exit / faction-change: reset heat + clear greeting bookkeeping for the prior zone
+  if (state.territoryZoneId !== (z ? z.id : null)) {
+    state.territoryHeat = 0;
+    state.territoryGreeted = new Set();
+    state.territoryZoneId = z ? z.id : null;
+  }
+  if (!z || faction === 'neutral') {
+    // outside any faction zone — also bleed any leftover heat
+    state.territoryHeat = 0;
+    state.territoryCashMult = 1.0;
+    return;
+  }
+  const tier = factionTier(P.faction[faction] || 0);
+
+  if (tier === 'hated') {
+    state.territoryHeat = (state.territoryHeat || 0) + 1;
+    state.territoryCashMult = 1.0;
+    // ambient line every ~15 ticks (~30s)
+    if ((state.territoryHeat % 15) === 7) {
+      const ln = TERRITORY_HATED_LINES[faction];
+      if (ln) { try { feedPost(ln[0].split(': ').slice(1).join(': ') || ln[0], ln[0].split(': ')[0]); } catch(e){} }
+    }
+    if (state.territoryHeat >= 30) {
+      state.territoryHeat = 0;
+      if (P.wanted < 3) { P.wanted = Math.min(3, P.wanted + 1); P.wantedT = 0; toast("a phone call was made.\nwanted +1", 2200); }
+    }
+    return;
+  }
+
+  // neutral — no effect, but reset cash mult so old liked-bonus doesn't linger
+  if (tier === 'neutral') {
+    state.territoryHeat = 0;
+    state.territoryCashMult = 1.0;
+    return;
+  }
+
+  // LIKED or LOVED
+  state.territoryCashMult = (tier === 'loved') ? 1.4 : 1.2;
+
+  // LOVED: +1 brain per 5 ticks (~10s)
+  if (tier === 'loved') {
+    state.territoryBrainTicks = (state.territoryBrainTicks || 0) + 1;
+    if (state.territoryBrainTicks >= 5) {
+      state.territoryBrainTicks = 0;
+      P.brain = Math.min(100, P.brain + 1);
+    }
+    // once-per-day-per-faction ambient line on the first tick of the zone-entry (this day)
+    const key = lovedAmbientKey(faction);
+    if (state.flags[key] !== state.day) {
+      state.flags[key] = state.day;
+      const ln = TERRITORY_LOVED_LINES[faction];
+      if (ln) {
+        try { feedPost(ln[0].split(': ').slice(1).join(': ') || ln[0], ln[0].split(': ')[0]); } catch(e){}
+        try { toast(ln[1], 2400); } catch(e){}
+      }
+    }
+  }
+
+  // greetings — find a known NPC within 80px who hasn't greeted yet this zone-entry (LIKED)
+  // or hasn't greeted in the last ~10s (LOVED).
+  const pcx = P.x + P.w/2, pcy = P.y + P.h/2;
+  const now = (performance && performance.now) ? performance.now() : Date.now();
+  state.territoryGreetLast = state.territoryGreetLast || {};
+  for (const n of npcs) {
+    if (n.dead) continue;
+    if (!TERRITORY_NPC_TARGETS.has(n.id)) continue;
+    const ncx = n.x + n.w/2, ncy = n.y + n.h/2;
+    const dx = pcx - ncx, dy = pcy - ncy;
+    if (dx*dx + dy*dy > 80*80) continue;
+    if (tier === 'liked') {
+      if (state.territoryGreeted.has(n.id)) continue;
+      state.territoryGreeted.add(n.id);
+    } else {
+      const last = state.territoryGreetLast[n.id] || 0;
+      if (now - last < 10000) continue;
+      state.territoryGreetLast[n.id] = now;
+    }
+    const pool = TERRITORY_GREETINGS[faction] || [];
+    if (pool.length) {
+      const line = pool[Math.floor(Math.random()*pool.length)];
+      try { toast(line, 2200); } catch(e){}
+    }
+    break; // one greeting per tick
   }
 }
 
@@ -1617,6 +1810,8 @@ async function saveGame() {
       crownPickup: state.crownPickup || null,
       // v13 wave 6 — graffiti layout + phone counter (quest state lives inside state.quests)
       graffiti: state.graffiti || null,
+      // v13 wave 8b — poster layout (procedural, persisted like graffiti)
+      posters: state.posters || null,
       publicPhoneAnswered: state.publicPhoneAnswered || 0,
       // v13 wave 7 — hideout stash survives death; flags carry day-event triggers
       hideoutStash: state.hideoutStash || { rocks:0, copper:0, cash:0, items:[] },
@@ -1687,6 +1882,10 @@ async function loadGame() {
       trainHopperTalkedTo: false,
       priceGuyDay: 0, priceGuyVisits: 0,
       parkNightCashDay: 0,
+      // v13 wave 8b — loved-district ambient lines are once-per-day-per-faction; track per save.
+      // bus pass cooldown is once-per-day (cleared at dawn). mom's free pass drop is once-per-day too.
+      lovedAmbient_street_day: 0, lovedAmbient_scrap_day: 0, lovedAmbient_spiritual_day: 0,
+      busPassUsedDay: 0, momBusPassDay: 0,
     }, sv.flags || {});
     // v13 wave 7 — hideout storage chest survives death. default empty.
     state.hideoutStash = Object.assign({ rocks:0, copper:0, cash:0, items:[] }, sv.hideoutStash || {});
@@ -1695,6 +1894,8 @@ async function loadGame() {
     // v13 wave 6 — restore graffiti layout + phone counter; if missing, leave null so a fresh layout
     // gets built on next drawGraffiti call (existing saves get one-time fresh tags — fine, decorative).
     state.graffiti = sv.graffiti || null;
+    // v13 wave 8b — posters re-hydrate like graffiti. Missing -> fresh build on next draw.
+    state.posters = sv.posters || null;
     state.publicPhoneAnswered = sv.publicPhoneAnswered || 0;
     P.charisma = sv.player && sv.player.charisma || 0;
     state.day = sv.day ?? 1;
@@ -1764,7 +1965,9 @@ function applyEquipStats() {
     charisma += (e.charisma||0);
     wantedDecayMult += (e.wantedDecay||0);
   }
-  if (P.cartMounted) baseSpeed += 0.6;
+  // v13 wave 8b — cart speed cap. Was +0.6 flat (v12 was +1, ~2.0 base). Now caps at base × 1.7
+  // so the cart scales with the (now larger) world without breaking equipment stacking.
+  if (P.cartMounted) baseSpeed = Math.min(baseSpeed * 1.7, baseSpeed + 1.5);
   P.speed = Math.max(0.8, baseSpeed);
   P.maxHp = baseHp;
   if (P.hp > P.maxHp) P.hp = P.maxHp;
@@ -2085,6 +2288,25 @@ function inZone(x,y,id) {
   const z = ZONES.find(z=>z.id===id);
   if (!z) return false;
   return x>=z.x && x<=z.x+z.w && y>=z.y && y<=z.y+z.h;
+}
+
+// v13 wave 8b — returns the zone object the player currently stands in (or null).
+// when zones overlap, the one with the higher-absolute faction tier wins (so a LOVED
+// street overlap beats neutral spiritual; HATED scrap beats neutral street).
+function currentZone() {
+  const cx = P.x + P.w/2, cy = P.y + P.h/2;
+  let best = null, bestRank = -1;
+  for (const z of ZONES) {
+    if (cx<z.x || cx>z.x+z.w || cy<z.y || cy>z.y+z.h) continue;
+    const f = z.faction || 'neutral';
+    const tierAbs = (f === 'neutral') ? 0 : Math.abs((P.faction && P.faction[f]) || 0);
+    if (tierAbs > bestRank) { bestRank = tierAbs; best = z; }
+  }
+  return best;
+}
+function currentZoneFaction() {
+  const z = currentZone();
+  return z ? (z.faction || 'neutral') : 'neutral';
 }
 
 function isNight() { return state.dayTime < 0.25 || state.dayTime > 0.75; }
@@ -3374,8 +3596,10 @@ function pigeonDialogue() {
 function bigguDialogue() {
   dialogue('THE BIG GUY', "i am the big guy.\nhe is, in fact, tall.\nhe lives under here.", [
     { label: P.copper>=5 ? 'trade 5 PURE COPPER for the cart.' : "you need 5 pure copper.", disabled: P.copper<5, action: () => {
-      P.copper -= 5; P.cartMounted = true; P.speed = 2.8; P.maxHp = 110; if (P.hp > P.maxHp) P.hp = P.maxHp;
-      toast("- 5 pure copper\n+ THE BIG GUY'S CART\n+1 speed. +10 max hp.\n(the wheels do not align.)");
+      P.copper -= 5; P.cartMounted = true;
+      // v13 wave 8b — route through applyEquipStats so the cart cap (base × 1.7) takes effect
+      applyEquipStats();
+      toast("- 5 pure copper\n+ THE BIG GUY'S CART\n+10 max hp. faster.\n(the wheels do not align.)");
       saveGame();
     }},
     { label: 'ask how tall.', action: () => {
@@ -3383,6 +3607,105 @@ function bigguDialogue() {
     }},
     { label: 'leave.', action: () => {} },
   ]);
+}
+
+// ---------- v13 wave 8b — bus pass helpers ----------
+// the bus pass is a single-use consumable. Pinky sells one for $20; mom drops a free one at dawn
+// if spiritual ≥ liked. Using one at Pinky's spot teleports the player to the center of any
+// visited zone. State: P.inventory item id='bus_pass' (q:1, no stacking). Cooldown: once per day
+// via state.flags.busPassUsedDay === state.day.
+function hasBusPass() { return !!P.inventory.find(i => i.id === 'bus_pass'); }
+function consumeBusPass() {
+  const i = P.inventory.findIndex(x => x.id === 'bus_pass');
+  if (i >= 0) P.inventory.splice(i, 1);
+}
+function giveBusPass(silent) {
+  if (hasBusPass()) return false;
+  P.inventory.push({ id:'bus_pass', n:'a bus pass', q:1 });
+  if (!silent) toast("+ a bus pass\nit smells like a wallet that wasn't yours.", 2600);
+  return true;
+}
+// "actively pursued" gate: any non-pet NPC that is hostile/aggro within ~220px,
+// or any cop alive (cops only exist if wanted > 0).
+function combatActive() {
+  if (P.wanted > 0) return true;
+  const pcx = P.x + P.w/2, pcy = P.y + P.h/2;
+  for (const n of npcs) {
+    if (n.dead || n.isPet) continue;
+    if (!(n.hostile || n.aggro)) continue;
+    const dx = (n.x+n.w/2) - pcx, dy = (n.y+n.h/2) - pcy;
+    if (dx*dx + dy*dy < 220*220) return true;
+  }
+  return false;
+}
+// list of zones the player has visited (re-uses the wave 6/8a "*Entered" flags for parity).
+const BUS_ZONE_TARGETS = [
+  // {flag, zoneId, label}
+  { flag:null,                 zoneId:'block',      label:'the block' },
+  { flag:null,                 zoneId:'market',     label:"mom's neighborhood" },
+  { flag:null,                 zoneId:'scrap',      label:'the scrap yard' },
+  { flag:null,                 zoneId:'alley',      label:'the back alley' },
+  { flag:null,                 zoneId:'church',     label:'the church' },
+  { flag:null,                 zoneId:'projects',   label:'the projects' },
+  { flag:'underpassEntered',   zoneId:'underpass',  label:'the highway underpass' },
+  { flag:'trainYardEntered',   zoneId:'trainyard',  label:'the train yard' },
+  { flag:'parkEntered',        zoneId:'park',       label:'the park' },
+  { flag:'skidRowEntered',     zoneId:'skidrow',    label:'skid row' },
+  { flag:'oldSchoolEntered',   zoneId:'oldschool',  label:'the old school' },
+];
+function visitedZonesForBus() {
+  // a zone is "visited" if its *Entered flag is true, OR if it has no gate flag (always known).
+  const out = [];
+  for (const t of BUS_ZONE_TARGETS) {
+    if (t.flag && !(state.flags && state.flags[t.flag])) continue;
+    out.push(t);
+  }
+  return out;
+}
+function openBusPassMenu() {
+  if (!hasBusPass()) {
+    dialogue('BUS STOP', "you do not have a bus pass.\nthe bus does not care that you tried.", [{label:'leave.', action:()=>{}}]);
+    return;
+  }
+  if (state.flags && state.flags.busPassUsedDay === state.day) {
+    dialogue('BUS STOP', "you already rode today.\nthe bus does not run twice for you.", [{label:'leave.', action:()=>{}}]);
+    return;
+  }
+  const aggro = combatActive();
+  const here = currentZone();
+  const opts = [];
+  for (const t of visitedZonesForBus()) {
+    const z = ZONES.find(z=>z.id===t.zoneId);
+    if (!z) continue;
+    const isHere = here && here.id === t.zoneId;
+    const disabledHere = isHere;
+    const disabledAggro = aggro;
+    const lbl = disabledAggro ? `${t.label} — the bus is not your friend right now.`
+              : disabledHere  ? `${t.label} — you're already where the bus is.`
+              : `take the bus to ${t.label}.`;
+    opts.push({ label: lbl, disabled: disabledAggro || disabledHere, action: () => {
+      // consume + fade + teleport
+      consumeBusPass();
+      state.flags.busPassUsedDay = state.day;
+      const tx = z.x + z.w/2, ty = z.y + z.h/2;
+      state.flash = 0.5; state.flashColor = '#000';
+      setTimeout(() => {
+        P.x = Math.max(20, Math.min(WORLD.w - 20 - P.w, tx - P.w/2));
+        P.y = Math.max(20, Math.min(WORLD.h - 20 - P.h, ty - P.h/2));
+        state.cam.x = clamp(P.x + P.w/2 - W/2, 0, WORLD.w - W);
+        state.cam.y = clamp(P.y + P.h/2 - H/2, 0, WORLD.h - H);
+        // reset territory bookkeeping since the player just teleported zones
+        state.territoryHeat = 0;
+        state.territoryGreeted = new Set();
+        state.territoryZoneId = null;
+        state.flash = 0.5; state.flashColor = '#000';
+        toast("the bus took you.\nthe bus does not explain how.", 3000);
+        saveGame();
+      }, 380);
+    }});
+  }
+  opts.push({ label: 'put the pass away.', action: () => {} });
+  dialogue('BUS STOP', "you take the pass out of your pocket.\nthe pass smells like a wallet that wasn't yours.\nwhere are you going.", opts);
 }
 
 // ---------- BAGGIE BARB (the supply) ----------
@@ -3523,7 +3846,11 @@ function pinkyDialogue() {
   };
   const oneP = vendorPrice(4);
   const fiveP = vendorPrice(18);
-  dialogue('PINKY POLENTA', flav[Math.floor(Math.random()*flav.length)] + "\nhe smells of cologne and onion.\nhe is always saying it once.", [
+  // v13 wave 8b — bus pass: pinky sells one for $20 if player doesn't already carry one
+  const passPrice = 20;
+  const showBusPassSell = !hasBusPass();
+  const showBusPassUse = hasBusPass();
+  const opts = [
     { label: P.cash>=oneP ? `buy 1 house cut packet. $${oneP}.` : `house cut is $${oneP}.`, disabled: P.cash<oneP, action: () => {
       P.cash -= oneP;
       P.supplies = (P.supplies||0) + 1;
@@ -3542,14 +3869,26 @@ function pinkyDialogue() {
       applyRep({ street: 2, spiritual: -2 }); // wave 7 — bulk gets a slightly bigger ledger hit
       audio.coin(); saveGame();
     }},
-    { label: "you no like?", action: () => {
-      toast("he is delighted you said it back.\n'you no like? you go barb.'\nhe says it once more under his breath.");
-    }},
-    { label: "ask about the cut.", action: () => {
-      toast("'is house. is what house had.'\nhe gestures behind him.\nthere is no house.");
-    }},
-    { label: "leave.", action: () => {} },
-  ]);
+  ];
+  if (showBusPassSell) {
+    opts.push({ label: P.cash>=passPrice ? `buy a bus pass. $${passPrice}.` : `a bus pass is $${passPrice}.`, disabled: P.cash<passPrice, action: () => {
+      P.cash -= passPrice;
+      giveBusPass();
+      toast(`- $${passPrice}\n+ a bus pass\npinky shrugs.\n'is paper. is the bus. is paper.'`, 3400);
+      audio.coin(); saveGame();
+    }});
+  }
+  if (showBusPassUse) {
+    opts.push({ label: 'use the bus pass.', action: () => openBusPassMenu() });
+  }
+  opts.push({ label: "you no like?", action: () => {
+    toast("he is delighted you said it back.\n'you no like? you go barb.'\nhe says it once more under his breath.");
+  }});
+  opts.push({ label: "ask about the cut.", action: () => {
+    toast("'is house. is what house had.'\nhe gestures behind him.\nthere is no house.");
+  }});
+  opts.push({ label: "leave.", action: () => {} });
+  dialogue('PINKY POLENTA', flav[Math.floor(Math.random()*flav.length)] + "\nhe smells of cologne and onion.\nhe is always saying it once.", opts);
 }
 
 // ---------- THE MATHEMATICIAN (under the underpass) ----------
@@ -4512,11 +4851,11 @@ function onNpcDeath(n) {
   if (n.id === 'os_brutus') {
     P.cred += 50;
     adjustFaction('street', 2);
-    // cash pile
+    // cash pile — v13 wave 8b: scaled by current territory cash mult (scrap LIKED/LOVED → bigger)
     cashPiles.push({
       id: 'cp_os_brutus_'+Math.random().toString(36).slice(2,6),
       x: n.x + n.w/2 - 22, y: n.y + n.h/2 + 8,
-      amt: 80, collected: false,
+      amt: Math.round(80 * (state.territoryCashMult || 1.0)), collected: false,
     });
     // copper goes straight to inventory (he was sitting on it)
     P.copper += 5;
@@ -4959,6 +5298,16 @@ function updateWorld(dt) {
     fireDayEvents();
     // v13 wave 7 — mom proud-call rolls at dawn (spiritual LIKED+ only, 1×/day)
     setTimeout(maybeFireMomProudCall, 12000 + Math.random()*30000);
+    // v13 wave 8b — mom drops a free bus pass at dawn if spiritual >= liked AND player doesn't have one.
+    // Once per day via momBusPassDay stamp. Surfaces a phone-feed line.
+    if (P.faction && P.faction.spiritual >= 10 && state.flags.momBusPassDay !== state.day) {
+      state.flags.momBusPassDay = state.day;
+      if (!hasBusPass()) {
+        giveBusPass(true);
+        feedPost("mom left a bus pass on the door. mom does not say where it came from.", '@hardcandy');
+        setTimeout(() => toast("+ a bus pass\nmom left it on the door.\nthe door does not lock.", 3200), 6000);
+      }
+    }
     // v13 wave 7 — mom's apartment hideout rent: $30/day if owned. failure evicts.
     if (state.flags && state.flags.momHideoutOwned) {
       if (P.cash >= 30) {
@@ -5035,6 +5384,25 @@ function updateWorld(dt) {
       p.diveCdT -= dt;
       if (p.diveCdT <= 0) { p.looted = false; }
     }
+  }
+
+  // v13 wave 8b — faction territory ticker (heat in hated, greetings + bonuses in liked/loved).
+  // pauses automatically when state.mode flips off 'playing' (dialogue / interior / heist / boss).
+  updateTerritory(dt);
+  // v13 wave 8b — edge-glow effect (zone-border crossing). decays each frame; rendered post-world.
+  if (state.borderGlowT > 0) state.borderGlowT = Math.max(0, state.borderGlowT - dt);
+  // detect zone-border crossings (zone change in last frame) and arm the glow.
+  const curZoneId = state.territoryZoneId || null;
+  if (state.lastZoneId !== curZoneId) {
+    const z = currentZone();
+    if (z && state.lastZoneId != null && z.id !== state.lastZoneId) {
+      // tint the glow by destination faction
+      const colors = { street:'#a04848', scrap:'#c08038', spiritual:'#d8c068' };
+      state.borderGlowT = 600;
+      state.borderGlowColor = colors[z.faction] || '#888';
+      state.borderGlowRect = { x:z.x, y:z.y, w:z.w, h:z.h };
+    }
+    state.lastZoneId = curZoneId;
   }
 
   // v13 wave 6 — first-time underpass entry: echo line + feed post
@@ -5116,7 +5484,9 @@ function updateWorld(dt) {
     if (state.flags.parkNightCashDay !== state.day) {
       state.flags.parkNightCashDay = state.day;
       if (Math.random() < 0.30) {
-        const amt = 20 + Math.floor(Math.random() * 21);
+        // v13 wave 8b — territory mult applies in spiritual liked/loved (park is spiritual)
+        const baseAmt = 20 + Math.floor(Math.random() * 21);
+        const amt = Math.round(baseAmt * (state.territoryCashMult || 1.0));
         cashPiles.push({
           id: 'cp_park_night_' + state.day,
           x: 2510, y: 1320, amt, collected: false,
@@ -6121,6 +6491,10 @@ function drawAll() {
 
   // procedural graffiti on building walls
   drawGraffiti();
+  // v13 wave 8b — wall-mounted posters (per-faction zone, 1-3 each)
+  drawPosters();
+  // v13 wave 8b — zone-border crossing flash (decays each frame, faction-tinted)
+  drawBorderGlow();
 
   // props (dumpsters, lamps, hydrants, etc.)
   drawProps();
@@ -6931,7 +7305,21 @@ function drawBuilding(b) {
 }
 
 // v13 wave 6 — Procedural graffiti — placed once per save and persisted via state.graffiti.
-// Uses GRAFFITI_LINES (35 voice-coherent fragments) and places 12-18 tags on building walls.
+// v13 wave 8b — faction-themed: each building's tag is pulled from the pool matching the
+// zone the building sits in (street default = GRAFFITI_LINES, scrap = SCRAP_GRAFFITI_LINES,
+// spiritual = SPIRITUAL_GRAFFITI_LINES). Tag color is also faction-tinted.
+const GRAFFITI_PALETTES = {
+  street:    ['#a06868','#b8706e','#a87a80','#c08070'],   // muted red / pink chalk
+  scrap:     ['#c08038','#a87038','#d09048','#a86028'],   // rust orange / metallic
+  spiritual: ['#8898b8','#a8b0c8','#c0c0c0','#d0d8e0'],   // faded blue / chalk white
+  neutral:   ['#a89878','#88a070','#a08070'],             // grey-green chalk
+};
+function pickGraffitiLine(faction) {
+  const pool = (faction === 'scrap') ? SCRAP_GRAFFITI_LINES
+             : (faction === 'spiritual') ? SPIRITUAL_GRAFFITI_LINES
+             : GRAFFITI_LINES;
+  return pool[Math.floor(Math.random()*pool.length)];
+}
 function buildGraffiti() {
   // if saved layout exists, just reuse it
   if (state.graffiti && state.graffiti.length) return;
@@ -6947,12 +7335,15 @@ function buildGraffiti() {
     walls.push({ b, kind:'leftside' });
     walls.push({ b, kind:'rightside' });
   }
-  // chalk / spray colors (low-saturation)
-  const palette = ['#a89878','#88a070','#7080a0','#a08070','#9080a0','#c0a878'];
   for (let i=0;i<N;i++) {
     const wall = walls[Math.floor(Math.random()*walls.length)];
     const b = wall.b;
-    const text = GRAFFITI_LINES[Math.floor(Math.random()*GRAFFITI_LINES.length)];
+    // determine faction by where the building sits
+    const zid = zoneAt(b.x + b.w/2, b.y + b.h/2);
+    const z = ZONES.find(z=>z.id===zid);
+    const faction = (z && z.faction) || 'street';
+    const text = pickGraffitiLine(faction);
+    const palette = GRAFFITI_PALETTES[faction] || GRAFFITI_PALETTES.street;
     let x, y;
     if (wall.kind === 'bottom') {
       x = b.x + 6 + Math.random()*(b.w-80);
@@ -6990,6 +7381,95 @@ function drawGraffiti() {
     ctx.globalAlpha = 1;
     ctx.restore();
   }
+}
+
+// v13 wave 8b — wall-mounted posters. 1-3 per faction-tagged zone, procedural per save.
+// Persisted in state.posters. Drawn between graffiti and props so they appear on walls,
+// below any prop overlays. Each poster has {x,y,w,h,faction,text,col,bg}.
+const POSTER_LINES = {
+  street: [
+    "MISSING DOG\n(REWARD)",
+    "WANTED\nLOOKS JUST\nLIKE YOU",
+    "DJ DANGER\nPRESENTS\nA DJ NIGHT",
+  ],
+  scrap: [
+    "CASH FOR\nCOPPER",
+    "ASK ABOUT\nTHE PRICE",
+    "PETE'S PAWN\nOPEN ALWAYS",
+  ],
+  spiritual: [
+    "REPENT",
+    "PRAYER MEETING\nTHURSDAYS",
+    "THE CHURCH IS\nA BUILDING.\nTHE BUILDING\nIS A CHURCH.",
+  ],
+};
+const POSTER_BG = {
+  street:    { bg:'#3a1818', fg:'#f0d8b0' },
+  scrap:     { bg:'#2a1f10', fg:'#e8c878' },
+  spiritual: { bg:'#1f1820', fg:'#d8d0e8' },
+};
+function buildPosters() {
+  if (state.posters && state.posters.length) return;
+  const out = [];
+  // for each non-locked building, decide if it's in a faction zone, and if so place 1-3 posters
+  // on its bottom/left/right wall faces.
+  const perZoneCounts = {};
+  for (const b of BUILDINGS) {
+    if (b.locked) continue;
+    const zid = zoneAt(b.x + b.w/2, b.y + b.h/2);
+    const z = ZONES.find(z=>z.id===zid);
+    if (!z || !z.faction || z.faction === 'neutral') continue;
+    const k = z.id;
+    perZoneCounts[k] = perZoneCounts[k] || 0;
+    if (perZoneCounts[k] >= 3) continue;
+    // probability scaled so each zone usually gets 1-3 posters across its buildings
+    if (Math.random() > 0.55) continue;
+    perZoneCounts[k]++;
+    const faction = z.faction;
+    const text = POSTER_LINES[faction][Math.floor(Math.random()*POSTER_LINES[faction].length)];
+    const wallPick = Math.floor(Math.random()*3); // 0 bottom, 1 left, 2 right
+    let x, y;
+    if (wallPick === 0)      { x = b.x + 12 + Math.random()*(b.w-48); y = b.y + b.h - 30; }
+    else if (wallPick === 1) { x = b.x + 4;                            y = b.y + 30 + Math.random()*(b.h-60); }
+    else                     { x = b.x + b.w - 20;                     y = b.y + 30 + Math.random()*(b.h-60); }
+    out.push({ x, y, w:16, h:24, faction, text });
+  }
+  state.posters = out;
+}
+function drawPosters() {
+  if (!state.posters || !state.posters.length) buildPosters();
+  if (!state.posters) return;
+  for (const p of state.posters) {
+    const skin = POSTER_BG[p.faction] || POSTER_BG.street;
+    // paper
+    ctx.fillStyle = skin.bg;
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    // torn-edge / nail accents
+    ctx.fillStyle = 'rgba(0,0,0,.45)';
+    ctx.fillRect(p.x, p.y, p.w, 1);
+    ctx.fillRect(p.x, p.y+p.h-1, p.w, 1);
+    // text
+    ctx.fillStyle = skin.fg;
+    ctx.font = 'bold 4px Courier New';
+    const lines = (p.text || '').split('\n');
+    for (let i=0;i<lines.length;i++) {
+      ctx.fillText(lines[i], p.x+2, p.y+5 + i*4);
+    }
+  }
+}
+
+// v13 wave 8b — short border-glow flash on zone-faction crossings. timer is set in updateWorld,
+// rendered post-world (screen-space, but tinted in world-space rect).
+function drawBorderGlow() {
+  if (!state.borderGlowT || state.borderGlowT <= 0 || !state.borderGlowRect) return;
+  const r = state.borderGlowRect;
+  const alpha = Math.min(0.55, state.borderGlowT / 600 * 0.55);
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = state.borderGlowColor || '#888';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(r.x, r.y, r.w, r.h);
+  ctx.restore();
 }
 
 // v13 wave 7 — small wooden-door decal at each owned hideout. drawn in world space.
@@ -8951,6 +9431,9 @@ function startGame(loaded) {
       trainHopperTalkedTo: false,
       priceGuyDay: 0, priceGuyVisits: 0,
       parkNightCashDay: 0,
+      // v13 wave 8b — loved ambient + bus pass day-stamps
+      lovedAmbient_street_day: 0, lovedAmbient_scrap_day: 0, lovedAmbient_spiritual_day: 0,
+      busPassUsedDay: 0, momBusPassDay: 0,
     };
     // v13 wave 7 — faction reputation + hideout chest
     P.faction = { street: 0, scrap: 0, spiritual: 0 };
@@ -8969,6 +9452,7 @@ function startGame(loaded) {
     state.flags.churchLoadedDumpsterY = 0;
     if (state.quests.scrap_dog) { state.quests.scrap_dog.state = 'idle'; state.quests.scrap_dog.done = false; state.quests.scrap_dog.available = false; }
     state.graffiti = null; // build a fresh layout
+    state.posters = null;  // v13 wave 8b — fresh poster layout on new save
     state.publicPhoneT = 240000 + Math.random()*240000;
     state.phonePropRingT = 0;
     state.publicPhoneAnswered = 0;
@@ -8986,6 +9470,8 @@ function startGame(loaded) {
   initInteractiveProps();
   // v13 wave 6 — build (or re-use persisted) graffiti layout
   buildGraffiti();
+  // v13 wave 8b — build (or re-use persisted) wall poster layout
+  buildPosters();
   applyEquipStats();
   rollHustles();
   // v13 wave 7 — re-spawn bus driver if day 30 fired but bus unresolved

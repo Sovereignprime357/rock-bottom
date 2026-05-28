@@ -4,6 +4,112 @@
 
 ---
 
+## FACTION TERRITORY (v13 wave 8b)
+
+Each zone carries a `faction: 'street' | 'scrap' | 'spiritual' | 'neutral'` tag. The territory ticker (`updateTerritory`, fires every 2s while `state.mode === 'playing'`) reads the player's current zone faction × rep tier and applies the matching effect.
+
+### Zone faction map (v13 wave 8b)
+
+| Zone | Faction | Notes |
+|------|---------|-------|
+| THE BLOCK | street | Tony's corner. |
+| DEALER'S CORNER | street | Stripe's stoop. |
+| BACK ALLEY | street | Alley crackheads. |
+| LAUNDROMAT | street | Barb. |
+| BUS STOP | street | Pinky. |
+| SKID ROW | street | Wave 8a. |
+| THE PROJECTS | street | Larry + Stripe. |
+| SCRAP YARD | scrap | Yuri. |
+| PAWN SHOP | scrap | Pete. |
+| HIGHWAY UNDERPASS | scrap | Big Guy + Mathematician. |
+| OLD SCHOOL | scrap | Wave 8a. |
+| MARKETPLACE | spiritual | Mom's neighborhood. |
+| CHURCH | spiritual | O'Malley. |
+| THE PARK | spiritual | Philosopher + Pigeon King. |
+| TRAIN YARD | spiritual | Train Hopper + Conductor. |
+| ABANDONED BUILDING | neutral | Locked. |
+
+### Zone-overlap rule
+
+`currentZone()` returns the matching zone with the highest `|tier|`, so LOVED street beats neutral spiritual; HATED scrap beats neutral street. Same-tier ties → first match in ZONES order.
+
+### Territory tier behavior
+
+| Tier | Cash mult | Brain regen | Greetings | Hated heat | Loved ambient |
+|------|-----------|-------------|-----------|------------|---------------|
+| hated | 1.0× | none | none | +1/2s (cap 30 → wanted +1) | n/a |
+| neutral | 1.0× | none | none | none | n/a |
+| liked | 1.2× | none | once per NPC per zone-entry, ≤80px | none | n/a |
+| loved | 1.4× | +1 brain / 10s | per NPC, 10s cooldown, ≤80px | none | once per faction per day |
+
+The cash multiplier only affects dynamic spawns inside the territory (OS Brutus death drop; park-night swing-set pile). Static cash piles seeded at save start are unaffected.
+
+Hated ambient lines fire roughly every 30s while heat is accumulating, per-faction via `TERRITORY_HATED_LINES`. Loved ambient lines (`TERRITORY_LOVED_LINES`) fire once per zone-entry-per-day-per-faction via `state.flags.lovedAmbient_<faction>_day` stamps.
+
+The ticker pauses whenever `state.mode !== 'playing'` (dialogue, cookmini, heist, boss, hideout, ending). `state.territoryHeat` resets on zone exit, neutral zone, and mode change.
+
+### Visual district identity
+
+- **Graffiti**: `buildGraffiti` reads the building's zone-faction and pulls from `SCRAP_GRAFFITI_LINES` (15), `SPIRITUAL_GRAFFITI_LINES` (15), or `GRAFFITI_LINES` (street default, 36). Colors via `GRAFFITI_PALETTES` (street muted red/pink; scrap rust; spiritual faded blue/white).
+- **Posters**: new persisted-in-save `state.posters` array. `buildPosters()` walks faction-tagged buildings, places 1-3 posters per zone (16×24 wall rects). `POSTER_LINES` provides 3 lines per faction. `drawPosters()` renders between graffiti and props.
+- **Edge glow**: `state.borderGlowT` (ms, decays in updateWorld), `state.borderGlowRect`, `state.borderGlowColor`. Arms when player crosses into a new zone. 600ms fade. `drawBorderGlow()` traces the destination zone bounds in a faction tint (street red, scrap rust, spiritual gold).
+
+### Bus pass
+
+| Field | Value |
+|-------|-------|
+| Inventory id | `bus_pass` |
+| Name | `a bus pass` |
+| Stack | 1 (single, `giveBusPass` early-returns if already held) |
+| Acquisition (Pinky) | $20 from `pinkyDialogue`, sold only when `!hasBusPass()` |
+| Acquisition (Mom) | Free at dawn if `P.faction.spiritual >= 10`, once per day via `momBusPassDay` |
+| Use trigger | `pinkyDialogue` "use the bus pass" option (when `hasBusPass()`) |
+| Destinations | every zone in `BUS_ZONE_TARGETS` the player has visited (`*Entered` flags from waves 6/8a) |
+| Cooldown | `state.flags.busPassUsedDay === state.day` (one ride per dawn) |
+| Combat gate | `combatActive()` returns true if `P.wanted > 0` OR any hostile/aggro non-pet NPC within 220px |
+| Self-target gate | option disabled if `currentZone().id === target.zoneId` |
+| Teleport | 0.5s black flash → set P.x/P.y to zone center (clamped) → snap camera → reset territory state → 0.5s flash → toast |
+| Save | `bus_pass` lives in `P.inventory`; cooldown + mom-day stamps live in `state.flags` |
+
+### Cart speed cap
+
+`if (P.cartMounted) baseSpeed = Math.min(baseSpeed * 1.7, baseSpeed + 1.5)` in `applyEquipStats`. The biggu cart trade routes through `applyEquipStats()` instead of setting `P.speed` directly, so the cap applies consistently.
+
+### New state fields
+
+| Field | Type | Persisted | Purpose |
+|-------|------|-----------|---------|
+| `state.territoryT` | number (ms) | no | ticker accumulator |
+| `state.territoryHeat` | number | no | hated-district heat |
+| `state.territoryZoneId` | string | no | last zone for transition detect |
+| `state.territoryCashMult` | number | no | dynamic-drop multiplier |
+| `state.territoryBrainTicks` | number | no | loved brain regen ticks |
+| `state.territoryGreeted` | Set | no | liked-greeting per-NPC tracker |
+| `state.territoryGreetLast` | object | no | loved-greeting per-NPC timestamp |
+| `state.lastZoneId` | string | no | edge-glow transition trigger |
+| `state.borderGlowT` | number (ms) | no | edge-glow timer |
+| `state.borderGlowRect` | object | no | edge-glow zone bounds |
+| `state.borderGlowColor` | string | no | edge-glow tint |
+| `state.posters` | array | YES | poster layout |
+| `state.flags.lovedAmbient_<f>_day` | number | YES | per-faction loved ambient day-stamp |
+| `state.flags.busPassUsedDay` | number | YES | one-ride-per-day cooldown |
+| `state.flags.momBusPassDay` | number | YES | mom-drop day-stamp |
+
+All ephemeral fields default to 0/null/undefined on a fresh frame; the ticker handles missing values via `(x||0)`.
+
+### Invariants (wave 8b)
+
+1. **Bus pass is single-stack.** `giveBusPass` checks `hasBusPass()` first.
+2. **Bus pass cannot escape combat.** `combatActive()` gate must fire BEFORE consume.
+3. **Bus pass cannot route to unvisited zones.** Filtered by `BUS_ZONE_TARGETS.flag` against `state.flags.*Entered`.
+4. **Cooldown survives reload.** `busPassUsedDay` is in `state.flags` and gets saved.
+5. **Territory ticker pauses in any non-playing mode.** Early-return on `state.mode !== 'playing'`.
+6. **Territory heat resets on zone exit.** Player cannot accumulate hated heat across zones.
+7. **Cart speed = min(base × 1.7, base + 1.5).** Both multiplicative scaling AND an absolute clamp.
+8. **Save format unchanged.** SAVE_KEY = `rockbottom_save_v8`. All new state fields default-defined in both load Object.assign paths and the startGame fresh-init.
+
+---
+
 ## WORLD EXPANSION (v13 wave 8a)
 
 **WORLD bounds:** `{ w: 4400, h: 3400 }` (up from 2200×1900). All existing zones keep their original x/y/w/h; the world grew around them. Every world-coord clamp (camera, projectile cull, cop spawn ring, player clamp, day-event NPC clamps, day-30 bus rehydrate) reads `WORLD.w` / `WORLD.h` exclusively. Minimap scale `(120/WORLD.w, 96/WORLD.h)` parameterized.

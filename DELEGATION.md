@@ -4,6 +4,17 @@
 
 ---
 
+## v13 wave 8b — SHIPPED ✓ (May 28, 2026) — faction territory + visual districts + bus pass
+
+Lands on `rock_bottom_v13.html`. SAVE_KEY untouched. See SPEC.md `FACTION TERRITORY (v13 wave 8b)` for the contract; BRAIN.md wave 8b entry for judgment calls + counterexample hunt.
+
+- [x] **Part A — zone faction tagging.** Every ZONES entry gets `faction: street|scrap|spiritual|neutral`. `currentZone()` helper resolves overlap by higher absolute tier.
+- [x] **Part B — territory mechanics ticker.** `updateTerritory(dt)` fires every 2s. Hated → +1 heat / 2s, wanted +1 at 30, ambient lines. Liked → greetings + 1.2× cash mult. Loved → +1 brain / 10s, ungated greetings, 1.4× cash mult, once-per-day-per-faction ambient. Pauses outside playing mode; resets on zone exit.
+- [x] **Part C — visual district identity.** Scrap + spiritual graffiti pools (15 each), faction color palette. New `state.posters` array with 1-3 posters per faction zone (16×24 wall rect). Edge-glow effect on zone-faction crossing (600ms strokeRect, faction-tinted).
+- [x] **Part D — bus pass + cart cap.** New `bus_pass` inventory item (single-stack). Pinky sells $20; mom drops free at dawn if spiritual ≥ liked. "use the bus pass" Pinky option opens travel menu (visited zones only, combat-gated, current-zone-gated). 0.5s fade → teleport → 0.5s fade → toast. Cooldown via `busPassUsedDay`. Cart speed cap now `min(base × 1.7, base + 1.5)` — Biggu trade routes through applyEquipStats.
+
+---
+
 ## v13 wave 8a — SHIPPED ✓ (May 28, 2026) — world expansion + 4 new zones
 
 Lands on `rock_bottom_v13.html`. SAVE_KEY untouched. See SPEC.md `WORLD EXPANSION (v13 wave 8a)` for the contract; BRAIN.md wave 8a entry for judgment calls + counterexample hunt.
