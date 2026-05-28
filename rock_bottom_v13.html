@@ -541,6 +541,69 @@ function vendorPrice(base) {
   return base;
 }
 
+// ---------- v13 wave 7 — faction reputation ----------
+// three reputation tracks separate from cred. integer per faction.
+// see SPEC.md FACTIONS for tier thresholds and the rep delta contract.
+const FACTION_NAMES = ['street', 'scrap', 'spiritual'];
+const FACTION_TIER_LABELS = { hated:'HATED', neutral:'NEUTRAL', liked:'LIKED', loved:'LOVED' };
+function factionTier(v) {
+  if (v <= -10) return 'hated';
+  if (v >= 25)  return 'loved';
+  if (v >= 10)  return 'liked';
+  return 'neutral';
+}
+// tier transition broadcasts. one line per faction × tier crossing.
+const TIER_TRANSITION_LINES = {
+  street: {
+    liked:   ["@hardcandy: someone has been seen with tony. someone keeps being seen.", "tony nodded twice."],
+    loved:   ["@hardcandy: tony said your name three times today.", "tony said your name."],
+    hated:   ["@blocklog: word travels. word does not return.", "word is out."],
+    neutral: ["@blocklog: the block is quiet about you again.", "the block forgets, slowly."],
+  },
+  scrap: {
+    liked:   ["@blocklog: yuri counted three times today. counted right twice.", "yuri counted you in."],
+    loved:   ["@blocklog: pete wrote down a number. pete does not write down numbers.", "pete wrote it down."],
+    hated:   ["@hardcandy: the yard gate is half closed. half closed is closed.", "the gate is half closed."],
+    neutral: ["@blocklog: the yard noticed nothing today.", "the yard is the yard again."],
+  },
+  spiritual: {
+    liked:   ["@blocklog: mom called. mom does not always call.", "mom called."],
+    loved:   ["@hardcandy: the possum sat upright today. the possum is not always upright.", "the possum sat upright."],
+    hated:   ["@blocklog: mom hasn't called. her phone is on silent.", "mom's phone is silent."],
+    neutral: ["@blocklog: the church bell rang on the hour. nothing else.", "the bell rang. nothing else."],
+  },
+};
+// single mutator. clamps to [-50, +50], detects tier transitions, broadcasts on crossings.
+function adjustFaction(faction, delta) {
+  if (!FACTION_NAMES.includes(faction) || !delta) return;
+  if (!P.faction) P.faction = { street: 0, scrap: 0, spiritual: 0 };
+  const before = P.faction[faction] | 0;
+  const beforeTier = factionTier(before);
+  const after = Math.max(-50, Math.min(50, before + delta));
+  P.faction[faction] = after;
+  const afterTier = factionTier(after);
+  if (beforeTier !== afterTier) {
+    const lines = TIER_TRANSITION_LINES[faction] && TIER_TRANSITION_LINES[faction][afterTier];
+    if (lines) {
+      try { feedPost(lines[0].split(': ').slice(1).join(': ') || lines[0], lines[0].split(': ')[0]); } catch(e) {}
+      try { toast(lines[1], 2200); } catch(e) {}
+    }
+    // LOVED milestone achievements
+    if (afterTier === 'loved') {
+      if (faction === 'street')    try { unlockAchievement('the_block_knows'); } catch(e) {}
+      if (faction === 'scrap')     try { unlockAchievement('yuri_counts_you'); } catch(e) {}
+      if (faction === 'spiritual') try { unlockAchievement('mom_is_proud'); } catch(e) {}
+    }
+  }
+}
+// convenience: bulk apply a delta object like { street: +1, spiritual: -1 }
+function applyRep(deltas) {
+  if (!deltas) return;
+  for (const k of FACTION_NAMES) {
+    if (deltas[k]) adjustFaction(k, deltas[k]);
+  }
+}
+
 // ---------- achievements ----------
 const ACHIEVEMENTS = {
   i_have_seen_horrors:  { name:"I HAVE SEEN HORRORS",  flav:"view 10 possum prophecies." },
@@ -578,6 +641,11 @@ const ACHIEVEMENTS = {
   liberator:            { name:"LIBERATOR",            flav:"free the chained dog. he never looks back. he never needed to." },
   the_piece_of_shit:    { name:"THE PIECE OF SHIT",    flav:"attacked the chained dog. there is a piece of shit out there. it is you." },
   phone_booth_prophet:  { name:"PHONE BOOTH PROPHET",  flav:"answer five public phone calls. nobody is paying you. someone is calling." },
+  // v13 wave 7 — third ending + faction milestones
+  the_bus:              { name:"THE BUS",              flav:"day 30. the bus came. you got on. it has a destination. it has not told you." },
+  the_block_knows:      { name:"THE BLOCK KNOWS",      flav:"reach street LOVED. tony said your name three times today." },
+  yuri_counts_you:      { name:"YURI COUNTS YOU IN",   flav:"reach scrap LOVED. pete wrote down a number. pete does not write down numbers." },
+  mom_is_proud:         { name:"MOM IS PROUD",         flav:"reach spiritual LOVED. she told the women at trader joe's. they nodded." },
 };
 
 // ---------- HUSTLES (daily objectives) ----------
@@ -688,6 +756,26 @@ function fireMomIntroTipOnce() {
   saveGame();
 }
 
+// v13 wave 7 — spiritual LIKED+: mom calls with a proud line, +5 brain.
+// fires at most once per day, only when spiritual >= +10 (LIKED).
+const MOM_PROUD_LINES = [
+  "remember when you were six.\nyou drew a duck.\nthe duck was good.\nthe duck is on the fridge.",
+  "kelly's son is fine. he is fine.\nhe is not you. you are also fine.",
+  "ben says hi. ben says it the way ben says it.\nyou know what i mean.",
+  "i told the women at trader joe's about you.\nthey nodded.\nthey nodded a lot.",
+];
+function maybeFireMomProudCall() {
+  if (!state.flags) return;
+  if (state.mode !== 'playing') return;
+  if ((state.flags.momProudCallDay || 0) === state.day) return;
+  if (!P.faction || P.faction.spiritual < 10) return;
+  // silence window guard (day 7 event)
+  if (state.flags.silenceUntilT && state.flags.silenceUntilT > Date.now()) return;
+  state.flags.momProudCallDay = state.day;
+  const txt = MOM_PROUD_LINES[Math.floor(Math.random()*MOM_PROUD_LINES.length)];
+  ringPhone({ from: 'YOUR MOM', text: txt + "\n(+5 brain)", action: () => { P.brain = Math.min(100, P.brain + 5); } });
+}
+
 // ---------- PET POSSUM follower ----------
 function spawnPetPossum() {
   if (npcs.find(n=>n.id==='pet_possum')) return;
@@ -765,6 +853,8 @@ function rotateNews() {
   tape.textContent = items.join('   ◆   ');
 }
 function broadcastNews(line) {
+  // v13 wave 7 — silence window suppresses the ticker. day-event triggers always go through (Date.now check).
+  if (state.flags && state.flags.silenceUntilT && state.flags.silenceUntilT > Date.now()) return;
   const tape = document.getElementById('tape');
   if (!tape) return;
   tape.textContent = '· BREAKING · ' + line + '   ◆   ' + tape.textContent;
@@ -778,6 +868,8 @@ const FEED_HANDLES = [
   '@yuri_metals','@lurch_thoughts','@brutus_blog','@the_alley_post','@cubscout_mom',
 ];
 function feedPost(text, handle) {
+  // v13 wave 7 — silence window suppresses the phone feed (day 7 event).
+  if (state.flags && state.flags.silenceUntilT && state.flags.silenceUntilT > Date.now()) return;
   const h = handle || FEED_HANDLES[Math.floor(Math.random()*FEED_HANDLES.length)];
   phoneState.posts.unshift({ h, t: text, day: state.day });
   while (phoneState.posts.length > 8) phoneState.posts.pop();
@@ -1391,6 +1483,8 @@ async function saveGame() {
         weapon: P.weapon, brutusDefeated: P.brutusDefeated, stripeLoyalty: P.stripeLoyalty,
         charisma: P.charisma||0,
         soapRocks: P.soapRocks||0,
+        // v13 wave 7 — faction reputation
+        faction: P.faction || { street: 0, scrap: 0, spiritual: 0 },
       },
       npcsKilled: npcs.filter(n=>n.dead).map(n=>n.id),
       cashPilesCollected: Array.from(state.cashPilesCollected),
@@ -1409,6 +1503,8 @@ async function saveGame() {
       // v13 wave 6 — graffiti layout + phone counter (quest state lives inside state.quests)
       graffiti: state.graffiti || null,
       publicPhoneAnswered: state.publicPhoneAnswered || 0,
+      // v13 wave 7 — hideout stash survives death; flags carry day-event triggers
+      hideoutStash: state.hideoutStash || { rocks:0, copper:0, cash:0, items:[] },
     });
   } catch(e) {}
 }
@@ -1428,6 +1524,8 @@ async function loadGame() {
     P.soapRocks = Math.max(0, P.soapRocks||0);
     // v13 wave 5 — status timers are ephemeral; never restored from save (start clean).
     P.stunT = 0; P.slowT = 0;
+    // v13 wave 7 — faction reputation; old saves default all to 0 (neutral).
+    P.faction = Object.assign({ street: 0, scrap: 0, spiritual: 0 }, (sv.player && sv.player.faction) || {});
     (sv.npcsKilled||[]).forEach(id => { const n = npcs.find(x=>x.id===id); if (n) n.dead = true; });
     state.cashPilesCollected = new Set(sv.cashPilesCollected || []);
     state.achievements = new Set(sv.achievements || []);
@@ -1460,7 +1558,16 @@ async function loadGame() {
       // so they don't get the first-entry toast on reload.
       underpassEntered: true, dumpsterPropaneAwarded: false,
       churchLoadedDumpsterX: 0, churchLoadedDumpsterY: 0,
+      // v13 wave 7 — day events + hideouts + tier-effect day flags
+      day3Fired: false, day7Fired: false, day14Fired: false, day30Fired: false,
+      day14Collected: false, busTaken: false, busRefused: false,
+      silenceUntilT: 0,
+      scrapHideoutOwned: false, momHideoutOwned: false,
+      momRentDay: 0, scrapLoanDay: 0, momProudCallDay: 0,
     }, sv.flags || {});
+    // v13 wave 7 — hideout storage chest survives death. default empty.
+    state.hideoutStash = Object.assign({ rocks:0, copper:0, cash:0, items:[] }, sv.hideoutStash || {});
+    state.dayEventActor = null; // ephemeral visit/bus NPC; rebuilt per session if conditions match
     state.crownPickup = sv.crownPickup || null;
     // v13 wave 6 — restore graffiti layout + phone counter; if missing, leave null so a fresh layout
     // gets built on next drawGraffiti call (existing saves get one-time fresh tags — fine, decorative).
@@ -1503,6 +1610,8 @@ const P = {
   // v13 wave 5 — combat-pattern status timers.
   // stunT: lurch's grab freezes input for 500ms. slowT: priest holy water = ×0.5 speed for 1500ms.
   stunT: 0, slowT: 0,
+  // v13 wave 7 — faction reputation. tiers via factionTier(). default 0 = neutral.
+  faction: { street: 0, scrap: 0, spiritual: 0 },
 };
 
 // Grant achievement helper
@@ -1789,8 +1898,35 @@ function renderQuests() {
   const activePairs = qPairs.filter(([_,q]) => isActive(q));
   const latentPairs = qPairs.filter(([_,q]) => isAvailableButLatent(q));
   const donePairs   = qPairs.filter(([_,q]) => q.done);
+  // v13 wave 7 — faction reputation block. tier label + bar (rep ∈ [-50, +50])
+  const factionRow = (key) => {
+    const v = (P.faction && P.faction[key]) | 0;
+    const tier = factionTier(v);
+    const pct = Math.max(0, Math.min(100, ((v + 50) / 100) * 100));
+    const color = (tier === 'liked' || tier === 'loved') ? '#7fa055'
+                : (tier === 'hated') ? '#a0554a'
+                : '#776';
+    return `<div class="quest" style="padding:6px 10px">
+      <div class="qtitle" style="display:flex;justify-content:space-between">
+        <span>${key.toUpperCase()}</span>
+        <span style="color:${color}">${FACTION_TIER_LABELS[tier]} · ${v>=0?'+':''}${v}</span>
+      </div>
+      <div style="margin-top:4px;height:5px;background:#1a1a18;border:1px solid #2a2a26;position:relative">
+        <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:#3a3a34"></div>
+        <div style="position:absolute;top:0;bottom:0;left:${v<0?pct:50}%;width:${Math.abs(pct-50)}%;background:${color};opacity:.7"></div>
+      </div>
+    </div>`;
+  };
+  const factionHtml = `
+    <h2>FACTIONS</h2>
+    ${factionRow('street')}
+    ${factionRow('scrap')}
+    ${factionRow('spiritual')}
+    <div style="color:#776;font-size:11px;padding:0 10px 6px 10px">hated · neutral · liked · loved</div>
+  `;
   panelEl.innerHTML = `
-    <h2>HUSTLES · DAY ${state.day}</h2>
+    ${factionHtml}
+    <h2 style="margin-top:14px">HUSTLES · DAY ${state.day}</h2>
     ${hustles.length ? hustles.map(h => `<div class="quest ${h.done?'done':''}">
       <div class="qtitle">${h.done?'✓ ':'· '}${h.desc}</div>
       <div class="qflav">reward: ${Object.entries(h.reward).map(([k,v])=>'+'+v+' '+k).join(' · ')}</div>
@@ -2142,7 +2278,10 @@ function tonyDialogue(n) {
     "you again. of course.",
     "three coats. ten dollars. simple math.",
   ];
-  const rockPrice = vendorPrice(10);
+  // v13 wave 7 — street-liked or street-loved drops the base by $1 (then charisma further shaves).
+  const streetTier = factionTier(P.faction ? P.faction.street : 0);
+  const tonyBase = (streetTier === 'liked' || streetTier === 'loved') ? 9 : 10;
+  const rockPrice = vendorPrice(tonyBase);
   const discount = rockPrice < 10;
   const charismaTag = discount ? "\nhe looks at your hat once. then twice. then not again." : '';
   const txt = `${lines[Math.floor(Math.random()*lines.length)]}\n\ntony does not blink. tony is wearing three coats.${charismaTag}`;
@@ -2153,6 +2292,7 @@ function tonyDialogue(n) {
       if (state.counters.rocksBought >= 50) unlockAchievement('tonys_worst');
       toast(`- $${rockPrice}\n+ 1 rock${discount?'\n(the crown got you a discount.\nhe is not happy about it.)':''}`);
       audio.coin();
+      adjustFaction('street', 1); // v13 wave 7 — tony rock buy = street +1
       if (!state.quests.first_rock.done) { state.quests.first_rock.done = true; questToast('THE FIRST ROCK'); }
       saveGame();
     }},
@@ -2179,12 +2319,22 @@ function tonyDialogue(n) {
 }
 
 function yuriDialogue() {
-  dialogue('YURI', "what you bring, idiot.", [
-    { label: `sell 1 PURE COPPER. $25.`, disabled: P.copper<1, action: () => {
-      P.copper--; P.cash += 25; toast('- 1 pure copper\n+ $25'); audio.coin(); saveGame();
+  // v13 wave 7 — scrap liked = $28/copper; loved = $28 (same as liked); else $25
+  const scrapTier = factionTier(P.faction ? P.faction.scrap : 0);
+  const yuriRate = (scrapTier === 'liked' || scrapTier === 'loved') ? 28 : 25;
+  // v13 wave 7 — scrap >= +5 unlocks the back-corner shed hideout (one-time $150).
+  const hideoutGate = (P.faction && P.faction.scrap >= 5) && !(state.flags && state.flags.scrapHideoutOwned);
+  const opts = [
+    { label: `sell 1 PURE COPPER. $${yuriRate}.`, disabled: P.copper<1, action: () => {
+      P.copper--; P.cash += yuriRate; toast('- 1 pure copper\n+ $'+yuriRate); audio.coin();
+      adjustFaction('scrap', 1); // wave 7 — yuri copper sell = scrap +1
+      saveGame();
     }},
     { label: 'sell all pure copper.', disabled: P.copper<1, action: () => {
-      const got = P.copper * 25; P.cash += got; toast(`- ${P.copper} pure copper\n+ $${got}`); P.copper = 0; audio.coin(); saveGame();
+      const sold = P.copper; const got = sold * yuriRate; P.cash += got;
+      toast(`- ${sold} pure copper\n+ $${got}`); P.copper = 0; audio.coin();
+      adjustFaction('scrap', Math.min(5, sold)); // cap +5 per bulk sale to avoid runaway
+      saveGame();
     }},
     { label: 'ask about brutus.', action: () => {
       toast("yuri does not look up.\n'BRUTUS REMEMBER. you know what you did.'\n(you do not.)");
@@ -2199,8 +2349,21 @@ function yuriDialogue() {
         toast("yuri looks up.\n'the dog is gone.'\nhe looks back down.\n'good for the dog.'");
       }
     }},
-    { label: 'leave.', action: () => {} },
-  ]);
+  ];
+  if (hideoutGate) {
+    opts.push({ label: P.cash>=150 ? 'rent the back-corner shed. $150.' : 'rent the shed. ($150 — short.)',
+      disabled: P.cash<150,
+      action: () => {
+        P.cash -= 150; state.flags.scrapHideoutOwned = true;
+        toast("- $150\nyuri tosses you a bent key.\n'shed. back corner.\ndon't bring problems.'", 3600);
+        feedPost("got a key today. it bent in the pocket.", '@crackheadcent');
+        adjustFaction('scrap', 2);
+        saveGame();
+      }
+    });
+  }
+  opts.push({ label: 'leave.', action: () => {} });
+  dialogue('YURI', "what you bring, idiot." + (hideoutGate ? "\nthe shed is empty.\nthe shed could be yours." : ''), opts);
 }
 
 // v13 wave 6 — the chained scrap-yard dog. 3 outcome branches.
@@ -2238,6 +2401,7 @@ function scrapDogDialogue(n) {
         q.state = 'fed'; q.done = true;
         toast("he ate it without looking up.\nhe looks at you once.\nthen back to the food.", 3200);
         feedPost("fed the scrap-yard dog.", '@crackheadcent');
+        adjustFaction('scrap', 2); // wave 7
         saveGame();
       }},
       { label: 'free him. (lockpick.)', action: () => freeScrapDog() },
@@ -2257,6 +2421,7 @@ function scrapDogDialogue(n) {
         q.state = 'fed'; q.done = true;
         toast("he ate it without looking up.\nhe looks at you once.\nthen back to the food.", 3200);
         feedPost("fed the scrap-yard dog.", '@crackheadcent');
+        adjustFaction('scrap', 2); // wave 7
         saveGame();
       }
     },
@@ -2281,6 +2446,7 @@ function freeScrapDog() {
       unlockAchievement('liberator');
       toast("CLICK. the lock falls.\nthe dog stands up.\nhe walks past you. he does not look at you.\nhe is gone.", 4400);
       feedPost("freed the dog. the dog did not stay.", '@crackheadcent');
+      applyRep({ scrap: 3, spiritual: -1 }); // wave 7 — freeing the dog (technically stealing)
       saveGame();
     },
     () => {
@@ -2319,6 +2485,15 @@ function peteDialogue() {
     state.flags.peteTorchStocked = true;
   }
   const torchAvail = state.flags && state.flags.peteTorchStocked && !state.flags.peteTorchSold && !hasPropane();
+  // v13 wave 7 — scrap-hated: pete refuses to buy. scrap-liked: +$2 on copper. scrap-loved: $50 loan 1×/day.
+  const scrapTier = factionTier(P.faction ? P.faction.scrap : 0);
+  if (scrapTier === 'hated') {
+    dialogue('PAWN SHOP PETE', "pete looks up. pete looks back down.\n'pete is full.\npete does not need your things.'", [
+      { label: 'leave.', action: () => {} }
+    ]);
+    return;
+  }
+  const peteCopper = (scrapTier === 'liked' || scrapTier === 'loved') ? 17 : 15;
   // v13 wave 6.5 — pete has a daily cash cap. $200/day across all sells to him.
   // sells become "pete is empty. pete is eating." once cap hit. resets at dawn.
   const PETE_CAP = 200;
@@ -2333,14 +2508,16 @@ function peteDialogue() {
     return pay;
   };
   const peteEmptyLine = "pete is empty. pete is eating.\ncome back tomorrow.";
+  const loanAvail = scrapTier === 'loved' && (state.flags.scrapLoanDay || 0) !== state.day;
   const opts = [
     peteEmpty
       ? { label: 'sell 1 PURE COPPER. (pete is empty.)', action: () => { toast(peteEmptyLine, 3000); }}
-      : { label: 'sell 1 PURE COPPER. $15.', disabled: P.copper<1, action: () => {
-          const pay = tryPay(15);
+      : { label: `sell 1 PURE COPPER. $${peteCopper}.`, disabled: P.copper<1, action: () => {
+          const pay = tryPay(peteCopper);
           if (pay <= 0) { toast(peteEmptyLine, 3000); return; }
           P.copper--; P.cash += pay; state.counters.peteSold = (state.counters.peteSold||0)+1;
-          toast("pete weighs it for 11 minutes.\n- 1 pure copper\n+ $"+pay+(pay<15?"\npete is almost empty.":""), 2800);
+          toast("pete weighs it for 11 minutes.\n- 1 pure copper\n+ $"+pay+(pay<peteCopper?"\npete is almost empty.":""), 2800);
+          adjustFaction('scrap', 1); // wave 7 — pete copper sell = scrap +1
           audio.coin(); saveGame();
         }},
     peteEmpty
@@ -2358,7 +2535,9 @@ function peteDialogue() {
           if (pay <= 0) { toast(peteEmptyLine, 3000); return; }
           P.inventory = P.inventory.filter(i=>i.id!=='license');
           P.cash += pay; state.counters.peteSold = (state.counters.peteSold||0)+1;
-          toast('+ $'+pay+(pay<20?"\npete is almost empty.":"\n(do not ask where it came from.)")); audio.coin(); saveGame();
+          toast('+ $'+pay+(pay<20?"\npete is almost empty.":"\n(do not ask where it came from.)")); audio.coin();
+          adjustFaction('scrap', 1); // wave 7 — pete buy = scrap +1
+          saveGame();
         }},
     // v13 wave 6 — pete sells generic food ($3). a junk inventory item with one use (feed the dog).
     // (note: this is pete SELLING TO player, not buying. not gated by pete's daily cash cap.)
@@ -2412,6 +2591,16 @@ function peteDialogue() {
   } else if (P.rank >= 3 && state.flags && state.flags.peteTorchSold) {
     opts.push({ label: "ask about the torch again.", action: () => {
       toast("'sold the one.\ngo find your own.'\npete is still eating.", 2400);
+    }});
+  }
+  // v13 wave 7 — scrap loved: pete will lend $50, once per day.
+  if (loanAvail) {
+    opts.push({ label: "ask pete for $50. (he likes you.)", action: () => {
+      P.cash += 50; state.flags.scrapLoanDay = state.day;
+      P.cred = Math.max(0, P.cred - 1); // implicit cred friction over time
+      toast("pete looks at you for 11 minutes.\nthen counts out fifty.\n+ $50\n'pete remembers.'", 3800);
+      feedPost("pete handed someone fifty. pete does not hand out money.", '@blocklog');
+      saveGame();
     }});
   }
   opts.push({ label: 'leave.', action: () => {} });
@@ -2548,6 +2737,7 @@ function momDialogue() {
     opts.push({ label: 'accept $10 and pity. (+$10)', action: () => {
       P.cash += 10; state.counters.kombuchaAskDay = state.day;
       toast("+ $10\nshe will tell ben about you tonight.\nben will not care.\ncome back tomorrow."); audio.coin();
+      adjustFaction('spiritual', -1); // wave 7 — asking mom for money disappoints her
       saveGame();
     }});
     opts.push({ label: 'ask for $20.', action: () => {
@@ -2555,6 +2745,7 @@ function momDialogue() {
       if (Math.random()<0.4) { P.cash += 20; toast('+ $20\nshe pauses. she sighs. she gives.\nben will be furious.\ncome back tomorrow.'); audio.coin(); }
       else { toast("she explains capitalism for 4 minutes.\nyou leave with no money and -2 brain.\ncome back tomorrow.");
         P.brain = Math.max(0, P.brain-2); }
+      adjustFaction('spiritual', -1); // wave 7 — even asking, regardless of outcome
       saveGame();
     }});
   } else {
@@ -2566,12 +2757,27 @@ function momDialogue() {
     opts.push({ label: 'compliment her kombucha. (+5 cred)', action: () => {
       P.cred += 5; state.counters.kombuchaComplimentDay = state.day;
       toast("she lights up.\nshe tells you it's lavender.\nyou agree it is lavender.\n+ 5 cred\ncome back tomorrow.");
+      adjustFaction('spiritual', 1); // wave 7 — compliment = spiritual +1
       saveGame();
     }});
   } else {
     opts.push({ label: 'compliment her kombucha again.', action: () => {
       toast("she has heard about her kombucha today.\nshe is tired of her kombucha.\nshe is tired of you.", 3600);
     }});
+  }
+  // v13 wave 7 — mom's apartment hideout gate (spiritual >= +10, one-time setup)
+  const momHideoutGate = (P.faction && P.faction.spiritual >= 10) && !(state.flags && state.flags.momHideoutOwned);
+  if (momHideoutGate) {
+    opts.push({ label: P.cash>=30 ? "ask mom if you can stay over. ($30/night.)" : "ask mom if you can stay over. ($30 — short.)",
+      disabled: P.cash<30,
+      action: () => {
+        P.cash -= 30; state.flags.momHideoutOwned = true; state.flags.momRentDay = state.day;
+        toast("- $30\n'oh sweetie.\nthe couch is yours.\nben works late.'\n(the spare key is on the hook.)", 4200);
+        feedPost("got a couch tonight. ben works late.", '@crackheadcent');
+        adjustFaction('spiritual', 2);
+        saveGame();
+      }
+    });
   }
   opts.push({ label: 'leave.', action: () => {} });
   dialogue('WHOLE FOODS MOM', "oh. oh sweetie.\nshe is wearing vibram five-fingers.\nshe is holding kombucha.", opts);
@@ -2641,16 +2847,21 @@ function priestDialogue() {
           P.cash-=5; P.cred+=3; state.counters.churchDonations += 5;
           state.counters.priestDonateDay = state.day;
           if (state.counters.churchDonations >= 100) unlockAchievement('ecclesiastes');
-          toast('- $5\n+ 3 cred\nthe lord notices. then forgets.\ncome back tomorrow.'); saveGame();
+          toast('- $5\n+ 3 cred\nthe lord notices. then forgets.\ncome back tomorrow.');
+          adjustFaction('spiritual', 2); // wave 7 — donate = spiritual +2
+          saveGame();
         }},
     { label: 'steal the collection plate.', action: () => {
       state.counters.plateStealAttempts = (state.counters.plateStealAttempts||0) + 1;
       // v13 wave 5 — after 4+ priest visits AND a steal attempt, the priest stops being the priest.
-      // this is the auto-trigger path. condition: priestVisits>=4 AND plateStealAttempts>=1.
+      // v13 wave 7 — spiritual >= +10 (LOVED) overrides the fall trigger; the priest holds.
+      const spiritualGate = (P.faction && P.faction.spiritual >= 10);
       if ((state.counters.priestVisits||0) >= 4
           && (state.counters.plateStealAttempts||0) >= 1
-          && state.flags && !state.flags.omalleyFallen) {
+          && state.flags && !state.flags.omalleyFallen && !spiritualGate) {
         triggerFallenPriestTransform();
+        // counts as a steal attempt for the faction ledger
+        applyRep({ street: 1, spiritual: -3 });
         return;
       }
       if (Math.random()<0.55) {
@@ -2660,6 +2871,7 @@ function priestDialogue() {
       } else {
         P.hp -= 12; P.wanted = Math.min(3, P.wanted+1); toast("father o'malley smites you.\n- 12 hp · wanted +1"); audio.hurt();
       }
+      applyRep({ street: 1, spiritual: -3 }); // wave 7 — every steal attempt counts
       saveGame();
     }},
     { label: 'leave.', action: () => {} },
@@ -2783,6 +2995,20 @@ function stripeDialogue() {
   const fenceClosed = fencedToday >= 10;
   // preview the immediate next-rock rate for the label
   const nextSellP = fencePerRock(fencedToday);
+  // v13 wave 7 — stripe fence rep ledger. each rock fenced is +1 street, -1 spiritual,
+  // with a spiritual cap of -3 per day (tracked on stripeSpiritualDayHits).
+  const spiritualHits = (state.counters.stripeSpiritualDayHits || 0);
+  const spiritualHitsDay = (state.counters.stripeSpiritualDayHitsDay || 0);
+  const todaysHits = (spiritualHitsDay === state.day) ? spiritualHits : 0;
+  function fenceRepTick() {
+    adjustFaction('street', 1);
+    const curDay = (state.counters.stripeSpiritualDayHitsDay === state.day) ? (state.counters.stripeSpiritualDayHits || 0) : 0;
+    if (curDay < 3) {
+      adjustFaction('spiritual', -1);
+      state.counters.stripeSpiritualDayHits = curDay + 1;
+      state.counters.stripeSpiritualDayHitsDay = state.day;
+    }
+  }
   const opts = [
     { label: P.cash>=buyP ? `buy stripe's rock. $${buyP}.` : "you can't afford it.", disabled: P.cash<buyP, action: () => {
       P.cash -= buyP;
@@ -2794,6 +3020,7 @@ function stripeDialogue() {
       } else {
         P.rocks++; toast(`- $${buyP}\n+ 1 rock\n(yeah it\'s probably real.)`); audio.coin();
       }
+      adjustFaction('street', 1); // wave 7 — buying from stripe also nudges street
       if (P.stripeLoyalty === 5) {
         toast("stripe nods slowly.\nhe sees you.\nhe has a proposal.", 3000);
       }
@@ -2810,6 +3037,7 @@ function stripeDialogue() {
       P.rocks--; P.cash += px;
       state.counters.stripeFencedToday = (state.counters.stripeFencedToday||0) + 1;
       P.lifetime.rocksFenced = (P.lifetime.rocksFenced||0) + 1;
+      fenceRepTick(); // wave 7 — fence rep delta
       const ft = state.counters.stripeFencedToday;
       let tail = '';
       if (ft === 4) tail = "\nstripe is taking less today.\nstripe is taking what stripe takes.";
@@ -2826,6 +3054,7 @@ function stripeDialogue() {
         P.rocks--; sold++;
         totalCash += px;
         state.counters.stripeFencedToday = before + 1;
+        fenceRepTick(); // wave 7 — fence rep delta per rock
         const after = state.counters.stripeFencedToday;
         if (after === 4) hitDegrade1 = true;
         if (after === 7) hitDegrade2 = true;
@@ -3082,6 +3311,7 @@ function barbDialogue() {
       q.done = true;
       questToast("BARB'S MISSING CROSSWORD");
       unlockAchievement('seven_across');
+      adjustFaction('street', 1); // wave 7 — return crossword = street +1
       audio.coin();
       dialogue('BAGGIE BARB', "she takes it. for the first time in years she looks up.\nher eyes are dry and the lashes are stuck.\n'fourteen across. five letters. begins with a B.\nit was BLAME.\nit's always BLAME.'\nshe looks back down.\n\n+ 1 packet (free.)", [
         { label: 'leave.', action: () => {} },
@@ -3113,6 +3343,14 @@ function barbDialogue() {
 
 // ---------- PINKY POLENTA (rival supply, house cut) ----------
 function pinkyDialogue() {
+  // v13 wave 7 — street-hated: pinky refuses to sell ("you smell like a snitch.")
+  const streetTier = factionTier(P.faction ? P.faction.street : 0);
+  if (streetTier === 'hated') {
+    dialogue('PINKY POLENTA', "pinky steps back.\n'you smell like a snitch.\npinky no sell to a snitch.\nyou go barb. barb sell to snitch.'", [
+      { label: 'leave.', action: () => {} }
+    ]);
+    return;
+  }
   const flav = [
     "buongiorno mi crackhead.",
     "the cut is amore.",
@@ -3138,6 +3376,7 @@ function pinkyDialogue() {
       P.dirtySupplies = (P.dirtySupplies||0) + 1;
       onBuy();
       toast(`- $${oneP}\n+ 1 packet (house cut)\nhe winks. with both eyes.`);
+      applyRep({ street: 1, spiritual: -1 }); // wave 7
       audio.coin(); saveGame();
     }},
     { label: P.cash>=fiveP ? `buy 5 packets bulk. $${fiveP}.` : `5 packets bulk is $${fiveP}.`, disabled: P.cash<fiveP, action: () => {
@@ -3146,6 +3385,7 @@ function pinkyDialogue() {
       P.dirtySupplies = (P.dirtySupplies||0) + 5;
       onBuy();
       toast(`- $${fiveP}\n+ 5 packets (house cut)\nhe says 'amore.' he says it three times.`);
+      applyRep({ street: 2, spiritual: -2 }); // wave 7 — bulk gets a slightly bigger ledger hit
       audio.coin(); saveGame();
     }},
     { label: "you no like?", action: () => {
@@ -3196,7 +3436,10 @@ function mathematicianDialogue() {
       "twenty two coins are on the ground. you have stepped on most of them already. hold F. the math is green.",
       "the priest's son is half tic-tac, half rock. exactly half. fifty fifty. flip your coin.",
     ];
-    if (tipIdx >= 0 && tipIdx < tips.length) tip = tips[tipIdx];
+    if (tipIdx >= 0 && tipIdx < tips.length) {
+      tip = tips[tipIdx];
+      adjustFaction('scrap', 1); // wave 7 — math hidden tip received = scrap +1
+    }
   }
 
   dialogue('THE MATHEMATICIAN', "he looks up from a clipboard.\n" + lead + (tip ? "\n\n· the numbers know what you did ·\n" + tip : ""), [
@@ -3888,6 +4131,7 @@ function onNpcDeath(n) {
   // re-uses the cash-pile pickup pattern, with a collar variant tagged via `equip` field.
   if (n.isOmalleyFallen) {
     state.flags.omalleyFallenDead = true;
+    adjustFaction('street', 2); // wave 7 — killing fallen priest = street +2
     cashPiles.push({
       id:'cp_plate_'+Math.random().toString(36).slice(2,6),
       x: n.x + n.w/2 - 18, y: n.y + n.h/2 + 8,
@@ -3913,7 +4157,9 @@ function onNpcDeath(n) {
 
   // v13 wave 4 — propane torch drops 25% on a night-time brutus kill (regular or older).
   // uses the existing cash-pile pickup pattern, with a `tool` field that triggers equip-on-pickup.
-  if ((n.id === 'brutus' || n.id === 'brutus_older') && isNight() && !hasPropane() && Math.random() < 0.25) {
+  // v13 wave 7 — street loved bumps the drop rate to ~37.5% (+50%).
+  const torchDropRate = factionTier(P.faction ? P.faction.street : 0) === 'loved' ? 0.375 : 0.25;
+  if ((n.id === 'brutus' || n.id === 'brutus_older') && isNight() && !hasPropane() && Math.random() < torchDropRate) {
     cashPiles.push({
       id:'cp_torch_'+Math.random().toString(36).slice(2,6),
       x: n.x + n.w/2, y: n.y + n.h/2 + 8,
@@ -3938,11 +4184,17 @@ function onNpcDeath(n) {
     } else {
       toast('+ 10 cred · wanted +1\na cop is on the ground.');
     }
+    // v13 wave 7 — killing a cop = street -3, spiritual +1 (mom would have wanted you to fight back)
+    applyRep({ street: -3, spiritual: 1 });
   }
   else { P.cred += 3; toast('+ 3 cred\n'+n.name+' is on the ground.'); }
   // alley kill counter for hustles
   if (['lurch','sherri','paulie'].includes(n.id)) {
     state.counters.alleyKills = (state.counters.alleyKills||0) + 1;
+  }
+  // v13 wave 7 — street-affiliated kills nudge street rep up (the block respects a finisher)
+  if (['brutus','brutus_older','lurch','sherri','paulie'].includes(n.id)) {
+    adjustFaction('street', 1);
   }
   // v13 wave 3 — dave drops the crossword if he had it
   if (n.id === 'dave' && state.flags && state.flags.daveHasCrossword && !state.flags.hasCrossword) {
@@ -4286,6 +4538,22 @@ function updateWorld(dt) {
     feedPost("it is day "+state.day+". this is somehow your life.", '@crackheadcent');
     // occasional garbage truck on new day
     if (Math.random() < 0.5) setTimeout(garbageTruckRumble, 8000);
+    // v13 wave 7 — fire day-specific events at dawn rollover (each guarded by once-per-save flag)
+    fireDayEvents();
+    // v13 wave 7 — mom proud-call rolls at dawn (spiritual LIKED+ only, 1×/day)
+    setTimeout(maybeFireMomProudCall, 12000 + Math.random()*30000);
+    // v13 wave 7 — mom's apartment hideout rent: $30/day if owned. failure evicts.
+    if (state.flags && state.flags.momHideoutOwned) {
+      if (P.cash >= 30) {
+        P.cash -= 30; state.flags.momRentDay = state.day;
+        toast("- $30\nmom's couch costs.\nshe says it does not.\nit does.", 3000);
+      } else {
+        state.flags.momHideoutOwned = false;
+        toast("ben put your bag in the hallway.\nthe spare key does not fit anymore.\n(mom's couch — closed.)", 4000);
+        feedPost("got put out. ben works late, ben changed the locks.", '@crackheadcent');
+        adjustFaction('spiritual', -3);
+      }
+    }
   }
   applyDayNight();
 
@@ -4293,12 +4561,16 @@ function updateWorld(dt) {
   // random world events, and hustle generation so day 1 is focused on the three intro beats.
   // the mom intro tip is a separate forced timer (see momTipT below) and is NOT gated by this.
   const introActive = state.flags && !state.flags.introDone;
+  // v13 wave 7 — silence window (day 7 event). suppresses ticker + phone + ambient calls for 4 min.
+  const silenceActive = state.flags && state.flags.silenceUntilT && state.flags.silenceUntilT > Date.now();
+  // v13 wave 7 — spiritual HATED: mom's ambient call line stops (gates the proud-call only;
+  // ambient calls overall still ring). enforced inside maybeFireMomProudCall via faction check.
 
   // phone calls every 90-240s
   state.phoneT = (state.phoneT||120000) - dt;
   if (state.phoneT <= 0) {
     state.phoneT = 90000 + Math.random()*150000;
-    if (!introActive && Math.random() < 0.8) ringPhone();
+    if (!introActive && !silenceActive && Math.random() < 0.8) ringPhone();
   }
 
   // v13 wave 3 — mom intro tip timer (~30s after game start, once per save)
@@ -4551,7 +4823,15 @@ function updateWorld(dt) {
       if (state.flags && !state.flags.introDone) {
         state.counters.introCashEarned = (state.counters.introCashEarned||0) + c.amt;
       }
-      toast(c.intro ? `+ $${c.amt}\nyou bend down. the ten dollars is yours now.\n(it was always there.)` : `+ $${c.amt}\n(found in a corner.)`, c.intro?2400:1400);
+      // v13 wave 7 — day 14 inheritance has its own copy + rep deltas
+      if (c.isInheritance) {
+        state.flags.day14Collected = true;
+        toast(`+ $${c.amt}\n\nyou don't recognize the bill.\nyou don't recognize the wallet.\nyou recognize the smell.`, 4800);
+        feedPost("someone came into money. someone always does.", '@hardcandy');
+        applyRep({ street: 2, spiritual: -1 });
+      } else {
+        toast(c.intro ? `+ $${c.amt}\nyou bend down. the ten dollars is yours now.\n(it was always there.)` : `+ $${c.amt}\n(found in a corner.)`, c.intro?2400:1400);
+      }
       tryCompleteIntroRemember();
       saveGame();
     }
@@ -5020,6 +5300,17 @@ function updateWorld(dt) {
         n.y += (tdy/tlen) * (n.speed||1) * (dt/16);
         isMoving = true;
       }
+    } else if (n.wanderOff) {
+      // v13 wave 7 — day-event actor walking off-map. once past world bounds, despawn.
+      const tdx = (n.targetX||(WORLD.w+80)) - n.x, tdy = (n.targetY||n.y) - n.y;
+      const tlen = Math.sqrt(tdx*tdx+tdy*tdy);
+      if (tlen > 4) {
+        n.x += (tdx/tlen) * (n.speed||1.2) * (dt/16);
+        n.y += (tdy/tlen) * (n.speed||1.2) * (dt/16);
+        isMoving = true;
+      } else {
+        n.dead = true;
+      }
     } else if (n.wander && n.speed > 0) {
       n.wanderT = (n.wanderT||0) - dt;
       if (n.wanderT <= 0) {
@@ -5329,6 +5620,8 @@ function drawAll() {
   }
   // marketplace stalls (decoration only)
   drawMarketStalls();
+  // v13 wave 7 — hideout doors (only render if owned)
+  drawHideoutDoors();
 
   // procedural graffiti on building walls
   drawGraffiti();
@@ -6134,6 +6427,36 @@ function drawGraffiti() {
   }
 }
 
+// v13 wave 7 — small wooden-door decal at each owned hideout. drawn in world space.
+function drawHideoutDoors() {
+  for (const kind of ['scrap', 'mom']) {
+    if (!hideoutOwned(kind)) continue;
+    const d = HIDEOUT_DOORS[kind];
+    const sx = d.x - state.cam.x, sy = d.y - state.cam.y;
+    if (sx < -50 || sx > W+50 || sy < -60 || sy > H+50) continue;
+    // door
+    ctx.fillStyle = kind === 'mom' ? '#6a4a30' : '#4a3a28';
+    ctx.fillRect(sx, sy, d.w, d.h);
+    // panel
+    ctx.fillStyle = kind === 'mom' ? '#8a6440' : '#5a4830';
+    ctx.fillRect(sx+3, sy+4, d.w-6, d.h-8);
+    // knob
+    ctx.fillStyle = '#c8a060';
+    ctx.fillRect(sx + d.w - 7, sy + d.h/2 - 1, 2, 2);
+    // "(E)" hint if player close
+    const ddx = (P.x+P.w/2) - (d.x+d.w/2), ddy = (P.y+P.h/2) - (d.y+d.h/2);
+    if (ddx*ddx + ddy*ddy < 60*60) {
+      ctx.fillStyle = 'rgba(0,0,0,.8)';
+      ctx.fillRect(sx + d.w/2 - 10, sy - 14, 20, 12);
+      ctx.fillStyle = '#e8c040';
+      ctx.font = 'bold 10px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText('(E)', sx + d.w/2, sy - 5);
+      ctx.textAlign = 'left';
+    }
+  }
+}
+
 function drawProps() {
   for (const p of PROPS) {
     // cull
@@ -6654,18 +6977,21 @@ function drawNpc(n) {
   }
   // v13 wave 3 — unvisited-vendor "?" floater. fades on first dialogue open.
   // never on hostile or aggro'd npcs (would clash with the aggro "!" and read weird).
-  if (VENDOR_FLOATER_IDS.has(n.id) && !state.metVendors.has(n.id) && !n.aggro && !n.hostile) {
+  // v13 wave 7 — also draw for npcs flagged with n.hasFloater (day event actors).
+  if ((VENDOR_FLOATER_IDS.has(n.id) || n.hasFloater) && !state.metVendors.has(n.id) && !n.aggro && !n.hostile) {
     const bob = Math.sin(performance.now()/360 + (n.x*0.013)) * 2;
     const fy = n.y - 16 + bob;
     const fx = n.x + n.w/2;
+    const sym = n.hasFloater || '?';
+    const sz = n.hasFloater === '?' && n.isBusDriver ? 22 : 16;
     ctx.save();
     ctx.globalAlpha = 0.78;
     ctx.fillStyle = '#0a0805';
-    ctx.font = 'bold 16px Courier New';
+    ctx.font = `bold ${sz}px Courier New`;
     ctx.textAlign = 'center';
-    ctx.fillText('?', fx+1, fy+1);
+    ctx.fillText(sym, fx+1, fy+1);
     ctx.fillStyle = '#e8c040';
-    ctx.fillText('?', fx, fy);
+    ctx.fillText(sym, fx, fy);
     ctx.textAlign = 'left';
     ctx.restore();
   }
@@ -6816,6 +7142,8 @@ function endingScreen(kind) {
 
 // ---------- INTERACT ----------
 function tryInteract() {
+  // v13 wave 7 — hideout doors (E within 40px while owned).
+  if (tryEnterHideout()) return;
   // v13 wave 6 — kickable trash cans (E within 50px). 50% cash / 20% junk / 30% rats.
   for (const ip of interactiveProps) {
     if (ip.type !== 'trashcan') continue;
@@ -7107,6 +7435,193 @@ function resetDailyCounters() {
   for (const k of DAILY_COUNTER_KEYS) state.counters[k] = 0;
 }
 
+// ---------- v13 wave 7 — day-specific scripted events ----------
+// fire at most once per save, guarded by state.flags.dayNFired booleans.
+function fireDayEvents() {
+  if (!state.flags) state.flags = {};
+  if (state.day === 3 && !state.flags.day3Fired)   fireDay3Visit();
+  if (state.day === 7 && !state.flags.day7Fired)   fireDay7Silence();
+  if (state.day === 14 && !state.flags.day14Fired) fireDay14Inheritance();
+  if (state.day === 30 && !state.flags.day30Fired) fireDay30Bus();
+}
+// re-spawn the bus driver on reload if day 30 fired but resolution didn't.
+function rehydrateDay30Bus() {
+  if (!state.flags) return;
+  if (!state.flags.day30Fired || state.flags.busTaken || state.flags.busRefused) return;
+  if (npcs.find(n => n.id === 'bus_driver')) return;
+  // re-run fireDay30Bus without re-firing the broadcast, by temporarily clearing the flag and restoring.
+  state.flags.day30Fired = false;
+  fireDay30Bus();
+}
+
+function fireDay3Visit() {
+  state.flags.day3Fired = true;
+  // spawn passive "someone you don't know" near the player. wanders off after the encounter.
+  const id = 'day3_visitor_' + Date.now();
+  const visitor = {
+    id, name: "SOMEONE YOU DON'T KNOW", sprite: 'lurch',
+    x: P.x + 80, y: P.y + 30, w: 24, h: 28, color: '#3a3030',
+    hp: 30, maxHp: 30, speed: 0.6, hostile: false, archetype: 'passive',
+    isDay3Visitor: true, hasFloater: '?',
+    interact: (n) => dialogue("SOMEONE YOU DON'T KNOW",
+      "someone you don't know.\nthey say:\n\n'i heard about you.'\n\nthat's all they say.",
+      [{ label: 'leave.', action: () => { n.wanderOff = true; n.speed = 1.2; n.targetX = WORLD.w + 80; n.targetY = n.y; }}]),
+  };
+  visitor.x = Math.max(40, Math.min(WORLD.w - 40, visitor.x));
+  visitor.y = Math.max(40, Math.min(WORLD.h - 40, visitor.y));
+  npcs.push(visitor);
+  toast("someone you don't know is on the block today.\nthey are not moving.\nthey are watching.", 4200);
+  feedPost("someone was on the block today. someone was watching.", '@crackheadcent');
+  saveGame();
+}
+
+function fireDay7Silence() {
+  state.flags.day7Fired = true;
+  state.flags.silenceUntilT = Date.now() + 4 * 60 * 1000; // 4 in-game minutes (real-time, since dayTime is real-time)
+  toast("the radio is off.\nthe phones are off.\nthe city is listening to something.", 5400);
+  // we don't broadcast or post — that's the point.
+  saveGame();
+}
+
+function fireDay14Inheritance() {
+  state.flags.day14Fired = true;
+  // spawn a $500 pile in player's current zone area (near player, jittered, clamped to world)
+  const px = P.x + (Math.random()-.5) * 320;
+  const py = P.y + (Math.random()-.5) * 320;
+  cashPiles.push({
+    id: 'cp_inheritance_' + Date.now(),
+    x: Math.max(40, Math.min(WORLD.w-40, px)),
+    y: Math.max(40, Math.min(WORLD.h-40, py)),
+    amt: 500, isInheritance: true, collected: false,
+  });
+  toast("something arrived today.\nyou don't know what.\nyou will, when you find it.", 4200);
+  saveGame();
+}
+
+function fireDay30Bus() {
+  state.flags.day30Fired = true;
+  if (state.flags.busTaken || state.flags.busRefused) return; // already resolved
+  // bus stop is where pinky stands (per VENDOR_INDEX_META). spawn the driver a few tiles south.
+  let bx = 1330, by = 1260;
+  const driver = {
+    id: 'bus_driver', name: 'THE BUS DRIVER', sprite: 'lurch',
+    x: bx, y: by, w: 24, h: 28, color: '#1a2a3a',
+    hp: 60, maxHp: 60, speed: 0, hostile: false, archetype: 'passive',
+    isBusDriver: true, hasFloater: '?',
+    interact: (n) => dialogue('THE BUS DRIVER',
+      "the bus is here.\nit hasn't been here in a while.\nthe driver looks at you.\n\nare you getting on?",
+      [
+        { label: 'yes. get on the bus.', action: () => takeTheBus() },
+        { label: 'no. not today.', action: () => {
+          state.flags.busRefused = true;
+          const idx = npcs.findIndex(x => x.id === 'bus_driver'); if (idx >= 0) npcs.splice(idx, 1);
+          toast("the bus leaves.\nit doesn't come back.\nthat was your chance.", 5200);
+          feedPost("the bus left. someone watched it leave.", '@crackheadcent');
+          saveGame();
+        }},
+      ]),
+  };
+  npcs.push(driver);
+  toast("a bus is at the stop.\nit hasn't been there in a while.\nthe driver is looking at you.", 5400);
+  feedPost("the bus is back. it does not come back often.", '@crackheadcent');
+  saveGame();
+}
+
+function takeTheBus() {
+  state.flags.busTaken = true;
+  unlockAchievement('the_bus');
+  state.mode = 'title';
+  const t = document.getElementById('title');
+  t.classList.remove('hide');
+  t.innerHTML = `
+    <h1 style="color:#6080a0;font-size:32px">THE BUS</h1>
+    <div class="sub">you got on the bus.<br>the bus left.<br>you survived rock bottom.<br>the bus has a destination. it has not told you.</div>
+    <div class="sub" style="margin-top:14px;opacity:.6">days: ${state.day} · rocks smoked: ${P.lifetime.rocksSmoked||0} · cred: ${P.cred|0}</div>
+    <div class="start">[ SPACE ] start again</div>
+    <div class="credit">vibekoded · the possum stayed</div>`;
+  window.storage.set(SAVE_KEY, null);
+}
+
+// ---------- v13 wave 7 — hideouts ----------
+// scrap-yard hideout: door at (520, 200) — back corner of scrap yard, behind yuri.
+// mom's apartment hideout: door at (1230, 1180) — marketplace area, close to mom (mom is at ~1280,1180).
+// E within 40px while owned = openHideout(kind). interactive dialogue with chest, rest, sleep, leave.
+const HIDEOUT_DOORS = {
+  scrap: { x: 520, y: 200, w: 24, h: 32 },
+  mom:   { x: 1230, y: 1180, w: 24, h: 32 },
+};
+function hideoutOwned(kind) {
+  if (!state.flags) return false;
+  return kind === 'scrap' ? !!state.flags.scrapHideoutOwned : !!state.flags.momHideoutOwned;
+}
+function tryEnterHideout() {
+  for (const kind of ['scrap', 'mom']) {
+    if (!hideoutOwned(kind)) continue;
+    const d = HIDEOUT_DOORS[kind];
+    const ddx = (P.x + P.w/2) - (d.x + d.w/2);
+    const ddy = (P.y + P.h/2) - (d.y + d.h/2);
+    if (ddx*ddx + ddy*ddy < 40*40) { openHideout(kind); return true; }
+  }
+  return false;
+}
+function openHideout(kind) {
+  const isMom = kind === 'mom';
+  const title = isMom ? "MOM'S COUCH" : "THE SHED";
+  const intro = isMom
+    ? "the apartment is warm.\nben is at work.\nthe couch is cleared.\nyou recognize this couch."
+    : "the shed smells like dust and old grease.\nthere is a chest in the corner.\nthere is a cot.\nthe door locks from the inside.";
+  dialogue(title, intro, [
+    { label: "open the chest. (stash survives death.)", action: () => openHideoutChest(kind) },
+    { label: isMom ? "rest 30 minutes. (+12 hp · -1 wanted)" : "rest 30 minutes. (+8 hp · -1 wanted)",
+      action: () => {
+        P.hp = Math.min(P.maxHp, P.hp + (isMom ? 12 : 8));
+        P.wanted = Math.max(0, P.wanted - 1);
+        toast("you sit down.\nthe walls have nothing to say.\n" + (isMom ? '+ 12 hp · - 1 wanted' : '+ 8 hp · - 1 wanted'), 2800);
+        saveGame();
+      }
+    },
+    { label: "sleep until morning. advances a day.", action: () => {
+      const target = state.dayTime > 0.3 ? 1.3 : 0.3;
+      state.dayTime = target;
+      if (state.dayTime >= 1) { state.dayTime -= 1; state.day++; P.lifetime.dayCount = state.day; rollWeather(); rollHustles(); resetDailyCounters(); fireDayEvents(); }
+      P.hp = Math.min(P.maxHp, P.hp + (isMom ? 60 : 50));
+      P.brain = Math.min(100, P.brain + (isMom ? 30 : 25));
+      P.shakes = Math.min(100, P.shakes + 15);
+      P.wanted = Math.max(0, P.wanted - 2);
+      adjustFaction(isMom ? 'spiritual' : 'scrap', 1);
+      toast("you slept.\nyou are still here.\nthe day is the next day.", 3000);
+      saveGame();
+    }},
+    isMom ? { label: "use the apartment phone. (skip the next ambient call.)", action: () => {
+      state.phoneT = 90000 + Math.random()*150000;
+      toast("the phone goes back on the hook.\nben uses this phone.\nben is at work.", 2400);
+    }} : null,
+    { label: "leave.", action: () => {} },
+  ].filter(Boolean));
+}
+function openHideoutChest(kind) {
+  // chest is shared across both hideouts (one stash). simpler + matches the "your stuff" mental model.
+  if (!state.hideoutStash) state.hideoutStash = { rocks:0, copper:0, cash:0, items:[] };
+  const s = state.hideoutStash;
+  dialogue("THE CHEST",
+    "metal box. dented. heavy.\nin the chest:\n  rocks: " + s.rocks + "\n  pure copper: " + s.copper + "\n  cash: $" + s.cash + "\n  items: " + (s.items.length||0),
+    [
+      { label: P.rocks>0 ? "deposit 1 rock. (chest: " + s.rocks + ")" : "deposit a rock. (you have none.)",
+        disabled: P.rocks<=0, action: () => { P.rocks--; s.rocks++; toast("- 1 rock · → chest", 1400); saveGame(); openHideoutChest(kind); }},
+      { label: s.rocks>0 ? "withdraw 1 rock. (chest: " + s.rocks + ")" : "withdraw a rock. (chest empty.)",
+        disabled: s.rocks<=0, action: () => { s.rocks--; P.rocks++; toast("← chest · + 1 rock", 1400); saveGame(); openHideoutChest(kind); }},
+      { label: P.copper>0 ? "deposit 1 copper. (chest: " + s.copper + ")" : "deposit copper. (you have none.)",
+        disabled: P.copper<=0, action: () => { P.copper--; s.copper++; toast("- 1 copper · → chest", 1400); saveGame(); openHideoutChest(kind); }},
+      { label: s.copper>0 ? "withdraw 1 copper. (chest: " + s.copper + ")" : "withdraw copper. (chest empty.)",
+        disabled: s.copper<=0, action: () => { s.copper--; P.copper++; toast("← chest · + 1 copper", 1400); saveGame(); openHideoutChest(kind); }},
+      { label: P.cash>=10 ? "deposit $10. (chest: $" + s.cash + ")" : "deposit $10. (short.)",
+        disabled: P.cash<10, action: () => { P.cash -= 10; s.cash += 10; toast("- $10 · → chest", 1400); saveGame(); openHideoutChest(kind); }},
+      { label: s.cash>=10 ? "withdraw $10. (chest: $" + s.cash + ")" : "withdraw $10. (chest short.)",
+        disabled: s.cash<10, action: () => { s.cash -= 10; P.cash += 10; toast("← chest · + $10", 1400); saveGame(); openHideoutChest(kind); }},
+      { label: "close the chest.", action: () => openHideout(kind) },
+    ]);
+}
+
 // ---------- HEIST (simple 3-stage) ----------
 async function startHeist() {
   // v13 wave 6.5 — heist has a daily cap (3/day). closes the conductor-arbitrage grind path.
@@ -7283,15 +7798,17 @@ function startLockpickMini(onSuccess, onFail) {
 function spawnBrutusOlder() {
   if (state.brutusOlderActive) return;
   state.brutusOlderActive = true;
+  // v13 wave 7 — street loved: brutus older spawns but does not aggro unprovoked.
+  const streetLoved = factionTier(P.faction ? P.faction.street : 0) === 'loved';
   const b = {
     id:'brutus_older', name:'BRUTUS THE OLDER', sprite:'brutus',
     x: P.x + 100, y: P.y + 100,
     w: 48, h: 36, color:'#8a3030',
     hp:200, maxHp:200, speed:2.4, dmg:14,
-    hostile:true, aggro:true, isBossB:true,
+    hostile: !streetLoved, aggro: !streetLoved, isBossB:true,
     showHp:true, attackCd:0, scale: 1.5,
     // v13 wave 5 — charger from the start; grabber added at phase 3 via state.brutusOlderPhase
-    archetype:'charger_older',
+    archetype: streetLoved ? 'passive' : 'charger_older',
     addsT: 0,
   };
   b.x = clamp(b.x, 40, WORLD.w-80);
@@ -7301,9 +7818,14 @@ function spawnBrutusOlder() {
   audio.bossRoar();
   state.flash = 1; state.flashColor = 'rgba(160,40,40,.4)';
   state.shake = 14;
-  toast("BRUTUS RETURNS.\nhe is larger now.\nhis eyes are red.\nhe is ASCENDED.", 4500);
+  if (streetLoved) {
+    toast("BRUTUS RETURNS.\nhe is larger now.\nhis eyes are red.\nhe sniffs once. he sits.\n(the block knows you.)", 5400);
+    feedPost("the dog came back. he is bigger now. he did not charge.", '@crackheadcent');
+  } else {
+    toast("BRUTUS RETURNS.\nhe is larger now.\nhis eyes are red.\nhe is ASCENDED.", 4500);
+    feedPost("the dog came back. he is bigger now.", '@crackheadcent');
+  }
   broadcastNews("BRUTUS HAS RETURNED. WITNESSES DESCRIBE 'LARGER. REDDER.'");
-  feedPost("the dog came back. he is bigger now.", '@crackheadcent');
 }
 function blockMenu() {
   const opts = [];
@@ -7334,6 +7856,7 @@ function blockMenu() {
       state.flash = 1; state.flashColor = 'rgba(232,192,64,.5)';
       toast('· smoke a rock ·\nthe sun moves.\nbrain -4. shakes -50.', 2500);
       feedPost("smoked a rock at the block. for the bit.", '@crackheadcent');
+      applyRep({ street: 1, spiritual: -1 }); // wave 7 — smoking real rocks ledger
       // v13 wave 3 — completes the intro chain
       completeIntroSmoke();
       saveGame();
@@ -7596,7 +8119,17 @@ function startGame(loaded) {
     state.flags = {
       introDone: false, momIntroFired: false, hasStripePackage: false,
       stripeBetrayed: false, daveHasCrossword: false, hasCrossword: false, crownSpotIdx: -1,
+      // v13 wave 7 — day events + hideouts
+      day3Fired: false, day7Fired: false, day14Fired: false, day30Fired: false,
+      day14Collected: false, busTaken: false, busRefused: false,
+      silenceUntilT: 0,
+      scrapHideoutOwned: false, momHideoutOwned: false,
+      momRentDay: 0, scrapLoanDay: 0, momProudCallDay: 0,
     };
+    // v13 wave 7 — faction reputation + hideout chest
+    P.faction = { street: 0, scrap: 0, spiritual: 0 };
+    state.hideoutStash = { rocks:0, copper:0, cash:0, items:[] };
+    state.dayEventActor = null;
     state.crownPickup = null;
     state.momTipT = 30000; // ~30s into the new save
     // intro chain seeds
@@ -7629,6 +8162,8 @@ function startGame(loaded) {
   buildGraffiti();
   applyEquipStats();
   rollHustles();
+  // v13 wave 7 — re-spawn bus driver if day 30 fired but bus unresolved
+  rehydrateDay30Bus();
   state.mode = 'playing';
   // v13 wave 3 — different first-toast for the intro
   if (!loaded && state.flags && !state.flags.introDone) {

@@ -320,6 +320,159 @@ Existing saves load with `introDone = true` defaulted-on and skip the intro chai
 
 `P.charisma` is summed from `EQUIPMENT[id].charisma` across all equipped slots in `applyEquipStats()`. Currently only `pigeon_crown` has `charisma: 1`. The `vendorPrice(base)` helper returns `Math.max(1, Math.round(base * 0.9))` when `P.charisma >= 1`, else `base`. Plumbed into Tony's $10 rock, Barb's $5/$22 packets, Pinky's $4/$18 packets, and Stripe's $8 buy / $6 fence.
 
+## FACTIONS (v13 wave 7)
+
+Three reputation tracks, separate from `P.cred`. Each is a signed integer stored on `P.faction = { street: 0, scrap: 0, spiritual: 0 }`. Persisted in save (no SAVE_KEY bump — missing fields default to 0).
+
+### TIER HELPER
+
+`factionTier(value)` returns one of: `'hated' | 'neutral' | 'liked' | 'loved'`.
+
+| value range | tier |
+|---|---|
+| ≤ −10 | hated |
+| −9 to +9 | neutral |
+| +10 to +24 | liked |
+| ≥ +25 | loved |
+
+### MEMBER AFFILIATIONS (who counts as which faction)
+
+- **STREET**: Tre Bag Tony, Stripe, every Brutus (Younger, Older, Jr. boss), Lurch, Sherri, Paulie, Dave, Pinky Polenta, Cousin Brendan (family-soft on street rep — killing him deducts street rep)
+- **SCRAP**: Yuri, Pete, Big Guy, the chained dog (wave 6), the Mathematician (he respects numbers)
+- **SPIRITUAL**: Mom / kombucha lady, Father O'Malley (pre-fall only — fallen variant becomes street-coded), the Possum, the Conductor, O'Malley's tic-tac son, the karaoke mike (if surfaced)
+
+### REP DELTA CONTRACT
+
+Wired into every existing transaction. Soap rocks deliberately do not count for spiritual — the universe doesn't validate self-deception.
+
+| Action | Street | Scrap | Spiritual |
+|---|---|---|---|
+| Buy rock from Tony | +1 | 0 | 0 |
+| Fence rock with Stripe (each) | +1 | 0 | −1 (cap −3 / day) |
+| Sell copper to Yuri | 0 | +1 | 0 |
+| Sell copper to Pete | 0 | +1 | 0 |
+| Donate to priest ($5) | 0 | 0 | +2 |
+| Steal priest's collection plate | +1 | 0 | −3 |
+| Ask mom for $10 / $20 | 0 | 0 | −1 |
+| Compliment mom's kombucha | 0 | 0 | +1 |
+| Smoke a rock at the crate | +1 | 0 | −1 |
+| Smoke a SOAP rock | 0 | 0 | 0 |
+| Kill Brutus / Lurch / Sherri / Paulie | +1 | 0 | 0 |
+| Kill a cop / Cousin Brendan | −3 | 0 | +1 |
+| Kill Father O'Malley (fallen) | +2 | 0 | 0 |
+| Feed chained dog | 0 | +2 | 0 |
+| Free chained dog (lockpick) | 0 | +3 | −1 |
+| Buy from Pinky Polenta | +1 | 0 | −1 |
+| Mathematician hidden tip received | 0 | +1 | 0 |
+| Return crossword to Barb | +1 | 0 | 0 |
+| Sleep at scrap hideout | 0 | +1 | 0 |
+| Sleep at mom's hideout | 0 | 0 | +1 |
+| Day 14 inheritance pickup | +2 | 0 | −1 |
+
+`adjustFaction(faction, delta)` is the single mutator. It clamps to `[-50, +50]`, detects tier transitions, and broadcasts the matching phone-feed line + toast on crossings.
+
+### TIER EFFECTS (wired into existing code paths)
+
+**STREET LIKED** — Tony's rock base price drops $9 → $8 (still multiplicative with charisma).
+**STREET LOVED** — Brutus Older variant no longer aggros unprovoked; propane torch drop chance +50%.
+**STREET HATED** — Pinky Polenta refuses to sell ("you smell like a snitch.").
+**SCRAP LIKED** — Yuri buys copper at $28 (+$3); Pete buys at $17 (+$2).
+**SCRAP LOVED** — Pete will lend $50 once per day (`scrap_loan_day` flag); implicit cred-deduction over 3 days.
+**SCRAP HATED** — Pete refuses to buy ("pete is full.").
+**SPIRITUAL LIKED** — Mom calls randomly with proud-line: +5 brain on receive.
+**SPIRITUAL LOVED** — Father O'Malley refuses to fall (fallen-priest trigger requires `P.faction.spiritual < +10`); Possum prophecy fires more often.
+**SPIRITUAL HATED** — Mom's ambient phone line stops firing.
+
+### TIER TRANSITION BROADCASTS
+
+Tier crossings emit one phone-feed line and one short toast. Lines are flat, third-person, lowercase.
+
+- STREET → LIKED: `"@hardcandy: someone has been seen with tony. someone keeps being seen."`
+- STREET → LOVED: `"@hardcandy: tony said your name three times today."`
+- STREET → HATED: `"@blocklog: word travels. word does not return."`
+- SCRAP → LIKED: `"@blocklog: yuri counted three times today. counted right twice."`
+- SCRAP → LOVED: `"@blocklog: pete wrote down a number. pete does not write down numbers."`
+- SCRAP → HATED: `"@hardcandy: the yard gate is half closed. half closed is closed."`
+- SPIRITUAL → LIKED: `"@blocklog: mom called. mom does not always call."`
+- SPIRITUAL → LOVED: `"@hardcandy: the possum sat upright today. the possum is not always upright."`
+- SPIRITUAL → HATED: `"@blocklog: mom hasn't called. her phone is on silent."`
+
+### Q-KEY PANEL
+
+New `FACTIONS` block at the top of the Q-panel. Three rows: `STREET`, `SCRAP`, `SPIRITUAL`. Each row shows the tier label and a thin bar that maps `[-50, +50]` onto fill. Color: muted green for liked/loved, muted red for hated, off-white for neutral. Below the panel: short legend `"hated · neutral · liked · loved"`.
+
+## DAY EVENTS (v13 wave 7)
+
+Tracked by `state.day`. Fire AT MOST ONCE per save. Each guarded by a flag on `state.flags`.
+
+### Day 3 — "the visit"
+
+Trigger: `state.day === 3 && !state.flags.day3Fired`, on morning tick.
+- Spawn one passive aggressive-archetype NPC at player's current zone center, NOT aggro'd, with a `?` floater.
+- Approach (within 32px) triggers single dialogue: `"someone you don't know.\nthey say:\n\n'i heard about you.'\n\nthat's all they say."`
+- After dialogue closes, NPC wanders off and despawns on zone change.
+- Feed: `"@crackheadcent: someone was on the block today. someone was watching."`
+- Sets `state.flags.day3Fired = true`.
+
+### Day 7 — "the silence"
+
+Trigger: `state.day === 7 && !state.flags.day7Fired`, on morning tick.
+- For 4 in-game minutes: news ticker suppressed, phone feed suppressed, ambient phone calls suppressed.
+- Toast at trigger: `"the radio is off.\nthe phones are off.\nthe city is listening to something."`
+- After 4 min, systems resume normally. Sets `state.flags.day7Fired = true` at trigger.
+
+### Day 14 — "the inheritance"
+
+Trigger: `state.day === 14 && !state.flags.day14Fired`, on morning tick.
+- Spawn a $500 cash pile at random spot in player's current zone with a larger `?` floater.
+- On collect: `"+ $500\n\nyou don't recognize the bill.\nyou don't recognize the wallet.\nyou recognize the smell."`
+- Apply: +$500, +2 street, −1 spiritual.
+- Feed on collect: `"@hardcandy: someone came into money. someone always does."`
+- Sets `state.flags.day14Fired = true` at trigger; `state.flags.day14Collected = true` on pickup.
+
+### Day 30 — "the bus"
+
+Trigger: `state.day === 30 && !state.flags.day30Fired`, on morning tick.
+- Spawn `bus_driver` NPC at the bus stop.
+- Within 30px triggers dialogue: `"the bus is here.\nit hasn't been here in a while.\nthe driver looks at you.\n\nare you getting on?"`
+- **yes** → THE_BUS ending screen modeled on existing `endingScreen`: `"you got on the bus.\nthe bus left.\nyou survived rock bottom.\nthe bus has a destination. it has not told you."` Plus stats summary and `THE_BUS` achievement. Save returns to main menu.
+- **no** → bus despawns permanently this save. Toast: `"the bus leaves.\nit doesn't come back.\nthat was your chance."`
+- Sets `state.flags.day30Fired = true` at trigger.
+
+This is a third ending alongside the Tony and Stripe co-op endings.
+
+## HIDEOUTS (v13 wave 7)
+
+Two rentable interiors. Both: a shared storage chest survives death; rest/sleep actions apply discrete HP regen and wanted-decay rather than real-time tickers.
+
+### IMPLEMENTATION NOTE — modal-dialogue interior (not a scene swap)
+
+Originally the spec called for a real scene swap with a bounded interior camera. In practice this collided with the rest of the game's modal/dialogue-driven interaction model, so the actual implementation is a **modal-dialogue interior**: pressing E on the door (when owned) opens `openHideout(kind)` — a dialogue with rest, sleep, chest, and (mom only) phone-reset actions. There is no separate interior camera or paused world rendering. The "5× faster wanted decay" and "1 HP / 4 sec" effects from the original spec became discrete `rest 30 minutes` actions instead of per-tick rates. See BRAIN.md wave 7 entry for the judgment-call reasoning.
+
+### SCRAP YARD HIDEOUT
+
+- Door rendered in world at `(520, 200)` (back corner of scrap yard).
+- Gate: talk to Yuri while `P.faction.scrap >= +5`.
+- Cost: $150 one-time. Sets `state.flags.scrapHideoutOwned = true`.
+- Rest action: +8 HP, −1 wanted.
+- Sleep action: +50 HP, +25 brain, +15 shakes, −2 wanted, advance day, +1 scrap rep.
+
+### MOM'S APARTMENT HIDEOUT
+
+- Door rendered in world at `(1230, 1180)` (marketplace, near mom's typical position).
+- Gate: talk to mom while `P.faction.spiritual >= +10`.
+- Cost: $30/day stayed (deducted on each dawn rollover; if short, evicts and −3 spiritual). Sets `state.flags.momHideoutOwned`.
+- Rest action: +12 HP, −1 wanted.
+- Sleep action: +60 HP, +30 brain, +15 shakes, −2 wanted, advance day, +1 spiritual rep.
+- Phone action: resets `state.phoneT` to skip the next ambient call deterministically.
+
+### STORAGE CHEST (shared)
+
+- E on the chest from either hideout opens `openHideoutChest(kind)` deposit/withdraw menu.
+- Stash lives at `state.hideoutStash = { rocks, copper, cash, items }`. ONE stash, shared between both hideouts.
+- Deposit/withdraw at fixed increments (1 rock, 1 copper, $10). Items array is allocated for future expansion (not yet wired).
+- On player death/arrest: on-hand `P.cash` and `P.rocks` → 0 (existing behavior); `state.hideoutStash` is on `state` not `P` and is fully preserved. THIS is the point of the safe.
+
 ## INVARIANTS
 
 These properties MUST hold across all builds. Violating any of these breaks the game spec.

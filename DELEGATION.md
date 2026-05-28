@@ -4,6 +4,32 @@
 
 ---
 
+## v13 wave 7 — SHIPPED ✓ (May 28, 2026) — faction rep + day events + hideouts
+
+Lands on `rock_bottom_v13.html`. SAVE_KEY untouched. See SPEC.md `FACTIONS`, `DAY EVENTS`, `HIDEOUTS` for the contract; BRAIN.md wave 7 entry for judgment calls.
+
+- [x] **Part A — faction reputation system**
+  - [x] `P.faction = { street, scrap, spiritual }` + save/load forward-compat (old saves default neutral)
+  - [x] `factionTier(value)` helper (hated ≤−10 / neutral −9..+9 / liked +10..+24 / loved ≥+25)
+  - [x] `adjustFaction(faction, delta)` mutator with [-50,+50] clamp + tier transition broadcast + LOVED achievement unlocks
+  - [x] Rep deltas wired into every existing transaction (Tony/Stripe/Yuri/Pete/priest/mom/smoking/kills/dog/Pinky/Math/Barb/sleep)
+  - [x] Tier effects: Tony $8 base at street liked+; Brutus Older passive at street loved + torch drop 0.25→0.375; Yuri $25→$28 at scrap liked+; Pete $15→$17 at scrap liked+, $50 loan 1×/day at scrap loved, refuse-to-buy at scrap hated; Pinky refusal at street hated; O'Malley anti-fall gate at spiritual ≥+10; mom proud-call (+5 brain) 1×/day at spiritual liked+
+  - [x] Q-key panel FACTIONS section at top with tier label + value bar per faction
+  - [x] Tier transition phone-feed + toast lines (12 strings, one per faction × tier crossing)
+- [x] **Part B — day-specific events** (fire once per save, guarded flags)
+  - [x] Day 3 "the visit" — passive NPC + dialogue + wander-off-map
+  - [x] Day 7 "the silence" — 4-min ticker/phone suppression via `silenceUntilT`
+  - [x] Day 14 "the inheritance" — $500 pile + rep deltas + custom pickup toast
+  - [x] Day 30 "the bus" — bus driver + THE_BUS ending + rehydrate-on-reload guard
+- [x] **Part C — hideouts** (modal-dialogue interior, not scene swap — see BRAIN judgment-call note)
+  - [x] Scrap yard hideout (gate: scrap ≥+5, cost $150 one-time, door at (520,200))
+  - [x] Mom's apartment hideout (gate: spiritual ≥+10, $30/day with eviction on shortfall, door at (1230,1180))
+  - [x] Shared storage chest (rocks/copper/cash/items, survives death via `state.hideoutStash`)
+  - [x] Rest + sleep actions apply HP / wanted / day / rep effects discretely
+- [x] **4 new achievements**: THE BUS, THE BLOCK KNOWS, YURI COUNTS YOU IN, MOM IS PROUD
+
+---
+
 ## v13 wave 6.5 — SHIPPED ✓ (May 26, 2026) — economy balance pass
 
 - [x] **Exploit 1: kombucha lady / mom infinite loop** — `momDialogue` ask-money (both $10 and $20 share a slot) gated 1×/day via `state.counters.kombuchaAskDay`; compliment kombucha gated 1×/day via `kombuchaComplimentDay`. Consumed branches surface VIBE refusal lines so the player sees the gate. Toast suffixes "come back tomorrow." on the productive paths.
