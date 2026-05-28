@@ -4050,6 +4050,14 @@ function tryEnterOldSchool() {
   const ddx = (P.x+P.w/2) - (OLD_SCHOOL_DOOR.x + OLD_SCHOOL_DOOR.w/2);
   const ddy = (P.y+P.h/2) - (OLD_SCHOOL_DOOR.y + OLD_SCHOOL_DOOR.h/2);
   if (ddx*ddx + ddy*ddy < 44*44) {
+    // v13 wave 8.6 — rank-3 gate. before this, the school was an open-air copper print
+    // (60% no-risk rip). progression now has a real wall.
+    if ((P.rank||0) < 3) {
+      dialogue("THE OLD SCHOOL",
+        "the door is chained.\nthe chain is rusted.\nyou don't have what it takes to break it yet.\n(rank 3 required.)",
+        [{ label: "leave.", action: () => { state.mode = 'playing'; } }]);
+      return true;
+    }
     openOldSchoolInterior();
     return true;
   }
@@ -4064,12 +4072,26 @@ function openOldSchoolInterior() {
     intro,
     [
       { label: "rip copper from the walls. (40% spawn risk.)", action: () => {
+        // v13 wave 8.6 — first rip per save FORCES OS Brutus spawn. no copper this time.
+        // after he's killed once (state.flags.osBrutusKilled = true, flipped in death drop
+        // at line ~4849), subsequent rips revert to 40% probabilistic spawn (the cousins).
+        // existing saves with no flag default to FALSE — first rip post-update forces spawn
+        // even if the player already ripped pre-fix. one-time tax. acceptable.
+        const firstEverRip = !state.flags.osBrutusKilled && !brutusAlive;
+        if (firstEverRip) {
+          audio.glassBreak();
+          spawnOldSchoolBrutus();
+          toast("the copper is here. so is OLD SCHOOL BRUTUS.\nhe was sleeping in the gym. he is no longer sleeping.\nno copper this time.", 4400);
+          state.mode = 'playing';
+          saveGame();
+          return;
+        }
         P.copper += 2;
         state.counters.copperStripped = (state.counters.copperStripped||0) + 2;
         if (state.counters.copperStripped >= 10) unlockAchievement('copper_singer');
         audio.glassBreak();
         toast("+ 2 pure copper\nthe pipe groans.\nsomething hears it.", 3000);
-        // spawn risk
+        // spawn risk — cousins. only rolls after first kill, when no brutus is currently up.
         if (!brutusAlive && Math.random() < 0.4) {
           spawnOldSchoolBrutus();
           // close the interior — fight happens outside in the schoolyard
@@ -4870,6 +4892,9 @@ function onNpcDeath(n) {
       });
     }
     unlockAchievement('school_s_out');
+    // v13 wave 8.6 — flip the first-rip gate. subsequent rips revert to 40% probabilistic spawn
+    // (the cousins). read in openOldSchoolInterior's rip handler.
+    state.flags.osBrutusKilled = true;
     toast("OLD SCHOOL BRUTUS IS DOWN.\n+ $80. + 5 copper. + a torch he had on him.\nthe gym is finally quiet.", 5500);
     broadcastNews("THE OLD SCHOOL IS QUIET. SOMETHING LARGE NO LONGER LIVES IN THE GYM.");
     feedPost("school's out. the old school is empty. the copper is gone.", '@blocklog');
@@ -8437,10 +8462,56 @@ function endingScreen(kind) {
 
 // ---------- INTERACT ----------
 function tryInteract() {
-  // v13 wave 7 — hideout doors (E within 40px while owned).
+  // v13 wave 7 — hideout doors (E within 40px while owned). doors win over everything.
   if (tryEnterHideout()) return;
   // v13 wave 8a — old school door (E within 44px). modal interior dialogue (hideout pattern).
+  // wave 8.6: now rank-gated (P.rank >= 3) inside tryEnterOldSchool.
   if (tryEnterOldSchool()) return;
+
+  // v13 wave 8.6 — NPCs win over interactive props. closest-NPC-within-60px first.
+  // before this lift, kickable trash / pay phone / dumpster / cart / bench all fired ahead
+  // of the NPC scan, which routed E to a trash can when standing next to a vendor.
+  // chain (post-doors): NPCs > heist trigger > interactive props (bench, trash, phone, cart,
+  // dumpster) > zone-only verbs (smoke at block, panhandle at market).
+  let bestNpc = null, bestNpcD = 60*60;
+  for (const n of npcs) {
+    if (n.dead || !n.interact) continue;
+    const dx = (P.x+P.w/2) - (n.x+n.w/2), dy = (P.y+P.h/2) - (n.y+n.h/2);
+    const d2 = dx*dx+dy*dy;
+    if (d2 < bestNpcD) { bestNpcD = d2; bestNpc = n; }
+  }
+  if (bestNpc) {
+    if (bestNpc.id === 'pete' && bestNpc.shopClosed) {
+      toast("pete is sleeping inside.\n'we open at 6.'", 1800); return;
+    }
+    // v13 wave 3 — first-time interaction with a tracked vendor lifts the "?" floater
+    // and adds them to the people-met index.
+    if (VENDOR_FLOATER_IDS.has(bestNpc.id)) {
+      const first = !state.metVendors.has(bestNpc.id);
+      state.metVendors.add(bestNpc.id);
+      if (first) saveGame();
+      // intro_tony auto-completes the moment the player opens tony's dialogue
+      if (bestNpc.id === 'tony' && state.quests.intro_tony && state.quests.intro_tony.available && !state.quests.intro_tony.done) {
+        state.quests.intro_tony.done = true;
+        P.cred += 1;
+        questToast('THE MAN AT THE CORNER');
+        toast("he charges ten dollars. that is the price.\nhe does not negotiate. sometimes he does.", 3400);
+        if (state.quests.intro_smoke) state.quests.intro_smoke.available = true;
+      }
+    }
+    bestNpc.interact(bestNpc);
+    return;
+  }
+
+  // abandoned heist trigger — proximity to the locked building. NPCs already missed; this is
+  // the highest-priority non-NPC interaction because it's the canonical late-game gate.
+  const heistB = BUILDINGS.find(b=>b.locked);
+  if (heistB) {
+    const cx = P.x+P.w/2, cy = P.y+P.h/2;
+    if (cx > heistB.x-20 && cx < heistB.x+heistB.w+20 && cy > heistB.y-20 && cy < heistB.y+heistB.h+20) {
+      startHeist(); return;
+    }
+  }
   // v13 wave 8a — park bench sit toggle (E within 50px of any park_bench).
   if (tryParkBenchSit()) return;
   // v13 wave 6 — kickable trash cans (E within 50px). 50% cash / 20% junk / 30% rats.
@@ -8503,62 +8574,15 @@ function tryInteract() {
       return;
     }
   }
-  // smoke at block — open menu
+  // smoke at block — open menu (zone verb, fires only when no NPC / prop took the E)
   if (inZone(P.x+P.w/2, P.y+P.h/2, 'block')) {
     blockMenu();
     return;
   }
-  // panhandling at marketplace — easy money
+  // panhandling at marketplace — easy money (zone verb, NPC scan already missed)
   if (inZone(P.x+P.w/2, P.y+P.h/2, 'market')) {
-    // check if not near another NPC first — handled below
-    let closeNpc = null;
-    for (const n of npcs) {
-      if (n.dead || !n.interact) continue;
-      const dx = (P.x+P.w/2) - (n.x+n.w/2), dy = (P.y+P.h/2) - (n.y+n.h/2);
-      if (dx*dx + dy*dy < 50*50) { closeNpc = n; break; }
-    }
-    if (!closeNpc) {
-      panhandle();
-      return;
-    }
-  }
-  // abandoned heist trigger
-  const heistB = BUILDINGS.find(b=>b.locked);
-  // copper heist trigger — wired in. no rank gate. the brutus jr. door IS the gate.
-  if (heistB) {
-    const cx = P.x+P.w/2, cy = P.y+P.h/2;
-    if (cx > heistB.x-20 && cx < heistB.x+heistB.w+20 && cy > heistB.y-20 && cy < heistB.y+heistB.h+20) {
-      startHeist(); return;
-    }
-  }
-  // NPC interact (closest within 60px)
-  let best = null, bestD = 60*60;
-  for (const n of npcs) {
-    if (n.dead || !n.interact) continue;
-    const dx = (P.x+P.w/2) - (n.x+n.w/2), dy = (P.y+P.h/2) - (n.y+n.h/2);
-    const d2 = dx*dx+dy*dy;
-    if (d2 < bestD) { bestD = d2; best = n; }
-  }
-  if (best) {
-    if (best.id === 'pete' && best.shopClosed) {
-      toast("pete is sleeping inside.\n'we open at 6.'", 1800); return;
-    }
-    // v13 wave 3 — first-time interaction with a tracked vendor lifts the "?" floater
-    // and adds them to the people-met index.
-    if (VENDOR_FLOATER_IDS.has(best.id)) {
-      const first = !state.metVendors.has(best.id);
-      state.metVendors.add(best.id);
-      if (first) saveGame();
-      // intro_tony auto-completes the moment the player opens tony's dialogue
-      if (best.id === 'tony' && state.quests.intro_tony && state.quests.intro_tony.available && !state.quests.intro_tony.done) {
-        state.quests.intro_tony.done = true;
-        P.cred += 1;
-        questToast('THE MAN AT THE CORNER');
-        toast("he charges ten dollars. that is the price.\nhe does not negotiate. sometimes he does.", 3400);
-        if (state.quests.intro_smoke) state.quests.intro_smoke.available = true;
-      }
-    }
-    best.interact(best);
+    panhandle();
+    return;
   }
 }
 

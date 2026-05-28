@@ -110,6 +110,53 @@ All ephemeral fields default to 0/null/undefined on a fresh frame; the ticker ha
 
 ---
 
+## INTERACT PRIORITY (v13 wave 8.6)
+
+`tryInteract` dispatches the E key by a fixed priority chain. Higher slots short-circuit lower slots.
+
+| Slot | Trigger | Range | Notes |
+|------|---------|-------|-------|
+| 1 | hideout doors | 40px | owned hideouts only |
+| 2 | old school door | 44px | gates by `P.rank >= 3` |
+| 3 | **NPC scan (closest)** | 60px | wave 8.6 lift — was at slot 10 |
+| 4 | abandoned heist trigger | building rect ±20 | proximity, not point |
+| 5 | park bench sit | 50px | toggle |
+| 6 | kickable trash can | 50px | RNG outcome |
+| 7 | pay phone (ringing) | 38px | only when state.phonePropRingT > 0 |
+| 8 | cart mount/dismount | 36px | |
+| 9 | dumpster dive | 44px | |
+| 10 | smoke at block (zone verb) | inZone('block') | |
+| 11 | panhandle at market (zone verb) | inZone('market') | |
+
+**Invariants (wave 8.6 interact priority):**
+1. **NPCs win over interactive props.** A vendor within 60px always consumes E before any adjacent trash/phone/bench/cart/dumpster can fire. Verified by sweep audit (Pete vs pawn trashcan, Tony vs dealer trashcan, Philosopher vs park benches, Train Hopper vs freight cars).
+2. **Doors win over NPCs.** Hideout door and Old School door come before the NPC scan because they're destinations, not roadside fixtures.
+3. **Heist trigger is between NPCs and props.** Per brief: NPCs > heist > interactive props > generic prop.
+
+---
+
+## OLD SCHOOL GATING (v13 wave 8.6)
+
+The Old School building (TINY pre-wave-8.6, free copper print) is now properly walled.
+
+**Entry gate (rank).** `tryEnterOldSchool` at line ~4049: if `P.rank < 3`, opens a one-option refusal `dialogue` with the canonical line `"the door is chained.\nthe chain is rusted.\nyou don't have what it takes to break it yet.\n(rank 3 required.)"` and returns true (consumes the E so it doesn't fall through to props). When `P.rank >= 3`, normal interior modal opens.
+
+**First-rip forced spawn (`openOldSchoolInterior` rip handler).**
+- `firstEverRip = !state.flags.osBrutusKilled && !brutusAlive`
+- If true: 0 copper, force `spawnOldSchoolBrutus()`, toast `"the copper is here. so is OLD SCHOOL BRUTUS.\nhe was sleeping in the gym. he is no longer sleeping.\nno copper this time."`, close interior.
+- If false: existing path. +2 copper, 40% probabilistic spawn (guarded by `!brutusAlive`).
+- Flag flip: `state.flags.osBrutusKilled = true` inside the OS Brutus death drop block (line ~4872, right before the school_s_out toast). Coupling to the actual reward path ensures the flag can't desync from "Brutus has been killed once for real."
+
+**Save backward-compat.** `state.flags.osBrutusKilled` is undefined on any save that didn't write it. `!undefined === true` → first rip post-update forces spawn even for players who'd already ripped pre-fix. One-time tax, acceptable. Lazy-init safety nets (`if (!state.flags) state.flags = {};` at lines 4705 + 8764) cover the very-old-save case where flags itself is missing.
+
+**Invariants (wave 8.6 Old School):**
+1. **Rank 3 required to enter the Old School.** No bypass. The door itself refuses.
+2. **First copper rip always spawns OS Brutus.** No 0-cost copper before the boss is dealt with.
+3. **OS Brutus drop table unchanged.** $80 + 5 copper + propane torch + 50 cred + STREET +2 + SCHOOL_S_OUT. The boss fight is the unlock for repeatable copper farming.
+4. **`state.flags.osBrutusKilled` is gated on death-drop, not despawn.** Walking away from a probabilistic spawn doesn't count.
+
+---
+
 ## WORLD EXPANSION (v13 wave 8a)
 
 **WORLD bounds:** `{ w: 4400, h: 3400 }` (up from 2200×1900). All existing zones keep their original x/y/w/h; the world grew around them. Every world-coord clamp (camera, projectile cull, cop spawn ring, player clamp, day-event NPC clamps, day-30 bus rehydrate) reads `WORLD.w` / `WORLD.h` exclusively. Minimap scale `(120/WORLD.w, 96/WORLD.h)` parameterized.
@@ -1040,3 +1087,4 @@ Comprehensive audit of every NPC / interaction that can grant cash, items, cred,
 | v13 wave 4 | May 2026 | THE HEAT minigame (real-time canvas skill check, 6 outcomes including SOAP-ROCK); parallel `P.soapRocks` FIFO counter (smoked first, silently); 4th cook mode `propane` gated on new `propane_torch` tool (two acquisitions: night-only brutus drop OR pete at rank 3 for $80); 3 new achievements (THE_HEAT_HELD, SOAP_TONGUE, CONTROLLED_BURN). Save key unchanged. |
 | v13 wave 5 | May 2026 | Combat depth pass. 5 archetypes (charger / grabber / swarmer / ranged / cop) with distinct patterns dispatched by `n.archetype`. New generic projectile system (`projectiles` array, kinds: bottle, holy). Boss phases reframed as pattern shifts (tony p2 = charger + sherri adds, p3 = berserk; brutus_older p2 = adds every 8s, p3 = grabber-on-contact). FATHER O'MALLEY FALLEN mini-boss + `fallen_priest` quest with two trigger paths (steal OR rank-3 phone call). New equipment `priest_collar` (+2 cred, +0.3 wantedDecay multiplier). 3 new achievements (FALLEN, DODGED_THE_LUNGE, OUTRAN_THE_PRIEST). New player status timers `P.stunT` + `P.slowT`. Cop radio-for-backup (25%/s at >120px, cap 4 cops). Hit-stun 120ms on every NPC damage. Save key unchanged. |
 | v13 wave 6 | May 2026 | Map depth pass. Highway Underpass: cracked-concrete tile palette + oil stains, 4 tents, cardboard sign next to The Mathematician, sodium-orange light patches, first-entry echo line. Scrap Yard depth: dirt-brown tile palette, scrap piles, 2 car wrecks, leash post, pay phone. New `scrap_dog` NPC (archetype `passive`, chained, leash render). Interactive props system (`interactiveProps[]` array): 6 kickable trash cans + 8 respawning breakable bottles + 1 pay phone. `startDumpsterDive` rewritten with distance-from-block loot table + rare propane drop (3rd acquisition path). Procedural graffiti rebuild: `GRAFFITI_LINES` (36) + 12-18 persisted tags via `state.graffiti`. `scrap_dog` side quest with 3 branches (feed/free/leave) + cop discomfort radius (200px). New `broken_bottle` weapon + `food` inventory item. 3 new achievements (LIBERATOR, THE_PIECE_OF_SHIT, PHONE_BOOTH_PROPHET). Save key unchanged. |
+| v13 wave 8.6 | May 2026 | Playtest bug fix wave. Two fixes: (1) interact priority overhaul — `tryInteract` now scans NPCs (closest within 60px) BEFORE interactive props (bench/trash/phone/cart/dumpster), so adjacent props no longer hijack vendor E. Doors (hideout, old school) stay above NPCs. Heist trigger between NPCs and props. Marketplace panhandle's redundant closeNpc check removed (now dead code after the lift). (2) Old School properly gated — `tryEnterOldSchool` refuses entry below `P.rank >= 3` with a one-option refusal dialogue; first ever copper rip per save FORCES OS Brutus spawn (0 copper that attempt), tracked via new `state.flags.osBrutusKilled` flipped on his death-drop. Subsequent rips revert to existing 40% probabilistic spawn. Save key unchanged. |

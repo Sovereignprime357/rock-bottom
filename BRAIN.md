@@ -2,6 +2,95 @@
 
 ---
 
+## v13 wave 8.6 — playtest bug fixes (SHIPPED)
+
+Surgical fix wave following Wave 8b. Operator (mobile via Dispatch) surfaced two issues from a live playtest. All edits on `rock_bottom_v13.html`, no v14 fork. SAVE_KEY untouched.
+
+### WHAT SHIPPED
+
+**Fix 1 — interact priority overhaul in `tryInteract` (line ~8439).** Before this wave the dispatch chain was: doors → bench → trash → phone → cart → dumpster → smoke-at-block → panhandle → heist → NPC scan. A player standing next to a vendor with a nearby prop got the prop. Reworked to: **doors → NPCs (closest within 60px) → heist trigger → interactive props (bench, trash, phone, cart, dumpster) → zone verbs (smoke, panhandle)**. The NPC scan that used to live at the bottom of the function is now hoisted to the top. The existing first-time-vendor floater/quest-completion sub-logic for Tony / Pete / metVendors moved with it. Marketplace panhandle's redundant 50px closeNpc gate was removed — the lifted NPC scan (60px) covers it cleanly, so the gate became dead code.
+
+**Fix 2a — rank-3 gate on Old School door (`tryEnterOldSchool`, line ~4049).** Player within 44px of door but `P.rank < 3` now opens a one-option refusal `dialogue`. Refusal copy verbatim:
+```
+the door is chained.
+the chain is rusted.
+you don't have what it takes to break it yet.
+(rank 3 required.)
+```
+Returns `true` so tryInteract treats the door as the consumed E (doesn't fall through to props).
+
+**Fix 2b — OS Brutus 100% first-rip spawn (`openOldSchoolInterior`, line ~4058).** Rip handler now reads `state.flags.osBrutusKilled`. If false AND no OS Brutus is currently on the field, the rip:
+- adds 0 copper
+- forces `spawnOldSchoolBrutus()`
+- toast: `"the copper is here. so is OLD SCHOOL BRUTUS.\nhe was sleeping in the gym. he is no longer sleeping.\nno copper this time."`
+- closes the interior modal
+
+Subsequent rips fall through to the unchanged 40% probabilistic spawn (cousins). `state.flags.osBrutusKilled = true` is flipped in the OS Brutus death drop block (line ~4872, right above the school_s_out toast). Drop table untouched: $80 + 5 copper + propane torch + 50 cred + STREET +2 + SCHOOL_S_OUT.
+
+### SWEEP AUDIT — vendor/prop placement
+
+Walked every interactive-prop coord against every NPC center. Findings:
+
+| Pair | NPC dist | Prop range | Status |
+|------|----------|------------|--------|
+| Tony (1634,886) vs dealer trashcan (1620,980) | 95px | 50px | borderline — fixed by NPC-priority lift |
+| Pete (264,716) vs pawn trashcan (220,700) | 47px | 50px | conflict — fixed by NPC-priority lift |
+| Yuri (314,216) vs scrap trashcan (380,280) | 92px | 50px | safe |
+| Mom (1214,1496) vs market trashcan (820,1500) | 394px | 50px | safe |
+| Sherri (363,1495) vs alley trashcan (300,1560) | 91px | 50px | safe |
+| Mom vs cart (1100,1520) | 116px | 36px | safe |
+| Mom/Priest vs market dumpster (1340,1480) | 127/474px | 44px | safe |
+| Yuri vs pay phone (130,220) | 184px | 38px | safe |
+| Philosopher (2693,1096) vs nearest park bench (2520,1040) | 182px | 50px | safe — Philosopher always wins NPC scan |
+| Pigeon King (2712,1190) vs (2880,1240) bench | 175px | 50px | safe |
+| Train Hopper (820,2940) vs navy freight car (840,2932) | 22px | n/a | freight cars have no E action (PROPS-only, decorative per Wave 8a) — safe |
+| Mathematician (1340,380) vs chalk sign / nearby props | n/a | n/a | math is the only NPC under the underpass at his coord; no E-interactive prop within 60px — safe |
+| Price Guy (2940,1860) vs skid row dumpster (2820,1780) | 144px | 44px | safe |
+
+No physical repositioning required. The NPC-priority lift resolves all borderline cases.
+
+### DECIDED, REASONING
+
+- **Why lift the entire NPC scan above all props, not just trashcans**: the brief said "NPCs > interactive props" as a rule, not a per-prop carve-out. A future Wave 9 prop near a vendor would hit the same bug. Treating the rule as systemic avoids whack-a-mole. Doors stay above NPCs because they're destination buildings (your shed / your school target), not roadside fixtures.
+- **Why the heist trigger lives between NPCs and interactive props (not back at the bottom)**: the brief explicitly stated the priority chain `NPCs > heist > interactive props > generic prop`. The heist trigger fires on building-rect overlap, which is a wider hit area than a 60px NPC radius — putting it after NPCs but before the 50px trashcan radius keeps it discoverable without stomping a vendor.
+- **Why the rank gate uses `dialogue()` not `toast()`**: brief said "refusal dialogue." A toast is asynchronous and dismissable by movement; a dialogue forces the player to read it and click leave. The "(rank 3 required.)" tag is the player's first concrete progression signal in the Old School beat — it should feel modal, not ambient.
+- **Why "the door is chained" rather than e.g. "the gym is locked"**: the door of the south wall is what's visible; the gym is where Brutus sleeps. Chain language reads as a physical, fixable obstacle ("when you have what it takes"), which is what a rank gate IS.
+- **Why first-rip drops 0 copper instead of 2 + spawn**: brief was explicit ("0 copper extracted, OS Brutus spawns"). Also: handing the player +2 copper as a reward for stumbling into the boss undercuts the comedic beat where he's a real threat. The +2 should feel earned.
+- **Why the flag flip lives in the death drop block at line 4872**: that block is the canonical "OS Brutus is dead, give the rewards" path. Flipping the flag here means it can't be set by any path that doesn't actually award the rewards (e.g., despawn-on-zone-change, or a debug spawn that didn't get killed). Tight coupling = correct semantics.
+- **Why existing saves take the one-time tax**: per the brief — players who exploited the pre-fix free-print should fight him once before resuming. Adding a back-compat migration ("mark osBrutusKilled = true if state.counters.copperStripped >= 5") would reward the exploit. Better to make everyone earn it.
+- **Why removed the `closeNpc` proximity check inside the marketplace panhandle branch**: after the NPC-priority lift, if any NPC is within 60px the function already returned. The inner 50px check became dead code; pruning keeps the dispatch readable.
+
+### COUNTEREXAMPLE HUNT
+
+- Player at (1620, 940) near Tony + dealer trashcan: Tony center distance ~56px (in NPC range), trashcan distance ~40px (in trashcan range). Pre-fix: trashcan fires. Post-fix: NPC scan finds Tony, fires Tony's dialogue. ✓
+- Player at (220, 740) near Pete + pawn trashcan: Pete distance ~50px (NPC range), trashcan distance ~40px. Post-fix: Pete wins. ✓
+- Player walks up to Philosopher near park bench: Philosopher center at (2693,1096); nearest bench at (2520,1040), 182px away. Player within 60px of Philosopher gets her dialogue. Player must move ≥120px (so Philosopher is outside 60px) before bench-sit can fire. ✓
+- Player walks up to Mathematician under underpass: no interactive prop within 60px of his coord (1340,380). Mathematician fires. ✓
+- Player walks up to Train Hopper sleeping under navy freight car: freight cars are decorative PROPS (no E-handler — verified by grep), so the only E target in that 60px window is the Train Hopper himself. ✓
+- Player at rank 0 walks up to Old School door: refusal dialogue fires, player can't enter. tryInteract returns. No fall-through to interior. ✓
+- Player at rank 3 walks up to door: existing interior modal opens. ✓
+- Brand-new save, first ever rip: `state.flags.osBrutusKilled` undefined, brutusAlive null → `firstEverRip = true`. OS Brutus spawns, 0 copper, modal closes. ✓
+- Player flees OS Brutus, walks back to door, opens interior, attempts rip again: brutusAlive is truthy (he's on the field still), `firstEverRip = !undef && !truthy = false`. Falls through to standard rip path: +2 copper, no extra spawn roll (guarded by `if (!brutusAlive)`). ✓
+- Player kills OS Brutus, walks back to door, rips: brutusAlive null, `state.flags.osBrutusKilled = true`, `firstEverRip = false`. Normal rip + 40% probabilistic spawn. ✓
+- Existing save where player already ripped 5 times pre-fix but never spawned/killed Brutus: `osBrutusKilled` undefined → next rip forces spawn. One-time tax as designed. ✓
+- Save load where `state.flags` itself is missing (very old save): the lazy guards at lines 4705 and 8764 ensure `state.flags = {}` is set before any read. `state.flags.osBrutusKilled` reads as undefined → forces first-rip. ✓
+
+### INVARIANT CHECK
+
+- "E key always opens the highest-priority interaction in range" — STRENGTHENED. NPCs now properly outrank ambient props.
+- "Old School yields copper" — INTACT but now correctly walled. Rank gate + first-rip forced-spawn don't change the eventual reward path, only its access.
+- "OS Brutus drops $80 / 5 copper / propane / +50 cred / SCHOOL_S_OUT" — UNCHANGED.
+- "Player can complete intro_tony by talking to Tony" — INTACT. The first-vendor floater + quest-completion sub-block moved with the NPC scan; it still runs when Tony's `interact()` is selected.
+
+### NEXT
+
+- Watch playtest for any unforeseen edge cases where a player wants a prop interaction WHILE a vendor is in 60px (e.g., they want to kick the trashcan next to Tony deliberately). Current design prevents that — they must walk Tony out of their 60px radius first. If operator complains, add a "shift+E" override or carve-out specific NPCs, but don't speculate now.
+- Potential follow-up: visual indicator (e.g., a `?` floater) on the priority target when both an NPC and a prop are in range. Out of scope for 8.6.
+
+---
+
+---
+
 ## v13 wave 8b — faction territory + bus pass (SHIPPED)
 
 Shipped 2026-05-28. Builds on Wave 8a's expanded world (4400×3400) and Wave 7's faction rep system. All edits on `rock_bottom_v13.html`, no v14 fork. SAVE_KEY untouched. Operator on mobile via Dispatch — no popups, smart defaults, text reports.
