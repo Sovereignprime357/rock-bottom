@@ -1650,6 +1650,34 @@ These contracts apply to the modular `index.html` build. They repair four measur
 
 ---
 
+## NPC identity registry gate (post-audit 2026-07-15)
+
+The `VIBE.md` canonical identity table is a shipping contract, not optional lore. Every runtime actor identity must resolve to exactly one complete row with the four required fields: `Name`, `Tic`, `Relationship`, and `Transaction/Threat`.
+
+### Coverage contract
+
+1. The permanent gate boots the modular new-game runtime and also scans every production source module for actor-shaped authoring (`name` together with `sprite`), explicit name mutation, kingdom `guardName`/`bossName`, and recognized generated-name expressions. This covers actors that are absent from a fresh spawn because they appear only on a day event, quest branch, wanted response, boss phase, pet branch, or completed-campaign day.
+2. A literal actor name must exactly match a canonical VIBE row or an explicit alias whose target is a canonical row. No free-form ignore list is valid.
+3. Allowed aliases represent the same person/state, not a way around registration: `BRUTUS (SKID) -> BRUTUS`, `LURCH (SKID) -> LURCH`, `SHERRI (SKID) -> SPIDER-BITE SHERRI`, and `FATHER O'MALLEY (FALLEN) -> FATHER O'MALLEY`. Both chained/freed dog records share the canonical `THE DOG` row.
+4. Generated display numbers normalize only through an explicit family rule. `CURB PRETENDER No. <positive integer>` resolves to the canonical row `CURB PRETENDER No. N`. An unrecognized computed `name` expression fails the gate and must receive a fixture/normalizer plus a complete canonical row before ship.
+5. Every registry cell is trimmed and non-empty; names are unique. A row cannot pass with placeholder punctuation, `TBD`, or a duplicated canonical name.
+6. Generic combat roles are not exempt merely because multiple instances share one display label. `COP` has one canonical identity row; all generated cops resolve to it.
+7. The four audited weak names—`TARP KNIGHT`, `CART LANCER`, `WIRE DEACON`, and `CURB HOLDOUT`—remain byte-for-byte unchanged pending an operator taste decision. Registration records their current identity; it does not ratify or rename them.
+
+### Required gate result
+
+`tools/npc-registry-gate.mjs` must fail when:
+
+- a runtime/source actor identity has no canonical row or explicit same-identity alias;
+- a VIBE row omits any of its four cells;
+- an alias points to a missing row, aliases chain, or two canonical rows use the same name;
+- a new actor uses an unrecognized computed display name; or
+- any of the four operator-reserved names changes before an explicit operator decision is recorded.
+
+The passing report includes canonical-row count, distinct actor identities covered, runtime actors observed, alias count, and generated-family count. This gate changes no gameplay state, dialogue, combat, save data, sprite, or display name.
+
+---
+
 ## CHANGE LOG
 
 | Version | Date | Major changes |
