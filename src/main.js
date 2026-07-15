@@ -19,7 +19,8 @@ import { init_heat } from './minigames/heat.js';
 import { init_combat } from './systems/combat.js';
 import { init_npc_ai } from './systems/npc_ai.js';
 import { init_update } from './core/update.js';
-import { init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_hud } from './ui/hud.js';
+import { init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();

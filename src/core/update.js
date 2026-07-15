@@ -11,7 +11,7 @@ import { H, RANKS, W, WORLD } from '../data/world.js';
 import { spawnFreedDogFollower } from '../dialogue/neighborhood_a.js';
 import { maybeFireFallenPriestCall } from '../dialogue/neighborhood_b.js';
 import { giveBusPass, hasBusPass, maybeSpawnPriceGuy } from '../dialogue/vendors_places.js';
-import { drawAll, drawLighting, fireDayEvents, resetDailyCounters, updateHUD } from '../legacy.js';
+import { drawAll, drawLighting, fireDayEvents, resetDailyCounters } from '../legacy.js';
 import { hasPropane, updateHeatMini } from '../minigames/heat.js';
 import { updateGuidance, updateKingdomBattle } from '../systems/campaigns.js';
 import { damagePlayer, manageCops, questToast, tryCompleteIntroRemember } from '../systems/combat.js';
@@ -20,6 +20,7 @@ import { adjustFaction, applyRep, updateTerritory } from '../systems/factions.js
 import { updateIncidents } from '../systems/incidents.js';
 import { updateNpcActors } from '../systems/npc_ai.js';
 import { checkHustles, rollHustles } from '../systems/progression_routes.js';
+import { updateHUD } from '../ui/hud.js';
 
 export let last;
 
