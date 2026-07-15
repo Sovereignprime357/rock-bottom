@@ -2,7 +2,8 @@
  * Source seams: achievements, hustles, and block routes.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { P, audio, die, last, panhandle, runtime, saveGame, state, toast, unlockAchievement } from '../legacy.js';
+import { audio, saveGame } from '../core/audio_save.js';
+import { P, die, last, panhandle, runtime, state, toast, unlockAchievement } from '../legacy.js';
 import { activeOfficeContract, maybeUnlockOfficeQuest } from './campaigns.js';
 import { broadcastNews, feedPost } from './communications.js';
 

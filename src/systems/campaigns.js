@@ -2,9 +2,10 @@
  * Source seams: office, claims, and curb kingdom campaign.
  * Do not hand-edit; change the source module after the refactor lands.
  */
+import { audio, saveGame } from '../core/audio_save.js';
 import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
 import { ZONES } from '../data/world.js';
-import { HIDEOUT_DOORS, OLD_SCHOOL_DOOR, P, audio, dialogue, endingScreen, hideoutOwned, inZone, last, openOffice, questToast, runtime, saveGame, state, toast, unlockAchievement } from '../legacy.js';
+import { HIDEOUT_DOORS, OLD_SCHOOL_DOOR, P, dialogue, endingScreen, hideoutOwned, inZone, last, openOffice, questToast, runtime, state, toast, unlockAchievement } from '../legacy.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction } from './factions.js';
 import { ACHIEVEMENTS, currentBlockRouteStop } from './progression_routes.js';

@@ -2,8 +2,9 @@
  * Source seams: calls, possum, truck, news, feed, and world events.
  * Do not hand-edit; change the source module after the refactor lands.
  */
+import { audio, saveGame } from '../core/audio_save.js';
 import { PROPS } from '../data/props.js';
-import { P, audio, dialogue, runtime, saveGame, state, toast, unlockAchievement } from '../legacy.js';
+import { P, dialogue, runtime, state, toast, unlockAchievement } from '../legacy.js';
 
 export let PHONE_CALL_LINES, MOM_TIP_CALL, MOM_PROUD_LINES, NEWS_POOL, newsState, phoneState, FEED_HANDLES, WORLD_EVENTS;
 

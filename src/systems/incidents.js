@@ -2,8 +2,9 @@
  * Source seams: living-neighborhood incidents.
  * Do not hand-edit; change the source module after the refactor lands.
  */
+import { audio, saveGame } from '../core/audio_save.js';
 import { ROAD_SEGMENTS, WORLD } from '../data/world.js';
-import { P, audio, clamp, ctx, currentZone, isNight, runtime, saveGame, state, toast, visibleWorldRect } from '../legacy.js';
+import { P, clamp, ctx, currentZone, isNight, runtime, state, toast, visibleWorldRect } from '../legacy.js';
 import { SPRITE_CACHE } from '../render/sprites.js';
 import { feedPost } from './communications.js';
 
