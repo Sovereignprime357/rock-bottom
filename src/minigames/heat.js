@@ -6,7 +6,7 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, closeDialogue, dialogue, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { clamp } from '../data/npc_spawns.js';
 import { H, W } from '../data/world.js';
-import { ctx } from '../legacy.js';
+import { ctx } from '../render/canvas_geography.js';
 import { questToast } from '../systems/combat.js';
 import { feedPost } from '../systems/communications.js';
 

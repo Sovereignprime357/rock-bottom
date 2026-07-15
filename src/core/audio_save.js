@@ -4,7 +4,8 @@
  */
 import { P, dialogue, runtime, state, toast } from './runtime_ui.js';
 import { PROPS } from '../data/props.js';
-import { ctx, drawGraffiti, resetDailyCounters, startGame } from '../legacy.js';
+import { drawGraffiti, resetDailyCounters, startGame } from '../legacy.js';
+import { ctx } from '../render/canvas_geography.js';
 import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState, freshOfficeState, normalizeDistrictClaims, normalizeKingdomState, normalizeOfficeState, officeNat, syncKingdomQuests } from '../systems/campaigns.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
 
