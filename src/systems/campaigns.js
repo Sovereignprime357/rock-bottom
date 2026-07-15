@@ -86,7 +86,7 @@ export function maybeUnlockOfficeQuest(persist=true){
   const q=state.quests.office_space;if(!q||q.done||(P.lifetime.routesCompleted||0)<3)return false;
   if(q.available===false){
     q.available=true;
-    toast('Â· NEW BAD IDEA Â·\nthe leasing guy has a unit.\nwalk-ins are somehow accepted.',3600);
+    toast('· NEW BAD IDEA ·\nthe leasing guy has a unit.\nwalk-ins are somehow accepted.',3600);
     feedPost('three routes filed. a leasing guy has noticed.','@crackheadcent');
     if(persist)saveGame();return true;
   }
@@ -144,8 +144,8 @@ export function currentOfficeObjective(){
   if(o.workJob){
     const d=CLAIM_SITE_BY_ID[o.workJob.id];
     return o.workJob.stage==='inspect'
-      ? {kind:'office',text:'order '+o.workJob.serial+' Â· inspect the '+d.name.toLowerCase()+' sign.',x:d.sign.x,y:d.sign.y}
-      : {kind:'office',text:'order '+o.workJob.serial+' Â· return to the office and file.',x:4920,y:3210};
+      ? {kind:'office',text:'order '+o.workJob.serial+' · inspect the '+d.name.toLowerCase()+' sign.',x:d.sign.x,y:d.sign.y}
+      : {kind:'office',text:'order '+o.workJob.serial+' · return to the office and file.',x:4920,y:3210};
   }
   if(o.owned&&paperQ&&!paperQ.done&&paperQ.available===true){
     return {kind:'office',text:o.upgrades&&o.upgrades.desk?'use the office desk. claim the drainage canal.':'put a desk in the office.',x:4920,y:3210};
@@ -158,7 +158,7 @@ export function selectDistrictClaim(id){
   if(!o.owned||!o.upgrades.desk||o.claimJob||o.workJob||!d)return false;
   const why=claimGateReason(d);if(why){toast(why,1800);return false;}
   o.claimJob={id,stage:'survey'};
-  toast('Â· CLAIM OPENED Â·\n'+d.name+'\nfirst: '+d.survey.task,3200);saveGame();return true;
+  toast('· CLAIM OPENED ·\n'+d.name+'\nfirst: '+d.survey.task,3200);saveGame();return true;
 }
 
 export function cancelDistrictClaim(){
@@ -173,7 +173,7 @@ export function fileDistrictClaim(){
   const o=ensureOfficeState();if(!o.claimJob||o.claimJob.stage!=='file')return false;
   const cost=claimFileCost();if(P.cash<cost||P.copper<1){toast('filing needs $'+cost+' and 1 pure copper.\nthe desk cannot spot you.',2400);return false;}
   P.cash-=cost;P.copper--;o.claimJob.stage='install';audio.coin();
-  const d=CLAIM_SITE_BY_ID[o.claimJob.id];toast('- $'+cost+' Â· - 1 copper\nform filed.\nnow install the sign at '+d.name.toLowerCase()+'.',3400);saveGame();return true;
+  const d=CLAIM_SITE_BY_ID[o.claimJob.id];toast('- $'+cost+' · - 1 copper\nform filed.\nnow install the sign at '+d.name.toLowerCase()+'.',3400);saveGame();return true;
 }
 
 export function tryUseOfficeFieldTarget(){
@@ -186,7 +186,7 @@ export function tryUseOfficeFieldTarget(){
       o.claimJob.stage='file';audio.coin();toast(p.stamp+'\nreturn to the office. the desk wants money.',3000);saveGame();return true;
     }
     state.districtClaims[d.id]=true;o.claimJob=null;P.cred+=2;updateOfficeMilestones(false);maybeUnlockKingdom(false,true);audio.rankUp();
-    toast(p.stamp+'\nÂ· DISTRICT ENTERED Â·  + 2 cred\n'+d.name,3800);feedPost('installed a sign at '+d.name.toLowerCase()+'. the sign has standing.','@crackheadcent');saveGame();return true;
+    toast(p.stamp+'\n· DISTRICT ENTERED ·  + 2 cred\n'+d.name,3800);feedPost('installed a sign at '+d.name.toLowerCase()+'. the sign has standing.','@crackheadcent');saveGame();return true;
   }
   if(o.workJob&&o.workJob.stage==='inspect'){
     const d=CLAIM_SITE_BY_ID[o.workJob.id],p=d.sign,dx=pcx-p.x,dy=pcy-p.y;
@@ -201,7 +201,7 @@ export function startOfficeWork(){
   if(!o.upgrades.radio||!owned.length||o.claimJob||o.workJob||o.workToday>=officeDailyCap())return false;
   let pool=owned.filter(id=>id!==o.lastWorkId);if(!pool.length)pool=owned.slice();
   const id=pool[Math.floor(Math.random()*pool.length)];o.orderSerial++;o.workJob={id,stage:'inspect',serial:o.orderSerial};o.lastWorkId=id;
-  const d=CLAIM_SITE_BY_ID[id];toast('Â· WORK ORDER '+o.orderSerial+' Â·\ninspect the sign at '+d.name.toLowerCase()+'.\nbring the condition back.',3200);saveGame();return true;
+  const d=CLAIM_SITE_BY_ID[id];toast('· WORK ORDER '+o.orderSerial+' ·\ninspect the sign at '+d.name.toLowerCase()+'.\nbring the condition back.',3200);saveGame();return true;
 }
 
 export function fileOfficeWork(){
@@ -210,13 +210,13 @@ export function fileOfficeWork(){
   const count=claimedDistrictIds().length,pay=Math.min(12,5+count);o.jobsCompleted++;o.workToday++;
   P.lifetime.officeJobs=o.jobsCompleted;P.cash+=pay;const cred=o.jobsCompleted%5===0?1:0;if(cred)P.cred++;
   const serial=o.workJob.serial;o.workJob=null;audio.coin();
-  toast('Â· ORDER '+serial+' FILED Â·\ngross $'+(pay+17)+'. chair rental $17.\nnet + $'+pay+(cred?' Â· + 1 cred':''),3600);saveGame();return true;
+  toast('· ORDER '+serial+' FILED ·\ngross $'+(pay+17)+'. chair rental $17.\nnet + $'+pay+(cred?' · + 1 cred':''),3600);saveGame();return true;
 }
 
 export function purchaseOfficeUpgrade(id){
   const o=ensureOfficeState(),d=OFFICE_UPGRADE_DEFS.find(x=>x.id===id);if(!o.owned||!d||o.upgrades[id])return false;
   if(P.cash<d.cash||P.copper<d.copper){toast(d.name+' needs $'+d.cash+(d.copper?' and '+d.copper+' pure copper':'')+'.\nthe office does not extend credit.',2200);return false;}
-  P.cash-=d.cash;P.copper-=d.copper;o.upgrades[id]=true;audio.rankUp();toast('Â· OFFICE UPGRADE Â·\n'+d.name+' installed.\n'+d.desc,3000);saveGame();return true;
+  P.cash-=d.cash;P.copper-=d.copper;o.upgrades[id]=true;audio.rankUp();toast('· OFFICE UPGRADE ·\n'+d.name+' installed.\n'+d.desc,3000);saveGame();return true;
 }
 
 export function purchaseOffice(){
@@ -225,7 +225,7 @@ export function purchaseOffice(){
   P.cash-=40;P.copper--;o.owned=true;
   const q=state.quests.office_space;if(q){q.done=true;q.available=true;questToast('THE OFFICE');}
   if(state.quests.paper_empire)state.quests.paper_empire.available=true;
-  unlockAchievement('squatters_rights');audio.rankUp();toast('- $40 Â· - 1 copper\n+ one key\nthe office is yours in the sense that no one stopped you.',4200);feedPost('acquired an office. the office was surprised.','@crackheadcent');saveGame();return true;
+  unlockAchievement('squatters_rights');audio.rankUp();toast('- $40 · - 1 copper\n+ one key\nthe office is yours in the sense that no one stopped you.',4200);feedPost('acquired an office. the office was surprised.','@crackheadcent');saveGame();return true;
 }
 
 export function leaseGuyDialogue(){
@@ -636,7 +636,7 @@ export function hideGuidance(){
 }
 
 export function init_campaigns() {
-  // ---------- v18 â€” THE OFFICE + BLOCK AUTHORITY ----------
+  // ---------- v18 — THE OFFICE + BLOCK AUTHORITY ----------
   OFFICE_DOOR = { x:4908, y:3204, w:24, h:32 };
   OFFICE_UPGRADE_DEFS = [
     { id:'cot',         name:'cot',         cash:30, copper:0, desc:'rest. sleep. wake up in the same room.' },

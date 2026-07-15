@@ -48,6 +48,11 @@ for (const file of jsFiles) {
 }
 if (manifest.extractedCount === manifest.totalChunks) assert(!fs.existsSync(path.join(ROOT, 'src/legacy.js')), 'legacy.js remains after final extraction');
 
+const campaignsSource = fs.readFileSync(path.join(ROOT, 'src/systems/campaigns.js'), 'utf8');
+for (const token of ['\u00c2\u00b7', '\u00e2\u20ac\u201d']) {
+  assert(!campaignsSource.includes(token), `office campaign encoding regressed: ${JSON.stringify(token)}`);
+}
+
 if (typeof vm.SourceTextModule !== 'function') {
   failures.push('vm.SourceTextModule unavailable; run with --experimental-vm-modules');
 } else {
