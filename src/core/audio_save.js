@@ -4,10 +4,11 @@
  */
 import { P, dialogue, runtime, state, toast } from './runtime_ui.js';
 import { PROPS } from '../data/props.js';
-import { resetDailyCounters, startGame } from '../legacy.js';
+import { startGame } from '../legacy.js';
 import { ctx } from '../render/canvas_geography.js';
 import { drawGraffiti } from '../render/structures.js';
 import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState, freshOfficeState, normalizeDistrictClaims, normalizeKingdomState, normalizeOfficeState, officeNat, syncKingdomQuests } from '../systems/campaigns.js';
+import { resetDailyCounters } from '../systems/daily_hideouts.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
 
 export let audio, SAVE_KEY;

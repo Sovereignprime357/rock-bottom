@@ -8,10 +8,10 @@ import { GRAFFITI_LINES, SCRAP_GRAFFITI_LINES, SPIRITUAL_GRAFFITI_LINES } from '
 import { isNight } from '../data/npc_spawns.js';
 import { BUILDINGS } from '../data/props.js';
 import { ZONES } from '../data/world.js';
-import { HIDEOUT_DOORS, hideoutOwned } from '../legacy.js';
 import { ENV_SPRITE_CACHE, ctx, visibleWorldRect } from './canvas_geography.js';
 import { zoneAt } from './tiles.js';
 import { CLAIM_SITES, OFFICE_DOOR, claimedDistrictIds, freshOfficeState } from '../systems/campaigns.js';
+import { HIDEOUT_DOORS, hideoutOwned } from '../systems/daily_hideouts.js';
 
 export let BUILDING_STYLE, GRAFFITI_PALETTES, POSTER_LINES, POSTER_BG;
 

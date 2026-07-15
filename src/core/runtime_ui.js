@@ -6,8 +6,9 @@ import { audio, saveGame } from './audio_save.js';
 import { last } from './update.js';
 import { EQUIPMENT, VENDOR_FLOATER_IDS, VENDOR_INDEX_META, vendorPrice } from '../data/catalogs.js';
 import { RANKS } from '../data/world.js';
-import { WEAPONS, officeUpgradeCount, panhandle, releaseAllInput, resetDailyCounters, startGame } from '../legacy.js';
+import { WEAPONS, panhandle, releaseAllInput, startGame } from '../legacy.js';
 import { CLAIM_SITES, CLAIM_SITE_BY_ID, OFFICE_UPGRADE_DEFS, bitCount3, claimedDistrictIds, currentPrimaryObjective, freshKingdomState, freshOfficeState, hideGuidance, kingdomStageClan, officeDailyCap } from '../systems/campaigns.js';
+import { officeUpgradeCount, resetDailyCounters } from '../systems/daily_hideouts.js';
 import { FACTION_TIER_LABELS, factionTier } from '../systems/factions.js';
 import { ACHIEVEMENTS, ROUTE_STOP_BY_ID, hustleProgress, validBlockRoute } from '../systems/progression_routes.js';
 

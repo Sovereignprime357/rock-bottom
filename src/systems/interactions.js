@@ -10,11 +10,12 @@ import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
 import { W } from '../data/world.js';
 import { possumDialogue } from '../dialogue/neighborhood_a.js';
 import { tryEnterOldSchool, tryParkBenchSit } from '../dialogue/vendors_places.js';
-import { blockMenu, hideoutOwned, panhandle, pickupWeapon, startHeist, tryEnterHideout, tryEnterOffice } from '../legacy.js';
+import { blockMenu, panhandle, pickupWeapon, startHeist } from '../legacy.js';
 import { hasPropane } from '../minigames/heat.js';
 import { tryKingdomDoor, tryUseKingdomTarget, tryUseOfficeFieldTarget } from './campaigns.js';
 import { questToast } from './combat.js';
 import { feedPost } from './communications.js';
+import { hideoutOwned, tryEnterHideout, tryEnterOffice } from './daily_hideouts.js';
 import { tryStampBlockRoute } from './progression_routes.js';
 
 export function endingScreen(kind) {
