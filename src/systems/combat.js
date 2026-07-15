@@ -9,11 +9,12 @@ import { clamp, isNight, rectsOverlap } from '../data/npc_spawns.js';
 import { interactiveProps } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { openOldSchoolInterior } from '../dialogue/vendors_places.js';
-import { WEAPONS, endingScreen, pickupWeapon, spawnBrutusOlder } from '../legacy.js';
+import { WEAPONS, pickupWeapon, spawnBrutusOlder } from '../legacy.js';
 import { hasPropane } from '../minigames/heat.js';
 import { abortKingdomFight, completeKingdomBoss, completeKingdomPretender, maybeUnlockKingdom, syncKingdomQuests } from './campaigns.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction, applyRep, factionTier } from './factions.js';
+import { endingScreen } from './interactions.js';
 import { rollBlockRoute, rollHustles } from './progression_routes.js';
 
 export let COP_HARD_CAP;

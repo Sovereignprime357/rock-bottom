@@ -9,10 +9,11 @@ import { inZone } from '../data/npc_spawns.js';
 import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
 import { ZONES } from '../data/world.js';
 import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
-import { HIDEOUT_DOORS, endingScreen, hideoutOwned, openOffice } from '../legacy.js';
+import { HIDEOUT_DOORS, hideoutOwned, openOffice } from '../legacy.js';
 import { questToast } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction } from './factions.js';
+import { endingScreen } from './interactions.js';
 import { ACHIEVEMENTS, currentBlockRouteStop } from './progression_routes.js';
 
 export let OFFICE_DOOR, OFFICE_UPGRADE_DEFS, OFFICE_UPGRADE_IDS, CLAIM_SITES, CLAIM_SITE_BY_ID, CLAIM_STAGES, WORK_STAGES, KINGDOM_STAGES, KINGDOM_DEFEAT_IDS, KINGDOM_STAGE_RANK, KINGDOM_DOORS, KINGDOM_CLANS, KINGDOM_CLAN_LIST, KINGDOM_EMPEROR, KINGDOM_GUARD_POSTS, QUEST_TARGETS;
