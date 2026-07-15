@@ -11,7 +11,8 @@ import { init_incidents } from './systems/incidents.js';
 import { init_sprites } from './render/sprites.js';
 import { init_audio_save } from './core/audio_save.js';
 import { init_runtime_ui } from './core/runtime_ui.js';
-import { init_helpers_spawns, init_dialogue_a, init_dialogue_b, init_vendors_places, init_heat, init_combat, init_npc_ai, init_update, init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_helpers_spawns } from './data/npc_spawns.js';
+import { init_dialogue_a, init_dialogue_b, init_vendors_places, init_heat, init_combat, init_npc_ai, init_update, init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();

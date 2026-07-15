@@ -4,8 +4,9 @@
  */
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, runtime, state, toast } from '../core/runtime_ui.js';
+import { clamp, currentZone, isNight } from '../data/npc_spawns.js';
 import { ROAD_SEGMENTS, WORLD } from '../data/world.js';
-import { clamp, ctx, currentZone, isNight, visibleWorldRect } from '../legacy.js';
+import { ctx, visibleWorldRect } from '../legacy.js';
 import { SPRITE_CACHE } from '../render/sprites.js';
 import { feedPost } from './communications.js';
 
