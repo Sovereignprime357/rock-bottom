@@ -1,0 +1,479 @@
+{
+  "reference": "rock_bottom_v19.html",
+  "referenceSha256": "C25DB5E17536AEC092143D87DBF8C113325076A8B8E196A98AECB84694A25C8B",
+  "extractedCount": 0,
+  "totalChunks": 37,
+  "chunks": [
+    {
+      "index": 1,
+      "id": "storage",
+      "file": "src/core/storage.js",
+      "extracted": false,
+      "ranges": [
+        [
+          249,
+          295
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 2,
+      "id": "constants_world",
+      "file": "src/data/world.js",
+      "extracted": false,
+      "ranges": [
+        [
+          296,
+          609
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 3,
+      "id": "props",
+      "file": "src/data/props.js",
+      "extracted": false,
+      "ranges": [
+        [
+          610,
+          887
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 4,
+      "id": "catalogs",
+      "file": "src/data/catalogs.js",
+      "extracted": false,
+      "ranges": [
+        [
+          888,
+          1063
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 5,
+      "id": "factions",
+      "file": "src/systems/factions.js",
+      "extracted": false,
+      "ranges": [
+        [
+          1064,
+          1277
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 6,
+      "id": "progression_routes",
+      "file": "src/systems/progression_routes.js",
+      "extracted": false,
+      "ranges": [
+        [
+          1278,
+          1530
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 7,
+      "id": "campaigns",
+      "file": "src/systems/campaigns.js",
+      "extracted": false,
+      "ranges": [
+        [
+          1531,
+          2214
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 8,
+      "id": "communications",
+      "file": "src/systems/communications.js",
+      "extracted": false,
+      "ranges": [
+        [
+          2215,
+          2424
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 9,
+      "id": "incidents",
+      "file": "src/systems/incidents.js",
+      "extracted": false,
+      "ranges": [
+        [
+          2425,
+          2711
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 10,
+      "id": "sprites",
+      "file": "src/render/sprites.js",
+      "extracted": false,
+      "ranges": [
+        [
+          2712,
+          3559
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 11,
+      "id": "audio_save",
+      "file": "src/core/audio_save.js",
+      "extracted": false,
+      "ranges": [
+        [
+          3560,
+          3834
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 12,
+      "id": "runtime_ui",
+      "file": "src/core/runtime_ui.js",
+      "extracted": false,
+      "ranges": [
+        [
+          3835,
+          4320
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 13,
+      "id": "helpers_spawns",
+      "file": "src/data/npc_spawns.js",
+      "extracted": false,
+      "ranges": [
+        [
+          4321,
+          4695
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 14,
+      "id": "dialogue_a",
+      "file": "src/dialogue/neighborhood_a.js",
+      "extracted": false,
+      "ranges": [
+        [
+          4696,
+          5324
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 15,
+      "id": "dialogue_b",
+      "file": "src/dialogue/neighborhood_b.js",
+      "extracted": false,
+      "ranges": [
+        [
+          5325,
+          5678
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 16,
+      "id": "vendors_places",
+      "file": "src/dialogue/vendors_places.js",
+      "extracted": false,
+      "ranges": [
+        [
+          5679,
+          6279
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 17,
+      "id": "heat",
+      "file": "src/minigames/heat.js",
+      "extracted": false,
+      "ranges": [
+        [
+          6280,
+          6710
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 18,
+      "id": "combat",
+      "file": "src/systems/combat.js",
+      "extracted": false,
+      "ranges": [
+        [
+          6711,
+          7253
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 19,
+      "id": "npc_ai",
+      "file": "src/systems/npc_ai.js",
+      "extracted": false,
+      "ranges": null,
+      "synthetic": "npc_ai"
+    },
+    {
+      "index": 20,
+      "id": "update",
+      "file": "src/core/update.js",
+      "extracted": false,
+      "ranges": null,
+      "synthetic": "update"
+    },
+    {
+      "index": 21,
+      "id": "hud",
+      "file": "src/ui/hud.js",
+      "extracted": false,
+      "ranges": [
+        [
+          8581,
+          8604
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 22,
+      "id": "canvas_geography",
+      "file": "src/render/canvas_geography.js",
+      "extracted": false,
+      "ranges": [
+        [
+          8605,
+          8880
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 23,
+      "id": "landmarks_a",
+      "file": "src/render/landmarks_a.js",
+      "extracted": false,
+      "ranges": [
+        [
+          8881,
+          9105
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 24,
+      "id": "frame",
+      "file": "src/render/frame.js",
+      "extracted": false,
+      "ranges": [
+        [
+          9106,
+          9430
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 25,
+      "id": "landmarks_b",
+      "file": "src/render/landmarks_b.js",
+      "extracted": false,
+      "ranges": [
+        [
+          9431,
+          9536
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 26,
+      "id": "tiles",
+      "file": "src/render/tiles.js",
+      "extracted": false,
+      "ranges": [
+        [
+          9537,
+          9830
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 27,
+      "id": "structures",
+      "file": "src/render/structures.js",
+      "extracted": false,
+      "ranges": [
+        [
+          9831,
+          10286
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 28,
+      "id": "render_props",
+      "file": "src/render/props.js",
+      "extracted": false,
+      "ranges": [
+        [
+          10287,
+          10889
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 29,
+      "id": "actors_weather",
+      "file": "src/render/actors_weather.js",
+      "extracted": false,
+      "ranges": [
+        [
+          10890,
+          11239
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 30,
+      "id": "minimap",
+      "file": "src/render/minimap.js",
+      "extracted": false,
+      "ranges": [
+        [
+          11240,
+          11298
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 31,
+      "id": "ending_interactions",
+      "file": "src/systems/interactions.js",
+      "extracted": false,
+      "ranges": [
+        [
+          11299,
+          11612
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 32,
+      "id": "daily_hideouts",
+      "file": "src/systems/daily_hideouts.js",
+      "extracted": false,
+      "ranges": [
+        [
+          11613,
+          11913
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 33,
+      "id": "activities",
+      "file": "src/minigames/activities.js",
+      "extracted": false,
+      "ranges": [
+        [
+          11914,
+          12286
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 34,
+      "id": "keyboard",
+      "file": "src/input/keyboard.js",
+      "extracted": false,
+      "ranges": [
+        [
+          12287,
+          12401
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 35,
+      "id": "start",
+      "file": "src/core/start.js",
+      "extracted": false,
+      "ranges": [
+        [
+          12402,
+          12536
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 36,
+      "id": "boot",
+      "file": "src/core/boot.js",
+      "extracted": false,
+      "ranges": [
+        [
+          12537,
+          12548
+        ]
+      ],
+      "synthetic": null
+    },
+    {
+      "index": 37,
+      "id": "mobile",
+      "file": "src/input/mobile.js",
+      "extracted": false,
+      "ranges": [
+        [
+          12549,
+          12733
+        ]
+      ],
+      "synthetic": null
+    }
+  ]
+}
