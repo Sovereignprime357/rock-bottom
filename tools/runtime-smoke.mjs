@@ -90,15 +90,15 @@ async function runReference() {
 async function runModules() {
   const context = makeContext();
   const cache = new Map();
-  async function load(file) {
+  function getModule(file) {
     const full = path.resolve(file);
     if (cache.has(full)) return cache.get(full);
     const mod = new vm.SourceTextModule(fs.readFileSync(full, 'utf8'), { context, identifier:full });
     cache.set(full, mod);
-    await mod.link((specifier, parent) => load(path.resolve(path.dirname(parent.identifier), specifier)));
     return mod;
   }
-  const main = await load(path.join(ROOT, 'src/main.js'));
+  const main = getModule(path.join(ROOT, 'src/main.js'));
+  await main.link((specifier, parent) => getModule(path.resolve(path.dirname(parent.identifier), specifier)));
   await main.evaluate();
   await Promise.resolve();
   return context;

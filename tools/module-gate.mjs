@@ -53,20 +53,22 @@ if (typeof vm.SourceTextModule !== 'function') {
 } else {
   const context = vm.createContext({});
   const cache = new Map();
-  async function loadModule(file) {
+  function getModule(file) {
     const full = path.resolve(file);
     if (cache.has(full)) return cache.get(full);
     const source = fs.readFileSync(full, 'utf8');
     const mod = new vm.SourceTextModule(source, { context, identifier:full });
     cache.set(full, mod);
-    await mod.link(async (specifier, referencing) => {
-      const resolved = path.resolve(path.dirname(referencing.identifier), specifier);
-      assert(fs.existsSync(resolved), `missing import ${specifier} from ${path.relative(ROOT, referencing.identifier)}`);
-      return loadModule(resolved);
-    });
     return mod;
   }
-  try { await loadModule(path.join(ROOT, 'src/main.js')); }
+  try {
+    const root = getModule(path.join(ROOT, 'src/main.js'));
+    await root.link((specifier, referencing) => {
+      const resolved = path.resolve(path.dirname(referencing.identifier), specifier);
+      assert(fs.existsSync(resolved), `missing import ${specifier} from ${path.relative(ROOT, referencing.identifier)}`);
+      return getModule(resolved);
+    });
+  }
   catch (error) { failures.push(`ES module link failed: ${error.stack || error.message}`); }
 }
 
