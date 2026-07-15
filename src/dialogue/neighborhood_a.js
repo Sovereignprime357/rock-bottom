@@ -6,7 +6,8 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, applyEquipStats, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { vendorPrice } from '../data/catalogs.js';
 import { isNight } from '../data/npc_spawns.js';
-import { aggroNpc, hasPropane, playerAttack, questToast, spawnBoss, startLockpickMini, triggerFallenPriestTransform } from '../legacy.js';
+import { triggerFallenPriestTransform } from './neighborhood_b.js';
+import { aggroNpc, hasPropane, playerAttack, questToast, spawnBoss, startLockpickMini } from '../legacy.js';
 import { feedPost, spawnPetPossum } from '../systems/communications.js';
 import { adjustFaction, applyRep, factionTier } from '../systems/factions.js';
 
