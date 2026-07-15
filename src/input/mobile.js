@@ -2,20 +2,20 @@
  * Source seams: mobile controls and final startup.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { SAVE_KEY, audio, loadGame, saveGame } from './core/audio_save.js';
-import { P, renderQuests, runtime, state } from './core/runtime_ui.js';
-import { startGame } from './core/start.js';
-import { update, updateWorld } from './core/update.js';
-import { INPUT_RELEASE_HOOKS, continueAfterEnding, loadFromTitle } from './input/keyboard.js';
-import { lockHeatMini } from './minigames/heat.js';
-import { resolveNpcPose } from './render/actors_weather.js';
-import { drawAll } from './render/frame.js';
-import { PALS, SPRITE_CACHE } from './render/sprites.js';
-import { currentPrimaryObjective } from './systems/campaigns.js';
-import { takeTheBus } from './systems/daily_hideouts.js';
-import { startIncident, updateActiveIncident } from './systems/incidents.js';
-import { endingScreen } from './systems/interactions.js';
-import { ROUTE_STOPS, ensureBlockRoute, hustleProgress, rollBlockRoute, routePatchTier, tryStampBlockRoute, validBlockRoute } from './systems/progression_routes.js';
+import { SAVE_KEY, audio, loadGame, saveGame } from '../core/audio_save.js';
+import { P, renderQuests, runtime, state } from '../core/runtime_ui.js';
+import { startGame } from '../core/start.js';
+import { update, updateWorld } from '../core/update.js';
+import { INPUT_RELEASE_HOOKS, continueAfterEnding, loadFromTitle } from './keyboard.js';
+import { lockHeatMini } from '../minigames/heat.js';
+import { resolveNpcPose } from '../render/actors_weather.js';
+import { drawAll } from '../render/frame.js';
+import { PALS, SPRITE_CACHE } from '../render/sprites.js';
+import { currentPrimaryObjective } from '../systems/campaigns.js';
+import { takeTheBus } from '../systems/daily_hideouts.js';
+import { startIncident, updateActiveIncident } from '../systems/incidents.js';
+import { endingScreen } from '../systems/interactions.js';
+import { ROUTE_STOPS, ensureBlockRoute, hustleProgress, rollBlockRoute, routePatchTier, tryStampBlockRoute, validBlockRoute } from '../systems/progression_routes.js';
 
 export let loadBtnEl, titleLoadTap;
 
