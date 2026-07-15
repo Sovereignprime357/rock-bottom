@@ -2,8 +2,9 @@
  * Source seams: audio and persistence.
  * Do not hand-edit; change the source module after the refactor lands.
  */
+import { P, dialogue, runtime, state, toast } from './runtime_ui.js';
 import { PROPS } from '../data/props.js';
-import { P, ctx, dialogue, drawGraffiti, resetDailyCounters, runtime, startGame, state, toast } from '../legacy.js';
+import { ctx, drawGraffiti, resetDailyCounters, startGame } from '../legacy.js';
 import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState, freshOfficeState, normalizeDistrictClaims, normalizeKingdomState, normalizeOfficeState, officeNat, syncKingdomQuests } from '../systems/campaigns.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
 

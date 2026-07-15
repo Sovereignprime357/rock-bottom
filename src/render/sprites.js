@@ -2,9 +2,10 @@
  * Source seams: sprite data and sprite caches.
  * Do not hand-edit; change the source module after the refactor lands.
  */
+import { P, runtime, state } from '../core/runtime_ui.js';
 import { EQUIPMENT } from '../data/catalogs.js';
 import { H } from '../data/world.js';
-import { P, WEAPONS, last, runtime, state } from '../legacy.js';
+import { WEAPONS, last } from '../legacy.js';
 
 export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, INCIDENT_PALS;
 

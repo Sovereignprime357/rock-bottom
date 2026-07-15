@@ -3,8 +3,9 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { audio, saveGame } from '../core/audio_save.js';
+import { P, runtime, state, toast } from '../core/runtime_ui.js';
 import { ROAD_SEGMENTS, WORLD } from '../data/world.js';
-import { P, clamp, ctx, currentZone, isNight, runtime, state, toast, visibleWorldRect } from '../legacy.js';
+import { clamp, ctx, currentZone, isNight, visibleWorldRect } from '../legacy.js';
 import { SPRITE_CACHE } from '../render/sprites.js';
 import { feedPost } from './communications.js';
 

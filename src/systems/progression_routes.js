@@ -3,7 +3,8 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { audio, saveGame } from '../core/audio_save.js';
-import { P, die, last, panhandle, runtime, state, toast, unlockAchievement } from '../legacy.js';
+import { P, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
+import { die, last, panhandle } from '../legacy.js';
 import { activeOfficeContract, maybeUnlockOfficeQuest } from './campaigns.js';
 import { broadcastNews, feedPost } from './communications.js';
 

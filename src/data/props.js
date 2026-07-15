@@ -2,7 +2,8 @@
  * Source seams: buildings, props, and interactive props.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { buildGraffiti, dialogue, state } from '../legacy.js';
+import { dialogue, state } from '../core/runtime_ui.js';
+import { buildGraffiti } from '../legacy.js';
 
 export let BUILDINGS, PROPS, interactiveProps, CHATTER;
 
