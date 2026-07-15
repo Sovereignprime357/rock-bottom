@@ -5,7 +5,8 @@ import { init_props } from './data/props.js';
 import { init_catalogs } from './data/catalogs.js';
 import { init_factions } from './systems/factions.js';
 import { init_progression_routes } from './systems/progression_routes.js';
-import { init_campaigns, init_communications, init_incidents, init_sprites, init_audio_save, init_runtime_ui, init_helpers_spawns, init_dialogue_a, init_dialogue_b, init_vendors_places, init_heat, init_combat, init_npc_ai, init_update, init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_campaigns } from './systems/campaigns.js';
+import { init_communications, init_incidents, init_sprites, init_audio_save, init_runtime_ui, init_helpers_spawns, init_dialogue_a, init_dialogue_b, init_vendors_places, init_heat, init_combat, init_npc_ai, init_update, init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();
