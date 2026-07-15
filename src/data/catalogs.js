@@ -3,7 +3,7 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { P, applyEquipStats, runtime, state } from '../core/runtime_ui.js';
-import { buildGraffiti } from '../legacy.js';
+import { buildGraffiti } from '../render/structures.js';
 import { manageCops } from '../systems/combat.js';
 import { feedPost } from '../systems/communications.js';
 

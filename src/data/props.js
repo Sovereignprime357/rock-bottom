@@ -3,7 +3,7 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { dialogue, state } from '../core/runtime_ui.js';
-import { buildGraffiti } from '../legacy.js';
+import { buildGraffiti } from '../render/structures.js';
 
 export let BUILDINGS, PROPS, interactiveProps, CHATTER;
 

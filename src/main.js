@@ -25,7 +25,8 @@ import { init_landmarks_a } from './render/landmarks_a.js';
 import { init_frame } from './render/frame.js';
 import { init_landmarks_b } from './render/landmarks_b.js';
 import { init_tiles } from './render/tiles.js';
-import { init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_structures } from './render/structures.js';
+import { init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();
