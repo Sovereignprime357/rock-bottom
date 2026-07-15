@@ -8,7 +8,8 @@ import { vendorPrice } from '../data/catalogs.js';
 import { clamp, currentZone, isNight } from '../data/npc_spawns.js';
 import { PROPS } from '../data/props.js';
 import { H, W, WORLD, ZONES } from '../data/world.js';
-import { drawNpc, hasPropane, questToast, update } from '../legacy.js';
+import { drawNpc, questToast, update } from '../legacy.js';
+import { hasPropane } from '../minigames/heat.js';
 import { broadcastNews, feedPost } from '../systems/communications.js';
 import { adjustFaction, applyRep, factionTier } from '../systems/factions.js';
 

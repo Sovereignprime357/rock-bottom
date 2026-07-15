@@ -15,7 +15,8 @@ import { init_helpers_spawns } from './data/npc_spawns.js';
 import { init_dialogue_a } from './dialogue/neighborhood_a.js';
 import { init_dialogue_b } from './dialogue/neighborhood_b.js';
 import { init_vendors_places } from './dialogue/vendors_places.js';
-import { init_heat, init_combat, init_npc_ai, init_update, init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_heat } from './minigames/heat.js';
+import { init_combat, init_npc_ai, init_update, init_hud, init_canvas_geography, init_landmarks_a, init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();
