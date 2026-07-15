@@ -108,7 +108,7 @@ function snapshot(context) {
   const rb = context.window._rb;
   if (!rb) throw new Error('window._rb was not installed');
   return {
-    player:{ x:rb.P.x, y:rb.P.y, cash:rb.P.cash, rocks:rb.P.rocks, hp:rb.P.hp, rank:rb.P.rank },
+    player:{ x:rb.P.x, y:rb.P.y, cash:rb.P.cash, rocks:rb.P.rocks, hp:rb.P.hp, rank:rb.P.rank, shakes:rb.P.shakes, rockedT:rb.P.rockedT, crashT:rb.P.crashT },
     state:{ mode:rb.state.mode, day:rb.state.day, weather:rb.state.weather, questCount:Object.keys(rb.state.quests).length },
     npcCount:rb.npcs.length,
     spriteKeys:Object.keys(rb.sprites).sort(),
@@ -157,6 +157,21 @@ if (JSON.stringify(snapshot(modular)) !== JSON.stringify(snapshot(reference))) {
   process.exit(1);
 }
 
+const afterDiagonal={x:modular.window._rb.P.x,y:modular.window._rb.P.y};
+for(const context of [reference,modular]){
+  context.window._rb.state.keys.add('w');
+  context.window._rb.updateWorld(16);
+  context.window._rb.state.keys.clear();
+}
+if(Math.abs(modular.window._rb.P.x-afterDiagonal.x)>0.001||modular.window._rb.P.y>=afterDiagonal.y){
+  console.error('RUNTIME SMOKE: releasing D did not continue W without lateral drift');
+  process.exit(1);
+}
+if(JSON.stringify(snapshot(modular))!==JSON.stringify(snapshot(reference))){
+  console.error('RUNTIME SMOKE: partial-release movement parity failed');
+  process.exit(1);
+}
+
 for (const context of [reference, modular]) {
   const tony = context.window._rb.npcs.find(npc => npc.id === 'tony');
   if (!tony || typeof tony.interact !== 'function') throw new Error('Tony dialogue actor missing');
@@ -166,6 +181,22 @@ const referenceDialogue = reference.document.getElementById('dialogue').innerHTM
 const modularDialogue = modular.document.getElementById('dialogue').innerHTML;
 if (!modularDialogue || modularDialogue !== referenceDialogue) {
   console.error('RUNTIME SMOKE: NPC dialogue parity failed');
+  process.exit(1);
+}
+
+for(const context of [reference,modular]){
+  context.window._rb.state.mode='playing';
+  context.window._rb.P.rockedT=18000;
+  context.window._rb.P.crashT=0;
+  context.window._rb.updateWorld(18000);
+}
+if(modular.window._rb.P.rockedT!==0||modular.window._rb.P.crashT!==8000){
+  console.error(`RUNTIME SMOKE: exact high transition failed (${modular.window._rb.P.rockedT} -> ${modular.window._rb.P.crashT})`);
+  process.exit(1);
+}
+for(const context of [reference,modular])context.window._rb.updateWorld(8000);
+if(modular.window._rb.P.crashT!==0||JSON.stringify(snapshot(modular))!==JSON.stringify(snapshot(reference))){
+  console.error('RUNTIME SMOKE: exact 8-second crash or status parity failed');
   process.exit(1);
 }
 
@@ -185,4 +216,4 @@ if (!loaded || modular.window._rb.P.cash !== 319) {
   process.exit(1);
 }
 
-console.log(`RUNTIME SMOKE: PASS (${snapshot(modular).npcCount} NPCs, diagonal input, dialogue, ${snapshot(modular).spriteKeys.length} sprite keys, save/load)`);
+console.log(`RUNTIME SMOKE: PASS (${snapshot(modular).npcCount} NPCs, WASD chord/release, exact 18s->8s status, dialogue, ${snapshot(modular).spriteKeys.length} sprite keys, save/load)`);
