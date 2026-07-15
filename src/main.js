@@ -22,7 +22,8 @@ import { init_update } from './core/update.js';
 import { init_hud } from './ui/hud.js';
 import { init_canvas_geography } from './render/canvas_geography.js';
 import { init_landmarks_a } from './render/landmarks_a.js';
-import { init_frame, init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_frame } from './render/frame.js';
+import { init_landmarks_b, init_tiles, init_structures, init_render_props, init_actors_weather, init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();
