@@ -4,11 +4,12 @@
  */
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
+import { last } from '../core/update.js';
 import { inZone } from '../data/npc_spawns.js';
 import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
 import { ZONES } from '../data/world.js';
 import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
-import { HIDEOUT_DOORS, endingScreen, hideoutOwned, last, openOffice } from '../legacy.js';
+import { HIDEOUT_DOORS, endingScreen, hideoutOwned, openOffice } from '../legacy.js';
 import { questToast } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction } from './factions.js';

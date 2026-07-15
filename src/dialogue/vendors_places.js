@@ -4,11 +4,12 @@
  */
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, applyEquipStats, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
+import { update } from '../core/update.js';
 import { vendorPrice } from '../data/catalogs.js';
 import { clamp, currentZone, isNight } from '../data/npc_spawns.js';
 import { PROPS } from '../data/props.js';
 import { H, W, WORLD, ZONES } from '../data/world.js';
-import { drawNpc, update } from '../legacy.js';
+import { drawNpc } from '../legacy.js';
 import { hasPropane } from '../minigames/heat.js';
 import { questToast } from '../systems/combat.js';
 import { broadcastNews, feedPost } from '../systems/communications.js';

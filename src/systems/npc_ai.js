@@ -4,10 +4,10 @@
  */
 import { audio } from '../core/audio_save.js';
 import { P, particles, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
+import { updateWorld } from '../core/update.js';
 import { clamp, rectsOverlap } from '../data/npc_spawns.js';
 import { CHATTER } from '../data/props.js';
 import { WORLD } from '../data/world.js';
-import { updateWorld } from '../legacy.js';
 import { aggroNpc, damagePlayer, onNpcDeath, spawnProjectile } from './combat.js';
 
 export function updateNpcActors(dt) {
