@@ -2,7 +2,8 @@
  * Source seams: factions and territory.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { P, currentZone, dialogue, feedPost, last, runtime, state, toast, unlockAchievement } from '../legacy.js';
+import { P, currentZone, dialogue, last, runtime, state, toast, unlockAchievement } from '../legacy.js';
+import { feedPost } from './communications.js';
 
 export let FACTION_NAMES, FACTION_TIER_LABELS, TIER_TRANSITION_LINES, TERRITORY_GREETINGS, TERRITORY_LOVED_LINES, TERRITORY_HATED_LINES, TERRITORY_NPC_TARGETS;
 

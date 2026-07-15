@@ -2,7 +2,8 @@
  * Source seams: chatter, equipment, phones, graffiti, and vendor catalogs.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { P, applyEquipStats, buildGraffiti, feedPost, manageCops, runtime, state } from '../legacy.js';
+import { P, applyEquipStats, buildGraffiti, manageCops, runtime, state } from '../legacy.js';
+import { feedPost } from '../systems/communications.js';
 
 export let EQUIPMENT, PUBLIC_PHONE_LINES, GRAFFITI_LINES, SCRAP_GRAFFITI_LINES, SPIRITUAL_GRAFFITI_LINES, VENDOR_FLOATER_IDS, VENDOR_INDEX_META, CROWN_SPOTS;
 
