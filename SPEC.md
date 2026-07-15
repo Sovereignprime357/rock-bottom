@@ -1613,6 +1613,43 @@ Comprehensive audit of every NPC / interaction that can grant cash, items, cred,
 
 ---
 
+## v19 post-audit legibility invariants (2026-07-15)
+
+These contracts apply to the modular `index.html` build. They repair four measured failures from `LEGIBILITY-AUDIT.md`; they do not create a general text-vs-text collision system.
+
+### Building sign coverage
+
+- Every `BUILDINGS` entry with a non-empty `name` has an explicit `BUILDING_STYLE[name]` record with a non-empty `sign`.
+- Repeated building names may share one authored style. Style fallback remains available only as defensive rendering, not as valid content authoring.
+- The permanent gate enumerates building entries, not merely unique keys. Audited baseline: 21 uncovered entries of 24 named buildings. Required result: 0.
+
+### Zone-label clearance
+
+- A zone may declare an optional `labelDy`; absent values retain the v19 baseline of `18` logical pixels.
+- The label bounding box must not intersect any building body or authored awning. `THE LAUNDROMAT` uses the data offset needed to clear its storefront; no gameplay coordinates move.
+- Static text-vs-text collision testing is explicitly out of scope: the audit found 0 intersections across 75 static text boxes. Audited text-vs-art baseline: 1. Required result: 0.
+
+### Dynamic nameplate de-confliction
+
+- Visible nameplates are laid out in deterministic feet-sorted draw order.
+- Before drawing a nameplate, its union box moves upward until it strictly clears every accepted nameplate box in the current frame.
+- Layout reuses cached NPC box objects and one frame buffer. It does not move NPC gameplay coordinates or allocate a fresh list per actor per frame.
+- Audited spawn baseline: 2 intersecting pairs. Required result, including a dense 60-label fixture: 0.
+
+### Graffiti wall fit and persisted-layout migration
+
+- Graffiti text width is measured with the exact selected Courier font size before placement.
+- A tag is selected only from lines that fit the building's usable horizontal wall width (`building width - 12`). The placer may step the selected size down to 8px to find a valid line.
+- Every generated record stores measured width and wall bounds. Horizontal placement preserves a 6px margin on each side, and render culling uses measured width rather than the historical 170px guess.
+- Saved v19 graffiti records without the layout marker/metrics are rebuilt once. This intentionally supersedes the older invariant that every persisted v13 layout must remain geometrically unchanged; text containment is now authoritative.
+- Audited baseline: approximately 51% of possible/generated tags overflow. Required result: 0.
+
+### Permanent gate
+
+`tools/legibility-gate.mjs` must remain runnable and must fail on any non-zero count for these four invariants. It must use measured text widths and art geometry from the production modules.
+
+---
+
 ## CHANGE LOG
 
 | Version | Date | Major changes |
