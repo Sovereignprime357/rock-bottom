@@ -28,7 +28,8 @@ import { init_tiles } from './render/tiles.js';
 import { init_structures } from './render/structures.js';
 import { init_render_props } from './render/props.js';
 import { init_actors_weather } from './render/actors_weather.js';
-import { init_minimap, init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_minimap } from './render/minimap.js';
+import { init_ending_interactions, init_daily_hideouts, init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();
