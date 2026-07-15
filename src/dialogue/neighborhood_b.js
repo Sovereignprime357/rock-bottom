@@ -5,7 +5,8 @@
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, applyEquipStats, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { vendorPrice } from '../data/catalogs.js';
-import { aggroNpc, blockMenu, pickCrownSpot, pickupWeapon, questToast, startPigeonCrownQuest } from '../legacy.js';
+import { blockMenu, pickupWeapon } from '../legacy.js';
+import { aggroNpc, pickCrownSpot, questToast, startPigeonCrownQuest } from '../systems/combat.js';
 import { broadcastNews, feedPost, ringPhone } from '../systems/communications.js';
 import { adjustFaction } from '../systems/factions.js';
 

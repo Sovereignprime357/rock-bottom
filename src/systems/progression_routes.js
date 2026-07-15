@@ -4,8 +4,9 @@
  */
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
-import { die, last, panhandle } from '../legacy.js';
+import { last, panhandle } from '../legacy.js';
 import { activeOfficeContract, maybeUnlockOfficeQuest } from './campaigns.js';
+import { die } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
 
 export let ACHIEVEMENTS, HUSTLE_TEMPLATES, ROUTE_STOPS, ROUTE_STOP_BY_ID;

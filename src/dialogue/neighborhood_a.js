@@ -7,8 +7,9 @@ import { P, applyEquipStats, dialogue, runtime, state, toast, unlockAchievement 
 import { vendorPrice } from '../data/catalogs.js';
 import { isNight } from '../data/npc_spawns.js';
 import { triggerFallenPriestTransform } from './neighborhood_b.js';
-import { aggroNpc, playerAttack, questToast, spawnBoss, startLockpickMini } from '../legacy.js';
+import { startLockpickMini } from '../legacy.js';
 import { hasPropane } from '../minigames/heat.js';
+import { aggroNpc, playerAttack, questToast, spawnBoss } from '../systems/combat.js';
 import { feedPost, spawnPetPossum } from '../systems/communications.js';
 import { adjustFaction, applyRep, factionTier } from '../systems/factions.js';
 

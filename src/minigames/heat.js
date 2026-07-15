@@ -6,7 +6,8 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, closeDialogue, dialogue, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { clamp } from '../data/npc_spawns.js';
 import { H, W } from '../data/world.js';
-import { ctx, questToast } from '../legacy.js';
+import { ctx } from '../legacy.js';
+import { questToast } from '../systems/combat.js';
 import { feedPost } from '../systems/communications.js';
 
 export let COOK_MODES;
