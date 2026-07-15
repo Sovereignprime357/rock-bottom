@@ -3,7 +3,8 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { ROAD_SEGMENTS, WORLD } from '../data/world.js';
-import { P, SPRITE_CACHE, audio, clamp, ctx, currentZone, isNight, runtime, saveGame, state, toast, visibleWorldRect } from '../legacy.js';
+import { P, audio, clamp, ctx, currentZone, isNight, runtime, saveGame, state, toast, visibleWorldRect } from '../legacy.js';
+import { SPRITE_CACHE } from '../render/sprites.js';
 import { feedPost } from './communications.js';
 
 export let INCIDENT_IDS, INCIDENT_DEFS;
