@@ -13,7 +13,23 @@ import { FOG_SHEET, LIGHT_CTX, LIGHT_GLOW_CACHE, LIGHT_MASK, nightAmount, punchL
 import { SPRITE_CACHE } from './sprites.js';
 import { routePatchTier } from '../systems/progression_routes.js';
 
-export let VISIBLE_NPC_BUFFER, NPC_IDLE_SPRITES, NPC_TWO_FRAME_SPRITES;
+export let VISIBLE_NPC_BUFFER, NAMEPLATE_BOX_BUFFER, NPC_IDLE_SPRITES, NPC_TWO_FRAME_SPRITES;
+
+export function nameplateBoxesIntersect(a,b) {
+  return a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y;
+}
+
+export function placeNameplateBox(n,labelLines,labelWidths) {
+  const maxWidth=Math.max(...labelWidths),cx=n.x+n.w/2;
+  let top=n.y-8-labelLines.length*10;
+  const box=n._labelBox||(n._labelBox={x:0,y:0,w:0,h:0,top:0});
+  box.x=Math.round(cx-maxWidth/2-3);box.y=top-8;box.w=maxWidth+6;box.h=labelLines.length*10;box.top=top;
+  while(NAMEPLATE_BOX_BUFFER.some(other=>nameplateBoxesIntersect(box,other))){
+    top-=box.h+2;box.y=top-8;box.top=top;
+  }
+  NAMEPLATE_BOX_BUFFER.push(box);
+  return box;
+}
 
 export function drawLighting() {
   const amount=nightAmount();
@@ -147,7 +163,7 @@ export function drawNpc(n) {
     }
     const labelLines=n._labelLines,labelWidths=n._labelWidths;
     ctx.textAlign='center';
-    const cx=n.x+n.w/2, top=n.y-8-labelLines.length*10;
+    const cx=n.x+n.w/2, top=placeNameplateBox(n,labelLines,labelWidths).top;
     for(let i=0;i<labelLines.length;i++){
       const line=labelLines[i], tw=labelWidths[i];
       ctx.fillStyle='rgba(10,8,5,.76)'; ctx.fillRect(Math.round(cx-tw/2-3),top+i*10-8,tw+6,10);
@@ -367,6 +383,7 @@ export function init_actors_weather() {
   
   
   VISIBLE_NPC_BUFFER=[];
+  NAMEPLATE_BOX_BUFFER=[];
   NPC_IDLE_SPRITES = new Set(['barb','larry','phoneguy','math','pigeon','possum','scrap_dog']);
   NPC_TWO_FRAME_SPRITES = new Set(['dave_sleep','brutus','scrap_dog','os_brutus','horsecop','pigeon','possum']);
   // Pure visual-state selector: rendering can ask for a pose without changing simulation state.

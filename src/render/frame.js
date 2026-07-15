@@ -7,7 +7,7 @@ import { isNight } from '../data/npc_spawns.js';
 import { BUILDINGS } from '../data/props.js';
 import { H, TILE, W, ZONES } from '../data/world.js';
 import { drawHeatMini, drawSmokeOverlay } from '../minigames/heat.js';
-import { VISIBLE_NPC_BUFFER, drawLighting, drawNpc, drawObjectiveGuide, drawPlayer, drawWeather } from './actors_weather.js';
+import { NAMEPLATE_BOX_BUFFER, VISIBLE_NPC_BUFFER, drawLighting, drawNpc, drawObjectiveGuide, drawPlayer, drawWeather } from './actors_weather.js';
 import { ctx, drawWorldFabric, visibleWorldRect } from './canvas_geography.js';
 import { drawForegroundWorld, drawKingdomSites, drawLandmarkFacades, drawWorldDecor } from './landmarks_a.js';
 import { drawDogLeash, drawScrapFence, drawUnderpass } from './landmarks_b.js';
@@ -51,7 +51,7 @@ export function drawAll() {
     ctx.setLineDash([]);
     ctx.fillStyle = z.label;
     ctx.font = '11px Courier New';
-    ctx.fillText(z.name, z.x+8, z.y+18);
+    ctx.fillText(z.name, z.x+8, z.y+(z.labelDy??18));
   }
   // low street furniture sits on the pavement; cached set-back facades establish blocks.
   drawWorldDecor('low');
@@ -165,6 +165,7 @@ export function drawAll() {
   // NPCs. Reuse the viewport buffer so a crowded scene does not manufacture an array
   // and a garbage-collection hitch every frame.
   VISIBLE_NPC_BUFFER.length=0;
+  NAMEPLATE_BOX_BUFFER.length=0;
   for(const n of runtime.npcs)if(!n.dead&&
     n.x>=state.cam.x-60&&n.x<=state.cam.x+W+40&&
     n.y>=state.cam.y-60&&n.y<=state.cam.y+H+40)VISIBLE_NPC_BUFFER.push(n);

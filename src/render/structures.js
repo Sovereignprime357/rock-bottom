@@ -14,6 +14,7 @@ import { CLAIM_SITES, OFFICE_DOOR, claimedDistrictIds, freshOfficeState } from '
 import { HIDEOUT_DOORS, hideoutOwned } from '../systems/daily_hideouts.js';
 
 export let BUILDING_STYLE, GRAFFITI_PALETTES, POSTER_LINES, POSTER_BG;
+export const GRAFFITI_LAYOUT_VERSION=2;
 
 export function drawBuilding(b) {
   // base shadow under building
@@ -227,16 +228,33 @@ export function drawBuilding(b) {
   }
 }
 
-export function pickGraffitiLine(faction) {
-  const pool = (faction === 'scrap') ? SCRAP_GRAFFITI_LINES
-             : (faction === 'spiritual') ? SPIRITUAL_GRAFFITI_LINES
-             : GRAFFITI_LINES;
-  return pool[Math.floor(Math.random()*pool.length)];
+export function graffitiPoolFor(faction) {
+  return (faction === 'scrap') ? SCRAP_GRAFFITI_LINES
+       : (faction === 'spiritual') ? SPIRITUAL_GRAFFITI_LINES
+       : GRAFFITI_LINES;
+}
+
+export function measureGraffitiText(text,sz=9) {
+  ctx.font='bold '+sz+'px Courier New';
+  return Math.ceil(ctx.measureText(text).width);
+}
+
+export function pickGraffitiLine(faction,maxWidth=Infinity,sz=9) {
+  const eligible=graffitiPoolFor(faction).filter(line=>measureGraffitiText(line,sz)<=maxWidth);
+  return eligible.length?eligible[Math.floor(Math.random()*eligible.length)]:'';
+}
+
+export function currentGraffitiLayout(tags) {
+  return Array.isArray(tags)&&tags.length>0&&tags.every(tag=>
+    tag.layoutV===GRAFFITI_LAYOUT_VERSION&&Number.isFinite(tag.textW)&&
+    Number.isFinite(tag.wallX)&&Number.isFinite(tag.wallW)&&
+    tag.textW<=tag.wallW&&tag.x>=tag.wallX-.001&&tag.x+tag.textW<=tag.wallX+tag.wallW+.001
+  );
 }
 
 export function buildGraffiti() {
-  // if saved layout exists, just reuse it
-  if (state.graffiti && state.graffiti.length) return;
+  // v19 layouts had no measured wall bounds. Rebuild those once; reuse all measured layouts.
+  if (currentGraffitiLayout(state.graffiti)) return;
   const out = [];
   const N = 12 + Math.floor(Math.random()*7); // 12-18
   // candidate walls: every BUILDING, both side and bottom faces (not roof, not under awnings).
@@ -256,24 +274,20 @@ export function buildGraffiti() {
     const zid = zoneAt(b.x + b.w/2, b.y + b.h/2);
     const z = ZONES.find(z=>z.id===zid);
     const faction = (z && z.faction) || 'street';
-    const text = pickGraffitiLine(faction);
+    const wallX=b.x+6,wallW=b.w-12;
+    let sz=8+Math.floor(Math.random()*3),text='';
+    while(sz>=8&&!text){text=pickGraffitiLine(faction,wallW,sz);if(!text)sz--;}
+    if(!text)continue;
+    const textW=measureGraffitiText(text,sz);
     const palette = GRAFFITI_PALETTES[faction] || GRAFFITI_PALETTES.street;
-    let x, y;
-    if (wall.kind === 'bottom') {
-      x = b.x + 6 + Math.random()*(b.w-80);
-      y = b.y + b.h - 8 - Math.random()*16;
-    } else if (wall.kind === 'leftside') {
-      x = b.x + 4;
-      y = b.y + 24 + Math.random()*(b.h-50);
-    } else {
-      x = b.x + b.w - 70;
-      y = b.y + 24 + Math.random()*(b.h-50);
-    }
+    const x=wallX+Math.random()*Math.max(0,wallW-textW);
+    let y;
+    if (wall.kind === 'bottom') y = b.y + b.h - 8 - Math.random()*16;
+    else y = b.y + 24 + Math.random()*(b.h-50);
     out.push({
-      x, y, text,
+      x,y,text,sz,textW,wallX,wallW,wallKind:wall.kind,layoutV:GRAFFITI_LAYOUT_VERSION,
       col: palette[Math.floor(Math.random()*palette.length)],
       rot: ((Math.random()-.5) * 0.18), // -5° to +5° (radians ~0.087)
-      sz: 8 + Math.floor(Math.random()*3), // 8-10 px
     });
   }
   state.graffiti = out;
@@ -283,7 +297,7 @@ export function drawGraffiti() {
   if (!state.graffiti || !state.graffiti.length) buildGraffiti();
   if (!state.graffiti) return;
   for (const g of state.graffiti) {
-    if (!visibleWorldRect(g.x-80,g.y-18,170,28,16)) continue;
+    if (!visibleWorldRect(g.x-2,g.y-18,(g.textW||170)+4,28,16)) continue;
     ctx.save();
     ctx.translate(g.x, g.y);
     ctx.rotate(g.rot);
@@ -434,7 +448,20 @@ export function init_structures() {
   BUILDING_STYLE = {
     PAWN:        { awning:'#a08030', sign:'PAWN',        signColor:'#e8c040', neon:'#fff080' },
     CORNER:      { awning:'#7a2018', sign:"TONY'S",      signColor:'#d06030', neon:'#ff6020' },
-    CHURCH:      { awning:'#3a2840', sign:'',            signColor:'#d488d4', neon:'#d488d4', cross:true },
+    CHURCH:      { awning:'#3a2840', sign:'CHURCH',      signColor:'#d488d4', neon:'#d488d4', cross:true },
+    OLDSCHOOL:   { sign:'OLD SCHOOL',     signColor:'#c08038', neon:'#e8a050' },
+    SHACK:       { sign:'SHACK',          signColor:'#a08070', neon:'#c09070' },
+    'UNIT 11':   { sign:'UNIT 11',        signColor:'#a8a090', neon:'#d0c090' },
+    RETURNS:     { sign:'RETURNS',        signColor:'#c08038', neon:'#d09858' },
+    'THE OFFICE':{ sign:'THE OFFICE',     signColor:'#e8c040', neon:'#fff080' },
+    'TARP PERMITS':   { sign:'TARP PERMITS',   signColor:'#88a8c0', neon:'#80b8e0' },
+    'BLUE COURT':     { sign:'BLUE COURT',     signColor:'#90b8d0', neon:'#70b8e8' },
+    'CART IMPOUND':   { sign:'CART IMPOUND',   signColor:'#d4c896', neon:'#f0d880' },
+    'THE KEEP':       { sign:'THE KEEP',       signColor:'#e8c040', neon:'#fff080' },
+    'COPPER RETURNS': { sign:'COPPER RETURNS', signColor:'#d07840', neon:'#f08040' },
+    'CHOIR OFFICE':   { sign:'CHOIR OFFICE',   signColor:'#d09058', neon:'#f09050' },
+    'DITCH RECORDS':  { sign:'DITCH RECORDS',  signColor:'#a8a090', neon:'#d0c890' },
+    'THE THRONE':     { sign:'THE THRONE',     signColor:'#e8c040', neon:'#fff080' },
     LAUNDROMAT:  { awning:'#4858a0', sign:'WASH·DRY',   signColor:'#88c0ff', neon:'#a0d0ff' },
   };
   

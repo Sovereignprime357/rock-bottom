@@ -42,7 +42,7 @@ export function init_constants_world() {
     // THE PROJECTS — larry + stripe live here. street-leaning, even though it's hardscrabble.
     { id: 'projects',    name: 'THE PROJECTS',        x: 100,  y: 1700, w: 600, h: 180, color: '#1c1c20', label: '#a0a0c0', faction: 'street' },
     { id: 'underpass',   name: 'HIGHWAY UNDERPASS',   x: 1020, y: 240,  w: 380, h: 220, color: '#1a1a1c', label: '#888888', faction: 'scrap' },
-    { id: 'laundromat',  name: 'THE LAUNDROMAT',      x: 1480, y: 1080, w: 320, h: 200, color: '#3a3a44', label: '#88c0ff', faction: 'street' },
+    { id: 'laundromat',  name: 'THE LAUNDROMAT',      x: 1480, y: 1080, w: 320, h: 200, color: '#3a3a44', label: '#88c0ff', labelDy: -8, faction: 'street' },
     // v13 wave 2 — small transit-zone for pinky polenta. between the block / market / laundromat.
     { id: 'busstop',     name: 'BUS STOP',            x: 1240, y: 1080, w: 220, h: 180, color: '#2a2820', label: '#888888', faction: 'street' },
     // v13 wave 8a — four new zones placed in the expanded world space (existing zones unchanged).
