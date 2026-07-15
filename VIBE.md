@@ -237,6 +237,8 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | PARK BENCH PHILOSOPHER | old woman, feeds pigeons, asks one question per day | the park (near the fountain) | +1 spiritual once/day for engaging. no money changes hands. |
 | THE PRICE GUY | brimmed hat, perfectly still, "the price is the price" | skid row center (spawns every 3 days) | takes ALL your cash for a random outcome: knife / $200 / propane torch / a rock / nothing |
 | OLD SCHOOL BRUTUS | bigger dog, deeper rust, lived in the gym | the old school (spawned by ripping copper inside) | hp 250, dmg 35 grab-lunge. drops $80, 5 copper, a propane torch |
+| THE LEASING GUY | clipboard, key ring on a fishhook, accepts copper as a key category | east side of the lot, outside the condemned tax office | after 3 filed routes, replaces the office lock once for $40 + 1 pure copper. cannot be displaced from the transaction. |
+| GUTTER GREG | guards a rubber duck, counts cart parts twice | the dry drainage canal | counts municipal inventory once per day for +1 scrap reputation. no cash or item. cannot be displaced from the duck. |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 

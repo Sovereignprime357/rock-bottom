@@ -10,19 +10,19 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 
 ## Technical shape
 
-- **One file.** `rock_bottom_v13.html` — HTML, CSS, JS, sprites, audio, all inline.
+- **One file.** `rock_bottom_v18.html` — HTML, CSS, JS, sprites, audio, all inline.
 - **Zero deps.** No CDN. No npm. No build step. No framework. Vanilla JS, Canvas 2D, Web Audio.
 - **How to run:** double-click the file. Or drag it into a browser. That is the install process.
-- **Saves:** `window.storage` (Claude.ai artifact API). Falls back to in-memory if missing.
-- **Browser:** any evergreen Chromium/Firefox/Safari. Desktop and mobile both supported (touch D-pad on mobile).
+- **Saves:** async `window.storage`; ordinary browsers receive an IndexedDB-backed adapter, with volatile memory only when IndexedDB is unavailable.
+- **Browser:** any evergreen Chromium/Firefox/Safari. Desktop and mobile both supported (analog touch controls on mobile).
 
 ## Current shipped build
 
-**v13** — wave 1 housekeeping done. v12 → v13 forked, dead rank-gate collision code removed, docs synced. Wave 2+ is queued in `DELEGATION.md`.
+**v18** — the paper-empire / far-east build. The world is now 5800×3800 with WAREHOUSE ROW, THE DRAINAGE CANAL, and THE LOT connected by new roads, terrain, facades, props, lights, route stops, and safe bus arrivals. Filing three block routes exposes THE OFFICE: a condemned former tax office that can be acquired for $40 + 1 pure copper, then visibly burdened with a cot, shared locker, desk, generator, radio, and route board. The desk opens eleven three-stage district claims gated by faction tolerance; the radio opens bounded sign inspections that pay only after returning to file. Ownership means bent signs and paperwork, never people, passive income, or a new currency. The Q ledger, objective marker, minimap, evolving office exterior, two authored clerical NPC sprites, six-per-page bus ledger, and 1/4/8/11 milestones make the long grind legible. v17's endless routes, full activity ledger, cursed-sticker player art, v16 multi-key controls, and the exact 18s high → 8s crash remain intact.
 
 ## Version lineage
 
-`rock_bottom_v4.html` through `rock_bottom_v13.html` are all preserved in the repo. v3 was the original public ship; everything since is in-house iteration. Latest = highest number. Older versions are kept for diff archeology, not because they still work — play the latest.
+`rock_bottom_v4.html` through `rock_bottom_v18.html` are all preserved in the repo. v3 was the original public ship; everything since is in-house iteration. Latest = highest number. Older versions are kept for diff archeology, not because they still work — play the latest.
 
 ## Design docs (read in this order)
 
@@ -31,7 +31,7 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 | `README.md` | This file. Quick orientation. |
 | `VIBE.md` | **THE SOUL.** Tone bible. Read it twice. Lowercase NPCs, cursed names, no fourth-wall breaks. |
 | `SPEC.md` | Behavioral contract. Resources, zones, invariants, edge cases. |
-| `CLAUDE.md` | Operating constraints for the agent. Hard rules vs soft rules. |
+| `AGENTS.md` | Operating constraints for the agent. Hard rules vs soft rules. |
 | `DELEGATION.md` | Prioritized backlog. What ships next. |
 | `BRAIN.md` | Append-only session log. What was changed, why, what was tried, what's next. |
 
@@ -41,7 +41,7 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 2. **VIBE.md** — internalize the voice before doing anything else
 3. SPEC.md — understand the systems before changing them
 4. Play the latest `rock_bottom_v{N}.html` end-to-end (smoke a rock, fight a crackhead, get arrested, cook a batch, beat the boss)
-5. CLAUDE.md — operating rules
+5. AGENTS.md — operating rules
 6. DELEGATION.md — pick a task off the top
 7. BRAIN.md — context for what just happened
 
@@ -55,6 +55,6 @@ Sovereign Prime (Shayler Phipps) — VibeKoded
 Architect: Claude (Opus 4.7)
 Methodology: SpecMesh
 
-## License
+## Release
 
-Personal portfolio piece. Not for distribution. The crackhead does not consent to a port.
+Free-to-play release candidate. No account, service, asset download, or build step is required. Source licensing and redistribution terms remain with the operator.
