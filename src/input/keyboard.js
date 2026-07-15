@@ -4,8 +4,8 @@
  */
 import { audio, loadGame } from '../core/audio_save.js';
 import { P, activeDialogue, closeDialogue, closePanel, dialogue, renderInventory, renderQuests, state, toast } from '../core/runtime_ui.js';
+import { startGame } from '../core/start.js';
 import { updateWorld } from '../core/update.js';
-import { startGame } from '../legacy.js';
 import { bailHeatMini, lockHeatMini } from '../minigames/heat.js';
 import { playerAttack } from '../systems/combat.js';
 import { phoneState, renderPhone } from '../systems/communications.js';

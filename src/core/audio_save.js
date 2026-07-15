@@ -3,8 +3,8 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { P, dialogue, runtime, state, toast } from './runtime_ui.js';
+import { startGame } from './start.js';
 import { PROPS } from '../data/props.js';
-import { startGame } from '../legacy.js';
 import { ctx } from '../render/canvas_geography.js';
 import { drawGraffiti } from '../render/structures.js';
 import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState, freshOfficeState, normalizeDistrictClaims, normalizeKingdomState, normalizeOfficeState, officeNat, syncKingdomQuests } from '../systems/campaigns.js';

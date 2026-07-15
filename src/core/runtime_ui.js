@@ -3,11 +3,11 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { audio, saveGame } from './audio_save.js';
+import { startGame } from './start.js';
 import { last } from './update.js';
 import { EQUIPMENT, VENDOR_FLOATER_IDS, VENDOR_INDEX_META, vendorPrice } from '../data/catalogs.js';
 import { RANKS } from '../data/world.js';
 import { releaseAllInput } from '../input/keyboard.js';
-import { startGame } from '../legacy.js';
 import { WEAPONS, panhandle } from '../minigames/activities.js';
 import { CLAIM_SITES, CLAIM_SITE_BY_ID, OFFICE_UPGRADE_DEFS, bitCount3, claimedDistrictIds, currentPrimaryObjective, freshKingdomState, freshOfficeState, hideGuidance, kingdomStageClan, officeDailyCap } from '../systems/campaigns.js';
 import { officeUpgradeCount, resetDailyCounters } from '../systems/daily_hideouts.js';
