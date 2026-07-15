@@ -130,6 +130,45 @@ if (actual !== expected) {
   process.exit(1);
 }
 
+reference.window._rb.startGame(false);
+modular.window._rb.startGame(false);
+const startedReference = JSON.stringify(snapshot(reference));
+const startedModular = JSON.stringify(snapshot(modular));
+if (startedModular !== startedReference || modular.window._rb.state.mode !== 'playing' || modular.window._rb.npcs.length < 50) {
+  console.error('RUNTIME SMOKE: new-game start parity failed');
+  console.error(`reference ${startedReference}`);
+  console.error(`modular   ${startedModular}`);
+  process.exit(1);
+}
+
+const beforeMove = { x:modular.window._rb.P.x, y:modular.window._rb.P.y };
+for (const context of [reference, modular]) {
+  context.window._rb.state.keys.add('w');
+  context.window._rb.state.keys.add('d');
+  context.window._rb.updateWorld(16);
+  context.window._rb.state.keys.clear();
+}
+if (modular.window._rb.P.x <= beforeMove.x || modular.window._rb.P.y >= beforeMove.y) {
+  console.error('RUNTIME SMOKE: simultaneous W+D movement did not move diagonally');
+  process.exit(1);
+}
+if (JSON.stringify(snapshot(modular)) !== JSON.stringify(snapshot(reference))) {
+  console.error('RUNTIME SMOKE: one-tick movement/world parity failed');
+  process.exit(1);
+}
+
+for (const context of [reference, modular]) {
+  const tony = context.window._rb.npcs.find(npc => npc.id === 'tony');
+  if (!tony || typeof tony.interact !== 'function') throw new Error('Tony dialogue actor missing');
+  tony.interact();
+}
+const referenceDialogue = reference.document.getElementById('dialogue').innerHTML;
+const modularDialogue = modular.document.getElementById('dialogue').innerHTML;
+if (!modularDialogue || modularDialogue !== referenceDialogue) {
+  console.error('RUNTIME SMOKE: NPC dialogue parity failed');
+  process.exit(1);
+}
+
 await modular.window.storage.set('qa_roundtrip', { value:19, possum:true });
 const saved = await modular.window.storage.get('qa_roundtrip');
 if (!saved || saved.value?.value !== 19 || saved.value?.possum !== true) {
@@ -137,4 +176,13 @@ if (!saved || saved.value?.value !== 19 || saved.value?.possum !== true) {
   process.exit(1);
 }
 
-console.log(`RUNTIME SMOKE: PASS (${snapshot(modular).npcCount} NPCs, ${snapshot(modular).spriteKeys.length} sprite keys, storage round-trip)`);
+modular.window._rb.P.cash = 319;
+await modular.window._rb.saveGame();
+modular.window._rb.P.cash = 1;
+const loaded = await modular.window._rb.loadGame();
+if (!loaded || modular.window._rb.P.cash !== 319) {
+  console.error('RUNTIME SMOKE: game save/load round-trip failed');
+  process.exit(1);
+}
+
+console.log(`RUNTIME SMOKE: PASS (${snapshot(modular).npcCount} NPCs, diagonal input, dialogue, ${snapshot(modular).spriteKeys.length} sprite keys, save/load)`);
