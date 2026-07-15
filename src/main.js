@@ -34,7 +34,8 @@ import { init_daily_hideouts } from './systems/daily_hideouts.js';
 import { init_activities } from './minigames/activities.js';
 import { init_keyboard } from './input/keyboard.js';
 import { init_start } from './core/start.js';
-import { init_boot, init_mobile } from './legacy.js';
+import { init_boot } from './core/boot.js';
+import { init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();

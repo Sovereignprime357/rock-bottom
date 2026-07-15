@@ -1,5 +1,5 @@
 /* Generated from frozen rock_bottom_v19.html.
- * Source seams: cache and HUD boot sequence | mobile controls and final startup.
+ * Source seams: mobile controls and final startup.
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { SAVE_KEY, audio, loadGame, saveGame } from './core/audio_save.js';
@@ -9,33 +9,13 @@ import { update, updateWorld } from './core/update.js';
 import { INPUT_RELEASE_HOOKS, continueAfterEnding, loadFromTitle } from './input/keyboard.js';
 import { lockHeatMini } from './minigames/heat.js';
 import { resolveNpcPose } from './render/actors_weather.js';
-import { buildEnvironmentSprites } from './render/canvas_geography.js';
 import { drawAll } from './render/frame.js';
-import { buildFogSheet, buildLandmarkFacades, buildLightSprites } from './render/landmarks_a.js';
-import { PALS, SPRITE_CACHE, buildSprites } from './render/sprites.js';
+import { PALS, SPRITE_CACHE } from './render/sprites.js';
 import { currentPrimaryObjective } from './systems/campaigns.js';
-import { rotateNews } from './systems/communications.js';
 import { takeTheBus } from './systems/daily_hideouts.js';
 import { startIncident, updateActiveIncident } from './systems/incidents.js';
 import { endingScreen } from './systems/interactions.js';
 import { ROUTE_STOPS, ensureBlockRoute, hustleProgress, rollBlockRoute, routePatchTier, tryStampBlockRoute, validBlockRoute } from './systems/progression_routes.js';
-import { updateHUD } from './ui/hud.js';
-
-export function init_boot() {
-  // ---------- INIT ----------
-  buildSprites();
-  buildEnvironmentSprites();
-  buildLandmarkFacades();
-  buildLightSprites();
-  buildFogSheet();
-  updateHUD();
-  rotateNews();
-  setInterval(rotateNews, 50000);
-  // CRT power-on auto-dismiss
-  setTimeout(() => { const p = document.getElementById('poweron'); if (p) p.classList.add('gone'); }, 800);
-  
-  
-}
 
 export let loadBtnEl, titleLoadTap;
 
