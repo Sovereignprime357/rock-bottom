@@ -2,7 +2,8 @@
  * Source seams: constants, zones, and visual world cohesion.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { currentZoneFaction, updateTerritory } from '../legacy.js';
+import { currentZoneFaction } from '../legacy.js';
+import { updateTerritory } from '../systems/factions.js';
 
 export let W, H, WORLD, TILE, RANKS, ZONES, TERRAIN_REGIONS, ROAD_SEGMENTS, CROSSWALKS, GROUND_PATHS, RAIL_LINES, LANDMARK_FACADES, WORLD_DECOR, UTILITY_WIRES, WORLD_LIGHTS;
 
