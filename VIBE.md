@@ -239,6 +239,36 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | OLD SCHOOL BRUTUS | bigger dog, deeper rust, lived in the gym | the old school (spawned by ripping copper inside) | hp 250, dmg 35 grab-lunge. drops $80, 5 copper, a propane torch |
 | THE LEASING GUY | clipboard, key ring on a fishhook, accepts copper as a key category | east side of the lot, outside the condemned tax office | after 3 filed routes, replaces the office lock once for $40 + 1 pure copper. cannot be displaced from the transaction. |
 | GUTTER GREG | guards a rubber duck, counts cart parts twice | the dry drainage canal | counts municipal inventory once per day for +1 scrap reputation. no cash or item. cannot be displaced from the duck. |
+| THE DOG | matted, patient, returns without acknowledging the arrangement | chained at the scrap yard, then occasionally on your route | can be fed, freed, or wronged; accepts one pet and resumes wandering |
+| THE BIG GUY | says he is the big guy because paperwork has not contradicted him | lives under the highway | trades his misaligned shopping cart for 5 pure copper |
+| CUBSCOUT | sells popcorn while his mom completes one continuous phone call | patrols the marketplace parking lot in daylight | sells one $8 tin and four points of local respect |
+| JOGGER | announces a heart rate of 142 without reducing speed | runs the same neighborhood rectangle indefinitely | may surrender $1 or accelerate away from the request |
+| DOG WALKER (PAISLEY) | says “paisley leave it” before paisley has selected anything | circles the market with a dog made entirely of fur | permits one tolerant pet for +1 cred |
+| BUSKER | wrote a song with no chorus and one speed setting | occupies the marketplace with an open guitar case | accepts $1; a different song is the same song faster |
+| HORSE COP | nods only after the horse has approved the nod | mounted authority near the bus stop | praise pays cred; unauthorized petting may produce curb and wanted |
+| THE VAPE LORD | exhales watermelon; the backpack dragon does the same | holds court beside the marketplace mist | sells a $6 “spectrum” pod for +10 brain; declines samples by staring |
+| A POTHOLE (TALKING) | knows your full legal name and your mother's voice | municipal road defect at the block | accepts $1; wins arguments for -4 brain |
+| MAYOR'S COUSIN | suit jacket, no pants, mayor has stopped returning calls | unofficial marketplace government | may reduce wanted with a bread phone; accepts $5 to forget a favor |
+| THE PHONE GUY | posts first and witnesses later | stationary marketplace media outlet | sells thirty seconds of fame for $3; the numbers are 3 |
+| LAUNDROMAT LADY | has folded the same shirt since 2009 | permanent laundromat shift with no visible employer | sells a $2 wash and $5 detergent; questions cost brain |
+| METER MAID | tickets existence inside a designated zone | patrols the dealer-side meters | $2 may reduce wanted; flirting creates another citation |
+| FOOD TRUCK GUY | truck says TACOS in four fonts and has not moved since wednesday | marketplace food infrastructure | sells mystery recovery, horchata, and a burrito with a rock in it |
+| THE PRIEST'S SON | backwards cap, same eyes, denies the available genealogy | stands beside the church his father will not discuss | sells a $10 special that is either one rock or exactly one tic-tac |
+| KARAOKE MIKE | owns the machine but not the microphone | laundromat sound department | takes $5 for a rhythm hearing; requests are processed as escape attempts |
+| YOUR POSSUM | follows silently and treats ownership as a route error | temporary companion acquired from the neighborhood possum situation | reveals nearby cash; may be released without ceremony |
+| THE BUS DRIVER | arrives once and looks at you until the decision exists | day-30 bus stop, then nowhere | offers one irreversible ride; refusal is also irreversible |
+| BRUTUS THE OLDER | larger, redder, remembers the original smell | returns beside the player as Brutus's senior claim | charger boss unless the block already loves you; may carry a torch |
+| SOMEONE YOU DON'T KNOW | knows one fact about you and declines a second sentence | appears nearby on day 3, then walks beyond the map | says “i heard about you”; offers nothing and leaves |
+| COP | arrives from the nearest edge and radios when distance becomes insulting | generic wanted response, not a resident | chases, calls backup, arrests, and removes cash plus rocks |
+| DARRYL UNDER BLUE | wears blue roof plastic as weather and title | ruler beneath BLUE TARP COURT | charger hearing with two clerks; surrenders the BLUE WEATHER seal |
+| GENERAL RECEIPT | receipt sash extends past the return window | ruler of CART CAVALRY KEEP | grabber appeal with two clerks; surrenders the CART APPEAL seal |
+| BISHOP WIRE | antenna mitre receives only b flat | conducts the hubcap congregation in COPPER CHOIR YARD | ranged mass with two deacons; surrenders the COPPER MASS seal |
+| THE CURB EMPEROR | stacked-curb crown, folding-chair throne, broken ruler | final authority of THE THRONE DITCH until the chair objects | three-phase succession fight; leaves $60, 40 cred, and the same chair |
+| TARP KNIGHT | tarp hood and bucket-lid shield, no roof permit | bounded guard of BLUE TARP COURT | attacks unauthorized weather filings; grants no loot or allegiance |
+| CART LANCER | holds a shopping-cart fork where a horse would go | bounded guard of CART CAVALRY KEEP | charges, grabs, or swarms for the return department; grants nothing |
+| WIRE DEACON | wire stole, loose coil, attendance marked yes | bounded guard of COPPER CHOIR YARD | conducts ranged objections and close corrections; grants nothing |
+| CURB HOLDOUT | wears whichever conquered uniform still fits | throne guard and emperor reinforcement | refuses succession in person; grants no reward |
+| CURB PRETENDER No. N | number changes daily; petition does not | returns to a conquered ruler post after coronation | one elite objection per day; defeat pays $10 and 2 cred once |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 
