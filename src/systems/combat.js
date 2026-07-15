@@ -9,7 +9,7 @@ import { clamp, isNight, rectsOverlap } from '../data/npc_spawns.js';
 import { interactiveProps } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { openOldSchoolInterior } from '../dialogue/vendors_places.js';
-import { WEAPONS, pickupWeapon, spawnBrutusOlder } from '../legacy.js';
+import { WEAPONS, pickupWeapon, spawnBrutusOlder } from '../minigames/activities.js';
 import { hasPropane } from '../minigames/heat.js';
 import { abortKingdomFight, completeKingdomBoss, completeKingdomPretender, maybeUnlockKingdom, syncKingdomQuests } from './campaigns.js';
 import { broadcastNews, feedPost } from './communications.js';

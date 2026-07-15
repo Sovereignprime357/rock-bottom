@@ -10,7 +10,7 @@ import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
 import { W } from '../data/world.js';
 import { possumDialogue } from '../dialogue/neighborhood_a.js';
 import { tryEnterOldSchool, tryParkBenchSit } from '../dialogue/vendors_places.js';
-import { blockMenu, panhandle, pickupWeapon, startHeist } from '../legacy.js';
+import { blockMenu, panhandle, pickupWeapon, startHeist } from '../minigames/activities.js';
 import { hasPropane } from '../minigames/heat.js';
 import { tryKingdomDoor, tryUseKingdomTarget, tryUseOfficeFieldTarget } from './campaigns.js';
 import { questToast } from './combat.js';

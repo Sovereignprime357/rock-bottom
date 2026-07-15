@@ -31,7 +31,8 @@ import { init_actors_weather } from './render/actors_weather.js';
 import { init_minimap } from './render/minimap.js';
 import { init_ending_interactions } from './systems/interactions.js';
 import { init_daily_hideouts } from './systems/daily_hideouts.js';
-import { init_activities, init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
+import { init_activities } from './minigames/activities.js';
+import { init_keyboard, init_start, init_boot, init_mobile } from './legacy.js';
 
 init_storage();
 init_constants_world();

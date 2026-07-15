@@ -6,7 +6,7 @@ import { P, runtime, state } from '../core/runtime_ui.js';
 import { last } from '../core/update.js';
 import { EQUIPMENT } from '../data/catalogs.js';
 import { H } from '../data/world.js';
-import { WEAPONS } from '../legacy.js';
+import { WEAPONS } from '../minigames/activities.js';
 
 export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, INCIDENT_PALS;
 
