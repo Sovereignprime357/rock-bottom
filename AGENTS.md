@@ -12,11 +12,11 @@ Not optional. Not skimmable. The comedy is the product. Mechanics serve the come
 ### 2. Spec before generate
 Adding a new system? Add the SPEC entry first. Spec without code is a draft. Code without spec is slop. Both, in order, is SpecMesh.
 
-### 3. Single HTML file architecture
-Everything in one file: HTML, CSS, JS, sprites, audio. No external dependencies. No CDN imports. No build step. The whole game must be openable by double-clicking the file.
+### 3. Plain ES module architecture — single-file rule RETIRED
+The former “everything in one HTML file” hard rule was deliberately retired by the operator on 2026-07-15. It existed for the Claude artifact host and no longer serves the hosted autonomous-loop experiment at this size. `rock_bottom_v19.html` is the frozen behavioral reference; active source lives in `index.html` plus section-derived files under `src/`, loaded as native ES modules over HTTP. Keep zero external runtime dependencies, zero CDN imports, zero frameworks, and no build step unless a later ratified SPEC changes that boundary. Do not recombine the source into a monolith merely to restore double-click execution.
 
-### 4. window.storage, NEVER localStorage
-Codex.ai artifacts do NOT support localStorage or sessionStorage. They fail silently in a way that corrupts the save illusion. Use `window.storage.set / .get` exclusively. All calls async, all wrapped in try/catch.
+### 4. window.storage, NEVER localStorage — REAFFIRMED
+The architecture change does not retire the storage abstraction. Use `window.storage.set / .get` exclusively; the browser fallback is IndexedDB. All calls stay async and wrapped in try/catch. Never scatter `localStorage` or `sessionStorage` through modules.
 
 ### 5. Audio init on first user interaction
 Browser autoplay policy. Audio context must be created in a keydown or click handler, never on page load. Track `audioReady` boolean to gate all `beep()` calls.
@@ -108,13 +108,13 @@ It's not. Cut it. Then write something more specific.
 
 ## What to do at the end of a session
 
-1. Save the updated HTML file as `rock_bottom_v{N+1}.html` (NOT overwriting v3 — keep the lineage)
+1. Keep `rock_bottom_v19.html` untouched as the behavioral reference. Update modular source in `index.html` and `src/`; create another monolithic lineage file only if the operator explicitly requests one.
 2. Update SPEC.md with any new systems, invariants, edge cases
 3. Update DELEGATION.md — move completed items to "shipped," refine remaining items
 4. Create/append BRAIN.md with the session log (what/why/decided/tried/next)
 5. If you added new sounds: document them in SPEC.md sound section
 6. If you added new NPCs: add to VIBE.md identity table
-7. Present the new HTML file via `present_files` for the operator to play
+7. Present the served modular entry point and any relevant reference file for the operator to play
 
 ---
 
@@ -129,7 +129,7 @@ If you do any of these, the operator will be unhappy and the work will be revert
 5. **Add a "good ending" where the crackhead gets clean** — the protagonist is a clown, not a moral lesson
 6. **Add real-world drug names, real cities, real victim references** — see VIBE.md HARD STOPS
 7. **Use localStorage** — see Hard Rule 4
-8. **Add Tailwind, React, any framework** — single HTML file, vanilla JS, see Hard Rule 3
+8. **Add Tailwind, React, any framework, CDN runtime, or unratified bundler** — native HTML/CSS/ES modules only, see Hard Rule 3
 9. **Add a credits screen with your name on it** — this is the operator's portfolio piece
 10. **Make any NPC speak in proper grammar with capital letters** — see VIBE.md Rule 1
 
@@ -154,13 +154,15 @@ Short questions get short answers. Deep questions get systems-level answers. Don
 
 ```
 /rock_bottom/
+├── index.html       ← hosted modular entry point
+├── src/             ← section-derived native ES modules
 ├── README.md
 ├── VIBE.md          ← THE SOUL
 ├── SPEC.md          ← THE SYSTEMS
 ├── AGENTS.md        ← THIS FILE
 ├── DELEGATION.md    ← THE BACKLOG
 ├── BRAIN.md         ← session continuity (append-only)
-└── rock_bottom_v{N}.html  ← shipped builds, one per version
+└── rock_bottom_v19.html   ← frozen behavioral reference
 ```
 
 ---
