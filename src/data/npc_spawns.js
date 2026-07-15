@@ -7,7 +7,8 @@ import { P, dialogue, runtime, state, toast } from '../core/runtime_ui.js';
 import { ZONES } from './world.js';
 import { daveDialogue, lurchDialogue, momDialogue, paulieDialogue, peteDialogue, possumDialogue, priestDialogue, scrapDogDialogue, sherriDialogue, tonyDialogue, yuriDialogue } from '../dialogue/neighborhood_a.js';
 import { bigguDialogue, conductorDialogue, larryDialogue, pigeonDialogue, stripeDialogue } from '../dialogue/neighborhood_b.js';
-import { barbDialogue, hopperDialogue, mathematicianDialogue, philosopherDialogue, pinkyDialogue, startRhythmMini } from '../legacy.js';
+import { barbDialogue, hopperDialogue, mathematicianDialogue, philosopherDialogue, pinkyDialogue } from '../dialogue/vendors_places.js';
+import { startRhythmMini } from '../legacy.js';
 import { gutterGregDialogue, leaseGuyDialogue } from '../systems/campaigns.js';
 import { feedPost, phoneState, renderPhone } from '../systems/communications.js';
 

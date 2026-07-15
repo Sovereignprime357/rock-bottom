@@ -7,7 +7,8 @@ import { P, dialogue, runtime, state, toast, unlockAchievement } from '../core/r
 import { inZone } from '../data/npc_spawns.js';
 import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
 import { ZONES } from '../data/world.js';
-import { HIDEOUT_DOORS, OLD_SCHOOL_DOOR, endingScreen, hideoutOwned, last, openOffice, questToast } from '../legacy.js';
+import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
+import { HIDEOUT_DOORS, endingScreen, hideoutOwned, last, openOffice, questToast } from '../legacy.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction } from './factions.js';
 import { ACHIEVEMENTS, currentBlockRouteStop } from './progression_routes.js';
