@@ -83,3 +83,62 @@ These were the same class of missing set/geometry relationship, but they are no 
 - Procedural ground, grime, and road rendering already follow visible world geometry. Posters already cap per faction zone. The building-style coverage failure is fixed. The single rideable cart is explicitly unique.
 - Ambient call/news/event timers without a physical response window are player-time systems, not spatial systems. They should not be multiplied by map area.
 - Fixed DOM HUD fonts, ticker width, dialogue placement, unclamped `(E)` prompts, rain count, and screen-effect radii have missing **viewport/content** relationships. They are real legibility work, but they are not evidence that world-size constants regressed. Likewise, the fixed `800×600` camera is an explicit SPEC decision; whether the player should see more of an `8600×5600` world is an operator call.
+
+## Wave 5 — required registry repair
+
+- [x] Restored the four-column VIBE registration requirement as `tools/npc-registry-gate.mjs`.
+- [x] Backfilled 30 identities. The audit estimated approximately 26; the exhaustive source/runtime inventory also found `MAYOR'S COUSIN`, `THE PRIEST'S SON`, `SOMEONE YOU DON'T KNOW`, and the shared generic `COP` identity.
+- [x] Kept four true state/variant aliases explicit rather than inventing duplicate people: Fallen O'Malley and the three source-declared SKID variants.
+- [x] Flagged the four weak kingdom guard names below without changing a display name, id, sprite, behavior, or line.
+
+## Operator decision register
+
+The audit evidence is recorded here without converting its preferences into canon. Every item remains open and operator-only.
+
+### OD-NPC-NAMES
+
+**Status:** OPEN — OPERATOR ONLY
+
+**Measured evidence:** `TARP KNIGHT`, `CART LANCER`, `WIRE DEACON`, and `CURB HOLDOUT` are the four kingdom rank/prop names that skipped the original four-column test and fail the audit's cursed-name test. They now have complete registry rows, so completeness and taste are separate questions.
+
+**Non-ratified audit recommendation:** none; flag the names and leave taste in the operator's seat.
+
+**Current behavior preserved:** all four names, ids, sprites, guard families, boss adds, and combat behavior remain unchanged.
+
+**Operator decision:** _open_
+
+### OD-PATTERN-ROTATION
+
+**Status:** OPEN — OPERATOR ONLY
+
+**Measured evidence:** the clerical construction owns 23/23 route stops, 22/22 claim beats, and 9/9 kingdom marks—approximately 54 permanent-loop beats. VIBE's four named escalation patterns remain concentrated in older incidental events. This happened because the clerical pattern is generative and “make it bigger” repeatedly selected the easiest pattern to extend.
+
+**Non-ratified audit recommendation:** name the Clerical Pattern as a fifth VIBE pattern, keep it, and add a rotation/share rule so it does not monopolize future endless content.
+
+**Current behavior preserved:** no route, claim, mark, quota, percentage, or VIBE pattern rule changed.
+
+**Operator decision:** _open_
+
+### OD-MEDIEVAL-REGISTER
+
+**Status:** OPEN — OPERATOR ONLY
+
+**Measured evidence:** kingdom, throne, crown, knight, bishop, anointing, and succession language is now a campaign register. The implementation repeatedly lets tarps, curbs, forms, wire, and a folding chair win in the same beat; the final throne remains a folding chair.
+
+**Non-ratified audit recommendation:** amend HARD YES #6 toward “mundane > magical, and if the setup goes magical, the mundane must win in the same breath” rather than removing the kingdom register.
+
+**Current behavior preserved:** no VIBE rule, campaign term, dialogue, objective, boss, or ending copy changed.
+
+**Operator decision:** _open_
+
+### OD-VIBE-SCOPE
+
+**Status:** OPEN — OPERATOR ONLY
+
+**Measured evidence:** VIBE strongly governs sentence-level tone but says nothing mechanical about world scope, campaign grammar, objective rotation, or how often the BAD IDEA must return to scoring and smoking. The world is now `8600×5600`; office, route, and kingdom objectives dominate long stretches after the intro, while the anoint stage is the one explicit return to the core loop.
+
+**Non-ratified audit recommendation:** extend VIBE with a scope invariant and a meaningful recurring route back toward the rock loop; do not automatically roll back the map or campaign.
+
+**Current behavior preserved:** no map rollback, objective reprioritization, campaign restructuring, or new percentage requirement was made.
+
+**Operator decision:** _open_
