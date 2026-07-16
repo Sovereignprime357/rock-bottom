@@ -1730,3 +1730,13 @@ Shipped: PR #1 merged (modular v19 + OD-1..4, KNIGHT EMERITUS, gate runner). OD-
 Decided: Block = only unconditional smoke spot forever; concessions earned via recognition (OD-5). Cart relocated + single mount authority (OD-6). Register is append-only. Done = pushed + green + reported.
 Learned: Codex abandoned delivery mid-flight (unpushed commit, uncommitted WIP, design packet handed back as "results") -> contract ratified. Operator feel pass caught the HUD-layer class the gates did not cover -> presentation gate now permanent.
 Next: Fable (Claude Code headless) builds THE REGULAR on branch v20-regular while operator is at work; chat Claude reviews + merges next session. Then concessions, then world-relationship gate. Operator still owes: in-game HUD stack verify, cart at Marketplace anchor.
+
+
+## 2026-07-16 — THE REGULAR (landing 2) build (Fable / Claude Code, branch v20-regular)
+
+What: implemented SPEC-V20-PACKET item #2, the recognition system. Branched v20-regular from main (ce70ae3), cherry-picked codex WIP 1248cea (-x), added the permanent gate.
+Why: recognition without reward — the neighborhood keeping count is the whole v20 north star. This is the counters + tier text half; concessions (section 2) are the next landing.
+Decided: KEEP the codex WIP as-is. Reviewed src/systems/recognition.js + its ten integration edits against packet section 1 — conforms to acknowledgment-only, additive-save, no-decay, and the 25% clerical share. Rewrite would have been churn. OD-7 (thresholds 3/8/15, per-visit dedup, dormant sell lane) carried forward from the WIP, not re-ratified; still operator-veto-standing.
+Tried/failed: nothing discarded — the WIP was clean. The only real gap was the missing gate the SPEC landing already named (tools/recognition-gate.mjs); authored it and wired it before runtime-smoke.
+Gate: recognition-gate.mjs proves registry/threshold contract, stranger->conceded ladder via simulated verbs, zero reward leakage, free-verb dedup, wrong venue/source rejection, full_high at the exact 18000->8000 boundary, no idle decay, malformed-save normalization, save/load roundtrip. Full suite 6/6 PASS.
+Next: concessions (section 2) — conceded venues become conditional smoke spots; then the world-relationship gate (section 4). Live in-browser feel pass for the toast/feed/Q surfaces still owed (deterministic gate is not a playtest). sell lane stays dormant until an honest hook exists.
