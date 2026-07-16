@@ -17,6 +17,7 @@ import { questToast } from './combat.js';
 import { feedPost } from './communications.js';
 import { hideoutOwned, tryEnterHideout, tryEnterOffice } from './daily_hideouts.js';
 import { tryStampBlockRoute } from './progression_routes.js';
+import { recordNpcBother } from './recognition.js';
 
 export function endingScreen(kind) {
   state.mode = 'title';
@@ -85,6 +86,7 @@ export function tryInteract() {
         if (state.quests.intro_smoke) state.quests.intro_smoke.available = true;
       }
     }
+    recordNpcBother(bestNpc.id);
     bestNpc.interact(bestNpc);
     return;
   }

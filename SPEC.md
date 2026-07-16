@@ -1745,6 +1745,38 @@ This is the prerequisite presentation/interaction landing named first in `SPEC-V
 
 ---
 
+## v20 landing 2 — THE REGULAR recognition ledger (2026-07-15)
+
+### Registry and tiers
+
+1. v20 recognizes exactly four venue ids: `park`, `laundromat`, `underpass`, and `choir_office`. These are the four future concession owners; recognition does not imply that a concession is implemented or currently legal.
+2. Every venue owns exactly five natural-number counters: `sit`, `bother`, `buy`, `sell`, and `full_high`. Unknown venue/action keys are discarded. Negative, fractional, non-finite, inherited, and prototype-bearing values normalize to bounded natural integers.
+3. Venue tier derives from the sum of its five counters and is never persisted: `stranger` at `0..2`, `counted` at `3..7`, `furniture` at `8..14`, and `conceded` at `15+`. Counters never decay in v20.
+4. `sell` is schema-supported but dormant at these four venues. No existing successful sell occurs there. THE BIG GUY's cart exchange remains a trade, not a mislabeled sale; v20 does not invent a fifth recognition venue or concession to activate the verb.
+
+### Credited verbs
+
+1. Free verbs (`sit`, `bother`) credit once per source per venue visit. Leaving the venue clears only the ephemeral visit witnesses; re-entry permits another remembered action. E-key repeat cannot grind a tier in place.
+2. Park `sit` credits only when a bench changes from standing to sitting. Park `bother` recognizes the philosopher and pigeon; Park `buy` recognizes one successful pigeon-secret purchase.
+3. Laundromat `bother` recognizes Barb, Laundromat Lady, and Karaoke Mike. `buy` recognizes one successful Barb single/bulk option, laundry service, detergent purchase, or karaoke payment. Quantity does not multiply the verb; refusals and disabled options credit zero.
+4. Underpass `bother` recognizes the Mathematician and THE BIG GUY. His cart exchange is not `buy` or `sell`.
+5. Choir Office `bother` recognizes a successful read of the `wire` court door. It does not infer recognition from the broader clan campaign.
+6. `full_high` credits exactly once at the existing `rockedT > 0` to `rockedT = 0; crashT = 8000` boundary, assigned by player-center containment at that boundary. It adds no continuous per-frame high ledger and changes neither status constant.
+
+### Persistence and effects
+
+1. `recognition` is one new additive top-level save key containing counters only. `SAVE_KEY`, save version, and every prior field remain unchanged. Missing legacy data normalizes to a fresh four-venue ledger.
+2. Recognition recording may mutate only its counters, ephemeral visit witnesses, acknowledgment surfaces, and persistence. It grants no cash, item, discount, damage, combat state, faction, rank, shakes, brain, HP, speed, `rockedT`, or `crashT` change.
+3. Only tier crossings toast/post a venue-specific acknowledgment. Ordinary increments remain quiet. The Q ledger shows all four venue tiers, remembered total, and non-zero verbs; it shows no reward, discount, next-threshold bar, or quest objective.
+4. The 12 venue/tier beats contain three Clerical Pattern entries (`3/12 = 25%`), below the 50% future-beat cap. Pattern ids are restricted to `inverted_authority`, `bad_trade`, `cursed_aside`, `possum_pattern`, `clerical`, and `mundane_magical`.
+5. The encounter-table line with an explicit trigger graduates now: the first venue to reach `counted` posts `he is still here. that is the whole post.` from `@blocklog`. The other nine encounter-table drafts remain untriggered until an encounter cadence is separately specified and gated.
+
+### Permanent gate
+
+`tools/recognition-gate.mjs` must fail on registry/threshold drift, malformed-save leakage, counter decay, free-verb repeat grinding, transaction over-counting, wrong venue/source mapping, reward-state mutation, high-boundary timing drift, incomplete reaction data, or a Clerical Pattern share above 50%. It runs inside `tools/run-gates.mjs` before the full runtime smoke.
+
+---
+
 ## OD-5 ratification (2026-07-15)
 
 Effective v20, the core-loop location invariant is amended to: "The Block is the only UNCONDITIONAL smoke/cook location. Additional smoke spots may exist only as earned, conditional concessions granted by the recognition system (SPEC-V20-PACKET.md, OD-SMOKE-COVERAGE)." The v18/v19 wave sections above record their own eras and stand unedited; the current build has zero concessions, so their invariants remain true of it today. Decision chain and rationale: REFACTOR-FINDINGS.md -> OD-SMOKE-COVERAGE (OD-5).

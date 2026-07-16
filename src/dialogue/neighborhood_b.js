@@ -9,6 +9,7 @@ import { blockMenu, pickupWeapon } from '../minigames/activities.js';
 import { aggroNpc, pickCrownSpot, questToast, startPigeonCrownQuest } from '../systems/combat.js';
 import { broadcastNews, feedPost, ringPhone } from '../systems/communications.js';
 import { adjustFaction } from '../systems/factions.js';
+import { recordRecognition } from '../systems/recognition.js';
 
 export function triggerFallenPriestTransform() {
   const n = runtime.npcs.find(x => x.id === 'priest');
@@ -310,6 +311,7 @@ export function pigeonDialogue() {
       P.cash -= 2;
       state.counters.pigeonTrade = (state.counters.pigeonTrade||0) + 2;
       if (state.counters.pigeonTrade >= 20) unlockAchievement('one_foot');
+      recordRecognition('park','buy','pigeon_secret');
       const secrets = [
         "the copper sings in b flat.\nyou are not crazy.",
         "yuri is going home to a family.\nthis is information.",

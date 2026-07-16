@@ -165,3 +165,15 @@ The audit evidence and the 2026-07-15 operator decisions are recorded here. Each
 **Decision:** HUD placement is a function of the actual centered 4:3 game rectangle and enters a compact state at `520px`; touch ticker and topbar share one boundary. NPC-first interaction remains authoritative. The one rideable cart moves to the clear Marketplace anchor `(1000,1600)`, and `P.cartMounted` becomes the sole mount-state authority across every acquisition, render, hint, interaction, and save/load path.
 
 **Preserved:** no NPC priority exception; no second rideable cart; no new save field; no cart stat, roadkill, damage, reward, achievement, status-timer, or 18000ms/8000ms change. Decorative cart husks stay non-interactive.
+
+### OD-REGULAR-LEDGER (OD-7)
+
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
+
+**Question:** The packet names five repeated verbs but locks four future concession venues. None of those four currently exposes a successful `sell`; thresholds and repeat de-duplication are also unspecified.
+
+**Decision:** v20 uses an explicit four-venue recognition allowlist and five-counter schema. Venue totals derive tiers at `3/8/15`. Free verbs credit once per source per venue visit; paid verbs credit once per successful option; full-high credits only at the existing high-to-crash boundary. `sell` remains a normalized, persisted, dormant schema lane rather than relabeling a trade or adding a fifth concession. Tier is derived, never saved.
+
+**Voice/effect budget:** twelve venue-tier acknowledgments contain three clerical beats (25%). They change toast/feed/Q acknowledgment only. The encounter table's explicitly triggered first-counted `@blocklog` post graduates with the ledger; its other nine lines remain draft until cadence is specified.
+
+**Preserved:** save key/version and all prior fields; cash/items/prices/factions/combat/status values; exact 18000ms/8000ms transition; four-concession cap; no recognition decay or reward path.
