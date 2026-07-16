@@ -32,7 +32,19 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all four gates in order, and stops on the first failure. Together they enforce source/reference integrity, module linking, save/input/status parity, the four measured legibility relationships, and complete VIBE registration for runtime NPC identities.
+The runner supplies `--experimental-vm-modules`, streams all **seven** gates in order, and stops on the first failure.
+
+| Gate | Enforces |
+|------|----------|
+| `corpus-gate` | **The seed.** Blocks staged deletions of the design docs and refuses to run at all if your view of the repo disagrees with `HEAD`. Runs first on purpose — see below. |
+| `module-gate` | Module linking, source/reference integrity, no file over the size ceiling. |
+| `npc-registry-gate` | Every runtime NPC identity is registered in `VIBE.md`. No unnamed strangers. |
+| `legibility-gate` | The four measured legibility relationships (buildings, zones, nameplates, graffiti). |
+| `presentation-gate` | Save/input/status parity. |
+| `recognition-gate` | **The north star.** Diffs every reward field across a full rank climb to prove recognition pays in acknowledgment and nothing else. |
+| `runtime-smoke` | The game boots, starts, and plays headless. |
+
+**Why `corpus-gate` runs first.** Every other gate checks the **game**. That one checks the **corpus** — `VIBE.md`, `SPEC.md`, `AGENTS.md`, the logs — which is the thing every future version gets reproduced from. On 2026-07-16 an agent read this repo through a stale mount and saw 508 deletions that did not exist; `git add -A` would have committed them **clean and green**, because a suite that only checks the game passes fine while the game is fine. **A suite that protects the output but not the seed is protecting the wrong thing.** There was a written note warning of exactly this. The note did not stop it. A note is a prompt, and prompts leak. Only a gate holds.
 
 ## Design docs (read in this order)
 

@@ -99,20 +99,41 @@ everywhere. **Keep it. Do not scatter `localStorage` calls through the modules.*
 
 ---
 
-## PREREQUISITE — GIT. THIS COMES FIRST.
+## PREREQUISITE — GIT. ~~THIS COMES FIRST.~~ **RETRACTED 2026-07-16. IT WAS NEVER TRUE.**
 
-**The repo is abandoned at `a2517ab` — "v13 wave 8.6".**
-
-`rock_bottom_v14` through `rock_bottom_v19` are **untracked**. `SPEC.md`, `BRAIN.md`,
-`DELEGATION.md`, `README.md`, `VIBE.md` are all modified and uncommitted. **Six versions of
-work exist as loose files with no history.**
-
-Git wasn't skipped — it lapsed, right around when the wheel got handed to a different model.
-
-**Before a single line moves:** commit v14–v19 and every modified doc, as-is, in one honest
-"checkpoint before refactor" commit. Not to be tidy — because **a refactor with no rollback is
-not an experiment, it is a coin flip.** And the autonomous loop that comes after this is
-strictly worse without it.
+> **This entire section was false when it was written, and it was ratified anyway.**
+>
+> It claimed: the repo is abandoned at `a2517ab` ("v13 wave 8.6"); `rock_bottom_v14` through
+> `v19` are untracked; the docs are all modified and uncommitted; **"six versions of work exist
+> as loose files with no history."**
+>
+> **Checked on 2026-07-16, on the host, one command each. Every claim is false:**
+> `a2517ab` is 77 commits back, not the tip. **v14, v15, v16, v17, v18, v19 — all six TRACKED.**
+> Working tree **clean**. Nothing modified. Nothing uncommitted. Nothing lost. There was never
+> anything to rescue.
+>
+> **Where it came from:** an agent read the repo through a stale sandbox mount, saw a `git log`
+> that ended 10 hours back, and built a crisis on top of it — then wrote the crisis into this
+> SPEC as a **hard, blocking, "before a single line moves" prerequisite.** The prose was
+> confident and the reasoning was good. *A refactor with no rollback is a coin flip* is a true
+> sentence. It was defending a repo that was never in danger.
+>
+> **Why this stays on the page instead of getting quietly deleted:** this SPEC governs the
+> autonomous-loop experiment, and this is the exact failure that experiment is exposed to. Not
+> a model that breaks the game — a model that **hallucinates a problem, solves it convincingly,
+> and gets the fabrication ratified into the corpus.** It cost nothing here because the
+> phantom fix (commit everything) was a no-op on a clean tree. **The next one won't be a no-op.**
+>
+> **The rule that survives, and it is the only part worth keeping:** *verify state, don't
+> narrate it.* One `git ls-files` would have killed this before it was written. It wasn't run,
+> because the story was coherent, and **coherent is not the same as checked.**
+>
+> **The gate that came out of it:** `tools/corpus-gate.mjs`, wired first in `run-gates.mjs`.
+> Not because it would have caught this — it wouldn't have, this was a false claim in prose,
+> not a bad diff — but because the same stale mount that invented this crisis would have
+> **deleted the corpus for real** on the next `git add -A`. Same root cause. One symptom got a
+> gate. **This one only ever gets a habit,** which is why it is written down at length instead
+> of erased.
 
 ---
 

@@ -64,4 +64,13 @@ Methodology: SpecMesh
 
 ## License
 
-Personal portfolio piece. Not for distribution. The crackhead does not consent to a port.
+⚠️ **Superseded. This file is a historical snapshot — do not take licensing from it.**
+
+This was the v3 handoff pack, written when the game was a private portfolio piece. It said
+*"Not for distribution."* **That is no longer true and has not been since the repo went public.**
+The repository is **MIT licensed** — see `LICENSE` at the root, which is the only license that
+governs anything here, including this folder.
+
+Kept for archaeology, not guidance. Everything below is frozen at v3 and describes a game that
+has since grown five zones, a rank ladder, and a recognition ledger. **Read the root `README.md`
+for what this actually is now.** The crackhead has reconsidered his position on ports.
