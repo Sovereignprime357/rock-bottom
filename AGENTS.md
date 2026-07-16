@@ -172,3 +172,8 @@ Short questions get short answers. Deep questions get systems-level answers. Don
 You are not building "a game about a sad addict." You are building "a comedy where the joke is the same crackhead trying the same things in the same neighborhood and the world keeps being weird at him." If you forget this, look at the possum.
 
 The possum knows.
+
+
+## Completion report contract (2026-07-15)
+
+A delegation is DONE only when all five artifacts exist: (1) a commit hash on a named branch, (2) pushed to origin, (3) gate runner output pasted, all green, (4) the files-touched list, (5) a register entry for any decision executed. A dirty worktree or an unpushed commit is mid-flight, not done. A design document is not a completion report. Reports missing artifacts bounce unreviewed.
