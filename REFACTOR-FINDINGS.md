@@ -251,3 +251,88 @@ The budget did not move. The content did not move. Nothing was grandfathered. `r
 **Known limit, named at ratification (operator's order — in the gate header, not just here):** the signature check proves a signature exists, never that it was worth signing. REFACTOR-FINDINGS.md is append-only and an agent can append: an autonomous loop can grow the world, trip the gate, sign its own permission slip, and compile itself green. ORCHESTRATOR-NOTES entry #2's family; not fixable at this layer and deliberately not attempted. When the loop goes live, ledger growth is a human-review trigger — a process control, and the gate says so rather than implying it sees everything.
 
 **Preserved:** zero gameplay values; the roller untouched by this addendum; the 60% budget itself unmoved — noting for the record the operator's own asymmetry: the three new thresholds are derived; the 60% at the center of the wave is chosen. Known, not moved.
+
+## OPERATOR PLAYTEST FINDINGS — 2026-07-16 (reported from live play, verified in source)
+
+Two real defects and one scope reading, from the operator playing the deployed build. **Both bugs
+were reported by feel and both are exact.** Recorded here, not fixed — the sock exploit is
+currently the operator's only fast path to late-game content and removing it before his feel pass
+would cost more than it buys.
+
+### F-SOCK — the pawn shop prints money (`neighborhood_a.js:258-265`)
+
+**Operator's report:** "at the pawn shop, and I believe at the junkyard, you can sell socks just
+fine. But for some reason it lets me just keep selling socks... even if I don't have a sock in my
+inventory. It will let me sell like 200 something of them. And then it'll say that the pawn shop's
+out of inventory."
+
+**Verified. `PETE_CAP = 200` — his "200 something" was exact.**
+
+`'pawn a sock. $1.'` has **no `disabled:` guard and no decrement.** It is `P.cash += pay` with
+nothing consumed. **There is no sock anywhere in the inventory system.** Every sibling option in
+the same menu does it correctly:
+
+| option | guard | consumes |
+|---|---|---|
+| sell 1 PURE COPPER | `disabled: P.copper<1` | `P.copper--` |
+| sell license plate | `disabled: !P.inventory.find(i=>i.id==='license')` | filters it out |
+| sell junk | `disabled: !P.inventory.find(i=>i.id==='junk')` | removes exactly what Pete paid for |
+| **pawn a sock** | **none** | **nothing** |
+
+It is not unbounded — `tryPay` clips against Pete's daily cash — so it is **$200/day from nothing**,
+which is not infinite but does trivialize the early economy. **The label promises an item
+transaction against an item that does not exist.**
+
+**Open question for the operator, not for a builder to invent:** is the sock supposed to be an
+item you find, or is "you always have another sock" the joke? The VIBE-consistent version is
+probably *you have the two you are wearing* — pawn both and you are out until you find more. That
+is a taste call. **Do not resolve it in a fix commit.**
+
+**The class, which matters more than the instance:** this is the infinite-resource-loop family.
+Nothing gates it. A vendor gate should assert that **every cash-paying option either guards on an
+inventory item and consumes it, or is registered by name as a deliberate no-item payout.** If the
+sock is broken, the question "what else is" currently has no mechanical answer.
+
+### F-GHOST — 28 buildings you can walk through (`update.js:84-95`, `world.js`)
+
+**Operator's report:** "since the map was expanded so much, there's a ton of new buildings, but a
+lot of these buildings have no boundary markers. Like, you could just walk over top of it instead
+of coming up to it and hitting it."
+
+**Verified, and the ratio is worse than it sounds:**
+
+- The collision loop iterates **`BUILDINGS` only** — `for (const b of BUILDINGS) { if (!b.solid) continue; ... }`
+- `BUILDINGS`: **25, all 25 solid.**
+- `LANDMARK_FACADES`: **28, none solid — and never entered into the collision loop at all.**
+
+**There are more walk-through structures in this world than solid ones.** The map expansions added
+*facades*, which are a render-layer concept, and nothing ever connected them to collision. The
+operator noticed the exact seam between "the parts that look and behave like a city" and "the
+parts that are painted on."
+
+**Not necessarily all a bug** — some facades may be intended as unreachable background scenery
+behind roads. **That distinction does not currently exist in the data**, which is the actual
+defect: there is no way to tell an intentionally-flat backdrop from a building somebody forgot to
+make real. **The fix is a registered distinction, not a blanket `solid: true`.**
+
+### F-BARREN — the operator's 20–25% empty-map reading (NOT verified — measured the wrong thing)
+
+**Operator's report:** "there's probably twenty percent of the map, twenty five percent of the
+map that's just barren wasteland. Like, there's nothing there. It's just grass."
+
+**A zone-coverage grid says 75.2% of the map sits outside any named zone — but that is not the same
+claim** and must not be reported as if it were. Roads, connective tissue, and deliberate negative
+space are all unzoned without being barren. **"Barren" is a felt property and this measurement does
+not touch it.** Recorded as unverified. **The operator played it; the grid did not.**
+
+### The scope reading these three point at
+
+The world gate now says the map is at its **distance** ceiling — the emperor commute sits at 95.8%
+of the runway budget and `pawn_sill ↔ ditch_gauge` at 98.5%. **The operator's instinct is to add
+break-ins, a live train yard, tool-gated and cred-gated entry, and to fill the empty quarter.**
+
+**Those are compatible, and it is worth saying plainly: density does not cost runway.** Filling
+existing space makes the walk worth taking; it does not lengthen the leg. **For a world already at
+its walkable limit, "stop expanding, start filling" is not a compromise — it is the only remaining
+direction that the instrument will allow.** His feel and the gate agree, which is rare enough to
+write down.
