@@ -14,6 +14,7 @@ import { drawNpc } from '../render/actors_weather.js';
 import { questToast } from '../systems/combat.js';
 import { broadcastNews, feedPost } from '../systems/communications.js';
 import { adjustFaction, applyRep, factionTier } from '../systems/factions.js';
+import { recordRecognition } from '../systems/recognition.js';
 
 export let BUS_ZONE_TARGETS, HOPPER_LINES, PHILOSOPHER_QUESTIONS, OLD_SCHOOL_DOOR;
 
@@ -140,6 +141,7 @@ export function barbDialogue() {
     opts.push({ label: P.cash>=singlePrice ? `buy 1 packet. $${singlePrice}. (unmarked.)` : `a packet is $${singlePrice}.`, disabled: P.cash<singlePrice, action: () => {
       P.cash -= singlePrice; P.supplies = (P.supplies||0) + 1;
       state.counters.barbPacketsToday = (state.counters.barbPacketsToday||0) + 1;
+      recordRecognition('laundromat','buy','barb_single');
       const left = 6 - state.counters.barbPacketsToday;
       const tail = left <= 0 ? "\nshe stops writing.\nshe's tired.\ncome back tomorrow." : '';
       toast(`- $${singlePrice}\n+ 1 packet (unmarked)\nshe does not look up.${tail}`);
@@ -150,6 +152,7 @@ export function barbDialogue() {
       opts.push({ label: P.cash>=bulkPrice ? `buy 5 packets. $${bulkPrice}. (bulk.)` : `5 packets is $${bulkPrice}.`, disabled: P.cash<bulkPrice, action: () => {
         P.cash -= bulkPrice; P.supplies = (P.supplies||0) + 5;
         state.counters.barbPacketsToday = (state.counters.barbPacketsToday||0) + 5;
+        recordRecognition('laundromat','buy','barb_bulk');
         const left = 6 - state.counters.barbPacketsToday;
         const tail = left <= 0 ? "\nshe stops writing.\nshe's tired.\ncome back tomorrow." : '';
         toast(`- $${bulkPrice}\n+ 5 packets\nshe writes '14 across' in pen.${tail}`);
@@ -396,6 +399,7 @@ export function tryParkBenchSit() {
         toast("you stand up.\nthe bench remembers.\n(sat for " + Math.floor(sat/1000) + " seconds.)", 2400);
       } else {
         state.sittingOnBench = true;
+        recordRecognition('park','sit','park_bench');
         state.benchSitT = 0;
         state.benchSitGainT = 0;
         state.benchSitPasserT = 0;

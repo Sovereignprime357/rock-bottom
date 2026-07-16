@@ -11,6 +11,7 @@ import { barbDialogue, hopperDialogue, mathematicianDialogue, philosopherDialogu
 import { startRhythmMini } from '../minigames/activities.js';
 import { gutterGregDialogue, leaseGuyDialogue } from '../systems/campaigns.js';
 import { feedPost, phoneState, renderPhone } from '../systems/communications.js';
+import { recordRecognition } from '../systems/recognition.js';
 
 export function rectsOverlap(a,b){ return a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y; }
 
@@ -269,10 +270,12 @@ export function spawnNpcs() {
         { label: P.cash>=2?'do a load of laundry. $2. (regen +12 hp)':"need $2.", disabled: P.cash<2, action: ()=>{
           P.cash -= 2; P.hp = Math.min(P.maxHp, P.hp + 12);
           state.counters.laundryDone = (state.counters.laundryDone||0) + 1;
+          recordRecognition('laundromat','buy','laundry_service');
           toast("- $2\n+ 12 hp\nyou wore wet clothes back outside.\nit smells like a different country in here.");
         }},
         { label: P.cash>=5?"buy detergent. $5. (item)":"detergent is $5.", disabled: P.cash<5, action: ()=>{
           P.cash -= 5; P.inventory.push({id:'detergent', n:'a jug of detergent', q:1});
+          recordRecognition('laundromat','buy','detergent');
           toast("- $5\n+ detergent\nyou are not going to use it. you know this. she knows this.");
         }},
         { label: 'ask why she is here.', action: ()=>{
@@ -337,6 +340,7 @@ export function spawnNpcs() {
       interact: (n)=> dialogue('KARAOKE MIKE', "he holds a karaoke machine.\nit is just a machine. there is no microphone.\nhe sings without one.", [
         { label: P.cash>=5?'sing a song. $5. (rhythm minigame)':"karaoke is $5.", disabled: P.cash<5, action: ()=>{
           P.cash -= 5; startRhythmMini();
+          recordRecognition('laundromat','buy','karaoke');
         }},
         { label: 'request a song.', action: ()=>{
           toast("he sings the song you want.\nyou did not request a song.\nyou wanted, in fact, to leave.");

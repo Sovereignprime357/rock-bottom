@@ -10,6 +10,7 @@ import { drawGraffiti } from '../render/structures.js';
 import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState, freshOfficeState, normalizeDistrictClaims, normalizeKingdomState, normalizeOfficeState, officeNat, syncKingdomQuests } from '../systems/campaigns.js';
 import { resetDailyCounters } from '../systems/daily_hideouts.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
+import { freshRecognition, normalizeRecognition } from '../systems/recognition.js';
 
 export let audio, SAVE_KEY;
 
@@ -55,6 +56,7 @@ export async function saveGame() {
       publicPhoneAnswered: state.publicPhoneAnswered || 0,
       // v13 wave 7 — hideout stash survives death; flags carry day-event triggers
       hideoutStash: state.hideoutStash || { rocks:0, copper:0, cash:0, items:[] },
+      recognition: state.recognition || freshRecognition(),
     });
   } catch(e) {}
 }
@@ -104,6 +106,8 @@ export async function loadGame() {
       philosopherRepDay: 0,
       gutterInventoryDay: 0,
     }, sv.counters || {});
+    state.recognition = normalizeRecognition(sv.recognition);
+    state.recognitionVisit = {venue:'',seen:Object.create(null)};
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
     state.hustles = Array.isArray(sv.hustles) ? sv.hustles : null;

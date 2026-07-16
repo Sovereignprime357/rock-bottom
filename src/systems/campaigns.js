@@ -15,6 +15,7 @@ import { HIDEOUT_DOORS, hideoutOwned, openOffice } from './daily_hideouts.js';
 import { adjustFaction } from './factions.js';
 import { endingScreen } from './interactions.js';
 import { ACHIEVEMENTS, currentBlockRouteStop } from './progression_routes.js';
+import { recordRecognition } from './recognition.js';
 
 export let OFFICE_DOOR, OFFICE_UPGRADE_DEFS, OFFICE_UPGRADE_IDS, CLAIM_SITES, CLAIM_SITE_BY_ID, CLAIM_STAGES, WORK_STAGES, KINGDOM_STAGES, KINGDOM_DEFEAT_IDS, KINGDOM_STAGE_RANK, KINGDOM_DOORS, KINGDOM_CLANS, KINGDOM_CLAN_LIST, KINGDOM_EMPEROR, KINGDOM_GUARD_POSTS, QUEST_TARGETS;
 
@@ -373,7 +374,7 @@ export function bitCount3(v){v=officeNat(v,7);return (v&1?1:0)+(v&2?1:0)+(v&4?1:
 
 export function tryKingdomDoor(){
   const pcx=P.x+P.w/2,pcy=P.y+P.h/2;
-  for(const d of KINGDOM_DOORS){const dx=pcx-(d.x+d.w/2),dy=pcy-(d.y+d.h/2);if(dx*dx+dy*dy<44*44){toast(d.line,2200);return true;}}
+  for(const d of KINGDOM_DOORS){const dx=pcx-(d.x+d.w/2),dy=pcy-(d.y+d.h/2);if(dx*dx+dy*dy<44*44){if(d.id==='wire')recordRecognition('choir_office','bother','wire_door');toast(d.line,2200);return true;}}
   return false;
 }
 

@@ -22,6 +22,7 @@ import { adjustFaction, applyRep, updateTerritory } from '../systems/factions.js
 import { updateIncidents } from '../systems/incidents.js';
 import { updateNpcActors } from '../systems/npc_ai.js';
 import { checkHustles, rollHustles } from '../systems/progression_routes.js';
+import { recordFullHighAtPlayer, syncRecognitionVisit } from '../systems/recognition.js';
 import { updateHUD } from '../ui/hud.js';
 
 export let last;
@@ -132,6 +133,7 @@ export function updateWorld(dt) {
   // wanted timer
   manageCops(dt);
   updateKingdomBattle(dt);
+  syncRecognitionVisit();
 
   // status effects
   if (P.rockedT > 0) {
@@ -142,6 +144,7 @@ export function updateWorld(dt) {
       audio.crash();
       state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
       toast('the crash arrives.\non schedule.', 2200);
+      recordFullHighAtPlayer({deferMs:2300});
     }
   } else if (P.crashT > 0) {
     P.crashT -= dt;
