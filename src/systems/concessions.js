@@ -11,7 +11,7 @@ import { syncKingdomQuests } from './campaigns.js';
 import { completeIntroSmoke } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { applyRep } from './factions.js';
-import { REGULAR_VENUE_BY_ID, recognitionTier } from './recognition.js';
+import { REGULAR_VENUE_BY_ID, recognitionTier, recognitionVenueAt } from './recognition.js';
 
 // ---------- spot registry ----------
 // The Block is the only unconditional spot, forever (OD-5). Concession spot ids
@@ -168,6 +168,98 @@ export function nearestLegalSpot(x,y,legalConcessionIds) {
 export function badIdeaSmokeSpot(x,y) {
   const legal=SMOKE_SPOTS.filter(spot=>spot.id!=='block'&&concessionAvailable(spot.id)).map(spot=>spot.id);
   return nearestLegalSpot(x,y,legal);
+}
+
+// ---------- the rooms ----------
+// Each concession answers the E key the way the block does: a small menu, one
+// smoke option, one exit. The condition is stated, never explained.
+function dryerStatusLine() {
+  const clocks=state.concessionClocks,dryer=clocks&&clocks.dryer;
+  if(dryerMidCycle())return 'mid-cycle.';
+  if(dryer&&dryer.phase==='running')return 'running. not mid.';
+  return 'idle.';
+}
+
+const CONCESSION_TEXT = {
+  park: {
+    hint:'consult the bench',
+    closedShort:'(the philosopher is awake.)',
+    refusal:'the philosopher opens one eye.\nthe arrangement is off.',
+    body:open=>open
+      ? 'the bench is here. the philosopher pretends to be asleep.\nhe is not.'
+      : 'the bench is here. the philosopher is awake.\nthe arrangement is off until dark.',
+    qCondition:'night only',
+    qStatus:()=>isNight()?'the philosopher is asleep enough.':'daylight.',
+  },
+  choir_office: {
+    hint:'consult the office',
+    closedShort:'(the office is closed.)',
+    refusal:'b flat ends.\nthe office is closed.',
+    body:open=>open
+      ? 'the office is open. the choir is holding b flat.\na loose vent is louder.'
+      : 'the office is closed.\noffice hours are b flat to b flat.\nthe schedule does not convert.',
+    qCondition:'office hours · b flat to b flat',
+    qStatus:()=>choirOfficeOpen()?'in session.':'closed.',
+  },
+  underpass: {
+    hint:'consult the bridge',
+    closedShort:'(the dog is elsewhere.)',
+    refusal:'the dog has left.\nthe arrangement left with it.',
+    body:open=>open
+      ? 'the dog with the lanyard is here.\nthe dog does not know it is a condition.'
+      : 'the dog is elsewhere.\nthe bridge tolerates you. the arrangement needs the dog.',
+    qCondition:'while the dog is present',
+    qStatus:()=>dogPresent()?'the dog is here.':'the dog is elsewhere.',
+  },
+  laundromat: {
+    hint:'consult the dryer',
+    closedShort:'(the dryer is not mid-cycle.)',
+    refusal:'the dryer finished.\nthe cover is gone.',
+    body:open=>open
+      ? 'the dryer is mid-cycle. the dryer provides cover.\nthe dryer knows.'
+      : (dryerStatusLine()==='running. not mid.'
+        ? 'the dryer is running. it is not mid-cycle.\nthe margins count.'
+        : 'the dryer is idle.\nprofessional courtesy is on break.'),
+    qCondition:'mid-cycle only',
+    qStatus:dryerStatusLine,
+  },
+};
+
+export function concessionActionHint(x,y) {
+  const venueId=recognitionVenueAt(x,y);
+  if(!venueId||!concessionUnlocked(venueId))return '';
+  return CONCESSION_TEXT[venueId]?CONCESSION_TEXT[venueId].hint:'';
+}
+
+// One line for the Q ledger, only after the venue has conceded. This is where
+// choir office hours and the dryer state are readable from anywhere.
+export function concessionQLine(venueId) {
+  if(!concessionUnlocked(venueId))return '';
+  const text=CONCESSION_TEXT[venueId];
+  return text?'concession: '+text.qCondition+' · '+text.qStatus():'';
+}
+
+export function concessionMenu(venueId) {
+  const spot=SMOKE_SPOT_BY_ID[venueId],venue=REGULAR_VENUE_BY_ID[venueId],text=CONCESSION_TEXT[venueId];
+  if(!spot||!venue||!text||!concessionUnlocked(venueId))return;
+  const totalRocks = (P.rocks||0) + (P.soapRocks||0);
+  const open=concessionConditionMet(venueId);
+  const opts=[];
+  opts.push({
+    label: totalRocks<=0 ? 'smoke a rock. (you have none.)'
+      : open ? 'smoke a rock. (-1 rock, +18s rocked-up)'
+      : 'smoke a rock. '+text.closedShort,
+    disabled: totalRocks<=0||P.rockedT>0||!open,
+    action: () => {
+      // the condition is re-checked at ACTION, not at render (SPEC edge case —
+      // decided once, stated here). today the world pauses during dialogue, so
+      // the race is unreachable; the guard is for the world where it isn't.
+      if(!concessionAvailable(venueId)){toast(text.refusal,2600);return;}
+      smokeRockAt(venueId);
+    }
+  });
+  opts.push({ label:'leave.', action:()=>{} });
+  dialogue(venue.label, text.body(open)+'\nyour shakes are '+Math.round(P.shakes)+'. your brain is '+Math.round(P.brain)+'.', opts);
 }
 
 // ---------- THE ONE SMOKE TRANSACTION ----------

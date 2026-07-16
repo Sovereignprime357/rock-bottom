@@ -11,6 +11,7 @@ import { ZONES } from '../data/world.js';
 import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
 import { questToast } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
+import { concessionActionHint } from './concessions.js';
 import { HIDEOUT_DOORS, hideoutOwned, openOffice } from './daily_hideouts.js';
 import { adjustFaction } from './factions.js';
 import { endingScreen } from './interactions.js';
@@ -617,6 +618,9 @@ export function resolveActionHint(){
     return 'use the milk crate';
   }
   if(inZone(pcx,pcy,'market'))return 'work the marketplace';
+  // v20 landing 3 — conceded venues advertise their room. the hint mirrors the E priority chain.
+  const concessionHint=concessionActionHint(pcx,pcy);
+  if(concessionHint)return concessionHint;
   return '';
 }
 
