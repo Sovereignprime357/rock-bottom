@@ -109,6 +109,21 @@ export function routePatchTier() {
   return Math.min(4, Math.floor(((P.lifetime&&P.lifetime.routesCompleted)||0)/5));
 }
 
+// v20 landing 5 — the runway leg budget, derived at run time (I-NO-BUDGET-DRIFT):
+// 60% of a fresh shakes runway at base walk speed. The inputs restate, by name, values
+// the engine owns elsewhere — walk 2.2px/16ms (runtime_ui.js:33 via update.js:82),
+// withdrawal 0.0008/ms (update.js:124), fresh 20 -> cap 100 (runtime_ui.js:355,
+// update.js:126) — and tools/world-gate.mjs measures those same quantities behaviorally
+// every run and fails the suite the moment this derivation and the measured world
+// disagree. Two copies of a number is one copy and one future lie; a second copy pinned
+// to the first by a gate is a tripwire. The literal 8250 appears nowhere.
+export function routeLegBudgetPx() {
+  const walkPxPerMs=2.2/16;
+  const shakesPerMs=0.0008;
+  const freshShakes=20, shakesCap=100;
+  return 0.60*((shakesCap-freshShakes)/shakesPerMs)*walkPxPerMs;
+}
+
 export function rollBlockRoute(silent=false, forcedLastStop='') {
   if (!state.flags || !state.flags.introDone) { state.blockRoute=null; return null; }
   const previous=validBlockRoute(state.blockRoute)?state.blockRoute:null;
@@ -120,8 +135,27 @@ export function rollBlockRoute(silent=false, forcedLastStop='') {
   const lastStopId=forcedLastStop||(previous&&previous.lastStopId)||'';
   if(pool.length>3&&lastStopId) pool=pool.filter(s=>s.id!==lastStopId);
   for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=pool[i];pool[i]=pool[j];pool[j]=t;}
+  // v20 landing 5 — the clipboard learns the budget it always owed (I-ROUTE-BUDGET).
+  // After the same shuffle, each next stop is the first remaining candidate within the
+  // runway leg budget of the previous one — identical to take-the-first-three whenever
+  // first-three is legal, which is 252 of the full pool's 253 pairs. If no remaining
+  // candidate is within budget (pathologically small or sparse pool), relax to the
+  // NEAREST remaining candidate instead: the roller always returns three stops
+  // (I-ROLL-TOTAL), never null, never a spin. The player->first-stop leg is not and
+  // cannot be governed here: the player can be anywhere when the clipboard speaks.
+  const budget=routeLegBudgetPx();
+  const stops=pool.length?[pool.shift()]:[];
+  while(stops.length<3&&pool.length){
+    const prev=stops[stops.length-1];
+    let pick=pool.findIndex(s=>Math.hypot(s.x-prev.x,s.y-prev.y)<=budget);
+    if(pick<0){
+      let bestD=Infinity;pick=0;
+      for(let i=0;i<pool.length;i++){const d=Math.hypot(pool[i].x-prev.x,pool[i].y-prev.y);if(d<bestD){bestD=d;pick=i;}}
+    }
+    stops.push(pool.splice(pick,1)[0]);
+  }
   const serial=(previous&&previous.serial||0)+1;
-  state.blockRoute={stops:pool.slice(0,3).map(s=>s.id),cursor:0,serial,lastStopId};
+  state.blockRoute={stops:stops.map(s=>s.id),cursor:0,serial,lastStopId};
   if(!silent) toast('· BLOCK ROUTE '+serial+' ·\nthree boxes. one pen. the pen works.',2600);
   return state.blockRoute;
 }
