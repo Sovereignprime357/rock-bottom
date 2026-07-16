@@ -233,3 +233,30 @@ mentioned in a comment can't satisfy the check.
 prose about behavior and no grep can judge it. **The gate holds the list, not the sentences.**
 Claiming otherwise would be a gate-shaped decoration — the exact thing being guarded against.
 Honest scope beats impressive scope.
+
+### 10. The docs gate caught a drift neither branch had
+
+**What happened:** merged two landings. Main carried `docs-gate` (which asserts the README's gate
+table matches the runner's `GATES` array). The branch carried `world-gate`, built before docs-gate
+existed. **Both sides were green. The merge was red.** `world-gate.mjs` ran in the suite and
+appeared in no README table, and **neither branch was wrong** — the violation did not exist until
+the two correct things were combined.
+
+**Why this is the most interesting entry in the file:** every other failure here is something
+*someone* did. This one is nobody's. **The drift was created by the merge itself**, out of two
+clean parents, and it is structurally invisible from either side — you cannot review it in either
+diff, because it isn't in either diff. **The only place it exists is the union.**
+
+**A gate on main caught it within seconds.** No human read either README. That is the entire case
+for mechanical enforcement over review discipline, made without an author to blame: **review scales
+with attention, and attention was never the bottleneck — the bug was in a place attention cannot
+look.**
+
+**Prevention: none needed. It already worked.** Entry #9 built docs-gate to close a gap entry #6
+named; it caught real drift on its first run and now merge-drift on its second, **inside one day.**
+The class was never hypothetical. **It just had nothing watching it.**
+
+**The transferable shape:** any invariant spanning two files that different branches own
+independently is a merge-drift candidate — the README and the runner, a spec and its
+implementation, a schema and its migration. **Green parents do not imply a green child.** If the
+relationship matters, gate the relationship, not the files.
