@@ -49,7 +49,24 @@
 // (currentPrimaryObjective / currentOfficeObjective / currentKingdomObjective) by
 // driving quest/stage state, so the gate measures what the strip actually points
 // at — not a hand-copied table that silently rots.
+//
+// KNOWN LIMIT OF THE INSTRUMENT (OD-10, named here on purpose):
+// I-EXCLUSION-LEDGER's signature check reads REFACTOR-FINDINGS.md — which is
+// append-only, and an agent can append. Under human review that is the right
+// design: a ledger entry plus a signature is a visible, named, reviewable artifact
+// in a diff, and loud-not-silent is the bar. But an autonomous loop can grow the
+// world, trip this gate, append its own signature to the register, add the ledger
+// row, and compile itself green. The loop signs its own permission slips. That is
+// ORCHESTRATOR-NOTES entry #2's family — sound reasoning on a premise nobody
+// checked — and it is not fixable at this layer; a gate cannot verify that a
+// signature was worth signing. When the autonomous loop goes live, LEDGER GROWTH
+// IS A HUMAN-REVIEW TRIGGER. That is a process control, not a code control, and
+// this comment exists so nobody mistakes the one for the other.
+import fs from 'node:fs';
+import path from 'node:path';
 import { loadModularGame } from './runtime-harness.mjs';
+
+const ROOT = path.resolve(import.meta.dirname, '..');
 
 const failures = [];
 const fail = m => failures.push(m);
@@ -284,30 +301,87 @@ function sampleGenerator(family, label, routesCompleted, unlockAll) {
   return seen;
 }
 const day1Seen = sampleGenerator('route-day1', 'RUNWAY-ROUTES-DAY1', 0, false);
-sampleGenerator('route-preoffice', 'RUNWAY-ROUTES-PREOFFICE', 2, false);
+const preOfficeSeen = sampleGenerator('route-preoffice', 'RUNWAY-ROUTES-PREOFFICE', 2, false);
 sampleGenerator('route-full', 'RUNWAY-ROUTES-FULL-UNLOCK', 2, true);
 P.lifetime.routesCompleted = 0;
 const day1Pool = [...day1Seen].map(id => ROUTE_STOP_BY_ID[id]);
 if (!day1Pool.length) fail('day-1 route pool sampled empty — the roller returned nothing for a fresh save');
 
-// Satisfiability, proved not assumed (I-ROLL-TOTAL): a legal three-stop chain from any
-// start needs every stop to keep at least two within-budget partners. The table pairs
-// beyond budget are reported, not failed — they are exactly what the constrained
-// generator exists to keep unassignable, and deleting them from the table instead
-// would be content movement this wave forbids.
+// ---- the three structural route invariants (OD-10) ----------------------------
+// Output sampling above proves the roller OBEYS the budget; it is blind by
+// construction to the world outgrowing the table, because a constrained generator
+// absorbs that growth silently — a filtered world and a clean world produce the
+// same green. These three checks are the detector restored as the alarm.
+const legal = (a, b) => Math.hypot(b.x - a.x, b.y - a.y) <= legBudgetPx;
+const pairKey = (a, b) => [a, b].sort().join(' <-> ');
+
+// I-DEAD-STOP: in every reachable pool, every stop keeps at least
+// 1 + (maximum simultaneous exclusions) within-budget partners — 3 when the pool
+// is large enough for the lastStopId filter (pool > 3: one already-picked stop +
+// lastStopId), 2 at pool == 3 (the roller skips the lastStopId filter there).
+// Derived, not chosen. Below this floor the relax-to-nearest fallback becomes
+// reachable, and A FIRING FALLBACK IS THE GENERATOR ASSIGNING AN OVER-BUDGET LEG —
+// the one silent budget violation the roller can still commit. This keeps the
+// fallback dead code deterministically; the sampling only keeps it dead probably.
+const POOLS = [
+  ['day-1', day1Pool],
+  ['pre-office', [...preOfficeSeen].map(id => ROUTE_STOP_BY_ID[id])],
+  ['full', ROUTE_STOPS],
+];
 let minPartners = Infinity, minPartnerStop = '';
+for (const [poolName, pool] of POOLS) {
+  if (pool.length < 3) { fail(`DEAD-STOP: ${poolName} pool has ${pool.length} stops — no three-stop route exists at all`); continue; }
+  const floor = Math.min(pool.length - 1, pool.length > 3 ? 3 : 2);
+  for (const stop of pool) {
+    const partners = pool.filter(other => other !== stop && legal(stop, other)).length;
+    if (poolName === 'full' && partners < minPartners) { minPartners = partners; minPartnerStop = stop.id; }
+    if (partners < floor) fail(`DEAD-STOP: ${poolName} pool stop ${stop.id} has ${partners} within-budget partner(s), floor ${floor} — the fallback is now reachable, which means the roller can silently assign an over-budget leg (I-DEAD-STOP)`);
+  }
+}
+
+// I-CO-ROUTABLE: the legality graph over the full pool keeps diameter <= 2 —
+// every pair of stops, including ledger-excluded ones, can still share one
+// three-stop route through some middle stop. The 2 is not invented; it is the
+// number of legs in a route. When this fails the world has regionalized, and no
+// ledger signature papers over it: wanting regions is a SPEC change, not an entry.
 const tableOver = [];
 for (let i = 0; i < ROUTE_STOPS.length; i++) {
-  let partners = 0;
-  for (let j = 0; j < ROUTE_STOPS.length; j++) {
-    if (i === j) continue;
-    const len = Math.hypot(ROUTE_STOPS[j].x - ROUTE_STOPS[i].x, ROUTE_STOPS[j].y - ROUTE_STOPS[i].y);
-    if (len <= legBudgetPx) partners++;
-    if (j > i && len > legBudgetPx) tableOver.push({ name: `${ROUTE_STOPS[i].id} <-> ${ROUTE_STOPS[j].id}`, len });
+  for (let j = i + 1; j < ROUTE_STOPS.length; j++) {
+    const a = ROUTE_STOPS[i], b = ROUTE_STOPS[j];
+    const len = Math.hypot(b.x - a.x, b.y - a.y);
+    if (len > legBudgetPx) {
+      tableOver.push({ key: pairKey(a.id, b.id), name: `${a.id} <-> ${b.id}`, len });
+      if (!ROUTE_STOPS.some(m => m !== a && m !== b && legal(a, m) && legal(m, b))) {
+        fail(`CO-ROUTABLE: stops ${a.id} and ${b.id} share no legal middle stop — no single route can span them and the world has regionalized (I-CO-ROUTABLE)`);
+      }
+    }
   }
-  if (partners < minPartners) { minPartners = partners; minPartnerStop = ROUTE_STOPS[i].id; }
 }
-if (minPartners < 2) fail(`ROUTE-TABLE: stop ${minPartnerStop} has only ${minPartners} within-budget partner(s) in the full table — a legal three-stop chain is no longer guaranteed from every start, and the roller's relax-to-nearest fallback would silently absorb it (I-ROLL-TOTAL satisfiability)`);
+
+// I-EXCLUSION-LEDGER: the generator may exclude exactly what the register has
+// signed, and nothing else. Every over-budget table pair must appear below with
+// the register decision that ratified it; every entry below must still be a real
+// exclusion. Both directions fail. The cited token must literally exist in
+// REFACTOR-FINDINGS.md — an unsigned exclusion cannot compile green. (See the
+// KNOWN LIMIT in this file's header: this proves a signature exists, never that
+// it was worth signing.)
+const RATIFIED_EXCLUSIONS = [
+  { a: 'scrap_gate', b: 'ditch_gauge', od: 'OD-10' },
+];
+const findingsText = fs.readFileSync(path.join(ROOT, 'REFACTOR-FINDINGS.md'), 'utf8');
+const ratified = new Map();
+for (const entry of RATIFIED_EXCLUSIONS) {
+  if (!findingsText.includes(entry.od)) fail(`EXCLUSION-LEDGER: entry ${entry.a} <-> ${entry.b} cites ${entry.od}, which appears nowhere in REFACTOR-FINDINGS.md — an unsigned exclusion cannot compile green (I-EXCLUSION-LEDGER)`);
+  ratified.set(pairKey(entry.a, entry.b), entry);
+}
+for (const pair of tableOver) {
+  if (!ratified.has(pair.key)) fail(`EXCLUSION-LEDGER: table pair ${pair.name} is beyond budget (${px(pair.len)}) and NOT in the ratified exclusion ledger — the world outgrew its route table; move the world or sign the pair in the register (I-EXCLUSION-LEDGER)`);
+}
+for (const [key, entry] of ratified) {
+  if (!tableOver.some(pair => pair.key === key)) fail(`EXCLUSION-LEDGER: ratified exclusion ${entry.a} <-> ${entry.b} (${entry.od}) is no longer beyond budget — stale ledger; retire the entry (I-EXCLUSION-LEDGER)`);
+}
+const totalPairs = ROUTE_STOPS.length * (ROUTE_STOPS.length - 1) / 2;
+const legalFraction = (totalPairs - tableOver.length) / totalPairs;
 
 // I-BLOCK-DAY-1: the Block alone covers every day-1 strip objective inside I-RUNWAY
 const block = SMOKE_SPOT_BY_ID.block;
@@ -360,7 +434,9 @@ function report() {
       console.log(`  ${offenders.length ? 'FAIL' : 'ok'} ${label}: ${count} legs, worst "${worst.name}" ${px(worst.len)} (${secs(worst.len, pxPerSec)}) / ${px(legBudgetPx)}${offenders.length ? ` — ${offenders.length}+ over budget` : ''}`);
     }
     const tableWorst = tableOver.reduce((a, b) => (b.len > a.len ? b : a), { name: '(none)', len: 0 });
-    console.log(`  ${minPartners < 2 ? 'FAIL' : 'ok'} ROUTE-TABLE: ${tableOver.length} table pair(s) beyond budget, generator-excluded (worst ${tableWorst.name} ${px(tableWorst.len)}) · min within-budget partners ${minPartners} (${minPartnerStop}) · src budget derivation ${px(srcBudget)}`);
+    // the fraction is a printed trend line for humans, never a threshold (OD-10):
+    // the three tripwires above fire at single-pair resolution, earlier than any floor.
+    console.log(`  ok ROUTE-TABLE: ${totalPairs} pairs, ${totalPairs - tableOver.length} legal (${(legalFraction * 100).toFixed(1)}%) · ${tableOver.length} ratified exclusion(s) (worst ${tableWorst.name} ${px(tableWorst.len)}) · min partners ${minPartners} (${minPartnerStop}), floor 3 · co-routable · src budget ${px(srcBudget)}`);
     console.log(`  ${day1Worst.d > legBudgetPx ? 'FAIL' : 'ok'} BLOCK-DAY-1: ${day1Items.length} day-1 objectives, farthest "${day1Worst.name}" ${px(day1Worst.d)} / ${px(legBudgetPx)}`);
     console.log(`  ${coverageWorst.d > coverageBudgetPx ? 'FAIL' : 'ok'} COVERAGE: worst point (${coverageWorst.x},${coverageWorst.y}) ${px(coverageWorst.d)} (${secs(coverageWorst.d, pxPerSec)}) from ${coverageWorst.nearest} / ${px(coverageBudgetPx)}`);
     console.log(`  ${rideables.length === 1 ? 'ok' : 'FAIL'} TRANSPORT: ${rideables.length} rideable cart(s)`);

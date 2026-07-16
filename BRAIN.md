@@ -1806,3 +1806,17 @@ The reading after the fix: worst assignable route leg is pawn_sill -> ditch_gaug
 Docs: SPEC.md landing 5 section; REFACTOR-FINDINGS Landing 5 notes + OD-9 resolution status note (register discipline: appended beneath the decision, decision text untouched); DELEGATION Landing 5 added and checked.
 
 Next: operator reviews and merges v20-world (landings 4+5 together, per instruction — not merged here). SPEC-v20-route-budget.md lives on main and arrives at merge; branch docs reference it by name. Standing near-miss to keep in view: the mandatory emperor commute is at 95.8% of the leg budget — the next map expansion trips RUNWAY-CAMPAIGN, and that one cannot be fixed in a generator.
+
+## 2026-07-16 — STRUCTURAL ROUTE INVARIANTS (landing 5 addendum, OD-10) (Fable / Claude Code, branch v20-world)
+
+What: built the three operator-ratified structural invariants into world-gate: I-DEAD-STOP (per-pool partner floor, derived as 1 + max simultaneous exclusions = 3 above pool size three, 2 at three), I-CO-ROUTABLE (full-pool legality graph diameter <= 2 — the 2 is the number of legs in a route), I-EXCLUSION-LEDGER (over-budget table pairs must exactly equal a named in-gate ledger, each entry citing a register token that must literally appear in REFACTOR-FINDINGS.md; both directions fail). Legal-pair fraction printed as a trend line, never thresholded. OD-10 register entry written. No src change; gate only.
+
+Why: the operator caught the hole in his own SPEC after my "measure the generator, not the table" rework — enforcement moved from detection to generation, and the detector was also the alarm. A constrained generator absorbs world growth silently; these checks are the detector restored as the alarm, at single-pair resolution, with names instead of a fraction floor.
+
+Decided (ratified in chat, recorded as OD-10): protect the pairs, not the percentage. The ledger is not OD-9's rejected grandfather — it tolerates no violation (excluded pairs are unassignable; the shipped game is legal); it makes the filter's silent work enumerable and signed. Known limit named in the gate header per operator order: the signature check proves a signature exists, never that it was worth signing — an autonomous loop can append its own permission slip to the append-only register (entry #2 family, ungateable at this layer); ledger growth is a human-review trigger when the loop goes live.
+
+Red-verified, all four directions: (1) ditch_gauge moved to (30000,30000) -> 49 failures with distinct names — DEAD-STOP (0 partners, floor 3), 22x CO-ROUTABLE regionalization, 21x unratified ledger pairs, AND the output sampling caught the fallback assigning over-budget legs, live confirmation of the I-DEAD-STOP causal chain (a reachable fallback = silent budget violations); (2) ledger emptied -> unratified scrap_gate<->ditch_gauge red; (3) scrap_gate moved to (2000,2000) making the pair legal -> stale-ledger red naming the entry to retire; (4) citation swapped to OD-99-PHANTOM -> unsigned-exclusion red. All restored; suite 9/9.
+
+Noted for the record (operator's own asymmetry, worth keeping visible): the three new thresholds are derived — 3 from exclusion arithmetic, 2 from route legs, exact-match from the ledger. The 60% at the center of the wave is chosen. Not moved; known.
+
+Next: operator reviews and merges Landings 4+5 together. The near-miss watchlist stands: emperor commute 95.8% of leg budget; pawn_sill<->ditch_gauge 98.5% — both will be the first entries the ledger or the campaign family names if the world grows again.

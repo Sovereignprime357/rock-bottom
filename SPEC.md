@@ -1842,3 +1842,13 @@ Resolves OD-9 per `SPEC-v20-route-budget.md` (on main at `6f57af8`): **constrain
 5. **I-STILL-CRUEL.** One pair in 253 removed, no mercy added: the worst assignable leg is still 8,123.8px — 98.5% of the budget.
 
 Red-verified both directions before trusted: constraint reverted → gate red naming `scrap_gate ↔ ditch_gauge` (69 assigned in 10,000 rolls); budget forced to 10px → all 30,000 rolls still return three valid stops via the fallback and NO-BUDGET-DRIFT fires. Suite: **9/9 honestly green.**
+
+### Landing 5 addendum — the detector restored as the alarm (OD-10, operator-ratified 2026-07-16)
+
+Constraining the generator created a silent-failure mode the operator named: a gate that measures generator output can no longer fail on world growth — the filter absorbs scope creep and a filtered world is indistinguishable from a clean one. Three structural invariants close it, every threshold derived, none invented:
+
+1. **I-DEAD-STOP.** In every reachable pool, every stop keeps ≥ 1 + maximum-simultaneous-exclusions within-budget partners (3 for pools larger than three, 2 at exactly three). Below the floor the relax-to-nearest fallback becomes reachable, and **a firing fallback is the generator assigning an over-budget leg** — the fallback stays dead code deterministically, not probably.
+2. **I-CO-ROUTABLE.** The legality graph over the full pool keeps diameter ≤ 2 — every pair of stops, excluded ones included, can still share one three-stop route through some middle. The 2 is the number of legs in a route. Failure means regionalization; no ledger signature papers it.
+3. **I-EXCLUSION-LEDGER.** Over-budget table pairs must exactly equal the named ledger in the gate; each entry cites a register decision whose token must literally appear in `REFACTOR-FINDINGS.md`; both directions fail (unratified exclusion / stale entry). The generator may exclude exactly what the register has signed, and nothing else. Ratified today: one pair, `scrap_gate ↔ ditch_gauge` (OD-10).
+
+The legal-pair fraction (99.6% at ratification) is a printed trend line, never a threshold. **Known limit, stated in the gate header:** the signature check proves a signature exists, never that it was worth signing — an autonomous loop can sign its own permission slip (ORCHESTRATOR-NOTES entry #2's family, not fixable at this layer). When the loop goes live, ledger growth is a human-review trigger. Red-verified in all four directions: isolated stop (DEAD-STOP + CO-ROUTABLE + unratified pair, with the output sampling also catching the fallback's over-budget legs — the causal chain confirmed live), emptied ledger, stale ledger, phantom citation.
