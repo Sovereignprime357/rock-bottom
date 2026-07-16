@@ -29,13 +29,10 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 Run these from the repository root with a current Node.js:
 
 ```text
-node --experimental-vm-modules tools/module-gate.mjs
-node --experimental-vm-modules tools/runtime-smoke.mjs
-node --experimental-vm-modules tools/legibility-gate.mjs
-node --experimental-vm-modules tools/npc-registry-gate.mjs
+node tools/run-gates.mjs
 ```
 
-Together they enforce source/reference integrity, module linking, save/input/status parity, the four measured legibility relationships, and complete VIBE registration for runtime NPC identities.
+The runner supplies `--experimental-vm-modules`, streams all four gates in order, and stops on the first failure. Together they enforce source/reference integrity, module linking, save/input/status parity, the four measured legibility relationships, and complete VIBE registration for runtime NPC identities.
 
 ## Design docs (read in this order)
 

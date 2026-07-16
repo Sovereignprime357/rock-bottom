@@ -4,6 +4,11 @@ import vm from 'node:vm';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 
+if (typeof vm.SourceTextModule !== 'function') {
+  console.error('RUNTIME HARNESS: vm.SourceTextModule unavailable; run with --experimental-vm-modules');
+  process.exit(1);
+}
+
 function seededMath() {
   let seed = 0x19c0ffee;
   const math = Object.create(Math);

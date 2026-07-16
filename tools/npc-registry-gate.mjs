@@ -15,7 +15,52 @@ const ALIASES=new Map([
 const GENERATED_FAMILIES=[
   {canonical:'CURB PRETENDER No. N',runtime:/^CURB PRETENDER No\. [1-9]\d*$/},
 ];
-const OPERATOR_RESERVED_NAMES=['TARP KNIGHT','CART LANCER','WIRE DEACON','CURB HOLDOUT'];
+const OPERATOR_RESERVED_NAME_REGISTER=[
+  {
+    slot:'blue_tarp_guard',initial:'TARP KNIGHT',runtimeId:/^kingdom_guard_blue_tarp_/,
+    sourceSites:["guardSprite:'blue_tarp_guard',guardName:'<NAME>',bossId:'darryl_under_blue'"],
+    decisions:[{authority:'operator-ratified',ratified:'2026-07-15',from:'TARP KNIGHT',to:'TARP KNIGHT'}],
+  },
+  {
+    slot:'cart_cavalry_guard',initial:'CART LANCER',runtimeId:/^kingdom_guard_cart_cavalry_/,
+    sourceSites:["guardSprite:'receipt_guard',guardName:'<NAME>',bossId:'general_receipt'"],
+    decisions:[{authority:'operator-ratified',ratified:'2026-07-15',from:'CART LANCER',to:'CART LANCER'}],
+  },
+  {
+    slot:'copper_choir_guard',initial:'WIRE DEACON',runtimeId:/^kingdom_guard_copper_choir_/,
+    sourceSites:["guardSprite:'wire_guard',guardName:'<NAME>',bossId:'bishop_wire'"],
+    decisions:[{authority:'operator-ratified',ratified:'2026-07-15',from:'WIRE DEACON',to:'WIRE DEACON'}],
+  },
+  {
+    slot:'throne_guard',initial:['CURB','HOLDOUT'].join(' '),runtimeId:/^kingdom_guard_throne_/,
+    sourceSites:[
+      "name:emperor?'<NAME>':def.guardName",
+      "{id:'throne',guardName:'<NAME>',guardSprite:",
+      "id:'kingdom_guard_throne_'+state.day+'_'+i,name:'<NAME>',sprite:",
+    ],
+    decisions:[{authority:'operator-ratified',ratified:'2026-07-15',from:['CURB','HOLDOUT'].join(' '),to:'KNIGHT EMERITUS'}],
+  },
+];
+
+function currentReservedName(record){
+  let current=record.initial;
+  for(const decision of record.decisions){
+    if(decision.authority!=='operator-ratified')fail(`reserved-name decision lacks operator ratification: ${record.slot}`);
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(decision.ratified))fail(`reserved-name decision has invalid date: ${record.slot}`);
+    if(decision.from!==current)fail(`reserved-name decision chain is broken: ${record.slot}`);
+    if(!String(decision.to||'').trim())fail(`reserved-name decision has no approved display name: ${record.slot}`);
+    current=decision.to;
+  }
+  return current;
+}
+
+const OPERATOR_RESERVED_NAMES=new Map();
+for(const record of OPERATOR_RESERVED_NAME_REGISTER){
+  const name=currentReservedName(record);
+  if(OPERATOR_RESERVED_NAMES.has(record.slot))fail(`duplicate operator-reserved slot: ${record.slot}`);
+  if([...OPERATOR_RESERVED_NAMES.values()].includes(name))fail(`duplicate operator-reserved display name: ${name}`);
+  OPERATOR_RESERVED_NAMES.set(record.slot,name);
+}
 
 function parseRegistry(){
   const lines=fs.readFileSync(path.join(ROOT,'VIBE.md'),'utf8').split(/\r?\n/);
@@ -44,7 +89,6 @@ for(const [alias,target] of ALIASES){
   if(ALIASES.has(target))fail(`alias chain is forbidden: ${alias} -> ${target}`);
 }
 for(const family of GENERATED_FAMILIES)if(!registry.has(family.canonical))fail(`generated family is not registered: ${family.canonical}`);
-for(const name of OPERATOR_RESERVED_NAMES)if(!registry.has(name))fail(`operator-reserved display name changed or disappeared: ${name}`);
 
 function canonicalName(raw){
   const name=String(raw||'').trim();
@@ -80,12 +124,13 @@ const mutationPattern=new RegExp(String.raw`\b[A-Za-z_$][\w$]*\.name\s*=\s*(${qu
 const knownComputed=new Set([
   'extra.name||def.guardName',
   'def.bossName',
-  "emperor?'CURB HOLDOUT':def.guardName",
+  "emperor?'KNIGHT EMERITUS':def.guardName",
   'clan.guardName',
 ].map(expression=>expression.replace(/\s+/g,'')));
 const pretenderExpression="'CURB PRETENDER No. '+(k.pretendersDefeated+1)";
 const sourceIdentities=new Map();
 let actorAuthoringSites=0;
+const campaignsSource=fs.readFileSync(path.join(ROOT,'src/systems/campaigns.js'),'utf8');
 
 function recordSourceIdentity(name,file,index){
   if(!name)return;
@@ -121,7 +166,7 @@ for(const [name,sites] of sourceIdentities){
   if(!canonicalName(name))fail(`unregistered source NPC identity: ${name} (${sites.join(', ')})`);
 }
 
-const {context}=await loadModularGame();
+const {context,module}=await loadModularGame();
 context.window._rb.startGame(false);
 const runtimeActors=context.window._rb.npcs.filter(actor=>!actor.dead&&String(actor.name||'').trim());
 const runtimeIdentities=new Set();
@@ -129,6 +174,31 @@ for(const actor of runtimeActors){
   runtimeIdentities.add(actor.name.trim());
   if(!canonicalName(actor.name))fail(`unregistered runtime NPC identity: ${actor.id} / ${actor.name}`);
 }
+
+for(const [slot,name] of OPERATOR_RESERVED_NAMES){
+  if(!registry.has(name))fail(`operator-reserved display name lacks a canonical row: ${slot} / ${name}`);
+  if(!sourceIdentities.has(name))fail(`operator-reserved display name is no longer authored: ${slot} / ${name}`);
+  if(!runtimeIdentities.has(name))fail(`operator-reserved display name is absent at runtime: ${slot} / ${name}`);
+}
+for(const record of OPERATOR_RESERVED_NAME_REGISTER){
+  const name=OPERATOR_RESERVED_NAMES.get(record.slot);
+  for(const template of record.sourceSites){
+    const expected=template.replace('<NAME>',name);
+    const occurrences=campaignsSource.split(expected).length-1;
+    if(occurrences!==1)fail(`operator-reserved source site changed: ${record.slot} / ${name} (${occurrences} matches)`);
+  }
+  const actors=runtimeActors.filter(actor=>record.runtimeId.test(String(actor.id||'')));
+  if(!actors.length)fail(`operator-reserved runtime slot is absent: ${record.slot}`);
+  for(const actor of actors)if(String(actor.name||'').trim()!==name)fail(`operator-reserved runtime slot changed: ${record.slot} / ${actor.id} / ${actor.name}`);
+}
+const campaigns=module('src/systems/campaigns.js');
+const kingdom=campaigns.ensureKingdomState();
+kingdom.stage='emperor_gate';
+if(!campaigns.startKingdomBoss('emperor'))fail('operator-reserved emperor-add fixture did not start');
+const emperorAdds=context.window._rb.npcs.filter(actor=>/^kingdom_add_curb_emperor_/.test(String(actor.id||'')));
+const throneGuardName=OPERATOR_RESERVED_NAMES.get('throne_guard');
+if(emperorAdds.length!==campaigns.KINGDOM_EMPEROR.adds.length)fail(`operator-reserved emperor-add fixture has ${emperorAdds.length} adds, expected ${campaigns.KINGDOM_EMPEROR.adds.length}`);
+for(const actor of emperorAdds)if(String(actor.name||'').trim()!==throneGuardName)fail(`operator-reserved emperor add changed: ${actor.id} / ${actor.name}`);
 
 if(failures.length){
   console.error(`NPC REGISTRY GATE: ${failures.length} failure(s)`);

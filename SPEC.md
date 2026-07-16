@@ -1656,13 +1656,13 @@ The `VIBE.md` canonical identity table is a shipping contract, not optional lore
 
 ### Coverage contract
 
-1. The permanent gate boots the modular new-game runtime and also scans every production source module for actor-shaped authoring (`name` together with `sprite`), explicit name mutation, kingdom `guardName`/`bossName`, and recognized generated-name expressions. This covers actors that are absent from a fresh spawn because they appear only on a day event, quest branch, wanted response, boss phase, pet branch, or completed-campaign day.
+1. The permanent gate boots the modular new-game runtime and also scans every production source module for actor-shaped authoring (`name` together with `sprite`), explicit name mutation, kingdom `guardName`/`bossName`, and recognized generated-name expressions. It additionally starts the emperor fixture so both reserved throne-guard actor families are exercised. This covers actors that are absent from a fresh spawn because they appear only on a day event, quest branch, wanted response, boss phase, pet branch, or completed-campaign day.
 2. A literal actor name must exactly match a canonical VIBE row or an explicit alias whose target is a canonical row. No free-form ignore list is valid.
 3. Allowed aliases represent the same person/state, not a way around registration: `BRUTUS (SKID) -> BRUTUS`, `LURCH (SKID) -> LURCH`, `SHERRI (SKID) -> SPIDER-BITE SHERRI`, and `FATHER O'MALLEY (FALLEN) -> FATHER O'MALLEY`. Both chained/freed dog records share the canonical `THE DOG` row.
 4. Generated display numbers normalize only through an explicit family rule. `CURB PRETENDER No. <positive integer>` resolves to the canonical row `CURB PRETENDER No. N`. An unrecognized computed `name` expression fails the gate and must receive a fixture/normalizer plus a complete canonical row before ship.
 5. Every registry cell is trimmed and non-empty; names are unique. A row cannot pass with placeholder punctuation, `TBD`, or a duplicated canonical name.
 6. Generic combat roles are not exempt merely because multiple instances share one display label. `COP` has one canonical identity row; all generated cops resolve to it.
-7. The four audited weak names—`TARP KNIGHT`, `CART LANCER`, `WIRE DEACON`, and `CURB HOLDOUT`—remain byte-for-byte unchanged pending an operator taste decision. Registration records their current identity; it does not ratify or rename them.
+7. The four operator-reserved guard slots are decision-registered. The 2026-07-15 ratification keeps `TARP KNIGHT`, `CART LANCER`, and `WIRE DEACON`, and changes the throne-guard display label from `CURB HOLDOUT` to `KNIGHT EMERITUS`. The gate stores the dated operator-ratified rename chain and binds each current approved value to its campaign authoring sites plus fresh-runtime id family; changing even one site, or changing source and VIBE together, must still fail until a new dated operator-ratified decision-register entry updates that slot.
 
 ### Required gate result
 
@@ -1672,9 +1672,27 @@ The `VIBE.md` canonical identity table is a shipping contract, not optional lore
 - a VIBE row omits any of its four cells;
 - an alias points to a missing row, aliases chain, or two canonical rows use the same name;
 - a new actor uses an unrecognized computed display name; or
-- any of the four operator-reserved names changes before an explicit operator decision is recorded.
+- any current operator-reserved display name changes without a new dated operator-ratified decision-register entry.
 
 The passing report includes canonical-row count, distinct actor identities covered, runtime actors observed, alias count, and generated-family count. This gate changes no gameplay state, dialogue, combat, save data, sprite, or display name.
+
+---
+
+## OD-1..4 ratification + gate launcher (2026-07-15)
+
+### Ratified VIBE constraints
+
+1. The Clerical Pattern is canonical pattern #5. For a wave adding `N` new permanent-loop beats, it may own at most `floor(N / 2)`; the other four patterns own the remainder. The existing 54 permanent-loop beats are grandfathered and are not rewritten to satisfy the ratio.
+2. HARD YES #6 is exactly: “mundane > magical — and if the setup goes magical, the mundane must win in the same breath.”
+3. Campaign-scale and endless systems must periodically return the BAD IDEA through score → smoke → 18s high → 8s crash. Long-form objectives may not permanently displace that loop. Frequency, transport, and coverage-budget enforcement is deferred to the Wave-4 world-scale session.
+4. `KNIGHT EMERITUS` is a display-label-only ratification. IDs, sprites, spawn sites, rewards, balance, and behavior remain unchanged.
+
+### Verification launcher
+
+1. `node tools/run-gates.mjs` launches, in order, `module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, and `runtime-smoke.mjs` as child processes using the current Node executable plus `--experimental-vm-modules`.
+2. Child output is inherited and streamed. The launcher stops at the first spawn error, signal, or non-zero exit, returns non-zero, and does not run later gates. Four successful children produce a 4/4 PASS summary.
+3. `tools/run-gates.cmd` is a two-line Windows shim that invokes the plain-Node launcher without adding a dependency or package script.
+4. `runtime-harness.mjs` and `runtime-smoke.mjs` guard `vm.SourceTextModule` before construction. Invocation without `--experimental-vm-modules` prints a friendly instruction, exits 1, and emits no stack trace.
 
 ---
 

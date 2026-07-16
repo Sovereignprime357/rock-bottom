@@ -1632,3 +1632,58 @@ Wave 3 implementation matches its four written contracts. Wave 4 changed finding
 - Live visual/audio QA is still pending. Do not describe VM/static verification as a browser playtest.
 
 ---
+
+## July 15, 2026 — OD-1..4 ratification / gate hardening
+
+### WHAT
+
+1. Preserved and included the pre-existing `REFACTOR-FINDINGS.md` decision-register changes, then reconciled its stale “all open” preface with the four decided 2026-07-15 entries.
+2. Canonized the Clerical Pattern as VIBE pattern #5. New permanent-loop beats are capped at 50% clerical per wave; the shipped 54 beats are grandfathered.
+3. Replaced HARD YES #6 with the ratified sentence verbatim and added the campaign/endless scope invariant: BAD IDEA must periodically return through score → smoke → 18s high → 8s crash. Enforcement mechanics remain deferred to the Wave-4 world-scale session.
+4. Changed the throne-guard display label to `KNIGHT EMERITUS` in the complete four-cell VIBE row and the three campaign authoring literals. IDs, sprites, spawn sites, counts, HP, damage, speed, archetypes, rewards, saves, and behavior are unchanged.
+5. Converted the four reserved guard labels into dated decision chains. Each current name must exist in the canonical registry, authored source identities, and the fresh runtime, preventing an orphaned old VIBE row from concealing a later unratified rename.
+6. Added the plain-Node `tools/run-gates.mjs` launcher and two-line Windows shim. The launcher streams the four gates with `--experimental-vm-modules`, suppresses experimental warnings, stops on first failure, and reports 4/4 only after all children pass.
+7. Added early `vm.SourceTextModule` guards to the runtime harness and smoke test. Naive invocation now prints one command hint and exits 1 without a stack trace.
+
+### WHY
+
+The decision register had moved from audit evidence to ratified canon, but VIBE, source, SPEC, and the permanent gate still described the old state. This pass makes the decisions agree across every authority surface while keeping gameplay values frozen. The runner removes a fragile four-command setup step without adding a package manager or dependency.
+
+### DECIDED / REASONING
+
+- **Future share, not retroactive churn.** The clerical pattern remains the world spine; only new permanent-loop beats enter the 50% budget.
+- **Scope now, numbers later.** The core loop remains the BAD IDEA, but frequency, transport, and coverage budgets require the deferred world-scale relationship work.
+- **Reservation means presence, not a stale row.** A reserved label must be canonical, authored, and live at fresh start. A later rename requires a new dated chain entry.
+- **Display-only rename.** Stable runtime IDs make a save migration unnecessary; the label is not persisted.
+- **One review command.** The runner uses the current Node executable and inherited stdio for Windows-safe, immediate gate output.
+
+### TRIED / ABANDONED
+
+- GitHub CLI authentication initially could not read its user config inside the filesystem sandbox. Retried through the approved GitHub configuration boundary; authentication is valid.
+- Did not add numeric scope enforcement, rewrite any of the 54 shipped clerical beats, change campaign dialogue/objective/ending copy beyond the approved display label, or touch the frozen v19 reference.
+
+### COUNTEREXAMPLE HUNT
+
+- A source-only guard rename fails as an unregistered identity and as a missing reserved source/runtime name.
+- A coordinated source + VIBE rename that leaves the old row behind still fails because the registered current name is no longer authored or live.
+- A broken or undated reserved-name decision chain fails before registry/runtime acceptance.
+- Naive `node tools/runtime-smoke.mjs` exits 1 with a friendly line and no raw `TypeError` stack.
+- The all-gates runner reaches its success receipt only after all four children exit zero.
+
+### DRIFT / PROPERTY CHECK
+
+- Frozen v19 SHA-256 remains `c25db5e17536aec092143d87dbf8c113325076a8b8e196a98aecb84694a25c8b`.
+- Module extraction/linking, 56-NPC runtime parity, WASD chord/release, exact 18s→8s status timing, legibility geometry, registry counts, storage, dialogue, and 373 sprite keys all pass.
+- No save key, timing constant, ID, sprite, balance value, package file, lockfile, dependency, or non-display gameplay copy changed.
+
+### NEXT
+
+- Use the Wave-4 world-scale session to choose frequency, transport, and coverage mechanics for the ratified core-loop scope clause.
+- Any future reserved guard rename must append a dated decision-chain entry and update VIBE/source together.
+
+### GOTCHA
+
+- `rock_bottom_v19.html` remains immutable.
+- Direct runtime-gate invocation still needs `--experimental-vm-modules`; `node tools/run-gates.mjs` supplies it automatically.
+
+---

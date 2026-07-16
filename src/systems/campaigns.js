@@ -443,7 +443,7 @@ export function startKingdomBoss(id){
   runtime.npcs=runtime.npcs.filter(n=>!(n.kingdomGuard&&(emperor?n.kingdomClan==='throne':n.kingdomClan===def.id)));
   runtime.npcs.push(boss);
   const addSprite=emperor?['blue_tarp_guard','receipt_guard']:null;
-  def.adds.forEach((at,i)=>runtime.npcs.push(makeKingdomActor(def,at,{id:'kingdom_add_'+def.bossId+'_'+i,name:emperor?'CURB HOLDOUT':def.guardName,sprite:addSprite?addSprite[i%addSprite.length]:def.guardSprite,hp:45,dmg:6,speed:1.35,archetype:i?'swarmer':'charger',aggro:true,kingdomAdd:true,kingdomClan:emperor?'throne':def.id})));
+  def.adds.forEach((at,i)=>runtime.npcs.push(makeKingdomActor(def,at,{id:'kingdom_add_'+def.bossId+'_'+i,name:emperor?'KNIGHT EMERITUS':def.guardName,sprite:addSprite?addSprite[i%addSprite.length]:def.guardSprite,hp:45,dmg:6,speed:1.35,archetype:i?'swarmer':'charger',aggro:true,kingdomAdd:true,kingdomClan:emperor?'throne':def.id})));
   k.stage=emperor?'emperor_boss':def.bossStage;k.bossId=def.bossId;
   state.kingdomBattle={id:def.bossId,zoneId:def.zoneId,escapeT:0};state.bossActive=true;state.bossKind='kingdom';state.bossPhase=1;state.bossNPC=boss;
   audio.bossRoar();state.shake=10;
@@ -520,7 +520,7 @@ export function syncKingdomForces(){
   }
   if(k.stage!=='emperor_boss'){
     const count=k.stage==='complete'?2:3,posts=KINGDOM_GUARD_POSTS.throne,sprites=['blue_tarp_guard','receipt_guard','wire_guard'];
-    for(let i=0;i<count;i++)runtime.npcs.push(makeKingdomActor({id:'throne',guardName:'CURB HOLDOUT',guardSprite:sprites[i%3],zoneOnly:KINGDOM_EMPEROR.zoneOnly},posts[i],{id:'kingdom_guard_throne_'+state.day+'_'+i,name:'CURB HOLDOUT',sprite:sprites[i%3],hp:52,dmg:7,speed:1.25,archetype:i===2?'ranged':'charger',kingdomGuard:true,kingdomClan:'throne',transient:false}));
+    for(let i=0;i<count;i++)runtime.npcs.push(makeKingdomActor({id:'throne',guardName:'KNIGHT EMERITUS',guardSprite:sprites[i%3],zoneOnly:KINGDOM_EMPEROR.zoneOnly},posts[i],{id:'kingdom_guard_throne_'+state.day+'_'+i,name:'KNIGHT EMERITUS',sprite:sprites[i%3],hp:52,dmg:7,speed:1.25,archetype:i===2?'ranged':'charger',kingdomGuard:true,kingdomClan:'throne',transient:false}));
   }
   spawnDailyPretender();
 }

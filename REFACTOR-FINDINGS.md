@@ -93,47 +93,47 @@ These were the same class of missing set/geometry relationship, but they are no 
 
 ## Operator decision register
 
-The audit evidence is recorded here without converting its preferences into canon. Every item remains open and operator-only.
+The audit evidence and the 2026-07-15 operator decisions are recorded here. Each AI-led decision remains subject to operator veto.
 
 ### OD-NPC-NAMES
 
-**Status:** OPEN — OPERATOR ONLY
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
 
 **Measured evidence:** `TARP KNIGHT`, `CART LANCER`, `WIRE DEACON`, and `CURB HOLDOUT` are the four kingdom rank/prop names that skipped the original four-column test and fail the audit's cursed-name test. They now have complete registry rows, so completeness and taste are separate questions.
 
 **Non-ratified audit recommendation:** none; flag the names and leave taste in the operator's seat.
 
-**Current behavior preserved:** all four names, ids, sprites, guard families, boss adds, and combat behavior remain unchanged.
+**Current behavior preserved:** only the throne-guard display label changes; ids, sprites, guard families, boss adds, and combat behavior remain unchanged.
 
-**Operator decision:** _open_
+**Operator decision:** DECIDED (AI-led). TARP KNIGHT, CART LANCER, and WIRE DEACON stay. Generic rank names are correct wallpaper for repeated ambient mobs — their formula flatness is what makes the ruler names (DARRYL UNDER BLUE) land by contrast. CURB HOLDOUT → KNIGHT EMERITUS. Post-completion holdouts are permanent endgame texture and deserve the mundane-wins beat: "emeritus" is the institutional word that deflates "knight" in the same breath. This ratification updates the VIBE registry row, campaigns.js display label, and the registry gate's reserved-name decision record. Veto reverses cleanly.
 
 ### OD-PATTERN-ROTATION
 
-**Status:** OPEN — OPERATOR ONLY
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
 
 **Measured evidence:** the clerical construction owns 23/23 route stops, 22/22 claim beats, and 9/9 kingdom marks—approximately 54 permanent-loop beats. VIBE's four named escalation patterns remain concentrated in older incidental events. This happened because the clerical pattern is generative and “make it bigger” repeatedly selected the easiest pattern to extend.
 
 **Non-ratified audit recommendation:** name the Clerical Pattern as a fifth VIBE pattern, keep it, and add a rotation/share rule so it does not monopolize future endless content.
 
-**Current behavior preserved:** no route, claim, mark, quota, percentage, or VIBE pattern rule changed.
+**Current behavior preserved:** no shipped route, claim, mark, or permanent-loop beat changes; the 50% share rule applies only to new permanent-loop content.
 
-**Operator decision:** _open_
+**Operator decision:** DECIDED (AI-led). The Clerical Pattern is canonized as VIBE pattern #5 — it earned it; it is the game's spine. Share rule for FUTURE permanent-loop content only: clerical owns at most 50% of new permanent-loop beats per wave, remainder drawn from the other four patterns. The existing 54 beats are grandfathered — rewriting shipped copy to satisfy a ratio is churn, not craft.
 
 ### OD-MEDIEVAL-REGISTER
 
-**Status:** OPEN — OPERATOR ONLY
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
 
 **Measured evidence:** kingdom, throne, crown, knight, bishop, anointing, and succession language is now a campaign register. The implementation repeatedly lets tarps, curbs, forms, wire, and a folding chair win in the same beat; the final throne remains a folding chair.
 
 **Non-ratified audit recommendation:** amend HARD YES #6 toward “mundane > magical, and if the setup goes magical, the mundane must win in the same breath” rather than removing the kingdom register.
 
-**Current behavior preserved:** no VIBE rule, campaign term, dialogue, objective, boss, or ending copy changed.
+**Current behavior preserved:** only HARD YES #6 changes; campaign terms, dialogue, objectives, bosses, and ending copy remain unchanged.
 
-**Operator decision:** _open_
+**Operator decision:** DECIDED (AI-led). Audit amendment ratified verbatim: HARD YES #6 becomes "mundane > magical — and if the setup goes magical, the mundane must win in the same breath." The shipped campaign already obeys it (lawn-chair throne, rock coronation, folding-chair emperor); this writes down the rule the good content was already following. No copy changes.
 
 ### OD-VIBE-SCOPE
 
-**Status:** OPEN — OPERATOR ONLY
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
 
 **Measured evidence:** VIBE strongly governs sentence-level tone but says nothing mechanical about world scope, campaign grammar, objective rotation, or how often the BAD IDEA must return to scoring and smoking. The world is now `8600×5600`; office, route, and kingdom objectives dominate long stretches after the intro, while the anoint stage is the one explicit return to the core loop.
 
@@ -141,4 +141,4 @@ The audit evidence is recorded here without converting its preferences into cano
 
 **Current behavior preserved:** no map rollback, objective reprioritization, campaign restructuring, or new percentage requirement was made.
 
-**Operator decision:** _open_
+**Operator decision:** DECIDED (AI-led). VIBE gains a scope clause: campaign-scale and endless systems must periodically route the player back through the score → smoke → 18s → 8s loop, and long-form objectives may not permanently displace it as the BAD IDEA. Mechanical enforcement (frequency, transport, coverage budgets) is deliberately deferred to the Wave 4 world-scale design session, where those relationships live. Spec language now, mechanics later — deciding enforcement numbers before the travel budgets exist would be the same missing-relationship mistake Wave 4 documents.

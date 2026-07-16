@@ -113,6 +113,10 @@ Don't punch the joke. Let it land flat. The flatness IS the comedy.
 **The Inverted Authority Pattern:** an animal or child has power over the player
 > "A cop on horseback nods at you. The horse also nods. Disturbing levels of agreement."
 
+**The Clerical Pattern (canonical pattern #5):** routine forms, titles, and counters absorb an absurd condition until the procedure becomes permanent infrastructure
+
+**Rotation rule:** The Clerical Pattern may own at most 50% of new permanent-loop beats per wave. The remainder must be drawn from the Possum, Bad Trade, Cursed Aside, and Inverted Authority patterns. The existing 54 permanent-loop beats are grandfathered.
+
 ---
 
 ## Visual aesthetic
@@ -203,8 +207,14 @@ These are not stylistic preferences. They are non-negotiable.
 3. **Reward the player's stupidity.** Shorting Tony has real consequences AND is genuinely funny when it happens.
 4. **Let things sing.** "The copper sings to you in B flat" is a meaningful, repeatable piece of lore. Maintain it. Build on it.
 5. **Honor the bit.** The Conductor says "the train is coming. it has always been coming. it will never be here." Do not later reveal that the train comes. The bit is the bit.
-6. **Mundane > magical.** A possum that wears a construction helmet is funnier than a wizard. A pigeon that demands bread for secrets is funnier than an oracle.
+6. **mundane > magical — and if the setup goes magical, the mundane must win in the same breath.**
 7. **Make the player do undignified things for small rewards.** Pawning a single AirPod. Selling a wet sock. Eating half a chimichanga out of a milk crate.
+
+### Scope invariant
+
+Campaign-scale and endless systems must periodically route the player back through the score → smoke → 18s high → 8s crash loop. Long-form objectives may not permanently displace that loop as the BAD IDEA.
+
+Enforcement mechanics—including frequency, transport, and coverage budgets—are deferred to the Wave-4 world-scale session.
 
 ---
 
@@ -267,7 +277,7 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | TARP KNIGHT | tarp hood and bucket-lid shield, no roof permit | bounded guard of BLUE TARP COURT | attacks unauthorized weather filings; grants no loot or allegiance |
 | CART LANCER | holds a shopping-cart fork where a horse would go | bounded guard of CART CAVALRY KEEP | charges, grabs, or swarms for the return department; grants nothing |
 | WIRE DEACON | wire stole, loose coil, attendance marked yes | bounded guard of COPPER CHOIR YARD | conducts ranged objections and close corrections; grants nothing |
-| CURB HOLDOUT | wears whichever conquered uniform still fits | throne guard and emperor reinforcement | refuses succession in person; grants no reward |
+| KNIGHT EMERITUS | wears whichever conquered uniform still fits | throne guard and emperor reinforcement | refuses succession in person; grants no reward |
 | CURB PRETENDER No. N | number changes daily; petition does not | returns to a conquered ruler post after coronation | one elite objection per day; defeat pays $10 and 2 cred once |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
