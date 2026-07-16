@@ -142,3 +142,16 @@ The audit evidence and the 2026-07-15 operator decisions are recorded here. Each
 **Current behavior preserved:** no map rollback, objective reprioritization, campaign restructuring, or new percentage requirement was made.
 
 **Operator decision:** DECIDED (AI-led). VIBE gains a scope clause: campaign-scale and endless systems must periodically route the player back through the score → smoke → 18s → 8s loop, and long-form objectives may not permanently displace it as the BAD IDEA. Mechanical enforcement (frequency, transport, coverage budgets) is deliberately deferred to the Wave 4 world-scale design session, where those relationships live. Spec language now, mechanics later — deciding enforcement numbers before the travel budgets exist would be the same missing-relationship mistake Wave 4 documents.
+
+
+### OD-SMOKE-COVERAGE (OD-5)
+
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
+
+**Question (operator, feel pass, day-2 save):** there is only one spot to smoke a rock — at what point does that change?
+
+**Decision:** The Block remains the only UNCONDITIONAL smoke spot, permanently. Additional spots enter only as earned, conditional concessions granted by the v20 recognition system (THE REGULAR): a venue that reaches "conceded" tier tolerates the loop under its own condition (time of day, presence, phase). Cap: four concessions world-wide at full recognition, roughly one per district. Concessions distribute the loop; they never bypass it — the BAD IDEA still points, and the 18000ms/8000ms contract is byte-identical everywhere.
+
+**Why:** it answers "what is success to a crackhead" mechanically — success is the neighborhood adjusting around you. It also converts the flagship Wave-4 travel defect (block-to-throne 8,396px vs ~4,455px of high) into the success arc instead of a transport band-aid: early game keeps the tight tether while the theme needs it; late game earns slack. Progression shaped like the arc itself, and the bleakest joke available — success measured in places that let you.
+
+**Scope:** SPEC core-loop invariant amended to "only unconditional spot" (true of the current build — no concessions exist yet, so drift-check holds today). Full design in SPEC-V20-PACKET.md. No implementation in this commit.

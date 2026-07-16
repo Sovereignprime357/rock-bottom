@@ -210,6 +210,10 @@ These are not stylistic preferences. They are non-negotiable.
 6. **mundane > magical — and if the setup goes magical, the mundane must win in the same breath.** A possum that wears a construction helmet is funnier than a wizard. A pigeon that demands bread for secrets is funnier than an oracle.
 7. **Make the player do undignified things for small rewards.** Pawning a single AirPod. Selling a wet sock. Eating half a chimichanga out of a milk crate.
 
+### North star (v20, OD-5)
+
+success is the neighborhood adjusting around you. recognition without reward. the ladder is not upward — the throne was a lawn chair. it is inward.
+
 ### Scope invariant
 
 Campaign-scale and endless systems must periodically route the player back through the score → smoke → 18s high → 8s crash loop. Long-form objectives may not permanently displace that loop as the BAD IDEA.

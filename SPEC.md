@@ -1716,3 +1716,8 @@ The passing report includes canonical-row count, distinct actor identities cover
 | v16 | July 2026 | Control reliability fix: event-latched multi-key WASD/arrows/Shift, removed 700ms repeat watchdog and global pointer keyboard purge, unified keyboard/analog/modal/focus release. Movement math, status timing, bosses, and save key unchanged. |
 | v17 | July 2026 | Cursed-sticker sprite pipeline with directional player/attack/gear/weapon/cart/route layers; BAD IDEA guidance and touch/keyboard control ledgers; persistent endless three-stop block routes; feasible/persisted daily hustles; IndexedDB-backed `window.storage` browser adapter; local Possum prophecy pool; square-pixel mobile letterboxing. Save key unchanged. |
 | v18 | July 2026 | Far-east expansion to 5800×3800; condemned office/shelter with six visible upgrades; eleven reputation-gated survey/file/sign claims; bounded endless office orders; new Leasing Guy and Gutter Greg sprites; evolving office/sign/minimap presentation; safe paginated bus travel; hardened partial-save reconciliation. Save key unchanged. |
+
+
+## OD-5 ratification (2026-07-15)
+
+Effective v20, the core-loop location invariant is amended to: "The Block is the only UNCONDITIONAL smoke/cook location. Additional smoke spots may exist only as earned, conditional concessions granted by the recognition system (SPEC-V20-PACKET.md, OD-SMOKE-COVERAGE)." The v18/v19 wave sections above record their own eras and stand unedited; the current build has zero concessions, so their invariants remain true of it today. Decision chain and rationale: REFACTOR-FINDINGS.md -> OD-SMOKE-COVERAGE (OD-5).
