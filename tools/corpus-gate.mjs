@@ -51,7 +51,16 @@ import { execFileSync } from "node:child_process";
  * the past does not get edited. (The repo already ratified "register append-only
  * discipline" in c44bbfd — this makes that rule mechanical instead of aspirational.)
  */
-const APPEND_ONLY = ["BRAIN.md", "REFACTOR-FINDINGS.md", "time_log.md"];
+const APPEND_ONLY = [
+  "BRAIN.md",
+  "REFACTOR-FINDINGS.md",
+  "time_log.md",
+  // ORCHESTRATOR-NOTES.md is the field log of how an AI in the orchestrator seat got things
+  // wrong, and it argues — at length — that notes do not hold and only gates do. Leaving it
+  // guarded by nothing but its own advice would be the joke writing itself. It is append-only
+  // for the same reason BRAIN.md is: a lesson someone deleted is a lesson someone repeats.
+  "ORCHESTRATOR-NOTES.md",
+];
 
 /**
  * PROTECTED. Deletions allowed, but a large one has to be deliberate.
