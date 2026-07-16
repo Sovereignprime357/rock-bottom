@@ -1780,3 +1780,35 @@ This is the prerequisite presentation/interaction landing named first in `SPEC-V
 ## OD-5 ratification (2026-07-15)
 
 Effective v20, the core-loop location invariant is amended to: "The Block is the only UNCONDITIONAL smoke/cook location. Additional smoke spots may exist only as earned, conditional concessions granted by the recognition system (SPEC-V20-PACKET.md, OD-SMOKE-COVERAGE)." The v18/v19 wave sections above record their own eras and stand unedited; the current build has zero concessions, so their invariants remain true of it today. Decision chain and rationale: REFACTOR-FINDINGS.md -> OD-SMOKE-COVERAGE (OD-5).
+
+---
+
+## v20 landing 3 — smoke concessions (2026-07-16)
+
+Implements `SPEC-V20-PACKET.md` §2 (OD-5) per `SPEC-v20-concessions.md`. The "zero concessions" clause of the OD-5 ratification above records its own era; effective this landing the build has four.
+
+### The one smoke transaction (I-ONE-LOOP)
+
+1. The smoke transaction lives in exactly one exported function, `smokeRockAt(spotId)` in `src/systems/concessions.js`, and `rockedT = 18000` has exactly one assignment site in `src/` — enforced structurally by the permanent gate, because a numeric check passes a copy-paste as happily as an extraction.
+2. The transaction is the blockMenu() transaction of v19, byte for byte: soap-first FIFO, `brain -4`, `shakes -50`, `cred +1`, `rockedT = 18000; crashT = 0`, the flash, the toast copy and timing, the street/spiritual rep ledger, the intro-chain completion, the save. Two named deltas only: the royal-static branch is additionally guarded on `spot.id==='block'`, and the feed line names the venue.
+3. Soap is soap everywhere: the soap branch rides the same function and produces an identical delta and an identical feed line at all five spots.
+
+### Spots and conditions
+
+1. Five spots: the Block (unconditional, forever) plus `park` (night only), `choir_office` (during office hours), `underpass` (while the freed dog is present), `laundromat` (dryer mid-cycle only). Concession spot ids equal their recognition venue ids; smoking is legal anywhere inside the venue zone, the spot coordinate is the BAD IDEA anchor.
+2. A concession exists only at `conceded` recognition tier (`recognitionTier()`, Landing 2). Below that tier the venue's room does not open and no state moves. No purchase path, no quest-flag path.
+3. Night and dog presence read clocks that already existed (`state.dayTime`, `state.freedDogFollowT` plus the live follower). Choir office hours and the dryer cycle are clocks authored by this landing: the choir holds b flat on its own schedule (closed 90–150s, open 55s — office hours are b flat to b flat, the schedule does not convert), the dryer idles 50–90s and runs 70s, mid-cycle excluding 15s margins on both ends. The dog's lanyard is a line, not a flag (orchestrator decision, SPEC-v20-concessions.md).
+4. The clocks tick in `updateWorld` on world time, persist as one additive save key (`concessionClocks`; save key and version 10 unchanged), normalize on load, reset on fresh save, and roll their phase durations from a private persisted LCG rather than `Math.random` (the runtime smoke runs this build in lockstep against frozen v19 on one shared seeded sequence).
+5. Conditions are re-checked at ACTION, not at render — decided once, here: a menu opened legally may be refused at the click if the condition has died. In the current engine `updateWorld` pauses during dialogue, so the race is unreachable; the guard is load-bearing only if that ever changes.
+6. A condition expiring mid-high changes nothing: the high runs its full 18000ms and the crash its full 8000ms. The world tolerates what it already tolerated.
+
+### Surfaces
+
+1. A conceded venue answers the E key like the block does: a zone verb at the bottom of the interaction chain, one smoke option, one exit, the condition stated and never explained. The action hint advertises the room (`consult the bench / the office / the bridge / the dryer`).
+2. The Q ledger's REGULAR rows gain one concession line at conceded tier only — condition, plus live status. This is where choir office hours and the dryer state (mid-cycle / running-not-mid / idle) are readable from anywhere. Clock turnovers also toast, but only to a player standing in a venue that has already conceded.
+3. BAD IDEA: when the player holds a rock (soap counts; the player cannot tell), is not high, and shakes have reached 50, the strip's selected thing becomes `smoke a rock at <spot>`, targeting the nearest LEGAL spot — a concession only while conceded and its condition is live, otherwise home. Ties (any exact tie for nearest, including between two concessions) go to the Block. Placement: below the intro, active office contracts, and every kingdom objective (the anoint objective still names the block — royal static is not portable), above available office work, routes, and quests. This lands the VIBE scope invariant mechanically.
+4. No reward: a concession is permission, not payment. Nothing about *where* you smoke changes any currency, item, combat, or timer value — enforced by the identity fingerprint in the gate.
+
+### Permanent gate
+
+`tools/concession-gate.mjs` runs after `recognition-gate` and before `runtime-smoke` (suite: 8). It must fail on: a second `rockedT = 18000` site anywhere in `src/`; any P-fingerprint delta difference between the five spots (real or soap) beyond the venue-named feed text; a room opening below conceded tier; a smoke with a false condition (including the stale-menu race); royal static firing at any concession or failing to fire at the block — verified to go red with the spot guard removed before it was trusted; an illegal, farther-than-nearest, or tie-not-to-block BAD IDEA target across all 16 condition combinations; a truncated high or crash after mid-high condition death; or a clock persistence/normalization regression.
