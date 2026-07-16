@@ -6,7 +6,7 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { last } from '../core/update.js';
 import { inZone } from '../data/npc_spawns.js';
-import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
+import { BUILDINGS, PROPS, interactiveProps, rideableCart } from '../data/props.js';
 import { ZONES } from '../data/world.js';
 import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
 import { questToast } from './combat.js';
@@ -608,8 +608,8 @@ export function resolveActionHint(){
   for(const ip of interactiveProps){if(ip.type!=='trashcan')continue;const dx=pcx-ip.x,dy=pcy-ip.y;if(dx*dx+dy*dy<50*50)return 'kick the can';}
   const phone=PROPS.find(p=>p.type==='pay_phone');
   if(phone&&state.phonePropRingT>0){const dx=pcx-phone.x,dy=pcy-phone.y;if(dx*dx+dy*dy<38*38)return 'answer the public phone';}
-  const cart=PROPS.find(p=>p.type==='cart');
-  if(cart){if(P.cartMounted&&cart.mounted==='me')return 'abandon the cart';const dx=pcx-cart.x,dy=pcy-cart.y;if(dx*dx+dy*dy<36*36)return 'get in the cart';}
+  const cart=rideableCart();
+  if(cart){if(P.cartMounted)return 'abandon the cart';const dx=pcx-cart.x,dy=pcy-cart.y;if(dx*dx+dy*dy<36*36)return 'get in the cart';}
   for(const p of PROPS){if(p.type!=='dumpster')continue;const dx=pcx-(p.x+p.w/2),dy=pcy-(p.y+p.h/2);if(dx*dx+dy*dy<44*44)return p.looted?'look in the empty dumpster':'get in the dumpster';}
   if(inZone(pcx,pcy,'block')){
     if(state.flags&&!state.flags.introDone&&((P.rocks||0)+(P.soapRocks||0))<=0)return '';

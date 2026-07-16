@@ -6,6 +6,17 @@ import { dialogue, state } from '../core/runtime_ui.js';
 import { buildGraffiti } from '../render/structures.js';
 
 export let BUILDINGS, PROPS, interactiveProps, CHATTER;
+export const RIDEABLE_CART_SPAWN = Object.freeze({ x:1000, y:1600 });
+
+export function rideableCart() {
+  return PROPS && PROPS.find(prop=>prop.type==='cart');
+}
+
+export function resetRideableCart() {
+  const cart=rideableCart();
+  if(!cart)return;
+  cart.x=RIDEABLE_CART_SPAWN.x;cart.y=RIDEABLE_CART_SPAWN.y;
+}
 
 export function initInteractiveProps() {
   interactiveProps = [
@@ -88,7 +99,7 @@ export function init_props() {
     { type:'dumpster', x:1620, y:280,  w:36, h:24, color:'#2a3818', looted:false },
     { type:'dumpster', x:780,  y:240,  w:36, h:24, color:'#2a2828', looted:false },
     // shopping cart (rideable)
-    { type:'cart', x:1100, y:1520, w:24, h:20, color:'#888', mounted:false },
+    { type:'cart', x:RIDEABLE_CART_SPAWN.x, y:RIDEABLE_CART_SPAWN.y, w:24, h:20, color:'#888' },
     // lamp posts
     { type:'lamp', x:740,  y:840 }, { type:'lamp', x:1340, y:840 },
     { type:'lamp', x:1740, y:1100 },{ type:'lamp', x:240,  y:1100 },

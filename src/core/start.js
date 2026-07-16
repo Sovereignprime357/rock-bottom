@@ -4,7 +4,7 @@
  */
 import { P, applyEquipStats, runtime, state, toast } from './runtime_ui.js';
 import { spawnCashPiles, spawnNpcs } from '../data/npc_spawns.js';
-import { initInteractiveProps } from '../data/props.js';
+import { initInteractiveProps, resetRideableCart } from '../data/props.js';
 import { RANKS } from '../data/world.js';
 import { releaseAllInput } from '../input/keyboard.js';
 import { buildGraffiti, buildPosters } from '../render/structures.js';
@@ -53,6 +53,7 @@ export function startGame(loaded) {
     state.combo = 0;
     P.equip = { shoes:null, hat:null, coat:null };
     P.cartMounted = false;
+    resetRideableCart();
     P.hasPossum = false;
     state.hustles = null;
     // v13 wave 3 — fresh save state for discoverability + intro chain

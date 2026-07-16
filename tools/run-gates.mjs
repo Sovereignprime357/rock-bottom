@@ -7,6 +7,7 @@ const GATES = [
   'module-gate.mjs',
   'npc-registry-gate.mjs',
   'legibility-gate.mjs',
+  'presentation-gate.mjs',
   'runtime-smoke.mjs',
 ];
 

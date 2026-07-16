@@ -4,6 +4,20 @@
  */
 import { P, state } from '../core/runtime_ui.js';
 import { RANKS } from '../data/world.js';
+import { resolvePresentationLayout } from './layout.js';
+
+export function syncPresentationLayout() {
+  const stage=document.getElementById('stage'),hud=document.getElementById('hud');
+  if(!stage||!hud)return;
+  const mobileChrome=window.innerWidth<=820||navigator.maxTouchPoints>0;
+  const layout=resolvePresentationLayout(stage.clientWidth,stage.clientHeight,mobileChrome);
+  hud.style.left=layout.hud.x+'px';hud.style.right=layout.hud.right+'px';
+  hud.style.top=layout.hud.y+'px';hud.style.fontSize=layout.hud.fontSize+'px';hud.style.gap=layout.hud.gap+'px';
+  stage.classList.toggle('hud-compact',layout.hud.compact);
+  const topbar=document.querySelector('#mobile-ctrls .topbar'),ticker=document.getElementById('ticker');
+  if(topbar)topbar.style.width=layout.topbar.w+'px';
+  if(ticker)ticker.style.right=layout.ticker.right+'px';
+}
 
 export function updateHUD() {
   const hearts = Math.max(0, Math.ceil(P.hp/20));
@@ -30,7 +44,8 @@ export function updateHUD() {
 
 export function init_hud() {
   // ---------- HUD ----------
-  
+  syncPresentationLayout();
+  window.addEventListener('resize',syncPresentationLayout);
   
   
 }

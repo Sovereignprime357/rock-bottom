@@ -1687,3 +1687,38 @@ The decision register had moved from audit evidence to ratified canon, but VIBE,
 - Direct runtime-gate invocation still needs `--experimental-vm-modules`; `node tools/run-gates.mjs` supplies it automatically.
 
 ---
+
+## July 15, 2026 — v20 landing 1 / presentation boundary + unique cart
+
+### WHAT
+
+1. Reproduced both HUD audit failures: height-limited desktop stages retained a fixed-width key ledger, and the `171px` mobile topbar covered `91px` of the ticker's `80px` reservation.
+2. Added a pure presentation resolver and wired HUD/chrome bounds to the actual centered 4:3 game rectangle on startup and resize. HUD columns now own disjoint flex halves, long text wraps inside its half, and the redundant key ledger hides at a `520px` game width.
+3. Reproduced the cart blocker: BUSKER's `60px` NPC-priority disc fully covered the cart's `36px` mount disc at `(1100,1520)`. Moved only the rideable cart to `(1000,1600)`, `106.2px` from the nearest interactive NPC.
+4. Removed the cart prop's parallel `mounted` field. `P.cartMounted` now controls ordinary mount/dismount, Big Guy acquisition, world visibility, player underlay, action hint, stats, restart, and the existing save field.
+5. Added `presentation-gate`, placed it in the permanent runner, and recorded OD-6 plus the implemented SPEC slice.
+
+### WHY / PATTERN
+
+- Preserve NPC-first interaction instead of creating a cart exception; fix the authored relationship that made the cart unreachable.
+- One durable authority prevents the player/cart prop from disagreeing after Big Guy acquisition or load.
+- The HUD follows the game rectangle because viewport width and rendered game width are not the same relationship in short or letterboxed layouts.
+
+### TRIED / ABANDONED
+
+- The in-app browser could not navigate to the local HTTP/file preview under its URL/network policy. No alternate browser workaround was used. Deterministic runtime and geometry fixtures became the verification surface.
+- A simple `cart.mounted='me'` reconciliation was rejected: it would leave two authorities and would not repair every acquisition/restart path.
+- Lifting cart interaction above NPCs was rejected because it would regress the ratified NPC-first priority chain.
+
+### COUNTEREXAMPLE / DRIFT / PROPERTY CHECK
+
+- Fixtures cover `800x600`, `1024x480`, `1024x360`, `1280x300`, `390x844`, and `844x390`; HUD columns stay inside the game rectangle and touch chrome is disjoint.
+- Cart spawn clearance exceeds `60+36px`; ordinary use, Big Guy, mounted save/load, and fresh reset share one authority. Base `2.2` speed / `100` HP and mounted `3.7` speed / `110` HP remain unchanged.
+- Full gate stack passes 5/5. Frozen v19, save key/version, NPC priority, cart roadkill/damage, WASD chord/release, and exact 18000ms→8000ms status timing remain intact.
+
+### NEXT / GOTCHA
+
+- Implement THE REGULAR as landing 2. `sell` is part of the five-verb schema but has no honest hook at the four concession venues; register it as dormant rather than relabeling Big Guy's trade or adding a fifth concession.
+- Keep `rock_bottom_v19.html` immutable. Live visual inspection is still pending; do not describe deterministic geometry as a browser playtest.
+
+---

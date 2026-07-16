@@ -6,7 +6,7 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, applyEquipStats, dialogue, particles, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { EQUIPMENT, PUBLIC_PHONE_LINES, VENDOR_FLOATER_IDS } from '../data/catalogs.js';
 import { inZone } from '../data/npc_spawns.js';
-import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
+import { BUILDINGS, PROPS, interactiveProps, rideableCart } from '../data/props.js';
 import { W } from '../data/world.js';
 import { possumDialogue } from '../dialogue/neighborhood_a.js';
 import { tryEnterOldSchool, tryParkBenchSit } from '../dialogue/vendors_places.js';
@@ -120,22 +120,19 @@ export function tryInteract() {
     }
   }
   // shopping cart mount/dismount
-  const cart = PROPS.find(p => p.type==='cart');
+  const cart = rideableCart();
   if (cart) {
     if (P.cartMounted) {
       // dismount near player
-      const dx = (P.x+P.w/2) - cart.x, dy = (P.y+P.h/2) - cart.y;
-      if (cart.mounted === 'me') {
-        P.cartMounted = false; cart.mounted = false;
-        cart.x = P.x + 4; cart.y = P.y + 8;
-        applyEquipStats();
-        toast('you abandon the cart.\nit rolls slightly. accuses you.', 1800);
-        return;
-      }
+      P.cartMounted = false;
+      cart.x = P.x + 4; cart.y = P.y + 8;
+      applyEquipStats();
+      toast('you abandon the cart.\nit rolls slightly. accuses you.', 1800);
+      return;
     } else {
       const dx = (P.x+P.w/2) - cart.x, dy = (P.y+P.h/2) - cart.y;
       if (dx*dx + dy*dy < 36*36) {
-        P.cartMounted = true; cart.mounted = 'me';
+        P.cartMounted = true;
         applyEquipStats();
         unlockAchievement('cart_baron');
         toast('+ shopping cart\n+1 speed. you can hit people now.', 2200);

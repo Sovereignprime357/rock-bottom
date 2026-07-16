@@ -65,6 +65,7 @@ export async function loadGame() {
     if (!s || !s.value || s.value.version < 8) return false;
     const sv = s.value;
     Object.assign(P, sv.player);
+    P.cartMounted = !!(sv.player && sv.player.cartMounted);
     P.attackCd = 0; P.hitFlash = 0; P.iframes = 0;
     P.facing = P.facing || 'down';
     P.supplies = P.supplies || 0;

@@ -25,8 +25,13 @@
   /* Overlays */
   .ui{position:absolute;color:var(--cream);text-shadow:1px 1px 0 #000;pointer-events:none;font-size:11px;line-height:1.3}
   #hud{top:26px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-  #hud .col{display:flex;flex-direction:column;gap:2px}
+  #hud .col{display:flex;flex:1 1 0;min-width:0;max-width:50%;flex-direction:column;gap:2px}
+  #hud .col>div{max-width:100%;overflow-wrap:anywhere}
   #hud .right{align-items:flex-end;text-align:right}
+  #hud .right>div{max-width:100%}
+  #hud .keyhint{white-space:nowrap}
+  #stage.hud-compact #hud .keyhint{display:none}
+  #stage.hud-compact #hud .bar{width:64px;max-width:calc(100% - 7ch)}
   .hearts{letter-spacing:1px;color:var(--rust)}
   .bar{display:inline-block;width:80px;height:6px;background:#220;border:1px solid #553;vertical-align:middle;margin-left:4px;position:relative}
   .bar i{display:block;height:100%;background:var(--purple)}
@@ -103,8 +108,8 @@
   #mobile-ctrls .actions .a{right:0;bottom:0}
   #mobile-ctrls .actions .b{right:64px;bottom:48px}
   #mobile-ctrls .actions .x{right:0;bottom:64px;width:46px;height:46px;font-size:14px}
-  #mobile-ctrls .topbar{position:absolute;top:0;right:0;display:flex;gap:1px;pointer-events:auto;flex-direction:row;z-index:22}
-  #mobile-ctrls .topbar .mb{width:42px;height:20px;background:rgba(10,8,5,.92);border:1px solid rgba(232,192,64,.5);color:var(--cream);font-size:9px;font-weight:bold;display:flex;align-items:center;justify-content:center;letter-spacing:1px}
+  #mobile-ctrls .topbar{position:absolute;top:0;right:0;width:171px;display:flex;gap:1px;pointer-events:auto;flex-direction:row;z-index:22}
+  #mobile-ctrls .topbar .mb{width:auto;min-width:0;flex:1 1 0;height:20px;background:rgba(10,8,5,.92);border:1px solid rgba(232,192,64,.5);color:var(--cream);font-size:9px;font-weight:bold;display:flex;align-items:center;justify-content:center;letter-spacing:1px}
   #mobile-ctrls .topbar .mb.active{background:rgba(232,192,64,.3);color:var(--piss);border-color:var(--piss)}
 
   /* News ticker */
@@ -137,7 +142,7 @@
     #stage{width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none}
     canvas#game{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,calc(100dvh * 4 / 3));height:min(100dvh,calc(100vw * 3 / 4))}
     #vignette{box-shadow:inset 0 0 40px 0 rgba(0,0,0,.5)}
-    #hud{top:24px;font-size:10px}
+    #hud{font-size:10px}
     .keyhint{display:none}
     #minimap{width:84px;height:64px;bottom:160px;right:6px;opacity:.85}
     #phonebox{width:160px;font-size:9px;top:80px;right:6px}

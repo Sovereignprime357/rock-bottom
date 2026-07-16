@@ -4,6 +4,17 @@
 
 ---
 
+## v20 recognition wave — IN PROGRESS (July 15, 2026)
+
+Active implementation branch: `codex/v20-recognition`. The operator packet remains `SPEC-V20-PACKET.md`; each slice graduates into SPEC only with its own register entry and green permanent gate.
+
+- [x] **Landing 1 — HUD deconfliction + cart repro.** HUD geometry now follows the actual centered 4:3 game rectangle across six desktop/touch fixtures; compact presentation removes the redundant key ledger at `520px`; touch ticker and topbar share one boundary. NPC-first priority stays intact. The one rideable cart moved from BUSKER's fully shadowed disc to a clear Marketplace anchor, and `P.cartMounted` is now the sole authority for ordinary use, Big Guy acquisition, render, hint, restart, and save/load. `presentation-gate` is permanent; the full runner reports 5/5.
+- [ ] **Landing 2 — THE REGULAR.** Implement the four-venue recognition ledger, additive persistence, tier acknowledgments, visit de-duplication, full-high boundary credit, Q ledger, pattern cap, and dedicated recognition gate. Resolve the packet's dormant `sell` verb explicitly; do not invent a fifth concession.
+- [ ] **Landing 3 — smoke concessions.** Implement the four conditional spots, one shared smoke transaction, condition-aware BAD IDEA targeting, Block-only coronation, and exact shared high/crash behavior behind its own register entry and gate.
+- [ ] **Landing 4 — world relationships.** Gate fresh-shakes runway, mandatory route legs, day-1 Block coverage, and potential concession coverage; enforce measured regressions rather than enlarging timers.
+
+---
+
 ## v19 post-audit stabilization — SHIPPED ✓ (July 15, 2026) — modular source / measured legibility / registry enforcement
 
 Active build: `index.html` + `src/`. `rock_bottom_v19.html` remains the frozen behavioral reference at SHA-256 `C25DB5E17536AEC092143D87DBF8C113325076A8B8E196A98AECB84694A25C8B`. SAVE_KEY and save shape are unchanged. See SPEC.md post-audit invariants, `REFACTOR-FINDINGS.md`, and the appended BRAIN session.

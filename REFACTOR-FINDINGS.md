@@ -155,3 +155,13 @@ The audit evidence and the 2026-07-15 operator decisions are recorded here. Each
 **Why:** it answers "what is success to a crackhead" mechanically — success is the neighborhood adjusting around you. It also converts the flagship Wave-4 travel defect (block-to-throne 8,396px vs ~4,455px of high) into the success arc instead of a transport band-aid: early game keeps the tight tether while the theme needs it; late game earns slack. Progression shaped like the arc itself, and the bleakest joke available — success measured in places that let you.
 
 **Scope:** SPEC core-loop invariant amended to "only unconditional spot" (true of the current build — no concessions exist yet, so drift-check holds today). Full design in SPEC-V20-PACKET.md. No implementation in this commit.
+
+### OD-HUD-CART-BOUNDARY (OD-6)
+
+**Status:** DECIDED — AI-LED 2026-07-15 (operator veto standing)
+
+**Measured evidence:** HUD width followed the viewport breakpoint while the stage could shrink independently by height: `1280x300` produced a `400x300` game stage with the fixed desktop key ledger still present. On touch layouts, the four-button topbar measured `171px` while the ticker reserved `80px`, producing `91px` of overlap. The unique rideable cart at `(1100,1520)` sat only `13.416px` from BUSKER's center; the `60px` NPC-priority disc therefore covered the cart's entire `36px` use disc. THE BIG GUY and save/load set only `P.cartMounted`, while world rendering, guidance, and dismount also required `cart.mounted`, rendering both carts and removing the abandon path.
+
+**Decision:** HUD placement is a function of the actual centered 4:3 game rectangle and enters a compact state at `520px`; touch ticker and topbar share one boundary. NPC-first interaction remains authoritative. The one rideable cart moves to the clear Marketplace anchor `(1000,1600)`, and `P.cartMounted` becomes the sole mount-state authority across every acquisition, render, hint, interaction, and save/load path.
+
+**Preserved:** no NPC priority exception; no second rideable cart; no new save field; no cart stat, roadkill, damage, reward, achievement, status-timer, or 18000ms/8000ms change. Decorative cart husks stay non-interactive.

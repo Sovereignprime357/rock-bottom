@@ -1689,8 +1689,8 @@ The passing report includes canonical-row count, distinct actor identities cover
 
 ### Verification launcher
 
-1. `node tools/run-gates.mjs` launches, in order, `module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, and `runtime-smoke.mjs` as child processes using the current Node executable plus `--experimental-vm-modules`.
-2. Child output is inherited and streamed. The launcher stops at the first spawn error, signal, or non-zero exit, returns non-zero, and does not run later gates. Four successful children produce a 4/4 PASS summary.
+1. `node tools/run-gates.mjs` launches, in order, `module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, `presentation-gate.mjs`, and `runtime-smoke.mjs` as child processes using the current Node executable plus `--experimental-vm-modules`.
+2. Child output is inherited and streamed. The launcher stops at the first spawn error, signal, or non-zero exit, returns non-zero, and does not run later gates. Five successful children produce a 5/5 PASS summary.
 3. `tools/run-gates.cmd` is a two-line Windows shim that invokes the plain-Node launcher without adding a dependency or package script.
 4. `runtime-harness.mjs` and `runtime-smoke.mjs` guard `vm.SourceTextModule` before construction. Invocation without `--experimental-vm-modules` prints a friendly instruction, exits 1, and emits no stack trace.
 
@@ -1717,6 +1717,33 @@ The passing report includes canonical-row count, distinct actor identities cover
 | v17 | July 2026 | Cursed-sticker sprite pipeline with directional player/attack/gear/weapon/cart/route layers; BAD IDEA guidance and touch/keyboard control ledgers; persistent endless three-stop block routes; feasible/persisted daily hustles; IndexedDB-backed `window.storage` browser adapter; local Possum prophecy pool; square-pixel mobile letterboxing. Save key unchanged. |
 | v18 | July 2026 | Far-east expansion to 5800×3800; condemned office/shelter with six visible upgrades; eleven reputation-gated survey/file/sign claims; bounded endless office orders; new Leasing Guy and Gutter Greg sprites; evolving office/sign/minimap presentation; safe paginated bus travel; hardened partial-save reconciliation. Save key unchanged. |
 
+
+## v20 landing 1 — HUD deconfliction + unique-cart authority (2026-07-15)
+
+This is the prerequisite presentation/interaction landing named first in `SPEC-V20-PACKET.md`. It does not implement THE REGULAR or a smoke concession.
+
+### HUD presentation contract
+
+1. HUD bounds derive from the centered 4:3 game rectangle inside the stage, not from viewport width alone. This relationship must hold when a short desktop window shrinks the stage by height and when a touch layout letterboxes the canvas in portrait or landscape.
+2. The left and right HUD columns occupy disjoint halves of the available HUD width. Wallet groups may wrap within the left half; rank/time copy may wrap within the right half. Neither column may escape the game rectangle.
+3. The redundant desktop key ledger remains one line while it fits and is hidden by the compact HUD state when the game rectangle is `520px` wide or narrower. The title receipt and Q ledger remain the full control references.
+4. When touch controls are displayed, the news ticker's right edge and the touch topbar's left edge share one computed boundary. The topbar may shrink on a viewport narrower than its authored `171px` width; it may never paint over the ticker.
+5. Layout is recomputed on resize. The permanent fixture covers `800x600`, `1024x480`, `1024x360`, `1280x300`, `390x844`, and `844x390` viewport/stage relationships.
+
+### Unique rideable-cart contract
+
+1. Exactly one `PROPS` record has `type:'cart'`. Decorative `cart_husk` records remain scenery and never enter interaction or ownership state.
+2. NPC-first interaction priority remains unchanged. The rideable cart's authored Marketplace anchor is `(1000,1600)`, whose center-to-center distance from every fresh interactive NPC exceeds the combined `60px` NPC-priority radius plus `36px` cart-use radius. Every point that can mount the cart is therefore free of an NPC-priority shadow.
+3. `P.cartMounted` is the sole mount-state authority for player stats, player underlay, world-cart visibility, action guidance, interaction, and persistence. The cart prop carries no parallel `mounted` flag.
+4. Ordinary use mounts the unique cart, changes the hint to abandon, and a later use drops that same cart beside the player. THE BIG GUY acquisition enters the identical mounted state and retains the same abandon path.
+5. Mounted save/load restores the existing `player.cartMounted` field and no new save key or parallel save shape. A fresh game clears the mounted state and returns the cart to its authored anchor.
+6. Cart speed cap, `+10` maximum HP, roadkill behavior, collision, damage, reward, achievement, and every other balance value remain unchanged.
+
+### Permanent gate
+
+`tools/presentation-gate.mjs` must fail on a viewport fixture whose HUD columns leave/intersect the game rectangle, on touch ticker/topbar overlap, on a compact-threshold drift, on any rideable-cart count or spawn-clearance regression, or when ordinary mount/dismount, THE BIG GUY acquisition, fresh restart, and mounted save/load cease to share the one player authority.
+
+---
 
 ## OD-5 ratification (2026-07-15)
 

@@ -46,7 +46,7 @@ export function drawProp(p) {
     ctx.fillText('TRASH', p.x+2, p.y+14);
   }
   else if (p.type === 'cart') {
-    if (p.mounted) return; // mounted on player
+    if (P.cartMounted) return; // the unique cart is mounted on the player
     ctx.fillStyle = '#888';
     ctx.fillRect(p.x, p.y, p.w, p.h);
     // grid pattern
