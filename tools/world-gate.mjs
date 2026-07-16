@@ -34,10 +34,14 @@
 //     the strip until finished; any 4 claims are required to reach the kingdom)
 //   - the kingdom campaign chain in strip-guided order (required to finish)
 //   - route legs: a rolled route is assigned, not chosen — the clipboard does not
-//     negotiate. The full stop pool is measured with unlock flags treated as
-//     potentially earned, the same load-bearing "potentially" as I-COVERAGE;
-//     otherwise the reading would flicker with progression state, and a gate row
-//     that can never fire is decoration.
+//     negotiate. Since Landing 5 (SPEC-v20-route-budget.md) the roller itself is
+//     budget-constrained, so this gate measures what the GENERATOR can assign — the
+//     real roller sampled 10,000 rolls per pool configuration with unlock flags
+//     treated as potentially earned (the same load-bearing "potentially" as
+//     I-COVERAGE) — while the raw table pairs are reported informationally. It also
+//     certifies the src budget derivation against the measured world
+//     (I-NO-BUDGET-DRIFT) and proves chain satisfiability instead of assuming it
+//     (I-ROLL-TOTAL).
 // NOT governed: the bus (optional one-way teleport, never assigned), the public
 // phone (optional), hustles (Q-panel, never on the strip), optional wandering.
 //
@@ -218,36 +222,6 @@ const oEmperor = need(currentKingdomObjective(), 'emperor boss');
 addLeg('campaign', 'kingdom emperor: banner -> boss', oThroneBanner, oEmperor);
 k.stage = 'locked'; k.marks = 0;
 
-// route legs: any ordered pair of pool stops can be consecutive (uniform shuffle,
-// progression_routes.js rollBlockRoute; cross-route continuity too — the next
-// route starts where the last one ended). Worst leg = max pairwise distance.
-// The day-1 and pre-office pools are sampled through the REAL roller so the
-// pool predicate (progression_routes.js:118) is exercised, not transcribed.
-function samplePool(routesCompleted, rolls = 400) {
-  P.lifetime.routesCompleted = routesCompleted;
-  state.blockRoute = null;
-  const ids = new Set();
-  for (let i = 0; i < rolls; i++) {
-    state.blockRoute = null;
-    const route = rollBlockRoute(true);
-    if (route) for (const id of route.stops) ids.add(id);
-  }
-  state.blockRoute = null;
-  return [...ids].map(id => ROUTE_STOP_BY_ID[id]);
-}
-const day1Pool = samplePool(0);        // first two routes: the original neighborhood
-const preOfficePool = samplePool(2);   // third route: full unlocked pool, flags fresh
-P.lifetime.routesCompleted = 0;
-if (!day1Pool.length) fail('day-1 route pool sampled empty — the roller returned nothing for a fresh save');
-function addPoolLegs(family, pool) {
-  for (let i = 0; i < pool.length; i++) for (let j = i + 1; j < pool.length; j++) {
-    addLeg(family, `route ${pool[i].id} <-> ${pool[j].id}`, pool[i], pool[j]);
-  }
-}
-addPoolLegs('route-mandatory', day1Pool);
-addPoolLegs('route-mandatory', preOfficePool);
-addPoolLegs('route-full', ROUTE_STOPS); // all flags treated as potentially earned
-
 // ---- 2. the checks ------------------------------------------------------------
 const familyResults = new Map();
 function checkFamily(family, label) {
@@ -261,8 +235,79 @@ function checkFamily(family, label) {
   }
 }
 checkFamily('campaign', 'RUNWAY-CAMPAIGN');
-checkFamily('route-mandatory', 'RUNWAY-ROUTES-MANDATORY');
-checkFamily('route-full', 'RUNWAY-ROUTES-FULL');
+
+// ---- routes: measure the GENERATOR, not the table (landing 5) -----------------
+// Landing 5 taught rollBlockRoute the budget (I-ROUTE-BUDGET, SPEC-v20-route-budget.md).
+// The stop table may geometrically contain over-budget pairs; what governs the player
+// is what the roller can ASSIGN. Sampling the real roller — chained lastStopId, all
+// three pool configurations — is the SPEC's own statistical check made permanent:
+// >=10,000 rolls per config, zero over-budget consecutive legs, zero nulls, three
+// distinct valid stops every time (I-ROLL-TOTAL). The player -> first-stop leg is
+// ungoverned and ungovernable (the player can be anywhere when the clipboard speaks);
+// said out loud here rather than pretended away.
+
+// I-NO-BUDGET-DRIFT: the game's own derivation must equal the budget measured from
+// behavior above. The src copy restates the model's inputs; this check is what pins
+// that copy to the truth — if either side moves alone, the suite goes red.
+const srcBudget = progression.routeLegBudgetPx();
+if (!(Math.abs(srcBudget - legBudgetPx) <= 1e-6 * legBudgetPx)) {
+  fail(`NO-BUDGET-DRIFT: routeLegBudgetPx() in src derives ${srcBudget.toFixed(3)}px but the measured world says ${legBudgetPx.toFixed(3)}px — the derivation and the game have diverged; fix the model reading, never the budget (I-NO-BUDGET-DRIFT)`);
+}
+
+const ROLLS = 10000;
+function sampleGenerator(family, label, routesCompleted, unlockAll) {
+  P.lifetime.routesCompleted = routesCompleted;
+  const addedFlags = [];
+  if (unlockAll) for (const s of ROUTE_STOPS) if (s.unlockFlag && !state.flags[s.unlockFlag]) { state.flags[s.unlockFlag] = true; addedFlags.push(s.unlockFlag); }
+  const seen = new Set();
+  let worst = { name: '(none)', len: 0 }, over = 0, bad = 0, forced = '';
+  const offenders = [];
+  for (let i = 0; i < ROLLS; i++) {
+    state.blockRoute = null;
+    const route = rollBlockRoute(true, forced);
+    if (!route || !Array.isArray(route.stops) || route.stops.length !== 3
+        || new Set(route.stops).size !== 3 || route.stops.some(id => !ROUTE_STOP_BY_ID[id])) { bad++; continue; }
+    for (const id of route.stops) seen.add(id);
+    for (let leg = 0; leg < 2; leg++) {
+      const a = ROUTE_STOP_BY_ID[route.stops[leg]], b = ROUTE_STOP_BY_ID[route.stops[leg + 1]];
+      const len = Math.hypot(b.x - a.x, b.y - a.y);
+      if (len > worst.len) worst = { name: `route ${a.id} -> ${b.id}`, len };
+      if (len > legBudgetPx) { over++; if (offenders.length < 5) offenders.push({ name: `route ${a.id} -> ${b.id}`, len }); }
+    }
+    forced = route.stops[2]; // the next route starts where this one ended (lastStopId interplay)
+  }
+  for (const flag of addedFlags) delete state.flags[flag];
+  state.blockRoute = null;
+  if (bad) fail(`${label}: ${bad}/${ROLLS} rolls failed to produce three distinct valid stops — the roller must ALWAYS return a route (I-ROLL-TOTAL)`);
+  for (const o of offenders) fail(`${label}: assigned leg "${o.name}" is ${px(o.len)} (${secs(o.len, pxPerSec)}) — budget ${px(legBudgetPx)} (${secs(legBudgetPx, pxPerSec)}), straight-line lower bound (I-ROUTE-BUDGET)${over > offenders.length ? ` [+${over - offenders.length} more assigned legs over budget]` : ''}`);
+  familyResults.set(family, { label: `${label} (${ROLLS} rolls)`, count: ROLLS * 2, worst, offenders });
+  return seen;
+}
+const day1Seen = sampleGenerator('route-day1', 'RUNWAY-ROUTES-DAY1', 0, false);
+sampleGenerator('route-preoffice', 'RUNWAY-ROUTES-PREOFFICE', 2, false);
+sampleGenerator('route-full', 'RUNWAY-ROUTES-FULL-UNLOCK', 2, true);
+P.lifetime.routesCompleted = 0;
+const day1Pool = [...day1Seen].map(id => ROUTE_STOP_BY_ID[id]);
+if (!day1Pool.length) fail('day-1 route pool sampled empty — the roller returned nothing for a fresh save');
+
+// Satisfiability, proved not assumed (I-ROLL-TOTAL): a legal three-stop chain from any
+// start needs every stop to keep at least two within-budget partners. The table pairs
+// beyond budget are reported, not failed — they are exactly what the constrained
+// generator exists to keep unassignable, and deleting them from the table instead
+// would be content movement this wave forbids.
+let minPartners = Infinity, minPartnerStop = '';
+const tableOver = [];
+for (let i = 0; i < ROUTE_STOPS.length; i++) {
+  let partners = 0;
+  for (let j = 0; j < ROUTE_STOPS.length; j++) {
+    if (i === j) continue;
+    const len = Math.hypot(ROUTE_STOPS[j].x - ROUTE_STOPS[i].x, ROUTE_STOPS[j].y - ROUTE_STOPS[i].y);
+    if (len <= legBudgetPx) partners++;
+    if (j > i && len > legBudgetPx) tableOver.push({ name: `${ROUTE_STOPS[i].id} <-> ${ROUTE_STOPS[j].id}`, len });
+  }
+  if (partners < minPartners) { minPartners = partners; minPartnerStop = ROUTE_STOPS[i].id; }
+}
+if (minPartners < 2) fail(`ROUTE-TABLE: stop ${minPartnerStop} has only ${minPartners} within-budget partner(s) in the full table — a legal three-stop chain is no longer guaranteed from every start, and the roller's relax-to-nearest fallback would silently absorb it (I-ROLL-TOTAL satisfiability)`);
 
 // I-BLOCK-DAY-1: the Block alone covers every day-1 strip objective inside I-RUNWAY
 const block = SMOKE_SPOT_BY_ID.block;
@@ -312,8 +357,10 @@ function report() {
     console.log(`  runway ${runwayS.toFixed(1)}s = ${px(runwayPx)} · leg budget ${(LEG_RATIO * 100)}% = ${px(legBudgetPx)} · coverage budget ${(COVERAGE_RATIO * 100)}% = ${px(coverageBudgetPx)}`);
     console.log(`  world ${WORLD.w}x${WORLD.h} · diagonal ${px(Math.hypot(WORLD.w, WORLD.h))} = ${secs(Math.hypot(WORLD.w, WORLD.h), pxPerSec)} of a ${runwayS.toFixed(0)}s runway`);
     for (const { label, count, worst, offenders } of familyResults.values()) {
-      console.log(`  ${offenders.length ? 'FAIL' : 'ok'} ${label}: ${count} legs, worst "${worst.name}" ${px(worst.len)} (${secs(worst.len, pxPerSec)}) / ${px(legBudgetPx)}${offenders.length ? ` — ${offenders.length} over budget` : ''}`);
+      console.log(`  ${offenders.length ? 'FAIL' : 'ok'} ${label}: ${count} legs, worst "${worst.name}" ${px(worst.len)} (${secs(worst.len, pxPerSec)}) / ${px(legBudgetPx)}${offenders.length ? ` — ${offenders.length}+ over budget` : ''}`);
     }
+    const tableWorst = tableOver.reduce((a, b) => (b.len > a.len ? b : a), { name: '(none)', len: 0 });
+    console.log(`  ${minPartners < 2 ? 'FAIL' : 'ok'} ROUTE-TABLE: ${tableOver.length} table pair(s) beyond budget, generator-excluded (worst ${tableWorst.name} ${px(tableWorst.len)}) · min within-budget partners ${minPartners} (${minPartnerStop}) · src budget derivation ${px(srcBudget)}`);
     console.log(`  ${day1Worst.d > legBudgetPx ? 'FAIL' : 'ok'} BLOCK-DAY-1: ${day1Items.length} day-1 objectives, farthest "${day1Worst.name}" ${px(day1Worst.d)} / ${px(legBudgetPx)}`);
     console.log(`  ${coverageWorst.d > coverageBudgetPx ? 'FAIL' : 'ok'} COVERAGE: worst point (${coverageWorst.x},${coverageWorst.y}) ${px(coverageWorst.d)} (${secs(coverageWorst.d, pxPerSec)}) from ${coverageWorst.nearest} / ${px(coverageBudgetPx)}`);
     console.log(`  ${rideables.length === 1 ? 'ok' : 'FAIL'} TRANSPORT: ${rideables.length} rideable cart(s)`);
