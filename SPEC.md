@@ -1812,3 +1812,21 @@ Implements `SPEC-V20-PACKET.md` §2 (OD-5) per `SPEC-v20-concessions.md`. The "z
 ### Permanent gate
 
 `tools/concession-gate.mjs` runs after `recognition-gate` and before `runtime-smoke` (suite: 8). It must fail on: a second `rockedT = 18000` site anywhere in `src/`; any P-fingerprint delta difference between the five spots (real or soap) beyond the venue-named feed text; a room opening below conceded tier; a smoke with a false condition (including the stale-menu race); royal static firing at any concession or failing to fire at the block — verified to go red with the spot guard removed before it was trusted; an illegal, farther-than-nearest, or tie-not-to-block BAD IDEA target across all 16 condition combinations; a truncated high or crash after mid-high condition death; or a clock persistence/normalization regression.
+
+## v20 landing 4 — world relationships (2026-07-16)
+
+Implements `SPEC-V20-PACKET.md` §3 per `SPEC-v20-world-relationships.md`. This landing is a ruler, not content: it adds one permanent gate and changes zero gameplay values (I-NO-BALANCE-CREEP — `git diff` on `src/` at this landing is empty). It closes the drift audit's open half: VIBE governs the sentence; this gate governs the map.
+
+### The budget (derived, never authored)
+
+1. Every budget is computed from live measurements at gate run time (I-MEASURED-NOT-VIBED): walk speed is measured by actually walking the player for one second and cross-checking against `P.speed × 1000/16` (`runtime_ui.js:33` via `update.js:82`); the withdrawal rate by standing still for one second (`update.js:124`); fresh shakes read from a fresh save (`runtime_ui.js:355`); the cap by overfilling and letting the clamp answer (`update.js:126`). At shipped values: 137.5 px/s, 0.8 shakes/s, 20→100, therefore a **100s runway = 13,750px**.
+2. **I-RUNWAY**: no mandatory route/campaign leg over 60% of a fresh runway (8,250px at walk). **I-COVERAGE**: no map point farther than 45% of a runway (6,187.5px ≈ the SPEC's "~45s walk") from a *potentially* legal smoke spot — conditions deliberately ignored so coverage cannot flicker with a dryer. **I-BLOCK-DAY-1**: every day-1 strip objective within the leg budget of the Block. **I-TRANSPORT**: exactly one rideable cart; no fast travel.
+3. All distances are **straight-line, a lower bound**. A leg that fails is definitely too long; a leg that passes may still be too long once collision detours are paid. The gate states this in its own output and never presents a lower bound as true path length.
+
+### What counts as mandatory (the one interpretive call, operator-vetoable by name)
+
+A leg is mandatory when the game assigns it as the standing BAD IDEA and the player cannot progress that lane without walking it: the intro chain, office acquisition, every claim/work-order leg (any four claims gate the kingdom), the kingdom chain in strip-guided order, and **route legs — a rolled route is assigned, not chosen; the clipboard does not negotiate**. The route pool is measured with unlock flags treated as potentially earned, the same load-bearing "potentially" as coverage. Not governed: the bus (optional one-way teleport), the public phone, hustles, wandering. The leg inventory is read through the real objective selectors (`currentPrimaryObjective` / `currentOfficeObjective` / `currentKingdomObjective`) by driving quest/stage state — the gate measures what the strip actually points at, not a hand-copied table.
+
+### Permanent gate, and its standing honest reading
+
+`tools/world-gate.mjs` runs LAST in the suite (a standing world reading must never mask a regression in the seven gates that protect shipped behavior — the runner stops at first failure). Red-verified before trusted: a moved venue fails COVERAGE naming the uncovered point; a moved banner fails RUNWAY-CAMPAIGN naming the leg; a planted second cart fails TRANSPORT; all restored to green. **The gate ships red on one genuine reading**: route leg `scrap_gate ↔ ditch_gauge` is 8,274.6px (60.2s) against the 8,250px (60s) budget. That is a finding in `REFACTOR-FINDINGS.md` (Landing 4, OD-9) awaiting an operator ruling — per this landing's own SPEC, the budget does not move to make the light turn green.
