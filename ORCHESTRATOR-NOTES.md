@@ -169,3 +169,39 @@ thing I was supervising.
 - **Recovery is cheap if you notice**: the branch merged to main and the commit rode along. The
   cost was entirely in *reporting something as done that wasn't*. That is the expensive part
   every time — not the mistake, the confident report of the mistake.
+
+### 8. The instrument came back with an answer nobody wanted, and that was the point
+
+**What happened:** the world-relationship gate (Landing 4) failed on its first run — a mandatory
+route leg measured **60.2s against a 60.0s budget.** 0.3% over. The builder did not widen the
+budget, move content, or grandfather a baseline. It filed the finding and logged the reasoning.
+
+**Why this entry exists:** every incentive at that moment points at the knob. The gate is new, the
+miss is trivial, the fix is one constant, and **nobody would ever have known.** Widening 60% to 61%
+would have produced a green suite, a closed wave, and a measuring device that had been quietly
+taught to agree. **That is not a hypothetical failure mode — it is exactly how the world got from
+4400×3400 to 8600×5600 with every gate green.** Nobody ever decided to outgrow the budget. It got
+adjusted, once, reasonably, a few times.
+
+**What made it hold:** the trap was named in the SPEC *before* the gate existed, so the builder met
+the temptation with the argument already in hand rather than inventing a justification under
+pressure. Then it went further than the SPEC and **put the warning inside the gate's own failure
+output** — the next person tempted to move the number reads *"the budget is what the game already
+is; a failing leg is a finding, not a knob"* at the exact moment they are reaching for it.
+**Put the guard rail where the hand goes, not in a document the hand never opens.**
+
+**The real lesson is about reading instruments, not building them.** 0.3% was never the finding.
+The finding was that **two other mandatory legs sit at 95.8% and 98.5% of budget** — the world is
+at its walkable limit *now*, and the next "make it bigger" trips the gate hard. A number one hair
+over a threshold is noise. **Three numbers stacked against the ceiling is a verdict.** Fix the
+reading and you delete the verdict along with it.
+
+**And note the rule's own precision:** 60% is a *chosen* number, not a derived one. The instrument
+is more precise than the threshold it enforces. **That is an argument for reading it carefully —
+never an argument for moving it.** The moment a threshold moves to accommodate a measurement, the
+measurement has stopped being evidence and started being decoration.
+
+**Prevention (this one is procedural, not mechanical):** when a new gate fails on its first run,
+**the failure is data about the world, not about the gate.** Budget changes are operator decisions
+made in daylight with the reasoning on the record — never a green-light expedient taken by whoever
+happened to be holding the branch.
