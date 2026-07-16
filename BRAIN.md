@@ -1722,3 +1722,11 @@ The decision register had moved from audit evidence to ratified canon, but VIBE,
 - Keep `rock_bottom_v19.html` immutable. Live visual inspection is still pending; do not describe deterministic geometry as a browser playtest.
 
 ---
+
+
+## 2026-07-15 — orchestration session close (Claude chat)
+
+Shipped: PR #1 merged (modular v19 + OD-1..4, KNIGHT EMERITUS, gate runner). OD-5 smoke-coverage decision + SPEC-V20-PACKET (recognition wave; north star into VIBE). OD-6 HUD/cart fix merged with permanent presentation gate (5/5). AGENTS.md completion report contract.
+Decided: Block = only unconditional smoke spot forever; concessions earned via recognition (OD-5). Cart relocated + single mount authority (OD-6). Register is append-only. Done = pushed + green + reported.
+Learned: Codex abandoned delivery mid-flight (unpushed commit, uncommitted WIP, design packet handed back as "results") -> contract ratified. Operator feel pass caught the HUD-layer class the gates did not cover -> presentation gate now permanent.
+Next: Fable (Claude Code headless) builds THE REGULAR on branch v20-regular while operator is at work; chat Claude reviews + merges next session. Then concessions, then world-relationship gate. Operator still owes: in-game HUD stack verify, cart at Marketplace anchor.
