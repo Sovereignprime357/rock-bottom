@@ -1534,3 +1534,101 @@ The code does not grant rocks, copper, supplies, equipment, combat power, or fac
 - Character cache headroom is now 8 canvases. A new three-frame named NPC family consumes three.
 - Gzip headroom is roughly 5.5KB under the v18 ceiling. Prefer extending existing data/state/render systems over adding another parallel framework.
 - Cold-load `npcsKilled` hydration still runs before `spawnNpcs()` in the inherited code, so ordinary saved NPC deaths do not currently rehydrate. This pre-existing issue does not affect essential v18 clerks; fix it only with a separate spec because Tony/vendor persistence consequences need a decision.
+
+---
+
+## July 15, 2026 — Claude audit response / v19 modular stabilization
+
+### WHAT
+
+1. Read `DELEGATIONCODEX.md` first, then `DRIFTAUDIT.md` and `LEGIBILITYAUDIT.md` as directed. Froze the audited `rock_bottom_v19.html` reference at SHA-256 `C25DB5E17536AEC092143D87DBF8C113325076A8B8E196A98AECB84694A25C8B` and checkpointed the existing lineage before changes.
+2. Made the one-line Wave 1 repair: `#vignette` now sits below gameplay UI. Its shadow, size, opacity, scanlines, canvas, and gameplay values are unchanged.
+3. Ratified retirement of the artifact-era single-file rule. Active source is `index.html` plus 38 native ES-module files under `src/`; v19 remains an untouched behavior oracle. Extracted all 37 source chunks, removed the transitional `legacy.js`, and kept every module below 1,000 lines.
+4. Added deterministic module/runtime tooling. The module gate checks reference hash, exact source-range coverage, linkability, module size, and forbidden synchronous storage. The runtime smoke compares frozen and modular initialization, new-game state, W+D movement, partial key release, Tony dialogue, exact 18,000ms high → 8,000ms crash, sprite keys, and real save/load round trips.
+5. Wrote the four legibility contracts before fixing them. Added complete authored signs, a data-driven laundromat label offset, feet-sorted nameplate deconfliction with reused boxes, and measured graffiti fitting/culling with one-time migration of v19 layouts.
+6. Added `tools/legibility-gate.mjs`: 24/24 named building signs, 23/23 clear zone labels, 56 production nameplates plus a dense 60-label fixture with zero intersections, and 14/14 deterministic graffiti records inside measured wall bounds.
+7. Completed Wave 4 as documentation only. `REFACTOR-FINDINGS.md` now inventories every found travel/withdrawal/day/route/office/bus/phone/police/incident dependency, authored population/resource/prop/light/transport/content coverage gap, and minimap resolution relationship. It also records positive relationships and exclusions so the vignette, local hitboxes, fixed camera, and player-time events are not falsely swept into the growth thesis.
+8. Restored the VIBE registry as a mechanical shipping gate. The audit estimated roughly 26 missing rows; exhaustive source/runtime inventory found 30. VIBE now has 55 complete canonical rows covering 59 distinct source identities, four explicit same-person/state aliases, one generated CURB PRETENDER family, 60 actor-authoring sites, and all 56 fresh-game actors.
+9. Flagged `TARP KNIGHT`, `CART LANCER`, `WIRE DEACON`, and `CURB HOLDOUT` without renaming them. Added separate open operator records for those names, clerical-pattern monopoly, the medieval register, and VIBE's missing scope/campaign grammar.
+10. Repaired only the audited office encoding block: 17 corrupt middle dots on ten player-facing lines plus one corrupt em dash in the v18 section comment. Added a targeted regression assertion and left the frozen v19 file untouched.
+11. Updated README and DELEGATION for the modular entry point, current build, gates, shipped audit work, and honest HTTP requirement. No new sound, NPC behavior, save field, resource, currency, boss rule, or external runtime dependency was added.
+
+### WHY
+
+The audits found a process failure more than a lack of content: systems grew by copied constants, visual relationships were implied instead of asserted, and the one machine-checkable VIBE rule quietly stopped running. The repair makes relationships executable where the answer is objective, documents them where the answer is a design choice, and leaves taste decisions with the operator.
+
+The modular split was necessary to make the game maintainable without pretending the old monolith remained safe at v19 scale. Behavior parity came first; improvements landed only after the frozen extraction passed.
+
+### DECIDED / REASONING
+
+- **Frozen v19 is an oracle, not active source.** Its hash is a hard gate. Post-audit fixes live only in modules, making every intentional divergence reviewable.
+- **Static plus deterministic runtime registry verification.** Startup catches 56 live actors. Source scanning catches bosses, pets, day actors, transformations, cops, adds, and generated families that are not all alive together.
+- **Registry names, not duplicate state rows.** Fallen O'Malley and SKID variants explicitly alias their canonical people. Brutus the Older, Old School Brutus, Your Possum, and the day visitor remain distinct identities.
+- **Register generic COP.** Guard mooks must pass the table, so exempting generic cops would reproduce the same loophole under another uniform.
+- **No automatic world-scale rebalance.** A larger map may justify more phones, smoke access, transit, light, cash, incidents, or time; it may also justify intentional scarcity. Wave 4 exposes the relationships and measured costs without choosing them.
+- **Measured geometry over guessed string length.** Building coverage is set-based; zone labels use ink boxes; nameplates use accepted boxes; graffiti uses the actual selected font and wall. Counts alone cannot prove those relationships.
+- **Vignette kept out of the growth story.** It was byte-identical across versions. Only its UI z-order was objectively wrong; intensity is a separate fixed-viewport decision.
+- **Operator recommendations remain non-ratified.** Neither an auditor nor an implementation pass gets to rename guards, ration the clerical pattern, amend VIBE's mundane rule, or set campaign-scope quotas.
+
+### TRIED / ABANDONED
+
+- The permitted in-app browser refused local `file://` navigation. Native modules require HTTP, and browser policy forbade routing around that restriction with a localhost server, headless browser, or different browser surface. Continued with the deterministic VM harness and static geometry/source gates; did not claim a live visual/audio pass.
+- Considered a central runtime NPC insertion API and live validator. Rejected for this wave because it would reroute every roster mutation and risk behavior/performance changes. The gate instead enforces the existing adjacent `name, sprite` authoring form, recognizes only enumerated computed expressions, and fails when authoring escapes that boundary.
+- The audit's “~26” registry estimate omitted `MAYOR'S COUSIN`, `THE PRIEST'S SON`, `SOMEONE YOU DON'T KNOW`, and generic `COP`. Enumerated all 59 source display identities instead of stopping at the estimate.
+- Did not run a broad encoding cleanup. Legacy mojibake exists elsewhere in frozen lineage; only the eleven audited office lines were authorized and repaired.
+- Did not expand the map, rebalance withdrawal, add transit nodes, rewrite routes, or change the four guard names while documenting Wave 4/5 findings.
+
+### COUNTEREXAMPLE HUNT
+
+- **Reference drift:** frozen v19 SHA-256 still equals the ratified hash. ✓
+- **Lost/duplicate extraction:** every v19 script-body line 249–12733 belongs to exactly one manifest range; 37/37 chunks extracted and 38 JS files link. ✓
+- **Legacy escape hatch:** no `src/legacy.js`; no module exceeds 1,000 lines. ✓
+- **Storage regression:** no production module references `localStorage` or `sessionStorage`; real `window.storage` and save/load round trips pass. ✓
+- **WASD chord bug:** W+D moves diagonally; releasing D leaves W moving immediately with zero lateral drift. ✓
+- **Core loop drift:** exactly 18,000ms rocked-up creates exactly 8,000ms crash; another exact 8,000ms reaches zero in both reference and modules. ✓
+- **Missing sign:** all 24 named building entries resolve to a non-empty authored sign. ✓
+- **Zone label over art:** measured boxes for all 23 labels overlap zero building bodies/awnings. ✓
+- **Crowded names:** production 56 and dense synthetic 60 place with zero strict box intersections. ✓
+- **Graffiti overflow:** production tags, every eligible building/font-size pool, and migrated legacy records remain inside measured walls. ✓
+- **Registry omission:** 55 complete rows cover 59 source identities, 60 actor sites, 56 runtime actors, four aliases, and the numbered pretender family. Unknown computed names and incomplete rows fail. ✓
+- **Taste disguised as fix:** four guard names and three broader design questions are recorded OPEN; runtime names and VIBE rules are unchanged except for required row backfill. ✓
+- **Encoding recurrence:** the campaign module contains neither audited corrupt token; the module gate asserts both sequences stay absent. ✓
+
+### DRIFT CHECK
+
+The modular initialization and exercised runtime snapshots match frozen v19 except for explicitly ratified post-audit presentation/content-encoding changes. Movement math, combat numbers, boss phases, player resources, save key/shape, route/claim ids, interaction priority, audio initialization path, smoke access, and high/crash timing were not altered.
+
+Wave 3 implementation matches its four written contracts. Wave 4 changed findings only. Wave 5 changes VIBE completeness and test enforcement, not runtime names or behavior. The office encoding repair changes displayed punctuation only.
+
+### PROPERTY VERIFICATION
+
+- Active build has zero external runtime dependencies, CDN imports, frameworks, or build step. ✓
+- Persistence remains async `window.storage`; IndexedDB adapter behavior is unchanged. ✓
+- Audio context creation remains gated by first user key/click/touch. ✓
+- Character art remains palette-indexed, 16×16 logical, prerendered/cached, and drawn with `drawImage`; cache still reports 373 keys. ✓
+- The Block remains the only smoke/cook location and a real rock remains required for anointing. ✓
+- Exact 18s high → 8s crash is now a permanent runtime gate. ✓
+- Boss implementation and HP/add values were untouched; the existing <90-second contract is unchanged. ✓
+- VIBE row backfill introduces no new actor, dialogue, currency, real place, victim reference, cure ending, tutorial modal, or fourth-wall line. ✓
+- Nameplate layout reuses the existing frame buffer; graffiti remains bounded/persisted; no new per-frame full-world loop was added. ✓
+
+### NEXT
+
+- Operator playtest the served `index.html` build at desktop and mobile sizes. Inspect all four fixed legibility cases in motion, especially dense laundromat names and old-save graffiti migration.
+- Run a real audio pass from title click through smoke → crash, combat, office toast, and a kingdom boss. The VM proves timing/state, not speaker output.
+- Decide the four open records in `REFACTOR-FINDINGS.md`: weak guard names, clerical-pattern rotation, medieval register wording, and VIBE scope/campaign grammar.
+- Review Wave 4's dependency inventory and ratify relationships before balancing. The highest-risk measured interaction is the sole `30s` public-phone window against `40.8–69.4s` far-map travel; the highest-scope decision is smoke/transit/recovery coverage against an `8600×5600` world.
+- If live browser inspection finds a new defect, add its measurable relationship to SPEC and a failing gate before changing implementation.
+
+### GOTCHA
+
+- `rock_bottom_v19.html` is immutable reference material. Do not “sync” modular fixes back into it or update its manifest hash.
+- Native modules require HTTP. Do not restore the monolith just to regain double-click execution.
+- `tools/*.mjs` gates require `node --experimental-vm-modules` on the current Node runtime.
+- NPC actor literals are deliberately authored with adjacent `name, sprite` fields. Reordering or introducing a computed name makes the registry gate fail until the expression is explicitly modeled.
+- VIBE aliases are same-person/state exceptions, not a generic ignore list. The numbered pretender is the only generated display-name family.
+- Wave 4 findings are not approved balance changes. Do not multiply timers or counts by world area; choose a travel/coverage invariant first.
+- Nameplate collision is solved, but maximum upward displacement/viewport containment remains a documented viewport relationship, not silently fixed.
+- Live visual/audio QA is still pending. Do not describe VM/static verification as a browser playtest.
+
+---

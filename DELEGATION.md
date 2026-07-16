@@ -4,6 +4,22 @@
 
 ---
 
+## v19 post-audit stabilization — SHIPPED ✓ (July 15, 2026) — modular source / measured legibility / registry enforcement
+
+Active build: `index.html` + `src/`. `rock_bottom_v19.html` remains the frozen behavioral reference at SHA-256 `C25DB5E17536AEC092143D87DBF8C113325076A8B8E196A98AECB84694A25C8B`. SAVE_KEY and save shape are unchanged. See SPEC.md post-audit invariants, `REFACTOR-FINDINGS.md`, and the appended BRAIN session.
+
+- [x] **Checkpoint before surgery.** Committed the v14–v19 lineage and documentation before touching the audited build. The only pre-refactor presentation change moved `#vignette` beneath gameplay UI; its intensity and every gameplay value stayed unchanged.
+- [x] **Retire the obsolete monolith rule deliberately.** Preserved v19 as reference and extracted all 37 script chunks into 38 linked native ES modules under `src/`, with `index.html` as the zero-dependency HTTP entry. No `legacy.js`, framework, CDN, package install, or build step remains.
+- [x] **Prove behavior parity.** `module-gate` verifies the frozen reference hash, one-time source coverage, import linking, forbidden storage APIs, and ≤1000-line modules. `runtime-smoke` compares deterministic reference/modular state, starts a new game, exercises W+D plus partial release, Tony dialogue, exact 18s→8s status timing, 373 sprite keys, and real save/load round trips.
+- [x] **Repair the four measured legibility failures.** All 24 named building entries have styled signs; all 23 zone-label ink boxes clear building/awning art; 56 production nameplates and a dense 60-label fixture deconflict; graffiti uses measured font widths and real wall bounds with one-time v19 layout migration. `legibility-gate` makes all four set/geometry relationships permanent.
+- [x] **Expose map-growth dependencies without balancing them.** Documented travel/withdrawal/day/route/office/bus/phone/police/incident budgets; NPC/resource/prop/light/transport/content coverage; minimap resolution; repaired relationships; and explicit counterexamples in `REFACTOR-FINDINGS.md`. No Wave 4 value changed. The vignette is recorded as an original fixed-viewport issue, not a growth regression.
+- [x] **Restore the NPC identity gate.** Added the SPEC contract, backfilled 30 omitted identities for 55 complete VIBE rows, and added `npc-registry-gate`. It covers 59 distinct source identities across 60 actor sites, 56 fresh-game actors, four explicit same-person aliases, and one generated pretender family. The four weak guard names are flagged but unchanged.
+- [x] **Preserve the operator's seat.** Recorded four open decisions—guard names, clerical-pattern monopoly, medieval register, and VIBE scope—alongside measured evidence and non-ratified recommendations. No name, campaign term, pattern quota, map scope, or VIBE rule was silently decided.
+- [x] **Repair the isolated encoding damage.** Corrected 17 malformed middle-dot tokens across ten office lines plus one corrupt em-dash comment. The campaign module now has an encoding regression assertion; the frozen v19 reference remains untouched.
+- [x] **Verification.** Four permanent gates pass: 37/37 module extraction with 38 JS files linked; 56-NPC reference parity with WASD chord/release and exact 18s→8s loop; 24 signs / 23 zone labels / 56 nameplates / 14 fitted deterministic tags; 55 canonical NPC rows / 59 source identities / 60 actor sites. `git diff --check` is clean and the frozen reference hash is unchanged. Live visual/audio inspection remains pending because the permitted in-app browser rejects local-file navigation and policy forbids routing around it with another server/browser path.
+
+---
+
 ## v18 — SHIPPED ✓ (July 14, 2026) — the office / paper empire / far-east expansion
 
 Lands on `rock_bottom_v18.html`. SAVE_KEY unchanged. See SPEC.md `THE OFFICE + BLOCK AUTHORITY + FAR-EAST EXPANSION (v18)` and the appended v18 BRAIN session.
