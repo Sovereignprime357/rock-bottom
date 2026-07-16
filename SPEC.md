@@ -4,6 +4,544 @@
 
 ---
 
+## CURB WAR + ONE CRACKLORD + KINGDOM EXPANSION (v19)
+
+v19 turns the v18 office foothold into an absurd succession war. Four new districts extend the neighborhood east and south. Three rival curb clans defend improvised courts made from tarps, shopping carts, mattresses, wire, buckets, and municipal leftovers. A short, explicit campaign gives the player a purpose without making the world sensible: answer a hostile radio summons, deface three pieces of clan paperwork in each enemy district, defeat its ruler, smoke one real rock at the Block to receive royal static, and challenge the Curb Emperor in THE THRONE DITCH. The receipt names one cracklord; it does not clean up the neighborhood or end play. Routes, office work, faction systems, procedural incidents, daily hustles, and daily pretenders continue forever.
+
+This is a comedy kingdom, not a realistic criminal organization. It owns curbs, bent signs, blue plastic, and incompatible receipts. It never owns people, sells product, creates passive income, models trafficking, or replaces the score -> smoke -> 18-second high -> 8-second crash loop.
+
+### Campaign spine
+
+The canonical durable state is `state.kingdom = { stage, marks, bossId, defeats, pretenderDay, pretenderDefeatedDay, pretendersDefeated }`.
+
+Allowed stages are:
+
+`locked -> summons -> tarp_marks -> tarp_boss -> cart_marks -> cart_boss -> wire_marks -> wire_boss -> anoint -> emperor_gate -> emperor_boss -> complete`
+
+1. `locked` advances to `summons` exactly once when THE OFFICE is owned, at least four durable district claims are installed, and `THE FALLEN KING` is complete. This makes Tony/the co-op corner fight the local prologue to the larger succession claim. The unlock does not require a live NPC and cannot be lost if a partial save drops an availability bit.
+2. In `summons`, the office radio carries a rival summons. If the player does not own the radio, the one primary objective says to install it. Answering the radio explicitly starts the war; no cutscene, automatic teleport, or resource reward occurs.
+3. Each clan uses a three-mark field phase. `marks` is a three-bit mask (`0..7`) reset only when entering a new clan stage. The three authored public anchors may be handled in any order, each pays nothing, and each can be marked only once. At `marks === 7`, the district's challenge banner becomes the target.
+4. Interacting with that banner starts the corresponding boss stage and spawns one ruler plus at most two transient reinforcements. Bosses never spawn from ordinary map initialization, cannot be killed out of sequence, and cannot be duplicated by reopening a dialogue or reloading.
+5. Defeating DARRYL UNDER BLUE advances `tarp_boss -> cart_marks`; defeating GENERAL RECEIPT advances `cart_boss -> wire_marks`; defeating BISHOP WIRE advances `wire_boss -> anoint`. Each durable defeat id appears once in the whitelisted `defeats` set. The listed boss reward is granted once at death, then the next stage is saved.
+6. `anoint` points back to the Block. Only the successful existing normal `smoke a rock` branch, after one real rock is deducted, advances to `emperor_gate`. Soap, dialogue cancellation, inventory inspection, cooking, load repair, or rendering cannot advance it. The smoke still sets exactly `rockedT = 18000`; its normal transition still creates exactly `crashT = 8000`.
+7. `emperor_gate` points to THE THRONE DITCH. The throne challenge starts the Curb Emperor fight. Defeating him sets `complete`, records the finite quest and achievement, saves first, then shows the `ONE CRACKLORD` receipt. Returning from the receipt resumes the same world and all existing progress.
+8. Completion is not a good ending and does not pacify the map. The throne is a lawn chair bolted to a curb. Enemy domains retain bounded daily holdouts, and one elite CURB PRETENDER appears per in-world day after completion. Defeating that day's pretender grants a small bounded cash/cred reward once and increments `P.lifetime.pretendersDefeated`. Reload, death, arrest, rest, bus travel, and repeated contact cannot duplicate it.
+
+Campaign quest receipts are `HOSTILE CORRESPONDENCE`, `BLUE WEATHER`, `CART APPEAL`, `COPPER MASS`, `ROYAL STATIC`, and `ONE CRACKLORD`. They are terse ledgers, not narration screens. Only the final ruler uses the existing ending-receipt surface.
+
+### Expanded kingdom map
+
+`WORLD` grows from `5800x3800` to `8600x5600`. Every v18 coordinate remains unchanged. The east and south road network extends existing service roads rather than creating isolated rectangles. Camera, collision, projectiles, cop-edge spawning, edge arrows, minimap scaling, route distance, bus travel, and all clamps remain parameterized by `WORLD.w` / `WORLD.h`.
+
+| Zone id | Display name | Bounds | Rival field | Identity |
+|---------|--------------|--------|-------------|----------|
+| `blue_tarp_court` | BLUE TARP COURT | `(5920,260,1160,1060)` | `blue_tarp` | overlapping blue roof plastic, bucket borders, pallet permits, plastic-chair court |
+| `cart_cavalry_keep` | CART CAVALRY KEEP | `(7340,1460,1040,980)` | `cart_cavalry` | nested shopping-cart barricades, return slips, appliance ramparts, one working caster |
+| `copper_choir_yard` | COPPER CHOIR YARD | `(5920,2760,1220,1120)` | `copper_choir` | wire clotheslines, hubcap chapel, stripped cable aisles, choir pews with no service |
+| `throne_ditch` | THE THRONE DITCH | `(7020,4200,1320,1120)` | `throne` | drainage cut, ceremonial curbs, tire audience, bolted lawn-chair throne |
+
+All four zones keep `faction:'neutral'` and declare a separate `clan` field. Clan hostility must never be fed into `P.faction`, office claim reputation gates, `currentZoneFaction()`, or the v13 territory ticker.
+
+The map adds authored terrain regions, continuous road segments, crosswalks, worn paths, facades, barriers, lights, banners, and local clutter. New solid buildings preserve clear south-door gaps and do not intersect roads:
+
+- BLUE TARP COURT: `TARP PERMITS (6000,300,340,180)` and `BLUE COURT (6660,300,340,180)`.
+- CART CAVALRY KEEP: `CART IMPOUND (7420,1540,320,220)` and `THE KEEP (7960,1540,320,220)`.
+- COPPER CHOIR YARD: `COPPER RETURNS (6000,2840,380,240)` and `CHOIR OFFICE (6620,2840,420,240)`.
+- THE THRONE DITCH: `DITCH RECORDS (7280,4280,360,220)` and `THE THRONE (7840,4280,420,220)`.
+
+Each district has an authored, collision-free bus arrival, challenge banner, three field marks, guard posts, route landmark, and first-entry receipt. Bus destinations stay hidden until the corresponding persisted `*Entered` flag is true. A district's route stop stays hidden until its ruler-clear flag is durable, so ordinary clipboards never send an unprepared player through a live court. New route ids are appended, never inserted or renamed: `tarp_docket`, `cart_barrier`, `choir_register`, and `ditch_gauge`. Existing serialized route ids remain valid.
+
+### Rival clans and combat
+
+| Clan | Common guard | Ruler | Boss contract | One-time reward |
+|------|--------------|-------|---------------|-----------------|
+| BLUE TARP COURT | TARP KNIGHT | DARRYL UNDER BLUE | charger, `180 HP`, no more than two adds | `$24 + 18 cred` |
+| CART CAVALRY KEEP | CART LANCER | GENERAL RECEIPT | grabber, `200 HP`, no more than two adds | `$30 + 22 cred` |
+| COPPER CHOIR YARD | WIRE DEACON | BISHOP WIRE | ranged, `210 HP`, no more than two adds | `$36 + 26 cred` |
+| THE THRONE DITCH | conquered-family holdouts | THE CURB EMPEROR | elite charger, `280 HP`, at most two reinforcements | `$60 + 40 cred` and final receipt |
+
+1. Rival guards are ordinary bounded NPC records with a `kingdomClan` tag and authored `zoneOnly` rectangle. Before conquest, at most five ambient guards occupy a clan district. After conquest, at most two daily holdouts remain. Guards do not reproduce per frame and the total authored NPC population remains compatible with the 60+ NPC frame budget.
+2. A guard is hostile inside its own clan domain, but cannot follow indefinitely across the whole 8600x5600 world. Bus arrivals and building doors sit outside immediate contact range. Old factions, cops, vendors, office clerks, and quest NPCs do not inherit clan hostility.
+3. Campaign bosses use the existing hostile archetype/update/damage pipeline and may be damaged by every normal player weapon. No boss is essential, invulnerable, or gated by a special damage type. Every fight must remain defeatable by a competent player in under 90 seconds; if testing exceeds that, reduce HP/add pressure rather than changing player combat.
+4. `state.kingdomBattle` and the spawned ruler/adds are transient. Death, arrest, ending receipt, or malformed reload calls one abort path: remove campaign boss/add NPCs and their transient projectiles, clear the boss reference, preserve completed marks, and demote `*_boss` to its matching `*_marks` with `marks = 7`; `emperor_boss` demotes to `emperor_gate`. No loss path grants or removes a durable defeat.
+5. After `complete`, one daily CURB PRETENDER uses a conquered guard sprite, `100 HP`, and a bounded `$10 + 2 cred` reward. `pretenderDefeatedDay === state.day` is the durable paid witness. Ambient holdouts grant no cash, cred, item, combo, or drop reward; this prevents boss abort, dawn, or reload recovery from becoming a guard-respawn mint.
+6. Clan combat never grants rocks, copper, supplies, faction reputation, district claims, office jobs, passive cash, or a new currency. It never makes smoking possible outside the Block.
+
+### Guidance, interaction, and gameflow
+
+The forced intro remains first. After intro, active acquisition/claim/order work may finish normally; once the war is unlocked, its current authored step becomes the long-form primary objective. The Q ledger adds `CURB WAR` after `THE OFFICE`, showing the current absurd instruction, three clan seals, mark progress, next ruler, and lifetime pretenders. It never reveals unseen mark copy or a future boss before that clan becomes active.
+
+World interaction priority is:
+
+1. office/hideout/Old School and authored clan doors;
+2. an active kingdom mark, challenge banner, or throne;
+3. an active office survey/install/inspection target;
+4. active block-route stamp;
+5. closest NPC;
+6. heist, props, and local zone verbs.
+
+`resolveActionHint()` mirrors that exact ordering. Rendering is read-only. Campaign targets do not advance through proximity, attacking a banner, entering a bus, opening Q, or touching an inactive future anchor. During a live boss stage, office purchase/claim/order acceptance, bus travel, route stamping, incidents, and unrelated dialogue are unavailable until the boss is defeated or the fight aborts. Ordinary campaign travel does not suppress those systems.
+
+The title receipt extends the visible long-term plan after the opening verbs: `file three routes -> acquire the office -> install four claims -> settle Tony -> answer the radio -> dispute every throne`. It does not explain boss solutions or freeze discovery.
+
+### Save and normalization
+
+1. `state.kingdom`, the four entry flags, campaign quest state, completion achievement, and `P.lifetime.pretendersDefeated` serialize in the existing `rockbottom_save_v8` payload. No new storage key is introduced.
+2. Normalization whitelists stages, boss ids, defeat ids, mark bits, day stamps, and finite nonnegative counters. Duplicate/unknown defeat ids are discarded. Active boss stages always normalize to their restartable pre-fight stage because spawned combatants are not durable.
+3. Durable witnesses reconcile forward but never fabricate rewards: three ruler defeats imply the matching later stage; `complete`/the final quest/achievement implies all prior defeat ids; a later stage implies prerequisite marks. Office ownership plus four real claim ids may restore `summons`, but an aggregate claim counter alone may not invent claims.
+4. Old v18 saves receive `locked`, then unlock naturally if their normalized office, four claim ids, and completed `fallen_king` quest satisfy the contract. Fresh saves begin locked. Load does not spawn, pay, kill, mark, anoint, or show an ending receipt.
+5. The single-file gzip ceiling rises from 185KB to 225KB for four authored districts, seven character families, campaign copy, and deterministic map detail. Save size remains below 50KB and initial paint remains below 250ms on the target desktop profile.
+6. Durable ruler witnesses reconcile forward without paying: each clan quest/clear flag may restore its matching defeat, Royal Static may restore `emperor_gate`, and the final quest/achievement/clear flag may restore `complete`. The normalized defeat prefix advances to the first unpaid stage, so a partial save cannot replay a recorded ruler and soft-lock on the duplicate-reward guard.
+7. Existing non-transient `npcsKilled` ids are cached during load and applied only after `spawnNpcs()`. Tony's death and `fallen_king` receipt are saved before the ending delay; reload cannot respawn a paid Tony or pay the corner reward twice.
+
+### Sprite and rendering contract
+
+Seven complete three-frame 16x16 palette-indexed families are added: `blue_tarp_guard`, `receipt_guard`, `wire_guard`, `darryl_under_blue`, `general_receipt`, `bishop_wire`, and `curb_emperor`. Their silhouettes are visibly different at 32x32 display: tarp hood/shield, cart-fork lance, wire stole/coil, blue canopy crown, receipt sash, antenna mitre, and stacked-curb crown. Bosses fill more of the logical grid but remain 32x32; runtime `scale` is not a substitute for authored pixels.
+
+All 21 character frames are rasterized once during initialization and drawn only with cached `drawImage`. Four one-frame clan/banner environment sprites follow the same cache pattern. The character/player cache ceiling rises from 360 to 400; projected v19 use is 373. The auxiliary environment/landmark/light cache ceiling rises from 48 to 64 with an actual v19 use of 53 after the additional facades and glow color. No operating-system emoji, external bitmap, runtime per-pixel character drawing, CDN, font, module, or framework is introduced.
+
+### v19 invariants
+
+1. The Block remains the only smoke/cook location. A real rock remains mandatory for campaign coronation.
+2. Rocked-up remains exactly 18 seconds and always becomes exactly 8 seconds of crash. The anoint hook does not change status, audio, consumption, or soap behavior.
+3. v19 deliberately supersedes the v18 “no fourth ending” invariant only for the requested `ONE CRACKLORD` comedy receipt. The receipt returns to endless play and is neither redemption nor world completion.
+4. Every v18 coordinate, serialized route/claim id, office cost/reward, faction rule, Tony phase, heist gate, and old ending remains valid.
+5. One campaign stage, one campaign boss, one office claim, one office order, one block route, and one primary marker maximum. Systems may coexist durably, but only the highest-priority active field target is advertised/interactable.
+6. Clan conquest owns no person and produces no passive income, allegiance rewrite, faction reputation, product distribution, or new currency.
+7. Death/arrest/reload can restart a live battle but cannot erase marks/defeats or duplicate a boss/pretender reward.
+8. All new roads, doors, mark anchors, guard posts, route points, bus arrivals, banners, and arenas have collision-clear approach space. No safe arrival starts inside a solid or immediate boss/add contact radius.
+9. Character cache remains `<=400`, auxiliary cache remains `<=64`, and no character sprite is painted per pixel at runtime.
+10. Four clan districts plus at least 60 active NPCs, weather, particles, office signs, guidance, and minimap remain below 16ms/frame on the deterministic target harness.
+11. Darryl, General Receipt, Bishop Wire, and the Curb Emperor are each independently defeatable in under 90 seconds by a competent player.
+
+### v19 required test matrix
+
+| Property | Required result |
+|----------|-----------------|
+| Old/fresh/malformed save | fresh stays locked; eligible v18 save reaches summons once; malformed stages/marks/defeats/days normalize; durable defeat/quest/clear witnesses reconcile forward; active boss reload is restartable and unpaid; killed Tony is applied after NPC spawn |
+| Unlock/radio | Tony + office + three claims does not unlock; Tony + fourth real claim does; without Tony the older corner objective remains; missing radio points to install; answering once enters tarp marks |
+| Three mark phases | any order, each one-shot, exact `0..7` mask, no reward, inactive/future marks ignore E, reload preserves mask |
+| Boss transaction | one ruler/add set, damageable by normal weapons, reward once, next stage saved, repeat interaction/reload cannot duplicate |
+| Loss recovery | death/arrest removes transient boss/adds/projectiles, retains the completed three-mark mask (`marks=7`), restores challenge, no reward or permanent soft lock |
+| Anoint status loop | soap never advances; real rock deducts once, enters emperor gate, sets exactly 18,000ms high, then exactly 8,000ms crash with one crash cue |
+| Final receipt | Emperor death saves complete before receipt; return resumes same world; old endings and routes remain available |
+| Endless pretender | one eligible elite per day after complete; one daily reward; reload cannot repeat; next dawn creates a new eligible pretender |
+| Guidance parity | objective, marker, minimap, E/B hint, and interaction agree for radio, nine marks, four banners, and anoint |
+| Expanded traversal | four zones, all roads/doors/anchors/route points/bus arrivals/arenas reachable and outside solids; no old coordinate moved |
+| Clan isolation | `faction:'neutral'`; no office claim gate, territory heat, rep, cop, vendor, or ordinary NPC receives clan state |
+| Controls/status | v16 WASD chords and partial release still pass; blur/modal clears; high/crash exact |
+| Boss duration | all four rulers defeated under 90 seconds in the combat harness |
+| Sprite/cache | all 21 family frames + four banners nonblank and cached; character <=400; aux <=64; visual signatures differ |
+| Performance/standalone | 60+ NPC update/draw <16ms; one dependency-free HTML; async `window.storage` only; gzip <=225KB; save <50KB |
+
+---
+
+## THE OFFICE + BLOCK AUTHORITY + FAR-EAST EXPANSION (v18)
+
+v18 gives the neighborhood a medium- and long-term spine without replacing its core joke. The player may acquire a condemned former tax office, improve it into a shelter/headquarters, file absurd ownership claims on public districts, and run bounded work orders forever. The "empire" owns bent signs and paper records, never people. Tony, the milk crate, the score -> smoke -> 18s high -> 8s crash loop, faction reputation, combat damage, and every existing ending remain canonical and mechanically unchanged.
+
+### Gameflow contract
+
+1. The forced three-step intro remains the only opening tutorial. Block routes 1-3 then teach traversal through play.
+2. Filing route 3 exposes `THE OFFICE` quest and points to THE LEASING GUY in the new district called THE LOT.
+3. Replacing the office lock costs `$40 + 1 pure copper`. The purchase is permanent, survives death/arrest/endings, and does not create rent or a new currency.
+4. The office is a modal interior following the existing hideout pattern. Its exterior remains in the walkable world and visibly accumulates every permanent upgrade and claim milestone.
+5. A desk unlocks authored district claims. The first claimable district is the neutral DRAINAGE CANAL, so the ownership loop is demonstrable without reputation grinding. Faction districts require the matching faction to be LIKED (`rep >= +10`) when a claim is selected.
+6. Once one district is claimed and a radio is installed, the office issues bounded work orders. These require travel to an owned sign and a return to the office. They never pay while unattended.
+7. The endless floor is two parallel loops: v17 block routes remain continuously available, while office orders are accepted explicitly. Active office campaign/order steps temporarily own the one BAD IDEA target; inactive paperwork never hides the block route.
+8. Finite campaign milestones exist at office acquisition and 1/4/8/11 claims. Claim milestones grant visual progression, quest receipts, and one-time achievements only; the claim's listed `+2 cred` is its complete currency reward. Completing all claims changes the office exterior and ledger, but does not create a fourth ending. Routes and work orders continue forever.
+
+### Expanded world
+
+`WORLD` grows from `4400x3400` to `5800x3800`. Every v17 coordinate remains unchanged. Camera, cop spawning, player/projectile clamps, minimap scaling, bus travel, objective arrows, and collision continue to consume `WORLD.w` / `WORLD.h` rather than hardcoded bounds.
+
+The authored world, office state machine, and ledger raise the single-file ceiling from 170KB to 185KB gzip. This is a deliberate v18 budget revision, not permission for external assets or runtime dependencies; initial paint remains under 200ms and save size remains under 50KB.
+
+| Zone id | Display name | Bounds | Faction | Identity |
+|---------|--------------|--------|---------|----------|
+| `warehouse_row` | WAREHOUSE ROW | `(4400,180,1100,760)` | scrap | patched loading concrete, oil, two warehouse units, numbered aprons |
+| `canal` | THE DRAINAGE CANAL | `(4300,1540,1350,680)` | neutral | walkable dry channel, wet seams, gauge marks, municipal water with no water |
+| `the_lot` | THE LOT | `(4300,2700,1250,850)` | neutral | dead parking grid, abandoned furniture, THE OFFICE |
+
+The old network is extended by an eastbound warehouse cut, a continuous park/skid road, a continuous south service road, a far-east spine, and the office drive. The three districts receive first-entry receipts and become bus destinations only after their corresponding persisted `*Entered` flag is true. Every bus destination has an authored collision-free arrival point rather than using a zone center that may lie inside a solid building. The destination ledger paginates at six locations so every destination and every navigation/leave action remains reachable from the `1-9` dialogue controls.
+
+New route landmarks are appended, never inserted or renamed: `warehouse_manifest`, `canal_gauge`, and `lot_meter`. Each carries an `unlockFlag`; `rollBlockRoute()` excludes a far landmark until its district has been entered. Existing serialized route IDs remain valid.
+
+### Headquarters contract
+
+The solid office shell is at `(4700,2920,440,300)` with a centered south door at `(4908,3204,24,32)`. It is not marked `locked`; the first `locked` building remains the abandoned heist building. THE LEASING GUY at THE LOT is the only acquisition transaction.
+
+Permanent upgrades use existing cash/copper only:
+
+| Upgrade | Cost | Mechanical use | Exterior evidence |
+|---------|------|----------------|-------------------|
+| cot | `$30` | rest; sleep to dawn with the canonical `+15 shakes` consequence | mattress corner / chair |
+| locker | `$45 + 1 copper` | opens the existing shared `state.hideoutStash` | chained metal cabinet |
+| desk | `$60 + 2 copper` | selects, files, and tracks district claims | desk glow / paperwork window |
+| generator | `$75 + 2 copper` | improves office rest and lights the door at night | patched cable and light |
+| radio | `$90 + 2 copper` | unlocks bounded office work orders | roof antenna |
+| route board | `$65 + 1 copper` | one unpaid block-route reroll per day | clipboard board by door |
+
+All purchase checks and deductions are atomic. Reopening an owned upgrade cannot charge again. Every office dialogue has a leave/back route and exposes why a disabled action is disabled.
+
+### District claim contract
+
+Claims are a second system named `districtClaims`; they must not reuse or mutate the existing ephemeral `state.territory*` ticker fields. `ZONES[].faction`, `P.faction`, `currentZone()`, `currentZoneFaction()`, and `updateTerritory()` retain their v13 meanings.
+
+Eleven claimable districts:
+
+- STREET: `alley`, `projects`, `skidrow`
+- SCRAP: `scrap`, `underpass`, `oldschool`, `warehouse_row`
+- SPIRITUAL: `market`, `park`, `trainyard`
+- NEUTRAL ONBOARDING: `canal`
+
+`block`, `dealer`, `church`, `abandoned`, `pawn`, `laundromat`, `busstop`, and `the_lot` are structurally protected from claims. The crate, Tony, church, heist, office, and primary vendors are never reclassified as owned territory.
+
+Only one claim contract may exist. Its persisted state is `{ id, stage }`, with whitelisted ids and stages:
+
+1. `survey`: selected at the office desk. Travel to the district's authored survey point and interact.
+2. `file`: return to the office. Filing costs `cash = 20 + 5 * claimedCount` and exactly `1 copper`.
+3. `install`: travel to a second, clear public coordinate and install a bent sign.
+4. completion: set `districtClaims[id] = true`, clear the active contract, grant exactly `+2 cred`, advance non-currency campaign milestones, save once.
+
+The reputation gate is checked only when selecting. A later reputation loss cannot corrupt or cancel an active filing. Canceling an unfiled or filed contract grants no resource and never duplicates a payment. Claim coordinates never depend on a living NPC, boss, weather, day/night, loot roll, weapon, or external service.
+
+Claimed signs are cached 16x16 logical sprites drawn with `drawImage`. Owned zone outlines also appear on the minimap. A claim does not suppress hated-faction heat, generate rocks, unlock smoking elsewhere, grant passive regeneration, or change local NPC allegiance. The form has no social authority.
+
+### Endless office work orders
+
+Work orders require the radio and at least one claimed district. They are accepted explicitly at the office, one at a time, and persist as `{ id, stage:'inspect'|'file', serial }`.
+
+1. `inspect`: visit one selected owned claim sign and interact.
+2. `file`: return to the office and close the ledger.
+3. Filing pays `cash = min(12, 5 + claimedCount)`; every fifth lifetime office order also grants `+1 cred`.
+4. Daily capacity is `min(3, 1 + floor(claimedCount / 4))`. Both acceptance and final filing recheck the cap; malformed same-day paperwork beyond capacity remains unpaid until dawn. The day stamp and count persist, reset through the same dawn path as existing daily counters, and cannot be reset by reload, rest, or reopening the menu.
+5. There is no passive, offline, catch-up, or missed-day income. An inspected but unfiled job pays nothing until the player physically returns to THE OFFICE.
+6. Orders never pay rocks, copper, supplies, equipment, faction reputation, combat power, or achievements more than once. Routes continue underneath and resume their saved cursor when no office step is active.
+
+### New people and activities
+
+- **THE LEASING GUY** stands in THE LOT with a key ring and clipboard. He explains the three-route requirement in-world and performs the one atomic office sale. He has no other economy.
+- **GUTTER GREG** stands in the canal with a rubber duck and an inventory theory. Counting canal inventory is available once per day, grants `+1 scrap` reputation, and no cash/item. It is a small authored reason to revisit the new district, not a farm.
+
+Both are palette-indexed 16x16 logical characters, prerendered to three cached frames, and registered in VIBE before ship. They are fixed essential clerical fixtures: a player swing may produce a paper-denial reaction, but cannot damage, kill, knock back, or permanently remove either transaction hook. Neither can call a remote service; the Possum remains the only AI-call NPC.
+
+### Guidance, interaction, and save contract
+
+1. Interaction priority becomes: office/hideout/Old School doors -> active office survey/install/order sign -> block-route stamp -> closest NPC -> heist -> props -> zone verbs.
+2. `resolveActionHint()` mirrors that ordering. No prompt may advertise a route stamp through an active office target or a door through a nearby NPC.
+3. `currentOfficeObjective()` runs after the forced intro and before the eternal route. It returns a target only for office acquisition, the first-claim onboarding, or an explicitly active claim/order step.
+4. The Q ledger adds THE OFFICE between BLOCK ROUTE and TODAY'S HUSTLES: ownership, upgrades, claim count, active stage, order capacity, and claimed/unclaimed district list. It does not reveal hidden claim copy before selection.
+5. `state.office`, `state.districtClaims`, `P.lifetime.officeJobs`, and `P.lifetime.territoriesClaimed` are serialized. Load normalization uses whitelisted ids/stages, finite nonnegative counters, deep upgrade defaults, and null-prototype lookup tables.
+6. Old saves with 3+ routes unlock the office quest on load/start. Old saves missing v18 state receive a locked empty office, no claims, and no duplicate route reward. On partial saves, any durable purchase witness (`office.owned`, completed `office_space`, `squatters_rights`, claims, office upgrades/jobs, or downstream v18 lifetime/milestone records) reconciles the purchase records upward so the lock can never be sold twice. Durable claim/milestone evidence restores the permanent desk prerequisite; durable work paperwork/completions restore the permanent radio prerequisite. Claim ids are never fabricated from an aggregate count. Surviving claim ids likewise reconcile milestone quest availability and achievements idempotently.
+7. The save key remains `rockbottom_save_v8`. Save size remains below 50KB. No `localStorage`, `sessionStorage`, network dependency, CDN, asset file, font, module, or build step is introduced.
+
+### v18 invariants
+
+1. The Block remains the only place to smoke/cook; the office has no cook action.
+2. Rocked-up remains exactly 18 seconds and always becomes exactly 8 seconds of crash.
+3. Tony, the abandoned heist, every old building/zone/NPC coordinate, and all existing quest/ending gates remain reachable and mechanically unchanged.
+4. District ownership never alters faction reputation or faction-territory behavior. A claimed hated zone may still call the cops.
+5. Death, arrest, dawn, ending receipts, and reload preserve the office, upgrades, claims, and active paperwork without paying them.
+6. One primary objective, one active claim, and one active office order maximum. Claim and order jobs cannot be active simultaneously.
+7. No passive income, no ownership decay, no real-world trafficking simulation, no people-as-property, and no new currency.
+8. All far-east roads, survey points, sign points, NPCs, route stops, and the office door have clear approach space outside solid collision.
+9. Character/player `SPRITE_CACHE` remains within its 360-canvas budget; separately bounded environment/landmark/light caches remain within 48 additional canvases. Repeated claim signs are prerendered once and new named sprites have complete keys.
+10. Tony remains defeatable by a competent player in under 90 seconds; v18 does not touch boss HP/damage/phase code.
+
+### v18 required test matrix
+
+| Property | Required result |
+|----------|-----------------|
+| Old/fresh save | Fresh office locked; old route-3+ save receives quest exactly once; malformed office data normalizes safely |
+| Acquisition | Route 3 unlocks Leasing Guy target; `$40 + 1 copper` deducts once; reload remains owned |
+| Upgrade atomicity | Insufficient resources never partially deduct; owned upgrade cannot repurchase; exterior updates immediately |
+| Claim state machine | survey -> office file -> install; fee once; +2 cred once; cancellation/reload cannot duplicate |
+| Reputation gate | canal selectable at neutral; faction districts disabled below +10; active job survives later rep loss |
+| Work order | accepted at office -> owned sign -> office; payout only at final file; daily cap survives reload |
+| Objective priority | active office target hides route marker without advancing route; route target resumes afterward |
+| Interaction parity | door/claim/order/route/NPC prompts and actual E/B action agree at every authored coordinate |
+| Map traversal | all three new zones, office door, new NPCs, route points, and claim points are reachable around solids |
+| Bus/discovery | far districts absent before visit, present after visit, six-per-page navigation remains keyboard-accessible, authored arrivals are outside solids, self-target/combat/day gates unchanged |
+| Endless property | after 11 claims, office orders continue across days and block routes continue without cap |
+| Economy | no passive payout; order cash <= $12; no order/claim grants rocks, supplies, copper, or equipment |
+| Controls/status | v16 WASD chords/partial release pass; high remains 18s and crash remains 8s |
+| Performance | expanded map + 60 NPCs + weather + incident + signs stays below 16ms/frame |
+| Standalone | one dependency-free HTML opens directly and persists only through async `window.storage` |
+
+---
+
+## CURSED STICKERS + BAD-IDEA CLARITY + ENDLESS BLOCK ROUTES (v17)
+
+v17 is a presentation and replayability fork of v16. It makes the player visually accumulate the junk they equip, exposes the neighborhood's existing depth without a blocking tutorial, and adds one repeatable travel loop that can continue forever. It does not add a city, currency, named NPC, real-world drug detail, redemption path, or new ending. Movement math, combat damage, the boss phase machine, and the 18s high -> 8s crash loop remain mechanically unchanged.
+
+### Diegetic clarity contract
+
+1. The title screen carries one compact receipt: desktop/mobile controls plus the opening plan (find $10 -> bother Tony -> smoke at the crate). It is a control ledger, not a modal tutorial, and never blocks play after start.
+2. During play, a single `BAD IDEA` strip shows the current primary objective, distance, and coarse direction. Priority is intro step -> active block-route stop -> first active quest. Only one target is marked at once.
+3. The primary target gets a world marker when visible and an edge arrow when off-screen. The minimap receives the same one target. Markers are guidance only: no teleport, collision, reward, or state mutation occurs in rendering.
+4. A contextual action hint appears only when an interaction is currently in range. Desktop uses `E`; touch uses the existing `B` action. The hint scanner is read-only, rate-limited, and follows interaction priority closely enough that it never advertises a lower-priority object through a nearby NPC.
+5. The Q panel starts with `WHAT TO PRESS`, the current bad idea, the active block route, and a compact activity ledger. The ledger surfaces existing verbs and districts without revealing hidden quest outcomes or un-met NPC identity.
+6. Mobile action buttons carry verb labels (`HIT`, `BOTHER`, `SQUINT`) in addition to A/B/F. Keyboard, touch, and analog behavior remain the v16 input contract.
+7. No tutorial freezes the world, requires acknowledgement, grades the player, or reappears after the intro. Discovery remains gameplay.
+
+### Endless block-route contract
+
+`ROUTE_STOPS` is a fixed authored list of reachable public landmarks. Each stop has `{id, x, y, zone, task, stamp}`. Copy uses the mundane -> specific -> escalation -> flat pattern. Stops never sit inside solid collision or require a vendor, boss, rank, item, night, weather, faction, or surviving NPC.
+
+1. The route unlocks when `state.flags.introDone` becomes true. Existing saves with no route receive one on start. The intro remains focused and route-free.
+2. One route contains three distinct stops. `rollBlockRoute()` avoids duplicating a stop inside a route and avoids immediately repeating the just-completed final stop when alternatives exist.
+3. Pressing interact within 58px of the active stop stamps it. Only the next unfinished stop can advance. Dialogue, panel, minigame, boss, stun, death, and hidden-tab states cannot stamp a stop.
+4. The third stamp completes the route immediately, increments `P.lifetime.routesCompleted`, pays a deliberately small ledger amount, then posts the next route. Formula: `cash = min(24, 6 + floor(routesCompleted / 5) * 2)` and `cred = min(4, 1 + floor(routesCompleted / 20))`.
+5. Route progress is independent of day rollover and daily hustle caps. Death and arrest preserve the route and lifetime count. A reload resumes the same stop; it never pays twice.
+6. Every 5 completed routes changes the player's cached route-patch layer, capped at the fourth visible patch tier. Milestone achievements exist at 5, 20, and 50 routes; the counter itself has no maximum.
+7. The route grants no faction reputation, rocks, supplies, copper, equipment, combat advantage, or new currency. It is a small cash/cred floor and a reason to cross the entire authored map.
+8. Boss/bus ending receipts never erase a route or lifetime grind. Their return action saves and resumes the same neighborhood; only an explicit fresh start from the normal opening title resets progression.
+
+### Cursed-sticker sprite contract
+
+The visual language is deterministic pixel pictograms: chunky, front-readable silhouettes with the instant readability of emoji, but no operating-system emoji glyphs. Every character image remains a 16x16 logical palette grid rasterized once to a cached 32x32 canvas.
+
+1. The player has genuinely distinct up/down/side silhouettes, an asymmetric four-beat shuffle, and authored attack poses. Left/right may share a cached side pose through mirrored `drawImage`; runtime pixel painting is prohibited.
+2. Equipped hats, coats, shoes, tools, and the active weapon use cached transparent palette-grid layers anchored to the same feet as the base player. Every equipment and weapon id must create a visible pixel delta at 2x display scale.
+3. Route patches are cached player layers selected from lifetime route count. Rocked-up can palette-swap the base while gear remains readable. Crash may lower the draw anchor but cannot alter hitboxes or timing.
+4. The old filled attack rectangle is replaced by a cached directional smear plus the cached weapon/attack pose. Hitbox, reach, damage, cooldown, and knockback remain unchanged.
+5. Named NPC identity comes from silhouette-scale geometry and oversized signature objects, not only palette. Existing Tony coat loss, sleeping Dave, Fallen O'Malley, dog, pigeon, and possum state art remains canonical. Combat-only pose art may read existing state fields but cannot write AI state.
+6. `resolveNpcPose(n, visualNow)` is pure visual selection. Missing sprite keys retain a release fallback but are a QA failure.
+7. Sprite layers are bottom-center anchored. No gear, stride, attack, or pose frame may move the logical feet by more than one pixel from idle.
+
+### Save and compatibility
+
+- `SAVE_KEY` remains `rockbottom_save_v8`.
+- `P.lifetime.routesCompleted` defaults to `0` on old saves.
+- `state.blockRoute` is serialized as a small `{stops, cursor, serial, lastStopId}` record. Missing or malformed records are regenerated after intro completion.
+- Objective/hint cache, marker pulse, sprite pose, and route-toast timers are ephemeral and never serialized.
+- No `localStorage`, `sessionStorage`, external asset, font, script, module, or network dependency is introduced.
+
+### Standalone free-release contract
+
+1. A host-provided async `window.storage` remains authoritative. When an ordinary browser provides none, v17 installs an async `window.storage` adapter backed by IndexedDB; only browsers without usable IndexedDB fall back to volatile memory. Game code still talks exclusively to `window.storage`, and `localStorage` / `sessionStorage` remain prohibited.
+2. The Possum always has an authored local prophecy ready. A host-provided completion service may replace that line only if it responds promptly and safely; missing, slow, or failed host completion never produces a dead interaction and never becomes required content.
+3. Mobile rendering preserves the canvas's 4:3 aspect ratio. Portrait may use the surrounding black area for touch controls, but logical 32x32 sprites cannot be stretched into non-square display pixels.
+4. Touch start/load and the Q control ledger name their actual touch verbs. The game remains fully playable without a keyboard, external service, account, download, or build step.
+
+### v17 required test matrix
+
+| Property | Required result |
+|----------|-----------------|
+| New save | Receipt is readable; objective points to the $10 intro path; no block route before intro completes |
+| Intro handoff | Smoking at the crate completes intro and posts route 1 without skipping the high/crash loop |
+| Route progression | Only ordered, in-range E/B stamps advance; three stamps pay once and generate the next route |
+| Endless property | 100 simulated route completions produce 100 new valid three-stop routes and no capped state |
+| Save/load | Mid-route cursor and lifetime count resume; completed payout cannot duplicate |
+| Death/day/modal | Route survives death/day; modal or boss state cannot stamp |
+| Guidance | Strip, world marker, edge arrow, and minimap agree on one target; no render function mutates route |
+| Sprite cache | All referenced keys are 32x32/nonblank; every equipment/weapon changes visible pixels; cache count <= 360 |
+| Sprite anchoring | Player base/gear/attack feet remain within one logical pixel; no runtime canvas creation after init |
+| Performance | 60+ visible NPCs + weather + incident + player layers remain under 16ms/frame |
+| Controls/status | v16 multi-key matrix passes; rocked-up is exactly 18s followed by exactly 8s crash |
+| Boss | Tony remains defeatable by a competent player in under 90 seconds |
+| Standalone | Hosted browser without injected storage persists through IndexedDB; missing completion service still yields local Possum content |
+| Mobile pixels | Portrait and landscape preserve square logical pixels; touch receipt and Q ledger match the visible controls |
+
+---
+
+## CONTROL INPUT RELIABILITY (v16)
+
+v16 is a focused input bug-fix fork of v15. It changes no movement speed, collision, status multiplier, animation timing, combat input, mobile joystick curve, NPC system, incident, economy, or save data.
+
+### Keyboard state contract
+
+1. Physical keyboard movement is event-latched: a movement key enters `state.keys` on `keydown` and remains there until its matching `keyup`, a modal explicitly clears input, the window blurs, or the document becomes hidden.
+2. Held keys must never expire because time elapsed. Browser/OS key-repeat cadence is not evidence that another physically held key was released.
+3. `W+D`, `W+A`, `S+D`, `S+A`, and their arrow-key equivalents produce normalized diagonal movement (`0.7071` per axis) for the entire hold, not only the first 700ms.
+4. Releasing either key from a diagonal continues movement on the still-held axis without requiring a new keydown.
+5. Pressing/releasing an unrelated pointer or action control must not clear physical keyboard movement.
+6. Lost-focus safety remains explicit: `blur` and hidden-document events clear all latched keys. Modal open/close paths retain their existing key clearing, and movement auto-repeat may not resurrect a key that a safety/modal path cleared.
+7. The mobile analog stick remains independent and continues to override keyboard vector input only while `state.stickMag > 0`.
+8. Sprint (`Shift`) follows the same event-latched rule and may be combined with either cardinal or diagonal movement.
+
+### Removed failure mechanisms
+
+- The 700ms `state.keyTimes` stale-key pruner is prohibited. It cannot distinguish a missed `keyup` from a normally held key whose operating system is repeating a different key.
+- The global `pointerup` keyboard purge is prohibited. Pointer release belongs to the mobile control that captured that pointer; it is not a keyboard-release signal.
+- `keyup`, `blur`, `visibilitychange`, modal clearing, mobile `pointerup`/`pointercancel`/`lostpointercapture`, and analog-stick reset remain the authoritative release paths.
+
+### Invariants and regressions
+
+1. **Speed unchanged.** Cardinal speed remains `P.speed`; diagonal magnitude remains equal to cardinal magnitude after normalization.
+2. **Collision unchanged.** Movement continues through the existing independent X/Y building collision checks and WORLD clamps.
+3. **Status loop unchanged.** Rocked-up remains 1.8× for 18s; crash remains 0.5× for 8s; slow remains 0.5×.
+4. **Control recovery.** After blur/visibility clearing, movement requires a fresh non-repeat keydown and cannot remain stuck.
+5. **Modal recovery.** Dialogue/inventory/quest transitions cannot leave a movement key latched or revive one only because the browser emits repeat.
+6. **Architecture/save unchanged.** v16 is still one dependency-free HTML file and `SAVE_KEY` remains `rockbottom_save_v8`.
+
+### Required test matrix
+
+| Input sequence | Required result |
+|----------------|-----------------|
+| Hold `W` for 2s | Continuous north movement for the full hold |
+| Hold `W`, then add `D`, hold both for 2s | Continuous northeast movement; equal absolute X/Y displacement away from collision |
+| Release `D`, keep `W` held | Immediate continuous north movement |
+| Hold `Shift+W+D` | Continuous normalized diagonal at sprint multiplier |
+| Hold `W`, click/release canvas | `W` remains latched and movement continues |
+| Hold `W`, dispatch blur/hidden equivalent | Keys clear; movement stops; repeat alone cannot restart it |
+| Open/close dialogue while moving | Keys clear; fresh press moves normally; no ghost/stuck key |
+| Analog stick diagonal then release/cancel | Stick vector returns to zero; keyboard remains independent |
+| Full smoke loop | 18s rocked-up transitions to exactly 8s crash |
+
+---
+
+## LIVING NEIGHBORHOOD + SPRITE IDENTITIES (v15)
+
+v15 turns ambient absurdity into short physical scenes and makes the existing pixel roster readable by silhouette instead of palette alone. It does not add a new district, named NPC, currency, quest chain, ending, or required interaction. The neighborhood remains the same place; it is now visibly occupied by its own administrative problems.
+
+### Neighborhood incident engine
+
+`INCIDENT_DEFS` owns six bounded, world-space micro-scenes. An active incident is ephemeral scene state, never a canonical NPC or prop. Incident actors have no HP, faction, dialogue priority, death record, or save identity.
+
+| Incident | Eligible space | Four-beat contract | Player consequence |
+|----------|----------------|--------------------|--------------------|
+| `runaway_mattress` | any nearby road | mattress enters traffic -> establishes right-of-way -> crosses the road under its own authority -> leaves | one small bump at most; never during combat |
+| `possum_inventory` | Marketplace | inventory begins -> possum arrives with forklift/clipboard -> counts the player twice -> closes inventory | visual/counting scene only; canonical Possum is never moved |
+| `laundromat_walkout` | Laundromat | dryer thumps -> rolls out with one wet sock -> takes the bus lane -> stops at a red light | visual scene only; Barb and the laundromat transaction remain available |
+| `yuri_receipt` | Scrap Yard | Yuri weighs one hubcap -> receipt grows -> wind assigns Brutus/leash-post item status -> Yuri starts over | crossing the ribbon gives a temporary paper-stuck cosmetic only |
+| `park_dry_committee` | Park, clear daytime | sprinkler starts -> six pigeons form a dry committee -> nozzle tracks the player -> meeting adjourns | temporary wet-drip cosmetic only; no slow or stat change |
+| `ticketed_luggage` | Train Yard | suitcase arrives -> Conductor punches its ticket -> pigeons queue behind it -> suitcase leaves on foot | suitcase waits/detours; the train never arrives |
+
+Incident copy follows VIBE order: mundane setup, specific absurdity, escalation, flat cleanup. Every line is lowercase except proper display labels. No incident uses a real place, victim, real-world drug instruction, tutorial text, or fourth-wall language.
+
+### Scheduler and lifecycle
+
+1. `MAX_ACTIVE_INCIDENTS = 1`. Incident actors are capped at 12 and incident particles at 30.
+2. The first incident becomes due 35-55 seconds after the intro. Later incidents become due after 70-110 seconds. At most three start per in-game day.
+3. A due incident may start only while `state.mode === 'playing'`, `state.flags.introDone`, day-7 silence is inactive, `state.bossActive` is false, no hostile is aggro within 320px, and no scripted day visitor/bus resolution is active.
+4. The scheduler and scene phases use `dt`; no incident uses `setTimeout`. Modal screens naturally pause incidents because `updateWorld` is not advancing.
+5. Selection prefers an eligible incident for the player's current canonical zone. `runaway_mattress` is the global fallback and anchors to the nearest authored road segment. Gameplay geography continues to come from `ZONES`/`ROAD_SEGMENTS`, never `terrainAt`.
+6. Toast-only `WORLD_EVENTS` do not fire while an incident is active or during day-7 silence. They retain their existing effects and cadence otherwise.
+7. `state.flags.incidentDay`, `incidentMask`, `incidentsToday`, and `lastIncidentId` persist. The bit is set when a scene starts, preventing reload repetition that day. Active actors/timers are deliberately not persisted and cleanly disappear on reload.
+8. Every cleanup path restores any temporarily hidden canonical actor. v15 incident implementations should prefer not hiding one in the first place.
+9. Incidents immediately clean up if a boss activates, scripted bus resolution begins, or their required canonical NPC becomes hostile/dead. They never delay Tony, Old School Brutus, Fallen O'Malley, arrest, smoke access, or heist input.
+
+### Sprite identity pass
+
+1. All character art remains palette-indexed 16x16 logical art, prerendered once to cached 32x32 canvases and drawn with `drawImage`.
+2. `makeNPC` receives a signature id. Signature overlays author posture and props inside the same three cached frames: long arms, stacked coats, crossword, bottle, cap/ticket, backpack, cane, badge, open mouth, and other canonical identifiers. Hitboxes and foot anchors do not change.
+3. The generic `tall` and `thin` families retain their silhouette in walk frames; walk animation may not reset them to the default wide legs.
+4. Chatty Dave receives a cached horizontal sleep pose used only while `n.asleep`; he returns to his standing sprite when awake or hostile.
+5. Fallen O'Malley receives a real cached fallen palette/silhouette. Tony's cached silhouette visibly loses one coat at each boss phase. These are render-state changes only; HP, speed, damage, phase thresholds, and boss timing are unchanged.
+6. Raster outlines/highlights align to the 2x logical pixel grid. Pure-white palette entries are replaced with dirty cream. No half-logical-pixel gloss may blur the sprites.
+7. Long names wrap onto at most two backed lines. Peaceful NPC nameplates fade outside 260px; vendors, unmet NPC markers, hostile/aggro names, HP bars, and combat telegraphs remain readable.
+8. Sprite cache budget rises to 190 canvases to permit the six incident props and boss-state variants. At 32x32 this remains bounded and is verified at init; there is no runtime cache growth.
+
+### Invariants (v15)
+
+1. **Comedy core unchanged.** Smoking a rock remains required; 18 seconds rocked-up always transitions to 8 seconds crash.
+2. **Bosses remain bounded.** Incidents cannot start during bosses, and Tony remains defeatable in under 90 seconds.
+3. **Canonical identity unchanged.** No incident actor enters `npcs`, `PROPS`, `npcsKilled`, faction logic, vendor scans, or interaction priority.
+4. **Possum authority unchanged.** Only the canonical Possum may call the live AI path. Incident possums are visual workers with no interaction.
+5. **The train never arrives.** Ticketed luggage may depart. The Conductor remains at his post.
+6. **Save compatibility.** `SAVE_KEY` stays `rockbottom_save_v8`; old v14 saves load with lazy incident defaults.
+7. **Performance.** Night + rain + 60 visible NPCs + 12 incident actors remains below 16ms/frame. Drawing is viewport-culled; actor arrays are bounded.
+8. **Architecture.** v15 remains a dependency-free single HTML file openable by double-click.
+9. **Storage.** Persistence uses async `window.storage` calls inside try/catch only.
+
+### Edge cases
+
+| Case | Behavior |
+|------|----------|
+| Save/reload during a scene | Active visuals end; its daily bit remains set; the next unseen incident schedules normally |
+| Player opens dialogue mid-scene | World update pauses; rendering remains stable; scene resumes after dialogue |
+| Boss/hostile combat begins | Active scene cleans up on the next world tick; no reward or penalty is synthesized |
+| Required NPC is dead/hostile | That district incident is ineligible; global mattress may still be selected outside combat |
+| Player leaves an incident district | Scene completes its current route and exits; it does not teleport the player or canonical actors |
+| Night + fog + crash | Incident art may dim; player/status/hostile telegraphs remain the top readable layers |
+
+---
+
+## VISUAL WORLD COHESION (v14)
+
+v14 is a geography and rendering pass over the existing 4400×3400 world. It does **not** add a city, move a district, add an NPC, or change a transaction. The purpose is to make the sixteen existing zones read as parts of one neighborhood instead of isolated rectangles on a repeated asphalt field.
+
+### Problem statement
+
+The v13 zone rectangles cover roughly 3.44M of the world's 14.96M square units (about 23%). The remaining ~77% falls through to `TILE_PALETTES.default`. Expanded districts are separated by 380–1420px corridors that currently contain the same checker tile, so distance reads as empty canvas rather than geography.
+
+### Static world-fabric layers
+
+All v14 world-fabric data is deterministic, code-owned, and save-free.
+
+| Layer | Contract | Collision | Draw order |
+|-------|----------|-----------|------------|
+| `TERRAIN_REGIONS` | Large rects assign an outside-zone ground material (`vacant`, `service`, `drainage`, `rail_approach`, `dead_grass`). Existing zone palettes always win. | none | ground tile selection |
+| `ROAD_SEGMENTS` | Axis-aligned streets/service lanes connect the old core to Park/Skid Row/Old School and Projects to Train Yard. Each draws asphalt, curb, sidewalk, patch seams, drains, and worn lane marks. | none | above ground, below zones |
+| `LANDMARK_FACADES` | Set-back facade/warehouse/rowhouse silhouettes break the empty world into readable blocks without becoming new gameplay walls. They sit outside canonical routes; kinds control wall treatment. | none | architecture-backdrop pass |
+| `WORLD_DECOR` | Non-interactive utility poles, bus shelter, signs, barriers, storm drains, newspaper boxes, guardrail, rail signals, clotheslines, and district clutter. | none | low/tall decor passes |
+| `WORLD_LIGHTS` | Static light sources for storefronts, bus shelter, underpass, park fountain, school door, and rail signals. | none | night mask + additive glow |
+
+`terrainAt(wx, wy)` is visual-only. It first asks `zoneAt`; if a canonical zone matches, that zone id is returned. Only unzoned space may inherit a `TERRAIN_REGIONS` palette.
+
+### District kits
+
+Each district must read at viewport scale through at least four identifiers: ground material, boundary treatment, landmark silhouette, and one restrained moving detail.
+
+| District | Required visual identity |
+|----------|--------------------------|
+| THE BLOCK | cracked residential asphalt, stoops/rowhouse frontage, utility wires, faded half-court marking around the crate |
+| SCRAP YARD | dirt, fence, car/scrap silhouettes, crane hook or hanging chain |
+| PAWN / DEALER / LAUNDROMAT | distinct storefront frontage, awning/sign light, curb furniture, unique window treatment |
+| BUS STOP | its own tile palette, shelter + bench + route placard, worn curb lettering |
+| MARKETPLACE | brick field, canopy rhythm, paper/produce debris, warm stall light |
+| BACK ALLEY / SKID ROW | wet/dark ground, compressed wall/shack silhouettes, overhead wire/tarp rhythm, puddle or drip movement |
+| PROJECTS | rowhouse massing, stoops, clotheslines, court markings; it may no longer be an empty labeled strip |
+| HIGHWAY UNDERPASS | concrete/oil tile remains visible beneath the bridge slab; sodium pools and column shadows |
+| PARK | grass edge, branching worn paths, tree-canopy border, animated fountain |
+| TRAIN YARD | continuous rails (not one disconnected pair per tile), freight/loading silhouettes, signals, ballast approach |
+| OLD SCHOOL | school mass, fenced yard, court markings, broken-window rhythm, isolated door light |
+
+The existing VIBE rule remains intact: zone areas retain a dashed boundary and approximately 25% tinted fill. v14 may weather and soften the treatment, but may not replace it with clean HUD chrome.
+
+### Rendering and performance contract
+
+1. Static objects are camera-culled before detailed drawing. Buildings outside the viewport do not emit brick/corrugation loops.
+2. `drawLighting` reuses one 800×600 offscreen canvas; it never allocates a canvas per frame.
+3. New repeated sprite-like decor is prerendered at 16×16 logical size, cached, and drawn with `drawImage`. Large one-off roads/buildings remain canvas geometry.
+4. Tall decor may receive a foreground cap/canopy pass so the player can walk visually behind it. Low decor stays below actors. Gameplay hitboxes do not change for decorative objects.
+5. Roads, landmark shells, and major rail lines appear on the minimap so the expanded world reads as a connected neighborhood.
+6. Richer rendering must remain under 16ms/frame with 60+ NPCs. Added arrays are static; no per-frame procedural allocation or full-world sorting.
+
+### Save and compatibility
+
+- `WORLD`, `ZONES`, `BUILDINGS`, NPC coordinates, door coordinates, bus targets, faction tags, and interaction ranges remain unchanged.
+- v14 visual arrays are constants and are not serialized. No save-key or save-shape change.
+- Existing `state.graffiti` and `state.posters` layouts remain loadable. New landmark buildings may receive fresh procedural wall marks only on a fresh layout; an old saved layout is not rebuilt.
+- The desktop fallback for a missing `window.storage` is memory-only. `localStorage` and `sessionStorage` are prohibited even as a shim.
+
+### Invariants (v14)
+
+1. **Spawn → Tony remains clear.** A player-sized route at least 96px wide connects THE BLOCK to DEALER'S CORNER without entering a hostile zone.
+2. **Every canonical interaction remains reachable.** Tony, Yuri, Pete, Barb, Pinky, the crate, church door, hideout doors, heist edge, park benches, Train Hopper/Conductor, Old School door, and bus destination centers retain clear approach space.
+3. **Boss arenas remain unchanged.** v14 adds no new collision geometry in Tony's corner, the Old School schoolyard, or any existing boss spawn point.
+4. **Existing zone mechanics are untouched.** Zone ids/rects/factions, territory overlap, zone verbs, entry flags, and bus travel continue to read `ZONES`, not visual regions.
+5. **Interaction priority remains:** doors > closest NPC > heist > interactive props > zone verbs.
+6. **Status readability remains.** Night/weather lighting cannot obscure rocked-up gold, crash purple, damage flash, hostile names, or charge telegraphs.
+7. **Pixel discipline remains.** No external raster assets, CDN content, runtime per-pixel sprite painting, or mixed asset-pack aesthetic.
+8. **Single-file architecture remains.** v14 opens by double-click with no build step or dependency.
+9. **Storage remains `window.storage` only.** All calls async and wrapped; missing API falls back to the current page's memory only.
+10. **Core timing remains untouched.** Rocked-up remains 18s and always transitions to the 8s crash.
+
+### Edge cases
+
+| Case | Behavior |
+|------|----------|
+| Old save contains graffiti/posters only for v13 buildings | Load them unchanged; missing marks on v14 landmarks are acceptable |
+| Player walks at world edge | Terrain/roads clip to WORLD bounds; camera and player clamps remain parameterized |
+| Road overlaps a canonical zone edge | Zone fill/border and district detail render above the road; mechanics still use the zone rect |
+| Night with many lights visible | Cull lights outside radius; reuse the persistent mask canvas |
+| Fog + night + crash | Fog and night retain contrast; crash tint remains the top status color layer |
+
+---
+
 ## FACTION TERRITORY (v13 wave 8b)
 
 Each zone carries a `faction: 'street' | 'scrap' | 'spiritual' | 'neutral'` tag. The territory ticker (`updateTerritory`, fires every 2s while `state.mode === 'playing'`) reads the player's current zone faction × rep tier and applies the matching effect.
@@ -256,7 +794,7 @@ Each gated by `state.flags.{trainYardEntered, parkEntered, skidRowEntered, oldSc
 
 ## WHAT
 
-Top-down action RPG built as a single HTML file. Pixel-art player sprite, emoji NPCs. 7+ zone walkable city, ~2200×1800 world with camera following player on 800×600 viewport. Real-time fist combat. Resource management (rocks, cash, shakes, cred, brain, wanted). Rank progression with one ascension boss. Persistent save via window.storage.
+Top-down action RPG built as a single HTML file. Palette-indexed pixel player and complete cached pixel NPC roster. Sixteen-zone, 4400×3400 walkable neighborhood with camera following the player on an 800×600 viewport. Real-time fist combat, multiple patterned bosses, resource management (rocks, cash, shakes, cred, brain, wanted), rank progression, factions, day/night/weather, equipment, quests, achievements, and persistent save via `window.storage`.
 
 ## WHY
 
@@ -280,9 +818,9 @@ The game is also a VibeKoded portfolio piece — a demonstration of building an 
 
 ## OUTPUTS
 
-- **Visual:** 800×600 canvas, pixel-art sprite player with walk animation, emoji-based NPCs, particle effects on hit, screen flashes for damage/high/crash
+- **Visual:** 800×600 canvas, cached pixel player/NPC walk sprites, district terrain/roads/facades, day/night/weather, hit particles, lighting, and screen treatments for damage/high/crash
 - **Audio:** Synth chiptune SFX via Web Audio API, no sampled audio
-- **Persistence:** `window.storage.set('rockbottom_save', JSON)` on rank up, purchase, heist completion, death, plus auto-save every 45 seconds
+- **Persistence:** `window.storage.set('rockbottom_save_v8', JSON)` on rank up, transactions, heist completion, death, plus auto-save every 45 seconds
 
 ---
 
@@ -394,12 +932,19 @@ Rank up: triggers `sfx.rankUp()`, toast notification, save.
 | THE BLOCK | center (900-1200, 740-960) | spawn, smoke spot, sleep spot | — |
 | SCRAP YARD | top-left (100-600, 80-440) | metal collection, $25/copper to Yuri | Yuri, Brutus |
 | PAWN SHOP | left-middle (130-380, 580-760) | pawn loot, $15/copper to Pete | Pete |
+| HIGHWAY UNDERPASS | north-center (1020-1400, 240-460) | tent camp, cart trade, cook oracle | Big Guy, Mathematician |
 | DEALER'S CORNER | middle-right (1450-1770, 780-1020) | buy rocks $10 | Tre Bag Tony |
 | ABANDONED BUILDING | top-right (1500-1980, 100-460) | copper heist (LOCKED until rank 4) | — |
+| BUS STOP | center-south (1240-1460, 1080-1260) | Pinky's supply lane, bus pass | Pinky Polenta |
+| THE LAUNDROMAT | center-right (1480-1800, 1080-1280) | clean supply vendor | Baggie Barb |
 | MARKETPLACE | bottom-center (700-1400, 1380-1620) | panhandling, shoplifting, mom | Whole Foods Mom, Chatty Dave |
 | BACK ALLEY | bottom-left (100-600, 1280-1660) | hostile crackheads, dumpster dive | Lurch, Sherri, Paulie |
 | CHURCH | bottom-right (1600-1980, 1300-1620) | tic-tac methadone, donations, steal plate | Father O'Malley |
-| THE PROJECTS | bottom-far-left (100-700, 1700-1780) | Conductor copper trade, Loud Larry, Stripe | Conductor, Larry, Stripe |
+| THE PROJECTS | bottom-far-left (100-700, 1700-1880) | street faction, Stripe's alternate lane | Loud Larry, Stripe |
+| TRAIN YARD | far south-west (260-1360, 2700-3260) | copper trade, train lore | Conductor, Train Hopper |
+| THE PARK | east-center (2400-3020, 900-1400) | benches, secrets, spiritual rep | Pigeon King, Philosopher |
+| SKID ROW | east-south (2480-3380, 1520-2240) | contested hostile district, Price Guy | Price Guy, three hostiles |
+| OLD SCHOOL | far north-east (3400-4160, 280-920) | rank-3 copper interior, comedy boss | Old School Brutus |
 
 ### Building collision rules
 
@@ -685,7 +1230,7 @@ Trigger: `state.day === 14 && !state.flags.day14Fired`, on morning tick.
 Trigger: `state.day === 30 && !state.flags.day30Fired`, on morning tick.
 - Spawn `bus_driver` NPC at the bus stop.
 - Within 30px triggers dialogue: `"the bus is here.\nit hasn't been here in a while.\nthe driver looks at you.\n\nare you getting on?"`
-- **yes** → THE_BUS ending screen modeled on existing `endingScreen`: `"you got on the bus.\nthe bus left.\nyou survived rock bottom.\nthe bus has a destination. it has not told you."` Plus stats summary and `THE_BUS` achievement. Save returns to main menu.
+- **yes** → THE_BUS ending screen modeled on existing `endingScreen`: `"you got on the bus.\nthe bus left.\nyou survived rock bottom.\nthe bus has a destination. it has not told you."` Plus stats summary and `THE_BUS` achievement. v17 saves the receipt and returns to the same neighborhood without erasing progression.
 - **no** → bus despawns permanently this save. Toast: `"the bus leaves.\nit doesn't come back.\nthat was your chance."`
 - Sets `state.flags.day30Fired = true` at trigger.
 
@@ -768,10 +1313,12 @@ These properties MUST hold across all builds. Violating any of these breaks the 
 | Metric | Budget |
 |--------|--------|
 | Frame time | < 16ms with 60 NPCs on screen |
-| Sprite count | < 100 prerendered |
+| Character/player `SPRITE_CACHE` | ≤ 360 prerendered 16×16-derived canvases |
+| Environment/landmark/light caches | ≤ 48 additional fixed canvases, viewport-culled where applicable |
+| Landmark facade cache | ≤ 20 static canvases, viewport-culled |
 | Particle pool | Soft cap 200 (auto-prune on life expiry) |
 | Save size | < 50KB |
-| File size (total HTML) | < 80KB compressed |
+| File size (total HTML) | ≤ 185KB gzip (v18 baseline: 179,459 bytes) |
 | Initial paint | < 200ms after script load |
 
 ---
@@ -793,22 +1340,15 @@ These properties MUST hold across all builds. Violating any of these breaks the 
 
 ---
 
-## OUT OF SCOPE (v3)
+## CURRENT OUT OF SCOPE / UNSHIPPED (v18)
 
-The following are NOT in v3 and should be considered for v4+ via DELEGATION.md:
-
-- Multiplayer / co-op
-- Mobile touch controls
-- Day/night cycle
-- Quest log UI
-- Equipment system
-- Tweaker vision mode
-- Boss music
-- Per-zone ambient audio
-- Achievements
+- Networked multiplayer
+- Procedural cities or a second city
+- Boss music synth track
+- Full per-zone ambient audio suite
 - New Game+
-- Procedural graffiti
-- Weather
+
+Mobile controls, day/night, quest UI, equipment, Tweaker Vision, achievements, procedural graffiti, and weather were historical v3 exclusions and are now shipped.
 
 ---
 
@@ -1073,6 +1613,89 @@ Comprehensive audit of every NPC / interaction that can grant cash, items, cred,
 
 ---
 
+## v19 post-audit legibility invariants (2026-07-15)
+
+These contracts apply to the modular `index.html` build. They repair four measured failures from `LEGIBILITY-AUDIT.md`; they do not create a general text-vs-text collision system.
+
+### Building sign coverage
+
+- Every `BUILDINGS` entry with a non-empty `name` has an explicit `BUILDING_STYLE[name]` record with a non-empty `sign`.
+- Repeated building names may share one authored style. Style fallback remains available only as defensive rendering, not as valid content authoring.
+- The permanent gate enumerates building entries, not merely unique keys. Audited baseline: 21 uncovered entries of 24 named buildings. Required result: 0.
+
+### Zone-label clearance
+
+- A zone may declare an optional `labelDy`; absent values retain the v19 baseline of `18` logical pixels.
+- The label bounding box must not intersect any building body or authored awning. `THE LAUNDROMAT` uses the data offset needed to clear its storefront; no gameplay coordinates move.
+- Static text-vs-text collision testing is explicitly out of scope: the audit found 0 intersections across 75 static text boxes. Audited text-vs-art baseline: 1. Required result: 0.
+
+### Dynamic nameplate de-confliction
+
+- Visible nameplates are laid out in deterministic feet-sorted draw order.
+- Before drawing a nameplate, its union box moves upward until it strictly clears every accepted nameplate box in the current frame.
+- Layout reuses cached NPC box objects and one frame buffer. It does not move NPC gameplay coordinates or allocate a fresh list per actor per frame.
+- Audited spawn baseline: 2 intersecting pairs. Required result, including a dense 60-label fixture: 0.
+
+### Graffiti wall fit and persisted-layout migration
+
+- Graffiti text width is measured with the exact selected Courier font size before placement.
+- A tag is selected only from lines that fit the building's usable horizontal wall width (`building width - 12`). The placer may step the selected size down to 8px to find a valid line.
+- Every generated record stores measured width and wall bounds. Horizontal placement preserves a 6px margin on each side, and render culling uses measured width rather than the historical 170px guess.
+- Saved v19 graffiti records without the layout marker/metrics are rebuilt once. This intentionally supersedes the older invariant that every persisted v13 layout must remain geometrically unchanged; text containment is now authoritative.
+- Audited baseline: approximately 51% of possible/generated tags overflow. Required result: 0.
+
+### Permanent gate
+
+`tools/legibility-gate.mjs` must remain runnable and must fail on any non-zero count for these four invariants. It must use measured text widths and art geometry from the production modules.
+
+---
+
+## NPC identity registry gate (post-audit 2026-07-15)
+
+The `VIBE.md` canonical identity table is a shipping contract, not optional lore. Every runtime actor identity must resolve to exactly one complete row with the four required fields: `Name`, `Tic`, `Relationship`, and `Transaction/Threat`.
+
+### Coverage contract
+
+1. The permanent gate boots the modular new-game runtime and also scans every production source module for actor-shaped authoring (`name` together with `sprite`), explicit name mutation, kingdom `guardName`/`bossName`, and recognized generated-name expressions. It additionally starts the emperor fixture so both reserved throne-guard actor families are exercised. This covers actors that are absent from a fresh spawn because they appear only on a day event, quest branch, wanted response, boss phase, pet branch, or completed-campaign day.
+2. A literal actor name must exactly match a canonical VIBE row or an explicit alias whose target is a canonical row. No free-form ignore list is valid.
+3. Allowed aliases represent the same person/state, not a way around registration: `BRUTUS (SKID) -> BRUTUS`, `LURCH (SKID) -> LURCH`, `SHERRI (SKID) -> SPIDER-BITE SHERRI`, and `FATHER O'MALLEY (FALLEN) -> FATHER O'MALLEY`. Both chained/freed dog records share the canonical `THE DOG` row.
+4. Generated display numbers normalize only through an explicit family rule. `CURB PRETENDER No. <positive integer>` resolves to the canonical row `CURB PRETENDER No. N`. An unrecognized computed `name` expression fails the gate and must receive a fixture/normalizer plus a complete canonical row before ship.
+5. Every registry cell is trimmed and non-empty; names are unique. A row cannot pass with placeholder punctuation, `TBD`, or a duplicated canonical name.
+6. Generic combat roles are not exempt merely because multiple instances share one display label. `COP` has one canonical identity row; all generated cops resolve to it.
+7. The four operator-reserved guard slots are decision-registered. The 2026-07-15 ratification keeps `TARP KNIGHT`, `CART LANCER`, and `WIRE DEACON`, and changes the throne-guard display label from `CURB HOLDOUT` to `KNIGHT EMERITUS`. The gate stores the dated operator-ratified rename chain and binds each current approved value to its campaign authoring sites plus fresh-runtime id family; changing even one site, or changing source and VIBE together, must still fail until a new dated operator-ratified decision-register entry updates that slot.
+
+### Required gate result
+
+`tools/npc-registry-gate.mjs` must fail when:
+
+- a runtime/source actor identity has no canonical row or explicit same-identity alias;
+- a VIBE row omits any of its four cells;
+- an alias points to a missing row, aliases chain, or two canonical rows use the same name;
+- a new actor uses an unrecognized computed display name; or
+- any current operator-reserved display name changes without a new dated operator-ratified decision-register entry.
+
+The passing report includes canonical-row count, distinct actor identities covered, runtime actors observed, alias count, and generated-family count. This gate changes no gameplay state, dialogue, combat, save data, sprite, or display name.
+
+---
+
+## OD-1..4 ratification + gate launcher (2026-07-15)
+
+### Ratified VIBE constraints
+
+1. The Clerical Pattern is canonical pattern #5. For a wave adding `N` new permanent-loop beats, it may own at most `floor(N / 2)`; the other four patterns own the remainder. The existing 54 permanent-loop beats are grandfathered and are not rewritten to satisfy the ratio.
+2. HARD YES #6 is exactly: “mundane > magical — and if the setup goes magical, the mundane must win in the same breath.”
+3. Campaign-scale and endless systems must periodically return the BAD IDEA through score → smoke → 18s high → 8s crash. Long-form objectives may not permanently displace that loop. Frequency, transport, and coverage-budget enforcement is deferred to the Wave-4 world-scale session.
+4. `KNIGHT EMERITUS` is a display-label-only ratification. IDs, sprites, spawn sites, rewards, balance, and behavior remain unchanged.
+
+### Verification launcher
+
+1. `node tools/run-gates.mjs` launches, in order, `module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, and `runtime-smoke.mjs` as child processes using the current Node executable plus `--experimental-vm-modules`.
+2. Child output is inherited and streamed. The launcher stops at the first spawn error, signal, or non-zero exit, returns non-zero, and does not run later gates. Four successful children produce a 4/4 PASS summary.
+3. `tools/run-gates.cmd` is a two-line Windows shim that invokes the plain-Node launcher without adding a dependency or package script.
+4. `runtime-harness.mjs` and `runtime-smoke.mjs` guard `vm.SourceTextModule` before construction. Invocation without `--experimental-vm-modules` prints a friendly instruction, exits 1, and emits no stack trace.
+
+---
+
 ## CHANGE LOG
 
 | Version | Date | Major changes |
@@ -1088,3 +1711,8 @@ Comprehensive audit of every NPC / interaction that can grant cash, items, cred,
 | v13 wave 5 | May 2026 | Combat depth pass. 5 archetypes (charger / grabber / swarmer / ranged / cop) with distinct patterns dispatched by `n.archetype`. New generic projectile system (`projectiles` array, kinds: bottle, holy). Boss phases reframed as pattern shifts (tony p2 = charger + sherri adds, p3 = berserk; brutus_older p2 = adds every 8s, p3 = grabber-on-contact). FATHER O'MALLEY FALLEN mini-boss + `fallen_priest` quest with two trigger paths (steal OR rank-3 phone call). New equipment `priest_collar` (+2 cred, +0.3 wantedDecay multiplier). 3 new achievements (FALLEN, DODGED_THE_LUNGE, OUTRAN_THE_PRIEST). New player status timers `P.stunT` + `P.slowT`. Cop radio-for-backup (25%/s at >120px, cap 4 cops). Hit-stun 120ms on every NPC damage. Save key unchanged. |
 | v13 wave 6 | May 2026 | Map depth pass. Highway Underpass: cracked-concrete tile palette + oil stains, 4 tents, cardboard sign next to The Mathematician, sodium-orange light patches, first-entry echo line. Scrap Yard depth: dirt-brown tile palette, scrap piles, 2 car wrecks, leash post, pay phone. New `scrap_dog` NPC (archetype `passive`, chained, leash render). Interactive props system (`interactiveProps[]` array): 6 kickable trash cans + 8 respawning breakable bottles + 1 pay phone. `startDumpsterDive` rewritten with distance-from-block loot table + rare propane drop (3rd acquisition path). Procedural graffiti rebuild: `GRAFFITI_LINES` (36) + 12-18 persisted tags via `state.graffiti`. `scrap_dog` side quest with 3 branches (feed/free/leave) + cop discomfort radius (200px). New `broken_bottle` weapon + `food` inventory item. 3 new achievements (LIBERATOR, THE_PIECE_OF_SHIT, PHONE_BOOTH_PROPHET). Save key unchanged. |
 | v13 wave 8.6 | May 2026 | Playtest bug fix wave. Two fixes: (1) interact priority overhaul — `tryInteract` now scans NPCs (closest within 60px) BEFORE interactive props (bench/trash/phone/cart/dumpster), so adjacent props no longer hijack vendor E. Doors (hideout, old school) stay above NPCs. Heist trigger between NPCs and props. Marketplace panhandle's redundant closeNpc check removed (now dead code after the lift). (2) Old School properly gated — `tryEnterOldSchool` refuses entry below `P.rank >= 3` with a one-option refusal dialogue; first ever copper rip per save FORCES OS Brutus spawn (0 copper that attempt), tracked via new `state.flags.osBrutusKilled` flipped on his death-drop. Subsequent rips revert to existing 40% probabilistic spawn. Save key unchanged. |
+| v14 | July 2026 | Visual world cohesion: connective roads/terrain/rails, cached facade silhouettes and environment sprites, district lighting/fog, foreground depth, culling, connective minimap, memory-only storage fallback. Save key unchanged. |
+| v15 | July 2026 | Living-neighborhood incident engine with six physical scenes; true logical-pixel raster pipeline; authored roster signatures; sleeping Dave, three dog silhouettes, crowned Pigeon King, Fallen O'Malley and Tony coat states; cached nameplates/buffer. Save key unchanged. |
+| v16 | July 2026 | Control reliability fix: event-latched multi-key WASD/arrows/Shift, removed 700ms repeat watchdog and global pointer keyboard purge, unified keyboard/analog/modal/focus release. Movement math, status timing, bosses, and save key unchanged. |
+| v17 | July 2026 | Cursed-sticker sprite pipeline with directional player/attack/gear/weapon/cart/route layers; BAD IDEA guidance and touch/keyboard control ledgers; persistent endless three-stop block routes; feasible/persisted daily hustles; IndexedDB-backed `window.storage` browser adapter; local Possum prophecy pool; square-pixel mobile letterboxing. Save key unchanged. |
+| v18 | July 2026 | Far-east expansion to 5800×3800; condemned office/shelter with six visible upgrades; eleven reputation-gated survey/file/sign claims; bounded endless office orders; new Leasing Guy and Gutter Greg sprites; evolving office/sign/minimap presentation; safe paginated bus travel; hardened partial-save reconciliation. Save key unchanged. |

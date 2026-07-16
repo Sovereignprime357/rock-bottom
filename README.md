@@ -1,6 +1,6 @@
 # ROCK BOTTOM — The Crackhead's Odyssey
 
-> A top-down satirical action game where you play a crackhead trying to score rocks from a local dealer. Single HTML file. Zero dependencies. Double-click to play. Built by VibeKoded.
+> A top-down satirical action game where you play a crackhead trying to score rocks from a local dealer. Native browser modules. Zero runtime dependencies. Built by VibeKoded.
 
 ## What it is
 
@@ -10,19 +10,29 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 
 ## Technical shape
 
-- **One file.** `rock_bottom_v13.html` — HTML, CSS, JS, sprites, audio, all inline.
-- **Zero deps.** No CDN. No npm. No build step. No framework. Vanilla JS, Canvas 2D, Web Audio.
-- **How to run:** double-click the file. Or drag it into a browser. That is the install process.
-- **Saves:** `window.storage` (Claude.ai artifact API). Falls back to in-memory if missing.
-- **Browser:** any evergreen Chromium/Firefox/Safari. Desktop and mobile both supported (touch D-pad on mobile).
+- **Active source.** `index.html` plus section-derived native ES modules under `src/`. `rock_bottom_v19.html` is the frozen behavioral reference, not the active source.
+- **Zero runtime deps.** No CDN, package install, framework, or build step. Vanilla JS, Canvas 2D, and Web Audio.
+- **How to run:** serve this folder over ordinary HTTP and open `index.html`. For example, from the repo root: `python -m http.server 8000`, then open `http://localhost:8000/`. Native modules are intentionally not recombined for `file://` double-click execution.
+- **Saves:** async `window.storage`; ordinary browsers receive an IndexedDB-backed adapter, with volatile memory only when IndexedDB is unavailable.
+- **Browser:** any evergreen Chromium/Firefox/Safari. Desktop and mobile both supported (analog touch controls on mobile).
 
 ## Current shipped build
 
-**v13** — wave 1 housekeeping done. v12 → v13 forked, dead rank-gate collision code removed, docs synced. Wave 2+ is queued in `DELEGATION.md`.
+**v19 post-audit modular build.** The world is `8600×5600`: the paper office now leads into BLUE TARP COURT, CART CAVALRY KEEP, COPPER CHOIR YARD, and THE THRONE DITCH, ending in a folding-chair succession fight before endless routes, work orders, hustles, incidents, and daily pretenders continue. The post-audit pass split the frozen v19 script into 38 linked source modules, repaired building/zone/nameplate/graffiti legibility, restored the complete NPC identity registry, fixed the isolated office encoding damage, and retained the exact multi-key controls plus 18s high → 8s crash loop.
 
 ## Version lineage
 
-`rock_bottom_v4.html` through `rock_bottom_v13.html` are all preserved in the repo. v3 was the original public ship; everything since is in-house iteration. Latest = highest number. Older versions are kept for diff archeology, not because they still work — play the latest.
+`rock_bottom_v4.html` through `rock_bottom_v19.html` are preserved for diff archaeology. v3 was the original public ship; v19 is now the frozen monolithic reference. Play the active modular build through `index.html`.
+
+## Verification
+
+Run these from the repository root with a current Node.js:
+
+```text
+node tools/run-gates.mjs
+```
+
+The runner supplies `--experimental-vm-modules`, streams all four gates in order, and stops on the first failure. Together they enforce source/reference integrity, module linking, save/input/status parity, the four measured legibility relationships, and complete VIBE registration for runtime NPC identities.
 
 ## Design docs (read in this order)
 
@@ -31,7 +41,7 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 | `README.md` | This file. Quick orientation. |
 | `VIBE.md` | **THE SOUL.** Tone bible. Read it twice. Lowercase NPCs, cursed names, no fourth-wall breaks. |
 | `SPEC.md` | Behavioral contract. Resources, zones, invariants, edge cases. |
-| `CLAUDE.md` | Operating constraints for the agent. Hard rules vs soft rules. |
+| `AGENTS.md` | Operating constraints for the agent. Hard rules vs soft rules. |
 | `DELEGATION.md` | Prioritized backlog. What ships next. |
 | `BRAIN.md` | Append-only session log. What was changed, why, what was tried, what's next. |
 
@@ -40,8 +50,8 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 1. README.md (you are here)
 2. **VIBE.md** — internalize the voice before doing anything else
 3. SPEC.md — understand the systems before changing them
-4. Play the latest `rock_bottom_v{N}.html` end-to-end (smoke a rock, fight a crackhead, get arrested, cook a batch, beat the boss)
-5. CLAUDE.md — operating rules
+4. Serve and play `index.html` end-to-end (smoke a rock, fight a crackhead, get arrested, cook a batch, beat the boss)
+5. AGENTS.md — operating rules
 6. DELEGATION.md — pick a task off the top
 7. BRAIN.md — context for what just happened
 
@@ -55,6 +65,6 @@ Sovereign Prime (Shayler Phipps) — VibeKoded
 Architect: Claude (Opus 4.7)
 Methodology: SpecMesh
 
-## License
+## Release
 
-Personal portfolio piece. Not for distribution. The crackhead does not consent to a port.
+Free-to-play release candidate. No account, gameplay service, asset download, package install, or build step is required; static HTTP hosting is required for native modules. Source licensing and redistribution terms remain with the operator.

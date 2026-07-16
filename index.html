@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ROCK BOTTOM v19</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+  :root {
+    --piss: #e8c040;
+    --mold: #4a5028;
+    --asphalt: #1a1810;
+    --brown: #604020;
+    --cream: #d4c896;
+    --rust: #8a3a3a;
+    --purple: #d488d4;
+    --copper: #d06030;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+  html,body{background:#000;color:var(--cream);font-family:'Courier New',monospace;overflow:hidden;height:100%;width:100%;touch-action:none;overscroll-behavior:none}
+  body{display:flex;align-items:center;justify-content:center;cursor:crosshair}
+  #stage{position:relative;width:min(800px,100vw,calc(100vh * 4 / 3));height:min(600px,100vh,calc(100vw * 3 / 4));background:#000;box-shadow:0 0 80px rgba(232,192,64,.08)}
+  canvas#game{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+  /* Overlays */
+  .ui{position:absolute;color:var(--cream);text-shadow:1px 1px 0 #000;pointer-events:none;font-size:11px;line-height:1.3}
+  #hud{top:26px;left:8px;right:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  #hud .col{display:flex;flex-direction:column;gap:2px}
+  #hud .right{align-items:flex-end;text-align:right}
+  .hearts{letter-spacing:1px;color:var(--rust)}
+  .bar{display:inline-block;width:80px;height:6px;background:#220;border:1px solid #553;vertical-align:middle;margin-left:4px;position:relative}
+  .bar i{display:block;height:100%;background:var(--purple)}
+  .bar.shake i{background:linear-gradient(90deg,#e8c040,#d488d4)}
+  .bar.brain i{background:#a2c0d4}
+  .stars{color:#5aa0ff}
+  #toast{bottom:60px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);border:1px solid var(--cream);padding:8px 14px;font-size:12px;letter-spacing:1px;max-width:560px;text-align:center;opacity:0;transition:opacity .25s;white-space:pre-wrap}
+  #toast.show{opacity:1}
+  #dialogue{bottom:8px;left:8px;right:8px;background:rgba(0,0,0,.92);border:2px solid var(--piss);padding:12px 16px;font-size:13px;pointer-events:auto;display:none}
+  #dialogue.show{display:block}
+  #dialogue .name{color:var(--piss);font-weight:bold;margin-bottom:4px;letter-spacing:2px}
+  #dialogue .text{color:var(--cream);margin-bottom:10px;line-height:1.5;white-space:pre-wrap}
+  #dialogue .opts{display:flex;flex-direction:column;gap:4px}
+  #dialogue .opt{cursor:pointer;padding:4px 8px;border-left:2px solid #443;color:var(--cream)}
+  #dialogue .opt:hover{border-left-color:var(--piss);background:rgba(232,192,64,.08);color:var(--piss)}
+  #dialogue .opt.disabled{opacity:.4;cursor:not-allowed}
+  #dialogue .opt b{color:var(--piss)}
+  #panel{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.95);border:2px solid var(--piss);padding:18px 22px;font-size:12px;pointer-events:auto;display:none;min-width:380px;max-width:560px;max-height:80vh;overflow-y:auto}
+  #panel.show{display:block}
+  #panel h2{color:var(--piss);letter-spacing:3px;margin-bottom:10px;font-size:14px}
+  #panel .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #443}
+  #panel .row span:last-child{color:var(--piss)}
+  #panel .sec{margin-top:12px;color:var(--copper);letter-spacing:2px;border-bottom:1px solid #443;padding-bottom:2px;margin-bottom:4px}
+  #panel .quest{padding:6px 0;border-bottom:1px dotted #443}
+  #panel .quest.done{opacity:.55}
+  #panel .quest.done .qtitle{text-decoration:line-through}
+  #panel .qtitle{color:var(--piss);letter-spacing:1px}
+  #panel .qflav{color:var(--cream);font-size:11px;margin-top:2px;line-height:1.4}
+  #panel .close{color:#776;text-align:right;font-size:10px;margin-top:10px;letter-spacing:2px}
+  #objective{top:91px;left:50%;transform:translateX(-50%);max-width:520px;min-width:280px;background:rgba(10,8,5,.84);border-left:3px solid var(--piss);padding:5px 10px;text-align:center;font-size:10px;letter-spacing:1px;color:var(--cream);display:none;z-index:24}
+  #objective.show{display:block}
+  #objective b{color:var(--piss);letter-spacing:2px}
+  #actionHint{bottom:112px;left:50%;transform:translateX(-50%);background:rgba(10,8,5,.88);border:1px solid #665;padding:4px 9px;color:var(--cream);font-size:10px;letter-spacing:1px;display:none;z-index:25;white-space:nowrap}
+  #actionHint.show{display:block}
+  #actionHint b{color:var(--piss)}
+
+  #title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse at center, #1a1810 0%, #000 100%);z-index:50;pointer-events:auto;cursor:pointer}
+  #title.hide{display:none}
+  #title h1{color:var(--piss);font-size:48px;letter-spacing:8px;margin-bottom:6px;text-shadow:4px 4px 0 var(--rust),0 0 24px rgba(232,192,64,.5)}
+  #title .sub{color:var(--cream);font-size:12px;letter-spacing:4px;margin-bottom:24px;opacity:.7}
+  #title .start{color:var(--cream);font-size:14px;letter-spacing:3px;animation:blink 1.2s infinite;margin-bottom:6px}
+  #title .load{color:#776;font-size:11px;letter-spacing:2px;cursor:pointer;margin-top:6px}
+  #title .load:hover{color:var(--piss)}
+  #title .credit{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#443;font-size:10px;letter-spacing:3px}
+  #title .receipt{width:min(620px,90vw);border-top:1px dashed #665;border-bottom:1px dashed #665;padding:10px 12px;margin:0 0 18px;color:#998f6f;font-size:10px;line-height:1.7;text-align:center;letter-spacing:1px}
+  #title .receipt b{color:var(--piss);font-weight:normal;letter-spacing:2px}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.25}}
+
+  /* CRT effects */
+  #scanlines{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 3px);z-index:30;mix-blend-mode:multiply}
+  #flicker{position:absolute;inset:0;pointer-events:none;background:rgba(255,220,140,.02);z-index:31;animation:flick 8s infinite}
+  @keyframes flick{0%,97%,100%{opacity:.4}98%{opacity:.7}99%{opacity:.2}}
+  #vignette{position:absolute;inset:0;pointer-events:none;z-index:0;box-shadow:inset 0 0 100px 20px #000}
+  #daynight{position:absolute;inset:0;pointer-events:none;z-index:28;transition:background 1.5s linear;mix-blend-mode:multiply}
+  #flash{position:absolute;inset:0;pointer-events:none;z-index:29;opacity:0}
+  #tweaker{position:absolute;inset:0;pointer-events:none;z-index:27;background:radial-gradient(ellipse,rgba(80,200,80,.18),rgba(80,200,80,.45));opacity:0;transition:opacity .25s;mix-blend-mode:screen}
+  #tweaker.on{opacity:1}
+
+  #minimap{position:absolute;bottom:8px;right:8px;width:120px;height:96px;border:1px solid #443;background:rgba(0,0,0,.6);z-index:20}
+
+  /* Mobile touch controls */
+  #mobile-ctrls{position:absolute;inset:0;pointer-events:none;z-index:22;display:none}
+  /* Analog joystick (v11) */
+  #mobile-ctrls .stick{position:absolute;bottom:18px;left:14px;width:130px;height:130px;border-radius:50%;background:rgba(0,0,0,.4);border:2px solid rgba(232,192,64,.55);pointer-events:auto;touch-action:none}
+  #mobile-ctrls .stick.dragging{background:rgba(0,0,0,.55);border-color:rgba(232,192,64,.85)}
+  #mobile-ctrls .stick .nub{position:absolute;left:50%;top:50%;width:54px;height:54px;border-radius:50%;background:rgba(232,192,64,.35);border:2px solid rgba(232,192,64,.85);transform:translate(-50%,-50%);box-shadow:0 0 12px rgba(232,192,64,.4) inset, 0 2px 6px rgba(0,0,0,.5);pointer-events:none;transition:background .08s}
+  #mobile-ctrls .stick.dragging .nub{background:rgba(232,192,64,.55)}
+  #mobile-ctrls .stick .ring{position:absolute;left:50%;top:50%;width:90px;height:90px;border-radius:50%;border:1px dashed rgba(232,192,64,.25);transform:translate(-50%,-50%);pointer-events:none}
+  #mobile-ctrls .actions{position:absolute;bottom:18px;right:12px;width:160px;height:160px;pointer-events:auto}
+  #mobile-ctrls .actions .ab{position:absolute;width:60px;height:60px;border-radius:50%;background:rgba(0,0,0,.55);border:2px solid rgba(232,192,64,.7);color:var(--piss);font-size:20px;font-weight:bold;display:flex;align-items:center;justify-content:center;letter-spacing:0;text-shadow:0 0 4px rgba(0,0,0,.9);transition:transform .08s, background .08s}
+  #mobile-ctrls .actions .ab{flex-direction:column;line-height:1}
+  #mobile-ctrls .actions .ab small{font-size:7px;letter-spacing:1px;color:var(--cream);margin-top:4px;font-weight:normal}
+  #mobile-ctrls .actions .ab.active{background:rgba(232,192,64,.5);transform:scale(.94)}
+  #mobile-ctrls .actions .a{right:0;bottom:0}
+  #mobile-ctrls .actions .b{right:64px;bottom:48px}
+  #mobile-ctrls .actions .x{right:0;bottom:64px;width:46px;height:46px;font-size:14px}
+  #mobile-ctrls .topbar{position:absolute;top:0;right:0;display:flex;gap:1px;pointer-events:auto;flex-direction:row;z-index:22}
+  #mobile-ctrls .topbar .mb{width:42px;height:20px;background:rgba(10,8,5,.92);border:1px solid rgba(232,192,64,.5);color:var(--cream);font-size:9px;font-weight:bold;display:flex;align-items:center;justify-content:center;letter-spacing:1px}
+  #mobile-ctrls .topbar .mb.active{background:rgba(232,192,64,.3);color:var(--piss);border-color:var(--piss)}
+
+  /* News ticker */
+  #ticker{position:absolute;top:0;left:0;right:80px;height:18px;background:rgba(10,8,5,.92);border-bottom:1px solid #443;overflow:hidden;z-index:21;font-size:11px;letter-spacing:1px;display:flex;align-items:center;padding:0 8px}
+  #ticker .badge{background:var(--rust);color:#000;padding:1px 6px;margin-right:8px;font-weight:bold;font-size:9px;letter-spacing:2px;flex-shrink:0}
+  #ticker .strip{flex:1;overflow:hidden;white-space:nowrap;position:relative;height:14px}
+  #ticker .tape{position:absolute;white-space:nowrap;color:var(--cream);animation:ticker 60s linear infinite;will-change:transform}
+  @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+  #ticker .sep{color:var(--copper);margin:0 14px}
+
+  /* Phone feed */
+  #phonebox{position:absolute;top:120px;right:8px;width:220px;background:rgba(10,8,5,.92);border:1px solid var(--piss);font-size:10px;letter-spacing:0;padding:6px 8px;z-index:21;display:none;font-family:Courier New,monospace}
+  #phonebox.show{display:block}
+  #phonebox .ph{color:var(--piss);letter-spacing:2px;font-size:9px;margin-bottom:4px;font-weight:bold}
+  #phonebox .post{padding:3px 0;border-bottom:1px dotted #443;line-height:1.4;color:var(--cream)}
+  #phonebox .post b{color:var(--piss)}
+  #phonebox .post:last-child{border-bottom:none}
+
+  /* CRT power-on */
+  #poweron{position:absolute;inset:0;z-index:60;background:#000;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .4s}
+  #poweron.gone{opacity:0;pointer-events:none}
+  #poweron .line{width:80%;height:2px;background:#fff;animation:scanin 1.4s ease-in-out forwards}
+  @keyframes scanin{0%{height:2px;width:80%;opacity:.9}50%{height:80%;width:80%;opacity:.7}100%{height:100%;width:100%;opacity:0}}
+  #poweron.gone .line{display:none}
+
+  .keyhint{color:#665;font-size:10px;letter-spacing:1px}
+
+  @media (max-width: 820px), (pointer: coarse){
+    body{align-items:stretch;justify-content:stretch;padding:0}
+    #stage{width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none}
+    canvas#game{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100vw,calc(100dvh * 4 / 3));height:min(100dvh,calc(100vw * 3 / 4))}
+    #vignette{box-shadow:inset 0 0 40px 0 rgba(0,0,0,.5)}
+    #hud{top:24px;font-size:10px}
+    .keyhint{display:none}
+    #minimap{width:84px;height:64px;bottom:160px;right:6px;opacity:.85}
+    #phonebox{width:160px;font-size:9px;top:80px;right:6px}
+    #toast{bottom:170px;font-size:11px;padding:6px 10px;max-width:90vw}
+    #objective{top:82px;min-width:0;width:68vw;max-width:440px;font-size:9px;padding:4px 7px}
+    #actionHint{bottom:166px;font-size:9px}
+    #dialogue{bottom:170px;font-size:11px;padding:8px 10px}
+    #dialogue .name{font-size:12px}
+    #dialogue .opt{padding:8px 6px;font-size:12px}
+    #panel{font-size:11px;padding:12px;min-width:auto;width:92vw;max-height:75vh}
+    #ticker{font-size:10px}
+    #title h1{font-size:34px;letter-spacing:5px}
+    #mobile-ctrls{display:block !important}
+    /* lift game render slightly so mobile UI doesn't crowd the player */
+    #scanlines{background-size:100% 2.5px}
+  }
+  @media (orientation: landscape) and (max-height: 600px){
+    #stage{height:100dvh}
+    #mobile-ctrls .pad{bottom:6px;left:6px;width:100px;height:100px}
+    #mobile-ctrls .pad .up,#mobile-ctrls .pad .down,#mobile-ctrls .pad .left,#mobile-ctrls .pad .right{width:34px;height:34px}
+    #mobile-ctrls .actions{bottom:6px;right:6px;width:130px;height:130px}
+    #mobile-ctrls .actions .ab{width:48px;height:48px;font-size:16px}
+    #toast,#dialogue{bottom:114px}
+    #minimap{bottom:110px}
+  }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="game" width="800" height="600"></canvas>
+    <div id="daynight" class="ui"></div>
+    <div id="tweaker" class="ui"></div>
+    <div id="flash" class="ui"></div>
+    <div id="vignette" class="ui"></div>
+    <div id="scanlines" class="ui"></div>
+    <div id="flicker" class="ui"></div>
+    <canvas id="minimap" width="120" height="96"></canvas>
+    <div id="mobile-ctrls">
+      <div class="stick" id="stick">
+        <div class="ring"></div>
+        <div class="nub" id="stickNub"></div>
+      </div>
+      <div class="actions">
+        <div class="ab a" data-key=" ">A<small>HIT</small></div>
+        <div class="ab b" data-key="e">B<small>BOTHER</small></div>
+        <div class="ab x" data-key="f">F<small>SQUINT</small></div>
+      </div>
+      <div class="topbar">
+        <div class="mb" data-key="i">INV</div>
+        <div class="mb" data-key="q">QST</div>
+        <div class="mb" data-key="p">FEED</div>
+        <div class="mb" data-key="m">MUTE</div>
+      </div>
+    </div>
+    <div id="ticker" class="ui">
+      <span class="badge">LIVE @ 4</span>
+      <div class="strip"><div class="tape" id="tape">good evening. tony has not blinked since 1994.</div></div>
+    </div>
+    <div id="phonebox">
+      <div class="ph">📱 LOCAL FEED · DAY <span id="phDay">1</span></div>
+      <div id="phPosts"></div>
+    </div>
+    <div id="hud" class="ui">
+      <div class="col">
+        <div><span class="hearts" id="hp">♥♥♥♥♥</span></div>
+        <div>$<span id="cash">0</span> &nbsp; 🪨<span id="rocks">0</span> &nbsp; 🪙<span id="copper">0</span> &nbsp; 🧪<span id="supplies">0</span></div>
+        <div>shakes<span class="bar shake"><i id="shakeBar"></i></span></div>
+        <div>brain<span class="bar brain"><i id="brainBar"></i></span></div>
+      </div>
+      <div class="col right">
+        <div><span id="rankName">stem-tip sucker</span> · <span id="cred">0</span> cred</div>
+        <div><span class="stars" id="wanted"></span></div>
+        <div id="timeOfDay" style="color:#776">tuesday · day</div>
+        <div class="keyhint">move wasd · hit space · bother e · business q</div>
+      </div>
+    </div>
+    <div id="objective" class="ui"></div>
+    <div id="actionHint" class="ui"></div>
+    <div id="toast" class="ui"></div>
+    <div id="panel" class="ui"></div>
+    <div id="dialogue" class="ui"></div>
+    <div id="title">
+      <pre style="color:#d4c896;font-size:9px;line-height:1;letter-spacing:0;margin-bottom:14px;text-shadow:1px 1px 0 #000;opacity:.6">
+        _____
+       /  _  \\___
+      |  / \\    /
+      | ( o )(o )
+      |  \\_/    \\
+       \\___|  ___>
+           \\/   the possum knows</pre>
+      <h1>ROCK BOTTOM</h1>
+      <div class="sub">the crackhead's odyssey · v19</div>
+      <div class="receipt"><b>THE PLAN</b> · find $10 · bother tony · smoke at the crate<br><b>THE LONGER PLAN</b> · file 3 routes · acquire the office · install 4 claims · settle tony · answer the radio · dispute every throne<br>MOVE · wasd / arrows &nbsp; HIT · space &nbsp; BOTHER · e &nbsp; RUN · shift<br>POCKETS · i &nbsp; BAD IDEAS · q &nbsp; SQUINT WRONG · f &nbsp; FEED · p<br>TOUCH · stick moves &nbsp; HIT hits &nbsp; BOTHER uses &nbsp; SQUINT squints</div>
+      <div class="start">[ SPACE / TAP ] begin</div>
+      <div class="load" id="loadBtn" style="display:none">[ L ] load save</div>
+      <div class="credit">vibekoded · the possum knows</div>
+    </div>
+    <div id="poweron"><div class="line"></div></div>
+  </div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

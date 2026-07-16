@@ -1,6 +1,97 @@
-# DELEGATION.md — Rock Bottom v4 Backlog
+# DELEGATION.md — Rock Bottom Backlog
 
 > Tasks for the next agent picking this up. Prioritized. Each task has a SPEC stub. Pick top-down. Don't ship a task without updating its status here.
+
+---
+
+## v19 post-audit stabilization — SHIPPED ✓ (July 15, 2026) — modular source / measured legibility / registry enforcement
+
+Active build: `index.html` + `src/`. `rock_bottom_v19.html` remains the frozen behavioral reference at SHA-256 `C25DB5E17536AEC092143D87DBF8C113325076A8B8E196A98AECB84694A25C8B`. SAVE_KEY and save shape are unchanged. See SPEC.md post-audit invariants, `REFACTOR-FINDINGS.md`, and the appended BRAIN session.
+
+- [x] **Checkpoint before surgery.** Committed the v14–v19 lineage and documentation before touching the audited build. The only pre-refactor presentation change moved `#vignette` beneath gameplay UI; its intensity and every gameplay value stayed unchanged.
+- [x] **Retire the obsolete monolith rule deliberately.** Preserved v19 as reference and extracted all 37 script chunks into 38 linked native ES modules under `src/`, with `index.html` as the zero-dependency HTTP entry. No `legacy.js`, framework, CDN, package install, or build step remains.
+- [x] **Prove behavior parity.** `module-gate` verifies the frozen reference hash, one-time source coverage, import linking, forbidden storage APIs, and ≤1000-line modules. `runtime-smoke` compares deterministic reference/modular state, starts a new game, exercises W+D plus partial release, Tony dialogue, exact 18s→8s status timing, 373 sprite keys, and real save/load round trips.
+- [x] **Repair the four measured legibility failures.** All 24 named building entries have styled signs; all 23 zone-label ink boxes clear building/awning art; 56 production nameplates and a dense 60-label fixture deconflict; graffiti uses measured font widths and real wall bounds with one-time v19 layout migration. `legibility-gate` makes all four set/geometry relationships permanent.
+- [x] **Expose map-growth dependencies without balancing them.** Documented travel/withdrawal/day/route/office/bus/phone/police/incident budgets; NPC/resource/prop/light/transport/content coverage; minimap resolution; repaired relationships; and explicit counterexamples in `REFACTOR-FINDINGS.md`. No Wave 4 value changed. The vignette is recorded as an original fixed-viewport issue, not a growth regression.
+- [x] **Restore the NPC identity gate.** Added the SPEC contract, backfilled 30 omitted identities for 55 complete VIBE rows, and added `npc-registry-gate`. It covers 59 distinct source identities across 60 actor sites, 56 fresh-game actors, four explicit same-person aliases, and one generated pretender family. The four reserved guard slots are now decision-registered across VIBE, source, and fresh runtime.
+- [x] **Ratify the operator decisions.** Canonized the Clerical Pattern as pattern #5 with a future-only 50% share cap, amended HARD YES #6 verbatim, added the core-loop scope invariant with Wave-4 enforcement deferred, retained three guard labels, and changed only the throne-guard display label to KNIGHT EMERITUS.
+- [x] **Repair the isolated encoding damage.** Corrected 17 malformed middle-dot tokens across ten office lines plus one corrupt em-dash comment. The campaign module now has an encoding regression assertion; the frozen v19 reference remains untouched.
+- [x] **Verification.** `node tools/run-gates.mjs` supplies the VM-module flag, streams four permanent gates, stops on the first failure, and reports 4/4 PASS: 37/37 module extraction with 38 JS files linked; 56-NPC reference parity with WASD chord/release and exact 18s→8s loop; 24 signs / 23 zone labels / 56 nameplates / 14 fitted deterministic tags; 55 canonical NPC rows / 59 source identities / 60 actor sites. `git diff --check` is clean and the frozen reference hash is unchanged. Live visual/audio inspection remains pending.
+
+---
+
+## v18 — SHIPPED ✓ (July 14, 2026) — the office / paper empire / far-east expansion
+
+Lands on `rock_bottom_v18.html`. SAVE_KEY unchanged. See SPEC.md `THE OFFICE + BLOCK AUTHORITY + FAR-EAST EXPANSION (v18)` and the appended v18 BRAIN session.
+
+- [x] **Make the map materially larger and stranger.** Expanded WORLD from 4400×3400 to 5800×3800 without moving v17 content. Added WAREHOUSE ROW, THE DRAINAGE CANAL, and THE LOT with distinct ground treatment, connected roads, facades, buildings, props, lights, entry receipts, bus discovery, and three appended route landmarks.
+- [x] **Give the player a shelter that becomes a headquarters.** Route 3 exposes THE LEASING GUY and a one-time $40 + 1 copper office sale. Six permanent upgrades add rest/sleep, shared storage, claims, powered recovery/light, bounded work orders, and one unpaid route reroll; every purchase changes the exterior.
+- [x] **Turn “territory” into the correct joke.** Eleven districts can be surveyed, filed for escalating cash + one copper, and marked with a cached bent sign. Faction claims require LIKED +10 when selected. Claims never own people, change faction heat, pay passively, produce rocks, or reclassify Tony/the crate/church/heist/vendors.
+- [x] **Build a medium goal, long goal, and endless floor.** Office acquisition and 1/4/8/11 claim receipts form the finite campaign. Radio work orders travel to one owned sign and back, pay $6–$12 with a one-to-three daily cap, and continue forever alongside the saved block-route cursor.
+- [x] **Keep the expansion readable.** Office objectives outrank the eternal route only while acquisition/onboarding/paperwork is active. Door/claim/order hints mirror E/B priority. Q reports ownership, upgrades, active paper, daily capacity, lifetime orders, and every claimable district.
+- [x] **Add two authored clerical fixtures.** THE LEASING GUY carries the clipboard/key-ring sale; GUTTER GREG counts canal inventory once per day for +1 scrap. Both have distinct three-frame cached 16×16 sprites and essential paper-denial behavior that prevents damage, death, or displacement softlocks.
+- [x] **Harden travel and persistence.** All fourteen bus destinations use authored collision-free arrivals and paginate six per page. Office/claim/job state is whitelisted, finite-clamped, prerequisite-reconciled, save-race-resistant, and repaired upward from durable purchase/milestone witnesses without inventing lost claim ids.
+- [x] **Verification.** JavaScript compile clean; 11 survey + 11 sign anchors, 19 route stops, 14 bus arrivals, both new NPCs, and the office door are outside solids; zero facade-road overlaps; 352/360 nonblank character canvases; environment 7 and landmark 20 nonblank; deterministic office acquisition/claim/order/cap flow passed; essential NPC attack test passed; 65-NPC update/draw smoke stayed far below 16ms in the stubbed harness; WASD chord/partial release and exact 18s→8s status loop passed; maxed save stayed below 9KB; standalone file is 179,459 bytes gzip inside the revised 185KB v18 ceiling.
+
+---
+
+## v17 — SHIPPED ✓ (July 14, 2026) — cursed stickers / bad-idea clarity / endless block routes
+
+Lands on `rock_bottom_v17.html`. SAVE_KEY unchanged. See SPEC.md `CURSED STICKERS + BAD-IDEA CLARITY + ENDLESS BLOCK ROUTES (v17)` and the appended v17 BRAIN session.
+
+- [x] **Make the player visually accumulate the grind.** Rebuilt the player as four genuinely distinct directions with a four-beat uneven shuffle, two attack poses, phased directional smears, visible cached layers for every equipment/weapon id, four route-patch tiers, and a cached directional shopping cart.
+- [x] **Push named silhouettes past palette swaps.** Enlarged signature geometry for Yuri, Pete, Lurch/Big Guy, Sherri, Paulie, Mom, Conductor, Larry, Stripe, and the existing state roster. Added a pure `resolveNpcPose()` and normalized two-frame animals/bosses so every requested cache key exists.
+- [x] **Tell the player what the bad idea is.** Added the title control/plan receipt, desktop/touch verb labels, one live BAD IDEA strip, shared world/edge/minimap targeting, read-only contextual E/B prompts, and a Q ledger ordered as controls → now → route → hustles → quests → factions → activities.
+- [x] **Add an endless floor without another currency.** Added 16 authored public route stops; every route has three ordered distinct landmarks, persists its cursor, posts the next sheet immediately, pays capped cash/cred, changes visible patches every five completions up to tier four, and grants milestones at 5/20/50 with no lifetime cap. Tony/co-op/bus ending receipts now save and return to the same block instead of wiping the ledger.
+- [x] **Repair daily-contract counterexamples.** Panhandle and church requirements now match possible actions, unavailable NPC contracts are filtered, hustles persist, church progress displays one donation, and crate sleep settles the current contract before dawn posts tomorrow's sheet.
+- [x] **Make the free build standalone.** Missing host storage now receives an IndexedDB-backed async `window.storage` adapter (memory only if IDB is unavailable); the Possum has 16 local prophecies with only a prompt optional host override; mobile canvas presentation preserves 4:3 square pixels and exposes touch start/load/verbs.
+- [x] **Verification.** Full JS compile/init/update/draw clean; v16 chord/partial-release and exact 18s→8s status matrix passed; 346/360 sprite canvases with all 60 gear-direction and 72 weapon-state layers nonblank; 100 routes/300 stamps paid exact capped totals and produced route 101; hidden/modal/boss guards and malformed/prototype-key route regeneration passed; IndexedDB round-trip passed; boss/attack/status code remains unchanged; 164,853 bytes gzip.
+
+---
+
+## v16 — SHIPPED ✓ (July 12, 2026) — keyboard / control reliability
+
+Lands on `rock_bottom_v16.html`. SAVE_KEY unchanged. See SPEC.md `CONTROL INPUT RELIABILITY (v16)` and the appended v16 BRAIN session.
+
+- [x] **Remove repeat-dependent movement.** Deleted the 700ms `state.keyTimes` stale-key watchdog that treated an ordinary held key as released when the operating system repeated a different key in the chord.
+- [x] **Stop pointer events from deleting keyboard state.** Removed the obsolete global pointer-up purge left behind by the retired mobile D-pad. Analog pointer-up now resets only the analog stick.
+- [x] **Preserve real multi-key holds.** WASD/arrows/Shift remain latched from keydown until matching keyup, modal clearing, blur, or hidden-document release. Existing normalized diagonal math and collision are byte-identical to v15.
+- [x] **Unify safety release.** `releaseAllInput()` clears keyboard keys, analog vector, captured mobile-control state, nub/dragging presentation, and active button classes. Wired to blur, visibility loss, dialogue open/close, panel open/close, and start.
+- [x] **Prevent ghost restart.** A repeated movement key cannot resurrect itself after a modal/focus safety clear; release + fresh keydown is required.
+- [x] **Verification.** Isolated actual-source harness passed 2s cardinal hold, 2s diagonal hold (equal 194.453px components; 274.997px magnitude), release-one-continues, Shift diagonal, pointer release while holding W, blur/visibility reset, no-repeat ghost prevention, panel reset, and exact 18,000ms high → 8,000ms crash. Full script compiles; movement math, status loop, and Tony boss phases hash-identical to v15.
+
+---
+
+## v15 — SHIPPED ✓ (July 12, 2026) — living neighborhood / sprite identities
+
+Lands on `rock_bottom_v15.html`. SAVE_KEY unchanged. See SPEC.md `LIVING NEIGHBORHOOD + SPRITE IDENTITIES (v15)` and the appended v15 BRAIN session.
+
+- [x] **Turn ambient lines into world events.** Added one bounded incident engine and six physical scenes: runaway mattress, Marketplace possum inventory, laundromat dryer walkout, Yuri's receipt ribbon, Park dry committee, and Train Yard ticketed luggage.
+- [x] **Keep incidents out of canonical systems.** Scene actors never enter `npcs`, `PROPS`, combat, interaction scans, factions, kill persistence, or vendor state. One active scene, ≤12 actors, three starts/day, daily seen mask, boss/combat/intro/silence/bus gates.
+- [x] **Give districts authored life.** Five scenes are tied to specific canonical zones and required peaceful NPCs; the mattress uses the nearest authored road as a global fallback. Scene phases follow mundane → specific absurdity → escalation → flat cleanup.
+- [x] **Repair the logical pixel pipeline.** Rasterization now paints a true 16×16 grid and scales once to 32×32. Removed half-logical-pixel gloss, corrected hat tokens and thin/tall walk families, removed pure-white palette entries, and bottom-centered sprites on varied hitboxes.
+- [x] **Make the roster readable.** Added cached, per-character signature pixels for posture/held props; horizontal sleeping Dave; Pigeon King crown; cleaned Possum helmet; three dog shapes; long-name wrapping/backing; restrained idle motions; visible Fallen O'Malley and Tony coat-loss states.
+- [x] **Rendering hygiene.** Reused visible-NPC buffer and cached nameplate layout to prevent crowded-roster allocation spikes. Total cache is 162 bounded 32×32 canvases; v15 is 152,816 bytes gzip.
+- [x] **Verification.** JavaScript compile/load clean; all six incidents ran to cleanup; active incident cleaned immediately on boss start; 162 cache entries all 32×32/nonblank with no missing roster keys; 66 visible NPCs + night/rain + active committee held 60 Hz with zero drops; 18s high → 8s crash passed exactly.
+
+---
+
+## v14 — SHIPPED ✓ (July 12, 2026) — visual world cohesion / district weave
+
+Lands on `rock_bottom_v14.html`. SAVE_KEY and save shape untouched. See SPEC.md `VISUAL WORLD COHESION (v14)` and the appended v14 BRAIN session.
+
+- [x] **Connect the expanded world.** Added 14 deterministic road/service-lane segments, sidewalks, curbs, worn lane marks, crosswalks, and coherent routes from the original core east to Park/Skid Row/Old School and south to Train Yard.
+- [x] **Replace the 77% default-ground void.** Added six outside-zone terrain regions (`vacant`, `service`, `drainage`, `rail_approach`, `dead_grass`, `school_outskirts`) while preserving canonical zone palettes and rectangles.
+- [x] **Add macro silhouettes.** Added 16 cached, code-native set-back facades (storefront/rowhouse/warehouse/industrial families) plus billboard, water tower, bus shelter, motel sign, clotheslines, utilities, drains, barriers, and rail signals. They are visual-only and do not alter collision.
+- [x] **Deepen district identity.** Bus Stop gets its own palette and shelter; Block/Projects/Old School get court markings; Park gets branching paths and foreground canopies; Train Yard gets continuous rails; Underpass keeps its oil/crack ground beneath bridge shadow.
+- [x] **Rebuild night presentation.** Persistent 800×600 light mask, cached light/fog sprites, colored district sources, softer night-fog stack, and no per-frame lighting-canvas allocation.
+- [x] **Rendering hygiene.** Full-bounds prop culling, building/graffiti/poster/zone culling, non-mutating visible-NPC sort, corrected hideout-door world coordinates, cached environment sprites/facades, roads/facades/rails on minimap.
+- [x] **Hard-rule repair.** Removed the browser-persistence fallback; missing `window.storage` now falls back to page memory only.
+- [x] **Verification.** JavaScript compile + live Chromium load clean; six-location visual sweep; 60-NPC night/rain stress scene held 60 Hz; real crate smoke ran 18s rocked-up → 8s crash; zone/building/NPC/update/interaction blocks hash-identical to v13.
+
+### Backlog status audit (v14)
+
+The older numbered backlog below is retained for design archeology. v13 already shipped several items whose status lines were never corrected: full cached NPC sprites, Tweaker Vision, day/night, cart, Brutus the Older, Fallen O'Malley, mobile controls, weather, equipment, minigames, and achievements. Their individual status lines are corrected below; their original briefs remain in place.
 
 ---
 
@@ -212,7 +303,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 ## v4 — HIGH PRIORITY (ship these first, in order)
 
 ### 1. NPC pixel sprites
-**Status:** Backlog
+**Status:** Shipped in v13 — the complete roster is palette-indexed, prerendered into `SPRITE_CACHE`, and rendered through `drawImage`.
 **Why:** v3 has pixel-art player but emoji NPCs — visual inconsistency.
 **Spec:**
 - Convert ALL named NPCs to 16×16 pixel sprites, not just some
@@ -232,7 +323,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Status:** Shipped — initial in v13 wave 2 (The Big Guy + The Mathematician + car rumble), depth pass in v13 wave 6 (cracked-concrete tile palette + oil stains, tent encampment, cardboard sign, sodium-orange light patches, first-entry echo line).
 
 ### 3. Tweaker Vision (hold F)
-**Status:** Backlog
+**Status:** Shipped before v14 — hold F, brain cost/cooldown, hidden cash reveal, and persisted collected-pile ids are live.
 **Why:** Adds discovery layer. Rewards exploration with brain cost.
 **Spec:**
 - Hold F: world overlay tints sickly green for 3 seconds, hidden cash piles become visible
@@ -247,7 +338,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 2 hours
 
 ### 4. Day/Night Cycle
-**Status:** Backlog
+**Status:** Shipped before v14 — day/dawn/dusk/night state, NPC schedules, lighting, and persisted cycle position are live.
 **Why:** Time pressure + variety. Different events at different hours.
 **Spec:**
 - Cycle: 4 minutes (2 min day, 2 min night)
@@ -291,7 +382,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 ## v4 — MEDIUM PRIORITY
 
 ### 6. Rideable Shopping Cart
-**Status:** Backlog
+**Status:** Shipped before v14 — mount/dismount, speed cap, hostile impact, and mobile interaction are live.
 **Spec:**
 - Spawn one rideable shopping cart in marketplace (use 🛒 emoji + special prop type)
 - Press E near it: mount/dismount
@@ -301,7 +392,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 3-4 hours
 
 ### 7. Boss 2: BRUTUS THE OLDER
-**Status:** Backlog
+**Status:** Shipped before v14 — encounter, phase shifts, adds, berserk/grab behavior, drops, and achievements are live (implementation diverged from the old spectral-phase brief).
 **Spec:**
 - Trigger: kill the original Brutus 5 times across runs (counter persists in save)
 - Encounter: Brutus returns "ascended" — larger (40×40), red eyes, 200 HP
@@ -312,7 +403,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 4-5 hours
 
 ### 8. Boss 3: FATHER O'MALLEY FALLEN
-**Status:** Backlog
+**Status:** Shipped in v13 wave 5 — two trigger paths, ranged/dasher phases, collar reward, and achievements are live (implementation supersedes the old brief below).
 **Spec:**
 - Trigger: steal collection plate 5 times successfully
 - Encounter: Father O'Malley turns black-eyed, dialogue shifts to all-caps
@@ -336,7 +427,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 5-6 hours
 
 ### 10. Mobile touch controls
-**Status:** Backlog
+**Status:** Shipped before v14 — analog stick, A/B/F actions, top-bar menus, and mobile canvas layout are live.
 **Spec:**
 - Detect touch device on load
 - Show virtual D-pad bottom-left
@@ -372,7 +463,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 2-3 hours
 
 ### 13. Weather system
-**Status:** Backlog
+**Status:** Shipped before v14 — clear/rain/fog day rolls and visual overlays are live; v14 caches the fog sheet and improves night contrast.
 **Spec:**
 - 3 weather types: clear, rain, fog
 - Random per-day (in-game time)
@@ -382,7 +473,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 3-4 hours
 
 ### 14. Equipment system
-**Status:** Backlog
+**Status:** Shipped before v14 — shoes/hat/coat/tool slots, cursed gear, stat recomputation, world pickups, and Pete inventory are live.
 **Spec:**
 - 3 slots: shoes, hat, coat
 - Shoes affect speed
@@ -393,7 +484,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 6-8 hours
 
 ### 15. New mini-games
-**Status:** Backlog
+**Status:** Shipped/expanded before v14 — heat cooking, lockpick, dumpster, karaoke/rhythm, and heist interactions are live; the old brief is retained for archeology.
 **Spec:**
 - **Rhythm panhandling** — press WASD in time with prompts as people walk by, more cash per perfect
 - **Timing lockpick** — moving needle, click in green zone for abandoned building entry
@@ -401,7 +492,7 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 4-6 hours total
 
 ### 16. Achievements (cursed accolades)
-**Status:** Backlog
+**Status:** Shipped/expanded before v14 — the live achievement registry substantially exceeds the original 12–15 target.
 **Spec:**
 - Track 12-15 achievements
 - Examples:
