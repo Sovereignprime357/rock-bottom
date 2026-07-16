@@ -13,6 +13,7 @@ import { CLAIM_SITES, CLAIM_SITE_BY_ID, OFFICE_UPGRADE_DEFS, bitCount3, claimedD
 import { officeUpgradeCount, resetDailyCounters } from '../systems/daily_hideouts.js';
 import { FACTION_TIER_LABELS, factionTier } from '../systems/factions.js';
 import { ACHIEVEMENTS, ROUTE_STOP_BY_ID, hustleProgress, validBlockRoute } from '../systems/progression_routes.js';
+import { REGULAR_ACTIONS, REGULAR_VENUES, recognitionTier, recognitionTotal } from '../systems/recognition.js';
 
 export let P, particles, state, toastEl, toastTimer, dialogueEl, activeDialogue, panelEl;
 
@@ -234,6 +235,11 @@ export function renderQuests() {
     ${factionRow('spiritual')}
     <div style="color:#776;font-size:11px;padding:0 10px 6px 10px">hated · neutral · liked · loved</div>
   `;
+  const recognitionHtml=REGULAR_VENUES.map(venue=>{
+    const counters=(state.recognition&&state.recognition[venue.id])||{},total=recognitionTotal(counters),tier=recognitionTier(counters);
+    const verbs=REGULAR_ACTIONS.filter(action=>(counters[action]||0)>0).map(action=>action.replace('_',' ')+' '+counters[action]).join(' · ');
+    return `<div class="quest" style="padding:6px 10px"><div class="qtitle" style="display:flex;justify-content:space-between"><span>${venue.label}</span><span>${tier.toUpperCase()} · ${total} REMEMBERED</span></div><div class="qflav">${verbs||'nothing entered yet.'}</div></div>`;
+  }).join('');
   const now=currentPrimaryObjective();
   const route=validBlockRoute(state.blockRoute)?state.blockRoute:null;
   const routeHtml=route?route.stops.map((id,i)=>{const s=ROUTE_STOP_BY_ID[id];return `<div class="quest ${i<route.cursor?'done':''}">
@@ -313,6 +319,10 @@ export function renderQuests() {
     <div style="opacity:.55">${donePairs.map(([k,q])=>renderQ(q,k)).join('')}</div>` : ''}
 
     <div style="margin-top:18px">${factionHtml}</div>
+
+    <h2 style="margin-top:18px">THE REGULAR</h2>
+    <div class="quest"><div class="qflav" style="color:#776">nothing here pays. the neighborhood is keeping count.</div></div>
+    ${recognitionHtml}
 
     <h2 style="margin-top:18px">WAYS TO WASTE TUESDAY</h2>
     ${activities.map(a=>`<div class="row"><span>${a[0]}</span><span style="color:#776">${a[1]}</span></div>`).join('')}
