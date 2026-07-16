@@ -10,6 +10,7 @@ import { drawGraffiti } from '../render/structures.js';
 import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState, freshOfficeState, normalizeDistrictClaims, normalizeKingdomState, normalizeOfficeState, officeNat, syncKingdomQuests } from '../systems/campaigns.js';
 import { resetDailyCounters } from '../systems/daily_hideouts.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
+import { freshConcessionClocks, normalizeConcessionClocks } from '../systems/concessions.js';
 import { freshRecognition, normalizeRecognition } from '../systems/recognition.js';
 
 export let audio, SAVE_KEY;
@@ -57,6 +58,8 @@ export async function saveGame() {
       // v13 wave 7 — hideout stash survives death; flags carry day-event triggers
       hideoutStash: state.hideoutStash || { rocks:0, copper:0, cash:0, items:[] },
       recognition: state.recognition || freshRecognition(),
+      // v20 landing 3 — additive key: the two concession clocks (choir hours, dryer cycle)
+      concessionClocks: state.concessionClocks || freshConcessionClocks(),
     });
   } catch(e) {}
 }
@@ -108,6 +111,7 @@ export async function loadGame() {
     }, sv.counters || {});
     state.recognition = normalizeRecognition(sv.recognition);
     state.recognitionVisit = {venue:'',seen:Object.create(null)};
+    state.concessionClocks = normalizeConcessionClocks(sv.concessionClocks);
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
     state.hustles = Array.isArray(sv.hustles) ? sv.hustles : null;

@@ -11,6 +11,7 @@ import { ZONES } from '../data/world.js';
 import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
 import { questToast } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
+import { badIdeaSmokeSpot, concessionActionHint } from './concessions.js';
 import { HIDEOUT_DOORS, hideoutOwned, openOffice } from './daily_hideouts.js';
 import { adjustFaction } from './factions.js';
 import { endingScreen } from './interactions.js';
@@ -557,6 +558,15 @@ export function currentPrimaryObjective() {
   if(activeOfficeContract()&&officeObjective)return officeObjective;
   const kingdomObjective=currentKingdomObjective();
   if(kingdomObjective)return kingdomObjective;
+  // v20 landing 3 — the loop reclaims the strip when the shakes get loud (VIBE scope
+  // invariant: long-form work may not permanently displace it). Target: the nearest
+  // LEGAL spot — a concession only while its condition is true, otherwise home.
+  // Ties go to the block. The anoint objective above still outranks this and still
+  // says the block; royal static is not portable.
+  if(((P.rocks||0)+(P.soapRocks||0))>0&&P.rockedT<=0&&P.shakes>=50){
+    const spot=badIdeaSmokeSpot(P.x+P.w/2,P.y+P.h/2);
+    return {kind:'loop',text:'smoke a rock at '+spot.feedName+'.',x:spot.x,y:spot.y};
+  }
   if(officeObjective)return officeObjective;
   const stop=currentBlockRouteStop();
   if(stop){
@@ -617,6 +627,9 @@ export function resolveActionHint(){
     return 'use the milk crate';
   }
   if(inZone(pcx,pcy,'market'))return 'work the marketplace';
+  // v20 landing 3 — conceded venues advertise their room. the hint mirrors the E priority chain.
+  const concessionHint=concessionActionHint(pcx,pcy);
+  if(concessionHint)return concessionHint;
   return '';
 }
 

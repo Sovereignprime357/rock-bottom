@@ -15,9 +15,10 @@ import { hasPropane } from '../minigames/heat.js';
 import { tryKingdomDoor, tryUseKingdomTarget, tryUseOfficeFieldTarget } from './campaigns.js';
 import { questToast } from './combat.js';
 import { feedPost } from './communications.js';
+import { concessionMenu, concessionUnlocked } from './concessions.js';
 import { hideoutOwned, tryEnterHideout, tryEnterOffice } from './daily_hideouts.js';
 import { tryStampBlockRoute } from './progression_routes.js';
-import { recordNpcBother } from './recognition.js';
+import { recordNpcBother, recognitionVenueAt } from './recognition.js';
 
 export function endingScreen(kind) {
   state.mode = 'title';
@@ -167,6 +168,13 @@ export function tryInteract() {
   // panhandling at marketplace — easy money (zone verb, NPC scan already missed)
   if (inZone(P.x+P.w/2, P.y+P.h/2, 'market')) {
     panhandle();
+    return;
+  }
+  // v20 landing 3 — a conceded venue answers the E the way the block does.
+  // zone verb, lowest priority: NPCs, doors, props, and the bench all take the key first.
+  const concessionVenue = recognitionVenueAt(P.x+P.w/2, P.y+P.h/2);
+  if (concessionVenue && concessionUnlocked(concessionVenue)) {
+    concessionMenu(concessionVenue);
     return;
   }
 }

@@ -8,11 +8,11 @@ import { clamp, isNight } from '../data/npc_spawns.js';
 import { WORLD } from '../data/world.js';
 import { openStripePackage } from '../dialogue/neighborhood_b.js';
 import { cookBatchMenu } from './heat.js';
-import { syncKingdomQuests } from '../systems/campaigns.js';
-import { completeIntroSmoke, die, questToast } from '../systems/combat.js';
+import { die, questToast } from '../systems/combat.js';
 import { broadcastNews, feedPost } from '../systems/communications.js';
+import { smokeRockAt } from '../systems/concessions.js';
 import { fireDayEvents, resetDailyCounters } from '../systems/daily_hideouts.js';
-import { applyRep, factionTier } from '../systems/factions.js';
+import { factionTier } from '../systems/factions.js';
 import { checkHustles, rollHustles } from '../systems/progression_routes.js';
 
 export let WEAPONS;
@@ -213,39 +213,8 @@ export function blockMenu() {
   opts.push({
     label: totalRocks > 0 ? "smoke a rock. (-1 rock, +18s rocked-up)" : "smoke a rock. (you have none.)",
     disabled: totalRocks <= 0 || P.rockedT > 0,
-    action: () => {
-      if ((P.soapRocks||0) > 0) {
-        // soap rock — no rocked-up effect, no shakes relief, no cred. you knew.
-        P.soapRocks--;
-        P.lifetime.rocksSmoked++;
-        audio.hurt(); audio.glassBreak();
-        toast("you smoke it. it's soap.\nyou knew. you smoked it anyway.", 3600);
-        feedPost("smoked soap. tasted it. did it again.", '@crackheadcent');
-        unlockAchievement('soap_tongue');
-        // intro chain still completes — the loop is the loop
-        completeIntroSmoke();
-        saveGame();
-        return;
-      }
-      P.rocks--; P.rockedT = 18000; P.crashT = 0; P.shakes = Math.max(0, P.shakes-50);
-      P.brain = Math.max(0, P.brain-4); P.lifetime.rocksSmoked++;
-      P.cred += 1;
-      let royalStatic=false;
-      if(state.kingdom&&state.kingdom.stage==='anoint'){
-        state.kingdom.stage='emperor_gate';state.kingdom.marks=0;royalStatic=true;syncKingdomQuests();
-      }
-      audio.rockUp();
-      state.flash = 1; state.flashColor = 'rgba(232,192,64,.5)';
-      toast(royalStatic
-        ? '· ROYAL STATIC ·\nthe sun moves. the throne ditch answers.\nbrain -4. shakes -50. emperor available.'
-        : '· smoke a rock ·\nthe sun moves.\nbrain -4. shakes -50.', royalStatic?4300:2500);
-      feedPost("smoked a rock at the block. for the bit.", '@crackheadcent');
-      if(royalStatic){broadcastNews('ROYAL STATIC RECEIVED. ONE DITCH ACKNOWLEDGES THE SIGNAL.');feedPost('the rock had a crown in the reception. the ditch is calling.','@blocklog');}
-      applyRep({ street: 1, spiritual: -1 }); // wave 7 — smoking real rocks ledger
-      // v13 wave 3 — completes the intro chain
-      completeIntroSmoke();
-      saveGame();
-    }
+    // v20 landing 3 — the transaction lives in concessions.js now (I-ONE-LOOP).
+    action: () => smokeRockAt('block')
   });
   // v13 wave 3 — open stripe's package "alone, where no one sees" (the block is home)
   if (state.flags && state.flags.hasStripePackage) {
