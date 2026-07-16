@@ -205,3 +205,31 @@ measurement has stopped being evidence and started being decoration.
 **the failure is data about the world, not about the gate.** Budget changes are operator decisions
 made in daylight with the reasoning on the record — never a green-light expedient taken by whoever
 happened to be holding the branch.
+
+### 9. The gap I named in entry #6, and the drift it caught on its first run
+
+**What happened:** entry #6 said the README-vs-reality drift class was **UNGUARDED**, named the exact
+gate that would close it, and did not build it. That sentence sat in this file for three hours.
+
+**Writing "this is still unguarded" into a notes file and moving on is the precise failure this
+file spends six entries arguing against.** It is the most comfortable version of the mistake,
+because it *looks* like rigor. Naming a gap is not closing a gap. So: `tools/docs-gate.mjs`,
+wired second, right behind the corpus it belongs to.
+
+**It found a real violation on its first run, and I had not planted it.** `concession-gate.mjs`
+shipped in Landing 3 three hours earlier, wired into the runner, **never added to the README's
+table.** Merged clean, 8/8 green, reviewed by me personally including two red tests I ran myself.
+**The drift recurred inside three hours of being documented as a known drift class, in work I
+reviewed, by a builder that had read the note.** That is not carelessness. **That is the whole
+thesis: the note was read and the note did not hold.**
+
+**Design detail worth stealing:** the gate transcribes nothing. It parses the `GATES` array out of
+`run-gates.mjs` and the table out of `README.md` and compares **two living sources against each
+other.** A doc gate with a hardcoded list of gates is just one more thing to keep in sync —
+**it becomes the drift it was built to catch.** Comment-stripped before parsing, so a gate name
+mentioned in a comment can't satisfy the check.
+
+**And what it deliberately does not check:** whether the README's *descriptions* are true. That is
+prose about behavior and no grep can judge it. **The gate holds the list, not the sentences.**
+Claiming otherwise would be a gate-shaped decoration — the exact thing being guarded against.
+Honest scope beats impressive scope.

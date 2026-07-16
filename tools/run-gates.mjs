@@ -10,6 +10,11 @@ const GATES = [
   // protects the output but not the seed protects the wrong thing.
   // See the incident note at the top of corpus-gate.mjs (2026-07-16).
   'corpus-gate.mjs',
+  // docs-gate runs second, right behind the corpus it belongs to. It asserts this very
+  // array matches the README's gate table — the README said "four gates" while seven ran,
+  // and nothing caught it because a stale sentence is neither game nor corpus deletion.
+  // Named as UNGUARDED in ORCHESTRATOR-NOTES.md entry #6; this closes it.
+  'docs-gate.mjs',
   'module-gate.mjs',
   'npc-registry-gate.mjs',
   'legibility-gate.mjs',
