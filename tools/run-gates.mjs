@@ -15,6 +15,7 @@ const GATES = [
   'legibility-gate.mjs',
   'presentation-gate.mjs',
   'recognition-gate.mjs',
+  'concession-gate.mjs',
   'runtime-smoke.mjs',
 ];
 
