@@ -12,6 +12,7 @@ import { ensureKingdomState, ensureOfficeState, freshKingdomState, freshOfficeSt
 import { broadcastNews, feedPost } from '../systems/communications.js';
 import { rehydrateDay30Bus } from '../systems/daily_hideouts.js';
 import { ensureBlockRoute, rollHustles } from '../systems/progression_routes.js';
+import { freshConcessionClocks } from '../systems/concessions.js';
 import { freshRecognition, freshRecognitionVisit } from '../systems/recognition.js';
 
 export function startGame(loaded) {
@@ -57,6 +58,7 @@ export function startGame(loaded) {
     resetRideableCart();
     state.recognition = freshRecognition();
     state.recognitionVisit = freshRecognitionVisit();
+    state.concessionClocks = freshConcessionClocks();
     P.hasPossum = false;
     state.hustles = null;
     // v13 wave 3 — fresh save state for discoverability + intro chain

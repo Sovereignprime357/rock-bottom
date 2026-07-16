@@ -6,7 +6,7 @@
  */
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
-import { isNight } from '../data/npc_spawns.js';
+import { inZone, isNight } from '../data/npc_spawns.js';
 import { syncKingdomQuests } from './campaigns.js';
 import { completeIntroSmoke } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
@@ -82,19 +82,29 @@ export const DRYER_IDLE_MAX_MS = 90000;
 export const DRYER_RUN_MS = 70000;
 export const DRYER_MID_MARGIN_MS = 15000;
 
-function rollChoirClosed(){ return CHOIR_CLOSED_MIN_MS+Math.floor(Math.random()*(CHOIR_CLOSED_MAX_MS-CHOIR_CLOSED_MIN_MS)); }
-function rollDryerIdle(){ return DRYER_IDLE_MIN_MS+Math.floor(Math.random()*(DRYER_IDLE_MAX_MS-DRYER_IDLE_MIN_MS)); }
+// The clocks carry their own tiny LCG instead of Math.random: the runtime smoke
+// runs this build in lockstep against frozen v19 on one shared seeded random
+// sequence, and a clock that ate from it would desynchronize the parity. The
+// seed persists with the clocks, so the neighborhood's rhythm survives a load.
+const CLOCK_SEED = 0x0bf1a75;
+function clockRandom(clocks) {
+  clocks.seed=(Math.imul(clocks.seed,1664525)+1013904223)>>>0;
+  return clocks.seed/0x100000000;
+}
+function rollChoirClosed(clocks){ return CHOIR_CLOSED_MIN_MS+Math.floor(clockRandom(clocks)*(CHOIR_CLOSED_MAX_MS-CHOIR_CLOSED_MIN_MS)); }
+function rollDryerIdle(clocks){ return DRYER_IDLE_MIN_MS+Math.floor(clockRandom(clocks)*(DRYER_IDLE_MAX_MS-DRYER_IDLE_MIN_MS)); }
 
 export function freshConcessionClocks() {
-  return {
-    choir:{phase:'closed',t:rollChoirClosed()},
-    dryer:{phase:'idle',t:rollDryerIdle()},
-  };
+  const clocks={seed:CLOCK_SEED,choir:null,dryer:null};
+  clocks.choir={phase:'closed',t:rollChoirClosed(clocks)};
+  clocks.dryer={phase:'idle',t:rollDryerIdle(clocks)};
+  return clocks;
 }
 
 export function normalizeConcessionClocks(raw) {
   const clocks=freshConcessionClocks();
   if(!raw||typeof raw!=='object')return clocks;
+  if(Number.isFinite(raw.seed))clocks.seed=raw.seed>>>0;
   const choir=raw.choir,dryer=raw.dryer;
   if(choir&&(choir.phase==='closed'||choir.phase==='open')&&Number.isFinite(choir.t)&&choir.t>0){
     const cap=choir.phase==='open'?CHOIR_OPEN_MS:CHOIR_CLOSED_MAX_MS;
@@ -105,6 +115,39 @@ export function normalizeConcessionClocks(raw) {
     clocks.dryer={phase:dryer.phase,t:Math.min(cap,Math.floor(dryer.t))};
   }
   return clocks;
+}
+
+// A clock turning over is world texture, but it only speaks to a player the
+// venue has conceded to, and only if they are standing in it. An invisible
+// condition is a bug; an advertised one is a different bug (I-CONCEDED-ONLY).
+function announceClockTurn(venueId,line) {
+  if(!concessionUnlocked(venueId))return;
+  const venue=REGULAR_VENUE_BY_ID[venueId];
+  if(!venue||!inZone(P.x+P.w/2,P.y+P.h/2,venue.zoneId))return;
+  toast(line,2600);
+}
+
+export function updateConcessionClocks(dt) {
+  if(!state.concessionClocks)state.concessionClocks=freshConcessionClocks();
+  const clocks=state.concessionClocks;
+  const choir=clocks.choir;
+  choir.t-=dt;
+  while(choir.t<=0){
+    choir.phase=choir.phase==='open'?'closed':'open';
+    choir.t+=choir.phase==='open'?CHOIR_OPEN_MS:rollChoirClosed(clocks);
+    announceClockTurn('choir_office',choir.phase==='open'
+      ? 'b flat begins.\nthe office is open.'
+      : 'b flat ends.\nthe office is closed.');
+  }
+  const dryer=clocks.dryer;
+  dryer.t-=dt;
+  while(dryer.t<=0){
+    dryer.phase=dryer.phase==='running'?'idle':'running';
+    dryer.t+=dryer.phase==='running'?DRYER_RUN_MS:rollDryerIdle(clocks);
+    announceClockTurn('laundromat',dryer.phase==='running'
+      ? 'the dryer starts.\nprofessional courtesy resumes.'
+      : 'the dryer stops.\nthe laundromat is just a room again.');
+  }
 }
 
 // ---------- BAD IDEA targeting ----------

@@ -17,6 +17,7 @@ import { drawAll } from '../render/frame.js';
 import { updateGuidance, updateKingdomBattle } from '../systems/campaigns.js';
 import { damagePlayer, manageCops, questToast, tryCompleteIntroRemember } from '../systems/combat.js';
 import { broadcastNews, feedPost, fireMomIntroTipOnce, fireRandomEvent, garbageTruckRumble, maybeFireMomProudCall, ringPhone } from '../systems/communications.js';
+import { updateConcessionClocks } from '../systems/concessions.js';
 import { fireDayEvents, resetDailyCounters } from '../systems/daily_hideouts.js';
 import { adjustFaction, applyRep, updateTerritory } from '../systems/factions.js';
 import { updateIncidents } from '../systems/incidents.js';
@@ -472,6 +473,10 @@ export function updateWorld(dt) {
       }
     }
   }
+
+  // v20 landing 3 — the two concession clocks (choir office hours, the dryer cycle).
+  // they run on world time like the sun and the dog; menus pause them with everything else.
+  updateConcessionClocks(dt);
 
   // v13 wave 6 — freed dog wandering schedule. while state==='freed', a follower can spawn
   // every 1-3 min. when present, follow window counts down ~60s before despawn.
