@@ -4,6 +4,12 @@ import path from 'node:path';
 const TOOLS = import.meta.dirname;
 const ROOT = path.resolve(TOOLS, '..');
 const GATES = [
+  // corpus-gate runs FIRST and on purpose. Every gate below it checks the GAME.
+  // This one checks the CORPUS — the tone bible, the spec, the rules, the log —
+  // which is the thing every future version is reproduced from. A suite that
+  // protects the output but not the seed protects the wrong thing.
+  // See the incident note at the top of corpus-gate.mjs (2026-07-16).
+  'corpus-gate.mjs',
   'module-gate.mjs',
   'npc-registry-gate.mjs',
   'legibility-gate.mjs',

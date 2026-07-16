@@ -58,7 +58,7 @@ This handoff pack contains:
 
 ## Owner
 
-Sovereign Prime (Shayler Phipps) — VibeKoded
+Sovereign Prime — VibeKoded
 Architect: Claude (Opus 4.7)
 Methodology: SpecMesh
 

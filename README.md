@@ -61,10 +61,12 @@ the game does not editorialize. the possum knows. lowercase only. the bit lands 
 
 ## Owner
 
-Sovereign Prime (Shayler Phipps) — VibeKoded
+Sovereign Prime — VibeKoded
 Architect: Claude (Opus 4.7)
 Methodology: SpecMesh
 
 ## Release
 
-Free-to-play release candidate. No account, gameplay service, asset download, package install, or build step is required; static HTTP hosting is required for native modules. Source licensing and redistribution terms remain with the operator.
+Free-to-play. No account, gameplay service, asset download, package install, or build step is required; static HTTP hosting is required for native modules.
+
+**MIT licensed** — see `LICENSE`. Take it, fork it, learn from it. The method is the point; the crackhead is public domain as far as we are concerned.
