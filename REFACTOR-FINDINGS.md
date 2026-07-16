@@ -93,7 +93,7 @@ These were the same class of missing set/geometry relationship, but they are no 
 
 ## Operator decision register
 
-The audit evidence and the 2026-07-15 operator decisions are recorded here. Each AI-led decision remains subject to operator veto.
+The audit evidence and the 2026-07-15 operator decisions are recorded here. Each AI-led decision remains subject to operator veto. Register discipline: ratified decision text is append-only — execution and status notes are added beneath a decision, never edited into it.
 
 ### OD-NPC-NAMES
 

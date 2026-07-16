@@ -207,7 +207,7 @@ These are not stylistic preferences. They are non-negotiable.
 3. **Reward the player's stupidity.** Shorting Tony has real consequences AND is genuinely funny when it happens.
 4. **Let things sing.** "The copper sings to you in B flat" is a meaningful, repeatable piece of lore. Maintain it. Build on it.
 5. **Honor the bit.** The Conductor says "the train is coming. it has always been coming. it will never be here." Do not later reveal that the train comes. The bit is the bit.
-6. **mundane > magical — and if the setup goes magical, the mundane must win in the same breath.**
+6. **mundane > magical — and if the setup goes magical, the mundane must win in the same breath.** A possum that wears a construction helmet is funnier than a wizard. A pigeon that demands bread for secrets is funnier than an oracle.
 7. **Make the player do undignified things for small rewards.** Pawning a single AirPod. Selling a wet sock. Eating half a chimichanga out of a milk crate.
 
 ### Scope invariant
