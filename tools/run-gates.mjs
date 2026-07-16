@@ -22,12 +22,16 @@ const GATES = [
   'recognition-gate.mjs',
   'concession-gate.mjs',
   'runtime-smoke.mjs',
-  // world-gate runs LAST, on purpose. It is a ruler over the shipped map, and the
-  // SPEC expects it to read red until the operator rules on the findings it names
-  // (a failing leg is a finding, not a defect in this branch). Last place means a
-  // standing world reading can never mask a regression in the seven gates that
-  // protect shipped behavior — the runner stops at the first failure.
+  // world-gate held the last slot while it carried OD-9's standing red; that
+  // reading resolved in Landing 5 and it reads green. It stays behind the
+  // shipped-behavior gates because it is still a ruler over the map.
   'world-gate.mjs',
+  // economy-gate runs LAST, on purpose, inheriting the slot and the rationale:
+  // it ships with a standing honest red (F-SOCK — left for the operator's taste
+  // call, see REFACTOR-FINDINGS.md), and the runner stops at the first failure,
+  // so a standing reading must sit where it can never mask a regression in the
+  // gates above it.
+  'economy-gate.mjs',
 ];
 
 function runGate(filename) {

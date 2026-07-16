@@ -336,3 +336,36 @@ existing space makes the walk worth taking; it does not lengthen the leg. **For 
 its walkable limit, "stop expanding, start filling" is not a compromise — it is the only remaining
 direction that the instrument will allow.** His feel and the gate agree, which is rare enough to
 write down.
+
+## F-ECON-PAYOUTS — the deliberate no-item payout register (v21, branch `v21-economy`)
+
+**Status: authored by the builder agent, operator ratification pending.** This is the register
+half of F-SOCK's closing paragraph ("a vendor gate should assert that every cash-paying option
+either guards on an inventory item and consumes it, or is registered by name as a deliberate
+no-item payout"). `tools/economy-gate.mjs` cites this token for every payout it licenses. Per
+OD-10's known limit, stated again here: **a signature proves an entry was named, never that it
+was worth signing — growth of this register is a human-review trigger.** Every entry below is
+shipped v19/v20 behavior, observed in source, none invented this wave. Deleting a row makes the
+gate go red on the orphaned entry; that is the design.
+
+The licensed families (sites are file:line as of this branch; the gate keys on statements, not
+line numbers, so drift here is cosmetic):
+
+| family | sites | why it is a payout, not a bug |
+|---|---|---|
+| found cash piles | `update.js:623` | authored world pickups (the $255 economy) plus boss drops; the pile leaves the world when the cash arrives |
+| quest rewards | `update.js:682` (stripe delivery $40), `campaigns.js:482,540` (kingdom bosses, pretenders), `progression_routes.js:68,188` (route stop + completion cash) | labor and campaign payouts; the strip is the precondition |
+| office wages | `campaigns.js:213` | filed work orders; the $17 chair rental is the joke, the net is the wage |
+| panhandling / performance | `activities.js:291,295,309,317` (marketplace verbs), `activities.js:123` (karaoke hits), `npc_spawns.js:129` (the jogger's $1, 40% — census-found on the gate's first run) | begging and busking pay because the world is weird at you; nothing was ever supposed to be consumed |
+| world loot verbs | `interactions.js:155` (tips jar), `interactions.js:304,311,315` (kicked trash can), `interactions.js:246,247,248,264,268` (dumpster picks), `vendors_places.js:455` (old-school copper rip), `activities.js:70` (heist pipes, daily-capped) | loot verbs with world-side costs — cooldowns, rats, BRUTUS, wanted risk |
+| gifts, loans, pity | `neighborhood_a.js:334` (pete's $50, scrap-loved, daily), `neighborhood_a.js:477,484` (mom's $10/$20, daily), `neighborhood_a.js:549` (the possum's $2), `neighborhood_a.js:414` (dave waives the crossword ransom at cred≥3) | relationship payouts; the precondition is social, not an item |
+| petty crime | `neighborhood_a.js:607` (collection plate, 45% smite), `neighborhood_a.js:442` (dave's wallet, 30% wake) | theft pays or punishes; consuming an item was never the deal |
+| ambient events / calls | `communications.js:131,212,220,226,229,236` (cash), `communications.js:218,230` (a traffic cone, a gold tooth) | the world hands you things; that is the pattern |
+| combat drops | `combat.js:407` (kill pocket-change), `combat.js:290` (OS Brutus's copper), `combat.js:391` (dave drops the crossword) | defeating the NPC is both precondition and cost |
+| quest props | `neighborhood_b.js:227` (stripe's package enters inventory) | a prop, not currency; opening it consumes it and is judged as a trade |
+| shared helper | `vendors_places.js:30` (`giveBusPass`) | one grant site, two callers — pinky sells it for $20 (conserving) and mom's dawn drop gifts it; site granularity cannot split callers, so the site is licensed here and the paid path stays honest by inspection |
+
+**Not licensed, deliberately:** the sock (`neighborhood_a.js:263`). It stays F-SOCK, it stays
+red, and whether it becomes a findable item or "you always have another sock" is the operator's
+taste call — see F-SOCK above. A bug signed into a payout register is a grandfather list, and
+OD-9 already ruled on those.
