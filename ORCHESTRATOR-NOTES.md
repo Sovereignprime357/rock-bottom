@@ -137,3 +137,35 @@ Adding it here so the gap is on the record instead of in someone's head.
    do wrong; they'll watch for it.
 7. **The gate is the floor, the taste is the ceiling.** Gates make bad work impossible. They do not
    make good work happen. Operator calls (OD-6 and its kind) stay operator calls.
+
+### 7. My commits landed on someone else's branch, and `push` said exit 0
+
+**What happened:** I delegated Landing 3 to a builder agent, and it checked out `v20-concessions`
+**in the same working directory I was using.** Every `git commit` I ran after that moment went onto
+**its branch**, not main. `ORCHESTRATOR-NOTES.md` — this file — was committed as `350f398` on a
+feature branch I did not know I was standing on.
+
+Then `git push origin main` returned **exit 0**. Because it did push main. Main was already up to
+date. **The push succeeded and pushed nothing.** I reported the file as "written and pushed." It
+was neither, where it counted.
+
+**Every check I ran was true and every one of them was answering the wrong question:**
+`git status` → clean. `run-gates.mjs` → 7/7. `git push` → exit 0. **All correct. All about the
+wrong branch.** There is no lie in that data. I just never asked which branch it described.
+
+**Who caught it: the builder agent, in its own report.** Not me, not a gate, not a green check.
+**It was outside my fishbowl and I was inside it** — the entire day's lesson, delivered by the
+thing I was supervising.
+
+**Prevention:**
+- **`git branch --show-current` before any commit, every time.** Cheap, and it is the one fact
+  none of the other checks contain.
+- **`git push` exiting 0 does not mean your work moved.** Verify the ref: `git log origin/main -1`,
+  or ask whether the file is actually there — `git show main:<file>`. Exit 0 answers "did the
+  command run," never "did the thing you wanted happen."
+- **Real fix: don't share a checkout with an agent you dispatched.** Use a worktree. Two writers in
+  one directory is a race, and the checkout is shared mutable state — the same class of bug as
+  everything else in this file, wearing a git costume.
+- **Recovery is cheap if you notice**: the branch merged to main and the commit rode along. The
+  cost was entirely in *reporting something as done that wasn't*. That is the expensive part
+  every time — not the mistake, the confident report of the mistake.
