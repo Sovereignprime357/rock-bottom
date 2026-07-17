@@ -32,7 +32,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **seven** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **eleven** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -44,6 +44,7 @@ The runner supplies `--experimental-vm-modules`, streams all **seven** gates in 
 | `presentation-gate` | Save/input/status parity. |
 | `recognition-gate` | **The north star.** Diffs every reward field across a full rank climb to prove recognition pays in acknowledgment and nothing else. |
 | `concession-gate` | **One loop, many rooms.** Proves exactly one `rockedT = 18000` site exists, that the high is identical at every spot, that royal static stays Block-only, and that BAD IDEA never points at an illegal room. |
+| `solidity-gate` | **The honest map.** Requires declared physicality, one collision authority, door/art and legacy-resolver parity, deterministic save ejection, exact actor exemptions, charge impacts, actor/projectile obstruction, and collision-aware traversal of every mandatory leg. Run it with `--full` to print the complete 69-campaign / 252-route before-and-after ledger. |
 | `runtime-smoke` | The game boots, starts, and plays headless. |
 | `world-gate` | **The map.** Derives the shakes runway and walk speed at run time, then measures every mandatory leg, day-1 coverage, and the route legality graph against them. Runs last on purpose: a standing world reading must never mask a regression in the gates above it. |
 

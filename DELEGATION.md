@@ -16,6 +16,14 @@ Active implementation branch: `codex/v20-recognition`. The operator packet remai
 
 ---
 
+## v21 honest map — BUILT / PENDING OPERATOR REVIEW (July 16, 2026)
+
+Branch: `v21-honest-map`, isolated worktree; push without merge. OD-11 is the signed physicality and traversal ruling.
+
+- [x] **Wave 4.1 — THE HONEST MAP.** All 53 rendered structures now declare physicality through one merged collision source: 25 existing buildings plus the 28 reachability-audited facades, all solid, with 21 authored south-side door apertures and zero invented flat rulings. Player, projectile, NPC, and cop motion share that source; new saves embedded in a solid footprint eject deterministically, while eight grandfathered actor anchors retain their shipped placement until they move clear. `solidity-gate` was forced red on both an undeclared facade and an unregistered flat reason before being trusted; it locks physicality, zero-content counts, save recovery, production actor crossings, and 69 campaign plus 252 assignable traversal legs. The measured deltas are recorded as findings, not balanced here. No building, zone, prop, NPC, interaction, route, save key, or timing constant was added or moved. Permanent suite: 11 gates.
+
+---
+
 ## v19 post-audit stabilization — SHIPPED ✓ (July 15, 2026) — modular source / measured legibility / registry enforcement
 
 Active build: `index.html` + `src/`. `rock_bottom_v19.html` remains the frozen behavioral reference at SHA-256 `C25DB5E17536AEC092143D87DBF8C113325076A8B8E196A98AECB84694A25C8B`. SAVE_KEY and save shape are unchanged. See SPEC.md post-audit invariants, `REFACTOR-FINDINGS.md`, and the appended BRAIN session.

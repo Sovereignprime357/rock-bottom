@@ -6,14 +6,24 @@ import { audio } from '../core/audio_save.js';
 import { P, particles, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { updateWorld } from '../core/update.js';
 import { clamp, rectsOverlap } from '../data/npc_spawns.js';
-import { CHATTER } from '../data/props.js';
+import { BUILDINGS, CHATTER } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { aggroNpc, damagePlayer, onNpcDeath, spawnProjectile } from './combat.js';
+import { commitActorStructureMotion, ensureClearPlacement, firstBlockingStructure } from './physicality.js';
 
 export function updateNpcActors(dt) {
   // NPC AI + walk-frame anim + chatter
   for (const n of runtime.npcs) {
     if (n.dead) continue;
+    const initialStructure=firstBlockingStructure(n);
+    const legacyStructure=Number.isInteger(n.legacyStructureIndex)?BUILDINGS[n.legacyStructureIndex]:null;
+    const authoredLegacyOverlap=!!legacyStructure&&initialStructure===legacyStructure;
+    if(n.structureCollisionReady===undefined)n.structureCollisionReady=!authoredLegacyOverlap;
+    else if(!n.structureCollisionReady&&!authoredLegacyOverlap)n.structureCollisionReady=true;
+    if(n.structureCollisionReady)ensureClearPlacement(n);
+    const structureStartX=n.x,structureStartY=n.y;
+    const structureChargeStarted=n.chargeState==='lunge';
+    let structureTarget=null;
     n.attackCd = Math.max(0, (n.attackCd||0) - dt);
     if (n.hitFlash) n.hitFlash = Math.max(0, n.hitFlash - dt);
     // v13 wave 5 — hit-stun freezes NPC AI for 120ms post-damage.
@@ -45,6 +55,7 @@ export function updateNpcActors(dt) {
     let isMoving = false;
     // pet possum AI — follow player at distance, occasionally reveals cash
     if (n.isPet) {
+      structureTarget={x:P.x+P.w/2,y:P.y+P.h/2};
       const pdxP = P.x - n.x, pdyP = P.y - n.y;
       const pdistP = Math.sqrt(pdxP*pdxP + pdyP*pdyP);
       if (pdistP > 48) {
@@ -76,6 +87,7 @@ export function updateNpcActors(dt) {
     if (n.isAlly) {
       const target = runtime.npcs.find(x => x.id === (n.allyTarget||'tony') && !x.dead);
       if (target) {
+        structureTarget={x:target.x+target.w/2,y:target.y+target.h/2};
         const adx = target.x - n.x, ady = target.y - n.y;
         const alen = Math.sqrt(adx*adx+ady*ady)||1;
         if (alen > 30) {
@@ -94,6 +106,7 @@ export function updateNpcActors(dt) {
         }
       } else {
         // patrol nearby player
+        structureTarget={x:P.x+P.w/2,y:P.y+P.h/2};
         const dxP = P.x - n.x, dyP = P.y - n.y;
         const lenP = Math.sqrt(dxP*dxP+dyP*dyP);
         if (lenP > 80) { n.x += (dxP/lenP)*(n.speed||1.2)*(dt/16); n.y += (dyP/lenP)*(n.speed||1.2)*(dt/16); isMoving = true; }
@@ -102,6 +115,7 @@ export function updateNpcActors(dt) {
     // aggro chase — v13 wave 5: archetype dispatch. patterns mutate the chase/touch flow.
     // existing non-archetype'd NPCs fall through to the default chase-bite (unchanged behavior).
     else if (n.aggro || (n.hostile && pd2 < 360*360)) {
+      structureTarget={x:P.x+P.w/2,y:P.y+P.h/2};
       const len = Math.sqrt(pd2)||1;
       const arch = n.archetype || 'default';
 
@@ -118,6 +132,11 @@ export function updateNpcActors(dt) {
         const lungeSpd = berserk ? 3.0 : (older ? 2.4 : 2.0);
         const dmgMult  = berserk ? 2.0 : (older ? 1.8 : 1.5);
         const cdMs     = berserk ? 600 : (older ? 1700 : 1400);
+
+        if(n.structureChargeHit){
+          n.structureChargeHit=false;
+          n.chargeState='cooldown';n.chargeT=cdMs;n.chargeCdT=cdMs;
+        }
 
         n.chargeState = n.chargeState || 'idle';
         n.chargeT = n.chargeT || 0;
@@ -325,6 +344,10 @@ export function updateNpcActors(dt) {
           n.chargeT = n.chargeT || 0;
           n.chargeCdT = Math.max(0, (n.chargeCdT||0) - dt);
           const windupMs = 500, lungeMs = 900, lungeSpd = 2.4, cdMs = 1200;
+          if(n.structureChargeHit){
+            n.structureChargeHit=false;
+            n.chargeState='cooldown';n.chargeT=cdMs;n.chargeCdT=cdMs;
+          }
           if (n.chargeState === 'cooldown') {
             n.chargeT -= dt;
             if (n.chargeT <= 0) { n.chargeState = 'idle'; }
@@ -409,6 +432,7 @@ export function updateNpcActors(dt) {
       // patrol along path
       n.patrolT = (n.patrolT||0) + dt;
       const tgt = n.patrol[Math.floor((n.patrolT/2000) % n.patrol.length)];
+      structureTarget={x:tgt.x+n.w/2,y:tgt.y+n.h/2};
       const tdx = tgt.x - n.x, tdy = tgt.y - n.y;
       const tlen = Math.sqrt(tdx*tdx+tdy*tdy);
       if (tlen > 4) {
@@ -418,6 +442,7 @@ export function updateNpcActors(dt) {
       }
     } else if (n.wanderOff) {
       // v13 wave 7 — day-event actor walking off-map. once past world bounds, despawn.
+      structureTarget={x:(n.targetX||(WORLD.w+80))+n.w/2,y:(n.targetY||n.y)+n.h/2};
       const tdx = (n.targetX||(WORLD.w+80)) - n.x, tdy = (n.targetY||n.y) - n.y;
       const tlen = Math.sqrt(tdx*tdx+tdy*tdy);
       if (tlen > 4) {
@@ -435,6 +460,7 @@ export function updateNpcActors(dt) {
         n.targetY = n.y + (Math.random()-.5) * 120;
       }
       const tdx = n.targetX - n.x, tdy = n.targetY - n.y;
+      structureTarget={x:n.targetX+n.w/2,y:n.targetY+n.h/2};
       const tlen = Math.sqrt(tdx*tdx+tdy*tdy);
       if (tlen > 4) {
         n.x += (tdx/tlen) * n.speed*0.4 * (dt/16);
@@ -459,6 +485,11 @@ export function updateNpcActors(dt) {
       n.x += Math.cos(ang)*10; n.y += Math.sin(ang)*10;
       audio.hit();
       if (n.hp <= 0) onNpcDeath(n);
+    }
+    if(n.structureCollisionReady){
+      const structureMotion=commitActorStructureMotion(n,structureStartX,structureStartY,n.x,n.y,
+        structureTarget,!!structureTarget&&!structureChargeStarted,structureChargeStarted);
+      if(structureChargeStarted&&structureMotion.blocked)n.structureChargeHit=true;
     }
   }
 }

@@ -46,7 +46,7 @@ export function isNight() { return state.dayTime < 0.25 || state.dayTime > 0.75;
 
 export function spawnNpcs() {
   runtime.npcs = [
-    { id:'tony', name:'TRE BAG TONY', sprite:'tony', x:1620, y:870, w:28,h:32, color:'#3a1810',
+    { id:'tony', name:'TRE BAG TONY', sprite:'tony', x:1620, y:870, w:28,h:32, color:'#3a1810', legacyStructureIndex:1,
       hp:120, maxHp:120, speed:0, hostile:false, vendor:true,
       interact: tonyDialogue },
     { id:'yuri', name:'YURI', sprite:'yuri', x:300, y:200, w:28,h:32, color:'#4a2818',
@@ -62,7 +62,7 @@ export function spawnNpcs() {
     { id:'scrap_dog', name:'THE DOG', sprite:'scrap_dog', x:580, y:150, w:26, h:20, color:'#684830',
       hp:40, maxHp:40, speed:0, hostile:false, archetype:'passive', chained: true, tailWag:0,
       interact: scrapDogDialogue },
-    { id:'pete', name:'PAWN SHOP PETE', sprite:'pete', x:250, y:700, w:28,h:32, color:'#4a4028',
+    { id:'pete', name:'PAWN SHOP PETE', sprite:'pete', x:250, y:700, w:28,h:32, color:'#4a4028', legacyStructureIndex:0,
       hp:80, maxHp:80, speed:0, hostile:false, vendor:true,
       interact: peteDialogue },
     { id:'lurch', name:'LURCH', sprite:'lurch', x:200, y:1400, w:28,h:34, color:'#3a2030',
@@ -86,7 +86,7 @@ export function spawnNpcs() {
     { id:'possum', name:'THE POSSUM', sprite:'possum', x:600, y:1500, w:28,h:24, color:'#604030',
       hp:20, maxHp:20, speed:0, hostile:false,
       interact: possumDialogue },
-    { id:'priest', name:"FATHER O'MALLEY", sprite:'priest', x:1800, y:1460, w:28,h:32, color:'#2a2030',
+    { id:'priest', name:"FATHER O'MALLEY", sprite:'priest', x:1800, y:1460, w:28,h:32, color:'#2a2030', legacyStructureIndex:3,
       hp:80, maxHp:80, speed:0, hostile:false,
       interact: priestDialogue },
     // v13 wave 8a — Conductor moved from THE PROJECTS to the TRAIN YARD. his real home turf.
@@ -234,7 +234,7 @@ export function spawnNpcs() {
       } },
     // --- v8 new NPCs ---
     // --- v12 new vendor: the supply ---
-    { id:'barb', name:'BAGGIE BARB', sprite:'barb', x:1540, y:1190, w:28,h:32, color:'#8a6080',
+    { id:'barb', name:'BAGGIE BARB', sprite:'barb', x:1540, y:1190, w:28,h:32, color:'#8a6080', legacyStructureIndex:4,
       hp:80, maxHp:80, speed:0, hostile:false, vendor:true,
       interact: barbDialogue },
     // v13 wave 2 — rival supply at the bus stop
@@ -264,7 +264,7 @@ export function spawnNpcs() {
     { id:'gutter_greg', name:'GUTTER GREG', sprite:'gutter_greg', x:4500, y:2050, w:26,h:32, color:'#496050',
       hp:80, maxHp:80, speed:0, hostile:false, essential:true,
       interact: gutterGregDialogue },
-    { id:'laundromat_lady', name:'LAUNDROMAT LADY', sprite:'launderlady', x:1720, y:1180, w:28,h:32, color:'#3a3a44',
+    { id:'laundromat_lady', name:'LAUNDROMAT LADY', sprite:'launderlady', x:1720, y:1180, w:28,h:32, color:'#3a3a44', legacyStructureIndex:4,
       hp:60, maxHp:60, speed:0, hostile:false,
       interact: (n)=> dialogue('LAUNDROMAT LADY', "she is folding the same shirt.\nshe has been folding the same shirt.\nthe shirt is hers, you think.", [
         { label: P.cash>=2?'do a load of laundry. $2. (regen +12 hp)':"need $2.", disabled: P.cash<2, action: ()=>{
@@ -321,7 +321,7 @@ export function spawnNpcs() {
         }},
         { label: 'leave.', action:()=>{} },
       ]) },
-    { id:'priests_son', name:"THE PRIEST'S SON", sprite:'priestson', x:1740, y:1480, w:24,h:28, color:'#2a2030',
+    { id:'priests_son', name:"THE PRIEST'S SON", sprite:'priestson', x:1740, y:1480, w:24,h:28, color:'#2a2030', legacyStructureIndex:3,
       hp:40, maxHp:40, speed:0, hostile:false,
       interact: (n)=> dialogue("THE PRIEST'S SON", "he is wearing a backwards cap.\nhe is the priest's son.\nthe priest does not acknowledge this.", [
         { label: 'ask about the priest.', action: ()=>{
@@ -335,7 +335,7 @@ export function spawnNpcs() {
         }},
         { label: 'leave.', action:()=>{} },
       ]) },
-    { id:'karaoke', name:'KARAOKE MIKE', sprite:'karaoke', x:1660, y:1180, w:24,h:28, color:'#603080',
+    { id:'karaoke', name:'KARAOKE MIKE', sprite:'karaoke', x:1660, y:1180, w:24,h:28, color:'#603080', legacyStructureIndex:4,
       hp:40, maxHp:40, speed:0, hostile:false,
       interact: (n)=> dialogue('KARAOKE MIKE', "he holds a karaoke machine.\nit is just a machine. there is no microphone.\nhe sings without one.", [
         { label: P.cash>=5?'sing a song. $5. (rhythm minigame)':"karaoke is $5.", disabled: P.cash<5, action: ()=>{
@@ -355,7 +355,7 @@ export function spawnNpcs() {
     { id:'skid_lurch',    name:'LURCH (SKID)',  sprite:'lurch',  x: 3020, y: 1940, w:28,h:34, color:'#3a2030',
       hp:55, maxHp:55, speed:1.5, hostile:true, aggro:true, dmg:6, zoneOnly:{x:2480,y:1520,w:900,h:720},
       archetype:'grabber', showHp:true },
-    { id:'skid_sherri',   name:'SHERRI (SKID)', sprite:'sherri', x: 2860, y: 2080, w:26,h:30, color:'#3a1820',
+    { id:'skid_sherri',   name:'SHERRI (SKID)', sprite:'sherri', x: 2860, y: 2080, w:26,h:30, color:'#3a1820', legacyStructureIndex:13,
       hp:45, maxHp:45, speed:2.1, hostile:true, aggro:true, dmg:5, zoneOnly:{x:2480,y:1520,w:900,h:720},
       archetype:'swarmer', showHp:true },
   ];

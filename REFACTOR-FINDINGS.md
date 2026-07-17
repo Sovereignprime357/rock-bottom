@@ -336,3 +336,31 @@ existing space makes the walk worth taking; it does not lengthen the leg. **For 
 its walkable limit, "stop expanding, start filling" is not a compromise — it is the only remaining
 direction that the instrument will allow.** His feel and the gate agree, which is rare enough to
 write down.
+
+### OD-HONEST-PHYSICALITY (OD-11)
+
+**Status:** DECIDED — AI-LED 2026-07-16 (operator veto standing)
+
+**Question:** Which of the 28 facades are architecture versus scenery under the contract's reachability rule, and what does the requested NPC/cop traversal smoke mean when the cited source line is not actor collision?
+
+**Measured evidence:** Movement has no terrain or zone walkability mask. A player-clearance flood from spawn reaches every facade center and all four exterior sides of all 28. Zero facades overlap a road, ground path, rail, existing building, NPC spawn, smoke spot, or mandatory anchor; all four renderer kinds paint filled structures, not murals. Twenty-one render a south entrance; ten generated entrances miss the existing centered aperture. Separately, `update.js:723` is projectile collision. `npc_ai.js` imports no structure table and directly mutates every actor position, so NPCs and cops have never shared building collision. A fresh-runtime overlap audit also finds eight deliberately embedded legacy actors: Tony in CORNER, Pete in PAWN, Father O'Malley and his son in CHURCH, Barb/the laundromat lady/Karaoke Mike in LAUNDROMAT, and Skid Sherri in a SHACK. Blind actor ejection would silently move eight canonical interaction anchors while claiming to fix facades that contain none of them.
+
+**Decision:** (1) All 28 current facades are `solid:true`; zero are registered flat. `flat` remains available only through a non-empty registered reason, never as a quota or a way to save a route number. (2) The 21 entrance-bearing facades use `doorGap:true` and receive a centered painted aperture; the seven storefronts have no visible door and no gap. (3) One merged `STRUCTURES` set and one scanner own player, projectile, load, NPC, and cop collision. Ordinary obstructed actors use stable corner detours; charges stop both axes at the wall and enter their existing cooldown. (4) Saves inside new solids eject deterministically to the nearest clear boundary. (5) Each of the eight actors deliberately embedded in a legacy id-less building declares that exact building index on its source actor record and receives a one-way compatibility exit only from that footprint; a familiar id in the wrong building ejects. Newly-solid facade overlap always ejects, including dynamic cops. (6) The merged resolver preserves the legacy south-door predicate and its full-target-Y x-axis behavior. (7) The real-path ruler uses the shipped arbitrary-heading analog control with framewise collision replay and legal action regions for unreachable selector centers; WASD/octile cost is a separately reported sensitivity.
+
+**Preserved:** no building/zone/prop/NPC/interaction additions; no route stop, venue, campaign anchor, world bound, walk speed, withdrawal rate, runway ratio, reward, save key/version, or 18000ms/8000ms timing change. `rock_bottom_v19.html` stays frozen. Any traversal-budget crossing is a finding recorded below and fixed nowhere in Wave 4.1.
+
+### F-HONEST-TRAVERSAL — the straight ruler was optimistic, but no newly legal leg crossed
+
+The collision-aware ledger traversed all 69 selector-derived campaign legs and all 252 generator-assignable route pairs before (`BUILDINGS` and the pre-v21 axis resolver) and after (the merged 53-structure authority). The complete row-by-row report is `node --no-warnings --experimental-vm-modules tools/solidity-gate.mjs --full`.
+
+| Reading | Straight | Baseline traversal | v21 traversal | Wave 4.1 delta | v21 minus straight | v21 budget use |
+|---|---:|---:|---:|---:|---:|---:|
+| kingdom emperor: Block → throne banner | 7,900.4px | 7,939.4px | 7,947.8px | +8.5px | +47.4px | 57.802s / 96.337% |
+| route `pawn_sill ↔ ditch_gauge` | 8,123.8px | 8,123.9px | 8,167.6px | +43.7px | +43.8px | 59.400s / 99.001% |
+| largest campaign delta: canal office → survey | 1,244.8px | 1,450.5px | 1,555.9px | +105.5px | +311.1px | 11.316s / 18.860% |
+| largest route delta: `motel_no ↔ canal_gauge` | 2,605.1px | 2,605.1px | 2,785.1px | +179.9px | +179.9px | 20.255s / 33.758% |
+| ratified generator exclusion: `scrap_gate ↔ ditch_gauge` | 8,274.6px | 8,282.8px | 8,324.5px | +41.6px | +49.8px | 60.542s / 100.903% |
+
+**Finding, fixed nowhere:** zero assignable route or campaign legs newly cross 8,250px, but `pawn_sill ↔ ditch_gauge` retains only 82.4px / 0.600s of analog headroom. The already-excluded `scrap_gate ↔ ditch_gauge` pair worsens by 41.6px and remains governed by OD-10; Wave 4.1 does not move it, widen the budget, or declare architecture flat.
+
+**Control sensitivity, also fixed nowhere:** literal unobstructed WASD/octile lower bounds are already 8,404.6px (101.874%) for the emperor commute and 8,614.7px (104.420%) for `pawn_sill ↔ ditch_gauge`, before obstacle detours. The canonical Wave 4.1 collision delta therefore uses the shipped arbitrary-heading analog control and reports WASD separately rather than pretending the packet's straight-line percentages describe keyboard travel.
