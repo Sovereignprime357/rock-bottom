@@ -7,6 +7,10 @@ import { last } from '../core/update.js';
 import { EQUIPMENT } from '../data/catalogs.js';
 import { H } from '../data/world.js';
 import { WEAPONS } from '../minigames/activities.js';
+import {
+  makeAttackSmear32, makeCartUnderlay32, makePlayer32, makePlayerAttack32,
+  makePlayerGear32, makeRoutePatch32, makeWeaponLayer32,
+} from './sprite_art_player_32.js';
 import { SPRITE_BASE_SIZES } from './sprite_manifest.js';
 import {
   anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut,
@@ -482,29 +486,29 @@ export function makeNPC(opts={}) {
 
 export function buildSprites() {
   // v17 player — four-beat shuffle, two attack poses, visible equipment, weapons and route patches.
-  const p = makePlayer();
+  const p = makePlayer32();
   ['down','up','left','right'].forEach(d => {
     p[d].forEach((g,i) => {
       cacheSprite('player','player_'+d+'_'+i,g,PALS.player);
       cacheSprite('playerhi','playerhi_'+d+'_'+i,g,PALS.player_high);
     });
     for(let phase=0;phase<2;phase++){
-      const attack=makePlayerAttack(p,d,phase);
+      const attack=makePlayerAttack32(p,d,phase);
       cacheSprite('playerattack','playerattack_'+d+'_'+phase,attack,PALS.player);
       cacheSprite('playerattackhi','playerattackhi_'+d+'_'+phase,attack,PALS.player_high);
-      cacheSprite('attack_smear','attack_smear_'+d+'_'+phase,makeAttackSmear(d,phase),PLAYER_LAYER_PAL,{noOutline:true});
+      cacheSprite('attack_smear','attack_smear_'+d+'_'+phase,makeAttackSmear32(d,phase),PLAYER_LAYER_PAL,{noOutline:true});
     }
     for(const id of Object.keys(EQUIPMENT)){
-      cacheSprite('gear_'+id,'gear_'+id+'_'+d,makePlayerGear(id,d),PLAYER_LAYER_PAL,{noOutline:true});
+      cacheSprite('gear_'+id,'gear_'+id+'_'+d,makePlayerGear32(id,d),PLAYER_LAYER_PAL,{noOutline:true});
     }
     for(const id of Object.keys(WEAPONS)){
-      cacheSprite('weapon_'+id,'weapon_'+id+'_'+d+'_0',makeWeaponLayer(id,d,false),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
-      cacheSprite('weapon_'+id,'weapon_'+id+'_'+d+'_1',makeWeaponLayer(id,d,true),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
+      cacheSprite('weapon_'+id,'weapon_'+id+'_'+d+'_0',makeWeaponLayer32(id,d,false),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
+      cacheSprite('weapon_'+id,'weapon_'+id+'_'+d+'_1',makeWeaponLayer32(id,d,true),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
     }
     for(let tier=1;tier<=4;tier++){
-      cacheSprite('route_patch_'+tier,'route_patch_'+tier+'_'+d,makeRoutePatch(tier,d),PLAYER_LAYER_PAL,{noOutline:true});
+      cacheSprite('route_patch_'+tier,'route_patch_'+tier+'_'+d,makeRoutePatch32(tier,d),PLAYER_LAYER_PAL,{noOutline:true});
     }
-    cacheSprite('cart_underlay','cart_underlay_'+d,makeCartUnderlay(d),CART_LAYER_PAL,{noOutline:true});
+    cacheSprite('cart_underlay','cart_underlay_'+d,makeCartUnderlay32(d),CART_LAYER_PAL,{noOutline:true});
   });
   // NPCs — distinctive styles, 3-frame walks
   const npcStyles = {
