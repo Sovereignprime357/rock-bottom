@@ -220,7 +220,9 @@ export function drawWorldFabric() {
 }
 
 export function buildEnvironmentSprites() {
-  const make = (rows,pal) => rasterize(parseGrid(rows), pal);
+  // Environment cache remains 16-logical by explicit declaration while character
+  // bases migrate independently to 32-logical art.
+  const make = (rows,pal) => rasterize(parseGrid(rows),pal,{logicalSize:16});
   ENV_SPRITE_CACHE.storm_drain = make([
     '................','................','................','................',
     '................','................','................','................',
