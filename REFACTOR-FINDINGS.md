@@ -336,3 +336,15 @@ existing space makes the walk worth taking; it does not lengthen the leg. **For 
 its walkable limit, "stop expanding, start filling" is not a compromise — it is the only remaining
 direction that the instrument will allow.** His feel and the gate agree, which is rare enough to
 write down.
+
+### OD-HONEST-PHYSICALITY (OD-11)
+
+**Status:** DECIDED — AI-LED 2026-07-16 (operator veto standing)
+
+**Question:** Which of the 28 facades are architecture versus scenery under the contract's reachability rule, and what does the requested NPC/cop traversal smoke mean when the cited source line is not actor collision?
+
+**Measured evidence:** Movement has no terrain or zone walkability mask. A player-clearance flood from spawn reaches every facade center and all four exterior sides of all 28. Zero facades overlap a road, ground path, rail, existing building, NPC spawn, smoke spot, or mandatory anchor; all four renderer kinds paint filled structures, not murals. Twenty-one render a south entrance; ten generated entrances miss the existing centered aperture. Separately, `update.js:723` is projectile collision. `npc_ai.js` imports no structure table and directly mutates every actor position, so NPCs and cops have never shared building collision.
+
+**Decision:** (1) All 28 current facades are `solid:true`; zero are registered flat. `flat` remains available only through a non-empty registered reason, never as a quota or a way to save a route number. (2) The 21 entrance-bearing facades use `doorGap:true` and receive a centered painted aperture; the seven storefronts have no visible door and no gap. (3) One merged `STRUCTURES` set and one scanner own player, projectile, load, NPC, and cop collision. Ordinary obstructed actors use stable corner detours; charges hit the wall. (4) Saves inside new solids eject deterministically to the nearest clear boundary. (5) The real-path ruler uses the shipped arbitrary-heading analog control with framewise collision replay and legal action regions for unreachable selector centers; WASD/octile cost is a separately reported sensitivity.
+
+**Preserved:** no building/zone/prop/NPC/interaction additions; no route stop, venue, campaign anchor, world bound, walk speed, withdrawal rate, runway ratio, reward, save key/version, or 18000ms/8000ms timing change. `rock_bottom_v19.html` stays frozen. Any traversal-budget crossing is a finding recorded below and fixed nowhere in Wave 4.1.
