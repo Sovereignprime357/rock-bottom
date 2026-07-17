@@ -278,7 +278,7 @@ export function drawPlayer() {
   ctx.fillStyle = 'rgba(0,0,0,.5)';
   ctx.fillRect(P.x+2, P.y+P.h-2, P.w-4, 4);
   const dir = P.facing, f = P.frame;
-  // Cached 16x16 cart underlay. It uses the same logical-pixel discipline as every body
+  // Cached 32-logical cart underlay. It shares the player's exact destination rectangle
   // instead of becoming a runtime rectangle costume when mounted.
   if (P.cartMounted) {
     const cart=SPRITE_CACHE['cart_underlay_'+dir];
@@ -326,7 +326,7 @@ export function drawPlayer() {
     }
     ctx.globalAlpha=damageAlpha;
     ctx.drawImage(sp, playerDrawX, playerDrawY, 32, 32);
-    // Equipment is a stack of cached transparent 16x16-derived layers. Loot now changes
+    // Equipment is a stack of cached transparent 32-logical layers. Loot now changes
     // the avatar instead of only changing numbers in the inventory panel.
     const eq=P.equip||{};
     const drawGear=(slot)=>{

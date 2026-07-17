@@ -23,13 +23,20 @@ import {
 } from './sprite_toolkit.js';
 
 export { anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut, mirrorGrid, parseGrid, rasterize, SPRITE_BASE_SIZES };
-export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, SPRITE_KEY_BASES, INCIDENT_PALS;
+export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, SPRITE_KEY_BASES,
+  SPRITE_PIXEL_COUNTS, SPRITE_KEY_PALETTES, INCIDENT_PALS;
 
 export function cacheSprite(base, key, grid, palette, options={}) {
   const logicalSize=SPRITE_BASE_SIZES[base];
   if (!logicalSize) throw new Error(`undeclared sprite base: ${base}`);
   if (Object.hasOwn(SPRITE_KEY_BASES,key)) throw new Error(`duplicate sprite key: ${key}`);
+  const paintedPixels=Array.isArray(grid)
+    ? grid.reduce((total,row)=>total+(Array.isArray(row)?row.filter(index=>index!==0).length:0),0)
+    : 0;
+  if (!paintedPixels) throw new Error(`blank sprite frame: ${key}`);
   SPRITE_KEY_BASES[key]=base;
+  SPRITE_PIXEL_COUNTS[key]=paintedPixels;
+  SPRITE_KEY_PALETTES[key]=Array.isArray(palette)?palette.slice():{...palette};
   SPRITE_CACHE[key]=rasterize(grid,palette,{...options,logicalSize});
 }
 
@@ -692,7 +699,7 @@ export function buildIncidentSprites16() {
 }
 
 export function makeHorseCop() {
-  // 16x16 sprite, horse body + cop torso on top
+  // Legacy 16-logical comparison fixture; production horse-cop art uses makeHorseCop32().
   const f = (frame) => parseGrid(applyVars([
     '...HHHH.........', // cop hat
     '...HHHH.........',
@@ -802,7 +809,7 @@ export function init_sprites() {
     os_brutus:    ['transparent','#000','#2a1810','#4a2818','#604030','#1a0805','#a08040','#5a2010'],
   };
   
-  // 16x16 pixel art helpers — parse a row string of 0-7 (dot=transparent)
+  // Legacy 16-logical authoring helpers retained for the live dual-size renderer.
   
   
   
@@ -843,9 +850,8 @@ export function init_sprites() {
   // Possum — flat brown lump, dignified, tiny construction helmet
   
   
-  // v15 authored identity layer. These are still edits to the 16x16 palette grid, not
-  // runtime drawing. Shared bodies keep the roster coherent; silhouette/held-object pixels
-  // carry the joke before a nameplate is read.
+  // Legacy v15 16-logical identity helpers remain as historical fixtures. Production
+  // character art is authored by the 32-logical modules imported above.
   
   
   
@@ -868,6 +874,8 @@ export function init_sprites() {
   // Build the SPRITE_CACHE
   SPRITE_CACHE = {};
   SPRITE_KEY_BASES = {};
+  SPRITE_PIXEL_COUNTS = {};
+  SPRITE_KEY_PALETTES = {};
   
   
   INCIDENT_PALS = {

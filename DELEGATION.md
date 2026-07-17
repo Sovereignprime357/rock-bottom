@@ -4,6 +4,15 @@
 
 ---
 
+## v21 character ceiling — BUILT / PENDING OPERATOR VISUAL REVIEW (July 16, 2026)
+
+Branch: `v21-sprite-ceiling`, isolated worktree; push without merge. OD-12 records the operator-ratified all-roster migration and the human-eye acceptance boundary.
+
+- [x] **Wave 4.2 — RAISE THE CHARACTER CEILING.** All 93 character bases / 373 exact nonblank cache keys now use true 32-logical palette grids inside the unchanged 32×32 screen rect. The player composite (high/attack states, 15 gear layers, nine weapons, four route tiers, smear, and cart), 47 humanoid/state identities, three dogs, possum, pigeon, horse cop, talking pothole, and five incident props were authored as reviewable commits. Every base declares its logical size; eleven environment sprites stay explicitly 16-logical on the same renderer. `sprite-gate` locks the exact grammar, declarations, nonblank frames, dual-size path, all 14 character-cache draw destinations, actual character/environment palette use, and no-smoothing rule. Eight direct intentional-red modes—undeclared, invalid size, key count, replaced frame, blank frame, character palette, environment palette, and draw destination—each exited 1 before the restored 13/13 suite. Green proves that the game and pixel machinery survived. It does not certify the art.
+- [ ] **Operator eye gate.** Review the supplied atlas and live-world screenshot at 1:1. The honest weak list is in `REFACTOR-FINDINGS.md`; visual veto remains standing because no mechanical gate can judge a sprite.
+
+---
+
 ## v20 recognition wave — IN PROGRESS (July 15, 2026)
 
 Active implementation branch: `codex/v20-recognition`. The operator packet remains `SPEC-V20-PACKET.md`; each slice graduates into SPEC only with its own register entry and green permanent gate.

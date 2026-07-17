@@ -422,3 +422,97 @@ impossible.**
    prose for truth. This class is ungateable, same as entry #2. What is available is a habit:
    **when the corpus makes a checkable claim about the code, check it.** Three of them were false
    and one command each proved it.
+
+**Resolution note — Wave 4.2 / OD-12, 2026-07-16:** the operator corrected VIBE's Texture section
+and raised the complete character ceiling. The final-diff audit then found that the first correction
+had not propagated into `AGENTS.md`, VIBE's later NPC-rendering bullets, or the active clauses in
+`SPEC.md`; a future agent would still have been ordered to restore 16×16 emoji actors. Those
+governing documents now explicitly name 93 32-logical character bases, eleven 16-logical
+environment holdouts, and the supersession of historical version ceilings. This is exactly the
+ungateable prose-truth class described above: `corpus-gate` stayed green while the seed contradicted
+itself. The independent read, not the suite, caught it.
+
+## F-SPRITE-CEILING — 4× the authored pixels, zero change to the actor footprint
+
+### What landed
+
+All 93 character bases / 373 exact cache keys now declare and author a true `32×32` logical grid.
+The cache output remains `32×32`, so the render scale becomes 1:1 without changing any destination
+rectangle. The migration landed in four reviewable art checkpoints: shared dual-size machinery,
+the complete player composite, 47 humanoid/state bases, then creatures and incident props. Eleven
+environment cache bases remain explicitly `16×16` and use the same production rasterizer, so dual
+size support is exercised by the running game rather than preserved as dead compatibility code.
+
+The player unit was larger than the SPEC's gear warning: `player`, `playerhi`, both attack states,
+15 gear bases, nine weapons, four route patches, the attack smear, and the cart underlay all share
+the same unchanged 32px actor rectangle. Moving only player + gear would have left legal but visibly
+misregistered layers. All of them moved together.
+
+### False premises found before and during implementation — fixed nowhere by pretending they were true
+
+- **F-AMENDMENT-DID-NOT-PROPAGATE.** The amended WHAT ordered all 93 bases, but the acceptance list,
+  screenshot stop, and THE TRAP still ordered a player-only landing. The operator's later and
+  explicit all-roster ruling governed. The stale clauses are now retracted in place rather than
+  silently deleted.
+- **F-I-STILL-PIXEL-SUBPIXEL.** The existing camera, player draw, cart/trail effects, and world
+  motion already admit fractional positions. “No sub-pixel placement” could not be made
+  retroactively true without changing shipped motion. Wave 4.2 adds no fractional grid geometry,
+  preserves every actor draw expression byte-for-byte, and keeps smoothing disabled.
+- **F-PALETTE-ALREADY-CLEAN.** The grandfathered palette corpus already contains colors broader
+  than the short VIBE orientation list, including pale accents and blue outside the three authority
+  palettes. Recoloring the whole game was not authorized. The gate freezes the exact shipped corpus,
+  rejects pure white / literal bright blue misuse, and requires a separately audited snapshot for
+  any future palette change.
+- **F-BARE-16-COUNT.** The packet said 124 bare `16`s across `src/`; the branch contained 140. The
+  warning was still directionally correct: only the sprite toolkit and its callers were
+  parameterized. No blind replacement occurred.
+- **F-FALLBACK-SCOPE.** The cited `_0` fallback is the NPC pose path, not a universal cache lookup.
+  The gate therefore pins the complete 93-base grammar directly instead of assuming the fallback
+  protects or threatens every key family in the same way.
+- **F-ANCHOR-SCOPE.** NPCs are bottom-centered; the player keeps its shipped `P.x-2, P.y-4` draw
+  expressions. The invariant is the exact destination expression and rectangle, not a new common
+  anchor invented for the gate.
+
+### The gate boundary and the eye reading
+
+`tools/sprite-gate.mjs` proves declarations, exact key/frame grammar, nonblank frames, 16/32
+coexistence, valid palette indices, 32px outputs, all 14 character-cache draw destinations, the
+palettes actually consumed by every character and environment cache key, no gradients, and no
+smoothing. Eight direct modes forced it red independently: undeclared base, invalid `24`, 372-key
+cache, replaced player frame, present-but-blank player frame, forbidden character palette,
+forbidden environment palette, and changed destination geometry. The last four hardenings followed
+an independent audit demonstrating that key count alone could congratulate an empty canvas, named
+palette exports omitted inline/environment consumers, and actor-only draw hashing omitted the
+attack/incident paths. It cannot prove that any sprite is good art, and says so in its own PASS
+output.
+
+The browser atlas and live-world pass found three concrete misses before delivery: the mattress
+read as an envelope, the possum read as an appliance, and OLD SCHOOL BRUTUS did not separate enough
+from BRUTUS. Their silhouettes were revised. The old pothole generator also produced identical
+mouth frames because two tokens resolved to the same palette index; the three replacement poses are
+visibly and structurally distinct.
+
+**Honest weak list for operator review:** MAYOR'S COUSIN remains the least specific humanoid and
+depends heavily on lapels/pins; the AirPod and priest-collar layers are necessarily tiny at the
+unchanged 32px footprint; the mattress remains the most context-dependent incident prop even after
+the quilt/springs pass; horse cop compresses rider and horse into one legally unchanged rectangle;
+and the attack smear / bottle fragments depend on dark-street contrast. These are visual findings,
+not permission to move hitboxes or add colors under a green suite.
+
+### OD-CHARACTER-CEILING (OD-12)
+
+**Status:** RATIFIED — operator, 2026-07-16; visual veto standing.
+
+**Question:** Keep the inherited 16-logical character ceiling, stop after one player proof, or use
+the unchanged 32px destination rect to re-author the complete roster at the world's native pixel
+grid?
+
+**Decision:** Raise all 93 character bases / 373 keys to explicit 32-logical art. “Go wild” spends
+density and taste, not map runway. Preserve exact screen rectangles, anchors, hitboxes, identity,
+key grammar, palette corpus, timing, and the frozen v19 floor. Land reviewable commits. Keep the
+shared renderer genuinely dual-size through eleven explicit 16-logical environment sprites. Green
+means the runtime and art machinery survived; only the operator's eye can accept the art.
+
+**Preserved:** `rock_bottom_v19.html`, save key/shape/version, `18000ms` high, `8000ms` crash,
+movement and combat values, world geometry, interactions, NPC identity, actor hitboxes, draw
+destinations, cache key grammar, and the existing color corpus.

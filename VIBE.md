@@ -139,6 +139,10 @@ copper orange       #d06030  (the holy grail color, dealer corner)
 - Pastel anything — too soft
 - Neon green/pink — wrong franchise
 
+These bind new palette decisions. Wave 4.2 does not silently repaint older exceptions: the exact
+grandfathered character + environment palette-use corpus is frozen by `sprite-gate`, and changing
+that snapshot requires a new audited decision.
+
 ### Texture
 - CRT scanlines always on (3px repeating gradient overlay, 12% opacity)
 - Slight body flicker (8-9s cycle)
@@ -179,6 +183,11 @@ copper orange       #d06030  (the holy grail color, dealer corner)
 >
 > Ratified by the operator 2026-07-16: *"make the corrections, raise the ceiling... we can have a
 > lot of detail and still be pixel."* See `REFACTOR-FINDINGS.md` §F-VIBE-ART.
+>
+> **RESOLVED IN WAVE 4.2 (OD-12):** the measurement above describes pre-wave commit `f3ac02f`.
+> Current character art is 93 explicitly declared `32x32` logical bases / 373 nonblank cache keys
+> rendered into the same `32x32` destination rectangles. Eleven environment cache bases remain
+> explicitly `16x16`, keeping the dual-size renderer live.
 
 ### Building rules
 - **Buildings are authored structures with real interiors, signage, and light response.** The
@@ -195,7 +204,11 @@ copper orange       #d06030  (the holy grail color, dealer corner)
 - Every building gets a labelColor (specific to its vibe)
 
 ### NPC rendering
-- 28x28 colored body rect + 22px emoji "face" + 10px monospace name above
+- Hand-authored `32x32` logical palette sprite cached at init and drawn into its exact authored
+  `32x32` world destination; no operating-system emoji face and no runtime per-pixel body painting
+- NPC sprite art stays aligned to the bottom center of its existing hitbox; the player and incident
+  overrides retain their separately authored, gate-pinned destination expressions
+- 10px monospace name above, wrapped/deconflicted by the nameplate system
 - Red name color if hostile, cream if neutral
 - HP bar appears only after first damage
 - "!" indicator if aggro'd

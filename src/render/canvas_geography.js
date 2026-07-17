@@ -6,7 +6,7 @@ import { state } from '../core/runtime_ui.js';
 import { CROSSWALKS, GROUND_PATHS, H, RAIL_LINES, ROAD_SEGMENTS, UTILITY_WIRES, W } from '../data/world.js';
 import { parseGrid, rasterize } from './sprites.js';
 
-export let cv, ctx, ENV_SPRITE_CACHE;
+export let cv, ctx, ENV_SPRITE_CACHE, ENV_SPRITE_PALETTES;
 
 export function visibleWorldRect(x, y, w=1, h=1, pad=72) {
   return x+w >= state.cam.x-pad && x <= state.cam.x+W+pad &&
@@ -222,27 +222,30 @@ export function drawWorldFabric() {
 export function buildEnvironmentSprites() {
   // Environment cache remains 16-logical by explicit declaration while character
   // bases migrate independently to 32-logical art.
-  const make = (rows,pal) => rasterize(parseGrid(rows),pal,{logicalSize:16});
-  ENV_SPRITE_CACHE.storm_drain = make([
+  const make = (key,rows,pal) => {
+    ENV_SPRITE_PALETTES[key]=Array.isArray(pal)?pal.slice():{...pal};
+    return rasterize(parseGrid(rows),pal,{logicalSize:16});
+  };
+  ENV_SPRITE_CACHE.storm_drain = make('storm_drain',[
     '................','................','................','................',
     '................','................','................','................',
     '..111111111111..','..122222222221..','..121212121221..','..122222222221..',
     '..111111111111..','................','................','................',
   ], {1:'#25231f',2:'#706858'});
-  ENV_SPRITE_CACHE.news_box = make([
+  ENV_SPRITE_CACHE.news_box = make('news_box',[
     '................','.....11111......','....1222221.....','....1222221.....',
     '....1333331.....','....1333331.....','....1333331.....','....1222221.....',
     '....1222221.....','....1222221.....','....1111111.....','.....11111......',
     '......11........','......11........','.....1111.......','................',
   ], {1:'#221d18',2:'#8a3a3a',3:'#d4c896'});
-  ENV_SPRITE_CACHE.road_barrier = make([
+  ENV_SPRITE_CACHE.road_barrier = make('road_barrier',[
     '................','................','................','................',
     '................','..111111111111..','..122112211221..','..211221122112..',
     '..111111111111..','....11......11..','....11......11..','....11......11..',
     '...1111....1111.','................','................','................',
   ], {1:'#3a3020',2:'#d06030'});
   // v18 district claim sign. One cached 16x16 logical sprite serves every owned district.
-  ENV_SPRITE_CACHE.claim_sign = make([
+  ENV_SPRITE_CACHE.claim_sign = make('claim_sign',[
     '................','..111111111111..','..122222222221..','..123333333321..',
     '..123232323321..','..123333333321..','..122222222221..','..111111111111..',
     '.......11.......','.......11.......','.......11.......','.......11.......',
@@ -254,23 +257,23 @@ export function buildEnvironmentSprites() {
     '..111111111111..','.......11.......','.......11.......','.......11.......',
     '.......11.......','......1111......','.....111111.....','................',
   ];
-  ENV_SPRITE_CACHE.clan_banner_blue=make(bannerRows,{1:'#111418',2:'#34485a',3:'#e8c040'});
-  ENV_SPRITE_CACHE.clan_banner_receipt=make(bannerRows,{1:'#17130d',2:'#d4c896',3:'#8a3a3a'});
-  ENV_SPRITE_CACHE.clan_banner_wire=make(bannerRows,{1:'#100b08',2:'#8a5b3a',3:'#d06030'});
-  ENV_SPRITE_CACHE.clan_banner_curb=make(bannerRows,{1:'#0a0805',2:'#5a5548',3:'#e8c040'});
-  ENV_SPRITE_CACHE.rail_signal = make([
+  ENV_SPRITE_CACHE.clan_banner_blue=make('clan_banner_blue',bannerRows,{1:'#111418',2:'#34485a',3:'#e8c040'});
+  ENV_SPRITE_CACHE.clan_banner_receipt=make('clan_banner_receipt',bannerRows,{1:'#17130d',2:'#d4c896',3:'#8a3a3a'});
+  ENV_SPRITE_CACHE.clan_banner_wire=make('clan_banner_wire',bannerRows,{1:'#100b08',2:'#8a5b3a',3:'#d06030'});
+  ENV_SPRITE_CACHE.clan_banner_curb=make('clan_banner_curb',bannerRows,{1:'#0a0805',2:'#5a5548',3:'#e8c040'});
+  ENV_SPRITE_CACHE.rail_signal = make('rail_signal',[
     '.......11.......','......1221......','......1331......','......1221......',
     '.......11.......','.......11.......','.......11.......','.......11.......',
     '.......11.......','.......11.......','.......11.......','.......11.......',
     '.......11.......','.....111111.....','.....111111.....','................',
   ], {1:'#302a24',2:'#8a3a3a',3:'#e8c040'});
-  ENV_SPRITE_CACHE.utility_top = make([
+  ENV_SPRITE_CACHE.utility_top = make('utility_top',[
     '.......11.......','.......11.......','..111111111111..','..1....11....1..',
     '..1....11....1..','.......11.......','.......11.......','.......11.......',
     '.......11.......','.......11.......','.......11.......','.......11.......',
     '.......11.......','.......11.......','.......11.......','.......11.......',
   ], {1:'#4a3723'});
-  ENV_SPRITE_CACHE.utility_base = make([
+  ENV_SPRITE_CACHE.utility_base = make('utility_base',[
     '.......11.......','.......11.......','.......11.......','.......11.......',
     '.......11.......','.......11.......','.......11.......','.......11.......',
     '.......11.......','.......11.......','.......11.......','.......11.......',
@@ -303,6 +306,7 @@ export function init_canvas_geography() {
   
   // ----- v14 cached environment sprites -----
   ENV_SPRITE_CACHE = {};
+  ENV_SPRITE_PALETTES = {};
   
   
   
