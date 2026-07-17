@@ -364,3 +364,61 @@ The collision-aware ledger traversed all 69 selector-derived campaign legs and a
 **Finding, fixed nowhere:** zero assignable route or campaign legs newly cross 8,250px, but `pawn_sill ↔ ditch_gauge` retains only 82.4px / 0.600s of analog headroom. The already-excluded `scrap_gate ↔ ditch_gauge` pair worsens by 41.6px and remains governed by OD-10; Wave 4.1 does not move it, widen the budget, or declare architecture flat.
 
 **Control sensitivity, also fixed nowhere:** literal unobstructed WASD/octile lower bounds are already 8,404.6px (101.874%) for the emperor commute and 8,614.7px (104.420%) for `pawn_sill ↔ ditch_gauge`, before obstacle detours. The canonical Wave 4.1 collision delta therefore uses the shipped arbitrary-heading analog control and reports WASD separately rather than pretending the packet's straight-line percentages describe keyboard travel.
+
+## F-VIBE-ART — the tone bible describes a game that stopped existing
+
+**Trigger:** operator asked for better character sprites ("avatars do look a little weak... it
+would be incredible to see that all look like legit game character sprites"). Before speccing it,
+checked whether `VIBE.md` governs art the way it governs voice. **It does. And what it says is
+false.**
+
+### What VIBE.md §Visual aesthetic currently claims, against what the code does
+
+| VIBE.md says | Reality | Verdict |
+|---|---|---|
+| L147: *"Emoji used unironically for NPCs and props. **This is the look, not a placeholder.**"* | **8 emoji lines in all of `src/`**, all in UI chrome (`hud.js`, `runtime_ui.js`, `communications.js`). NPCs are **373 sprite keys** of hand-authored pixel art. | **FALSE** |
+| L150: *"Solid buildings: filled rect + 3px dark border"* | The render layer is **3,912 lines across 10 modules** — `structures.js` 523, `props.js` 621, `sprites.js` 919, `landmarks_a/b` 402, `tiles.js` 315, plus light masks, glow caches and a fog sheet. | **FALSE** |
+| L145: *"Pixel art is CHUNKY, not refined. 16x16 logical, scaled 2x."* | **True — of characters only.** 16×16 grids drawn at 32×32 through one call at `actors_weather.js:136`. The environment obeys no such ceiling. | **HALF TRUE, and that half is the bug** |
+
+### The finding
+
+**The art drifted past VIBE many versions ago and nobody noticed, because nothing checks whether
+the seed is true.** `corpus-gate` protects `VIBE.md` from *shrinking*. **Nothing protects it from
+being wrong.** A gate that keeps a false document intact keeps a false document intact.
+
+**This inverts the operator's request.** He is not asking to violate the aesthetic. **The
+aesthetic was abandoned by the environment and the characters are the last thing still obeying
+it.** The world got a 3,912-line renderer with atmospheric lighting; the characters got 373 tiny
+grids and one `drawImage`. **That mismatch is what reads as "weak" — not the sprites themselves.**
+
+### Why this is the most dangerous thing in the corpus right now
+
+`README.md`'s read order tells every fresh agent: *"**VIBE.md** — internalize the voice before
+doing anything else."* **An agent sent to improve the art, obeying the tone bible exactly, would
+build emoji NPCs and filled-rect buildings.** It would be following orders. It would make the game
+substantially worse. And every gate would stay green, because **no gate reads a document for
+truth.**
+
+**This is entry #11's shape at corpus scale.** A false premise, unread, load-bearing, with hands.
+Entry #11 was one line I never opened. **This is a whole section of the seed, and the seed is what
+every future version reproduces from.**
+
+### Not resolved here — this is the operator's
+
+`VIBE.md` is the soul and the tone bible is his. **Correcting a stale art section is not the same
+decision as the "single HTML file" retirement** — that rule was obsolete, this one is **false**.
+Retirement needs a reason; a false claim only needs a correction. **But it is still his hand on
+the seed, and an AI silently rewriting the tone bible is exactly what `corpus-gate` exists to make
+impossible.**
+
+**Proposed, veto standing, not written:**
+1. §Visual aesthetic gets corrected to describe the game that exists — sprites not emoji, a real
+   renderer not filled rects — with the stale claims **retracted in place, not deleted**, the way
+   `SPEC-refactor-modularize.md`'s fabricated prerequisite was.
+2. The 16×16 character ceiling gets **decided rather than inherited**. It is currently the only
+   surviving line of a rule the rest of the game abandoned, and it is load-bearing for the
+   operator's complaint either way — keep it deliberately, or raise it deliberately.
+3. **A `vibe-truth` gate is NOT proposed, because it cannot exist.** No mechanical check reads
+   prose for truth. This class is ungateable, same as entry #2. What is available is a habit:
+   **when the corpus makes a checkable claim about the code, check it.** Three of them were false
+   and one command each proved it.
