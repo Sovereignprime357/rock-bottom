@@ -260,3 +260,63 @@ The class was never hypothetical. **It just had nothing watching it.**
 independently is a merge-drift candidate — the README and the runner, a spec and its
 implementation, a schema and its migration. **Green parents do not imply a green child.** If the
 relationship matters, gate the relationship, not the files.
+
+### 11. My SPEC cited a line I never read, and the acceptance criteria would have gutted the game
+
+**What happened:** I wrote `SPEC-v21-honest-map.md` and put this in the edge cases, as fact:
+
+> *"NPC and cop pathing. They use the same collision (`update.js:723`). Solidifying can trap or
+> reroute them."*
+
+**Both halves are false.** `update.js:714` opens with *"projectile update (bottles + holy water
+vials)"* — **:723 is the projectile loop.** And `npc_ai.js` imports no structure table at all:
+**NPCs and cops have never shared building collision, in any version.** They walk through
+everything and always have.
+
+**How I produced it:** a grep returned `update.js:723: // wall (solid building) collision`. I read
+the grep line. **I never read the ten lines above it.** The comment was true and its subject was
+projectiles. **I cited a line I had not read, in a SPEC, as a load-bearing fact.**
+
+**Why this one is worse than #2.** Entry #2 was a fabricated crisis whose phantom fix was a
+**no-op** on a clean tree — it cost nothing and I wrote *"assume the next one isn't."* **This was
+the next one, and it wasn't.** From that false premise I derived a real acceptance criterion:
+
+> *"Save-load into every newly-solid footprint ejects cleanly. NPC/cop pathing smoke across each
+> newly-solid structure."*
+
+A builder following my SPEC **exactly and obediently** would have wired actors into collision and
+ejected everyone overlapping a structure. A fresh-runtime audit found **eight canonical actors
+deliberately embedded inside legacy buildings**: Tony in CORNER, Pete in PAWN, Father O'Malley and
+his son in CHURCH, Barb and the laundromat lady and Karaoke Mike in LAUNDROMAT, Skid Sherri in a
+SHACK. **Blind ejection would have silently moved eight core interaction anchors out of their own
+shops — while fixing facades that contain none of them.** The dealer, the pawn shop, the supplier,
+the church. Every gate would have stayed green: none of them assert where Tony stands.
+
+**What saved it: the builder read the line I cited and I didn't.** Not a gate — no gate can read a
+SPEC. Not me. **The instruction "push back by name before building it" was the only control that
+fired**, and it fired because it was written into the delegation, not because anything enforced it.
+
+**Prevention, and it is narrow on purpose:**
+- **A `file:line` in a SPEC is a claim. Open it.** A grep result is a string match, not a fact
+  about what the code does. The comment said "wall (solid building) collision" and was true —
+  about a subject I invented.
+- **Acceptance criteria inherit the premises of the edge cases.** A wrong edge case is inert. A
+  wrong edge case with an acceptance criterion hanging off it is **an instruction**, and it will be
+  obeyed.
+- **The delegation must always say: push back by name, before building, not after.** It is the
+  only defense against a confidently wrong SPEC, and it is a **process control, not a code
+  control** — write it every time.
+
+**⭐ For the autonomous loop, this is the whole exposure in one artifact.** The loop has no builder
+who argues. **A compliant agent executing this SPEC ships eight moved NPCs, green, with a
+convincing rationale in the commit message** — and the fabrication that caused it is one unread
+line in a document nobody re-reads. Entry #2 said the loop's risk is a fabricated premise getting
+ratified. **This is what ratified looks like when it has hands.**
+
+**Footnote, entry #3's family, fourth of the day:** my first attempt to red-test the solidity gate
+was a false positive. A PowerShell `-replace` silently failed to match, and `Set-Content -Encoding
+UTF8` added a BOM and double-encoded every `×` into `Ã—` — **accidentally reproducing the exact
+"isolated office encoding damage" BRAIN records from v19.** The gate caught it instantly via a
+facade corpus hash and named it as drift. I nearly recorded that failure as a successful red test.
+**Redone in node, it fired honestly.** Four false-positive tests in one day, and the only reason
+none of them shipped is that each one looked wrong for a reason unrelated to what I was testing.
