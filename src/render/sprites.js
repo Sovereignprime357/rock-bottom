@@ -7,42 +7,42 @@ import { last } from '../core/update.js';
 import { EQUIPMENT } from '../data/catalogs.js';
 import { H } from '../data/world.js';
 import { WEAPONS } from '../minigames/activities.js';
+import {
+  makeAttackSmear32, makeCartUnderlay32, makePlayer32, makePlayerAttack32,
+  makePlayerGear32, makeRoutePatch32, makeWeaponLayer32,
+} from './sprite_art_player_32.js';
+import { makeNpc32, makeSleepingDave32 } from './sprite_art_npc_32.js';
+import {
+  makeDog32, makeHorseCop32, makeIncidentSprites32, makePigeon32,
+  makePossum32, makePothole32,
+} from './sprite_art_special_32.js';
+import { SPRITE_BASE_SIZES } from './sprite_manifest.js';
+import {
+  anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut,
+  mirrorGrid, parseGrid, rasterize,
+} from './sprite_toolkit.js';
 
-export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, INCIDENT_PALS;
+export { anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut, mirrorGrid, parseGrid, rasterize, SPRITE_BASE_SIZES };
+export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, SPRITE_KEY_BASES,
+  SPRITE_PIXEL_COUNTS, SPRITE_KEY_PALETTES, INCIDENT_PALS;
 
-export function parseGrid(rows) {
-  return rows.map(r => r.split('').map(c => c === '.' ? 0 : parseInt(c)));
-}
-
-export function applyVars(rows, vars) {
-  return rows.map(r => {
-    let out = r;
-    for (const k in vars) out = out.split(k).join(vars[k]);
-    return out;
-  });
-}
-
-export function blankSpriteGrid(){return Array.from({length:16},()=>Array(16).fill(0));}
-
-export function gridPut(g,x,y,v){if(x>=0&&x<16&&y>=0&&y<16)g[y][x]=v;}
-
-export function gridBox(g,x,y,w,h,v){for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)gridPut(g,xx,yy,v);}
-
-export function gridLine(g,x1,y1,x2,y2,v){const n=Math.max(Math.abs(x2-x1),Math.abs(y2-y1));for(let i=0;i<=n;i++)gridPut(g,Math.round(x1+(x2-x1)*(i/(n||1))),Math.round(y1+(y2-y1)*(i/(n||1))),v);}
-
-export function mirrorGrid(g){return g.map(row=>row.slice().reverse());}
-
-export function anchorGridToBottom(g){
-  let bottom=-1;for(let y=0;y<16;y++)for(let x=0;x<16;x++)if(g[y][x])bottom=Math.max(bottom,y);
-  if(bottom<0||bottom===15)return g.map(r=>r.slice());
-  const out=blankSpriteGrid(),shift=15-bottom;
-  for(let y=0;y<16;y++)for(let x=0;x<16;x++)if(g[y][x])gridPut(out,x,y+shift,g[y][x]);
-  return out;
+export function cacheSprite(base, key, grid, palette, options={}) {
+  const logicalSize=SPRITE_BASE_SIZES[base];
+  if (!logicalSize) throw new Error(`undeclared sprite base: ${base}`);
+  if (Object.hasOwn(SPRITE_KEY_BASES,key)) throw new Error(`duplicate sprite key: ${key}`);
+  const paintedPixels=Array.isArray(grid)
+    ? grid.reduce((total,row)=>total+(Array.isArray(row)?row.filter(index=>index!==0).length:0),0)
+    : 0;
+  if (!paintedPixels) throw new Error(`blank sprite frame: ${key}`);
+  SPRITE_KEY_BASES[key]=base;
+  SPRITE_PIXEL_COUNTS[key]=paintedPixels;
+  SPRITE_KEY_PALETTES[key]=Array.isArray(palette)?palette.slice():{...palette};
+  SPRITE_CACHE[key]=rasterize(grid,palette,{...options,logicalSize});
 }
 
 export function makePlayer() {
   const base=(dir)=>{
-    const g=blankSpriteGrid(),H=1,S=2,T=4,P=6,A=5,E=6,X=7;
+    const g=blankSpriteGrid(16),H=1,S=2,T=4,P=6,A=5,E=6,X=7;
     if(dir==='down'){
       gridBox(g,7,1,3,1,H);gridBox(g,6,2,5,1,H);gridBox(g,5,3,7,1,H);
       gridBox(g,5,4,7,3,H);gridBox(g,6,4,5,3,S);gridPut(g,7,5,H);gridPut(g,9,5,H);gridPut(g,8,6,X);
@@ -102,7 +102,7 @@ export function makePlayerAttack(player,dir,phase){
 }
 
 export function makePlayerGear(id,dir){
-  const right=dir==='right',d=right?'left':dir,g=blankSpriteGrid(),side=d==='left';
+  const right=dir==='right',d=right?'left':dir,g=blankSpriteGrid(16),side=d==='left';
   if(id==='mesh_cap'){if(side){gridBox(g,3,1,7,2,6);gridBox(g,1,3,5,1,2);}else{gridBox(g,5,1,7,2,6);gridBox(g,4,3,8,1,2);}}
   else if(id==='ski_mask'){if(side){gridBox(g,3,3,7,4,1);gridPut(g,4,5,5);}else{gridBox(g,5,3,7,4,1);gridPut(g,7,5,5);gridPut(g,9,5,5);}}
   else if(id==='helmet'){if(side){gridBox(g,4,0,6,2,2);gridBox(g,2,2,8,1,4);}else{gridBox(g,6,0,5,2,2);gridBox(g,4,2,9,1,4);}}
@@ -122,7 +122,7 @@ export function makePlayerGear(id,dir){
 }
 
 export function makeRoutePatch(tier,dir){
-  const right=dir==='right',d=right?'left':dir,g=blankSpriteGrid(),side=d==='left';
+  const right=dir==='right',d=right?'left':dir,g=blankSpriteGrid(16),side=d==='left';
   if(tier>=1)gridBox(g,5,9,2,2,2);
   if(tier>=2)gridBox(g,side?7:9,11,2,2,4);
   if(tier>=3)gridLine(g,side?4:3,12,side?8:5,12,7);
@@ -131,7 +131,7 @@ export function makeRoutePatch(tier,dir){
 }
 
 export function makeWeaponLayer(id,dir,attack){
-  const right=dir==='right',d=right?'left':dir,g=blankSpriteGrid(),side=d==='left';
+  const right=dir==='right',d=right?'left':dir,g=blankSpriteGrid(16),side=d==='left';
   let x1=side?(attack?0:1):12,y1=side?(attack?10:11):(attack?8:10),x2=side?6:14,y2=side?11:14;
   if(d==='down'){x1=attack?7:12;y1=attack?10:10;x2=attack?9:13;y2=15;}
   if(d==='up'){x1=attack?7:3;y1=attack?3:9;x2=attack?9:4;y2=attack?9:13;}
@@ -155,7 +155,7 @@ export function makeWeaponLayer(id,dir,attack){
 }
 
 export function makeAttackSmear(dir,phase){
-  const g=blankSpriteGrid(),v=phase?4:2;
+  const g=blankSpriteGrid(16),v=phase?4:2;
   if(dir==='right'){
     if(!phase){gridLine(g,5,5,11,7,v);gridLine(g,6,8,12,10,v);}else{gridLine(g,2,3,13,7,v);gridLine(g,4,8,15,11,v);gridPut(g,13,12,5);}
   }
@@ -172,7 +172,7 @@ export function makeAttackSmear(dir,phase){
 }
 
 export function makeCartUnderlay(dir){
-  const g=blankSpriteGrid();
+  const g=blankSpriteGrid(16);
   gridLine(g,2,8,13,8,3);gridLine(g,3,13,12,13,2);gridLine(g,2,8,3,13,2);gridLine(g,13,8,12,13,2);
   for(let x=4;x<=11;x+=2)gridLine(g,x,9,x,12,2);
   gridLine(g,3,10,12,10,3);gridLine(g,3,12,12,12,3);
@@ -182,36 +182,6 @@ export function makeCartUnderlay(dir){
 }
 
 export function putCartHub(g,x,y){gridPut(g,x,y,4);gridPut(g,x+1,y+1,2);}
-
-export function rasterize(grid, palette, opts={}) {
-  // v15: paint on the true 16x16 logical grid, then scale once. The old 1-device-pixel
-  // halo and shine created half-logical pixels that blurred every silhouette.
-  const logical = document.createElement('canvas');
-  logical.width = 16; logical.height = 16;
-  const lg = logical.getContext('2d');
-  lg.imageSmoothingEnabled = false;
-  if (!opts.noOutline) {
-    lg.fillStyle = 'rgba(0,0,0,.9)';
-    for (let y=0;y<16;y++) for (let x=0;x<16;x++) {
-      if (!grid[y] || grid[y][x] === 0) continue;
-      lg.fillRect(x-1,y,1,1); lg.fillRect(x+1,y,1,1);
-      lg.fillRect(x,y-1,1,1); lg.fillRect(x,y+1,1,1);
-    }
-  }
-  for (let y=0;y<16;y++) for (let x=0;x<16;x++) {
-    const idx = grid[y] ? grid[y][x] : 0;
-    const col = palette[idx];
-    if (!idx || !col || col === 'transparent') continue;
-    lg.fillStyle = col;
-    lg.fillRect(x,y,1,1);
-  }
-  const c = document.createElement('canvas');
-  c.width = 32; c.height = 32;
-  const g = c.getContext('2d');
-  g.imageSmoothingEnabled = false;
-  g.drawImage(logical,0,0,32,32);
-  return c;
-}
 
 export function makeDog() {
   const B=3, D=2, E=1, T=4, M=7;
@@ -528,29 +498,29 @@ export function makeNPC(opts={}) {
 
 export function buildSprites() {
   // v17 player — four-beat shuffle, two attack poses, visible equipment, weapons and route patches.
-  const p = makePlayer();
+  const p = makePlayer32();
   ['down','up','left','right'].forEach(d => {
     p[d].forEach((g,i) => {
-      SPRITE_CACHE['player_'+d+'_'+i] = rasterize(g, PALS.player);
-      SPRITE_CACHE['playerhi_'+d+'_'+i] = rasterize(g, PALS.player_high);
+      cacheSprite('player','player_'+d+'_'+i,g,PALS.player);
+      cacheSprite('playerhi','playerhi_'+d+'_'+i,g,PALS.player_high);
     });
     for(let phase=0;phase<2;phase++){
-      const attack=makePlayerAttack(p,d,phase);
-      SPRITE_CACHE['playerattack_'+d+'_'+phase]=rasterize(attack,PALS.player);
-      SPRITE_CACHE['playerattackhi_'+d+'_'+phase]=rasterize(attack,PALS.player_high);
-      SPRITE_CACHE['attack_smear_'+d+'_'+phase]=rasterize(makeAttackSmear(d,phase),PLAYER_LAYER_PAL,{noOutline:true});
+      const attack=makePlayerAttack32(p,d,phase);
+      cacheSprite('playerattack','playerattack_'+d+'_'+phase,attack,PALS.player);
+      cacheSprite('playerattackhi','playerattackhi_'+d+'_'+phase,attack,PALS.player_high);
+      cacheSprite('attack_smear','attack_smear_'+d+'_'+phase,makeAttackSmear32(d,phase),PLAYER_LAYER_PAL,{noOutline:true});
     }
     for(const id of Object.keys(EQUIPMENT)){
-      SPRITE_CACHE['gear_'+id+'_'+d]=rasterize(makePlayerGear(id,d),PLAYER_LAYER_PAL,{noOutline:true});
+      cacheSprite('gear_'+id,'gear_'+id+'_'+d,makePlayerGear32(id,d),PLAYER_LAYER_PAL,{noOutline:true});
     }
     for(const id of Object.keys(WEAPONS)){
-      SPRITE_CACHE['weapon_'+id+'_'+d+'_0']=rasterize(makeWeaponLayer(id,d,false),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
-      SPRITE_CACHE['weapon_'+id+'_'+d+'_1']=rasterize(makeWeaponLayer(id,d,true),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
+      cacheSprite('weapon_'+id,'weapon_'+id+'_'+d+'_0',makeWeaponLayer32(id,d,false),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
+      cacheSprite('weapon_'+id,'weapon_'+id+'_'+d+'_1',makeWeaponLayer32(id,d,true),PLAYER_LAYER_PAL,{noOutline:id==='fists'});
     }
     for(let tier=1;tier<=4;tier++){
-      SPRITE_CACHE['route_patch_'+tier+'_'+d]=rasterize(makeRoutePatch(tier,d),PLAYER_LAYER_PAL,{noOutline:true});
+      cacheSprite('route_patch_'+tier,'route_patch_'+tier+'_'+d,makeRoutePatch32(tier,d),PLAYER_LAYER_PAL,{noOutline:true});
     }
-    SPRITE_CACHE['cart_underlay_'+d]=rasterize(makeCartUnderlay(d),CART_LAYER_PAL,{noOutline:true});
+    cacheSprite('cart_underlay','cart_underlay_'+d,makeCartUnderlay32(d),CART_LAYER_PAL,{noOutline:true});
   });
   // NPCs — distinctive styles, 3-frame walks
   const npcStyles = {
@@ -603,48 +573,54 @@ export function buildSprites() {
     // v13 wave 8a — old school brutus reuses the dog sprite (handled below), this entry not used
   };
   Object.entries(npcStyles).forEach(([k, opts]) => {
-    const frames = makeNPC({...opts, signature:k});
+    const frames = makeNpc32({...opts,signature:k});
     frames.forEach((g, i) => {
-      SPRITE_CACHE[k+'_'+i] = rasterize(g, PALS[k] || PALS.tony);
+      cacheSprite(k,k+'_'+i,g,PALS[k] || PALS.tony);
     });
   });
   // v15 readable state art: Dave lies down; Tony's contractually numbered coats actually
   // leave his body; Fallen O'Malley no longer relies on n.color that cached art ignores.
-  makeSleepingDave().forEach((g,i)=>{ SPRITE_CACHE['dave_sleep_'+i]=rasterize(anchorGridToBottom(g),PALS.dave); });
+  makeSleepingDave32().forEach((g,i)=>{ cacheSprite('dave_sleep','dave_sleep_'+i,anchorGridToBottom(g),PALS.dave); });
   const tonyStates = [
     ['tony_coat_2', {...npcStyles.tony, coats:2, signature:'tony_coat_2'}],
     ['tony_coat_1', {...npcStyles.tony, coats:1, signature:'tony_coat_1'}],
     ['tony_bare',   {...npcStyles.tony, coats:1, signature:'tony_bare'}],
   ];
-  for (const [key,def] of tonyStates) makeNPC(def).forEach((g,i)=>{
-    SPRITE_CACHE[key+'_'+i]=rasterize(g,PALS.tony);
+  for (const [key,def] of tonyStates) makeNpc32(def).forEach((g,i)=>{
+    cacheSprite(key,key+'_'+i,g,PALS.tony);
   });
-  makeNPC({...npcStyles.priest, coats:1, signature:'priest_fallen'}).forEach((g,i)=>{
-    SPRITE_CACHE['priest_fallen_'+i]=rasterize(g,PALS.priest_fallen);
+  makeNpc32({...npcStyles.priest,coats:1,signature:'priest_fallen'}).forEach((g,i)=>{
+    cacheSprite('priest_fallen','priest_fallen_'+i,g,PALS.priest_fallen);
   });
   // possum, brutus, pigeon — special silhouettes, 2-frame
-  const possum = makePossum();
-  possum.forEach((g,i) => { SPRITE_CACHE['possum_'+i] = rasterize(anchorGridToBottom(g), PALS.possum); });
-  const dog = makeDog();
-  dog.forEach((g,i) => { SPRITE_CACHE['brutus_'+i] = rasterize(anchorGridToBottom(applyDogSignature('brutus',g,i)), PALS.brutus); });
+  const possum = makePossum32();
+  possum.forEach((g,i) => { cacheSprite('possum','possum_'+i,anchorGridToBottom(g),PALS.possum); });
+  makeDog32('brutus').forEach((g,i) => { cacheSprite('brutus','brutus_'+i,anchorGridToBottom(g),PALS.brutus); });
   // v13 wave 6 — scrap_dog reuses the dog shape with a different (mangier) palette
-  dog.forEach((g,i) => { SPRITE_CACHE['scrap_dog_'+i] = rasterize(anchorGridToBottom(applyDogSignature('scrap_dog',g,i)), PALS.scrap_dog); });
+  makeDog32('scrap_dog').forEach((g,i) => { cacheSprite('scrap_dog','scrap_dog_'+i,anchorGridToBottom(g),PALS.scrap_dog); });
   // v13 wave 8a — old school brutus reuses the dog shape with the deeper-rust palette. boss-tier.
-  dog.forEach((g,i) => { SPRITE_CACHE['os_brutus_'+i] = rasterize(anchorGridToBottom(applyDogSignature('os_brutus',g,i)), PALS.os_brutus); });
-  const pig = makePigeon();
-  pig.forEach((g,i) => { SPRITE_CACHE['pigeon_'+i] = rasterize(anchorGridToBottom(g), PALS.pigeon); });
+  makeDog32('os_brutus').forEach((g,i) => { cacheSprite('os_brutus','os_brutus_'+i,anchorGridToBottom(g),PALS.os_brutus); });
+  const pig = makePigeon32();
+  pig.forEach((g,i) => { cacheSprite('pigeon','pigeon_'+i,anchorGridToBottom(g),PALS.pigeon); });
 
   // horse cop — horse with cop on top (special)
-  const hc = makeHorseCop();
-  hc.forEach((g,i) => { SPRITE_CACHE['horsecop_'+i] = rasterize(anchorGridToBottom(g), PALS.horsecop); });
+  const hc = makeHorseCop32();
+  hc.forEach((g,i) => { cacheSprite('horsecop','horsecop_'+i,anchorGridToBottom(g),PALS.horsecop); });
   // pothole — a hole that talks
-  SPRITE_CACHE['pothole_0'] = rasterize(makePothole(0), PALS.pothole);
-  SPRITE_CACHE['pothole_1'] = rasterize(makePothole(1), PALS.pothole);
-  SPRITE_CACHE['pothole_2'] = rasterize(makePothole(2), PALS.pothole);
+  cacheSprite('pothole','pothole_0',makePothole32(0),PALS.pothole);
+  cacheSprite('pothole','pothole_1',makePothole32(1),PALS.pothole);
+  cacheSprite('pothole','pothole_2',makePothole32(2),PALS.pothole);
   buildIncidentSprites();
 }
 
 export function buildIncidentSprites() {
+  const defs=makeIncidentSprites32();
+  for(const [key,frames] of Object.entries(defs)) frames.forEach((grid,i)=>{
+    cacheSprite(key,key+'_'+i,grid,INCIDENT_PALS[key.slice(9)]);
+  });
+}
+
+export function buildIncidentSprites16() {
   const defs={
     incident_mattress:[
       [
@@ -718,12 +694,12 @@ export function buildIncidentSprites() {
     ],
   };
   for(const [key,frames] of Object.entries(defs)) frames.forEach((rows,i)=>{
-    SPRITE_CACHE[key+'_'+i]=rasterize(parseGrid(rows),INCIDENT_PALS[key.slice(9)]);
+    cacheSprite(key,key+'_'+i,parseGrid(rows),INCIDENT_PALS[key.slice(9)]);
   });
 }
 
 export function makeHorseCop() {
-  // 16x16 sprite, horse body + cop torso on top
+  // Legacy 16-logical comparison fixture; production horse-cop art uses makeHorseCop32().
   const f = (frame) => parseGrid(applyVars([
     '...HHHH.........', // cop hat
     '...HHHH.........',
@@ -770,7 +746,7 @@ export function makePothole(frame) {
 
 export function init_sprites() {
   // ---------- NPCs canonical data ----------
-  // pixel-art sprite as palette-indexed strings (16x16)
+  // Palette-indexed sprite colors; each base's logical grid is declared in the manifest.
   PALS = {
     player: ['transparent','#2a1f10','#604020','#a07050','#e8c040','#d4c896','#1a1810','#3a2820'],
     player_high: ['transparent','#5a4020','#a07020','#e8c040','#fff0a0','#fff8d0','#3a2810','#7a5020'],
@@ -833,7 +809,7 @@ export function init_sprites() {
     os_brutus:    ['transparent','#000','#2a1810','#4a2818','#604030','#1a0805','#a08040','#5a2010'],
   };
   
-  // 16x16 pixel art helpers — parse a row string of 0-7 (dot=transparent)
+  // Legacy 16-logical authoring helpers retained for the live dual-size renderer.
   
   
   
@@ -860,9 +836,7 @@ export function init_sprites() {
   
   
   
-  // Render palette-indexed sprite to a 32×32 offscreen canvas (16×16 scaled 2x)
-  // v10: adds automatic outline (1px black around all opaque pixels) and shading
-  // (lighter pixel on top-left of each colored region) for a more polished look.
+  // Rasterization is centralized in sprite_toolkit.js and always outputs a 32x32 cache canvas.
   
   
   // Quadruped (Brutus) — 14 year old mostly blind dog. 2-frame trot.
@@ -876,9 +850,8 @@ export function init_sprites() {
   // Possum — flat brown lump, dignified, tiny construction helmet
   
   
-  // v15 authored identity layer. These are still edits to the 16x16 palette grid, not
-  // runtime drawing. Shared bodies keep the roster coherent; silhouette/held-object pixels
-  // carry the joke before a nameplate is read.
+  // Legacy v15 16-logical identity helpers remain as historical fixtures. Production
+  // character art is authored by the 32-logical modules imported above.
   
   
   
@@ -900,6 +873,9 @@ export function init_sprites() {
   
   // Build the SPRITE_CACHE
   SPRITE_CACHE = {};
+  SPRITE_KEY_BASES = {};
+  SPRITE_PIXEL_COUNTS = {};
+  SPRITE_KEY_PALETTES = {};
   
   
   INCIDENT_PALS = {

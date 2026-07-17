@@ -21,6 +21,7 @@ const GATES = [
   // The label was the bug. Consistency is gateable; which number is right is not.
   'version-gate.mjs',
   'module-gate.mjs',
+  'sprite-gate.mjs',
   'npc-registry-gate.mjs',
   'legibility-gate.mjs',
   'presentation-gate.mjs',

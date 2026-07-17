@@ -18,7 +18,7 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 
 ## Current shipped build
 
-**v21 Wave 4.1 — the honest map.** Built on the v19 post-audit modular base, through the whole v20 recognition wave (HUD deconfliction, THE REGULAR, smoke concessions, the world-relationship gate, the route budget) and v21 Wave 4.1, which gave all 28 landmark facades declared physicality and merged every collision path into one 53-structure authority. The world is `8600×5600`: the paper office now leads into BLUE TARP COURT, CART CAVALRY KEEP, COPPER CHOIR YARD, and THE THRONE DITCH, ending in a folding-chair succession fight before endless routes, work orders, hustles, incidents, and daily pretenders continue. The post-audit pass split the frozen v19 script into 38 linked source modules, repaired building/zone/nameplate/graffiti legibility, restored the complete NPC identity registry, fixed the isolated office encoding damage, and retained the exact multi-key controls plus 18s high → 8s crash loop.
+**v21 Wave 4.2 — raise the character ceiling.** Wave 4.2 moves all 93 character sprite bases and all 373 cache keys from the inherited 16-logical ceiling to explicitly declared 32-logical art while preserving the exact 32×32 screen rect, anchors, hitboxes, identities, and grandfathered palette corpus. The player, high/attack states, gear, weapons, route patches, attack smear, and cart underlay migrate as one aligned composite; eleven cached environment sprites remain explicitly 16-logical, so both grid sizes run through the same renderer. It follows v21 Wave 4.1, which gave all 28 landmark facades declared physicality and merged every collision path into one 53-structure authority, and the complete v20 recognition wave. The world remains `8600×5600`, the frozen v19 reference remains untouched, and the exact multi-key controls plus 18s high → 8s crash loop remain intact.
 
 ## Version lineage
 
@@ -32,7 +32,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **eleven** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **thirteen** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -40,6 +40,7 @@ The runner supplies `--experimental-vm-modules`, streams all **eleven** gates in
 | `docs-gate` | **This table.** Asserts the gate list here matches the `GATES` array in `run-gates.mjs`. This README once claimed four gates while seven ran; nothing caught it. |
 | `version-gate` | **The label.** The `<title>`, the subtitle, and this README's "Current shipped build" must name the same version. The game said `v19` through the entire v20 wave and Wave 4.1, and sent the operator hard-refreshing a deploy that was already current. |
 | `module-gate` | Module linking, source/reference integrity, no file over the size ceiling. |
+| `sprite-gate` | **The character ceiling.** Pins 373 exact nonblank keys across 93 explicitly declared 32-logical character bases, keeps eleven explicit 16-logical environment sprites on the same renderer, freezes all 14 character-cache draw destinations and the palettes actually consumed by both caches, and enforces the no-smoothing pixel contract. Green proves structure and rendering discipline—not whether the art is good; that remains an operator visual decision. |
 | `npc-registry-gate` | Every runtime NPC identity is registered in `VIBE.md`. No unnamed strangers. |
 | `legibility-gate` | The four measured legibility relationships (buildings, zones, nameplates, graffiti). |
 | `presentation-gate` | Save/input/status parity. |

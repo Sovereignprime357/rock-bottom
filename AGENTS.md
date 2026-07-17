@@ -22,9 +22,12 @@ The architecture change does not retire the storage abstraction. Use `window.sto
 Browser autoplay policy. Audio context must be created in a keydown or click handler, never on page load. Track `audioReady` boolean to gate all `beep()` calls.
 
 ### 6. Pixel sprite discipline
-- 16×16 logical, prerendered to offscreen canvas at init
-- Scaled 2x to 32×32 display
-- Palette-indexed (numbered string format, see PLAYER_SPRITES)
+- Every character base explicitly declares `32×32` logical art; selected environment sprites may
+  explicitly remain `16×16`. There is no inferred/default size.
+- Both logical sizes prerender through the same toolkit to an exact `32×32` cache canvas. Character
+  art is 1:1; the explicit environment holdouts scale 2×.
+- Palette-indexed grids only. The Wave 4.2 grandfathered palette corpus is hash-pinned; additions
+  still obey VIBE's forbidden-color rules.
 - Cached in `SPRITE_CACHE` object
 - Drawn via `ctx.drawImage` — never `fillRect` per pixel at runtime
 
@@ -61,8 +64,10 @@ If a new sound is needed, write it as a synth function in the `sfx` object. Matc
 ### Prefer canvas drawing over DOM elements
 The HUD, dialogue, and toast are DOM. Everything else is canvas. New gameplay UI should be canvas to maintain the scanline/CRT effect.
 
-### Prefer emoji NPCs over pixel-art NPCs (for now)
-v3 has pixel-art player + emoji NPCs. This is the look. Adding pixel-art NPCs is on the v4 backlog (DELEGATION.md item 1) and is OK, but ALL NPCs should be converted, not just some. Inconsistency would break the aesthetic.
+### Prefer the established pixel-sprite system
+Actors and world props are hand-authored palette-indexed sprites. Emoji are UI chrome only. Extend
+the existing declared-size/cached-grid pipeline; do not introduce a second actor-art system or a
+mixed external asset pack.
 
 ---
 
@@ -122,7 +127,7 @@ It's not. Cut it. Then write something more specific.
 
 If you do any of these, the operator will be unhappy and the work will be reverted:
 
-1. **Replace the emoji aesthetic with stock asset pixel art** — the emoji are the look
+1. **Replace the hand-authored pixel aesthetic with stock/external art or emoji actors** — the local palette-grid sprites are the look
 2. **Add a tutorial that explains anything** — discovery is the gameplay
 3. **Make the game beatable without smoking a rock** — the entire point is the loop
 4. **Add a "story mode" with cutscenes between zones** — there is no story, only consequences

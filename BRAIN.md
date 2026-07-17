@@ -1865,3 +1865,79 @@ The same pass found the legacy-actor compatibility test was geometry-wide: any n
 An independent final-diff audit found that the id restriction was still too broad, diagonal lunges could axis-slide along a wall, and the centralized door predicate had not preserved the old resolver's full-target-Y x-axis probe. The exemption now lives on exactly eight source actor records as an exact `BUILDINGS` index; registered Tony moved into PAWN ejects. Charges stop both axes and enter their already-authored cooldown on the next tick. The x-axis door query now uses the full target probe, with 96 before/after legacy boundary fixtures. Each detector was forced red directly: the charge mutation named all 28 sliding facades, the broad footprint mutation named misplaced Tony, and the door mutation named all 32 resolver mismatches. Restored green now covers 28 facade actor ejections, one unrelated old-building actor, one misplaced registered actor, 28 charge impacts, and eight exact legacy anchors.
 
 The follow-up audit then found a second shipped charge implementation: fallen-priest phase two stopped physically but did not consume the wall-hit flag. It now enters its existing 1,200ms dasher cooldown through the same collision result. The matrix covers charger and fallen-priest lunges at every facade: 56 production impacts total. Removing the fallen-priest consumer makes all 28 of its cooldown checks fail.
+
+## 2026-07-16 — v21 Wave 4.2 / RAISE THE CHARACTER CEILING (Codex, branch `v21-sprite-ceiling`, isolated worktree)
+
+### WHAT
+
+Raised all 93 character sprite bases / 373 exact cache keys to true 32-logical palette art inside
+the unchanged 32×32 screen rectangle. Added a parameterized sprite toolkit, an explicit frozen
+base-size manifest, and one central cache registration path. Eleven cached environment sprites
+remain explicit 16-logical consumers of the same renderer.
+
+Authored the work as reviewable units: the player composite (high/attack states, gear, weapons,
+route patches, attack smear, cart), 47 humanoid/state bases, then dogs, possum, pigeon, horse cop,
+talking pothole, and five incident props. Added `tools/sprite-gate.mjs`, wired it into the runner,
+documented it, graduated Wave 4.2 into `SPEC.md`, and superseded the ratified packet clauses that
+still described the retracted one-player plan.
+
+### WHY / HOW / PATTERN / CONNECT
+
+The world draws at one canvas pixel while inherited character art drew one authored pixel as a 2×2
+block. The destination rectangle was already 32×32, so 32-logical sources gain four times the
+authored pixels without changing screen size, anchor, hitbox, or pathing. The toolkit validates an
+explicit `16|32` declaration, exact square grids, integer palette indices, and declared colors,
+then renders to a fixed 32px cache with smoothing disabled.
+
+This follows the honest-map pattern: remove “nobody said” from data, centralize one authority, and
+gate the relationship rather than one current output. The exact 373-key grammar and all nine actor
+draw expressions are frozen. The existing 18s high → 8s crash loop, WASD chord/release behavior,
+identity registry, world budgets, and v19 hash remain independent and green.
+
+### DECIDED / FINDINGS
+
+OD-12 executes the operator's amended all-93 ruling. The original acceptance list did not receive
+that amendment and still said player-only; it is retracted in place. The actual composite unit also
+included weapons, route patches, smear, and cart—not just gear. Existing fractional world positions
+and the broader grandfathered palette meant two SPEC phrases could not be made literally true
+without unrelated rewrites; Wave 4.2 instead preserves draw expressions and freezes the palette
+corpus. Full premise corrections and the visual weak list are in `REFACTOR-FINDINGS.md`.
+
+### TRIED / FAILED / CORRECTED
+
+- First-pass mattress geometry read as a framed envelope; added sagged corners, quilting, mold, and
+  exposed springs.
+- First-pass possum read as a helmeted appliance; added the pale wedge face, pin nose, whiskers, and
+  segmented tail.
+- OLD SCHOOL BRUTUS was too close to ordinary BRUTUS; added the shoulder hump, ruined ear, heavy
+  forelegs, and torn gym towel while preserving the same legal footprint.
+- The old pothole frames were byte-identical in two poses because `e` and `E` both resolved to
+  palette index 1. Re-authored three different mouth states.
+- A browser canvas export API was unavailable in the review harness; preserved viewport screenshots
+  instead. The live modular build rendered with no console error.
+- The independent final-diff audit found the seed still ordered 16×16 emoji actors in `AGENTS.md`,
+  VIBE's later NPC section, and historical SPEC clauses despite the corrected Texture block. It also
+  proved two gate false-greens: a present-but-blank frame and attack/incident destination drift.
+  Superseded the corpus contradictions and expanded the instrument before commit.
+
+### RED / DRIFT / PROPERTY VERIFICATION
+
+Direct, unpiped red runs exited 1 in all eight exposed directions: missing `player` declaration;
+invalid `player:24`; cache reduced to 372 by removing `pothole_2`; `player_down_3` replaced by an
+unknown key while total count stayed constant; a present `player_down_3` with zero painted pixels;
+pure white injected into one character palette; pure white injected into one environment palette;
+and one changed destination-geometry signature. The gate also executes independent synthetic
+counterexamples for declaration, size, key replacement, blank frames, mapping drift, output resize,
+and loss of dual-size support on every invocation.
+
+The restored sprite gate reports 373 exact nonblank keys, 93 declared 32-logical character bases,
+eleven explicit 16-logical environment sprites, 14 frozen character-cache draw sites, actual
+palette-use snapshots, and no smoothing. Runtime smoke reports 56 NPCs, WASD chord/release, exact
+18s→8s status, dialogue, all 373 keys, and save/load. Full permanent suite target: 13/13.
+
+### NEXT / GOTCHA
+
+The operator's eye is still the acceptance gate. Start with MAYOR'S COUSIN, AirPods/collar,
+mattress, horse cop, and the low-contrast attack fragments. A green suite proves the game runs and
+the pixel discipline holds; it does not prove the art landed. Do not “fix” a weak read by changing
+the 32px footprint, hitbox, identity, or palette under this decision.

@@ -4,6 +4,52 @@
 
 ---
 
+## RAISE THE CHARACTER CEILING (v21 Wave 4.2)
+
+Wave 4.2 raises the complete character corpus to the world's one-pixel authoring grid without
+changing how much world space any actor occupies. OD-12 is the operator-ratified ruling: all 93
+character bases / 373 exact keys move together in reviewable commits; visual acceptance remains a
+human-eye decision.
+
+### Active sprite contract
+
+1. `SPRITE_BASE_SIZES` explicitly declares every character base. All 93 current character bases
+   are `32`; no default or inferred logical size exists. Eleven cached environment bases remain
+   explicitly `16`, so both supported sizes execute through one renderer in the running game.
+2. Both logical sizes rasterize once at initialization to exact `32×32` cache canvases with
+   smoothing disabled. No gradient, anti-aliasing, external bitmap, CDN asset, or runtime per-pixel
+   character drawing is introduced.
+3. `SPRITE_CACHE` contains exactly 373 nonblank character frames with the complete direction/frame
+   grammar. A present but blank frame, a replacement key that only preserves the count, a missing
+   mapping, or an undeclared base is a gate failure.
+4. The complete player composite is one alignment unit: base/high/attack states, gear, weapons,
+   route patches, attack smear, and cart underlay. NPCs, creatures, state variants, and incident
+   props use the same declared-size contract.
+5. Every character-cache draw destination is frozen across `actors_weather.js`, `frame.js`, and
+   `incidents.js`. NPCs keep their existing bottom-center relationship; player, attack smear, and
+   incident overrides retain their own exact expressions. Draw rects stay `32×32`; hitboxes,
+   footprints, world positions, and gameplay state are unchanged.
+6. Logical grids contain integer palette indices only. The exact palettes actually consumed by all
+   373 character keys and eleven environment keys are frozen as the grandfathered corpus. VIBE's
+   forbidden colors govern additions; changing the snapshot requires a separately audited ruling,
+   not a silent Wave 4.2 recolor.
+7. `sprite-gate` is structural: it proves declarations, grammar, nonblank frames, dual-size
+   rendering, output/destination rectangles, palette use, and no smoothing. It cannot prove that a
+   sprite is good art. The operator visual veto remains standing.
+
+### Supersession and preservation
+
+Earlier version sections below retain their historical 16-logical, 2×-display, and `≤360`/`≤400`
+acceptance text as version archaeology. Those clauses no longer govern the active v21 character
+pipeline; this section supersedes them. Their identity, silhouette, pose-selection, bottom-foot,
+cache-at-init, no-runtime-painting, and gameplay-preservation requirements remain in force.
+
+Wave 4.2 changes no save key/shape/version, movement/combat value, NPC identity, world geometry,
+interaction, reward, route, `18000ms` high, or `8000ms` crash timing. `rock_bottom_v19.html` remains
+the hash-pinned behavioral reference.
+
+---
+
 ## CURB WAR + ONE CRACKLORD + KINGDOM EXPANSION (v19)
 
 v19 turns the v18 office foothold into an absurd succession war. Four new districts extend the neighborhood east and south. Three rival curb clans defend improvised courts made from tarps, shopping carts, mattresses, wire, buckets, and municipal leftovers. A short, explicit campaign gives the player a purpose without making the world sensible: answer a hostile radio summons, deface three pieces of clan paperwork in each enemy district, defeat its ruler, smoke one real rock at the Block to receive royal static, and challenge the Curb Emperor in THE THRONE DITCH. The receipt names one cracklord; it does not clean up the neighborhood or end play. Routes, office work, faction systems, procedural incidents, daily hustles, and daily pretenders continue forever.
