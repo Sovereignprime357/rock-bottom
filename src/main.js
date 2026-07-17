@@ -2,6 +2,7 @@
 import { init_storage } from './core/storage.js';
 import { init_constants_world } from './data/world.js';
 import { init_props } from './data/props.js';
+import { init_physicality } from './systems/physicality.js';
 import { init_catalogs } from './data/catalogs.js';
 import { init_factions } from './systems/factions.js';
 import { init_progression_routes } from './systems/progression_routes.js';
@@ -42,6 +43,7 @@ import { init_mobile } from './input/mobile.js';
 init_storage();
 init_constants_world();
 init_props();
+init_physicality();
 init_catalogs();
 init_factions();
 init_progression_routes();

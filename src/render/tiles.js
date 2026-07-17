@@ -288,7 +288,7 @@ export function init_tiles() {
     skidrow:    { base:['#1f1d18','#1b1915'], grime:'rgba(30,18,10,.55)', crack:'rgba(0,0,0,.85)', concrete:true, skidtrash:true },
     // v13 wave 8a — old school: weedy cracked playground concrete with chalk smudges
     oldschool:  { base:['#2a201c','#241a16'], grime:'rgba(120,70,40,.3)', crack:'rgba(0,0,0,.55)', schoolyard:true, weed:true },
-    // v18 far-east materials. Geometry remains visual; only BUILDINGS participate in collision.
+    // v18 far-east materials. Tile geometry remains visual; declared STRUCTURES own collision.
     warehouse_row:{ base:['#292720','#25231e'], grime:'rgba(86,58,34,.42)', crack:'rgba(0,0,0,.76)', concrete:true, oilstain:true, patch:true },
     canal:        { base:['#252a27','#202522'], grime:'rgba(42,70,62,.42)', crack:'rgba(0,0,0,.72)', concrete:true, wet:true },
     the_lot:      { base:['#2b261d','#272219'], grime:'rgba(92,66,34,.38)', crack:'rgba(0,0,0,.66)', deadgrass:true, patch:true, weed:true },

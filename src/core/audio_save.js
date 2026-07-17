@@ -11,6 +11,7 @@ import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState,
 import { resetDailyCounters } from '../systems/daily_hideouts.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
 import { freshConcessionClocks, normalizeConcessionClocks } from '../systems/concessions.js';
+import { ensureClearPlacement } from '../systems/physicality.js';
 import { freshRecognition, normalizeRecognition } from '../systems/recognition.js';
 
 export let audio, SAVE_KEY;
@@ -217,6 +218,7 @@ export async function loadGame() {
     state.weather = sv.weather || 'clear';
     const looted = new Set(sv.lootedDumpsters || []);
     PROPS.filter(p=>p.type==='dumpster').forEach(p => { if (looted.has(p.x+','+p.y)) p.looted = true; });
+    ensureClearPlacement(P);
     return true;
   } catch(e) { return false; }
 }

@@ -22,6 +22,7 @@ import { fireDayEvents, resetDailyCounters } from '../systems/daily_hideouts.js'
 import { adjustFaction, applyRep, updateTerritory } from '../systems/factions.js';
 import { updateIncidents } from '../systems/incidents.js';
 import { updateNpcActors } from '../systems/npc_ai.js';
+import { firstBlockingStructure, moveBodyAgainstStructures } from '../systems/physicality.js';
 import { checkHustles, rollHustles } from '../systems/progression_routes.js';
 import { recordFullHighAtPlayer, syncRecognitionVisit } from '../systems/recognition.js';
 import { updateHUD } from '../ui/hud.js';
@@ -81,22 +82,8 @@ export function updateWorld(dt) {
   if (sprinting && (vx||vy)) spd *= 1.7;
   const newX = P.x + vx*spd*(dt/16);
   const newY = P.y + vy*spd*(dt/16);
-  // collision against buildings
-  let blockedX=false, blockedY=false;
-  const r = { x: newX, y: P.y, w: P.w, h: P.h };
-  for (const b of BUILDINGS) {
-    if (!b.solid) continue;
-    if (b.doorGap && newY+P.h > b.y+b.h-30 && newY+P.h < b.y+b.h+30 && newX+P.w/2 > b.x+b.w/2-30 && newX+P.w/2 < b.x+b.w/2+30) continue;
-    if (rectsOverlap(r, b)) { blockedX = true; break; }
-  }
-  const r2 = { x: P.x, y: newY, w: P.w, h: P.h };
-  for (const b of BUILDINGS) {
-    if (!b.solid) continue;
-    if (b.doorGap && newY+P.h > b.y+b.h-30 && newY+P.h < b.y+b.h+30 && P.x+P.w/2 > b.x+b.w/2-30 && P.x+P.w/2 < b.x+b.w/2+30) continue;
-    if (rectsOverlap(r2, b)) { blockedY = true; break; }
-  }
-  if (!blockedX) P.x = newX;
-  if (!blockedY) P.y = newY;
+  // Every declared structure shares this one physicality source.
+  moveBodyAgainstStructures(P,newX,newY);
   P.x = clamp(P.x, 0, WORLD.w - P.w);
   P.y = clamp(P.y, 0, WORLD.h - P.h);
 
@@ -720,11 +707,8 @@ export function updateWorld(dt) {
     pr.y += pr.vy * (dt/1000);
     pr.rot += pr.rotVel;
     let dead = false;
-    // wall (solid building) collision
-    for (const b of BUILDINGS) {
-      if (!b.solid) continue;
-      if (pr.x > b.x && pr.x < b.x+b.w && pr.y > b.y && pr.y < b.y+b.h) { dead = true; break; }
-    }
+    // wall collision uses the same declared structure source as movement.
+    if (firstBlockingStructure({x:pr.x-.5,y:pr.y-.5,w:1,h:1})) dead = true;
     // world edge
     if (!dead && (pr.x < 0 || pr.x > WORLD.w || pr.y < 0 || pr.y > WORLD.h)) dead = true;
     // player hit

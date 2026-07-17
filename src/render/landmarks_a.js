@@ -60,6 +60,24 @@ export function buildLandmarkFacades() {
         g.fillStyle=(i&1)?'#6b2f26':'#b79a56'; g.fillRect(x+5+i*18,y+25,18,11);
       }
     }
+    // Collision admits the player through the centered south 60px. Paint that same
+    // aperture after the generated bays so even-bay facades still show where passage exists.
+    if (f.doorGap) {
+      const doorW=60, doorH=Math.min(f.kind==='rowhouse'?48:58,f.h-30);
+      const doorX=x+(f.w-doorW)/2, doorY=y+f.h-doorH;
+      const jamb=f.kind==='rowhouse'?'#5b4634':'#5c5548';
+      g.fillStyle='#0f0d0b'; g.fillRect(doorX,doorY,doorW,doorH);
+      g.fillStyle=jamb;
+      g.fillRect(doorX-3,doorY-4,doorW+6,4);
+      g.fillRect(doorX-3,doorY,3,doorH);
+      g.fillRect(doorX+doorW,doorY,3,doorH);
+      g.fillStyle='rgba(212,200,150,.06)';
+      g.fillRect(doorX+5,doorY+5,doorW-10,2);
+      g.fillStyle='#211b16'; g.fillRect(doorX+6,y+f.h-9,doorW-12,9);
+      g.fillStyle=jamb;
+      g.fillRect(doorX-5,y+f.h-3,doorW+10,3);
+      g.fillRect(doorX,y+f.h,doorW,3);
+    }
     const label=f.sign||'';
     const fs=Math.max(8,Math.min(12,Math.floor((f.w-18)/Math.max(1,label.length)*1.7)));
     g.font=`bold ${fs}px Courier New`; g.textAlign='center';

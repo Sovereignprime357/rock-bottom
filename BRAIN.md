@@ -1820,3 +1820,48 @@ Red-verified, all four directions: (1) ditch_gauge moved to (30000,30000) -> 49 
 Noted for the record (operator's own asymmetry, worth keeping visible): the three new thresholds are derived — 3 from exclusion arithmetic, 2 from route legs, exact-match from the ledger. The 60% at the center of the wave is chosen. Not moved; known.
 
 Next: operator reviews and merges Landings 4+5 together. The near-miss watchlist stands: emperor commute 95.8% of leg budget; pawn_sill<->ditch_gauge 98.5% — both will be the first entries the ledger or the campaign family names if the world grows again.
+
+## 2026-07-16 — v21 Wave 4.1 / THE HONEST MAP (Codex, branch `v21-honest-map`, isolated worktree)
+
+### WHAT
+
+Classified all 28 `LANDMARK_FACADES` by reachable-world evidence: 28 architecture, zero scenery. Every facade now declares `solid:true`; every one of the 25 legacy `BUILDINGS` already declared the same. `src/systems/physicality.js` initializes one 53-record `STRUCTURES` authority and one visitor used by player movement, projectiles, load placement, NPCs, and cops. Twenty-one entrance-bearing facades declare `doorGap:true` and paint one centered 60px south aperture; seven storefronts remain wall-fronts with no gap.
+
+Loads inside a new solid eject to the exact nearest clear N/E/S/W tangent with stable ties. Ordinary NPCs and cops use bounded local two-corner detours; charges hit walls. Eight actors intentionally authored inside legacy buildings keep their anchors and receive a one-way exit exemption, then join shared collision when clear. A newly-solid facade never receives that exemption.
+
+Added `tools/solidity-gate.mjs`, wired it before runtime/world measurement, documented it in the README, graduated the contract into SPEC, recorded OD-11, and updated the backlog. `--full` emits the complete 69-campaign / 252-route traversal ledger. Zero gameplay content was added.
+
+### WHY / DECIDED
+
+Reachability, not the word “facade,” decided physicality. The player-clearance flood reaches the center and all four exterior sides of every facade; none overlaps a road, path, rail, old building, actor spawn, smoke spot, or mandatory anchor. Marking any current facade flat would preserve the reported ghost-building defect. The packet's `update.js:723` NPC/collision premise was false—those lines handled projectiles and actors had no building collision—so the acceptance requirement governed and actor motion joined the shared authority.
+
+Real-path comparison uses arbitrary-heading analog replay because it is a shipped control and isolates collision delta. Four raw selector occurrences point to Tony's center inside CORNER; both baseline and v21 project those endpoints into the existing 60px action region. WASD/octile cost is printed separately. No path number changed the classification.
+
+### TRIED / FAILED / CORRECTED
+
+- A world-scale visibility/Dijkstra actor planner measured 70–204ms for one blocked actor and 1,858ms across the 28 facades. Rejected. The bounded local planner measures at most 1.166ms in the same fixture; a 60-actor, 300-frame production smoke measured 5.624ms worst, 2.092ms p99, 1.001ms average.
+- Eager save-ejection geometry took 14–16.3ms per embedded actor. Replaced with a lazy nearest-cardinal frontier: 0.533ms worst, 1.949ms for all 28.
+- Unconditional actor ejection would have moved Tony, Pete, Father O'Malley, his son, Barb, the laundromat lady, Karaoke Mike, and Skid Sherri out of intentionally embedded legacy anchors. The one-way legacy exit preserves them without granting new facades a loophole.
+- The first `--full` traversal report exposed a contaminated fixture: it reused P after the actor smokes and printed a plausible but false 7,874px intro spawn leg. Fresh player center is now captured before any mutation and pinned at 119.1px in the gate.
+
+### RED / DRIFT / PROPERTY VERIFICATION
+
+Red test 1 removed `checks.solid`: direct, unpiped gate invocation exited 1 and named `expected exactly one physicality declaration`, followed by the expected behavioral leaks. Red test 2 replaced it with `flat:'not_registered'`: direct, unpiped invocation exited 1 and named the unregistered reason. Both were restored through explicit patches before green.
+
+The restored gate proves 53 declarations, 28 road-clear solid facades, 21 door/save preservations, 28 nearest-cardinal save ejections, 28 player/projectile blocks, 28 player routes, 56 real NPC/cop routes, 28 dynamic actor ejections, eight legacy-anchor preservations, 69 campaign traversals, 252 assignable route traversals, and zero new budget crossings. Full permanent runner: 11/11 green. Frozen v19, `rockbottom_save_v8`, save version/shape, 18,000ms high, 8,000ms crash, world bounds, 23 zones, 166 props, 56 fresh NPCs, 23 route stops, all anchors, and all rewards remain unchanged.
+
+### FINDING / NEXT / GOTCHA
+
+`pawn_sill ↔ ditch_gauge` is now 8,167.6px / 59.400s, leaving 82.4px / 0.600s of analog headroom. The emperor commute is 7,947.8px / 57.802s. No new crossing exists, so nothing was “fixed” by flattening architecture. Literal WASD lower bounds already exceed budget on both ceiling readings; that is recorded in `REFACTOR-FINDINGS.md`, not repaired here.
+
+Next is the fill wave: density inside the existing map, not more acreage. Do not turn this physicality landing into break-ins, train-yard systems, props, NPCs, interactions, or map growth retroactively.
+
+### FINAL HARDENING ADDENDUM
+
+The final counterexample pass found that the first shared door helper had narrowed the legacy `BUILDINGS` south-door test from the moving body's bottom edge to its top edge. That was outside Wave 4.1. The helper now preserves the shipped bottom-edge convention exactly, and the solidity gate behaviorally compares accepted/rejected boundary probes on every old `doorGap` before measuring v21 traversal.
+
+The same pass found the legacy-actor compatibility test was geometry-wide: any new actor first observed inside any old building could have inherited the exemption. It is now restricted to the eight decision-registered actor ids. A ninth, unrelated production actor embedded in an old solid must eject immediately. Deliberately broadening the exemption again produced a direct exit-1 red naming `unregistered legacy actor received the grandfathered exit exemption`. The undeclared and unregistered-flat reds were then repeated against this exact gate revision; both exited 1 before the restored green.
+
+An independent final-diff audit found that the id restriction was still too broad, diagonal lunges could axis-slide along a wall, and the centralized door predicate had not preserved the old resolver's full-target-Y x-axis probe. The exemption now lives on exactly eight source actor records as an exact `BUILDINGS` index; registered Tony moved into PAWN ejects. Charges stop both axes and enter their already-authored cooldown on the next tick. The x-axis door query now uses the full target probe, with 96 before/after legacy boundary fixtures. Each detector was forced red directly: the charge mutation named all 28 sliding facades, the broad footprint mutation named misplaced Tony, and the door mutation named all 32 resolver mismatches. Restored green now covers 28 facade actor ejections, one unrelated old-building actor, one misplaced registered actor, 28 charge impacts, and eight exact legacy anchors.
+
+The follow-up audit then found a second shipped charge implementation: fallen-priest phase two stopped physically but did not consume the wall-hit flag. It now enters its existing 1,200ms dasher cooldown through the same collision result. The matrix covers charger and fallen-priest lunges at every facade: 56 production impacts total. Removing the fallen-priest consumer makes all 28 of its cooldown checks fail.
