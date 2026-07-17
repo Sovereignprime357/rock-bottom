@@ -12,6 +12,10 @@ import {
   makePlayerGear32, makeRoutePatch32, makeWeaponLayer32,
 } from './sprite_art_player_32.js';
 import { makeNpc32, makeSleepingDave32 } from './sprite_art_npc_32.js';
+import {
+  makeDog32, makeHorseCop32, makeIncidentSprites32, makePigeon32,
+  makePossum32, makePothole32,
+} from './sprite_art_special_32.js';
 import { SPRITE_BASE_SIZES } from './sprite_manifest.js';
 import {
   anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut,
@@ -582,28 +586,34 @@ export function buildSprites() {
     cacheSprite('priest_fallen','priest_fallen_'+i,g,PALS.priest_fallen);
   });
   // possum, brutus, pigeon — special silhouettes, 2-frame
-  const possum = makePossum();
+  const possum = makePossum32();
   possum.forEach((g,i) => { cacheSprite('possum','possum_'+i,anchorGridToBottom(g),PALS.possum); });
-  const dog = makeDog();
-  dog.forEach((g,i) => { cacheSprite('brutus','brutus_'+i,anchorGridToBottom(applyDogSignature('brutus',g,i)),PALS.brutus); });
+  makeDog32('brutus').forEach((g,i) => { cacheSprite('brutus','brutus_'+i,anchorGridToBottom(g),PALS.brutus); });
   // v13 wave 6 — scrap_dog reuses the dog shape with a different (mangier) palette
-  dog.forEach((g,i) => { cacheSprite('scrap_dog','scrap_dog_'+i,anchorGridToBottom(applyDogSignature('scrap_dog',g,i)),PALS.scrap_dog); });
+  makeDog32('scrap_dog').forEach((g,i) => { cacheSprite('scrap_dog','scrap_dog_'+i,anchorGridToBottom(g),PALS.scrap_dog); });
   // v13 wave 8a — old school brutus reuses the dog shape with the deeper-rust palette. boss-tier.
-  dog.forEach((g,i) => { cacheSprite('os_brutus','os_brutus_'+i,anchorGridToBottom(applyDogSignature('os_brutus',g,i)),PALS.os_brutus); });
-  const pig = makePigeon();
+  makeDog32('os_brutus').forEach((g,i) => { cacheSprite('os_brutus','os_brutus_'+i,anchorGridToBottom(g),PALS.os_brutus); });
+  const pig = makePigeon32();
   pig.forEach((g,i) => { cacheSprite('pigeon','pigeon_'+i,anchorGridToBottom(g),PALS.pigeon); });
 
   // horse cop — horse with cop on top (special)
-  const hc = makeHorseCop();
+  const hc = makeHorseCop32();
   hc.forEach((g,i) => { cacheSprite('horsecop','horsecop_'+i,anchorGridToBottom(g),PALS.horsecop); });
   // pothole — a hole that talks
-  cacheSprite('pothole','pothole_0',makePothole(0),PALS.pothole);
-  cacheSprite('pothole','pothole_1',makePothole(1),PALS.pothole);
-  cacheSprite('pothole','pothole_2',makePothole(2),PALS.pothole);
+  cacheSprite('pothole','pothole_0',makePothole32(0),PALS.pothole);
+  cacheSprite('pothole','pothole_1',makePothole32(1),PALS.pothole);
+  cacheSprite('pothole','pothole_2',makePothole32(2),PALS.pothole);
   buildIncidentSprites();
 }
 
 export function buildIncidentSprites() {
+  const defs=makeIncidentSprites32();
+  for(const [key,frames] of Object.entries(defs)) frames.forEach((grid,i)=>{
+    cacheSprite(key,key+'_'+i,grid,INCIDENT_PALS[key.slice(9)]);
+  });
+}
+
+export function buildIncidentSprites16() {
   const defs={
     incident_mattress:[
       [
@@ -729,7 +739,7 @@ export function makePothole(frame) {
 
 export function init_sprites() {
   // ---------- NPCs canonical data ----------
-  // pixel-art sprite as palette-indexed strings (16x16)
+  // Palette-indexed sprite colors; each base's logical grid is declared in the manifest.
   PALS = {
     player: ['transparent','#2a1f10','#604020','#a07050','#e8c040','#d4c896','#1a1810','#3a2820'],
     player_high: ['transparent','#5a4020','#a07020','#e8c040','#fff0a0','#fff8d0','#3a2810','#7a5020'],
@@ -819,9 +829,7 @@ export function init_sprites() {
   
   
   
-  // Render palette-indexed sprite to a 32×32 offscreen canvas (16×16 scaled 2x)
-  // v10: adds automatic outline (1px black around all opaque pixels) and shading
-  // (lighter pixel on top-left of each colored region) for a more polished look.
+  // Rasterization is centralized in sprite_toolkit.js and always outputs a 32x32 cache canvas.
   
   
   // Quadruped (Brutus) — 14 year old mostly blind dog. 2-frame trot.
