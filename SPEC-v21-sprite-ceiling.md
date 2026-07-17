@@ -40,9 +40,32 @@ grid.**
 ## WHAT
 
 Parameterize the sprite toolkit so a sprite declares its logical size, support `16` and `32`
-**simultaneously**, and migrate the player first.
+**simultaneously**, and **migrate everything.** All 93 bases. Characters, gear, weapons, props.
 
-**Not all 93 sprites. The player. One sprite. Then stop and show the operator.**
+> **AMENDED 2026-07-16 — the operator overruled the one-sprite gate, and he was right.**
+>
+> This section originally said: *"Not all 93 sprites. The player. One sprite. Then stop and show
+> the operator."* That caution came from **my doubt about whether an agent can author good pixel
+> art** — doubt I had no evidence for. **The operator does:** *"5.6 SOL seems surprisingly good at
+> pixel art, I've seen tons of examples online. Write the delegation, take the risk without fear.
+> Tell codex to do the thing and then some. Sprites, clothes, weapons, etc. Go wild."*
+>
+> **His information beats my speculation.** I was speculating about a model's capability from
+> nothing; he has seen the work. **A gate built out of an unfounded doubt is not caution, it is
+> friction with a rationale.**
+>
+> **And the risk is genuinely contained, which is why this is not recklessness:**
+> - **"Go wild" here costs zero runway.** This is the same word that took the world from 4400×3400
+>   to 8600×5600 one wave at a time — but that was *distance* and this is *density*. **No sprite
+>   can trip `world-gate`.** The budget this wave spends is bytes and taste, not the player's legs.
+> - **`rock_bottom_v19.html` is the floor**, frozen and hash-pinned. Bad art is one branch,
+>   unmerged, and a `git checkout` away from never happening.
+> - **The invariants below are not caution — they are the things that break the game**, and they
+>   all still bind. Hitboxes, identity, key count, palette. Go wild *inside* them.
+>
+> **What survives from the original caution:** the acceptance gate is still a human eye, because
+> no gate reads art. That is not a reason to ship one sprite. It is a reason to be honest that
+> 12/12 green means nothing about whether this looks good.
 
 ---
 
@@ -73,18 +96,21 @@ Parameterize the sprite toolkit so a sprite declares its logical size, support `
 
 ---
 
-## THE HONEST PART — WHERE THIS COULD FAIL
+## THE HONEST PART — WHAT NO GATE CAN TELL US
 
-**Hand-authoring pixel art as string grids is the thing an agent is worst at in this entire
-repo.** Every other task here is logic, and logic can be gated. **Art cannot.** No gate knows
-whether Baggie Barb looks good. `runtime-smoke` will happily report 373 keys of garbage.
+**Art is the one thing in this repo that cannot be gated.** Every other task here is logic, and
+logic gets a mechanical enforcer. **No gate knows whether Baggie Barb looks good.**
+`runtime-smoke` will cheerfully report 373 keys of garbage and `GATE RUNNER: 12/12 PASS` underneath
+it.
 
-**So the acceptance gate for this wave is a human eye, and that is not a weakness in the plan —
-it is the plan.** Build the system, migrate **one** sprite, and stop. If the operator looks at a
-32×32 player and it is worse than the 16×16 one, **the system was still worth building and the art
-direction needs a different hand.** That is a real possible outcome and it must be survivable.
+**So when this comes back green, green means the game still runs. It does not mean the art
+landed.** Say that plainly in the report. **Do not let a passing suite stand in for a verdict it
+cannot give** — that is the whole disease this repo has been treating all day, and it would be
+embarrassing to catch it here.
 
-**Do not migrate 93 sprites and present them as done. Migrate one and ask.**
+**The eye is the gate. The operator's, not yours and not mine.** Ship it all, then say honestly
+which sprites you think are weak. **An agent that reports 93 sprites as uniformly good has stopped
+looking.**
 
 ---
 
