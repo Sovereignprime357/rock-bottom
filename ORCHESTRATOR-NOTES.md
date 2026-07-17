@@ -320,3 +320,58 @@ UTF8` added a BOM and double-encoded every `×` into `Ã—` — **accidentally 
 facade corpus hash and named it as drift. I nearly recorded that failure as a successful red test.
 **Redone in node, it fired honestly.** Four false-positive tests in one day, and the only reason
 none of them shipped is that each one looked wrong for a reason unrelated to what I was testing.
+
+### 12. I wrote entry #11, then committed entry #11 again, hours later, about the same file
+
+**What happened:** entry #11 is about citing `update.js:723` in a SPEC without opening it. I wrote
+it tonight. **Then I wrote `SPEC-v21-sprite-ceiling.md` and put this in it as a hard invariant:**
+
+> *"I-PALETTE: VIBE's canonical palette and its FORBIDDEN COLORS still bind — no pure white, no
+> bright blue outside cops, no pastels, no neon."*
+
+**I did not check it.** I had, that same hour, found **three** false claims in VIBE's visual
+section and personally retracted them. **I cited a fourth line from the same section, in the same
+file I had just corrected, without reading whether it was true.** Then the operator pasted the
+delegation into a live agent.
+
+**It is false, and specifically:** 183 distinct colors ship against VIBE's claimed 8 — that part
+is fine, the canonical 8 are a spine and the other 175 are shading ramps, which is what pixel art
+*is*. **But the FORBIDDEN list is already violated in seven character palettes, correctly:**
+
+| Palette | "Forbidden" color | What it actually is |
+|---|---|---|
+| `PALS.player_high` | `#fff0a0` `#fff8d0` | **the rocked-up gold glow.** A core visual. |
+| `PALS.jogger` | `#f8a8c8` | pastel pink |
+| `phoneguy` `launderlady` `priestson` `dogwalker` `lease_guy` | `#88c0ff` | light blue |
+| `INCIDENT_PALS.dryer` `sprinkler` | `#88c0ff` | the dryer window, the water |
+
+**A compliant agent obeying I-PALETTE strips the gold off the player's high and recolors five
+named NPCs.** Following orders. Green suite. **Same failure as #11, same shape, same night, worse —
+because #11 was an accident and this one happened *after the lesson was written down and
+published*.**
+
+**Why the note didn't hold, and this is the actual finding:** I did not skip the check out of
+haste. **I skipped it because I had just corrected that section and therefore felt like I knew
+it.** Retracting three claims produced *confidence about the fourth*. **Proximity to a correction
+felt like verification.** It is the same mechanism as entry #5 — documenting the blank-line bug and
+committing it one command later — and the same as #1: the memory note about the mount was read, and
+then the mount ate me anyway.
+
+**Prevention: none new, and that is the point.** Every entry in this file has proposed a habit and
+**the habits do not hold.** What held tonight, every single time, was **something outside my own
+head** — the builder that opened the line I cited, the gate that hashed the corpus, the operator
+who couldn't find v21 on a screen. **Twelve gates, and the only one that has ever caught a false
+premise in a SPEC is a person or an agent reading it and arguing.**
+
+**⭐ The rule that actually follows, and it is a process control, not a code control:**
+**every delegation says "push back by name before building it," every time, without exception.**
+It is the only mechanism in this repo that has ever caught this class. **It is not a nice-to-have
+in the template — it is the template.** An autonomous loop with no arguing builder ships this one
+green, and the fabrication is one unread line in a document nobody re-reads.
+
+**And the narrow, checkable one:** `VIBE.md §Visual aesthetic` has now had **four** claims tested
+and **four** came back false or half-false — emoji actors, filled-rect buildings, the 16×16
+ceiling, the forbidden palette. **Treat that entire section as an artifact, not a specification,
+until every line in it has been checked against source.** The rest of `VIBE.md` — voice, patterns,
+the hard lines about not moralizing or punching down — is untested by this and remains the soul.
+**It is the *visual* section that rotted, because the code moved and the prose didn't.**
