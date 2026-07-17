@@ -15,6 +15,11 @@ const GATES = [
   // and nothing caught it because a stale sentence is neither game nor corpus deletion.
   // Named as UNGUARDED in ORCHESTRATOR-NOTES.md entry #6; this closes it.
   'docs-gate.mjs',
+  // version-gate rides with docs-gate: same class, same origin. index.html said "v19"
+  // through the whole v20 wave and Wave 4.1 while the README said v19 too, and the
+  // operator lost an evening hard-refreshing a deploy that was already current.
+  // The label was the bug. Consistency is gateable; which number is right is not.
+  'version-gate.mjs',
   'module-gate.mjs',
   'npc-registry-gate.mjs',
   'legibility-gate.mjs',

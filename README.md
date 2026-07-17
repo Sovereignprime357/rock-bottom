@@ -18,7 +18,7 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 
 ## Current shipped build
 
-**v19 post-audit modular build.** The world is `8600×5600`: the paper office now leads into BLUE TARP COURT, CART CAVALRY KEEP, COPPER CHOIR YARD, and THE THRONE DITCH, ending in a folding-chair succession fight before endless routes, work orders, hustles, incidents, and daily pretenders continue. The post-audit pass split the frozen v19 script into 38 linked source modules, repaired building/zone/nameplate/graffiti legibility, restored the complete NPC identity registry, fixed the isolated office encoding damage, and retained the exact multi-key controls plus 18s high → 8s crash loop.
+**v21 Wave 4.1 — the honest map.** Built on the v19 post-audit modular base, through the whole v20 recognition wave (HUD deconfliction, THE REGULAR, smoke concessions, the world-relationship gate, the route budget) and v21 Wave 4.1, which gave all 28 landmark facades declared physicality and merged every collision path into one 53-structure authority. The world is `8600×5600`: the paper office now leads into BLUE TARP COURT, CART CAVALRY KEEP, COPPER CHOIR YARD, and THE THRONE DITCH, ending in a folding-chair succession fight before endless routes, work orders, hustles, incidents, and daily pretenders continue. The post-audit pass split the frozen v19 script into 38 linked source modules, repaired building/zone/nameplate/graffiti legibility, restored the complete NPC identity registry, fixed the isolated office encoding damage, and retained the exact multi-key controls plus 18s high → 8s crash loop.
 
 ## Version lineage
 
@@ -38,6 +38,7 @@ The runner supplies `--experimental-vm-modules`, streams all **eleven** gates in
 |------|----------|
 | `corpus-gate` | **The seed.** Blocks staged deletions of the design docs and refuses to run at all if your view of the repo disagrees with `HEAD`. Runs first on purpose — see below. |
 | `docs-gate` | **This table.** Asserts the gate list here matches the `GATES` array in `run-gates.mjs`. This README once claimed four gates while seven ran; nothing caught it. |
+| `version-gate` | **The label.** The `<title>`, the subtitle, and this README's "Current shipped build" must name the same version. The game said `v19` through the entire v20 wave and Wave 4.1, and sent the operator hard-refreshing a deploy that was already current. |
 | `module-gate` | Module linking, source/reference integrity, no file over the size ceiling. |
 | `npc-registry-gate` | Every runtime NPC identity is registered in `VIBE.md`. No unnamed strangers. |
 | `legibility-gate` | The four measured legibility relationships (buildings, zones, nameplates, graffiti). |
