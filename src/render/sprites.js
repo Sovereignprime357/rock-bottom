@@ -11,6 +11,7 @@ import {
   makeAttackSmear32, makeCartUnderlay32, makePlayer32, makePlayerAttack32,
   makePlayerGear32, makeRoutePatch32, makeWeaponLayer32,
 } from './sprite_art_player_32.js';
+import { makeNpc32, makeSleepingDave32 } from './sprite_art_npc_32.js';
 import { SPRITE_BASE_SIZES } from './sprite_manifest.js';
 import {
   anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut,
@@ -561,23 +562,23 @@ export function buildSprites() {
     // v13 wave 8a — old school brutus reuses the dog sprite (handled below), this entry not used
   };
   Object.entries(npcStyles).forEach(([k, opts]) => {
-    const frames = makeNPC({...opts, signature:k});
+    const frames = makeNpc32({...opts,signature:k});
     frames.forEach((g, i) => {
       cacheSprite(k,k+'_'+i,g,PALS[k] || PALS.tony);
     });
   });
   // v15 readable state art: Dave lies down; Tony's contractually numbered coats actually
   // leave his body; Fallen O'Malley no longer relies on n.color that cached art ignores.
-  makeSleepingDave().forEach((g,i)=>{ cacheSprite('dave_sleep','dave_sleep_'+i,anchorGridToBottom(g),PALS.dave); });
+  makeSleepingDave32().forEach((g,i)=>{ cacheSprite('dave_sleep','dave_sleep_'+i,anchorGridToBottom(g),PALS.dave); });
   const tonyStates = [
     ['tony_coat_2', {...npcStyles.tony, coats:2, signature:'tony_coat_2'}],
     ['tony_coat_1', {...npcStyles.tony, coats:1, signature:'tony_coat_1'}],
     ['tony_bare',   {...npcStyles.tony, coats:1, signature:'tony_bare'}],
   ];
-  for (const [key,def] of tonyStates) makeNPC(def).forEach((g,i)=>{
+  for (const [key,def] of tonyStates) makeNpc32(def).forEach((g,i)=>{
     cacheSprite(key,key+'_'+i,g,PALS.tony);
   });
-  makeNPC({...npcStyles.priest, coats:1, signature:'priest_fallen'}).forEach((g,i)=>{
+  makeNpc32({...npcStyles.priest,coats:1,signature:'priest_fallen'}).forEach((g,i)=>{
     cacheSprite('priest_fallen','priest_fallen_'+i,g,PALS.priest_fallen);
   });
   // possum, brutus, pigeon — special silhouettes, 2-frame
