@@ -142,12 +142,54 @@ copper orange       #d06030  (the holy grail color, dealer corner)
 ### Texture
 - CRT scanlines always on (3px repeating gradient overlay, 12% opacity)
 - Slight body flicker (8-9s cycle)
-- Pixel art is CHUNKY, not refined. 16x16 logical, scaled 2x.
+- **Pixel art is DETAILED, and it is still pixel art.** Characters are `32x32` logical drawn at
+  `32x32` — the same pixel density as the world they stand in. Detail is not refinement; a
+  crackhead rendered with more pixels is still a crackhead. **The bit still lands flat.**
 - Backgrounds use 64x64 checker grid + procedural grime splotches
-- Emoji used unironically for NPCs and props. This is the look, not a placeholder.
+- **NPCs and props are hand-authored pixel sprites.** Emoji appear only in UI chrome (HUD,
+  phone/feed, status), never as an actor or a world object.
+
+> **⚠️ RETRACTED 2026-07-16 — the two lines this replaced were FALSE, and they were load-bearing.**
+>
+> They said: *"Pixel art is CHUNKY, not refined. 16x16 logical, scaled 2x."* and *"Emoji used
+> unironically for NPCs and props. **This is the look, not a placeholder.**"*
+>
+> **Checked in source, one command each. The emoji claim was false by v19 at the latest:** there
+> are 8 emoji lines in all of `src/`, every one of them UI chrome. Actors are **373 sprite keys**
+> of hand-authored pixel art. The chunky claim was **half true, and that half was the bug** — the
+> `16x16 → 32x32` ceiling applied to characters only. The environment quietly grew a **3,912-line
+> renderer** across ten modules with light masks, glow caches and a fog sheet, and obeys no
+> ceiling at all.
+>
+> **The measurement that settles it:** the game canvas is `800x600` (`index.html:180`). The world
+> draws at **one canvas pixel**. Characters draw a `16x16` source into `32x32`
+> (`sprites.js:190`, `actors_weather.js:136`) — **every character detail is a 2×2 block.** The
+> actors have been running at **half the resolution of the world they stand in**, and nobody chose
+> that. It is the last surviving line of a v3 rule the rest of the game abandoned.
+>
+> **Why this stays on the page instead of being quietly overwritten:** this file is the seed.
+> `README.md` orders every fresh agent to *"internalize the voice before doing anything else"* —
+> so an agent sent to improve the art, obeying the old text exactly, **would have built emoji NPCs
+> and made the game worse, following orders, with every gate green.** `corpus-gate` protects this
+> document from *shrinking*. **Nothing protects it from being wrong.** That gap is ungateable: no
+> mechanical check reads prose for truth.
+>
+> **The habit that replaces the gate:** when the corpus makes a checkable claim about the code,
+> **check it.** Three claims in this section were false and one command each proved it.
+>
+> Ratified by the operator 2026-07-16: *"make the corrections, raise the ceiling... we can have a
+> lot of detail and still be pixel."* See `REFACTOR-FINDINGS.md` §F-VIBE-ART.
 
 ### Building rules
-- Solid buildings: filled rect + 3px dark border
+- **Buildings are authored structures with real interiors, signage, and light response.** The
+  render layer is ~3,900 lines across ten modules; treat `structures.js`, `props.js`,
+  `landmarks_a/b.js` and `tiles.js` as the actual contract and this section as orientation.
+- **Every structure declares its physicality** — `solid`, or `flat` with a registered reason.
+  "Nobody said" is not a state. (v21 Wave 4.1, OD-11.)
+- *(RETRACTED 2026-07-16: this section previously said "Solid buildings: filled rect + 3px dark
+  border." That described v3. It has been false for many versions and, like the Texture claims
+  above, would have actively misled any agent that obeyed it. Same finding, same habit: the
+  corpus made a checkable claim and nobody checked it.)*
 - Zone areas (the block, dealer's corner, alley): dashed border, 25% alpha fill
 - Locked buildings: boarded planks drawn as 4px lines + 🔒 emoji
 - Every building gets a labelColor (specific to its vibe)
