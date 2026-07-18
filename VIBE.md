@@ -151,7 +151,9 @@ that snapshot requires a new audited decision.
   crackhead rendered with more pixels is still a crackhead. **The bit still lands flat.**
 - Backgrounds use 64x64 checker grid + procedural grime splotches
 - **NPCs and props are hand-authored pixel sprites.** Emoji appear only in UI chrome (HUD,
-  phone/feed, status), never as an actor or a world object.
+  phone/feed, status) ~~, never as an actor or a world object~~ **[✅ F-VIBE-2: one exception — the
+  `🔒` drawn on locked buildings (`src/render/structures.js:210`), which line 204 below explicitly
+  mandates. So: no emoji ACTORS; the single world-object emoji is the lock icon, and it's canonical.]**.
 
 > **⚠️ RETRACTED 2026-07-16 — the two lines this replaced were FALSE, and they were load-bearing.**
 >
@@ -294,7 +296,7 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | CHATTY DAVE | asleep, wallet half-out | marketplace | pickpocketable while asleep |
 | WHOLE FOODS MOM | vibram five-fingers, kombucha | marketplace | gives you $5 and pity |
 | THE POSSUM | tiny construction helmet | alley → world | trades secrets via AI prophecy |
-| FATHER O'MALLEY | priest, calls tic-tacs medicine | the church | dispenses "blessed tic-tacs" for shakes |
+| FATHER O'MALLEY | priest, calls tic-tacs medicine | the church | dispenses "blessed tic-tacs" — **+5 brain only, NOT shakes relief** [✅ F-VIBE-1: the shakes reduction was deliberately removed in v13 wave 6.5 (economy-exploit pass); canonical line is now "the tic tac is gone. the shakes do not care." Restoring tic-tacs as a shakes remedy reopens a closed exploit.] |
 | THE CONDUCTOR | waits for a train | the train yard (relocated v13 wave 8a) | buys 3 PURE COPPER for $90 |
 | LOUD LARRY | just loud | the projects | fights, big damage |
 | STRIPE | rival dealer, sells soap | the projects | $8 rocks, 40% are soap |
