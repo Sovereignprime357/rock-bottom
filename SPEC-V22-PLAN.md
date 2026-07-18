@@ -25,12 +25,17 @@ Every idea here is measured against that. **The world noticing you = yes. The wo
 
 ---
 
-## BLOCKED ON THE OPERATOR (not building until he rules)
+## ~~BLOCKED ON THE OPERATOR~~ → **RULED 2026-07-18**
 
-- **The pipe / scavenging / emergency hitter.** Two unanswered design questions, and both change the whole shape (`SPEC-V22-PACKET.md §3`):
-  1. Is the pipe a **tool** (durable, breaks, replaced) or a **consumable** (one hit, gone)?
-  2. Does scavenging **cost shakes-runway** or run alongside it? `world-gate` will have an opinion — two mandatory legs already sit at 96% and 98.5% of budget.
-  **This is exactly the class of idea that must not be guessed.** Surfaced, not built.
+- **The emergency hitter — ✅ UNBLOCKED, design locked.** The operator ruled both questions on
+  2026-07-18: it's a **consumable**, obtained two ways (rare dumpster find **or** crafted by
+  **consuming copper instead of selling it**), and it does **not** cost shakes-runway in seconds —
+  the cost is that the hit is a **bad trade** (worse than a real rock). Full contract:
+  `SPEC-v22-emergency-hitter.md`. **Sequenced right after Wave 5.1** — it depends on copper being a
+  settled resource, and it's the wave that gives copper its second life ("sell it or keep it to save
+  your life later"). This is the payoff of *not guessing*: the idea sat blocked one message, the
+  operator answered, and the answer was better than either thing I'd have built on my own (copper as
+  the craft cost was his connection, not mine).
 
 - **The sock money bug (F-SOCK).** `'pawn a sock. $1.'` prints $200/day from an item that doesn't exist. The operator said leave it during his playtest — it's his fast path to late content. **`economy-gate` (built, on `v21-economy` branch) exists to catch it and its siblings.** His call when to close it.
 
