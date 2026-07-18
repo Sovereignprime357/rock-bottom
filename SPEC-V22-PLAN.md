@@ -27,7 +27,9 @@ Every idea here is measured against that. **The world noticing you = yes. The wo
 
 ## ~~BLOCKED ON THE OPERATOR~~ → **RULED 2026-07-18**
 
-- **The emergency hitter — ✅ UNBLOCKED, design locked.** The operator ruled both questions on
+- **The emergency hitter — ✅ SHIPPED 2026-07-18** — branch `v22-hitter`, contract
+  `SPEC-v22-emergency-hitter.md` graduated to SPEC.md; `hitter-gate` permanent, suite 16/16.
+  The operator ruled both questions on
   2026-07-18: it's a **consumable**, obtained two ways (rare dumpster find **or** crafted by
   **consuming copper instead of selling it**), and it does **not** cost shakes-runway in seconds —
   the cost is that the hit is a **bad trade** (worse than a real rock). Full contract:

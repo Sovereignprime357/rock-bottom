@@ -2053,3 +2053,69 @@ around the ledger; the demanded failure shape (real gate, wrong door) is now wat
 **Next.** Operator play-pass: the three tellers as bits, the hint/room wording at a revealed
 venue, and one full 15-sit handoff from unearned room to real concession. Wave 5.3 (the
 robbery) is next in the plan; 5.4 break-ins still needs its SPEC.
+
+---
+
+## 2026-07-18 — v22: the emergency hitter (branch `v22-hitter`, worktree, push-no-merge)
+
+**What.** The operator-ruled consumable: a worse smoke for when you're out of rocks. Two ways
+in — fold 2 pure copper in YOUR POCKETS (the E nothing else wanted, anywhere) or a 4%
+far-dumpster find. Numbers, all in `src/systems/hitter.js`: 6s high / shakes -20 / brain -8 /
+no cred, then a 14s / +35 crash keyed on `P.hitterHigh` at the update.js boundary. Net of a
+full cycle the hitter raises shakes +15 where a rock nets -20 — spamming it is
+self-destructive by construction, which is I-BAD-TRADE surviving the SPEC's named trap (the
+sneaky failure was a hitter nerfed per-use that wins the marathon). `hitter-gate` (16th)
+races both transactions through the live boundary to a 40s horizon and requires the rock to
+win every axis; suite 16/16; world-gate readings byte-identical to pre-wave (I-NO-RUNWAY-COST).
+
+**Decided.**
+- The use-anywhere surface is the whiffed E ("YOUR POCKETS"), not a new key: zero new input
+  chrome, works on mobile (B BOTHER) for free, lowest priority so it can never steal an NPC,
+  prop, dumpster, or zone verb, and silent with empty pockets so pre-wave whiff behavior is
+  unchanged. The SPEC settles that use is location-free: I-NO-RUNWAY-COST forbids a mandatory
+  walk for USING it, and "at the last second is the whole fantasy."
+- The hitter is a nobody on every ledger: no cred, no rep, no rocksSmoked, no intro credit
+  (the game stays unbeatable without a real rock), and no recognition credit at the boundary
+  — the room does not respect the pipe. Red-tested that last one specifically.
+- A real rock never inherits the hitter's crash: `smokeRockAt` clears the flag defensively.
+- Craft cost 2 copper ≈ $50-60 unsold at yuri against a $10 rock — the "sell it or keep it"
+  decision is real money, not a rounding error.
+
+**Tried that failed / mistakes in the open.**
+- concession-gate went red on first run because my hitter.js HEADER COMMENT contained the
+  string `rockedT=18000` — that gate reads raw text. Reworded the comment. Then my own gate's
+  forbidden-pattern scan tripped on my own prose the same way; fixed by comment-stripping
+  before scanning (docs-gate precedent), because the check is about what code does.
+- I mutated files for red test 1 with PowerShell `-replace` + `Set-Content -Encoding utf8`
+  and it double-encoded both files' UTF-8 — the exact trap in ORCHESTRATOR-NOTES entry #11's
+  footnote, walked into with the note already read. The red test itself was still valid (the
+  mutation semantics survived; ASCII assertions unaffected), but the restore cost real work:
+  update.js came back via `git checkout --` + re-applying edits; hitter.js was UNTRACKED, so
+  checkout could not save it and it was rewritten from context. Every later mutation went
+  through the Edit tool. Lesson unchanged from the notes: the note did not hold, the habit
+  that held was doing mutations with an instrument that cannot re-encode the file.
+- Browser playtest: rAF throttling in the backgrounded pane meant the world did not tick in
+  real time; drove the boundary with `_rb.updateWorld()` in the live page instead — same
+  production path, and the full pocket→fold→hit→crash chain plus the untouched real-rock
+  18s→8s loop both verified in the served build with zero console errors.
+
+**Red proof for hitter-gate (all five fired, then restored green, exit codes unpiped).**
+(1) THE TRAP: relief 45 (passes constants, per-use still reads nerfed) + crash literal +5 →
+ONLY the marathon axis fired, rock 72.0 vs hitter 52.0 at the horizon — the full-cycle test
+catches what every per-use number hides; (2) crash literal 4000 bypassing the constant →
+crash axis + literal detector; (3) recordFullHighAtPlayer added to the hitter branch → the
+nobody check; (4) find chance 0.5 → rarity bound; (5) call-site roll bypass (`if (true)`) →
+static count + both dynamic rarity checks. Each mutation's failure message showed the
+measured numbers moving — proof the poison reached the real path (entry #13 discipline).
+
+**Findings, written not fixed.**
+- `SPEC-v22-emergency-hitter.md` cites the reference transaction at
+  `src/minigames/activities.js`; it lives at `src/systems/concessions.js:288-290` since v20
+  Landing 3 (values themselves are correct).
+- `SPEC-V22-PLAN.md` row 5.1 still reads "READY — building now" though 5.1 is merged;
+  DELEGATION's 5.2 entry still reads "PENDING OPERATOR REVIEW" though 5.2 is merged — same
+  stale-status class the corpus audit corrected for v20/v21.
+
+**Next.** Operator play-pass: tune the hitter numbers if the trade reads wrong (the gate
+holds the ordering, not the values), and judge the bits — pennies, "ahead of schedule," the
+copper that stops singing. Wave 5.3 (the robbery) is next in the plan; 5.4 still needs SPEC.
