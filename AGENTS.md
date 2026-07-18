@@ -1,6 +1,15 @@
 # AGENTS.md — Agent Operating Constraints
 
-> You are picking up a satirical action game in mid-build. Operator is Sovereign Prime (VibeKoded). v3 is shipped. The comedic voice is a HARD spec — read VIBE.md before touching anything.
+> You are picking up a satirical action game in mid-build. Operator is Sovereign Prime (VibeKoded). ~~v3 is shipped.~~ **[✅ F-AGENTS-4: v21 is shipped — `<title>ROCK BOTTOM v21</title>`. Rule 3 below states the modular reality correctly; this header contradicted its own body.]** The comedic voice is a HARD spec — read VIBE.md before touching anything.
+
+> ## ⚠️ AUDIT CORRECTIONS 2026-07-18 (`CORPUS-AUDIT.md`)
+> This file's 2026-07-15 rewrite got the architecture right (modular v21, frozen v19 reference,
+> IndexedDB-backed `window.storage`, declared-size sprites, 18s/8s loop all verify). Six lines carry
+> **v3-era phantom identifiers that exist in no preserved build** — corrected in place below. The
+> audio/timer tripwire names are the dangerous ones: obeying them builds a **duplicate** audio or
+> timer system parallel to the real one. Live names: loop = `P.rockedT`/`P.crashT` (`update.js`),
+> audio gate = `audio.ready` with `tone()`/`noise()` (`audio_save.js:230`), synths live on the
+> **`audio`** object (not `sfx`), player update = `update()`/`updateWorld()`.
 
 ---
 
@@ -19,7 +28,7 @@ The former “everything in one HTML file” hard rule was deliberately retired 
 The architecture change does not retire the storage abstraction. Use `window.storage.set / .get` exclusively; the browser fallback is IndexedDB. All calls stay async and wrapped in try/catch. Never scatter `localStorage` or `sessionStorage` through modules.
 
 ### 5. Audio init on first user interaction
-Browser autoplay policy. Audio context must be created in a keydown or click handler, never on page load. Track `audioReady` boolean to gate all `beep()` calls.
+Browser autoplay policy. Audio context must be created in a keydown or click handler, never on page load. ~~Track `audioReady` boolean to gate all `beep()` calls.~~ **[✅ F-AGENTS-2: the gate is `audio.ready` (`src/core/audio_save.js:230`), checked inside every synth (`if (!this.ready || this.muted) return;`); primitives are `tone()`/`noise()`, not `beep()`. Building a new `audioReady`/`beep()` wrapper makes a duplicate audio state that desyncs mute/init.]**
 
 ### 6. Pixel sprite discipline
 - Every character base explicitly declares `32×32` logical art; selected environment sprites may
@@ -32,11 +41,11 @@ Browser autoplay policy. Audio context must be created in a keydown or click han
 - Drawn via `ctx.drawImage` — never `fillRect` per pixel at runtime
 
 ### 7. Test the rocked-up + crash loop after any change touching it
-The 18s high → 8s crash loop is the comedic core of the gameplay. If you touch any of:
-- `updatePlayer` timing
-- `rockedUpTimer` / `crashTimer`
-- `sfx.rockUp` / `sfx.crash`
-- The `smoke a rock` dialogue option
+The 18s high → 8s crash loop is the comedic core of the gameplay. **[✅ F-AGENTS-1: the loop and timing are LIVE and correct; the tripwire names below drifted to v3 identifiers that exist in no build. An agent greps them, finds nothing, and skips the mandatory playtest — or "restores" a duplicate.]** If you touch any of:
+- ~~`updatePlayer` timing~~ → **`update()` / `updateWorld()`** (`src/core/update.js`)
+- ~~`rockedUpTimer` / `crashTimer`~~ → **`P.rockedT` / `P.crashT`** (`update.js:127-130`, `concessions.js:286`)
+- ~~`sfx.rockUp` / `sfx.crash`~~ → **`audio.rockUp()` / `audio.crash()`** (`audio_save.js:269,272`)
+- The `smoke a rock` dialogue option (`concessions.js:250`)
 
 → play it end-to-end before shipping.
 
@@ -54,12 +63,12 @@ No "this game," "I, Codex," "the developer." The world is the world.
 ## Soft rules (prefer, but exceptions allowed)
 
 ### Prefer extending existing systems over adding new ones
-- Adding a status effect? Look at `rockedUpTimer` / `crashTimer` pattern.
+- Adding a status effect? Look at the **`P.rockedT` / `P.crashT`** pattern (`src/core/update.js`). *(F-AGENTS-1: not `rockedUpTimer`/`crashTimer` — those never existed.)*
 - Adding a new NPC behavior? Look at `npc.wander` / `npc.hostile` / `npc.zoneOnly`.
 - Adding a new currency? Reconsider. You probably don't need it.
 
 ### Prefer Web Audio synthesis over samples
-If a new sound is needed, write it as a synth function in the `sfx` object. Match the existing chiptune aesthetic.
+If a new sound is needed, write it as a synth function in the ~~`sfx` object~~ **[✅ F-AGENTS-3: there is no `sfx` object. All synths (`rockUp`, `crash`, `copSiren`, `bossRoar`…) live on the `audio` object created in `init_audio_save()` (`src/core/audio_save.js:226`). Add new sounds there so they inherit its `ready`/`muted` gating.]** Match the existing chiptune aesthetic.
 
 ### Prefer canvas drawing over DOM elements
 The HUD, dialogue, and toast are DOM. Everything else is canvas. New gameplay UI should be canvas to maintain the scanline/CRT effect.
@@ -91,7 +100,7 @@ After every working session, append to BRAIN.md (if it doesn't exist, create it)
 3. **Property verification** — are the invariants from SPEC.md still preserved?
 
 ### Naming
-All sprite IDs, NPC IDs, function names use snake_case in this codebase. Match the existing convention.
+~~All sprite IDs, NPC IDs, function names use snake_case in this codebase.~~ **[✅ F-AGENTS-6: sprite/NPC IDs are snake_case (`scrap_dog`, `os_brutus`) — true — but function names are overwhelmingly camelCase (~396 declarations: `cacheSprite`, `updateWorld`, `smokeRockAt`) vs ~40 snake_case `init_*` entry points.]** Match the existing convention: **snake_case for IDs, camelCase for functions.**
 
 ---
 
@@ -104,7 +113,7 @@ Re-read VIBE.md. Pick the option that is more flat and more specific. Fewer adje
 Check SPEC.md invariants. If your change would violate an invariant, your change is wrong (or the invariant is wrong — and changing an invariant requires updating SPEC.md first).
 
 ### When in doubt about scope
-Check DELEGATION.md. If your idea isn't on the v4 list, ask the operator before building it. The backlog is prioritized for a reason.
+Check DELEGATION.md. ~~If your idea isn't on the v4 list~~ **[✅ F-AGENTS-5: the v4 list is a fully-shipped historical ledger. The live backlog is the v20/v21 waves and `SPEC-V22-PACKET.md`.]** If your idea isn't on the **current v21/v22** backlog, ask the operator before building it. The backlog is prioritized for a reason.
 
 ### When in doubt about whether something is funny
 It's not. Cut it. Then write something more specific.
