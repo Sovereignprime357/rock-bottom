@@ -214,3 +214,27 @@ Notes on what checked out TRUE (no findings): the frozen v19 reference hash at l
 - Line 65 ("The HUD, dialogue, and toast are DOM. Everything else is canvas."): spot checks were consistent but the auditor did not exhaustively enumerate DOM gameplay UI; no disproof found.
 
 ---
+
+## BRAIN.md — 18 claims checked · 2 false · verdict: overwhelmingly accurate; both findings are stale-against-code lines superseded later in the file itself, and historical session narration (the bulk of the 1,943 lines) was out of scope
+
+### F-BRAIN-1 · DAMAGE: LOW
+- **Where:** BRAIN.md:1808 (same claim at 1790 and 1822)
+- **Claim:** "Next: operator reviews and merges v20-world (landings 4+5 together, per instruction — not merged here)."
+- **Disproof:** `git log main --oneline | Select-String world` → `cd5d716 merge: world relationships + route budget (SPEC-V20-PACKET section 3 / OD-9, OD-10) - 9/9 green`
+- **Actually:** v20-world (Landings 4+5, world-gate + route budget + OD-10 invariants) was merged to main at cd5d716; the current runner streams world-gate and reports 13/13 PASS. BRAIN never records the merge — the last three explicit statements about it all say "pushed, not merged" / "pending," and DELEGATION.md:23-24 corroborates the stale "pending operator review/merge" status.
+- **If obeyed:** An agent would attempt to review/merge an already-merged branch (git no-ops with "Already up to date") or, worse, report to the operator that landings 4+5 are still absent from main and try to re-land or cherry-pick them, risking duplicate gate wiring.
+
+### F-BRAIN-2 · DAMAGE: LOW
+- **Where:** BRAIN.md:1142
+- **Claim:** "`LANDMARK_FACADES` are visual-only by design. Do not silently add them to `BUILDINGS`; NPCs need shared collision first."
+- **Disproof:** `Select-String -Path src/data/world.js -Pattern "solid:true" | Measure-Object` → 28 (every facade declares `solid:true`); and src/systems/physicality.js:22 reads `STRUCTURES=Object.freeze([...BUILDINGS,...LANDMARK_FACADES]);`
+- **Actually:** Wave 4.1 (v21 honest map, merged 52a6c1a) made all 28 facades solid via the shared `STRUCTURES` authority, with player, projectile, NPC, and cop collision — the "NPCs need shared collision first" precondition was satisfied and the design reversed. The GOTCHA is written as a standing design rule and is corrected only by the Wave 4.1 entry 700 lines later.
+- **If obeyed:** An agent would treat facades as walk-through scenery — authoring props/actors/paths inside them or "restoring" non-solid behavior — reintroducing the exact ghost-building defect Wave 4.1 retired; tools/solidity-gate.mjs would go red, tempting a gate "fix" instead of a content fix.
+
+### SUSPECTED — UNPROVEN
+- BRAIN.md:1756 "Game is live at sovereignprime357.github.io/rock-bottom (index 200, src/main.js 200)" — network claim, not verified from this audit (read-only, no fetch); could have gone stale since 2026-07-16.
+- BRAIN.md:1632/1722 "Live visual/audio QA is still pending" — the Wave 4.2 entry later mentions the live modular build rendering with screenshots preserved, so the "still pending" status may be partially superseded, but no command can prove whether the operator's feel pass ever happened.
+
+Notes on verification coverage (all confirmed TRUE, not findings): frozen v19 SHA-256 matches `C25DB5E1…` exactly (Get-FileHash); full suite runs 13/13 PASS today with corpus-gate first and world-gate last as claimed; runner had exactly 11 gates at the Wave 4.1 merge and 13 at the Wave 4.2 merge, matching both entries' "11/11" and "13/13"; `WORLD = { w: 8600, h: 5600 }` at src/data/world.js:15, `baseSpeed = 2.2` at src/core/runtime_ui.js:33, and the 0.0008 withdrawal rate all match the OD-9 premise check; `SAVE_KEY = 'rockbottom_save_v8'` at src/core/audio_save.js:303; the v13-era internal citations spot-checked clean (`WORLD = { w: 4400, h: 3400 }` at rock_bottom_v13.html line 253; "the door is chained" refusal copy present); SPEC-v20-route-budget.md exists on main; no src module exceeds 1,000 lines; and the "38 native ES-module files" claim was true at the PR #1 merge (`git ls-tree -r bac3a24 -- src` → 38 JS files). The 16×16-logical sprite statements at BRAIN.md:1608 were true when written and are explicitly superseded by the Wave 4.2 entry in the same file, so they were not counted as findings.
+
+---
