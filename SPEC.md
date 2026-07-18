@@ -1967,3 +1967,41 @@ wanted bumps). The choir-yard copper mass is untouched.
    exhaustion across different sites, forced-extreme yield identity at every site, and
    exhaustive both-branch path walks of every entry and getaway (no dead modal). Red-tested
    in seven directions before trusted; README table updated (docs-gate holds the list).
+
+## v22 Wave 5.2 — SMOKE-SPOT DISCOVERY (2026-07-18)
+
+Implements `SPEC-v22-smoke-discovery.md`, graduated from `SPEC-V22-PLAN.md` § the wave table
+("the map, not the key", design ratified in `SPEC-V22-PACKET.md §1`). Wild crackheads tell you
+a concession venue exists; telling flips a per-venue `discovered` boolean and nothing else.
+The tellers: LURCH → the underpass, PAULIE THE FACE → the choir office, SPIDER-BITE SHERRI →
+the park, then the laundromat (one per conversation). All reveals route through one door,
+`tellVenue()` in `src/systems/discovery.js`.
+
+1. **I-MAP-NOT-KEY.** No NPC, dialogue, flag, or quest grants a concession, moves a venue to
+   `conceded`, lowers a `REGULAR_THRESHOLDS` value, or credits a recognition verb. Discovery
+   writes `state.discoveredVenues` and nothing else; the ledger remains the sole path to
+   `conceded`, and you still sit 15 times. The quest reveals the room; it does not open it.
+2. **I-REVEAL-IS-COSMETIC.** A discovered venue and an undiscovered one at the same visit
+   count are mechanically byte-identical — proven, not promised: the gate diffs the whole
+   ledger + tier + condition + reward fingerprint across every reveal. Visibility surfaces:
+   the E hint (same verb the conceded room uses), a known-but-unearned room on E ("you know
+   this counts. the bench does not know you yet."), and a Q-ledger line
+   (`known: <condition> · the <keeper> does not know you yet.`) that states the condition as
+   a fact and never live now-ness — the concessions honesty rule carries over.
+3. **Orthogonality.** Discovery and recognition never read each other's write paths: the old
+   accidental grind still concedes an untold venue, and a told venue at 14 visits is still
+   closed. The Block is unconditional, always known, and structurally excluded from the set.
+4. **I-SAVE-ADDITIVE.** One additive save key (`discovered`, an id array; version stays 10).
+   A pre-5.2 save loads with everything undiscovered — those players had not been told yet.
+   Unknown ids, non-strings, and `block` are dropped on normalize.
+5. **Permanent enforcement.** `tools/discovery-gate.mjs` (15th gate, behind the recognition
+   family it protects). It exists because discovery routes *around* the ledger:
+   `recognition-gate`'s zero-leakage proof watches the ledger and stays green even if a
+   reveal grants tier — the leak comes through a door that gate does not watch. This gate
+   watches the door: comment-stripped structural sweep (no ledger vocabulary in the map
+   module; `discoverVenue` called only inside it; the set written only by owner +
+   persistence), byte-identical reveals at 4 counts × 4 venues through the real teller
+   dialogues with idempotent retells, grant-nothing unearned room, 14/15 orthogonality both
+   ways, save round-trip + pre-5.2 all-undiscovered. Red-tested in four directions (reveal
+   grants tier; reveal pays cred with no ledger vocabulary — mechanical check fires alone;
+   Block admitted; save key dropped) before the green was trusted. Suite **15/15**.

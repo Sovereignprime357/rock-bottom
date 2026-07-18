@@ -12,6 +12,7 @@ import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
 import { questToast } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { badIdeaSmokeSpot, concessionActionHint } from './concessions.js';
+import { discoveryActionHint } from './discovery.js';
 import { HIDEOUT_DOORS, hideoutOwned, openOffice } from './daily_hideouts.js';
 import { adjustFaction } from './factions.js';
 import { endingScreen } from './interactions.js';
@@ -631,6 +632,10 @@ export function resolveActionHint(){
   // v20 landing 3 — conceded venues advertise their room. the hint mirrors the E priority chain.
   const concessionHint=concessionActionHint(pcx,pcy);
   if(concessionHint)return concessionHint;
+  // v22 wave 5.2 — a discovered-but-unconceded venue advertises the same verb its
+  // room will answer to. discovery changes visibility only, never the transaction.
+  const discoveryHint=discoveryActionHint(pcx,pcy);
+  if(discoveryHint)return discoveryHint;
   return '';
 }
 

@@ -1998,3 +1998,58 @@ operator call — flagged, not decided here.
 smoke-spot discovery per the plan. If 5.4 break-ins generalize this pattern, the engine's
 entry-kind table (roll/lockpick/item/cash/wait/sure) is the seam to extend — add kinds, not
 copies.
+
+---
+
+## 2026-07-18 — v22 Wave 5.2: smoke-spot discovery (the map, not the key) — branch `v22-discovery`
+
+**What was changed.** New `src/systems/discovery.js` owning `state.discoveredVenues` (a Set;
+one additive save key `discovered`, version stays 10). Wild-crackhead reveals: lurch → the
+underpass, paulie → the choir office, sherri → the park then the laundromat (one per
+conversation) — one new dialogue option each in `neighborhood_a.js`, all routing through the
+single door `tellVenue()`. Visibility surfaces: `discoveryActionHint` (campaigns.js, right
+after the concession hint), `discoveryMenu` (interactions.js E chain, below the conceded
+branch), `discoveryQLine` (runtime_ui Q ledger). `CONCESSION_TEXT` exported from
+concessions.js so the known room reuses the exact conceded verb and qCondition — no drifting
+copies. `tools/discovery-gate.mjs` wired 12th in the runner (behind the recognition family),
+README table updated; suite 15/15.
+
+**Decided, and why.**
+- *All four venues get a teller* (spec floor was "at least one, ideally 2–3 reveals"): a
+  venue with no teller keeps the exact hole this wave exists to fill. Sherri carries two,
+  delivered one per conversation, because she "has a thing" and gets around; the trio stays
+  three NPCs with four facts between them.
+- *The unearned room is a separate `discoveryMenu`*, not a branch inside `concessionMenu`:
+  concession-gate asserts the conceded room does not open below tier (I-CONCEDED-ONLY), and
+  the unearned room must never grow a smoke option by refactor accident. Separate doors,
+  separate gates.
+- *The Q `known:` line states the condition and never live status* — a room you cannot use
+  yet advertised as "in session." is a lie with extra steps; the concessions honesty rule
+  carries over.
+- *The gate strips comments before its structural sweep* (docs-gate's lesson, other
+  direction): the module's own header saying "never touches state.recognition" must not
+  satisfy — or trip — a token scan.
+
+**Tried and failed / mistakes made (in the open).**
+- The gate's first run went red on its own header comment (`state.recognition` named in
+  documentation) — fixed the scanner, not the comment.
+- `instanceof Set` is false across the vm realm boundary in the harness; the pre-5.2 check
+  duck-types the set now. In-game code keeps `instanceof` (one realm there).
+- A commit message containing double quotes got mangled by PowerShell 5.1 native-arg
+  passing — git read the message tail as pathspecs and the commit failed loudly; recommitted
+  via `git commit -F <file>`. Nothing was lost, but the failure mode looks like a git error
+  and is actually a shell quoting bug.
+- Red tests ran against committed state only (the 5.1 lesson held: `git checkout --` during
+  red-testing eats uncommitted work), and every exit code was read unpiped.
+
+**Red proof for the gate (all four fired, then restored green).** (1) reveal grants tier —
+37 failures, structural + byte-identical both fire; (2) reveal pays +1 cred with zero ledger
+vocabulary — exactly the 4 mechanical reward-fingerprint failures, proving that check lives
+independently of the token sweep; (3) normalize admits `block`/garbage — Block exclusion
+fires; (4) `discovered` key dropped from the save payload — roundtrip fires. This gate
+exists because recognition-gate's zero-leakage proof watches the ledger and discovery routes
+around the ledger; the demanded failure shape (real gate, wrong door) is now watched.
+
+**Next.** Operator play-pass: the three tellers as bits, the hint/room wording at a revealed
+venue, and one full 15-sit handoff from unearned room to real concession. Wave 5.3 (the
+robbery) is next in the plan; 5.4 break-ins still needs its SPEC.

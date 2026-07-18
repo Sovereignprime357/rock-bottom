@@ -14,6 +14,7 @@ import { officeUpgradeCount, resetDailyCounters } from '../systems/daily_hideout
 import { FACTION_TIER_LABELS, factionTier } from '../systems/factions.js';
 import { ACHIEVEMENTS, ROUTE_STOP_BY_ID, hustleProgress, validBlockRoute } from '../systems/progression_routes.js';
 import { concessionQLine } from '../systems/concessions.js';
+import { discoveryQLine } from '../systems/discovery.js';
 import { REGULAR_ACTIONS, REGULAR_VENUES, recognitionTier, recognitionTotal } from '../systems/recognition.js';
 
 export let P, particles, state, toastEl, toastTimer, dialogueEl, activeDialogue, panelEl;
@@ -241,7 +242,9 @@ export function renderQuests() {
     const verbs=REGULAR_ACTIONS.filter(action=>(counters[action]||0)>0).map(action=>action.replace('_',' ')+' '+counters[action]).join(' · ');
     // v20 landing 3 — a conceded venue's condition is readable here (choir hours, dryer state).
     const concessionLine=concessionQLine(venue.id);
-    return `<div class="quest" style="padding:6px 10px"><div class="qtitle" style="display:flex;justify-content:space-between"><span>${venue.label}</span><span>${tier.toUpperCase()} · ${total} REMEMBERED</span></div><div class="qflav">${verbs||'nothing entered yet.'}${concessionLine?'\n'+concessionLine:''}</div></div>`;
+    // v22 wave 5.2 — a discovered-but-unconceded venue reads as known, not earned.
+    const discoveredLine=discoveryQLine(venue.id);
+    return `<div class="quest" style="padding:6px 10px"><div class="qtitle" style="display:flex;justify-content:space-between"><span>${venue.label}</span><span>${tier.toUpperCase()} · ${total} REMEMBERED</span></div><div class="qflav">${verbs||'nothing entered yet.'}${concessionLine?'\n'+concessionLine:''}${discoveredLine?'\n'+discoveredLine:''}</div></div>`;
   }).join('');
   const now=currentPrimaryObjective();
   const route=validBlockRoute(state.blockRoute)?state.blockRoute:null;
