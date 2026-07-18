@@ -2,6 +2,28 @@
 
 > SpecMesh format. Read VIBE.md before this if you haven't already. Spec without vibe is a soulless port.
 
+> ## ⚠️ AUDIT CORRECTIONS 2026-07-18 (`CORPUS-AUDIT.md`) — the unversioned "current state" sections drifted
+> The v20/v21 wave sections, gate contracts, and constants at the **bottom** of this file all verify
+> accurate. The rot is in the **unversioned mid-file "current state" sections** (WHAT, WORLD MAP,
+> COMBAT, STATUS EFFECTS, SAVE/LOAD, RESOURCES, PERFORMANCE, API) that froze around v13–v18 and were
+> never re-versioned. Each false line below is also struck in place; this table is the fast index.
+> **Trust `src/` over any unversioned prose here** — every "actually" is a run command from the audit.
+>
+> | Finding | Where | Says (wrong) | Actually (in `src/`) |
+> |---|---|---|---|
+> | **F-SPEC-1 HIGH** | :843 | "single HTML file … 4400×3400 … 16 zones" | `index.html`+`src/` modules; **8600×5600**; **23 zones** (`world.js:15`) |
+> | **F-SPEC-2 HIGH** | :1113 | save `version: 3`, `bossActive` field | **`version: 10`** (`audio_save.js:21`), ~40 fields, no `bossActive` |
+> | F-SPEC-3 MED | :1097,:886 | wanted decay −1 / 30s | **−1 / 18,000ms** (`combat.js:485`) |
+> | F-SPEC-4 MED | :1099 | cops 80 HP / 1.8 spd / 18 dmg / 500px vision | **60 HP / 1.5 / 10**, aggro-from-spawn (`combat.js:505`) |
+> | F-SPEC-5 MED | :883 | shakes +0.0025/ms, +0.05 sprint | **+0.0008/ms**, +0.012 sprint (`update.js:111`) — the world-gate runway constant |
+> | F-SPEC-6 MED | :1376 | Possum: `claude-sonnet-4…`, max_tokens 400, "possum is busy" | no model/max_tokens; local prophecy fallback (`neighborhood_a.js:529`) |
+> | F-SPEC-7 MED | :1738 | runner = 5 gates, "5/5 PASS" | **13 gates, 13/13** (`run-gates.mjs`) — *obeying this deletes 8 gates* |
+> | F-SPEC-8 MED | :1323 | "Block is canonical — rocks cannot be smoked elsewhere" | 5 legal spots since Landing 3; OD-5 superseded this |
+> | F-SPEC-9 MED | :1362 | ≤360 16×16 canvases, ≤185KB gzip | **373 keys / 93 32px bases**; ~231KB (`sprite-gate.mjs:76`) |
+> | F-SPEC-10 LOW | :1052 | knockback ×6, 6 particles | **×8, 11 particles** (`combat.js:197`) |
+> | F-SPEC-11 LOW | :978 | zone rects (block/scrap/pawn/dealer/market) | drift 10–20px from `world.js` |
+> | F-SPEC-12 LOW | :1868 | withdrawal at `update.js:124` | Wave 4.1 shifted lines; accrual is `update.js:111` (values still correct) |
+
 ---
 
 ## RAISE THE CHARACTER CEILING (v21 Wave 4.2)
@@ -840,7 +862,7 @@ Each gated by `state.flags.{trainYardEntered, parkEntered, skidRowEntered, oldSc
 
 ## WHAT
 
-Top-down action RPG built as a single HTML file. Palette-indexed pixel player and complete cached pixel NPC roster. Sixteen-zone, 4400×3400 walkable neighborhood with camera following the player on an 800×600 viewport. Real-time fist combat, multiple patterned bosses, resource management (rocks, cash, shakes, cred, brain, wanted), rank progression, factions, day/night/weather, equipment, quests, achievements, and persistent save via `window.storage`.
+Top-down action RPG ~~built as a single HTML file~~ **[✅ F-SPEC-1 HIGH: built as `index.html` + ~37 ES-module chunks under `src/`; the single-file era ended at the modularize refactor]**. Palette-indexed pixel player and complete cached pixel NPC roster **(true 32px, 93 bases / 373 keys since Wave 4.2)**. ~~Sixteen-zone, 4400×3400~~ **[✅ F-SPEC-1: 23-zone, 8600×5600 (`src/data/world.js:15`)]** walkable neighborhood with camera following the player on an 800×600 viewport. Real-time fist combat, multiple patterned bosses, resource management (rocks, cash, shakes, cred, brain, wanted), rank progression, factions, day/night/weather, equipment, quests, achievements, and persistent save via `window.storage`. **An agent obeying the struck text would clamp the world back to 4400×3400 (stranding every v19 coordinate) or re-inline the modules.**
 
 ## WHY
 
@@ -1108,7 +1130,9 @@ See `VIBE.md` for full identity registry. Mechanical spec:
 - Mute does NOT trigger save (cosmetic only)
 
 ### Save shape
+> **[✅ F-SPEC-2 HIGH: this is the v3 shape. The live save is `version: 10` (`src/core/audio_save.js:21`) with a ~40-field payload including kingdom, office, districtClaims, recognition/concession state — `SAVE_KEY = 'rockbottom_save_v8'`. There is no `bossActive` field. An agent "normalizing" saves to the shape below would write version 3, drop dozens of fields, and corrupt every real save; a validator would reject all correct version-10 saves. The authoritative shape is the object serialized in `audio_save.js`.]**
 ```js
+// ⚠️ v3 — SUPERSEDED, DO NOT WRITE. See src/core/audio_save.js for the live version-10 payload.
 {
   version: 3,
   player: { ...full player state },
@@ -1320,7 +1344,7 @@ These properties MUST hold across all builds. Violating any of these breaks the 
 
 1. **Player can always reach Tre Bag Tony from spawn** — no zone is locked behind a hostile gauntlet
 2. **Dealer's Corner is the canonical rocks vendor** — Stripe is an unreliable alternative, never the primary
-3. **The Block is the canonical smoke spot** — rocks cannot be smoked elsewhere
+3. **The Block is the canonical smoke spot** — ~~rocks cannot be smoked elsewhere~~ **[✅ F-SPEC-8: since v20 Landing 3 there are FIVE legal spots — the Block (unconditional) plus four earned conditional concessions (park/choir/underpass/laundromat at `conceded` tier). The OD-5 amendment superseded this, but the line sat inside a "MUST hold across all builds" list and was never edited. An invariant-checking agent scanning this list would flag the shipped, operator-ratified concession system as a spec violation and could rip out correct code + its gate. The Block is the only *unconditional* spot — that is the surviving invariant.]**
 4. **Yuri pays MORE per PURE COPPER than Pete** — $25 vs $15. Yuri is always the optimal sell.
 5. **Boss is unwinnable without combat experience** — player must have learned to fight Lurch/Sherri first
 6. **Death never deletes save** — only resets position and small cred penalty
@@ -1735,8 +1759,8 @@ The passing report includes canonical-row count, distinct actor identities cover
 
 ### Verification launcher
 
-1. `node tools/run-gates.mjs` launches, in order, `module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, `presentation-gate.mjs`, and `runtime-smoke.mjs` as child processes using the current Node executable plus `--experimental-vm-modules`.
-2. Child output is inherited and streamed. The launcher stops at the first spawn error, signal, or non-zero exit, returns non-zero, and does not run later gates. Five successful children produce a 5/5 PASS summary.
+1. `node tools/run-gates.mjs` launches, in order, ~~`module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, `presentation-gate.mjs`, and `runtime-smoke.mjs`~~ **[✅ F-SPEC-7: the runner now streams THIRTEEN gates — `corpus`, `docs`, `version`, `module`, `sprite`, `npc-registry`, `legibility`, `presentation`, `recognition`, `concession`, `solidity`, `runtime-smoke`, `world` — the authoritative list is the `GATES` array in `run-gates.mjs`, enforced by `docs-gate`]** as child processes using the current Node executable plus `--experimental-vm-modules`.
+2. Child output is inherited and streamed. The launcher stops at the first spawn error, signal, or non-zero exit, returns non-zero, and does not run later gates. ~~Five successful children produce a 5/5 PASS summary.~~ **[✅ F-SPEC-7: thirteen successful children produce a 13/13 PASS. An agent reconciling the runner to the old 5-gate list would DELETE eight gates — sprite, concession, solidity, world among them — gutting the suite while it still prints PASS.]**
 3. `tools/run-gates.cmd` is a two-line Windows shim that invokes the plain-Node launcher without adding a dependency or package script.
 4. `runtime-harness.mjs` and `runtime-smoke.mjs` guard `vm.SourceTextModule` before construction. Invocation without `--experimental-vm-modules` prints a friendly instruction, exits 1, and emits no stack trace.
 
