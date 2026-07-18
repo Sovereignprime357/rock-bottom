@@ -5,6 +5,7 @@
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, dialogue, rollWeather, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { clamp, isNight } from '../data/npc_spawns.js';
+import { COPPER_SITES } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { openStripePackage } from '../dialogue/neighborhood_b.js';
 import { cookBatchMenu } from './heat.js';
@@ -17,83 +18,104 @@ import { checkHustles, rollHustles } from '../systems/progression_routes.js';
 
 export let WEAPONS;
 
-export async function startHeist() {
-  // v13 wave 6.5 — heist has a daily cap (3/day). closes the conductor-arbitrage grind path.
-  // 3 heists × 2-4 copper × ($90 / 3 copper) caps the conductor floor at ~$270 / day.
-  if ((state.counters.heistsToday||0) >= 3) {
-    dialogue('ABANDONED BUILDING', "the door is half off.\nthere is no air coming out.\nbrutus jr. is awake and watching the door.\nnot tonight.", [
+// v22 wave 5.1 — the heist is ONE engine, many buildings. COPPER_SITES (data/props.js) supplies
+// each site's texts, entries, and exits; this flow exists exactly once (I-ONE-ENGINE). All sites
+// share the daily cap and the yield — variety is the payout, not income (I-DAILY-CAP-SHARED).
+export const HEIST_DAILY_CAP = 3;   // v13 wave 6.5 — closes the conductor-arbitrage grind path.
+export const HEIST_YIELD_MIN = 2;   // 3 heists × 2-4 copper × ($90 / 3 copper) caps the
+export const HEIST_YIELD_SPAN = 3;  // conductor floor at ~$270 / day. Shared by every site.
+
+// Applies one effects object. Order (text -> hp -> glass -> wanted -> brain -> shakes) is
+// abandoned-building parity — see SPEC-v22-copper-sites.md I-ABANDONED-VERBATIM.
+function applyHeistEffects(fx) {
+  if (fx.text) toast(fx.text, fx.dur);
+  if (fx.hp) P.hp -= fx.hp;
+  if (fx.glass) audio.glassBreak();
+  if (fx.wanted) P.wanted = Math.min(3, P.wanted + fx.wanted);
+  if (fx.brain) P.brain = Math.max(0, P.brain - fx.brain);
+  if (fx.shakes) P.shakes = Math.min(100, P.shakes + fx.shakes);
+}
+
+function heistSite(siteId) {
+  return COPPER_SITES.find(s => s.id === siteId) || COPPER_SITES[0];
+}
+
+export async function startHeist(siteId = 'abandoned') {
+  const site = heistSite(siteId);
+  if ((state.counters.heistsToday||0) >= HEIST_DAILY_CAP) {
+    dialogue(site.title, site.capText, [
       { label: 'come back tomorrow.', action: () => { state.mode = 'playing'; }},
     ]);
     return;
   }
   state.counters.heistsToday = (state.counters.heistsToday||0) + 1;
   state.mode = 'heist';
-  await heistStage(1);
+  await heistStage(site, 1);
 }
 
-export async function heistStage(stage) {
+export async function heistStage(site, stage) {
   return new Promise(resolve => {
+    // an entry resolved: apply the cost, then advance — unless the cost was fatal.
+    const advance = () => { if (P.hp<=0) die(); else heistStage(site, 2); resolve(); };
     if (stage === 1) {
-      dialogue('ABANDONED BUILDING', "the door is half off.\nbrutus jr. is inside. he is asleep.\nyou hear pipes singing in b flat.", [
-        { label: 'sneak past brutus jr.', action: () => {
-          if (Math.random()<0.7) { toast('you sneak. brutus jr. dreams of a tennis ball.'); heistStage(2); }
-          else { toast('BRUTUS JR. WAKES UP. he is a puppy. he is FURIOUS.'); P.hp -= 10; if (P.hp<=0) die(); else heistStage(2); }
-          resolve();
-        }},
-        { label: 'pick the side door lock. (4-pin lockpick)', action: () => {
+      const opts = site.entries.map(entry => {
+        if (entry.kind === 'roll') return { label: entry.label, action: () => {
+          applyHeistEffects(Math.random() < entry.p ? entry.under : entry.over);
+          advance();
+        }};
+        if (entry.kind === 'lockpick') return { label: entry.label, action: () => {
           startLockpickMini(
+            () => { applyHeistEffects(entry.ok); advance(); },
             () => {
-              toast("CLICK. the door opens.\nbrutus jr. dreams uninterrupted.\nyou are inside.");
-              audio.glassBreak();
-              heistStage(2); resolve();
-            },
-            () => {
-              toast("you give up on the lock.\nthe door is harder than it looks.\nyou take the front door.");
-              if (Math.random()<.5) { P.hp -= 12; toast('BRUTUS JR. WAS WAITING.\n- 12 hp', 1800); }
-              if (P.hp<=0) die(); else heistStage(2); resolve();
+              applyHeistEffects(entry.fail);
+              if (entry.fail.extra && Math.random() < entry.fail.extraChance) applyHeistEffects(entry.fail.extra);
+              advance();
             }
           );
-        }},
-        { label: P.inventory.find(i=>i.id==='soap') ? 'throw soap as distraction.' : "throw something (you have nothing useful).", disabled: !P.inventory.find(i=>i.id==='soap'), action: () => {
-          P.inventory = P.inventory.filter(i=>i.id!=='soap');
-          toast('brutus jr. licks the soap. is consumed.'); heistStage(2); resolve();
-        }},
-        { label: P.cash>=3 ? 'pay $3 for a chimichanga distraction.' : "you don't have $3.", disabled: P.cash<3, action: () => {
-          P.cash -= 3; toast("the chimichanga is talking.\nbrutus jr. listens."); heistStage(2); resolve();
-        }},
-        { label: 'leave.', action: () => { state.mode='playing'; resolve(); }},
-      ]);
+        }};
+        if (entry.kind === 'item') {
+          const have = P.inventory.find(i => i.id === entry.itemId);
+          return { label: have ? entry.haveLabel : entry.lackLabel, disabled: !have, action: () => {
+            // 'all' preserves the shipped soap filter; 'one' spends a single can.
+            if (entry.consume === 'one') P.inventory.splice(P.inventory.findIndex(i => i.id === entry.itemId), 1);
+            else P.inventory = P.inventory.filter(i => i.id !== entry.itemId);
+            applyHeistEffects(entry.effect); advance();
+          }};
+        }
+        if (entry.kind === 'cash') return {
+          label: P.cash >= entry.cost ? entry.haveLabel : entry.lackLabel, disabled: P.cash < entry.cost,
+          action: () => { P.cash -= entry.cost; applyHeistEffects(entry.effect); advance(); },
+        };
+        // 'wait' and 'sure' both resolve unconditionally; their cost (if any) rides the effect.
+        return { label: entry.label, action: () => { applyHeistEffects(entry.effect); advance(); }};
+      });
+      opts.push({ label: 'leave.', action: () => { state.mode='playing'; resolve(); }});
+      dialogue(site.title, site.intro, opts);
     } else if (stage === 2) {
-      dialogue('THE COPPER PIPES', "the pipes hum.\nin b flat.\nthey are waiting.", [
+      dialogue('THE COPPER PIPES', site.pipes.text, [
         { label: 'strip them.', action: () => {
-          const got = 2 + Math.floor(Math.random()*3);
+          const got = HEIST_YIELD_MIN + Math.floor(Math.random()*HEIST_YIELD_SPAN);
           P.copper += got; audio.glassBreak();
           state.counters.copperStripped += got;
           if (state.counters.copperStripped >= 10) unlockAchievement('copper_singer');
-          toast(`+ ${got} pure copper\nthe singing stops.\nyou feel watched.`);
+          toast(`+ ${got} pure copper\n` + site.pipes.stripAfter);
           if (!state.quests.copper_sings.done) { state.quests.copper_sings.done = true; questToast('THE COPPER SINGS'); }
-          heistStage(3); resolve();
+          heistStage(site, 3); resolve();
         }},
         { label: 'listen to them sing.', action: () => {
-          P.brain = Math.min(100, P.brain+8); toast('+ 8 brain\nthey know your name now.');
-          heistStage(3); resolve();
+          P.brain = Math.min(100, P.brain+8); toast('+ 8 brain\n' + site.pipes.listenAfter);
+          heistStage(site, 3); resolve();
         }},
         { label: 'leave.', action: () => { state.mode='playing'; resolve(); }},
       ]);
     } else {
-      dialogue('GETAWAY', "the floor creaks.\nthere is a window.\nthere is also a door.", [
-        { label: 'window. fast.', action: () => {
-          if (Math.random()<0.8) { toast('you jump. the landing is bad but legal.'); P.hp -= 3; }
-          else { toast('the glass breaks. so does your dignity.'); P.hp -= 12; audio.glassBreak(); P.wanted = Math.min(3,P.wanted+1); }
+      dialogue('GETAWAY', site.getawayText, site.exits.map(exit => ({
+        label: exit.label, action: () => {
+          applyHeistEffects(Math.random() < exit.p ? exit.under : exit.over);
           if (P.hp<=0) die();
           state.mode = 'playing'; saveGame(); resolve();
-        }},
-        { label: 'door. slow.', action: () => {
-          if (Math.random()<0.5) { toast('a cop is waiting on the other side.\nyou run.'); P.wanted = Math.min(3,P.wanted+2); }
-          else { toast('you walk out like you own the place.\n(you do not.)'); }
-          state.mode = 'playing'; saveGame(); resolve();
-        }},
-      ]);
+        },
+      })));
     }
   });
 }

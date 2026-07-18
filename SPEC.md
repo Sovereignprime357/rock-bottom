@@ -725,7 +725,7 @@ All ephemeral fields default to 0/null/undefined on a fresh frame; the ticker ha
 | 1 | hideout doors | 40px | owned hideouts only |
 | 2 | old school door | 44px | gates by `P.rank >= 3` |
 | 3 | **NPC scan (closest)** | 60px | wave 8.6 lift — was at slot 10 |
-| 4 | abandoned heist trigger | building rect ±20 | proximity, not point |
+| 4 | copper-site heist trigger | site rect ±20 (COPPER_SITES registry; abandoned + 3 v22 sites) | proximity, not point |
 | 5 | park bench sit | 50px | toggle |
 | 6 | kickable trash can | 50px | RNG outcome |
 | 7 | pay phone (ringing) | 38px | only when state.phonePropRingT > 0 |
@@ -899,7 +899,7 @@ The game is also a VibeKoded portfolio piece — a demonstration of building an 
 | HP | 0-100 | None (regenerates only via actions) | Triggers respawn at 0 | 5 hearts in HUD |
 | Cash | 0-∞ | None | N/A | `$N` |
 | Rocks | 0-∞ | None | N/A | `🪨 N` |
-| Pure Copper | 0-∞ | None | N/A | `🪙 N` — stolen from abandoned bldg |
+| Pure Copper | 0-∞ | None | N/A | `🪙 N` — stripped from the four copper sites (one heist engine) |
 | Supplies | 0-∞ | None | N/A | `🧪 N` — unmarked packets from Baggie Barb (clean) or Pinky Polenta (dirty/house cut) |
 | Dirty Supplies | 0 ≤ N ≤ Supplies | None | N/A | counter within Supplies; consumed first by `doCook`; ramps post-roll soap rate |
 | Shakes | 0-100 | Climbs +0.0025/ms passively, +0.05/ms sprinting | At 100, 1.5% chance per tick of 2 damage | bar, red above 70 |
@@ -1633,7 +1633,7 @@ Comprehensive audit of every NPC / interaction that can grant cash, items, cred,
 | Stripe — fence rocks | $6 → $4 → $2 → closed | volume-gated (3 / 3 / 3 / +1 cap) | `stripeFencedToday` (max 10) |
 | Baggie Barb — buy packets | +1 or +5 supplies | 6 packets/day | `barbPacketsToday` |
 | Pawn Shop Pete — sell items | various $ | $200 cash/day cap | `peteCashToday` |
-| Abandoned Building — heist | +2-4 copper | 3 heists/day | `heistsToday` |
+| Copper sites (×4, one engine) — heist | +2-4 copper per heist, identical at every site | 3 heists/day SHARED across all sites | `heistsToday` |
 
 ### Already gated (pre-wave-6.5)
 
@@ -1935,3 +1935,35 @@ Implements `SPEC-v21-honest-map.md` under OD-11. This landing changes the physic
 6. **I-REAL-PATH METRIC.** Every selector-derived campaign leg and every full-unlock generator-assignable route pair is measured before (`BUILDINGS`) and after (merged declared solids) with 24×28 player clearance. The canonical collision delta uses arbitrary-heading analog movement, a shipped control model, replayed framewise through the axis-separated collision contract. Selector anchors inside a solid are projected only to their live action-completion region (Tony: the existing 60px NPC radius); invented travel through a wall is forbidden. Straight-line, before-path, after-path, after-minus-straight, and Wave-4.1 delta are exposed together. WASD/octile sensitivity is reported separately and never silently substituted for this metric.
 7. **I-FINDING-NOT-KNOB.** A newly over-budget traversal is appended to `REFACTOR-FINDINGS.md` and left unresolved in this landing. Physical architecture may not be declared flat, moved, or given a wider budget to produce green. `world-gate` retains its straight-line role; `solidity-gate` exposes the collision-aware reading.
 8. **Permanent enforcement.** `tools/solidity-gate.mjs` fails undeclared or multiply-declared structures, unregistered/empty flat reasons, split collision authority, road overlap, door/art mismatch, legacy door-resolver drift, nondeterministic or wedged loads, player/projectile leaks, NPC/cop overlap or non-arrival, charge sliding, over-broad legacy actor exemptions, missing mandatory-leg traversal, and zero-content drift. Both required declaration failures must be demonstrated red against temporary source mutations before its green is trusted. The gate is wired before runtime/world measurement and documented in the README table.
+
+## v22 Wave 5.1 — COPPER FROM MULTIPLE LOCATIONS (2026-07-18)
+
+Implements `SPEC-v22-copper-sites.md`, graduated from `SPEC-V22-PLAN.md` § WAVE 5.1. The
+abandoned-building heist's 3-stage flow (entry → strip → getaway) is extracted into **one
+parameterized engine** (`startHeist(siteId)` / `heistStage(site, stage)` in
+`src/minigames/activities.js`); sites are rows in `COPPER_SITES` (`src/data/props.js`). Three
+new sites open the empty quarter: **COLD (NOT)** in warehouse row (DENNIS (NIGHTS), quiet — no
+path touches wanted), **WATER DEPT. (DRY)** at the drainage canal (THE RACCOON QUORUM, mid
+heat), and **THE RUST FREIGHT CAR** in the train yard (TRANSIT AUTHORITY DAN, hot — citation
+wanted bumps). The choir-yard copper mass is untouched.
+
+1. **I-ONE-ENGINE.** The `heistsToday` increment, the `state.mode='heist'` entry, and the
+   yield roll each exist exactly once in `src/`. Sites are data; a site cannot carry logic.
+2. **I-DAILY-CAP-SHARED.** One cap (`HEIST_DAILY_CAP` = 3/day) across ALL sites; one yield
+   (`HEIST_YIELD_MIN` 2 + rand(`HEIST_YIELD_SPAN` 3) = 2-4) at ALL sites. Site effect objects
+   are key-allowlisted (text/dur/hp/glass/wanted/brain/shakes) — a site can cost, never mint.
+   The conductor floor stays ~$270/day. **No distance→dollars gradient exists**: the reward
+   for walking to the train yard is the train yard.
+3. **I-ABANDONED-VERBATIM.** The abandoned building's texts, odds, costs, effect order, and
+   die() semantics are preserved exactly, including its availability keying on the
+   still-`locked` BUILDINGS entry (it still vanishes at rank ≥ 4 — see the standing finding
+   in BRAIN.md 2026-07-18: SPEC §"the brutus jr. door is the gate" vs `update.js` rank unlock).
+4. **I-SAVE-ADDITIVE (vacuously).** No new persisted state at all; sites are stateless beyond
+   the existing shared counter. Save key and shape untouched; round-trip verified headlessly.
+5. **Wanted is the difficulty knob, never income**: quiet / mid / hot per site.
+6. **Permanent enforcement.** `tools/copper-sites-gate.mjs` (14th gate, after
+   `concession-gate` — same invariant class, different resource). Static singleton counts,
+   effect-key allowlist, anchor parity against `world.js`/`PROPS` rects, dynamic shared-cap
+   exhaustion across different sites, forced-extreme yield identity at every site, and
+   exhaustive both-branch path walks of every entry and getaway (no dead modal). Red-tested
+   in seven directions before trusted; README table updated (docs-gate holds the list).
