@@ -20,7 +20,7 @@ Sections appear in agent-completion order, not priority order. Status table:
 | AGENTS.md | 184 | pending |
 | CLAUDE.md | 172 | pending |
 | README.md | 90 | done — 29 checked, 0 false (clean) |
-| DELEGATION.md | 577 | pending |
+| DELEGATION.md | 577 | done — 43 checked, 8 false (2 HIGH) |
 | SPEC.md | 1,913 | pending |
 
 ---
@@ -45,5 +45,57 @@ Notes on non-findings: L15's how-to-run (`python -m http.server`) is a generic i
 ### SUSPECTED — UNPROVEN
 - The historical anecdotes (L40 "README once claimed four gates while seven ran", L41 the v19-label evening, L53 the 2026-07-16 stale-mount / 508-deletion incident) are corroborated by identical comments in `tools/run-gates.mjs:14-21` but the underlying events are not independently verifiable from git history by command; no evidence they are false, so not findings.
 - L83 "Architect: Claude (Opus 4.7)" — an attribution, not disprovable by any repo command.
+
+---
+
+## DELEGATION.md — 43 claims checked · 8 false · verdict: historical sections (v3–v19) are accurate down to the SHA-256, but the two "live" sections at the top are stale — every v20/v21 branch is already merged into HEAD, and two items still listed as pending/backlog are fully shipped in src
+
+### F-DELEG-1 · DAMAGE: HIGH
+- **Where:** DELEGATION.md:21
+- **Claim:** "- [ ] **Landing 2 — THE REGULAR.** Implement the four-venue recognition ledger, additive persistence, tier acknowledgments, visit de-duplication, full-high boundary credit, Q ledger, pattern cap, and dedicated recognition gate."
+- **Disproof:** `git log --oneline HEAD | grep -i regular` → `ccdbf75 merge: THE REGULAR recognition system (SPEC-V20-PACKET #1) - 6/6 gates green` (ancestor of HEAD); `grep -n "REGULAR_TIERS\|REGULAR_VENUES" src/systems/recognition.js` → `REGULAR_TIERS = ['stranger','counted','furniture','conceded']` with per-venue ledger and thresholds; `ls tools/` → `recognition-gate.mjs` exists.
+- **Actually:** Landing 2 is built, gated, and merged into the current build (`src/systems/recognition.js` + `tools/recognition-gate.mjs`, merged from `v20-regular` at ccdbf75).
+- **If obeyed:** An agent picking top-down would rebuild the entire recognition system from scratch — a second ledger, colliding save keys, a duplicate gate — on top of the one already live and depended on by the merged Landing 3 concessions (`conceded` tier gates the four smoke rooms).
+
+### F-DELEG-2 · DAMAGE: HIGH
+- **Where:** DELEGATION.md:446
+- **Claim:** "### 9. Co-op Ending with Stripe / **Status:** Backlog"
+- **Disproof:** `grep -rn "spawnCoopBoss\|coopMode" src` → `src/dialogue/neighborhood_b.js:277:export function spawnCoopBoss()`, `src/systems/npc_ai.js:86: // ally AI (stripe in coop)`, `src/systems/interactions.js:31: 'you and stripe split the corner · you get the slow days'`.
+- **Actually:** The co-op ending is fully implemented in the current build — Stripe's team-up dialogue, `state.coopMode`, ally AI, and a dedicated "TUESDAYS AND THURSDAYS" ending screen. DELEGATION.md line 74 (v17) even references "Tony/co-op/bus ending receipts" as shipped.
+- **If obeyed:** An agent working the MEDIUM-priority list would build a duplicate co-op ending path — a second Stripe trigger and a conflicting Tony fight variant — regressing the boss fight (Hard Rule 7/8 territory) and duplicating an ending that already persists in saves.
+
+### F-DELEG-3 · DAMAGE: MEDIUM
+- **Where:** DELEGATION.md:16-18
+- **Claim:** "## v20 recognition wave — IN PROGRESS (July 15, 2026) … Active implementation branch: `codex/v20-recognition`."
+- **Disproof:** `git branch --merged HEAD` → `codex/v20-recognition` listed (fully merged); its tip `e37faf2 v20: deconflict HUD and unify unique cart` is Landing 1 work, already in HEAD.
+- **Actually:** All five v20 landings are merged into the current branch's history (ccdbf75, ad96cbe, cd5d716); `codex/v20-recognition` is a stale, fully-merged branch. Nothing in the v20 wave is in progress.
+- **If obeyed:** An agent would check out a stale branch behind main and implement v20 work against a pre-recognition, pre-concessions codebase, producing a divergent lineage that conflicts on merge.
+
+### F-DELEG-4 · DAMAGE: MEDIUM
+- **Where:** DELEGATION.md:9 (and header line 7)
+- **Claim:** "Branch: `v21-sprite-ceiling`, isolated worktree; push without merge."
+- **Disproof:** `git merge-base --is-ancestor v21-sprite-ceiling HEAD && echo MERGED` → `MERGED`; `git log --oneline HEAD` → `dbd960c merge: v21 Wave 4.2 — the character ceiling is gone (93 bases at true 32px) — 13/13 green`.
+- **Actually:** Wave 4.2 was merged at dbd960c; the branch is an ancestor of HEAD. The "push without merge" instruction and the isolated-worktree framing describe a state that ended two commits before the operator's v22 packet.
+- **If obeyed:** An agent doing sprite follow-up would work in the dead worktree branch and deliberately withhold the merge, forking the 93-base sprite art away from the live build.
+
+### F-DELEG-5 · DAMAGE: MEDIUM
+- **Where:** DELEGATION.md:30
+- **Claim:** "Branch: `v21-honest-map`, isolated worktree; push without merge. OD-11 is the signed physicality and traversal ruling."
+- **Disproof:** `git merge-base --is-ancestor v21-honest-map HEAD && echo MERGED` → `MERGED`; HEAD log contains `52a6c1a merge: v21 Wave 4.1 — the honest map (OD-11) — 11/11 green`.
+- **Actually:** Wave 4.1 merged at 52a6c1a; the section header's "PENDING OPERATOR REVIEW" and the push-without-merge instruction are stale.
+- **If obeyed:** Same failure as F-DELEG-4 — collision/solidity follow-up work would land on a stale unmerged branch instead of the live merged source.
+
+### F-DELEG-6 · DAMAGE: MEDIUM
+- **Where:** DELEGATION.md:22, 23, 24
+- **Claim:** "(Built on `v20-concessions`, 2026-07-16 — pending operator review/merge.)" — repeated verbatim ("`v20-world`") on Landings 4 and 5.
+- **Disproof:** `git log --oneline HEAD | grep merge` → `ad96cbe merge: smoke concessions (SPEC-V20-PACKET section 2 / OD-5) - 8/8 gates green` and `cd5d716 merge: world relationships + route budget (SPEC-V20-PACKET section 3 / OD-9, OD-10) - 9/9 green`, both ancestors of HEAD.
+- **Actually:** Landings 3, 4, and 5 are all merged into the current build; `src/systems/concessions.js` and `tools/world-gate.mjs` are live on HEAD. Nothing is pending merge.
+- **If obeyed:** An agent would treat the live concessions/world-gate code as unreviewed branch work — re-merging, re-reviewing, or basing changes on the branches instead of HEAD.
+
+### SUSPECTED — UNPROVEN
+- DELEGATION.md:12 — "[ ] Operator eye gate" (Wave 4.2 visual review) is unchecked, yet the operator merged Wave 4.2 at dbd960c and then banked a v22 ideas packet (c68d9b2), which suggests the review happened. Human review cannot be disproven by command, so it stays unproven.
+- DELEGATION.md:32 — "Permanent suite: 11 gates" was true at merge 52a6c1a but the current suite is 13 (dbd960c "13/13 green"). Read as historical narration of that wave it is accurate; flagging only that a fresh agent skimming this section could expect an 11-gate runner.
+
+Notes on what checked out TRUE (no findings): the frozen v19 reference hash at line 38 matches exactly (`Get-FileHash rock_bottom_v19.html` → `C25DB5E1…4A25C8B`); `REFACTOR-FINDINGS.md` and `SPEC-V20-PACKET.md` exist as referenced; the four items genuinely still marked Backlog that were disprove-hunted (boss music, per-zone ambient audio, New Game+) have zero matching symbols in `src/` — those statuses are honest; all "Shipped in v13 / before v14" backlog corrections (graffiti, tweaker vision, equipment, cart, heat minigame, day/night) have live symbols in `src/`.
 
 ---
