@@ -11,6 +11,7 @@ import { startLockpickMini } from '../minigames/activities.js';
 import { hasPropane } from '../minigames/heat.js';
 import { aggroNpc, playerAttack, questToast, spawnBoss } from '../systems/combat.js';
 import { feedPost, spawnPetPossum } from '../systems/communications.js';
+import { tellVenue, venueDiscovered } from '../systems/discovery.js';
 import { adjustFaction, applyRep, factionTier } from '../systems/factions.js';
 
 export let LOCAL_POSSUM_PROPHECIES;
@@ -357,6 +358,14 @@ export function lurchDialogue(n) {
     { label: 'lie. say you have a dollar.', action: () => {
       toast("lurch nods. waits. lurch is still waiting.\n(the lie did not work. he is just waiting.)");
     }},
+    // v22 wave 5.2 — lurch tells you the underpass exists. telling is the map,
+    // not the key: tellVenue flips visibility only (I-MAP-NOT-KEY).
+    { label: 'ask where he sleeps.', action: () => {
+      tellVenue('underpass',
+        "under the bridge. not lately.\nthere is a dog now. the dog has a lanyard.\narrangements exist.",
+        "the bridge. the dog.\nlurch says it exactly the same as before.",
+        "lurch says the bridge has a dog now. arrangements exist.");
+    }},
     { label: 'fight.', action: () => { aggroNpc(n); toast('lurch swings. so do you. it begins.'); }},
     { label: 'leave.', action: () => {} },
   ]);
@@ -374,6 +383,23 @@ export function sherriDialogue(n) {
           P.cred += 1; state.counters.sherriSpiderDay = state.day;
           toast('sherri respects you. (+1 cred)\ncome back tomorrow.'); saveGame();
         }},
+    // v22 wave 5.2 — sherri has seen two rooms. one per conversation, park first.
+    // reveals flip visibility only; the bench and the dryer keep their own count.
+    { label: 'ask what she saw.', action: () => {
+      if (!venueDiscovered('park')) {
+        tellVenue('park',
+          "the bench by the fountain.\nafter dark the philosopher stops counting.\nhe is not asleep. he is polite.",
+          "the bench. after dark.\nsherri has said this already.",
+          "sherri saw something at the park bench. after dark.");
+      } else if (!venueDiscovered('laundromat')) {
+        tellVenue('laundromat',
+          "the laundromat. mid-cycle.\nthe dryer provides.\nsherri does not say what.",
+          "the dryer. mid-cycle.\nsherri has said this already.",
+          "sherri says the dryer provides. mid-cycle. noted.");
+      } else {
+        toast("sherri rolls her sleeve up an inch.\nputs it back down.\nshe has told you what she saw.", 3000);
+      }
+    }},
     { label: 'tell her there is no spider.', action: () => {
       aggroNpc(n); toast("the spider is back.\nshe is hostile now.");
     }},
@@ -396,6 +422,14 @@ export function paulieDialogue(n) {
           toast("paulie does not smile but the face changes.\n+ 1 cred\ncome back tomorrow.");
           saveGame();
         }},
+    // v22 wave 5.2 — the face has heard the choir office. hearing is the map,
+    // not the key: tellVenue flips visibility only (I-MAP-NOT-KEY).
+    { label: 'ask what the face hears.', action: () => {
+      tellVenue('choir_office',
+        "the choir office keeps hours.\nb flat to b flat.\nthe face does not attend.",
+        "the face says it again. identical.\nthe hours have not moved.",
+        "paulie says the choir office keeps hours. b flat to b flat.");
+    }},
     { label: 'fight.', action: () => { aggroNpc(n); }},
     { label: 'leave.', action: () => {} },
   ]);
