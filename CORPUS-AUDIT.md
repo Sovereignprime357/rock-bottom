@@ -18,7 +18,7 @@ Sections appear in agent-completion order, not priority order. Status table:
 |---|---|---|
 | VIBE.md | 400 | pending |
 | AGENTS.md | 184 | pending |
-| CLAUDE.md | 172 | pending |
+| CLAUDE.md | 172 | done — 26 checked, 14 false in 8 findings (4 HIGH) |
 | README.md | 90 | done — 29 checked, 0 false (clean) |
 | DELEGATION.md | 577 | done — 43 checked, 8 false (2 HIGH) |
 | SPEC.md | 1,913 | pending |
@@ -97,5 +97,70 @@ Notes on non-findings: L15's how-to-run (`python -m http.server`) is a generic i
 - DELEGATION.md:32 — "Permanent suite: 11 gates" was true at merge 52a6c1a but the current suite is 13 (dbd960c "13/13 green"). Read as historical narration of that wave it is accurate; flagging only that a fresh agent skimming this section could expect an 11-gate runner.
 
 Notes on what checked out TRUE (no findings): the frozen v19 reference hash at line 38 matches exactly (`Get-FileHash rock_bottom_v19.html` → `C25DB5E1…4A25C8B`); `REFACTOR-FINDINGS.md` and `SPEC-V20-PACKET.md` exist as referenced; the four items genuinely still marked Backlog that were disprove-hunted (boss music, per-zone ambient audio, New Game+) have zero matching symbols in `src/` — those statuses are honest; all "Shipped in v13 / before v14" backlog corrections (graffiti, tweaker vision, equipment, cart, heat minigame, day/night) have live symbols in `src/`.
+
+---
+
+## CLAUDE.md — 26 claims checked · 14 false (grouped into 8 findings) · verdict: the file's discipline rules (SpecMesh, storage, audio-on-interaction, the 18s→8s loop, tone rules) still hold, but its entire picture of the build — version, architecture, sprite format, NPC aesthetic, identifiers, ship procedure — is one full generation stale and four of its lines are active orders to destroy shipped v21 work.
+
+### F-CLAUDE-1 · DAMAGE: HIGH
+- **Where:** CLAUDE.md:15-16 (restated at CLAUDE.md:132)
+- **Claim:** "Everything in one file: HTML, CSS, JS, sprites, audio. No external dependencies. No CDN imports. No build step. The whole game must be openable by double-clicking the file."
+- **Disproof:** `grep -n "module" index.html` → `251:<script type="module" src="./src/main.js"></script>`; `node -e "const m=require('./src/module-manifest.json'); ..."` → `{"reference":"rock_bottom_v19.html",...,"extractedCount":37,"totalChunks":37,...}`
+- **Actually:** The active build is `index.html` + 37 extracted ES-module chunks under `src/` (frozen v19 monolith kept only as the hash-pinned behavioral reference). Native ES modules do not load over `file://`, so the double-click requirement is dead too; DELEGATION.md records the monolith rule as deliberately retired ("index.html as the zero-dependency HTTP entry").
+- **If obeyed:** An agent would re-inline 38 modules into a single HTML file, destroying the modular refactor, its `module-gate` parity proof, and every `tools/*.mjs` gate that reads `src/`.
+
+### F-CLAUDE-2 · DAMAGE: HIGH
+- **Where:** CLAUDE.md:64-65 (and the premise repeated at CLAUDE.md:125)
+- **Claim:** "v3 has pixel-art player + emoji NPCs. This is the look. Adding pixel-art NPCs is on the v4 backlog (DELEGATION.md item 1)"
+- **Disproof:** `grep -rln "emoji" src/` → only hit is a historical comment `src/render/sprites.js:781: // v13 wave 2 — converting the last four emoji-era styles...`; `ls src/render/` → `sprite_art_npc_32.js` exists; `head -60 DELEGATION.md` → item 1 is "v21 character ceiling — BUILT... All 93 character bases... true 32-logical palette grids"
+- **Actually:** Emoji NPCs were eliminated by v13 and every character is now hand-authored 32px pixel art (93 bases, merged at dbd960c). DELEGATION.md item 1 is the completed v21 sprite-ceiling wave, not an NPC-conversion backlog item. Escalation trigger #1's premise "the emoji are the look" (line 125) is equally dead.
+- **If obeyed:** An agent would add new NPCs as emoji "to match the look" — breaking the unified 93-base pixel roster and failing `sprite-gate`/`npc-registry-gate` — or treat the shipped pixel-art migration as the revert-worthy violation described in line 125.
+
+### F-CLAUDE-3 · DAMAGE: HIGH
+- **Where:** CLAUDE.md:24-27
+- **Claim:** "16×16 logical, prerendered to offscreen canvas at init / Scaled 2x to 32×32 display / Palette-indexed (numbered string format, see PLAYER_SPRITES)"
+- **Disproof:** `head -30 src/render/sprite_art_player_32.js` → `const SIZE = 32;` with a validator throwing unless grids are "an explicit 32x32 grid" of integers 0-7; `grep -rn "PLAYER_SPRITES" src/ index.html` → no matches
+- **Actually:** Character sprites are true 32-logical integer palette grids (only eleven environment sprites remain 16-logical per DELEGATION.md, and `sprite_toolkit.js` accepts exactly {16, 32}). `PLAYER_SPRITES` and the "numbered string format" no longer exist; art lives in `src/render/sprite_art_player_32.js` / `sprite_art_npc_32.js` / `sprite_art_special_32.js`. (`SPRITE_CACHE` and the `ctx.drawImage` rule at lines 28-29 are still true.)
+- **If obeyed:** An agent would author any new character sprite as a 16×16 numbered string — the exact format `sprite-gate` red-verifies against — regressing the v21 character ceiling and failing the 13/13 suite.
+
+### F-CLAUDE-4 · DAMAGE: HIGH
+- **Where:** CLAUDE.md:111 (and 117)
+- **Claim:** "Save the updated HTML file as `rock_bottom_v{N+1}.html` (NOT overwriting v3 — keep the lineage)"
+- **Disproof:** `ls rock_bottom_v*.html | sort -V` → `rock_bottom_v4.html` … `rock_bottom_v19.html` (no v3, and nothing past v19); `head -15 tools/version-gate.mjs` → "version-gate.mjs — the game must not lie about which game it is"
+- **Actually:** v4-v19 monoliths are frozen history; v20/v21 shipped as commits to `index.html` + `src/` with the displayed version enforced by `tools/version-gate.mjs`. There is no v3 to avoid overwriting and no "updated HTML file" to save.
+- **If obeyed:** An agent would flatten the modular build into a new `rock_bottom_v22.html` monolith at session end, forking the codebase away from the gated `src/` tree and shipping an artifact no gate covers.
+
+### F-CLAUDE-5 · DAMAGE: MEDIUM
+- **Where:** CLAUDE.md:3
+- **Claim:** "You are picking up a satirical action game in mid-build. Operator is Sovereign Prime (VibeKoded). v3 is shipped."
+- **Disproof:** `grep -n "<title>" index.html` → `10:<title>ROCK BOTTOM v21</title>`
+- **Actually:** Current shipped build is v21 (Wave 4.2 merged at dbd960c); v3 predates even the oldest monolith in the repo (v4).
+- **If obeyed:** An agent calibrates every decision to a ~18-version-old game state — expecting a small single-file project with a v4 backlog, and misreading 17 gate scripts and 38 modules as someone else's scope creep.
+
+### F-CLAUDE-6 · DAMAGE: MEDIUM
+- **Where:** CLAUDE.md:153-164
+- **Claim:** "```/rock_bottom/ ├── README.md ├── VIBE.md ├── SPEC.md ├── CLAUDE.md ├── DELEGATION.md ├── BRAIN.md └── rock_bottom_v{N}.html```" (presented as the complete file system for handoffs)
+- **Disproof:** `ls -la` → repo also contains `index.html`, `src/` (10 module dirs), `tools/` (17 scripts incl. `run-gates.mjs`), `AGENTS.md`, 8 `SPEC-*.md` packet files, `DELEGATION-CODEX.md`, `reports/`, `screenshots/`, `uploads/`, plus five audit docs
+- **Actually:** The listed six docs exist, but the map omits the entire active game source (`src/`), the mandatory verification suite (`tools/`), and the second agent-instruction file (`AGENTS.md`).
+- **If obeyed:** A handoff agent trusting this map never discovers `tools/run-gates.mjs` or the SPEC packets, and ships changes without running the 13-gate suite the project actually requires.
+
+### F-CLAUDE-7 · DAMAGE: LOW
+- **Where:** CLAUDE.md:33-35 (also 54, 59, 22)
+- **Claim:** "`updatePlayer` timing / `rockedUpTimer` / `crashTimer` / `sfx.rockUp` / `sfx.crash`" (and line 22's "Track `audioReady` boolean to gate all `beep()` calls", line 59's "synth function in the `sfx` object")
+- **Disproof:** `grep -rn "rockedUpTimer\|crashTimer\|updatePlayer\|audioReady\|sfx\.rockUp" src/` → no matches; `grep -rn "rockedT\|crashT" src/core/update.js | head -3` → `78: if (P.rockedT>0) spd *= 1.8;` and `130: P.rockedT = 0; P.crashT = 8000;`; `sed -n 225,260p src/core/audio_save.js` → `audio = { ctx: null, ready: false, ... tone(freq,...)`
+- **Actually:** The mechanics the rule protects are intact — 18s high → 8s crash is live (`P.rockedT = 18000` at src/systems/concessions.js:286, `P.crashT = 8000`, `smoke a rock` option at concessions.js:250, `audio.init()` called from keydown/click in src/input/keyboard.js) — but every named identifier drifted: `P.rockedT`/`P.crashT`, `audio.rockUp()`/`audio.crash()`, `update()`/`updateWorld()`, `audio.ready` gating `tone()`/`noise()`.
+- **If obeyed:** Mostly wasted time — an agent greps for the named symbols, finds nothing, and may wrongly conclude the rocked-up loop or audio gating was removed and "restore" a duplicate system.
+
+### F-CLAUDE-8 · DAMAGE: LOW
+- **Where:** CLAUDE.md:89
+- **Claim:** "All sprite IDs, NPC IDs, function names use snake_case in this codebase. Match the existing convention."
+- **Disproof:** `grep -rn "export function smokeRockAt\|function rollBlockRoute" src/` → `src/systems/concessions.js:270:export function smokeRockAt(spotId)` and `src/systems/progression_routes.js:127:function rollBlockRoute(...)`
+- **Actually:** Function names are predominantly camelCase throughout `src/` (sprite cache keys and NPC ids do use snake_case; the "function names" third of the claim is false).
+- **If obeyed:** New code written in snake_case functions clashes with the real convention, or worse, an agent "fixes" existing camelCase exports and breaks cross-module imports.
+
+### SUSPECTED — UNPROVEN
+- Hard Rule 8 ("boss fight defeatable in <90 seconds"): boss code exists in `src/core/update.js`/`src/data/world.js`, but no command can measure a competent player's clear time; neither provable nor disprovable here.
+- CLAUDE.md:117 "Present the new HTML file via `present_files`": `present_files` is a claude.ai artifact-environment tool whose availability in the current Claude Code environment cannot be tested by a repo command; its premise (a single new HTML file per session) is already disproven in F-CLAUDE-4.
+- Hard Rule 4's rationale ("Claude.ai artifacts do NOT support localStorage") is unverifiable from the repo, but the rule itself is TRUE in practice: code uses `window.storage` exclusively with an IndexedDB-backed shim (`src/core/storage.js`), and `module-gate` checks forbidden storage APIs. Likewise TRUE and worth recording: Hard Rules 1/2/5 (in substance), the 18s→8s loop, `SPRITE_CACHE`, `npc.wander`/`hostile`/`zoneOnly`, DOM HUD/dialogue/toast, and the existence of BRAIN.md and VIBE.md's identity table (VIBE.md:280).
 
 ---
