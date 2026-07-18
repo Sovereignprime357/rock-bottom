@@ -48,7 +48,10 @@ const countAll = pattern => (srcText.match(pattern) || []).length;
 
 for (const [pattern, expected, label] of [
   [/function\s+hitEmergencyHitter/g, 1, 'hitEmergencyHitter definition'],
-  [/P\.hitters--/g, 1, 'hitter consumption site'],
+  // v22 robbery raised this from 1 to 2: the skid grabber may TAKE a hitter
+  // (SPEC-v22-robbery.md edge case — a losable consumable). Both sites subtract;
+  // grants stay pinned at 2 below, so the hitter still never mints.
+  [/P\.hitters--/g, 2, 'hitter subtraction sites (use + skid robbery theft)'],
   [/P\.hitterHigh\s*=\s*true/g, 1, 'hitterHigh ignition site'],
   [/P\.hitters\s*=\s*\(P\.hitters\s*\|\|\s*0\)\s*\+\s*1/g, 2, 'hitter grant sites (craft + found)'],
   [/dumpsterHitterRoll\s*\(/g, 2, 'dumpsterHitterRoll call sites (1 definition + 1 dumpster hook)'],

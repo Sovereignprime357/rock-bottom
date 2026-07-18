@@ -315,6 +315,7 @@ export function init_daily_hideouts() {
     'barbPacketsToday',  // exploit 3b (barb supply cap)
     'peteCashToday',     // audit (pete daily $200 cap)
     'heistsToday',       // audit (heist daily cap = 3)
+    'robberiesToday',    // v22 robbery — daily cap (I-BOUNDED-RATE); robLastClockMs is NOT here, it rides the world clock
   ];
   
   

@@ -41,6 +41,12 @@ const GATES = [
   // zero-leakage proof watches the LEDGER; discovery routes around the ledger, so a
   // reveal that granted tier would leave that gate green. This one watches the door.
   'discovery-gate.mjs',
+  // robbery-gate rides behind the income family (copper-sites, hitter) as their
+  // mirror: they prove nothing mints; this proves the economy's first SINK only
+  // subtracts (I-SINK-ONLY), can never take a progression key (I-NO-SOFTLOCK,
+  // allowlist not denylist), robs only through the skid grabber's landed grab,
+  // and stays governed — the mercy is the rate, not the outcome.
+  'robbery-gate.mjs',
   'solidity-gate.mjs',
   'runtime-smoke.mjs',
   // world-gate runs LAST, on purpose. It is a ruler over the shipped map, and the

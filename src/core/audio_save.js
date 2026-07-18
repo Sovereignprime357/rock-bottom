@@ -119,6 +119,9 @@ export async function loadGame() {
       // v13 wave 8a — philosopher gives +1 spiritual once/day; gated by day-stamp counter.
       philosopherRepDay: 0,
       gutterInventoryDay: 0,
+      // v22 robbery — additive counter keys (I-SAVE-ADDITIVE): a pre-robbery save has
+      // neither and loads to 0 (never robbed, governor open).
+      robberiesToday: 0, robLastClockMs: 0,
     }, sv.counters || {});
     state.recognition = normalizeRecognition(sv.recognition);
     state.recognitionVisit = {venue:'',seen:Object.create(null)};

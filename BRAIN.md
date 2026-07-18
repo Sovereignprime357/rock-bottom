@@ -2119,3 +2119,71 @@ measured numbers moving — proof the poison reached the real path (entry #13 di
 **Next.** Operator play-pass: tune the hitter numbers if the trade reads wrong (the gate
 holds the ordering, not the values), and judge the bits — pennies, "ahead of schedule," the
 copper that stops singing. Wave 5.3 (the robbery) is next in the plan; 5.4 still needs SPEC.
+
+---
+
+## 2026-07-18 — v22 wave 5.4: the robbery (the economy's first sink) — branch `v22-robbery`
+
+**What was changed.** Built `SPEC-v22-robbery.md` with the decided trigger (a): the skid
+grabber's landed grab takes a thing. New module `src/systems/robbery.js` (all numbers +
+both allowlists in one file, hitter.js precedent); `robs:true` on the `skid_lurch` def
+(the flag IS the zone scope); the hook rides the grabber contact in `npc_ai.js`, resolved
+BEFORE damagePlayer so a killing grab can never rob the respawn point, with the robbery
+toast outranking GRABBED; `robberiesToday` joined `DAILY_COUNTER_KEYS`; two additive
+counter defaults in `audio_save.js`. New `tools/robbery-gate.mjs` (17th gate) + README
+table row; suite 17/17.
+
+**Decided, and why.**
+- *Flag over archetype for scope.* The grabber archetype is shared by the back-alley
+  LURCH, two kingdom bosses, pretenders, and phase-3 Brutus the Older — gating robbery on
+  the archetype would have violated I-ZONE-SCOPED five ways. `robs:true` lives on exactly
+  one def and the gate counts it.
+- *World-clock cooldown over a per-frame timer.* `(day + dayTime) * 240000` needs no
+  update.js tick (the rocked/crash boundary went completely untouched), survives
+  save/load through the counters object for free, and sleeping off a robbery is in-theme.
+- *The hitter is losable* (spec's own edge case) — which raised hitter-gate's
+  subtraction-site pin from 1 to 2 (use + theft). Grant sites stay pinned at 2; the
+  hitter still never mints. That gate edit is the wave's only touch on a shipped gate.
+- *Robbery resolves before damage.* Otherwise a lethal grab calls die(), teleports you to
+  the block, and THEN the toast reads like you were robbed at your own crate.
+- *No sighting ledger.* The spec allows a later flavor sighting of your stolen coat;
+  building it would have added state for a stretch goal. Nothing records what was taken.
+- *Not built on purpose:* option (b) robbed-instead-of-killed (operator's to escalate),
+  any resist/recovery path (the spec's named trap), rocks in the losable set (the intro
+  needs one).
+
+**Tried and failed.**
+- PowerShell `(Get-Content -Raw) | Set-Content -Encoding utf8` round-trip mojibake'd
+  `SPEC-v22-robbery.md` (PS 5.1 reads BOM-less UTF-8 as ANSI). Caught immediately,
+  restored from git, redone with the encoding-safe editor. Corpus edits on this machine:
+  append-only here-strings are safe, read-modify-write round-trips are not.
+- My gate's first static checks tripped on their own subject: `robs:true` counted prose
+  comments (fixed with comment-stripping, docs-gate precedent) and the equip-assignment
+  regex had a backtracking hole (`\s*` + lookahead lets ` null` dodge `(?!null)`; fixed
+  as `=(?!\s*null)`).
+- First full-suite run went red on hitter-gate — correctly: it was pinning "exactly one
+  P.hitters--" and the theft added the second. The pin was the contract doing its job;
+  evolved it consciously rather than routing around it.
+
+**Verification.** 17/17 green. robbery-gate red-tested with an 11-mutation battery, every
+mutation in the real src files, exit codes read unpiped (#3), each failure required to
+NAME its defect, and three mutations built specifically to slip the static checks
+(`-= -amt`, index-assign gift-back, `-= -1`) so the dynamic snapshots had to be the ones
+that fire (#13). The I-VISIBLE probe records real drawImage calls from the real
+drawPlayer and was itself red-tested (deleted drawGear('coat') → fires). Long no-return
+runs freeze the roster and park the event clock because aggro'd hostiles are NOT
+zone-clamped and a pizza_box event grants a gold tooth — both would have false-failed
+the probe watching the taken thing.
+
+**Findings, written not fixed.**
+- Wave numbering collided: the plan table says 5.3 = robbery, but the hitter shipped
+  out-of-band under the name "Wave 5.3", and the robbery spec commit says "Wave 5.4".
+  Noted in the plan row; renumbering is the operator's call.
+- Aggro'd zoneOnly hostiles chase far outside their zone (only kingdom actors are
+  clamped, npc_ai.js:476). Pre-existing; matters to anyone else writing long headless
+  runs; possibly a design feature ("skid row follows you"). Not touched.
+
+**Next.** Operator play-pass: wear a coat into skid row and judge the bit (the toast, the
+sprite missing its layer, "the math is correct"); rule on option (b) as the zone's
+escalation; tune $5-15 / 60s / 2-per-day if the sting reads wrong — the gate holds the
+shape, not the values. Then 5.4 break-ins needs its SPEC; 5.5 stays blocked behind it.

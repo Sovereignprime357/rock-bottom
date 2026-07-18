@@ -32,7 +32,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **sixteen** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -49,6 +49,7 @@ The runner supplies `--experimental-vm-modules`, streams all **sixteen** gates i
 | `copper-sites-gate` | **One engine, many buildings.** Proves the 3-stage heist flow, the `heistsToday` increment, and the 2-4 yield roll each exist exactly once; that all copper sites share the 3/day cap (so more sites never means more income); that site effects structurally cannot mint cash or copper; that registry anchors match the world's rects; and walks every entry and getaway of every site under both RNG branches to end back at play. |
 | `hitter-gate` | **The bad trade.** Proves the emergency hitter is strictly worse than a real rock over the full hit→high→crash cycle by racing both through the live boundary to a 40s horizon (the marathon a spammed hitter must always lose), that it credits nothing (no cred, no rep, no recognition, no intro), that copper crafting is one-directional and the dumpster find stays rare and far-only, that neither path adds a walk, and that the save keys are additive. |
 | `discovery-gate` | **The map, not the key.** Proves smoke-spot discovery flips visibility and nothing else: reveals leave the recognition ledger, tier, and reward state byte-identical (through the real teller dialogues), the Block can never enter the discovered set, and a pre-5.2 save loads all-undiscovered. Exists because discovery routes *around* the ledger recognition-gate watches. |
+| `robbery-gate` | **The first sink.** Proves the skid robbery only subtracts: every theft category (cash, item, hitter, equipped clothing) runs with a full economy snapshot and nothing ever increases, the taken thing stays gone through live minutes, losability is an allowlist a pocket full of progression keys provably survives, only `skid_lurch` robs (the back-alley grabber's landed grab — same real code path — takes nothing), a stolen coat provably stops being drawn, the cooldown + daily cap hold through the real dawn reset, and the save keys are additive. |
 | `solidity-gate` | **The honest map.** Requires declared physicality, one collision authority, door/art and legacy-resolver parity, deterministic save ejection, exact actor exemptions, charge impacts, actor/projectile obstruction, and collision-aware traversal of every mandatory leg. Run it with `--full` to print the complete 69-campaign / 252-route before-and-after ledger. |
 | `runtime-smoke` | The game boots, starts, and plays headless. |
 | `world-gate` | **The map.** Derives the shakes runway and walk speed at run time, then measures every mandatory leg, day-1 coverage, and the route legality graph against them. Runs last on purpose: a standing world reading must never mask a regression in the gates above it. |

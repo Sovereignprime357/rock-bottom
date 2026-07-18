@@ -2048,3 +2048,58 @@ is selected by `P.hitterHigh` at the update.js boundary.
    the constant; a recognition credit in the hitter branch; find chance 0.5; call-site roll
    bypass), each mutation confirmed to move the measured numbers before the red was
    believed. Suite **16/16**.
+## v22 — THE ROBBERY (2026-07-18)
+
+Implements `SPEC-v22-robbery.md` (trigger **(a)** as decided: the grabber takes a thing;
+option (b), robbed-instead-of-killed, deliberately NOT built — operator's to escalate at
+review). In SKID ROW, LURCH (SKID)'s landed grab — and nothing else in the game — takes
+something: cash ($5-15, capped at the pocket), one allowlisted inventory item, an emergency
+hitter, or an allowlisted equipped clothing slot. **The economy's first sink.** Every number
+and both allowlists live in `src/systems/robbery.js`.
+
+1. **I-SINK-ONLY.** A robbery only subtracts. No resist roll, no drop in exchange, no
+   return timer, no reclaim quest (I-NO-RECOVERY-GUARANTEE — the allowed later *sighting*
+   was not built either; nothing records what was taken). The mercy is the rate, not the
+   outcome.
+2. **I-NO-SOFTLOCK, allowlist not denylist.** Default un-takeable; classes opt IN.
+   Inventory: junk / food / soap / detergent / cone / gold_tooth / lottery / license.
+   Equip: the coat/hat/shoes slots only (never tool), and within them only the twelve
+   ordinary clothes — never pigeon_crown or priest_collar (uniques the world cannot
+   re-issue). stripe_package, the crossword, the bus pass, and rocks are structurally
+   un-takeable. The emergency hitter IS losable (the spec's blessed edge case: you folded a
+   lifeline and skid row took it). Broke and keyless resolves to the near-miss beat ("finds
+   a receipt. keeps the receipt.") — never silence, never an error.
+3. **I-VISIBLE.** Equipped theft nulls the slot and re-runs applyEquipStats; drawPlayer
+   reads `P.equip` per frame, so the `gear_` layer stops drawing the moment the coat is
+   taken. The player *sees* the loss on their own sprite.
+4. **I-BOUNDED-RATE.** 60s cooldown on the world clock (`(day + dayTime) * 240000` — no
+   per-frame timer, survives save/load for free) plus a 2/day cap via `robberiesToday` in
+   `DAILY_COUNTER_KEYS`. A near-miss spends the governor too. One crossing stings; it
+   cannot strip you.
+5. **I-ZONE-SCOPED.** Scope is the `robs:true` flag on the `skid_lurch` def alone — not the
+   grabber archetype (the back-alley LURCH, the kingdom grabbers, and phase-3 Brutus the
+   Older all grab and must never rob). The hook rides the landed grab in `npc_ai.js`,
+   resolved BEFORE the damage so a killing grab can never read as a robbery at the respawn
+   point.
+6. **I-SAVE-ADDITIVE.** Counter keys `robberiesToday` + `robLastClockMs` ride the existing
+   counters object; version stays 10; a pre-robbery save loads 0/0 (never robbed, governor
+   open).
+7. **I-VIBE.** Flat larceny, accounting toasts: "- a trench coat / LURCH (SKID) takes your
+   coat. / he does not put it on. he just holds it." · "he checks the size. he says
+   nothing." · "he holds them by the laces." · "- $10 / he counts it in front of you. / the
+   math is correct." · "- the emergency hitter / he takes the pipe. / he knows what it is."
+   No editorializing, no resist prompt, no revenge hook. The grab already paid audio.hurt();
+   the theft adds no celebration sound.
+8. **Permanent enforcement.** `tools/robbery-gate.mjs` (17th gate, behind the income family
+   it mirrors — copper-sites and hitter prove nothing mints; this proves the sink only
+   sinks). Load-bearing checks are dynamic and run through the REAL paths: the theft fires
+   through `updateNpcActors`' grabber contact (and the back-alley grabber's landed grab, same
+   path, takes nothing); a pocket of nothing but progression keys survives an 8-roll RNG
+   sweep byte-identical; all five theft categories diff a full economy snapshot (one axis
+   down, zero up, taken things stay gone over live minutes); the governor holds through the
+   real dawn reset; a stolen coat provably stops being drawImage'd by the real drawPlayer.
+   Red-tested with an 11-mutation battery — including three static-evading mutations
+   (`-= -amt` cash grant, index-assign gift-back, `-= -1` hitter mint) that only the dynamic
+   snapshots catch — every one red for its named reason, pristine tree re-verified green.
+   hitter-gate's subtraction-site pin raised 1→2 (use + theft), grants still pinned at 2.
+   Suite **17/17**.
