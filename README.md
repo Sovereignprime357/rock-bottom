@@ -32,7 +32,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **fifteen** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **sixteen** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -47,6 +47,7 @@ The runner supplies `--experimental-vm-modules`, streams all **fifteen** gates i
 | `recognition-gate` | **The north star.** Diffs every reward field across a full rank climb to prove recognition pays in acknowledgment and nothing else. |
 | `concession-gate` | **One loop, many rooms.** Proves exactly one `rockedT = 18000` site exists, that the high is identical at every spot, that royal static stays Block-only, and that BAD IDEA never points at an illegal room. |
 | `copper-sites-gate` | **One engine, many buildings.** Proves the 3-stage heist flow, the `heistsToday` increment, and the 2-4 yield roll each exist exactly once; that all copper sites share the 3/day cap (so more sites never means more income); that site effects structurally cannot mint cash or copper; that registry anchors match the world's rects; and walks every entry and getaway of every site under both RNG branches to end back at play. |
+| `hitter-gate` | **The bad trade.** Proves the emergency hitter is strictly worse than a real rock over the full hit→high→crash cycle by racing both through the live boundary to a 40s horizon (the marathon a spammed hitter must always lose), that it credits nothing (no cred, no rep, no recognition, no intro), that copper crafting is one-directional and the dumpster find stays rare and far-only, that neither path adds a walk, and that the save keys are additive. |
 | `discovery-gate` | **The map, not the key.** Proves smoke-spot discovery flips visibility and nothing else: reveals leave the recognition ledger, tier, and reward state byte-identical (through the real teller dialogues), the Block can never enter the discovered set, and a pre-5.2 save loads all-undiscovered. Exists because discovery routes *around* the ledger recognition-gate watches. |
 | `solidity-gate` | **The honest map.** Requires declared physicality, one collision authority, door/art and legacy-resolver parity, deterministic save ejection, exact actor exemptions, charge impacts, actor/projectile obstruction, and collision-aware traversal of every mandatory leg. Run it with `--full` to print the complete 69-campaign / 252-route before-and-after ledger. |
 | `runtime-smoke` | The game boots, starts, and plays headless. |
