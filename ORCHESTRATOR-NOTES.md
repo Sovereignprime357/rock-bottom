@@ -375,3 +375,36 @@ ceiling, the forbidden palette. **Treat that entire section as an artifact, not 
 until every line in it has been checked against source.** The rest of `VIBE.md` — voice, patterns,
 the hard lines about not moralizing or punching down — is untested by this and remains the soul.
 **It is the *visual* section that rotted, because the code moved and the prose didn't.**
+
+### 13. A false-negative red test almost made me reject good work
+
+**What happened:** reviewing Wave 5.2 (smoke discovery), I re-ran the load-bearing red test myself
+rather than trust the builder's report — poisoned `discoverVenue` to cheat the recognition count,
+expecting `discovery-gate` to fire. **It stayed green.** For a moment that read as a *gate hole* —
+the gate that's the entire point of the wave, failing to catch the exact leak it exists for. I was
+one step from blocking a correct merge and telling the operator the wave was broken.
+
+**It wasn't the gate. It was my test.** I poisoned `globalThis.state.recognition`; the module uses
+the `state` **singleton imported from `runtime_ui.js`**, a different reference. In the gate's
+headless context `globalThis.state` is undefined, my `try/catch` swallowed it, the mutation never
+ran, and the gate **correctly** reported no change. Re-poisoned the real imported path → 37
+failures, exactly as designed. The gate was sound the whole time.
+
+**Why this one is worth its own entry:** every prior false-positive test (#3, and the Landing-3/4
+re-runs) risked **trusting bad work** — a test that can't fail rubber-stamps a defect. This is the
+**mirror image**: a test that can't fire on a *good* target **rubber-stamps a false alarm**, and the
+cost is **rejecting correct work** — worse in a way, because it also burns the operator's trust in a
+gate that was fine.
+
+**The tell was identical to every other instance** and I almost missed it because the failure
+pointed the flattering direction (my test "found a hole nobody else did"). The discipline that saved
+it: **when a red test doesn't go red, that is not evidence about the code — it is a question about
+the test.** Before concluding "the gate is broken," prove your *test* actually executed against the
+*real* target. `globalThis.state` vs the module singleton is the same fishbowl error as everything
+else — I checked a reference that wasn't the one the system uses.
+
+**Prevention:** a red test has two failure modes, not one. It can fail to fail (trusts bad work) and
+it can fail to fire (rejects good work). **Both are "the test can't do its job," and the fix for both
+is the same: confirm the mutation actually reached the code path before you believe either a red or a
+green.** For a poison test specifically: assert the poison *changed observable behavior somewhere*
+before trusting what the gate says about it.
