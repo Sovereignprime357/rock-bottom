@@ -340,6 +340,9 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | WIRE DEACON | wire stole, loose coil, attendance marked yes | bounded guard of COPPER CHOIR YARD | conducts ranged objections and close corrections; grants nothing |
 | KNIGHT EMERITUS | wears whichever conquered uniform still fits | throne guard and emperor reinforcement | refuses succession in person; grants no reward |
 | CURB PRETENDER No. N | number changes daily; petition does not | returns to a conquered ruler post after coronation | one elite objection per day; defeat pays $10 and 2 cred once |
+| DENNIS (NIGHTS) | guards the cold that left in 2011; holds the empty thermos with both hands | night watch at COLD (NOT), warehouse row (copper site, dialogue-only like brutus jr.) | writes you into a log nobody collects; cannot be provoked |
+| THE RACCOON QUORUM | seven raccoons; quorum is four; votes on everything | in session on the filing cabinet at WATER DEPT. (DRY), the drainage canal (copper site, dialogue-only) | rules on your entry; the vote is binding; accepts one can of evidence |
+| TRANSIT AUTHORITY DAN | laminated his own badge; the lamination is peeling | patrols the train yard for a railroad that ended in 1987 (copper site, dialogue-only) | writes citations on transfer slips; the fine is whatever he remembers |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 
