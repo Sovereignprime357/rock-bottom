@@ -47,6 +47,11 @@ const GATES = [
   // allowlist not denylist), robs only through the skid grabber's landed grab,
   // and stays governed — the mercy is the rate, not the outcome.
   'robbery-gate.mjs',
+  // breakin-gate rides behind the income family and its sink: copper-sites proves
+  // the one engine and the copper ceiling; robbery proves the sink only sinks;
+  // this one proves the engine's two door kinds genuinely refuse (I-GATE-REAL)
+  // and that break-ins ride their own governor, never copper's (I-NO-MINT-DRIFT).
+  'breakin-gate.mjs',
   'solidity-gate.mjs',
   'runtime-smoke.mjs',
   // world-gate runs LAST, on purpose. It is a ruler over the shipped map, and the
