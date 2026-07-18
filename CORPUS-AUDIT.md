@@ -22,6 +22,9 @@ Sections appear in agent-completion order, not priority order. Status table:
 | README.md | 90 | done — 29 checked, 0 false (clean) |
 | DELEGATION.md | 577 | done — 43 checked, 8 false (2 HIGH) |
 | SPEC.md | 1,913 | done — 94 checked, 12 false (2 HIGH, 7 MEDIUM, 3 LOW) |
+| BRAIN.md | 1,943 | done — 18 checked, 2 false (both LOW) |
+| DRIFT-AUDIT.md | 415 | done — 44 checked, 6 false (1 MEDIUM, 5 LOW) |
+| LEGIBILITY-AUDIT.md | 550 | done — 36 checked, 2 false (1 MEDIUM, 1 LOW) |
 
 ---
 
@@ -402,5 +405,75 @@ Notes on verification coverage (all confirmed TRUE, not findings): frozen v19 SH
 - VIBE.md:118 "The existing 54 permanent-loop beats are grandfathered" — the 54 (23 route stops + 22 claim beats + 9 kingdom marks) is consistent across REFACTOR-FINDINGS.md:114, SPEC.md:1731, and BRAIN.md, but REFACTOR-FINDINGS itself hedges "approximately 54" and the beats were not independently re-counted in code.
 - VIBE.md:381 "The 'leave' option is mandatory" — every dialogue opened (Tony, Stripe, Barb, Pinky, O'Malley, mom, possum, Vape Lord, Leasing Guy, Price Guy, etc.) has a leave/exit option, but not every dialogue() call site was exhaustively scanned for a counterexample.
 - VIBE.md:236 "bossRoar: detuned bass + noise burst" — the code is a single 80Hz sawtooth sliding to 40Hz plus noise (audio_save.js:281), not a detuned oscillator pair; "detuned" is loose enough that it was not counted as disproven.
+
+---
+
+## DRIFT-AUDIT.md — 44 claims checked · 6 false · verdict: An exceptionally accurate historical audit (quotes, counts, and citations verify against the audit-era commit), but all four of its open recommendations have since been executed and gated — plus two minor citation errors that were false when written.
+
+### F-DRIFT-1 · DAMAGE: MEDIUM
+- **Where:** DRIFT-AUDIT.md:84 (and ranked summary line 382 "Fix or formally retire")
+- **Claim:** "What shouldn't stand is the current state: a rule that's still written down and silently not running. That's the worst of both — no enforcement *and* a document that lies about the game."
+- **Disproof:** `node tools/run-gates.mjs` → `NPC REGISTRY GATE: PASS (55 canonical rows, 59 source identities, ...)`; `grep -n "CURB EMPEROR\|TARP KNIGHT\|KARAOKE MIKE" VIBE.md` → all present (VIBE.md:335, 336, 326)
+- **Actually:** The registry was backfilled after the audit (25 → 55 rows, including all nine v19 NPCs and the ambient tail) and is now mechanically enforced by `tools/npc-registry-gate.mjs`, which passes. The rule is both written down and running.
+- **If obeyed:** An agent would re-backfill an already-complete registry, or take the offered option (b) and "retire the rule" — dismantling a now-enforced, green gate.
+
+### F-DRIFT-2 · DAMAGE: LOW
+- **Where:** DRIFT-AUDIT.md:152
+- **Claim:** "`VIBE.md` should name it *and* say what share of endless content it's allowed to own, or the next wave will make it 70 beats for exactly the same reason it made it 54."
+- **Disproof:** `grep -n -i "clerical" VIBE.md` → VIBE.md:116 "The Clerical Pattern (canonical pattern #5)" and VIBE.md:118 "Rotation rule: The Clerical Pattern may own at most 50% of new permanent-loop beats per wave"
+- **Actually:** The recommendation was executed verbatim: pattern #5 is named and share-capped in VIBE.md.
+- **If obeyed:** Duplicate or conflicting pattern/rotation text added to VIBE.md.
+
+### F-DRIFT-3 · DAMAGE: LOW
+- **Where:** DRIFT-AUDIT.md:195
+- **Claim:** "**Recommend: amend HARD YES #6** to something like *'mundane > magical — and if you must go magical, the mundane has to win in the same breath.'* v19 already follows that rule. It just isn't written down."
+- **Disproof:** `grep -n -i "mundane" VIBE.md` → VIBE.md:265 "**mundane > magical — and if the setup goes magical, the mundane must win in the same breath.**"
+- **Actually:** HARD YES #6 has already been amended with essentially the proposed wording. It is written down.
+- **If obeyed:** An agent would re-amend an already-amended rule, or wrongly treat v19-style magical framing as still technically off-spec.
+
+### F-DRIFT-4 · DAMAGE: LOW
+- **Where:** DRIFT-AUDIT.md:372 (and 374 "Add the missing invariant")
+- **Claim:** "**`VIBE.md` has no scope invariant, so scope was the one axis with no brake.**"
+- **Disproof:** `grep -n -i "scope" VIBE.md` → VIBE.md:272 `### Scope invariant`
+- **Actually:** VIBE.md now contains a dedicated "Scope invariant" section; the world gate additionally enforces measured scope budgets (`WORLD GATE: PASS ... frozen 8600x5600/23 zones`).
+- **If obeyed:** Duplicate/conflicting scope invariant added; or an agent believes map scope is currently unbraked.
+
+### F-DRIFT-5 · DAMAGE: LOW
+- **Where:** DRIFT-AUDIT.md:340
+- **Claim:** "24 zones (L317–352)."
+- **Disproof:** `awk '/^const ZONES = \[/,/^\];/' rock_bottom_v19.html | grep -c "{ *id:"` → 23
+- **Actually:** v19 has 23 zones (LEGIBILITY-AUDIT.md and the current world gate both agree: 23). False when written.
+- **If obeyed:** An agent citing 24 zones would propagate a wrong count into specs or gates.
+
+### F-DRIFT-6 · DAMAGE: LOW
+- **Where:** DRIFT-AUDIT.md:238
+- **Claim:** "L2970 `feedPost("the dog returned. then he didn't. legend.", '@crackheadcent')`"
+- **Disproof:** `grep -n "the dog returned" rock_bottom_v19.html` → 6970 (line 2970 is sprite-canvas code: `c.width = 32; c.height = 32;`)
+- **Actually:** The quote is real but lives at v19 line 6970, not 2970. Wrong citation when written.
+- **If obeyed:** An agent following the line reference lands in unrelated sprite code.
+
+### SUSPECTED — UNPROVEN
+- DRIFT-AUDIT.md:274 "11 mojibake sequences": counts of 10 mojibake-bearing lines and 18 mangled two-byte occurrences in v19 (`grep -c "Â"` → 10; `grep -o "Â.\|â€." | wc -l` → 18); no counting method yields exactly 11, but "sequence" is ambiguous, so not proven false. (The mojibake itself is real in v19 and fully absent from current `src/` — 0 hits.)
+
+---
+
+## LEGIBILITY-AUDIT.md — 36 claims checked · 2 false · verdict: Every code citation, quote, and measurement checked verifies exactly against v19 at the audit-era commit (6b3457e); the only falsehoods are its standing "fails today / build these gates" instructions, whose top items (gates 1–5) have since been built, fixed, and are green.
+
+### F-LEGIB-1 · DAMAGE: MEDIUM
+- **Where:** LEGIBILITY-AUDIT.md:542 (and the gate table, lines 527–538: "Fails today: 21/24 · 1 · 2 at spawn · ~51%")
+- **Claim:** "Each is a pure bounding-box or map-lookup question with a yes/no answer, each currently fails with a known count, and each has a bounded fix whose success is measured by the same gate that found it."
+- **Disproof:** `node tools/run-gates.mjs` → `LEGIBILITY GATE: PASS (24 signs, 23 zone labels, 56 active nameplates, 14 fitted tags)` · `GATE RUNNER: 13/13 PASS`
+- **Actually:** Recommended gates 1–4 (building-sign coverage, zone-label-vs-art, nameplate de-confliction, graffiti fit) already exist as `tools/legibility-gate.mjs`, wired into `tools/run-gates.mjs`, and none of them fail — the underlying data/logic defects were fixed in the v21 modular build.
+- **If obeyed:** An agent would build duplicate gates and go hunting for 21 unplated signs, a buried zone label, colliding nameplates, and ~51% overflowing graffiti that no longer exist — wasted work at best, regressive rewrites of already-fixed data at worst.
+
+### F-LEGIB-2 · DAMAGE: LOW
+- **Where:** LEGIBILITY-AUDIT.md:540 (and line 277, "the single largest legibility cost in the game"; gate 5 row line 533, "Fails today: all of them")
+- **Claim:** "**Highest readability-per-byte:** gate 5 — one `z-index` line moves every piece of text in the game from **2.4:1 to 10.6:1**."
+- **Disproof:** `git log -L82,82:rock_bottom_v19.html` → commit d5dc924 "fix: render vignette below gameplay UI" changed `z-index:32` → `z-index:0`; `grep -n "vignette" index.html` → line 92 `#vignette{...z-index:0;...}`
+- **Actually:** The one-line fix was applied post-audit (d5dc924) and carried into the current v21 `index.html`; the vignette now renders below all gameplay UI. (Note `#scanlines` remains at z-index:30 — only the vignette half of the gate-5 assertion was executed.)
+- **If obeyed:** An agent would try to "apply" a z-index fix that is already in place, or report the UI as currently drowned at 2.4:1 contrast when it is not.
+
+### SUSPECTED — UNPROVEN
+- none
 
 ---
