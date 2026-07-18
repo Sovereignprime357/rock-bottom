@@ -300,6 +300,184 @@ export function init_props() {
     lease_guy: ["walk-ins.", "unit is a unit.", "key is extra.", "copper counts as a key."],
     gutter_greg: ["inventory.", "duck is one.", "water pending.", "count the cart twice."],
   };
-  
-  
+
+
+}
+
+// ---------- v22 wave 5.1 — copper sites ----------
+// One registry, one engine (activities.js). Each site is DATA: the 3-stage heist flow is
+// interpreted, never copied. All sites share the heistsToday cap (3/day) and the 2-4 yield —
+// more sites is more neighborhood, not more income. See SPEC-v22-copper-sites.md.
+//
+// anchor kinds:
+//   locked_building — resolves to the BUILDINGS entry with locked:true at call time, so the
+//                     abandoned site keeps its shipped availability (gone once rank 4 unboards it).
+//   rect            — literal trigger rect. Facade-anchored rects mirror world.js
+//                     LANDMARK_FACADES coordinates (copper-sites-gate proves parity); the rust
+//                     car mirrors the freight_car prop above (380,2820,220,64).
+//
+// entry kinds the engine understands: roll (p; under/over effects), lockpick, item, cash,
+// wait, sure. Effects: { text, dur?, hp?, wanted?, brain?, shakes?, glass? } — hp/brain are
+// costs, wanted/shakes are gains, glass fires audio.glassBreak(). Order of application is
+// text -> hp -> glass -> wanted -> brain -> shakes (abandoned-building parity).
+export const COPPER_SITES = [
+  {
+    id: 'abandoned',
+    title: 'ABANDONED BUILDING',
+    hint: 'test the abandoned boards',
+    who: 'brutus jr.',
+    anchor: { kind: 'locked_building' },
+    capText: "the door is half off.\nthere is no air coming out.\nbrutus jr. is awake and watching the door.\nnot tonight.",
+    intro: "the door is half off.\nbrutus jr. is inside. he is asleep.\nyou hear pipes singing in b flat.",
+    entries: [
+      { kind: 'roll', label: 'sneak past brutus jr.', p: 0.7,
+        under: { text: 'you sneak. brutus jr. dreams of a tennis ball.' },
+        over:  { text: 'BRUTUS JR. WAKES UP. he is a puppy. he is FURIOUS.', hp: 10 } },
+      { kind: 'lockpick', label: 'pick the side door lock. (4-pin lockpick)',
+        ok:   { text: "CLICK. the door opens.\nbrutus jr. dreams uninterrupted.\nyou are inside.", glass: true },
+        fail: { text: "you give up on the lock.\nthe door is harder than it looks.\nyou take the front door.",
+                extraChance: 0.5, extra: { text: 'BRUTUS JR. WAS WAITING.\n- 12 hp', dur: 1800, hp: 12 } } },
+      { kind: 'item', itemId: 'soap', consume: 'all',
+        haveLabel: 'throw soap as distraction.', lackLabel: 'throw something (you have nothing useful).',
+        effect: { text: 'brutus jr. licks the soap. is consumed.' } },
+      { kind: 'cash', cost: 3,
+        haveLabel: 'pay $3 for a chimichanga distraction.', lackLabel: "you don't have $3.",
+        effect: { text: 'the chimichanga is talking.\nbrutus jr. listens.' } },
+    ],
+    pipes: {
+      text: 'the pipes hum.\nin b flat.\nthey are waiting.',
+      stripAfter: 'the singing stops.\nyou feel watched.',
+      listenAfter: 'they know your name now.',
+    },
+    getawayText: 'the floor creaks.\nthere is a window.\nthere is also a door.',
+    exits: [
+      { label: 'window. fast.', p: 0.8,
+        under: { text: 'you jump. the landing is bad but legal.', hp: 3 },
+        over:  { text: 'the glass breaks. so does your dignity.', hp: 12, glass: true, wanted: 1 } },
+      { label: 'door. slow.', p: 0.5,
+        under: { text: 'a cop is waiting on the other side.\nyou run.', wanted: 2 },
+        over:  { text: 'you walk out like you own the place.\n(you do not.)' } },
+    ],
+  },
+  {
+    id: 'cold_not',
+    title: 'COLD (NOT)',
+    hint: 'try the cold (not) door',
+    who: 'dennis (nights)',
+    // world.js LANDMARK_FACADES cold_not — warehouse row.
+    anchor: { kind: 'rect', facadeId: 'cold_not', x: 4440, y: 1080, w: 450, h: 230 },
+    capText: "dennis is at the desk.\nthe log is open to today.\ntoday is full.\nnot tonight.",
+    intro: "the warehouse said COLD. the parenthesis said (NOT).\ndennis is at the desk. the desk faces the wrong way.\nsomewhere inside, the old freon lines are singing. b flat. colder.",
+    entries: [
+      { kind: 'roll', label: 'walk in like you are the day shift.', p: 0.7,
+        under: { text: 'you nod at dennis. dennis nods at the nod.\nyou are payroll now.' },
+        over:  { text: "dennis asks for your badge.\nyou show him a receipt.\nhe writes you in the log as 'RECEIPT MAN.'", brain: 2 } },
+      { kind: 'cash', cost: 2,
+        haveLabel: 'buy dennis a coffee from the machine. ($2)', lackLabel: "you don't have $2.",
+        effect: { text: 'the machine is dead. you hand him the empty cup.\nhe holds it with both hands.\nthis is the whole transaction.' } },
+      { kind: 'wait', label: 'wait for his round.',
+        effect: { text: 'dennis walks his route. the route is a circle.\nyou are inside the circle now.\nthe shakes came with you.', shakes: 6 } },
+    ],
+    pipes: {
+      text: 'the freon lines are empty. they sing anyway.\nb flat. colder than the pipes downtown.\nthey are waiting.',
+      stripAfter: 'the singing stops.\nthe warehouse is room temperature about it.',
+      listenAfter: 'the cold is not here. the song is about that.',
+    },
+    getawayText: 'the aisles go on.\nthere is a loading dock.\nthere is also the front desk.',
+    exits: [
+      { label: 'the loading dock.', p: 0.75,
+        under: { text: 'you roll off the dock like cargo.\nthe manifest does not mention you.', hp: 2 },
+        over:  { text: 'the dock is taller than your plan.', hp: 8 } },
+      { label: 'the front desk. wave at dennis.', p: 0.5,
+        under: { text: 'dennis waves back.\nthe log says you were never here.\nthe log is wrong twice.' },
+        over:  { text: "dennis asks you to sign out.\nyou sign 'RECEIPT MAN.'\nit is legally binding somehow.", brain: 1 } },
+    ],
+  },
+  {
+    id: 'water_dept',
+    title: 'WATER DEPT. (DRY)',
+    hint: 'test the dry grate',
+    who: 'the raccoon quorum',
+    // world.js LANDMARK_FACADES water_dry — the drainage canal.
+    anchor: { kind: 'rect', facadeId: 'water_dry', x: 4460, y: 2250, w: 520, h: 210 },
+    capText: "the quorum is in recess.\nthe docket is closed.\nnot tonight.",
+    intro: "the water department has no water.\nthe service lines never held any. they sing b flat anyway.\nhigher. like a question.\nseven raccoons are in session on the filing cabinet.",
+    entries: [
+      { kind: 'roll', label: 'state your business to the quorum.', p: 0.6,
+        under: { text: 'you state your business.\nthe raccoons confer.\nthe vote is 4 to 3. you may pass.' },
+        over:  { text: 'the vote fails.\na raccoon touches your shoe with its small hand.\nyou lose the argument.', brain: 3 } },
+      { kind: 'item', itemId: 'food', consume: 'one',
+        haveLabel: 'submit a can of food (unmarked) as evidence.', lackLabel: 'submit evidence (you have no evidence).',
+        effect: { text: 'the quorum accepts the can into the record.\nthe can is policy now.\nyou may pass.' } },
+      { kind: 'roll', label: 'pry the maintenance grate.', p: 0.5,
+        under: { text: 'the grate gives.\nthe quorum notes your method.\nnothing is said.' },
+        over:  { text: 'the grate objects. loudly.\nsomeone from the city hears it.', hp: 6, wanted: 1 } },
+    ],
+    pipes: {
+      text: 'the service lines have never held water.\nthey sing b flat. higher.\nlike a question.\nthey are waiting.',
+      stripAfter: 'the singing stops.\nthe question does not.',
+      listenAfter: 'the question is about you.',
+    },
+    getawayText: 'the filing room hums.\nthere is an outflow pipe.\nthere are also the front steps.',
+    exits: [
+      { label: 'the outflow pipe.', p: 0.8,
+        under: { text: 'you exit through the outflow.\nthere is no water. there was never water.\nyou are dry and you know things.', hp: 2 },
+        over:  { text: 'the pipe narrows where the map said it would not.', hp: 6 } },
+      { label: 'the front steps.', p: 0.6,
+        under: { text: 'a raccoon on the steps files your departure.\nno action is taken.' },
+        over:  { text: 'a man from the city is on the steps.\nhe has a clipboard and has begun walking with purpose.', wanted: 1 } },
+    ],
+  },
+  {
+    id: 'rust_car',
+    title: 'THE RUST FREIGHT CAR',
+    hint: 'try the rust car door',
+    who: 'transit authority dan',
+    // PROPS freight_car (rust red) above — the train yard. conductor (680,2960) and the
+    // hopper (820,2940) sit outside this rect + margin; no interaction collision.
+    anchor: { kind: 'rect', propType: 'freight_car', x: 380, y: 2820, w: 220, h: 64 },
+    capText: "dan is leaning on the rust car.\nhe is off duty. he says. while patrolling.\nnot tonight.",
+    intro: "the rust freight car's door is open one hand.\ninside: signal wire. spooled. singing in b flat.\ntransit authority dan is on the ballast, checking tickets.\nthere are no tickets. there is no transit.",
+    entries: [
+      { kind: 'roll', label: 'present a ticket you do not have.', p: 0.5,
+        under: { text: "you mime the ticket.\ndan punches the air where it would be.\n'proceed.'" },
+        over:  { text: 'no ticket.\ndan writes a citation on a transfer slip from 1987.', wanted: 1 } },
+      { kind: 'roll', label: 'go along the ballast, between the cars.', p: 0.7,
+        under: { text: 'you move car to car.\nthe yard pretends not to notice.\nit is good at this.' },
+        over:  { text: 'your foot finds every rock in the yard.\nyou eat ballast.', hp: 6 } },
+      { kind: 'sure', label: 'pull the dead signal lever.',
+        effect: { text: 'the signal has been wrong since 1987.\nnow it is wrong in green.\ndan salutes it. you walk past the salute.' } },
+    ],
+    pipes: {
+      text: 'the signal wire is spooled to the ceiling.\nit sings b flat.\nthe whole car is a tuning fork.\nit is waiting.',
+      stripAfter: 'the singing stops.\nthe car goes back to being a box.',
+      listenAfter: 'the car remembers being a train.',
+    },
+    getawayText: 'the door is still one hand wide.\nthere are the couplers.\nthere is also the main gate.',
+    exits: [
+      { label: 'over the couplers.', p: 0.7,
+        under: { text: 'you go over the couplers.\na freight car approves. silently.', hp: 2 },
+        over:  { text: 'the coupler was higher than your leg believed.', hp: 10 } },
+      { label: 'the main gate.', p: 0.4,
+        under: { text: 'dan is explaining jurisdiction to the conductor.\nneither is listening. you walk.' },
+        over:  { text: 'dan radios a department that was disbanded.\nsomeone answers.', wanted: 2 } },
+    ],
+  },
+];
+
+// Trigger lookup shared by tryInteract (interactions.js) and resolveActionHint (campaigns.js).
+// Same ±20px proximity margin the abandoned building has always used. Returns the first
+// available site whose rect contains the point, or null. The abandoned site resolves its rect
+// from the still-locked BUILDINGS entry, which is also its availability switch.
+export function copperSiteAt(cx, cy) {
+  const margin = 20;
+  for (const site of COPPER_SITES) {
+    let r = site.anchor;
+    if (r.kind === 'locked_building') {
+      r = BUILDINGS && BUILDINGS.find(b => b.locked);
+      if (!r) continue;
+    }
+    if (cx > r.x - margin && cx < r.x + r.w + margin && cy > r.y - margin && cy < r.y + r.h + margin) return site;
+  }
+  return null;
 }
