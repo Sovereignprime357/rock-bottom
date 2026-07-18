@@ -115,6 +115,7 @@ export function renderInventory() {
     <div class="row"><span>cash</span><span>$${P.cash}</span></div>
     <div class="row"><span>rocks</span><span>🪨 ${(P.rocks||0) + (P.soapRocks||0)}</span></div>
     <div class="row"><span>pure copper</span><span>🪙 ${P.copper}</span></div>
+    ${(P.hitters||0) > 0 ? `<div class="row"><span>emergency hitter</span><span>${P.hitters}</span></div>` : ''}
     <div class="row"><span>raw supplies</span><span>🧪 ${P.supplies||0}${(P.dirtySupplies||0)>0 ? ` (${P.dirtySupplies} house cut)` : ''}</span></div>
     <div class="row"><span>hp</span><span>${Math.round(P.hp)} / ${P.maxHp}</span></div>
     <div class="row"><span>shakes</span><span>${P.shakes.toFixed(0)}</span></div>
@@ -359,6 +360,9 @@ export function init_runtime_ui() {
     wanted: 0, wantedT: 0, rank: 0,
     attackCd: 0, attacking: 0, hitFlash: 0, iframes: 0,
     rockedT: 0, crashT: 0,
+    // v22 hitter — consumable count + which kind of high is running (the flag
+    // selects the rougher crash at the update.js boundary).
+    hitters: 0, hitterHigh: false,
     inventory: [], lifetime: { rocksSmoked: 0, copsKilled: 0, arrests: 0, dayCount: 0, rocksCooked: 0, rocksFenced: 0, routesCompleted: 0, officeJobs: 0, territoriesClaimed: 0, pretendersDefeated: 0 },
     tonyOffenses: 0,
     cartMounted: false,

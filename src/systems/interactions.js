@@ -17,6 +17,7 @@ import { questToast } from './combat.js';
 import { feedPost } from './communications.js';
 import { concessionMenu, concessionUnlocked } from './concessions.js';
 import { discoveryMenu, venueDiscovered } from './discovery.js';
+import { dumpsterHitterRoll, grantFoundHitter, pocketHasBusiness, pocketMenu } from './hitter.js';
 import { hideoutOwned, tryEnterHideout, tryEnterOffice } from './daily_hideouts.js';
 import { tryStampBlockRoute } from './progression_routes.js';
 import { recordNpcBother, recognitionVenueAt } from './recognition.js';
@@ -180,6 +181,13 @@ export function tryInteract() {
     discoveryMenu(concessionVenue);
     return;
   }
+  // v22 hitter — the E nobody else wanted goes to your pockets, anywhere
+  // (I-NO-RUNWAY-COST: use and craft are location-free). Only answers when
+  // there is business in them; an empty-pocket whiff stays silent, as before.
+  if (pocketHasBusiness()) {
+    pocketMenu();
+    return;
+  }
 }
 
 export function startDumpsterDive(dumpster) {
@@ -220,7 +228,12 @@ export function startDumpsterDive(dumpster) {
   const noNothingBoost = farFactor * 0.6; // far dumpsters have less "nothing"
   const noneCut = 0.30 + (1 - farFactor) * 0.20; // close = 50% nothing, far = 30%
   let lootPicked = null;
-  if (r < noneCut) {
+  // v22 hitter — the rare opportunistic find (I-RARE-FIND). One roll, one place
+  // (hitter.js); adjacent-to-the-block dumpsters never carry it. It replaces the
+  // loot-table pick, so it is still one of three things and you still choose.
+  if (dumpsterHitterRoll(farFactor)) {
+    lootPicked = {n:'the emergency hitter', q:'hitter_drop'};
+  } else if (r < noneCut) {
     lootPicked = {n:'nothing. dumpsters know.', q:'rats'};
   } else if (r < noneCut + 0.30) {
     lootPicked = {n:"$"+(1+Math.floor(Math.random()*4))+' in loose bills', q:'cash', val: 1+Math.floor(Math.random()*4)};
@@ -285,6 +298,10 @@ export function startDumpsterDive(dumpster) {
         } else {
           toast("a torch. you already have one.\nyou close the lid.", 2000);
         }
+      }
+      // v22 hitter — the rare find lands in the pocket counter, not P.inventory
+      else if (it.q === 'hitter_drop') {
+        grantFoundHitter();
       }
       dumpster.looted = true;
       dumpster.diveCdT = 90000; // v13 wave 6 — 90s cooldown per dumpster after a dig

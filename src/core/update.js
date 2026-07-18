@@ -20,6 +20,7 @@ import { broadcastNews, feedPost, fireMomIntroTipOnce, fireRandomEvent, garbageT
 import { updateConcessionClocks } from '../systems/concessions.js';
 import { fireDayEvents, resetDailyCounters } from '../systems/daily_hideouts.js';
 import { adjustFaction, applyRep, updateTerritory } from '../systems/factions.js';
+import { HITTER_CRASH_MS, HITTER_CRASH_SHAKES } from '../systems/hitter.js';
 import { updateIncidents } from '../systems/incidents.js';
 import { updateNpcActors } from '../systems/npc_ai.js';
 import { firstBlockingStructure, moveBodyAgainstStructures } from '../systems/physicality.js';
@@ -127,12 +128,24 @@ export function updateWorld(dt) {
   if (P.rockedT > 0) {
     P.rockedT -= dt;
     if (P.rockedT <= 0) {
-      P.rockedT = 0; P.crashT = 8000;
-      P.shakes = clamp(P.shakes+30, 0, 100);
-      audio.crash();
-      state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
-      toast('the crash arrives.\non schedule.', 2200);
-      recordFullHighAtPlayer({deferMs:2300});
+      P.rockedT = 0;
+      if (P.hitterHigh) {
+        // v22 hitter — the rougher crash (I-BAD-TRADE). Longer, steeper, and it
+        // records nothing: a hitter high is not a full high, so the room gets no
+        // recognition credit. The room does not respect the pipe.
+        P.hitterHigh = false; P.crashT = HITTER_CRASH_MS;
+        P.shakes = clamp(P.shakes + HITTER_CRASH_SHAKES, 0, 100);
+        audio.crash();
+        state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
+        toast('the crash arrives.\nahead of schedule.', 2200);
+      } else {
+        P.crashT = 8000;
+        P.shakes = clamp(P.shakes+30, 0, 100);
+        audio.crash();
+        state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
+        toast('the crash arrives.\non schedule.', 2200);
+        recordFullHighAtPlayer({deferMs:2300});
+      }
     }
   } else if (P.crashT > 0) {
     P.crashT -= dt;
