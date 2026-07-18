@@ -31,6 +31,10 @@ const GATES = [
   // concession proves one smoke loop across many rooms; this proves one heist engine across
   // many buildings, and that adding buildings cannot move the daily copper ceiling.
   'copper-sites-gate.mjs',
+  // discovery-gate rides behind the recognition family it protects. recognition-gate's
+  // zero-leakage proof watches the LEDGER; discovery routes around the ledger, so a
+  // reveal that granted tier would leave that gate green. This one watches the door.
+  'discovery-gate.mjs',
   'solidity-gate.mjs',
   'runtime-smoke.mjs',
   // world-gate runs LAST, on purpose. It is a ruler over the shipped map, and the
