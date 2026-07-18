@@ -16,6 +16,17 @@
 
 ---
 
+## v22 wave 5.1 — copper from multiple locations — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
+
+Branch: `v22-copper`, isolated worktree; push without merge. Contract: `SPEC-V22-PLAN.md` § WAVE 5.1, graduated to `SPEC-v22-copper-sites.md`.
+
+- [x] **One engine, many buildings.** The abandoned-building 3-stage flow is extracted to `startHeist(siteId)` / `heistStage(site, stage)` (`src/minigames/activities.js`); sites are data rows in `COPPER_SITES` (`src/data/props.js`). The abandoned building is preserved verbatim — texts, odds, effect order, die() semantics, and its rank-4 disappearance through the locked-BUILDINGS lookup. Three new sites open the empty quarter, each anchored to existing geometry (no new structures/props/zones/objectives): **COLD (NOT)** in warehouse row — DENNIS (NIGHTS), the quiet site, no path touches wanted; **WATER DEPT. (DRY)** at the drainage canal — THE RACCOON QUORUM, mid heat, accepts one can of food as evidence; **THE RUST FREIGHT CAR** in the train yard — TRANSIT AUTHORITY DAN, the hot site, citation wanted bumps. The choir-yard copper mass untouched.
+- [x] **The income ceiling did not move.** One shared `heistsToday` cap (3/day) across all sites; identical 2-4 yield everywhere; site effect objects are key-allowlisted so a site can cost hp/wanted/brain/shakes but can never mint cash or copper. The conductor floor stays ~$270/day. No distance→dollars gradient — the reward for walking to the train yard is the train yard.
+- [x] **Permanent enforcement.** `tools/copper-sites-gate.mjs` (14th gate): static singleton counts (increment / mode entry / yield roll each exactly once in `src/`), anchor parity with `world.js`+`PROPS` rects, dynamic shared-cap exhaustion across different sites, forced-extreme yield identity, exhaustive both-branch walks of every entry and getaway. Red-tested in seven directions (dup increment, loosened cap, mode leak, dead modal, quiet-site wanted, anchor drift, moved yield) — all fire; suite **14/14**. Save shape untouched (no new keys); round-trip verified headlessly.
+- [ ] **Operator play gate.** Walk to each site, run all three entries, both getaways; confirm the guards land as bits (the vote is 4 to 3; dan punches the air where the ticket would be). No mechanical gate can judge whether a raccoon is funny.
+
+---
+
 ## v21 character ceiling — BUILT / PENDING OPERATOR VISUAL REVIEW (July 16, 2026)
 
 Branch: `v21-sprite-ceiling`, isolated worktree; push without merge. OD-12 records the operator-ratified all-roster migration and the human-eye acceptance boundary.

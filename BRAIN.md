@@ -1941,3 +1941,60 @@ The operator's eye is still the acceptance gate. Start with MAYOR'S COUSIN, AirP
 mattress, horse cop, and the low-contrast attack fragments. A green suite proves the game runs and
 the pixel discipline holds; it does not prove the art landed. Do not “fix” a weak read by changing
 the 32px footprint, hitbox, identity, or palette under this decision.
+
+## 2026-07-18 — v22 Wave 5.1 / COPPER FROM MULTIPLE LOCATIONS (Fable / Claude Code, branch `v22-copper`, isolated worktree)
+
+**What changed.** The abandoned-building heist's 3-stage flow is now one parameterized engine
+(`startHeist(siteId)` / `heistStage(site, stage)`, `src/minigames/activities.js`) reading site
+rows from `COPPER_SITES` (`src/data/props.js`). Three new sites in the empty quarter: COLD (NOT)
+in warehouse row (DENNIS (NIGHTS) — quiet, zero wanted paths), WATER DEPT. (DRY) at the canal
+(THE RACCOON QUORUM — mid, inverted-authority), THE RUST FREIGHT CAR in the train yard (TRANSIT
+AUTHORITY DAN — hot, citation wanted). `tryInteract` and `resolveActionHint` both read the same
+`copperSiteAt` lookup, so prompt and action can't disagree. `copper-sites-gate` is the 14th gate.
+Suite 14/14. No new save state; save key/shape untouched, round-trip verified.
+
+**Decided, and why.**
+- Registry lives in `data/props.js`, not activities/catalogs: both trigger consumers
+  (interactions, campaigns) already import props — zero new import-graph edges, no new cycles.
+- Site anchors are literal rects + a facadeId/propType witness, NOT imports of world.js — the
+  gate proves rect parity mechanically, avoiding a props→world→npc_spawns→campaigns cycle.
+- All sites share the cap and yield; effect objects are key-allowlisted (can cost, can't mint).
+  The one real design decision in the SPEC (shared vs per-site cap) went to the stated default:
+  one shared cap. Nothing pays more anywhere — the payout of a far site is the site.
+- New guards are dialogue-only inhabitants (the brutus jr. precedent) — added to the VIBE
+  identity table for canon, but no runtime actors, so npc-registry-gate/sprite-gate/solidity
+  counts are untouched and the 56-NPC parity stands.
+- Clerical-pattern rotation respected: of the three new site bits, only dan is clerical; the
+  quorum is Inverted Authority, dennis is the bad-trade/empty-thermos shape.
+- The rust car anchors the train-yard site (not the navy car — the hopper sleeps there; not a
+  new structure — solidity-gate pins 53). Conductor at (680,2960) and hopper (820,2940) sit
+  outside the trigger; verified before authoring.
+
+**Tried and failed / mistakes made (in the open).**
+- Red-testing before committing the engine: a `git checkout --` revert during red-test #1 wiped
+  the uncommitted engine edit and silently restored the v19-shaped flow; caught it by reading
+  the file, re-applied, committed FIRST, then red-tested. Rule restated: mutate-and-revert
+  testing only against committed work.
+- Piped a red-test run through `head -3` and read `EXIT=0` off head's exit code — the exact
+  unpiped-exit-code trap ORCHESTRATOR-NOTES already documents. Re-ran everything unpiped.
+- First softlock red-test (deleting `state.mode='playing'` from one exit) did NOT red the gate —
+  correctly: `closeDialogue()` restores playing before any action runs, in-game and in-harness,
+  so that mutation isn't a real softlock. The catchable shapes (mode leak, dead modal with no
+  options) both red correctly. The gate asserts what's true, not what sounds true.
+- First lockpick solver replayed the full learned prefix after successes; the mini keeps
+  correct pins set, so replaying re-pressed set pins and reset the lock. Fixed by tracking
+  live progress and replaying only after a reset.
+
+**Standing finding (written, not fixed).** At rank ≥ 4, `update.js` flips the locked building
+to unlocked, which removes the abandoned heist trigger entirely — but SPEC.md says "(v12: rank
+gate removed — the brutus jr. door is now the gate, not your cred)" and the economy tables
+state the 3/day cap with no rank cutoff. Before this wave, copper income silently DIED at rank
+4; the SPEC's ~$270/day conductor floor was unreachable for late players. This wave preserves
+the abandoned site's disappearance verbatim AND (by adding rank-independent sites) restores the
+SPEC-documented ceiling at rank ≥ 4. Whether the abandoned building should keep vanishing is an
+operator call — flagged, not decided here.
+
+**Next.** Operator play-pass on the three sites (funny is not gateable); then Wave 5.2
+smoke-spot discovery per the plan. If 5.4 break-ins generalize this pattern, the engine's
+entry-kind table (roll/lockpick/item/cash/wait/sure) is the seam to extend — add kinds, not
+copies.
