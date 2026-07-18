@@ -2273,3 +2273,14 @@ a real carry choice with a free swap at pete; redirect if they should stack). Pl
 quarter: do three buildings read as a reason to walk south, is the goose funny, do $35 /
 cap 2 / cred 25 & 50 pace right. On merge, 5.6 (fill the quarter) unblocks and inherits:
 sites are data, doors are gates, one engine.
+
+**Addendum, same day — the fork RULED.** Operator ratified the tool-slot tension as the
+mechanic itself: *"the tension is good. you have to choose — better crack with the
+propane torch, or easier break-ins."* Cook or burglar, per-outing. Changes: every
+displacement and swap line now states the choice flat — pete's crowbar sale over the
+torch says "you can pry or you can cook. not both."; the swap is directional ("tonight
+you pry. nothing cooks." / "tonight you cook. nothing pries."); the torch pickup and
+price-guy displacement say "you cook now. you do not pry." Reversibility re-verified
+end-to-end (buy → displace → swap → swap back → no-dupe, 6/6 headless); the locker
+keeps the tension per-outing, never per-save. SPEC.md crowbar clause and DELEGATION
+play-gate updated to record the ruling. Suite stays 18/18 — no gate reads toast text.

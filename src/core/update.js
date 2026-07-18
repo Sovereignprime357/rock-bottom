@@ -605,7 +605,7 @@ export function updateWorld(dt) {
         if (!ownsTool('propane_torch')) {
           const displaced = equipTool('propane_torch');
           audio.pickup();
-          toast("+ a propane torch (dented)\n(equipped.)\nit doesn't care." + (displaced ? "\nthe crowbar goes to pete's glass.\nthis is the arrangement." : ""), 3400);
+          toast("+ a propane torch (dented)\n(equipped.)\nit doesn't care." + (displaced ? "\nthe crowbar goes to pete's glass.\nyou cook now. you do not pry." : ""), 3400);
           feedPost("picked up a torch. found it. don't ask.", '@crackheadcent');
           saveGame();
         }

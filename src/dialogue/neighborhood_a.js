@@ -320,7 +320,7 @@ export function peteDialogue() {
         const displaced = equipTool('propane_torch');
         state.flags.peteTorchSold = true;
         audio.coin();
-        toast("- $80\n+ a propane torch (dented)\npete does not explain where he got it.\n(equipped.)" + (displaced ? "\npete slides the crowbar behind the glass.\n'pete holds it.'" : ""), 4200);
+        toast("- $80\n+ a propane torch (dented)\npete does not explain where he got it.\n(equipped.)" + (displaced ? "\nthe crowbar goes behind the glass.\nyou can cook or you can pry. not both." : ""), 4200);
         feedPost("bought a torch off pete. pete is eating.", '@crackheadcent');
         saveGame();
       }
@@ -341,7 +341,7 @@ export function peteDialogue() {
         P.cash -= 35;
         const displaced = equipTool('crowbar');
         audio.coin();
-        toast("- $35\n+ a crowbar (municipal)\nit says PROPERTY OF. the rest wore off.\n(equipped.)" + (displaced ? "\npete slides the torch behind the glass.\n'pete holds it.'" : ""), 4200);
+        toast("- $35\n+ a crowbar (municipal)\nit says PROPERTY OF. the rest wore off.\n(equipped.)" + (displaced ? "\nthe torch goes behind the glass.\nyou can pry or you can cook. not both." : ""), 4200);
         feedPost("bought a crowbar off pete. for projects.", '@crackheadcent');
         saveGame();
       }
@@ -356,11 +356,18 @@ export function peteDialogue() {
     opts.push({
       label: "swap tools. pete is holding " + heldName + ".",
       action: () => {
-        state.flags.peteToolLocker = P.equip.tool || null;
+        const returned = P.equip.tool || null;
+        state.flags.peteToolLocker = returned;
         P.equip.tool = held;
         applyEquipStats();
         audio.pickup();
-        toast("pete slides " + heldName + " across.\npete takes the other one back.\nno money moves.\npete does not explain the service.", 3600);
+        // the fork is the mechanic (operator-ratified): cook or burglar, per-outing.
+        // the swap line states which life the player just picked. flat.
+        const tension = returned
+          ? (held === 'crowbar' ? "the torch goes behind the glass.\ntonight you pry. nothing cooks."
+                                : "the crowbar goes behind the glass.\ntonight you cook. nothing pries.")
+          : "pete does not explain the service.";
+        toast("pete slides " + heldName + " across.\n" + tension + "\nno money moves.", 3600);
         saveGame();
       }
     });

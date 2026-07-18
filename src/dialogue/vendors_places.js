@@ -543,7 +543,7 @@ export function priceGuyDialogue(n) {
           // v22 wave 5.5 — ownership counts pete's locker; a crowbar in the slot
           // is displaced there, never destroyed.
           const displaced = equipTool('propane_torch');
-          toast("you paid $" + paid + ".\nhe handed you a propane torch.\nit smells like a parking lot.\n(+ propane torch)" + (displaced ? "\nthe crowbar goes to pete's glass.\nthis is the arrangement." : ""), 5400);
+          toast("you paid $" + paid + ".\nhe handed you a propane torch.\nit smells like a parking lot.\n(+ propane torch)" + (displaced ? "\nthe crowbar goes to pete's glass.\nyou cook now. you do not pry." : ""), 5400);
           feedPost("the price guy gave someone a propane torch. he had one. now they do.", '@crackheadcent');
         } else if (r < 0.70) {
           P.rocks++;

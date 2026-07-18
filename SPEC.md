@@ -2142,7 +2142,12 @@ whole gate vocabulary is `failedHeistGate()`, defined once.
    the design, not a leak.
 5. **The crowbar.** `EQUIPMENT.crowbar` (slot `tool`, "a crowbar (municipal)"), $35 at
    Pete, always stocked, one per customer. It shares the ONE tool slot with the propane
-   torch — carrying one means not carrying the other. The displaced tool is never
+   torch — carrying one means not carrying the other. **Operator-ratified 2026-07-18:
+   the slot tension IS the mechanic** — *"the tension is good. you have to choose —
+   better crack with the propane torch, or easier break-ins."* Cook or burglar,
+   per-outing, never per-save; every displacement and swap states the fork flat
+   ("you can cook or you can pry. not both." / "tonight you pry. nothing cooks.").
+   The displaced tool is never
    destroyed: it goes behind Pete's glass (`state.flags.peteToolLocker`) and swaps back
    free ("no money moves. pete does not explain the service."), so no torch- or
    crowbar-gated content is ever permanently unreachable. `ownsTool()` (equipped OR
