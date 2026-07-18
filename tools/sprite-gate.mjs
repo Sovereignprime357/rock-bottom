@@ -21,8 +21,11 @@ const sameSet=(a,b)=>JSON.stringify(sorted(a))===JSON.stringify(sorted(b));
 const DIRS=['down','up','left','right'];
 
 const PLAYER_BASES=['player','playerhi','playerattack','playerattackhi','attack_smear'];
+// v22 wave 5.5 — 'crowbar' added (the break-in tool, EQUIPMENT slot 'tool').
+// Additive snapshot extension: 93→94 bases, 373→377 keys; the 373 prior keys'
+// palette records are untouched and the new hash is ratified below.
 const GEAR_IDS=[
-  'airpods','bathrobe','cowboy','crocs','helmet','mesh_cap','parka','pigeon_crown',
+  'airpods','bathrobe','cowboy','crocs','crowbar','helmet','mesh_cap','parka','pigeon_crown',
   'priest_collar','propane_torch','ski_mask','trench','vibrams','walmart_sneak','windbreaker',
 ];
 const WEAPON_IDS=['baguette','brick','broken_bottle','cart_wheel','fists','knife','microphone','pipe','shoe'];
@@ -73,7 +76,7 @@ for(const [base,keys] of EXPECTED_BASE_KEYS)for(const key of keys){
   EXPECTED_KEY_BASES[key]=base;
 }
 const EXPECTED_KEYS=Object.keys(EXPECTED_KEY_BASES);
-if(EXPECTED_BASES.length!==93||EXPECTED_KEYS.length!==373){
+if(EXPECTED_BASES.length!==94||EXPECTED_KEYS.length!==377){
   throw new Error(`sprite-gate grammar is internally wrong (${EXPECTED_BASES.length} bases / ${EXPECTED_KEYS.length} keys)`);
 }
 
@@ -349,7 +352,10 @@ const characterPaletteSnapshot=Object.entries(characterPalettes).sort(([a],[b])=
 const environmentPaletteSnapshot=Object.entries(environmentPalettes).sort(([a],[b])=>a.localeCompare(b));
 const characterPaletteHash=createHash('sha256').update(JSON.stringify(characterPaletteSnapshot)).digest('hex');
 const environmentPaletteHash=createHash('sha256').update(JSON.stringify(environmentPaletteSnapshot)).digest('hex');
-const EXPECTED_CHARACTER_PALETTE_HASH='020631c66212dd4266e4fe093de7730b364a730aceb66185c0290b6ae8a93367';
+// v22 wave 5.5 ratified snapshot: adds the 4 gear_crowbar_* keys. Audit: the art
+// module edit only ADDED the crowbar branch — no prior key's draw code changed,
+// so the 373 previous records are byte-identical inside the new snapshot.
+const EXPECTED_CHARACTER_PALETTE_HASH='1d36333e3aee34e657cdfcaf43891b195996a135e9b7e32c4b85eea84385d8ac';
 const EXPECTED_ENVIRONMENT_PALETTE_HASH='ab49d9868ec172f3d3e487ed0230df09319ba395f8df3f8e4d6baaa734348bd3';
 if(characterPaletteHash!==EXPECTED_CHARACTER_PALETTE_HASH)fail(`character palette-use corpus drifted (${characterPaletteHash}); audit and ratify a new snapshot`);
 if(environmentPaletteHash!==EXPECTED_ENVIRONMENT_PALETTE_HASH)fail(`environment palette-use corpus drifted (${environmentPaletteHash}); audit and ratify a new snapshot`);

@@ -37,6 +37,10 @@ export function init_catalogs() {
     // v13 wave 4 — propane torch unlocks the 4th cook mode. fits in the new 'tool' slot.
     // no movement / hp / cred mods — it's a kitchen tool, not a fit.
     propane_torch: { slot:'tool',  n:"a propane torch (dented)",        speed: 0, cred: 0,  hp: 0 },
+    // v22 wave 5.5 — pries the tool-gated break-in doors (activities.js failedHeistGate).
+    // Shares the one tool slot with the torch: carrying one means not carrying the
+    // other. The displaced tool goes behind pete's glass (equipTool, runtime_ui.js).
+    crowbar:       { slot:'tool',  n:"a crowbar (municipal)",           speed: 0, cred: 0,  hp: 0 },
     // v13 wave 5 — taken from father o'malley fallen. cred for showing up in a thing you didn't earn.
     // wantedDecay is a multiplier on the cop-decay timer (1.3 = 30% faster) applied in manageCops.
     priest_collar: { slot:'hat',   n:"the priest's collar (reversed)",  speed: 0, cred: 2,  hp: 0, wantedDecay: 0.3 },

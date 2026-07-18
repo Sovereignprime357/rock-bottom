@@ -14,6 +14,14 @@ export let COOK_MODES;
 
 export function hasPropane() { return P.equip && P.equip.tool === 'propane_torch'; }
 
+// v22 wave 5.5 — ownership vs. carrying. hasPropane() gates USE (the cook mode
+// needs the torch in hand); ownsTool() gates ACQUISITION (a tool at pete's glass
+// is still yours, so drops and vendors must not issue a duplicate — a second
+// torch would overwrite the locker and destroy a tool).
+export function ownsTool(id) {
+  return (P.equip && P.equip.tool === id) || (state.flags && state.flags.peteToolLocker === id);
+}
+
 export function cookBatchMenu() {
   const have = P.supplies || 0;
   const dirty = Math.min(P.dirtySupplies||0, have);

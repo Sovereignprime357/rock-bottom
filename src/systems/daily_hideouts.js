@@ -316,6 +316,7 @@ export function init_daily_hideouts() {
     'peteCashToday',     // audit (pete daily $200 cap)
     'heistsToday',       // audit (heist daily cap = 3)
     'robberiesToday',    // v22 robbery — daily cap (I-BOUNDED-RATE); robLastClockMs is NOT here, it rides the world clock
+    'breakinsToday',     // v22 wave 5.5 — break-in daily cap (2), separate from heistsToday (I-NO-MINT-DRIFT)
   ];
   
   

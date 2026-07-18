@@ -2187,3 +2187,100 @@ the probe watching the taken thing.
 sprite missing its layer, "the math is correct"); rule on option (b) as the zone's
 escalation; tune $5-15 / 60s / 2-per-day if the sting reads wrong — the gate holds the
 shape, not the values. Then 5.4 break-ins needs its SPEC; 5.5 stays blocked behind it.
+
+---
+
+## 2026-07-18 — v22 Wave 5.5: break-ins, generalized (branch `v22-breakins`, pushed, NOT merged)
+
+**What.** The copper heist engine learned two door kinds and a second data table.
+`failedHeistGate()` (activities.js) is the entire gate vocabulary — `tool` checks
+`P.equip.tool` identity, `cred` checks `P.cred >= n`, listed order, all must pass, first
+failure speaks its per-building refusal and bounces clean, spending nothing.
+`BREAKIN_SITES` (props.js): MODEL HOME (crowbar; the model family, at dinner since 2016;
+$14 "FOR REALISM" + the one real apple), THE SPOIL BANK (cred 25; the former teller at a
+vault the 1994 demolition missed; $18 in a band labeled $2,000), SOD FARM OFFICE (crowbar
++ cred 50, the precedence witness — door before goose; $9 petty cash + a rain gauge
+(dry)). Own governor `breakinsToday` cap 2/day, never `heistsToday`. Crowbar: $35 at
+pete, always stocked, one per customer; shares the ONE tool slot with the torch; the
+displaced tool goes behind pete's glass (`peteToolLocker`) and swaps back free.
+`ownsTool()` (equipped OR lockered) now guards every torch acquisition path so a
+duplicate can never overwrite the locker and destroy a tool. Scope held at 3 sites —
+the spec's trap ("fill the whole quarter") not taken; 5.6 inherits the pattern.
+
+**Decided, and why.**
+- **Gates are site-level doors, not entry kinds.** The spec's phrase "entry-gate kinds"
+  could read as entries; but an entry-level gate next to a `roll` entry is a door you
+  can open without the gate — exactly the I-GATE-REAL bug. So the door is checked once
+  in `startHeist` before the cap, and entries stay flavor. Precedence = listed order,
+  pinned by the gate (both-gates sites must list tool first).
+- **Gate before cap, refusal spends nothing.** A door that eats your daily cap while
+  refusing you is a trap; the spec calls the refusal "a clean bounce." Copper still
+  counts on entry (unchanged, shipped behavior).
+- **Second table, not an extended COPPER_SITES** — per the spec's own recommendation;
+  the two governors and loot shapes never entangle.
+- **Copper-gate's literal singletons kept intact** by branching the governor
+  (`site.loot` selects the counter) instead of generalizing the increment expression —
+  the copper gate still finds its exact `heistsToday` literal exactly once, unedited.
+- **Non-solid `breakin_shell` props, not new facades.** solidity-gate hash-pins the 28
+  facades as a ratified OD-11 decision; the freight car already established "authored
+  non-solid silhouette, the interior is the dialogue" for a heist anchor. Three shells
+  + one cardsign + six weeds; solidity's zero-content prop pin consciously moved
+  166→176 with the reason in the gate comment.
+- **Crowbar loot cannot include copper** — copper-sites-gate's contract says the
+  engine's single roll is the ONLY copper faucet; break-in loot ids are pinned to
+  {food, junk} + cash. Both are inside the robbery's losable allowlist: skid row can
+  take back what the quarter gave. Deliberate; the loop closing IS the economy note.
+- **Sprite corpus extended additively** for `gear_crowbar` (the player-gear module
+  throws on unknown EQUIPMENT ids — every tool is visible on the sprite, same principle
+  robbery's I-VISIBLE relies on). 93→94 bases, 373→377 keys; VIBE's frozen-snapshot
+  rule honored by REPRODUCING the old hash from the new snapshot minus the crowbar keys
+  (additive proven, not asserted) before ratifying the new one. runtime-smoke got an
+  explicit POST_V19_SPRITE_KEYS allowlist that is asserted present in the modular build,
+  so it can't rot into excusing a missing sprite.
+
+**Tried and adjusted.**
+- First suite run failed at sprite-gate ("unknown player gear: crowbar") — the renderer
+  enforces art for every equipment id at link time. Authored the art rather than
+  special-casing invisibility.
+- runtime-smoke's exact spriteKeys parity with frozen v19 cannot hold once the live
+  game grows art the monolith can't contain; solved with the asserted allowlist above
+  rather than loosening the comparison.
+
+**Verification.** 18/18 green. breakin-gate proves I-GATE-REAL dynamically in BOTH
+directions at the exact boundary (cred 24 refuses / 25 opens; bare hands + wrong tool
+refuse; both-gates order), proves governor separation by interleaving a capped copper
+day with 2 break-ins through the real `resetDailyCounters`, walks every entry × RNG ×
+take/alt × exit × RNG to `playing`, and round-trips crowbar + locker + counter through
+the real save. Red-tested six directions (neutered tool check, neutered cred check,
+governor swapped onto heistsToday, loot $100, take stage dropped, anchor drifted) —
+every mutation in the real src files, exit codes unpiped (#3), every red required to
+fire its DESIGNED message, mutations verified to reach the imported path (#13), clean
+tree re-greened. Pete's buy/displace/swap/no-dupe flows exercised end-to-end headless
+(6/6). Economy net: source ≤ $32/day gated behind cred 25+ / a $35 tool, against the
+robbery's 2/day sink — governed, small, variety-is-the-payout.
+
+**Findings, written not fixed.**
+- The crowbar has no cook use and the torch has no pry use — the slot choice is clean
+  today, but any future third tool must decide what the locker does when it's occupied
+  by a tool pete has no line for (the invariant "two tools ⇒ locker never overwrites"
+  is stated at equipTool and will need restating).
+- `gear_crowbar` art is functional pixel work (municipal red bar, hook, rear strap
+  angle); it has NOT had an operator eye. Sprite quality remains the operator's
+  acceptance gate, as sprite-gate itself prints.
+
+**Next.** Operator: the flagged fork — crowbar vs torch sharing the tool slot (built as
+a real carry choice with a free swap at pete; redirect if they should stack). Play the
+quarter: do three buildings read as a reason to walk south, is the goose funny, do $35 /
+cap 2 / cred 25 & 50 pace right. On merge, 5.6 (fill the quarter) unblocks and inherits:
+sites are data, doors are gates, one engine.
+
+**Addendum, same day — the fork RULED.** Operator ratified the tool-slot tension as the
+mechanic itself: *"the tension is good. you have to choose — better crack with the
+propane torch, or easier break-ins."* Cook or burglar, per-outing. Changes: every
+displacement and swap line now states the choice flat — pete's crowbar sale over the
+torch says "you can pry or you can cook. not both."; the swap is directional ("tonight
+you pry. nothing cooks." / "tonight you cook. nothing pries."); the torch pickup and
+price-guy displacement say "you cook now. you do not pry." Reversibility re-verified
+end-to-end (buy → displace → swap → swap back → no-dupe, 6/6 headless); the locker
+keeps the tension per-outing, never per-save. SPEC.md crowbar clause and DELEGATION
+play-gate updated to record the ruling. Suite stays 18/18 — no gate reads toast text.

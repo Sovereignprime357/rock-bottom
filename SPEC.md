@@ -2103,3 +2103,71 @@ and both allowlists live in `src/systems/robbery.js`.
    snapshots catch — every one red for its named reason, pristine tree re-verified green.
    hitter-gate's subtraction-site pin raised 1→2 (use + theft), grants still pinned at 2.
    Suite **17/17**.
+## v22 — BREAK-INS, GENERALIZED (2026-07-18)
+
+Implements `SPEC-v22-breakins.md`. The copper heist engine (`activities.js`) learns two
+door kinds — `tool` and `cred` — and runs a second data table, `BREAKIN_SITES`
+(`src/data/props.js`): three cursed buildings in the barren quarter, each with its own
+inhabitant, gate, and specific take. Same 3-beat flow (get in → take → get out); the
+whole gate vocabulary is `failedHeistGate()`, defined once.
+
+1. **I-ONE-ENGINE.** No second heist implementation. `startHeist`/`heistStage` remain
+   single definitions; break-in sites are data through the same flow, stage 2 branching
+   on `site.loot` (the take) vs `site.pipes` (copper). `breakin-gate` counts the
+   singletons across all of `src/`.
+2. **I-GATE-REAL.** A `tool` gate is `P.equip.tool === 'crowbar'` identity; a `cred`
+   gate is `P.cred >= n`. Gates evaluate in listed order, ALL must pass, and the first
+   failing gate speaks its refusal — a clean bounce to `playing` that spends nothing
+   (not the daily cap, not a dollar). Declared precedence on a both-gates site: tool
+   before cred ("the door is answered before the goose is"). Proven dynamically in both
+   directions at the exact boundary (cred 24 refuses, 25 opens; bare hands and the
+   wrong tool both refuse).
+3. **The three sites.** MODEL HOME (southwest scrub; the model family, mid-dinner since
+   2016; crowbar door; take: $14 "FOR REALISM" + an apple (real, from the bowl)) · THE
+   SPOIL BANK (rail spoil; the former teller at a vault the 1994 demolition missed;
+   cred 25; take: $18 in a band labeled $2,000 + a blank deposit slip) · SOD FARM
+   OFFICE (far scrub; the goose (manager), not hired, the manager; crowbar + cred 50 —
+   the precedence witness; take: $9 petty cash + a rain gauge (dry)). Each has an alt
+   to the take (sit at the table / compound interest / the map of former lawns, +8
+   brain) — the copper "listen" analog.
+4. **I-NO-MINT-DRIFT.** Own governor: `breakinsToday`, cap **2/day**
+   (`BREAKIN_DAILY_CAP`), in `DAILY_COUNTER_KEYS` — never `heistsToday`, so copper and
+   break-ins cannot starve each other (proven by interleaving a capped copper day with
+   2 break-ins and watching both counters through the real dawn reset). Loot is
+   structurally locked: fixed per-site take, cash ≤ $20/site, worst-case day $32
+   (< $40 pinned ceiling, noise next to the ~$270 copper floor), item ids from the
+   vetted set {food, junk}, and no site JSON may name copper, rocks, supplies, or
+   hitters. Break-in loot (cash, food, junk) is inside the robbery's losable
+   allowlist — skid row can take back what the quarter gave. The loop closes; that is
+   the design, not a leak.
+5. **The crowbar.** `EQUIPMENT.crowbar` (slot `tool`, "a crowbar (municipal)"), $35 at
+   Pete, always stocked, one per customer. It shares the ONE tool slot with the propane
+   torch — carrying one means not carrying the other. **Operator-ratified 2026-07-18:
+   the slot tension IS the mechanic** — *"the tension is good. you have to choose —
+   better crack with the propane torch, or easier break-ins."* Cook or burglar,
+   per-outing, never per-save; every displacement and swap states the fork flat
+   ("you can cook or you can pry. not both." / "tonight you pry. nothing cooks.").
+   The displaced tool is never
+   destroyed: it goes behind Pete's glass (`state.flags.peteToolLocker`) and swaps back
+   free ("no money moves. pete does not explain the service."), so no torch- or
+   crowbar-gated content is ever permanently unreachable. `ownsTool()` (equipped OR
+   lockered) guards every torch acquisition path — Pete's re-stock, the price guy, both
+   Brutus drops, the world pickup — so a duplicate can never overwrite the locker. The
+   robbery cannot take the tool slot (pinned). Player gear art: `gear_crowbar`, an
+   additive sprite-corpus extension (93→94 bases, 373→377 keys) whose minus-crowbar
+   palette snapshot reproduces the old ratified hash byte-identically.
+6. **I-REACHABLE / anchors.** Sites anchor to three non-solid `breakin_shell` props
+   (freight-car idiom: authored silhouettes, the interior is the dialogue) in the
+   southwest scrub and south rail spoil, clear of both roads, parity-pinned to the
+   registry (barren-quarter bounds asserted: x < 5680, 3800 ≤ y ≤ 5600). Optional
+   content only; world-gate runway untouched. `breakinSiteAt()` and `copperSiteAt()`
+   provably never answer for each other's sites.
+7. **I-SAVE-ADDITIVE.** `breakinsToday` rides the counters defaults;
+   `peteToolLocker: null` rides the flags defaults; version stays 10; a pre-break-in
+   save loads with doors open and Pete holding nothing. Crowbar + locker + governor
+   round-trip through the real save/load.
+8. **Permanent enforcement.** `tools/breakin-gate.mjs` (18th gate, behind the income
+   family and its sink). Red-tested in six directions — neutered tool check, neutered
+   cred check, governor swapped onto `heistsToday`, loot raised to $100, take stage
+   dropped (softlock), anchor drifted — each firing its designed message through the
+   real imported path before any green was believed. Suite **18/18**.

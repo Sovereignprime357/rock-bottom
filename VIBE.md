@@ -343,6 +343,9 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | DENNIS (NIGHTS) | guards the cold that left in 2011; holds the empty thermos with both hands | night watch at COLD (NOT), warehouse row (copper site, dialogue-only like brutus jr.) | writes you into a log nobody collects; cannot be provoked |
 | THE RACCOON QUORUM | seven raccoons; quorum is four; votes on everything | in session on the filing cabinet at WATER DEPT. (DRY), the drainage canal (copper site, dialogue-only) | rules on your entry; the vote is binding; accepts one can of evidence |
 | TRANSIT AUTHORITY DAN | laminated his own badge; the lamination is peeling | patrols the train yard for a railroad that ended in 1987 (copper site, dialogue-only) | writes citations on transfer slips; the fine is whatever he remembers |
+| THE MODEL FAMILY | mid-dinner since 2016; the food is plastic, the commitment is not | staged inside MODEL HOME, the southwest scrub (break-in site, dialogue-only) | does not move, does not object; the empty chair is available |
+| THE FORMER TELLER | keeps banking hours at a vault the demolition missed | THE SPOIL BANK mound, the rail spoil (break-in site, dialogue-only) | admits account holders only (cred 25); stamps papers that stamp nothing |
+| THE GOOSE (MANAGER) | stands on the desk; was not hired; is the manager | SOD FARM OFFICE, the far scrub (break-in site, dialogue-only) | grants passage or performs a review at speed; files complaints as honking |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 

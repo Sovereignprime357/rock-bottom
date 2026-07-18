@@ -327,6 +327,14 @@ export function makePlayerGear32(id, direction) {
     box(grid,x,18,5,11,orange); box(grid,x+1,19,3,8,brick);
     box(grid,x+1,15,3,4,dark); line(grid,x+2,15,x-1,12,dark);
     put(grid,x-2,11,yellow); put(grid,x-3,10,pink); put(grid,x+1,23,cream);
+  } else if (id === 'crowbar') {
+    // v22 wave 5.5 — municipal red bar, carried low in the tool hand; hooked
+    // end up by the grip, flat pry foot at the ground. It says PROPERTY OF.
+    const x=side?23:25;
+    line(grid,x,17,x+2,28,brick); line(grid,x+1,17,x+3,28,brick);
+    line(grid,x,17,x-3,14,brick); put(grid,x-3,15,brick); put(grid,x-4,15,dark);
+    put(grid,x+2,29,dark); put(grid,x+3,29,dark);
+    put(grid,x+1,20,cream); put(grid,x+2,24,dark);
   } else {
     throw new Error(`unknown player gear: ${id}`);
   }
@@ -352,6 +360,10 @@ export function makePlayerGear32(id, direction) {
       box(grid,6,31,6,1,dark); box(grid,22,31,6,1,dark); put(grid,13,30,yellow); put(grid,20,30,yellow);
     } else if (id === 'propane_torch') {
       line(grid,9,17,25,23,dark); put(grid,16,20,cream); put(grid,17,20,cream);
+    } else if (id === 'crowbar') {
+      // rear: the bar rides across the back at a working angle, hook past the hip.
+      line(grid,8,22,24,18,brick); line(grid,8,23,24,19,brick);
+      put(grid,7,23,dark); put(grid,25,17,dark); put(grid,15,21,cream);
     }
   }
   if (side && id === 'walmart_sneak') {

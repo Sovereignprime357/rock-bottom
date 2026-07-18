@@ -109,6 +109,12 @@ async function runModules() {
   return context;
 }
 
+// v22 wave 5.5 — sprite keys that postdate the frozen v19 reference. The monolith
+// cannot contain them, so parity is defined as: every v19 key identical, AND every
+// listed addition actually present in the modular build (asserted below, so this
+// allowlist cannot rot into silently excusing a missing sprite).
+const POST_V19_SPRITE_KEYS = ['gear_crowbar_down', 'gear_crowbar_left', 'gear_crowbar_right', 'gear_crowbar_up'];
+
 function snapshot(context) {
   const rb = context.window._rb;
   if (!rb) throw new Error('window._rb was not installed');
@@ -116,7 +122,7 @@ function snapshot(context) {
     player:{ x:rb.P.x, y:rb.P.y, cash:rb.P.cash, rocks:rb.P.rocks, hp:rb.P.hp, rank:rb.P.rank, shakes:rb.P.shakes, rockedT:rb.P.rockedT, crashT:rb.P.crashT },
     state:{ mode:rb.state.mode, day:rb.state.day, weather:rb.state.weather, questCount:Object.keys(rb.state.quests).length },
     npcCount:rb.npcs.length,
-    spriteKeys:Object.keys(rb.sprites).sort(),
+    spriteKeys:Object.keys(rb.sprites).filter(key => !POST_V19_SPRITE_KEYS.includes(key)).sort(),
     palKeys:Object.keys(rb.pals).sort(),
     routeStops:rb.routeStops.map(stop => stop.id),
     scheduledFrames:context.__qa.frames.length,
@@ -126,6 +132,12 @@ function snapshot(context) {
 
 const reference = await runReference();
 const modular = await runModules();
+const modularSpriteKeys = Object.keys(modular.window._rb.sprites);
+const missingAdditions = POST_V19_SPRITE_KEYS.filter(key => !modularSpriteKeys.includes(key));
+if (missingAdditions.length) {
+  console.error(`RUNTIME SMOKE: post-v19 sprite additions missing from the modular build: ${missingAdditions.join(', ')}`);
+  process.exit(1);
+}
 const expected = JSON.stringify(snapshot(reference));
 const actual = JSON.stringify(snapshot(modular));
 if (actual !== expected) {

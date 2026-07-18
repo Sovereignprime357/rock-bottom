@@ -285,6 +285,76 @@ export function drawProp(p) {
     ctx.font = 'bold 7px Courier New';
     ctx.fillText('RA  ROAD', p.x+12, p.y+22);
   }
+  // v22 wave 5.5 — BREAK-IN SHELLS (barren quarter). Non-solid authored silhouettes,
+  // freight-car idiom: one branch, three variants. The interior is the dialogue.
+  else if (p.type === 'breakin_shell') {
+    // ground shadow
+    ctx.fillStyle = 'rgba(0,0,0,.5)';
+    ctx.fillRect(p.x+4, p.y+p.h, p.w-8, 6);
+    // body
+    ctx.fillStyle = p.color || '#4a4038';
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    // dark roof band
+    ctx.fillStyle = 'rgba(0,0,0,.42)';
+    ctx.fillRect(p.x, p.y, p.w, 8);
+    if (p.variant === 'model_home') {
+      // plywood windows, two, with plank X's — municipal
+      ctx.fillStyle = '#6a5838';
+      ctx.fillRect(p.x+26, p.y+34, 44, 34);
+      ctx.fillRect(p.x+p.w-70, p.y+34, 44, 34);
+      ctx.strokeStyle = 'rgba(0,0,0,.5)'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(p.x+26, p.y+34); ctx.lineTo(p.x+70, p.y+68);
+      ctx.moveTo(p.x+70, p.y+34); ctx.lineTo(p.x+26, p.y+68);
+      ctx.moveTo(p.x+p.w-70, p.y+34); ctx.lineTo(p.x+p.w-26, p.y+68);
+      ctx.moveTo(p.x+p.w-26, p.y+34); ctx.lineTo(p.x+p.w-70, p.y+68);
+      ctx.stroke();
+      // front door (model condition, never opened)
+      ctx.fillStyle = '#2a2018';
+      ctx.fillRect(p.x + p.w/2 - 14, p.y + p.h - 44, 28, 44);
+      // a lawn strip that came with the staging
+      ctx.fillStyle = 'rgba(60,88,40,.5)';
+      ctx.fillRect(p.x-6, p.y+p.h+6, p.w+12, 4);
+    } else if (p.variant === 'spoil_bank') {
+      // the mound swallows the corners — dirt arcs over the body
+      ctx.fillStyle = '#3a2e20';
+      ctx.beginPath();
+      ctx.ellipse(p.x + p.w/2, p.y + p.h, p.w/2 + 14, p.h - 8, 0, Math.PI, 0);
+      ctx.fill();
+      // the vault door (round, out of place, on time)
+      const vx = p.x + p.w/2, vy = p.y + p.h - 46;
+      ctx.fillStyle = '#565a5e';
+      ctx.beginPath(); ctx.arc(vx, vy, 32, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,.6)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(vx, vy, 24, 0, Math.PI*2); ctx.stroke();
+      // spokes
+      ctx.beginPath();
+      ctx.moveTo(vx-14, vy); ctx.lineTo(vx+14, vy);
+      ctx.moveTo(vx, vy-14); ctx.lineTo(vx, vy+14);
+      ctx.stroke();
+      // the teller's window: a gap in the dirt
+      ctx.fillStyle = '#0a0805';
+      ctx.fillRect(p.x + 30, p.y + p.h - 34, 26, 14);
+    } else if (p.variant === 'sod_office') {
+      // office window (closed; the goose closed it)
+      ctx.fillStyle = '#141812';
+      ctx.fillRect(p.x + 28, p.y + 30, 52, 30);
+      ctx.strokeStyle = 'rgba(0,0,0,.5)'; ctx.lineWidth = 2;
+      ctx.strokeRect(p.x + 28, p.y + 30, 52, 30);
+      // swollen door, visibly fought
+      ctx.fillStyle = '#241c14';
+      ctx.fillRect(p.x + p.w - 52, p.y + p.h - 42, 30, 42);
+      ctx.fillStyle = 'rgba(0,0,0,.4)';
+      ctx.fillRect(p.x + p.w - 54, p.y + p.h - 44, 34, 4);
+      // the last pallet of sod, delivered, never laid
+      ctx.fillStyle = 'rgba(58,80,40,.7)';
+      ctx.fillRect(p.x - 18, p.y + p.h - 12, 14, 12);
+    }
+    // faded sign
+    ctx.fillStyle = 'rgba(220,210,180,.5)';
+    ctx.font = 'bold 8px Courier New';
+    ctx.fillText(p.sign || '', p.x + 8, p.y + 20);
+  }
   // v13 wave 8a — TRAIN YARD: chalk message on a freight car side
   else if (p.type === 'chalk_message') {
     ctx.fillStyle = 'rgba(220,210,180,.72)';

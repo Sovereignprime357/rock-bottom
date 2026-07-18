@@ -16,6 +16,20 @@
 
 ---
 
+## v22 wave 5.5 — break-ins, generalized (the engine earns its keep) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
+
+Branch: `v22-breakins`, isolated worktree; push without merge. Contract: `SPEC-v22-breakins.md`, graduated to SPEC.md. Scope held to 3 sites as the spec ordered — filling the quarter is 5.6's.
+
+- [x] **Two door kinds, one engine.** `failedHeistGate()` in `activities.js` is the whole gate vocabulary: `tool` is `P.equip.tool` identity, `cred` is `P.cred >= n`; listed order, all must pass, first failure speaks ("the lock knows you're a nobody" energy, per-building text); a refused door bounces clean to `playing` and spends nothing. `BREAKIN_SITES` is a second data table through the SAME `startHeist`/`heistStage` flow — stage 2 is the take instead of the pipes.
+- [x] **Three cursed buildings (barren quarter).** MODEL HOME — the model family, at dinner since 2016; crowbar; $14 "FOR REALISM" + the one real apple. THE SPOIL BANK — the former teller, keeping hours at a vault the demolition missed; cred 25; $18 in a band labeled $2,000 + a blank deposit slip. SOD FARM OFFICE — the goose (manager), not hired, the manager; crowbar AND cred 50, the declared-precedence witness (door before goose). Non-solid `breakin_shell` props (freight-car idiom), southwest scrub + rail spoil, both lookups provably disjoint from copper's.
+- [x] **The crowbar.** $35 at pete, always stocked, one per customer, durable, gear-art on the sprite (`gear_crowbar`, additive 94/377 corpus extension, minus-crowbar hash reproduces the old snapshot). Shares the one tool slot with the torch; the displaced tool goes behind pete's glass and swaps back FREE, so neither tool's content is ever unreachable. `ownsTool()` closes every duplicate-torch path (pete re-stock, price guy, both brutus drops, world pickup). The robbery can never take the tool slot.
+- [x] **The governor (I-NO-MINT-DRIFT).** `breakinsToday`, cap 2/day, own counter in `DAILY_COUNTER_KEYS` — never `heistsToday`. Worst-case take $32/day against the ~$270 copper floor and the robbery's 2/day sink; loot fixed per site, item ids vetted {food, junk} — both inside the robbery's losable allowlist, so skid row can take back what the quarter gave (the loop closes on purpose).
+- [x] **Permanent enforcement.** `tools/breakin-gate.mjs` (18th gate) — refusal proven in BOTH directions at the exact boundary (cred 24/25, bare hands, wrong tool, both-gates precedence), governors proven separate by interleaving a capped copper day through the real dawn reset, loot structurally locked, every entry/take/alt/exit/leave walked to `playing`, crowbar + locker + governor save round-trip. Red-tested in six directions, each firing its designed message through the real imported path, exit codes unpiped; suite **18/18**; frozen v19 untouched.
+- [x] **The fork — RULED 2026-07-18.** Operator ratified the tool-slot tension as the mechanic: *"the tension is good. you have to choose — better crack with the propane torch, or easier break-ins."* Cook or burglar, per-outing (swap free at pete, never a per-save lockout). Every displacement/swap line now states the choice flat: "you can cook or you can pry. not both." / "tonight you pry. nothing cooks."
+- [ ] **Operator play gate.** Walk the quarter and see if three buildings read as a reason to go; judge whether the goose is funny; feel whether the swap lines land the cook-or-burglar choice; tune $35 / cap 2 / cred 25 & 50 if the pacing reads wrong.
+
+---
+
 ## v22 wave 5.4 — the robbery (the first sink) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
 
 Branch: `v22-robbery`, isolated worktree; push without merge. Contract: `SPEC-v22-robbery.md`, graduated to SPEC.md. Trigger **(a)** as ruled: the grabber takes; option (b), robbed-instead-of-killed, deliberately not built — operator's to escalate at review.

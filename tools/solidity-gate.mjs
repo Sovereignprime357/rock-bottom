@@ -122,7 +122,9 @@ if(LANDMARK_FACADES.length!==28||facadeSolid!==28||facadeFlat!==0){
 if(BUILDINGS.length!==25)fail(`legacy building inventory drifted: expected 25, got ${BUILDINGS.length}`);
 if(WORLD.w!==8600||WORLD.h!==5600)fail(`zero-content world bounds drifted: expected 8600x5600, got ${WORLD.w}x${WORLD.h}`);
 if(ZONES.length!==23)fail(`zero-content zone inventory drifted: expected 23, got ${ZONES.length}`);
-if(PROPS.length!==166)fail(`zero-content prop inventory drifted: expected 166, got ${PROPS.length}`);
+// v22 wave 5.5: 166 -> 176. The +10 are content-bearing, not drift: 3 breakin_shell
+// anchors (BREAKIN_SITES parity is proven by breakin-gate), 1 cardsign, 6 weeds.
+if(PROPS.length!==176)fail(`zero-content prop inventory drifted: expected 176, got ${PROPS.length}`);
 if(freshNpcCount!==56)fail(`zero-content fresh NPC inventory drifted: expected 56, got ${freshNpcCount}`);
 if(ROAD_SEGMENTS.length!==28)fail(`zero-content road inventory drifted: expected 28, got ${ROAD_SEGMENTS.length}`);
 if(!Array.isArray(STRUCTURES))fail('STRUCTURES is not the initialized merged collision source');

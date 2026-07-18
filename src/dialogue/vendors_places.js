@@ -3,13 +3,13 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { audio, saveGame } from '../core/audio_save.js';
-import { P, applyEquipStats, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
+import { P, applyEquipStats, dialogue, equipTool, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { update } from '../core/update.js';
 import { vendorPrice } from '../data/catalogs.js';
 import { clamp, currentZone, isNight } from '../data/npc_spawns.js';
 import { PROPS } from '../data/props.js';
 import { H, W, WORLD, ZONES } from '../data/world.js';
-import { hasPropane } from '../minigames/heat.js';
+import { ownsTool } from '../minigames/heat.js';
 import { drawNpc } from '../render/actors_weather.js';
 import { questToast } from '../systems/combat.js';
 import { broadcastNews, feedPost } from '../systems/communications.js';
@@ -539,10 +539,11 @@ export function priceGuyDialogue(n) {
           P.cash += 200;
           toast("you paid $" + paid + ".\nhe handed you $200.\nyou are net positive on this transaction.\nyou are not.\n(+ $200)", 5400);
           feedPost("the price guy gave someone $200. the someone gave him $" + paid + ". the math is moral.", '@crackheadcent');
-        } else if (r < 0.45 && !hasPropane()) {
-          P.equip.tool = 'propane_torch';
-          applyEquipStats();
-          toast("you paid $" + paid + ".\nhe handed you a propane torch.\nit smells like a parking lot.\n(+ propane torch)", 5400);
+        } else if (r < 0.45 && !ownsTool('propane_torch')) {
+          // v22 wave 5.5 — ownership counts pete's locker; a crowbar in the slot
+          // is displaced there, never destroyed.
+          const displaced = equipTool('propane_torch');
+          toast("you paid $" + paid + ".\nhe handed you a propane torch.\nit smells like a parking lot.\n(+ propane torch)" + (displaced ? "\nthe crowbar goes to pete's glass.\nyou cook now. you do not pry." : ""), 5400);
           feedPost("the price guy gave someone a propane torch. he had one. now they do.", '@crackheadcent');
         } else if (r < 0.70) {
           P.rocks++;

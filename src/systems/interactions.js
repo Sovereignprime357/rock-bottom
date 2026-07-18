@@ -6,7 +6,7 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, applyEquipStats, dialogue, particles, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { EQUIPMENT, PUBLIC_PHONE_LINES, VENDOR_FLOATER_IDS } from '../data/catalogs.js';
 import { inZone } from '../data/npc_spawns.js';
-import { PROPS, copperSiteAt, interactiveProps, rideableCart } from '../data/props.js';
+import { PROPS, breakinSiteAt, copperSiteAt, interactiveProps, rideableCart } from '../data/props.js';
 import { W } from '../data/world.js';
 import { possumDialogue } from '../dialogue/neighborhood_a.js';
 import { tryEnterOldSchool, tryParkBenchSit } from '../dialogue/vendors_places.js';
@@ -99,6 +99,9 @@ export function tryInteract() {
   // highest-priority non-NPC interaction because it's the canonical late-game gate.
   const heistSite = copperSiteAt(P.x+P.w/2, P.y+P.h/2);
   if (heistSite) { startHeist(heistSite.id); return; }
+  // v22 wave 5.5 — break-in sites: second table, same engine, same priority tier.
+  const breakinSite = breakinSiteAt(P.x+P.w/2, P.y+P.h/2);
+  if (breakinSite) { startHeist(breakinSite.id); return; }
   // v13 wave 8a — park bench sit toggle (E within 50px of any park_bench).
   if (tryParkBenchSit()) return;
   // v13 wave 6 — kickable trash cans (E within 50px). 50% cash / 20% junk / 30% rats.

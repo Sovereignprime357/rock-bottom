@@ -256,6 +256,18 @@ export function init_props() {
     { type:'school_fence', x:5920, y:3840, w:1220, h:6 },
     { type:'weeds', x:5960, y:3100 }, { type:'weeds', x:7060, y:3820 },
   
+    // v22 wave 5.5 — BREAK-IN SHELLS (the barren quarter). Non-solid authored
+    // silhouettes like the freight cars; the interior is the dialogue. Coordinates
+    // are the anchor of record — BREAKIN_SITES below mirrors them and breakin-gate
+    // proves the parity. Southwest scrub + south rail spoil, clear of both roads.
+    { type:'breakin_shell', variant:'model_home', x: 950,  y: 4350, w: 240, h: 150, color:'#5a5044', sign:'MODEL HOME' },
+    { type:'breakin_shell', variant:'spoil_bank', x: 3350, y: 4450, w: 260, h: 140, color:'#4a3c2c', sign:'BANK (FORMER)' },
+    { type:'breakin_shell', variant:'sod_office', x: 4800, y: 5050, w: 240, h: 130, color:'#3c4030', sign:'SOD · OFFICE' },
+    { type:'cardsign', x: 1000, y: 4530, text:'IF YOU LIVED HERE\nYOU WOULD BE\nHOME NOW' },
+    { type:'weeds', x: 920,  y: 4520 }, { type:'weeds', x: 1220, y: 4380 },
+    { type:'weeds', x: 3320, y: 4610 }, { type:'weeds', x: 3640, y: 4470 },
+    { type:'weeds', x: 4770, y: 5200 }, { type:'weeds', x: 5070, y: 5090 },
+
     // v19 THE THRONE DITCH: ceremonial curb inventory. The folding chair is not constitutional.
     { type:'cardsign', x:7660, y:4540, text:'ONE CHAIR\nNO APPEALS' },
     { type:'crate', x:7630, y:4565 }, { type:'crate', x:7690, y:4565 },
@@ -477,6 +489,167 @@ export function copperSiteAt(cx, cy) {
       r = BUILDINGS && BUILDINGS.find(b => b.locked);
       if (!r) continue;
     }
+    if (cx > r.x - margin && cx < r.x + r.w + margin && cy > r.y - margin && cy < r.y + r.h + margin) return site;
+  }
+  return null;
+}
+
+// ---------- v22 wave 5.5 — break-in sites ----------
+// Same engine as COPPER_SITES (activities.js, I-ONE-ENGINE), second table. Break-ins
+// differ from copper in exactly three data facts, not in flow:
+//   1. `gates` — the door itself is gated. Kinds: tool (P.equip.tool identity) and
+//      cred (P.cred >= n). Gates evaluate in listed order and ALL must pass; the
+//      first failing gate states its refusal — never a silent no-op. A site listing
+//      tool before cred means the door is answered before the reputation is.
+//   2. `loot` — stage 2 is the take (specific cursed loot per building), not the
+//      copper pipes. Loot is fixed, small, and structurally incapable of granting
+//      copper or rocks — breakin-gate locks the allowed keys.
+//   3. the governor — break-ins count `breakinsToday` (cap 2/day, activities.js),
+//      NEVER `heistsToday`, so copper and break-ins cannot starve each other
+//      (I-NO-MINT-DRIFT). A refused door does not spend the day's cap.
+// Entries and exits use the exact copper vocabulary and effect bounds.
+export const BREAKIN_SITES = [
+  {
+    id: 'model_home',
+    title: 'MODEL HOME',
+    hint: 'pry the model home',
+    who: 'the model family',
+    anchor: { kind: 'rect', propType: 'breakin_shell', x: 950, y: 4350, w: 240, h: 150 },
+    gates: [
+      { kind: 'tool', tool: 'crowbar',
+        refuse: "the windows are plywood. the plywood is municipal.\nyour fingers are not.\na crowbar would change this conversation." },
+    ],
+    capText: "the plywood is back up.\nnobody put it back up.\nnot tonight.",
+    intro: "the sign says MODEL HOME. the development never came.\ninside, the model family is at dinner.\nthey have been at dinner since 2016.\nthe food is plastic. the commitment is not.",
+    entries: [
+      { kind: 'roll', label: 'walk past the dining room. naturally.', p: 0.7,
+        under: { text: 'you walk like a buyer.\nthe father watches you with the confidence\nof a man with no eyes.' },
+        over:  { text: 'you knock the son over.\nhe keeps his pose on the floor. mid-toast.\nyou set him back. nobody saw.\nthe mother saw.', brain: 2 } },
+      { kind: 'sure', label: 'compliment the kitchen.',
+        effect: { text: "you say 'granite.'\nno one answers.\nthe kitchen accepts the compliment\non its own behalf." } },
+      { kind: 'wait', label: 'wait for the family to finish dinner.',
+        effect: { text: 'they do not finish.\nthey were never going to finish.\nyou stop waiting.', shakes: 6 } },
+    ],
+    loot: {
+      title: 'THE STAGING',
+      text: "the staging envelope is taped under the table.\n$14. the label says FOR REALISM.\non the table: a bowl of plastic fruit.\none of the apples is real. it has always been real.",
+      takeLabel: 'take the envelope. and the real apple.',
+      cash: 14,
+      items: [{ id: 'food', n: 'an apple (real, from the bowl)' }],
+      takeToast: "+ $14 (FOR REALISM)\n+ an apple (real, from the bowl)\nthe family does not turn.\nthe dinner goes on.",
+      takeDur: 4200,
+      altLabel: 'sit at the table instead.',
+      alt: { brain: 8, text: 'you sit in the empty chair.\nthere was always an empty chair.\n+ 8 brain\nyou leave before it means something.', dur: 4200 },
+    },
+    getawayText: 'the front door is where you left it.\nthere is also the garage.\nthe garage has never held a car.',
+    exits: [
+      { label: 'the garage.', p: 0.75,
+        under: { text: 'the garage door rolls up.\nyou exit through a garage that has never held a car.\nit holds you briefly. then nothing again.' },
+        over:  { text: 'the door comes down on you.\nmunicipal plywood. municipal spite.', hp: 8 } },
+      { label: 'the front door. like a buyer.', p: 0.5,
+        under: { text: "you leave through the front door.\nyou wave at the family.\nthe father's confidence follows you out." },
+        over:  { text: 'a man with a clipboard is on the lawn.\nhe has been sent about the plywood.\nhe begins walking with purpose.', wanted: 1 } },
+    ],
+  },
+  {
+    id: 'spoil_bank',
+    title: 'THE SPOIL BANK',
+    hint: 'present yourself at the spoil bank',
+    who: 'the former teller',
+    anchor: { kind: 'rect', propType: 'breakin_shell', x: 3350, y: 4450, w: 260, h: 140 },
+    gates: [
+      { kind: 'cred', cred: 25,
+        refuse: "the teller looks through the little window.\nthe window is a gap in the dirt.\n'the bank knows everyone.\nthe bank does not know you.'\ncome back somebody." },
+    ],
+    capText: "the window shows CLOSED.\nthe sign is written on a shovel.\nbanking hours are over.\nnot tonight.",
+    intro: "a vault door in a hill of fill dirt.\nthe bank was demolished in 1994.\nthe vault did not attend.\nthe former teller keeps the hours.\nthe hours are whenever he is here. he is always here.",
+    entries: [
+      { kind: 'roll', label: 'state a plausible account number.', p: 0.6,
+        under: { text: "you say nine digits with confidence.\nhe stamps a paper that stamps nothing.\n'go on through.'" },
+        over:  { text: 'you say eight digits.\nhe notices. of course he notices.\nhe makes you fill out a form\nfor the missing digit.', brain: 3 } },
+      { kind: 'cash', cost: 2,
+        haveLabel: 'pay the service fee. ($2)', lackLabel: "you don't have $2.",
+        effect: { text: 'he takes the two dollars.\nhe puts it in the drawer.\nthe drawer is a shoe.' } },
+      { kind: 'wait', label: 'wait in line.',
+        effect: { text: 'there is no line.\nyou wait in it anyway.\nhe respects this deeply.', shakes: 6 } },
+    ],
+    loot: {
+      title: 'THE VAULT',
+      text: 'the vault is dirt on three sides.\nthe shelves hold what the fill dirt brought:\na paper band labeled $2,000.\ninside the band: $18.\na deposit slip, blank since 1994.',
+      takeLabel: 'take the band. and the slip.',
+      cash: 18,
+      items: [{ id: 'junk', n: 'a deposit slip (blank, 1994)' }],
+      takeToast: '+ $18 (the band said $2,000)\n+ a deposit slip (blank, 1994)\nthe shortfall is not your business.',
+      takeDur: 4200,
+      altLabel: 'ask the teller about compound interest.',
+      alt: { brain: 8, text: 'he explains compound interest to the dirt.\nthe dirt compounds.\n+ 8 brain', dur: 3600 },
+    },
+    getawayText: 'the vault door is open.\nthere is also the hole in the back.\nthe hole is not on the schematic.',
+    exits: [
+      { label: 'the hole in the back.', p: 0.8,
+        under: { text: 'you exit through the hole.\nyou are in the spoil.\nyou were always in the spoil.', hp: 2 },
+        over:  { text: 'the hole narrows.\nthe dirt takes a deposit.', hp: 8 } },
+      { label: 'the front. past the teller.', p: 0.6,
+        under: { text: "he stamps you out.\n'the bank thanks you.'\nthe bank is a hill." },
+        over:  { text: 'he asks you to sign the register.\nyou sign a name. not yours.\nhe files it under that name forever.', brain: 2 } },
+    ],
+  },
+  {
+    id: 'sod_office',
+    title: 'SOD FARM OFFICE',
+    hint: 'try the sod office door',
+    who: 'the goose (manager)',
+    anchor: { kind: 'rect', propType: 'breakin_shell', x: 4800, y: 5050, w: 240, h: 130 },
+    // Both gates — the precedence witness. Listed order rules: the door (tool) is
+    // answered before the goose (cred). Both must pass.
+    gates: [
+      { kind: 'tool', tool: 'crowbar',
+        refuse: 'the door is swollen shut since the sod left.\nit needs a crowbar.\nthe goose watches you not have one.' },
+      { kind: 'cred', cred: 50,
+        refuse: 'the door would open.\nthe goose is standing on the desk.\nthe goose has not heard of you.\ncome back famous.' },
+    ],
+    capText: 'the goose is at the window.\nthe window is closed. the goose closed it.\nnot tonight.',
+    intro: 'the sod farm office. the sod left in 2019.\nthe lawns it grew are still out there.\nsomewhere. being lawns.\na goose stands on the desk.\nit was not hired. it is the manager.',
+    entries: [
+      { kind: 'roll', label: 'announce yourself to the goose.', p: 0.6,
+        under: { text: 'you state your name and business.\nthe goose accepts neither.\nit lets you pass anyway. management.' },
+        over:  { text: 'the goose objects.\nthe objection connects.\nyou are hit by middle management.', hp: 6 } },
+      { kind: 'item', itemId: 'food', consume: 'one',
+        haveLabel: 'submit a can of food (unmarked) to the manager.', lackLabel: 'submit an offering (you have nothing canned).',
+        effect: { text: 'the goose stands on the can.\nthe can is office equipment now.\nyou may pass.' } },
+      { kind: 'sure', label: 'read the org chart on the wall.',
+        effect: { text: 'the org chart is a photo of the goose.\nunder it, a name. the name is redacted.\nyou pass beneath the chart.' } },
+    ],
+    loot: {
+      title: 'PETTY CASH',
+      text: 'the petty cash tin is where tins are.\ninside: $9 and a receipt for $9.\non the wall: a rain gauge. dry. municipal.\na laminated map of lawns that no longer exist.',
+      takeLabel: 'take the tin. and the rain gauge.',
+      cash: 9,
+      items: [{ id: 'junk', n: 'a rain gauge (dry)' }],
+      takeToast: '+ $9 (receipt included)\n+ a rain gauge (dry)\nthe goose does not turn.\nthe goose knew.',
+      takeDur: 4200,
+      altLabel: 'study the map of former lawns.',
+      alt: { brain: 8, text: 'the lawns are numbered.\nlawn 34 is circled.\nno reason is given.\n+ 8 brain', dur: 3600 },
+    },
+    getawayText: 'the door you pried is still pried.\nthere is also the loading window.\nthe goose is between you and both.',
+    exits: [
+      { label: 'the loading window.', p: 0.7,
+        under: { text: 'you fold through the window.\nthe landing is soft.\nit is sod. the last sod.', hp: 2 },
+        over:  { text: 'the window frame keeps a piece of your coat.\nthe goose files this.', hp: 6, wanted: 1 } },
+      { label: 'past the goose. with dignity.', p: 0.5,
+        under: { text: 'you walk past the goose.\nthe goose allows it.\nthis was a performance review.\nyou passed.' },
+        over:  { text: 'the goose escorts you out.\nat speed.\nhonking. municipal honking.', hp: 4, wanted: 1 } },
+    ],
+  },
+];
+
+// Trigger lookup — same contract and margin as copperSiteAt, second table. Shared by
+// tryInteract (interactions.js) and resolveActionHint (campaigns.js); breakin-gate
+// proves the two lookups never answer for each other's sites.
+export function breakinSiteAt(cx, cy) {
+  const margin = 20;
+  for (const site of BREAKIN_SITES) {
+    const r = site.anchor;
     if (cx > r.x - margin && cx < r.x + r.w + margin && cy > r.y - margin && cy < r.y + r.h + margin) return site;
   }
   return null;
