@@ -29,6 +29,9 @@ export async function saveGame() {
         weapon: P.weapon, brutusDefeated: P.brutusDefeated, stripeLoyalty: P.stripeLoyalty,
         charisma: P.charisma||0,
         soapRocks: P.soapRocks||0,
+        // v22 hitter — additive keys; a pre-hitter save has neither and loads to 0/false.
+        hitters: P.hitters||0,
+        hitterHigh: !!P.hitterHigh,
         // v13 wave 7 — faction reputation
         faction: P.faction || { street: 0, scrap: 0, spiritual: 0 },
       },
@@ -76,6 +79,9 @@ export async function loadGame() {
     const sv = s.value;
     Object.assign(P, sv.player);
     P.cartMounted = !!(sv.player && sv.player.cartMounted);
+    // v22 hitter — additive normalize: absent key -> 0/false, junk -> 0/false.
+    P.hitters = Math.max(0, Math.floor(Number(sv.player && sv.player.hitters) || 0));
+    P.hitterHigh = !!(sv.player && sv.player.hitterHigh);
     P.attackCd = 0; P.hitFlash = 0; P.iframes = 0;
     P.facing = P.facing || 'down';
     P.supplies = P.supplies || 0;

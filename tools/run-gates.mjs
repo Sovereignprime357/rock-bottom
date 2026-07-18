@@ -31,6 +31,12 @@ const GATES = [
   // concession proves one smoke loop across many rooms; this proves one heist engine across
   // many buildings, and that adding buildings cannot move the daily copper ceiling.
   'copper-sites-gate.mjs',
+  // hitter-gate rides behind the two loops it must never beat: concession-gate
+  // proves the one real high; copper-sites-gate proves the copper income the
+  // craft consumes. This one proves the emergency hitter loses to the rock over
+  // the FULL hit->high->crash cycle — the marathon, not the sprint — and that
+  // neither acquiring nor using it adds a walk or mints anything back.
+  'hitter-gate.mjs',
   // discovery-gate rides behind the recognition family it protects. recognition-gate's
   // zero-leakage proof watches the LEDGER; discovery routes around the ledger, so a
   // reveal that granted tier would leave that gate green. This one watches the door.

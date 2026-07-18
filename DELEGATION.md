@@ -16,6 +16,18 @@
 
 ---
 
+## v22 — the emergency hitter (the bad trade) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
+
+Branch: `v22-hitter`, isolated worktree; push without merge. Contract: `SPEC-v22-emergency-hitter.md`, graduated to SPEC.md.
+
+- [x] **The consumable.** `P.hitters` counter + `hitterHigh` flag, all numbers in `src/systems/hitter.js`: 6s high, shakes -20, brain -8, no cred/rep/rocksSmoked/intro/recognition, then a 14s/+35 crash at the update.js boundary ("the crash arrives. ahead of schedule."). Net of one full cycle it RAISES shakes (+15) where a rock lowers them (-20) — the rock wins the marathon, not just the sprint. One use, gone; unusable while rocked; a real rock never inherits the hitter's crash.
+- [x] **Two ways in.** Fold 2 pure copper in YOUR POCKETS ("the copper stops singing.") — one-directional, nothing pays copper back — or a 4% far-dumpster find ("it is still warm. you do not ask."), one of the three dive finds, never block-adjacent. The pocket answers the E nothing else wanted, anywhere, lowest priority, silent when empty: no walk, no new leg, world-gate readings identical to pre-wave.
+- [x] **Save additive.** `hitters` + `hitterHigh` keys inside the player object; version stays 10; pre-hitter saves load 0/false; junk normalizes to 0/false.
+- [x] **Permanent enforcement.** `tools/hitter-gate.mjs` (16th gate) — the load-bearing check races both transactions through the live updateWorld boundary to a common 40s horizon and requires the rock to win every axis, including the horizon position a spammed hitter would need (the SPEC's named trap). Red-tested in five directions, every mutation confirmed to move the measured numbers, exit codes read unpiped; suite **16/16**; frozen v19 untouched.
+- [ ] **Operator play gate.** Tune the numbers if the trade reads wrong in play (the gate holds the ordering, not the values); fold one at a strip you'd rather sell, hit it far from the block at high shakes, and confirm the crash arriving "ahead of schedule" lands as a bit and the pocket menu reads flat. No mechanical gate can judge whether pennies are funny.
+
+---
+
 ## v22 wave 5.2 — smoke-spot discovery (the map, not the key) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
 
 Branch: `v22-discovery`, isolated worktree; push without merge. Contract: `SPEC-v22-smoke-discovery.md`, graduated to SPEC.md.

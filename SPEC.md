@@ -2005,3 +2005,46 @@ the park, then the laundromat (one per conversation). All reveals route through 
    ways, save round-trip + pre-5.2 all-undiscovered. Red-tested in four directions (reveal
    grants tier; reveal pays cred with no ledger vocabulary — mechanical check fires alone;
    Block admitted; save key dropped) before the green was trusted. Suite **15/15**.
+
+## v22 — THE EMERGENCY HITTER (2026-07-18)
+
+Implements `SPEC-v22-emergency-hitter.md` (operator-ratified 2026-07-18: "sell it or keep it
+to save your life later. that's great. it's kind of both."). A consumable pipe that is a
+strictly worse smoke than a real rock, obtained by folding copper instead of selling it or as
+a rare dumpster find. Every hitter number lives in `src/systems/hitter.js`; the rougher crash
+is selected by `P.hitterHigh` at the update.js boundary.
+
+1. **I-BAD-TRADE.** The hitter loses to the real rock on every axis, over the FULL
+   hit→high→crash cycle, not just the instant: 6s high vs 18s, shakes -20 vs -50, brain -8
+   vs -4, no cred / no rep / no rocksSmoked / no intro credit / no recognition boundary
+   credit, then a 14s / +35 crash vs 8s / +30. Net of one full cycle the hitter RAISES
+   shakes (+15) while the rock lowers them (-20): spamming hitters is strictly
+   self-destructive, so the rock wins the marathon, not just the sprint. Numbers are the
+   operator's knob; the ordering is the invariant.
+2. **I-COPPER-COST, one-directional.** Folding costs 2 pure copper (~$50-60 unsold at yuri
+   against a $10 rock) and nothing ever pays copper back out of the hitter path — no
+   strip→craft→strip loop. The craft is a genuine "sell it or keep it" decision at every
+   strip, which is the point of the wave.
+3. **I-RARE-FIND.** 4% per dive, far dumpsters only (block-adjacent dumpsters never carry
+   it), presented as one of the three dive finds — opportunistic, never a pilgrimage.
+   Crafting is the supply; the find is a gift.
+4. **I-NO-RUNWAY-COST.** Craft and use are location-free: YOUR POCKETS answers the E that
+   nothing else wanted, lowest priority, anywhere — it never steals an NPC, prop, dumpster,
+   or zone verb, and stays silent when the pockets are empty. No new mandatory leg;
+   world-gate readings unchanged (96.337% / 99.001% on the two hot legs, identical to
+   pre-wave).
+5. **I-CONSUMABLE / I-SAVE-ADDITIVE.** One use, gone; unusable while already rocked. Save
+   keys `hitters` + `hitterHigh` are additive inside the player object; version stays 10; a
+   pre-hitter save loads 0/false; junk normalizes to 0/false.
+6. **I-VIBE.** The pipe "tastes like pennies"; the crash arrives "ahead of schedule"; the
+   craft ends with "the copper stops singing" (the B-flat lore, inverted); the found one "is
+   still warm. you do not ask." Flat, accounting-style, never dignified.
+7. **Permanent enforcement.** `tools/hitter-gate.mjs` (16th gate, behind concession-gate and
+   copper-sites-gate, the two loops it must never beat). The load-bearing check is dynamic
+   and full-cycle: both transactions race through the live updateWorld boundary to a common
+   40s horizon and the rock must win every axis — including the horizon shakes position a
+   spammed hitter would need. Red-tested in five directions (the SPEC trap: per-use-nerfed
+   relief 45 + mild crash literal → only the marathon axis fires; crash literal bypassing
+   the constant; a recognition credit in the hitter branch; find chance 0.5; call-site roll
+   bypass), each mutation confirmed to move the measured numbers before the red was
+   believed. Suite **16/16**.

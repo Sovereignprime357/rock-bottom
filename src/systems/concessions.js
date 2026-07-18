@@ -285,6 +285,8 @@ export function smokeRockAt(spotId) {
     saveGame();
     return;
   }
+  // v22 hitter — a real rock never inherits the hitter's rougher crash boundary.
+  P.hitterHigh = false;
   P.rocks--; P.rockedT = 18000; P.crashT = 0; P.shakes = Math.max(0, P.shakes-50);
   P.brain = Math.max(0, P.brain-4); P.lifetime.rocksSmoked++;
   P.cred += 1;
