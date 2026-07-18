@@ -16,7 +16,7 @@ Sections appear in agent-completion order, not priority order. Status table:
 
 | Doc | Lines | Status |
 |---|---|---|
-| VIBE.md | 400 | pending |
+| VIBE.md | 400 | done — ~125 checked, 9 false (2 MEDIUM, 7 LOW) |
 | AGENTS.md | 184 | done — 23 checked, 6 false (3 MEDIUM, 3 LOW) |
 | CLAUDE.md | 172 | done — 26 checked, 14 false in 8 findings (4 HIGH) |
 | README.md | 90 | done — 29 checked, 0 false (clean) |
@@ -330,5 +330,77 @@ Notes on verification coverage (all confirmed TRUE, not findings): frozen v19 SH
 - All "<90 seconds by a competent player" boss claims and the 16ms/60-NPC frame budget: behavioral, not disprovable by static command; the combat/perf harnesses exist but were not run to timing completion.
 - SPEC.md:1885 "every stop in the shipped table keeps ≥21 within-budget partners": not independently re-derived; trusted to world-gate.
 - SPEC.md:1106 "Auto-save: every 45 seconds (`setInterval`)": the 45s cadence is real (update.js:871 accumulator) but no save `setInterval` exists — mechanism-only drift, judged too trivial to list as a finding.
+
+---
+
+## VIBE.md — ~125 claims checked · 9 false · verdict: mostly true — the 58-row identity registry, palette, SFX recipes, and Wave-4.2 art corrections check out almost perfectly; the 9 falsehoods are small-caliber (two mechanic misstatements in the registry, one emoji residue in the corrected art text, six spec-drift details), nothing on the scale of the retracted art section.
+
+### F-VIBE-1 · DAMAGE: MEDIUM
+- **Where:** VIBE.md:297
+- **Claim:** "FATHER O'MALLEY | priest, calls tic-tacs medicine | the church | dispenses "blessed tic-tacs" for shakes"
+- **Disproof:** `sed -n 560,600p src/dialogue/neighborhood_a.js` → comment "v13 wave 6.5 — tic-tac is a TASTE, not a withdrawal substitute. removed shakes reduction"; the option gives `P.brain+5` and toasts "the tic tac is gone.\nthe shakes do not care."
+- **Actually:** Tic-tacs give +5 brain only and explicitly do NOT relieve shakes — the shakes reduction was deliberately removed in v13 wave 6.5 (commit 27222ac, economy exploit pass); "the shakes do not care" is now the canonical line.
+- **If obeyed:** An agent extending church/shakes content from the registry would reintroduce tic-tacs as a shakes remedy, reopening an exploit the operator deliberately closed and contradicting the shipped canonical joke.
+
+### F-VIBE-2 · DAMAGE: MEDIUM
+- **Where:** VIBE.md:153-154 (and the retraction's "8 emoji lines … every one of them UI chrome" at VIBE.md:160-161)
+- **Claim:** "Emoji appear only in UI chrome (HUD, phone/feed, status), never as an actor or a world object."
+- **Disproof:** `grep -rn "🔒" src index.html` → `src/render/structures.js:210: ctx.fillText('🔒', b.x+b.w/2-8, b.y+b.h/2+6);`
+- **Actually:** One of the 8 emoji lines in src/ is drawn on the world canvas onto locked buildings — a world-object usage that VIBE.md:204 itself mandates ("boarded planks drawn as 4px lines + 🔒 emoji", which matches the code). The corrected art text and line 204 give contradictory orders, and the retraction's "every one of them UI chrome" is wrong about that line.
+- **If obeyed:** An agent enforcing line 153-154 would strip the 🔒 from locked buildings that line 204 and the shipped renderer require — or would trust the "all UI chrome" audit claim as complete when it isn't.
+
+### F-VIBE-3 · DAMAGE: LOW
+- **Where:** VIBE.md:295
+- **Claim:** "WHOLE FOODS MOM | vibram five-fingers, kombucha | marketplace | gives you $5 and pity"
+- **Disproof:** `sed -n 455,500p src/dialogue/neighborhood_a.js` → option label `'accept $10 and pity. (+$10)'` with `P.cash += 10` (plus a separate 40%-odds "ask for $20" branch).
+- **Actually:** She gives $10 and pity (daily-capped), with an optional $20 gamble. $5 is not an amount anywhere in her dialogue.
+- **If obeyed:** Economy or content work balanced against a $5/day income source that actually pays $10-$20, and a registry row that propagates the wrong number into new writing.
+
+### F-VIBE-4 · DAMAGE: LOW
+- **Where:** VIBE.md:261
+- **Claim:** "The chimichanga is talking. The cat hisses in cursive. The copper sings in B flat."
+- **Disproof:** `grep -l -i "hiss\|cursive" rock_bottom_v*.html index.html` and `grep -rn -i "hiss\|cursive" src --include="*.js"` → zero output (no build v4-v19, src/, or index.html contains either word; no cat NPC exists).
+- **Actually:** The chimichanga (src/minigames/activities.js:62) and B-flat copper lore (src/core/update.js:352-353 and others) are real, shipped, repeatable lore. The cursive-hissing cat has never existed in any version of the game — it is a fabricated lore anchor presented alongside two real ones.
+- **If obeyed:** An agent told to "maintain" and "build on" location texture would treat the cat as existing canon to extend or would waste time hunting for it; new content could cite lore with no referent.
+
+### F-VIBE-5 · DAMAGE: LOW
+- **Where:** VIBE.md:147
+- **Claim:** "CRT scanlines always on (3px repeating gradient overlay, 12% opacity)"
+- **Disproof:** `grep -n "scanlines" index.html` → line 89: `repeating-linear-gradient(... rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px)` — 18% opacity (2.5px period on small screens, line 165).
+- **Actually:** The shipped scanline lines are 18% black, not 12%; only the 3px period is correct.
+- **If obeyed:** New overlay/CRT work authored to 12% would render visibly lighter than every shipped frame.
+
+### F-VIBE-6 · DAMAGE: LOW
+- **Where:** VIBE.md:224
+- **Claim:** "Sounds are SHORT (50-300ms) except death (1.5s descending)"
+- **Disproof:** `sed -n 265,282p src/core/audio_save.js` → `crash() { this.tone(440,.6,...) }` (600ms), `bossRoar()` 450ms, `windup()` 450ms; `node -e "console.log(3*220+320)"` → 980 (death totals ~0.98s, not 1.5s).
+- **Actually:** Multiple shipped sfx exceed 300ms (crash 600ms, bossRoar/windup 450ms, traffic 350ms), and death runs ~1.0s, not 1.5s.
+- **If obeyed:** An agent would clamp new sounds to a 300ms ceiling the shipped soundscape doesn't obey, or write a 1.5s "death-length" sound that overshoots the real one by 50%.
+
+### F-VIBE-7 · DAMAGE: LOW
+- **Where:** VIBE.md:231
+- **Claim:** "coin: major third up (B → E, the only "happy" sound)"
+- **Disproof:** `node -e "console.log((659/494).toFixed(3))"` → 1.334 (perfect fourth = 1.333; major third = 1.250); code at src/core/audio_save.js:268 is `tone(494,...)` then `tone(659,...)`.
+- **Actually:** The notes B4 → E5 match the code, but that interval is a perfect fourth, not a major third.
+- **If obeyed:** An agent writing "another happy major third like coin" would produce an interval that doesn't match the existing sound it's told to echo.
+
+### F-VIBE-8 · DAMAGE: LOW
+- **Where:** VIBE.md:211
+- **Claim:** "10px monospace name above, wrapped/deconflicted by the nameplate system"
+- **Disproof:** `grep -n "Courier" src/render/actors_weather.js` → line 155: `ctx.font='9px Courier New';` (the nameplate draw path; the only 10px font nearby is the asleep-"z" marker at line 145).
+- **Actually:** NPC nameplates render at 9px Courier New; the wrap/deconflict system part of the claim is true.
+- **If obeyed:** New name rendering authored at 10px would mismatch every existing nameplate and the wrap-width metrics (17-char line break) tuned for 9px.
+
+### F-VIBE-9 · DAMAGE: LOW
+- **Where:** VIBE.md:205
+- **Claim:** "Every building gets a labelColor (specific to its vibe)"
+- **Disproof:** `grep -rn "labelColor" src` → no matches; `grep -c "labelColor" rock_bottom_v4.html rock_bottom_v10.html rock_bottom_v19.html` → 0, 0, 0 (the identifier has never existed in any build).
+- **Actually:** Zones carry a `label:` color (src/data/world.js:33+); named buildings get per-building `signColor` via `BUILDING_STYLE[b.name]` (src/render/structures.js:48,167); the 28 `LANDMARK_FACADES` get kind-generic cached signage. There is no `labelColor` property and no universal per-building color field.
+- **If obeyed:** An agent adding a building would search for `labelColor`, find nothing, and either stall or invent a new parallel field instead of extending `BUILDING_STYLE` / zone `label`.
+
+### SUSPECTED — UNPROVEN
+- VIBE.md:118 "The existing 54 permanent-loop beats are grandfathered" — the 54 (23 route stops + 22 claim beats + 9 kingdom marks) is consistent across REFACTOR-FINDINGS.md:114, SPEC.md:1731, and BRAIN.md, but REFACTOR-FINDINGS itself hedges "approximately 54" and the beats were not independently re-counted in code.
+- VIBE.md:381 "The 'leave' option is mandatory" — every dialogue opened (Tony, Stripe, Barb, Pinky, O'Malley, mom, possum, Vape Lord, Leasing Guy, Price Guy, etc.) has a leave/exit option, but not every dialogue() call site was exhaustively scanned for a counterexample.
+- VIBE.md:236 "bossRoar: detuned bass + noise burst" — the code is a single 80Hz sawtooth sliding to 40Hz plus noise (audio_save.js:281), not a detuned oscillator pair; "detuned" is loose enough that it was not counted as disproven.
 
 ---
