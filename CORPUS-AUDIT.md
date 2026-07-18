@@ -17,7 +17,7 @@ Sections appear in agent-completion order, not priority order. Status table:
 | Doc | Lines | Status |
 |---|---|---|
 | VIBE.md | 400 | pending |
-| AGENTS.md | 184 | pending |
+| AGENTS.md | 184 | done — 23 checked, 6 false (3 MEDIUM, 3 LOW) |
 | CLAUDE.md | 172 | done — 26 checked, 14 false in 8 findings (4 HIGH) |
 | README.md | 90 | done — 29 checked, 0 false (clean) |
 | DELEGATION.md | 577 | done — 43 checked, 8 false (2 HIGH) |
@@ -162,5 +162,55 @@ Notes on what checked out TRUE (no findings): the frozen v19 reference hash at l
 - Hard Rule 8 ("boss fight defeatable in <90 seconds"): boss code exists in `src/core/update.js`/`src/data/world.js`, but no command can measure a competent player's clear time; neither provable nor disprovable here.
 - CLAUDE.md:117 "Present the new HTML file via `present_files`": `present_files` is a claude.ai artifact-environment tool whose availability in the current Claude Code environment cannot be tested by a repo command; its premise (a single new HTML file per session) is already disproven in F-CLAUDE-4.
 - Hard Rule 4's rationale ("Claude.ai artifacts do NOT support localStorage") is unverifiable from the repo, but the rule itself is TRUE in practice: code uses `window.storage` exclusively with an IndexedDB-backed shim (`src/core/storage.js`), and `module-gate` checks forbidden storage APIs. Likewise TRUE and worth recording: Hard Rules 1/2/5 (in substance), the 18s→8s loop, `SPRITE_CACHE`, `npc.wander`/`hostile`/`zoneOnly`, DOM HUD/dialogue/toast, and the existence of BRAIN.md and VIBE.md's identity table (VIBE.md:280).
+
+---
+
+## AGENTS.md — 23 claims checked · 6 false · verdict: the 2026-07-15 rewrite got the big things right (modular v21 architecture, v19 frozen reference, IndexedDB-backed window.storage, declared-size sprite pipeline, hash-pinned palettes, 18s/8s loop timing all verify), but the file still carries v3-era phantom identifiers that exist in no preserved build, plus stale status/backlog/naming lines.
+
+### F-AGENTS-1 · DAMAGE: MEDIUM
+- **Where:** AGENTS.md:34-41 (also referenced at line 57)
+- **Claim:** "If you touch any of: `updatePlayer` timing / `rockedUpTimer` / `crashTimer` / `sfx.rockUp` / `sfx.crash` … play it end-to-end before shipping."
+- **Disproof:** `rg -n "rockedUpTimer|crashTimer|updatePlayer|sfx\." src/` → no matches; `Select-String rock_bottom_v19.html, rock_bottom_v4.html -Pattern 'rockedUpTimer|sfx\.rockUp|updatePlayer'` → 0 hits in both monoliths
+- **Actually:** The loop lives in `P.rockedT` / `P.crashT` (src/core/update.js:127-130, src/systems/concessions.js:286) and `audio.rockUp` / `audio.crash` (src/core/audio_save.js:269,272); the player update is `update()`/`updateWorld()` in src/core/update.js. None of the five named identifiers exist in any preserved build (v4 through v19 or src/). The 18s→8s timing itself is TRUE (`P.rockedT = 18000`, `P.crashT = 8000`).
+- **If obeyed:** An agent greps the listed tripwire names, finds nothing, and concludes the mandatory end-to-end playtest doesn't apply — then edits the real `rockedT`/`crashT` decay in update.js without testing the comedic core loop the rule exists to protect.
+
+### F-AGENTS-2 · DAMAGE: MEDIUM
+- **Where:** AGENTS.md:22
+- **Claim:** "Track `audioReady` boolean to gate all `beep()` calls."
+- **Disproof:** `rg -n "audioReady|beep\(" src/ rock_bottom_v19.html` → no matches anywhere
+- **Actually:** The gate is `audio.ready` (src/core/audio_save.js:230), checked inside every synth method (`if (!this.ready || this.muted) return;`); the primitives are `tone()` and `noise()`, not `beep()`. The underlying rule (init audio in a user-interaction handler) is real and honored.
+- **If obeyed:** An agent adding a sound introduces a new global `audioReady` boolean and `beep()` wrapper parallel to the existing `audio.ready` gating — duplicate audio state that can desync mute/init behavior.
+
+### F-AGENTS-3 · DAMAGE: MEDIUM
+- **Where:** AGENTS.md:62
+- **Claim:** "write it as a synth function in the `sfx` object"
+- **Disproof:** `rg -n "const sfx|sfx\s*=|sfx\." src/` → no matches; `rg -n "audio = \{" src/core/audio_save.js` → line 228 `audio = {`
+- **Actually:** There is no `sfx` object in src/ or in rock_bottom_v19.html. All synth functions (`rockUp`, `crash`, `copSiren`, `bossRoar`, etc.) live on the `audio` object created in `init_audio_save()` (src/core/audio_save.js:226-284).
+- **If obeyed:** An agent literally creates a new `sfx` object for new sounds — a second audio system alongside `audio`, unwired to its `ready`/`muted` gating and to first-interaction init.
+
+### F-AGENTS-4 · DAMAGE: LOW
+- **Where:** AGENTS.md:3
+- **Claim:** "v3 is shipped."
+- **Disproof:** `rg -n "<title>" index.html` → `<title>ROCK BOTTOM v21</title>` (and README.md:25: "v3 was the original public ship; v19 is now the frozen monolithic reference")
+- **Actually:** Current shipped build is v21 (index.html loader + 37 src/ chunks per src/module-manifest.json); v3 isn't even in the repo — preserved monoliths start at rock_bottom_v4.html. Rule 3 in the same file states the v19/modular reality correctly, so the header contradicts its own body.
+- **If obeyed:** A fresh agent misdates the project by ~18 versions, may hunt for a nonexistent rock_bottom_v3.html as the shipped baseline, and misreads how much of the surrounding guidance is v3-era.
+
+### F-AGENTS-5 · DAMAGE: LOW
+- **Where:** AGENTS.md:107
+- **Claim:** "Check DELEGATION.md. If your idea isn't on the v4 list, ask the operator before building it."
+- **Disproof:** `rg -n "^## v4|^## v2[01]" DELEGATION.md` → v20/v21 sections at lines 7-30 are the active items; the "## v4 — HIGH PRIORITY" list at line 332 has every item marked shipped (line 335: "**Status:** Shipped in v13")
+- **Actually:** The v4 list is a fully-shipped historical ledger; the live prioritized backlog is the v20/v21 waves and SPEC-V22-PACKET.md.
+- **If obeyed:** An agent gates scope against a dead list — either treats long-shipped v4 items as sanctioned pending work, or needlessly escalates every item actually on the live v21/v22 backlog as "not on the v4 list."
+
+### F-AGENTS-6 · DAMAGE: LOW
+- **Where:** AGENTS.md:94
+- **Claim:** "All sprite IDs, NPC IDs, function names use snake_case in this codebase."
+- **Disproof:** `rg -c "^(export )?function [a-z]+[A-Z]" src/` → 396 camelCase function declarations across 41 files (vs 40 snake_case, which are almost entirely the per-module `init_*` entry points)
+- **Actually:** Sprite/NPC IDs are snake_case (`scrap_dog`, `os_brutus`, `dave_sleep`) — that part is true — but function names are overwhelmingly camelCase (`cacheSprite`, `makeNpc32`, `updateWorld`, `blankSpriteGrid`).
+- **If obeyed:** An agent writes new functions in snake_case, diverging from the dominant convention the same sentence tells it to match.
+
+### SUSPECTED — UNPROVEN
+- Lines 43-47 (boss defeatable <90s; <16ms frame at 60+ NPCs): performance/playability targets not verifiable by static command; no evidence for or against.
+- Line 65 ("The HUD, dialogue, and toast are DOM. Everything else is canvas."): spot checks were consistent but the auditor did not exhaustively enumerate DOM gameplay UI; no disproof found.
 
 ---
