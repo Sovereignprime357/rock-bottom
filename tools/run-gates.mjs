@@ -27,6 +27,10 @@ const GATES = [
   'presentation-gate.mjs',
   'recognition-gate.mjs',
   'concession-gate.mjs',
+  // copper-sites-gate rides behind concession-gate — same invariant class, different resource:
+  // concession proves one smoke loop across many rooms; this proves one heist engine across
+  // many buildings, and that adding buildings cannot move the daily copper ceiling.
+  'copper-sites-gate.mjs',
   'solidity-gate.mjs',
   'runtime-smoke.mjs',
   // world-gate runs LAST, on purpose. It is a ruler over the shipped map, and the
