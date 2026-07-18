@@ -21,7 +21,7 @@ Sections appear in agent-completion order, not priority order. Status table:
 | CLAUDE.md | 172 | done — 26 checked, 14 false in 8 findings (4 HIGH) |
 | README.md | 90 | done — 29 checked, 0 false (clean) |
 | DELEGATION.md | 577 | done — 43 checked, 8 false (2 HIGH) |
-| SPEC.md | 1,913 | pending |
+| SPEC.md | 1,913 | done — 94 checked, 12 false (2 HIGH, 7 MEDIUM, 3 LOW) |
 
 ---
 
@@ -236,5 +236,99 @@ Notes on what checked out TRUE (no findings): the frozen v19 reference hash at l
 - BRAIN.md:1632/1722 "Live visual/audio QA is still pending" — the Wave 4.2 entry later mentions the live modular build rendering with screenshots preserved, so the "still pending" status may be partially superseded, but no command can prove whether the operator's feel pass ever happened.
 
 Notes on verification coverage (all confirmed TRUE, not findings): frozen v19 SHA-256 matches `C25DB5E1…` exactly (Get-FileHash); full suite runs 13/13 PASS today with corpus-gate first and world-gate last as claimed; runner had exactly 11 gates at the Wave 4.1 merge and 13 at the Wave 4.2 merge, matching both entries' "11/11" and "13/13"; `WORLD = { w: 8600, h: 5600 }` at src/data/world.js:15, `baseSpeed = 2.2` at src/core/runtime_ui.js:33, and the 0.0008 withdrawal rate all match the OD-9 premise check; `SAVE_KEY = 'rockbottom_save_v8'` at src/core/audio_save.js:303; the v13-era internal citations spot-checked clean (`WORLD = { w: 4400, h: 3400 }` at rock_bottom_v13.html line 253; "the door is chained" refusal copy present); SPEC-v20-route-budget.md exists on main; no src module exceeds 1,000 lines; and the "38 native ES-module files" claim was true at the PR #1 merge (`git ls-tree -r bac3a24 -- src` → 38 JS files). The 16×16-logical sprite statements at BRAIN.md:1608 were true when written and are explicitly superseded by the Wave 4.2 entry in the same file, so they were not counted as findings.
+
+---
+
+## SPEC.md — 94 claims checked · 12 false · verdict: the v20/v21 contracts, gate descriptions, kingdom/office/concession/recognition constants, and Wave 4.2 sprite contract all verify accurate against src/ and tools/ (checked exhaustively); the falsehoods concentrate in the unversioned mid-file "current state" sections (WHAT, COMBAT, STATUS EFFECTS, SAVE/LOAD, RESOURCES, PERFORMANCE BUDGETS, API DEPENDENCIES) that still describe the v13-era monolith and were never updated; v13–v18 wave sections were spot-checked as historical narration only.
+
+### F-SPEC-1 · DAMAGE: HIGH
+- **Where:** SPEC.md:843
+- **Claim:** "Top-down action RPG built as a single HTML file. … Sixteen-zone, 4400×3400 walkable neighborhood with camera following the player on an 800×600 viewport."
+- **Disproof:** `rg -n "WORLD = " src/data/world.js` → `15:  WORLD = { w: 8600, h: 5600 };`; `rg -c "id: '" src/data/world.js` → `23`; `rg -n "script type" index.html` → `251:<script type="module" src="./src/main.js">`
+- **Actually:** Current build is a 17KB index.html loader plus ES modules in src/ (37 chunks); 23 zones; world is 8600×5600 (grown v18→v19).
+- **If obeyed:** An agent would treat the seven post-v17 districts and the kingdom campaign area as out-of-spec, clamp world constants back to 4400×3400 (stranding every v19 coordinate), or try to re-inline the modular build into one file.
+
+### F-SPEC-2 · DAMAGE: HIGH
+- **Where:** SPEC.md:1113
+- **Claim:** "version: 3," (save shape: `{ version: 3, player, npcsKilled, bossActive }`)
+- **Disproof:** `sed -n 21,23p src/core/audio_save.js` → `version: 10,` followed by a ~40-field payload; no `bossActive` field exists.
+- **Actually:** Save version is 10 (also confirmed by SPEC's own landing-3 text "save key and version 10 unchanged"); payload includes kingdom, office, districtClaims, recognition-era fields; `bossActive` is not serialized.
+- **If obeyed:** An agent "normalizing" saves to the documented shape would write version 3 and drop dozens of fields, corrupting every real save; a validator would reject all correct version-10 saves.
+
+### F-SPEC-3 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:1097 (also 886)
+- **Claim:** "Decay: -1 every 30 seconds (paused while wanted = 0)"
+- **Disproof:** `sed -n 485,487p src/systems/combat.js` → `// decay -1 every 18s (faster with collar)` / `if (P.wantedT >= 18000) { P.wantedT = 0; P.wanted--; }`
+- **Actually:** Wanted decays -1 every 18,000ms (modulated by the priest-collar multiplier).
+- **If obeyed:** An agent would "fix" the timer to 30s, lengthening cop pressure ~67% and silently rebalancing arrest/boss-window difficulty.
+
+### F-SPEC-4 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:1099
+- **Claim:** "Cops have 80 HP, 1.8 speed, 18 damage, 500px vision range"
+- **Disproof:** `sed -n 505,508p src/systems/combat.js` → cop spawn record: `hp:60, maxHp:60, speed:1.5, dmg:10, hostile:true, aggro:true`
+- **Actually:** Cops spawn with 60 HP, 1.5 speed, 10 damage, and are aggro from spawn (no vision-range check found).
+- **If obeyed:** An agent would buff cops 33–80% across three stats, breaking wanted-level balance and the sub-90s boss margins during any fight with heat active.
+
+### F-SPEC-5 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:883
+- **Claim:** "Climbs +0.0025/ms passively, +0.05/ms sprinting" (Shakes)
+- **Disproof:** `rg -n "shakes \+=" src/core/update.js` → `111:  P.shakes += 0.0008 * dt;` / `112:  if (sprinting && (vx||vy)) P.shakes += 0.012 * dt;`
+- **Actually:** Passive rate is 0.0008/ms (0.8/s) and sprint adds 0.012/ms — exactly the 0.8 shakes/s the landing-4 world-gate measures and bakes into its 100s/13,750px runway derivation (SPEC.md:1868 agrees with the code; line 883 contradicts both).
+- **If obeyed:** An agent would triple withdrawal speed, shrinking the fresh-save runway from 100s to 32s and putting the entire measured route/coverage budget system (world-gate) into contradiction.
+
+### F-SPEC-6 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:1376–1379
+- **Claim:** "Model: `claude-sonnet-4-20250514`" / "Max tokens: 400" / "Failure mode: silent fallback (\"the possum is busy. try again later.\")"
+- **Disproof:** `rg -in "claude-sonnet|max_tokens|the possum is busy" src/` → no matches; `sed -n 529,537p src/dialogue/neighborhood_a.js` → `window.claude.complete({ messages: [...] })` raced against a 1800ms timeout, fallback preloaded from `LOCAL_POSSUM_PROPHECIES`.
+- **Actually:** The Possum call passes no model and no max_tokens, and the failure mode is a random authored local prophecy (the v17 standalone contract), never a "possum is busy" dead-air line.
+- **If obeyed:** An agent would add a model/max_tokens parameter the artifact runtime does not accept, or "restore" the dead-air fallback line, violating the v17 rule that a failed completion never produces dead content.
+
+### F-SPEC-7 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:1738–1739
+- **Claim:** "`node tools/run-gates.mjs` launches, in order, `module-gate.mjs`, `npc-registry-gate.mjs`, `legibility-gate.mjs`, `presentation-gate.mjs`, and `runtime-smoke.mjs` … Five successful children produce a 5/5 PASS summary."
+- **Disproof:** `rg -n "'.*\.mjs'" tools/run-gates.mjs` → 13-entry GATES array: corpus, docs, version, module, sprite, npc-registry, legibility, presentation, recognition, concession, solidity, runtime-smoke, world.
+- **Actually:** The launcher runs 13 gates (13/13 PASS), beginning with corpus/docs/version gates and ending with world-gate — consistent with merge commit dbd960c "13/13 green".
+- **If obeyed:** An agent reconciling the launcher to this contract would delete eight gates — including the sprite, concession, solidity, and world gates that enforce the newest invariants — gutting the verification suite while it still prints PASS.
+
+### F-SPEC-8 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:1323
+- **Claim:** "**The Block is the canonical smoke spot** — rocks cannot be smoked elsewhere"
+- **Disproof:** `rg -n "SMOKE_SPOTS = " src/systems/concessions.js -A6` → five frozen spots (`block`, `park`, `choir_office`, `underpass`, `laundromat`); `rg -n "rockedT = 18000" src/` → concessions.js:286 fires at any legal spot.
+- **Actually:** Since v20 landing 3, four earned conditional concession spots legally smoke rocks; the OD-5 amendment (SPEC.md:1828) supersedes this line but the line itself — inside a list headed "These properties MUST hold across all builds" — was never edited.
+- **If obeyed:** An invariant-checking agent scanning this list would flag the entire shipped concession system (and its gate) as a spec violation and could rip out correct, operator-ratified code.
+
+### F-SPEC-9 · DAMAGE: MEDIUM
+- **Where:** SPEC.md:1362 (also 1363, 1367)
+- **Claim:** "Character/player `SPRITE_CACHE` | ≤ 360 prerendered 16×16-derived canvases" (and "≤ 48" env canvases, "File size (total HTML) | ≤ 185KB gzip")
+- **Disproof:** `rg -n "373" tools/sprite-gate.mjs` → `76:if(EXPECTED_BASES.length!==93||EXPECTED_KEYS.length!==373)` (gate PASS line: "373 exact nonblank keys, 93 declared 32-logical character bases"); `cat index.html src/**/*.js | gzip -9 | wc -c` → 236,259 bytes.
+- **Actually:** The enforced contract is exactly 373 character keys from 93 true-32px bases (v19 raised ceilings to 400/64; Wave 4.2 retired 16×16-derived), and the shipped sources gzip to ~231KB under the v19-revised 225KB-era budget, not 185KB. This unversioned table reads as current but froze at v18.
+- **If obeyed:** An agent would cut 13 sprites or revert the 32px art to fit "≤360 16×16-derived," directly undoing the just-merged Wave 4.2 migration, or fail builds against a dead 185KB budget.
+
+### F-SPEC-10 · DAMAGE: LOW
+- **Where:** SPEC.md:1052 (also 1053)
+- **Claim:** "Knockback applied to target proportional to direction vector × 6" (and "6 hit particles spawned at target center")
+- **Disproof:** `sed -n 197,206p src/systems/combat.js` → `const kb = 8;` and 8 spark + 3 blood particles per hit.
+- **Actually:** Knockback is 8 (bumped 6→8 in v13 wave 5, which SPEC.md:1443 itself records) and 11 particles spawn; the unversioned COMBAT section was never updated.
+- **If obeyed:** An agent would "restore" ×6 knockback, reverting a deliberate feel change that the wave-5 section of the same file documents as intentional.
+
+### F-SPEC-11 · DAMAGE: LOW
+- **Where:** SPEC.md:978 (WORLD MAP table, also rows 979–982, 986)
+- **Claim:** "THE BLOCK | center (900-1200, 740-960)"
+- **Disproof:** `rg -n "id: 'block'" src/data/world.js` → `x: 880, y: 720, w: 340, h: 240` (i.e. 880–1220, 720–960); dealer is 1460–1780/780–1030 vs claimed "(1450-1770, 780-1020)", market 700–1420 vs "(700-1400)".
+- **Actually:** Several legacy zone rects in this "canonical positions" table drift 10–20px from the shipped data (block, scrap, pawn, dealer, market); the wave-8a-era rows (trainyard, park, skidrow, oldschool, church, underpass, busstop) are exact.
+- **If obeyed:** An agent placing props, claim points, or collision checks from this table would author coordinates just outside/inside real zone bounds, producing off-by-a-tile zone-verb and territory bugs.
+
+### F-SPEC-12 · DAMAGE: LOW
+- **Where:** SPEC.md:1868
+- **Claim:** "the withdrawal rate by standing still for one second (`update.js:124`)"
+- **Disproof:** `sed -n 120,124p src/core/update.js` → line 124 is `syncRecognitionVisit();`; the withdrawal accrual is at update.js:111 (`P.shakes += 0.0008 * dt;`).
+- **Actually:** Wave 4.1's insertions shifted update.js line numbers; the cited measurement anchors for withdrawal/cap now point at unrelated statements (the values themselves — 0.8/s, 2.2 speed, shakes 20 — all still verify correct; runtime_ui.js:33 still holds).
+- **If obeyed:** An agent auditing the world-gate's "measured-not-vibed" chain would inspect the wrong lines, conclude the derivation is unanchored, and either distrust a correct gate or "re-anchor" it against the wrong code.
+
+### SUSPECTED — UNPROVEN
+- "500px vision range" for cops (SPEC.md:1099): cops spawn `aggro:true`, and no vision-range constant was found, suggesting no such mechanic exists at all — but npc_ai.js was not exhaustively ruled out, so only the three disproven stats appear in F-SPEC-4.
+- All "<90 seconds by a competent player" boss claims and the 16ms/60-NPC frame budget: behavioral, not disprovable by static command; the combat/perf harnesses exist but were not run to timing completion.
+- SPEC.md:1885 "every stop in the shipped table keeps ≥21 within-budget partners": not independently re-derived; trusted to world-gate.
+- SPEC.md:1106 "Auto-save: every 45 seconds (`setInterval`)": the 45s cadence is real (update.js:871 accumulator) but no save `setInterval` exists — mechanism-only drift, judged too trivial to list as a finding.
 
 ---
