@@ -16,7 +16,7 @@ Every idea here is measured against that. **The world noticing you = yes. The wo
 
 | Wave | Idea | Status | Why here |
 |---|---|---|---|
-| **5.1** | **Copper from multiple locations** | ✅ **READY — building now** | Smallest, self-contained, extends a proven pattern (the abandoned-building heist). It is the **pilot for the loot-site system** that break-ins later generalize. Pure density, zero runway cost. |
+| **5.1** | **Copper from multiple locations** | ✅ **SHIPPED 2026-07-18** — 4 sites, `copper-sites-gate`, suite 14/14, merged | Smallest, self-contained, extended a proven pattern (the abandoned-building heist). It **piloted the loot-site system** that break-ins later generalize. Pure density, zero runway cost. |
 | **5.2** | **Smoke-spot discovery (map, not key)** | ✅ **SHIPPED 2026-07-18** — branch `v22-discovery`, contract `SPEC-v22-smoke-discovery.md` graduated to SPEC.md; `discovery-gate` permanent, suite 15/15 | Design already resolved in `SPEC-V22-PACKET.md §1`: quests *reveal* concession venues, never grant them. Fills a real hole — nothing currently tells a player the park counts. Depends on nothing. |
 | **5.3** | **The robbery** (gang areas take your stuff) | ✅ READY | The economy's first real **sink** — everything so far only adds. Bounded in `§PACKET 2`. Medium size, no new tech (combat + inventory + sprite-visible loss already exist). |
 | **5.4** | **Break-ins, generalized** (train yard, shacks, tool/cred-gated) | ⚙️ NEEDS SPEC | The big one. **5.1 proves the loot-site pattern; 5.4 generalizes it** into gated building entry across the map. Waits for 5.1 so it inherits a working pattern instead of inventing one. |
