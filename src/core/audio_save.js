@@ -11,6 +11,7 @@ import { CLAIM_SITES, KINGDOM_STAGE_RANK, claimedDistrictIds, freshKingdomState,
 import { resetDailyCounters } from '../systems/daily_hideouts.js';
 import { validBlockRoute } from '../systems/progression_routes.js';
 import { freshConcessionClocks, normalizeConcessionClocks } from '../systems/concessions.js';
+import { normalizeDiscovered } from '../systems/discovery.js';
 import { ensureClearPlacement } from '../systems/physicality.js';
 import { freshRecognition, normalizeRecognition } from '../systems/recognition.js';
 
@@ -61,6 +62,9 @@ export async function saveGame() {
       recognition: state.recognition || freshRecognition(),
       // v20 landing 3 — additive key: the two concession clocks (choir hours, dryer cycle)
       concessionClocks: state.concessionClocks || freshConcessionClocks(),
+      // v22 wave 5.2 — additive key: discovered venue set (the map, not the key).
+      // a pre-5.2 save has no key and loads with everything undiscovered.
+      discovered: Array.from(state.discoveredVenues || []),
     });
   } catch(e) {}
 }
@@ -113,6 +117,7 @@ export async function loadGame() {
     state.recognition = normalizeRecognition(sv.recognition);
     state.recognitionVisit = {venue:'',seen:Object.create(null)};
     state.concessionClocks = normalizeConcessionClocks(sv.concessionClocks);
+    state.discoveredVenues = normalizeDiscovered(sv.discovered);
     state.barbAside = !!sv.barbAside;
     state.quests = Object.assign({}, state.quests, sv.quests || {});
     state.hustles = Array.isArray(sv.hustles) ? sv.hustles : null;

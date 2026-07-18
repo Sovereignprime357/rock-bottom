@@ -180,7 +180,9 @@ function dryerStatusLine() {
   return 'idle.';
 }
 
-const CONCESSION_TEXT = {
+// v22 wave 5.2 — exported so discovery reuses the exact hint verb and
+// qCondition wording; one source of truth per room, no drifting copies.
+export const CONCESSION_TEXT = {
   park: {
     hint:'consult the bench',
     closedShort:'(the philosopher is awake.)',
