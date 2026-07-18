@@ -16,6 +16,18 @@
 
 ---
 
+## v22 wave 5.2 — smoke-spot discovery (the map, not the key) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
+
+Branch: `v22-discovery`, isolated worktree; push without merge. Contract: `SPEC-v22-smoke-discovery.md`, graduated to SPEC.md.
+
+- [x] **The tellers.** LURCH tells the underpass ("there is a dog now. the dog has a lanyard. arrangements exist."), PAULIE THE FACE tells the choir office ("b flat to b flat. the face does not attend."), SPIDER-BITE SHERRI tells the park then the laundromat, one per conversation. Reveal by implication, lowercase, land flat; second telling is flavor; an already-conceded room is acknowledged ("you already know. the room knows you know.") and unchanged. No new NPCs — the alley trio got one option each.
+- [x] **The map, not the key.** Every reveal routes through `tellVenue()` in `src/systems/discovery.js`, which flips `state.discoveredVenues` and nothing else. A discovered and an undiscovered venue at the same visit count are byte-identical (whole-ledger + tier + condition + reward fingerprint diff, through the real dialogue options). You still sit 15 times; the old accidental grind still works untold; the Block never enters the set. One additive save key (`discovered`, version stays 10); pre-5.2 saves load all-undiscovered.
+- [x] **Visibility surfaces.** Discovered-but-unconceded venues: same E verb the conceded room uses, a known-but-unearned room ("you know this counts. the bench does not know you yet."), and a Q-ledger `known:` line stating the condition as a fact, never live now-ness. Undiscovered venues stay exactly as invisible as before; conceded rooms untouched at every surface.
+- [x] **Permanent enforcement.** `tools/discovery-gate.mjs` (15th gate) — built because discovery routes *around* the ledger `recognition-gate` watches, so that gate stays green even if a reveal grants tier. Red-tested in four directions (reveal grants tier, reveal pays cred with no ledger vocabulary, Block admitted, save key dropped) — all fire, exit codes checked unpiped; suite **15/15**; world-gate confirms no new mandatory legs; frozen v19 untouched.
+- [ ] **Operator play gate.** Talk to lurch, sherri (twice), and paulie; confirm the reveals land as bits, walk to a revealed venue and check the hint + the unearned room read right, then sit the count out at one venue and confirm the handoff to the real concession room. No mechanical gate can judge whether "the face does not attend" is funny.
+
+---
+
 ## v22 wave 5.1 — copper from multiple locations — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
 
 Branch: `v22-copper`, isolated worktree; push without merge. Contract: `SPEC-V22-PLAN.md` § WAVE 5.1, graduated to `SPEC-v22-copper-sites.md`.
