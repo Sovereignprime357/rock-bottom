@@ -352,9 +352,12 @@ export function spawnNpcs() {
     { id:'skid_brutus_1', name:'BRUTUS (SKID)', sprite:'brutus', x: 2700, y: 1820, w:32,h:24, color:'#3a2810',
       hp:60, maxHp:60, speed:1.5, hostile:true, aggro:true, dmg:7, zoneOnly:{x:2480,y:1520,w:900,h:720},
       archetype:'charger', showHp:true },
+    // v22 robbery — robs:true makes THIS grab take a thing (robbery.js). The flag is
+    // the zone scope (I-ZONE-SCOPED): only the skid grabber carries it. The back-alley
+    // lurch, the kingdom grabbers, the dog — grabbers all, robbers none.
     { id:'skid_lurch',    name:'LURCH (SKID)',  sprite:'lurch',  x: 3020, y: 1940, w:28,h:34, color:'#3a2030',
       hp:55, maxHp:55, speed:1.5, hostile:true, aggro:true, dmg:6, zoneOnly:{x:2480,y:1520,w:900,h:720},
-      archetype:'grabber', showHp:true },
+      archetype:'grabber', robs:true, showHp:true },
     { id:'skid_sherri',   name:'SHERRI (SKID)', sprite:'sherri', x: 2860, y: 2080, w:26,h:30, color:'#3a1820', legacyStructureIndex:13,
       hp:45, maxHp:45, speed:2.1, hostile:true, aggro:true, dmg:5, zoneOnly:{x:2480,y:1520,w:900,h:720},
       archetype:'swarmer', showHp:true },

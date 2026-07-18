@@ -10,6 +10,7 @@ import { BUILDINGS, CHATTER } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { aggroNpc, damagePlayer, onNpcDeath, spawnProjectile } from './combat.js';
 import { commitActorStructureMotion, ensureClearPlacement, firstBlockingStructure } from './physicality.js';
+import { attemptRobbery } from './robbery.js';
 
 export function updateNpcActors(dt) {
   // NPC AI + walk-frame anim + chatter
@@ -222,13 +223,17 @@ export function updateNpcActors(dt) {
           }
         }
         if (rectsOverlap({x:P.x,y:P.y,w:P.w,h:P.h}, n) && (n.attackCd||0) <= 0) {
+          // v22 robbery — the skid grabber's grab takes a thing (robs flag only; rate-
+          // governed inside). Resolved BEFORE the damage so a killing grab can never
+          // read as a robbery at the respawn point; its toast outranks GRABBED.
+          const robbed = n.robs ? attemptRobbery(n) : false;
           const dmg = Math.floor((n.dmg||8) * 1.3);
           damagePlayer(dmg, n);
           n.attackCd = 800;
           n.grabFreezeT = 200;
           P.stunT = Math.max(P.stunT||0, 500);
           // toast only on first grab per encounter (avoid spam)
-          if (!n.grabbedOnce) { n.grabbedOnce = true; toast("GRABBED.\nhis arms are too long.", 1400); }
+          if (!robbed && !n.grabbedOnce) { n.grabbedOnce = true; toast("GRABBED.\nhis arms are too long.", 1400); }
         }
       }
 
