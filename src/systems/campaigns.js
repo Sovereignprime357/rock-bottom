@@ -6,7 +6,7 @@ import { audio, saveGame } from '../core/audio_save.js';
 import { P, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { last } from '../core/update.js';
 import { inZone } from '../data/npc_spawns.js';
-import { BUILDINGS, PROPS, interactiveProps, rideableCart } from '../data/props.js';
+import { PROPS, copperSiteAt, interactiveProps, rideableCart } from '../data/props.js';
 import { ZONES } from '../data/world.js';
 import { OLD_SCHOOL_DOOR } from '../dialogue/vendors_places.js';
 import { questToast } from './combat.js';
@@ -613,8 +613,9 @@ export function resolveActionHint(){
   let best=null,bestD=60*60;
   for(const n of runtime.npcs){if(n.dead||!n.interact)continue;const dx=pcx-(n.x+n.w/2),dy=pcy-(n.y+n.h/2),d=dx*dx+dy*dy;if(d<bestD){bestD=d;best=n;}}
   if(best)return 'bother '+String(best.name||'somebody').toLowerCase();
-  const heistB=BUILDINGS.find(b=>b.locked);
-  if(heistB&&pcx>heistB.x-20&&pcx<heistB.x+heistB.w+20&&pcy>heistB.y-20&&pcy<heistB.y+heistB.h+20)return 'test the abandoned boards';
+  // v22 wave 5.1 — every copper site advertises its own flat verb through the shared lookup.
+  const heistSite=copperSiteAt(pcx,pcy);
+  if(heistSite)return heistSite.hint;
   for(const p of PROPS){if(p.type!=='park_bench')continue;const dx=pcx-(p.x+p.w/2),dy=pcy-(p.y+p.h/2);if(dx*dx+dy*dy<50*50)return state.sittingOnBench?'stand up':'sit on the bench';}
   for(const ip of interactiveProps){if(ip.type!=='trashcan')continue;const dx=pcx-ip.x,dy=pcy-ip.y;if(dx*dx+dy*dy<50*50)return 'kick the can';}
   const phone=PROPS.find(p=>p.type==='pay_phone');
