@@ -2,6 +2,18 @@
 
 > Tasks for the next agent picking this up. Prioritized. Each task has a SPEC stub. Pick top-down. Don't ship a task without updating its status here.
 
+> ## ⚠️ MERGE-STATUS CORRECTION 2026-07-18 (audit `CORPUS-AUDIT.md`)
+> **Every v20 and v21 wave below that reads "IN PROGRESS", "PENDING OPERATOR REVIEW", "push without
+> merge", or "pending operator review/merge" is MERGED into `main` and live on HEAD.** Those framings
+> were true on 2026-07-16 and never updated. Confirmed by `git merge-base --is-ancestor <branch> HEAD`:
+> `ccdbf75` THE REGULAR · `ad96cbe` concessions · `cd5d716` world+route · `52a6c1a` honest map ·
+> `dbd960c` sprite ceiling. The suite is **13/13** on HEAD. `codex/v20-recognition`,
+> `v20-concessions`, `v20-world`, `v21-honest-map`, `v21-sprite-ceiling` are all stale, fully-merged
+> branches — **do not check them out and do not re-merge.** Two checkboxes below were left unchecked
+> on shipped work and are corrected in place (F-DELEG-1, F-DELEG-2); an agent picking them top-down
+> would rebuild the live recognition system and co-op ending from scratch, colliding save keys and
+> gates.
+
 ---
 
 ## v21 character ceiling — BUILT / PENDING OPERATOR VISUAL REVIEW (July 16, 2026)
@@ -18,7 +30,7 @@ Branch: `v21-sprite-ceiling`, isolated worktree; push without merge. OD-12 recor
 Active implementation branch: `codex/v20-recognition`. The operator packet remains `SPEC-V20-PACKET.md`; each slice graduates into SPEC only with its own register entry and green permanent gate.
 
 - [x] **Landing 1 — HUD deconfliction + cart repro.** HUD geometry now follows the actual centered 4:3 game rectangle across six desktop/touch fixtures; compact presentation removes the redundant key ledger at `520px`; touch ticker and topbar share one boundary. NPC-first priority stays intact. The one rideable cart moved from BUSKER's fully shadowed disc to a clear Marketplace anchor, and `P.cartMounted` is now the sole authority for ordinary use, Big Guy acquisition, render, hint, restart, and save/load. `presentation-gate` is permanent; the full runner reports 5/5.
-- [ ] **Landing 2 — THE REGULAR.** Implement the four-venue recognition ledger, additive persistence, tier acknowledgments, visit de-duplication, full-high boundary credit, Q ledger, pattern cap, and dedicated recognition gate. Resolve the packet's dormant `sell` verb explicitly; do not invent a fifth concession.
+- [x] **Landing 2 — THE REGULAR. [✅ SHIPPED — F-DELEG-1 (HIGH). Was `[ ]`; it is built, gated, merged at `ccdbf75`.]** The four-venue recognition ledger, additive persistence, tier acknowledgments, visit de-duplication, full-high boundary credit, Q ledger, and pattern cap are live in `src/systems/recognition.js` (`REGULAR_TIERS = ['stranger','counted','furniture','conceded']`, per-venue thresholds); `tools/recognition-gate.mjs` is permanent and green. The `conceded` tier is depended on by the merged Landing 3 concessions. **Do not implement — it exists. Rebuilding it means a second ledger, colliding save keys, and a duplicate gate on top of live code.**
 - [x] **Landing 3 — smoke concessions.** The smoke transaction extracted to one exported function (`smokeRockAt`, the only `rockedT = 18000` site in `src/`, structurally gated). Four conditional rooms behind `conceded` tier: park at night, choir office during b-flat office hours (authored clock), underpass while the dog is present, laundromat dryer mid-cycle (authored clock, 15s margins). Conditions re-check at action; BAD IDEA targets only legal spots and ties go to the Block; coronation provably Block-only (gate check verified red first). Clocks persist additively; save version unchanged. Register OD-8; `concession-gate` permanent; suite 8/8. (Built on `v20-concessions`, 2026-07-16 — pending operator review/merge.)
 - [x] **Landing 4 — world relationships.** `tools/world-gate.mjs` (permanent, wired last, suite: 9) derives the runway live (walked speed × measured withdrawal: 100s = 13,750px), reads the mandatory leg inventory through the real objective selectors (69 campaign legs, route pools sampled through the real roller), and enforces I-RUNWAY (60%), I-COVERAGE (45%, potential spots), I-BLOCK-DAY-1, and cart uniqueness — all straight-line lower bounds, stated as such. Red-verified on coverage, campaign leg, and transport before trusted. Zero gameplay values changed. **Shipped with one honest standing red: route `scrap_gate ↔ ditch_gauge` 8,274.6px vs 8,250px budget — resolved by Landing 5.** (Built on `v20-world`, 2026-07-16 — pending operator review/merge.)
 - [x] **Landing 5 — route budget.** OD-9 ruled: constrain the generator. `rollBlockRoute` selects budget-aware after the unchanged shuffle (identical `Math.random` consumption, v19 lockstep parity untouched); relax-to-nearest fallback guarantees three stops always (I-ROLL-TOTAL, proven at a pathological 10px budget across 30,000 rolls); budget derived at run time in `routeLegBudgetPx()` — no hardcoded 8250 anywhere — and pinned to the behaviorally measured world by the gate (I-NO-BUDGET-DRIFT, red-verified). World-gate now samples the real roller (10,000 rolls × 3 pool configs, chained `lastStopId`, zero over-budget, zero nulls) and reports table pairs beyond budget as generator-excluded. Revert-red verified: blind first-three makes the gate fail naming the pair. **Suite 9/9 honestly green; worst assignable leg 98.5% of budget — no mercy added.** Addendum (OD-10, operator-ratified): three structural invariants restore the detector as the alarm — I-DEAD-STOP (partner floor keeps the fallback dead code deterministically), I-CO-ROUTABLE (diameter ≤ 2, regionalization fails un-signably), I-EXCLUSION-LEDGER (the generator may exclude exactly what the register has signed; unsigned or stale entries fail; the self-signing-loop limit is named in the gate header). Red-verified in all four directions. (Built on `v20-world`, 2026-07-16 — pending operator review/merge.)
@@ -443,7 +455,11 @@ Notes from shipping: kept the laundromat as the supply location instead of inven
 **Estimated effort:** 4-5 hours
 
 ### 9. Co-op Ending with Stripe
-**Status:** Backlog
+**Status:** ~~Backlog~~ **✅ SHIPPED — F-DELEG-2 (HIGH).** Fully implemented in the current build:
+`spawnCoopBoss()` (`src/dialogue/neighborhood_b.js:277`), `state.coopMode`, ally AI (`src/systems/npc_ai.js:86`),
+and the "TUESDAYS AND THURSDAYS" ending (`src/systems/interactions.js:31`). **Do not build — an agent
+working this MEDIUM item would author a duplicate Stripe trigger and a conflicting Tony-fight variant,
+regressing the boss fight and duplicating a persisted ending.** Spec below kept as historical record.
 **Spec:**
 - Alternative to defeating Tony as boss
 - Trigger: buy 5+ soap rocks from Stripe (proving loyalty by stupidity)
