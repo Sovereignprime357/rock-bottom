@@ -16,6 +16,7 @@ import { tryKingdomDoor, tryUseKingdomTarget, tryUseOfficeFieldTarget } from './
 import { questToast } from './combat.js';
 import { feedPost } from './communications.js';
 import { concessionMenu, concessionUnlocked } from './concessions.js';
+import { discoveryMenu, venueDiscovered } from './discovery.js';
 import { hideoutOwned, tryEnterHideout, tryEnterOffice } from './daily_hideouts.js';
 import { tryStampBlockRoute } from './progression_routes.js';
 import { recordNpcBother, recognitionVenueAt } from './recognition.js';
@@ -171,6 +172,12 @@ export function tryInteract() {
   const concessionVenue = recognitionVenueAt(P.x+P.w/2, P.y+P.h/2);
   if (concessionVenue && concessionUnlocked(concessionVenue)) {
     concessionMenu(concessionVenue);
+    return;
+  }
+  // v22 wave 5.2 — a discovered venue answers the E with the known-but-unearned
+  // room. same zone-verb priority; the smoke option does not exist here.
+  if (concessionVenue && venueDiscovered(concessionVenue)) {
+    discoveryMenu(concessionVenue);
     return;
   }
 }
