@@ -1,6 +1,6 @@
 # SPEC — THE ROBBERY (v22 Wave 5.4) — the first sink
 
-status: 2026-07-18 · design captured in `SPEC-V22-PACKET.md §2`. AI-drafted contract, operator veto standing. Uses only shipped systems (skid-row combat, inventory, equip, sprite gear layers). Graduates into SPEC.md on green gate.
+status: 2026-07-18 · **BUILT — graduated to SPEC.md (§ v22 — THE ROBBERY), pending operator review.** Branch `v22-robbery`, trigger **(a)** as decided (the grabber takes; option (b) not built — operator's to escalate). `robbery-gate` permanent, suite **17/17**. Design captured in `SPEC-V22-PACKET.md §2`; AI-drafted contract, operator veto standing. One deviation worth naming: hitter-gate's subtraction-site pin moved 1→2 because the hitter is now losable to the robbery (this file's own edge case).
 
 ---
 
@@ -49,15 +49,15 @@ Every mechanic in the game so far **adds**: strip copper, panhandle, sell, find.
 
 ## ACCEPTANCE CRITERIA
 
-- [ ] Skid-row hostiles can take cash / a losable inventory item / an equipped clothing slot, per the chosen trigger.
-- [ ] **Never takes a progression key** — a headless test attempts theft while carrying `stripe_package` + an active quest item and confirms they're untouchable.
-- [ ] Equipped theft **removes the sprite layer** — verified (equip a coat, get robbed, confirm `P.equip.coat === null` and the `gear_coat` layer no longer draws).
-- [ ] It's a **pure sink** — a headless run confirms no robbery path ever increases cash/inventory/equip.
-- [ ] Bounded rate — a full skid-row crossing can't strip everything; cooldown/cap proven.
-- [ ] Zone-scoped — no non-skid NPC robs; a headless check confirms.
-- [ ] Save additive, round-trips; `world-gate` unaffected (no new legs).
-- [ ] Suite green (**16/16**, or **17/17** if a robbery gate is warranted — and one likely is, to pin I-SINK-ONLY and I-NO-SOFTLOCK). Red-test any new gate before trusting it, and prove your mutation reaches the real path (ORCHESTRATOR-NOTES #13).
-- [ ] BRAIN appended; `SPEC-V22-PLAN.md` robbery row shipped; findings written not fixed.
+- [x] Skid-row hostiles can take cash / a losable inventory item / an equipped clothing slot, per the chosen trigger.
+- [x] **Never takes a progression key** — a headless test attempts theft while carrying `stripe_package` + an active quest item and confirms they're untouchable.
+- [x] Equipped theft **removes the sprite layer** — verified (equip a coat, get robbed, confirm `P.equip.coat === null` and the `gear_coat` layer no longer draws).
+- [x] It's a **pure sink** — a headless run confirms no robbery path ever increases cash/inventory/equip.
+- [x] Bounded rate — a full skid-row crossing can't strip everything; cooldown/cap proven.
+- [x] Zone-scoped — no non-skid NPC robs; a headless check confirms.
+- [x] Save additive, round-trips; `world-gate` unaffected (no new legs).
+- [x] Suite green (**16/16**, or **17/17** if a robbery gate is warranted — and one likely is, to pin I-SINK-ONLY and I-NO-SOFTLOCK). Red-test any new gate before trusting it, and prove your mutation reaches the real path (ORCHESTRATOR-NOTES #13).
+- [x] BRAIN appended; `SPEC-V22-PLAN.md` robbery row shipped; findings written not fixed.
 
 ## THE TRAP
 

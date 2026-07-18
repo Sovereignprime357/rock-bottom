@@ -16,6 +16,18 @@
 
 ---
 
+## v22 wave 5.4 — the robbery (the first sink) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
+
+Branch: `v22-robbery`, isolated worktree; push without merge. Contract: `SPEC-v22-robbery.md`, graduated to SPEC.md. Trigger **(a)** as ruled: the grabber takes; option (b), robbed-instead-of-killed, deliberately not built — operator's to escalate at review.
+
+- [x] **The take.** LURCH (SKID)'s landed grab — resolved before the damage, so a killing grab never robs the respawn — takes ONE of: cash ($5-15, capped at the pocket), an allowlisted inventory item, an emergency hitter (the spec's blessed edge case), or an allowlisted coat/hat/shoes slot (nulled → the `gear_` layer stops drawing; the loss is on your sprite). Broke and keyless gets the near-miss beat ("finds a receipt. keeps the receipt."). Pure subtraction: no resist, no drop back, no return timer, no reclaim quest, no sighting ledger. All numbers + both allowlists in `src/systems/robbery.js`.
+- [x] **The allowlist (I-NO-SOFTLOCK).** Default un-takeable, classes opt in: 8 inventory ids (junk/food/soap/detergent/cone/gold_tooth/lottery/license), 12 ordinary-clothes equip ids across coat/hat/shoes only. stripe_package, crossword, bus_pass, rocks, the tool slot, pigeon_crown, and priest_collar are structurally beyond reach.
+- [x] **The governor (I-BOUNDED-RATE).** 60s cooldown on the world clock + 2/day cap (`robberiesToday` in `DAILY_COUNTER_KEYS`, `robLastClockMs` alongside — additive counter keys, save version stays 10). A near-miss spends the governor too. Scope is the `robs:true` flag on `skid_lurch` alone, not the grabber archetype.
+- [x] **Permanent enforcement.** `tools/robbery-gate.mjs` (17th gate) — theft driven through the REAL `updateNpcActors` grab (and the back-alley grabber's landed grab, same path, takes nothing); progression-key pocket survives an 8-roll sweep byte-identical; all 5 theft categories diffed against a full economy snapshot with no-return proven over live minutes; governor held through the real dawn reset; stolen coat provably stops being drawImage'd by the real drawPlayer. Red-tested with an 11-mutation battery (3 static-evading), each red naming its defect, exit codes unpiped; hitter-gate subtraction pin 1→2 (use + theft); suite **17/17**; frozen v19 untouched.
+- [ ] **Operator play gate.** Walk skid row wearing a coat and confirm the loss lands as a bit (the toast, the sprite, the silence after); decide whether option (b) — robbed-instead-of-killed — should escalate the zone; tune $5-15 / 60s / 2-day if the sting reads wrong in play. The gate holds the shape, not the funny.
+
+---
+
 ## v22 — the emergency hitter (the bad trade) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
 
 Branch: `v22-hitter`, isolated worktree; push without merge. Contract: `SPEC-v22-emergency-hitter.md`, graduated to SPEC.md.
