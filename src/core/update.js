@@ -3,7 +3,7 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { audio, saveGame } from './audio_save.js';
-import { P, applyEquipStats, dialogue, particles, rollWeather, runtime, state, toast, unlockAchievement } from './runtime_ui.js';
+import { P, applyEquipStats, dialogue, equipTool, particles, rollWeather, runtime, state, toast, unlockAchievement } from './runtime_ui.js';
 import { EQUIPMENT } from '../data/catalogs.js';
 import { clamp, currentZone, inZone, isNight, rectsOverlap } from '../data/npc_spawns.js';
 import { BUILDINGS, PROPS, interactiveProps } from '../data/props.js';
@@ -11,7 +11,7 @@ import { H, RANKS, W, WORLD } from '../data/world.js';
 import { spawnFreedDogFollower } from '../dialogue/neighborhood_a.js';
 import { maybeFireFallenPriestCall } from '../dialogue/neighborhood_b.js';
 import { giveBusPass, hasBusPass, maybeSpawnPriceGuy } from '../dialogue/vendors_places.js';
-import { hasPropane, updateHeatMini } from '../minigames/heat.js';
+import { ownsTool, updateHeatMini } from '../minigames/heat.js';
 import { drawLighting } from '../render/actors_weather.js';
 import { drawAll } from '../render/frame.js';
 import { updateGuidance, updateKingdomBattle } from '../systems/campaigns.js';
@@ -600,11 +600,12 @@ export function updateWorld(dt) {
       c.collected = true; state.cashPilesCollected.add(c.id);
       // v13 wave 4 — propane torch pickup (a 'cash pile' variant tagged with tool)
       if (c.tool === 'propane_torch') {
-        if (!hasPropane()) {
-          P.equip.tool = 'propane_torch';
-          applyEquipStats();
+        // v22 wave 5.5 — ownership counts the locker (no duplicate torches), and a
+        // crowbar in the slot is displaced to pete's glass, never destroyed.
+        if (!ownsTool('propane_torch')) {
+          const displaced = equipTool('propane_torch');
           audio.pickup();
-          toast("+ a propane torch (dented)\n(equipped.)\nit doesn't care.", 3400);
+          toast("+ a propane torch (dented)\n(equipped.)\nit doesn't care." + (displaced ? "\nthe crowbar goes to pete's glass.\nthis is the arrangement." : ""), 3400);
           feedPost("picked up a torch. found it. don't ask.", '@crackheadcent');
           saveGame();
         }

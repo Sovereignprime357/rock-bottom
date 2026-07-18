@@ -122,6 +122,9 @@ export async function loadGame() {
       // v22 robbery — additive counter keys (I-SAVE-ADDITIVE): a pre-robbery save has
       // neither and loads to 0 (never robbed, governor open).
       robberiesToday: 0, robLastClockMs: 0,
+      // v22 wave 5.5 — break-in governor, separate from heistsToday (I-SAVE-ADDITIVE:
+      // a pre-break-in save loads to 0, doors open).
+      breakinsToday: 0,
     }, sv.counters || {});
     state.recognition = normalizeRecognition(sv.recognition);
     state.recognitionVisit = {venue:'',seen:Object.create(null)};
@@ -188,6 +191,9 @@ export async function loadGame() {
       busPassUsedDay: 0, momBusPassDay: 0,
       // v15 incident history (active scene state is never serialized)
       incidentDay: 0, incidentMask: 0, incidentsToday: 0, lastIncidentId: '',
+      // v22 wave 5.5 — the tool the slot displaced, held behind pete's glass.
+      // null = pete holds nothing. Old saves load to null (I-SAVE-ADDITIVE).
+      peteToolLocker: null,
     }, sv.flags || {});
     const rawKingdom=(sv.kingdom&&typeof sv.kingdom==='object')?{...sv.kingdom}:{};
     const witnessedDefeats=new Set(Array.isArray(rawKingdom.defeats)?rawKingdom.defeats:[]);

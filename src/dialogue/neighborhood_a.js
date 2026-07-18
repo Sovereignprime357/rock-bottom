@@ -3,12 +3,12 @@
  * Do not hand-edit; change the source module after the refactor lands.
  */
 import { audio, saveGame } from '../core/audio_save.js';
-import { P, applyEquipStats, dialogue, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
+import { P, applyEquipStats, dialogue, equipTool, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { vendorPrice } from '../data/catalogs.js';
 import { isNight } from '../data/npc_spawns.js';
 import { triggerFallenPriestTransform } from './neighborhood_b.js';
 import { startLockpickMini } from '../minigames/activities.js';
-import { hasPropane } from '../minigames/heat.js';
+import { hasPropane, ownsTool } from '../minigames/heat.js';
 import { aggroNpc, playerAttack, questToast, spawnBoss } from '../systems/combat.js';
 import { feedPost, spawnPetPossum } from '../systems/communications.js';
 import { tellVenue, venueDiscovered } from '../systems/discovery.js';
@@ -220,7 +220,9 @@ export function peteDialogue() {
   if (P.rank >= 3 && state.flags && !state.flags.peteTorchStocked) {
     state.flags.peteTorchStocked = true;
   }
-  const torchAvail = state.flags && state.flags.peteTorchStocked && !state.flags.peteTorchSold && !hasPropane();
+  // v22 wave 5.5 — ownership counts the locker: a torch behind pete's glass is
+  // still sold. Without this, buying a crowbar over the torch would re-stock pete.
+  const torchAvail = state.flags && state.flags.peteTorchStocked && !state.flags.peteTorchSold && !ownsTool('propane_torch');
   // v13 wave 7 — scrap-hated: pete refuses to buy. scrap-liked: +$2 on copper. scrap-loved: $50 loan 1×/day.
   const scrapTier = factionTier(P.faction ? P.faction.scrap : 0);
   if (scrapTier === 'hated') {
@@ -315,11 +317,10 @@ export function peteDialogue() {
       disabled: P.cash < 80,
       action: () => {
         P.cash -= 80;
-        P.equip.tool = 'propane_torch';
-        applyEquipStats();
+        const displaced = equipTool('propane_torch');
         state.flags.peteTorchSold = true;
         audio.coin();
-        toast("- $80\n+ a propane torch (dented)\npete does not explain where he got it.\n(equipped.)", 4200);
+        toast("- $80\n+ a propane torch (dented)\npete does not explain where he got it.\n(equipped.)" + (displaced ? "\npete slides the crowbar behind the glass.\n'pete holds it.'" : ""), 4200);
         feedPost("bought a torch off pete. pete is eating.", '@crackheadcent');
         saveGame();
       }
@@ -328,6 +329,41 @@ export function peteDialogue() {
     opts.push({ label: "ask about the torch again.", action: () => {
       toast("'sold the one.\ngo find your own.'\npete is still eating.", 2400);
     }});
+  }
+  // v22 wave 5.5 — the crowbar. Always stocked, one per customer (the locker
+  // counts as owning it). Pries the tool-gated break-in doors; shares the tool
+  // slot with the torch, so buying it over the torch stashes the torch here.
+  if (!ownsTool('crowbar')) {
+    opts.push({
+      label: P.cash >= 35 ? "buy the crowbar. $35. (municipal.)" : "the crowbar is $35. you don't have it.",
+      disabled: P.cash < 35,
+      action: () => {
+        P.cash -= 35;
+        const displaced = equipTool('crowbar');
+        audio.coin();
+        toast("- $35\n+ a crowbar (municipal)\nit says PROPERTY OF. the rest wore off.\n(equipped.)" + (displaced ? "\npete slides the torch behind the glass.\n'pete holds it.'" : ""), 4200);
+        feedPost("bought a crowbar off pete. for projects.", '@crackheadcent');
+        saveGame();
+      }
+    });
+  }
+  // v22 wave 5.5 — the tool locker. Whatever the slot displaced lives behind the
+  // glass; the swap is free and repeatable, so neither tool's content is ever
+  // permanently unreachable. pete does not explain the service.
+  if (state.flags && state.flags.peteToolLocker) {
+    const held = state.flags.peteToolLocker;
+    const heldName = held === 'crowbar' ? 'the crowbar' : 'the torch';
+    opts.push({
+      label: "swap tools. pete is holding " + heldName + ".",
+      action: () => {
+        state.flags.peteToolLocker = P.equip.tool || null;
+        P.equip.tool = held;
+        applyEquipStats();
+        audio.pickup();
+        toast("pete slides " + heldName + " across.\npete takes the other one back.\nno money moves.\npete does not explain the service.", 3600);
+        saveGame();
+      }
+    });
   }
   // v13 wave 7 — scrap loved: pete will lend $50, once per day.
   if (loanAvail) {

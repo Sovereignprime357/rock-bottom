@@ -23,6 +23,7 @@ export const SPRITE_BASE_SIZES = Object.freeze({
   gear_bathrobe:32,
   gear_cowboy:32,
   gear_crocs:32,
+  gear_crowbar:32,
   gear_helmet:32,
   gear_mesh_cap:32,
   gear_parka:32,

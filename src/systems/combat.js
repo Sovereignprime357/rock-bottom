@@ -10,7 +10,7 @@ import { interactiveProps } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { openOldSchoolInterior } from '../dialogue/vendors_places.js';
 import { WEAPONS, pickupWeapon, spawnBrutusOlder } from '../minigames/activities.js';
-import { hasPropane } from '../minigames/heat.js';
+import { ownsTool } from '../minigames/heat.js';
 import { abortKingdomFight, completeKingdomBoss, completeKingdomPretender, maybeUnlockKingdom, syncKingdomQuests } from './campaigns.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction, applyRep, factionTier } from './factions.js';
@@ -290,8 +290,8 @@ export function onNpcDeath(n) {
     P.copper += 5;
     state.counters.copperStripped = (state.counters.copperStripped||0) + 5;
     if (state.counters.copperStripped >= 10) unlockAchievement('copper_singer');
-    // guaranteed propane torch (no-dupe gated)
-    if (!hasPropane()) {
+    // guaranteed propane torch (no-dupe gated — v22 5.5: the locker counts as owned)
+    if (!ownsTool('propane_torch')) {
       runtime.cashPiles.push({
         id: 'cp_os_torch_'+Math.random().toString(36).slice(2,6),
         x: n.x + n.w/2 + 22, y: n.y + n.h/2 + 8,
@@ -347,7 +347,7 @@ export function onNpcDeath(n) {
   // uses the existing cash-pile pickup pattern, with a `tool` field that triggers equip-on-pickup.
   // v13 wave 7 — street loved bumps the drop rate to ~37.5% (+50%).
   const torchDropRate = factionTier(P.faction ? P.faction.street : 0) === 'loved' ? 0.375 : 0.25;
-  if ((n.id === 'brutus' || n.id === 'brutus_older') && isNight() && !hasPropane() && Math.random() < torchDropRate) {
+  if ((n.id === 'brutus' || n.id === 'brutus_older') && isNight() && !ownsTool('propane_torch') && Math.random() < torchDropRate) {
     runtime.cashPiles.push({
       id:'cp_torch_'+Math.random().toString(36).slice(2,6),
       x: n.x + n.w/2, y: n.y + n.h/2 + 8,

@@ -58,6 +58,21 @@ export function applyEquipStats() {
   P.wantedDecayMult = wantedDecayMult;
 }
 
+// v22 wave 5.5 — one tool slot, two tools (torch, crowbar). Equipping over an
+// occupied slot never destroys the other tool: the displaced one goes behind
+// pete's glass (state.flags.peteToolLocker) and swaps back free at the pawn
+// counter, so no tool-gated content is ever permanently unreachable. Returns the
+// displaced tool id (or null) so the caller's toast can state it flat.
+// Invariant: with exactly two tool ids in the world, the locker never overwrites —
+// displacement only fires while the OTHER tool is equipped.
+export function equipTool(id) {
+  const displaced = (P.equip.tool && P.equip.tool !== id) ? P.equip.tool : null;
+  if (displaced) state.flags.peteToolLocker = displaced;
+  P.equip.tool = id;
+  applyEquipStats();
+  return displaced;
+}
+
 export function rollWeather() {
   const r = Math.random();
   if (r < 0.65) state.weather = 'clear';

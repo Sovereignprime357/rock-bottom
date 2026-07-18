@@ -5,7 +5,7 @@
 import { audio, saveGame } from '../core/audio_save.js';
 import { P, dialogue, rollWeather, runtime, state, toast, unlockAchievement } from '../core/runtime_ui.js';
 import { clamp, isNight } from '../data/npc_spawns.js';
-import { COPPER_SITES } from '../data/props.js';
+import { BREAKIN_SITES, COPPER_SITES } from '../data/props.js';
 import { WORLD } from '../data/world.js';
 import { openStripePackage } from '../dialogue/neighborhood_b.js';
 import { cookBatchMenu } from './heat.js';
@@ -24,6 +24,11 @@ export let WEAPONS;
 export const HEIST_DAILY_CAP = 3;   // v13 wave 6.5 — closes the conductor-arbitrage grind path.
 export const HEIST_YIELD_MIN = 2;   // 3 heists × 2-4 copper × ($90 / 3 copper) caps the
 export const HEIST_YIELD_SPAN = 3;  // conductor floor at ~$270 / day. Shared by every site.
+// v22 wave 5.5 — break-ins run through THIS engine (I-ONE-ENGINE) but on their own
+// governor: breakinsToday, never heistsToday, so copper and break-ins cannot starve
+// each other (I-NO-MINT-DRIFT). Worst-case take: 2/day × the two richest sites
+// ($14 + $18) = $32/day — noise next to the copper floor, real next to the robbery.
+export const BREAKIN_DAILY_CAP = 2;
 
 // Applies one effects object. Order (text -> hp -> glass -> wanted -> brain -> shakes) is
 // abandoned-building parity — see SPEC-v22-copper-sites.md I-ABANDONED-VERBATIM.
@@ -37,18 +42,50 @@ function applyHeistEffects(fx) {
 }
 
 function heistSite(siteId) {
-  return COPPER_SITES.find(s => s.id === siteId) || COPPER_SITES[0];
+  return COPPER_SITES.find(s => s.id === siteId) || BREAKIN_SITES.find(s => s.id === siteId) || COPPER_SITES[0];
+}
+
+// v22 wave 5.5 — the door's gates (I-GATE-REAL). The engine's whole gate vocabulary
+// lives in this one function: a `tool` gate is P.equip.tool identity, a `cred` gate
+// is P.cred >= n. Gates evaluate in listed order and ALL must pass; the first
+// failing gate is returned so its refusal speaks — never a silent no-op.
+function failedHeistGate(site) {
+  for (const g of (site.gates || [])) {
+    if (g.kind === 'tool' && P.equip.tool !== g.tool) return g;
+    if (g.kind === 'cred' && P.cred < g.cred) return g;
+  }
+  return null;
 }
 
 export async function startHeist(siteId = 'abandoned') {
   const site = heistSite(siteId);
-  if ((state.counters.heistsToday||0) >= HEIST_DAILY_CAP) {
-    dialogue(site.title, site.capText, [
-      { label: 'come back tomorrow.', action: () => { state.mode = 'playing'; }},
+  // the door is answered before the schedule: a refused gate is a clean bounce
+  // that spends nothing — not the day's cap, not an entry cost (I-NO-SOFTLOCK).
+  const refusedGate = failedHeistGate(site);
+  if (refusedGate) {
+    dialogue(site.title, refusedGate.refuse, [
+      { label: 'leave.', action: () => { state.mode = 'playing'; }},
     ]);
     return;
   }
-  state.counters.heistsToday = (state.counters.heistsToday||0) + 1;
+  if (site.loot) {
+    // break-in governor — separate counter, separate cap (I-NO-MINT-DRIFT).
+    if ((state.counters.breakinsToday||0) >= BREAKIN_DAILY_CAP) {
+      dialogue(site.title, site.capText, [
+        { label: 'come back tomorrow.', action: () => { state.mode = 'playing'; }},
+      ]);
+      return;
+    }
+    state.counters.breakinsToday = (state.counters.breakinsToday||0) + 1;
+  } else {
+    if ((state.counters.heistsToday||0) >= HEIST_DAILY_CAP) {
+      dialogue(site.title, site.capText, [
+        { label: 'come back tomorrow.', action: () => { state.mode = 'playing'; }},
+      ]);
+      return;
+    }
+    state.counters.heistsToday = (state.counters.heistsToday||0) + 1;
+  }
   state.mode = 'heist';
   await heistStage(site, 1);
 }
@@ -91,6 +128,25 @@ export async function heistStage(site, stage) {
       });
       opts.push({ label: 'leave.', action: () => { state.mode='playing'; resolve(); }});
       dialogue(site.title, site.intro, opts);
+    } else if (stage === 2 && site.loot) {
+      // v22 wave 5.5 — the take. Fixed, specific, small: the loot IS the building's
+      // punchline, and it cannot mint copper or rocks (breakin-gate locks the keys).
+      const L = site.loot;
+      dialogue(L.title, L.text, [
+        { label: L.takeLabel, action: () => {
+          P.cash += L.cash || 0;
+          for (const it of (L.items || [])) P.inventory.push({ id: it.id, n: it.n, q: 1 });
+          audio.pickup();
+          toast(L.takeToast, L.takeDur);
+          heistStage(site, 3); resolve();
+        }},
+        { label: L.altLabel, action: () => {
+          if (L.alt.brain) P.brain = Math.min(100, P.brain + L.alt.brain);
+          toast(L.alt.text, L.alt.dur);
+          heistStage(site, 3); resolve();
+        }},
+        { label: 'leave.', action: () => { state.mode='playing'; resolve(); }},
+      ]);
     } else if (stage === 2) {
       dialogue('THE COPPER PIPES', site.pipes.text, [
         { label: 'strip them.', action: () => {
