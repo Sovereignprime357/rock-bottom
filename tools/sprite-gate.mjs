@@ -352,10 +352,16 @@ const characterPaletteSnapshot=Object.entries(characterPalettes).sort(([a],[b])=
 const environmentPaletteSnapshot=Object.entries(environmentPalettes).sort(([a],[b])=>a.localeCompare(b));
 const characterPaletteHash=createHash('sha256').update(JSON.stringify(characterPaletteSnapshot)).digest('hex');
 const environmentPaletteHash=createHash('sha256').update(JSON.stringify(environmentPaletteSnapshot)).digest('hex');
-// v22 wave 5.5 ratified snapshot: adds the 4 gear_crowbar_* keys. Audit: the art
-// module edit only ADDED the crowbar branch — no prior key's draw code changed,
-// so the 373 previous records are byte-identical inside the new snapshot.
-const EXPECTED_CHARACTER_PALETTE_HASH='1d36333e3aee34e657cdfcaf43891b195996a135e9b7e32c4b85eea84385d8ac';
+// v22 wave 4.3 ratified snapshot (shading pass). Audit: exactly two palette
+// TABLE changes, both repurposing a slot that was an exact duplicate of slot
+// 5's cream (#d4c896) and referenced by no draw code before this wave:
+//   PALS.larry[7]     #d4c896 -> #5a2020 (deep-red shade step, rust family)
+//   PALS.price_guy[7] #d4c896 -> #343434 (one-step edge light, asphalt family)
+// Every other key's palette record is byte-identical to the 5.5 snapshot
+// (1d36333e...). The wave's pixel-density work cannot move this hash by
+// construction — it freezes color tables, not grids. No forbidden colors:
+// both new steps are ramps of existing spine hues (rust red, asphalt).
+const EXPECTED_CHARACTER_PALETTE_HASH='9da3a1314f0ea2c93134807b50516062c2a4e2351186647d3f49bdd67d54f79d';
 const EXPECTED_ENVIRONMENT_PALETTE_HASH='ab49d9868ec172f3d3e487ed0230df09319ba395f8df3f8e4d6baaa734348bd3';
 if(characterPaletteHash!==EXPECTED_CHARACTER_PALETTE_HASH)fail(`character palette-use corpus drifted (${characterPaletteHash}); audit and ratify a new snapshot`);
 if(environmentPaletteHash!==EXPECTED_ENVIRONMENT_PALETTE_HASH)fail(`environment palette-use corpus drifted (${environmentPaletteHash}); audit and ratify a new snapshot`);

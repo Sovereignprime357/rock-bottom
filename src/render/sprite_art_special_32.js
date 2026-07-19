@@ -42,6 +42,12 @@ function dogBody(kind,frame) {
     gridPut(g,26,17,6);gridPut(g,27,17,1);
     gridLine(g,24,21,29,22,7);gridPut(g,28,23,5);
     gridLine(g,22,13,23,22,1);gridBox(g,22,20,3,2,7);
+    // v22 4.3 — fourteen years of shape: haunch crease, sagging flank fur,
+    // a chest in shadow, and a muzzle going gray around the nose.
+    gridLine(g,8,15,7,17,shadow);gridLine(g,7,17,10,21,shadow);
+    gridPut(g,13,21,shadow);gridPut(g,17,21,shadow);gridPut(g,20,22,shadow);gridPut(g,24,22,shadow);
+    gridPut(g,11,15,light);gridPut(g,15,15,light);gridPut(g,19,14,light);
+    gridPut(g,28,21,eye);gridPut(g,29,20,eye);
   } else if (kind==='scrap_dog') {
     // Ribs and missing fur turn the shared dog into a different read at 1px scale.
     gridEllipse(g,14,19,9,5,0);
@@ -50,6 +56,8 @@ function dogBody(kind,frame) {
     gridPut(g,7,15,0);gridPut(g,9,14,0);gridPut(g,18,15,4);
     gridLine(g,28,12,30,9,1);gridPut(g,30,10,2);
     gridLine(g,6,16,frame?0:2,frame?11:13,2);
+    // v22 4.3 — hip bone catching light and two mange patches. Texture, not health.
+    gridPut(g,9,15,light);gridPut(g,13,18,dark);gridPut(g,17,20,dark);
   } else {
     // Older Brutus has the same legal footprint and much less empty air: a shoulder
     // hump, ruined ear, heavy forelegs and a gym towel that outlived the gym.
@@ -89,6 +97,11 @@ export function makePossum32() {
     for(const [x,y] of feet){gridBox(g,x,y,3,2,3);gridPut(g,x+3,y+1,1);}
     gridBox(g,11,12,10,3,6);gridBox(g,13,10,7,3,6);
     gridLine(g,10,15,22,15,7);gridPut(g,13,11,7);gridPut(g,18,10,7);
+    // v22 4.3 — fur grain between the guard-hair rows, underbelly shade, one
+    // helmet scratch. Municipal, not groomed.
+    gridPut(g,11,21,3);gridPut(g,15,22,3);gridPut(g,19,21,3);
+    gridPut(g,10,23,2);gridPut(g,14,23,2);gridPut(g,18,23,2);
+    gridPut(g,15,13,7);
     return g;
   };
   return [make(0),make(1)];
@@ -112,6 +125,9 @@ export function makePigeon32() {
     // One foot. The absent one does not get an explanatory animation.
     gridLine(g,16,26-rise,16,29,6);gridLine(g,16,29,13+(frame?1:0),30,6);
     if(frame){gridLine(g,9,18,5,14,3);gridLine(g,6,14,4,17,4);}
+    // v22 4.3 — breast shade and a wing seam; the crown stays too large.
+    gridPut(g,13,20-rise,2);gridPut(g,14,22-rise,2);gridPut(g,12,18-rise,2);
+    gridLine(g,20,16-rise,23,19-rise,2);
     return g;
   };
   return [make(0),make(1)];
@@ -137,6 +153,12 @@ export function makeHorseCop32() {
     gridLine(g,9,10,6,18,3);gridLine(g,19,10,23,17,3);
     gridPut(g,16,11,7);gridPut(g,17,12,7);gridLine(g,12,14,18,14,4);
     gridLine(g,20,12,27,15,1); // reins
+    // v22 4.3 — the horse gets muscle: haunch line, flank dither, mane, and a
+    // brim shadow so the cop's face sits under the cap instead of beside it.
+    gridLine(g,23,19,25,23,1);
+    gridPut(g,11,22,1);gridPut(g,15,23,1);gridPut(g,19,22,1);
+    gridPut(g,25,16,1);gridPut(g,26,17,1);
+    gridPut(g,12,5,1);gridPut(g,17,5,1);
     return g;
   };
   return [make(0),make(1)];

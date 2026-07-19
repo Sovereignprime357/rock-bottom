@@ -53,6 +53,11 @@ function frontHead(grid) {
   line(grid,13,12,17,13,mouth); put(grid,18,12,mouth);
   put(grid,12,13,hair); put(grid,20,13,hair);
   box(grid,14,14,5,2,skin); put(grid,13,14,hair);
+  // v22 4.3 — the face keeps score: heavy brows, eye bags, hollow cheeks,
+  // stubble on the chin. Mileage, not menace.
+  put(grid,11,9,hair); put(grid,20,10,hair);
+  put(grid,11,11,mouth); put(grid,20,12,mouth); put(grid,10,11,mouth);
+  put(grid,14,14,mouth); put(grid,16,14,mouth); put(grid,18,14,mouth);
 }
 
 function backHead(grid) {
@@ -79,6 +84,9 @@ function sideHead(grid) {
   line(grid,7,13,11,13,mouth); put(grid,12,12,mouth);
   put(grid,16,12,hair); put(grid,18,11,hair);
   box(grid,13,14,5,2,skin);
+  // v22 4.3 — profile mileage: brow shelf, sunken cheek, chin stubble.
+  put(grid,8,10,hair); put(grid,10,12,mouth);
+  put(grid,14,14,mouth); put(grid,16,14,mouth);
 }
 
 function drawFrontTorso(grid, frame, back=false) {
@@ -88,9 +96,16 @@ function drawFrontTorso(grid, frame, back=false) {
   if (back) {
     line(grid,15,16,15,23,undershirt); put(grid,16,18,undershirt);
     line(grid,10,20,13,20,stain); put(grid,20,17,dark);
+    // v22 4.3 — shoulder-blade creases and a hem losing interest.
+    put(grid,12,18,stain); put(grid,19,18,stain);
+    put(grid,10,23,stain); put(grid,17,23,stain);
   } else {
     box(grid,14,16,5,2,undershirt); line(grid,16,18,15,23,undershirt);
     put(grid,11,19,stain); put(grid,12,20,stain); line(grid,20,20,21,22,dark);
+    // v22 4.3 — collar shadow, a crease off the pocket, one shaded flank.
+    put(grid,10,17,stain); put(grid,19,17,stain);
+    line(grid,13,21,12,23,stain);
+    put(grid,22,18,stain); put(grid,21,20,stain); put(grid,22,21,stain); put(grid,21,23,stain);
   }
 
   const leftHand = frame===1 ? [4,24] : frame===3 ? [7,18] : [5,22];
@@ -121,6 +136,7 @@ function drawFrontTorso(grid, frame, back=false) {
     box(grid,9,31,6,1,dark); box(grid,21,31,8,1,dark);
   }
   put(grid,11,27,stain); put(grid,20,26,dark);
+  put(grid,12,25,stain); put(grid,19,25,stain);
 }
 
 function lightForSkin(seed) {
@@ -132,6 +148,9 @@ function drawSideTorso(grid, frame) {
   box(grid,11,15,9,2,shirt); box(grid,9,17,13,7,shirt);
   box(grid,11,23,11,2,shirt); put(grid,9,23,0); put(grid,21,24,shirt);
   line(grid,17,16,18,23,undershirt); put(grid,13,20,stain); put(grid,14,21,stain);
+  // v22 4.3 — the back of the hoodie falls into shade; the front creases.
+  put(grid,20,18,stain); put(grid,19,21,stain); put(grid,20,22,stain);
+  put(grid,12,17,stain); line(grid,12,20,11,22,stain); put(grid,11,23,stain);
 
   const frontHand = frame===1 ? [3,23] : frame===3 ? [8,18] : [5,21];
   const rearHand = frame===3 ? [23,24] : frame===1 ? [21,18] : [23,21];
@@ -159,6 +178,7 @@ function drawSideTorso(grid, frame) {
     box(grid,11,31,6,1,dark); box(grid,22,31,8,1,dark);
   }
   put(grid,12,27,stain); put(grid,19,26,dark);
+  put(grid,13,25,stain); put(grid,18,25,stain);
 }
 
 function makePlayerFrame(direction, frame) {
@@ -241,26 +261,32 @@ export function makePlayerGear32(id, direction) {
     if (side) {
       box(grid,8,4,13,10,dark); box(grid,8,11,11,3,olive); box(grid,9,7,5,2,cream);
       put(grid,9,8,dark); box(grid,7,11,4,2,brick); put(grid,18,13,dark);
+      put(grid,11,12,dark); put(grid,15,11,dark);
     } else {
       box(grid,8,4,16,10,dark); box(grid,9,11,14,3,olive);
       box(grid,10,7,5,2,cream); box(grid,18,8,4,2,cream); put(grid,11,8,dark); put(grid,20,9,dark);
       line(grid,13,12,18,13,brick);
+      put(grid,10,12,dark); put(grid,15,11,dark); put(grid,20,12,dark);
     }
   } else if (id === 'helmet') {
     if (side) {
       box(grid,9,0,10,2,yellow); box(grid,7,2,14,3,orange); box(grid,4,5,18,2,yellow);
       line(grid,10,1,10,4,dark); line(grid,16,1,16,4,dark); put(grid,20,4,cream);
+      put(grid,9,3,dark); put(grid,15,2,dark);
     } else {
       box(grid,10,0,11,2,yellow); box(grid,8,2,15,3,orange); box(grid,5,5,20,2,yellow);
       line(grid,11,1,11,4,dark); line(grid,19,1,19,4,dark); put(grid,23,4,cream);
+      put(grid,10,3,dark); put(grid,17,2,dark);
     }
   } else if (id === 'cowboy') {
     if (side) {
       box(grid,10,0,8,2,brick); box(grid,8,2,12,3,orange); line(grid,4,5,23,5,brick);
       put(grid,8,1,orange); put(grid,19,4,dark); line(grid,11,3,17,3,yellow);
+      put(grid,13,0,dark); put(grid,13,1,dark);
     } else {
       box(grid,11,0,10,2,brick); box(grid,8,2,15,3,orange); line(grid,3,5,27,5,brick);
       put(grid,9,1,orange); put(grid,22,4,dark); line(grid,11,3,20,3,yellow);
+      put(grid,15,0,dark); put(grid,15,1,dark);
     }
   } else if (id === 'pigeon_crown') {
     if (side) {
@@ -284,24 +310,38 @@ export function makePlayerGear32(id, direction) {
     line(grid,x+3,16,x+7,28,dark); line(grid,x+w-3,16,x+w-6,28,dark);
     line(grid,x+1,22,x+w-2,22,cream); put(grid,x+4,20,dark); put(grid,x+w-5,20,dark);
     put(grid,x+2,28,0); put(grid,x+w-3,28,0);
+    // v22 4.3 — buckle, collar shadow, worn lapel edges, fraying hem.
+    put(grid,x+Math.floor(w/2),22,yellow);
+    line(grid,x+1,16,x+2,16,dark); line(grid,x+w-2,16,x+w-3,16,dark);
+    put(grid,x+2,18,orange); put(grid,x+w-3,25,orange);
+    put(grid,x+3,28,dark); put(grid,x+w-4,28,dark);
   } else if (id === 'windbreaker') {
     const x=side?9:7,w=side?14:18;
     box(grid,x,15,w,10,pink); line(grid,x+1,17,x+w-2,17,yellow);
     line(grid,x+Math.floor(w/2),16,x+Math.floor(w/2)-1,24,dark);
     box(grid,x+2,21,4,2,olive); box(grid,x+w-6,21,4,2,olive);
     put(grid,x+1,24,dark); put(grid,x+w-2,24,dark);
+    // v22 4.3 — nylon crinkles; the fabric has opinions about being worn.
+    put(grid,x+3,19,dark); put(grid,x+w-4,20,dark); put(grid,x+4,23,dark);
+    line(grid,x+1,16,x+2,16,dark);
   } else if (id === 'bathrobe') {
     const x=side?9:7,w=side?14:18;
     box(grid,x,15,w,14,cream); line(grid,x+2,16,x+7,28,pink);
     line(grid,x+w-3,16,x+w-7,28,pink); box(grid,x,22,w,2,pink);
     line(grid,x+Math.floor(w/2),22,x+Math.floor(w/2),28,dark);
     put(grid,x+2,28,0); put(grid,x+w-3,28,0); put(grid,x+w-4,18,olive);
+    // v22 4.3 — terry texture and a pocket that holds one former tissue.
+    put(grid,x+3,18,pink); put(grid,x+w-4,19,pink); put(grid,x+4,25,pink); put(grid,x+w-5,26,pink);
+    box(grid,x+2,24,3,2,pink); put(grid,x+3,24,dark);
   } else if (id === 'parka') {
     const x=side?8:6,w=side?16:20;
     box(grid,x,14,w,12,olive); box(grid,x+1,14,w-2,3,yellow);
     box(grid,x+2,17,w-4,2,dark); line(grid,x+Math.floor(w/2),17,x+Math.floor(w/2),25,orange);
     box(grid,x+1,23,5,3,brick); box(grid,x+w-6,23,5,3,brick);
     put(grid,x,19,yellow); put(grid,x+w-1,20,yellow); put(grid,x+2,26,olive);
+    // v22 4.3 — clumped fur trim and a quilt seam. Insulation with a past.
+    put(grid,x+3,15,dark); put(grid,x+7,14,dark); put(grid,x+w-5,15,dark);
+    put(grid,x+3,21,dark); put(grid,x+7,21,dark); put(grid,x+w-6,21,dark);
   } else if (id === 'airpods') {
     if (side) {
       box(grid,5,8,2,4,cream); put(grid,4,8,dark); put(grid,6,12,cream);
@@ -443,6 +483,7 @@ export function makeWeaponLayer32(id, direction, attack) {
     const x=tip[0]-(direction==='left'?0:2), y=tip[1]-2;
     line(grid,hand[0],hand[1],x+2,y+2,dark); box(grid,x,y,6,5,brick);
     line(grid,x,y+2,x+5,y+2,orange); put(grid,x+2,y+1,dark); put(grid,x+4,y+3,dark);
+    put(grid,x+1,y+3,dark); put(grid,x+5,y,orange);
   } else if (id === 'cart_wheel') {
     line(grid,hand[0],hand[1],tip[0],tip[1],dark);
     wheel(grid,tip[0],tip[1],4,cream,olive);
@@ -451,6 +492,7 @@ export function makeWeaponLayer32(id, direction, attack) {
     const sx=tip[0]-(direction==='left'?0:3), sy=tip[1]-2;
     box(grid,sx,sy,7,4,brick); box(grid,sx-1,sy+3,9,2,dark);
     line(grid,sx+2,sy+1,sx+5,sy+1,cream);
+    put(grid,sx+1,sy+2,dark); put(grid,sx+6,sy,dark);
   } else if (id === 'baguette') {
     thickLine(grid,hand[0],hand[1],tip[0],tip[1],cream);
     const dx=Math.sign(tip[0]-hand[0]), dy=Math.sign(tip[1]-hand[1]);
