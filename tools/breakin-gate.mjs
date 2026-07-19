@@ -100,7 +100,10 @@ function checkEffect(fx, where) {
   }
 }
 
-if (!Array.isArray(SITES) || SITES.length < 2 || SITES.length > 3) fail(`registry: ${SITES?.length} sites, expected 2-3 (this wave proves the generalization; filling the quarter is 5.6)`);
+// 5.5 proved the generalization at 2-3 sites; 5.6 filled the quarter's dead band
+// with exactly two more (drained_pool, visitor_center). Growing this number again
+// is a new wave with its own spec, not a drive-by edit.
+if (!Array.isArray(SITES) || SITES.length !== 5) fail(`registry: ${SITES?.length} sites, expected exactly 5 (3 from wave 5.5 + 2 from wave 5.6)`);
 for (const field of ['id', 'title', 'hint', 'who']) {
   const seen = new Set(SITES.map(site => site[field]));
   if (seen.size !== SITES.length || seen.has(undefined) || seen.has('')) fail(`registry: '${field}' values are not unique and non-empty`);

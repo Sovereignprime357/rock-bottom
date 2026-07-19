@@ -124,7 +124,11 @@ if(WORLD.w!==8600||WORLD.h!==5600)fail(`zero-content world bounds drifted: expec
 if(ZONES.length!==23)fail(`zero-content zone inventory drifted: expected 23, got ${ZONES.length}`);
 // v22 wave 5.5: 166 -> 176. The +10 are content-bearing, not drift: 3 breakin_shell
 // anchors (BREAKIN_SITES parity is proven by breakin-gate), 1 cardsign, 6 weeds.
-if(PROPS.length!==176)fail(`zero-content prop inventory drifted: expected 176, got ${PROPS.length}`);
+// v22 wave 5.6: 176 -> 193. The +17 fill the barren quarter: 2 breakin_shell
+// anchors (dead band, y>=3800), 2 cardsigns + 4 weeds around them, and the
+// 9-prop SCENIC OVERLOOK tableau in the far-right sliver (2 park_bench,
+// 2 cardsign, drink_fountain, tree, 3 weeds). All non-solid existing types.
+if(PROPS.length!==193)fail(`zero-content prop inventory drifted: expected 193, got ${PROPS.length}`);
 if(freshNpcCount!==56)fail(`zero-content fresh NPC inventory drifted: expected 56, got ${freshNpcCount}`);
 if(ROAD_SEGMENTS.length!==28)fail(`zero-content road inventory drifted: expected 28, got ${ROAD_SEGMENTS.length}`);
 if(!Array.isArray(STRUCTURES))fail('STRUCTURES is not the initialized merged collision source');
