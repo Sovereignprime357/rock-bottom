@@ -7,9 +7,12 @@ import { isNight } from '../data/npc_spawns.js';
 import { BUILDINGS } from '../data/props.js';
 import { H, TILE, W, ZONES } from '../data/world.js';
 import { drawHeatMini, drawSmokeOverlay } from '../minigames/heat.js';
-import { NAMEPLATE_BOX_BUFFER, VISIBLE_NPC_BUFFER, drawLighting, drawNpc, drawObjectiveGuide, drawPlayer, drawWeather } from './actors_weather.js';
+import {
+  NAMEPLATE_BOX_BUFFER, VISIBLE_NPC_BUFFER, drawLighting, drawNpc, drawNpcContactShadow,
+  drawObjectiveGuide, drawPlayer, drawPlayerContactShadow, drawWeather,
+} from './actors_weather.js';
 import { ctx, drawWorldFabric, visibleWorldRect } from './canvas_geography.js';
-import { drawForegroundWorld, drawKingdomSites, drawLandmarkFacades, drawWorldDecor } from './landmarks_a.js';
+import { drawForegroundWorld, drawKingdomSites, drawLandmarkFacades, drawWorldDecor, prepareLightingFrame } from './landmarks_a.js';
 import { drawDogLeash, drawScrapFence, drawUnderpass } from './landmarks_b.js';
 import { drawMinimap } from './minimap.js';
 import { drawProps } from './props.js';
@@ -17,7 +20,7 @@ import { SPRITE_CACHE } from './sprites.js';
 import { drawBorderGlow, drawBuilding, drawClaimSites, drawGraffiti, drawHideoutDoors, drawOfficeExterior, drawPosters } from './structures.js';
 import { drawGroundTile, drawMarketStalls } from './tiles.js';
 import { playerAttack } from '../systems/combat.js';
-import { drawIncidentPlayerCosmetics, drawIncidents } from '../systems/incidents.js';
+import { drawIncidentPlayerCosmetics, drawIncidentShadows, drawIncidents } from '../systems/incidents.js';
 
 export function drawAll() {
   state.visualNow = performance.now();
@@ -27,6 +30,7 @@ export function drawAll() {
   ctx.save();
   const sx = (state.shake>0?(Math.random()-.5)*state.shake:0);
   const sy = (state.shake>0?(Math.random()-.5)*state.shake:0);
+  prepareLightingFrame(sx,sy);
   ctx.translate(-state.cam.x + sx, -state.cam.y + sy);
   // ground tiles — per-zone variety + procedural texture
   const startX = Math.floor(state.cam.x/TILE)*TILE;
@@ -159,17 +163,23 @@ export function drawAll() {
     ctx.fillRect(cp.x-12, cp.y-12+bob, 24, 18);
   }
 
-  // Bounded scene actors sit above props and below canonical actors. They never enter npcs.
-  drawIncidents();
-
-  // NPCs. Reuse the viewport buffer so a crowded scene does not manufacture an array
-  // and a garbage-collection hitch every frame.
+  // Reuse one actor buffer. All contact shadows render on one plane before any actor body.
   VISIBLE_NPC_BUFFER.length=0;
   NAMEPLATE_BOX_BUFFER.length=0;
   for(const n of runtime.npcs)if(!n.dead&&
     n.x>=state.cam.x-60&&n.x<=state.cam.x+W+40&&
     n.y>=state.cam.y-60&&n.y<=state.cam.y+H+40)VISIBLE_NPC_BUFFER.push(n);
   VISIBLE_NPC_BUFFER.sort((a,b)=>(a.y+a.h)-(b.y+b.h));
+  drawIncidentShadows();
+  for(const n of VISIBLE_NPC_BUFFER){
+    if(n.id==='mom'&&isNight()||n.id==='pete'&&isNight()||n.daytimeOnly&&isNight())continue;
+    drawNpcContactShadow(n);
+  }
+  drawPlayerContactShadow();
+
+  // Bounded scene actors sit above props and below canonical actors. They never enter npcs.
+  drawIncidents();
+
   for (const n of VISIBLE_NPC_BUFFER) {
     if (n.dead) continue;
     if (n.id==='mom' && isNight()) continue;

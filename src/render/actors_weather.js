@@ -6,11 +6,14 @@ import { P, dialogue, runtime, state } from '../core/runtime_ui.js';
 import { last } from '../core/update.js';
 import { VENDOR_FLOATER_IDS } from '../data/catalogs.js';
 import { clamp } from '../data/npc_spawns.js';
-import { PROPS } from '../data/props.js';
-import { H, W, WORLD_LIGHTS } from '../data/world.js';
+import { H, W } from '../data/world.js';
 import { ctx } from './canvas_geography.js';
-import { FOG_SHEET, LIGHT_CTX, LIGHT_GLOW_CACHE, LIGHT_MASK, nightAmount, punchLightMask } from './landmarks_a.js';
-import { SPRITE_CACHE } from './sprites.js';
+import {
+  ACTIVE_LIGHTS, FOG_SHEET, LIGHT_CTX, LIGHT_FRAME_SHAKE_X, LIGHT_FRAME_SHAKE_Y,
+  LIGHT_GLOW_CACHE, LIGHT_MASK, drawAmbientGrade, drawContactShadow, nightAmount,
+  punchLightMask,
+} from './landmarks_a.js';
+import { SPRITE_CACHE, SPRITE_EMISSIVE_CACHE } from './sprites.js';
 import { routePatchTier } from '../systems/progression_routes.js';
 
 export let VISIBLE_NPC_BUFFER, NAMEPLATE_BOX_BUFFER, NPC_IDLE_SPRITES, NPC_TWO_FRAME_SPRITES;
@@ -31,45 +34,78 @@ export function placeNameplateBox(n,labelLines,labelWidths) {
   return box;
 }
 
+export function drawEmissiveCore(light){
+  if(!light.core)return;
+  const sx=Math.round(light.x-state.cam.x+LIGHT_FRAME_SHAKE_X);
+  const sy=Math.round(light.y-state.cam.y+LIGHT_FRAME_SHAKE_Y);
+  if(sx<-20||sx>W+20||sy<-20||sy>H+20)return;
+  ctx.globalAlpha=Math.min(1,.58+light.level*.34);
+  if(light.core==='bulb'){
+    ctx.fillStyle=`rgb(${light.rgb})`;ctx.fillRect(sx-2,sy-2,5,4);
+    ctx.fillStyle='#d4c896';ctx.fillRect(sx-1,sy-2,2,2);
+  }else if(light.core==='fire'){
+    const flicker=Math.round(Math.sin((state.visualNow||0)/95+light.x*.03));
+    ctx.fillStyle='#d06030';ctx.fillRect(sx-4,sy+flicker,8,5);ctx.fillRect(sx-2,sy-5-flicker,4,6);
+    ctx.fillStyle='#e8c040';ctx.fillRect(sx-1,sy-3-flicker,3,5);
+  }else if(light.core==='neon'){
+    ctx.fillStyle=`rgb(${light.rgb})`;ctx.fillRect(sx-9,sy-2,18,3);ctx.fillRect(sx-7,sy+2,12,1);
+  }else if(light.core==='window'){
+    ctx.fillStyle=`rgb(${light.rgb})`;ctx.fillRect(sx-5,sy-4,10,8);
+    ctx.fillStyle='#5a4828';ctx.fillRect(sx,sy-4,1,8);ctx.fillRect(sx-5,sy,10,1);
+  }else if(light.core==='signal'){
+    ctx.fillStyle=`rgb(${light.rgb})`;ctx.fillRect(sx-2,sy-2,4,4);
+  }else if(light.core==='cop'){
+    const flip=Math.floor((state.visualNow||0)/150)%2;
+    ctx.fillStyle=flip?`rgb(${light.rgb})`:'#8a3a3a';ctx.fillRect(sx-6,sy-2,5,3);
+    ctx.fillStyle=flip?'#8a3a3a':`rgb(${light.rgb})`;ctx.fillRect(sx+1,sy-2,5,3);
+  }else if(light.core==='ember'){
+    ctx.fillStyle='#d06030';ctx.fillRect(sx-1,sy-1,3,3);
+    ctx.fillStyle='#e8c040';ctx.fillRect(sx,sy-1,1,1);
+  }
+}
+
+export function drawPlayerEmissives(){
+  const dir=P.facing||P.dir||'down';
+  const playerDrawX=P.x-2-state.cam.x+LIGHT_FRAME_SHAKE_X;
+  const playerDrawY=P.y-4+(P.crashT>0?1:0)-state.cam.y+LIGHT_FRAME_SHAKE_Y;
+  const eq=P.equip||{};
+  const toolMask=eq.tool?SPRITE_EMISSIVE_CACHE['gear_'+eq.tool+'_'+dir]:null;
+  const attackPhase=P.attacking>0?(P.attacking>80?0:1):0;
+  const weaponState=P.attacking>0?attackPhase:0;
+  const weaponMask=SPRITE_EMISSIVE_CACHE['weapon_'+(P.weapon||'fists')+'_'+dir+'_'+weaponState];
+  ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+  if(toolMask)ctx.drawImage(toolMask,playerDrawX,playerDrawY,32,32);
+  if(weaponMask)ctx.drawImage(weaponMask,playerDrawX,playerDrawY,32,32);
+}
+
 export function drawLighting() {
   const amount=nightAmount();
-  if(amount<=.01)return;
-  const octx=LIGHT_CTX;
-  octx.globalCompositeOperation='source-over';
-  octx.globalAlpha=1;
-  octx.clearRect(0,0,W,H);
-  octx.fillStyle=`rgba(0,0,0,${(.72*amount).toFixed(3)})`;
-  octx.fillRect(0,0,W,H);
-  octx.globalCompositeOperation='destination-out';
-  for(const p of PROPS){
-    if(p.type!=='lamp')continue;
-    punchLightMask(octx,p.x-state.cam.x,p.y-32-state.cam.y,120,1,amount);
+  if(amount>.01){
+    const octx=LIGHT_CTX;
+    octx.globalCompositeOperation='source-over';octx.globalAlpha=1;
+    octx.clearRect(0,0,W,H);
+    octx.fillStyle=`rgba(0,0,0,${(.72*amount).toFixed(3)})`;octx.fillRect(0,0,W,H);
+    octx.globalCompositeOperation='destination-out';
+    for(const light of ACTIVE_LIGHTS){
+      punchLightMask(octx,light.x-state.cam.x+LIGHT_FRAME_SHAKE_X,light.y-state.cam.y+LIGHT_FRAME_SHAKE_Y,
+        light.radius,Math.min(1.25,light.power+.35),light.level);
+    }
+    const px=P.x+P.w/2-state.cam.x+LIGHT_FRAME_SHAKE_X,py=P.y+P.h/2-state.cam.y+LIGHT_FRAME_SHAKE_Y;
+    punchLightMask(octx,px,py,P.rockedT>0?132:92,P.rockedT>0?1:.86,amount);
+    octx.globalAlpha=1;octx.globalCompositeOperation='source-over';ctx.drawImage(LIGHT_MASK,0,0);
   }
-  for(const l of WORLD_LIGHTS){
-    if(l.office&&!(state.office&&state.office.upgrades&&state.office.upgrades.generator))continue;
-    punchLightMask(octx,l.x-state.cam.x,l.y-state.cam.y,l.radius,l.power+.35,amount);
-  }
-  const px=P.x+P.w/2-state.cam.x,py=P.y+P.h/2-state.cam.y;
-  punchLightMask(octx,px,py,P.rockedT>0?132:92,P.rockedT>0?1:.86,amount);
-  octx.globalAlpha=1;octx.globalCompositeOperation='source-over';
-  ctx.drawImage(LIGHT_MASK,0,0);
-
-  // Colored cached glow sprites. Static gradients were built once at init.
+  drawAmbientGrade();
+  for(const light of ACTIVE_LIGHTS)drawEmissiveCore(light);
+  drawPlayerEmissives();
+  // Colored cached glow sprites. Every registry RGB was built once at init.
   ctx.globalCompositeOperation='lighter';
-  for(const p of PROPS){
-    if(p.type!=='lamp')continue;
-    const sx=p.x-state.cam.x,sy=p.y-32-state.cam.y,r=74;
+  for(const light of ACTIVE_LIGHTS){
+    const sx=light.x-state.cam.x+LIGHT_FRAME_SHAKE_X,sy=light.y-state.cam.y+LIGHT_FRAME_SHAKE_Y,r=light.radius*.74;
     if(sx<-r||sx>W+r||sy<-r||sy>H+r)continue;
-    ctx.globalAlpha=.72*amount;
-    ctx.drawImage(LIGHT_GLOW_CACHE['255,210,120'],sx-r,sy-r,r*2,r*2);
-  }
-  for(const l of WORLD_LIGHTS){
-    if(l.office&&!(state.office&&state.office.upgrades&&state.office.upgrades.generator))continue;
-    const sx=l.x-state.cam.x,sy=l.y-state.cam.y,r=l.radius*.74;
-    if(sx<-r||sx>W+r||sy<-r||sy>H+r)continue;
-    ctx.globalAlpha=l.power*amount;
-    const glow=LIGHT_GLOW_CACHE[l.rgb];
-    if(glow)ctx.drawImage(glow,sx-r,sy-r,r*2,r*2);
+    ctx.globalAlpha=light.power*light.level;
+    const glow=LIGHT_GLOW_CACHE[light.rgb];
+    if(!glow)throw new Error(`missing cached light glow: ${light.rgb}`);
+    ctx.drawImage(glow,sx-r,sy-r,r*2,r*2);
   }
   ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
 }
@@ -116,12 +152,11 @@ export function resolveNpcPose(n, visualNow) {
   return { spriteKey, frame, bob:(n.frame===1||n.frame===2)?-1:0 };
 }
 
+export function drawNpcContactShadow(n){
+  drawContactShadow(n.x+n.w/2,n.y+n.h-1,Math.max(6,n.w/2),3,.36);
+}
+
 export function drawNpc(n) {
-  // body shadow — soft elliptical
-  ctx.fillStyle = 'rgba(0,0,0,.45)';
-  ctx.beginPath();
-  ctx.ellipse(n.x+n.w/2, n.y+n.h-1, n.w/2, 3, 0, 0, Math.PI*2);
-  ctx.fill();
   // sprite (with walk/identity frame). Bottom-center anchoring keeps 22px pedestrians,
   // 36px horse cops and 28px vendors aligned to their actual hitbox feet.
   const visualNow = state.visualNow || performance.now();
@@ -273,10 +308,11 @@ export function drawNpc(n) {
   }
 }
 
+export function drawPlayerContactShadow(){
+  drawContactShadow(P.x+P.w/2,P.y+P.h-1,Math.max(7,P.w/2),3,.38);
+}
+
 export function drawPlayer() {
-  // shadow
-  ctx.fillStyle = 'rgba(0,0,0,.5)';
-  ctx.fillRect(P.x+2, P.y+P.h-2, P.w-4, 4);
   const dir = P.facing, f = P.frame;
   // Cached 32-logical cart underlay. It shares the player's exact destination rectangle
   // instead of becoming a runtime rectangle costume when mounted.
