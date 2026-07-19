@@ -91,3 +91,13 @@ Two reasons, both real:
 **The temptation is to make copper sites pay more the farther they are** — a distance-reward gradient. That's a reward economy, and it fights the north star and the daily cap at once. **The reward for walking to the train yard is the train yard** — a new cursed room, a new specific inhabitant, a different way in. Not more dollars per copper. Variety is the payout.
 
 Second trap: **reskinning.** Three sites that are the abandoned building with the serial numbers filed off is worse than one good site. Each is a *place*, with a *who* and a *why-it's-weird*. If it hasn't got a possum-tier detail, it's not done.
+
+---
+
+## GRAPHICS / POLISH BACKLOG (operator direction 2026-07-18, post-v22)
+
+Decision: **NOT going full 3D.** Keep shipping the 2D game; the corpus (VIBE + systems + world) is the real asset and is medium-portable later if ever wanted. "Better" = specific, grounded improvements, not a rebuild. Graphics/map track routes to **Codex** (operator's pick; and Codex built the honest-map/physicality layer, so it knows the render/world code — the real reason it fits, since sprites are hand-authored code grids, not generated images). Workflow: operator plays on the big screen → notes specifics → grounded SPEC → Codex builds → gates + operator's eye verify.
+
+- **G-ROADS — the road network isn't a grid (CONFIRMED 2026-07-18).** 28 `ROAD_SEGMENTS`, 0 fully-disconnected (all touch), but edges land on arbitrary coords (X-gaps 620/80/24/88/548/20…, no modulus) and widths wobble 102–112px. Intersections meet off-aligned; reads sloppy though it connects. **Fix:** a road-grid pass — snap positions to a modulus, normalize widths to a constant, clean intersections into a real street system. **Risk/invariants:** roads are walkable and buildings solid, so moving a road can collide a building (`solidity-gate`), move a route stop or mandatory leg (`world-gate` must stay byte-identical or the change is deliberate + re-ratified), or strand a copper/break-in site placed relative to a road. Not cosmetic — a real wave with real gates. Operator's own read: *"some of the roads don't connect, and it's not an actual gridded system."*
+- **G-SHADING (4.3)** — sprite shading pass, building now (Fable), operator's eye is the acceptance gate.
+- **(collect on the big-screen playthrough)** — operator hasn't played since v19 on a real screen; his played notes become the rest of this backlog.
