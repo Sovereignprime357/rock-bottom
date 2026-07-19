@@ -2344,3 +2344,34 @@ Next: operator play gate — walk the band (do two more doors make it a place?),
 the overlook (lands, or clutter?), rule cred 20 and the $13/$16 takes, and decide
 whether a 5.7 (remaining sparse cells, mid-map singles) is wanted at all. Branch
 v22-fill-quarter pushed, not merged.
+
+## 2026-07-18 — v22 Wave 4.3 / SPRITE SHADING PASS (Fable / Claude Code, branch `v22-sprite-shading`, isolated worktree)
+
+### WHAT
+
+Reshaded the 94-base / 377-key character roster for depth inside the existing 32×32 ceiling — denser pixels, same structure. Three layers of work: (1) the shared humanoid generator gained per-identity ramp roles `shade`/`worn` declared in `npcStyles` (fabric shadow step, lit/wear step — indices into each NPC's existing palette, defaulting to outline-dark/off), driving brow/jaw/chin shadows, underarm and flank shade, hem wear and thigh creases across all 46 humanoid bases at once; (2) signature passes for the bases the shared body couldn't carry — tony's coat-layer depth, paulie's face topography, dave's slept-in rumples, biggu's weather side, lurch's rim light, barb's knit, pete's grease, larry's deep-red flush, price_guy's edge-lit void, priest's cassock fold-lights, cop's gut, both tarp bases' creases, wire_guard's coil shadows, and more; (3) hand passes on the player composite (face mileage: brows, bags, hollow cheeks, stubble; hoodie creases and shaded flank; pants highlights — all four directions, attack frames inherit), the four gear coats + hats, and the specials (brutus got a haunch, flank fur and a graying muzzle; the horse under horsecop got muscle; possum fur grain; pigeon breast shade; dave_sleep blanket folds).
+
+Palette-use snapshot re-ratified ONCE at the final state: exactly two table changes, both slots that were exact duplicates of cream (#d4c896) referenced by no draw code — `PALS.larry[7]` → `#5a2020` (rust-family shade step) and `PALS.price_guy[7]` → `#343434` (asphalt-family edge light). No forbidden colors. Everything else moves the pixels, not the tables.
+
+### WHY / DECIDED
+
+Operator's read from playing v21: "more shading, more definition... just run the sprites." Decided the leverage order was shared-generator-first (46 bases per edit), signatures second, hand art third — and that `shade`/`worn` should be *declared per identity* rather than guessed from a fixed index, because the palettes disagree about which slot is dark (receipt_guard's 2 is cream; mom's darker-green step turned out wrong for faces and was swapped to her plum step after the eye caught green flecks reading as illness). Deliberately left alone: os_brutus (already dense — forcing more would muddy it), pothole, the five incidents, attack smear, route patches, cart underlay, and the 11 environment sprites (out of scope).
+
+### FINDING (written, not fixed)
+
+The SPEC's edge case says "every reshade changes the palette-use snapshot." False by construction: `sprite-gate` hashes `SPRITE_KEY_PALETTES` — the per-key color *tables*, not the pixel grids. A reshade that only places existing indices denser leaves the hash byte-identical; only the two table edits moved it. The ratification therefore audits palette-table decisions specifically, which is arguably what it was always for — but the SPEC prose overclaims what the hash sees.
+
+### VERIFIED
+
+- 18/18 suite green at the ratified snapshot; frozen v19 untouched; only the three art modules + sprites.js + sprite-gate changed.
+- Red tests on the REAL path (entry #13 discipline), all three fired then reverted: `imageSmoothingEnabled=true` in the live rasterizer → gate names it; `pothole_2` cacheSprite deleted → 376/377 + lost-frame; `#fff` in larry's live palette → forbidden-white × 3 frames + hash drift. Built-in `--red=key-count` / `--red=character-palette` also exercised.
+- I-SAME-SCREEN checked mechanically: per-frame pre-anchor bottom rows identical to baseline for every anchored base (possum, dogs, pigeon, horsecop, dave_sleep), so no anchor shift; non-anchored bases only gained interior pixels.
+- Gear/weapon overlay alignment verified on composited renders (trench+cap+pipe, parka+mask+shoe, bathrobe+cowboy+brick, windbreaker+helmet+knife, attack+crowbar, sneakers+clipboard patch).
+
+### WEAK LIST (the operator rules; these are the ones I'd redo)
+
+jogger (grandfathered pastel palette swallows shading — fixing it means an operator palette decision), sherri (thin frame leaves nowhere for the shade to sit), curb_emperor (signature was already the busiest in the roster; my dots add noise, not form — wants a redraw wave), dogwalker's dog Paisley (still six rectangles), the horsecop rider (horse improved, rider still crude), os_brutus (untouched on the "already dense" call — operator may disagree).
+
+### NEXT
+
+Operator eyes the atlas and rules per base; anything that reads *nicer* rather than *more itself* gets reverted by name. Merge is the operator's call — branch pushed, not merged.
