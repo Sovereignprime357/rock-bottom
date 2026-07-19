@@ -408,3 +408,11 @@ it can fail to fire (rejects good work). **Both are "the test can't do its job,"
 is the same: confirm the mutation actually reached the code path before you believe either a red or a
 green.** For a poison test specifically: assert the poison *changed observable behavior somewhere*
 before trusting what the gate says about it.
+
+## 2026-07-19 — corrupted a corpus doc with Set-Content, then committed past the red gate
+
+Two linked failures in one small repair.
+
+**1. Set-Content ate the UTF-8.** Edited a plan doc via Get-Content -Raw | Set-Content -Encoding UTF8. Get-Content mis-decoded the existing UTF-8 (checkmark emojis, em-dashes) as ANSI; Set-Content wrote the mojibake back — 58 garbage artifacts, all 7 checkmarks destroyed. Same family as the BOM double-encode notes. Never mutate a corpus file through PowerShell Set-Content; use node fs.writeFileSync(path, s, utf8) for any programmatic doc edit. Repaired from the clean HEAD~1 blob via node.
+
+**2. Committed past a red corpus-gate.** After the repair I ran the suite, saw FAIL 1 corpus violation, and committed anyway. corpus-gate fired correctly: mid-repair my working view of the doc disagreed with the corrupted HEAD — the exact stale-mount signature it guards. It cannot tell a good repair from a phantom deletion. The right move for a legitimate crossing is CORPUS_GATE_ALLOW=reason, loud and on the record, not committing past a naked red. A red gate is a stop even when you believe it is a false positive. Cross it loudly or not at all.
