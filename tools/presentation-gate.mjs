@@ -55,6 +55,9 @@ for(const contract of ['flex:1 1 0;min-width:0;max-width:50%','overflow-wrap:any
   if(!html.includes(contract))failures.push(`HUD containment CSS missing: ${contract}`);
 }
 
+// v22 display fix: mobile chrome keys off a coarse pointer only, never viewport width.
+if(!html.includes('@media (pointer: coarse){'))failures.push('mobile media query must be @media (pointer: coarse){ - coarse-pointer gated');
+if(html.includes('max-width: 820px'))failures.push('mobile media query still width-gated (max-width: 820px) - desktop zoom would re-show mobile chrome');
 const carts=propsModule.PROPS.filter(prop=>prop.type==='cart');
 if(carts.length!==1)failures.push(`rideable cart count ${carts.length}, expected 1`);
 const cart=carts[0];
