@@ -32,7 +32,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **eighteen** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -40,7 +40,7 @@ The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates
 | `docs-gate` | **This table.** Asserts the gate list here matches the `GATES` array in `run-gates.mjs`. This README once claimed four gates while seven ran; nothing caught it. |
 | `version-gate` | **The label.** The `<title>`, the subtitle, and this README's "Current shipped build" must name the same version. The game said `v19` through the entire v20 wave and Wave 4.1, and sent the operator hard-refreshing a deploy that was already current. |
 | `module-gate` | Module linking, source/reference integrity, no file over the size ceiling. |
-| `sprite-gate` | **The character ceiling.** Pins 373 exact nonblank keys across 93 explicitly declared 32-logical character bases, keeps eleven explicit 16-logical environment sprites on the same renderer, freezes all 14 character-cache draw destinations and the palettes actually consumed by both caches, and enforces the no-smoothing pixel contract. Green proves structure and rendering discipline—not whether the art is good; that remains an operator visual decision. |
+| `sprite-gate` | **The character ceiling.** Pins 377 exact nonblank keys across 94 explicitly declared 32-logical character bases, keeps eleven explicit 16-logical environment sprites on the same renderer, freezes all 14 character-cache draw destinations and the palettes actually consumed by both caches, and enforces the no-smoothing pixel contract. Green proves structure and rendering discipline—not whether the art is good; that remains an operator visual decision. |
 | `npc-registry-gate` | Every runtime NPC identity is registered in `VIBE.md`. No unnamed strangers. |
 | `legibility-gate` | The four measured legibility relationships (buildings, zones, nameplates, graffiti). |
 | `presentation-gate` | Save/input/status parity. |
@@ -54,6 +54,13 @@ The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates
 | `solidity-gate` | **The honest map.** Requires declared physicality, one collision authority, door/art and legacy-resolver parity, deterministic save ejection, exact actor exemptions, charge impacts, actor/projectile obstruction, and collision-aware traversal of every mandatory leg. Run it with `--full` to print the complete 69-campaign / 252-route before-and-after ledger. |
 | `runtime-smoke` | The game boots, starts, and plays headless. |
 | `world-gate` | **The map.** Derives the shakes runway and walk speed at run time, then measures every mandatory leg, day-1 coverage, and the route legality graph against them. Runs last on purpose: a standing world reading must never mask a regression in the gates above it. |
+
+Graphics Phase 1 also has a bounded standalone acceptance gate. It stays outside the permanent
+runner so the required suite remains exactly 18:
+
+```text
+node --no-warnings --experimental-vm-modules tools/phase1-lighting-gate.mjs
+```
 
 **Why `corpus-gate` runs first.** Every other gate checks the **game**. That one checks the **corpus** — `VIBE.md`, `SPEC.md`, `AGENTS.md`, the logs — which is the thing every future version gets reproduced from. On 2026-07-16 an agent read this repo through a stale mount and saw 508 deletions that did not exist; `git add -A` would have committed them **clean and green**, because a suite that only checks the game passes fine while the game is fine. **A suite that protects the output but not the seed is protecting the wrong thing.** There was a written note warning of exactly this. The note did not stop it. A note is a prompt, and prompts leak. Only a gate holds.
 

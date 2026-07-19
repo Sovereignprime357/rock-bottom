@@ -516,3 +516,27 @@ means the runtime and art machinery survived; only the operator's eye can accept
 **Preserved:** `rock_bottom_v19.html`, save key/shape/version, `18000ms` high, `8000ms` crash,
 movement and combat values, world geometry, interactions, NPC identity, actor hitboxes, draw
 destinations, cache key grammar, and the existing color corpus.
+
+## IMPL-GRAPHICS-P1-01 — one frame registry, opt-in emissive semantics, visual-only fire
+
+**Status:** implementation decision record, 2026-07-19; not an operator-ratified OD. The operator's
+visual veto and Phase 2/3 stop remain standing.
+
+**Decision:** extend the shipped light machinery through one reused `ACTIVE_LIGHTS` frame buffer.
+Static `WORLD_LIGHTS`, lamp props, burn barrels, live cops, and the player ember normalize there;
+mask holes, cached glows, emissive cores, and nearest-light AO consume the same rows. Broad ambient
+fields explicitly do not cast a directional shadow.
+
+Palette indices `2` and `7` are emissive only on an allowlisted emitter-capable sprite base. They
+cannot be reinterpreted globally: the grandfathered 94-base corpus uses both indices for ordinary
+faces, clothes, paper, and trim. The normal grids, palettes, keys, and `SPRITE_CACHE` remain the
+authority; `SPRITE_EMISSIVE_CACHE` is a transparent initialization-time derivative.
+
+The four burn barrels are visual-only `WORLD_DECOR`, not `PROPS` or an interaction system. They add
+no collision, damage, warmth, loot, save state, or verb. The Phase 1 acceptance gate stays beside,
+not inside, `run-gates.mjs`, preserving the operator's exact 18-gate runner while still giving this
+bounded visual wave a red-tested contract.
+
+**Preserved:** Canvas 2D, pixelated world rendering, eight-entry palettes, sprite-gate's 94/377
+snapshot and 14 destinations, gameplay geometry/state/random order, frozen v19, and the Phase 2/3
+operator boundary.

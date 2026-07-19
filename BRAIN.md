@@ -2344,3 +2344,38 @@ Next: operator play gate — walk the band (do two more doors make it a place?),
 the overlook (lands, or clutter?), rule cred 20 and the $13/$16 takes, and decide
 whether a 5.7 (remaining sparse cells, mid-map singles) is wanted at all. Branch
 v22-fill-quarter pushed, not merged.
+
+## 2026-07-19 — Graphics Phase 1: lighting & grade layer (Codex, `codex/graphics-phase1-light-grade`)
+
+**What / why.** Extended the under-deployed v14 Canvas lighting stack without replacing it. One
+active frame registry now carries streetlamps, the existing world fixtures, four visual-only burn
+barrels, neon/windows, living cops, and the live player ember into the same darkness-hole, cached
+glow, emissive-core, and shadow-direction consumers. Frozen zone/terrain rows add a low-alpha dirty
+multiply/overlay grade. Cached multiply AO and 1–2px contact bands seat actors, physical props,
+interactive props, incident actors, and world decor.
+
+**Decided.** Indices `2`/`7` are an opt-in emissive semantic for `gear_propane_torch` and
+`weapon_pipe`, not a global reinterpretation: the existing palette corpus already uses them for
+ordinary material. Normal sprite grids, palettes, keys, and anchors stay untouched; twelve
+transparent masks are derived once at cache initialization. Broad ambient light records do not
+cast; burn barrels remain render-only decor. Phase 1 owns a standalone red-tested gate outside the
+exact 18-gate runner. These are implementation decisions, not permission to start Phase 2 or 3.
+
+**Tried / adjusted.** The requested `specmesh-spec-capture` command/tool is not installed in this
+workspace, so the equivalent sub-SPEC was captured and committed manually before production code.
+The first monolithic documentation patch missed a UTF-8 line; split `apply_patch` edits landed
+cleanly without a PowerShell round-trip. Browser capture needed a temporary click-only fixture and
+served HTTP; it was removed after matched captures. Gate review found three SPEC-listed mutations
+missing named modes, so grade-alpha, unclassified-prop, and render-order were added rather than
+weakening the captured contract.
+
+**Proof.** `phase1-lighting-gate` passes 887 checks after all nine named red modes exit nonzero. A
+real 800×600 browser stress scene with 64 visible cops/dynamic lights averages 1.548ms/frame over
+120 measured frames after warm-up. The acceptance sheet compares the exact base at
+`6108724b23e113b35d7b7f03be44b3743e48bd3d` against Phase 1 at identical Block,
+Laundromat/Church, and Skid Row fixtures. `sprite-gate` remains 94 bases / 377 keys / 14 draw sites;
+frozen v19 and `index.html` have no capture-only diff.
+
+**Next.** Operator eye gate on `artifacts/graphics-phase1/phase1-before-after.png`: rule area hue,
+source strength, shadow seating, and whether the result stays grimy rather than clean. Stop there.
+Phase 2 palette/grime and Phase 3 resolution remain unbuilt until an explicit operator go.

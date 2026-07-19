@@ -4,6 +4,9 @@ Status: captured before implementation. This packet governs Phase 1 of
 `DELEGATION-graphics-upgrade.md` only. Phase 2 palette/grime-density work and Phase 3 sprite-size
 work are explicitly out of scope.
 
+Implementation status: candidate complete on `codex/graphics-phase1-light-grade`; automated and
+browser proof are green, with the operator eye gate still open.
+
 ## Outcome
 
 The existing Canvas 2D lighting stack remains the authority: `drawLighting()` still owns the
@@ -45,7 +48,7 @@ Required source families:
 | Family | Authority | Hue | Behavior |
 |---|---|---|---|
 | streetlamp | `PROPS` lamp records | sodium piss-yellow `232,192,64` | night mask hole + cached glow + self-lit bulb |
-| barrel fire | authored physical prop/light records | fire orange `208,96,48` | dirty flicker in radius/power; no random allocation |
+| barrel fire | authored physical prop/light records | fire orange `208,96,48` | dirty core flicker; no random allocation |
 | neon sign | authored facade/decor light records | fluorescent purple `212,136,212` | night glow + self-lit broken sign strokes |
 | lit window | authored facade/building light records | dirty cream/gold `212,200,150` | low-power night glow; never pure white |
 | pipe ember | live player status/equipment | copper orange `208,96,48` | bounded player-attached source while the relevant ember is visibly live |
@@ -154,11 +157,14 @@ sample, font, CDN, framework, or build step is permitted.
 
 ## Permanent verification
 
-The permanent suite remains 18 gates. Phase-1 structural/behavioral checks are added to
-`presentation-gate.mjs` (the existing render/presentation owner); `sprite-gate.mjs`, its key count,
-palette hashes, and destination hash do not move.
+The permanent suite remains 18 gates. Phase-1 structural/behavioral checks live in the standalone
+`tools/phase1-lighting-gate.mjs`, invoked beside the permanent runner for this bounded visual wave.
+It is deliberately not registered in `run-gates.mjs`: doing so would silently change the operator's
+required 18-gate suite to 19. `presentation-gate.mjs` and `sprite-gate.mjs` remain unchanged; the
+sprite key count, palette hashes, and destination hash do not move.
 
-New presentation checks must prove:
+The standalone Phase-1 gate must prove items 1–7 below. The companion real-browser stress profile
+must prove item 8; the headless Canvas stub is not accepted as frame-time evidence.
 
 1. all six required light families normalize through one registry and every requested RGB has a
    prebuilt glow cache;
@@ -171,9 +177,10 @@ New presentation checks must prove:
 7. no `WebGL`, shader, `ctx.filter`, hot-path canvas/gradient creation, or smoothing regression;
 8. a 60-NPC night fixture plus visible props remains below 16ms/frame.
 
-Each new check is red-tested by a temporary, observed mutation before the green result is trusted:
-remove one source family, exceed a grade alpha bound, invert a shadow vector, leave a prop type
-unclassified, admit a forbidden emissive index, and reorder grade/emissive. Mutations are restored
+Each new check is red-tested by a temporary, observed mutation before the green result is trusted.
+The nine named modes remove one source family, inject a forbidden emitter RGB, remove a grade row,
+exceed a grade-alpha bound, invert a shadow vector, widen a contact band to 3px, admit a forbidden
+emissive index, leave a prop type unclassified, and reorder grade/emissive. Mutations are restored
 before the 18-gate run.
 
 Required final verification:

@@ -143,6 +143,23 @@ These bind new palette decisions. Wave 4.2 does not silently repaint older excep
 grandfathered character + environment palette-use corpus is frozen by `sprite-gate`, and changing
 that snapshot requires a new audited decision.
 
+### Lighting grammar (Graphics Phase 1)
+
+- A district commits to one dirty ambient wash, never a clean base repaint: sodium yellow,
+  mold green, fluorescent purple, copper orange, asphalt, or slate. Multiply stays dominant;
+  overlay is a trace.
+- Light must name its fixture. Streetlamp, burn barrel, window, sign, pipe ember, rail signal,
+  or cop beacon are valid. A decorative glow with no object is an ambient field and cannot cast a
+  directional shadow.
+- Canonical new emitter RGBs are sodium `232,192,64`, fluorescent `212,136,212`, fire
+  `208,96,48`, dirty-window cream `212,200,150`, and authority-only cop blue `72,104,208`.
+- Palette indices `2` and `7` carry an **opt-in** emissive meaning only on declared emitter layers.
+  They are not globally self-lit: the grandfathered corpus uses those indices for ordinary faces,
+  clothes, paper, and trim.
+- Contact shadows stay dirty and cheap: cached soft multiply AO at the feet, offset away from the
+  nearest real fixture, plus a 1–2px ground seam for props. No shader, normal map, runtime blur,
+  smoothing, or dignity enters through the lighting door.
+
 ### Texture
 - CRT scanlines always on (3px repeating gradient overlay, 12% opacity)
 - Slight body flicker (8-9s cycle)
