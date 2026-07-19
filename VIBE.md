@@ -346,6 +346,8 @@ Any new NPC must be added to this registry with: name, tic, relationship to worl
 | THE MODEL FAMILY | mid-dinner since 2016; the food is plastic, the commitment is not | staged inside MODEL HOME, the southwest scrub (break-in site, dialogue-only) | does not move, does not object; the empty chair is available |
 | THE FORMER TELLER | keeps banking hours at a vault the demolition missed | THE SPOIL BANK mound, the rail spoil (break-in site, dialogue-only) | admits account holders only (cred 25); stamps papers that stamp nothing |
 | THE GOOSE (MANAGER) | stands on the desk; was not hired; is the manager | SOD FARM OFFICE, the far scrub (break-in site, dialogue-only) | grants passage or performs a review at speed; files complaints as honking |
+| THE LIFEGUARD (STILL CERTIFIED) | in the chair since the water left; guards the deep end, which is now a concept | MUNICIPAL POOL (DRAINED), the south dead band (break-in site, dialogue-only) | scores your dry-land freestyle out of 10; the whistle still works and means whatever it means |
+| THE DOCENT (SELF-GUIDED) | gives a four-stop tour; every stop is the room the tour is in | THE VISITOR CENTER, the south dead band (break-in site, dialogue-only) | admits visitors of record (cred 20); the donations box is also the exhibit |
 
 **Rule: New NPCs must extend this table.** If you can't fill all four columns, don't ship the NPC.
 
