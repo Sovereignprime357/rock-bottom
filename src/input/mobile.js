@@ -21,8 +21,10 @@ export let loadBtnEl, titleLoadTap;
 
 export function setupMobile() {
   // detect touch
-  const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-  if (!isTouch && window.innerWidth > 820) return;
+  // v22: gate on a real coarse pointer (phone/tablet), NOT viewport width - a narrow
+  // desktop window or high browser zoom is not a touch device (2026-07-19 display fix).
+  const isTouch = typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
+  if (!isTouch) return;
   state.touchMode = true;
   document.getElementById('mobile-ctrls').style.display = 'block';
   const fireKey = (key, down) => {

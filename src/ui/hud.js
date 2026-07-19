@@ -9,7 +9,7 @@ import { resolvePresentationLayout } from './layout.js';
 export function syncPresentationLayout() {
   const stage=document.getElementById('stage'),hud=document.getElementById('hud');
   if(!stage||!hud)return;
-  const mobileChrome=window.innerWidth<=820||navigator.maxTouchPoints>0;
+  const mobileChrome=typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
   const layout=resolvePresentationLayout(stage.clientWidth,stage.clientHeight,mobileChrome);
   hud.style.left=layout.hud.x+'px';hud.style.right=layout.hud.right+'px';
   hud.style.top=layout.hud.y+'px';hud.style.fontSize=layout.hud.fontSize+'px';hud.style.gap=layout.hud.gap+'px';
