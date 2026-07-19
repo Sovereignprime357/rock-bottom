@@ -2171,3 +2171,58 @@ whole gate vocabulary is `failedHeistGate()`, defined once.
    cred check, governor swapped onto `heistsToday`, loot raised to $100, take stage
    dropped (softlock), anchor drifted — each firing its designed message through the
    real imported path before any green was believed. Suite **18/18**.
+## v22 — FILL THE BARREN QUARTER (2026-07-18)
+
+Implements `SPEC-v22-fill-quarter.md`. A density wave, not a systems wave: the
+bottom-left dead band `(0–4800, 3200–4000)` and the far-right top sliver
+`(7200–8000, 0–1600)` get bounded, cursed, optional content on the shipped engines.
+`git diff` shows data tables and two gate-pin raises — zero new mechanics.
+
+1. **I-DENSITY-NOT-DISTANCE.** Zero mandatory legs added, zero stops moved.
+   `world-gate` output captured before and after the wave: **byte-identical**
+   (1306 chars both; ceiling legs unchanged at 96.3%/99.0% of budget). Everything
+   added is a detour, never a crossing.
+2. **The band (gameplay lean, operator's rec).** Two new break-in sites on the 5.5
+   engine, appended to `BREAKIN_SITES` (3 → 5): MUNICIPAL POOL (DRAINED) (shell at
+   1880,3820; crowbar door; the lifeguard (still certified) guards the deep end,
+   which is now a concept; take: $13 in dried-stiff singles + a flipper (left)) ·
+   THE VISITOR CENTER (shell at 2960,3840; cred 20 — "come back heard of."; the
+   docent (self-guided) gives a four-stop tour of the room the tour is in; take:
+   $16 from the donations box + a button that says I SAW IT; the box's own receipt
+   says $40, unreturned). Both shells sit at y ≥ 3800, inside breakin-gate's
+   quarter box, clear of every zone rect and road. Gate-signature spread stays
+   covered (tool / cred / tool+cred). Both ride `breakinsToday` (2/day); the
+   worst-case daily take moves $32 → $34, still under the $40 pinned ceiling —
+   more sites is variety, not income.
+3. **The sliver (atmosphere lean).** Reachability proven before placement: the
+   production player was driven from the `court_keep_cut` road at (7838,1386)
+   due north to y≈147 — the walking lane at x≈7840 threads the
+   wheel_witness/coin_return gap — then west into cell (9,0). The tableau: SCENIC
+   OVERLOOK — two park benches facing the top edge of the world, a broken drinking
+   fountain, one tree the benches do not face, and two cardsigns ("SCENIC OVERLOOK /
+   THE VIEW IS BEING DISCUSSED", "DO NOT FEED THE" — the sign ends there). Nine
+   props, all existing draw branches, all non-solid, no income surface. NPCs were
+   deliberately NOT added: a new actor would need new 32px art (sprite-gate ceiling
+   work, a different wave) and a reused sprite would put a stranger in a known
+   character's body; the tableau carries the atmosphere the way the corpus already
+   does it (cardsign/chalk lore).
+4. **I-VIBE-PER-ADDITION.** Both site inhabitants entered the VIBE.md identity
+   table with all four columns. Prop counts stayed small on purpose: 8 props in
+   the band, 9 in the sliver, 2 sites — fewer, better, cursed.
+5. **Physicality.** No new structures: shells are the non-solid freight-car idiom
+   (declared by type, not by `solid`/`flat`, matching 5.5); tableau props are
+   decoration. `solidity-gate`'s inventory pin raised 176 → 193 with the +17
+   itemized as content-bearing.
+6. **I-SAVE-ADDITIVE.** No new state at all — the sites ride the existing
+   `breakinsToday` counter and the existing loot vocabulary; nothing new to save.
+7. **Enforcement.** No new gate (no genuinely new invariant — the wave leans on
+   world-gate + solidity-gate + breakin-gate as specced). Both raised pins
+   red-tested through the real path: with the content in and the old pins live,
+   breakin-gate and solidity-gate each failed on exactly their count line and
+   nothing else; the new exact-5 site pin was then mutation-tested (a popped site
+   → red on count + shell parity, restored). One false red-test first — a
+   PowerShell in-place edit whose em-dash search string fell to the PS 5.1
+   BOM-less-UTF-8 misread, so the mutation never reached the file and the gate
+   stayed correctly green (ORCHESTRATOR-NOTES #13: a red test that doesn't fire
+   is a question about the test); redone with a safe editor, fired as designed.
+   Suite **18/18**.

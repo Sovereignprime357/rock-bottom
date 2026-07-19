@@ -268,6 +268,28 @@ export function init_props() {
     { type:'weeds', x: 3320, y: 4610 }, { type:'weeds', x: 3640, y: 4470 },
     { type:'weeds', x: 4770, y: 5200 }, { type:'weeds', x: 5070, y: 5090 },
 
+    // v22 wave 5.6 — FILL THE BARREN QUARTER (density, not distance). Two more
+    // break-in shells in the bottom-left dead band, placed at y >= 3800 so the
+    // spec's band row and breakin-gate's quarter box are both satisfied; and the
+    // SCENIC OVERLOOK tableau in the far-right top sliver (cell 9,0 — reachability
+    // driven live before placement: the walking lane at x~7840 threads the
+    // wheel_witness / coin_return gap). Existing draw branches only.
+    { type:'breakin_shell', variant:'drained_pool',   x: 1880, y: 3820, w: 250, h: 140, color:'#3a4248', sign:'MUNICIPAL POOL' },
+    { type:'breakin_shell', variant:'visitor_center', x: 2960, y: 3840, w: 240, h: 130, color:'#4c4638', sign:'VISITOR CENTER' },
+    { type:'cardsign', x: 1930, y: 3990, text:'CLOSED FOR\nWINTER\n(2011)' },
+    { type:'cardsign', x: 3010, y: 4000, text:'YOU ARE HERE' },
+    { type:'weeds', x: 1850, y: 3980 }, { type:'weeds', x: 2160, y: 3860 },
+    { type:'weeds', x: 2930, y: 3990 }, { type:'weeds', x: 3230, y: 3880 },
+    // the overlook: two benches facing the top edge of the world. the view is not there.
+    { type:'park_bench', x: 7580, y: 400, w: 40, h: 12 },
+    { type:'park_bench', x: 7650, y: 400, w: 40, h: 12 },
+    { type:'drink_fountain', x: 7720, y: 420 },
+    { type:'tree', x: 7530, y: 360 },
+    { type:'cardsign', x: 7600, y: 460, text:'SCENIC OVERLOOK\nTHE VIEW IS\nBEING DISCUSSED' },
+    { type:'cardsign', x: 7740, y: 470, text:'DO NOT\nFEED THE' },
+    { type:'weeds', x: 7550, y: 470 }, { type:'weeds', x: 7700, y: 380 },
+    { type:'weeds', x: 7810, y: 440 },
+
     // v19 THE THRONE DITCH: ceremonial curb inventory. The folding chair is not constitutional.
     { type:'cardsign', x:7660, y:4540, text:'ONE CHAIR\nNO APPEALS' },
     { type:'crate', x:7630, y:4565 }, { type:'crate', x:7690, y:4565 },
@@ -639,6 +661,94 @@ export const BREAKIN_SITES = [
       { label: 'past the goose. with dignity.', p: 0.5,
         under: { text: 'you walk past the goose.\nthe goose allows it.\nthis was a performance review.\nyou passed.' },
         over:  { text: 'the goose escorts you out.\nat speed.\nhonking. municipal honking.', hp: 4, wanted: 1 } },
+    ],
+  },
+  // v22 wave 5.6 — the bottom-left dead band gets its own doors. Same engine,
+  // same governor (breakinsToday 2/day), same locked loot vocabulary. Signature
+  // spread stays covered: tool (pool), cred (visitor center).
+  {
+    id: 'drained_pool',
+    title: 'MUNICIPAL POOL (DRAINED)',
+    hint: 'pry the pool gate',
+    who: 'the lifeguard (still certified)',
+    anchor: { kind: 'rect', propType: 'breakin_shell', x: 1880, y: 3820, w: 250, h: 140 },
+    gates: [
+      { kind: 'tool', tool: 'crowbar',
+        refuse: "the gate is chained shut.\nthe chain is municipal grade.\nyour fingers have opinions. the chain does not care.\na crowbar would." },
+    ],
+    capText: "the lifeguard is standing up.\nhe has never stood up.\nnot tonight.",
+    intro: "the pool closed for winter in 2011.\nwinter is still on.\nthe lifeguard is in the chair, watching the deep end.\nthe deep end is a concept now. he guards the concept.",
+    entries: [
+      { kind: 'roll', label: 'walk the deep end.', p: 0.7,
+        under: { text: 'you cross the deep end on foot.\nnine feet of air, floor to surface.\nyou swim none of it.' },
+        over:  { text: 'the main drain takes your shoe.\nit has been waiting since 2011.\nyou take the shoe back. the drain allows this.', hp: 4 } },
+      { kind: 'sure', label: 'show the lifeguard your stroke.',
+        effect: { text: 'you mime freestyle on dry land.\nthe lifeguard watches the whole lap.\nhe holds up a number.\nthe number is 6. you may pass.' } },
+      { kind: 'wait', label: 'wait for adult swim.',
+        effect: { text: 'adult swim is announced to no one.\nyou are the adult. it is your swim.\nthere is no water. the shakes attend anyway.', shakes: 6 } },
+    ],
+    loot: {
+      title: 'LOST AND FOUND',
+      text: 'the lost and found is a bin behind the chair.\ninside: $13 in singles, dried stiff as shingles.\none flipper. left foot.\nnobody came back for any of it.',
+      takeLabel: 'take the singles. and the flipper.',
+      cash: 13,
+      items: [{ id: 'junk', n: 'a flipper (left)' }],
+      takeToast: '+ $13 (dried stiff)\n+ a flipper (left)\nthe lifeguard does not turn.\nthe deep end still needs him.',
+      takeDur: 4200,
+      altLabel: 'read the pool rules instead.',
+      alt: { brain: 8, text: 'rule 1 is NO RUNNING.\nrule 4 is also NO RUNNING.\nrules 2 and 3 are gone.\nyou suspect running.\n+ 8 brain', dur: 3600 },
+    },
+    getawayText: 'the chair throws a long shadow.\nthere is the shallow-end ramp.\nthere is also the gate you came through.',
+    exits: [
+      { label: 'the shallow end ramp.', p: 0.75,
+        under: { text: 'you walk up the ramp like the water is closing.\nit closed in 2011.\nyou make it out dry. everything here does.' },
+        over:  { text: 'the ramp is slick with fifteen years of never.\nyou eat pool floor.', hp: 6 } },
+      { label: 'back over the gate.', p: 0.5,
+        under: { text: 'you clear the gate.\nthe whistle blows behind you. one short blast.\nit means nothing. it means everything.' },
+        over:  { text: 'the chain-link keeps your sleeve.\nthe whistle blows. two short blasts.\nsomewhere, someone official agrees.', hp: 4, wanted: 1 } },
+    ],
+  },
+  {
+    id: 'visitor_center',
+    title: 'THE VISITOR CENTER',
+    hint: 'present yourself at the visitor center',
+    who: 'the docent (self-guided)',
+    anchor: { kind: 'rect', propType: 'breakin_shell', x: 2960, y: 3840, w: 240, h: 130 },
+    gates: [
+      { kind: 'cred', cred: 20,
+        refuse: "the docent looks up from the desk.\n'tours are for visitors of record.'\nyou are not of record.\ncome back heard of." },
+    ],
+    capText: "the hours are posted on the door.\nthe hours are a drawing of a clock.\nthe clock has no hands.\nnot tonight.",
+    intro: 'a visitor center. the attraction is not named.\nthe brochure rack is full. every brochure is for here.\nthe docent rises from the desk.\nthe tour has been ready for eleven years.',
+    entries: [
+      { kind: 'sure', label: 'take the tour.',
+        effect: { text: "the tour is four stops.\nall of them are in this room.\nstop three is the window. 'from here you can see outside.'\nthe tour concludes where it began." } },
+      { kind: 'roll', label: 'ask about the attraction.', p: 0.6,
+        under: { text: "'you're in it,' the docent says.\nhe gestures at everything.\neverything holds still for the gesture." },
+        over:  { text: 'the docent consults the brochure to answer.\nthe brochure is about the visitor center.\nthe consultation orbits.\nyou come out lighter.', brain: 3 } },
+      { kind: 'cash', cost: 2,
+        haveLabel: 'donate $2 for the upkeep.', lackLabel: "you don't have $2.",
+        effect: { text: 'the box says DONATIONS.\nyour $2 goes on display.\nlabeled. dated.\nyou may proceed.' } },
+    ],
+    loot: {
+      title: 'THE DONATIONS BOX',
+      text: 'the donations box opens from the back.\nall of them do.\ninside: $16.\na button that says I SAW IT.\na receipt for the box itself. $40. unreturned.',
+      takeLabel: 'take the $16. and the button.',
+      cash: 16,
+      items: [{ id: 'junk', n: 'a button (I SAW IT)' }],
+      takeToast: "+ $16 (upkeep)\n+ a button (I SAW IT)\nthe box cost $40 new.\nthe math is nobody's problem now.",
+      takeDur: 4200,
+      altLabel: 'sign the guest book instead.',
+      alt: { brain: 8, text: "the last entry is from 2014.\nit says 'nice.'\nyou write 'nice.'\nthe tradition holds.\n+ 8 brain", dur: 3600 },
+    },
+    getawayText: 'the front door stands open for visitors.\nyou are done being one.\nthere is also the fire exit. it has never had a fire.',
+    exits: [
+      { label: 'the fire exit.', p: 0.8,
+        under: { text: 'the alarm is disconnected.\nthe door opens onto the field.\nthe field was not expecting visitors.' },
+        over:  { text: 'the push bar pushes back.\nthe door wins on points.', hp: 5 } },
+      { label: 'the front door. as a visitor.', p: 0.5,
+        under: { text: "the docent waves.\n'come again.'\nthe wave continues after you turn away.\nyou can feel it continuing." },
+        over:  { text: 'a cop car idles at the lot entrance.\nit has idled there since 2019.\ntoday it notices.', wanted: 1 } },
     ],
   },
 ];

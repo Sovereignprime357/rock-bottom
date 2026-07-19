@@ -2284,3 +2284,63 @@ price-guy displacement say "you cook now. you do not pry." Reversibility re-veri
 end-to-end (buy → displace → swap → swap back → no-dupe, 6/6 headless); the locker
 keeps the tension per-outing, never per-save. SPEC.md crowbar clause and DELEGATION
 play-gate updated to record the ruling. Suite stays 18/18 — no gate reads toast text.
+
+## 2026-07-18 — v22 wave 5.6: FILL THE BARREN QUARTER build (Fable / Claude Code, branch v22-fill-quarter, own worktree)
+
+What: implemented SPEC-v22-fill-quarter.md (main 2741806, spec-first). A density wave —
+content only, zero new mechanics; the src diff is one file (src/data/props.js, data
+tables). Bottom-left dead band (0–4800, 3200–4000), gameplay lean per operator rec: two
+new break-in sites on the shipped 5.5 engine, BREAKIN_SITES 3→5 — MUNICIPAL POOL
+(DRAINED) (crowbar door; the lifeguard (still certified), in the chair since the water
+left, guards the deep end, which is now a concept; scores your dry-land freestyle a 6;
+take $13 in singles dried stiff as shingles + a flipper (left)) and THE VISITOR CENTER
+(cred 20, "come back heard of."; the docent (self-guided) gives a four-stop tour of the
+room the tour is in; take $16 + a button that says I SAW IT; the donations box's own
+receipt says $40, unreturned). Shells at y≥3800: the spec's band row and breakin-gate's
+quarter box both hold. Far-right top sliver (7200–8000, 0–1600), atmosphere lean: the
+SCENIC OVERLOOK tableau in cell (9,0) — two benches facing the top edge of the world, a
+broken drinking fountain, one tree the benches do not face, "SCENIC OVERLOOK / THE VIEW
+IS BEING DISCUSSED", and "DO NOT FEED THE" (the sign ends there). 17 props, existing
+draw branches only, all non-solid, no income surface. VIBE identity rows added for both
+inhabitants.
+
+Decided: (1) No new NPC in the sliver, though the fork named ambient NPCs — a new actor
+needs new 32px art (sprite-gate ceiling work, a different wave) and a reused sprite puts
+a stranger in a known character's body; cardsign/chalk lore carries the atmosphere the
+way the corpus already does. Taste call, flagged for review. (2) Sliver reachability
+proven BEFORE placement (spec edge case): drove the production player from the
+court_keep_cut road (7838,1386) due north to y≈147 — the x≈7840 lane threads the
+wheel_witness/coin_return gap — then west into cell (9,0). (3) breakin-gate's site pin
+made EXACT (5, not a range): growing it again is a new wave with its own spec. (4)
+Bounded on purpose (I-SCOPED): 2 sites + 17 props against 26 empty cells; the rest is a
+5.7 for the operator to want or not.
+
+Proof: world-gate captured before/after — BYTE-IDENTICAL (1306 chars both; ceiling legs
+96.337%/99.001% unchanged) — I-DENSITY-NOT-DISTANCE held mechanically. Red-tests
+unpiped: with the content in and the old pins live, breakin-gate failed on exactly the
+site-count line and solidity-gate on exactly the prop-inventory line (one failure each —
+the additions provably reach both real paths); then the new exact-5 pin mutation-tested
+post-commit (popped a site → red on count + shell parity, restored via git). Suite 18/18
+exit 0. Governor: worst-case daily take $32→$34, under the $40 pinned ceiling; both
+sites ride breakinsToday 2/day. No new save state at all.
+
+Tried/failed: first mutation red-test stayed green — the mutation had never landed. The
+PowerShell in-place .Replace search string contained an em-dash; PS 5.1 read the
+BOM-less UTF-8 file as ANSI, the em-dash mojibaked, nothing matched, and Set-Content
+re-wrote the file through the same misread (write discarded by the git restore; the
+standing PS51 round-trip memory called this exactly). Entry-#13 discipline held: a red
+test that doesn't fire is a question about the test, not the gate — redone with the
+editor tool, fired as designed (2 failures, both expected). Scripted in-place edits on
+this corpus stay forbidden; editor tools only.
+
+Findings, written not fixed: (a) cell (9,1) of the spec's sliver (7200–8000, 800–1600)
+already contains the wheel_witness facade anchor (7360,1120) — the 26-cell measurement
+and the facade table disagree about that cell; the next density measurement should
+restate its anchor definition. Doesn't change this wave (the tableau went to the
+genuinely empty (9,0)). (b) The 5.5 rank-4 finding stands: update.js unboards the
+abandoned building at rank ≥ 4, killing its copper-site trigger.
+
+Next: operator play gate — walk the band (do two more doors make it a place?), judge
+the overlook (lands, or clutter?), rule cred 20 and the $13/$16 takes, and decide
+whether a 5.7 (remaining sparse cells, mid-map singles) is wanted at all. Branch
+v22-fill-quarter pushed, not merged.

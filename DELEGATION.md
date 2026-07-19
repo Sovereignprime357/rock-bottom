@@ -16,6 +16,19 @@
 
 ---
 
+## v22 wave 5.6 — fill the barren quarter (density, not distance) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
+
+Branch: `v22-fill-quarter`, isolated worktree; push without merge. Contract: `SPEC-v22-fill-quarter.md`, graduated to SPEC.md. Bounded on purpose: 2 sites + 17 props, targeting the two worst dead regions — still-sparse cells are a 5.7, not scope creep.
+
+- [x] **I-DENSITY-NOT-DISTANCE (the ⭐⭐).** `world-gate` output captured before and after: **byte-identical** (1306 chars; ceiling legs unchanged 96.3%/99.0%). Zero mandatory legs, zero moved stops; everything optional.
+- [x] **The band (gameplay).** Two break-in sites on the shipped 5.5 engine, `BREAKIN_SITES` 3→5, shells at y≥3800 inside breakin-gate's quarter box: MUNICIPAL POOL (DRAINED) — crowbar door; the lifeguard (still certified), in the chair since the water left, scores your dry-land freestyle a 6; take $13 in dried-stiff singles + a flipper (left). THE VISITOR CENTER — cred 20, "come back heard of."; the docent (self-guided) runs a four-stop tour of the room the tour is in; take $16 + a button (I SAW IT); the donations box's own receipt says $40, unreturned. Gate-signature spread still tool / cred / tool+cred; worst-case day $32→$34 under the $40 pinned ceiling — variety, not income.
+- [x] **The sliver (atmosphere).** Reachability proven live BEFORE placement (spec edge case): production player driven from the court road (7838,1386) north to y≈147 through the wheel_witness/coin_return walking gap, then west into cell (9,0). Then the SCENIC OVERLOOK: two benches facing the top edge of the world, a broken drinking fountain, one tree the benches do not face, "THE VIEW IS BEING DISCUSSED", and "DO NOT FEED THE" (the sign ends there). Nine props, existing draw branches, no income surface. Deliberately no new NPC: new actor = new 32px art (a different wave); reused sprite = a stranger in a known character's body.
+- [x] **Gates.** No new gate (no genuinely new invariant — the wave leans on world/solidity/breakin gates as specced). Both raised pins red-tested through the real path first (old pins + new content = exactly one expected failure each), then the new exact-5 site pin mutation-tested (popped site → red on count + shell parity). One false red-test caught and named: a PowerShell in-place edit lost its em-dash search string to the PS 5.1 BOM-less-UTF-8 misread, mutation never landed, gate stayed correctly green — redone with a safe editor, fired as designed (ORCHESTRATOR-NOTES #13 discipline). Suite **18/18**; frozen v19 untouched.
+- [x] **VIBE.** Both inhabitants entered the identity table with all four columns; both sites carry the who / why-it's-weird / flat landing the spec demands.
+- [ ] **Operator play gate.** Walk the band and the sliver: do two more doors make the dead band read as a place? Does the overlook land, or is it clutter? Judge cred 20 / the $13+$16 takes; rule whether a 5.7 (remaining sparse cells, mid-map singles) is wanted at all.
+
+---
+
 ## v22 wave 5.5 — break-ins, generalized (the engine earns its keep) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
 
 Branch: `v22-breakins`, isolated worktree; push without merge. Contract: `SPEC-v22-breakins.md`, graduated to SPEC.md. Scope held to 3 sites as the spec ordered — filling the quarter is 5.6's.
