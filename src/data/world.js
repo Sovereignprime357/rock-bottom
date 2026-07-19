@@ -7,6 +7,66 @@ import { updateTerritory } from '../systems/factions.js';
 
 export let W, H, WORLD, TILE, RANKS, ZONES, TERRAIN_REGIONS, ROAD_SEGMENTS, CROSSWALKS, GROUND_PATHS, RAIL_LINES, LANDMARK_FACADES, WORLD_DECOR, UTILITY_WIRES, WORLD_LIGHTS;
 
+export const DIEGETIC_LIGHT_RGB = Object.freeze({
+  sodium: '232,192,64',
+  fluorescent: '212,136,212',
+  fire: '208,96,48',
+  window: '212,200,150',
+  cop: '72,104,208',
+});
+
+const AMBIENT_GRADE_PRESETS = Object.freeze({
+  sodium: Object.freeze({ multiply:'88,70,34', multiplyAlpha:.12, overlay:'151,112,35', overlayAlpha:.035 }),
+  mold: Object.freeze({ multiply:'48,60,38', multiplyAlpha:.13, overlay:'80,92,48', overlayAlpha:.025 }),
+  purple: Object.freeze({ multiply:'66,43,68', multiplyAlpha:.10, overlay:'112,70,110', overlayAlpha:.035 }),
+  copper: Object.freeze({ multiply:'78,48,31', multiplyAlpha:.12, overlay:'132,70,37', overlayAlpha:.030 }),
+  asphalt: Object.freeze({ multiply:'39,38,35', multiplyAlpha:.15, overlay:'72,68,58', overlayAlpha:.018 }),
+  slate: Object.freeze({ multiply:'45,50,49', multiplyAlpha:.12, overlay:'67,74,68', overlayAlpha:.020 }),
+});
+
+// Visual geography only. Mechanical zone/faction authority remains in ZONES.
+export const AMBIENT_GRADES = Object.freeze({
+  block: AMBIENT_GRADE_PRESETS.sodium,
+  scrap: AMBIENT_GRADE_PRESETS.mold,
+  pawn: AMBIENT_GRADE_PRESETS.mold,
+  dealer: AMBIENT_GRADE_PRESETS.copper,
+  abandoned: AMBIENT_GRADE_PRESETS.asphalt,
+  market: AMBIENT_GRADE_PRESETS.mold,
+  alley: AMBIENT_GRADE_PRESETS.sodium,
+  church: AMBIENT_GRADE_PRESETS.purple,
+  projects: AMBIENT_GRADE_PRESETS.asphalt,
+  underpass: AMBIENT_GRADE_PRESETS.mold,
+  laundromat: AMBIENT_GRADE_PRESETS.purple,
+  busstop: AMBIENT_GRADE_PRESETS.sodium,
+  trainyard: AMBIENT_GRADE_PRESETS.asphalt,
+  park: AMBIENT_GRADE_PRESETS.mold,
+  skidrow: AMBIENT_GRADE_PRESETS.copper,
+  oldschool: AMBIENT_GRADE_PRESETS.copper,
+  warehouse_row: AMBIENT_GRADE_PRESETS.copper,
+  canal: AMBIENT_GRADE_PRESETS.slate,
+  the_lot: AMBIENT_GRADE_PRESETS.asphalt,
+  blue_tarp_court: AMBIENT_GRADE_PRESETS.slate,
+  cart_cavalry_keep: AMBIENT_GRADE_PRESETS.sodium,
+  copper_choir_yard: AMBIENT_GRADE_PRESETS.copper,
+  throne_ditch: AMBIENT_GRADE_PRESETS.asphalt,
+  north_vacant: AMBIENT_GRADE_PRESETS.asphalt,
+  school_outside: AMBIENT_GRADE_PRESETS.copper,
+  east_service: AMBIENT_GRADE_PRESETS.sodium,
+  south_drainage: AMBIENT_GRADE_PRESETS.slate,
+  rail_approach: AMBIENT_GRADE_PRESETS.asphalt,
+  south_dead: AMBIENT_GRADE_PRESETS.asphalt,
+  far_north: AMBIENT_GRADE_PRESETS.copper,
+  far_mid: AMBIENT_GRADE_PRESETS.slate,
+  far_south: AMBIENT_GRADE_PRESETS.asphalt,
+  kingdom_north: AMBIENT_GRADE_PRESETS.slate,
+  kingdom_middle: AMBIENT_GRADE_PRESETS.sodium,
+  kingdom_south: AMBIENT_GRADE_PRESETS.copper,
+  kingdom_bottom: AMBIENT_GRADE_PRESETS.asphalt,
+  southwest_scrub: AMBIENT_GRADE_PRESETS.asphalt,
+  south_rail_spoil: AMBIENT_GRADE_PRESETS.asphalt,
+  default: AMBIENT_GRADE_PRESETS.asphalt,
+});
+
 export function init_constants_world() {
   // ---------- constants ----------
   W = 800, H = 600;
@@ -281,6 +341,12 @@ export function init_constants_world() {
     { type:'storm_drain', x:8420, y:4050, layer:'low' },
     { type:'storm_drain', x:7120, y:5240, layer:'low' },
     { type:'storm_drain', x:8420, y:5420, layer:'low' },
+    // Phase 1 light fixtures. These stay visual-only world decor: fire does not become loot,
+    // collision, warmth, damage, or a new interaction verb.
+    { type:'burn_barrel', x:1130, y:940, layer:'low' },
+    { type:'burn_barrel', x:1640, y:1285, layer:'low' },
+    { type:'burn_barrel', x:2860, y:1885, layer:'low' },
+    { type:'burn_barrel', x:1210, y:410, layer:'low' },
   ];
   
   UTILITY_WIRES = [
@@ -296,30 +362,30 @@ export function init_constants_world() {
   ];
   
   WORLD_LIGHTS = [
-    { x:1620, y:810,  radius:105, rgb:'208,96,48',   power:.55 },
-    { x:1600, y:1085, radius:115, rgb:'136,192,210', power:.50 },
-    { x:1800, y:1350, radius:120, rgb:'186,120,180', power:.42 },
-    { x:1292, y:1120, radius:88,  rgb:'232,192,64',  power:.38 },
-    { x:2700, y:1140, radius:92,  rgb:'160,190,150', power:.28 },
-    { x:3760, y:720,  radius:120, rgb:'232,192,64',  power:.42 },
-    { x:3580, y:500,  radius:96,  rgb:'190,158,92',  power:.18 },
-    { x:3980, y:510,  radius:96,  rgb:'190,158,92',  power:.18 },
-    { x:1100, y:360,  radius:110, rgb:'208,128,48',  power:.40 },
-    { x:1230, y:380,  radius:110, rgb:'208,128,48',  power:.40 },
-    { x:1340, y:410,  radius:110, rgb:'208,128,48',  power:.40 },
-    { x:310,  y:2738, radius:72,  rgb:'138,58,58',   power:.48 },
-    { x:1300, y:3008, radius:72,  rgb:'138,58,58',   power:.48 },
-    { x:2580, y:1650, radius:74,  rgb:'208,128,48',  power:.22 },
-    { x:3200, y:1950, radius:74,  rgb:'208,128,48',  power:.22 },
-    { x:300,  y:1740, radius:76,  rgb:'208,128,48',  power:.20 },
-    { x:4460, y:850,  radius:100, rgb:'208,128,48',  power:.28 },
-    { x:5410, y:850,  radius:100, rgb:'208,128,48',  power:.24 },
-    { x:5420, y:2070, radius:84,  rgb:'120,160,145', power:.22 },
-    { x:4920, y:3210, radius:130, rgb:'232,192,64',  power:.50, office:true },
-    { x:6500, y:760,  radius:180, rgb:'72,88,94',    power:.34 },
-    { x:7860, y:2050, radius:170, rgb:'190,158,92',  power:.30 },
-    { x:6510, y:3480, radius:190, rgb:'208,96,48',   power:.46 },
-    { x:7680, y:4880, radius:180, rgb:'138,58,58',   power:.32 },
+    { id:'tony_neon', kind:'neon_sign', x:1620, y:810, radius:105, rgb:DIEGETIC_LIGHT_RGB.fire, power:.55, castsShadow:true, core:'neon' },
+    { id:'laundromat_fluorescent', kind:'neon_sign', x:1600, y:1085, radius:115, rgb:DIEGETIC_LIGHT_RGB.fluorescent, power:.50, castsShadow:true, core:'neon' },
+    { id:'church_window', kind:'lit_window', x:1800, y:1350, radius:120, rgb:DIEGETIC_LIGHT_RGB.fluorescent, power:.42, castsShadow:true, core:'window' },
+    { id:'bus_shelter_panel', kind:'lit_window', x:1292, y:1120, radius:88, rgb:DIEGETIC_LIGHT_RGB.window, power:.38, castsShadow:true, core:'window' },
+    { id:'park_fountain_field', kind:'ambient_field', x:2700, y:1140, radius:92, rgb:'160,190,150', power:.28, castsShadow:false, core:null },
+    { id:'old_school_door', kind:'lit_window', x:3760, y:720, radius:120, rgb:DIEGETIC_LIGHT_RGB.window, power:.42, castsShadow:true, core:'window' },
+    { id:'old_school_window_w', kind:'lit_window', x:3580, y:500, radius:96, rgb:'190,158,92', power:.18, castsShadow:true, core:'window' },
+    { id:'old_school_window_e', kind:'lit_window', x:3980, y:510, radius:96, rgb:'190,158,92', power:.18, castsShadow:true, core:'window' },
+    { id:'underpass_pool_w', kind:'ambient_field', x:1100, y:360, radius:110, rgb:'208,128,48', power:.40, castsShadow:false, core:null },
+    { id:'underpass_pool_c', kind:'ambient_field', x:1230, y:380, radius:110, rgb:'208,128,48', power:.40, castsShadow:false, core:null },
+    { id:'underpass_pool_e', kind:'ambient_field', x:1340, y:410, radius:110, rgb:'208,128,48', power:.40, castsShadow:false, core:null },
+    { id:'rail_signal_w', kind:'rail_signal', x:310, y:2738, radius:72, rgb:'138,58,58', power:.48, castsShadow:true, core:'signal' },
+    { id:'rail_signal_e', kind:'rail_signal', x:1300, y:3008, radius:72, rgb:'138,58,58', power:.48, castsShadow:true, core:'signal' },
+    { id:'skid_window_nw', kind:'lit_window', x:2580, y:1650, radius:74, rgb:'208,128,48', power:.22, castsShadow:true, core:'window' },
+    { id:'skid_window_se', kind:'lit_window', x:3200, y:1950, radius:74, rgb:'208,128,48', power:.22, castsShadow:true, core:'window' },
+    { id:'projects_window', kind:'lit_window', x:300, y:1740, radius:76, rgb:'208,128,48', power:.20, castsShadow:true, core:'window' },
+    { id:'warehouse_window_w', kind:'lit_window', x:4460, y:850, radius:100, rgb:'208,128,48', power:.28, castsShadow:true, core:'window' },
+    { id:'warehouse_window_e', kind:'lit_window', x:5410, y:850, radius:100, rgb:'208,128,48', power:.24, castsShadow:true, core:'window' },
+    { id:'canal_service_light', kind:'lit_window', x:5420, y:2070, radius:84, rgb:'120,160,145', power:.22, castsShadow:true, core:'window' },
+    { id:'office_generator', kind:'lit_window', x:4920, y:3210, radius:130, rgb:DIEGETIC_LIGHT_RGB.sodium, power:.50, castsShadow:true, core:'window', office:true },
+    { id:'blue_tarp_field', kind:'ambient_field', x:6500, y:760, radius:180, rgb:'72,88,94', power:.34, castsShadow:false, core:null },
+    { id:'cart_keep_field', kind:'ambient_field', x:7860, y:2050, radius:170, rgb:'190,158,92', power:.30, castsShadow:false, core:null },
+    { id:'copper_choir_field', kind:'ambient_field', x:6510, y:3480, radius:190, rgb:DIEGETIC_LIGHT_RGB.fire, power:.46, castsShadow:false, core:null },
+    { id:'throne_ditch_field', kind:'ambient_field', x:7680, y:4880, radius:180, rgb:'138,58,58', power:.32, castsShadow:false, core:null },
   ];
   
   

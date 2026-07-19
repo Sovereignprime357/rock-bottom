@@ -24,7 +24,13 @@ import {
 
 export { anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut, mirrorGrid, parseGrid, rasterize, SPRITE_BASE_SIZES };
 export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, SPRITE_KEY_BASES,
-  SPRITE_PIXEL_COUNTS, SPRITE_KEY_PALETTES, INCIDENT_PALS;
+  SPRITE_PIXEL_COUNTS, SPRITE_KEY_PALETTES, SPRITE_EMISSIVE_CACHE, INCIDENT_PALS;
+
+export const EMISSIVE_PALETTE_INDICES = Object.freeze([2,7]);
+export const EMISSIVE_BASE_INDICES = Object.freeze({
+  gear_propane_torch: Object.freeze([2,7]),
+  weapon_pipe: Object.freeze([2]),
+});
 
 export function cacheSprite(base, key, grid, palette, options={}) {
   const logicalSize=SPRITE_BASE_SIZES[base];
@@ -38,6 +44,13 @@ export function cacheSprite(base, key, grid, palette, options={}) {
   SPRITE_PIXEL_COUNTS[key]=paintedPixels;
   SPRITE_KEY_PALETTES[key]=Array.isArray(palette)?palette.slice():{...palette};
   SPRITE_CACHE[key]=rasterize(grid,palette,{...options,logicalSize});
+  const emissiveIndices=EMISSIVE_BASE_INDICES[base];
+  if(emissiveIndices){
+    const emissiveGrid=grid.map(row=>row.map(index=>emissiveIndices.includes(index)?index:0));
+    if(emissiveGrid.some(row=>row.some(Boolean))){
+      SPRITE_EMISSIVE_CACHE[key]=rasterize(emissiveGrid,palette,{noOutline:true,logicalSize});
+    }
+  }
 }
 
 export function makePlayer() {
@@ -873,6 +886,7 @@ export function init_sprites() {
   
   // Build the SPRITE_CACHE
   SPRITE_CACHE = {};
+  SPRITE_EMISSIVE_CACHE = {};
   SPRITE_KEY_BASES = {};
   SPRITE_PIXEL_COUNTS = {};
   SPRITE_KEY_PALETTES = {};

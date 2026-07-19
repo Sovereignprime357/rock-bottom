@@ -2226,3 +2226,50 @@ bottom-left dead band `(0–4800, 3200–4000)` and the far-right top sliver
    stayed correctly green (ORCHESTRATOR-NOTES #13: a red test that doesn't fire
    is a question about the test); redone with a safe editor, fired as designed.
    Suite **18/18**.
+
+## GRAPHICS PHASE 1 — LIGHTING & GRADE (2026-07-19)
+
+Implements `SPEC-graphics-phase1-lighting.md`. This is a render-only extension of the v14 light
+mask/glow/fog machinery. Phase 2 palette/grime-density work and Phase 3 resolution work remain
+unbuilt and require explicit operator direction.
+
+1. **I-ONE-LIGHT-REGISTRY.** `prepareLightingFrame()` populates one reused active-light buffer from
+   the existing lamp and `WORLD_LIGHTS` authorities plus authored burn barrels, visible cop actors,
+   and the player's active pipe ember. Every normalized row has a kind, world position, radius,
+   power, RGB, active level, shadow-casting flag, and optional emissive core. Darkness holes,
+   additive cached glows, procedural cores, and nearest-light AO consume this same buffer. Broad
+   atmosphere rows are explicit `ambient_field` records and never direct a shadow.
+2. **I-DIEGETIC-HUES.** The six required source families are live: `streetlamp`, `barrel_fire`,
+   `neon_sign`, `lit_window`, `pipe_ember`, and `cop_light`. New canonical RGBs are sodium
+   `232,192,64`, fluorescent `212,136,212`, fire `208,96,48`, dirty-window cream `212,200,150`,
+   and cops-only blue `72,104,208`. Every active RGB owns a prebuilt `LIGHT_GLOW_CACHE` canvas;
+   a missing entry is a runtime error, not a silent unlit fixture. Fire/ember/cop sources retain a
+   restrained daylight floor; night darkness remains exclusively `nightAmount()`.
+3. **I-AREA-GRADE.** `AMBIENT_GRADES` covers all 23 `ZONES`, all 15 `TERRAIN_REGIONS`, and a default
+   fallback. Rows are frozen, visual-only `{multiply,multiplyAlpha,overlay,overlayAlpha}` data;
+   multiply is `0.04..0.18`, overlay `0..0.08`. Player-center geography chooses the row without
+   changing faction, objective, collision, clock, or save state. Screen order is world/actors →
+   night mask/holes → area grade → emissive cores/masks → cached glows → weather/status/UI → the
+   existing vignette.
+4. **I-GROUNDED.** One prebuilt 64×24 contact-shadow sheet supplies multiply AO at actor alpha
+   `.36..38` and prop alpha `.30..34`. The offset is the clamped `1..4px` vector away from the
+   nearest active shadow-casting source, with a stable top-down fallback. Player, runtime NPCs,
+   incident actors, every production `PROPS` type, interactive props, and physical `WORLD_DECOR`
+   are covered. Flat ground marks, wall art, and overhead lines are named exemptions. Physical
+   props also receive a 1–2px contact band at their authored ground seam.
+5. **I-EMISSIVE-WITHOUT-DRIFT.** Palette indices `2` and `7` are an opt-in semantic, not a global
+   reinterpretation of the grandfathered corpus. Initial allowlist: `gear_propane_torch:{2,7}` and
+   `weapon_pipe:{2}`. Cache initialization derives twelve transparent 32×32 masks into
+   `SPRITE_EMISSIVE_CACHE`, no outline and no smoothing, then replays them after darkening at the
+   player's unchanged anchor. `SPRITE_CACHE`, all grids/palettes, 94 bases, 377 exact keys, and all
+   14 gate-pinned draw destinations remain unchanged.
+6. **I-CANVAS-ONLY / I-PERF.** No WebGL, shader, normal map, `ctx.filter`, runtime gradient, external
+   asset, framework, or smoothing change exists. A real 800×600 browser fixture with 64 visible cop
+   actors (64 dynamic lights plus AO and the authored visible props) averaged **1.548ms/frame** over
+   120 measured frames after warm-up, below the 16ms invariant.
+7. **Verification.** `tools/phase1-lighting-gate.mjs` is a standalone wave-acceptance gate so the
+   permanent suite remains exactly 18. Its named counterexamples must exit red before its restored
+   production check is trusted. `node tools/run-gates.mjs` remains 18/18; `sprite-gate` stays at
+   94/377 and 14 draw sites; `rock_bottom_v19.html` remains byte-untouched. Human acceptance is the
+   matched three-scene sheet at `artifacts/graphics-phase1/phase1-before-after.png` (baseline left,
+   Phase 1 right; Block, Laundromat/Church, Skid Row).

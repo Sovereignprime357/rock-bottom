@@ -61,6 +61,18 @@ technique below maps onto extending this, not replacing it.
 
 ## PHASE 1 — the lighting & grade layer (biggest win; 32×32 and 8-index untouched)
 
+**Status — BUILT / PENDING OPERATOR EYE, 2026-07-19.** Contract:
+`SPEC-graphics-phase1-lighting.md`; branch `codex/graphics-phase1-light-grade`. The shipped candidate
+normalizes streetlamps, four trash-barrel fires, neon/window fixtures, the high/pipe ember, and live
+cop beacons through one reused registry; adds frozen zone/terrain multiply+overlay grades; replaces
+fragmented actor/prop shadows with nearest-light AO plus contact bands; and derives opt-in emissive
+masks for palette indices 2/7 without changing one source grid, palette, cache key, or draw anchor.
+`tools/phase1-lighting-gate.mjs` is a standalone acceptance gate so the permanent runner remains
+exactly 18; all counterexample modes went red, then the real suite returned 18/18. A real 800×600
+browser profile with 64 visible cops measured 1.548ms/frame. Matched Block/Laundromat-Church/Skid
+Row night renders are in `artifacts/graphics-phase1/` (left baseline, right Phase 1). Phase 2 and
+Phase 3 remain unbuilt and operator-gated.
+
 Every one of the six briefs named this as the #1 lever. Extend `drawLighting()` and the light-source
 registry:
 

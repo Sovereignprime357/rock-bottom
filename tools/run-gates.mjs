@@ -25,6 +25,10 @@ const GATES = [
   'npc-registry-gate.mjs',
   'legibility-gate.mjs',
   'presentation-gate.mjs',
+  // phase1-lighting-gate rides behind presentation-gate in the same render-layer family.
+  // Promoted standalone -> permanent 2026-07-19: Phase 1's lighting / grade / AO / emissive
+  // invariants now run every commit. Nine counterexample modes red-tested.
+  'phase1-lighting-gate.mjs',
   'recognition-gate.mjs',
   'concession-gate.mjs',
   // copper-sites-gate rides behind concession-gate — same invariant class, different resource:

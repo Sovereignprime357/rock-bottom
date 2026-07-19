@@ -6,19 +6,61 @@ import { P, state } from '../core/runtime_ui.js';
 import { isNight } from '../data/npc_spawns.js';
 import { PROPS, interactiveProps } from '../data/props.js';
 import { ctx, visibleWorldRect } from './canvas_geography.js';
+import { drawContactBand, drawContactShadow } from './landmarks_a.js';
+
+export const PROP_AO_EXEMPT = new Set(['syringe','bottle','chalk_message','school_mural','broken_window']);
+export const PROP_AO_PROFILE = Object.freeze({
+  dumpster:'rect',cart:'rect',cart_husk:'rect',lamp:'center',hydrant:'center',mailbox:'center',
+  cone:'center',trash:'center',crate:'crate',tent:'tent',cardsign:'cardsign',scrap_pile:'rect',
+  car_wreck:'rect',leash_post:'center',freight_car:'rect',breakin_shell:'rect',weeds:'center',
+  fountain:'center',park_bench:'rect',swing_set:'swing',drink_fountain:'center',tree:'center',
+  broken_hoop:'hoop',school_fence:'rect',pay_phone:'phone',
+});
+
+function propVisible(p){
+  const pw=p.w||64,ph=p.h||64;
+  return visibleWorldRect(p.x-32,p.y-64,pw+64,ph+96,16);
+}
+
+export function drawPropContactShadow(p){
+  if(PROP_AO_EXEMPT.has(p.type)||!PROP_AO_PROFILE[p.type]||(p.type==='cart'&&P.cartMounted))return;
+  let cx=p.x,foot=p.y,rx=7,ry=3,band=10;
+  if(PROP_AO_PROFILE[p.type]==='rect'){
+    const width=p.w||24,height=p.h||16;cx=p.x+width/2;foot=p.y+height;
+    rx=Math.min(42,Math.max(7,width*.44));ry=Math.min(6,Math.max(3,height*.12));band=Math.min(width*.78,120);
+  }else if(p.type==='crate'){cx=p.x+12;foot=p.y+16;rx=11;band=19;}
+  else if(p.type==='tent'){cx=p.x+12;foot=p.y+16;rx=14;ry=4;band=24;}
+  else if(p.type==='cardsign'){cx=p.x+18;foot=p.y+22;rx=16;ry=4;band=28;}
+  else if(p.type==='lamp'){foot=p.y;rx=6;band=7;}
+  else if(p.type==='hydrant'){foot=p.y+2;rx=7;band=10;}
+  else if(p.type==='mailbox'){foot=p.y+6;rx=7;band=9;}
+  else if(p.type==='cone'){foot=p.y;rx=6;band=9;}
+  else if(p.type==='trash'){foot=p.y+4;rx=7;band=10;}
+  else if(p.type==='leash_post'){foot=p.y+2;rx=5;band=6;}
+  else if(p.type==='weeds'){foot=p.y+6;rx=5;ry=2;band=7;}
+  else if(p.type==='fountain'){foot=p.y+14;rx=22;ry=5;band=38;}
+  else if(p.type==='swing_set'){cx=p.x+32;foot=p.y+2;rx=30;ry=5;band=56;}
+  else if(p.type==='drink_fountain'){foot=p.y+12;rx=7;band=10;}
+  else if(p.type==='tree'){foot=p.y+18;rx=14;ry=4;band=18;}
+  else if(p.type==='broken_hoop'){foot=p.y+40;rx=6;band=7;}
+  else if(p.type==='pay_phone'){foot=p.y+24;rx=7;band=9;}
+  drawContactShadow(cx,foot,rx,ry,.34);drawContactBand(cx,foot,band,.32,2);
+}
+
+export function drawInteractivePropContactShadow(p){
+  if(p.type==='trashcan'){
+    drawContactShadow(p.x,p.y+14,12,4,.34);drawContactBand(p.x,p.y+14,20,.32,2);
+  }else if(p.type==='b_bottle'&&!p.broken){
+    drawContactShadow(p.x,p.y+2,3,2,.30);drawContactBand(p.x,p.y+2,4,.30,1);
+  }
+}
 
 export function drawProps() {
-  for (const p of PROPS) {
-    // Full-bounds culling keeps long freight cars / fences visible when their anchor leaves screen.
-    const pw=p.w||64, ph=p.h||64;
-    if (!visibleWorldRect(p.x-32,p.y-64,pw+64,ph+96,16)) continue;
-    drawProp(p);
-  }
+  for (const p of PROPS) if(propVisible(p))drawPropContactShadow(p);
+  for (const ip of interactiveProps) if(visibleWorldRect(ip.x-20,ip.y-20,40,40,16))drawInteractivePropContactShadow(ip);
+  for (const p of PROPS) if(propVisible(p))drawProp(p);
   // v13 wave 6 — interactive props pass (parallel array)
-  for (const ip of interactiveProps) {
-    if (!visibleWorldRect(ip.x-20,ip.y-20,40,40,16)) continue;
-    drawInteractiveProp(ip);
-  }
+  for (const ip of interactiveProps) if(visibleWorldRect(ip.x-20,ip.y-20,40,40,16))drawInteractiveProp(ip);
 }
 
 export function drawProp(p) {
@@ -150,9 +192,6 @@ export function drawProp(p) {
   }
   // v13 wave 6 — tent (makeshift, varied palette)
   else if (p.type === 'tent') {
-    // ground shadow
-    ctx.fillStyle = 'rgba(0,0,0,.35)';
-    ctx.fillRect(p.x-2, p.y+14, 28, 4);
     // triangular tarp
     ctx.fillStyle = p.color;
     ctx.beginPath();
@@ -210,15 +249,9 @@ export function drawProp(p) {
     ctx.moveTo(p.x+4, p.y); ctx.lineTo(p.x+8, p.y-8);
     ctx.moveTo(p.x+p.w-6, p.y); ctx.lineTo(p.x+p.w-2, p.y-10);
     ctx.stroke();
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.4)';
-    ctx.fillRect(p.x+2, p.y+p.h, p.w-4, 3);
   }
   // v13 wave 6 — car wreck (totaled sedan, on blocks)
   else if (p.type === 'car_wreck') {
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.5)';
-    ctx.fillRect(p.x, p.y+p.h, p.w, 4);
     // body
     ctx.fillStyle = p.color || '#5a3030';
     ctx.fillRect(p.x, p.y+6, p.w, p.h-10);
@@ -253,9 +286,6 @@ export function drawProp(p) {
   }
   // v13 wave 8a — TRAIN YARD: freight car (decorative, non-solid silhouette)
   else if (p.type === 'freight_car') {
-    // ground shadow
-    ctx.fillStyle = 'rgba(0,0,0,.55)';
-    ctx.fillRect(p.x+4, p.y+p.h, p.w-8, 6);
     // body
     ctx.fillStyle = p.color || '#5a2a20';
     ctx.fillRect(p.x, p.y, p.w, p.h);
@@ -288,9 +318,6 @@ export function drawProp(p) {
   // v22 wave 5.5 — BREAK-IN SHELLS (barren quarter). Non-solid authored silhouettes,
   // freight-car idiom: one branch, three variants. The interior is the dialogue.
   else if (p.type === 'breakin_shell') {
-    // ground shadow
-    ctx.fillStyle = 'rgba(0,0,0,.5)';
-    ctx.fillRect(p.x+4, p.y+p.h, p.w-8, 6);
     // body
     ctx.fillStyle = p.color || '#4a4038';
     ctx.fillRect(p.x, p.y, p.w, p.h);
@@ -375,9 +402,6 @@ export function drawProp(p) {
     ctx.fillRect(p.x-2, p.y-3, 1, 3);
     ctx.fillRect(p.x+1, p.y-4, 1, 3);
     ctx.fillRect(p.x+4, p.y-3, 1, 2);
-    // small base shadow
-    ctx.fillStyle = 'rgba(0,0,0,.3)';
-    ctx.fillRect(p.x-3, p.y+6, 8, 1);
   }
   // v13 wave 8a — THE PARK: stone fountain
   else if (p.type === 'fountain') {
@@ -399,15 +423,9 @@ export function drawProp(p) {
     // a thin "spout" sparkle
     ctx.fillStyle = `rgba(200,220,240,${0.55+t*0.3})`;
     ctx.fillRect(p.x-1, p.y-22, 2, 4);
-    // little base shadow
-    ctx.fillStyle = 'rgba(0,0,0,.4)';
-    ctx.fillRect(p.x-22, p.y+14, 44, 3);
   }
   // v13 wave 8a — THE PARK: bench (wood slats + iron frame)
   else if (p.type === 'park_bench') {
-    // ground shadow
-    ctx.fillStyle = 'rgba(0,0,0,.35)';
-    ctx.fillRect(p.x+2, p.y+p.h, p.w-4, 3);
     // back rest
     ctx.fillStyle = '#5a4028';
     ctx.fillRect(p.x, p.y-8, p.w, 3);
@@ -474,17 +492,9 @@ export function drawProp(p) {
     // rust drip
     ctx.fillStyle = 'rgba(140,60,20,.6)';
     ctx.fillRect(p.x-1, p.y+2, 2, 6);
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.3)';
-    ctx.fillRect(p.x-6, p.y+12, 12, 2);
   }
   // v13 wave 8a — THE PARK: tree (trunk + dark green canopy)
   else if (p.type === 'tree') {
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.4)';
-    ctx.beginPath();
-    ctx.ellipse(p.x, p.y+18, 14, 4, 0, 0, Math.PI*2);
-    ctx.fill();
     // trunk
     ctx.fillStyle = '#3a2818';
     ctx.fillRect(p.x-3, p.y, 6, 18);
@@ -531,9 +541,6 @@ export function drawProp(p) {
     ctx.beginPath();
     ctx.arc(p.x+2, p.y-8, 6, 0, Math.PI);
     ctx.stroke();
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.4)';
-    ctx.fillRect(p.x-3, p.y+40, 6, 2);
   }
   // v13 wave 8a — OLD SCHOOL: chain-link fence (drawn as a thin horizontal band of "X" patterns)
   else if (p.type === 'school_fence') {
@@ -620,9 +627,6 @@ export function drawInteractiveProp(p) {
     ctx.translate(p.x, p.y);
     ctx.rotate(rot);
     ctx.scale(scale, scale);
-    // shadow
-    ctx.fillStyle = 'rgba(0,0,0,.4)';
-    ctx.fillRect(-12, 14, 24, 4);
     // body (silver dented)
     ctx.fillStyle = '#5a5a5a';
     ctx.fillRect(-10, -16, 20, 30);

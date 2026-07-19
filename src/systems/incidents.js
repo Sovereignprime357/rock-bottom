@@ -7,6 +7,7 @@ import { P, runtime, state, toast } from '../core/runtime_ui.js';
 import { clamp, currentZone, isNight } from '../data/npc_spawns.js';
 import { ROAD_SEGMENTS, WORLD } from '../data/world.js';
 import { ctx, visibleWorldRect } from '../render/canvas_geography.js';
+import { drawContactBand, drawContactShadow } from '../render/landmarks_a.js';
 import { SPRITE_CACHE } from '../render/sprites.js';
 import { feedPost } from './communications.js';
 
@@ -187,12 +188,33 @@ export function drawIncidentSprite(key,x,y,frame=0) {
   if(sp&&visibleWorldRect(x-20,y-36,44,48,16))ctx.drawImage(sp,Math.round(x-16),Math.round(y-28),32,32);
 }
 
+export function drawIncidentShadows(){
+  const inc=state.incident;if(!inc)return;
+  if(inc.id==='runaway_mattress'){
+    const a=inc.actors[0];drawContactShadow(a.x,a.y+5,18,4,.35);drawContactBand(a.x,a.y+5,30,.31,2);
+  }else if(inc.id==='possum_inventory'){
+    const a=inc.actors[0];drawContactShadow(a.x,a.y+4,18,4,.35);drawContactBand(a.x,a.y+4,28,.31,2);
+  }else if(inc.id==='laundromat_walkout'){
+    const a=inc.actors[0];drawContactShadow(a.x,a.y+4,16,4,.35);drawContactBand(a.x,a.y+4,24,.31,2);
+  }else if(inc.id==='park_dry_committee'){
+    const a=inc.anchor;drawContactShadow(a.x,a.y+4,13,4,.34);drawContactBand(a.x,a.y+4,18,.30,2);
+    for(let i=0;i<6;i++){
+      const ang=-2.8+i*.52,px=a.x+Math.cos(ang)*78,py=a.y+Math.sin(ang)*48;
+      drawContactShadow(px,py+6,5,2,.34);
+    }
+  }else if(inc.id==='ticketed_luggage'){
+    const a=inc.actors[0];drawContactShadow(a.x,a.y+4,12,4,.34);drawContactBand(a.x,a.y+4,18,.30,2);
+    if(inc.t>14000)for(let i=0;i<3;i++){
+      const px=a.x-30-i*26,py=a.y+8+(i&1)*5;drawContactShadow(px,py+6,5,2,.34);
+    }
+  }
+}
+
 export function drawIncidents() {
   const inc=state.incident;if(!inc)return;
   const t=state.visualNow||performance.now(), frame=Math.floor(t/320)%2;
   if(inc.id==='runaway_mattress'){
     const a=inc.actors[0];
-    ctx.fillStyle='rgba(0,0,0,.36)';ctx.beginPath();ctx.ellipse(a.x,a.y+5,18,4,0,0,Math.PI*2);ctx.fill();
     drawIncidentSprite('incident_mattress',a.x,a.y,frame);
   } else if(inc.id==='possum_inventory'){
     const a=inc.actors[0];drawIncidentSprite('incident_forklift',a.x,a.y,frame);

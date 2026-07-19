@@ -16,6 +16,33 @@
 
 ---
 
+## Graphics Phase 1 — LIGHTING & GRADE — BUILT / PENDING OPERATOR EYE (July 19, 2026)
+
+Branch: `codex/graphics-phase1-light-grade`, isolated worktree. Contract:
+`SPEC-graphics-phase1-lighting.md`; scope stops before Phase 2 palette/grime work and Phase 3
+resolution work.
+
+- [x] **One deployed light registry.** Existing lamps and `WORLD_LIGHTS` now share one reused active
+  buffer with four authored barrel fires, neon/window fixture kinds, the pipe ember, and live cop
+  beacons. Darkness holes, cached RGB glows, emissive cores, and nearest-light shadow direction all
+  consume that same buffer; broad ambient fields do not invent directional shadows.
+- [x] **Area grade.** All 23 zones plus every terrain/default fallback resolve to bounded Canvas 2D
+  multiply/overlay rows. The wash remains active at midday, precedes emissive/glow/weather/status/
+  vignette, and never changes gameplay geography or save state.
+- [x] **Grounding.** Characters, the player, incident actors, all production `PROPS`, interactive
+  props, and physical world decor receive cached soft multiply AO; authored footprint profiles or
+  explicit flat/wall exemptions prevent floating wall art. Props also receive a 1–2px contact band.
+- [x] **Emissive without corpus drift.** Indices `2` and `7` are opt-in only for
+  `gear_propane_torch` / `weapon_pipe`; a separate 12-key cache replays those pixels after darkness.
+  Normal 94-base / 377-key palettes, grids, destinations, and `sprite-gate` output are unchanged.
+- [x] **Proof.** Standalone `phase1-lighting-gate` counterexamples red, then green; permanent runner
+  **18/18**; real-browser 64-visible-cop night profile **1.548ms/frame**; frozen v19 diff empty.
+- [ ] **Operator eye gate.** Review `artifacts/graphics-phase1/phase1-before-after.png`: left is the
+  exact branch base, right is Phase 1; rows are Block, Laundromat/Church, Skid Row. Rule the mood,
+  source strength, and shadow seating. Do not start Phase 2 or Phase 3 from this branch.
+
+---
+
 ## v22 wave 5.6 — fill the barren quarter (density, not distance) — BUILT / PENDING OPERATOR REVIEW (July 18, 2026)
 
 Branch: `v22-fill-quarter`, isolated worktree; push without merge. Contract: `SPEC-v22-fill-quarter.md`, graduated to SPEC.md. Bounded on purpose: 2 sites + 17 props, targeting the two worst dead regions — still-sparse cells are a 5.7, not scope creep.

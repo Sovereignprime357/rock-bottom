@@ -18,7 +18,7 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 
 ## Current shipped build
 
-**v22 — the economy waves.** Five waves built a real economy on top of the v21 world. **Copper from multiple locations** (5.1) turned one heist into a parameterized engine across four cursed sites. **Smoke-spot discovery** (5.2) made the concession venues findable — wild crackheads reveal them, but you still earn the room. **The emergency hitter** (5.3) gave copper a second life: craft a bad-trade consumable or find one rare, so every strip is "sell it or keep it to save your life later." **The robbery** (5.4) added the economy's first sink — Skid Row takes your cash, your items, the coat off your sprite, and you don't get it back. **Break-ins** (5.5) generalized the heist engine with `tool`/`cred` doors and a barren-quarter loot table, and made the crowbar and the propane torch fight for the one tool slot: cook or burglar, not both. It follows v21 (the character ceiling, the honest map, the recognition wave). The world remains `8600×5600`, the frozen v19 reference remains untouched, the 18s → 8s loop remains intact, and the suite is **18 gates**.
+**v22 — the economy waves.** Five waves built a real economy on top of the v21 world. **Copper from multiple locations** (5.1) turned one heist into a parameterized engine across four cursed sites. **Smoke-spot discovery** (5.2) made the concession venues findable — wild crackheads reveal them, but you still earn the room. **The emergency hitter** (5.3) gave copper a second life: craft a bad-trade consumable or find one rare, so every strip is "sell it or keep it to save your life later." **The robbery** (5.4) added the economy's first sink — Skid Row takes your cash, your items, the coat off your sprite, and you don't get it back. **Break-ins** (5.5) generalized the heist engine with `tool`/`cred` doors and a barren-quarter loot table, and made the crowbar and the propane torch fight for the one tool slot: cook or burglar, not both. It follows v21 (the character ceiling, the honest map, the recognition wave). The world remains `8600×5600`, the frozen v19 reference remains untouched, the 18s → 8s loop remains intact, and the suite is **19 gates**.
 
 ## Version lineage
 
@@ -32,7 +32,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **eighteen** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -40,10 +40,11 @@ The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates
 | `docs-gate` | **This table.** Asserts the gate list here matches the `GATES` array in `run-gates.mjs`. This README once claimed four gates while seven ran; nothing caught it. |
 | `version-gate` | **The label.** The `<title>`, the subtitle, and this README's "Current shipped build" must name the same version. The game said `v19` through the entire v20 wave and Wave 4.1, and sent the operator hard-refreshing a deploy that was already current. |
 | `module-gate` | Module linking, source/reference integrity, no file over the size ceiling. |
-| `sprite-gate` | **The character ceiling.** Pins 373 exact nonblank keys across 93 explicitly declared 32-logical character bases, keeps eleven explicit 16-logical environment sprites on the same renderer, freezes all 14 character-cache draw destinations and the palettes actually consumed by both caches, and enforces the no-smoothing pixel contract. Green proves structure and rendering discipline—not whether the art is good; that remains an operator visual decision. |
+| `sprite-gate` | **The character ceiling.** Pins 377 exact nonblank keys across 94 explicitly declared 32-logical character bases, keeps eleven explicit 16-logical environment sprites on the same renderer, freezes all 14 character-cache draw destinations and the palettes actually consumed by both caches, and enforces the no-smoothing pixel contract. Green proves structure and rendering discipline—not whether the art is good; that remains an operator visual decision. |
 | `npc-registry-gate` | Every runtime NPC identity is registered in `VIBE.md`. No unnamed strangers. |
 | `legibility-gate` | The four measured legibility relationships (buildings, zones, nameplates, graffiti). |
 | `presentation-gate` | Save/input/status parity. |
+| `phase1-lighting-gate` | **The light layer.** Proves Phase 1 lighting holds: one reused diegetic light registry (sodium / fluorescent / fire / window / cop), frozen per-zone multiply+overlay grades, nearest-light AO + contact bands, and opt-in emissive indices 2/7 - with no forbidden RGB (no pure white, no neon-as-base), no palette or sprite-grid change, and the composite order intact. Nine counterexample modes red-test it. |
 | `recognition-gate` | **The north star.** Diffs every reward field across a full rank climb to prove recognition pays in acknowledgment and nothing else. |
 | `concession-gate` | **One loop, many rooms.** Proves exactly one `rockedT = 18000` site exists, that the high is identical at every spot, that royal static stays Block-only, and that BAD IDEA never points at an illegal room. |
 | `copper-sites-gate` | **One engine, many buildings.** Proves the 3-stage heist flow, the `heistsToday` increment, and the 2-4 yield roll each exist exactly once; that all copper sites share the 3/day cap (so more sites never means more income); that site effects structurally cannot mint cash or copper; that registry anchors match the world's rects; and walks every entry and getaway of every site under both RNG branches to end back at play. |
@@ -54,6 +55,12 @@ The runner supplies `--experimental-vm-modules`, streams all **seventeen** gates
 | `solidity-gate` | **The honest map.** Requires declared physicality, one collision authority, door/art and legacy-resolver parity, deterministic save ejection, exact actor exemptions, charge impacts, actor/projectile obstruction, and collision-aware traversal of every mandatory leg. Run it with `--full` to print the complete 69-campaign / 252-route before-and-after ledger. |
 | `runtime-smoke` | The game boots, starts, and plays headless. |
 | `world-gate` | **The map.** Derives the shakes runway and walk speed at run time, then measures every mandatory leg, day-1 coverage, and the route legality graph against them. Runs last on purpose: a standing world reading must never mask a regression in the gates above it. |
+
+Graphics Phase 1's lighting invariants are enforced by `phase1-lighting-gate`, now part of the permanent runner (promoted 2026-07-19). It can still be run standalone:
+
+```text
+node --no-warnings --experimental-vm-modules tools/phase1-lighting-gate.mjs
+```
 
 **Why `corpus-gate` runs first.** Every other gate checks the **game**. That one checks the **corpus** — `VIBE.md`, `SPEC.md`, `AGENTS.md`, the logs — which is the thing every future version gets reproduced from. On 2026-07-16 an agent read this repo through a stale mount and saw 508 deletions that did not exist; `git add -A` would have committed them **clean and green**, because a suite that only checks the game passes fine while the game is fine. **A suite that protects the output but not the seed is protecting the wrong thing.** There was a written note warning of exactly this. The note did not stop it. A note is a prompt, and prompts leak. Only a gate holds.
 

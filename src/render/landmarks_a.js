@@ -2,13 +2,22 @@
  * Source seams: landmark and light caches.
  * Do not hand-edit; change the source module after the refactor lands.
  */
-import { P, state } from '../core/runtime_ui.js';
+import { P, runtime, state } from '../core/runtime_ui.js';
 import { PROPS } from '../data/props.js';
-import { H, LANDMARK_FACADES, UTILITY_WIRES, W, WORLD_DECOR, WORLD_LIGHTS } from '../data/world.js';
+import {
+  AMBIENT_GRADES, DIEGETIC_LIGHT_RGB, H, LANDMARK_FACADES, TERRAIN_REGIONS,
+  UTILITY_WIRES, W, WORLD_DECOR, WORLD_LIGHTS, ZONES,
+} from '../data/world.js';
 import { ENV_SPRITE_CACHE, ctx, visibleWorldRect } from './canvas_geography.js';
 import { KINGDOM_CLANS, KINGDOM_EMPEROR, freshKingdomState, kingdomStageClan } from '../systems/campaigns.js';
 
-export let LANDMARK_CACHE, landmarkCacheReady, LIGHT_MASK, LIGHT_CTX, LIGHT_HOLE, LIGHT_GLOW_CACHE, FOG_SHEET;
+export let LANDMARK_CACHE, landmarkCacheReady, LIGHT_MASK, LIGHT_CTX, LIGHT_HOLE,
+  LIGHT_GLOW_CACHE, CONTACT_SHADOW_SHEET, FOG_SHEET;
+export const ACTIVE_LIGHTS = [];
+export let LIGHT_FRAME_SHAKE_X = 0, LIGHT_FRAME_SHAKE_Y = 0;
+
+let LIGHT_SOURCE_POOL;
+const SHADOW_OFFSET = new Float32Array(2);
 
 export function buildLandmarkFacades() {
   for (const f of LANDMARK_FACADES) {
@@ -102,10 +111,17 @@ export function drawLandmarkFacades() {
 export function decorBounds(p) {
   if (p.type==='utility_pole') return {x:p.x-18,y:p.y-64,w:36,h:68};
   if (p.type==='clothesline') return {x:Math.min(p.x,p.x2),y:Math.min(p.y,p.y2)-30,w:Math.abs(p.x2-p.x)+1,h:Math.abs(p.y2-p.y)+50};
+  if (p.type==='burn_barrel') return {x:p.x-12,y:p.y-28,w:24,h:30};
   return {x:p.x-18,y:p.y-(p.h||24),w:(p.w||36)+18,h:(p.h||36)+24};
 }
 
 export function drawWorldDecor(layer) {
+  // AO is one plane below the bodies: later furniture never paints a shadow over an earlier body.
+  for (const p of WORLD_DECOR) {
+    if ((p.layer||'low')!==layer) continue;
+    const b=decorBounds(p); if(!visibleWorldRect(b.x,b.y,b.w,b.h,40)) continue;
+    drawDecorContactShadow(p);
+  }
   for (const p of WORLD_DECOR) {
     if ((p.layer||'low')!==layer) continue;
     const b=decorBounds(p); if(!visibleWorldRect(b.x,b.y,b.w,b.h,40)) continue;
@@ -114,8 +130,13 @@ export function drawWorldDecor(layer) {
     } else if (p.type==='utility_pole') {
       ctx.drawImage(ENV_SPRITE_CACHE.utility_top,p.x-16,p.y-64,32,32);
       ctx.drawImage(ENV_SPRITE_CACHE.utility_base,p.x-16,p.y-32,32,32);
+    } else if (p.type==='burn_barrel') {
+      ctx.fillStyle='#18120d';ctx.fillRect(p.x-8,p.y-15,16,15);
+      ctx.fillStyle='#5a2f1e';ctx.fillRect(p.x-7,p.y-13,14,3);ctx.fillRect(p.x-7,p.y-6,14,2);
+      ctx.fillStyle='#0a0805';ctx.fillRect(p.x-9,p.y-16,18,3);
+      ctx.fillStyle='#d06030';ctx.fillRect(p.x-4,p.y-20,8,5);
+      ctx.fillStyle='#e8c040';ctx.fillRect(p.x-1,p.y-23,3,5);
     } else if (p.type==='bus_shelter') {
-      ctx.fillStyle='rgba(0,0,0,.34)'; ctx.fillRect(p.x+4,p.y+p.h,p.w-8,5);
       ctx.fillStyle='rgba(92,104,100,.28)'; ctx.fillRect(p.x+5,p.y+5,p.w-10,p.h-8);
       ctx.strokeStyle='#504d44'; ctx.lineWidth=3; ctx.strokeRect(p.x+3,p.y+2,p.w-6,p.h-3);
       ctx.fillStyle='#5a4028'; ctx.fillRect(p.x+18,p.y+p.h-16,p.w-36,7);
@@ -196,6 +217,116 @@ export function drawForegroundWorld() {
   }
 }
 
+function pointInside(rect,x,y){
+  return x>=rect.x&&x<=rect.x+rect.w&&y>=rect.y&&y<=rect.y+rect.h;
+}
+
+export function ambientGradeAt(x,y){
+  for(const zone of ZONES)if(pointInside(zone,x,y))return AMBIENT_GRADES[zone.id]||AMBIENT_GRADES.default;
+  for(const region of TERRAIN_REGIONS)if(pointInside(region,x,y))return AMBIENT_GRADES[region.id]||AMBIENT_GRADES.default;
+  return AMBIENT_GRADES.default;
+}
+
+export function drawAmbientGrade(){
+  const grade=ambientGradeAt(P.x+P.w/2,P.y+P.h/2);
+  ctx.save();
+  ctx.globalCompositeOperation='multiply';ctx.globalAlpha=grade.multiplyAlpha;
+  ctx.fillStyle=`rgb(${grade.multiply})`;ctx.fillRect(0,0,W,H);
+  if(grade.overlayAlpha>0){
+    ctx.globalCompositeOperation='overlay';ctx.globalAlpha=grade.overlayAlpha;
+    ctx.fillStyle=`rgb(${grade.overlay})`;ctx.fillRect(0,0,W,H);
+  }
+  ctx.restore();
+  ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+}
+
+function inLightRange(x,y,radius){
+  const pad=radius+160;
+  return x>=state.cam.x-pad&&x<=state.cam.x+W+pad&&y>=state.cam.y-pad&&y<=state.cam.y+H+pad;
+}
+
+function appendActiveLight(id,kind,x,y,radius,power,rgb,level,castsShadow,core){
+  if(level<=.01||!inLightRange(x,y,radius))return;
+  const index=ACTIVE_LIGHTS.length;
+  const light=LIGHT_SOURCE_POOL[index]||(LIGHT_SOURCE_POOL[index]={});
+  light.id=id;light.kind=kind;light.x=x;light.y=y;light.radius=radius;
+  light.power=power;light.rgb=rgb;light.level=level;light.active=true;
+  light.castsShadow=castsShadow!==false;light.core=core||null;
+  ACTIVE_LIGHTS.push(light);
+}
+
+export function prepareLightingFrame(shakeX=0,shakeY=0){
+  ACTIVE_LIGHTS.length=0;
+  LIGHT_FRAME_SHAKE_X=shakeX;LIGHT_FRAME_SHAKE_Y=shakeY;
+  const amount=nightAmount();
+  if(amount>.01){
+    for(const p of PROPS)if(p.type==='lamp'){
+      appendActiveLight('streetlamp','streetlamp',p.x,p.y-32,120,1,DIEGETIC_LIGHT_RGB.sodium,amount,true,'bulb');
+    }
+    for(const light of WORLD_LIGHTS){
+      if(light.office&&!(state.office&&state.office.upgrades&&state.office.upgrades.generator))continue;
+      appendActiveLight(light.id,light.kind,light.x,light.y,light.radius,light.power,light.rgb,amount,light.castsShadow,light.core);
+    }
+  }
+  for(const p of WORLD_DECOR)if(p.type==='burn_barrel'){
+    appendActiveLight('burn_barrel','barrel_fire',p.x,p.y-19,92,.68,DIEGETIC_LIGHT_RGB.fire,Math.max(.30,amount),true,'fire');
+  }
+  for(const n of runtime.npcs){
+    if(n.dead||n.hidden||!(n.isCop||n.sprite==='cop'||n.sprite==='horsecop'))continue;
+    appendActiveLight(n.id||'cop','cop_light',n.x+n.w/2,n.y-5,104,.62,DIEGETIC_LIGHT_RGB.cop,Math.max(.34,amount),true,'cop');
+  }
+  if(P.rockedT>0||P.hitterHigh){
+    const dir=P.facing||P.dir||'down';
+    const ex=P.x+P.w/2+(dir==='left'?-9:dir==='right'?9:0);
+    const ey=P.y+10+(dir==='up'?-5:dir==='down'?5:0);
+    appendActiveLight('player_pipe','pipe_ember',ex,ey,48,.62,DIEGETIC_LIGHT_RGB.fire,Math.max(.36,amount),false,'ember');
+  }
+  return ACTIVE_LIGHTS;
+}
+
+export function contactShadowOffset(cx,cy,out=SHADOW_OFFSET){
+  let nearest=null,bestDistance=Infinity;
+  for(const light of ACTIVE_LIGHTS){
+    if(!light.active||!light.castsShadow)continue;
+    const dx=light.x-cx,dy=light.y-cy,distance=dx*dx+dy*dy;
+    if(distance<bestDistance){bestDistance=distance;nearest=light;}
+  }
+  if(!nearest){out[0]=1;out[1]=2;return out;}
+  const awayX=cx-nearest.x,awayY=cy-nearest.y,length=Math.hypot(awayX,awayY);
+  if(length<.001){out[0]=0;out[1]=3;return out;}
+  const magnitude=Math.min(4,Math.max(1,2+length/180));
+  out[0]=awayX/length*magnitude;out[1]=awayY/length*magnitude;
+  return out;
+}
+
+export function drawContactShadow(cx,footY,radiusX,radiusY,alpha=.36){
+  const offset=contactShadowOffset(cx,footY,SHADOW_OFFSET);
+  ctx.save();ctx.globalCompositeOperation='multiply';ctx.globalAlpha=alpha;
+  ctx.drawImage(CONTACT_SHADOW_SHEET,Math.round(cx+offset[0]-radiusX),Math.round(footY+offset[1]-radiusY),Math.round(radiusX*2),Math.max(2,Math.round(radiusY*2)));
+  ctx.restore();ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+}
+
+export function drawContactBand(cx,footY,width,alpha=.34,height=2){
+  ctx.save();ctx.globalCompositeOperation='multiply';ctx.globalAlpha=alpha;
+  ctx.fillStyle='#0a0805';ctx.fillRect(Math.round(cx-width/2),Math.round(footY),Math.max(2,Math.round(width)),height);
+  ctx.restore();ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+}
+
+export const DECOR_AO_EXEMPT = new Set(['storm_drain','clothesline']);
+
+export function drawDecorContactShadow(p){
+  if(DECOR_AO_EXEMPT.has(p.type))return;
+  let cx=p.x,foot=p.y+16,rx=12,ry=3,band=16;
+  if(p.type==='bus_shelter'){cx=p.x+p.w/2;foot=p.y+p.h;rx=Math.min(34,p.w*.42);ry=4;band=p.w-10;}
+  else if(p.type==='billboard'){cx=p.x+p.w/2;foot=p.y+p.h+52;rx=34;ry=5;band=p.w*.62;}
+  else if(p.type==='water_tower'){cx=p.x+p.w/2;foot=p.y+p.h;rx=34;ry=5;band=48;}
+  else if(p.type==='motel_sign'){cx=p.x+14;foot=p.y+p.h;rx=7;ry=3;band=9;}
+  else if(p.type==='utility_pole'){foot=p.y+4;rx=6;ry=3;band=7;}
+  else if(p.type==='crossbuck'){foot=p.y+6;rx=6;ry=3;band=7;}
+  else if(p.type==='burn_barrel'){foot=p.y;rx=10;ry=4;band=15;}
+  drawContactShadow(cx,foot,rx,ry,.34);drawContactBand(cx,foot,band,.32,2);
+}
+
 export function buildLightSprites() {
   const hg=LIGHT_HOLE.getContext('2d');
   const hole=hg.createRadialGradient(128,128,8,128,128,128);
@@ -203,7 +334,7 @@ export function buildLightSprites() {
   hole.addColorStop(.45,'rgba(0,0,0,.72)');
   hole.addColorStop(1,'rgba(0,0,0,0)');
   hg.fillStyle=hole; hg.fillRect(0,0,256,256);
-  const colors=new Set(['255,210,120',...WORLD_LIGHTS.map(l=>l.rgb)]);
+  const colors=new Set([...Object.values(DIEGETIC_LIGHT_RGB),...WORLD_LIGHTS.map(l=>l.rgb)]);
   for(const rgb of colors){
     const c=document.createElement('canvas');c.width=256;c.height=256;
     const g=c.getContext('2d');
@@ -214,6 +345,12 @@ export function buildLightSprites() {
     g.fillStyle=glow;g.fillRect(0,0,256,256);
     LIGHT_GLOW_CACHE[rgb]=c;
   }
+  const sg=CONTACT_SHADOW_SHEET.getContext('2d');sg.imageSmoothingEnabled=false;
+  const shadow=sg.createRadialGradient(32,12,1,32,12,30);
+  shadow.addColorStop(0,'rgba(10,8,5,.92)');
+  shadow.addColorStop(.55,'rgba(10,8,5,.58)');
+  shadow.addColorStop(1,'rgba(10,8,5,0)');
+  sg.fillStyle=shadow;sg.fillRect(0,0,64,24);
 }
 
 export function buildFogSheet() {
@@ -264,6 +401,9 @@ export function init_landmarks_a() {
   LIGHT_HOLE = document.createElement('canvas');
   LIGHT_HOLE.width=256; LIGHT_HOLE.height=256;
   LIGHT_GLOW_CACHE = {};
+  CONTACT_SHADOW_SHEET = document.createElement('canvas');
+  CONTACT_SHADOW_SHEET.width=64;CONTACT_SHADOW_SHEET.height=24;
+  LIGHT_SOURCE_POOL=[];ACTIVE_LIGHTS.length=0;
   FOG_SHEET = document.createElement('canvas');
   FOG_SHEET.width=W; FOG_SHEET.height=H;
   
