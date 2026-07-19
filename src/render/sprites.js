@@ -523,53 +523,56 @@ export function buildSprites() {
     cacheSprite('cart_underlay','cart_underlay_'+d,makeCartUnderlay32(d),CART_LAYER_PAL,{noOutline:true});
   });
   // NPCs — distinctive styles, 3-frame walks
+  // v22 wave 4.3: shade/worn declare which existing palette steps carry the
+  // fabric shadow and the lit/worn step for the shared body. shade defaults to
+  // the outline dark; worn defaults off. Ramp roles, not new hues.
   const npcStyles = {
-    tony:      { hat:6, skin:3, shirt:4, pants:6, accent:5, coats:3, shirt2:7 },          // three coats, never blinks
-    yuri:      { hat:6, skin:3, shirt:2, pants:6, accent:5, bald:true, beard:true },      // bald, beard
-    pete:      { hat:2, skin:3, shirt:6, pants:5, accent:4, wide:true },                  // wide, behind glass
-    lurch:     { hat:1, skin:3, shirt:6, pants:6, accent:5, tall:true },                  // 7ft tall
-    sherri:    { hat:6, skin:3, shirt:6, pants:2, accent:5, thin:true },                  // thin, fast
-    paulie:    { hat:1, skin:4, shirt:3, pants:6, accent:5 },                             // the face
-    dave:      { hat:2, skin:3, shirt:6, pants:6, accent:5 },                             // sleeps
-    mom:       { hat:6, skin:5, shirt:4, pants:5, accent:6, accessory:'kombucha' },       // kombucha
-    priest:    { hat:1, skin:5, shirt:1, pants:1, accent:6, accessory:'cross' },          // collar + cross
-    conductor: { hat:6, skin:3, shirt:6, pants:1, accent:5, cap:true },                   // train cap
-    larry:     { hat:5, skin:3, shirt:6, pants:2, accent:4, yelling:true, wide:true },    // YELLING
-    stripe:    { hat:5, skin:3, shirt:6, pants:2, accent:4, hood:true },                  // hood up
-    cop:       { hat:3, skin:5, shirt:3, pants:1, accent:7, cap:true, accessory:'badge', accColor:5 },
-    biggu:     { hat:5, skin:3, shirt:6, pants:6, accent:5, tall:true, wide:true },       // tall AND big
-    cubscout:  { hat:5, skin:5, shirt:4, pants:1, accent:7, accessory:'sash', thin:true },
-    jogger:    { hat:5, skin:5, shirt:4, pants:1, accent:7, thin:true },
-    busker:    { hat:5, skin:3, shirt:4, pants:6, accent:7 },
-    dogwalker: { hat:6, skin:5, shirt:4, pants:1, accent:6 },
-    vapelord:  { hat:5, skin:3, shirt:2, pants:1, accent:6, hood:true, accessory:'kombucha' },
-    mayorscousin: { hat:1, skin:3, shirt:6, pants:1, accent:5, coats:2, shirt2:5 },
-    phoneguy:  { hat:5, skin:3, shirt:2, pants:6, accent:7, thin:true },
-    launderlady: { hat:6, skin:5, shirt:4, pants:1, accent:6, wide:true },
-    metermaid: { hat:6, skin:5, shirt:4, pants:1, accent:6, cap:true, accessory:'badge', accColor:5 },
-    foodtruck: { hat:5, skin:3, shirt:6, pants:6, accent:5, wide:true, accessory:'badge' },
-    priestson: { hat:5, skin:5, shirt:2, pants:1, accent:6, thin:true, cap:true },
-    karaoke:   { hat:5, skin:3, shirt:6, pants:2, accent:4 },
+    tony:      { hat:6, skin:3, shirt:4, pants:6, accent:5, coats:3, shirt2:7, shade:2 }, // three coats, never blinks
+    yuri:      { hat:6, skin:3, shirt:2, pants:6, accent:5, bald:true, beard:true, worn:6 }, // bald, beard
+    pete:      { hat:2, skin:3, shirt:6, pants:5, accent:4, wide:true, shade:5 },         // wide, behind glass
+    lurch:     { hat:1, skin:3, shirt:6, pants:6, accent:5, tall:true, shade:2, worn:3 }, // 7ft tall
+    sherri:    { hat:6, skin:3, shirt:6, pants:2, accent:5, thin:true, shade:2 },         // thin, fast
+    paulie:    { hat:1, skin:4, shirt:3, pants:6, accent:5, shade:2 },                    // the face
+    dave:      { hat:2, skin:3, shirt:6, pants:6, accent:5, shade:2, worn:4 },            // sleeps
+    mom:       { hat:6, skin:5, shirt:4, pants:5, accent:6, accessory:'kombucha', shade:2 }, // kombucha
+    priest:    { hat:1, skin:5, shirt:1, pants:1, accent:6, accessory:'cross', worn:4 },  // collar + cross
+    conductor: { hat:6, skin:3, shirt:6, pants:1, accent:5, cap:true, shade:2 },          // train cap
+    larry:     { hat:5, skin:3, shirt:6, pants:2, accent:4, yelling:true, wide:true, shade:7 }, // YELLING
+    stripe:    { hat:5, skin:3, shirt:6, pants:2, accent:4, hood:true, shade:2 },         // hood up
+    cop:       { hat:3, skin:5, shirt:3, pants:1, accent:7, cap:true, accessory:'badge', accColor:5, shade:2 },
+    biggu:     { hat:5, skin:3, shirt:6, pants:6, accent:5, tall:true, wide:true, shade:2, worn:4 }, // tall AND big
+    cubscout:  { hat:5, skin:5, shirt:4, pants:1, accent:7, accessory:'sash', thin:true, shade:6 },
+    jogger:    { hat:5, skin:5, shirt:4, pants:1, accent:7, thin:true, shade:6 },
+    busker:    { hat:5, skin:3, shirt:4, pants:6, accent:7, shade:2 },
+    dogwalker: { hat:6, skin:5, shirt:4, pants:1, accent:6, shade:2 },
+    vapelord:  { hat:5, skin:3, shirt:2, pants:1, accent:6, hood:true, accessory:'kombucha', worn:3 },
+    mayorscousin: { hat:1, skin:3, shirt:6, pants:1, accent:5, coats:2, shirt2:5, shade:2, worn:4 },
+    phoneguy:  { hat:5, skin:3, shirt:2, pants:6, accent:7, thin:true, worn:3 },
+    launderlady: { hat:6, skin:5, shirt:4, pants:1, accent:6, wide:true, shade:2 },
+    metermaid: { hat:6, skin:5, shirt:4, pants:1, accent:6, cap:true, accessory:'badge', accColor:5, shade:2 },
+    foodtruck: { hat:5, skin:3, shirt:6, pants:6, accent:5, wide:true, accessory:'badge', shade:2 },
+    priestson: { hat:5, skin:5, shirt:2, pants:1, accent:6, thin:true, cap:true, worn:3 },
+    karaoke:   { hat:5, skin:3, shirt:6, pants:2, accent:4, shade:2 },
     // v13 wave 2
-    barb:      { hat:2, skin:3, shirt:4, pants:6, accent:5, wide:true },
-    pinky:     { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true },
-    math:      { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true, accessory:'glasses' },
-    brendan:   { hat:3, skin:5, shirt:3, pants:6, accent:7, cap:true, accessory:'badge', accColor:5, thin:true },
+    barb:      { hat:2, skin:3, shirt:4, pants:6, accent:5, wide:true, shade:6, worn:2 },
+    pinky:     { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true, shade:6 },
+    math:      { hat:2, skin:3, shirt:4, pants:6, accent:5, thin:true, accessory:'glasses', shade:2 },
+    brendan:   { hat:3, skin:5, shirt:3, pants:6, accent:7, cap:true, accessory:'badge', accColor:5, thin:true, shade:2 },
     // v13 wave 8a — train hopper: wiry, gray beard, faded jacket. accessory shows the backpack on his back via accent color.
-    train_hopper: { hat:2, skin:3, shirt:3, pants:6, accent:7, thin:true, beard:true },
+    train_hopper: { hat:2, skin:3, shirt:3, pants:6, accent:7, thin:true, beard:true, shade:2 },
     // v13 wave 8a — philosopher: kindly old woman, gray hair under a hat, brown coat
-    philosopher:  { hat:6, skin:5, shirt:2, pants:6, accent:7, wide:true },
-    lease_guy:    { hat:2, skin:5, shirt:3, pants:1, accent:7, cap:true, wide:true },
-    gutter_greg:  { hat:2, skin:4, shirt:3, pants:7, accent:6, thin:true, beard:true },
+    philosopher:  { hat:6, skin:5, shirt:2, pants:6, accent:7, wide:true, shade:6, worn:3 },
+    lease_guy:    { hat:2, skin:5, shirt:3, pants:1, accent:7, cap:true, wide:true, shade:2 },
+    gutter_greg:  { hat:2, skin:4, shirt:3, pants:7, accent:6, thin:true, beard:true, shade:2 },
     blue_tarp_guard:   {hat:2,skin:3,shirt:4,pants:6,accent:5,hood:true,wide:true},
-    receipt_guard:     {hat:7,skin:3,shirt:4,pants:6,accent:2,cap:true,accessory:'sash'},
+    receipt_guard:     {hat:7,skin:3,shirt:4,pants:6,accent:2,cap:true,accessory:'sash',shade:6},
     wire_guard:        {hat:1,skin:3,shirt:4,pants:6,accent:5,thin:true,beard:true},
     darryl_under_blue: {hat:2,skin:3,shirt:4,pants:6,accent:5,hood:true,wide:true,coats:2,shirt2:2},
-    general_receipt:   {hat:2,skin:3,shirt:4,pants:6,accent:7,cap:true,wide:true,coats:2,shirt2:2},
-    bishop_wire:       {hat:5,skin:3,shirt:4,pants:6,accent:7,tall:true,beard:true},
-    curb_emperor:      {hat:2,skin:3,shirt:4,pants:6,accent:5,wide:true,yelling:true,coats:3,shirt2:2},
+    general_receipt:   {hat:2,skin:3,shirt:4,pants:6,accent:7,cap:true,wide:true,coats:2,shirt2:2,shade:6},
+    bishop_wire:       {hat:5,skin:3,shirt:4,pants:6,accent:7,tall:true,beard:true,shade:2},
+    curb_emperor:      {hat:2,skin:3,shirt:4,pants:6,accent:5,wide:true,yelling:true,coats:3,shirt2:2,shade:6},
     // v13 wave 8a — price guy: silhouette in a black coat. brim hat. unsettling.
-    price_guy:    { hat:1, skin:4, shirt:3, pants:3, accent:6, hood:true },
+    price_guy:    { hat:1, skin:4, shirt:3, pants:3, accent:6, hood:true, worn:7 },
     // v13 wave 8a — old school brutus reuses the dog sprite (handled below), this entry not used
   };
   Object.entries(npcStyles).forEach(([k, opts]) => {
@@ -763,7 +766,9 @@ export function init_sprites() {
     priest: ['transparent','#000','#1a1020','#2a2030','#4a3040','#d4c896','#d488d4','#d4c896'],
     priest_fallen: ['transparent','#050306','#160b18','#321438','#5a205f','#d4c896','#8a3a78','#e8c040'],
     conductor: ['transparent','#1a1010','#3a2820','#604030','#a07050','#d4c896','#8a3a3a','#604030'],
-    larry: ['transparent','#1a0808','#3a1818','#8a3030','#d4c896','#e8c040','#d06030','#d4c896'],
+    // v22 wave 4.3 (audited): slot 7 was an exact duplicate of slot 5's cream.
+    // Repurposed as the deep-red shade step for the yell-flushed skin/shirt.
+    larry: ['transparent','#1a0808','#3a1818','#8a3030','#d4c896','#e8c040','#d06030','#5a2020'],
     stripe: ['transparent','#0a0a18','#1a1828','#3a3848','#7a7888','#d4c896','#e8c040','#d4d4d4'],
     pigeon: ['transparent','#1a1810','#3a3828','#605840','#888070','#d4c896','#d06030','#e8c040'],
     cop: ['transparent','#000','#080820','#1818a0','#2828d0','#d4c896','#e8c040','#d4c896'],
@@ -794,7 +799,9 @@ export function init_sprites() {
     // v13 wave 8a — park bench philosopher: gray hair + brown coat + kindly face
     philosopher:  ['transparent','#0a0805','#604838','#8a7868','#c8c0b8','#d4c896','#3a2820','#88a08c'],
     // v13 wave 8a — price guy: black coat + hat brim + a stillness about him. mostly silhouette.
-    price_guy:    ['transparent','#000','#0a0808','#181818','#2a2a2a','#d4c896','#5a3030','#d4c896'],
+    // v22 wave 4.3 (audited): slot 7 duplicated slot 5's cream, unused. Now the
+    // one-step edge light that gives the void a coat without giving it a face.
+    price_guy:    ['transparent','#000','#0a0808','#181818','#2a2a2a','#d4c896','#5a3030','#343434'],
     lease_guy:    ['transparent','#15100a','#3a3024','#6a5840','#9a8058','#d4c896','#c08038','#88c0ff'],
     gutter_greg:  ['transparent','#10120f','#29382f','#496050','#7a8060','#d4c896','#e8c040','#3a2818'],
     // v19 rival courts. Slate blue avoids the bright cop-only blue language.

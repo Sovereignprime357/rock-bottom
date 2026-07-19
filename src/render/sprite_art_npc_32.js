@@ -41,6 +41,10 @@ function colorsFor(opts) {
     coat: opts.shirt2 ?? opts.shirt ?? 4,
     accessory: opts.accColor ?? opts.accent ?? 5,
     boot: 6,
+    // v22 wave 4.3 — per-identity ramp roles. shade is the fabric/skin shadow
+    // step (defaults to outline dark); worn is a lighter lit/wear step, 0 = off.
+    shade: opts.shade ?? 1,
+    worn: opts.worn ?? 0,
   };
 }
 
@@ -95,6 +99,15 @@ function drawHead(grid, opts, colors) {
   }
   gridBox(grid,15,y+11,3,3,skin);
   gridPut(grid,18,y+12,shirt);
+
+  // Faces carry their mileage: brow shadow under the hair/brim, one sunken
+  // cheek, and the chin dropping shade onto the neck. Skipped where a beard
+  // or a yell already owns those rows.
+  const {shade} = colors;
+  gridPut(grid,x+1,y+5,shade);
+  gridPut(grid,x+width-2,y+5,shade);
+  if (!opts.beard && !opts.yelling) gridPut(grid,x+width-2,y+9,shade);
+  gridPut(grid,15,y+11,shade);
 }
 
 function drawTorso(grid, opts, frame, colors) {
@@ -145,12 +158,34 @@ function drawTorso(grid, opts, frame, colors) {
   gridBox(grid,left+3,top+8,3,2,accent);
   gridPut(grid,left+4,top+8,shirt);
 
+  // v22 wave 4.3 — the light has a side. Underarm shadow, a dithered shade
+  // column down the right, hem wear, and an optional worn/lit step on the
+  // left shoulder and flank. Single pixels: texture, not stripes.
+  const {shade,worn} = colors;
+  gridPut(grid,left+2,top+3,shade);
+  gridPut(grid,right-2,top+4,shade);
+  gridPut(grid,right-2,top+6,shade);
+  gridPut(grid,right-3,top+9,shade);
+  gridPut(grid,right-2,top+10,shade);
+  gridPut(grid,left+4,top+11,shade);
+  gridPut(grid,right-4,top+12,shade);
+  if (worn) {
+    gridPut(grid,left+3,top+2,worn);
+    gridPut(grid,left+4,top+2,worn);
+    gridPut(grid,left+2,top+5,worn);
+    gridPut(grid,left+2,top+6,worn);
+  }
+
   const hipY=25;
   gridBox(grid,12,hipY,9,3,pants);
   gridPut(grid,16,hipY+2,dark);
+  gridPut(grid,13,hipY+1,shade);
+  gridPut(grid,19,hipY+1,shade);
   if (frame === 0) {
     gridBox(grid,12,28,3,3,pants);
     gridBox(grid,18,28,3,3,pants);
+    gridPut(grid,13,29,shade);
+    gridPut(grid,19,29,shade);
     gridBox(grid,11,30,5,2,boot);
     gridBox(grid,18,30,5,2,boot);
   } else if (frame === 1) {
@@ -196,7 +231,7 @@ function drawOptionAccessory(grid, opts, colors) {
 }
 
 function applySignature(id, grid, frame, opts, c) {
-  const {dark,hat,skin,shirt,pants,accent,coat,accessory,boot} = c;
+  const {dark,hat,skin,shirt,pants,accent,coat,accessory,boot,shade,worn} = c;
   switch (id) {
     case 'tony':
     case 'tony_coat_3':
@@ -211,6 +246,9 @@ function applySignature(id, grid, frame, opts, c) {
       gridLine(grid,12,14,16,23,dark); gridLine(grid,21,14,17,23,dark);
       dots(grid,accent,[[14,17],[19,18],[15,21],[18,22]]);
       if (!layers) { gridBox(grid,12,14,9,10,skin); gridLine(grid,16,15,16,23,dark); }
+      // Each coat layer drops shade on the one beneath it. Depth, not decor.
+      if (layers >= 1) dots(grid,shade,[[10,17],[10,22],[22,18],[22,23]]);
+      if (layers >= 2) dots(grid,shade,[[9,16],[24,17]]);
       break;
     }
     case 'yuri': { // Bald crown, square beard, hubcap held like an invoice.
@@ -218,12 +256,16 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,12,10,9,3,hat); dots(grid,skin,[[13,10],[19,10]]);
       gridEllipse(grid,26,21,4,4,accessory); gridEllipse(grid,26,21,2,2,dark); gridPut(grid,26,21,skin);
       thickLine(grid,21,17,24,20,skin); gridPut(grid,29,18,accessory);
+      // Beard grain and a brow that has already decided about you.
+      dots(grid,dark,[[14,11],[18,12],[16,11]]); dots(grid,shade,[[13,6],[19,6]]);
       break;
     }
     case 'pete': { // Apron, pocket, serving hatch residue and one hot-pocket unit.
       gridBox(grid,12,14,10,12,accessory); gridLine(grid,12,14,16,25,dark); gridLine(grid,21,14,17,25,dark);
-      gridBox(grid,15,20,5,4,accent); gridLine(grid,15,20,19,20,dark);
+      gridBox(grid,15,20,5,4,shirt); gridLine(grid,15,20,19,20,dark);
       gridBox(grid,25,18,6,4,coat); gridBox(grid,26,19,4,2,accent); gridPut(grid,30,18,dark);
+      // Eleven minutes per weighing leaves marks: grease on the apron, a fold.
+      dots(grid,shade,[[14,17],[19,19],[15,23],[18,24]]); gridLine(grid,17,15,17,19,shade);
       break;
     }
     case 'lurch': { // Seven feet of elbows, with the shoulders already apologizing.
@@ -231,6 +273,9 @@ function applySignature(id, grid, frame, opts, c) {
       thickLine(grid,11,12,5,28,shirt,2); thickLine(grid,21,13,27,29,shirt,2);
       gridBox(grid,4,28,3,3,skin); gridBox(grid,27,29,3,2,skin);
       gridPut(grid,12,12,dark); gridPut(grid,21,13,dark);
+      // Rim light so the dark mass reads as a person and not a doorway.
+      gridLine(grid,13,13,13,17,worn); gridLine(grid,13,20,13,23,worn);
+      dots(grid,worn,[[7,20],[25,19]]);
       break;
     }
     case 'sherri': { // Hard hair spikes and a phone already leaving the conversation.
@@ -244,6 +289,9 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,11,2,11,3,hat); gridBox(grid,12,6,3,3,dark); gridBox(grid,18,6,3,3,dark);
       gridPut(grid,13,7,skin); gridPut(grid,19,8,skin); gridLine(grid,15,10,20,10,dark);
       gridLine(grid,10,5,8,8,accent); gridLine(grid,22,4,24,9,accent); gridPut(grid,17,9,dark);
+      // The face has topography now: brow furrow, eye bags, hollow cheeks.
+      dots(grid,shade,[[14,5],[17,5],[13,9],[19,9],[21,11]]);
+      gridLine(grid,11,11,12,12,shade);
       break;
     }
     case 'dave': { // Awake only by zoning: pillow, drool, one slipper, closed receipt eyes.
@@ -251,6 +299,9 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,7,15,5,7,coat); gridPut(grid,8,16,dark); gridPut(grid,7,21,0);
       clearBox(grid,19,30,5,2); gridBox(grid,19,30,4,2,accent); gridPut(grid,22,30,0);
       gridLine(grid,11,14,9,23,dark);
+      // Slept-in shirt: two long rumples and knees gone pale from the bench.
+      gridLine(grid,14,17,13,22,shade); gridLine(grid,18,16,19,21,shade);
+      gridPut(grid,13,26,worn); gridPut(grid,19,27,worn);
       break;
     }
     case 'mom': { // Bottle, sensible tote, sensible shoes, no agreement among them.
@@ -276,18 +327,25 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,10,1,12,4,hat); gridBox(grid,8,4,17,2,hat); gridBox(grid,14,2,3,2,accent);
       gridBox(grid,25,18,5,6,accessory); gridPut(grid,27,19,dark); gridPut(grid,29,22,dark);
       thickLine(grid,21,16,25,20,skin); gridBox(grid,8,17,4,7,coat);
+      // Brim shadow and a coat crease from decades of the same lean.
+      dots(grid,shade,[[11,6],[19,6]]); gridLine(grid,10,19,10,23,shade);
       break;
     }
     case 'larry': { // The yell gets its own architecture.
       clearBox(grid,13,10,8,4); gridBox(grid,12,9,10,5,dark); gridBox(grid,14,10,6,2,skin);
       thickLine(grid,10,16,3,9,shirt,3); thickLine(grid,22,17,29,8,shirt,3);
       gridBox(grid,1,7,4,4,skin); gridBox(grid,28,6,4,4,skin); dots(grid,dark,[[2,7],[30,7]]);
+      // Deep-red shade: arm undersides, heaving chest, fists flushed at the edge.
+      gridLine(grid,9,17,4,12,shade); gridLine(grid,23,18,28,11,shade);
+      dots(grid,shade,[[14,12],[19,12],[2,10],[29,9],[14,19],[18,20]]);
       break;
     }
     case 'stripe': { // Hood aperture, severe stripe, suspicious soap package.
       gridBox(grid,11,5,11,8,hat); gridBox(grid,13,7,7,5,skin); dots(grid,dark,[[14,9],[19,10]]);
       thickLine(grid,10,14,22,26,accessory,2); gridLine(grid,9,15,21,27,dark);
       gridBox(grid,25,19,6,6,accent); gridBox(grid,26,20,4,3,accessory); gridPut(grid,28,22,dark);
+      // Hood folds; the aperture is deeper than the face inside it.
+      dots(grid,shade,[[12,6],[20,7],[13,11],[19,12]]);
       break;
     }
     case 'cop': { // Broad cap, gut, badge, baton, coffee; one boot remains administratively open.
@@ -295,12 +353,18 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,10,15,14,10,shirt); gridBox(grid,20,16,3,3,accessory); gridPut(grid,21,17,dark);
       gridLine(grid,26,17,29,27,dark); gridLine(grid,27,17,30,27,dark);
       gridBox(grid,5,19,4,5,coat); gridPut(grid,6,20,skin); clearBox(grid,20,31,3,1);
+      // The gut has an underside and the shirt has a pocket seam.
+      gridLine(grid,12,24,21,24,shade); dots(grid,shade,[[12,17],[12,18],[18,21]]);
       break;
     }
     case 'biggu': { // Tall AND big. The arms have their own commute.
       gridBox(grid,8,12,17,5,shirt); thickLine(grid,8,15,2,29,shirt,4); thickLine(grid,24,16,30,29,shirt,4);
       gridBox(grid,1,28,4,3,skin); gridBox(grid,29,28,3,3,skin); gridBox(grid,11,23,12,5,coat);
       dots(grid,dark,[[8,15],[24,17],[13,24],[21,26]]);
+      // The slab gets a weather side: chest fold, arm undersides, hem shadow.
+      gridLine(grid,9,16,20,14,shade); gridLine(grid,8,17,3,28,shade);
+      gridLine(grid,26,18,29,27,shade); dots(grid,shade,[[13,27],[17,27],[21,27]]);
+      gridLine(grid,10,13,14,13,worn);
       break;
     }
     case 'cubscout': { // Oversized pack and sash; the knees have filed a separate report.
@@ -340,6 +404,9 @@ function applySignature(id, grid, frame, opts, c) {
       gridLine(grid,11,14,16,22,coat); gridLine(grid,22,14,17,22,coat);
       gridBox(grid,12,15,3,3,accent); gridPut(grid,13,16,dark); gridPut(grid,20,16,accessory);
       gridBox(grid,8,18,4,8,coat); gridBox(grid,22,18,4,8,coat); gridPut(grid,22,31,0);
+      // The jacket was pressed once, in a previous administration.
+      dots(grid,shade,[[13,18],[20,18],[14,22],[19,23]]);
+      gridLine(grid,13,23,15,23,shade); gridPut(grid,12,15,worn);
       break;
     }
     case 'phoneguy': { // Phone, face, cord, power bank: one continuous employment condition.
@@ -376,12 +443,19 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,8,20,13,9,hat); gridBox(grid,10,22,9,3,accent); gridPut(grid,14,23,dark);
       gridBox(grid,25,11,3,5,accessory); gridLine(grid,24,16,21,20,dark);
       gridLine(grid,27,16,30,29,dark); gridLine(grid,30,29,23,31,dark);
+      // Shirt creases above the machine; knobs and speaker holes on it.
+      gridLine(grid,13,16,12,19,shade); gridPut(grid,19,15,shade);
+      dots(grid,dark,[[10,27],[12,27],[16,27],[18,27]]);
       break;
     }
     case 'barb': { // Cardigan, hard purse, reading glasses kept below the eyes.
       gridBox(grid,9,14,16,12,shirt); gridLine(grid,16,14,16,26,dark); dots(grid,accent,[[15,17],[17,20],[15,23]]);
       gridBox(grid,24,19,7,7,accessory); gridLine(grid,25,19,28,16,dark); gridPut(grid,27,22,dark);
       gridLine(grid,13,11,20,11,accent);
+      // Knit rows and a ribbed hem; the collar catches what light there is.
+      for (let x=10;x<=22;x+=4){gridPut(grid,x,17,shade);gridPut(grid,x+2,21,shade);}
+      dots(grid,shade,[[11,25],[15,25],[19,25],[23,25]]);
+      gridLine(grid,12,14,15,14,worn);
       break;
     }
     case 'pinky': { // Long uneven braids and knees that bend in different jurisdictions.
@@ -412,6 +486,9 @@ function applySignature(id, grid, frame, opts, c) {
       gridLine(grid,25,17,28,31,dark); gridPut(grid,27,31,dark); gridPut(grid,29,31,dark);
       gridBox(grid,9,18,5,6,accessory); gridBox(grid,20,18,5,6,accessory); gridPut(grid,11,20,dark);
       gridLine(grid,13,9,16,9,accent); gridLine(grid,18,10,21,10,accent); gridPut(grid,17,9,accent);
+      // Wool folds catch light above the pockets and drop shade below them.
+      dots(grid,worn,[[12,16],[12,20],[20,16],[21,22]]);
+      dots(grid,shade,[[10,24],[22,24],[15,15]]);
       break;
     }
     case 'lease_guy': { // Clipboard on one side, unreasonable key ring on the other.
@@ -430,6 +507,9 @@ function applySignature(id, grid, frame, opts, c) {
       clearBox(grid,6,0,22,17); gridBox(grid,8,1,18,5,hat); gridLine(grid,5,6,29,6,hat);
       gridLine(grid,6,7,8,24,hat); gridLine(grid,28,7,25,24,hat); gridBox(grid,10,7,14,5,hat);
       gridBox(grid,13,8,8,5,skin); dots(grid,dark,[[15,10],[19,11]]); dots(grid,accent,[[8,4],[25,3],[6,7]]);
+      // Tarps crease where weather won. Two folds and shade under the aperture.
+      gridLine(grid,11,2,13,5,dark); gridLine(grid,22,1,20,5,dark);
+      dots(grid,dark,[[12,13],[21,13]]);
       break;
     }
     case 'receipt_guard': { // Receipt sash and a loose end that keeps itemizing the pavement.
@@ -442,6 +522,8 @@ function applySignature(id, grid, frame, opts, c) {
       for (const y of [16,19,22,25]) { gridLine(grid,10,y,23,y,accessory); gridPut(grid,9,y-1,accessory); gridPut(grid,24,y+1,accessory); }
       gridEllipse(grid,27,20,4,5,accent); gridEllipse(grid,27,20,2,3,dark); gridPut(grid,27,20,skin);
       gridLine(grid,28,25,31,31,accessory);
+      // The body behind the coils drops into shadow; the coils gain weight.
+      dots(grid,dark,[[12,17],[18,18],[13,20],[17,23],[14,26]]);
       break;
     }
     case 'darryl_under_blue': { // The tarp is the silhouette. Darryl is a face-shaped exception.
@@ -450,6 +532,9 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,12,9,10,6,skin); dots(grid,dark,[[14,11],[20,12],[17,14]]);
       gridLine(grid,7,16,26,16,accent); dots(grid,accent,[[5,4],[27,3],[3,8],[30,9]]);
       gridBox(grid,10,17,14,10,coat); gridPut(grid,11,26,0); gridPut(grid,23,25,0);
+      // The roof plastic hangs in folds, not a sheet. Weather has a texture.
+      gridLine(grid,8,2,10,14,dark); gridLine(grid,25,2,23,14,dark);
+      dots(grid,dark,[[13,17],[20,18],[12,23],[21,24]]);
       break;
     }
     case 'general_receipt': { // Paper crown, epaulettes and a scroll with more rank than ink.
@@ -476,6 +561,9 @@ function applySignature(id, grid, frame, opts, c) {
       clearBox(grid,9,1,17,13); gridBox(grid,11,2,12,4,dark); gridBox(grid,7,6,20,3,dark); gridBox(grid,12,8,10,5,coat);
       dots(grid,accent,[[14,10],[20,11]]); gridBox(grid,9,13,16,15,dark); gridLine(grid,8,14,5,30,dark); gridLine(grid,25,14,29,30,dark);
       gridBox(grid,20,18,5,4,accessory); gridPut(grid,22,20,dark); gridLine(grid,22,18,24,16,accessory);
+      // One-step edge light: the void gains a coat without gaining a face.
+      gridLine(grid,10,14,7,29,worn); gridLine(grid,11,3,21,3,worn);
+      dots(grid,worn,[[10,13],[24,15],[9,7],[25,7]]);
       break;
     }
     default:
@@ -519,6 +607,9 @@ export function makeSleepingDave32() {
     gridPut(grid,frame ? 6 : 5,20,7);
     gridPut(grid,frame ? 5 : 6,19,7);
     gridPut(grid,3,31,2); gridPut(grid,29,31,7);
+    // v22 4.3 — the blanket has folds and the pillow has been fought with.
+    dots(grid,1,[[18,25],[21,26],[24,25],[11,23],[13,24]]);
+    dots(grid,1,[[5,24],[7,25]]);
     return assertGrid32(grid,'dave_sleep');
   };
   return [makeFrame(0),makeFrame(1)].map(cloneGrid);
