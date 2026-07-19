@@ -42,6 +42,8 @@ for(const fixture of fixtures){
   stage.clientWidth=stageW;stage.clientHeight=stageH;
   context.window.innerWidth=fixture.viewport[0];context.window.innerHeight=fixture.viewport[1];
   context.navigator.maxTouchPoints=fixture.mobile?1:0;
+  // v22 display fix: mobile is now detected via a coarse pointer, not innerWidth/maxTouchPoints.
+  context.window.matchMedia=(q)=>({matches:fixture.mobile&&/coarse/.test(String(q)),media:String(q)});
   hudModule.syncPresentationLayout();
   const topbar=context.document.querySelector('#mobile-ctrls .topbar'),ticker=context.document.getElementById('ticker');
   if(!near(parseFloat(hud.style.left),resolved.hud.x)||!near(parseFloat(hud.style.right),resolved.hud.right)||!near(parseFloat(hud.style.top),resolved.hud.y))failures.push(`${fixture.name}: production HUD styles diverge from resolver`);
