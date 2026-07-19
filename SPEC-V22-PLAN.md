@@ -24,7 +24,7 @@ Every idea here is measured against that. **The world noticing you = yes. The wo
 | **5.6** | **Fill the barren quarter** | ✅ **BUILT 2026-07-18** — branch `v22-fill-quarter`, contract `SPEC-v22-fill-quarter.md` graduated to SPEC.md; no new gate (leans on world/solidity/breakin gates, both raised pins red-tested), suite 18/18, world-gate byte-identical, pushed without merge (operator review) | Density, not distance. Band got 2 more break-in sites (pool, visitor center: `BREAKIN_SITES` 3→5); sliver got the SCENIC OVERLOOK tableau (reachability driven live first). Bounded on purpose — still-sparse cells are a 5.7, not scope creep. |
 
 *(Numbering corrected 2026-07-18 to ship order: copper 5.1 · discovery 5.2 · hitter 5.3 · robbery 5.4 · break-ins 5.5 · fill 5.6. The earlier table had the hitter and robbery both labeled 5.3; resolved.)*
-| **4.3** | **Sprite shading / more definition** | 🎨 PARALLEL | Operator's "more shading, more definition" note. Pure art track, independent of all gameplay above — can run alongside without collision. |
+| **4.3** | **Sprite shading / more definition** | ⚙️ **NEXT — spec ready** (`SPEC-v22-sprite-shading.md`) | Operator's "more shading, more definition... just run the sprites." Pure art track. Reshades the 94-base / 377-key roster denser within the 32×32 ceiling; the operator's eye is the acceptance gate, not the suite. Runs clean — 5.6 left sprite files untouched. |
 
 ---
 
