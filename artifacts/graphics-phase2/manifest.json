@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "phase": "graphics-phase2-full-map",
+  "status": "built-pending-operator-eye",
+  "branch": "codex/graphics-phase2-full-map",
+  "baselineCommit": "fdd0ccc364540cc46d67b14be51a5f9fb145fc36",
+  "productionCommit": "bfca7431cad0363d20c6cbf5cd2e4c0157ea914c",
+  "capturedOn": "2026-07-21",
+  "capture": {
+    "engine": "Chromium through the served native-ES-module entry point",
+    "canvas": {
+      "width": 800,
+      "height": 600,
+      "devicePixelRatio": 1,
+      "imageSmoothingEnabled": false
+    },
+    "world": {
+      "width": 8600,
+      "height": 5600,
+      "coveragePixels": 48160000
+    },
+    "fixedVisualNow": 426240,
+    "authoredRandomSeedHex": "0x524f434b",
+    "primaryObjective": null,
+    "mapActors": "cleared for exact geography comparison",
+    "dayTime": 0.5,
+    "nightTime": 0.96,
+    "dayWeather": "clear",
+    "nightWeather": "rain",
+    "cameraOrigins": {
+      "x": [0, 800, 1600, 2400, 3200, 4000, 4800, 5600, 6400, 7200, 7800],
+      "y": [0, 600, 1200, 1800, 2400, 3000, 3600, 4200, 4800, 5000],
+      "count": 110,
+      "union": [0, 0, 8600, 5600]
+    },
+    "fullMapScale": 0.25,
+    "fullMapDimensions": [2150, 1400],
+    "comparisonDimensions": [4300, 1440],
+    "detailCropOrigins": [
+      { "name": "northwest", "x": 0, "y": 0 },
+      { "name": "skid_row", "x": 2400, "y": 1500 },
+      { "name": "canal", "x": 4000, "y": 1500 },
+      { "name": "southwest", "x": 0, "y": 4400 },
+      { "name": "south_rail", "x": 5000, "y": 4400 },
+      { "name": "throne_ditch", "x": 7800, "y": 5000 }
+    ],
+    "detailMontageDimensions": [2400, 1200]
+  },
+  "performance": {
+    "method": "requestAnimationFrame, 30 warmup frames, 240 measured frames",
+    "requirements": {
+      "meanMsMax": 8,
+      "p95MsExclusiveMax": 16
+    },
+    "dayClear64Mixed": {
+      "meanMs": 0.41166666659216083,
+      "p95Ms": 0.5999999940395355,
+      "p99Ms": 0.7000000178813934,
+      "maxMs": 1,
+      "source": "performance-day.json"
+    },
+    "nightRain64Cops": {
+      "meanMs": 0.8179166660954554,
+      "p95Ms": 1.2999999821186066,
+      "p99Ms": 1.5999999940395355,
+      "maxMs": 2.4000000059604645,
+      "source": "performance-night.json"
+    }
+  },
+  "files": [
+    {
+      "name": "character-variant-atlas.png",
+      "role": "normal plus mold_sick, mauve_shadow, and sun_bleached character rows",
+      "bytes": 220758,
+      "width": 1536,
+      "height": 756,
+      "sha256": "805f23591d26a651e372ac7d948fbd4e617c0779c2456df6882f6f5e43188f32"
+    },
+    {
+      "name": "detail-crops-after-day.png",
+      "role": "six 1:1 Phase 2 day crops",
+      "bytes": 216976,
+      "width": 2400,
+      "height": 1200,
+      "sha256": "66162a6c2d3ac742c3490f197b57dd311740c0567a72a54af138ab057ec13a80"
+    },
+    {
+      "name": "detail-crops-after-night.png",
+      "role": "six 1:1 Phase 2 night/rain crops",
+      "bytes": 432758,
+      "width": 2400,
+      "height": 1200,
+      "sha256": "08a701b4cbe991941b812f6ee3e728c4f63f3ded65d2b644558b0a651276282d"
+    },
+    {
+      "name": "detail-crops-before-day.png",
+      "role": "six 1:1 Phase 1 baseline day crops",
+      "bytes": 174910,
+      "width": 2400,
+      "height": 1200,
+      "sha256": "c151c8603e84e0559535fe18b913a536179d248845dddfc3c48911ffdb102ee8"
+    },
+    {
+      "name": "detail-crops-before-night.png",
+      "role": "six 1:1 Phase 1 baseline night/rain crops",
+      "bytes": 393761,
+      "width": 2400,
+      "height": 1200,
+      "sha256": "d4a653b5ecc892f5f33b8fd6bbccf666e5bacff3b824c823508007685946ad63"
+    },
+    {
+      "name": "full-map-after-day.png",
+      "role": "gapless Phase 2 day mosaic at 25 percent",
+      "bytes": 547246,
+      "width": 2150,
+      "height": 1400,
+      "sha256": "b6113ebeb35f6ec38c74cdccc8ab28ae918697835ab9820c19e962c355b50f58"
+    },
+    {
+      "name": "full-map-after-night.png",
+      "role": "gapless Phase 2 night/rain mosaic at 25 percent",
+      "bytes": 643067,
+      "width": 2150,
+      "height": 1400,
+      "sha256": "d79a16cafead99b273311a108173662b696d79e13dc14ed93a5198f2e5479f34"
+    },
+    {
+      "name": "full-map-before-after-day.png",
+      "role": "labeled Phase 1 versus Phase 2 full-map day comparison",
+      "bytes": 839243,
+      "width": 4300,
+      "height": 1440,
+      "sha256": "c412f667c2f17316c9d3579f178689b3b3712e76f228698f88a1c1dd8833c825"
+    },
+    {
+      "name": "full-map-before-after-night.png",
+      "role": "labeled Phase 1 versus Phase 2 full-map night comparison",
+      "bytes": 988715,
+      "width": 4300,
+      "height": 1440,
+      "sha256": "4d66f47cf75e6f1726ada72fb7f806685d2dedbd5162ba1ff8189aa2d7e32c8f"
+    },
+    {
+      "name": "full-map-before-day.png",
+      "role": "gapless Phase 1 baseline day mosaic at 25 percent",
+      "bytes": 383704,
+      "width": 2150,
+      "height": 1400,
+      "sha256": "d79a6e8c7e8f1e77f3429e3b2977a46c2fa4444f388f2909e26d913394265018"
+    },
+    {
+      "name": "full-map-before-night.png",
+      "role": "gapless Phase 1 baseline night/rain mosaic at 25 percent",
+      "bytes": 491805,
+      "width": 2150,
+      "height": 1400,
+      "sha256": "49c2f5ac2aeffba184776d65c42946f5ba826972d58d342c627e347482256991"
+    },
+    {
+      "name": "grime-static-atlas.png",
+      "role": "all 12 cached static grime families",
+      "bytes": 18678,
+      "width": 720,
+      "height": 456,
+      "sha256": "23ba379777c0246b9283fb0231185e65b9f08787fed8716c69c6af6ae31bf26d"
+    },
+    {
+      "name": "performance-day.json",
+      "role": "day/clear 64-mixed-actor browser profile",
+      "bytes": 233,
+      "sha256": "b3ff5780f7f8379e2f0bee5da3b53817104b141ba605fa0f8f68379c52bb4c64"
+    },
+    {
+      "name": "performance-night.json",
+      "role": "night/rain 64-cop browser profile",
+      "bytes": 252,
+      "sha256": "f4dd6b394f8ab0fed6759e9700c7aa93a7de7310d9d2de69d7358ee4a2445cb0"
+    },
+    {
+      "name": "secondary-loop-strip.png",
+      "role": "all frames of all six secondary animation families",
+      "bytes": 24285,
+      "width": 640,
+      "height": 888,
+      "sha256": "66817e1d0f0718e6fceb6d0c507a141fbdee736f226960ee21e653aaa0fbe4e6"
+    }
+  ]
+}
