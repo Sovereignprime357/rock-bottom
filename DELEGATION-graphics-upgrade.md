@@ -111,6 +111,9 @@ twentieth permanent gate; all 21 counterexample modes went red before the 20/20 
 Matched full-map/day/night/detail sheets, atlases, loop strip, hashes, and real-browser profiles are
 in `artifacts/graphics-phase2/`. Phase 3 remains unbuilt and operator-gated.
 
+Production commit: `bfca7431cad0363d20c6cbf5cd2e4c0157ea914c`. Hashed acceptance bundle:
+`20c17ee`. The named branch is pushed to `origin/codex/graphics-phase2-full-map`.
+
 Now push the sprites and the world to match the new light. Art-heavy, not tech-heavy.
 
 1. **Tenebrist ramp authoring (Blasphemous).** Fix a single implied light direction across the roster;

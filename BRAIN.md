@@ -2432,3 +2432,10 @@ not reasons to inflate hitboxes or start Phase 3.
 **Next.** Operator: inspect `full-map-before-after-day.png`, then the 1:1 day/night crops and variant
 atlas. Rule whether the full-map density reads as lived-in filth rather than wallpaper. The branch
 stops at Phase 2; Phase 3 stays unbuilt unless explicitly opened.
+
+### Graphics Phase 2 completion handoff — 2026-07-21
+
+Production is frozen at `bfca7431cad0363d20c6cbf5cd2e4c0157ea914c`; the hashed visual/performance
+acceptance bundle is commit `20c17ee`. The manifest verified all fifteen evidence files against
+their recorded SHA-256 values, the permanent runner returned 20/20, and the named branch is pushed
+to `origin/codex/graphics-phase2-full-map`. No Phase 3 work was started.

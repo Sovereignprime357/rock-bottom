@@ -245,7 +245,7 @@ Both require mean frame time ≤8ms and p95 <16ms. Report p99/max but do not fai
 - [x] Permanent suite 20/20 green; frozen v19 untouched.
 - [x] Real-browser full-map before/after, detail/atlas/loop artifacts, and performance JSON ready.
 - [x] `SPEC.md`, `VIBE.md`, `DELEGATION-graphics-upgrade.md`, `SPEC-V22-PLAN.md`, and append-only `BRAIN.md` updated.
-- [ ] Named branch committed, pushed, and stopped before Phase 3.
+- [x] Named branch committed, pushed, and stopped before Phase 3.
 
 ## THE TRAPS
 
