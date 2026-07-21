@@ -24,7 +24,7 @@ Every idea here is measured against that. **The world noticing you = yes. The wo
 | **5.6** | **Fill the barren quarter** | ✅ **BUILT 2026-07-18** — branch `v22-fill-quarter`, contract `SPEC-v22-fill-quarter.md` graduated to SPEC.md; no new gate (leans on world/solidity/breakin gates, both raised pins red-tested), suite 18/18, world-gate byte-identical, MERGED to main (2026-07-18, commit 2880e1c) | Density, not distance. Band got 2 more break-in sites (pool, visitor center: `BREAKIN_SITES` 3→5); sliver got the SCENIC OVERLOOK tableau (reachability driven live first). Bounded on purpose — still-sparse cells are a 5.7, not scope creep. |
 
 *(Numbering corrected 2026-07-18 to ship order: copper 5.1 · discovery 5.2 · hitter 5.3 · robbery 5.4 · break-ins 5.5 · fill 5.6. The earlier table had the hitter and robbery both labeled 5.3; resolved.)*
-| **4.3** | **Sprite shading / more definition** | ⚙️ **NEXT — spec ready** (`SPEC-v22-sprite-shading.md`) | Operator's "more shading, more definition... just run the sprites." Pure art track. Reshades the 94-base / 377-key roster denser within the 32×32 ceiling; the operator's eye is the acceptance gate, not the suite. Runs clean — 5.6 left sprite files untouched. |
+| **4.3** | **Sprite shading / more definition** | ✅ **BUILT / PENDING OPERATOR EYE 2026-07-21** — integrated into `SPEC-graphics-phase2-full-map.md`; branch `codex/graphics-phase2-full-map`; suite 20/20 | Reshades the 94-base / 377-key roster denser within the 32×32 ceiling, adds three topology-preserving grime variants, and pairs it with deterministic full-map density. The contact sheet and matched before/after remain the acceptance gate, not the suite. Phase 3 is unopened. |
 
 ---
 
@@ -99,5 +99,12 @@ Second trap: **reskinning.** Three sites that are the abandoned building with th
 Decision: **NOT going full 3D.** Keep shipping the 2D game; the corpus (VIBE + systems + world) is the real asset and is medium-portable later if ever wanted. "Better" = specific, grounded improvements, not a rebuild. Graphics/map track routes to **Codex** (operator's pick; and Codex built the honest-map/physicality layer, so it knows the render/world code — the real reason it fits, since sprites are hand-authored code grids, not generated images). Workflow: operator plays on the big screen → notes specifics → grounded SPEC → Codex builds → gates + operator's eye verify.
 
 - **G-ROADS — the road network isn't a grid (CONFIRMED 2026-07-18).** 28 `ROAD_SEGMENTS`, 0 fully-disconnected (all touch), but edges land on arbitrary coords (X-gaps 620/80/24/88/548/20…, no modulus) and widths wobble 102–112px. Intersections meet off-aligned; reads sloppy though it connects. **Fix:** a road-grid pass — snap positions to a modulus, normalize widths to a constant, clean intersections into a real street system. **Risk/invariants:** roads are walkable and buildings solid, so moving a road can collide a building (`solidity-gate`), move a route stop or mandatory leg (`world-gate` must stay byte-identical or the change is deliberate + re-ratified), or strand a copper/break-in site placed relative to a road. Not cosmetic — a real wave with real gates. Operator's own read: *"some of the roads don't connect, and it's not an actual gridded system."*
-- **G-SHADING (4.3)** — sprite shading pass, building now (Fable), operator's eye is the acceptance gate.
+- **G-SHADING (4.3) — ✅ BUILT 2026-07-21.** Integrated into Graphics Phase 2 on
+  `codex/graphics-phase2-full-map`: 94 bases / 377 normal keys preserved, denser three-index ramps,
+  three topology-preserving per-instance grime variants, re-ratified sprite snapshot, and an
+  operator-eye atlas. Canonical contract: `SPEC-graphics-phase2-full-map.md`.
+- **G-FULL-MAP — ✅ BUILT 2026-07-21.** Deterministic grime now covers all 1,350 cells of the
+  8,600×5,600 world with 12 static families and six unsynchronized secondary loops. Gapless day/night
+  before/after mosaics, 1:1 crops, and browser performance evidence live in
+  `artifacts/graphics-phase2/`. Phase 3 is explicitly unopened.
 - **(collect on the big-screen playthrough)** — operator hasn't played since v19 on a real screen; his played notes become the rest of this backlog.

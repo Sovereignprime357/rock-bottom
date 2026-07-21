@@ -13,7 +13,7 @@ import {
   LIGHT_GLOW_CACHE, LIGHT_MASK, drawAmbientGrade, drawContactShadow, nightAmount,
   punchLightMask,
 } from './landmarks_a.js';
-import { SPRITE_CACHE, SPRITE_EMISSIVE_CACHE } from './sprites.js';
+import { SPRITE_CACHE, SPRITE_EMISSIVE_CACHE, resolveSpriteVariantCanvas } from './sprites.js';
 import { routePatchTier } from '../systems/progression_routes.js';
 
 export let VISIBLE_NPC_BUFFER, NAMEPLATE_BOX_BUFFER, NPC_IDLE_SPRITES, NPC_TWO_FRAME_SPRITES;
@@ -161,7 +161,8 @@ export function drawNpc(n) {
   // 36px horse cops and 28px vendors aligned to their actual hitbox feet.
   const visualNow = state.visualNow || performance.now();
   const pose=resolveNpcPose(n,visualNow),frame=pose.frame,spriteKey=pose.spriteKey;
-  const sp = SPRITE_CACHE[spriteKey+'_'+frame] || SPRITE_CACHE[spriteKey+'_0'];
+  const frameKey=SPRITE_CACHE[spriteKey+'_'+frame]?spriteKey+'_'+frame:spriteKey+'_0';
+  const sp = resolveSpriteVariantCanvas(frameKey,spriteKey,n.id);
   if (sp) {
     if (n.hitFlash) ctx.globalCompositeOperation = 'lighter';
     // tiny bob when walking

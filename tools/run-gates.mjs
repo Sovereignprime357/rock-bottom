@@ -29,6 +29,10 @@ const GATES = [
   // Promoted standalone -> permanent 2026-07-19: Phase 1's lighting / grade / AO / emissive
   // invariants now run every commit. Nine counterexample modes red-tested.
   'phase1-lighting-gate.mjs',
+  // phase2-graphics-gate follows the light layer it extends. It freezes the
+  // 94/377 normal corpus while proving dither, 465 tint canvases, the complete
+  // 45x30 grime field, six unsynchronized loops, culling, and the repaired tile hash.
+  'phase2-graphics-gate.mjs',
   'recognition-gate.mjs',
   'concession-gate.mjs',
   // copper-sites-gate rides behind concession-gate — same invariant class, different resource:

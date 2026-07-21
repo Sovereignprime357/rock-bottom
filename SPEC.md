@@ -2230,8 +2230,8 @@ bottom-left dead band `(0–4800, 3200–4000)` and the far-right top sliver
 ## GRAPHICS PHASE 1 — LIGHTING & GRADE (2026-07-19)
 
 Implements `SPEC-graphics-phase1-lighting.md`. This is a render-only extension of the v14 light
-mask/glow/fog machinery. Phase 2 palette/grime-density work and Phase 3 resolution work remain
-unbuilt and require explicit operator direction.
+mask/glow/fog machinery. Graphics Phase 2 is specified and implemented in the section below;
+Phase 3 resolution work remains unbuilt and requires explicit operator direction.
 
 1. **I-ONE-LIGHT-REGISTRY.** `prepareLightingFrame()` populates one reused active-light buffer from
    the existing lamp and `WORLD_LIGHTS` authorities plus authored burn barrels, visible cop actors,
@@ -2267,9 +2267,52 @@ unbuilt and require explicit operator direction.
    asset, framework, or smoothing change exists. A real 800×600 browser fixture with 64 visible cop
    actors (64 dynamic lights plus AO and the authored visible props) averaged **1.548ms/frame** over
    120 measured frames after warm-up, below the 16ms invariant.
-7. **Verification.** `tools/phase1-lighting-gate.mjs` is a standalone wave-acceptance gate so the
-   permanent suite remains exactly 18. Its named counterexamples must exit red before its restored
-   production check is trusted. `node tools/run-gates.mjs` remains 18/18; `sprite-gate` stays at
+7. **Verification.** `tools/phase1-lighting-gate.mjs` is a permanent render-layer gate. Its named
+   counterexamples must exit red before its restored production check is trusted. The current
+   permanent suite is 20/20; `sprite-gate` stays at
    94/377 and 14 draw sites; `rock_bottom_v19.html` remains byte-untouched. Human acceptance is the
    matched three-scene sheet at `artifacts/graphics-phase1/phase1-before-after.png` (baseline left,
    Phase 1 right; Block, Laundromat/Church, Skid Row).
+
+## GRAPHICS PHASE 2 — PALETTE CRAFT + FULL-MAP GRIME (2026-07-21)
+
+Implements `SPEC-graphics-phase2-full-map.md`. This is the art/density layer on top of Phase 1;
+it changes no gameplay geometry or state. Phase 3 remains unbuilt and operator-gated.
+
+1. **I-TENEBRIST-ROSTER.** All 94 normal bases / 377 keys remain structurally exact. The 32-logical
+   art now uses a consistent screen-left key and screen-right shadow, sparse mauve/rust transitions,
+   warm dirty-cream/copper rims, and real two-index checker wear. `gridDither()` is the one ordered
+   helper; its 2×2 probe is exactly `A B / B A` and never creates a ninth color.
+2. **I-PALETTE-MULTIPLICATION.** Fifty-four drawNpc-capable bases / 155 normal frames receive three
+   initialization-time palette derivatives (`mold_sick`, `mauve_shadow`, `sun_bleached`): 162 frozen
+   palette rows and 465 frozen 32×32 canvases. Stable actor-id/base hashing selects the tint. Every
+   variant preserves its normal alpha topology; invalid identity, base, or kind falls back to
+   `SPRITE_CACHE`. Authority blue remains confined to cop, horse-cop, and Brendan variants.
+3. **I-FULL-MAP-DENSITY.** A frozen `45×30 = 1350` visual-only grid covers all `8600×5600` world
+   pixels, including default corridors and clipped east/south cells. Every cell owns 2–3 cached
+   stamps: 3,017 total across twelve semantic families, maximum family share 9.48%. Per-cell lanes
+   keep all static/loop 32px AABBs non-overlapping, including the exactly-32px south edge.
+4. **I-SECONDARY-MOTION.** The same grid owns 273 phased placements across flies (3), sign buzz (2),
+   grate steam (4), drip (3), wire tremor (4), and discarded-TV glow (3). Every source is an explicit
+   nonblank 16-logical palette grid prerendered to 32×32. `state.visualNow` is the sole clock and
+   coordinate-derived phase prevents synchronized blinking.
+5. **I-CULLING / I-ORDER.** `drawFullMapGrime()` traverses only camera-plus-32px cells, uses two bounded
+   scalar passes with cached `drawImage` calls, and allocates/rasterizes nothing in the hot path.
+   Statics draw before loops immediately after `drawWorldFabric()`, below zones/buildings/props/actors
+   and before Phase 1 lighting. Conservative padded maximum is 81 draws; exact sampled maximum is 59,
+   both below the 90-draw contract.
+6. **I-NO-SEAM.** `tileCoordHash()` avalanches integer tile coordinates with independent salts. Its
+   sampled texture offsets cover every residue 0–63; world-pixel multiples can no longer pin grime,
+   cracks, weeds, or material marks to the left tile edge.
+7. **I-VISUAL-ONLY / I-STRUCTURE.** Grime and variants never enter `PROPS`, `WORLD_DECOR`, collision,
+   interaction, AI, quest, reward, save, audio, or timer registries. Canvas 2D, eight-index palettes,
+   pixelated rendering, 11 environment keys, 14 character draw destinations, Phase 1 emissive masks,
+   and the frozen v19 reference remain intact. No 48px/tall actor or other Phase 3 work exists.
+8. **Verification.** `tools/phase2-graphics-gate.mjs` is permanent and passes 39,412 structural/runtime
+   checks. All 21 named counterexamples exited nonzero, including the eye-pass-derived
+   `stamp-overlap`; the full runner is 20/20. Real-browser 240-frame profiles after 30 warmups measured
+   mixed 64-NPC day/clear at **0.412ms mean / 0.600ms p95**, and 64 cop lights night/rain at
+   **0.818ms mean / 1.300ms p95**. Matched full-map mosaics, six 1:1 detail crops per condition,
+   character/variant and grime atlases, the loop strip, hashes, and profile JSON live in
+   `artifacts/graphics-phase2/`. Those files make the operator-eye veto executable; green gates do
+   not declare the art beautiful.

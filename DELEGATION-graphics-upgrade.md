@@ -61,17 +61,15 @@ technique below maps onto extending this, not replacing it.
 
 ## PHASE 1 — the lighting & grade layer (biggest win; 32×32 and 8-index untouched)
 
-**Status — BUILT / PENDING OPERATOR EYE, 2026-07-19.** Contract:
-`SPEC-graphics-phase1-lighting.md`; branch `codex/graphics-phase1-light-grade`. The shipped candidate
+**Status — SHIPPED, 2026-07-19.** Contract:
+`SPEC-graphics-phase1-lighting.md`; merged baseline `fdd0ccc`. The shipped layer
 normalizes streetlamps, four trash-barrel fires, neon/window fixtures, the high/pipe ember, and live
 cop beacons through one reused registry; adds frozen zone/terrain multiply+overlay grades; replaces
 fragmented actor/prop shadows with nearest-light AO plus contact bands; and derives opt-in emissive
 masks for palette indices 2/7 without changing one source grid, palette, cache key, or draw anchor.
-`tools/phase1-lighting-gate.mjs` is a standalone acceptance gate so the permanent runner remains
-exactly 18; all counterexample modes went red, then the real suite returned 18/18. A real 800×600
+`tools/phase1-lighting-gate.mjs` is permanent; all counterexample modes went red. A real 800×600
 browser profile with 64 visible cops measured 1.548ms/frame. Matched Block/Laundromat-Church/Skid
-Row night renders are in `artifacts/graphics-phase1/` (left baseline, right Phase 1). Phase 2 and
-Phase 3 remain unbuilt and operator-gated.
+Row night renders are in `artifacts/graphics-phase1/` (left baseline, right Phase 1).
 
 Every one of the six briefs named this as the #1 lever. Extend `drawLighting()` and the light-source
 registry:
@@ -102,6 +100,16 @@ diegetic-grimy light colors. `sprite-gate` + `presentation-gate` stay green. Thi
 ---
 
 ## PHASE 2 — sprite palette craft + grime density
+
+**Status — BUILT / PENDING OPERATOR EYE, 2026-07-21.** Contract:
+`SPEC-graphics-phase2-full-map.md`; branch `codex/graphics-phase2-full-map`. The candidate finishes
+screen-left tenebrist shading and two-index wear dither, prebuilds three topology-identical palette
+variants across 54 eligible bases / 155 frames (465 canvases), and covers the full 8600×5600 map
+with 1,350 deterministic non-overlapping cells, 3,017 cached grime stamps, and 273 phased placements
+across six secondary loops. The tile-coordinate hash seam is repaired. `phase2-graphics-gate` is the
+twentieth permanent gate; all 21 counterexample modes went red before the 20/20 suite returned green.
+Matched full-map/day/night/detail sheets, atlases, loop strip, hashes, and real-browser profiles are
+in `artifacts/graphics-phase2/`. Phase 3 remains unbuilt and operator-gated.
 
 Now push the sprites and the world to match the new light. Art-heavy, not tech-heavy.
 
@@ -165,7 +173,7 @@ as calibration, not a default.
   **grime, wear, and specificity** — a sprite that reads *nicer* has failed; one that reads *more
   itself* has landed.
 - **`sprite-gate` structure frozen** (94 bases / 377 keys); palette hash re-ratified + red-tested per
-  audited change. **`presentation-gate`, `world-gate`, and all 18 gates stay green.**
+  audited change. **`presentation-gate`, `world-gate`, and all 20 gates stay green.**
 - **Frozen `rock_bottom_v19.html` (and every `rock_bottom_v*.html`) untouched.**
 - **SPEC before code, per phase.** Each phase is its own branch/worktree + its own gate; commit messages
   reference the SPEC section; `VIBE.md` palette/texture rules updated to match shipped art. The

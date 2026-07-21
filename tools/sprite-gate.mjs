@@ -352,16 +352,13 @@ const characterPaletteSnapshot=Object.entries(characterPalettes).sort(([a],[b])=
 const environmentPaletteSnapshot=Object.entries(environmentPalettes).sort(([a],[b])=>a.localeCompare(b));
 const characterPaletteHash=createHash('sha256').update(JSON.stringify(characterPaletteSnapshot)).digest('hex');
 const environmentPaletteHash=createHash('sha256').update(JSON.stringify(environmentPaletteSnapshot)).digest('hex');
-// v22 wave 4.3 ratified snapshot (shading pass). Audit: exactly two palette
-// TABLE changes, both repurposing a slot that was an exact duplicate of slot
-// 5's cream (#d4c896) and referenced by no draw code before this wave:
-//   PALS.larry[7]     #d4c896 -> #5a2020 (deep-red shade step, rust family)
-//   PALS.price_guy[7] #d4c896 -> #343434 (one-step edge light, asphalt family)
-// Every other key's palette record is byte-identical to the 5.5 snapshot
-// (1d36333e...). The wave's pixel-density work cannot move this hash by
-// construction — it freezes color tables, not grids. No forbidden colors:
-// both new steps are ramps of existing spine hues (rust red, asphalt).
-const EXPECTED_CHARACTER_PALETTE_HASH='9da3a1314f0ea2c93134807b50516062c2a4e2351186647d3f49bdd67d54f79d';
+// v22 Graphics Phase 2 ratified snapshot. The audited palette-craft pass removes
+// non-authority ice-blue entries from the affected roster palettes, replaces the
+// jogger's clean pastel ramp, and gives Larry / Price Guy / the dogwalker / lease
+// guy restrained rust or shadow roles instead of duplicate cream/gray. Structure,
+// key grammar, and the separately pinned environment corpus remain unchanged.
+// Intentional-red coverage lives in phase2-graphics-gate's character-palette mode.
+const EXPECTED_CHARACTER_PALETTE_HASH='cf0ba657e8e4d63b89f9c0cf9cde085b8555fbc15fb2c271f960e0e3aa874b81';
 const EXPECTED_ENVIRONMENT_PALETTE_HASH='ab49d9868ec172f3d3e487ed0230df09319ba395f8df3f8e4d6baaa734348bd3';
 if(characterPaletteHash!==EXPECTED_CHARACTER_PALETTE_HASH)fail(`character palette-use corpus drifted (${characterPaletteHash}); audit and ratify a new snapshot`);
 if(environmentPaletteHash!==EXPECTED_ENVIRONMENT_PALETTE_HASH)fail(`environment palette-use corpus drifted (${environmentPaletteHash}); audit and ratify a new snapshot`);

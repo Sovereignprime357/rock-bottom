@@ -24,7 +24,10 @@ import {
 
 export { anchorGridToBottom, applyVars, blankSpriteGrid, gridBox, gridLine, gridPut, mirrorGrid, parseGrid, rasterize, SPRITE_BASE_SIZES };
 export let PALS, PLAYER_LAYER_PAL, CART_LAYER_PAL, SPRITE_CACHE, SPRITE_KEY_BASES,
-  SPRITE_PIXEL_COUNTS, SPRITE_KEY_PALETTES, SPRITE_EMISSIVE_CACHE, INCIDENT_PALS;
+  SPRITE_PIXEL_COUNTS, SPRITE_KEY_PALETTES, SPRITE_EMISSIVE_CACHE, INCIDENT_PALS,
+  SPRITE_VARIANT_CACHE, SPRITE_VARIANT_PALETTES, SPRITE_VARIANT_TOPOLOGY,
+  SPRITE_GRID_TOPOLOGY, SPRITE_GRID_STATS, SPRITE_GRID_TOPOLOGY_HASH,
+  SPRITE_VARIANT_STATS;
 
 export const EMISSIVE_PALETTE_INDICES = Object.freeze([2,7]);
 export const EMISSIVE_BASE_INDICES = Object.freeze({
@@ -32,10 +35,56 @@ export const EMISSIVE_BASE_INDICES = Object.freeze({
   weapon_pipe: Object.freeze([2]),
 });
 
+export const SPRITE_VARIANT_KINDS=Object.freeze(['mold_sick','mauve_shadow','sun_bleached']);
+// Every body base that can reach drawNpc; player/equipment/incidents stay in the normal cache only.
+export const SPRITE_VARIANT_ELIGIBLE_BASES=Object.freeze([
+  'barb','biggu','bishop_wire','blue_tarp_guard','brendan','busker','conductor','cop','cubscout','curb_emperor','darryl_under_blue','dave','dogwalker','foodtruck','general_receipt','gutter_greg','jogger','karaoke','larry','launderlady','lease_guy','lurch','math','mayorscousin','metermaid','mom','paulie','pete','philosopher','phoneguy','pinky','price_guy','priest','priestson','receipt_guard','sherri','stripe','tony','train_hopper','vapelord','wire_guard','yuri',
+  'dave_sleep','tony_coat_2','tony_coat_1','tony_bare','priest_fallen','possum','brutus','scrap_dog','os_brutus','pigeon','horsecop','pothole',
+]);
+const SPRITE_VARIANT_ELIGIBLE_SET=new Set(SPRITE_VARIANT_ELIGIBLE_BASES),AUTHORITY_BLUE_BASES=new Set(['cop','horsecop','brendan']);
+const VARIANT_TINT_TARGETS=Object.freeze({mold_sick:Object.freeze([58,74,38]),mauve_shadow:Object.freeze([78,34,68]),sun_bleached:Object.freeze([132,112,70])});
+let SPRITE_VARIANT_SOURCE_PALETTES;
+function parseHexColor(color){const raw=String(color||'').trim().toLowerCase();if(!/^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/.test(raw))throw new Error(`invalid sprite palette color: ${JSON.stringify(color)}`);const hex=raw.length===4?raw.slice(1).split('').map(d=>d+d).join(''):raw.slice(1);return [parseInt(hex.slice(0,2),16),parseInt(hex.slice(2,4),16),parseInt(hex.slice(4,6),16)];}
+function hexColor(rgb){return '#'+rgb.map(c=>Math.max(0,Math.min(255,Math.round(c))).toString(16).padStart(2,'0')).join('');}
+function isBrightBlue([r,g,b]){return b>=140&&b-r>=35&&b-g>=24;}
+function mixChannel(source,target,amount){return Math.round(source*(1-amount)+target*amount);}
+function transformVariantColor(color,kind,index,authorityBlue){
+  let rgb=parseHexColor(color);const blue=isBrightBlue(rgb);
+  if(blue&&!authorityBlue){const l=Math.round(rgb[0]*.22+rgb[1]*.50+rgb[2]*.28);rgb=[Math.round(l*.76),Math.round(l*.68),Math.round(l*.72)];}
+  if(blue&&authorityBlue){const t={mold_sick:[38,48,82],mauve_shadow:[46,42,96],sun_bleached:[72,76,104]}[kind],a=index<=2?.42:.32,r=rgb.map((c,i)=>mixChannel(c,t[i],a));r[2]=Math.max(r[2],r[1]+10,r[0]+16);return hexColor(r.map(c=>Math.min(c,196)));}
+  const t=VARIANT_TINT_TARGETS[kind],a=kind==='sun_bleached'?(index<=2?.28:index>=6?.46:.38):(index<=2?.52:index>=6?.38:.44),r=rgb.map((c,i)=>mixChannel(c,t[i],a)),scale=kind==='mold_sick'?.84:kind==='mauve_shadow'?.82:.92;
+  for(let i=0;i<3;i++)r[i]=Math.min(kind==='sun_bleached'?202:212,Math.round(r[i]*scale));if(!authorityBlue&&isBrightBlue(r))r[2]=Math.min(132,Math.max(r[0],r[1])+12);return hexColor(r);
+}
+function variantPalettesFor(base,palette){
+  if(!Array.isArray(palette)||palette.length!==8||palette[0]!=='transparent')throw new Error(`${base}: variant source palette must be an eight-entry transparent-index array`);
+  const source=JSON.stringify(palette);if(SPRITE_VARIANT_SOURCE_PALETTES[base]&&SPRITE_VARIANT_SOURCE_PALETTES[base]!==source)throw new Error(`${base}: one sprite base cannot use multiple variant source palettes`);SPRITE_VARIANT_SOURCE_PALETTES[base]=source;if(SPRITE_VARIANT_PALETTES[base])return SPRITE_VARIANT_PALETTES[base];
+  const authorityBlue=AUTHORITY_BLUE_BASES.has(base),variants={};for(const kind of SPRITE_VARIANT_KINDS){const p=['transparent'];for(let i=1;i<8;i++)p.push(transformVariantColor(palette[i],kind,i,authorityBlue));if(p.filter((c,i)=>i&&c.toLowerCase()!==String(palette[i]).toLowerCase()).length<2)throw new Error(`${base}/${kind}: variant palette must change at least two painted entries`);variants[kind]=Object.freeze(p);}SPRITE_VARIANT_PALETTES[base]=variants;return variants;
+}
+// Each 32-pixel row becomes one eight-hex-digit alpha bit mask, serialized top-to-bottom.
+function spriteGridTopologySignature(grid){return grid.map(row=>{let mask=0;for(let x=0;x<row.length;x++)if(row[x]!==0)mask=(mask|(1<<(31-x)))>>>0;return mask.toString(16).padStart(8,'0');}).join('');}
+function spriteGridStats(grid,paintedPixels){
+  const height=grid.length,width=grid[0]?.length||0;let minX=width,minY=height,maxX=-1,maxY=-1,indexMask=0;
+  for(let y=0;y<height;y++)for(let x=0;x<width;x++){const index=grid[y][x];indexMask|=1<<index;if(index!==0){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);}}
+  return Object.freeze({width,height,paintedPixels,transparentPixels:width*height-paintedPixels,minX,minY,maxX,maxY,indexMask});
+}
+function fnv1a(text){let hash=0x811c9dc5;for(let i=0;i<text.length;i++){hash^=text.charCodeAt(i);hash=Math.imul(hash,0x01000193);}return hash>>>0;}
+function finalizeSpriteVariantMetadata(){
+  const keys=Object.keys(SPRITE_KEY_BASES).filter(key=>SPRITE_VARIANT_ELIGIBLE_SET.has(SPRITE_KEY_BASES[key]));let canvasCount=0,topologyMismatches=0;
+  for(const base of SPRITE_VARIANT_ELIGIBLE_BASES){const palettes=SPRITE_VARIANT_PALETTES[base];if(!palettes)throw new Error(`missing sprite variant palette metadata: ${base}`);Object.freeze(palettes);}
+  for(const kind of SPRITE_VARIANT_KINDS){const cache=SPRITE_VARIANT_CACHE[kind],topology=SPRITE_VARIANT_TOPOLOGY[kind];for(const key of keys){if(cache[key])canvasCount++;if(topology[key]!==SPRITE_GRID_TOPOLOGY[key])topologyMismatches++;}Object.freeze(cache);Object.freeze(topology);}
+  if(keys.length!==155||canvasCount!==465||topologyMismatches)throw new Error(`sprite variant coverage drifted (${keys.length} frames / ${canvasCount} canvases / ${topologyMismatches} topology mismatches)`);
+  const topologyText=Object.keys(SPRITE_GRID_TOPOLOGY).sort().map(key=>`${key}=${SPRITE_GRID_TOPOLOGY[key]};`).join('');SPRITE_GRID_TOPOLOGY_HASH=fnv1a(topologyText).toString(16).padStart(8,'0');
+  Object.freeze(SPRITE_VARIANT_PALETTES);Object.freeze(SPRITE_VARIANT_CACHE);Object.freeze(SPRITE_VARIANT_TOPOLOGY);Object.freeze(SPRITE_GRID_TOPOLOGY);Object.freeze(SPRITE_GRID_STATS);
+  SPRITE_VARIANT_STATS=Object.freeze({eligibleBaseCount:SPRITE_VARIANT_ELIGIBLE_BASES.length,eligibleFrameCount:keys.length,variantKindCount:SPRITE_VARIANT_KINDS.length,paletteCount:SPRITE_VARIANT_ELIGIBLE_BASES.length*SPRITE_VARIANT_KINDS.length,canvasCount,topologyMismatches,normalTopologyCount:Object.keys(SPRITE_GRID_TOPOLOGY).length});
+}
+export function selectSpriteVariantKind(identity,base){const valid=(typeof identity==='string'&&identity.length>0)||(typeof identity==='number'&&Number.isFinite(identity));if(!valid||!SPRITE_VARIANT_ELIGIBLE_SET.has(base))return null;return SPRITE_VARIANT_KINDS[fnv1a(`${typeof identity}:${String(identity)}\u0000${base}`)%3];}
+export function resolveSpriteVariantCanvas(key,base,identity,requestedKind){const normal=SPRITE_CACHE?.[key]||null;if(!normal||SPRITE_KEY_BASES?.[key]!==base||!SPRITE_VARIANT_ELIGIBLE_SET.has(base))return normal;const selected=selectSpriteVariantKind(identity,base);if(!selected)return normal;const kind=requestedKind===undefined?selected:requestedKind;if(!SPRITE_VARIANT_KINDS.includes(kind))return normal;return SPRITE_VARIANT_CACHE?.[kind]?.[key]||normal;}
+
 export function cacheSprite(base, key, grid, palette, options={}) {
   const logicalSize=SPRITE_BASE_SIZES[base];
   if (!logicalSize) throw new Error(`undeclared sprite base: ${base}`);
   if (Object.hasOwn(SPRITE_KEY_BASES,key)) throw new Error(`duplicate sprite key: ${key}`);
+  if(!Array.isArray(grid)||grid.length!==32||grid.some(row=>!Array.isArray(row)||row.length!==32))throw new Error(`${key}: normal sprite source grid must be exact 32x32`);
   const paintedPixels=Array.isArray(grid)
     ? grid.reduce((total,row)=>total+(Array.isArray(row)?row.filter(index=>index!==0).length:0),0)
     : 0;
@@ -43,12 +92,22 @@ export function cacheSprite(base, key, grid, palette, options={}) {
   SPRITE_KEY_BASES[key]=base;
   SPRITE_PIXEL_COUNTS[key]=paintedPixels;
   SPRITE_KEY_PALETTES[key]=Array.isArray(palette)?palette.slice():{...palette};
+  const topologySignature=spriteGridTopologySignature(grid);
+  SPRITE_GRID_TOPOLOGY[key]=topologySignature;
+  SPRITE_GRID_STATS[key]=spriteGridStats(grid,paintedPixels);
   SPRITE_CACHE[key]=rasterize(grid,palette,{...options,logicalSize});
   const emissiveIndices=EMISSIVE_BASE_INDICES[base];
   if(emissiveIndices){
     const emissiveGrid=grid.map(row=>row.map(index=>emissiveIndices.includes(index)?index:0));
     if(emissiveGrid.some(row=>row.some(Boolean))){
       SPRITE_EMISSIVE_CACHE[key]=rasterize(emissiveGrid,palette,{noOutline:true,logicalSize});
+    }
+  }
+  if(SPRITE_VARIANT_ELIGIBLE_SET.has(base)){
+    const variants=variantPalettesFor(base,palette);
+    for(const kind of SPRITE_VARIANT_KINDS){
+      SPRITE_VARIANT_CACHE[kind][key]=rasterize(grid,variants[kind],{...options,logicalSize});
+      SPRITE_VARIANT_TOPOLOGY[kind][key]=topologySignature;
     }
   }
 }
@@ -550,7 +609,7 @@ export function buildSprites() {
     mom:       { hat:6, skin:5, shirt:4, pants:5, accent:6, accessory:'kombucha', shade:2 }, // kombucha
     priest:    { hat:1, skin:5, shirt:1, pants:1, accent:6, accessory:'cross', worn:4 },  // collar + cross
     conductor: { hat:6, skin:3, shirt:6, pants:1, accent:5, cap:true, shade:2 },          // train cap
-    larry:     { hat:5, skin:3, shirt:6, pants:2, accent:4, yelling:true, wide:true, shade:7 }, // YELLING
+    larry:     { hat:5, skin:3, shirt:6, pants:2, accent:7, yelling:true, wide:true, shade:2 }, // YELLING; 7 is heat, 2 is shadow
     stripe:    { hat:5, skin:3, shirt:6, pants:2, accent:4, hood:true, shade:2 },         // hood up
     cop:       { hat:3, skin:5, shirt:3, pants:1, accent:7, cap:true, accessory:'badge', accColor:5, shade:2 },
     biggu:     { hat:5, skin:3, shirt:6, pants:6, accent:5, tall:true, wide:true, shade:2, worn:4 }, // tall AND big
@@ -585,7 +644,7 @@ export function buildSprites() {
     bishop_wire:       {hat:5,skin:3,shirt:4,pants:6,accent:7,tall:true,beard:true,shade:2},
     curb_emperor:      {hat:2,skin:3,shirt:4,pants:6,accent:5,wide:true,yelling:true,coats:3,shirt2:2,shade:6},
     // v13 wave 8a — price guy: silhouette in a black coat. brim hat. unsettling.
-    price_guy:    { hat:1, skin:4, shirt:3, pants:3, accent:6, hood:true, worn:7 },
+    price_guy:    { hat:1, skin:4, shirt:3, pants:3, accent:7, accColor:6, hood:true, worn:4 },
     // v13 wave 8a — old school brutus reuses the dog sprite (handled below), this entry not used
   };
   Object.entries(npcStyles).forEach(([k, opts]) => {
@@ -627,6 +686,7 @@ export function buildSprites() {
   cacheSprite('pothole','pothole_1',makePothole32(1),PALS.pothole);
   cacheSprite('pothole','pothole_2',makePothole32(2),PALS.pothole);
   buildIncidentSprites();
+  finalizeSpriteVariantMetadata();
 }
 
 export function buildIncidentSprites() {
@@ -779,8 +839,8 @@ export function init_sprites() {
     priest: ['transparent','#000','#1a1020','#2a2030','#4a3040','#d4c896','#d488d4','#d4c896'],
     priest_fallen: ['transparent','#050306','#160b18','#321438','#5a205f','#d4c896','#8a3a78','#e8c040'],
     conductor: ['transparent','#1a1010','#3a2820','#604030','#a07050','#d4c896','#8a3a3a','#604030'],
-    // v22 wave 4.3 (audited): slot 7 was an exact duplicate of slot 5's cream.
-    // Repurposed as the deep-red shade step for the yell-flushed skin/shirt.
+    // v22 graphics phase 2: slot 7 is Larry's sparse heat accent. General
+    // face/fabric shadow stays on slot 2 so the accent never becomes a wash.
     larry: ['transparent','#1a0808','#3a1818','#8a3030','#d4c896','#e8c040','#d06030','#5a2020'],
     stripe: ['transparent','#0a0a18','#1a1828','#3a3848','#7a7888','#d4c896','#e8c040','#d4d4d4'],
     pigeon: ['transparent','#1a1810','#3a3828','#605840','#888070','#d4c896','#d06030','#e8c040'],
@@ -789,18 +849,18 @@ export function init_sprites() {
     horsecop: ['transparent','#000','#080820','#1818a0','#2828d0','#d4c896','#604030','#d4c896'],
     vapelord: ['transparent','#1a0820','#3a1850','#603080','#a050c0','#d4c896','#d488d4','#d4c896'],
     mayorscousin: ['transparent','#1a1008','#3a2818','#604030','#a07050','#d4c896','#8a3a3a','#d4c896'],
-    phoneguy: ['transparent','#1a1008','#3a2818','#604030','#a07050','#d4c896','#88c0ff','#d4c896'],
+    phoneguy: ['transparent','#1a1008','#3a2818','#604030','#a07050','#d4c896','#4a5058','#d4c896'],
     pothole: ['transparent','#000','#0a0805','#1a1810','#2a2818','#3a3828','#604020','#d4c896'],
-    launderlady: ['transparent','#1a0820','#3a3a44','#605a70','#a09abd','#d4c896','#88c0ff','#d4c896'],
+    launderlady: ['transparent','#1a0820','#3a3a44','#605a70','#a09abd','#d4c896','#6a5a68','#d4c896'],
     metermaid: ['transparent','#1a1810','#3a3818','#605828','#a8c030','#d4c896','#8a3a3a','#d4c896'],
     foodtruck: ['transparent','#1a0805','#3a1810','#603020','#a04830','#d4c896','#d06030','#d4c896'],
-    priestson: ['transparent','#1a0820','#2a2030','#4a3040','#80708a','#d4c896','#88c0ff','#d4c896'],
+    priestson: ['transparent','#1a0820','#2a2030','#4a3040','#80708a','#d4c896','#6a405f','#d4c896'],
     karaoke: ['transparent','#1a0820','#3a1850','#603080','#a050c0','#d4c896','#e8c040','#d4c896'],
     // v13 wave 2 — converting the last four emoji-era styles and giving barb her own skin
     cubscout: ['transparent','#1a1810','#2828a8','#e8c0a0','#2a5028','#e8c040','#20202a','#d4c896'],
-    jogger: ['transparent','#1a0810','#c8a850','#f0c8b0','#d488d4','#f8a8c8','#1a1a20','#d4c896'],
+    jogger: ['transparent','#160d13','#39202f','#8a5b3a','#5a3048','#c0a878','#2a2028','#8a3a3a'],
     busker: ['transparent','#1a1008','#5a3018','#d4a878','#8a6840','#604030','#283848','#d4c896'],
-    dogwalker: ['transparent','#1a1010','#604020','#e8c8a8','#e8a880','#88c0ff','#4a4848','#d4c896'],
+    dogwalker: ['transparent','#1a1010','#604020','#e8c8a8','#e8a880','#d4c896','#4a4848','#8a3a3a'],
     barb: ['transparent','#20182a','#b0a8a0','#c0a890','#8a6080','#c898c0','#4a3040','#d4c896'],
     pinky: ['transparent','#0a0805','#180810','#c08850','#c8b070','#e8c040','#2a1810','#d4c896'],
     math: ['transparent','#0a0a08','#2a1810','#b09078','#c8b8a0','#6a6a5a','#6a5a4a','#d4c896'],
@@ -812,10 +872,10 @@ export function init_sprites() {
     // v13 wave 8a — park bench philosopher: gray hair + brown coat + kindly face
     philosopher:  ['transparent','#0a0805','#604838','#8a7868','#c8c0b8','#d4c896','#3a2820','#88a08c'],
     // v13 wave 8a — price guy: black coat + hat brim + a stillness about him. mostly silhouette.
-    // v22 wave 4.3 (audited): slot 7 duplicated slot 5's cream, unused. Now the
-    // one-step edge light that gives the void a coat without giving it a face.
-    price_guy:    ['transparent','#000','#0a0808','#181818','#2a2a2a','#d4c896','#5a3030','#343434'],
-    lease_guy:    ['transparent','#15100a','#3a3024','#6a5840','#9a8058','#d4c896','#c08038','#88c0ff'],
+    // Slot 4 remains the one-step coat edge. Slot 7 is a restrained hot-rust
+    // accent used sparsely; it is not a second gray and never lights the void.
+    price_guy:    ['transparent','#000','#0a0808','#181818','#2a2a2a','#d4c896','#5a3030','#a04830'],
+    lease_guy:    ['transparent','#15100a','#3a3024','#6a5840','#9a8058','#d4c896','#c08038','#8a3a3a'],
     gutter_greg:  ['transparent','#10120f','#29382f','#496050','#7a8060','#d4c896','#e8c040','#3a2818'],
     // v19 rival courts. Slate blue avoids the bright cop-only blue language.
     blue_tarp_guard: ['transparent','#111418','#34485a','#9a6848','#263540','#e8c040','#2a2118','#6a7b80'],
@@ -897,6 +957,17 @@ export function init_sprites() {
   SPRITE_KEY_BASES = {};
   SPRITE_PIXEL_COUNTS = {};
   SPRITE_KEY_PALETTES = {};
+  SPRITE_VARIANT_CACHE = Object.fromEntries(SPRITE_VARIANT_KINDS.map(kind=>[kind,{}]));
+  SPRITE_VARIANT_PALETTES = {};
+  SPRITE_VARIANT_TOPOLOGY = Object.fromEntries(SPRITE_VARIANT_KINDS.map(kind=>[kind,{}]));
+  SPRITE_GRID_TOPOLOGY = {};
+  SPRITE_GRID_STATS = {};
+  SPRITE_GRID_TOPOLOGY_HASH = '';
+  SPRITE_VARIANT_STATS = Object.freeze({
+    eligibleBaseCount:0,eligibleFrameCount:0,variantKindCount:0,paletteCount:0,
+    canvasCount:0,topologyMismatches:0,normalTopologyCount:0,
+  });
+  SPRITE_VARIANT_SOURCE_PALETTES = {};
   
   
   INCIDENT_PALS = {

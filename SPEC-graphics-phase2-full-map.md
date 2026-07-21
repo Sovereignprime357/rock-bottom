@@ -198,10 +198,11 @@ becomes **20 gates**. It must prove:
 6. The corrected tile hash spreads several samples across the full 0–63 coordinate range instead of
    pinning texture x offsets to zero.
 
-Required intentional-red modes, each verified nonzero before final green:
+Required intentional-red modes, each verified nonzero before final green (the counterexample hunt
+added `stamp-overlap` after the first full-map eye pass exposed clipped-edge stamp collisions):
 
 `sprite-topology`, `character-palette`, `dither-third-index`, `duplicate-variant`,
-`variant-topology`, `variant-blue`, `missing-cell`, `cell-density`, `missing-static-family`,
+`variant-topology`, `variant-blue`, `missing-cell`, `cell-density`, `stamp-overlap`, `missing-static-family`,
 `missing-loop-family`, `bad-loop-frame-count`, `frozen-loop`, `synchronized-loop`,
 `nondeterministic-layout`, `unculled-draw`, `visible-budget`, `runtime-raster`, `render-order`,
 `gameplay-leak`, `tile-seam`.
@@ -235,15 +236,15 @@ Both require mean frame time ≤8ms and p95 <16ms. Report p99/max but do not fai
 
 ## ACCEPTANCE CHECKLIST
 
-- [ ] Sub-SPEC committed before production code.
-- [ ] Pending sprite shading integrated/audited; weak sprites named honestly in the handoff.
-- [ ] 94 bases / 377 normal keys / 11 env keys / 14 draw sites intact; Phase 3 untouched.
-- [ ] Dither, three per-instance palettes, full 1350-cell static grime, six loop families shipped.
-- [ ] Tile seam hash corrected.
-- [ ] All 20 intentional-red modes observed failing; production Phase 2 gate green.
-- [ ] Permanent suite 20/20 green; frozen v19 untouched.
-- [ ] Real-browser full-map before/after, detail/atlas/loop artifacts, and performance JSON ready.
-- [ ] `SPEC.md`, `VIBE.md`, `DELEGATION-graphics-upgrade.md`, and append-only `BRAIN.md` updated.
+- [x] Sub-SPEC committed before production code.
+- [x] Pending sprite shading integrated/audited; weak sprites named honestly in the handoff.
+- [x] 94 bases / 377 normal keys / 11 env keys / 14 draw sites intact; Phase 3 untouched.
+- [x] Dither, three per-instance palettes, full 1350-cell static grime, six loop families shipped.
+- [x] Tile seam hash corrected.
+- [x] All 21 intentional-red modes observed failing; production Phase 2 gate green.
+- [x] Permanent suite 20/20 green; frozen v19 untouched.
+- [x] Real-browser full-map before/after, detail/atlas/loop artifacts, and performance JSON ready.
+- [x] `SPEC.md`, `VIBE.md`, `DELEGATION-graphics-upgrade.md`, `SPEC-V22-PLAN.md`, and append-only `BRAIN.md` updated.
 - [ ] Named branch committed, pushed, and stopped before Phase 3.
 
 ## THE TRAPS

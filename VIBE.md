@@ -160,13 +160,32 @@ that snapshot requires a new audited decision.
   nearest real fixture, plus a 1–2px ground seam for props. No shader, normal map, runtime blur,
   smoothing, or dignity enters through the lighting door.
 
+### Palette craft + density grammar (Graphics Phase 2)
+
+- The implied key stays on screen-left and the mauve/rust-biased shadow stays on screen-right.
+  Mirroring a pose does not grant the street a second sun. Dirty cream, piss yellow, and copper are
+  sparse rim/specular steps; none becomes a clean white wash.
+- Ordered dither is two declared indices in a checker, used for worn cloth, pitted metal, stains,
+  and banded grime. It is a material transition, not screen-door noise and never a ninth color.
+- Per-instance palette multiplication deepens identity instead of replacing it. `mold_sick`,
+  `mauve_shadow`, and `sun_bleached` retain the exact silhouette and alpha topology; sun-bleached
+  means dirty ochre/gray, never pastel. Cop/horse-cop/Brendan alone retain authority-blue variants.
+- Full-map clutter is visual evidence, not loot. Trash, puddles, oil, mildew, wire, needles, stubs,
+  glass, cans, rat holes, paper, and grates sit below buildings/actors and add no collision, verb,
+  reward, warmth, or save state. Deterministic lanes prevent stamps from becoming one fused pile at
+  map edges.
+- Secondary motion must look incidental: flies disagree, signs miss a beat, steam wanders, drips
+  fall, wire trembles, and discarded televisions fail to hold one brightness. Coordinate phase keeps
+  the neighborhood from blinking in chorus. Nothing is cute, clean, heroic, or dignified.
+
 ### Texture
 - CRT scanlines always on (3px repeating gradient overlay, 12% opacity)
 - Slight body flicker (8-9s cycle)
 - **Pixel art is DETAILED, and it is still pixel art.** Characters are `32x32` logical drawn at
   `32x32` — the same pixel density as the world they stand in. Detail is not refinement; a
   crackhead rendered with more pixels is still a crackhead. **The bit still lands flat.**
-- Backgrounds use 64x64 checker grid + procedural grime splotches
+- Backgrounds use a 64x64 checker grid, procedural grime splotches, and cached full-map debris;
+  texture never hides doors, paths, signs, or actor silhouettes.
 - **NPCs and props are hand-authored pixel sprites.** Emoji appear only in UI chrome (HUD,
   phone/feed, status) ~~, never as an actor or a world object~~ **[✅ F-VIBE-2: one exception — the
   `🔒` drawn on locked buildings (`src/render/structures.js:210`), which line 204 below explicitly

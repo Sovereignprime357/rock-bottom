@@ -18,7 +18,7 @@ import { drawMinimap } from './minimap.js';
 import { drawProps } from './props.js';
 import { SPRITE_CACHE } from './sprites.js';
 import { drawBorderGlow, drawBuilding, drawClaimSites, drawGraffiti, drawHideoutDoors, drawOfficeExterior, drawPosters } from './structures.js';
-import { drawGroundTile, drawMarketStalls } from './tiles.js';
+import { drawFullMapGrime, drawGroundTile, drawMarketStalls } from './tiles.js';
 import { playerAttack } from '../systems/combat.js';
 import { drawIncidentPlayerCosmetics, drawIncidentShadows, drawIncidents } from '../systems/incidents.js';
 
@@ -42,6 +42,8 @@ export function drawAll() {
   }
   // v14 — roads, footpaths, rails and district ground marks connect the zone islands.
   drawWorldFabric();
+  // Phase 2 visual-only density: cached static grime first, then incidental loops.
+  drawFullMapGrime();
   // zones (dashed border + tinted fill)
   for (const z of ZONES) {
     if (!visibleWorldRect(z.x,z.y,z.w,z.h,20)) continue;

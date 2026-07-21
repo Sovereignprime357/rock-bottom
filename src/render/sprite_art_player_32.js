@@ -38,10 +38,10 @@ function thickLine(grid, x1, y1, x2, y2, value, horizontal=false) {
     x2+(horizontal ? 0 : 1), y2+(horizontal ? 1 : 0), value);
 }
 
-function enforceScreenRightKey(grid) {
+function enforceScreenRightShadow(grid) {
   // Right-facing art is derived from the left silhouette so equipment stays
   // registered. Undo only the mirrored hoodie checker, then restore the same
-  // screen-right key used by every other direction.
+  // screen-right shadow transition used by every other direction.
   for (let y=18;y<22;y++) for (let x=12;x<14;x++) if (grid[y][x]===7) grid[y][x]=4;
   gridDither(grid,18,18,2,4,4,7,[4,7]);
   return grid;
@@ -197,7 +197,7 @@ function drawSideTorso(grid, frame) {
 }
 
 function makePlayerFrame(direction, frame) {
-  if (direction === 'right') return finish(enforceScreenRightKey(mirrorGrid(makePlayerFrame('left',frame))),`player right frame ${frame}`);
+  if (direction === 'right') return finish(enforceScreenRightShadow(mirrorGrid(makePlayerFrame('left',frame))),`player right frame ${frame}`);
   const grid=fresh();
   if (direction === 'down') {
     frontHead(grid); drawFrontTorso(grid,frame,false);
@@ -232,7 +232,7 @@ export function makePlayerAttack32(player, direction, phase) {
       put(grid,1,23,3); put(grid,5,20,3);
     }
   } else if (direction === 'right') {
-    return finish(enforceScreenRightKey(mirrorGrid(makePlayerAttack32(player,'left',phase))),`player attack right ${phase}`);
+    return finish(enforceScreenRightShadow(mirrorGrid(makePlayerAttack32(player,'left',phase))),`player attack right ${phase}`);
   } else if (direction === 'down') {
     box(grid,4,16,7,10,0); box(grid,21,16,8,10,0);
     if (phase) {

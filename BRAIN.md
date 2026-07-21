@@ -2379,3 +2379,56 @@ frozen v19 and `index.html` have no capture-only diff.
 **Next.** Operator eye gate on `artifacts/graphics-phase1/phase1-before-after.png`: rule area hue,
 source strength, shadow seating, and whether the result stays grimy rather than clean. Stop there.
 Phase 2 palette/grime and Phase 3 resolution remain unbuilt until an explicit operator go.
+
+## 2026-07-21 — Graphics Phase 2: palette craft + full-map grime (`codex/graphics-phase2-full-map`)
+
+**What / why.** The operator explicitly opened the next graphics phase and asked for the full map.
+`SPEC-graphics-phase2-full-map.md` was captured and committed first, then the pending 32px shading
+work was integrated and audited. The roster now keeps a screen-left key / screen-right mauve-rust
+shadow, sparse two-index checker wear, and restrained hot accents. Fifty-four drawNpc-capable bases
+(155 normal frames) each receive three initialization-time palette variants: 465 topology-identical
+canvases selected by stable actor identity. The map now owns a deterministic 45×30 visual grid:
+1,350 cells, 3,017 cached static stamps across twelve families, and 273 phased placements across six
+2–4-frame loops. A salted integer-tile avalanche fixes the old `h % TILE === 0` seam bias.
+
+**Decided.** (1) Variants live beside `SPRITE_CACHE`; they never add normal keys or reinterpret
+Phase 1 emissive indices. Invalid identity/base/kind returns the normal canvas. (2) Grime is a tile
+render authority, not a prop/gameplay registry: no solid, verb, reward, save, warmth, or damage.
+(3) Every cell keeps the required 2–3 statics, but a coordinate-derived lane permutation gives all
+records disjoint 32px AABBs. This preserves full coverage without fusing the clipped south row into
+one pile. (4) Static-before-loop render order sits immediately after `drawWorldFabric()`, below all
+actors and the Phase 1 light stack. (5) Normal palette cleanup was deliberately narrow and audited;
+the separately pinned legacy environment corpus was not silently repainted. (6) Phase 3 remains a
+hard stop: no 48px/tall actor, anchor, hitbox, camera, or destination-rect change.
+
+**Tried / adjusted.** `specmesh-spec-capture` is not installed, so the documented manual SpecMesh
+fallback was committed alone before production. The first mathematically green layout contained
+322 strict same-cell overlaps (244 static/static, 78 static/loop), including 23 of 45 exactly-32px
+south-edge cells. The 1:1 crop made the stamp-soup risk visible; deterministic lanes removed all of
+them and `stamp-overlap` became intentional-red mode 21. The first tight-loop browser timing reported
+a false p95 of 24.4ms from queued canvas flushes; sampling one explicit draw per real animation frame
+produced the relevant stable render cost. The first comparison also let randomized persisted
+graffiti/posters/bottles differ across builds; the capture fixture now rebuilds those authorities
+from one fixed LCG before both sides, freezes `performance.now`, removes NPCs/objective arrows, and
+uses the same 110 camera origins.
+
+**Proof.** `phase2-graphics-gate` passes 39,412 checks. All 21 named red modes exit nonzero with their
+intended diagnostic. `sprite-gate --red=character-palette` fails and the audited normal snapshot is
+re-ratified at `cf0ba657…`; topology SHA-256 is `84f9d23b…`, runtime topology FNV `8056e182`, and
+layout hash `a2d9ef37`. The permanent runner is 20/20. Real-browser 800×600 profiles, 30 warmups +
+240 measured RAF frames: 64 mixed NPCs day/clear = 0.412ms mean / 0.600ms p95; 64 cops night/rain =
+0.818ms mean / 1.300ms p95. The matched 110-view mosaics cover all 48,160,000 world pixels; 1:1
+six-location day/night crops, normal+three-variant atlas, twelve-family grime atlas, six-loop strip,
+performance JSON, and hashes are under `artifacts/graphics-phase2/`. Frozen v19 is untouched.
+
+**Honest weak list.** The wire tangle can read as a discarded ring until seen among street debris;
+the bent needle and spent stub depend on their dirty-ground context at native size; the two-frame
+sign buzz and TV glow are deliberately crude found objects, not facade animation; horse cop still
+compresses horse plus rider into the unchanged 32px box; MAYOR'S COUSIN remains the least specific
+humanoid; the three global tint families can mute very small creature identity more than the named
+humanoids, though their silhouettes and topology remain exact. Those are operator-eye questions,
+not reasons to inflate hitboxes or start Phase 3.
+
+**Next.** Operator: inspect `full-map-before-after-day.png`, then the 1:1 day/night crops and variant
+atlas. Rule whether the full-map density reads as lived-in filth rather than wallpaper. The branch
+stops at Phase 2; Phase 3 stays unbuilt unless explicitly opened.

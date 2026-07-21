@@ -533,10 +533,41 @@ faces, clothes, paper, and trim. The normal grids, palettes, keys, and `SPRITE_C
 authority; `SPRITE_EMISSIVE_CACHE` is a transparent initialization-time derivative.
 
 The four burn barrels are visual-only `WORLD_DECOR`, not `PROPS` or an interaction system. They add
-no collision, damage, warmth, loot, save state, or verb. The Phase 1 acceptance gate stays beside,
-not inside, `run-gates.mjs`, preserving the operator's exact 18-gate runner while still giving this
-bounded visual wave a red-tested contract.
+no collision, damage, warmth, loot, save state, or verb. During the pre-graduation eye pass, the
+Phase 1 acceptance gate stayed beside `run-gates.mjs`, preserving the then-current 18-gate runner
+while still giving the bounded visual wave a red-tested contract.
+
+**Superseded runner status:** Phase 1 subsequently graduated as permanent gate 19 on its shipped
+branch; the operator's Phase 2 go then added `phase2-graphics-gate` as permanent gate 20. The
+implementation decision above remains unchanged; only the historical runner placement moved.
 
 **Preserved:** Canvas 2D, pixelated world rendering, eight-entry palettes, sprite-gate's 94/377
 snapshot and 14 destinations, gameplay geometry/state/random order, frozen v19, and the Phase 2/3
 operator boundary.
+
+## OD-GRAPHICS-P2-FULL-MAP (OD-13)
+
+**Status:** RATIFIED — operator, 2026-07-21; visual veto standing.
+
+**Question:** Stop after the shipped light layer, confine density to authored districts, or execute
+Graphics Phase 2 as a full-map palette/dither/variant/grime pass while retaining the Phase 3 stop?
+
+**Decision:** Execute Phase 2 only, across the complete 8600×5600 world. Keep the 94-base / 377-key
+normal sprite authority exact; multiply eligible NPC appearances through three pre-rendered
+topology-identical palettes; use one sparse two-index dither grammar; and give every 192px coverage
+cell 2–3 cached visual-only grime stamps plus deterministic chances for the six specified ambient
+loops. Correct the tile-coordinate hash seam in the same render layer. The operator's wording
+“full map” rules out zone-only scatter, not hierarchy: placements are culled, non-overlapping, below
+actors, and capped at 90 visible draws. A green structural gate does not overrule the matched
+full-map/day/night eye sheets.
+
+**Implementation decision:** A first valid layout exposed 322 same-cell AABB collisions, especially
+in the exactly-32px clipped south row. Coordinate-derived horizontal lane permutations replace
+retry/random placement, guaranteeing disjoint cached stamps without hot-path work or reducing the
+required 2–3-per-cell coverage. This counterexample is permanently executable as the
+`stamp-overlap` intentional-red mode.
+
+**Preserved:** Canvas 2D, no smoothing, eight-index palettes, Phase 1 light/grade/AO/emissive
+authority, normal sprite keys/topology/anchors/hitboxes, environment cache, gameplay registries,
+world geometry, save data, random gameplay order, `rock_bottom_v19.html`, and the explicit Phase 3
+operator boundary. No 48×48/tall actor work is authorized by this decision.

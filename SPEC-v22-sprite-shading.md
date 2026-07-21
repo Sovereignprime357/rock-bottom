@@ -2,6 +2,12 @@
 
 status: 2026-07-18 · operator: *"more shading, more definition... just run the sprites."* Pure **art** track — reshades the existing 32px character roster for depth. AI-drafted, operator veto standing. **The acceptance gate is the operator's eye; no gate judges whether art is good** (the Wave 4.2 lesson). Graduates into SPEC.md on green gate + operator sign-off.
 
+**Integrated candidate 2026-07-21:** this art track is built inside Graphics Phase 2 on branch
+`codex/graphics-phase2-full-map`. The canonical integrated contract is
+`SPEC-graphics-phase2-full-map.md`: 94 bases / 377 normal keys are preserved, the character palette
+snapshot is re-ratified, the permanent suite is 20/20, and the pending operator-eye atlas is in
+`artifacts/graphics-phase2/`. Phase 3 remains unopened.
+
 ---
 
 ## WHAT
@@ -35,17 +41,17 @@ The operator's own read from playing v21: the sprites landed ("they look fucking
 
 ## ACCEPTANCE CRITERIA
 
-- [ ] Character roster reshaded for shading/definition; **94 bases / 377 keys preserved** exactly.
-- [ ] 32-logical, no smoothing, integer indices — `sprite-gate` structural pins green.
-- [ ] Palette stays within VIBE's spine + ramps; **no forbidden colors**; palette-use hash **re-ratified once** at the final state; `sprite-gate` green at the new snapshot.
-- [ ] Same screen rect / anchor / hitbox per base — no base grows or shifts.
-- [ ] Gear/weapon overlays still align on the reshaded player composite.
-- [ ] Suite green (**18/18**). Frozen v19 untouched.
-- [ ] **A contact sheet / atlas rendered for the operator's eye** — the real acceptance gate. Report the sprites you judge weakest.
-- [ ] BRAIN appended; `SPEC-V22-PLAN.md` 4.3 shipped; findings written not fixed.
+- [x] Character roster reshaded for shading/definition; **94 bases / 377 keys preserved** exactly.
+- [x] 32-logical, no smoothing, integer indices — `sprite-gate` structural pins green.
+- [x] Palette stays within VIBE's spine + ramps; **no forbidden colors**; palette-use hash **re-ratified once** at the final state; `sprite-gate` green at the new snapshot.
+- [x] Same screen rect / anchor / hitbox per base — no base grows or shifts.
+- [x] Gear/weapon overlays still align on the reshaded player composite.
+- [x] Suite green (**20/20**). Frozen v19 untouched.
+- [x] **A contact sheet / atlas rendered for the operator's eye** — the real acceptance gate. Weak sprites are named in the Phase 2 handoff and BRAIN entry.
+- [x] BRAIN appended; `SPEC-V22-PLAN.md` 4.3 shipped; findings written not fixed.
 
 ## THE TRAP
 
-**No gate can catch bad art, so the temptation is to trust the green suite as "done."** It isn't — 18/18 means the machinery survived, not that the roster looks better. **The operator's eye is the only acceptance that counts**, exactly as it was for Wave 4.2. Ship a contact sheet, name your own weak sprites, and let him rule.
+**No gate can catch bad art, so the temptation is to trust the green suite as "done."** It isn't — 20/20 means the machinery survived, not that the roster looks better. **The operator's eye is the only acceptance that counts**, exactly as it was for Wave 4.2. Ship a contact sheet, name your own weak sprites, and let him rule.
 
 Second trap: **"more definition" sliding into "more polish."** This is a game about a crackhead in a stupid world; the art is grimy, flat, and cursed on purpose. **Shading toward realism or cuteness betrays the whole tone.** More pixels means more *specific grime*, not a cleaner image. If a reshade makes a character look like they're having a better day, undo it.

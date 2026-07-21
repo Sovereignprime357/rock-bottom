@@ -16,7 +16,32 @@
 
 ---
 
-## Graphics Phase 1 — LIGHTING & GRADE — BUILT / PENDING OPERATOR EYE (July 19, 2026)
+## Graphics Phase 2 — PALETTE CRAFT + FULL-MAP GRIME — BUILT / PENDING OPERATOR EYE (July 21, 2026)
+
+Branch: `codex/graphics-phase2-full-map`, isolated worktree. Contract:
+`SPEC-graphics-phase2-full-map.md`; scope stops before Phase 3 resolution, tall actors, anchors,
+hitboxes, or camera changes.
+
+- [x] **Sprite craft without structural drift.** The 94-base / 377-key normal authority remains
+  exact. Screen-left tenebrist ramps and two-index wear dither add definition; 54 eligible bases /
+  155 frames receive three deterministic, topology-identical grime palettes (465 cached 32×32
+  canvases). Missing or invalid variants fall back to the normal cache.
+- [x] **The entire map receives authored grime.** All 1,350 192px cells across the 8,600×5,600
+  world carry 2–3 deterministic, lane-separated stamps from 12 cached static families; 273 placements
+  draw six independently phased secondary loops. Camera culling keeps the conservative visible draw
+  ceiling at 81, below the contract's 90.
+- [x] **Nothing mechanical moved.** Roads, zones, buildings, collision, actor anchors/hitboxes, saves,
+  RNG order, the 18s/8s loop, Phase 1 lighting/AO/emissive behavior, and frozen v19 are preserved.
+- [x] **Proof.** `phase2-graphics-gate` passes 39,412 checks after all 21 intentional-red modes fired;
+  permanent runner **20/20**; real-browser day p95 **0.60ms** and night/rain/64-cop p95 **1.30ms**.
+- [ ] **Operator eye gate.** Review the matched day/night full-map sheets, six 1:1 crop pairs,
+  character/variant atlas, grime atlas, and loop strip under `artifacts/graphics-phase2/`. Judge
+  whether the dirt reads as places rather than confetti and whether the palette variants retain each
+  character's identity. Do not start Phase 3 without an explicit go.
+
+---
+
+## Graphics Phase 1 — LIGHTING & GRADE — SHIPPED (July 19, 2026)
 
 Branch: `codex/graphics-phase1-light-grade`, isolated worktree. Contract:
 `SPEC-graphics-phase1-lighting.md`; scope stops before Phase 2 palette/grime work and Phase 3
@@ -35,11 +60,11 @@ resolution work.
 - [x] **Emissive without corpus drift.** Indices `2` and `7` are opt-in only for
   `gear_propane_torch` / `weapon_pipe`; a separate 12-key cache replays those pixels after darkness.
   Normal 94-base / 377-key palettes, grids, destinations, and `sprite-gate` output are unchanged.
-- [x] **Proof.** Standalone `phase1-lighting-gate` counterexamples red, then green; permanent runner
-  **18/18**; real-browser 64-visible-cop night profile **1.548ms/frame**; frozen v19 diff empty.
-- [ ] **Operator eye gate.** Review `artifacts/graphics-phase1/phase1-before-after.png`: left is the
-  exact branch base, right is Phase 1; rows are Block, Laundromat/Church, Skid Row. Rule the mood,
-  source strength, and shadow seating. Do not start Phase 2 or Phase 3 from this branch.
+- [x] **Proof.** `phase1-lighting-gate` counterexamples red, then green; it graduated as the 19th
+  permanent gate before Phase 2 began; real-browser 64-visible-cop night profile
+  **1.548ms/frame**; frozen v19 diff empty.
+- [x] **Operator go.** The 2026-07-21 direction to execute the next graphics phase closes the Phase 1
+  stop. Phase 2 extends this merged base; Phase 3 remains separately operator-gated.
 
 ---
 
