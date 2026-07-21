@@ -1,5 +1,5 @@
 import {
-  blankSpriteGrid, cloneGrid, gridBox, gridEllipse, gridLine, gridPut, mirrorGrid,
+  blankSpriteGrid, cloneGrid, gridBox, gridDither, gridEllipse, gridLine, gridPut, mirrorGrid,
 } from './sprite_toolkit.js';
 
 const SIZE = 32;
@@ -36,6 +36,15 @@ function thickLine(grid, x1, y1, x2, y2, value, horizontal=false) {
   line(grid, x1, y1, x2, y2, value);
   line(grid, x1+(horizontal ? 0 : 1), y1+(horizontal ? 1 : 0),
     x2+(horizontal ? 0 : 1), y2+(horizontal ? 1 : 0), value);
+}
+
+function enforceScreenRightKey(grid) {
+  // Right-facing art is derived from the left silhouette so equipment stays
+  // registered. Undo only the mirrored hoodie checker, then restore the same
+  // screen-right key used by every other direction.
+  for (let y=18;y<22;y++) for (let x=12;x<14;x++) if (grid[y][x]===7) grid[y][x]=4;
+  gridDither(grid,18,18,2,4,4,7,[4,7]);
+  return grid;
 }
 
 function frontHead(grid) {
@@ -108,6 +117,10 @@ function drawFrontTorso(grid, frame, back=false) {
     put(grid,22,18,stain); put(grid,21,20,stain); put(grid,22,21,stain); put(grid,21,23,stain);
   }
 
+  // A small, screen-right checker transition keeps one implied key direction
+  // across the four gait frames without soft alpha or a ninth color.
+  gridDither(grid,20,18,2,4,shirt,stain,[shirt,stain]);
+
   const leftHand = frame===1 ? [4,24] : frame===3 ? [7,18] : [5,22];
   const rightHand = frame===3 ? [27,24] : frame===1 ? [24,18] : [26,21];
   thickLine(grid,8,17,leftHand[0]+1,leftHand[1]-1,shirt);
@@ -152,6 +165,8 @@ function drawSideTorso(grid, frame) {
   put(grid,20,18,stain); put(grid,19,21,stain); put(grid,20,22,stain);
   put(grid,12,17,stain); line(grid,12,20,11,22,stain); put(grid,11,23,stain);
 
+  gridDither(grid,18,18,2,4,shirt,stain,[shirt,stain]);
+
   const frontHand = frame===1 ? [3,23] : frame===3 ? [8,18] : [5,21];
   const rearHand = frame===3 ? [23,24] : frame===1 ? [21,18] : [23,21];
   thickLine(grid,10,17,frontHand[0]+1,frontHand[1]-1,shirt);
@@ -182,7 +197,7 @@ function drawSideTorso(grid, frame) {
 }
 
 function makePlayerFrame(direction, frame) {
-  if (direction === 'right') return mirrorGrid(makePlayerFrame('left',frame));
+  if (direction === 'right') return finish(enforceScreenRightKey(mirrorGrid(makePlayerFrame('left',frame))),`player right frame ${frame}`);
   const grid=fresh();
   if (direction === 'down') {
     frontHead(grid); drawFrontTorso(grid,frame,false);
@@ -217,7 +232,7 @@ export function makePlayerAttack32(player, direction, phase) {
       put(grid,1,23,3); put(grid,5,20,3);
     }
   } else if (direction === 'right') {
-    return finish(mirrorGrid(makePlayerAttack32(player,'left',phase)),`player attack right ${phase}`);
+    return finish(enforceScreenRightKey(mirrorGrid(makePlayerAttack32(player,'left',phase))),`player attack right ${phase}`);
   } else if (direction === 'down') {
     box(grid,4,16,7,10,0); box(grid,21,16,8,10,0);
     if (phase) {

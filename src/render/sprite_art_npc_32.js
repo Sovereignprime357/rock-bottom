@@ -2,6 +2,7 @@ import {
   blankSpriteGrid,
   cloneGrid,
   gridBox,
+  gridDither,
   gridEllipse,
   gridLine,
   gridPut,
@@ -162,6 +163,7 @@ function drawTorso(grid, opts, frame, colors) {
   // column down the right, hem wear, and an optional worn/lit step on the
   // left shoulder and flank. Single pixels: texture, not stripes.
   const {shade,worn} = colors;
+  if (shade !== shirt) gridDither(grid,right-4,top+4,2,4,shirt,shade,[shirt,shade]);
   gridPut(grid,left+2,top+3,shade);
   gridPut(grid,right-2,top+4,shade);
   gridPut(grid,right-2,top+6,shade);
@@ -282,6 +284,11 @@ function applySignature(id, grid, frame, opts, c) {
       dots(grid,hat,[[10,1],[12,0],[15,1],[18,0],[21,2],[22,4]]);
       gridBox(grid,26,8,3,8,accessory); gridPut(grid,27,9,dark); thickLine(grid,22,15,26,13,skin);
       gridLine(grid,9,14,5,21,shirt); gridPut(grid,5,22,accent);
+      // The phone lights one cheek; the other side stays hollow. Her narrow
+      // coat gets a torn diagonal rather than the generic body's flat column.
+      dots(grid,shade,[[12,6],[13,10],[20,9],[21,12],[20,16]]);
+      gridLine(grid,12,17,10,23,shade);gridPut(grid,24,12,worn||accent);
+      gridPut(grid,27,12,worn||accent);
       break;
     }
     case 'paulie': { // The face arrives before the rest of Paulie.
@@ -379,6 +386,10 @@ function applySignature(id, grid, frame, opts, c) {
       thickLine(grid,11,15,5,21,shirt,2); thickLine(grid,22,15,29,11,shirt,2);
       gridPut(grid,29,10,accessory); gridPut(grid,30,11,dark);
       if (frame === 0) { clearBox(grid,11,28,5,4); gridLine(grid,14,27,8,31,pants); }
+      // Rib shadow and sweat-dark collar replace the old clean pastel read.
+      gridLine(grid,13,15,12,21,shade);gridLine(grid,18,15,20,21,shade);
+      dots(grid,shade,[[14,14],[15,15],[18,15],[19,16]]);
+      gridPut(grid,7,22,dark);gridPut(grid,28,12,dark);
       break;
     }
     case 'busker': { // Crooked guitar body, two strings, empty case corner.
@@ -392,6 +403,11 @@ function applySignature(id, grid, frame, opts, c) {
       gridBox(grid,25,26,6,4,coat); gridBox(grid,28,24,3,3,coat); gridPut(grid,30,24,hat);
       gridPut(grid,31,26,dark); gridBox(grid,25,30,2,2,dark); gridBox(grid,29,30,2,2,dark);
       gridPut(grid,24,27,coat);
+      // Paisley: one upright ear, pale muzzle, sweater seam and a tail with a
+      // permanent administrative kink. Still tiny; no mascot face.
+      gridPut(grid,29,23,hat);gridPut(grid,28,24,dark);gridPut(grid,31,25,accessory);
+      gridLine(grid,25,27,29,27,shade);gridPut(grid,27,28,shade);
+      gridLine(grid,24,27,22,25,coat);gridPut(grid,22,24,dark);
       break;
     }
     case 'vapelord': { // The device is enormous; the cloud is paperwork-shaped.
@@ -555,6 +571,11 @@ function applySignature(id, grid, frame, opts, c) {
       gridLine(grid,16,0,20,4,hat); gridLine(grid,20,4,24,1,hat); gridLine(grid,24,1,24,5,hat); gridLine(grid,9,5,24,5,hat);
       gridLine(grid,7,14,27,31,accessory); gridLine(grid,27,14,7,31,accessory); gridLine(grid,6,18,28,18,accessory);
       gridBox(grid,7,14,6,7,coat); gridBox(grid,22,14,6,7,coat); gridLine(grid,11,14,16,26,hat); gridLine(grid,23,14,18,26,hat);
+      // Separate coat from chair: one shadowed lapel, one warm worn rim, and
+      // a sagging seat band. The X remains lawn furniture, not texture noise.
+      gridLine(grid,12,15,15,24,shade);gridLine(grid,21,15,18,24,worn||accent);
+      gridLine(grid,10,26,23,26,dark);gridPut(grid,16,27,dark);
+      gridDither(grid,17,18,3,3,hat,shade,[hat,shade]);
       break;
     }
     case 'price_guy': { // Brim, black coat and one tag. The face remains an accounting error.

@@ -1,5 +1,5 @@
 import {
-  blankSpriteGrid, gridBox, gridEllipse, gridLine, gridPut,
+  blankSpriteGrid, gridBox, gridDither, gridEllipse, gridLine, gridPut,
 } from './sprite_toolkit.js';
 
 const SIZE=32;
@@ -48,6 +48,7 @@ function dogBody(kind,frame) {
     gridPut(g,13,21,shadow);gridPut(g,17,21,shadow);gridPut(g,20,22,shadow);gridPut(g,24,22,shadow);
     gridPut(g,11,15,light);gridPut(g,15,15,light);gridPut(g,19,14,light);
     gridPut(g,28,21,eye);gridPut(g,29,20,eye);
+    gridDither(g,17,18,3,2,body,shadow,[body,shadow]);
   } else if (kind==='scrap_dog') {
     // Ribs and missing fur turn the shared dog into a different read at 1px scale.
     gridEllipse(g,14,19,9,5,0);
@@ -58,6 +59,7 @@ function dogBody(kind,frame) {
     gridLine(g,6,16,frame?0:2,frame?11:13,2);
     // v22 4.3 — hip bone catching light and two mange patches. Texture, not health.
     gridPut(g,9,15,light);gridPut(g,13,18,dark);gridPut(g,17,20,dark);
+    gridDither(g,17,18,3,2,body,dark,[body,dark]);
   } else {
     // Older Brutus has the same legal footprint and much less empty air: a shoulder
     // hump, ruined ear, heavy forelegs and a gym towel that outlived the gym.
@@ -69,6 +71,11 @@ function dogBody(kind,frame) {
     gridLine(g,25,14,29,17,dark);gridPut(g,27,14,6);
     gridBox(g,23,21,5,8,shadow);gridBox(g,24,28,6,2,dark);
     gridBox(g,8,11,5,3,light);gridPut(g,6,16,accent);gridPut(g,5,17,accent);
+    gridDither(g,13,13,3,2,body,shadow,[body,shadow]);
+    // Old-school Brutus gets a collapsed eye, scar notch, and towel folds so
+    // the boss reads as accumulated mileage rather than scaled-up dog mass.
+    gridPut(g,27,15,dark);gridPut(g,28,15,shadow);gridLine(g,24,11,22,13,dark);
+    gridPut(g,22,10,0);gridPut(g,20,15,1);gridPut(g,21,18,1);
   }
   return g;
 }
@@ -102,6 +109,7 @@ export function makePossum32() {
     gridPut(g,11,21,3);gridPut(g,15,22,3);gridPut(g,19,21,3);
     gridPut(g,10,23,2);gridPut(g,14,23,2);gridPut(g,18,23,2);
     gridPut(g,15,13,7);
+    gridDither(g,15,20,3,2,4,3,[4,3]);
     return g;
   };
   return [make(0),make(1)];
@@ -128,6 +136,7 @@ export function makePigeon32() {
     // v22 4.3 — breast shade and a wing seam; the crown stays too large.
     gridPut(g,13,20-rise,2);gridPut(g,14,22-rise,2);gridPut(g,12,18-rise,2);
     gridLine(g,20,16-rise,23,19-rise,2);
+    gridDither(g,15,19-rise,3,2,3,2,[3,2]);
     return g;
   };
   return [make(0),make(1)];
@@ -159,6 +168,10 @@ export function makeHorseCop32() {
     gridPut(g,11,22,1);gridPut(g,15,23,1);gridPut(g,19,22,1);
     gridPut(g,25,16,1);gridPut(g,26,17,1);
     gridPut(g,12,5,1);gridPut(g,17,5,1);
+    gridDither(g,16,21,3,2,6,1,[6,1]);
+    // Rider weight: jacket underside, trouser break and a crooked cap seam.
+    gridLine(g,17,9,18,13,2);gridPut(g,10,13,2);gridPut(g,19,14,2);
+    gridLine(g,11,2,17,2,1);gridPut(g,18,3,1);gridPut(g,15,11,7);
     return g;
   };
   return [make(0),make(1)];

@@ -51,6 +51,24 @@ export function gridLine(grid, x1, y1, x2, y2, value) {
   }
 }
 
+// Phase 2 ordered dither. The helper stays grid-only: callers choose two
+// already-declared palette indices, and rasterization remains the one place
+// pixels become canvas color. `replace` can restrict the checker to an existing
+// material so wear never fills transparent silhouette space by accident.
+export function gridDither(grid, x, y, width, height, first, second, replace=null) {
+  if (![x,y,width,height,first,second].every(Number.isInteger) || width < 1 || height < 1 ||
+      first < 0 || second < 0 || first > 7 || second > 7 || first === second) {
+    throw new Error('gridDither needs an integer rect and two distinct palette indices 0..7');
+  }
+  const allowed = replace == null ? null : new Set(Array.isArray(replace) ? replace : [replace]);
+  for (let yy=y; yy<y+height; yy++) for (let xx=x; xx<x+width; xx++) {
+    if (!grid[yy] || xx < 0 || xx >= grid[yy].length) continue;
+    if (allowed && !allowed.has(grid[yy][xx])) continue;
+    gridPut(grid,xx,yy,((xx-x)+(yy-y))&1 ? second : first);
+  }
+  return grid;
+}
+
 export function gridEllipse(grid, centerX, centerY, radiusX, radiusY, value) {
   if (radiusX <= 0 || radiusY <= 0) return;
   const minX=Math.floor(centerX-radiusX), maxX=Math.ceil(centerX+radiusX);
