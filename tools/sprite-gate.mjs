@@ -355,7 +355,17 @@ const environmentPaletteHash=createHash('sha256').update(JSON.stringify(environm
 // v22 wave 5.5 ratified snapshot: adds the 4 gear_crowbar_* keys. Audit: the art
 // module edit only ADDED the crowbar branch — no prior key's draw code changed,
 // so the 373 previous records are byte-identical inside the new snapshot.
-const EXPECTED_CHARACTER_PALETTE_HASH='1d36333e3aee34e657cdfcaf43891b195996a135e9b7e32c4b85eea84385d8ac';
+// v23 ratified snapshot (SPEC-v23-grime-cinema.md, Wave 4.3): tenebrist regrade of 49
+// palettes (48 PALS + PLAYER_LAYER_PAL; full before→after ledger in
+// artifacts/v23/palette-audit.json). Pure value re-map inside the same 8 slots: index count,
+// order, and semantics unchanged; anchors (#d4c896/#e8c040/#000) and identity-exempt palettes
+// (cop, horsecop, brendan — authority blue rule; player_high — rocked-up gold glow)
+// byte-identical. Shadows crushed toward mauve per the Blasphemous-study lever; lights
+// protected. Red evidence: the un-ratified tree failed this gate on exactly this line
+// (hash 8cae… vs the v22 pin) before ratification; character-palette red case re-proves
+// the validator post-ratification. INCIDENT_PALS deliberately untouched this pass (their
+// five world-object palettes already read grounded); a later pass may extend the curve.
+const EXPECTED_CHARACTER_PALETTE_HASH='8cae4b9d396214774531aba900609b97b085bdabe4ddc9b15334b25e6ec74c93';
 const EXPECTED_ENVIRONMENT_PALETTE_HASH='ab49d9868ec172f3d3e487ed0230df09319ba395f8df3f8e4d6baaa734348bd3';
 if(characterPaletteHash!==EXPECTED_CHARACTER_PALETTE_HASH)fail(`character palette-use corpus drifted (${characterPaletteHash}); audit and ratify a new snapshot`);
 if(environmentPaletteHash!==EXPECTED_ENVIRONMENT_PALETTE_HASH)fail(`environment palette-use corpus drifted (${environmentPaletteHash}); audit and ratify a new snapshot`);

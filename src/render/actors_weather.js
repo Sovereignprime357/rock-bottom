@@ -10,7 +10,7 @@ import { H, W } from '../data/world.js';
 import { ctx } from './canvas_geography.js';
 import {
   ACTIVE_LIGHTS, FOG_SHEET, LIGHT_CTX, LIGHT_FRAME_SHAKE_X, LIGHT_FRAME_SHAKE_Y,
-  LIGHT_GLOW_CACHE, LIGHT_MASK, drawAmbientGrade, drawContactShadow, nightAmount,
+  LIGHT_GLOW_CACHE, LIGHT_MASK, VIGNETTE_SHEET, buildVignetteSheet, drawAmbientGrade, drawContactShadow, nightAmount,
   punchLightMask,
 } from './landmarks_a.js';
 import { SPRITE_CACHE, SPRITE_EMISSIVE_CACHE } from './sprites.js';
@@ -108,6 +108,11 @@ export function drawLighting() {
     ctx.drawImage(glow,sx-r,sy-r,r*2,r*2);
   }
   ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+  // v23 SPEC-v23-grime-cinema — cinematic frame. Cached vignette sheet after the
+  // light pass so it darkens the composed scene (mask + grade + emissive + glow).
+  // Built lazily once; never per-frame allocation.
+  if (!VIGNETTE_SHEET) buildVignetteSheet();
+  ctx.drawImage(VIGNETTE_SHEET,0,0);
 }
 
 export function drawWeather() {
@@ -123,12 +128,37 @@ export function drawWeather() {
       ctx.lineTo(x-3, y+10);
       ctx.stroke();
     }
+    // v23 SPEC-v23-grime-cinema — splash flecks where drops land. Screen-space,
+    // deterministic phase per index, three fillRects total setup cost.
+    const t2 = performance.now() / 22;
+    ctx.fillStyle = 'rgba(190,205,220,.26)';
+    for (let i=0;i<34;i++) {
+      const ph = (t2 + i*1.37) % 3;
+      if (ph < 1.25) {
+        const sx = (i*127 + Math.floor(t2*13)*7) % W;
+        const sy = (i*211 + Math.floor(t2*29)*11) % H;
+        ctx.fillRect(sx - ph*3, sy + ph*4, 2 + ph*4, 1);
+      }
+    }
+    // v23 — distant lightning through the rain: a slow deterministic cycle brightens
+    // the sky for a fraction of a second every ~23s. No gameplay state, no sound debt.
+    const cyc = performance.now() % 23000;
+    if (cyc < 300) {
+      const k = Math.sin(cyc/300*Math.PI);
+      const flick = cyc < 110 ? 1 : .55; // main stroke then weaker restrike
+      ctx.fillStyle = `rgba(206,196,158,${(.11*k*flick).toFixed(3)})`;
+      ctx.fillRect(0,0,W,H);
+    }
   }
   if (state.weather === 'fog') {
     // Cached fog sheet; reduce opacity at night so the player and boss telegraphs survive
     // the night + fog stack instead of disappearing into a gray-black slab.
+    // v23 — the banks now DRIFT: the sheet sways a few px on two slow sines, drawn
+    // slightly oversized so the offset never reveals an edge. Still one cached canvas.
+    const now = performance.now();
+    const ox = Math.sin(now/9000)*9, oy = Math.cos(now/13000)*6;
     ctx.globalAlpha = .72 - nightAmount()*.18;
-    ctx.drawImage(FOG_SHEET,0,0);
+    ctx.drawImage(FOG_SHEET, -12+ox, -9+oy, W+24, H+18);
     ctx.globalAlpha = 1;
   }
 }
@@ -152,6 +182,15 @@ export function resolveNpcPose(n, visualNow) {
   return { spriteKey, frame, bob:(n.frame===1||n.frame===2)?-1:0 };
 }
 
+// v23 SPEC-v23-grime-cinema — corpse fade. Dead NPCs sink out of the world over
+// ~2.4s (visual only: dead-flag/loot/persistence logic untouched). Returns the
+// alpha to draw with, and 1 for anything alive.
+export function npcCorpseAlpha(n, visualNow){
+  if(!n.dead)return 1;
+  const t=visualNow-(n.deadAt||visualNow-2400);
+  return Math.max(0,Math.min(1,(2400-t)/2400));
+}
+
 export function drawNpcContactShadow(n){
   drawContactShadow(n.x+n.w/2,n.y+n.h-1,Math.max(6,n.w/2),3,.36);
 }
@@ -163,6 +202,10 @@ export function drawNpc(n) {
   const pose=resolveNpcPose(n,visualNow),frame=pose.frame,spriteKey=pose.spriteKey;
   const sp = SPRITE_CACHE[spriteKey+'_'+frame] || SPRITE_CACHE[spriteKey+'_0'];
   if (sp) {
+    // v23 — corpses fade out over ~2.4s instead of vanishing mid-frame.
+    const corpseAlpha = npcCorpseAlpha(n, visualNow);
+    if (corpseAlpha <= 0) return;
+    ctx.globalAlpha = corpseAlpha;
     if (n.hitFlash) ctx.globalCompositeOperation = 'lighter';
     // tiny bob when walking
     const bob = pose.bob;
@@ -170,6 +213,7 @@ export function drawNpc(n) {
     const drawY = Math.round(n.y+n.h-32+bob);
     ctx.drawImage(sp, drawX, drawY, 32, 32);
     ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
   } else {
     ctx.fillStyle = n.color;
     ctx.fillRect(n.x, n.y, n.w, n.h);
@@ -408,6 +452,27 @@ export function drawObjectiveGuide(){
     const cx=W/2,cy=H/2,ang=Math.atan2(sy-cy,sx-cx),ex=clamp(sx,24,W-24),ey=clamp(sy,42,H-34);
     ctx.translate(ex,ey);ctx.rotate(ang);ctx.beginPath();ctx.moveTo(10,0);ctx.lineTo(-7,-6);ctx.lineTo(-4,0);ctx.lineTo(-7,6);ctx.closePath();ctx.fill();
   }
+  ctx.restore();
+}
+
+// v23 SPEC-v23-grime-cinema — directional damage indicator: a rust-red arc on the
+// screen edge pointing at the last thing that hurt you. Screen-space read of
+// P.dmgArcT/P.dmgArcX/P.dmgArcY set by damagePlayer(); decays to nothing.
+export function drawDamageArc() {
+  if (!(P.dmgArcT > 0)) return;
+  P.dmgArcT -= 16;
+  const px=P.x+P.w/2-state.cam.x, py=P.y+P.h/2-state.cam.y;
+  let sx=P.dmgArcX-state.cam.x, sy=P.dmgArcY-state.cam.y;
+  // clamp the anchor point to the frame so the arc always rides an edge
+  sx=Math.max(26,Math.min(W-26,sx)); sy=Math.max(46,Math.min(H-40,sy));
+  const ang=Math.atan2(py-sy,px-sx);
+  const alpha=Math.min(.85,P.dmgArcT/420*.85);
+  ctx.save();
+  ctx.globalAlpha=alpha;
+  ctx.translate(sx,sy); ctx.rotate(ang);
+  ctx.fillStyle='#8a3a3a';
+  ctx.beginPath(); ctx.moveTo(14,0); ctx.lineTo(-4,-9); ctx.lineTo(-1,0); ctx.lineTo(-4,9); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle='rgba(10,8,5,.6)'; ctx.lineWidth=1; ctx.stroke();
   ctx.restore();
 }
 

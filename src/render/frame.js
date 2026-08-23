@@ -8,11 +8,11 @@ import { BUILDINGS } from '../data/props.js';
 import { H, TILE, W, ZONES } from '../data/world.js';
 import { drawHeatMini, drawSmokeOverlay } from '../minigames/heat.js';
 import {
-  NAMEPLATE_BOX_BUFFER, VISIBLE_NPC_BUFFER, drawLighting, drawNpc, drawNpcContactShadow,
+  NAMEPLATE_BOX_BUFFER, VISIBLE_NPC_BUFFER, drawDamageArc, drawLighting, drawNpc, drawNpcContactShadow,
   drawObjectiveGuide, drawPlayer, drawPlayerContactShadow, drawWeather,
 } from './actors_weather.js';
 import { ctx, drawWorldFabric, visibleWorldRect } from './canvas_geography.js';
-import { drawForegroundWorld, drawKingdomSites, drawLandmarkFacades, drawWorldDecor, prepareLightingFrame } from './landmarks_a.js';
+import { drawGrimeDecor, drawGrimeSteam, drawForegroundWorld, drawKingdomSites, drawLandmarkFacades, drawWorldDecor, prepareLightingFrame } from './landmarks_a.js';
 import { drawDogLeash, drawScrapFence, drawUnderpass } from './landmarks_b.js';
 import { drawMinimap } from './minimap.js';
 import { drawProps } from './props.js';
@@ -42,6 +42,9 @@ export function drawAll() {
   }
   // v14 — roads, footpaths, rails and district ground marks connect the zone islands.
   drawWorldFabric();
+  // v23 SPEC-v23-grime-cinema — grime decor: deterministic litter/stains layer on the
+  // pavement plane, below all furniture, actors and AO. Non-solid, non-interactive.
+  drawGrimeDecor();
   // zones (dashed border + tinted fill)
   for (const z of ZONES) {
     if (!visibleWorldRect(z.x,z.y,z.w,z.h,20)) continue;
@@ -164,9 +167,11 @@ export function drawAll() {
   }
 
   // Reuse one actor buffer. All contact shadows render on one plane before any actor body.
+  // v23 — freshly-dead NPCs stay in the buffer ~2.4s so the corpse fade can draw them.
+  const corpseWindow = state.visualNow - 2400;
   VISIBLE_NPC_BUFFER.length=0;
   NAMEPLATE_BOX_BUFFER.length=0;
-  for(const n of runtime.npcs)if(!n.dead&&
+  for(const n of runtime.npcs)if((!n.dead||((n.deadAt||0)>corpseWindow))&&
     n.x>=state.cam.x-60&&n.x<=state.cam.x+W+40&&
     n.y>=state.cam.y-60&&n.y<=state.cam.y+H+40)VISIBLE_NPC_BUFFER.push(n);
   VISIBLE_NPC_BUFFER.sort((a,b)=>(a.y+a.h)-(b.y+b.h));
@@ -237,6 +242,8 @@ export function drawAll() {
   // player sprite
   drawPlayer();
   drawIncidentPlayerCosmetics();
+  // v23 — steam off grates drifts above actors (additive, culled, allocation-free)
+  drawGrimeSteam();
   // v17 attack smear: cached chunky motion art replaces the old filled hitbox rectangle.
   // Collision/reach still come exclusively from playerAttack().
   if (P.attacking > 0) {
@@ -259,6 +266,8 @@ export function drawAll() {
   // weather
   drawWeather();
   drawObjectiveGuide();
+  // v23 — directional damage indicator rides above the objective marker, under the flash
+  drawDamageArc();
 
   // flash overlay
   if (state.flash > 0) {

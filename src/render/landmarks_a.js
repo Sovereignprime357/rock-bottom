@@ -5,14 +5,14 @@
 import { P, runtime, state } from '../core/runtime_ui.js';
 import { PROPS } from '../data/props.js';
 import {
-  AMBIENT_GRADES, DIEGETIC_LIGHT_RGB, H, LANDMARK_FACADES, TERRAIN_REGIONS,
+  AMBIENT_GRADES, DIEGETIC_LIGHT_RGB, GRIME_DECOR, H, LANDMARK_FACADES, TERRAIN_REGIONS,
   UTILITY_WIRES, W, WORLD_DECOR, WORLD_LIGHTS, ZONES,
 } from '../data/world.js';
 import { ENV_SPRITE_CACHE, ctx, visibleWorldRect } from './canvas_geography.js';
 import { KINGDOM_CLANS, KINGDOM_EMPEROR, freshKingdomState, kingdomStageClan } from '../systems/campaigns.js';
 
 export let LANDMARK_CACHE, landmarkCacheReady, LIGHT_MASK, LIGHT_CTX, LIGHT_HOLE,
-  LIGHT_GLOW_CACHE, CONTACT_SHADOW_SHEET, FOG_SHEET;
+  LIGHT_GLOW_CACHE, CONTACT_SHADOW_SHEET, FOG_SHEET, VIGNETTE_SHEET;
 export const ACTIVE_LIGHTS = [];
 export let LIGHT_FRAME_SHAKE_X = 0, LIGHT_FRAME_SHAKE_Y = 0;
 
@@ -86,8 +86,36 @@ export function buildLandmarkFacades() {
       g.fillStyle=jamb;
       g.fillRect(doorX-5,y+f.h-3,doorW+10,3);
       g.fillRect(doorX,y+f.h,doorW,3);
+      // v23 SPEC-v23-grime-cinema — worn trampled path below the aperture: pale dust
+      // scuffs on the pavement where a thousand entries actually happened.
+      let fseed=0;for(let i=0;i<f.id.length;i++)fseed=(fseed*31+f.id.charCodeAt(i))>>>0;
+      g.fillStyle='rgba(10,8,5,.20)';
+      for(let i=0;i<8;i++){
+        const wx=doorX+2+i*8+((fseed>>>(i+2))&3);
+        g.fillRect(wx,y+f.h+6+((fseed>>>(i+5))&1)*3,6,2);
+      }
     }
     const label=f.sign||'';
+    // v23 SPEC-v23-grime-cinema — facade enrichment, baked once per cache canvas.
+    // Rain-grime streaks bleed from the roofline; a parapet lip caps every wall; the
+    // door aperture gets a step plus a worn trampled path; one chalk tag scrawls near
+    // the base. All deterministic off f.id so a given facade always weathers the same.
+    {
+      let seed=0;for(let i=0;i<f.id.length;i++)seed=(seed*31+f.id.charCodeAt(i))>>>0;
+      g.fillStyle='rgba(8,6,4,.16)';
+      for(let i=0;i<Math.floor(f.w/26)+2;i++){
+        const sx=x+6+((seed^Math.imul(i+1,0x9E3779B9))>>>0)%Math.max(1,f.w-12);
+        const sw=2+(Math.imul(seed^(i*0x85EBCA6B),1)>>>28)%4;
+        const sh=Math.floor(f.h*.30)+((seed>>>(i&7))>>>0)%Math.floor(f.h*.32);
+        g.fillRect(sx,y+3,sw,sh);
+      }
+      g.fillStyle='#141110';g.fillRect(x-1,y-2,f.w+2,4);
+      g.fillStyle='rgba(232,192,64,.045)';g.fillRect(x,y,f.w,2);
+      g.strokeStyle='rgba(212,200,150,.13)';g.lineWidth=1;
+      g.beginPath();
+      const tx=x+10+((seed>>>5)%(Math.max(10,f.w-70))),ty=y+f.h-12+((seed>>>9)%6);
+      g.moveTo(tx,ty);g.lineTo(tx+9,ty-5);g.lineTo(tx+15,ty+3);g.stroke();
+    }
     const fs=Math.max(8,Math.min(12,Math.floor((f.w-18)/Math.max(1,label.length)*1.7)));
     g.font=`bold ${fs}px Courier New`; g.textAlign='center';
     const tw=Math.min(f.w-18,g.measureText(label).width+14);
@@ -379,6 +407,122 @@ export function punchLightMask(octx,sx,sy,r,power,amount){
   octx.drawImage(LIGHT_HOLE,sx-r,sy-r,r*2,r*2);
 }
 
+// ---------- v23 SPEC-v23-grime-cinema — grime decor rendering ----------
+const GRIME_BOUNDS = [];   // culling rects, built once from GRIME_DECOR
+const GRIME_STEAM = [];    // reused per-frame buffer of steam-source indices
+const GRIME_INK = {
+  grime_weed:      { stem:'#3d4a26', head:'#54632e' },
+  grime_paper:     { face:'#b7ac8c', edge:'#6f6752' },
+  grime_bottle:    { glass:'#4a5540', shine:'#8fa06f' },
+  grime_can:       { body:'#7a6a52', tab:'#a89a80' },
+  grime_stain:     { pool:'rgba(12,9,6,.34)', rim:'rgba(60,44,28,.22)' },
+  grime_tarp:      { top:'#3a4038', fold:'#272b25' },
+  grime_tires:     { wall:'#1c1a16', tread:'#33302a' },
+  grime_crate:     { plank:'#4c3d28', slat:'#33291a' },
+  grime_cone:      { cone:'#a05224', band:'#d4c896' },
+  grime_mattress:  { cloth:'#6b6353', stain:'#4a4436' },
+  grime_grate_steam: { bars:'#20201c' },
+};
+export function drawGrimeDecor() {
+  if (!GRIME_DECOR) return;
+  if (!GRIME_BOUNDS.length) {
+    for (const g of GRIME_DECOR) GRIME_BOUNDS.push({ x:g.x, y:g.y, w:g.w, h:g.h });
+  }
+  GRIME_STEAM.length = 0;
+  for (let i=0;i<GRIME_DECOR.length;i++) {
+    const g = GRIME_DECOR[i];
+    const b = GRIME_BOUNDS[i];
+    if (!visibleWorldRect(b.x,b.y,b.w,b.h,10)) continue;
+    const ink = GRIME_INK[g.type];
+    const x = g.x, y = g.y, w = g.w, h = g.h, v = g.v;
+    if (g.type==='grime_weed') {
+      ctx.strokeStyle=ink.stem; ctx.lineWidth=1; ctx.beginPath();
+      ctx.moveTo(x+3,y+h); ctx.lineTo(x+2+((v&1)),y+2);
+      ctx.moveTo(x+w-4,y+h); ctx.lineTo(x+w-3-((v>>1)&1),y+4);
+      ctx.stroke();
+      ctx.fillStyle=ink.head; ctx.fillRect(x+1+(v&3),y,2,3); ctx.fillRect(x+w-4,y+2,2,2);
+    } else if (g.type==='grime_paper') {
+      ctx.fillStyle=ink.face; ctx.fillRect(x,y,w,h);
+      ctx.fillStyle=ink.edge; ctx.fillRect(x,y+h-2,w,2); ctx.fillRect(x+w-2,y,2,h);
+      ctx.save(); ctx.translate(x+w/2,y+h/2); ctx.rotate(((v*37)%14-7)*Math.PI/180);
+      ctx.strokeStyle='rgba(30,24,16,.5)'; ctx.strokeRect(-w/2+.5,-h/2+.5,w-1,h-1); ctx.restore();
+    } else if (g.type==='grime_bottle') {
+      ctx.fillStyle=ink.glass; ctx.fillRect(x,y+3,w,h-3); ctx.fillRect(x+1,y,w-2,3);
+      ctx.fillStyle=ink.shine; ctx.fillRect(x+1,y+4,1,h-6);
+    } else if (g.type==='grime_can') {
+      ctx.fillStyle=ink.body; ctx.fillRect(x,y,w,h);
+      ctx.fillStyle=ink.tab; ctx.fillRect(x+1,y+1,w-2,1);
+    } else if (g.type==='grime_stain') {
+      ctx.fillStyle=ink.pool; ctx.beginPath(); ctx.ellipse(x+w/2,y+h/2,w/2,h/2,0,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=ink.rim; ctx.beginPath(); ctx.ellipse(x+w/2-w*.18,y+h/2+h*.14,w*.22,h*.2,0,0,Math.PI*2); ctx.fill();
+    } else if (g.type==='grime_tarp') {
+      ctx.fillStyle=ink.top; ctx.beginPath();
+      ctx.moveTo(x,y+h*.4); ctx.lineTo(x+w*.3,y); ctx.lineTo(x+w,y+h*.2);
+      ctx.lineTo(x+w*.85,y+h); ctx.lineTo(x+w*.15,y+h*.85); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle=ink.fold; ctx.beginPath(); ctx.moveTo(x+w*.3,y+2); ctx.lineTo(x+w*.5,y+h-3); ctx.stroke();
+    } else if (g.type==='grime_tires') {
+      ctx.fillStyle=ink.wall;
+      ctx.beginPath(); ctx.arc(x+w*.28,y+h*.55,h*.42,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x+w*.72,y+h*.62,h*.38,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=ink.tread;
+      ctx.beginPath(); ctx.arc(x+w*.28,y+h*.55,h*.16,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x+w*.72,y+h*.62,h*.13,0,Math.PI*2); ctx.fill();
+    } else if (g.type==='grime_crate') {
+      ctx.fillStyle=ink.plank; ctx.fillRect(x,y,w,h);
+      ctx.strokeStyle=ink.slat; ctx.lineWidth=1;
+      ctx.strokeRect(x+.5,y+.5,w-1,h-1);
+      ctx.beginPath(); ctx.moveTo(x+1,y+h*.33); ctx.lineTo(x+w-1,y+h*.33);
+      ctx.moveTo(x+1,y+h*.66); ctx.lineTo(x+w-1,y+h*.66); ctx.stroke();
+    } else if (g.type==='grime_cone') {
+      ctx.fillStyle=ink.cone;
+      ctx.beginPath(); ctx.moveTo(x+w/2,y); ctx.lineTo(x+w,y+h); ctx.lineTo(x,y+h); ctx.closePath(); ctx.fill();
+      ctx.fillStyle=ink.band; ctx.fillRect(x+2,y+h*.45,w-4,2);
+    } else if (g.type==='grime_mattress') {
+      ctx.fillStyle=ink.cloth; ctx.fillRect(x,y,w,h);
+      ctx.fillStyle=ink.stain; ctx.fillRect(x+w*.2,y+h*.25,w*.4,h*.4);
+      ctx.strokeStyle='rgba(20,16,12,.5)'; ctx.strokeRect(x+.5,y+.5,w-1,h-1);
+    } else if (g.type==='grime_grate_steam') {
+      // the grate itself is static; its steam is drawn by drawGrimeSteam()
+      ctx.fillStyle=ink.bars;
+      for (let s=0;s<3;s++) ctx.fillRect(x+s*(w/3)+1,y+h-3,w/3-2,3);
+      GRIME_STEAM.push(i);
+    }
+  }
+}
+// Steam sources are re-collected each frame into a reused buffer (no allocation churn
+// beyond the array's stable length). Drawn as cheap additive puffs above actors.
+export function drawGrimeSteam() {
+  if (!GRIME_STEAM.length || !GRIME_DECOR) return;
+  const t=(state.visualNow||performance.now())/1000;
+  ctx.globalCompositeOperation='lighter';
+  for (let k=0;k<GRIME_STEAM.length;k++) {
+    const g=GRIME_DECOR[GRIME_STEAM[k]];
+    const phase=t*.5+GRIME_STEAM[k]*1.7;
+    const rise=(phase%1)*g.h*2.2;
+    const alpha=.05+.04*Math.sin(phase*6.28);
+    const sx=g.x+g.w/2+Math.sin(phase*2.4)*3, sy=g.y-rise;
+    ctx.globalAlpha=Math.max(0,alpha);
+    ctx.fillStyle='#8a8878';
+    ctx.fillRect(sx-3,sy,7,4);
+    ctx.fillRect(sx-1,sy-5,4,4);
+  }
+  ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+}
+// Cinematic frame: cached vignette sheet, drawn once per frame after lighting.
+export function buildVignetteSheet() {
+  VIGNETTE_SHEET=document.createElement('canvas');
+  VIGNETTE_SHEET.width=W; VIGNETTE_SHEET.height=H;
+  const g=VIGNETTE_SHEET.getContext('2d');
+  const inner=g.createRadialGradient(W/2,H/2,H*.36,W/2,H/2,H*.78);
+  inner.addColorStop(0,'rgba(6,4,2,0)');
+  inner.addColorStop(1,'rgba(6,4,2,.42)');
+  g.fillStyle=inner; g.fillRect(0,0,W,H);
+  const corner=g.createRadialGradient(W/2,H/2,H*.30,W/2,H/2,W*.62);
+  corner.addColorStop(0,'rgba(4,3,2,0)');
+  corner.addColorStop(1,'rgba(4,3,2,.20)');
+  g.fillStyle=corner; g.fillRect(0,0,W,H);
+}
+
 export function init_landmarks_a() {
   // ----- v14 cached set-back facades -----
   LANDMARK_CACHE = {};
@@ -406,6 +550,7 @@ export function init_landmarks_a() {
   LIGHT_SOURCE_POOL=[];ACTIVE_LIGHTS.length=0;
   FOG_SHEET = document.createElement('canvas');
   FOG_SHEET.width=W; FOG_SHEET.height=H;
+  VIGNETTE_SHEET=null;
   
   
   

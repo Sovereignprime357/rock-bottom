@@ -18,7 +18,19 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 
 ## Current shipped build
 
-**v22 — the economy waves.** Five waves built a real economy on top of the v21 world. **Copper from multiple locations** (5.1) turned one heist into a parameterized engine across four cursed sites. **Smoke-spot discovery** (5.2) made the concession venues findable — wild crackheads reveal them, but you still earn the room. **The emergency hitter** (5.3) gave copper a second life: craft a bad-trade consumable or find one rare, so every strip is "sell it or keep it to save your life later." **The robbery** (5.4) added the economy's first sink — Skid Row takes your cash, your items, the coat off your sprite, and you don't get it back. **Break-ins** (5.5) generalized the heist engine with `tool`/`cred` doors and a barren-quarter loot table, and made the crowbar and the propane torch fight for the one tool slot: cook or burglar, not both. It follows v21 (the character ceiling, the honest map, the recognition wave). The world remains `8600×5600`, the frozen v19 reference remains untouched, the 18s → 8s loop remains intact, and the suite is **19 gates**.
+**v23 — the grime & cinema pass.** The third agentic seat consumed the graphics delegation's reserved
+phases and shipped them as one wave on top of Phase 1 lighting. **The tenebrist palette regrade**
+(4.3) re-ranked 49 character palettes through one documented S-curve — shadows crushed toward mauve,
+lights protected — inside the same 8-slot palettes, with the full before→after ledger in
+`artifacts/v23/`. **The grime layer** scattered ~150 deterministic, validated litter items (weeds,
+paper, bottles, tarps, tire piles, crates, cones, mattresses, steaming grates) across the world
+without touching PROPS or WORLD_DECOR. **Ground value dither** broke the flat asphalt fills;
+**cached facade enrichment** baked rain-streaks, parapets and worn door paths into every set-back
+facade. **Weather went cinematic**: rain splashes, drifting fog banks, distant lightning. **The feel
+pack** landed hit-stop beats, a directional damage arc, corpse fades, and an always-on vignette.
+A new permanent **grime-gate** proves the layer deterministic, overlap-free, and inventory-clean
+(three red-tested counterexample modes). The world remains `8600×5600`, the frozen v19 reference
+remains untouched, the 18s → 8s loop remains intact, and the suite is **21 gates**.
 
 ## Version lineage
 
@@ -32,7 +44,7 @@ Run these from the repository root with a current Node.js:
 node tools/run-gates.mjs
 ```
 
-The runner supplies `--experimental-vm-modules`, streams all **eighteen** gates in order, and stops on the first failure.
+The runner supplies `--experimental-vm-modules`, streams all **twenty-one** gates in order, and stops on the first failure.
 
 | Gate | Enforces |
 |------|----------|
@@ -45,6 +57,8 @@ The runner supplies `--experimental-vm-modules`, streams all **eighteen** gates 
 | `legibility-gate` | The four measured legibility relationships (buildings, zones, nameplates, graffiti). |
 | `presentation-gate` | Save/input/status parity. |
 | `phase1-lighting-gate` | **The light layer.** Proves Phase 1 lighting holds: one reused diegetic light registry (sodium / fluorescent / fire / window / cop), frozen per-zone multiply+overlay grades, nearest-light AO + contact bands, and opt-in emissive indices 2/7 - with no forbidden RGB (no pure white, no neon-as-base), no palette or sprite-grid change, and the composite order intact. Nine counterexample modes red-test it. |
+| `grime-gate` | **The grime layer.** v23. Proves the ~150-item grime decor scatter is deterministic across loads, only ships known types inside world bounds, overlaps zero authored content (buildings, facades, road cores, props, decor), leaves the pinned inventories untouched (PROPS exactly 193, WORLD_DECOR exactly 96), and that the render wiring is real: low-plane decor, steam above actors, vignette composited after the glow pass, damage arc after the objective guide, clamped corpse fade. Three counterexample modes red-test it. |
+| `cart-park-gate` | **BUG-1 never returns.** v23. Drives the mounted cart across the park boundary in both directions — over both bench rows at dt=16 and max-clamped dt=50, at rocked 1.8x speed, and in a sprint seam wobble — and fails on any thrown frame, non-finite position, or stuck state. Red-tested with an injected stall. The operator's freeze report now has a standing tripwire. |
 | `recognition-gate` | **The north star.** Diffs every reward field across a full rank climb to prove recognition pays in acknowledgment and nothing else. |
 | `concession-gate` | **One loop, many rooms.** Proves exactly one `rockedT = 18000` site exists, that the high is identical at every spot, that royal static stays Block-only, and that BAD IDEA never points at an illegal room. |
 | `copper-sites-gate` | **One engine, many buildings.** Proves the 3-stage heist flow, the `heistsToday` increment, and the 2-4 yield roll each exist exactly once; that all copper sites share the 3/day cap (so more sites never means more income); that site effects structurally cannot mint cash or copper; that registry anchors match the world's rects; and walks every entry and getaway of every site under both RNG branches to end back at play. |
