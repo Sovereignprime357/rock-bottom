@@ -4,8 +4,11 @@
  */
 import { currentZoneFaction } from './npc_spawns.js';
 import { updateTerritory } from '../systems/factions.js';
+// v23 grime layer validates its scatter against authored content. Cycle-safe: these
+// bindings are read only inside init_grime_decor(), which main.js calls after init_props().
+import { BUILDINGS, PROPS } from './props.js';
 
-export let W, H, WORLD, TILE, RANKS, ZONES, TERRAIN_REGIONS, ROAD_SEGMENTS, CROSSWALKS, GROUND_PATHS, RAIL_LINES, LANDMARK_FACADES, WORLD_DECOR, UTILITY_WIRES, WORLD_LIGHTS;
+export let W, H, WORLD, TILE, RANKS, ZONES, TERRAIN_REGIONS, ROAD_SEGMENTS, CROSSWALKS, GROUND_PATHS, RAIL_LINES, LANDMARK_FACADES, WORLD_DECOR, UTILITY_WIRES, WORLD_LIGHTS, GRIME_DECOR;
 
 export const DIEGETIC_LIGHT_RGB = Object.freeze({
   sodium: '232,192,64',
@@ -387,6 +390,64 @@ export function init_constants_world() {
     { id:'copper_choir_field', kind:'ambient_field', x:6510, y:3480, radius:190, rgb:DIEGETIC_LIGHT_RGB.fire, power:.46, castsShadow:false, core:null },
     { id:'throne_ditch_field', kind:'ambient_field', x:7680, y:4880, radius:180, rgb:'138,58,58', power:.32, castsShadow:false, core:null },
   ];
-  
-  
+}
+
+// ---------- v23 SPEC-v23-grime-cinema — the grime decor layer ----------
+// Deterministic seeded scatter of non-solid, non-interactive world litter. PROPS
+// (193) and WORLD_DECOR are untouched: this is its own export, validated at init
+// against buildings/facades/road cores/props/decor so it can never block a door,
+// sit inside a building, or collide with authored content. No loot, no NPCs, no
+// shadows, no save state. Rendered in the low decor plane under the AO pass.
+// Runs AFTER init_props(): it reads BUILDINGS/PROPS, which main.js initializes
+// one step before this.
+export function init_grime_decor() {
+  const grimeTypes = [
+    { type:'grime_weed',        w:14, h:18, weight:16 },
+    { type:'grime_paper',       w:10, h:7,  weight:12 },
+    { type:'grime_bottle',      w:5,  h:11, weight:9  },
+    { type:'grime_can',         w:6,  h:6,  weight:7  },
+    { type:'grime_stain',       w:26, h:14, weight:13 },
+    { type:'grime_tarp',        w:34, h:22, weight:4  },
+    { type:'grime_tires',       w:30, h:14, weight:3  },
+    { type:'grime_crate',       w:20, h:16, weight:4  },
+    { type:'grime_cone',        w:9,  h:13, weight:3  },
+    { type:'grime_mattress',    w:38, h:24, weight:2  },
+    { type:'grime_grate_steam', w:18, h:26, weight:5  },
+  ];
+  const GRIME_TOTAL_WEIGHT = grimeTypes.reduce((sum,t)=>sum+t.weight,0);
+  let gseed = 0x5eed1a23 >>> 0;
+  const grand = () => {
+    gseed = (Math.imul(gseed, 1664525) + 1013904223) >>> 0;
+    return gseed / 0x100000000;
+  };
+  const pickGrime = () => {
+    let roll = grand() * GRIME_TOTAL_WEIGHT;
+    for (const t of grimeTypes) { roll -= t.weight; if (roll < 0) return t; }
+    return grimeTypes[0];
+  };
+  const overlapsAny = (x,y,w,h,pad) => {
+    for (const b of BUILDINGS) if (x < b.x+b.w+pad && x+w > b.x-pad && y < b.y+b.h+pad && y+h > b.y-pad) return true;
+    for (const f of LANDMARK_FACADES) if (x < f.x+f.w+pad && x+w > f.x-pad && y < f.y+f.h+pad && y+h > f.y-pad) return true;
+    for (const r of ROAD_SEGMENTS) if (x < r.x+r.w-8 && x+w > r.x+8 && y < r.y+r.h-8 && y+h > r.y+8) return true;
+    for (const p of PROPS) { const pw=p.w||28,ph=p.h||28; if (x < p.x+pw/2+pad && x+w > p.x-pw/2-pad && y < p.y+ph/2+pad && y+h > p.y-ph/2-pad) return true; }
+    for (const d of WORLD_DECOR) {
+      const dx=d.x??0, dy=d.y??0, dw=(d.w||(d.x2!=null?Math.abs(d.x2-dx):40))+8, dh=(d.h||(d.y2!=null?Math.abs(d.y2-dy):40))+8;
+      if (x < dx+dw && x+w > dx-8 && y < dy+dh && y+h > dy-8) return true;
+    }
+    for (const z of ZONES) {
+      const lx=z.x+8, ly=z.y+(z.labelDy??18)-10;
+      if (x < lx+z.name.length*7+8 && x+w > lx-8 && y < ly+4 && y+h > ly-12) return true;
+    }
+    return false;
+  };
+  GRIME_DECOR = [];
+  let grimeAttempts = 0;
+  while (GRIME_DECOR.length < 150 && grimeAttempts < 4000) {
+    grimeAttempts++;
+    const t = pickGrime();
+    const x = Math.round(grand()*WORLD.w), y = Math.round(grand()*WORLD.h);
+    if (overlapsAny(x-t.w/2, y-t.h, t.w, t.h, 6)) continue;
+    GRIME_DECOR.push({ type:t.type, x:x-Math.floor(t.w/2), y:y-t.h, w:t.w, h:t.h,
+      v:1+((gseed>>>8)&3) });
+  }
 }

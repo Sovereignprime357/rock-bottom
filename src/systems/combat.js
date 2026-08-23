@@ -247,6 +247,7 @@ export function onNpcDeath(n) {
   if(n.kingdomAdd){n.dead=true;audio.hurt();toast(n.name.toLowerCase()+' is removed from the minutes.',1400);return;}
   if(n.kingdomGuard){n.dead=true;audio.hurt();toast(n.name.toLowerCase()+' files an objection from the ground.\nno payment authorized.',1800);return;}
   n.dead = true;
+  n.deadAt = state.visualNow || performance.now(); // v23 corpse-fade clock (visual only)
   audio.hurt();
   if (n.id === 'tony' && state.bossActive && state.bossKind === 'tony') {
     state.bossActive = false;
@@ -416,6 +417,10 @@ export function damagePlayer(amount, src) {
   audio.hurt();
   state.flash = 1; state.flashColor = 'rgba(160,40,40,.4)';
   state.shake = 8;
+  // v23 SPEC-v23-grime-cinema — a real hit lands: one beat of hit-stop plus a
+  // directional damage arc the eye can read without hunting the hp bar.
+  state.hitPause = Math.max(state.hitPause, 60);
+  P.dmgArcT = 420; P.dmgArcX = src ? src.x : P.x; P.dmgArcY = src ? src.y : P.y - 40;
   state.combo = 0; // break combo
   if (src) {
     const dx = P.x - src.x, dy = P.y - src.y;
