@@ -29,6 +29,11 @@ const GATES = [
   // Promoted standalone -> permanent 2026-07-19: Phase 1's lighting / grade / AO / emissive
   // invariants now run every commit. Nine counterexample modes red-tested.
   'phase1-lighting-gate.mjs',
+  // grime-gate rides beside phase1-lighting-gate in the same render-layer family.
+  // v23: proves the grime decor layer is deterministic, overlap-free against every
+  // authored inventory, and that the pinned inventories (PROPS 193, WORLD_DECOR 96)
+  // did not move to smuggle it in. Three counterexample modes red-tested.
+  'grime-gate.mjs',
   'recognition-gate.mjs',
   'concession-gate.mjs',
   // copper-sites-gate rides behind concession-gate — same invariant class, different resource:

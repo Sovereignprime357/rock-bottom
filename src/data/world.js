@@ -447,7 +447,10 @@ export function init_grime_decor() {
     const t = pickGrime();
     const x = Math.round(grand()*WORLD.w), y = Math.round(grand()*WORLD.h);
     if (overlapsAny(x-t.w/2, y-t.h, t.w, t.h, 6)) continue;
-    GRIME_DECOR.push({ type:t.type, x:x-Math.floor(t.w/2), y:y-t.h, w:t.w, h:t.h,
+    // clamp fully inside the world so no item ever escapes the bounds
+    const cx = Math.max(0, Math.min(WORLD.w - t.w, x - Math.floor(t.w/2)));
+    const cy = Math.max(0, Math.min(WORLD.h - t.h, y - t.h));
+    GRIME_DECOR.push({ type:t.type, x:cx, y:cy, w:t.w, h:t.h,
       v:1+((gseed>>>8)&3) });
   }
 }
