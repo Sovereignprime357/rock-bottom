@@ -34,6 +34,12 @@ const GATES = [
   // authored inventory, and that the pinned inventories (PROPS 193, WORLD_DECOR 96)
   // did not move to smuggle it in. Three counterexample modes red-tested.
   'grime-gate.mjs',
+  // cart-park-gate is BUG-1's regression coverage (BUG-REPORTS.md): the operator's
+  // "cart freezes going into the park" report becomes a permanent drive of the mounted
+  // cart across the park boundary in both directions at dt=16/50, rocked speed, and
+  // sprint seam wobble — any throw, NaN position, or stuck state fails. Red-tested
+  // with an injected stall.
+  'cart-park-gate.mjs',
   'recognition-gate.mjs',
   'concession-gate.mjs',
   // copper-sites-gate rides behind concession-gate — same invariant class, different resource:
