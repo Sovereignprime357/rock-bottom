@@ -16,6 +16,34 @@
 
 ---
 
+## v23 — GRIME & CINEMA PASS — BUILT / PENDING OPERATOR EYE (August 22, 2026)
+
+Branch: `v23-grime-cinema`. Contract: `SPEC-v23-grime-cinema.md` (spec-first). Third agentic
+seat; consumed the Phase 2 / Wave 4.3 operator go reserved in `DELEGATION-graphics-upgrade.md`.
+
+- [x] **Tenebrist palette regrade (Wave 4.3).** 48 PALS + PLAYER_LAYER_PAL re-ranked through one
+  documented S-curve — shadows crushed toward mauve, lights protected, anchors and the four
+  identity-exempt palettes byte-identical. Same 8 slots, same roster. `sprite-gate` palette hash
+  re-ratified once at the final state with the full before→after ledger in
+  `artifacts/v23/palette-audit.json`; stale-hash red observed before ratification, `--red=`
+  forbidden-color injection red after.
+- [x] **Grime layer.** `GRIME_DECOR`: ~150 seeded deterministic litter items across 11 types,
+  init-validated against every authored inventory; PROPS stayed exactly 193, WORLD_DECOR exactly 96.
+  Rendered low plane under AO; grate steam drifts above actors.
+- [x] **Ground + facade work.** Deterministic value dither in `drawGroundTile`; cached facade
+  enrichment (roofline streaks, parapet lip, chalk tag, worn door paths) baked once per facade canvas.
+- [x] **Weather cinema.** Rain splash flecks, ~23s distant lightning cycle, drifting fog banks on the
+  same cached sheet (oversized draw, no edge reveal).
+- [x] **Feel pack.** Cached VIGNETTE_SHEET after the light pass; hit-stop beat + directional damage
+  arc in `damagePlayer()`; ~2.4s corpse fade via a visual-only `deadAt` clock.
+- [x] **Gates.** New permanent `grime-gate` (determinism/overlap/inventory/wiring; three red modes)
+  and BUG-1's demanded regression coverage `cart-park-gate` (boundary drive at dt=16/50, rocked speed,
+  sprint seam wobble; injected-stall red). Suite **21/21**; version bumped to v23 everywhere
+  version-gate looks; headless drawAll probe 0.415ms/frame on a 60-cop night+rain fixture.
+- [ ] **Operator eye gate.** Play v23 on the big screen: does the mauve-shadow read land? Is grime
+  density right? Vignette strength? Lightning frequency? Per-palette push-back is surgical via the
+  audit ledger. Phase 3 (selective hero bump) remains gated behind this review.
+
 ## Graphics Phase 1 — LIGHTING & GRADE — BUILT / PENDING OPERATOR EYE (July 19, 2026)
 
 Branch: `codex/graphics-phase1-light-grade`, isolated worktree. Contract:
