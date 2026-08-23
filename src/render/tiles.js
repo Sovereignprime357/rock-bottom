@@ -220,6 +220,27 @@ export function drawGroundTile(x, y) {
     ctx.fillStyle = 'rgba(232,192,64,.12)';
     ctx.fillRect(x, y+TILE-5, TILE, 3);
   }
+  // v23 SPEC-v23-grime-cinema — value dither. Asphalt is never one flat fill: a
+  // deterministic 4x4 ordered-dither speckle (dark pits on one checker cell, dry pale
+  // flecks on the other) breaks up the base at zero allocation. Same hash family as the
+  // grime pass above, so a given world pixel always dithers the same way.
+  {
+    const dark = checker ? .10 : .055, pale = checker ? .045 : .085;
+    ctx.fillStyle = `rgba(4,3,2,${dark})`;
+    for (let i=0;i<7;i++) {
+      const hx = (h ^ (i*0x9E3779B9)) >>> 0;
+      ctx.fillRect(x + (hx & 63), y + ((hx >>> 6) & 63), 1 + (hx & 1), 1);
+      if (((hx >>> 12) & 3) === 0) { // sparse second pixel keeps density uneven
+        ctx.fillRect(x + ((hx >>> 14) & 63), y + ((hx >>> 20) & 63), 1, 1);
+      }
+    }
+    ctx.fillStyle = `rgba(212,200,150,${pale})`;
+    for (let i=0;i<3;i++) {
+      const hx = (h ^ (i*0x85EBCA6B)) >>> 0;
+      if ((hx & 3) === 0) continue;
+      ctx.fillRect(x + ((hx >>> 5) & 63), y + ((hx >>> 11) & 63), 1, 1);
+    }
+  }
 }
 
 export function drawMarketStalls() {

@@ -86,8 +86,36 @@ export function buildLandmarkFacades() {
       g.fillStyle=jamb;
       g.fillRect(doorX-5,y+f.h-3,doorW+10,3);
       g.fillRect(doorX,y+f.h,doorW,3);
+      // v23 SPEC-v23-grime-cinema — worn trampled path below the aperture: pale dust
+      // scuffs on the pavement where a thousand entries actually happened.
+      let fseed=0;for(let i=0;i<f.id.length;i++)fseed=(fseed*31+f.id.charCodeAt(i))>>>0;
+      g.fillStyle='rgba(10,8,5,.20)';
+      for(let i=0;i<8;i++){
+        const wx=doorX+2+i*8+((fseed>>>(i+2))&3);
+        g.fillRect(wx,y+f.h+6+((fseed>>>(i+5))&1)*3,6,2);
+      }
     }
     const label=f.sign||'';
+    // v23 SPEC-v23-grime-cinema — facade enrichment, baked once per cache canvas.
+    // Rain-grime streaks bleed from the roofline; a parapet lip caps every wall; the
+    // door aperture gets a step plus a worn trampled path; one chalk tag scrawls near
+    // the base. All deterministic off f.id so a given facade always weathers the same.
+    {
+      let seed=0;for(let i=0;i<f.id.length;i++)seed=(seed*31+f.id.charCodeAt(i))>>>0;
+      g.fillStyle='rgba(8,6,4,.16)';
+      for(let i=0;i<Math.floor(f.w/26)+2;i++){
+        const sx=x+6+((seed^Math.imul(i+1,0x9E3779B9))>>>0)%Math.max(1,f.w-12);
+        const sw=2+(Math.imul(seed^(i*0x85EBCA6B),1)>>>28)%4;
+        const sh=Math.floor(f.h*.30)+((seed>>>(i&7))>>>0)%Math.floor(f.h*.32);
+        g.fillRect(sx,y+3,sw,sh);
+      }
+      g.fillStyle='#141110';g.fillRect(x-1,y-2,f.w+2,4);
+      g.fillStyle='rgba(232,192,64,.045)';g.fillRect(x,y,f.w,2);
+      g.strokeStyle='rgba(212,200,150,.13)';g.lineWidth=1;
+      g.beginPath();
+      const tx=x+10+((seed>>>5)%(Math.max(10,f.w-70))),ty=y+f.h-12+((seed>>>9)%6);
+      g.moveTo(tx,ty);g.lineTo(tx+9,ty-5);g.lineTo(tx+15,ty+3);g.stroke();
+    }
     const fs=Math.max(8,Math.min(12,Math.floor((f.w-18)/Math.max(1,label.length)*1.7)));
     g.font=`bold ${fs}px Courier New`; g.textAlign='center';
     const tw=Math.min(f.w-18,g.measureText(label).width+14);
