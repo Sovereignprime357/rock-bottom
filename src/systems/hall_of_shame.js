@@ -2,7 +2,8 @@
  * Tracks best/worst stats in IndexedDB via window.storage
  * Zero backend, zero wallet, pure local.
  */
-import { P, state, toast, saveGame } from '../core/runtime_ui.js';
+import { P, state, toast } from '../core/runtime_ui.js';
+import { saveGame } from '../core/audio_save.js';
 import { TOKEN_CONFIG } from '../config/token.js';
 
 const HALL_KEY = 'rockbottom_hall_of_shame';
