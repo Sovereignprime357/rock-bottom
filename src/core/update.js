@@ -17,7 +17,8 @@ import { drawAll } from '../render/frame.js';
 import { updateGuidance, updateKingdomBattle } from '../systems/campaigns.js';
 import { damagePlayer, manageCops, questToast, tryCompleteIntroRemember } from '../systems/combat.js';
 import { broadcastNews, feedPost, fireMomIntroTipOnce, fireRandomEvent, garbageTruckRumble, maybeFireMomProudCall, ringPhone } from '../systems/communications.js';
-import { updateConcessionClocks } from '../systems/concessions.js';
+import { freshConcessionClocks, updateConcessionClocks } from '../systems/concessions.js';
+import { onCrash } from '../systems/hall_of_shame.js';
 import { fireDayEvents, resetDailyCounters } from '../systems/daily_hideouts.js';
 import { adjustFaction, applyRep, updateTerritory } from '../systems/factions.js';
 import { HITTER_CRASH_MS, HITTER_CRASH_SHAKES } from '../systems/hitter.js';
@@ -139,13 +140,14 @@ export function updateWorld(dt) {
         state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
         toast('the crash arrives.\nahead of schedule.', 2200);
       } else {
-        P.crashT = 8000;
-        P.shakes = clamp(P.shakes+30, 0, 100);
-        audio.crash();
-        state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
-        toast('the crash arrives.\non schedule.', 2200);
-        recordFullHighAtPlayer({deferMs:2300});
-      }
+              P.crashT = 8000;
+              P.shakes = clamp(P.shakes+30, 0, 100);
+              audio.crash();
+              state.flash = 1; state.flashColor = 'rgba(180,80,180,.35)';
+              toast('the crash arrives.\non schedule.', 2200);
+              recordFullHighAtPlayer({deferMs:2300});
+              onCrash();
+            }
     }
   } else if (P.crashT > 0) {
     P.crashT -= dt;

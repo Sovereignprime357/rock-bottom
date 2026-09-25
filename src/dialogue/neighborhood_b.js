@@ -325,8 +325,9 @@ export function pigeonDialogue() {
   ];
   let headerExtra = '';
   if (q && !q.done && !q.available && state.counters.pigeonVisits >= 2) {
-    headerExtra = "\nhe regards you.\nhis crown is missing.\nit has been missing for some time.";
-    opts.push({ label: "ask about the crown.", action: () => {
+      headerExtra = "\nhe regards you.\nhis crown is missing.\nit has been missing for some time.";
+      import('../systems/hall_of_shame.js').then(m=>m.onCrownAttempt());
+      opts.push({ label: "ask about the crown.", action: () => {
       const spot = pickCrownSpot();
       dialogue('THE PIGEON KING', `the crown fell.\nthe pigeons grieve.\nhe says where it might be.\n\nlast seen: ${spot.where}.`, [
         { label: 'accept the search.', action: () => {

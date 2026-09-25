@@ -34,6 +34,8 @@ export async function saveGame() {
         hitterHigh: !!P.hitterHigh,
         // v13 wave 7 — faction reputation
         faction: P.faction || { street: 0, scrap: 0, spiritual: 0 },
+        // Hall of Shame — persistent save ID
+        saveId: P.saveId || null,
       },
       npcsKilled: runtime.npcs.filter(n=>n.dead&&!n.transient&&!n.kingdomGuard&&!n.kingdomPretender).map(n=>n.id),
       cashPilesCollected: Array.from(state.cashPilesCollected),
@@ -97,7 +99,9 @@ export async function loadGame() {
     // v13 wave 5 — status timers are ephemeral; never restored from save (start clean).
     P.stunT = 0; P.slowT = 0;
     // v13 wave 7 — faction reputation; old saves default all to 0 (neutral).
-    P.faction = Object.assign({ street: 0, scrap: 0, spiritual: 0 }, (sv.player && sv.player.faction) || {});
+        P.faction = Object.assign({ street: 0, scrap: 0, spiritual: 0 }, (sv.player && sv.player.faction) || {});
+        // Hall of Shame — restore saveId
+        P.saveId = sv.player && sv.player.saveId || null;
     // NPC definitions are instantiated in startGame(), after loadGame() returns. Hold the
     // durable ids until that spawn boundary instead of applying them to the empty title array.
     state.loadedNpcDeaths = new Set(Array.isArray(sv.npcsKilled)?sv.npcsKilled.filter(id=>typeof id==='string'):[]);

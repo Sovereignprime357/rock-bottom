@@ -119,7 +119,7 @@ export function scrapDogDialogue(n) {
   // already-resolved branches
   if (q.state === 'fed') {
     dialogue('THE DOG', "the dog. fed. matted but slightly less so.\nhe blinks. once. that's the whole interaction.", [
-      { label: 'pet him.', action: () => { toast("the dog accepts. tolerantly.\nthe chain rattles.", 1800); P.cred += 1; saveGame(); }},
+      { label: 'pet him.', action: () => { toast("the dog accepts. tolerantly.\nthe chain rattles.", 1800); P.cred += 1; import('../systems/hall_of_shame.js').then(m=>m.onDogPet()); saveGame(); }},
       { label: 'leave him.', action: () => {} },
     ]);
     return;

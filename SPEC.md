@@ -2273,3 +2273,49 @@ unbuilt and require explicit operator direction.
    94/377 and 14 draw sites; `rock_bottom_v19.html` remains byte-untouched. Human acceptance is the
    matched three-scene sheet at `artifacts/graphics-phase1/phase1-before-after.png` (baseline left,
    Phase 1 right; Block, Laundromat/Church, Skid Row).
+
+---
+
+## v24 — PRICE TICKER + HALL OF SHAME (2026-09-24)
+
+Implements `SPEC-price-ticker-hall-of-shame.md`. Pure client-side read (pump.fun public API) + local write (IndexedDB via `window.storage`). Zero backend, zero wallet, zero blockchain transactions.
+
+### 1. Price Ticker
+- **Source:** pump.fun public API `https://frontend-api.pump.fun/api/coin/{mint}` polled every 30s
+- **Config:** `src/config/token.js` exports `TOKEN_CONFIG.mint` (operator pastes post-launch)
+- **Display:** HUD right column, below time-of-day: `CRUMB  $0.000034  |  MC $12.4K  |  LIQ 42 SOL`
+- **Hidden** if mint empty; shows "(stale)" on API failure
+
+### 2. Buy Link
+- **Location:** Title screen, under `[ L ] load save`
+- **Action:** Opens `https://pump.fun/{mint}` in new tab
+- **Hidden** if mint empty
+
+### 3. Hall of Shame
+- **Storage:** `rockbottom_hall_of_shame` in IndexedDB via `window.storage`
+- **Scope:** Persists across all saves, survives deletion/reload
+- **Best Stats (7):** most rocks smoked, highest cred, longest run (day), most copper stripped, most routes filed, most bosses killed
+- **Worst Stats (10):** most deaths, most arrests, most soap smoked, highest shakes peak, most $ lost to cops, longest crash streak, most times dog pet, most crown attempts, most pothole arguments lost
+- **Save ID:** Each save gets persistent `save_N` assigned on first save; hall records which save achieved each record
+- **UI:** Title screen `[ H ] hall of shame` button (shows if save exists); opens panel with BEST/WORST columns
+- **Clear:** "clear record." button wipes hall, toast "the neighborhood forgets."
+
+### 4. Event Hooks
+- `die()` → `onDeath()`: increments deaths, updates highest shakes peak, longest survival, crash streak
+- `arrestScene()` → `onArrest(lostCash)`: increments arrests, adds lost cash, resets crash streak
+- `smokeRockAt()` → `onSmokeRock(isSoap)`: real rock updates mostRocksSmoked + breaks crash streak; soap increments mostSoapSmoked
+- Crash transition in `update.js` → `onCrash()`: increments crash streak
+- Dog pet interaction → `onDogPet()`: increments pet count
+- Pigeon crown quest offer → `onCrownAttempt()`: increments attempt count
+- Pothole argue interaction → `onPotholeLoss()`: increments loss count
+
+### 5. Invariants
+- **No network in gameplay loop** — price poll is independent `setInterval`
+- **No wallet, no signing, no transactions** — pure read + local write
+- **Hall never affects gameplay** — purely cosmetic
+- **Save compatible** — `saveId` additive, old loads work
+- **VIBE tone** — lowercase, flat, specific, no celebration
+
+### 6. Files
+- New: `src/config/token.js`, `src/systems/hall_of_shame.js`, `src/ui/hall_of_shame.js`, `SPEC-price-ticker-hall-of-shame.md`
+- Modified: `src/main.js`, `src/core/audio_save.js`, `src/systems/combat.js`, `src/systems/concessions.js`, `src/core/update.js`, `src/ui/hud.js`, `index.html`, `src/input/keyboard.js`, `src/input/mobile.js`, `src/dialogue/neighborhood_a.js`, `src/dialogue/neighborhood_b.js`, `src/data/npc_spawns.js`, `DELEGATION.md`

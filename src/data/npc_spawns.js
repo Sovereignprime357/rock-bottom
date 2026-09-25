@@ -180,12 +180,13 @@ export function spawnNpcs() {
         { label: 'leave.', action:()=>{} },
       ]) },
     { id:'pothole', name:'A POTHOLE (TALKING)', sprite:'pothole', x:980, y:920, w:32,h:18, color:'#0a0805',
-      hp:9999, maxHp:9999, speed:0, hostile:false,
-      interact: (n)=> dialogue('A POTHOLE', "the pothole says your full legal name.\nyou did not give it your full legal name.", [
-        { label: 'argue with the pothole.', action: ()=>{
-          P.brain = Math.max(0, P.brain-4);
-          toast("- 4 brain\nthe pothole has more facts than you do.\nthe pothole is also correct.");
-        }},
+          hp:9999, maxHp:9999, speed:0, hostile:false,
+          interact: (n)=> dialogue('A POTHOLE', "the pothole says your full legal name.\nyou did not give it your full legal name.", [
+            { label: 'argue with the pothole.', action: ()=>{
+              P.brain = Math.max(0, P.brain-4);
+              toast("- 4 brain\nthe pothole has more facts than you do.\nthe pothole is also correct.");
+              import('../systems/hall_of_shame.js').then(m=>m.onPotholeLoss());
+            }},
         { label: 'throw something in it.', action: ()=>{
           if (P.cash>=1) { P.cash--; P.cred++; toast("- $1\n+ 1 cred\nthe pothole accepts.\nthe pothole says 'thank you' in your mother's voice."); }
           else toast("you have nothing to throw.\nthe pothole understands. the pothole is patient.");

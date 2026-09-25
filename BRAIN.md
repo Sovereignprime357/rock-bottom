@@ -2461,3 +2461,34 @@ lab-matched fixtures — noted honestly).
 shadows land or push back), grime density, vignette strength, lightning frequency (~23s).
 Phase 3 (selective hero bump) stays operator-gated. BUG-2/BUG-3 need his symptoms before
 anyone touches them.
+
+---
+
+## v24 — Price Ticker + Hall of Shame (2026-09-24)
+
+### WHAT
+Implemented pump.fun price ticker in HUD, buy link on title screen, and local-only Hall of Shame leaderboard. Zero backend, zero wallet, zero blockchain transactions. Operator pastes mint address in `src/config/token.js` post-launch.
+
+### WHY
+User wanted token connection without ongoing funding. Read-only price feed + local leaderboard fits: shows real token data, gives "leaderboard" vibe, costs $0 ongoing, breaks no game systems.
+
+### HOW
+- **Price ticker:** `setInterval` every 30s → pump.fun public API → renders in HUD right column. Hidden if mint empty.
+- **Buy link:** Title screen anchor → `pump.fun/{mint}` in new tab. Hidden if mint empty.
+- **Hall of Shame:** IndexedDB via `window.storage` key `rockbottom_hall_of_shame`. Tracks 7 best / 10 worst stats across all saves. Each save gets persistent `save_N` ID.
+- **Event hooks:** Death, arrest, smoke (real/soap), crash, dog pet, crown attempt, pothole loss all call into `hall_of_shame.js`.
+- **Save ID:** Added `saveId` to player save object (additive, version 10 unchanged).
+- **UI:** Title screen `[ H ] hall of shame` button, `H` key on title, mobile tap handlers. Panel with BEST/WORST columns, "clear record." button.
+
+### DECISIONS
+- No chips system — user said "not funding in-game token." Removed `chipsBanked` from hall design mid-implementation.
+- No wallet adapter — would break the 18s/8s loop with signing popups. Kept it read-only.
+- Hall purely cosmetic — never gates content, never affects stats.
+- VIBE tone throughout: lowercase, flat, "the neighborhood forgets."
+
+### FILES
+New: `src/config/token.js`, `src/systems/hall_of_shame.js`, `src/ui/hall_of_shame.js`, `SPEC-price-ticker-hall-of-shame.md`
+Modified: `src/main.js`, `src/core/audio_save.js`, `src/systems/combat.js`, `src/systems/concessions.js`, `src/core/update.js`, `src/ui/hud.js`, `index.html`, `src/input/keyboard.js`, `src/input/mobile.js`, `src/dialogue/neighborhood_a.js`, `src/dialogue/neighborhood_b.js`, `src/data/npc_spawns.js`, `DELEGATION.md`, `SPEC.md`
+
+### NEXT
+Operator launches token, pastes mint in `src/config/token.js`. Deploys. Hall of Shame populates as players play.

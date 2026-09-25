@@ -44,6 +44,22 @@ seat; consumed the Phase 2 / Wave 4.3 operator go reserved in `DELEGATION-graphi
   density right? Vignette strength? Lightning frequency? Per-palette push-back is surgical via the
   audit ledger. Phase 3 (selective hero bump) remains gated behind this review.
 
+## v24 — PRICE TICKER + HALL OF SHAME — SHIPPED ✓ (September 24, 2026)
+
+Branch: main (direct commit). Contract: `SPEC-price-ticker-hall-of-shame.md`.
+
+- [x] **Price ticker.** Real-time pump.fun price/MC/liquidity fetch every 30s. HUD line: `CRUMB  $0.000034  |  MC $12.4K  |  LIQ 42 SOL`. Hidden if no mint configured.
+- [x] **Buy link.** Title screen "buy crumb on pump.fun" → opens pump.fun/{mint} in new tab. Hidden if no mint configured.
+- [x] **Hall of Shame.** Local-only leaderboard in IndexedDB tracking 7 best / 10 worst stats across all saves: most rocks smoked, highest cred, longest run, most copper stripped, most routes filed, most bosses killed / most deaths, most arrests, most soap smoked, highest shakes peak, most $ lost to cops, longest crash streak, most times dog pet, most crown attempts, most pothole arguments lost.
+- [x] **Title screen integration.** `[ H ] hall of shame` button (shows if save exists), `[ L ] load save` (shows if save exists), buy link (shows if token config exists).
+- [x] **Keyboard/touch.** `H` key on title screen opens hall. Mobile tap handlers for all three title buttons.
+- [x] **Event hooks.** Death, arrest, smoke (real/soap), crash, dog pet, crown attempt, pothole loss all update hall records.
+- [x] **Save ID persistence.** Each save gets persistent `save_N` ID stored in save file and hall records.
+- [x] **Clear record.** "clear record." button wipes hall with toast "the neighborhood forgets."
+- [x] **Operator config.** `src/config/token.js` — paste mint address post-launch. Zero code changes needed.
+
+Notes: No backend, no wallet, no blockchain transactions. Pure read (price) + local write (hall). VIBE tone throughout.
+
 ## Graphics Phase 1 — LIGHTING & GRADE — BUILT / PENDING OPERATOR EYE (July 19, 2026)
 
 Branch: `codex/graphics-phase1-light-grade`, isolated worktree. Contract:

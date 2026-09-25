@@ -1,10 +1,10 @@
-/* Generated from frozen rock_bottom_v19.html.
- * Source seams: HUD.
- * Do not hand-edit; change the source module after the refactor lands.
- */
 import { P, state } from '../core/runtime_ui.js';
 import { RANKS } from '../data/world.js';
 import { resolvePresentationLayout } from './layout.js';
+import { hasTokenConfig, getTokenMint, getTokenSymbol } from '../systems/hall_of_shame.js';
+
+let priceTickerTimer = null;
+let lastPriceData = null;
 
 export function syncPresentationLayout() {
   const stage=document.getElementById('stage'),hud=document.getElementById('hud');
@@ -17,6 +17,41 @@ export function syncPresentationLayout() {
   const topbar=document.querySelector('#mobile-ctrls .topbar'),ticker=document.getElementById('ticker');
   if(topbar)topbar.style.width=layout.topbar.w+'px';
   if(ticker)ticker.style.right=layout.ticker.right+'px';
+}
+
+async function fetchTokenPrice() {
+  if (!hasTokenConfig()) return;
+  try {
+    const mint = getTokenMint();
+    const symbol = getTokenSymbol();
+    const res = await fetch(`https://frontend-api.pump.fun/api/coin/${mint}`);
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    lastPriceData = {
+      price: data.price || 0,
+      marketCap: data.market_cap || data.usd_market_cap || 0,
+      liquidity: data.liquidity || data.virtual_sol_reserves || 0,
+      symbol,
+    };
+    renderPriceTicker();
+  } catch (_) {
+    // silent fail, keep last data
+  }
+}
+
+function renderPriceTicker() {
+  const el = document.getElementById('priceTicker');
+  if (!el) return;
+  if (!lastPriceData || !hasTokenConfig()) {
+    el.style.display = 'none';
+    return;
+  }
+  el.style.display = 'block';
+  const p = lastPriceData.price;
+  const mc = lastPriceData.marketCap;
+  const liq = lastPriceData.liquidity;
+  const sym = lastPriceData.symbol;
+  el.textContent = `${sym}  $${p.toFixed(8)}  |  MC $${(mc/1000).toFixed(1)}K  |  LIQ ${liq.toFixed(0)} SOL`;
 }
 
 export function updateHUD() {
@@ -40,12 +75,17 @@ export function updateHUD() {
   const phase = ht<0.2?'night':ht<0.3?'dawn':ht<0.7?'day':ht<0.8?'dusk':'night';
   const tEl = document.getElementById('timeOfDay');
   if (tEl) tEl.textContent = `day ${state.day} · ${phase} · ${state.weather} · 🏷 ${hdone}/${h.length}`;
+  renderPriceTicker();
 }
 
 export function init_hud() {
   // ---------- HUD ----------
   syncPresentationLayout();
   window.addEventListener('resize',syncPresentationLayout);
-  
-  
+
+  // Price ticker poll
+  if (hasTokenConfig()) {
+    fetchTokenPrice(); // initial
+    priceTickerTimer = setInterval(fetchTokenPrice, 30000);
+  }
 }

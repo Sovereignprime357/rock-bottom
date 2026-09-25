@@ -12,6 +12,7 @@ import { completeIntroSmoke } from './combat.js';
 import { broadcastNews, feedPost } from './communications.js';
 import { applyRep } from './factions.js';
 import { REGULAR_VENUE_BY_ID, recognitionTier, recognitionVenueAt } from './recognition.js';
+import { onSmokeRock, onCrash } from './hall_of_shame.js';
 
 // ---------- spot registry ----------
 // The Block is the only unconditional spot, forever (OD-5). Concession spot ids
@@ -282,6 +283,7 @@ export function smokeRockAt(spotId) {
     unlockAchievement('soap_tongue');
     // intro chain still completes — the loop is the loop
     completeIntroSmoke();
+    onSmokeRock(true);
     saveGame();
     return;
   }
@@ -304,6 +306,7 @@ export function smokeRockAt(spotId) {
   applyRep({ street: 1, spiritual: -1 }); // wave 7 — smoking real rocks ledger
   // v13 wave 3 — completes the intro chain
   completeIntroSmoke();
+  onSmokeRock(false);
   saveGame();
 }
 

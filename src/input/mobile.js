@@ -17,7 +17,7 @@ import { startIncident, updateActiveIncident } from '../systems/incidents.js';
 import { endingScreen } from '../systems/interactions.js';
 import { ROUTE_STOPS, ensureBlockRoute, hustleProgress, rollBlockRoute, routePatchTier, tryStampBlockRoute, validBlockRoute } from '../systems/progression_routes.js';
 
-export let loadBtnEl, titleLoadTap;
+export let loadBtnEl, hallBtnEl, buyLinkEl, titleLoadTap;
 
 export function setupMobile() {
   // detect touch
@@ -178,22 +178,38 @@ export function init_mobile() {
   setupMobile();
   
   // The visible load receipt is a real touch/click target, not keyboard-only decoration.
-  loadBtnEl=document.getElementById('loadBtn');
-  titleLoadTap=(e)=>{
-    e.preventDefault();e.stopPropagation();
-    loadFromTitle();
-  };
-  loadBtnEl.addEventListener('pointerdown',titleLoadTap);
-  loadBtnEl.addEventListener('touchstart',titleLoadTap,{passive:false});
-  loadBtnEl.addEventListener('click',titleLoadTap);
-  
-  // detect existing save for title screen; storage absence must not break a double-clicked build.
-  (async () => {
-    try{
-      const s = await window.storage.get(SAVE_KEY);
-      if (s && s.value) loadBtnEl.style.display = 'block';
-    }catch(_){ /* volatile play still works when the host provides no storage adapter */ }
-  })();
+    loadBtnEl=document.getElementById('loadBtn');
+    hallBtnEl=document.getElementById('hallBtn');
+    buyLinkEl=document.getElementById('buyLink');
+    titleLoadTap=(e)=>{
+      e.preventDefault();e.stopPropagation();
+      loadFromTitle();
+    };
+    loadBtnEl.addEventListener('pointerdown',titleLoadTap);
+    loadBtnEl.addEventListener('touchstart',titleLoadTap,{passive:false});
+    loadBtnEl.addEventListener('click',titleLoadTap);
+
+    hallBtnEl.addEventListener('pointerdown',(e)=>{e.preventDefault();e.stopPropagation();import('./ui/hall_of_shame.js').then(m=>m.renderHallOfShame());});
+    hallBtnEl.addEventListener('touchstart',(e)=>{e.preventDefault();e.stopPropagation();import('./ui/hall_of_shame.js').then(m=>m.renderHallOfShame());},{passive:false});
+    hallBtnEl.addEventListener('click',(e)=>{e.preventDefault();e.stopPropagation();import('./ui/hall_of_shame.js').then(m=>m.renderHallOfShame());});
+
+    // detect existing save for title screen; storage absence must not break a double-clicked build.
+    (async () => {
+      try{
+        const s = await window.storage.get(SAVE_KEY);
+        if (s && s.value) {
+          loadBtnEl.style.display = 'block';
+          hallBtnEl.style.display = 'block';
+        }
+        // buy link shows if token config exists
+        const { hasTokenConfig, getTokenMint } = await import('../systems/hall_of_shame.js');
+        if (hasTokenConfig()) {
+          buyLinkEl.style.display = 'block';
+          const link = document.getElementById('pumpFunLink');
+          if (link) link.href = 'https://pump.fun/' + getTokenMint();
+        }
+      }catch(_){ /* volatile play still works when the host provides no storage adapter */ }
+    })();
   
   requestAnimationFrame(update);
   

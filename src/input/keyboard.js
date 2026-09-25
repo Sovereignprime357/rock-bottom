@@ -102,11 +102,17 @@ export function init_keyboard() {
       return;
     }
     if (k === 'p') {
-      phoneState.visible = !phoneState.visible;
-      renderPhone();
-      return;
-    }
-    // play mode keys
+          phoneState.visible = !phoneState.visible;
+          renderPhone();
+          return;
+        }
+        if (k === 'h') {
+          if (state.mode === 'title') {
+            import('./ui/hall_of_shame.js').then(m => m.renderHallOfShame());
+            return;
+          }
+        }
+        // play mode keys
     if (state.mode !== 'playing') return;
     if (MOVEMENT_KEYS.has(k)) e.preventDefault();
     state.keys.add(k);

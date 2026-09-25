@@ -16,6 +16,7 @@ import { broadcastNews, feedPost } from './communications.js';
 import { adjustFaction, applyRep, factionTier } from './factions.js';
 import { endingScreen } from './interactions.js';
 import { rollBlockRoute, rollHustles } from './progression_routes.js';
+import { onDeath, onArrest } from './hall_of_shame.js';
 
 export let COP_HARD_CAP;
 
@@ -445,6 +446,7 @@ export function die() {
   // cops vanish
   runtime.npcs = runtime.npcs.filter(n => !n.isCop);
   toast('you wake up at the block.\nyour mouth tastes like a battery.\nit is approximately tuesday.', 3500);
+  onDeath();
   saveGame();
 }
 
@@ -457,6 +459,7 @@ export function arrestScene() {
   runtime.npcs = runtime.npcs.filter(n => !n.isCop);
   toast(`arrested.\n- $${lostCash} · - all rocks\nthey didn't check your sock.`, 4000);
   feedPost("arrested again. they did not check the sock. the sock is safe.", '@crackheadcent');
+  onArrest(lostCash);
   saveGame();
 }
 

@@ -80,6 +80,8 @@
   #title .start{color:var(--cream);font-size:14px;letter-spacing:3px;animation:blink 1.2s infinite;margin-bottom:6px}
   #title .load{color:#776;font-size:11px;letter-spacing:2px;cursor:pointer;margin-top:6px}
   #title .load:hover{color:var(--piss)}
+  #title .load a{color:inherit;text-decoration:none}
+  #title .load a:hover{color:var(--piss);text-decoration:underline}
   #title .credit{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#443;font-size:10px;letter-spacing:3px}
   #title .receipt{width:min(620px,90vw);border-top:1px dashed #665;border-bottom:1px dashed #665;padding:10px 12px;margin:0 0 18px;color:#998f6f;font-size:10px;line-height:1.7;text-align:center;letter-spacing:1px}
   #title .receipt b{color:var(--piss);font-weight:normal;letter-spacing:2px}
@@ -221,6 +223,7 @@
         <div><span id="rankName">stem-tip sucker</span> · <span id="cred">0</span> cred</div>
         <div><span class="stars" id="wanted"></span></div>
         <div id="timeOfDay" style="color:#776">tuesday · day</div>
+        <div id="priceTicker" style="color:var(--piss);font-size:10px;letter-spacing:1px;display:none"></div>
         <div class="keyhint">move wasd · hit space · bother e · business q</div>
       </div>
     </div>
@@ -243,6 +246,8 @@
       <div class="receipt"><b>THE PLAN</b> · find $10 · bother tony · smoke at the crate<br><b>THE LONGER PLAN</b> · file 3 routes · acquire the office · install 4 claims · settle tony · answer the radio · dispute every throne<br>MOVE · wasd / arrows &nbsp; HIT · space &nbsp; BOTHER · e &nbsp; RUN · shift<br>POCKETS · i &nbsp; BAD IDEAS · q &nbsp; SQUINT WRONG · f &nbsp; FEED · p<br>TOUCH · stick moves &nbsp; HIT hits &nbsp; BOTHER uses &nbsp; SQUINT squints</div>
       <div class="start">[ SPACE / TAP ] begin</div>
       <div class="load" id="loadBtn" style="display:none">[ L ] load save</div>
+      <div class="load" id="hallBtn" style="display:none">[ H ] hall of shame</div>
+      <div class="load" id="buyLink" style="display:none"><a href="#" id="pumpFunLink" target="_blank" rel="noopener">buy crumb on pump.fun</a></div>
       <div class="credit">vibekoded · the possum knows</div>
     </div>
     <div id="poweron"><div class="line"></div></div>
