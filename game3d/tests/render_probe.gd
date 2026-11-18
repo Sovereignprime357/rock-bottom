@@ -71,6 +71,7 @@ func _run() -> void:
 			_capture("conversation")
 			game.hud.close_menu()
 			game.mode = "paused"
+	await _capture_portraits()
 	game._title()
 	game.player.position = Vector3(0, 0.05, 8)
 	game.player.rotation = Vector3.ZERO
@@ -110,6 +111,7 @@ func _run() -> void:
 	var report := {
 		"device": RenderingServer.get_video_adapter_name(), "resolution": "1280x720",
 		"engine": Engine.get_version_info().string, "vsync": "disabled for probe",
+		"msaa_3d": root.msaa_3d,
 		"window_focused": DisplayServer.window_is_focused(), "measurements": samples,
 		"scope": "native render + six production actors; optional 54 art-only animated duplicates, not 60 full AI agents"
 	}
@@ -123,6 +125,37 @@ func _run() -> void:
 	await process_frame
 	await create_timer(0.25).timeout
 	quit()
+
+func _capture_portraits() -> void:
+	# Eye-level art evidence is deliberately separate from the production cameras
+	# and measured workload. Pete's QA camera may cross the service aperture.
+	var player_transform: Transform3D = game.player.transform
+	var camera_transform: Transform3D = game.camera.transform
+	var camera_fov: float = game.camera.fov
+	var hud_visible: bool = game.hud.visible
+	var hands_visible: bool = game.hands.visible
+	game.hud.hide()
+	game.hands.hide()
+	game.camera.fov = 48.0
+	for id: String in ["tony", "pete", "yuri", "lurch", "possum", "brutus"]:
+		var actor: Node3D = game.actors[id]
+		var head: Node3D = actor.get_node("Art/head")
+		var forward: Vector3 = actor.global_basis.z.normalized()
+		var up: Vector3 = actor.global_basis.y.normalized()
+		var focus: Vector3 = head.global_position + up * 0.04 + forward * 0.14
+		var distance: float = 0.8 if id == "possum" else 1.0
+		game.player.transform = Transform3D(Basis.IDENTITY, focus + forward * distance - camera_transform.origin)
+		game.camera.position = camera_transform.origin
+		game.camera.look_at(focus)
+		await process_frame
+		await physics_frame
+		await RenderingServer.frame_post_draw
+		_capture("portrait_" + id)
+	game.player.transform = player_transform
+	game.camera.transform = camera_transform
+	game.camera.fov = camera_fov
+	game.hud.visible = hud_visible
+	game.hands.visible = hands_visible
 
 func _measure(label: String, count: int, day_time: float) -> void:
 	fixed_day = day_time

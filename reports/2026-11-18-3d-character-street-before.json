@@ -1,0 +1,59 @@
+{
+	"device": "NVIDIA GeForce RTX 3080",
+	"engine": "4.5.1-stable (official)",
+	"measurements": [
+		{
+			"actors": 6,
+			"engine_fps_monitor": 539.0,
+			"engine_frames_drawn": 2785,
+			"frames": 2785,
+			"mean_interval_ms": 1.79579533213645,
+			"median_cpu_process_ms": 3.36,
+			"median_draw_calls": 701.0,
+			"observed_render_hz": 556.856331066585,
+			"p95_interval_ms": 2.596,
+			"seconds": 5.00129,
+			"view": "block_day"
+		},
+		{
+			"actors": 6,
+			"engine_fps_monitor": 526.0,
+			"engine_frames_drawn": 2737,
+			"frames": 2737,
+			"mean_interval_ms": 1.82721373766898,
+			"median_cpu_process_ms": 3.236,
+			"median_draw_calls": 749.0,
+			"observed_render_hz": 547.281349403449,
+			"p95_interval_ms": 2.845,
+			"seconds": 5.001084,
+			"view": "block_night"
+		},
+		{
+			"actors": 60,
+			"engine_fps_monitor": 139.0,
+			"engine_frames_drawn": 699,
+			"frames": 699,
+			"mean_interval_ms": 7.16152789699571,
+			"median_cpu_process_ms": 9.495,
+			"median_draw_calls": 4775.0,
+			"observed_render_hz": 139.635007275403,
+			"p95_interval_ms": 8.638,
+			"seconds": 5.005908,
+			"view": "render_idle_stress"
+		}
+	],
+	"resolution": "1280x720",
+	"scope": "native render + six production actors; optional 54 art-only animated duplicates, not 60 full AI agents",
+	"vsync": "disabled for probe",
+	"window_focused": true,
+	"world_batching": {
+		"batches": 142,
+		"palette_surfaces": 1256,
+		"skipped_meshes": 0,
+		"source_meshes": 1266,
+		"source_surfaces": 1266,
+		"surfaces": 142,
+		"triangles": 18852,
+		"vertices": 32762
+	}
+}

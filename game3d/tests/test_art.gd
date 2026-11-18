@@ -2,6 +2,7 @@ extends SceneTree
 
 const Surfaces = preload("res://scripts/surface_kit.gd")
 const Batcher = preload("res://scripts/mesh_batcher.gd")
+const Characters = preload("res://scripts/character_art.gd")
 var checks: int = 0
 var failures: Array[String] = []
 
@@ -12,11 +13,13 @@ func _initialize() -> void:
 
 func _run() -> void:
 	_test_surfaces()
+	_test_periodic_fields()
 	_test_geometry()
 	_test_cells_and_guards()
 	_test_palette_batching()
+	_test_character_geometry()
 	if failures.is_empty():
-		print("3D ART GATE: PASS (%d checks; deterministic material tiles, transformed geometry, normals, render state and untouched pivots/collision)" % checks)
+		print("3D ART GATE: PASS (%d checks; deterministic periodic tiles, transformed geometry, bounded character meshes, selective normals, render state and untouched pivots/collision)" % checks)
 		quit(0)
 	else:
 		for failure: String in failures:
@@ -79,6 +82,99 @@ func _tile_statistics(tile: Image) -> Vector3:
 			maximum = maxf(maximum, value)
 			total += value
 	return Vector3(minimum, maximum, total / float(tile.get_width() * tile.get_height()))
+
+
+func _test_periodic_fields() -> void:
+	# Test the properties that make broad dirt fields safe to tile. Include
+	# negative coordinates and subpixel samples; integer-only tests miss seams.
+	for cell: int in [8, 16, 32]:
+		var bounded: bool = true
+		var periodic: bool = true
+		var continuous: bool = true
+		for salt: int in [11, 19, 37, 47]:
+			for at: Vector2 in [Vector2(-128.25, -0.125), Vector2(-1, 129.5), Vector2.ZERO, Vector2(7.625, 15.75), Vector2(63.2, 127.9)]:
+				var value: float = Surfaces._field(at.x, at.y, cell, salt)
+				bounded = bounded and is_finite(value) and value >= 0.0 and value <= 1.0
+				periodic = periodic and is_equal_approx(value, Surfaces._field(at.x + 128.0, at.y, cell, salt))
+				periodic = periodic and is_equal_approx(value, Surfaces._field(at.x, at.y - 128.0, cell, salt))
+			for seam: float in [0.0, float(cell), 128.0]:
+				continuous = continuous and absf(Surfaces._field(seam - 0.001, 3.75, cell, salt) - Surfaces._field(seam + 0.001, 3.75, cell, salt)) < 0.00001
+				continuous = continuous and absf(Surfaces._field(11.5, seam - 0.001, cell, salt) - Surfaces._field(11.5, seam + 0.001, cell, salt)) < 0.00001
+		_check(bounded, "%dpx wear field stays finite and within neutral modulation bounds" % cell)
+		_check(periodic, "%dpx wear field repeats exactly across both 128px tile axes" % cell)
+		_check(continuous, "%dpx wear field has no jumps at lattice or tile boundaries" % cell)
+
+
+func _test_character_geometry() -> void:
+	for id: String in ["tony", "pete", "yuri", "lurch", "possum", "brutus", "player_hands"]:
+		var actor: Node3D = Characters.create_character(id)
+		root.add_child(actor)
+		var points: Array[Vector3] = _points(actor)
+		var finite_points: bool = not points.is_empty()
+		for point: Vector3 in points:
+			finite_points = finite_points and point.is_finite()
+		_check(finite_points, "%s contains finite authored geometry" % id)
+		if finite_points:
+			var bounds: AABB = _bounds(points)
+			# Broad physical envelopes catch spikes or a unit/scale mistake without
+			# freezing a face, proportion, triangle count or exact silhouette.
+			var max_size := Vector3(1.8, 2.5, 1.5)
+			var min_height: float = 1.4
+			if id in ["possum", "brutus"]:
+				max_size = Vector3(1.2, 1.4, 2.5)
+				min_height = 0.25
+			elif id == "player_hands":
+				max_size = Vector3(1.4, 1.4, 1.4)
+				min_height = 0.15
+			_check(bounds.size.x > 0.15 and bounds.size.x <= max_size.x and bounds.size.y >= min_height and bounds.size.y <= max_size.y and bounds.size.z > 0.15 and bounds.size.z <= max_size.z, "%s stays within a human/creature/viewmodel physical envelope (%s)" % [id, bounds.size])
+			if id != "player_hands":
+				_check(bounds.position.y >= -0.15 and bounds.position.y < 0.15, "%s remains grounded at its unchanged art origin" % id)
+		var normals: Dictionary = {"valid": true, "triangles": 0, "flat": 0, "smooth": 0}
+		_character_normal_stats(actor, normals)
+		_check(normals.valid and normals.triangles > 0, "%s visible triangles have finite unit normals facing their drawn side" % id)
+		if id in ["tony", "pete", "yuri", "lurch"]:
+			var head: Node3D = actor.get_node_or_null("head")
+			var head_normals: Dictionary = {"valid": true, "triangles": 0, "flat": 0, "smooth": 0}
+			if head != null: _character_normal_stats(head, head_normals)
+			_check(head_normals.smooth > 0 and head_normals.flat > 0, "%s head combines softened broad forms with hard detail planes" % id)
+		actor.free()
+
+
+func _character_normal_stats(node: Node3D, stats: Dictionary) -> void:
+	if node is MeshInstance3D:
+		var instance: MeshInstance3D = node as MeshInstance3D
+		for surface: int in range(instance.mesh.get_surface_count()):
+			var arrays: Array = instance.mesh.surface_get_arrays(surface)
+			var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+			if arrays[Mesh.ARRAY_NORMAL] == null or arrays[Mesh.ARRAY_NORMAL].size() != vertices.size():
+				stats.valid = false
+				continue
+			var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+			var indices := PackedInt32Array()
+			if arrays[Mesh.ARRAY_INDEX] != null: indices = arrays[Mesh.ARRAY_INDEX]
+			var count: int = indices.size() if not indices.is_empty() else vertices.size()
+			if count % 3 != 0:
+				stats.valid = false
+				continue
+			for offset: int in range(0, count, 3):
+				var a: int = indices[offset] if not indices.is_empty() else offset
+				var b: int = indices[offset + 1] if not indices.is_empty() else offset + 1
+				var c: int = indices[offset + 2] if not indices.is_empty() else offset + 2
+				var cross: Vector3 = (vertices[b] - vertices[a]).cross(vertices[c] - vertices[a])
+				# Legacy pole triangles have zero area and draw no pixels. They do
+				# not license bad normals on the actual visible surface beside them.
+				if cross.length_squared() < 1e-16: continue
+				var face_normal: Vector3 = -cross.normalized()
+				var flat: bool = true
+				for index: int in [a, b, c]:
+					var normal: Vector3 = normals[index]
+					stats.valid = stats.valid and normal.is_finite() and absf(normal.length() - 1.0) < 0.001 and normal.dot(face_normal) > 0.0
+					flat = flat and normal.distance_to(face_normal) < 0.001
+				stats.triangles += 1
+				if flat: stats.flat += 1
+				else: stats.smooth += 1
+	for child: Node in node.get_children():
+		if child is Node3D: _character_normal_stats(child as Node3D, stats)
 
 
 func _box(parent: Node3D, paint: Material, position_at: Vector3) -> MeshInstance3D:

@@ -2544,3 +2544,51 @@ and exact build/file list are recorded in `reports/2026-11-18-3d-menu-fix.md`.
 **Next.** Operator can refresh localhost8073 and click wake up/continue. In an embedded browser
 without capture, hold right mouse to look. Full browser save/economy/encounter acceptance and
 standalone-browser captured-pointer feel are still broader work, not implied by this fix.
+
+## 2026-11-18 — connected characters and coherent streets
+
+**What/why.** Operator requested another graphics/texture pass, especially characters, buildings,
+streets and NPCs, closer to Schedule I. Read the tone/corpus and captured
+`SPEC-3D-CHARACTER-STREET.md` before code. Branch `codex/3d-character-street-polish` starts at
+the menu fix `63eb32f`. This is original low-poly art for the existing six residents and Block.
+
+**Changed.** Connected authored head/body forms replace the primitive assembly look. Selective
+smooth normals retain hard cloth/jaw breaks. Faces, fitted eyes/hair/beard, three Tony coats,
+distinct silhouettes, cuffs/fists and both animals were revised. Shops gained deep bays,
+smaller mounted signs, side-wall detail, layered awnings and varied rooflines. Distant buildings,
+grouped curb/yard props, gutters/inlets/manholes, a coherent crossing and flush road repairs
+replace the empty skyline and scattered raised-looking stamps. Original cached tiles now use
+smooth periodic wear, smaller masonry courses and restrained grain. Balanced cream/slate light
+and 4x MSAA improve surface separation and thin edges while retaining the dirty palette.
+
+**Decisions.** Larger four-to-five-head caricature proportions are intentional for recognition;
+the spec records this eye-review refinement. Actor origins, pivots, bounded animation API,
+physics/rays, gameplay, saves and browser capture/menu behavior stay intact. New standing props
+have matching collision. Static batching and Compatibility remain. Decision: IMPL-3D-ART-02.
+
+**Tried/corrected.** An initial GDScript inference error in the new head helper required an
+explicit float; the runner rejected the engine error even though a direct invocation printed
+PASS/exit0. Open coat ribbons avoid invalid convex-fan hem caps. First renders caught two
+detached moustache triangles, Pete's collar intersecting his jaw, an awning sloped across the
+pawn sign and puddles floating above the road/casting slab shadows. Fixed each and re-rendered.
+Review also raised a yard shelf and its contents 5cm above a float-sensitive ground-clearance
+cutoff so overhead decoration cannot become an invisible ground blocker.
+
+**Verification.** Legacy runner 19/19; 3D runner 3/3 (106 simulation, 92 scene, 196 art checks).
+Native tour observed crash at 18.004s and completion at 26.009s, with isolated save roundtrip.
+Both exports built and packaged Windows boot exited0 cleanly. Live in-app browser loaded the
+new hashed pack, entered play, moved to Tony, opened/left dialogue and paused/resumed without
+the old loop. Embedded pointer-lock refusal still appears in its console; fallback movement
+and menu exits remained usable. Browser QA made no purchase/save and did not test a full cycle.
+
+**Measured art cost.** Same native cameras, RTX3080, 1280x720, Compatibility, VSync off, 5s
+warmed samples. Day draws701->838, p95 rendered interval2.596->3.108ms. Night749->886,
+2.845->3.530ms. Six actors plus54 art-only idle duplicates4775->4914, 8.638->9.052ms.
+Before uses2x MSAA, after4x; this is increased quality at a modest measured cost, not a speedup
+or full60-agent/browser FPS claim. Raw logs/JSON and before/after captures are linked in
+`reports/2026-11-18-3d-character-street.md`.
+
+**Next.** Operator eye/play review at localhost8073: faces, hands, streets, lighting and movement.
+Full neighborhood/AI parity and full browser save/encounter acceptance remain separate. The
+public GitHub Pages entry is still the original 2D release; this increment is in the local
+Windows/Web builds and the named source branch.

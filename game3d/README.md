@@ -34,6 +34,15 @@ workbench and street details. Existing residents have more defined faces, layere
 hands and shoes; Pete eats, the possum walks and Brutus moves his jaw. These are bounded idle
 gestures, not new transactions. Static geometry batches once; animated pivots stay independent.
 
+The character/street refinement replaces primitive-looking faces and limbs with connected
+authored forms and selective smooth shading. Each resident has a distinct head/body silhouette;
+Brutus, the possum and first-person fists use the same coherent approach. Shops have layered
+window bays, smaller mounted signs, awnings, side-wall details and varied rooflines. The streets
+have a zebra crossing, gutters/drains, manholes, flush repairs and grouped curbside props. Smaller
+masonry courses, smoother wear fields, balanced cream/slate lighting and 4x MSAA improve clarity.
+Original palettes and all gameplay/capture/save contracts remain intact. Native day/night views,
+portraits and before/after measurements are in `../reports/2026-11-18-3d-character-street.md`.
+
 You can earn, buy, sell, smoke, fight, crash, die/recover, save and load. Real rocks use the
 18-second high / 8-second crash. A 240-second active day refreshes bounded finds and Pete's
 $200 outlay. Native saves use a separate Godot user-data file; browser saves go through async
@@ -88,5 +97,7 @@ rendering/idle-animation pressure, not full 60-NPC AI/gameplay. It changes no pl
 its own output directory under `.build/art-pass/`. Draw-call counts and CPU/render timings are
 reported separately, with hardware/focus state and VSync disabled for the probe.
 
-Contracts: `../SPEC-3D-SLICE.md`, `../SPEC-3D-ART-PASS.md` and `../SPEC-3D-TRANSITION.md`.
+Contracts: `../SPEC-3D-SLICE.md`, `../SPEC-3D-ART-PASS.md`, `../SPEC-3D-CHARACTER-STREET.md`
+and `../SPEC-3D-TRANSITION.md`.
+Character/street refinement: `../SPEC-3D-CHARACTER-STREET.md`.
 Identity and tone: `../VIBE.md`.

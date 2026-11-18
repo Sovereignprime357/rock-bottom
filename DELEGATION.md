@@ -1,5 +1,22 @@
 # DELEGATION.md — Rock Bottom Backlog
 
+## 3D character and street refinement — BUILT / OPERATOR EYE REVIEW (November 18, 2026)
+
+Branch: `codex/3d-character-street-polish`; contract `SPEC-3D-CHARACTER-STREET.md`.
+
+- [x] Connected human facial/body forms with selective smooth normals, distinct silhouettes,
+  fitted hair/eyes/beard, layered Tony coats, improved animals and first-person fists.
+- [x] Deeper storefront bays, side walls, smaller mounted signs, varied roofs, distant buildings,
+  coherent road markings/repairs, gutters/manholes and grouped curbside/yard props.
+- [x] Refined cached tiles, balanced cream/slate lighting and 4x MSAA; preserved Compatibility,
+  static batching, original palette and the recent browser capture/menu correction.
+- [x] Production simulation/scene/art gates, six close-up portraits, eye-level day/night review
+  and same-camera before/after render stress. Evidence: `reports/2026-11-18-3d-character-street.md`.
+- [x] Rebuilt Windows/Web, clean packaged Windows boot, native real-time loop/save tour, and
+  live browser start/movement/Tony dialogue/leave/pause/Continue with the final art pack.
+- [ ] Operator eye/play review of this visual increment. Further NPC AI/gameplay parity remains
+  separate; this pass refines existing residents and their bounded gestures.
+
 ## 3D browser menu blocker — FIXED (November 18, 2026)
 
 Branch: `codex/3d-browser-menu-fix`; contract amendment in `SPEC-3D-SLICE.md`.

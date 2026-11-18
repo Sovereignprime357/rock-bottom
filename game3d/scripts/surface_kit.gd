@@ -36,7 +36,7 @@ static func material(kind: String, hex: String, roughness: float = 0.94, emissio
 		result.uv1_triplanar_sharpness = 8.0
 		# Local triplanar survives rig motion and supports custom meshes without UVs.
 		result.uv1_world_triplanar = surface not in ["fabric", "skin", "rubber"]
-		var repeats: float = 0.52 # A brick is ~0.48m wide / ~0.24m high.
+		var repeats: float = 0.80 # Masonry courses read at ~0.31m wide / ~0.16m high.
 		match surface:
 			"plaster", "concrete", "asphalt": repeats = 0.75
 			"wood": repeats = 0.8
@@ -102,53 +102,68 @@ static func _noise(x: int, y: int, salt: int = 0) -> float:
 	return float((value ^ (value >> 16)) & 65535) / 65535.0
 
 
+static func _field(x: float, y: float, cell: int, salt: int) -> float:
+	# Smooth, periodic dirt fields avoid the old visible square noise cells.
+	var period: int = TILE_SIZE / cell
+	var ix: int = floori(x / cell)
+	var iy: int = floori(y / cell)
+	var fx: float = smoothstep(0.0, 1.0, fposmod(x, cell) / cell)
+	var fy: float = smoothstep(0.0, 1.0, fposmod(y, cell) / cell)
+	var a := _noise(posmod(ix, period), posmod(iy, period), salt)
+	var b := _noise(posmod(ix + 1, period), posmod(iy, period), salt)
+	var c := _noise(posmod(ix, period), posmod(iy + 1, period), salt)
+	var d := _noise(posmod(ix + 1, period), posmod(iy + 1, period), salt)
+	return lerpf(lerpf(a, b, fx), lerpf(c, d, fx), fy)
+
+
 static func _tile(kind: String) -> Image:
 	var tile: Image = Image.create(TILE_SIZE, TILE_SIZE, false, Image.FORMAT_RGB8)
 	for y: int in range(TILE_SIZE):
 		for x: int in range(TILE_SIZE):
 			var grain: float = _noise(x, y, 3)
-			var patch: float = _noise(x >> 3, y >> 3, 11)
+			var patch: float = _field(x, y, 16, 11)
+			var broad: float = _field(x, y, 32, 19)
 			var value: float = 0.96
 			match kind:
 				"brick":
 					var row: int = y >> 4
 					var bx: int = posmod(x + (row % 2) * 16, TILE_SIZE)
 					var face: float = _noise(bx >> 5, row, 7)
-					value = 0.91 + face * 0.07 + grain * 0.02
+					value = 0.89 + face * 0.075 + grain * 0.016 + broad * 0.025
 					if y % 16 < 2 or bx % 32 < 2:
 						value = 0.67 + grain * 0.07
 					elif y % 16 == 2 or bx % 32 == 2:
 						value = 0.99
-					elif grain < 0.025:
-						value -= 0.11
+					elif grain < 0.018:
+						value -= 0.075
 				"plaster":
-					value = 0.94 + grain * 0.045
-					if patch < 0.14: value -= (0.14 - patch) * 0.8
-					if grain < 0.015: value -= 0.12
+					value = 0.905 + broad * 0.065 + grain * 0.018
+					if patch < 0.28: value -= (0.28 - patch) * 0.19
+					if grain < 0.009: value -= 0.09
 				"concrete":
-					value = 0.91 + grain * 0.07 + patch * 0.02
-					if grain < 0.035: value -= 0.13
-					if x % 64 == 0: value -= 0.07
+					value = 0.90 + grain * 0.045 + broad * 0.045
+					if grain < 0.024: value -= 0.11
+					if patch < 0.23: value -= 0.018
 				"asphalt":
-					value = 0.90 + grain * 0.085
-					if grain < 0.11: value -= 0.12
-					if _noise(x >> 1, y >> 1, 23) > 0.85: value = 0.99
+					value = 0.88 + grain * 0.055 + broad * 0.065
+					if grain < 0.075: value -= 0.10
+					if _noise(x >> 1, y >> 1, 23) > 0.89: value = 0.98
 				"wood":
-					var stripe: float = _noise(x >> 1, ((y >> 5) + (x >> 4)) % 4, 37)
-					value = 0.91 + grain * 0.035 + stripe * 0.045
-					if stripe < 0.13: value -= 0.10
+					var stripe: float = _field(x, 8.0 + 6.0 * sin(float(y) * TAU / TILE_SIZE), 8, 37)
+					value = 0.905 + grain * 0.018 + stripe * 0.07
+					if sin(float(x) * PI * 0.5 + sin(float(y) * TAU / TILE_SIZE) * 0.7) > 0.87: value -= 0.035
 					if x % 32 < 1: value = 0.71 + grain * 0.04
 				"painted_metal":
-					value = 0.95 + grain * 0.03
-					if patch < 0.12 and grain < 0.3: value = 0.72 + grain * 0.25
-					if y % 29 == 2 and _noise(x >> 4, y, 47) > 0.65: value = 0.83
+					value = 0.935 + broad * 0.04 + grain * 0.012
+					if patch < 0.25 and grain < 0.35: value = 0.76 + grain * 0.20
+					if x % 29 == 2 and _field(x, y, 32, 47) > 0.64: value = 0.85
 				"fabric":
-					value = 0.94 + grain * 0.04
-					if (x + y) % 4 == 0: value -= 0.055
+					value = 0.94 + grain * 0.018 + broad * 0.025
+					if (x + y) % 4 == 0: value -= 0.04
 					if x % 4 == 0 and y % 4 == 0: value = 0.99
 				"skin":
-					value = 0.965 + grain * 0.03
-					if grain < 0.015: value = 0.88
+					value = 0.955 + broad * 0.025 + grain * 0.012
+					if grain < 0.006: value = 0.88
 				"rubber":
 					value = 0.93 + grain * 0.045
 					if y % 32 < 2: value -= 0.06

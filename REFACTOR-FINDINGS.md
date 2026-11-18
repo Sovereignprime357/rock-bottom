@@ -637,3 +637,30 @@ supported `mainPack` and file-size config. No save-key, engine, hosting or 2D ru
 production scene checks. Browser event-order permutations and right-drag math are exercised by
 the native scene gate; that does not claim every browser grants pointer lock. Full browser
 gameplay/save acceptance remains separate. Details: `reports/2026-11-18-3d-menu-fix.md`.
+
+## IMPL-3D-ART-02 — connected characters and coherent streets (2026-11-18)
+
+**Status:** executed on `codex/3d-character-street-polish` under the operator's request to bring
+graphics/textures, particularly characters, buildings, streets and NPCs closer to Schedule I.
+Contract captured first in `SPEC-3D-CHARACTER-STREET.md`.
+
+**Decision:** original authored cross-section meshes with selectively softened normals, coherent
+face/nose/hair/body surfaces and distinct resident shapes. Keep exaggerated four-to-five-head
+caricature proportions for recognition instead of forcing uniform realistic anatomy. Fit eye,
+mouth, clothing and animal details onto those forms; retain every actor origin, rig API, identity
+and bounded animation. Architecture gains deep bays/trim/awnings, varied roofs, smaller mounted
+signs and grouped lived-in edges. Streets gain coherent crossing/repair/drain details. New blockers
+have collision; elevated/flat decoration must not invent ground exclusion zones or cast floating
+slab shadows.
+
+**Materials/rendering:** original cached mipmapped neutral tiles with periodic smooth wear,
+smaller masonry courses, restrained skin grain, cream sunlight/slate fill and 4x MSAA. Existing
+Compatibility rendering and static batching remain. The before sample uses 2x MSAA; quality
+changes are declared in the comparison. No new NPC identities, economy, save schema, tutorial,
+external art assets, 2D runtime edits or claim of full 60-agent AI performance.
+
+**Review:** day/night eye-level and six close-up portraits caught a reversed awning pitch,
+floating shadow-casting puddles, detached moustache pieces and Pete's collar/jaw overlap; fixed
+before handoff. Static review caught a shelf exactly on the ground-clearance cutoff; raised it
+5cm with its contents. Production gates preserve routes, transactions, menu exits and loop
+timing. Full evidence and measured limits: `reports/2026-11-18-3d-character-street.md`.

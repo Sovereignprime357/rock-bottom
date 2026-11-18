@@ -3,6 +3,9 @@
 Captured 2026-11-18 before implementation. Operator requested continued improvements to graphics,
 textures, assets, characters, buildings, streets and NPCs while away from the PC.
 
+The operator's subsequent closer-to-Schedule-I refinement is specified separately in
+`SPEC-3D-CHARACTER-STREET.md`; the original material/batching guarantees below remain binding.
+
 ## Intent and boundary
 
 Improve the existing first-person neighborhood as a coherent low-poly place: distinguish road,
