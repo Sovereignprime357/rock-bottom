@@ -2379,3 +2379,38 @@ frozen v19 and `index.html` have no capture-only diff.
 **Next.** Operator eye gate on `artifacts/graphics-phase1/phase1-before-after.png`: rule area hue,
 source strength, shadow seating, and whether the result stays grimy rather than clean. Stop there.
 Phase 2 palette/grime and Phase 3 resolution remain unbuilt until an explicit operator go.
+
+## 2026-11-18 — 3D direction / corpus and migration review
+
+**What / why.** The operator requested understanding the repo and building toward low-poly 3D
+similar to Schedule I. Read VIBE first, reviewed the lore/spec/audit/log corpus, inspected current
+system owners, and split independent lore and architecture audits. Captured
+`SPEC-3D-TRANSITION.md`, linked it from SPEC and the backlog, and recorded OD-3D-DIRECTION.
+
+**Decided.** Treat the new visual medium as the user's stated direction. Recommend a compact
+first-person desktop slice and Godot/Blender workflow; neither is represented as user-selected.
+Preserve the existing browser release while the new runtime is scoped. Translate neighborhood
+relationships and travel time, not the pixel dimensions. The essential product is recognition
+without meaningful elevation, small transactions, physical comedy and the recurring high/crash.
+
+**Findings.** The live game is v22, not AGENTS' v21 header. Existing four earned concessions and
+the 6s/14s emergency-hitter exception must survive any full parity port. The module split still
+couples shared state, DOM and rendering; this is an engine port, not a camera toggle. Current
+route budgets leave little room for first-person detours. RESEARCH-ABSURDITY contains unbuilt
+proposals. Reviewed the existing Block image and official reference/engine documentation; no
+claim of a fresh end-to-end browser playthrough or a 3D visual acceptance pass is made.
+
+**Tried / failed.** No implementation experiments, runtime edits or new assets. Some broad corpus
+reads exceeded tool output limits; focused reads and independent source audits supplied the
+missing context. Existing documentation drift is recorded, not bulk-rewritten in this session.
+
+**Verification.** Baseline `node tools/run-gates.mjs` exited 0, `GATE RUNNER: 19/19 PASS` at
+`fdd0ccc364540cc46d67b14be51a5f9fb145fc36`. A final staged documentation check follows before
+commit. After the draft and independent review corrections, the full runner again exited 0,
+19/19 PASS; complete output is `reports/2026-11-18-3d-transition-gates.txt`. Existing gates verify
+the browser build, not an unbuilt 3D executable. Review clarified action-time smoke guards,
+current timer-reset behavior on load, legitimate repeat visits, and muted blue tarp identity.
+
+**Next.** Resolve the pending platform/perspective preference, select/pin the runtime, capture
+the scoped architecture amendment, and implement the walkable Block/corner art proof. Then
+complete the earn/buy/smoke/fight/crash/recover/save loop before expanding the neighborhood.

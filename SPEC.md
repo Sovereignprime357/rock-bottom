@@ -1,5 +1,10 @@
 # SPEC.md — Rock Bottom Behavioral Contract
 
+> **2026-11-18 — 3D direction captured:** `SPEC-3D-TRANSITION.md` records the operator's request
+> for a low-poly 3D version with Schedule I as a graphics reference. It is a proposed port and
+> first-slice contract, not implemented behavior. The active v22 browser contracts below remain
+> in force; platform, perspective, engine and native-runtime exceptions are not yet selected.
+
 > SpecMesh format. Read VIBE.md before this if you haven't already. Spec without vibe is a soulless port.
 
 > ## ⚠️ AUDIT CORRECTIONS 2026-07-18 (`CORPUS-AUDIT.md`) — the unversioned "current state" sections drifted

@@ -540,3 +540,24 @@ bounded visual wave a red-tested contract.
 **Preserved:** Canvas 2D, pixelated world rendering, eight-entry palettes, sprite-gate's 94/377
 snapshot and 14 destinations, gameplay geometry/state/random order, frozen v19, and the Phase 2/3
 operator boundary.
+
+## OD-3D-DIRECTION — low-poly 3D direction received (2026-11-18)
+
+**Status:** operator-requested direction; platform/perspective/engine and implementation amendment
+remain open. This entry does not retroactively alter an earlier decision.
+
+**Operator request:** "Go into this repo, read the lore and corpus understand the game. I want to
+build this out as a 3d low poly game similar to the graphics of the game schedule 1".
+
+**Executed:** reviewed the corpus against the v22 runtime, ran the unchanged 19-gate baseline, and
+captured `SPEC-3D-TRANSITION.md`. The architectural recommendation is a separate native 3D project
+with explicit behavior fixtures and new assets, rather than an implicit change to the active
+browser entry. First-person Windows/Godot/Blender is a recommendation, not an operator ruling.
+
+**Scope interpretation:** the later user instruction authorizes the new low-poly visual direction.
+The old sprite rules still govern the shipped 2D build; they do not prohibit investigating the
+requested port. No code, engine dependency, asset pipeline, save migration, or 3D runtime has been
+introduced in this session. Implementation must capture its own concrete scoped amendment first.
+
+**Preserved:** VIBE's voice and identity, frozen v19, active browser source, current save namespace,
+all current gate definitions, and the distinction between research proposals and shipped content.

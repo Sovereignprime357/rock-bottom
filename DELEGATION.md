@@ -1,5 +1,22 @@
 # DELEGATION.md — Rock Bottom Backlog
 
+## 3D transition — DIRECTION CAPTURED / IMPLEMENTATION PROPOSED (November 18, 2026)
+
+Contract: `SPEC-3D-TRANSITION.md`. The operator wants low-poly 3D with Schedule I as the graphics
+reference. Current browser baseline: v22, 19/19 gates passing. This is a separate proposed port.
+
+- [x] Read the tone/lore corpus and audit live systems, progression, architecture and gates.
+- [x] Capture source owners, visual direction, first playable circuit, preservation requirements
+  and counterexamples. Record direction/scope in `REFACTOR-FINDINGS.md` (OD-3D-DIRECTION).
+- [ ] Resolve platform/perspective preference; select and pin the engine and scoped architecture
+  amendment. Working recommendation: first-person Windows, Godot 4, Blender/glTF.
+- [ ] Landing A: a walkable Block/corner art proof at player height.
+- [ ] Landing B: earn/buy/smoke/fight/crash/recover/save/reload, with behavioral fixtures.
+- [ ] Land consequences, neighborhood parity and succession in the subsequent declared stages.
+
+No 3D implementation is shipped by the research/spec entry. Existing pending visual judgments
+below remain historical review tasks; the new direction does not silently mark them accepted.
+
 > Tasks for the next agent picking this up. Prioritized. Each task has a SPEC stub. Pick top-down. Don't ship a task without updating its status here.
 
 > ## ⚠️ MERGE-STATUS CORRECTION 2026-07-18 (audit `CORPUS-AUDIT.md`)
