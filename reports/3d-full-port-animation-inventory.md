@@ -5,7 +5,7 @@ under `SPEC-3D-FULL-PORT.md`. This is an inventory and subordinate presentation 
 a claim of full-port parity. Source inspected: the active `src/` game, current `game3d/` rigs,
 and VIBE in full. Frozen v19 was not used as the live authority.
 
-## Current 3D implementation
+## 3D implementation at the pre-P01 audit baseline
 
 | Area | Actual implementation | Gap relevant to the port |
 |---|---|---|
@@ -241,3 +241,47 @@ spending, ray/collision, pause/save and legacy gates stay green.
 For later skinned rigs add normalized finite bone weights, UV bounds, joint deformation and
 prop socket tests; inspect face profiles, knees/elbows, clothing overlap and foot contact.
 All observations here are source findings; no engine, game or browser was run for this audit.
+
+## P01/P05a implementation and review notes
+
+P01 now has a separate explicit-tick articulated viewmodel. Parent integrated it and generated
+native captures in `.build/full-port/p01`. The first captured punch exposed a real pose defect:
+the wrist folded down behind the cuff, leaving only a sleeve silhouette. Corrected wrist
+alignment, cuff overlap and grip-prop placement; added projected cuff/knuckle regression checks.
+The next captures show clear left/right fists, relaxed recovery, lower sprint posture, a visible
+receipt and held food. Still images do not establish subjective motion smoothness. Generic food
+and equip acknowledgement are limited presentation; later item/weapon grip families remain work.
+One initial gait assertion sampled near the cycle's return to rest; it now samples excursion
+against a same-clock stationary controller instead of relying on a single phase.
+
+P05a is specified separately in `SPEC-3D-CHARACTER-ROSTER.md`. Parent's central native headless
+run passes149 checks for the six initial models. The initial failed run exposed optional
+nonindexed mesh arrays returning Nil. Conversion now handles sequential triangles explicitly,
+rejects incomplete construction and does not cache a failed template. The gate also requires
+both construction and complete geometry/animation checks for every model. Exit0 alone never
+qualifies as evidence; parent verifies the error-free full log.
+
+| P05a identity | Meshes/surfaces | Triangles | Bones | Max vertex influences |
+|---|---:|---:|---:|---:|
+| Tony |10/10|16,978|26|4|
+| Pete |6/6|7,970|26|4|
+| Yuri |6/6|7,962|26|4|
+| Lurch |5/5|7,640|26|4|
+| Brutus |6/6|6,615|22|4|
+| Possum |4/4|5,546|21|4|
+
+Tony exceeds the provisional6–12k art range because his three actual removable sleeves/coats
+remain geometry. This is reported for profiling, not hidden by counting only visible layers.
+All six together are52,711 triangles. Meshes, materials and bind skins are cached; bones,
+attachments and state are independent per instance. The independent source review found a
+potential deformed-body culling limit; enlarged bounds and actual CPU-skinned death/extended-pose
+bounds checks now cover it. No production60-AI performance claim follows from these counts.
+
+`game3d/tests/character_roster_probe.gd` provides58 native PNGs under `.build/full-port/p05`
+using production neighborhood lighting/ground and explicit snapshots: all six front/quarter
+rest and walk at2m; strike/hurt/death; explicit human peak strikes; rest at20m; Tony's four coat
+states; Pete eat/Yuri inspect. The first20m setup was blocked by a wall and was not usable
+readability evidence. The corrected far view uses the street with a physics line-of-sight check.
+It owns no simulation/save/audio or autonomous pose loop. Render review remains required before
+the P05a checkpoint is accepted. The63-row identity ledger still distinguishes the initial six
+from57 unimplemented registry identities; aliases are not fabricated extra residents.

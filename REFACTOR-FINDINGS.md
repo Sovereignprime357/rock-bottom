@@ -695,3 +695,40 @@ visual correction restored fist clearance beyond the cuff and connected props to
 native real-time loop/save tour and browser controls; details in the foundation report.
 Full world, complete cast/AI, all domain systems and whole-game native/Web acceptance remain
 required before the persistent goal can be complete. Public deployment is unchanged.
+
+## IMPL-3D-FULL-02 — full world and composed domain foundations (2026-11-18)
+
+**Status:** executed bounded checkpoint on `codex/3d-full-port`; full port remains active.
+Contracts: SPEC-3D-WORLD-BUILD, CHARACTER-ROSTER, ECONOMY, COMBAT, RUNTIME and PHYSICS-ADAPTER.
+
+**World/physics:**53 standing structures,193 props and23 zones preserve source geography.
+Authored ground openings resolve source-embedded services; real shape casts and rays validate
+consumer access. Source bounds clamp intended positions before collision. All321 campaign/legal
+route pairs pass physical sweeps at base5.5m/s, worst59.396s. The real fixed-step controller takes
+59.402s on the critical path without stuck corners. Global planning is not a per-frame AI path.
+Low pickups, strict44px office reach and actual vendor/smoke access also pass the composed230-check
+consumer test.
+
+**Characters:** six original skinned identities, up to26 bones and four normalized influences,
+cached GPU geometry and independent pose state. Source identity and coat-state geometry remain;
+finger ownership separates palm/finger/thumb/arm chains, avoiding deformation contamination.
+Native pose review required a fitted front apron sheet over Pete's belly. Full63-cast parity is
+still pending and cannot be inferred from these six models or the identity ledger.
+
+**Domains:** live one-use action capabilities, exact source inventory record semantics, actual
+core vendors and a single model composition. Movement uses source speed/status modifiers;
+fixed-step timers and collision results remain authoritative. Save events coalesce only after
+all domain consequences; malformed restore envelopes cannot erase an active Runtime session.
+
+**Combat adaptations:** source rotated first-person melee, physical wall-first contacts and swept
+projectiles, unchanged weapon/reward/archetype governors. Brendan's verified ReferenceError is
+explicitly repaired to finish intended badge/cash/faction/achievement/save outcome; original
+failure is a separate fixture. Preserve shipped any-ordinary-fists-kill pipe reward. Cosmetic
+RNG no longer shifts gameplay rolls. Special deaths require an atomic capable domain handler.
+No generic death reward substitutes for unfinished boss/campaign systems.
+
+**Evidence/limits:** original19/19; expanded3D22/22 including2870 combat checks/63 source fixtures,
+585 economy checks/23 source fixtures,159 rig checks,55 Runtime and21 adapter checks. Day/night
+world captures62 and native rig captures58. Report contains gate output, files and selected images.
+Production full-cast AI, remaining systems, full scene, exports and whole-game native/Web tours
+remain required. No completed parity feature or full60AI performance is claimed.

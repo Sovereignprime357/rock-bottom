@@ -41,7 +41,7 @@ function Invoke-Gate {
 }
 
 Invoke-Gate -Name 'import' -GodotArgs @('--editor', '--import', '--quit')
-foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd')) {
+foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd')) {
     if (-not (Test-Path -LiteralPath (Join-Path $PSScriptRoot $script) -PathType Leaf)) {
         throw "Required gate $script is missing. Simulation, scene and art checks must exist before this runner can pass."
     }
@@ -53,11 +53,21 @@ Invoke-Gate -Name 'viewmodel' -GodotArgs @('--script', 'res://tests/test_viewmod
 Invoke-Gate -Name 'full-state' -GodotArgs @('--script', 'res://tests/test_game_state.gd', '--quit-after', '6000') -PassPattern '3D FULL STATE GATE: PASS'
 Invoke-Gate -Name 'memory' -GodotArgs @('--script', 'res://tests/test_memory_loop.gd', '--quit-after', '6000') -PassPattern '3D MEMORY GATE: PASS'
 Invoke-Gate -Name 'progression' -GodotArgs @('--script', 'res://tests/test_progression.gd', '--quit-after', '6000') -PassPattern '3D PROGRESSION GATE: PASS'
+Invoke-Gate -Name 'economy' -GodotArgs @('--script', 'res://tests/test_economy.gd', '--quit-after', '6000') -PassPattern '3D ECONOMY GATE: PASS'
+Invoke-Gate -Name 'full-world' -GodotArgs @('--script', 'res://tests/test_full_world.gd', '--quit-after', '12000') -PassPattern 'FULL WORLD GEOMETRY PASS:'
+Invoke-Gate -Name 'roster' -GodotArgs @('--script', 'res://tests/test_character_roster.gd', '--quit-after', '6000') -PassPattern '3D CHARACTER ROSTER GATE: PASS'
+Invoke-Gate -Name 'combat' -GodotArgs @('--script', 'res://tests/test_combat.gd', '--quit-after', '6000') -PassPattern '3D COMBAT GATE: PASS'
+Invoke-Gate -Name 'full-runtime' -GodotArgs @('--script', 'res://tests/test_full_runtime.gd', '--quit-after', '6000') -PassPattern '3D FULL RUNTIME GATE: PASS'
+Invoke-Gate -Name 'physics-adapter' -GodotArgs @('--script', 'res://tests/test_world_adapter.gd', '--quit-after', '6000') -PassPattern '3D PHYSICS ADAPTER GATE: PASS'
+Invoke-Gate -Name 'full-integration' -GodotArgs @('--script', 'res://tests/test_full_integration.gd', '--quit-after', '6000') -PassPattern '3D FULL INTEGRATION GATE: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
     @{ Name = 'memory-oracle'; Script = '3d-memory-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'progression-oracle'; Script = '3d-progression-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'economy-oracle'; Script = '3d-economy-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'world-oracle'; Script = '3d-world-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'combat-oracle'; Script = '3d-combat-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -65,4 +75,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 12/12 PASS (import clean; 7 engine suites and 5 source/parity checks; full-port integration remains tracked separately)'
+Write-Output '3D GATE RUNNER: 22/22 PASS (import clean; 14 engine suites and 8 source/parity checks; full-port integration remains tracked separately)'

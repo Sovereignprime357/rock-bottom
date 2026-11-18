@@ -85,9 +85,10 @@ This imports the project and runs production simulation, scene integration and a
 on engine error text as well as nonzero exits, because Godot can report a script error with exit0.
 The original suite remains `node tools/run-gates.mjs`.
 
-The full-port foundation expands that runner to12 checks: seven engine suites (slice simulation,
-scene, art, hands, full state, memory and progression), deterministic content/provenance checks,
-two unchanged-source oracle checks and parity coverage. Full state/model tests are not a claim
+The full-port foundation expands that runner to22 checks: fourteen engine suites (slice simulation,
+scene, art, hands, full state, memory, progression, economy, full geometry, weighted cast, combat,
+runtime, physics adapter and composed world interactions), deterministic content/provenance checks,
+five unchanged-source oracle checks and parity coverage. Full state/model tests are not a claim
 that those systems are already reachable in the current slice scene. The32-feature/585-handler
 ledger is `data/parity_manifest.json`; `node tools/3d-parity-gate.mjs --complete` intentionally
 fails until every obligation has integrated native/Web evidence.

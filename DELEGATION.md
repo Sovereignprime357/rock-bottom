@@ -12,7 +12,11 @@ characters, improved hands/animation/interaction and desktop/Web validation. Nam
 - [x] Full-state/migration, memory/high/soap/hitter and routes/hustles/territory model foundations
   independently tested against unchanged source functions. These remain scene integration work.
 - [x] Machine-readable32-feature/585-handler coverage ledger; no full feature claimed verified yet.
-- [ ] Full world physical access/path budgets, all canonical character families and agent lifecycle.
+- [x] Full world geometry foundation:23 zones/53 structures/193 props,321 capsule-tested routes,
+  62 native day/night views and actual intro pickup/walk/vendor/smoke integration.
+- [x] Six weighted original character rigs, independent animated poses, coat states and native review.
+- [x] Source-faithful Tony/Pete/Yuri economy, one-use action sessions and full-model movement composition.
+- [ ] Remaining canonical character families, production actor lifecycle and active full-world scene.
 - [ ] Full vendor/action system, combat/bosses, activities/heists, campaigns, days and presentation.
 - [ ] Full native/Web progression tours,60+ real AI profile, save/recovery audit and final delivery.
 

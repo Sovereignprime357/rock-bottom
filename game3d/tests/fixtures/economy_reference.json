@@ -1,0 +1,2544 @@
+{
+  "source": "unchanged active v22 dialogue callbacks",
+  "cases": [
+    {
+      "id": "tony_normal",
+      "setup": {
+        "player": {
+          "cash": 20,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 2,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "buy_rock"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "buy_rock",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 10,
+          "rocks": 1,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 1,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 1,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 1,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": true,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_threshold_reprice",
+      "setup": {
+        "player": {
+          "cash": 30,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 9,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "buy_rock"
+        ],
+        [
+          "tony",
+          "buy_rock"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "buy_rock",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "tony",
+          "action": "buy_rock",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 11,
+          "rocks": 2,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 11,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 2,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": true,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_crown_liked",
+      "setup": {
+        "player": {
+          "cash": 20,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "hat": "pigeon_crown"
+          },
+          "inventory": [],
+          "faction": {
+            "street": 10,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 1
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "buy_rock"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "buy_rock",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 12,
+          "rocks": 1,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "hat": "pigeon_crown"
+          },
+          "inventory": [],
+          "faction": {
+            "street": 11,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 1
+        },
+        "counters": {
+          "rocksBought": 1,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": true,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_fifty",
+      "setup": {
+        "player": {
+          "cash": 20,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 24,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 49,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "buy_rock"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "buy_rock",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 11,
+          "rocks": 1,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 25,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 50,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": true,
+        "achievements": [
+          "the_block_knows",
+          "tonys_worst"
+        ],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_short_two",
+      "setup": {
+        "player": {
+          "cash": 10,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "short"
+        ],
+        [
+          "tony",
+          "short"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "short",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "tony",
+          "action": "short",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 2,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_short_boss",
+      "setup": {
+        "player": {
+          "cash": 5,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 2,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "short"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "short",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 3,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": true,
+          "kind": "tony",
+          "phase": 1
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_challenge",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 100,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "challenge"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "challenge",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 100,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": true,
+          "kind": "tony",
+          "phase": 1
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "tony_poor",
+      "setup": {
+        "player": {
+          "cash": 4,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "tony",
+          "buy_rock"
+        ],
+        [
+          "tony",
+          "short"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "tony",
+          "action": "buy_rock",
+          "present": true,
+          "enabled": false
+        },
+        {
+          "vendor": "tony",
+          "action": "short",
+          "present": true,
+          "enabled": false
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 4,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "yuri_single",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 2,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "yuri",
+          "sell_copper"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "yuri",
+          "action": "sell_copper",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 25,
+          "rocks": 0,
+          "copper": 1,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 1,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "yuri_bulk_threshold",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 10,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 9,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "yuri",
+          "sell_all_copper"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "yuri",
+          "action": "sell_all_copper",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 250,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 14,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "yuri_liked",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 3,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 10,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "yuri",
+          "sell_all_copper"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "yuri",
+          "action": "sell_all_copper",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 84,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 13,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "yuri_shed",
+      "setup": {
+        "player": {
+          "cash": 150,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 5,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "yuri",
+          "rent_shed"
+        ],
+        [
+          "yuri",
+          "rent_shed"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "yuri",
+          "action": "rent_shed",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "yuri",
+          "action": "rent_shed",
+          "present": false,
+          "enabled": false
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 7,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": true
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_copper_cap",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 2,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 195
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "sell_copper"
+        ],
+        [
+          "pete",
+          "sell_copper"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "sell_copper",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "sell_copper",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 5,
+          "rocks": 0,
+          "copper": 1,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 1,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 1,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_liked",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 1,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 10,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "sell_copper"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "sell_copper",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 17,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 11,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 1,
+          "peteCashToday": 17
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_license_all",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [
+            {
+              "id": "license",
+              "n": "a license plate (bent)",
+              "q": 3
+            },
+            {
+              "id": "license",
+              "n": "a license plate (bent)",
+              "q": 1
+            }
+          ],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 193
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "sell_license"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "sell_license",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 7,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 1,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 1,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_junk_partial",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 9
+            },
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            },
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            }
+          ],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 198
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "sell_junk"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "sell_junk",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 2,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            }
+          ],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 1,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_sock_then_empty",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 199
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "sock"
+        ],
+        [
+          "pete",
+          "sock"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "sock",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "sock",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 1,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 1,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_food_after_cap",
+      "setup": {
+        "player": {
+          "cash": 3,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "buy_food"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "buy_food",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [
+            {
+              "id": "food",
+              "n": "a can of food (unmarked)",
+              "q": 1
+            }
+          ],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 1,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_tools_torch_first",
+      "setup": {
+        "player": {
+          "cash": 200,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "buy_torch"
+        ],
+        [
+          "pete",
+          "buy_crowbar"
+        ],
+        [
+          "pete",
+          "swap_tools"
+        ],
+        [
+          "pete",
+          "torch_again"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "buy_torch",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "buy_crowbar",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "swap_tools",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "torch_again",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 85,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": "propane_torch"
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": true,
+          "peteTorchSold": true,
+          "peteToolLocker": "crowbar",
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_tools_crowbar_first",
+      "setup": {
+        "player": {
+          "cash": 200,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "buy_crowbar"
+        ],
+        [
+          "pete",
+          "buy_torch"
+        ],
+        [
+          "pete",
+          "swap_tools"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "buy_crowbar",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "buy_torch",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "swap_tools",
+          "present": true,
+          "enabled": true
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 85,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": "crowbar"
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": true,
+          "peteTorchSold": true,
+          "peteToolLocker": "propane_torch",
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_owned_torch_not_resold",
+      "setup": {
+        "player": {
+          "cash": 200,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "tool": "crowbar"
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": "propane_torch",
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "buy_torch"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "buy_torch",
+          "present": false,
+          "enabled": false
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 200,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "tool": "crowbar"
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": true,
+          "peteTorchSold": false,
+          "peteToolLocker": "propane_torch",
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_loan_once",
+      "setup": {
+        "player": {
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 25,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "loan"
+        ],
+        [
+          "pete",
+          "loan"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "loan",
+          "present": true,
+          "enabled": true
+        },
+        {
+          "vendor": "pete",
+          "action": "loan",
+          "present": false,
+          "enabled": false
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 50,
+          "rocks": 0,
+          "copper": 0,
+          "cred": 0,
+          "rank": 0,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": 25,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 200
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": 1,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    },
+    {
+      "id": "pete_hated_refuses_all",
+      "setup": {
+        "player": {
+          "cash": 200,
+          "rocks": 0,
+          "copper": 3,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": -10,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": false,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      },
+      "operations": [
+        [
+          "pete",
+          "buy_food"
+        ],
+        [
+          "pete",
+          "sell_copper"
+        ],
+        [
+          "pete",
+          "buy_crowbar"
+        ]
+      ],
+      "offered": [
+        {
+          "vendor": "pete",
+          "action": "buy_food",
+          "present": false,
+          "enabled": false
+        },
+        {
+          "vendor": "pete",
+          "action": "sell_copper",
+          "present": false,
+          "enabled": false
+        },
+        {
+          "vendor": "pete",
+          "action": "buy_crowbar",
+          "present": false,
+          "enabled": false
+        }
+      ],
+      "expected": {
+        "player": {
+          "cash": 200,
+          "rocks": 0,
+          "copper": 3,
+          "cred": 0,
+          "rank": 3,
+          "tonyOffenses": 0,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "inventory": [],
+          "faction": {
+            "street": 0,
+            "scrap": -10,
+            "spiritual": 0
+          },
+          "charisma": 0
+        },
+        "counters": {
+          "rocksBought": 0,
+          "peteSold": 0,
+          "peteCashToday": 0
+        },
+        "flags": {
+          "peteTorchStocked": true,
+          "peteTorchSold": false,
+          "peteToolLocker": null,
+          "scrapLoanDay": null,
+          "scrapHideoutOwned": null
+        },
+        "firstRock": false,
+        "achievements": [],
+        "boss": {
+          "active": false,
+          "kind": "",
+          "phase": 0
+        },
+        "day": 1
+      }
+    }
+  ]
+}

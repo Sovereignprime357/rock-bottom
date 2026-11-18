@@ -2628,3 +2628,37 @@ Browser capture errors remain with functional fallback. Evidence/files/gate outp
 **Next.** Resolve physical world failures; validate skeletal roster and full vendor transactions;
 compose full model/controller/cast, port remaining combat/activities/campaign/day systems,
 then native/Web progression and60+ real-agent acceptance. Keep goal active until full delivery.
+
+## 2026-11-18 — full-world/model checkpoint, goal still active
+
+**Changed/why.** Built full23-zone geometry from the pinned source, physical services and all321
+campaign/route walks; added real weighted six-character rigs and explicit animation snapshots.
+Ported Tony/Pete/Yuri economy/action capabilities and ordinary combat/director/police. Root
+composed state/memory/progression/economy into Runtime, source-speed movement through native
+shape casts, live interaction queries and coalesced post-transaction saves. A real generated-world
+test walks from the guaranteed cash pickup to Tony, buys and smokes at the Block.
+
+**Decisions.** Preserve source anchors/speeds; author actual openings for inaccessible legacy
+points. Physical movement and projectiles stop at geometry before contact. Preserve fists-to-pipe
+quirk; characterize and explicitly repair Brendan's bare cashPiles ReferenceError. Cosmetic RNG
+is separated from gameplay. Shared meshes/skins have independent poses; higher polygon counts
+serve joints, fingers, faces and identity props. Global route search is occasional, never per frame.
+
+**Tried/corrected.** Fixed nine service obstructions, an indoor route and the longest route budget
+without sprint/speed/timer concessions. Roster errors exposed nonindexed mesh arrays, incomplete
+test execution, finger weights pulling palm vertices and apron clipping. Native captures corrected
+shoulder seams, punch extension, grip, far-camera obstruction and the apron sheet. Combat oracle
+aborted on a typed Array but printed success; added all63-fixture/five-group completion guards.
+Float32 physics-coordinate tolerances are documented separately from exact resource/timer checks.
+
+**Verified.** Original19/19 and expanded3D22/22; world7789, roster159, economy585, combat2870,
+runtime55, adapter21 and actual-world integration230 checks. Corrected the office physical reach
+from40px to the source's strict44px boundary. The critical actual-controller walk
+takes59.402s through11 waypoints at source base speed. Five source oracle suites remain
+green. Native world62 captures and roster58 captures; selected views reviewed and retained.
+Report: reports/2026-11-18-3d-full-world-models.md. No full-scene/native-Web parity or60AI claim.
+
+**Next.** Bounded P05b day-one/full canonical cast, P07b bosses and P12a travel are active.
+Root connects full scene/controller/presenter, then completes remaining dialogue, activities,
+heists, campaigns, day/communication systems, lifecycle/save and real native/Web acceptance.
+Default playable export remains the hand-improved slice until full integration is ready.

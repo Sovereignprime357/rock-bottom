@@ -191,4 +191,4 @@ func _test_normalizers() -> void:
 	_check(forged.size() == 1 and forged[0].reward.cash == 15,"hustle save allowlist canonical reward and dedup")
 	game.s.hustles = forged
 	var saved: Dictionary = game.snapshot()
-	_check(game.restore(saved) and _same(game.s.blockRoute,valid) and _same(game.s.hustles,forged),"route/hustles survive real schema2 roundtrip")
+	_check(game.restore(saved).ok and _same(game.s.blockRoute,valid) and _same(game.s.hustles,forged),"route/hustles survive real schema2 roundtrip")
