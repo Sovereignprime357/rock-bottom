@@ -22,3 +22,9 @@ yarn-error.log*
 # Build / temp scratch
 *.tmp
 *.bak
+
+# Local 3D toolchain and generated exports
+.tools/
+.build/
+game3d/.godot/
+game3d/builds/

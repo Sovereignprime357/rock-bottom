@@ -1,5 +1,12 @@
 # AGENTS.md — Agent Operating Constraints
 
+> **2026-11-18 scoped successor:** the operator selected first-person desktop with a secondary
+> browser target. `game3d/` follows `SPEC-3D-SLICE.md`: Godot 4.5.1, GDScript, original low-poly
+> meshes, Compatibility rendering and native/Web export. Its documented engine, art, audio,
+> persistence and build exceptions apply only there. The original rules below still govern the
+> active v22 `index.html` / `src/` release and frozen v19. Keep both gate runners green; never
+> weaken the sprite contract to admit 3D geometry. The 3D slice is not full neighborhood parity.
+
 > You are picking up a satirical action game in mid-build. Operator is Sovereign Prime (VibeKoded). ~~v3 is shipped.~~ **[✅ F-AGENTS-4: v21 is shipped — `<title>ROCK BOTTOM v21</title>`. Rule 3 below states the modular reality correctly; this header contradicted its own body.]** The comedic voice is a HARD spec — read VIBE.md before touching anything.
 
 > ## ⚠️ AUDIT CORRECTIONS 2026-07-18 (`CORPUS-AUDIT.md`)

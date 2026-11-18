@@ -1,5 +1,24 @@
 # DELEGATION.md — Rock Bottom Backlog
 
+## First-person 3D slice — BUILT / OPERATOR PLAY REVIEW (November 18, 2026)
+
+Branch: `codex/3d-first-person-slice`; contract `SPEC-3D-SLICE.md`. Desktop first-person is
+operator-selected, browser is secondary. The scoped engine decision is IMPL-3D-SLICE-01.
+
+- [x] Isolated Godot 4.5.1/GDScript/Compatibility project, original mesh kit, Windows and Web presets.
+- [x] Walkable Block, storefronts, yard and alley, six established identities, physical interaction
+  rays, first-person movement/punching, modal conversations and focus-safe pause.
+- [x] Bounded earning/purchasing, one real 18s/8s cycle, Lurch encounter, death/recovery, separate
+  native/IndexedDB save adapters, source-generated audio. Explicit subset economy in its README.
+- [x] Production simulation and scene gates; real-time native rendered loop and save proof.
+- [ ] Operator eye/play review: faces, sense of place, movement, input and encounter pacing.
+- [ ] Browser UI playthrough: export succeeds, but Computer Use halted because the active browser
+  URL could not be determined reliably. No browser-control fallback bypassed that safety stop.
+- [ ] Next parity landing: Tony's fight and police/arrest; then one recognition venue, concessions,
+  fuller economy and the rest of the neighborhood. Do not treat the slice as a finished port.
+
+The earlier transition proposal below is historical; its platform fork is now resolved.
+
 ## 3D transition — DIRECTION CAPTURED / IMPLEMENTATION PROPOSED (November 18, 2026)
 
 Contract: `SPEC-3D-TRANSITION.md`. The operator wants low-poly 3D with Schedule I as the graphics

@@ -2,11 +2,11 @@
 
 Date: 2026-11-18. Baseline: `fdd0ccc364540cc46d67b14be51a5f9fb145fc36` (v22).
 
-**Status: direction captured; implementation proposal.** The operator requested a 3D low-poly
-Rock Bottom with graphics similar to Schedule I. That authorizes exploring the new medium.
-First-person desktop, Godot, the slice below, and its provisional art budgets are recommendations,
-not recorded operator decisions. No 3D runtime, asset set, or playable build is delivered by this
-document. The existing browser release retains its active contracts.
+**Status: first-person desktop selected, browser secondary.** The operator confirmed that target
+later on 2026-11-18. `SPEC-3D-SLICE.md` captures the subsequent implementation contract and scoped
+Godot 4.5.1 architecture decision. This document remains the broader migration direction; it
+does not imply that every proposed system below is implemented. The existing v22 browser release
+retains its active contracts.
 
 ## What we are carrying forward
 
@@ -209,7 +209,6 @@ Read together: `VIBE.md`, current `SPEC.md` versioned sections, `CORPUS-AUDIT.md
 - [Godot: supported 3D formats and Blender/glTF workflow](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html)
 - [Godot: Windows export](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_windows.html)
 
-Platform/perspective remains the open user preference: first-person desktop (recommended),
-first-person browser, or third-person desktop. Settle that before selecting the runtime and
-capturing the implementation amendment. No budget, delivery date, engine choice or full-port
-authorization beyond the user's stated direction is invented here.
+Platform/perspective was resolved later on 2026-11-18: first-person desktop primary, browser
+play desirable as a secondary export. See `SPEC-3D-SLICE.md` for the scoped runtime amendment and
+first implementation. Full v22 parity remains a staged port, without an invented delivery date.

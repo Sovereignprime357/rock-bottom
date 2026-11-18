@@ -121,6 +121,14 @@ Don't punch the joke. Let it land flat. The flatness IS the comedy.
 
 ## Visual aesthetic
 
+> **3D scope, 2026-11-18:** the operator requested low-poly 3D and selected first-person desktop
+> with browser play as a secondary target. `game3d/` uses original mesh characters, source-lit
+> 3D spaces and a readable first-person HUD under `SPEC-3D-SLICE.md`. The palette, identities,
+> voice and comedy rules remain binding. Pixel-grid, Canvas-only shading and mandatory CRT
+> clauses below continue to govern the existing 2D release; they do not order a 3D character
+> back into a sprite. Native/Web audio uses cached synthesized waveforms, without external
+> samples; the new namespace's persistence is documented in the same scoped contract.
+
 ### Palette (canonical)
 ```
 piss yellow         #e8c040  (titles, glow, highlights)

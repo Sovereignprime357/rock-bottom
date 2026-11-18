@@ -1,0 +1,29 @@
+; Pinned to Godot 4.5.1 stable. See SPEC-3D-SLICE.md.
+config_version=5
+
+[application]
+config/name="ROCK BOTTOM — THE BLOCK"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.5", "GL Compatibility")
+config/use_custom_user_dir=true
+config/custom_user_dir_name="RockBottom3D"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+anti_aliasing/quality/msaa_3d=1
+environment/defaults/default_clear_color=Color(0.32, 0.29, 0.23, 1)
+
+[audio]
+driver/enable_input=false
+
+[physics]
+common/physics_ticks_per_second=60

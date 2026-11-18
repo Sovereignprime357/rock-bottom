@@ -16,6 +16,13 @@ Find cash. Score rocks. Smoke at the block. Climb ranks. Strip copper from the a
 - **Saves:** async `window.storage`; ordinary browsers receive an IndexedDB-backed adapter, with volatile memory only when IndexedDB is unavailable.
 - **Browser:** any evergreen Chromium/Firefox/Safari. Desktop and mobile both supported (analog touch controls on mobile).
 
+## First-person 3D prototype
+
+The separate **first-person 3D prototype** is in [`game3d/`](game3d/README.md), governed by
+[`SPEC-3D-SLICE.md`](SPEC-3D-SLICE.md). It targets Windows desktop with a secondary browser export.
+It is an early playable neighborhood slice, not the full v22 release described below. The root
+HTTP entry remains the original 2D game. See the 3D README for local builds, controls and checks.
+
 ## Current shipped build
 
 **v22 — the economy waves.** Five waves built a real economy on top of the v21 world. **Copper from multiple locations** (5.1) turned one heist into a parameterized engine across four cursed sites. **Smoke-spot discovery** (5.2) made the concession venues findable — wild crackheads reveal them, but you still earn the room. **The emergency hitter** (5.3) gave copper a second life: craft a bad-trade consumable or find one rare, so every strip is "sell it or keep it to save your life later." **The robbery** (5.4) added the economy's first sink — Skid Row takes your cash, your items, the coat off your sprite, and you don't get it back. **Break-ins** (5.5) generalized the heist engine with `tool`/`cred` doors and a barren-quarter loot table, and made the crowbar and the propane torch fight for the one tool slot: cook or burglar, not both. It follows v21 (the character ceiling, the honest map, the recognition wave). The world remains `8600×5600`, the frozen v19 reference remains untouched, the 18s → 8s loop remains intact, and the suite is **19 gates**.

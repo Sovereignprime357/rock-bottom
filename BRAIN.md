@@ -2414,3 +2414,53 @@ current timer-reset behavior on load, legitimate repeat visits, and muted blue t
 **Next.** Resolve the pending platform/perspective preference, select/pin the runtime, capture
 the scoped architecture amendment, and implement the walkable Block/corner art proof. Then
 complete the earn/buy/smoke/fight/crash/recover/save loop before expanding the neighborhood.
+
+## 2026-11-18 — first-person desktop slice / secondary browser export
+
+**What / why.** Operator selected first-person desktop and said browser play would also be nice.
+Captured `SPEC-3D-SLICE.md` before code, recorded OD-3D-PLATFORMS and IMPL-3D-SLICE-01, and built
+an isolated `game3d/` project. Original v22 source and frozen v19 remain untouched. The slice has
+the Block, Tony, Pete, Yuri, Lurch, Brutus, the possum, bounded finds, vendors, a real high/crash,
+melee, recovery, synthesized audio, and separate native/IndexedDB saves. Windows and Web exports
+share the source. The root browser entry is still the shipped 2D game.
+
+**Decisions.** Pinned the pre-existing official Godot4.5.1 archive, GDScript and Compatibility
+rendering, single-threaded web, source-authored original low-poly mesh kits, no external art or
+runtime plugin. Matching official templates were downloaded to ignored `.tools/`. This is a
+first-loop prototype with explicitly documented economy/combat subset choices, not full v22
+parity. Reused the live $200 Pete cap, deathHP60/shakes30/cred-10, and real18/8 transitions;
+withdrawal's legacy random per-frame damage became an explicit expected-rate0.72HP/s in the slice.
+
+**Tried / corrected.** Independent gameplay, environment and character work exposed a nonexistent
+Environment enum at import; removed it. Godot can exit0 on parse errors, so new gate/build scripts
+also fail on engine error text. Sandbox blocked editor-data writes and official template DNS;
+the required escalated calls succeeded. Agent-side approval calls were stopped and provisioning
+centralized. First render was too yellow/overexposed; reduced lighting and added Block grime.
+Screenshot review then caught reopened menus being positioned above the viewport; CenterContainer
+now owns modal placement and a scene check measures its logical viewport rectangle. Review also
+caught async-load/session races and stale E-key targets; guarded session changes and recast on
+input. Audio cleanup needed a short mixer drain before the headless test exited.
+
+**Verification.** Production simulation:106 checks. Integrated scene:33 checks, including ray
+reach, walls, paused conversations, actual purchase/smoke/update callbacks, melee cooldown/defeat,
+no repeated reward, save roundtrip and death recovery. Native rendered real-time smoke/crash and
+save tour passes; eye-level screenshots inspected. Both Windows and Web exports succeed. Full
+logs and limitations live in `reports/2026-11-18-3d-slice.md` and its linked evidence. Performance
+captures cover six actors at1280x720, not the60+ NPC target; hidden-window timing is not a benchmark.
+
+**UI verification limit.** Computer Use halted because it could not reliably determine the active
+Windows browser URL. Browser UI playthrough remains unverified; no alternative browser-control
+method bypassed that stop. The exported web build is served locally for operator testing.
+
+**Next.** Operator eye/play pass: character look, first-person fists, movement, menu readability,
+loop/encounter pacing; Pete could use a better interior fixture. Next parity increment is Tony's
+fight plus police/arrest, then one recognition venue and earned concessions. Full-map conversion,
+shipping-quality rigs, campaign, and60+ NPC profiling remain future work.
+
+**Final handoff check.** The README prototype paragraph initially displaced the required v22
+opening under Current shipped build; moved it into its own section and the original runner now
+passes19/19. Final3D runner passes106 simulation and33 scene checks. The packaged Windows export
+boots headlessly and exits cleanly. The sandboxed local server was unreachable; restarted with
+approved network access and confirmed HTTP200. Browser UI verification remains unperformed.
+Final captures show the centered menu. Hidden-window timings are inconsistent and2,625 draw
+calls warrant batching before scale; no foreground FPS or60-NPC performance claim is made.

@@ -561,3 +561,31 @@ introduced in this session. Implementation must capture its own concrete scoped 
 
 **Preserved:** VIBE's voice and identity, frozen v19, active browser source, current save namespace,
 all current gate definitions, and the distinction between research proposals and shipped content.
+
+## OD-3D-PLATFORMS — first-person desktop, browser secondary (2026-11-18)
+
+**Status:** operator selected. Exact follow-up: "yes first person desktop. playable in the browser
+would be nice as well". This resolves the open platform/perspective question in OD-3D-DIRECTION.
+The native game is primary; one shared-source browser export is desirable, not permission to
+silently sacrifice the desktop target or replace the existing root browser release.
+
+## IMPL-3D-SLICE-01 — scoped engine and first-loop implementation (2026-11-18)
+
+**Status:** executed technical decision within the requested direction, not a claim the operator
+personally selected each engine setting. Captured in `SPEC-3D-SLICE.md` before generation.
+
+**Decision:** isolate the first playable in `game3d/`, use the already available official Godot
+4.5.1 stable with GDScript, Compatibility rendering and single-threaded Web export. Source-authored
+mesh kits keep assets original and reviewable; Blender is optional for later replacements.
+Native audio caches generated waveforms. Native file and web async `window.storage`/IndexedDB
+adapters share a new schema/namespace and never touch the v22 save. Engine/templates/cache/builds
+remain ignored; repeatable export scripts and original source are committed.
+
+**Boundary:** bounded deterministic subset economy, no new NPC identities, no full v22 parity
+claim. Both normal loop timers remain exact; simulation and scene tests exercise production
+methods. Browser export is built, but its UI playthrough remains unverified after Computer Use's
+URL-identification safety stop. Native rendered evidence is separate and completed.
+
+**Preserved:** original `index.html`, all `src/` gameplay, frozen v19, existing 19-gate definitions,
+all prior append-only decisions, VIBE identities and the distinction between build proof and
+operator acceptance. Next parity work is explicitly listed in DELEGATION and the slice README.

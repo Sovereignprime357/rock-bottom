@@ -1,9 +1,9 @@
 # SPEC.md — Rock Bottom Behavioral Contract
 
-> **2026-11-18 — 3D direction captured:** `SPEC-3D-TRANSITION.md` records the operator's request
-> for a low-poly 3D version with Schedule I as a graphics reference. It is a proposed port and
-> first-slice contract, not implemented behavior. The active v22 browser contracts below remain
-> in force; platform, perspective, engine and native-runtime exceptions are not yet selected.
+> **2026-11-18 — separate first-person 3D slice:** the operator selected desktop first-person,
+> with browser play desirable too. `SPEC-3D-SLICE.md` governs `game3d/` (Godot 4.5.1, Windows plus
+> Web export); `SPEC-3D-TRANSITION.md` remains the broader migration plan. The active v22 browser
+> contracts below remain in force for `index.html` and `src/`; the slice is not full v22 parity.
 
 > SpecMesh format. Read VIBE.md before this if you haven't already. Spec without vibe is a soulless port.
 
