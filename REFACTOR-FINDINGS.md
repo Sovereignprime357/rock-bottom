@@ -613,3 +613,27 @@ simulation second and skip constant plateaus.
 actor identities or 2D runtime changes. Lurch's short hit reaction now advances on active
 simulation time, so visual motion respects pause. Public GitHub Pages remains the existing
 release; local Windows and Web exports are the review artifacts for this pass.
+
+## IMPL-3D-INPUT-01 — asynchronous browser capture and menu recovery (2026-11-18)
+
+**Status:** executed on `codex/3d-browser-menu-fix` for the operator's blocking menu-loop report.
+The behavior contract was amended in `SPEC-3D-SLICE.md` before code changes.
+
+**Cause:** the Web engine reports actual pointer lock, not a pending request. Resume requested
+capture, then the next physics tick reopened pause whenever capture was still absent. Refusal
+made the loop permanent. Escape could also toggle back into play after lock-loss already paused.
+
+**Decision:** observe successful acquisition per play session; only a subsequent loss pauses.
+Never retry capture from physics. Web Escape pauses only, and deliberate Continue requests
+capture once. Right-drag look and uncaptured left-click combat preserve play where capture is
+unavailable. True focus loss and modal simulation pause remain intact; late lock is released
+while a modal stays open. The native capture behavior is retained.
+
+**Build correction:** normal browser refresh demonstrably retained the old `index.pck` even
+after the new export. The build now copies game data to a SHA-256-named pack and updates the
+supported `mainPack` and file-size config. No save-key, engine, hosting or 2D runtime changes.
+
+**Evidence/boundary:** live in-app browser entry/movement/menu-exit proof and 38 additional
+production scene checks. Browser event-order permutations and right-drag math are exercised by
+the native scene gate; that does not claim every browser grants pointer lock. Full browser
+gameplay/save acceptance remains separate. Details: `reports/2026-11-18-3d-menu-fix.md`.

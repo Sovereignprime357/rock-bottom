@@ -51,6 +51,22 @@ I pockets, M mute. Start/continue require a user click. Focus loss pauses and re
 resume reacquires it only on a deliberate action. Menus pause the simulation. Look-to-interact
 requires reach and line of sight; modal buttons recheck resources and reject duplicate spending.
 
+**Browser capture correction (2026-11-18):** requesting pointer lock is asynchronous and may be
+refused by an embedded browser. Start/Continue enters play immediately; missing initial capture
+must not reopen a menu. Track capture actually observed in the current play session, and pause
+only when that acquired lock is subsequently lost. Request once per deliberate resume, never
+from a physics retry loop. Web Escape only pauses (including an open conversation), never
+toggles back into play after the browser already released the lock. Continue is the resume
+action. Actual window focus loss still pauses. A late lock arriving during a modal is released.
+Without capture, WASD/E/I and left-click punch remain usable; holding right mouse while dragging
+looks around. Show that binding unobtrusively while uncaptured, and in the pause control list.
+This is an input binding reference, not a gameplay tutorial. Native mouse capture is unchanged.
+Regression coverage must include delayed/refused capture, acquired-lock loss, both Escape event
+orders, modal/async-load resume, focus loss, late capture and uncaptured look/combat.
+The Web build names its game-data pack by SHA-256 content digest and points `mainPack` and its
+progress size at that file. A refreshed HTML shell must not reuse a stale `index.pck` from an
+earlier build. Engine assets remain pinned to the current engine; no save namespace changes.
+
 One simulation object owns stats/counters/timers. Scene and HUD observe it and submit actions.
 Start HP100, cash0, rocks0, shakes20, brain100, cred0. Walk 3.6m/s; high x1.8; sprint x1.7;
 crash x0.5. Shakes +0.8/s, plus 12/s while moving and sprinting. Normal rock costs $10:

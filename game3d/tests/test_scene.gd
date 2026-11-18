@@ -149,8 +149,9 @@ func _run() -> void:
 	check(game.sim.hurt(1000), "lethal damage reports death")
 	game._death()
 	check(game.player.position.distance_to(Vector3(0, 0.02, 8)) < 0.01 and game.sim.cred == 10, "death relocates to the Block with expected penalty")
+	await _test_browser_controls(game)
 	if failures.is_empty():
-		print("3D SCENE GATE: PASS (%d checks; scene boot, physical rays, collision, menus, real loop, persistence and recovery)" % checks)
+		print("3D SCENE GATE: PASS (%d checks; scene boot, physical rays, collision, menus, real loop, persistence, recovery and browser capture/fallback controls)" % checks)
 	else:
 		print("3D SCENE GATE: FAIL (%d/%d failed)" % [failures.size(), checks])
 	game.queue_free()
@@ -177,3 +178,167 @@ func _walkable_cells(world: Node3D) -> Dictionary:
 			clear[next] = true
 			queue.append(next)
 	return clear
+
+func _key_press(code: Key) -> InputEventKey:
+	var event := InputEventKey.new()
+	event.physical_keycode = code
+	event.keycode = code
+	event.pressed = true
+	return event
+
+func _press_menu(game: Node3D, text: String) -> bool:
+	for child: Node in game.hud.menu_box.get_children():
+		if child is Button and (child as Button).text == text and not (child as Button).disabled:
+			(child as Button).pressed.emit()
+			return true
+	return false
+
+func _test_browser_controls(game: Node3D) -> void:
+	# Observe browser capture states through the real production transition method.
+	# Native headless input cannot provide a browser's asynchronous lock events.
+	# Manual physics keeps those observations deterministic; the world physics and
+	# async save/load still run on the real SceneTree and independent test save file.
+	game.set_physics_process(false)
+	game.web_controls = true
+	game.sim.fresh()
+	game._respawn()
+	game._restore_enemy()
+	game._resume()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game.sim.rocks = 1
+	check(game.sim.transact("smoke").ok, "browser control regression starts the production high timer")
+	var start_clock: float = game.clock
+	var start_position: Vector3 = game.player.position
+	Input.action_press("forward")
+	for frame: int in range(5):
+		await physics_frame
+		game._physics_process(0.05)
+	Input.action_release("forward")
+	check(game.mode == "playing" and not game.hud.modal.visible, "pending initial pointer lock never reopens the pause menu")
+	check(not game.capture_acquired and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "pending capture neither invents success nor retries from physics")
+	check(game.player.position.distance_to(start_position) > 0.05, "WASD moves the actual player while browser capture is pending")
+	check(is_equal_approx(game.clock - start_clock, 0.25) and is_equal_approx(game.sim.high_remaining, 17.75), "pending capture advances gameplay and the real high timer")
+	check(game.hud.look_hint.visible, "uncaptured browser play exposes the drag-look binding")
+	# Continuing to observe refusal must remain playable, not wait for a timeout or
+	# repeatedly replace the menu. There is intentionally no fake success here.
+	for frame: int in range(20): game._physics_process(0.1)
+	check(game.mode == "playing" and not game.capture_acquired, "permanently rejected capture stays playable across repeated physics ticks")
+	check(is_equal_approx(game.sim.high_remaining, 15.75), "capture refusal cannot freeze or reset the high timer")
+	game._sync_mouse_capture(true)
+	check(game.capture_acquired and game.mode == "playing", "a delayed successful lock is observed without restarting play")
+	check(not game.hud.look_hint.visible, "successful capture removes the fallback binding")
+	game._sync_mouse_capture(false)
+	check(game.mode == "paused" and game.hud.modal.visible, "losing a previously acquired lock pauses gameplay")
+	var pause_heading: Node = game.hud.menu_box.get_child(0)
+	var pause_high: float = game.sim.high_remaining
+	game._physics_process(0.5)
+	game._sync_mouse_capture(false)
+	check(game.hud.menu_box.get_child(0) == pause_heading and is_equal_approx(game.sim.high_remaining, pause_high), "repeated unlocked observations neither rebuild pause nor advance timers")
+	check(not game.hud.look_hint.visible, "pause hides the fallback binding")
+	# Browser unlock can be delivered before the Escape key from that same action.
+	game._unhandled_input(_key_press(KEY_ESCAPE))
+	check(game.mode == "paused", "lock-loss-before-Escape cannot toggle back into play")
+	check(_press_menu(game, "continue."), "pause Continue invokes the production resume callback")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game._physics_process(0.1)
+	check(game.mode == "playing" and not game.capture_acquired, "Continue resets old capture ownership before another delayed request")
+	# Exercise the other event ordering: Escape first, browser unlock second.
+	game._sync_mouse_capture(true)
+	game._unhandled_input(_key_press(KEY_ESCAPE))
+	game._sync_mouse_capture(false)
+	game._unhandled_input(_key_press(KEY_ESCAPE))
+	check(game.mode == "paused" and not game.capture_acquired, "Escape-before-lock-loss and repeated Escape remain paused")
+	# An ordinary conversation releases the lock intentionally, then its actual
+	# leave button must resume even if the next lock is refused.
+	game._resume()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game._interact("tony")
+	game._sync_mouse_capture(false)
+	var dialogue_high: float = game.sim.high_remaining
+	game._physics_process(0.2)
+	check(game.mode == "dialogue" and is_equal_approx(game.sim.high_remaining, dialogue_high), "intentional dialogue unlock retains the conversation and freezes gameplay")
+	check(_press_menu(game, "leave."), "conversation leave invokes the production resume callback")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game._physics_process(0.1)
+	check(game.mode == "playing" and not game.hud.modal.visible, "conversation exit survives refused reacquisition")
+	game._interact("tony")
+	game._unhandled_input(_key_press(KEY_ESCAPE))
+	check(game.mode == "paused", "Web Escape converts a conversation to pause instead of resuming")
+	# Uncaptured pointer motion must be deliberate: no-button motion is ignored,
+	# right-drag changes both look axes, and left-click still reaches real combat.
+	game.sim.fresh()
+	game._restore_enemy()
+	game._resume()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	var yaw_before: float = game.player.rotation.y
+	var pitch_before: float = game.pitch
+	var motion := InputEventMouseMotion.new()
+	motion.relative = Vector2(40, -20)
+	game._unhandled_input(motion)
+	check(is_equal_approx(game.player.rotation.y, yaw_before) and is_equal_approx(game.pitch, pitch_before), "free cursor movement cannot rotate an uncaptured view")
+	motion.button_mask = MOUSE_BUTTON_MASK_RIGHT
+	game._unhandled_input(motion)
+	check(not is_equal_approx(game.player.rotation.y, yaw_before) and not is_equal_approx(game.pitch, pitch_before), "right-drag rotates yaw and pitch through production input handling")
+	game.player.position = Vector3(25.1, 0.05, 14)
+	game.camera.look_at(Vector3(27, 1.2, 14))
+	game.attack_cd = 0.0
+	await physics_frame
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.button_mask = MOUSE_BUTTON_MASK_LEFT
+	click.pressed = true
+	game._unhandled_input(click)
+	check(is_equal_approx(game.enemy_hp, 102.0), "uncaptured left-click damages Lurch through the actual melee ray")
+	game._unhandled_input(click)
+	check(is_equal_approx(game.enemy_hp, 102.0) and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "fallback combat keeps cooldown and does not substitute another capture request")
+	game._unhandled_input(_key_press(KEY_I))
+	check(game.mode == "dialogue", "uncaptured inventory input remains usable")
+	game._resume()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game.player.position = Vector3(18, 0.05, -10.4)
+	game.player.rotation = Vector3.ZERO
+	game.camera.look_at(Vector3(18, 1.2, -13))
+	await physics_frame
+	game._unhandled_input(_key_press(KEY_E))
+	check(game.mode == "dialogue", "uncaptured E reaches the real nearby vendor interaction")
+	# Late acquisition must release the cursor while retaining whichever modal is open.
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	game._sync_mouse_capture(true)
+	check(game.mode == "dialogue" and not game.capture_acquired and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "late capture during dialogue is released without closing the conversation")
+	game._pause()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	game._sync_mouse_capture(true)
+	check(game.mode == "paused" and not game.capture_acquired and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "late capture during pause is released without resuming")
+	# The asynchronous production load takes its Web continuation branch while the
+	# storage adapter remains native and points exclusively at scene-test-save.json.
+	game._respawn()
+	game.sim.cash = 23
+	var written: bool = await game.store.write_save(game.sim.snapshot(game.player.position, game.player.rotation.y))
+	check(written, "browser continuation fixture writes only the independent native test save")
+	game.sim.cash = 1
+	await game._load()
+	check(game.mode == "paused" and not game.loading and game.sim.cash == 23, "asynchronous Web load restores data and waits for a deliberate Continue")
+	check(_press_menu(game, "continue."), "loaded Web save exposes a working Continue callback")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game._physics_process(0.1)
+	check(game.mode == "playing" and not game.capture_acquired and not game.hud.modal.visible, "post-load Continue survives delayed or denied pointer lock")
+	game._focus_lost()
+	var focus_clock: float = game.clock
+	game._physics_process(0.2)
+	check(game.mode == "paused" and is_equal_approx(game.clock, focus_clock), "actual focus loss still pauses uncaptured fallback play")
+	game._resume()
+	game._sync_mouse_capture(true)
+	game._focus_lost()
+	game._sync_mouse_capture(false)
+	check(game.mode == "paused" and not game.capture_acquired, "actual focus loss also pauses successfully captured play")
+	# The platform override is test-only; the shipped native Escape toggle stays intact.
+	game.web_controls = false
+	game._unhandled_input(_key_press(KEY_ESCAPE))
+	check(game.mode == "playing", "native Escape retains its existing resume toggle")
+	game._unhandled_input(_key_press(KEY_ESCAPE))
+	check(game.mode == "paused", "native Escape still pauses playing")
+	game._sync_mouse_capture(false)
+	check(not game.hud.look_hint.visible, "native controls never display the Web fallback binding")
+	Input.action_release("forward")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	game.set_physics_process(true)

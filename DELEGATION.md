@@ -1,5 +1,21 @@
 # DELEGATION.md — Rock Bottom Backlog
 
+## 3D browser menu blocker — FIXED (November 18, 2026)
+
+Branch: `codex/3d-browser-menu-fix`; contract amendment in `SPEC-3D-SLICE.md`.
+
+- [x] Reproduce Continue immediately returning to pause in the operator's local in-app browser.
+- [x] Separate pending/refused mouse capture from loss of an acquired lock. Web Escape pauses
+  only; Continue and conversation exits resume. Right-drag look and left-click punch work without
+  capture. Focus loss still pauses; late capture cannot close a modal.
+- [x] Content-hash the Web game pack after a normal refresh was observed reusing stale data.
+- [x] Verify actual browser start, movement, pockets/leave, pause, repeated Escape and Continue.
+  Existing REMEMBERED continuation also entered play; this is not a full browser save/loop test.
+- [x] Add 38 production scene regressions; original 19/19 and 3D 3/3 gates pass. See
+  `reports/2026-11-18-3d-menu-fix.md` for evidence and native verification.
+- [ ] Full browser gameplay/save roundtrip and captured-pointer feel in a standalone browser
+  remain a broader acceptance pass; the reported entry/menu blocker is reproduced and resolved.
+
 ## 3D neighborhood art pass — BUILT / OPERATOR EYE REVIEW (November 18, 2026)
 
 Branch: `codex/3d-neighborhood-art-pass`; contract `SPEC-3D-ART-PASS.md`.

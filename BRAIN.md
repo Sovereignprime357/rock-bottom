@@ -2516,3 +2516,31 @@ is clean. The native tour observed crash at 18.002s and completion at 26.001s. F
 daytime draws are 701 versus 2,506 in the committed baseline; the art-only 60-cast stress records
 7.616ms p95 render interval and 8.709ms median CPU process monitor on this RTX3080 at 1280x720.
 These are bounded measured conditions, not a claim of full 60-agent simulation or browser FPS.
+
+## 2026-11-18 — browser menu-loop blocker
+
+**What/why.** Operator could not enter play: Continue closed and instantly reopened the pause
+menu. Reproduced in the in-app browser at localhost8073. Web pointer lock is asynchronous and
+can be refused; treating every uncaptured physics tick as a pause caused the loop.
+
+**Decision.** Spec amended before implementation. Track capture actually acquired this session,
+pause on its subsequent loss, and leave initial refusal playable. Web Escape only pauses;
+Continue requests capture once. Without capture, right-drag looks and left-click punches.
+Focus loss still pauses; late captures in a modal are released. Native controls stay the same.
+Decision register: IMPL-3D-INPUT-01. Independent review found no blockers.
+
+**Tried/corrected.** First rebuilt export appeared to keep looping: the HTTP log and old pause
+copy revealed that normal reload had reused cached `index.pck`. The build now hashes the game
+pack filename and sets the loader's supported mainPack and progress-size entries. A normal
+reload then fetched the new pack and entered play. No cache-clearing workaround or save reset.
+
+**Verification.** Live browser start and W/D movement, pockets/leave, repeated Escape and
+Continue now work. An observed REMEMBERED continuation entered play as well. Screenshot in
+`artifacts/3d-menu-fix-browser.jpg`. New 38 scene regressions cover delayed/refused lock, both
+Escape event orders, real fallback movement/look/melee, dialogue/load/focus and late capture.
+Original runner 19/19; 3D runner 3/3 (106 simulation, 92 scene, 156 art). Native loop evidence
+and exact build/file list are recorded in `reports/2026-11-18-3d-menu-fix.md`.
+
+**Next.** Operator can refresh localhost8073 and click wake up/continue. In an embedded browser
+without capture, hold right mouse to look. Full browser save/economy/encounter acceptance and
+standalone-browser captured-pointer feel are still broader work, not implied by this fix.

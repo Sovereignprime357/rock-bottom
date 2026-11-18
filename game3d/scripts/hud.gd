@@ -8,6 +8,7 @@ var pocket: Label
 var objective: Label
 var prompt: Label
 var receipt: Label
+var look_hint: Label
 var health: ProgressBar
 var shakes: ProgressBar
 var crosshair: Label
@@ -90,6 +91,13 @@ func _ready() -> void:
 	receipt.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	receipt.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 	root.add_child(receipt)
+	look_hint = _label("[hold right mouse] look", 14)
+	look_hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	look_hint.position = Vector2(-290, -31)
+	look_hint.size = Vector2(268, 22)
+	look_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	look_hint.hide()
+	root.add_child(look_hint)
 	modal = PanelContainer.new()
 	modal.custom_minimum_size.x = 580
 	modal.add_theme_stylebox_override("panel", _style(Color(0.072, 0.077, 0.060, 0.97), Color("777044"), 1))
@@ -175,6 +183,7 @@ func _process(delta: float) -> void:
 		receipt.modulate.a = minf(receipt_time, 1.0)
 
 func menu(title: String, body: String, options: Array, big: bool = false) -> void:
+	look_hint.hide()
 	for child in menu_box.get_children():
 		menu_box.remove_child(child)
 		child.queue_free()

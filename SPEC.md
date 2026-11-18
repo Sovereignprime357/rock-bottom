@@ -7,6 +7,9 @@
 
 > The subsequent requested graphics increment is `SPEC-3D-ART-PASS.md`: original cached materials,
 > richer existing cast/world art, bounded idle gestures and static mesh batching in `game3d/`.
+> The slice's browser capture correction allows asynchronous/refused pointer lock, right-drag
+> look and pause-only Web Escape; content-hashed game packs prevent stale gameplay after refresh.
+> These input/export exceptions are scoped to `game3d/`; see `SPEC-3D-SLICE.md`.
 > Its validation is separate from the unchanged 2D sprite and gameplay gates.
 
 > SpecMesh format. Read VIBE.md before this if you haven't already. Spec without vibe is a soulless port.

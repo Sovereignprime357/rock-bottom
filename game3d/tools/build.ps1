@@ -76,5 +76,18 @@ if ($Target -in @('All', 'Web')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot 'web/storage.js') -Destination (Join-Path $webRoot 'storage.js')
     $html = Get-Content -LiteralPath (Join-Path $webRoot 'index.html') -Raw
     if (-not $html.Contains('<script src="storage.js"></script>')) { throw 'The exported web shell is missing the async storage adapter.' }
+    # A normal refresh can retain cached subresources. Give each game-data revision its own URL.
+    $packPath = Join-Path $webRoot 'index.pck'
+    $packHash = (Get-FileHash -LiteralPath $packPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    $packName = "index.$packHash.pck"
+    Copy-Item -LiteralPath $packPath -Destination (Join-Path $webRoot $packName)
+    $configMatch = [regex]::Match($html, '(?m)^const GODOT_CONFIG = (\{[^\r\n]+\});\r?$')
+    if (-not $configMatch.Success) { throw 'Expected Godot web configuration was not found; refusing to emit a stale pack URL.' }
+    $config = $configMatch.Groups[1].Value | ConvertFrom-Json -AsHashtable
+    $config['mainPack'] = $packName
+    $config['fileSizes'][$packName] = (Get-Item -LiteralPath $packPath).Length
+    $config['fileSizes'].Remove('index.pck')
+    $html = $html.Replace($configMatch.Groups[1].Value, ($config | ConvertTo-Json -Depth 8 -Compress))
+    [IO.File]::WriteAllText((Join-Path $webRoot 'index.html'), $html, [Text.UTF8Encoding]::new($false))
 }
 Write-Output "3D BUILD: PASS ($Target; Godot $version; outputs: $buildRoot)"

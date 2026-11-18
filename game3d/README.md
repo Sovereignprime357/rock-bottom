@@ -14,6 +14,9 @@ This is the start of the port, not full v22 parity. The existing 2D release rema
 
 WASD moves, mouse looks, Shift sprints, E interacts, left mouse punches, I opens pockets,
 Escape pauses/releases capture, M mutes. Start or resume by clicking. Conversations pause the world.
+If the browser refuses mouse capture, hold the right mouse button and drag to look; movement,
+interaction and left-click punching still work. In the browser, Escape only pauses; click
+**continue.** to resume. Refresh the page after rebuilding the Web export.
 Desktop is the primary target. The browser uses the same simulation, geometry and controls,
 with a single-threaded Compatibility/WebGL2 export. No external runtime plugins or CDN assets.
 
@@ -63,6 +66,8 @@ The script downloads nothing. Templates/editor must both report4.5.1. Build outp
 by Git. The browser head includes the local `storage.js` adapter, copied by the build script.
 No cross-origin-isolation headers are needed for this single-threaded export. Browser save
 availability depends on the origin's IndexedDB permissions; failures are reported in the HUD.
+Game-data packs use a content hash in their filename so refreshing after a build fetches the
+updated gameplay even when the browser retains cached subresources.
 
 ## Verification
 

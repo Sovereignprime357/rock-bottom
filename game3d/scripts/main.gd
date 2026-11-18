@@ -35,6 +35,8 @@ var save_pending := false
 var loading := false
 var spawned := false
 var qa_mode := false
+var web_controls := OS.has_feature("web")
+var capture_acquired := false
 
 func _ready() -> void:
 	_register_inputs()
@@ -171,8 +173,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			sound.muted = not sound.muted
 			hud.show_receipt("the block goes quiet." if sound.muted else "the block continues.")
 		if event.physical_keycode == KEY_ESCAPE:
-			if mode == "playing": _pause()
-			elif mode != "title": _resume()
+			# Web may report lock loss before delivering this same Escape key.
+			if mode == "playing" or (web_controls and mode == "dialogue"): _pause()
+			elif not web_controls and mode != "title": _resume()
 			get_viewport().set_input_as_handled()
 			return
 		if mode == "playing":
@@ -183,22 +186,34 @@ func _unhandled_input(event: InputEvent) -> void:
 					if not current_id.is_empty(): _interact(current_id)
 			if event.physical_keycode == KEY_I: _pockets()
 	if mode != "playing": return
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or
+			(web_controls and (event.button_mask & MOUSE_BUTTON_MASK_RIGHT) != 0)):
 		player.rotate_y(-event.relative.x * 0.0022)
 		pitch = clampf(pitch - event.relative.y * 0.0022, -1.25, 1.25)
 		camera.rotation.x = pitch
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		if not web_controls and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		else: _punch()
+
+func _sync_mouse_capture(captured: bool) -> void:
+	hud.look_hint.visible = web_controls and mode == "playing" and not captured
+	if not web_controls: return
+	if mode != "playing":
+		# A pending browser request can finish after a conversation/pause has opened.
+		capture_acquired = false
+		if captured: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif captured:
+		capture_acquired = true
+	elif capture_acquired:
+		_pause()
+	# Initial pending/refused capture is playable with right-drag look. No retry loop.
 
 func _physics_process(delta: float) -> void:
 	if not spawned: return
 	hud.update_stats(sim, _zone())
+	_sync_mouse_capture(Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
 	if mode != "playing": return
-	if OS.has_feature("web") and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-		_pause()
-		return
 	clock += delta
 	world.set_day_time(sim.day_time)
 	var motion := Input.get_vector("left", "right", "forward", "back")
@@ -342,6 +357,7 @@ func _new_game() -> void:
 func _resume() -> void:
 	if store.busy or loading: return
 	mode = "playing"
+	capture_acquired = false
 	sound.ready_for_sound = true
 	hud.close_menu()
 	hands.show()
@@ -349,8 +365,11 @@ func _resume() -> void:
 
 func _pause() -> void:
 	mode = "paused"
+	capture_acquired = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	hud.menu("STILL HERE", "WASD move · mouse look · shift sprint\nE bother · left mouse swing · I pockets · M mute", [
+	var controls := "WASD move · mouse look · shift sprint\nE bother · left mouse swing · I pockets · M mute"
+	if web_controls: controls += "\nright-drag look · Esc pause · click continue to resume"
+	hud.menu("STILL HERE", controls, [
 		_option("continue.", _resume), _option("put it on file.", _save.bind(true)),
 		_option("remember.", _load), _option("back to the curb.", _title)])
 
@@ -402,7 +421,7 @@ func _load() -> void:
 	_restore_enemy()
 	_sync_finds()
 	loading = false
-	if OS.has_feature("web"):
+	if web_controls:
 		mode = "paused"
 		hud.menu("REMEMBERED", "the file remembers.\nthe block continues.", [_option("continue.", _resume)])
 	else:
