@@ -1,0 +1,7700 @@
+{
+  "source": "unchanged active v22 boss start/phase/death/AI functions",
+  "cases": [
+    {
+      "id": "start_tony",
+      "kind": "tony",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 200,
+            "maxHp": 200,
+            "speed": 1.8,
+            "dmg": 12,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "coatsOff": 1,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "start_coop",
+      "kind": "coop",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1,
+          "coopMode": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 200,
+            "maxHp": 200,
+            "speed": 1.8,
+            "dmg": 12,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "coatsOff": 1,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 362,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 1.4,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "isAlly": true,
+            "allyTarget": "tony",
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": [
+          4000
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "start_coop_no_stripe",
+      "kind": "coop",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1,
+          "coopMode": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 200,
+            "maxHp": 200,
+            "speed": 1.8,
+            "dmg": 12,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "coatsOff": 1,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": [
+          4000
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "start_tony_active_refuses",
+      "kind": "tony",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "kingdom"
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "kingdom",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "start_older",
+      "kind": "older",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "brutus_older",
+            "name": "BRUTUS THE OLDER",
+            "sprite": "brutus",
+            "x": 430,
+            "y": 330,
+            "w": 48,
+            "h": 36,
+            "hp": 200,
+            "maxHp": 200,
+            "speed": 2.4,
+            "dmg": 14,
+            "hostile": true,
+            "aggro": true,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "attackCd": 0,
+            "addsT": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "start_older_loved",
+      "kind": "older",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 25,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 25,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "brutus_older",
+            "name": "BRUTUS THE OLDER",
+            "sprite": "brutus",
+            "x": 430,
+            "y": 330,
+            "w": 48,
+            "h": 36,
+            "hp": 200,
+            "maxHp": 200,
+            "speed": 2.4,
+            "dmg": 14,
+            "hostile": false,
+            "aggro": false,
+            "isBossB": true,
+            "archetype": "passive",
+            "attackCd": 0,
+            "addsT": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "start_older_active_refuses",
+      "kind": "older",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "transform_fallen",
+      "kind": "transform",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": true
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "omalley_fallen",
+            "name": "FATHER O'MALLEY (FALLEN)",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 160,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "idle",
+            "chargeT": 0,
+            "chargeCdT": 0,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "transform_preserves_hitflash",
+      "kind": "transform",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "hitFlash": 100,
+            "hitStun": 50
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": true
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "FATHER O'MALLEY (FALLEN)",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 160,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "idle",
+            "chargeT": 0,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "hitFlash": 100,
+            "hitStun": 50
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "transform_missing_refuses",
+      "kind": "transform",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "transform_dead_refuses",
+      "kind": "transform",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "spawn_old_school",
+      "kind": "school",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "stripe",
+            "name": "stripe",
+            "sprite": "stripe",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "priest",
+            "name": "priest",
+            "sprite": "priest",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "attackCd": 0
+          },
+          {
+            "id": "os_brutus",
+            "name": "OLD SCHOOL BRUTUS",
+            "sprite": "os_brutus",
+            "x": 3730,
+            "y": 780,
+            "w": 36,
+            "h": 28,
+            "hp": 250,
+            "maxHp": 250,
+            "speed": 1.5,
+            "dmg": 35,
+            "hostile": true,
+            "aggro": true,
+            "isOsBrutus": true,
+            "archetype": "charger",
+            "chargeState": "idle",
+            "chargeT": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "oldschool_corpse_blocks",
+      "kind": "school",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "os_brutus",
+            "name": "os_brutus",
+            "sprite": "os_brutus",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "os_brutus",
+            "name": "os_brutus",
+            "sprite": "os_brutus",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "tony_equal66",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 132,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "hitStun": 99999,
+            "coatsOff": 1
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 132,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "coatsOff": 1,
+            "attackCd": 0,
+            "hitStun": 99983
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "tony_phase2",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 131,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "hitStun": 99999,
+            "coatsOff": 1
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 131,
+            "maxHp": 200,
+            "speed": 2.4,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "archetype": "charger",
+            "coatsOff": 2,
+            "chargeState": "idle",
+            "chargeT": 0,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "hitStun": 99983
+          },
+          {
+            "id": "sherri_boss_r",
+            "name": "SPIDER-BITE SHERRI",
+            "sprite": "sherri",
+            "x": 150,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 45,
+            "maxHp": 45,
+            "speed": 2,
+            "dmg": 5,
+            "hostile": true,
+            "aggro": true,
+            "archetype": "swarmer",
+            "attackCd": 0
+          },
+          {
+            "id": "sherri_boss_r",
+            "name": "SPIDER-BITE SHERRI",
+            "sprite": "sherri",
+            "x": 310,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 45,
+            "maxHp": 45,
+            "speed": 2,
+            "dmg": 5,
+            "hostile": true,
+            "aggro": true,
+            "archetype": "swarmer",
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "tony_equal33",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 66,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "hitStun": 99999,
+            "coatsOff": 2
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 66,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "coatsOff": 2,
+            "attackCd": 0,
+            "hitStun": 99983
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "tony_phase3",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 65,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "hitStun": 99999,
+            "coatsOff": 2
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 3
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 65,
+            "maxHp": 200,
+            "speed": 3,
+            "dmg": 16,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "archetype": "charger",
+            "coatsOff": 3,
+            "berserk": true,
+            "chargeState": "idle",
+            "chargeT": 0,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "hitStun": 99983
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": [
+          200,
+          420
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "tony_skip_phase2",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 1,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "hitStun": 99999,
+            "coatsOff": 1
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 3
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 1,
+            "maxHp": 200,
+            "speed": 3,
+            "dmg": 16,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "archetype": "charger",
+            "coatsOff": 3,
+            "berserk": true,
+            "chargeState": "idle",
+            "chargeT": 0,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "hitStun": 99983
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": [
+          200,
+          420
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "older_equal50",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 0,
+            "chargeLanded": false
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "older_phase2",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 99,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 0,
+            "chargeLanded": false
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 99,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 16
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "older_equal25",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 50,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 0,
+            "chargeLanded": false
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 50,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 16
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "older_phase3",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 49,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 0,
+            "chargeLanded": true
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 500,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 3
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 49,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "berserk": true,
+            "grabber": true,
+            "chargeState": "idle",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 16
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "older_skip_phase2",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 1
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 1,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 0,
+            "chargeLanded": false
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 3
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 1,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "berserk": true,
+            "grabber": true,
+            "chargeState": "idle",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 16
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "older_one_add",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 90,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 7990,
+            "chargeLanded": false
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 90,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 0
+          },
+          {
+            "id": "sherri_brutus_r",
+            "name": "SPIDER-BITE SHERRI",
+            "sprite": "sherri",
+            "x": 170,
+            "y": 250,
+            "w": 26,
+            "h": 30,
+            "hp": 45,
+            "maxHp": 45,
+            "speed": 2,
+            "dmg": 5,
+            "hostile": true,
+            "aggro": true,
+            "archetype": "swarmer",
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "older_add_cap",
+      "kind": "phase",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 90,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "hitStun": 99999,
+            "addsT": 7990,
+            "chargeLanded": false
+          },
+          {
+            "id": "sherri_one",
+            "name": "sherri_one",
+            "sprite": "sherri_one",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "swarmer",
+            "hitStun": 99999
+          },
+          {
+            "id": "sherri_two",
+            "name": "sherri_two",
+            "sprite": "sherri_two",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "swarmer",
+            "hitStun": 99999
+          }
+        ],
+        "refs": {
+          "brutusOlderNPC": "brutus_older"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": true,
+          "brutusOlderPhase": 2
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 90,
+            "maxHp": 200,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "isBossB": true,
+            "archetype": "charger_older",
+            "chargeLanded": false,
+            "attackCd": 0,
+            "hitStun": 99983,
+            "addsT": 0
+          },
+          {
+            "id": "sherri_one",
+            "name": "sherri_one",
+            "sprite": "sherri_one",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "archetype": "swarmer",
+            "attackCd": 0,
+            "hitStun": 99983
+          },
+          {
+            "id": "sherri_two",
+            "name": "sherri_two",
+            "sprite": "sherri_two",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 100,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "archetype": "swarmer",
+            "attackCd": 0,
+            "hitStun": 99983
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "death_tony",
+      "kind": "death",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 3
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 200,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "shoe",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": true
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": [
+          4000
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "death_coop",
+      "kind": "death",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": true,
+          "bossKind": "tony",
+          "bossPhase": 3,
+          "coopMode": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {
+          "bossNPC": "tony"
+        }
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 200,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "shoe",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "coopMode": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": true
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "tony",
+            "name": "tony",
+            "sprite": "tony",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": [
+          4000
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "death_older",
+      "kind": "death",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "brutusOlderActive": true
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isBossB": true
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 105,
+          "cred": 100,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0,
+          "brutusOlderActive": false
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "brutus_older",
+            "name": "brutus_older",
+            "sprite": "brutus_older",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "isBossB": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "death_oldschool",
+      "kind": "death",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "territoryCashMult": 1.25
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 5,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "os_brutus",
+            "name": "os_brutus",
+            "sprite": "os_brutus",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 50,
+          "cash": 25,
+          "copper": 5,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 2,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false,
+          "osBrutusKilled": true
+        },
+        "counters": {
+          "copperStripped": 10,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [
+          "copper_singer",
+          "school_s_out"
+        ],
+        "actors": [
+          {
+            "id": "os_brutus",
+            "name": "os_brutus",
+            "sprite": "os_brutus",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [
+          {
+            "x": 221,
+            "y": 253,
+            "amt": 100,
+            "collected": false
+          },
+          {
+            "x": 265,
+            "y": 253,
+            "amt": 0,
+            "tool": "propane_torch",
+            "collected": false
+          }
+        ],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "death_oldschool_locker_torch",
+      "kind": "death",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false,
+          "peteToolLocker": "propane_torch"
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "os_brutus",
+            "name": "os_brutus",
+            "sprite": "os_brutus",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 50,
+          "cash": 25,
+          "copper": 5,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 2,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": false,
+          "omalleyFallenDead": false,
+          "osBrutusKilled": true
+        },
+        "counters": {
+          "copperStripped": 5,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [
+          "school_s_out"
+        ],
+        "actors": [
+          {
+            "id": "os_brutus",
+            "name": "os_brutus",
+            "sprite": "os_brutus",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [
+          {
+            "x": 221,
+            "y": 253,
+            "amt": 80,
+            "collected": false
+          }
+        ],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "death_fallen",
+      "kind": "death",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "isOmalleyFallen": true
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 2,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": true
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": true,
+            "available": false
+          }
+        },
+        "achievements": [
+          "fallen"
+        ],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 0,
+            "maxHp": 100,
+            "speed": 0,
+            "dmg": 8,
+            "hostile": false,
+            "aggro": false,
+            "dead": true,
+            "isOmalleyFallen": true,
+            "attackCd": 0
+          }
+        ],
+        "piles": [
+          {
+            "x": 225,
+            "y": 253,
+            "amt": 200,
+            "collected": false
+          },
+          {
+            "x": 261,
+            "y": 253,
+            "amt": 0,
+            "equip": "priest_collar",
+            "collected": false
+          }
+        ],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_ranged_aim",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 450,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 160,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 450,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230.0072723110915,
+            "y": 231.5926361290394,
+            "w": 26,
+            "h": 30,
+            "hp": 160,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "attackCd": 0,
+            "throwT": -16,
+            "throwAimT": 350,
+            "aimingThrow": true
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_holy_throw",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 450,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 160,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true,
+            "throwAimT": 10,
+            "aimingThrow": true
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 450,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230.0072723110915,
+            "y": 231.5926361290394,
+            "w": 26,
+            "h": 30,
+            "hp": 160,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "attackCd": 0,
+            "throwT": 1200,
+            "throwAimT": 0,
+            "aimingThrow": false
+          }
+        ],
+        "piles": [],
+        "projectiles": [
+          {
+            "x": 243.0072723110915,
+            "y": 246.5926361290394,
+            "vx": 279.8460569080318,
+            "vy": 9.28355713218828,
+            "dmg": 22,
+            "slowMs": 1500,
+            "kind": "holy",
+            "life": 4000
+          }
+        ],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_phase2_windup",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 231.59991838192155,
+            "y": 229.98383920826342,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "windup",
+            "chargeT": 500,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "fallenPhase2": true,
+            "lungeVx": 0.999948988700964,
+            "lungeVy": -0.010100494835363273
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_phase2_release",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true,
+            "fallenPhase2": true,
+            "chargeState": "windup",
+            "chargeT": 10,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "lunge",
+            "chargeT": 900,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "hitFlash": 40,
+            "fallenPhase2": true,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_phase2_lunge",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true,
+            "fallenPhase2": true,
+            "chargeState": "lunge",
+            "chargeT": 500,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 232.4,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "lunge",
+            "chargeT": 484,
+            "chargeCdT": 0,
+            "attackCd": 0,
+            "fallenPhase2": true,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_phase2_contact",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 250,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true,
+            "fallenPhase2": true,
+            "chargeState": "lunge",
+            "chargeT": 500,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 258,
+          "y": 230,
+          "hp": 70,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 1500,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 232.4,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "cooldown",
+            "chargeT": 1200,
+            "chargeCdT": 0,
+            "chargeLanded": true,
+            "attackCd": 600,
+            "fallenPhase2": true,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_phase2_iframe",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 250,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 500,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true,
+            "fallenPhase2": true,
+            "chargeState": "lunge",
+            "chargeT": 500,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 250,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 1500,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 232.4,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "cooldown",
+            "chargeT": 1200,
+            "chargeCdT": 0,
+            "chargeLanded": true,
+            "attackCd": 600,
+            "fallenPhase2": true,
+            "lungeVx": 1,
+            "lungeVy": 0
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    },
+    {
+      "id": "fallen_phase2_miss",
+      "kind": "ai",
+      "roll": 0.75,
+      "setup": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "w": 24,
+          "h": 28,
+          "facing": "down",
+          "frame": 0,
+          "frameT": 0,
+          "vx": 0,
+          "vy": 0,
+          "speed": 2.2,
+          "hp": 100,
+          "maxHp": 100,
+          "cash": 25,
+          "rocks": 0,
+          "copper": 0,
+          "supplies": 0,
+          "dirtySupplies": 0,
+          "shakes": 20,
+          "cred": 0,
+          "brain": 70,
+          "wanted": 0,
+          "wantedT": 0,
+          "rank": 0,
+          "attackCd": 0,
+          "attacking": 0,
+          "hitFlash": 0,
+          "iframes": 0,
+          "rockedT": 0,
+          "crashT": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "inventory": [],
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          },
+          "tonyOffenses": 0,
+          "cartMounted": false,
+          "equip": {
+            "shoes": null,
+            "hat": null,
+            "coat": null,
+            "tool": null
+          },
+          "weapon": "fists",
+          "brutusDefeated": 0,
+          "stripeLoyalty": 0,
+          "charisma": 0,
+          "soapRocks": 0,
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {},
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 230,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "chatterCd": 999999,
+            "attackCd": 0,
+            "archetype": "priest_fallen",
+            "isOmalleyFallen": true,
+            "fallenPhase2": true,
+            "chargeState": "lunge",
+            "chargeT": 10,
+            "lungeVx": 0,
+            "lungeVy": 1
+          }
+        ],
+        "refs": {}
+      },
+      "expected": {
+        "player": {
+          "x": 330,
+          "y": 230,
+          "hp": 100,
+          "maxHp": 100,
+          "cred": 0,
+          "cash": 25,
+          "copper": 0,
+          "weapon": "fists",
+          "stunT": 0,
+          "slowT": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          }
+        },
+        "state": {
+          "bossActive": false,
+          "bossKind": "",
+          "bossPhase": 0
+        },
+        "flags": {
+          "omalleyFallen": true,
+          "omalleyFallenDead": false
+        },
+        "counters": {
+          "copperStripped": 0,
+          "omalleyFallenSurviveT": 0
+        },
+        "quests": {
+          "fallen_king": {
+            "done": false
+          },
+          "fallen_priest": {
+            "done": false,
+            "available": false
+          }
+        },
+        "achievements": [
+          "dodged_the_lunge"
+        ],
+        "actors": [
+          {
+            "id": "omalley_fallen",
+            "name": "omalley_fallen",
+            "sprite": "omalley_fallen",
+            "x": 230,
+            "y": 232.4,
+            "w": 26,
+            "h": 30,
+            "hp": 79,
+            "maxHp": 160,
+            "speed": 1.6,
+            "dmg": 22,
+            "hostile": true,
+            "aggro": true,
+            "dead": false,
+            "isOmalleyFallen": true,
+            "archetype": "priest_fallen",
+            "chargeState": "cooldown",
+            "chargeT": 1200,
+            "chargeCdT": 0,
+            "chargeLanded": false,
+            "attackCd": 0,
+            "fallenPhase2": true,
+            "lungeVx": 0,
+            "lungeVy": 1
+          }
+        ],
+        "piles": [],
+        "projectiles": [],
+        "timers": []
+      },
+      "error": null
+    }
+  ],
+  "defects": {
+    "fallenRestart": {
+      "flag": true,
+      "ordinary": true,
+      "fallen": false
+    },
+    "olderStale": {
+      "phase": 3,
+      "berserk": false
+    },
+    "departure": {
+      "x": 8574,
+      "targetX": 8680,
+      "dead": false
+    }
+  }
+}

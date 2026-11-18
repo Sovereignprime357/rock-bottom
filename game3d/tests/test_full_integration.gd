@@ -61,6 +61,8 @@ func _run() -> void:
 	_check(runtime.smoke("block").get("ok",false) and runtime.s.flags.get("introDone",false),"real Block position/visibility and complete intro smoke")
 	print("FULL INTEGRATION WALK: ",walk_seconds,"s; physics queries ",physics.query_count)
 	_walk_critical_route()
+	_zone_verb_regression()
+	_crown_placements()
 	world.free(); runtime = null; physics = null
 	await process_frame
 	if failures.is_empty():
@@ -93,3 +95,44 @@ func _walk_critical_route() -> void:
 	_check(Content.to_source(finish).distance_to(runtime.state.player_center()) < 0.15,"critical controller reaches real ditch approach")
 	_check(seconds <= 60.0,"critical controller stays within60s at source base walk")
 	print("FULL INTEGRATION CRITICAL WALK: ",seconds,"s; ",route.size()," waypoints; blocked=",blocked,"; actual fixed-step movement, no sprint/teleport between endpoints")
+
+func _zone_verb_regression() -> void:
+	runtime.fresh(); runtime.p.rocks = 1
+	var found: bool = false
+	for zone: Dictionary in runtime.state.content.world.zones:
+		if zone.id != "block": continue
+		for x: float in [zone.x+24.0,zone.x+zone.w-24.0]:
+			for y: float in [zone.y+24.0,zone.y+zone.h-24.0]:
+				_place(Content.to_world(Vector2(x,y)))
+				if physics.can_use_zone("block") and not physics.can_reach_target("smoke:block"):
+					found = true; break
+			if found: break
+	_check(found,"clear Block position exists beyond the marker's2.3m object reach")
+	_check(runtime.smoke("block").get("ok",false) and runtime.p.rocks == 0,"source Block zone verb has no added marker walk")
+	runtime.fresh(); runtime.p.rocks = 1
+	_place(world.service_points.tony.approach)
+	_check(not runtime.smoke("block").get("ok",false) and runtime.p.rocks == 1,"outside source Block zone cannot smoke there")
+	var checked_wall: bool = false
+	for obstacle: Dictionary in world.obstacle_records():
+		if obstacle.bounds.size.y < 1.0: continue
+		_place(obstacle.bounds.get_center())
+		if not physics.can_use_zone("block"):
+			checked_wall = true; break
+	_check(checked_wall and not runtime.smoke("block").get("ok",false) and runtime.p.rocks == 1,"embedded player cannot execute zone command")
+
+func _crown_placements() -> void:
+	for spot: Dictionary in Content.definition("src/data/catalogs.js","CROWN_SPOTS",[]):
+		runtime.fresh()
+		runtime.s.crownPickup = {"x":spot.x,"y":spot.y,"collected":false}
+		var point: Vector3 = Content.to_world(Vector2(spot.x,spot.y))
+		var found: bool = false
+		for radius: float in [0.0,0.30,0.48,0.60,0.71]:
+			for index: int in range(32):
+				var angle: float = float(index)*TAU/32.0
+				var candidate := point+Vector3(cos(angle),0,sin(angle))*radius
+				_place(candidate)
+				if physics.can_use_zone("block") and physics.can_reach_target("quest:crown"):
+					found = true; break
+			if found: break
+		_check(found,"exact crown point has clear capsule and actual low-object LOS:"+str(spot.where))
+		_check(found and runtime.quests.collect_crown() and runtime.p.equip.hat == "pigeon_crown","actual crown collection equips original quest reward:"+str(spot.where))

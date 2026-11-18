@@ -2,6 +2,7 @@ extends Node
 
 const SAVE_PATH := "user://rockbottom_3d_slice_v1.json"
 var save_path := SAVE_PATH
+var storage_key := "rockbottom_3d_slice_v1"
 var busy := false
 var last_error := ""
 
@@ -13,7 +14,7 @@ func write_save(data: Dictionary) -> bool:
 	last_error = ""
 	var payload := JSON.stringify(data)
 	if OS.has_feature("web"):
-		JavaScriptBridge.eval("window.rb3dSave(%s)" % JSON.stringify(payload))
+		JavaScriptBridge.eval("window.rb3dSave(%s,%s)" % [JSON.stringify(payload),JSON.stringify(storage_key)])
 		var result: Dictionary = await _wait_web()
 		busy = false
 		last_error = str(result.get("error", ""))
@@ -44,7 +45,7 @@ func read_save() -> Dictionary:
 	last_error = ""
 	var payload := ""
 	if OS.has_feature("web"):
-		JavaScriptBridge.eval("window.rb3dLoad()")
+		JavaScriptBridge.eval("window.rb3dLoad(%s)" % JSON.stringify(storage_key))
 		var result: Dictionary = await _wait_web()
 		busy = false
 		last_error = str(result.get("error", ""))

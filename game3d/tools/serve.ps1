@@ -1,9 +1,11 @@
 [CmdletBinding()]
-param([ValidateRange(1024,65535)][int]$Port = 8073)
+param([ValidateRange(1024,65535)][int]$Port = 8073,
+    [ValidateSet('Slice','Full')][string]$Entry = 'Slice')
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $webRoot = Join-Path $repoRoot '.build/3d/web'
+if ($Entry -eq 'Full') { $webRoot = Join-Path $repoRoot '.build/3d/full/web' }
 $htmlPath = Join-Path $webRoot 'index.html'
 if (-not (Test-Path -LiteralPath $htmlPath)) { throw 'Build the Web export before starting the local preview.' }
 $url = "http://127.0.0.1:$Port/"
@@ -20,6 +22,7 @@ try {
 }
 $python = (Get-Command python -ErrorAction Stop).Source
 $logRoot = Join-Path $repoRoot '.build/3d'
+if ($Entry -eq 'Full') { $logRoot = Join-Path $logRoot 'full' }
 $arguments = @('-m','http.server',"$Port",'--bind','127.0.0.1','--directory',('"{0}"' -f $webRoot))
 # A detached hidden helper survives the interactive command session. It is local
 # to this PC and does not install a service, startup task or public hosting.

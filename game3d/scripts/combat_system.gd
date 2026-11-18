@@ -67,7 +67,13 @@ func has_physics(method: StringName) -> bool:
 
 
 func _geometry(body: Dictionary) -> Dictionary:
-	return {"id":str(body.get("id", "player")), "x":body.x, "y":body.y, "w":body.w, "h":body.h}
+	var result: Dictionary = {"id":str(body.get("id", "player")), "x":body.x, "y":body.y, "w":body.w, "h":body.h}
+	# Detached visual hints let first placement use the actual profile height before
+	# a spawned actor enters the model roster or receives its presentation node.
+	for key: String in ["name","sprite"]:
+		if body.get(key) is String: result[key] = body[key]
+	if body.get("isOmalleyFallen") is bool: result.isOmalleyFallen = body.isOmalleyFallen
+	return result
 
 
 func clear_actor(body: Dictionary) -> bool:
@@ -93,6 +99,23 @@ func can_hit(from: Vector2, to: Vector2, source_id: String, target_id: String) -
 	if not from.is_finite() or not to.is_finite() or not has_physics(&"can_hit"): return false
 	var result: Variant = _physics().call(&"can_hit", from, to, source_id, target_id)
 	return result is bool and result
+
+
+func resolve_departure(body: Dictionary, edge: String) -> Dictionary:
+	if host == null or edge not in ["east","west"] or not has_physics(&"resolve_departure"): return {}
+	var result: Variant = _physics().call(&"resolve_departure", _geometry(body), edge)
+	if not result is Dictionary or not result.get("exit_id") is String or result.exit_id.is_empty(): return {}
+	if not result.get("target") is Vector2 or not result.target.is_finite() or not result.get("route") is Array: return {}
+	if result.route.is_empty() or result.route.size() > 2048: return {}
+	var bounds: Dictionary = host.content.world.bounds
+	var half := Vector2(float(body.w),float(body.h))*0.5
+	var limit := Vector2(float(bounds.w),float(bounds.h))-half
+	var route: Array[Vector2] = []
+	for point: Variant in result.route:
+		if not point is Vector2 or not point.is_finite() or point.x < half.x or point.y < half.y or point.x > limit.x or point.y > limit.y: return {}
+		route.append(point)
+	if route[-1].distance_squared_to(result.target) > 0.00000001: return {}
+	return {"exit_id":result.exit_id,"target":result.target,"route":route}
 
 
 func domain_has(method: StringName) -> bool:

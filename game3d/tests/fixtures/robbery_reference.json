@@ -1,0 +1,2095 @@
+{
+  "source": "unchanged active src/systems/robbery.js",
+  "cases": [
+    {
+      "id": "empty",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 0,
+      "toast": "LURCH (SKID) checks your pockets.\nfinds a receipt.\nkeeps the receipt.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "not_marked",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": false,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": false,
+      "draws": 0,
+      "toast": "",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      }
+    },
+    {
+      "id": "dead",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": true
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": false,
+      "draws": 0,
+      "toast": "",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      }
+    },
+    {
+      "id": "cooldown_before",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 264001,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": false,
+      "draws": 0,
+      "toast": "",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 264001,
+          "robberiesToday": 0
+        }
+      }
+    },
+    {
+      "id": "cooldown_exact",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 264000,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 0,
+      "toast": "LURCH (SKID) checks your pockets.\nfinds a receipt.\nkeeps the receipt.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "daily_cap",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 2
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": false,
+      "draws": 0,
+      "toast": "",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 2
+        }
+      }
+    },
+    {
+      "id": "cash_low",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 3,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 2,
+      "toast": "- $3\nLURCH (SKID) counts it in front of you.\nthe math is correct.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "cash_min",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 50,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0,
+        0
+      ],
+      "result": true,
+      "draws": 2,
+      "toast": "- $5\nLURCH (SKID) counts it in front of you.\nthe math is correct.",
+      "expected": {
+        "player": {
+          "cash": 45,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "cash_max",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 50,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0,
+        0.99999
+      ],
+      "result": true,
+      "draws": 2,
+      "toast": "- $15\nLURCH (SKID) counts it in front of you.\nthe math is correct.",
+      "expected": {
+        "player": {
+          "cash": 35,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "hitter",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 3,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- the emergency hitter\nLURCH (SKID) takes the pipe.\nhe knows what it is.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 2,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "protected",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "stripe_package",
+              "n": "package",
+              "q": 1
+            },
+            {
+              "id": "crossword",
+              "n": "crossword",
+              "q": 1
+            },
+            {
+              "id": "bus_pass",
+              "n": "pass",
+              "q": 1
+            },
+            {
+              "id": "unknown",
+              "n": "future key",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": "pigeon_crown",
+            "shoes": null,
+            "tool": "propane_torch"
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 0,
+      "toast": "LURCH (SKID) checks your pockets.\nfinds a receipt.\nkeeps the receipt.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "stripe_package",
+              "n": "package",
+              "q": 1
+            },
+            {
+              "id": "crossword",
+              "n": "crossword",
+              "q": 1
+            },
+            {
+              "id": "bus_pass",
+              "n": "pass",
+              "q": 1
+            },
+            {
+              "id": "unknown",
+              "n": "future key",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": "pigeon_crown",
+            "shoes": null,
+            "tool": "propane_torch"
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_junk",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "junk",
+              "n": "a junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a junk\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_food",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "a food",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a food\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_soap",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "soap",
+              "n": "a soap",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a soap\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_detergent",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "detergent",
+              "n": "a detergent",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a detergent\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_cone",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "cone",
+              "n": "a cone",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a cone\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_gold_tooth",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "gold_tooth",
+              "n": "a gold_tooth",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a gold_tooth\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_lottery",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a lottery\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "item_license",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "license",
+              "n": "a license",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a license\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "stack",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "soap",
+              "n": "soap",
+              "q": 3
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- soap\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "soap",
+              "n": "soap",
+              "q": 2
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "equip_coat",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": "parka",
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 112,
+          "speed": 2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a parka in august\nLURCH (SKID) takes your coat.\nhe does not put it on.\nhe just holds it.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "equip_hat",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": "helmet",
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a tiny construction helmet\nLURCH (SKID) takes your hat.\nhe checks the size.\nhe says nothing.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "equip_shoes",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": "crocs",
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.8000000000000003,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.25
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- one croc (red)\nLURCH (SKID) takes your shoes.\nhe holds them by the laces.",
+      "expected": {
+        "player": {
+          "cash": 0,
+          "hitters": 0,
+          "inventory": [],
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.2,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_0",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.03571428571428571,
+        0.5
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a trench coat\nLURCH (SKID) takes your coat.\nhe does not put it on.\nhe just holds it.",
+      "expected": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": null,
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 100,
+          "speed": 2.6,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_1",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.17857142857142858,
+        0.5
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- a mesh hat (HONK IF U LOVE PETE)\nLURCH (SKID) takes your hat.\nhe checks the size.\nhe says nothing.",
+      "expected": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": null,
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_2",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.32142857142857145,
+        0.5
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- vibram five-fingers\nLURCH (SKID) takes your shoes.\nhe holds them by the laces.",
+      "expected": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": null,
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.1,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_3",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.4642857142857143,
+        0.5
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- food\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_4",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.6071428571428571,
+        0.5
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- junk\nLURCH (SKID) takes it.\nhe does not ask what it is. neither did you.",
+      "expected": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_5",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.75,
+        0.5
+      ],
+      "result": true,
+      "draws": 1,
+      "toast": "- the emergency hitter\nLURCH (SKID) takes the pipe.\nhe knows what it is.",
+      "expected": {
+        "player": {
+          "cash": 30,
+          "hitters": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    },
+    {
+      "id": "order_6",
+      "actor": {
+        "id": "skid_lurch",
+        "name": "LURCH (SKID)",
+        "robs": true,
+        "dead": false
+      },
+      "setup": {
+        "player": {
+          "cash": 30,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "state": {
+          "day": 1,
+          "dayTime": 0.35
+        },
+        "counters": {
+          "robLastClockMs": 0,
+          "robberiesToday": 0
+        }
+      },
+      "rolls": [
+        0.8928571428571429,
+        0.5
+      ],
+      "result": true,
+      "draws": 2,
+      "toast": "- $10\nLURCH (SKID) counts it in front of you.\nthe math is correct.",
+      "expected": {
+        "player": {
+          "cash": 20,
+          "hitters": 1,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 3
+            },
+            {
+              "id": "junk",
+              "n": "junk",
+              "q": 1
+            }
+          ],
+          "equip": {
+            "coat": "trench",
+            "hat": "mesh_cap",
+            "shoes": "vibrams",
+            "tool": "crowbar"
+          },
+          "hp": 100,
+          "maxHp": 108,
+          "speed": 2.5,
+          "stunT": 0
+        },
+        "counters": {
+          "robLastClockMs": 324000,
+          "robberiesToday": 1
+        }
+      }
+    }
+  ]
+}

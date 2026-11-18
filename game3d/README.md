@@ -60,6 +60,14 @@ rigs are simple mesh pivots; richer animation and Blender-authored replacements 
 
 ## Reproduce the build
 
+Full-world development entry: run `res://full_main.tscn` in Godot. Export it with
+`pwsh -File game3d/tools/build.ps1 -Entry Full`, then serve with
+`pwsh -File game3d/tools/serve.ps1 -Entry Full -Port 8074`. Outputs are under
+`.build/3d/full/windows/` and `.build/3d/full/web/`. These are separate from the
+default slice and its save namespace. The full development scene includes real
+source NPCs, combat, dialogue, travel and Karaoke; campaign and remaining
+activities are still being integrated. This is not yet complete game parity.
+
 Use the official [Godot 4.5.1 archive](https://godotengine.org/download/archive/4.5.1-stable/).
 The version is pinned because it is available locally and supports both targets; it is not a
 claim to be the latest release.
@@ -85,13 +93,13 @@ This imports the project and runs production simulation, scene integration and a
 on engine error text as well as nonzero exits, because Godot can report a script error with exit0.
 The original suite remains `node tools/run-gates.mjs`.
 
-The full-port foundation expands that runner to22 checks: fourteen engine suites (slice simulation,
-scene, art, hands, full state, memory, progression, economy, full geometry, weighted cast, combat,
-runtime, physics adapter and composed world interactions), deterministic content/provenance checks,
-five unchanged-source oracle checks and parity coverage. Full state/model tests are not a claim
-that those systems are already reachable in the current slice scene. The32-feature/585-handler
-ledger is `data/parity_manifest.json`; `node tools/3d-parity-gate.mjs --complete` intentionally
-fails until every obligation has integrated native/Web evidence.
+The full-port runner now has43 checks:26 engine suites and17 source/provenance/
+parity checks, in addition to a clean import. It exercises the real full scene,
+physical source world, full cast, combat/bosses, navigation, travel, dialogue,
+robbery, Karaoke, communications and day model. The32-feature/585-handler ledger
+is `data/parity_manifest.json`; `node tools/3d-parity-gate.mjs --complete`
+intentionally fails until every obligation has integrated native/Web evidence.
+Day still requires the real Campaign owner before production installation.
 
 Development-only engine arguments after `--`: `--qa-tour` runs a real-time rendered smoke/crash
 and isolated save roundtrip; `--qa-capture` captures the Block, Tony, Pete and Lurch.

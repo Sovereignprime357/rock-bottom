@@ -284,4 +284,130 @@ states; Pete eat/Yuri inspect. The first20m setup was blocked by a wall and was 
 readability evidence. The corrected far view uses the street with a physics line-of-sight check.
 It owns no simulation/save/audio or autonomous pose loop. Render review remains required before
 the P05a checkpoint is accepted. The63-row identity ledger still distinguishes the initial six
-from57 unimplemented registry identities; aliases are not fabricated extra residents.
+from57 then-unimplemented registry identities; aliases are not fabricated extra residents.
+
+### P05a accepted checkpoint and P05b1 implementation handoff
+
+Parent accepted P05a at pushed checkpoint `74986ce556518b9b6ec8f88e3069c92fe4a8db9e`.
+The final gate passed159 checks, and the native probe saved58 views. Additional review caught
+Pete's closed apron cutting through the shirt, then side facets poking through a replacement
+sheet. The final shallow-curved cloth panel passes39 nearest-visible-surface probes over its
+center, sides and bib and reads continuously in the native view. Final counts supersede the
+initial table above: Tony17,074; Pete7,870; Yuri7,962; Lurch7,640; Brutus6,615; possum5,546
+triangles, total52,707. Mesh/surface/bone counts remain as reported above.
+
+P05b1 is implemented but **not yet accepted**. `cast_profiles.gd` adds authored body/head
+proportions, face planes, hair, garment layers, palettes, surface types and source signature
+props. It resolves the actual41 base/56 day-one records with explicit canonical names/sprite
+fields/aliases. These represent42 canonical rows. The44 visual templates include the existing
+six, the fallen-priest state, three shared guard-uniform variants, Paisley and the mounted
+rider; helper bodies and state variants do not invent additional canonical residents.
+
+The roster retains lazy per-identity resource construction. The expanded gate prints first
+construction and cached-instance times separately; it does not preload every actor at startup
+or claim a performance target before parent measures the real scene. Human and quadruped
+weighted bones remain shared anatomy with independent Skeleton instances. Pigeon has its own
+one-leg/wing/neck hierarchy. Pothole has only head/mouth bones and stays flat even under death
+state. Mounted cop combines a horse skeleton with a seated independently skinned rider;
+Paisley is an independently posed quadruped child of the walker visual. Child clocks consume
+current snapshots even when distant parent cosmetic updates are skipped.
+
+`snapshot.asleep` is additive and controller-owned. Dave's sleep pose does not own a wake
+timer. Read/write/phone/fold/serve/strum/seated gestures are visual poses without transactions,
+projectiles or timing authority. New deforming garments use fixed UV fabric; rigid props use
+object-local surface textures so they cannot swim through world coordinates.
+
+Central commands: the existing `res://tests/test_character_roster.gd` now exercises every
+advertised template and actual exported day-one mappings. The existing native probe still
+defaults to the58 original P05a views; `-- --packet=b1` selects new B1 models under
+`.build/full-port/p05b1`, with front rest, quarter walk, identity action, human peak strike and
+an unobstructed20m view. Mounted close views are explicitly3m. No engine or git was run by
+the character worker. B1 gate logs, metric totals, renders and production60-AI profiling remain
+required evidence; the ledger marks36 additional rows pending review, with21 later rows still
+unimplemented.
+
+The first central B1 gate completed1162 checks with three failures, all in collapse bounds:
+dogwalker, philosopher and receipt guard. Construction, mapping, weights, resource reuse and
+the other poses passed. First construction totaled7.88s across lazy templates; cached creation
+totaled5.60ms, with companion templates sometimes already warm. These are headless build
+measurements, not render-frame measurements.
+
+The three failures were production pose defects. Paisley followed the human visual root's
+fall and also received its own quadruped collapse. Paisley now anchors to the unchanged actor
+origin, with only its own grounded collapse. The philosopher's cane and receipt guard's fork
+were pushed below ground by the generic bent right elbow; their authored death pose keeps
+that arm straight so the long tool lies beside the body. The existing envelope test remains
+unchanged, and three stricter checks inspect actual tool/companion geometry at ground level.
+The expected1165-check rerun and native collapse views remain pending at this handoff.
+
+B1 follow-up evidence: the central gate passed1165 checks without script errors. The native
+probe saved188 PNGs under `.build/full-port/p05b1`; parent accepted the corrected long-tool
+and Paisley death views and reviewed the mounted/pigeon/selected resident actions. The parent
+also passed86 production-development scene checks with56 actual day-one instances and real
+cash/Tony/Block-menu/control/save paths. These results supersede the pending status of the
+earlier handoff, without claiming completion of the entire63-row port or a60-AI frame budget.
+
+P05b2 implementation adds14 lazy templates for13 canonical rows, reaching58 templates and55
+canonical rows. Nine distinct human profiles cover the two police types, Price Guy, Bus Driver,
+day-3 visitor and four rulers. Three petition/crown variants retain the exact guard uniforms.
+Old School Brutus and Brutus Older use the authored old-dog anatomy with larger proportions
+and deep-rust palettes; the latter incorporates source scale1.5 once. YOUR POSSUM intentionally
+shares the original helmet-possum visual. Generated cop/Brendan/Sherri and freed-dog IDs are
+resolved by their explicit canonical names/sprites, without suffix guessing. Pretender names
+are checked with the generated-family pattern read from the exported content catalog.
+
+The B2 probe selector is `-- --packet=b2`, output `.build/full-port/p05b2`; B1 membership stays
+fixed at38 added/helper templates and188 views. The expanded gate adds generated-name negatives,
+all conditional/ruler mappings, passive/boss Older equivalence, stillness with advancing time,
+actual signature handles and long-tool/chair collapse geometry. Source-side radio/taser poses
+only present supplied action phases and never fire effects. B2 central gates/metrics/native
+views remain pending; the last eight site-only registry rows are explicitly unimplemented.
+
+B2 central construction/mapping/geometry/animation gate passed1561 checks before the visual
+refinement below. Native B2 evidence is pending. Independent B1 review found four specific
+presentation defects: an open hood crown, wrist-mounted guitar and basket, and a pencil that
+never touched its board. Parent authorized this bounded correction before B3.
+
+The hood now has an authored cloth roof. Guitar, basket and equation board attach to the chest;
+an analytic two-bone cosmetic arm solve reaches their authored contact points using cached
+parents and bindings. Combat/death remain stronger poses. Tests now check actual skinned finger
+vertices, actual pencil geometry, basket orientation, unchanged arm lengths, and hood triangles.
+The targeted probe accepts `--ids=busker,launderlady,math,stripe,vapelord,blue_tarp_guard,darryl_under_blue,pretender_tarp`
+with optional `--output=...`; it adds close contact phases15/80 and hood roof angles. Original
+packet membership stays unchanged. Zero-duration idle captures now evaluate one active idle tick
+so prop carrying is visible rather than showing the anatomical bind. No engine was run here;
+the expanded central gate and native visual acceptance are still required.
+
+The expanded contact/hood gate passed all new checks but failed the unchanged collapse envelope
+for Laundry Lady (1/1585): the deep basket followed her chest through the ground. The correction
+gives the released basket an authored upright resting transform beside her, blended only from
+the supplied death phase. It creates no gameplay object. A stricter actual basket-vertex test
+checks ground clearance at four collapse phases; targeted evidence also captures the final fall.
+The central rerun remains pending at this handoff.
+
+The final58-template refinement passed1586 central checks with no script errors. Parent accepted
+the B2 and targeted native captures, including guitar fretting/strumming, level two-hand basket,
+pencil/board contact, closed hood roof and released basket above ground. These supersede the
+pending contact status above. Actual60-AI native performance remains a separate acceptance gate;
+the diagnostic run exceeds16ms p95 and does not establish the target frame budget.
+
+P05b3 now implements all remaining eight site identities through a separate exact
+`visual_for_site(kind, site_record)` adapter. It requires source kind/id/lowercase-who and leaves
+actor sprite resolution unchanged. Four standalone residents, the elevated seated lifeguard,
+the seven-raccoon cabinet, the frozen father/mother/son dinner and the two-foot desk goose use14
+new templates, reaching72 templates for63 canonical registry rows. The family remains rigid
+under every snapshot; the father has an authored eyeless face and the son holds his toast.
+The sixth/seventh animal does not introduce an independent simulation or gameplay timer.
+
+All child identities share cached meshes/skins while owning their poses. Furniture assemblies
+never inherit a human fall. Tests now cover actual source site records and rejected conflicts,
+exact group membership, child resource/pose independence, real chair/cabinet/desk support rays,
+current action phases, inert actual geometry, and finger/pencil/stamp/card contacts. Quiet skin
+materials and finger weighting support per-profile skin colors. Tiny existing animal sections
+avoid redundant subdivision at construction; there is no new per-frame scene traversal.
+
+Native selector: `character_roster_probe.gd -- --packet=b3`, writing `.build/full-port/p05b3`,
+with all14 templates, near/far silhouettes, two identity-action phases and Teller's actual stamp
+contact. Assembly near views are explicitly3m. No engine or commit was run by this worker.
+Central parsing, full roster gates, native review, production site placement and performance
+acceptance remain pending; this is an implementation handoff, not a completed full-port claim.

@@ -2,6 +2,8 @@
 param(
     [ValidateSet('All', 'Windows', 'Web')]
     [string]$Target = 'All',
+    [ValidateSet('Slice', 'Full')]
+    [string]$Entry = 'Slice',
     [string]$Engine = ''
 )
 
@@ -9,6 +11,8 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $repoRoot = Split-Path -Parent $projectRoot
 $buildRoot = Join-Path $repoRoot '.build/3d'
+if ($Entry -eq 'Full') { $buildRoot = Join-Path $buildRoot 'full' }
+$presetSuffix = if ($Entry -eq 'Full') { ' Full' } else { '' }
 $templateRoot = Join-Path $repoRoot '.tools/templates'
 if (-not $Engine) {
     $Engine = Join-Path $repoRoot '.tools/godot-4.5.1/Godot_v4.5.1-stable_win64_console.exe'
@@ -63,13 +67,13 @@ if ($Target -in @('All', 'Windows')) {
     $windowsRoot = Join-Path $buildRoot 'windows'
     New-Item -ItemType Directory -Force -Path $windowsRoot | Out-Null
     $windowsExe = Join-Path $windowsRoot 'RockBottom.exe'
-    Invoke-GodotChecked -Stage 'export-windows' -GodotArgs @('--export-release', 'Windows', $windowsExe)
+    Invoke-GodotChecked -Stage 'export-windows' -GodotArgs @('--export-release', ('Windows' + $presetSuffix), $windowsExe)
     if (-not (Test-Path -LiteralPath $windowsExe -PathType Leaf)) { throw 'Windows export did not produce RockBottom.exe.' }
 }
 if ($Target -in @('All', 'Web')) {
     $webRoot = Join-Path $buildRoot 'web'
     New-Item -ItemType Directory -Force -Path $webRoot | Out-Null
-    Invoke-GodotChecked -Stage 'export-web' -GodotArgs @('--export-release', 'Web', (Join-Path $webRoot 'index.html'))
+    Invoke-GodotChecked -Stage 'export-web' -GodotArgs @('--export-release', ('Web' + $presetSuffix), (Join-Path $webRoot 'index.html'))
     foreach ($file in @('index.html', 'index.js', 'index.wasm', 'index.pck')) {
         if (-not (Test-Path -LiteralPath (Join-Path $webRoot $file) -PathType Leaf)) { throw "Web export did not produce $file." }
     }
@@ -90,4 +94,4 @@ if ($Target -in @('All', 'Web')) {
     $html = $html.Replace($configMatch.Groups[1].Value, ($config | ConvertTo-Json -Depth 8 -Compress))
     [IO.File]::WriteAllText((Join-Path $webRoot 'index.html'), $html, [Text.UTF8Encoding]::new($false))
 }
-Write-Output "3D BUILD: PASS ($Target; Godot $version; outputs: $buildRoot)"
+Write-Output "3D BUILD: PASS ($Entry / $Target; Godot $version; outputs: $buildRoot)"

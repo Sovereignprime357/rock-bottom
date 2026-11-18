@@ -34,7 +34,7 @@ func _talk_reason(id: String) -> String:
 	if host == null: return "missing_owner"
 	if id not in IDS: return "unknown_vendor"
 	if host.s.mode not in ["playing", "dialogue"]: return "wrong_mode"
-	if host.s.get("bossActive", false): return "active_boss"
+	if host.s.get("bossKind", "") == "kingdom": return "active_boss"
 	var actor: Dictionary = _actor(id)
 	if actor.is_empty() or actor.get("dead", false): return "missing_vendor"
 	if id == "pete" and actor.get("shopClosed", false): return "shop_closed"

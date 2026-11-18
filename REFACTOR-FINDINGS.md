@@ -732,3 +732,50 @@ No generic death reward substitutes for unfinished boss/campaign systems.
 world captures62 and native rig captures58. Report contains gate output, files and selected images.
 Production full-cast AI, remaining systems, full scene, exports and whole-game native/Web tours
 remain required. No completed parity feature or full60AI performance is claimed.
+
+## IMPL-3D-FULL-03 — Full scene, cast and source domains (2026-11-18)
+
+**Status:** executed bounded work on `codex/3d-full-port`; full-port goal remains active.
+Contracts: SCENE-COMPOSITION, CHARACTER-ROSTER, BOSSES, RESIDENT-DIALOGUE,
+QUEST-DIALOGUE, STREET-DIALOGUE, RHYTHM, ROBBERY, DAY-SYSTEM, COMMUNICATIONS,
+TRAVEL and ACTOR-NAVIGATION. These exceptions apply only to game3d.
+
+The full scene uses one GameState/Runtime and real source actor/domain owners.
+Full-state persistence has its own namespace; old slice saves are read only as
+migration fallback. Bad envelopes and blocked restored Fallen placement cannot
+replace live progress. Source menus use one-use capabilities and a scene callback
+generation; explicit returned domains own nested Travel/Karaoke menus. Native
+capture refusal retains fallback movement and deliberate menu exits.
+
+Original cast expansion uses72 templates to represent63 canonical rows; site-only
+identity resolution remains separate from actor aliases. Real authoring includes
+hand/prop contacts and seated/inert assemblies. View clocks respect hitpause.
+Distant ambient gestures may use the existing every-third-call presentation
+cadence; authoritative actions, hurt/death/coat changes remain immediate. Exact
+bone transforms/coat state skip redundant setter calls without approximate poses.
+
+Robbery retains the source allowlists,60s world cooldown and2/day sink governor.
+Raw dialogue HP/stun is not substituted for actual Travel death/arrest lifecycle.
+Quest auto-delivery completes its source current-step AI/projectile/boss work
+before future active steps pause. Crown positions are unchanged and physically
+reachable. All new RNG/economy fixtures execute unchanged active JavaScript.
+
+P14-PHYSICAL-DEFER: required day owners preflight before paid sleep. Chosen source
+actor/cash payloads that cannot be placed enter a bounded normalized saved queue;
+retries do not reroll/reward, and no invisible model actor is inserted. Natural
+time is not stalled by physical placement failure. Real Campaign remains required
+before production Day installation. Source dawn news precedes day7 silence through
+synchronous Communications publication. Session-global feed/props preserve source
+fresh/load retention; garbage clears looted state but not other tips jars. Source
+traffic pitch RNG is retained where it affects later source event selections.
+
+Physics caches certify exact positive origin queries only within the same render
+and physics frame and geometry revision. Body/height/epoch/collider changes clear
+certificates. Casts, endpoints, contacts and line of sight remain actual queries.
+Day cash staging uses bounded capsule/low-target visibility tests; wall-blocked
+recovery defers instead of moving a pickup through geometry.
+
+Full Windows/Web export presets use Godot's native custom-feature main-scene
+override and separate output directories. The default slice and public2D hosting
+are unchanged. Full-game parity and60AI performance are not inferred from passing
+model tests or source data. Native actual60 remains diagnostic until measured.

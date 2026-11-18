@@ -41,10 +41,34 @@ Root owns `main.gd`, gate runner, shared specs and persistence until explicitly 
 
 ## Current assignments
 
-- architecture_review: P03a/b accepted foundations; P07a central review; P07b boss/domain source/API proposal.
-- slice_world: P04a physical/native accepted foundation; P12a travel model/oracle/tests implementing.
-- slice_characters: P05a six weighted rigs/native correction; P05b1 expands all day-one identities.
-- root: composition, actual physics/controller integration, shared gate runner, evidence and serialized validation.
+- architecture_review: accepted Boss/Resident/Quest/Street/Rhythm source models; P14 communications and authoritative prop state next.
+- slice_world: accepted local navigation and Travel; P14 four-cause day system, deferred physical placements and conditional actor dialogs.
+- slice_characters: B1/B2/B3 original cast (72 templates/63 identities), native review and bounded presentation scheduling optimization.
+- root: real FullScene/Runtime/physics/controller integration, robbery, shared gates, separate full exports and serialized native/Web validation.
+
+## Integration checkpoint — active, not full parity
+
+The actual full scene now composes the source world,56 day-one actors, real
+Combat/Director/Bosses, core vendors, nine Resident and five Quest handlers,
+15 Street handlers, Travel and untimed Karaoke. The initial pickup→Tony→Block
+18/8 loop passed a native rendered tour. The scene has readonly full inventory
+and quest ledgers, scrolling source choices, pointer-capture fallback, guarded
+menu callbacks, source number shortcuts and isolated full-state persistence.
+
+New packet bounds: P06B1 Resident; P06B2 Quest/crown/package; P06B3a Street;
+P09a Rhythm; P11a Robbery; P04b bounded real actor navigation; P15a first full
+scene. Source quirks are tested explicitly, including direct dialogue HP costs,
+low-HP recovery/travel, kingdom-only interaction blocks and same-step automatic
+delivery ordering. These foundations do not finish their parent parity rows.
+
+The first actual60 native capture exposed missing robbery, then that owner was
+implemented and the short rerun showed60/60 supported actors. Performance still
+fails: scene CPU p95 about17–18ms, with~6–7ms in model presentation; full engine
+and render costs require further profiling. Day route arrest legitimately
+removes police and invalidates that sustained60-count sample. Do not label the
+diagnostic runs as accepted performance. Remaining full native/Web progression,
+campaign, days, communications, activities/heists and source interaction priority
+remain open. The complete-port parity gate remains deliberately incomplete.
 
 ## Evidence
 

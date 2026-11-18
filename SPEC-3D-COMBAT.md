@@ -29,7 +29,8 @@ Physics adapter is mandatory, weak, pure with respect to model resources. Exact 
 
 * move_body(body:Dictionary,intended:Vector2,goal:Variant=null,stop_on_block:bool=false)
   -> Dictionary `{position:Vector2,blocked:bool}`. Position is finite source top-left. Input
-  body is a detached geometry record `{x,y,w,h,id}`; adapter cannot mutate authoritative actors.
+  body is a detached geometry record `{x,y,w,h,id}` with optional scalar `name`, `sprite` and
+  `isOmalleyFallen` visual hints for exact pre-spawn body height; adapter cannot mutate actors.
 * clear_placement(body:Dictionary) -> finite Vector2 source top-left, or null on failure.
 * can_hit(from_center:Vector2,to_center:Vector2,source_id:String,target_id:String) -> bool,
   computed from actual current wall/height geometry. Missing adapter fails closed.

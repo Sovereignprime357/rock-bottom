@@ -6,6 +6,7 @@ const Vendors = preload("res://scripts/vendors_core.gd")
 const Memory = preload("res://scripts/memory_loop.gd")
 var checks: int = 0
 var failures: Array[String] = []
+var oracle_completed: int = 0
 
 class Spatial:
 	extends RefCounted
@@ -44,8 +45,9 @@ func _run() -> void:
 	_test_boss_seam()
 	_test_intro_and_loan()
 	_test_migration()
+	_check(oracle_completed == 27, "all 27 source economy fixtures completed without script abort")
 	if failures.is_empty():
-		print("3D ECONOMY GATE: PASS (%d checks; 23 source fixtures, inventory/migration, live action sessions and Tony/Pete/Yuri; scene/combat integration pending)" % checks)
+		print("3D ECONOMY GATE: PASS (%d checks; 27 source fixtures, inventory/migration, live action sessions and Tony/Pete/Yuri; scene/combat integration pending)" % checks)
 		quit(0)
 	else:
 		for failure: String in failures: push_error(failure)
@@ -103,7 +105,7 @@ func _event_count(game: RefCounted, kind: String) -> int:
 
 func _test_source_oracle() -> void:
 	var fixture: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/economy_reference.json"))
-	_check(fixture is Dictionary and fixture.get("cases", []).size() == 23, "source economy fixtures available")
+	_check(fixture is Dictionary and fixture.get("cases", []).size() == 27, "source economy fixtures available")
 	if not fixture is Dictionary: return
 	for test: Dictionary in fixture.cases:
 		var game: RefCounted = State.new()
@@ -119,10 +121,12 @@ func _test_source_oracle() -> void:
 		game.s.quests.intro_tony.available = false
 		game.s.achievements = test.setup.achievements.duplicate()
 		game.s.day = test.setup.day
-		for operation: Array in test.operations:
+		game.s.bossActive = test.setup.boss.active; game.s.bossKind = test.setup.boss.kind; game.s.bossPhase = test.setup.boss.phase
+		for index: int in range(test.operations.size()):
+			var operation: Array = test.operations[index]
 			_at(game, operation[0])
 			var menu: Dictionary = vendors.open(operation[0])
-			_check(menu.ok, "oracle %s opens %s" % [test.id, operation[0]])
+			_check(menu.ok == test.offered[index].opened, "oracle %s interaction access %s" % [test.id, operation[0]])
 			if not menu.ok: continue
 			var choice: Dictionary = _option(menu, operation[1])
 			if not choice.is_empty() and choice.enabled: vendors.select(menu.token, operation[1])
@@ -138,6 +142,7 @@ func _test_source_oracle() -> void:
 		achievements.sort()
 		_check(_same(achievements, test.expected.achievements), "oracle %s achievements" % test.id)
 		_check(game.s.bossActive == test.expected.boss.active and game.s.bossKind == test.expected.boss.kind and game.s.bossPhase == test.expected.boss.phase, "oracle %s boss handoff" % test.id)
+		oracle_completed += 1
 
 
 func _test_inventory() -> void:
@@ -255,7 +260,17 @@ func _test_boss_seam() -> void:
 	_check(not _act(vendors, game, "tony", "short").ok and game.p.cash == 10 and game.p.tonyOffenses == 2 and boss.starts == 0, "synchronous rejected boss leaves vendor costs/offenses untouched")
 	boss.accepts = true
 	_check(_act(vendors, game, "tony", "short").ok and game.p.cash == 5 and game.p.tonyOffenses == 3 and boss.starts == 1 and game.s.bossActive, "successful boss handoff pays exactly once")
-	_check(not vendors.open("tony").ok, "active boss refuses a second vendor session")
+	var menu: Dictionary = vendors.open("tony")
+	_check(menu.ok, "active Tony preserves his source trade dialogue")
+	vendors.close(); boss.available = false
+	var prior_cash: int = game.p.cash
+	_check(not _act(vendors, game, "tony", "short").ok and game.p.cash == prior_cash and game.p.tonyOffenses == 3 and boss.starts == 1, "active fight cannot bypass atomic third-short start refusal")
+	game.p.cash = 20
+	_at(game, "tony"); menu = vendors.open("tony")
+	game.s.bossKind = "kingdom"
+	_check(not vendors.select(menu.token, "buy_rock").ok and game.p.cash == 20, "kingdom lock appearing after menu opening refuses without payment")
+	game.s.bossActive = false
+	_check(not vendors.open("tony").ok, "kingdom kind alone blocks interaction like the source guard")
 
 
 func _test_intro_and_loan() -> void:

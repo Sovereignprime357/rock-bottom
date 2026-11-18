@@ -41,7 +41,7 @@ function Invoke-Gate {
 }
 
 Invoke-Gate -Name 'import' -GodotArgs @('--editor', '--import', '--quit')
-foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd')) {
+foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd', 'test_bosses.gd', 'test_travel.gd', 'test_actor_navigation.gd', 'test_full_hud.gd', 'test_full_scene.gd', 'test_resident_dialogue.gd', 'test_quest_dialogue.gd', 'test_street_dialogue.gd', 'test_rhythm.gd', 'test_robbery.gd', 'test_day_system.gd', 'test_communications.gd')) {
     if (-not (Test-Path -LiteralPath (Join-Path $PSScriptRoot $script) -PathType Leaf)) {
         throw "Required gate $script is missing. Simulation, scene and art checks must exist before this runner can pass."
     }
@@ -60,6 +60,18 @@ Invoke-Gate -Name 'combat' -GodotArgs @('--script', 'res://tests/test_combat.gd'
 Invoke-Gate -Name 'full-runtime' -GodotArgs @('--script', 'res://tests/test_full_runtime.gd', '--quit-after', '6000') -PassPattern '3D FULL RUNTIME GATE: PASS'
 Invoke-Gate -Name 'physics-adapter' -GodotArgs @('--script', 'res://tests/test_world_adapter.gd', '--quit-after', '6000') -PassPattern '3D PHYSICS ADAPTER GATE: PASS'
 Invoke-Gate -Name 'full-integration' -GodotArgs @('--script', 'res://tests/test_full_integration.gd', '--quit-after', '6000') -PassPattern '3D FULL INTEGRATION GATE: PASS'
+Invoke-Gate -Name 'bosses' -GodotArgs @('--script', 'res://tests/test_bosses.gd', '--quit-after', '6000') -PassPattern '3D BOSS GATE: PASS'
+Invoke-Gate -Name 'travel' -GodotArgs @('--script', 'res://tests/test_travel.gd', '--quit-after', '6000') -PassPattern '3D TRAVEL GATE: PASS'
+Invoke-Gate -Name 'navigation' -GodotArgs @('--script', 'res://tests/test_actor_navigation.gd', '--quit-after', '6000') -PassPattern '3D ACTOR NAVIGATION GATE: PASS'
+Invoke-Gate -Name 'full-hud' -GodotArgs @('--script', 'res://tests/test_full_hud.gd', '--quit-after', '6000') -PassPattern '3D FULL HUD GATE: PASS'
+Invoke-Gate -Name 'full-scene' -GodotArgs @('--script', 'res://tests/test_full_scene.gd', '--quit-after', '6000') -PassPattern '3D FULL SCENE GATE: PASS'
+Invoke-Gate -Name 'residents' -GodotArgs @('--script', 'res://tests/test_resident_dialogue.gd', '--quit-after', '6000') -PassPattern '3D RESIDENT GATE: PASS'
+Invoke-Gate -Name 'quests' -GodotArgs @('--script', 'res://tests/test_quest_dialogue.gd', '--quit-after', '6000') -PassPattern '3D QUEST GATE: PASS'
+Invoke-Gate -Name 'street' -GodotArgs @('--script', 'res://tests/test_street_dialogue.gd', '--quit-after', '6000') -PassPattern '3D STREET GATE: PASS'
+Invoke-Gate -Name 'rhythm' -GodotArgs @('--script', 'res://tests/test_rhythm.gd', '--quit-after', '6000') -PassPattern '3D RHYTHM GATE: PASS'
+Invoke-Gate -Name 'robbery' -GodotArgs @('--script', 'res://tests/test_robbery.gd', '--quit-after', '6000') -PassPattern '3D ROBBERY GATE: PASS'
+Invoke-Gate -Name 'days' -GodotArgs @('--script', 'res://tests/test_day_system.gd', '--quit-after', '6000') -PassPattern '3D DAY GATE: PASS'
+Invoke-Gate -Name 'communications' -GodotArgs @('--script', 'res://tests/test_communications.gd', '--quit-after', '6000') -PassPattern '3D COMMUNICATIONS GATE: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
@@ -68,6 +80,15 @@ foreach ($entry in @(
     @{ Name = 'economy-oracle'; Script = '3d-economy-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'world-oracle'; Script = '3d-world-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'combat-oracle'; Script = '3d-combat-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'boss-oracle'; Script = '3d-boss-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'travel-oracle'; Script = '3d-travel-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'resident-oracle'; Script = '3d-resident-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'quest-oracle'; Script = '3d-quest-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'street-oracle'; Script = '3d-street-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'rhythm-oracle'; Script = '3d-rhythm-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'robbery-oracle'; Script = '3d-robbery-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'day-oracle'; Script = '3d-day-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'communications-oracle'; Script = '3d-communications-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -75,4 +96,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 22/22 PASS (import clean; 14 engine suites and 8 source/parity checks; full-port integration remains tracked separately)'
+Write-Output '3D GATE RUNNER: 43/43 PASS (import clean; 26 engine suites and 17 source/parity checks; complete-port acceptance remains tracked separately)'

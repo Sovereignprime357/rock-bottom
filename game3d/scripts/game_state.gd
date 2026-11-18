@@ -26,6 +26,7 @@ const STATE_SAVE_KEYS: Array[String] = [
 	"blockRoute", "office", "districtClaims", "kingdom", "day", "dayTime", "weather", "lootedDumpsters",
 	"barbAside", "metVendors", "flags", "crownPickup", "graffiti", "posters", "publicPhoneAnswered",
 	"hideoutStash", "recognition", "concessionClocks", "discoveredVenues", "migration",
+	"dayPendingPlacements",
 ]
 
 var content: Dictionary = {}
@@ -36,6 +37,8 @@ var cash_piles: Array[Dictionary] = []
 var projectiles: Array[Dictionary] = []
 var events: Array[Dictionary] = []
 var on_high_expired: Callable
+var on_day_preflight: Callable
+var on_day_started: Callable
 var last_error: String = ""
 var rng_seed: int = DEFAULT_SEED
 var _quantum_remaining: float = QUANTUM_MS
@@ -114,6 +117,9 @@ func tick(seconds: float, context: Dictionary = {}) -> bool:
 	if float(p.rockedT) > 0.0 and float(p.rockedT) <= remaining + EPSILON and not on_high_expired.is_valid():
 		last_error = "A high-expiry handler is required before advancing through the boundary."
 		return false
+	if remaining+EPSILON >= (1.0-float(s.dayTime))*DAY_MS and not _preflight_day("natural"):
+		last_error = "A required day owner is unavailable before the boundary."
+		return false
 	last_error = ""
 	var body_context: Dictionary = context.duplicate()
 	while remaining > EPSILON:
@@ -164,16 +170,30 @@ func _at_block(context: Dictionary) -> bool:
 	return false
 
 
-func _advance_day() -> void:
+func _preflight_day(cause: String) -> bool:
+	if cause not in ["natural","hideout_sleep","office_sleep","block_sleep"]: return false
+	if on_day_preflight.is_valid() != on_day_started.is_valid(): return false
+	return on_day_preflight.call(cause) == true if on_day_preflight.is_valid() else true
+
+
+func _advance_day(cause: String = "natural") -> bool:
+	if not _preflight_day(cause): return false
 	s.day = mini(LIMIT, int(s.day) + 1)
 	p.lifetime.dayCount = s.day
-	var daily_keys: Array = definition("src/systems/daily_hideouts.js", "DAILY_COUNTER_KEYS", [])
-	for value: Variant in daily_keys:
-		if value is String: s.counters[value] = 0
-	if s.office is Dictionary:
-		s.office.workDay = s.day
-		s.office.workToday = 0
-	emit_event("day_started", {"day": s.day})
+	if cause != "natural": s.dayTime = 0.3
+	var handled: bool = on_day_started.is_valid()
+	if handled: on_day_started.call(cause)
+	else:
+		# Isolated foundation users retain the existing reset; full composition
+		# installs both callbacks and owns weather/campaign/source-order effects.
+		var daily_keys: Array = definition("src/systems/daily_hideouts.js", "DAILY_COUNTER_KEYS", [])
+		for value: Variant in daily_keys:
+			if value is String: s.counters[value] = 0
+		if s.office is Dictionary:
+			s.office.workDay = s.day
+			s.office.workToday = 0
+	emit_event("day_started", {"day": s.day,"cause":cause,"handled":handled})
+	return true
 
 
 func apply_equip_stats() -> void:

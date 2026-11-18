@@ -16,7 +16,9 @@ characters, improved hands/animation/interaction and desktop/Web validation. Nam
   62 native day/night views and actual intro pickup/walk/vendor/smoke integration.
 - [x] Six weighted original character rigs, independent animated poses, coat states and native review.
 - [x] Source-faithful Tony/Pete/Yuri economy, one-use action sessions and full-model movement composition.
-- [ ] Remaining canonical character families, production actor lifecycle and active full-world scene.
+- [x] Full-world development scene with56 source actors, composed combat/dialogue/travel and original cast templates.
+- [x] Resident/quest/street dialogue foundations, crown/package lifecycle, untimed Karaoke and source robbery sink.
+- [ ] Remaining site-character placement, presentation refinement and full production actor lifecycle.
 - [ ] Full vendor/action system, combat/bosses, activities/heists, campaigns, days and presentation.
 - [ ] Full native/Web progression tours,60+ real AI profile, save/recovery audit and final delivery.
 

@@ -4,6 +4,8 @@ extends RefCounted
 ## Actor origin stays at the feet. +Z is this art's forward; it is not camera -Z.
 
 const Legacy = preload("res://scripts/character_art.gd")
+const Profiles = preload("res://scripts/cast_profiles.gd")
+const Sites = preload("res://scripts/site_cast_profiles.gd")
 const DEFINITIONS := {
 	&"tony":{"family":"human","height":1.96,"hip":0.76,"arm":0.62,"leg":0.64,"stride":1.10},
 	&"pete":{"family":"human","height":1.77,"hip":0.66,"arm":0.43,"leg":0.54,"stride":0.86},
@@ -18,11 +20,24 @@ static var _materials: Dictionary = {}
 
 
 static func supported_visuals() -> PackedStringArray:
-	return PackedStringArray(["tony","pete","yuri","lurch","brutus","possum"])
+	var result := PackedStringArray(["tony","pete","yuri","lurch","brutus","possum"])
+	result.append_array(Profiles.supported_visuals())
+	result.append_array(Sites.supported_visuals())
+	return result
+
+
+static func visual_for_actor(source_actor: Dictionary) -> StringName:
+	return Profiles.visual_for_actor(source_actor)
+
+
+static func visual_for_site(kind: StringName, site_record: Dictionary) -> StringName:
+	return Sites.visual_for_site(kind,site_record)
 
 
 static func definition(visual_id: StringName) -> Dictionary:
-	if not DEFINITIONS.has(visual_id): return {}
+	if not DEFINITIONS.has(visual_id):
+		var profile := Profiles.definition(visual_id)
+		return Sites.definition(visual_id) if profile.is_empty() else profile
 	var result: Dictionary = DEFINITIONS[visual_id].duplicate(true)
 	result["visual_id"] = visual_id
 	result["actions"] = HUMAN_ACTIONS.duplicate() if result.family == "human" else ANIMAL_ACTIONS.duplicate()
@@ -31,7 +46,8 @@ static func definition(visual_id: StringName) -> Dictionary:
 
 
 static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
-	if not DEFINITIONS.has(visual_id): return null
+	var def := definition(visual_id)
+	if def.is_empty(): return null
 	if not _templates.has(visual_id):
 		var built := _build_template(visual_id)
 		if built.is_empty():
@@ -42,12 +58,13 @@ static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 	var root := Node3D.new()
 	root.name = String(visual_id)
 	root.set_meta("visual_id",visual_id)
-	root.set_meta("height",float(DEFINITIONS[visual_id].height))
+	root.set_meta("height",float(def.height))
 	var skeleton := Skeleton3D.new()
 	skeleton.name = "Skeleton"
 	skeleton.modifier_callback_mode_process = Skeleton3D.MODIFIER_CALLBACK_MODE_PROCESS_MANUAL
 	root.add_child(skeleton)
 	var rests: Array[Transform3D] = []
+	var parents := PackedInt32Array()
 	var lookup: Dictionary = {}
 	for bone: Dictionary in source.bones:
 		var index := skeleton.add_bone(bone.name)
@@ -55,7 +72,15 @@ static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 		skeleton.set_bone_parent(index,bone.parent)
 		skeleton.set_bone_rest(index,bone.local)
 		rests.append(bone.local)
+		parents.append(bone.parent)
 	skeleton.reset_bone_poses()
+	var base_poses: Array[Transform3D] = rests.duplicate()
+	for bone_name: String in def.get("base_pose",{}):
+		var index: int = lookup[bone_name]
+		var pose: Transform3D = base_poses[index]
+		pose.basis *= Basis.from_euler(def.base_pose[bone_name])
+		base_poses[index] = pose
+		skeleton.set_bone_pose(index,pose)
 	var layers: Array = [[],[],[],[]]
 	for entry: Dictionary in source.meshes:
 		var part := MeshInstance3D.new()
@@ -63,20 +88,27 @@ static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 		part.mesh = entry.mesh
 		part.skin = source.skin
 		part.skeleton = NodePath("../Skeleton")
-		part.custom_aabb = AABB(Vector3(-1.8,-0.5,-2.5),Vector3(3.6,3.7,5.0))
+		part.custom_aabb = AABB(Vector3(-1.8,-0.5,-2.8),Vector3(3.6,maxf(3.7,float(def.height)+0.7),5.6))
 		root.add_child(part)
 		layers[int(entry.layer)].append(part)
 	var attachments: Array = []
+	var prop_lookup: Dictionary = {}
 	for entry: Dictionary in source.attachments:
 		var part := (entry.scene as PackedScene).instantiate() as Node3D
 		root.add_child(part)
-		attachments.append({"node":part,"bone":lookup[entry.bone],"offset":entry.offset})
+		var binding := {"node":part,"bone":lookup[entry.bone],"offset":entry.offset}
+		attachments.append(binding)
+		prop_lookup[String(part.name)] = binding
 	var markers: Dictionary = {}
 	var marker_bones: Dictionary = {"head":"head"}
-	if DEFINITIONS[visual_id].family == "human":
+	if def.family == "human":
 		marker_bones.merge({"left_arm":"left_shoulder","right_arm":"right_shoulder","left_leg":"left_hip","right_leg":"right_hip","left_grip":"left_wrist","right_grip":"right_wrist"})
-	else:
+	elif def.family in ["quadruped","mounted"]:
 		for limb: String in ["front_left","front_right","back_left","back_right"]: marker_bones[limb] = limb
+	elif def.family == "bird":
+		marker_bones.merge({"left_wing":"left_wing","right_wing":"right_wing"})
+		if bool(def.get("two_feet",false)): marker_bones.merge({"left_leg":"bird_left","right_leg":"bird_right"})
+		else: marker_bones["single_leg"] = "single_leg"
 	for marker_name: String in marker_bones:
 		var marker := root.get_node_or_null(NodePath(marker_name)) as Node3D
 		if marker == null:
@@ -84,12 +116,31 @@ static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 			marker.name = marker_name
 			root.add_child(marker)
 		markers[marker_name] = {"node":marker,"bone":lookup[marker_bones[marker_name]]}
-	var rig := {"skeleton":skeleton,"rests":rests,"lookup":lookup,"attachments":attachments,
-		"markers":markers,"layers":layers,"definition":definition(visual_id),"time":0.0,
+	var companions: Array = []
+	var metrics: Dictionary = source.metrics.duplicate(true)
+	for child_def: Dictionary in def.get("companions",[]):
+		var child := create(child_def.visual_id,instance_seed+37+companions.size()*13)
+		if child == null:
+			root.free()
+			return null
+		child.name = String(child_def.get("name",child_def.visual_id))
+		root.add_child(child)
+		# The authored offset is in actor coordinates at rest. Only visual anatomy
+		# follows this bone; each companion still owns an independent pose cache.
+		var bone_index: int = lookup[child_def.bone]
+		var anchor := Transform3D(Basis(Vector3.UP,float(child_def.get("yaw",0.0))),child_def.position)
+		var offset: Transform3D = (source.bones[bone_index].global as Transform3D).affine_inverse()*anchor
+		companions.append({"node":child,"bone":bone_index,"offset":offset,"anchor":anchor,"follow_bone":child_def.get("follow_bone",true),"action":child_def.action})
+		var child_metrics: Dictionary = child.get_meta("roster_metrics")
+		for key: String in ["meshes","surfaces","triangles","bones"]: metrics[key] += int(child_metrics[key])
+	var rig := {"skeleton":skeleton,"rests":rests,"base_poses":base_poses,"parents":parents,"lookup":lookup,"attachments":attachments,"prop_lookup":prop_lookup,"companions":companions,
+		"markers":markers,"layers":layers,"definition":def,"time":0.0,
 		"phase":0.0,"motion":0.0,"seed":float(posmod(instance_seed,997))/997.0*TAU,
-		"detail":-1,"frame":0,"last_state":[],"pose_updates":0,"finger_updates":0}
+		"detail":-1,"frame":0,"last_state":[],"pose_updates":0,"finger_updates":0,
+		"applied_poses":base_poses.duplicate(),"bone_writes":0,"last_coats":3,"visibility_writes":0}
 	root.set_meta("roster_rig",rig)
-	root.set_meta("roster_metrics",source.metrics.duplicate(true))
+	root.set_meta("roster_metrics",metrics)
+	root.set_meta("roster_own_metrics",source.metrics.duplicate(true))
 	_sync_attachments(rig)
 	return root
 
@@ -98,6 +149,8 @@ static func _sync_attachments(rig: Dictionary) -> void:
 	var skeleton: Skeleton3D = rig.skeleton
 	for item: Dictionary in rig.attachments:
 		(item.node as Node3D).transform = skeleton.get_bone_global_pose(item.bone)*item.offset
+	for item: Dictionary in rig.companions:
+		(item.node as Node3D).transform = skeleton.get_bone_global_pose(item.bone)*item.offset if item.follow_bone else item.anchor
 	for key: String in rig.markers:
 		if key == "head": continue # The face attachment is also the legacy head marker.
 		var item: Dictionary = rig.markers[key]
@@ -107,6 +160,7 @@ static func _sync_attachments(rig: Dictionary) -> void:
 static func _raw_character(id: StringName) -> Node3D:
 	# Reuse the original authored construction, before its static batching discards
 	# part identity. Existing faces remain the same; legacy animation is never called.
+	if not DEFINITIONS.has(id): return Sites.build_raw(id) if Profiles.definition(id).is_empty() else Profiles.build_raw(id)
 	var raw := Node3D.new()
 	match id:
 		&"tony": Legacy._tony(raw)
@@ -187,15 +241,37 @@ static func _at(point: Vector3, basis: Basis = Basis.IDENTITY) -> Transform3D:
 
 static func _build_bones(data: Dictionary, raw: Node3D, def: Dictionary) -> void:
 	_bone(data,"root","",Transform3D.IDENTITY)
+	if def.family == "assembly":
+		_bone(data,"head","root",_relative(raw.get_node("head") as Node3D,raw))
+		return
+	if def.family == "object":
+		_bone(data,"head","root",_relative(raw.get_node("head") as Node3D,raw))
+		_bone(data,"mouth","head",_relative(raw.get_node("mouth") as Node3D,raw))
+		return
 	var human: bool = def.family == "human"
+	var bird: bool = def.family == "bird"
 	var hip: float = def.hip
 	var head := raw.get_node("head") as Node3D
-	_bone(data,"pelvis","root",_at(Vector3(0,hip,0 if human else -0.22)))
+	_bone(data,"pelvis","root",_at(Vector3(0,hip,0 if human or bird else -0.22)))
 	_bone(data,"spine","pelvis",_at(Vector3(0,hip+(0.22 if human else 0.02),0 if human else -0.05)))
-	_bone(data,"chest","spine",_at(Vector3(0,head.position.y-(0.36 if human else 0.14),0 if human else 0.19)))
-	_bone(data,"neck","chest",_at(head.position-Vector3(0,0.18 if human else 0.05,0.04)))
+	var chest_y: float = def.get("chest_y",hip+0.14 if def.family == "mounted" else head.position.y-(0.36 if human else 0.14))
+	_bone(data,"chest","spine",_at(Vector3(0,chest_y,0 if human else 0.19)))
+	_bone(data,"neck","chest",_at(def.get("neck_at",head.position-Vector3(0,0.18 if human else 0.05,0.04))))
 	_bone(data,"head","neck",_at(head.position))
-	if human:
+	if bird:
+		if bool(def.get("two_feet",false)):
+			for name_text: String in ["bird_left","bird_right"]:
+				var leg := raw.get_node(name_text) as Node3D
+				_bone(data,name_text,"pelvis",_relative(leg,raw))
+				_bone(data,name_text+"_knee",name_text,_at(leg.position+Vector3(0,-0.085,-0.015)))
+				_bone(data,name_text+"_ankle",name_text+"_knee",_at(leg.position+Vector3(0,-0.17,0.020)))
+		else:
+			var leg := raw.get_node("single_leg") as Node3D
+			_bone(data,"single_leg","pelvis",_relative(leg,raw))
+			_bone(data,"single_knee","single_leg",_at(leg.position+Vector3(0,-0.055,0.012)))
+			_bone(data,"single_ankle","single_knee",_at(leg.position+Vector3(0,-0.095,0.02)))
+		for part: String in ["left_wing","right_wing","tail"]: _bone(data,part,"chest" if part.ends_with("wing") else "pelvis",_relative(raw.get_node(part) as Node3D,raw))
+	elif human:
 		for side: String in ["left","right"]:
 			var sign_value := -1.0 if side == "left" else 1.0
 			var arm := raw.get_node(side+"_arm") as Node3D
@@ -225,8 +301,8 @@ static func _build_bones(data: Dictionary, raw: Node3D, def: Dictionary) -> void
 			_bone(data,limb+"_ankle",limb+"_knee",upper_leg*_at(Vector3(sign_value*0.03,-float(def.leg),0.04)))
 		var tail := raw.get_node("tail") as Node3D
 		_bone(data,"tail","pelvis",_relative(tail,raw))
-		_bone(data,"tail_mid","tail",_at(tail.position+Vector3(0.06,-0.02,-0.24)))
-		_bone(data,"tail_tip","tail_mid",_at(tail.position+Vector3(0.20,-0.06,-0.43)))
+		_bone(data,"tail_mid","tail",_at(tail.position+(Vector3(0.04,-0.37,-0.11) if def.family == "mounted" else Vector3(0.06,-0.02,-0.24))))
+		_bone(data,"tail_tip","tail_mid",_at(tail.position+(Vector3(0.10,-0.84,-0.11) if def.family == "mounted" else Vector3(0.20,-0.06,-0.43))))
 		var jaw := raw.get_node_or_null("jaw") as Node3D
 		if jaw != null: _bone(data,"jaw","head",_relative(jaw,raw))
 
@@ -251,14 +327,20 @@ static func _set_owner(node: Node, owner_root: Node) -> void:
 
 static func _build_template(id: StringName) -> Dictionary:
 	var raw := _raw_character(id)
+	if raw == null: return {}
 	var def := definition(id)
-	var data := {"bones":[],"lookup":{},"attachments":[],"skip":[],"groups":{},"meshes":[],"errors":[]}
+	var data := {"bones":[],"lookup":{},"attachments":[],"skip":[],"groups":{},"meshes":[],"errors":[],"skin_color":String(def.get("skin",""))}
 	_build_bones(data,raw,def)
 	_pack_attachment(data,raw,raw.get_node("head") as Node3D,"head")
 	var jaw := raw.get_node_or_null("jaw") as Node3D
 	if jaw != null: _pack_attachment(data,raw,jaw,"jaw")
 	if id == &"pete": _pack_attachment(data,raw,raw.get_node("right_arm/forearm/hot_pocket") as Node3D,"right_wrist")
 	if id == &"yuri": _pack_attachment(data,raw,raw.get_node("left_arm/forearm/hubcap") as Node3D,"left_wrist")
+	for attachment: Dictionary in raw.get_meta("roster_attachments",[]):
+		_pack_attachment(data,raw,raw.get_node(attachment.path) as Node3D,attachment.bone)
+	if def.family == "bird":
+		for part: String in ["left_wing","right_wing","tail"]: _pack_attachment(data,raw,raw.get_node(part) as Node3D,part)
+	elif def.family == "object": _pack_attachment(data,raw,raw.get_node("mouth") as Node3D,"mouth")
 	_collect(data,raw,raw,def,"torso")
 	if not (data.errors as Array).is_empty():
 		for error: String in data.errors: push_error(error)
@@ -285,7 +367,7 @@ static func _build_template(id: StringName) -> Dictionary:
 	var skin := Skin.new()
 	for i: int in range(data.bones.size()): skin.add_bind(i,(data.bones[i].global as Transform3D).affine_inverse())
 	data["skin"] = skin
-	var metrics := {"meshes":data.meshes.size(),"surfaces":data.meshes.size(),"triangles":0,"bones":data.bones.size(),"max_weights":4}
+	var metrics := {"meshes":data.meshes.size(),"surfaces":data.meshes.size(),"triangles":0,"bones":data.bones.size(),"max_weights":0 if (data.meshes as Array).is_empty() else 4}
 	for entry: Dictionary in data.meshes:
 		var arrays: Array = (entry.mesh as ArrayMesh).surface_get_arrays(0)
 		metrics.triangles += floori(float((arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array).size())/3.0)
@@ -317,7 +399,7 @@ static func _collect(data: Dictionary, raw: Node3D, node: Node3D, def: Dictionar
 	if node in data.skip: return
 	var next_role := role
 	var name_text := String(node.name)
-	if name_text in ["left_arm","right_arm","left_leg","right_leg","front_left","front_right","back_left","back_right","tail"]: next_role = name_text
+	if name_text in ["left_arm","right_arm","left_leg","right_leg","front_left","front_right","back_left","back_right","tail","single_leg","bird_left","bird_right"]: next_role = name_text
 	if node is MeshInstance3D:
 		var part := node as MeshInstance3D
 		var layer := _coat_layer(part,next_role,def.visual_id)
@@ -377,7 +459,7 @@ static func _append_part(data: Dictionary, raw: Node3D, part: MeshInstance3D, ro
 		if count%3 != 0 or vertices.size() != normals.size():
 			data.errors.append("Invalid triangle/normal layout in "+String(part.name))
 			return
-		var refine: bool = vertices.size() >= 30 and role != "torso" or String(part.name) in ["bare_torso","shirt","work_jacket","coat_one","coat_two","coat_three","body"]
+		var refine: bool = not bool(part.get_meta("roster_no_refine",false)) and (vertices.size() >= 30 and role != "torso" or String(part.name) in ["bare_torso","shirt","work_jacket","coat_one","coat_two","coat_three","body"])
 		for face: int in range(0,count,3):
 			var points: Array[Vector3] = []
 			var norms: Array[Vector3] = []
@@ -405,6 +487,8 @@ static func _append_part(data: Dictionary, raw: Node3D, part: MeshInstance3D, ro
 
 
 static func _chain(data: Dictionary, role: String, part: MeshInstance3D, center: Vector3) -> Array[String]:
+	if role == "single_leg": return ["single_leg","single_knee","single_ankle"]
+	if role in ["bird_left","bird_right"]: return [role,role+"_knee",role+"_ankle"]
 	if role.ends_with("_arm"):
 		var side := role.trim_suffix("_arm")
 		if String(part.name) == "thumb": return [side+"_wrist",side+"_thumb",side+"_thumbtip"]
@@ -412,7 +496,7 @@ static func _chain(data: Dictionary, role: String, part: MeshInstance3D, center:
 		# solve bends the back of the palm with the fingertips and opens the fist.
 		if String(part.name) == "hand": return [side+"_wrist"]
 		var paint := part.material_override as StandardMaterial3D
-		var skin: bool = paint.albedo_color.to_html(false) in [Legacy.SKIN,Legacy.SKIN_PALE,Legacy.SKIN_SHADE]
+		var skin: bool = paint.albedo_color.to_html(false) in [Legacy.SKIN,Legacy.SKIN_PALE,Legacy.SKIN_SHADE,data.skin_color]
 		var wrist: Transform3D = data.bones[data.lookup[side+"_wrist"]].global
 		if skin and (wrist.affine_inverse()*center).y < -0.08: return [side+"_fingers",side+"_fingertips"]
 		return [side+"_shoulder",side+"_elbow",side+"_wrist"]

@@ -10,6 +10,10 @@ var camera: Camera3D
 var caption: Label
 var captures: int = 0
 var stage := Vector3(0,0.02,8)
+var packet_b1: bool = false
+var packet_b2: bool = false
+var packet_b3: bool = false
+var target_ids := PackedStringArray()
 
 
 func _initialize() -> void:
@@ -23,7 +27,15 @@ func _run() -> void:
 		return
 	output_dir = ProjectSettings.globalize_path("res://../.build/full-port/p05")
 	for arg: String in OS.get_cmdline_user_args():
+		if arg == "--packet=b1": packet_b1 = true
+		if arg == "--packet=b2": packet_b2 = true
+		if arg == "--packet=b3": packet_b3 = true
+	if packet_b1: output_dir = ProjectSettings.globalize_path("res://../.build/full-port/p05b1")
+	if packet_b2: output_dir = ProjectSettings.globalize_path("res://../.build/full-port/p05b2")
+	if packet_b3: output_dir = ProjectSettings.globalize_path("res://../.build/full-port/p05b3")
+	for arg: String in OS.get_cmdline_user_args():
 		if arg.begins_with("--output="): output_dir = arg.trim_prefix("--output=")
+		if arg.begins_with("--ids="): target_ids = arg.trim_prefix("--ids=").split(",",false)
 	if DirAccess.make_dir_recursive_absolute(output_dir) != OK:
 		push_error("Cannot create roster evidence directory.")
 		quit(1)
@@ -52,7 +64,16 @@ func _run() -> void:
 	overlay.add_child(caption)
 	await process_frame
 	await physics_frame
-	for id: String in Roster.supported_visuals():
+	var visuals := Roster.Profiles.supported_visuals("b2" if packet_b2 else "b1") if packet_b1 or packet_b2 else PackedStringArray(["tony","pete","yuri","lurch","brutus","possum"])
+	if packet_b3: visuals = Roster.Sites.supported_visuals("b3")
+	if not target_ids.is_empty():
+		visuals = target_ids
+		for id: String in visuals:
+			if id not in Roster.supported_visuals():
+				push_error("Unsupported targeted roster identity: "+id)
+				quit(1)
+				return
+	for id: String in visuals:
 		var art := Roster.create(StringName(id),17)
 		if art == null:
 			push_error("Roster probe could not construct "+id)
@@ -60,6 +81,10 @@ func _run() -> void:
 			return
 		root.add_child(art)
 		art.position = stage
+		if packet_b1 or packet_b2 or packet_b3 or not target_ids.is_empty():
+			if not await _profile_evidence(art,id): return
+			art.free()
+			continue
 		var human: bool = Roster.definition(StringName(id)).family == "human"
 		_pose(art,{},0.0)
 		_view(human,false,false,false)
@@ -112,8 +137,87 @@ func _run() -> void:
 	quit(0)
 
 
+func _profile_evidence(art: Node3D, id: String) -> bool:
+	var def := Roster.definition(StringName(id))
+	var near_label := "3m" if def.family in ["mounted","assembly"] else "2m"
+	_pose(art,{},0.0)
+	_profile_view(def,false,false)
+	if not await _capture(id+"_front_rest_"+near_label,art): return false
+	_pose(art,{"local_velocity":Vector3.ZERO if def.family == "assembly" else Vector3(0,0,1.6)},0.20)
+	_profile_view(def,true,false)
+	if not await _capture(id+"_quarter_walk_"+near_label,art): return false
+	var action: StringName = def.get("action",&"talk" if def.family in ["bird","object","mounted"] else &"bite")
+	_pose(art,{"action":action,"action_phase":0.46,"asleep":id == "dave"},1.0/60.0)
+	if id == "dave":
+		camera.position = stage+Vector3(1.5,1.4,2.4)
+		camera.look_at(stage+Vector3(-0.7,0.22,0))
+	if not await _capture(id+"_identity_gesture",art): return false
+	if packet_b3:
+		for phase: float in [0.15,0.80]:
+			_pose(art,{"action":action,"action_phase":phase},1.0/60.0)
+			_profile_view(def,phase < 0.5,false)
+			if not await _capture(id+"_site_action_%02d" % int(phase*100),art): return false
+		if id == "former_teller":
+			_pose(art,{"action":&"stamp","action_phase":0.5},1.0/60.0)
+			camera.position = stage+Vector3(0.8,1.65,1.25)
+			camera.look_at(stage+Vector3(0,1.10,0.20))
+			if not await _capture(id+"_stamp_contact",art): return false
+	if not target_ids.is_empty():
+		if id in ["busker","math","launderlady"]:
+			for phase: float in [0.15,0.80]:
+				_pose(art,{"action":action,"action_phase":phase},1.0/60.0)
+				camera.position = stage+Vector3(0.85,1.65,1.25)
+				camera.look_at(stage+Vector3(0,1.10,0.15))
+				if not await _capture(id+"_contact_%02d" % int(phase*100),art): return false
+		if def.get("hair","") in ["hood","tarp_hood"]:
+			_pose(art,{},1.0/60.0)
+			camera.position = stage+Vector3(0.50,float(def.height)+0.35,0.85)
+			camera.look_at(stage+Vector3(0,float(def.height)-0.15,0))
+			if not await _capture(id+"_hood_roof",art): return false
+	if def.family == "human" and not bool(def.get("site_resident",false)):
+		_pose(art,{"action":&"strike","action_phase":0.03,"contact":true},1.0/60.0)
+		_profile_view(def,false,false)
+		if not await _capture(id+"_front_peak_strike_2m",art): return false
+	if id in ["dogwalker","philosopher","receipt_guard","bishop_wire","curb_emperor","os_brutus","brutus_older"] or (id == "launderlady" and not target_ids.is_empty()):
+		_pose(art,{"dead":true,"death_phase":1.0},1.0/60.0)
+		camera.position = stage+Vector3(1.6,1.6,2.8)
+		camera.look_at(stage+Vector3(0,0.20,0.80))
+		if not await _capture(id+"_quarter_death",art): return false
+	_pose(art,{},0.0)
+	var near_stage := stage
+	stage = Vector3(0,0.03,-6.5)
+	art.position = stage
+	art.rotation.y = PI*0.5
+	_profile_view(def,false,true)
+	var focus_y := maxf(0.03,float(def.height)*0.52)
+	var ray := PhysicsRayQueryParameters3D.create(camera.position,stage+Vector3(0,focus_y,0),3)
+	if not camera.get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
+		push_error("B1 far evidence has blocked line of sight: "+id)
+		quit(1)
+		return false
+	if not await _capture(id+"_front_rest_20m",art): return false
+	stage = near_stage
+	art.position = stage
+	art.rotation = Vector3.ZERO
+	return true
+
+
+func _profile_view(def: Dictionary, quarter: bool, far: bool) -> void:
+	var focus_y := maxf(0.03,float(def.height)*0.52)
+	var eye := maxf(0.65,focus_y+0.65)
+	var distance := 20.0 if far else (3.0 if def.family in ["mounted","assembly"] else 2.0)
+	var side := distance*0.60 if quarter else 0.0
+	if quarter: distance *= 0.80
+	camera.position = stage+(Vector3(distance,eye,0) if far else Vector3(side,eye,distance))
+	camera.look_at(stage+Vector3(0,focus_y,0))
+
+
 func _pose(art: Node3D, snapshot: Dictionary, duration: float) -> void:
 	Animator.reset(art)
+	# A rendered idle includes the active holding pose, not the anatomical bind.
+	if duration <= 0.0:
+		Animator.tick(art,1.0/60.0,snapshot)
+		return
 	var elapsed: float = 0.0
 	while elapsed < duration-0.00001:
 		var dt := minf(1.0/60.0,duration-elapsed)

@@ -2662,3 +2662,43 @@ Report: reports/2026-11-18-3d-full-world-models.md. No full-scene/native-Web par
 Root connects full scene/controller/presenter, then completes remaining dialogue, activities,
 heists, campaigns, day/communication systems, lifecycle/save and real native/Web acceptance.
 Default playable export remains the hand-improved slice until full integration is ready.
+
+## 2026-11-18 — Full scene and source-domain continuation (active goal)
+
+**Changed/why.** Composed the actual full world,56 day-one actors, combat/bosses,
+core vendors, resident/quest/street menus, Travel, Karaoke, Robbery and the phone
+feed. Added native scene/controller tour, full HUD/ledgers/scrolling/numbered
+choices and isolated full save namespace. Expanded original cast to72 templates
+for63 identities, including sites, held-prop contacts and group/furniture poses.
+
+**Decisions.** Source semantics remain authoritative, including raw negative HP
+from dialogue, untimed Karaoke, exact heist-compatible item records, package
+ordering, session-global props/feed and traffic RNG. Day physical placements may
+be deferred in a bounded persisted queue without repeating rewards/RNG. Real
+Campaign is still required before Day installs. Separate full export presets keep
+the development scene independently playable while full parity is unfinished.
+
+**Counterexamples/failures.** Native full HUD exposed an offscreen pocket panel;
+fixed anchors/offsets and added bounds checks. A native walking probe stalled
+because it encoded movement below Input's0.5deadzone; fixed driver, not physics.
+Native60 exposed unsupported skid_lurch and scene p95CPU~17–18ms; implemented
+real robbery and began measured origin-query/pose optimizations. A genuine arrest
+removed police, so that sample cannot claim sustained60. First Day fixture omitted
+shed ownership and normalized office defaults, causing23 honest comparison fails;
+fixed fixture setup, not production rewards. Traffic's pre-audio-init RNG caused
+six Communications mismatches; preserved source draw order. Audio mixer teardown
+needed a short flush after stopping voices in the scene test. A quoted native
+probe output argument split at the workspace space; moved its five generated
+files into the intended repository evidence directory and removed the empty temp.
+
+**Observed.** Full native intro purchase/smoke reached crash18.071s and cycle26.129s;
+B1/B2/contact/B3 native captures188/72/52/85. Day3441/68source cases,
+Communications1219/69, Runtime101 and earlier scene93 passed central checks.
+Original2D runner19/19 passed again. Expanded complete runner/build validation and
+current visual optimization are in flight; no full parity/performance claim.
+
+**Next.** Finish P13 Campaign, P11 heists/lockpick, remaining activities/cooking,
+animals/followers/props/incidents, final interaction priority and site placement.
+Integrate real Day and remaining guidance/audio; native/Web tours, persistence
+counterexamples and60AI measurements precede final delivery. See WORKFLOW-3D-PORT.md
+and reports/2026-11-18-3d-full-scene.md. Continue the active goal after checkpoint.

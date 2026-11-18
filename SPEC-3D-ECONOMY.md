@@ -38,8 +38,15 @@ time; the orchestrator remains responsible for pause/input and invalidating sess
 `select(token,action_id)` returns `{ok,reason,...receipt}` and queues normal GameState events.
 Only Tony, Pete and Yuri are handled here. Source-center reach is strictly less than60px,
 in addition to live 3D adapter visibility. Current actor existence/death, Pete shopClosed,
-active boss, mode, resource balances, faction, daily room, rank and ownership are rechecked at
+kingdom interaction lock, mode, resource balances, faction, daily room, rank and ownership are rechecked at
 selection. UI copies are never authority. No partial deduction or reward on rejection.
+
+Source interaction parity amendment, 2026-11-18: only `bossKind == "kingdom"` blankets vendor
+access, regardless of bossActive, matching tryInteract's first guard. An active Tony encounter
+does not remove living Tony/Pete/Yuri interaction callbacks: ordinary buying/selling remains
+available, with existing reach, closure and resource checks. Opening or selecting after the
+kingdom lock appears must refuse without payment. Starting another Tony fight still requires
+the capable synchronous boss adapter below; allowing trade does not bypass its start guard.
 
 Boss adapter exposes pure `can_start_tony()` and synchronous `start_tony()->bool`. A third
 short-payment or corner challenge refuses before vendor cash/offense changes if no capable

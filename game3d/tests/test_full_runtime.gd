@@ -7,8 +7,14 @@ class Spatial extends RefCounted:
 	func can_reach_target(id: String) -> bool:
 		calls.append(id)
 		return visible
-	func move_body(body: Dictionary,intended: Vector2) -> Dictionary:
+	func can_use_zone(_id: String) -> bool: return visible
+	func move_body(body: Dictionary,intended: Vector2,_goal: Variant = null,_stop: bool = false) -> Dictionary:
 		return {"position":Vector2(body.x,body.y) if blocked else intended,"blocked":blocked}
+	func clear_placement(body: Dictionary) -> Variant:
+		return Vector2(body.x,body.y) if not blocked else null
+	func can_hit(_from: Vector2,_to: Vector2,_source: String,_target: String) -> bool: return visible
+	func sweep_projectile(start: Vector2,end: Vector2,_radius: float) -> Dictionary:
+		return {"blocked":blocked,"fraction":0.0 if blocked else 1.0,"position":start if blocked else end}
 var checks: int = 0
 var failures: Array[String] = []
 func _initialize() -> void: call_deferred("_run")
@@ -27,6 +33,11 @@ func _run() -> void:
 	_test_boundaries()
 	_test_pickups()
 	_test_movement()
+	_test_actor_and_travel_composition()
+	_test_resident_composition()
+	_test_quest_ordering()
+	_test_street_robbery_and_restore()
+	_test_communications_composition()
 	if failures.is_empty():
 		print("3D FULL RUNTIME GATE: PASS (%d checks; composed intro/vendor/loop/save chain, pause, stale capabilities and physical access boundaries; full scene pending)" % checks)
 		quit(0)
@@ -34,6 +45,177 @@ func _run() -> void:
 		for failure: String in failures: push_error(failure)
 		print("3D FULL RUNTIME GATE: FAIL (%d failures / %d checks)" % [failures.size(),checks])
 		quit(1)
+
+func _test_communications_composition() -> void:
+	var spatial := Spatial.new()
+	var runtime: RefCounted = Runtime.new(spatial,null,func(): return 1000.0)
+	runtime.fresh(); runtime.drain_events()
+	_check(runtime.props.ready() and runtime.communications.day_capabilities_ready(),"actual prop/feed owners composed")
+	runtime.state.emit_event("feed",{"text":"the ledger has a page.","author":"@phone_guy"})
+	runtime.drain_events()
+	_check(runtime.communications.snapshot().posts.size() == 1,"queued source post reaches real feed once")
+	runtime.drain_events()
+	_check(runtime.communications.snapshot().posts.size() == 1,"draining event sink cannot duplicate source feed")
+	runtime.fresh()
+	_check(runtime.communications.snapshot().posts.size() == 1 and runtime.props.ready(),"fresh retains source session feed and rebinds actual props")
+	runtime.s.momTipT = 1.0; runtime.s.flags.silenceUntilT = 9000
+	runtime.s.phoneT = 1.0; runtime.s.eventT = 1.0
+	var seed: int = runtime.state.rng_seed
+	runtime.advance(1.0/60.0)
+	_check(runtime.s.flags.momIntroFired and runtime.s.phoneT >= 90000 and runtime.s.eventT >= 15000,"intro/silence reset ambient clocks while forced Mom tip fires")
+	_check(runtime.state.rng_seed != seed and runtime.communications.snapshot().posts.size() == 1,"suppressed ambient reset consumes source RNG without feed")
+	runtime.set_mode("paused")
+	var timer: float = runtime.s.phoneT
+	runtime.advance(1.0)
+	_check(runtime.s.phoneT == timer,"paused play freezes source ambient timers")
+	runtime.advance_wall(1000.0)
+	var news: String = runtime.communications.snapshot().news_text
+	runtime.advance_wall(51000.0)
+	_check(runtime.communications.snapshot().news_text != news,"source wall ticker rotates during pause and silence")
+	runtime.fresh(); runtime.s.flags.introDone = true
+	var phone: Dictionary = _actor(runtime,"phoneguy")
+	_put(runtime,Vector2(phone.x+phone.w*0.5,phone.y+phone.h*0.5)); runtime.p.cash = 10
+	var menu: Dictionary = runtime.open_street("phoneguy")
+	_check(menu.get("ok",false) and runtime.communications.snapshot().visible,"PhoneGuy opens the real source feed")
+	var posts: int = runtime.communications.snapshot().posts.size()
+	_check(runtime.select_street(menu.token,"content").get("ok",false) and runtime.p.cash == 7 and runtime.communications.snapshot().posts.size() == mini(8,posts+1),"paid phone content costs once and publishes once")
+
+func _test_street_robbery_and_restore() -> void:
+	var spatial := Spatial.new()
+	var runtime: RefCounted = Runtime.new(spatial); runtime.fresh()
+	_check(runtime.enable_actor_simulation(),"new domains compose")
+	var pinky: Dictionary = _actor(runtime,"pinky")
+	_put(runtime,Vector2(pinky.x+pinky.w*0.5,pinky.y+pinky.h*0.5)); runtime.p.cash = 100
+	var menu: Dictionary = runtime.open_street("pinky")
+	_check(menu.get("ok",false) and runtime.select_street(menu.token,"buy_one").get("ok",false) and runtime.p.dirtySupplies == 1,"Pinky uses real Street supply transaction")
+	menu = runtime.open_street("pinky")
+	var before: Dictionary = runtime.snapshot()
+	var candidate: Dictionary = before.duplicate(true); candidate.state.flags.omalleyFallen = true
+	candidate.player.cash = 999; spatial.blocked = true
+	_check(not runtime.restore(candidate) and runtime.snapshot() == before and runtime.s.mode == "dialogue","blocked Fallen restore preserves live state and menu")
+	spatial.blocked = false
+	_check(runtime.select_street(menu.token,"buy_pass").get("ok",false),"blocked restore preserves valid source menu capability")
+	runtime.close_dialogue()
+	var skid: Dictionary = _actor(runtime,"skid_lurch")
+	_check(runtime.director.supported(skid),"real robbery owner supports source skid grabber")
+	runtime.state.npcs.clear(); runtime.state.npcs.append(skid)
+	skid.x = runtime.p.x; skid.y = runtime.p.y; skid.speed = 0; skid.aggro = true; skid.attackCd = 0
+	if skid.has("zoneOnly"): skid.erase("zoneOnly")
+	runtime.advance(1.0/60.0)
+	_check(runtime.s.counters.get("robberiesToday",0) == 1 and runtime.p.stunT > 0,"real landed grab invokes robbery once")
+	runtime.fresh(); var karaoke: Dictionary = _actor(runtime,"karaoke")
+	_put(runtime,Vector2(karaoke.x+karaoke.w*0.5,karaoke.y+karaoke.h*0.5)); runtime.p.cash = 10
+	menu = runtime.open_street("karaoke")
+	var chosen: Dictionary = runtime.select_street(menu.token,"sing")
+	_check(chosen.get("ok",false) and chosen.get("domain") == "activities" and runtime.p.cash == 5,"Street transfers to real paid rhythm owner")
+	runtime.set_mode("paused")
+	_check(not runtime.select_activity(chosen.get("token"),"left").get("ok",false) and runtime.p.cash == 5,"pause cancels rhythm capability without refund")
+
+func _test_actor_and_travel_composition() -> void:
+	var spatial := Spatial.new()
+	var runtime: RefCounted = Runtime.new(spatial)
+	runtime.fresh()
+	_check(runtime.enable_actor_simulation(),"full Runtime composes actual combat/director/boss modules")
+	var tony: Dictionary = _actor(runtime,"tony")
+	runtime.state.npcs.clear(); runtime.state.npcs.append(tony)
+	tony.x = 1090.0; tony.y = 840.0
+	runtime.p.cred = 100; runtime.p.cash = 20
+	runtime.advance_wall(1000.0)
+	var menu: Dictionary = runtime.open_vendor("tony")
+	_check(menu.get("ok",false) and runtime.select_vendor(menu.token,"challenge").get("ok",false) and runtime.s.bossActive,"vendor action starts composed real Tony encounter")
+	var attack: Dictionary = runtime.attack(Vector2.RIGHT)
+	_check(attack.get("ok",false) and attack.get("connected",false) and tony.hp < 200,"composed attack applies actual damage immediately")
+	var cooldown: float = runtime.p.attackCd
+	var hp: float = tony.hp
+	runtime.advance(1.0/60.0)
+	_check(runtime.p.attackCd == cooldown and tony.hp == hp,"composed contact hitpause freezes both actor and player timers")
+	runtime.s.hitPause = 0.0
+	runtime.set_mode("paused")
+	runtime.advance_wall(2000.0)
+	_check(runtime.p.attackCd == cooldown,"wall callbacks do not tick active cooldowns while paused")
+	_check(not runtime.advance_wall(1999.0),"wall clock rejects rewind")
+	runtime.fresh()
+	_check(runtime.advance_wall(3000.0),"wall clock remains monotonic across fresh state epoch")
+	# Different domain menus cannot retain valid stale capabilities.
+	var pinky: Dictionary = _actor(runtime,"pinky")
+	_put(runtime,Vector2(pinky.x+pinky.w*0.5,pinky.y+pinky.h*0.5))
+	runtime.p.cash = 100
+	var travel_menu: Dictionary = runtime.open_travel("pinky")
+	_check(travel_menu.get("ok",false),"composed travel opens its real vendor menu")
+	tony = _actor(runtime,"tony")
+	_put(runtime,Vector2(tony.x+tony.w*0.5,tony.y+tony.h*0.5))
+	menu = runtime.open_vendor("tony")
+	_check(menu.get("ok",false) and not runtime.select_travel(travel_menu.token,"buy_pass").get("ok",false),"opening vendor invalidates travel capability")
+	_put(runtime,Vector2(pinky.x+pinky.w*0.5,pinky.y+pinky.h*0.5))
+	travel_menu = runtime.open_travel("pinky")
+	_check(travel_menu.get("ok",false) and not runtime.select_vendor(menu.token,"buy_rock").get("ok",false),"opening travel invalidates vendor capability")
+	runtime.close_dialogue()
+	# Same-process restore preserves only the unsaved cart's actual previous position.
+	runtime.s.travelRuntime.cart.x = 1200.0
+	var saved: Dictionary = runtime.snapshot()
+	_check(not saved.state.has("travelRuntime"),"cart scratch remains excluded from durable source schema")
+	_check(runtime.restore(saved) and runtime.travel.cart_record().x == 1200.0,"composed restore keeps same-process parked cart position")
+	_check(runtime.advance_wall(4000.0),"wall callbacks accept next monotonic time after restore")
+
+func _test_resident_composition() -> void:
+	var spatial := Spatial.new()
+	var runtime: RefCounted = Runtime.new(spatial)
+	runtime.fresh(); runtime.enable_actor_simulation()
+	var lurch: Dictionary = _actor(runtime,"lurch")
+	_put(runtime,Vector2(lurch.x+lurch.w*0.5,lurch.y+lurch.h*0.5))
+	runtime.p.cash = 10
+	var menu: Dictionary = runtime.open_resident("lurch")
+	_check(menu.get("ok",false) and runtime.select_resident(menu.token,"give").get("ok",false) and runtime.p.cash == 9,"composed resident action consumes canonical source dollar")
+	menu = runtime.open_resident("lurch")
+	var tony: Dictionary = _actor(runtime,"tony")
+	_put(runtime,Vector2(tony.x+tony.w*0.5,tony.y+tony.h*0.5))
+	var vendor: Dictionary = runtime.open_vendor("tony")
+	_check(vendor.get("ok",false) and not runtime.select_resident(menu.token,"fight").get("ok",false),"vendor opening invalidates resident action")
+	_put(runtime,Vector2(lurch.x+lurch.w*0.5,lurch.y+lurch.h*0.5))
+	menu = runtime.open_resident("lurch")
+	_check(not runtime.select_vendor(vendor.token,"short").get("ok",false),"resident opening invalidates vendor action")
+	runtime.set_mode("paused")
+	_check(not runtime.select_resident(menu.token,"fight").get("ok",false) and runtime.s.mode == "paused","stale resident button cannot unpause")
+	runtime.set_mode("playing")
+	menu = runtime.open_resident("lurch")
+	_check(runtime.select_resident(menu.token,"fight").get("ok",false) and lurch.aggro,"resident fight reaches same composed combat actor")
+
+func _test_quest_ordering() -> void:
+	var spatial := Spatial.new()
+	var runtime: RefCounted = Runtime.new(spatial)
+	runtime.fresh(); runtime.enable_actor_simulation()
+	var conductor: Dictionary = _actor(runtime,"conductor")
+	var lurch: Dictionary = _actor(runtime,"lurch")
+	var pete: Dictionary = _actor(runtime,"pete")
+	var at := Vector2(conductor.x+conductor.w*0.5,conductor.y+conductor.h*0.5)
+	_put(runtime,at)
+	lurch.x = at.x+100.0; lurch.y = at.y; lurch.hostile = true; lurch.aggro = true
+	var lurch_start: float = lurch.x
+	runtime.state.npcs.assign([conductor,lurch,pete])
+	runtime.state.cash_piles.clear()
+	runtime.state.cash_piles.append({"id":"quest_order_cash","x":at.x,"y":at.y,"amt":5,"collected":false})
+	runtime.s.crownPickup = {"x":at.x,"y":at.y,"collected":false}
+	runtime.s.flags.hasStripePackage = true
+	runtime.inventory.append_item("stripe_package","a package from stripe")
+	runtime.s.quests.stripe_package.available = true
+	runtime.combat.spawn_projectile({"x":at.x+500,"y":at.y+500,"tx":at.x+700,"ty":at.y+500})
+	runtime.drain_events(); runtime.advance(0.1)
+	_check(runtime.p.cash == 45 and runtime.s.crownPickup.collected and runtime.p.equip.hat == "pigeon_crown","cash/crown/package commit actual source resources in one step")
+	_check(runtime.s.mode == "dialogue" and not runtime.s.flags.hasStripePackage and runtime.inventory.count_records("stripe_package") == 0,"automatic package delivery owns real modal and consumes records")
+	_check(lurch.x < lurch_start and runtime.state.projectiles[0].life < 4000,"same delivery step still advances actor/projectile work")
+	_check(absf(runtime._elapsed_ms-Runtime.STEP_MS) < 0.00001 and absf(runtime.state.projectiles[0].life-(4000-Runtime.STEP_MS)) < 0.00001,"later fixed steps pause immediately after delivery step")
+	var events: Array[Dictionary] = runtime.drain_events()
+	var crown_event: int = -1; var delivery_event: int = -1; var menu: Dictionary = {}
+	for index: int in range(events.size()):
+		if events[index].kind == "quest_pickup_changed": crown_event = index
+		if events[index].kind == "package_delivered": delivery_event = index
+		if events[index].kind == "dialogue_requested": menu = events[index].payload.menu
+	_check(crown_event >= 0 and delivery_event > crown_event and menu.get("page") == "delivery","event presenter observes crown before automatic delivery menu")
+	_check(runtime.select_quest(menu.token,"leave").get("ok",false),"automatic receipt has live one-use quest capability")
+	runtime.s.dayTime = 0.8; runtime.advance(0.001)
+	_check(pete.shopClosed and runtime.p.cash == 45,"Pete follows exact night closure and delivery never pays twice")
+	var invalid: Dictionary = runtime.snapshot(); invalid.state.crownPickup = {"x":INF,"y":12,"collected":false}
+	_check(runtime.restore(invalid) and runtime.s.crownPickup == null,"quest normalizer is active before composed restore")
 
 func _test_movement() -> void:
 	var spatial := Spatial.new()
@@ -119,7 +301,7 @@ func _test_boundaries() -> void:
 	runtime.p.rocks = 1
 	_put(runtime,Vector2(1062,854))
 	spatial.visible = false
-	_check(not runtime.smoke("block").ok and runtime.p.rocks == 1,"smoke rechecks live physical access")
+	_check(not runtime.smoke("block").ok and runtime.p.rocks == 1,"smoke rechecks valid physical player placement")
 	spatial.visible = true
 	_check(runtime.smoke("block").ok,"valid access accepts smoke")
 	var high: float = runtime.p.rockedT
@@ -127,6 +309,7 @@ func _test_boundaries() -> void:
 	var day_time: float = runtime.s.dayTime
 	runtime.set_mode("paused")
 	_check(runtime.advance(20) and runtime.p.rockedT == high and runtime.p.shakes == shakes and runtime.s.dayTime == day_time,"pause freezes every model clock/resource")
+	_check(runtime.last_advanced_ms == 0.0,"pause exposes no cosmetic active time")
 	_check(not runtime.craft_hitter().ok and not runtime.use_hitter().ok,"pause cannot invoke pocket transactions")
 	runtime.set_mode("playing")
 	for bad: float in [-1.0,NAN,INF,241.0]:
@@ -134,6 +317,7 @@ func _test_boundaries() -> void:
 	runtime.s.hitPause = 20.0
 	runtime.advance(1.0/60.0)
 	_check(runtime.p.rockedT == high and runtime.s.hitPause > 0,"first hitpause step freezes world")
+	_check(runtime.last_advanced_ms == 0.0,"hitpause exposes no cosmetic active time")
 	runtime.advance(1.0/60.0)
 	_check(runtime.p.rockedT == high and runtime.s.hitPause == 0,"fractional hitpause remainder still consumes whole source step")
 	runtime.advance(1.0/60.0)

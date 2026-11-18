@@ -40,12 +40,14 @@ do not pass camera-local velocity unchanged.
 | action | StringName empty | Authoritative presentation action family |
 | action_phase | float 0 | Normalized current simulation phase; controller never waits for a clip |
 | action_serial | int 0 | Stable accepted-action sequence; cosmetic side variation only |
+| ambient_action | bool false | True only for an injected ambient identity gesture; never grants gameplay timing authority |
 | contact | bool false | Existing resolved contact; no new hit/projectile callbacks |
 | hurt | float 0 | Authoritative 0..1 recoil envelope |
 | dead | bool false | Authoritative death state, overrides idle/action |
 | death_phase | float 1 | Authoritative 0..1 collapse progress; no animation-owned death timer |
 | coat_count | int 3 | Tony's exact visible layers 3/2/1/0; pure presentation |
 | gaze | Vector2.ZERO | Optional bounded head yaw/pitch radians |
+| asleep | bool false | Source sleep state; Dave uses it only when no stronger current action is selected |
 
 Malformed/nonfinite inputs normalize safely without modifying the snapshot. Invalid or nonpositive
 delta does not advance any presentation. Positive stalled frames cap cosmetic integration.
@@ -56,6 +58,103 @@ P05a humans expose idle/talk/eat/inspect/windup/strike/grab/throw and hurt/death
 Quadrupeds expose idle/windup/lunge/bite and hurt/death overlays. `strike` begins at extension
 and recovers, matching already-resolved immediate combat; windup is a separate simulation phase.
 No clip events. Reset restores all bones/props/coat defaults and deterministic seeded idle phase.
+
+## Bounded presentation scheduling — actual60 follow-up
+
+The diagnostic actual60 profile measured the inclusive model synchronization scope at6.795ms
+p95 in the core and6.274ms at the train yard. Most stationary residents received a nonempty
+ambient identity action, bypassing the existing distant idle schedule. The approved correction
+distinguishes that provenance with `ambient_action`, default false. At detail2 an unchanged
+ambient gesture follows the existing every-third-call cosmetic schedule (about20Hz at60Hz).
+Time, gait integration and child snapshots are still consumed on every call. At detail1/2,
+ambient fingers may be omitted; authoritative actions keep their current per-call poses.
+Windup/strike/grab/throw/lunge/bite/taser never become throttled through this flag. Changed
+action/serial/contact/death/hurt/coat/grounded state and far-to-near return update immediately.
+Current supplied phase is used directly on the next pose; no queued clip can replay old phases.
+
+Cache the last applied local bone Transform3D per instance and omit an engine setter only when
+the target is exactly equal, with no epsilon or pose quantization. Reset restores the same base
+pose through that cache. Tony layer visibility is written on coat-count changes only. Track
+presentation-only bone/visibility write counters for tests; they never feed gameplay. Checks
+compare actual near geometry against an unthrottled instance at the same current time/phase,
+force real actions and state transitions between distant pose slots, and verify unchanged
+inert poses issue no redundant bone writes. A four-microradian still-head gaze test rejects
+epsilon comparisons, and zero coats/reset/zero coats rejects stale visibility caches. Counters
+reset for each explicit reset operation and count only engine writes made during/after it.
+Profile native results before claiming frame savings.
+
+## Prop contact refinement — P05b visual review
+
+The guitar, laundry basket and equation board follow the chest through cached attachments.
+During their supported idle/identity actions, an analytic two-bone cosmetic arm solve places
+wrists against authored prop-space contact points. It preserves anatomical segment lengths,
+uses an outward/downward elbow pole, clamps unreachable targets, and changes only the current
+per-instance bone poses. Bone parents and prop bindings are cached at construction. No physics,
+gameplay contact, action timing or new authority enters the helper. Combat and death supersede
+these holding poses. Strumming/writing strokes use only the supplied action phase.
+On collapse, a released rigid prop may interpolate to an explicitly authored actor-local
+resting transform. Laundry Lady's basket settles upright beside her body, using the supplied
+death phase; this is visual release only, with no spawned object, pickup, physics or timer.
+Reset and every live pose restore the original cached attachment binding.
+
+The basket remains upright; both hands support its rim. The guitar stays across the chest with
+one hand at the neck and the other over the strings. The pencil tip meets the tilted board.
+Tests inspect actual posed finger/prop vertices at several phases, plus immutable actor origins
+and bounded geometry. Native targeted captures cover these contacts and the closed authored
+cloth roofs on hooded heads. Passing matrices alone does not establish visual acceptance.
+
+## P05b3 site residents — approved construction contract
+
+The remaining eight registry rows are source site records, not NPC/sprite records. Add
+`Roster.visual_for_site(kind: StringName, site_record: Dictionary) -> StringName`, accepting
+only `copper`/`breakin` plus the exact source `id` and lowercase `who` below. Unknown kinds,
+missing/non-string fields, mismatched identities and cross-table records return empty. Keep
+`visual_for_actor` strict and unchanged; do not manufacture actor IDs, sprites or spawn flags.
+The authored implementation lives in `site_cast_profiles.gd`, using the existing shared cache,
+anatomical builders and pose API. Site placement/transactions remain the production binder's job.
+
+| Kind / source ID | Exact source who | Visual ID / signature |
+|---|---|---|
+| copper / cold_not | dennis (nights) | dennis; night-watch uniform, empty thermos held in both hands |
+| copper / water_dept | the raccoon quorum | raccoon_quorum; seven raccoons on a filing cabinet, evidence can |
+| copper / rust_car | transit authority dan | transit_dan; peeling badge, transfer slips and ticket punch |
+| breakin / model_home | the model family | model_family; father, mother and son at plastic dinner, empty fourth chair |
+| breakin / spoil_bank | the former teller | former_teller; banking vest, stamp, papers and shoe drawer |
+| breakin / sod_office | the goose (manager) | goose_manager; two-foot long-neck goose on a desk |
+| breakin / drained_pool | the lifeguard (still certified) | lifeguard; elevated chair, whistle and score card6 |
+| breakin / visitor_center | the docent (self-guided) | docent; brochure, visitor badge and wide presenting gesture |
+
+Delivery is bounded in two checkpoints: five human residents first (six templates including the
+seated lifeguard helper), then the quorum, model family and goose assemblies (eight templates
+including their anatomical helpers). The final roster is expected to expose72 templates for63
+canonical rows; helpers are never extra registry identities. During a checkpoint, advertise only
+implemented templates. Raccoon count is seven; four is the vote/quorum count. The model family
+has three distinct figures: eyeless father, mother and son holding a toast. These figures preserve
+their rigid authored poses under all snapshots, including movement/death; no breathing/blinking.
+The source does not provide a nighttime spawn flag for Dennis, nor autonomous resident AI.
+
+Assemblies own immobile furniture roots and independently cached child rigs. Child authored
+position/yaw and stable instance names distinguish seven raccoons or the seated family. An
+assembly consumes snapshots/time without applying a human fall to furniture. The goose uses
+two real leg chains and an articulated long neck, never the Pigeon King's missing-foot anatomy.
+Resident actions reuse read/write/serve/inspect/talk/seated where appropriate; additive wave,
+salute, stamp, vote and score poses use only supplied normalized phase. They cannot transact,
+spawn resources, damage, queue a gameplay delay or own a resident timer.
+
+Checks cover actual exported site records, rejected wrong kind/id/who and unchanged actor
+resolution; all cached meshes/skins, finite weighted geometry and independent child poses;
+actual seven/three/two-leg composition; rigid family stillness; seated support and physical hand
+contacts. Native evidence must show near/far silhouettes and signature actions for all eight.
+Full-scene placement and interaction parity remain parent-owned, separate from this art gate.
+
+The parent subsequently approved integrating both B3 checkpoints together after the1586-check
+58-template contact pass and native review. All14 B3 templates are now implemented and exposed,
+for72 total templates and all63 canonical rows; engine/visual acceptance is pending. Small authored
+animal paw/toe/tail sections opt out of redundant constructor subdivision, keeping the seven-member
+group bounded. This changes no simulation rate, animation authority or per-frame traversal.
+Per-profile skin colors participate in anatomical finger binding; arbitrary new skin tones do not
+silently route fingertips to forearm bones. Assembly children have cached names/yaw/anchors and
+independent poses. Static furniture remains fixed while child clocks consume the same snapshot.
 
 ## Geometry and rig
 
@@ -148,6 +247,10 @@ presentation actions. Dave's source `asleep` state maps to sleep; `isOmalleyFall
 not an autonomous pose timer. Unsupported actions remain detectable in per-profile capabilities.
 No added gesture commits resources, fires a projectile, spawns an actor or changes an authority
 timer. Animal/mounted/object families use their own bones/part controllers, not human limbs.
+Companion anchoring distinguishes a rider following its horse's chest from Paisley staying at
+the owner's unchanged actor origin. Each child collapses at most once; a human's visual fall
+cannot also rotate a ground companion. Long-tool carriers use an authored collapse arm pose
+so their cane/cart fork remains beside the body instead of piercing the ground.
 
 Coverage must exercise actual exported base/day1 records, all canonical name mappings, allowed
 variants and rejected malformed/unknown combinations. Tests inspect anatomical families,
@@ -156,74 +259,112 @@ state freshness, skin integrity and bounds. Native evidence includes near/far si
 family-specific actions and group composition. Registry rows become art-ready only after their
 construction/tests/visual review; that status does not establish interaction or full-port parity.
 
+### P05b2 construction contract
+
+After the B1 central1165-check pass (native review pending), B2 implements the next13 canonical
+rows. It adds14 templates: nine human bodies (`cop`, `brendan`, `price_guy`, `bus_driver`,
+`day3_visitor`, and four rulers), two larger rust dog variants (`os_brutus`, `brutus_older`), and
+three `pretender_*` uniform variants. YOUR POSSUM intentionally shares the original helmet
+possum's anatomy. The complete B2 roster will therefore have58 templates, representing55
+canonical rows; the eight site-only residents remain unimplemented until B3.
+
+Mappings remain exact name plus allowed source sprite. THE BUS DRIVER and SOMEONE YOU DON'T
+KNOW both arrive with sprite `lurch`, but receive distinct named uniforms/faces. BRUTUS THE
+OLDER arrives with sprite `brutus` and source scale1.5; the authored larger variant incorporates
+that scale, so a binding must not multiply it again. Passive/hostile and boss flags do not
+select a different body. YOUR POSSUM uses sprite `possum`; the freed follower keeps THE DOG /
+`scrap_dog`. Generated cop/Brendan/Sherri IDs do not need stripping or guessing: their exact
+canonical names and sprite fields select the same profiles as any other instance.
+
+Pretender names must match the exported generated-family regular expression, with a positive
+integer and one of the three actual guard sprites. Their numbered actor IDs stay director-owned.
+The variants retain the corresponding tarp/receipt/wire clothing plus a petition and an
+unconvincing paper crown. They do not add a fourth guard family or a generic unknown fallback.
+
+Police get distinct broad-gut versus thin-rookie bodies, caps, badges, carried radio/coffee/baton
+or flashlight/taser props. Price Guy stays a motionless brim/long-black-coat silhouette with a
+price tag. Bus Driver has a transit uniform and ticket roll; the day-3 stranger is a narrow,
+unhurried dark coat. Darryl's oversized tarp remains the silhouette; General Receipt has paper
+crown/epaulettes/long sash; Bishop Wire has antenna mitre/coils/crozier; the emperor has layered
+coats, stacked-curb crown, broken ruler and actual folding-chair geometry.
+
+Radio and taser poses acknowledge current authoritative actions; they never fire or queue an
+effect. Intentional stillness suppresses cosmetic breath/gaze when stationary but never stalls
+simulation or discards an explicit current action. B1 probe membership stays fixed; `--packet=b2`
+captures only these new templates with near/far/action views and special collapse views where
+props need them. Mapping tests cover source aliases, generated family positives/negatives,
+boss/passive Older variants, independent caches, joint geometry and finite bounds.
+
 ## Canonical identity ledger
 
-All 63 VIBE registry rows are accounted for below. Six are in this implementation checkpoint;
-57 remain planned. Runtime aliases/state bases and the Model Family/Quorum member counts do not
+All 63 VIBE registry rows are accounted for below. Six have passed P05a;36 more rows have the
+B1 central1165-check/native188-view evidence;13 B2 rows await central gates/render review;
+eight site-only rows remain planned. Runtime aliases/state
+bases and the Model Family/Quorum member counts do not
 create additional registry identities. Planned means not implemented, not a generic substitute.
 
 | Canonical identity | Family | P05 status |
 |---|---|---|
-| TRE BAG TONY | human | P05a implementing: `tony` |
-| YURI | human | P05a implementing: `yuri` |
-| BRUTUS | quadruped | P05a implementing: `brutus` |
-| PAWN SHOP PETE | human | P05a implementing: `pete` |
-| LURCH | human | P05a implementing: `lurch` |
-| SPIDER-BITE SHERRI | human | P05b1 specified — unimplemented |
-| PAULIE THE FACE | human | P05b1 specified — unimplemented |
-| BAGGIE BARB | human | P05b1 specified — unimplemented |
-| CHATTY DAVE | human | P05b1 specified — unimplemented |
-| WHOLE FOODS MOM | human | P05b1 specified — unimplemented |
-| THE POSSUM | quadruped | P05a implementing: `possum` |
-| FATHER O'MALLEY | human | P05b1 specified — unimplemented |
-| THE CONDUCTOR | human | P05b1 specified — unimplemented |
-| LOUD LARRY | human | P05b1 specified — unimplemented |
-| STRIPE | human | P05b1 specified — unimplemented |
-| THE PIGEON KING | bird | P05b1 specified — unimplemented |
-| PINKY POLENTA | human | P05b1 specified — unimplemented |
-| THE MATHEMATICIAN | human | P05b1 specified — unimplemented |
-| COUSIN BRENDAN | human | later packet — unimplemented |
-| THE TRAIN HOPPER | human | P05b1 specified — unimplemented |
-| PARK BENCH PHILOSOPHER | human | P05b1 specified — unimplemented |
-| THE PRICE GUY | human | later packet — unimplemented |
-| OLD SCHOOL BRUTUS | quadruped | later packet — unimplemented |
-| THE LEASING GUY | human | P05b1 specified — unimplemented |
-| GUTTER GREG | human | P05b1 specified — unimplemented |
-| THE DOG | quadruped | P05b1 specified — unimplemented |
-| THE BIG GUY | human | P05b1 specified — unimplemented |
-| CUBSCOUT | human | P05b1 specified — unimplemented |
-| JOGGER | human | P05b1 specified — unimplemented |
-| DOG WALKER (PAISLEY) | human + dog | P05b1 specified — unimplemented |
-| BUSKER | human | P05b1 specified — unimplemented |
-| HORSE COP | mounted human/horse | P05b1 specified — unimplemented |
-| THE VAPE LORD | human | P05b1 specified — unimplemented |
-| A POTHOLE (TALKING) | road object | P05b1 specified — unimplemented |
-| MAYOR'S COUSIN | human | P05b1 specified — unimplemented |
-| THE PHONE GUY | human | P05b1 specified — unimplemented |
-| LAUNDROMAT LADY | human | P05b1 specified — unimplemented |
-| METER MAID | human | P05b1 specified — unimplemented |
-| FOOD TRUCK GUY | human | P05b1 specified — unimplemented |
-| THE PRIEST'S SON | human | P05b1 specified — unimplemented |
-| KARAOKE MIKE | human | P05b1 specified — unimplemented |
-| YOUR POSSUM | quadruped | later packet — unimplemented |
-| THE BUS DRIVER | human | later packet — unimplemented |
-| BRUTUS THE OLDER | quadruped | later packet — unimplemented |
-| SOMEONE YOU DON'T KNOW | human | later packet — unimplemented |
-| COP | human | later packet — unimplemented |
-| DARRYL UNDER BLUE | human | later packet — unimplemented |
-| GENERAL RECEIPT | human | later packet — unimplemented |
-| BISHOP WIRE | human | later packet — unimplemented |
-| THE CURB EMPEROR | human | later packet — unimplemented |
-| TARP KNIGHT | human | P05b1 specified — unimplemented |
-| CART LANCER | human | P05b1 specified — unimplemented |
-| WIRE DEACON | human | P05b1 specified — unimplemented |
-| KNIGHT EMERITUS | human | P05b1 specified — unimplemented |
-| CURB PRETENDER No. N | human | later packet — unimplemented |
-| DENNIS (NIGHTS) | human | later packet — unimplemented |
-| THE RACCOON QUORUM | quadruped | later packet — unimplemented |
-| TRANSIT AUTHORITY DAN | human | later packet — unimplemented |
-| THE MODEL FAMILY | still human group | later packet — unimplemented |
-| THE FORMER TELLER | human | later packet — unimplemented |
-| THE GOOSE (MANAGER) | bird | later packet — unimplemented |
-| THE LIFEGUARD (STILL CERTIFIED) | human | later packet — unimplemented |
-| THE DOCENT (SELF-GUIDED) | human | later packet — unimplemented |
+| TRE BAG TONY | human | P05a accepted: `tony` |
+| YURI | human | P05a accepted: `yuri` |
+| BRUTUS | quadruped | P05a accepted: `brutus` |
+| PAWN SHOP PETE | human | P05a accepted: `pete` |
+| LURCH | human | P05a accepted: `lurch` |
+| SPIDER-BITE SHERRI | human | P05b1 art accepted — central1165/native188 |
+| PAULIE THE FACE | human | P05b1 art accepted — central1165/native188 |
+| BAGGIE BARB | human | P05b1 art accepted — central1165/native188 |
+| CHATTY DAVE | human | P05b1 art accepted — central1165/native188 |
+| WHOLE FOODS MOM | human | P05b1 art accepted — central1165/native188 |
+| THE POSSUM | quadruped | P05a accepted: `possum` |
+| FATHER O'MALLEY | human | P05b1 art accepted — central1165/native188 |
+| THE CONDUCTOR | human | P05b1 art accepted — central1165/native188 |
+| LOUD LARRY | human | P05b1 art accepted — central1165/native188 |
+| STRIPE | human | P05b1 art accepted — central1165/native188 |
+| THE PIGEON KING | bird | P05b1 art accepted — central1165/native188 |
+| PINKY POLENTA | human | P05b1 art accepted — central1165/native188 |
+| THE MATHEMATICIAN | human | P05b1 art accepted — central1165/native188 |
+| COUSIN BRENDAN | human | P05b2 art accepted — central1586/native review |
+| THE TRAIN HOPPER | human | P05b1 art accepted — central1165/native188 |
+| PARK BENCH PHILOSOPHER | human | P05b1 art accepted — central1165/native188 |
+| THE PRICE GUY | human | P05b2 art accepted — central1586/native review |
+| OLD SCHOOL BRUTUS | quadruped | P05b2 art accepted — central1586/native review |
+| THE LEASING GUY | human | P05b1 art accepted — central1165/native188 |
+| GUTTER GREG | human | P05b1 art accepted — central1165/native188 |
+| THE DOG | quadruped | P05b1 art accepted — central1165/native188 |
+| THE BIG GUY | human | P05b1 art accepted — central1165/native188 |
+| CUBSCOUT | human | P05b1 art accepted — central1165/native188 |
+| JOGGER | human | P05b1 art accepted — central1165/native188 |
+| DOG WALKER (PAISLEY) | human + dog | P05b1 art accepted — central1165/native188 |
+| BUSKER | human | P05b1 art accepted — central1165/native188 |
+| HORSE COP | mounted human/horse | P05b1 art accepted — central1165/native188 |
+| THE VAPE LORD | human | P05b1 art accepted — central1165/native188 |
+| A POTHOLE (TALKING) | road object | P05b1 art accepted — central1165/native188 |
+| MAYOR'S COUSIN | human | P05b1 art accepted — central1165/native188 |
+| THE PHONE GUY | human | P05b1 art accepted — central1165/native188 |
+| LAUNDROMAT LADY | human | P05b1 art accepted — central1165/native188 |
+| METER MAID | human | P05b1 art accepted — central1165/native188 |
+| FOOD TRUCK GUY | human | P05b1 art accepted — central1165/native188 |
+| THE PRIEST'S SON | human | P05b1 art accepted — central1165/native188 |
+| KARAOKE MIKE | human | P05b1 art accepted — central1165/native188 |
+| YOUR POSSUM | quadruped | P05b2 art accepted — central1586/native review |
+| THE BUS DRIVER | human | P05b2 art accepted — central1586/native review |
+| BRUTUS THE OLDER | quadruped | P05b2 art accepted — central1586/native review |
+| SOMEONE YOU DON'T KNOW | human | P05b2 art accepted — central1586/native review |
+| COP | human | P05b2 art accepted — central1586/native review |
+| DARRYL UNDER BLUE | human | P05b2 art accepted — central1586/native review |
+| GENERAL RECEIPT | human | P05b2 art accepted — central1586/native review |
+| BISHOP WIRE | human | P05b2 art accepted — central1586/native review |
+| THE CURB EMPEROR | human | P05b2 art accepted — central1586/native review |
+| TARP KNIGHT | human | P05b1 art accepted — central1165/native188 |
+| CART LANCER | human | P05b1 art accepted — central1165/native188 |
+| WIRE DEACON | human | P05b1 art accepted — central1165/native188 |
+| KNIGHT EMERITUS | human | P05b1 art accepted — central1165/native188 |
+| CURB PRETENDER No. N | human | P05b2 art accepted — central1586/native review |
+| DENNIS (NIGHTS) | human | P05b3 central1898/native85; eye review passed |
+| THE RACCOON QUORUM | seven quadrupeds / furniture | P05b3 central1898/native85; eye review passed, front row occludes rear heads |
+| TRANSIT AUTHORITY DAN | human | P05b3 central1898/native85; eye review passed |
+| THE MODEL FAMILY | three still humans / furniture | P05b3 central1898/native85; eye review passed |
+| THE FORMER TELLER | human | P05b3 central1898/native85; eye review passed |
+| THE GOOSE (MANAGER) | two-foot bird / desk | P05b3 central1898/native85; eye review passed |
+| THE LIFEGUARD (STILL CERTIFIED) | seated human / elevated chair | P05b3 central1898/native85; eye review passed |
+| THE DOCENT (SELF-GUIDED) | human | P05b3 central1898/native85; eye review passed |

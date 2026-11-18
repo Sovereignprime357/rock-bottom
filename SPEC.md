@@ -2291,3 +2291,13 @@ unbuilt and require explicit operator direction.
    94/377 and 14 draw sites; `rock_bottom_v19.html` remains byte-untouched. Human acceptance is the
    matched three-scene sheet at `artifacts/graphics-phase1/phase1-before-after.png` (baseline left,
    Phase 1 right; Block, Laundromat/Church, Skid Row).
+# Full 3D composition checkpoint — 2026-11-18
+
+The full-port successor is governed by `SPEC-3D-FULL-PORT.md`, with bounded
+contracts for `SPEC-3D-SCENE-COMPOSITION.md`, `SPEC-3D-BOSSES.md`,
+`SPEC-3D-RESIDENT-DIALOGUE.md`, `SPEC-3D-QUEST-DIALOGUE.md`,
+`SPEC-3D-STREET-DIALOGUE.md`, `SPEC-3D-RHYTHM.md`, `SPEC-3D-ROBBERY.md`,
+`SPEC-3D-TRAVEL.md` and `SPEC-3D-ACTOR-NAVIGATION.md`.
+These affect only `game3d/`; source v22/frozen v19 contracts remain unchanged.
+The actual full scene and separate full export presets are development entries,
+not claims that the32-feature/585-handler parity ledger is fully verified.

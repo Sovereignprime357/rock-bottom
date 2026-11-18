@@ -12,6 +12,7 @@ var combat: RefCounted:
 var _player_epoch: Dictionary = {}
 var _state_epoch: Dictionary = {}
 var _poses: Dictionary = {}
+var _departures: Dictionary = {}
 var _wall_ms: float = 0.0
 
 
@@ -23,12 +24,12 @@ func _init(owner: RefCounted, combat_system: RefCounted) -> void:
 func _sync_epoch() -> bool:
 	if host == null or combat == null: return false
 	if not is_same(_player_epoch, host.p) or not is_same(_state_epoch, host.s):
-		_player_epoch = host.p; _state_epoch = host.s; _poses.clear()
+		_player_epoch = host.p; _state_epoch = host.s; _poses.clear(); _departures.clear()
 	return true
 
 
 func supported(body: Dictionary) -> bool:
-	if body.get("archetype", "default") not in ["default", "passive", "cop", "brendan", "charger", "charger_older", "grabber", "swarmer", "ranged"]: return false
+	if body.get("archetype", "default") not in ["default", "passive", "cop", "brendan", "charger", "charger_older", "grabber", "swarmer", "ranged", "priest_fallen"]: return false
 	if body.get("robs", false) and not combat.domain_has(&"attempt_robbery"): return false
 	return true
 
@@ -74,7 +75,8 @@ func tick(dt_ms: float, wall_ms: float) -> bool:
 		if body.get("isAlly", false): _ally(body, dt_ms)
 		elif body.get("aggro", false) or (body.get("hostile", false) and Combat.center(body).distance_squared_to(host.player_center()) < 129600.0):
 			_hostile(body, dt_ms)
-		else: _passive(body, dt_ms)
+		else:
+			if _passive(body, dt_ms): continue
 		if (body.get("kingdomGuard", false) or body.get("kingdomPretender", false) or body.get("kingdomBoss", false) or body.get("kingdomAdd", false)) and body.get("zoneOnly") is Dictionary:
 			var zone: Dictionary = body.zoneOnly
 			combat.move_actor(body, Vector2(clampf(body.x, zone.x + 6.0, zone.x + zone.w - body.w - 6.0), clampf(body.y, zone.y + 6.0, zone.y + zone.h - body.h - 6.0)))
@@ -159,6 +161,7 @@ func _hostile(body: Dictionary, dt: float) -> void:
 			if body.get("speed", 0.0) > 0.0: _move(body, toward * body.speed * 1.4 * step, host.player_center())
 			if _touching(body) and body.attackCd <= 0.0: _hit(body, maxf(1.0, floor(_damage(body, 5.0) * 0.6)), 700.0)
 		"ranged": _ranged(body, dt, toward, distance)
+		"priest_fallen": _fallen_priest(body, dt, toward, distance)
 		_:
 			var spook: float = 0.5 if body.get("dogSpookSlow", 0) and (body.get("cop", false) or body.id in ["brendan", "horsecop"]) else 1.0
 			if body.get("speed", 0.0) > 0.0: _move(body, toward * body.speed * spook * step, host.player_center())
@@ -233,7 +236,91 @@ func _ranged(body: Dictionary, dt: float, toward: Vector2, distance: float) -> v
 			host.emit_event("sound", {"id":"bottleThrow"})
 
 
-func _passive(body: Dictionary, dt: float) -> void:
+func _fallen_priest(body: Dictionary, dt: float, toward: Vector2, distance: float) -> void:
+	var phase_two: bool = float(body.hp) / float(body.maxHp) < 0.5
+	if phase_two and not body.get("fallenPhase2",false):
+		body.fallenPhase2 = true; host.s.shake = 12.0
+		host.emit_event("sound", {"id":"bossRoar"})
+		host.emit_event("toast", {"text":"the lord is not here.\nthe lord left.\nhe took the bus.","duration_ms":4200})
+	if not phase_two:
+		var motion := Vector2(-toward.y,toward.x) * sin(_wall_ms/600.0)
+		if distance < 180.0: motion = -toward
+		elif distance > 280.0: motion = toward
+		_move(body,motion*_speed(body,1.6)*dt/16.0,host.player_center())
+		body.throwT = float(body.get("throwT",0.0))-dt
+		body.throwAimT = maxf(0.0,float(body.get("throwAimT",0.0))-dt)
+		if body.throwT <= 0.0 and distance >= 160.0 and distance <= 300.0:
+			if body.throwAimT <= 0.0 and not body.get("aimingThrow",false): body.aimingThrow = true; body.throwAimT = 350.0
+			elif body.get("aimingThrow",false) and body.throwAimT <= 0.0:
+				body.aimingThrow = false; body.throwT = 1200.0
+				var origin := Combat.center(body)
+				var target: Vector2 = host.player_center()
+				combat.spawn_projectile({"x":origin.x,"y":origin.y,"tx":target.x,"ty":target.y,"speed":280.0,"dmg":22.0,"slowMs":1500.0,"kind":"holy","from":body,"wobble":0.18})
+				host.emit_event("sound", {"id":"holyWaterThrow"})
+		return
+	body.chargeState = body.get("chargeState","idle")
+	body.chargeT = float(body.get("chargeT",0.0))
+	body.chargeCdT = maxf(0.0,float(body.get("chargeCdT",0.0))-dt)
+	if body.get("structureChargeHit",false):
+		body.structureChargeHit = false; body.chargeState = "cooldown"; body.chargeT = 1200.0; body.chargeCdT = 1200.0
+	match body.chargeState:
+		"cooldown":
+			body.chargeT -= dt
+			if body.chargeT <= 0.0: body.chargeState = "idle"
+		"windup":
+			body.chargeT -= dt
+			if fmod(body.chargeT,90.0) < 45.0: body.hitFlash = maxf(float(body.hitFlash),40.0)
+			if body.chargeT <= 0.0: body.chargeState = "lunge"; body.chargeT = 900.0
+		"lunge":
+			body.chargeT -= dt
+			if body.has("lungeVx"):
+				var moved: Dictionary = _move(body,Vector2(body.lungeVx,body.lungeVy)*2.4*dt/16.0,null,true)
+				if moved.blocked: body.structureChargeHit = true
+			if _touching(body) and body.attackCd <= 0.0:
+				_hit(body,30.0,600.0); host.p.slowT = maxf(float(host.p.slowT),1500.0)
+				body.chargeState = "cooldown"; body.chargeT = 1200.0; body.chargeLanded = true
+			if body.chargeT <= 0.0:
+				if not body.get("chargeLanded",false): host.unlock_achievement("dodged_the_lunge")
+				body.chargeLanded = false; body.chargeState = "cooldown"; body.chargeT = 1200.0
+		_:
+			if body.get("speed",0.0) > 0.0: _move(body,toward*_speed(body,1.6)*dt/16.0,host.player_center())
+			if distance < 220.0 and body.chargeCdT <= 0.0:
+				body.chargeState = "windup"; body.chargeT = 500.0; body.lungeVx = toward.x; body.lungeVy = toward.y
+				host.emit_event("sound", {"id":"windup"})
+
+
+func _depart(body: Dictionary, dt: float) -> bool:
+	if not (body.get("isDay3Visitor",false) or body.get("isPriceGuy",false) or body.get("priceWalkOff",false)):
+		combat.dependency_missing("departure_writer:"+str(body.id)); return false
+	var bounds: Dictionary = host.content.world.bounds
+	var source_target: float = float(body.get("targetX",float(bounds.w)+80.0))
+	var edge: String = "west" if source_target < 0.0 else ("east" if source_target > float(bounds.w) else "")
+	var exit: Dictionary = combat.resolve_departure(body,edge)
+	if exit.is_empty(): combat.dependency_missing("departure_route:"+str(body.id)); return false
+	var id: String = str(body.id)
+	var progress: Dictionary = _departures.get(id,{})
+	if progress.is_empty() or progress.exit_id != exit.exit_id or progress.route != exit.route:
+		progress = {"exit_id":exit.exit_id,"route":exit.route.duplicate(),"cursor":0}
+		_departures[id] = progress
+	var at := Combat.center(body)
+	if at.distance_to(exit.target) <= 4.0:
+		for index: int in range(host.npcs.size()-1,-1,-1):
+			if is_same(host.npcs[index],body): host.npcs.remove_at(index); break
+		_poses.erase(str(body.id))
+		_departures.erase(id)
+		host.emit_event("actor_departed", {"actor_id":body.id,"exit_id":exit.exit_id})
+		return true
+	var next: Vector2 = exit.target
+	while progress.cursor < exit.route.size() and at.distance_to(exit.route[progress.cursor]) <= 4.0: progress.cursor += 1
+	if progress.cursor < exit.route.size(): next = exit.route[progress.cursor]
+	var delta := next-at
+	var distance: float = delta.length()
+	if distance > 0.0:
+		_move(body,delta/distance*minf(distance,_speed(body,1.2)*dt/16.0),next)
+	return false
+
+
+func _passive(body: Dictionary, dt: float) -> bool:
 	var target := _position(body)
 	var speed: float = 0.0
 	if body.get("patrol") is Array and not body.patrol.is_empty():
@@ -241,10 +328,7 @@ func _passive(body: Dictionary, dt: float) -> void:
 		var point: Dictionary = body.patrol[int(floor(body.patrolT / 2000.0)) % body.patrol.size()]
 		target = Vector2(point.x, point.y); speed = _speed(body, 1.0)
 	elif body.get("wanderOff", false):
-		var bounds: Dictionary = host.content.world.bounds
-		target = Vector2(float(body.get("targetX", 0.0)) if body.get("targetX", 0.0) else float(bounds.w) + 80.0, float(body.get("targetY", 0.0)) if body.get("targetY", 0.0) else float(body.y))
-		speed = _speed(body, 1.2)
-		if target.distance_to(_position(body)) <= 4.0: body.dead = true
+		return _depart(body,dt)
 	elif body.get("wander", false) and body.get("speed", 0.0) > 0.0:
 		body.wanderT = float(body.get("wanderT", 0.0)) - dt
 		if body.wanderT <= 0.0:
@@ -253,6 +337,7 @@ func _passive(body: Dictionary, dt: float) -> void:
 		target = Vector2(body.targetX, body.targetY); speed = float(body.speed) * 0.4
 	var delta := target - _position(body)
 	if delta.length() > 4.0 and speed > 0.0: _move(body, delta.normalized() * speed * dt / 16.0, target + Vector2(body.w, body.h) * 0.5)
+	return false
 
 
 func _dog_discomfort() -> void:
@@ -278,16 +363,22 @@ func _record(body: Dictionary, start: Vector2, dt: float, old_cd: float) -> void
 	var phase: float = 0.0
 	var charge: String = str(body.get("chargeState", ""))
 	var animal: bool = str(body.get("sprite", body.id)) in ["brutus", "brutus_older", "scrap_dog", "freed_dog", "possum", "pet_possum"]
+	var priest: bool = body.get("archetype") == "priest_fallen"
 	if charge in ["windup", "lunge", "cooldown"]:
 		action = ("lunge" if animal else "strike") if charge == "lunge" else ("windup" if charge == "windup" else "")
 		var older: bool = body.get("archetype") == "charger_older"
 		var berserk: bool = body.get("berserk", false)
 		var duration: float = (400.0 if berserk else (550.0 if older else 800.0)) if charge == "windup" else ((800.0 if berserk else (1400.0 if older else 1000.0)) if charge == "lunge" else (600.0 if berserk else (1700.0 if older else 1400.0)))
+		if priest: duration = 500.0 if charge == "windup" else (900.0 if charge == "lunge" else 1200.0)
 		phase = clampf(1.0 - float(body.get("chargeT", duration)) / duration, 0.0, 1.0)
-	elif body.get("aimingThrow", false): action = "throw"; phase = clampf((1.0 - float(body.get("throwAimT", 300.0)) / 300.0) * 0.6, 0.0, 0.6)
+	elif body.get("aimingThrow", false) and not (priest and body.get("fallenPhase2",false)):
+		action = "throw"
+		var aim: float = 350.0 if priest else 300.0
+		phase = clampf((1.0-float(body.get("throwAimT",aim))/aim)*0.6,0.0,0.6)
 	elif body.get("grabFreezeT", 0.0) > 0.0: action = "grab"; phase = 1.0 - float(body.grabFreezeT) / 200.0
 	elif body.get("attackCd", 0.0) > 600.0: action = "bite" if animal else "strike"; phase = clampf(1.0 - (float(body.attackCd) - 600.0) / 400.0, 0.0, 1.0)
 	var contact: bool = float(body.get("attackCd", 0.0)) > old_cd
+	if contact and action.is_empty(): action = "bite" if animal else "strike"; phase = 0.72
 	if action != pose.action or contact: pose.action_serial += 1
 	pose.action = action; pose.action_phase = phase; pose.contact = contact
 	pose.dead = body.get("dead", false)
@@ -298,6 +389,7 @@ func _record(body: Dictionary, start: Vector2, dt: float, old_cd: float) -> void
 	pose.local_velocity = world_velocity.rotated(Vector3.UP, -float(pose.yaw))
 	pose.turn_rate = angle_difference(previous_yaw, pose.yaw) * 1000.0 / dt
 	pose.grounded = true; pose.hurt = clampf(float(body.get("hitFlash", 0.0)) / 200.0, 0.0, 1.0)
+	pose.asleep = body.get("asleep",false) == true
 	pose.coat_count = clampi(3 - int(body.get("coatsOff", 0)), 0, 3); pose.gaze = Vector2.ZERO
 	_poses[id] = pose
 

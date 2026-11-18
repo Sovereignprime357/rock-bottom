@@ -8,6 +8,7 @@ const game=await loadModularGame();
 const ui=game.module('src/core/runtime_ui.js');
 const vendors=game.module('src/dialogue/neighborhood_a.js');
 const spawns=game.module('src/data/npc_spawns.js');
+const interactions=game.module('src/systems/interactions.js');
 const clone=value=>JSON.parse(JSON.stringify(value));
 const playerKeys=['cash','rocks','copper','cred','rank','tonyOffenses','equip','inventory','faction','charisma'];
 const counterKeys=['rocksBought','peteSold','peteCashToday'];
@@ -32,6 +33,7 @@ function reset(spec){
   ui.P.cash=0;ui.P.equip.tool=null;
   ui.state.quests.intro_tony.available=false;
   Object.assign(ui.P,clone(spec.player||{}));
+  Object.assign(ui.state,clone(spec.state||{}));
   Object.assign(ui.state.flags,clone(spec.flags||{}));
   Object.assign(ui.state.counters,clone(spec.counters||{}));
   ui.applyEquipStats();
@@ -61,14 +63,23 @@ const specs=[
   {id:'pete_owned_torch_not_resold',player:{cash:200,rank:3,equip:{tool:'crowbar'}},flags:{peteToolLocker:'propane_torch'},ops:[['pete','buy_torch']]},
   {id:'pete_loan_once',player:{cred:0,faction:{street:0,scrap:25,spiritual:0}},counters:{peteCashToday:200},ops:[['pete','loan'],['pete','loan']]},
   {id:'pete_hated_refuses_all',player:{cash:200,copper:3,rank:3,faction:{street:0,scrap:-10,spiritual:0}},ops:[['pete','buy_food'],['pete','sell_copper'],['pete','buy_crowbar']]},
+  {id:'tony_buy_during_tony',viaInteract:true,state:{bossActive:true,bossKind:'tony',bossPhase:1},player:{cash:20},ops:[['tony','buy_rock']]},
+  {id:'pete_sell_during_tony',viaInteract:true,state:{bossActive:true,bossKind:'tony',bossPhase:1},player:{copper:2},ops:[['pete','sell_copper']]},
+  {id:'yuri_sell_during_tony',viaInteract:true,state:{bossActive:true,bossKind:'tony',bossPhase:1},player:{copper:2},ops:[['yuri','sell_copper']]},
+  {id:'kingdom_kind_blocks_all_even_inactive',viaInteract:true,state:{bossActive:false,bossKind:'kingdom'},player:{cash:20,copper:2},ops:[['tony','buy_rock'],['pete','sell_copper'],['yuri','sell_copper']]},
 ];
 const cases=[];
 for(const spec of specs){
   reset(spec);const setup=snapshot();const offered=[];
   for(const [vendor,action] of spec.ops){
-    vendors[`${vendor}Dialogue`](ui.runtime.npcs.find(n=>n.id===vendor));
-    const option=ui.activeDialogue.opts.find(o=>labels[action].test(o.label));
-    offered.push({vendor,action,present:!!option,enabled:!!option&&!option.disabled});
+    ui.closeDialogue();
+    const actor=ui.runtime.npcs.find(n=>n.id===vendor);
+    if(spec.viaInteract){
+      ui.P.x=actor.x+(actor.w-ui.P.w)/2;ui.P.y=actor.y+(actor.h-ui.P.h)/2;
+      interactions.tryInteract();
+    }else vendors[`${vendor}Dialogue`](actor);
+    const option=ui.activeDialogue?.opts.find(o=>labels[action].test(o.label));
+    offered.push({vendor,action,opened:!!ui.activeDialogue,present:!!option,enabled:!!option&&!option.disabled});
     if(option&&!option.disabled){ui.closeDialogue();option.action();}
   }
   cases.push({id:spec.id,setup,operations:spec.ops,offered,expected:snapshot()});
