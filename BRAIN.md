@@ -2464,3 +2464,55 @@ boots headlessly and exits cleanly. The sandboxed local server was unreachable; 
 approved network access and confirmed HTTP200. Browser UI verification remains unperformed.
 Final captures show the centered menu. Hidden-window timings are inconsistent and2,625 draw
 calls warrant batching before scale; no foreground FPS or60-NPC performance claim is made.
+
+## 2026-11-18 — neighborhood art, materials and rendering pass
+
+**Request and scope.** Operator asked for continued graphics, textures, assets, characters,
+buildings, streets and NPC improvements while away for a few hours. Captured
+`SPEC-3D-ART-PASS.md` before code; branch `codex/3d-neighborhood-art-pass`. Existing six identities,
+loop, transactions and saves remain the slice baseline. No changes to root 2D source or v19.
+
+**Changed.** Added nine original deterministic 128px texture tiles with mipmaps; differentiated
+brick, plaster, asphalt, concrete, wood, worn metal, cloth, skin and rubber. Rebuilt surface
+detail around storefronts, furnished/lit Pete's shop, added an original parked sedan, cabinets,
+mailbox, loading stoop, workbench and tire stacks. Sky and fog now darken with the day/night cycle.
+Character work adds fitted faces, layered clothing/seams, footwear, creature details and smaller
+articulated fists. Tony's eyes remain fixed; Pete eats; creatures and residents have bounded
+pivot gestures. Compact HUD corner panels show more street. Viewmodel shadows are disabled so
+detached fists do not appear on the ground. Lurch's visual recoil now advances only while playing.
+
+**Decisions.** Source-generated material tiles keep the asset corpus original and reproducible.
+Construction-time mesh batching preserves solids, labels, emitters, targets and animated pivots.
+Compatible material tints are carried by sRGB vertex colors, allowing primitive/custom parts
+to share a surface without changing the palette. Detailed state signatures retain real material
+differences. Unsupported, transparent or tagged geometry is deliberately left independent.
+Decision register: IMPL-3D-ART-01 in REFACTOR-FINDINGS.
+
+**Tried and corrected.** Initial batching reduced draws but the 60-character art stress remained
+too expensive; palette coalescing and removal of unused vertex channels delivered the larger
+improvement. Initial cheek/chin overlays read as separate discs; removed them and fitted facial
+details to the head planes. Night initially retained the daytime horizon; fixed with a cached,
+throttled sky update. New art tests ran before tree entry and failed on global transforms;
+deferred entry, then corrected test oracles for Godot's snapped get_faces helper, packed normal
+precision and reconstructed tangents. Actual raw geometry/color preservation remains tested.
+Review caught an old hit-reaction tween continuing during pause; replaced it with active-time
+recoil and added a real pause/resume check. Tire collision now covers each complete stack.
+
+**Verification.** Original runner passes 19/19. New runner passes 106 simulation, 54 scene and
+156 art checks. Routes to every tested approach remain clear. Native captures and comparable
+before/after metrics are in `reports/2026-11-18-3d-art-pass.md`. The stress scene contains six
+production actors plus 54 animated art duplicates; it is not full 60-agent AI proof. Rendered
+smoke/crash verification now checks observed real-time transition points as well as final timers.
+
+**Next.** Operator eye/play pass on the refreshed local export. Further art should respond to
+that review; full NPC AI, Tony's fight, police/arrest and other parity work remain separate.
+Browser UI behavior remains unverified; export/HTTP evidence does not claim a browser playthrough.
+
+**Local handoff.** The earlier interactive HTTP server had ended before final verification.
+Added `game3d/tools/serve.ps1` to start a hidden localhost-only background helper, verify the
+served HTML against the export and reuse an existing matching preview. No service, startup task,
+public listener or unrelated-process termination. Both exports rebuilt; packaged Windows boot
+is clean. The native tour observed crash at 18.002s and completion at 26.001s. Final native
+daytime draws are 701 versus 2,506 in the committed baseline; the art-only 60-cast stress records
+7.616ms p95 render interval and 8.709ms median CPU process monitor on this RTX3080 at 1280x720.
+These are bounded measured conditions, not a claim of full 60-agent simulation or browser FPS.

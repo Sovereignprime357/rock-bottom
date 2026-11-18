@@ -1,5 +1,25 @@
 # DELEGATION.md — Rock Bottom Backlog
 
+## 3D neighborhood art pass — BUILT / OPERATOR EYE REVIEW (November 18, 2026)
+
+Branch: `codex/3d-neighborhood-art-pass`; contract `SPEC-3D-ART-PASS.md`.
+
+- [x] Cached original material tiles: brick, plaster, concrete, asphalt, wood, metal, cloth, skin,
+  rubber; clear facade/road separation and a sky/fog transition that follows day/night.
+- [x] Furnished and lit pawn-shop interior, storefront trim, original parked sedan, utility
+  cabinets, mailbox, loading stoop, workbench and physical tire stacks. Routes stay clear.
+- [x] Refined existing cast, three-coat Tony, fitted facial planes, sleeves/fists, shoes, creature
+  details and bounded idle gestures. Viewmodel fists no longer cast detached world shadows.
+- [x] Static material/spatial batching plus vertex-palette merging; animation pivots, collision,
+  labels and fixture lights remain independent. Lurch's recoil now pauses with gameplay.
+- [x] Production simulation, scene and art gates; eye-level day/night render evidence and a
+  separate 60-character art/idle stress probe. This is not a full 60-agent AI performance claim.
+- [ ] Operator eye/play review at localhost: texture scale, faces, motion, night visibility,
+  first-person hands and storefront/street readability.
+- [ ] Browser UI playthrough remains separate from successful export and HTTP availability.
+
+The first slice's remaining gameplay parity work below is unchanged.
+
 ## First-person 3D slice — BUILT / OPERATOR PLAY REVIEW (November 18, 2026)
 
 Branch: `codex/3d-first-person-slice`; contract `SPEC-3D-SLICE.md`. Desktop first-person is

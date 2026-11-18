@@ -41,12 +41,8 @@ func _ready() -> void:
 	tint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tint.color = Color(0, 0, 0, 0)
 	root.add_child(tint)
-	var top_back := ColorRect.new()
-	top_back.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	top_back.offset_bottom = 94
-	top_back.color = Color(0.06, 0.07, 0.05, 0.78)
-	top_back.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.add_child(top_back)
+	_plate(Control.PRESET_TOP_LEFT, Vector2(20, 16), Vector2(510, 70))
+	_plate(Control.PRESET_TOP_RIGHT, Vector2(-358, 16), Vector2(338, 70))
 	var meter_back := ColorRect.new()
 	meter_back.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
 	meter_back.position = Vector2(20, -124)
@@ -110,6 +106,17 @@ func _ready() -> void:
 	menu_box.add_theme_constant_override("separation", 10)
 	margin.add_child(menu_box)
 	modal.hide()
+
+func _plate(anchor: int, at: Vector2, size: Vector2) -> void:
+	var panel := Panel.new()
+	panel.set_anchors_and_offsets_preset(anchor)
+	panel.position = at
+	panel.size = size
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var paper := _style(Color(0.06, 0.065, 0.045, 0.72), Color(0.38, 0.35, 0.22, 0.65), 1)
+	paper.border_width_bottom = 2
+	panel.add_theme_stylebox_override("panel", paper)
+	root.add_child(panel)
 
 func _style(background: Color, border: Color, width: int) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()

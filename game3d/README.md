@@ -7,6 +7,7 @@ This is the start of the port, not full v22 parity. The existing 2D release rema
 
 - Windows: `../.build/3d/windows/RockBottom.exe` (standalone, embedded data).
 - Browser: serve `../.build/3d/web/` over HTTP and open its `index.html` in Chromium or Firefox.
+  To start a hidden background preview: `pwsh -File game3d/tools/serve.ps1` from the repo root.
   From the repository root: `python -m http.server 8073 --bind 127.0.0.1 --directory .build/3d/web`.
   Open `http://127.0.0.1:8073/`. WebAssembly/WebGL2 are required; double-clicking the HTML is not supported.
 - Editor: open `project.godot` in **Godot 4.5.1 stable**, then run the main scene.
@@ -23,6 +24,12 @@ three dumpsters, loose cash, copper, Brutus and the helmeted possum. Original so
 low-poly meshes and materials; no stock character pack. Meshes and material kits are constructed
 once, not regenerated each frame. Sound is synthesized into cached waveforms at startup and
 played only after input.
+
+The neighborhood art pass adds nine original procedural surface tiles with mipmaps, masonry and
+plaster storefronts, furnished/lit Pete interior, a parked sedan, utility cabinets, scrap-yard
+workbench and street details. Existing residents have more defined faces, layered clothes,
+hands and shoes; Pete eats, the possum walks and Brutus moves his jaw. These are bounded idle
+gestures, not new transactions. Static geometry batches once; animated pivots stay independent.
 
 You can earn, buy, sell, smoke, fight, crash, die/recover, save and load. Real rocks use the
 18-second high / 8-second crash. A 240-second active day refreshes bounded finds and Pete's
@@ -60,13 +67,21 @@ availability depends on the origin's IndexedDB permissions; failures are reporte
 ## Verification
 
 From the repo root: `pwsh -File game3d/tests/run-gates.ps1`.
-This imports the project and runs production simulation and scene integration checks. It fails
+This imports the project and runs production simulation, scene integration and art/batching checks. It fails
 on engine error text as well as nonzero exits, because Godot can report a script error with exit0.
 The original suite remains `node tools/run-gates.mjs`.
 
 Development-only engine arguments after `--`: `--qa-tour` runs a real-time rendered smoke/crash
-and isolated save roundtrip; `--qa-capture` captures the Block, Tony, Pete and Lurch, and reports
-frame intervals. These are not player controls. Test saves/captures go under `../.build/3d/`;
+and isolated save roundtrip; `--qa-capture` captures the Block, Tony, Pete and Lurch.
+These are not player controls. Test saves/captures go under `../.build/3d/`;
 automated native tests do not overwrite the player's save.
 
-Contracts: `../SPEC-3D-SLICE.md` and `../SPEC-3D-TRANSITION.md`. Identity and tone: `../VIBE.md`.
+For native graphics evidence run `pwsh -File game3d/tools/render-probe.ps1 -Stress` from the repo
+root. It records eye-level day/night PNGs and a five-second warmed render sample at 1280x720.
+The optional stress scene adds 54 art-only duplicates to the six actual residents; it measures
+rendering/idle-animation pressure, not full 60-NPC AI/gameplay. It changes no player save and uses
+its own output directory under `.build/art-pass/`. Draw-call counts and CPU/render timings are
+reported separately, with hardware/focus state and VSync disabled for the probe.
+
+Contracts: `../SPEC-3D-SLICE.md`, `../SPEC-3D-ART-PASS.md` and `../SPEC-3D-TRANSITION.md`.
+Identity and tone: `../VIBE.md`.

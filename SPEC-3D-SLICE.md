@@ -1,5 +1,8 @@
 # SPEC — First-person desktop slice with a browser export
 
+The subsequent visual/material/batching increment is scoped in `SPEC-3D-ART-PASS.md`; the
+simulation and save contracts below remain its baseline.
+
 Captured 2026-11-18, before implementation. Supersedes the unresolved platform choice in
 `SPEC-3D-TRANSITION.md`. User: "yes first person desktop. playable in the browser would be nice as well".
 

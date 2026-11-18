@@ -35,6 +35,14 @@ func _run() -> void:
 	check(game.sim.cash == 17, "new game cannot race a pending save")
 	game.store.busy = false
 	check(game.targets.size() == 9, "nine physical interaction anchors")
+	check(not game.world.is_clear_position(Vector3(-37, 0.0, 15.5)), "tire stack has a full-height save-clearance footprint")
+	game.world.set_day_time(60.0)
+	var daytime: Color = game.world.sky_material.sky_horizon_color
+	game.world.set_day_time(180.0)
+	var nighttime: Color = game.world.sky_material.sky_horizon_color
+	check(nighttime.get_luminance() < daytime.get_luminance() * 0.6, "night sky dims along with the neighborhood")
+	game.world.set_day_time(0.0)
+	var reachable := _walkable_cells(game.world)
 	var probes := [
 		["block", Vector3(0, 0.05, 6.4), Vector3(0, 0.8, 4)],
 		["tony", Vector3(18, 0.05, -10.4), Vector3(18, 1.2, -13)],
@@ -48,6 +56,8 @@ func _run() -> void:
 		["copper_1", Vector3(-29, 0.05, 19), Vector3(-31, 0.22, 19)],
 	]
 	for probe: Array in probes:
+		var approach: Vector3 = probe[1]
+		check(reachable.has(Vector2i(roundi(approach.x), roundi(approach.z))), "dressed streets retain a clear route to %s" % probe[0])
 		game.player.position = probe[1]
 		game.player.rotation = Vector3.ZERO
 		game.camera.look_at(probe[2])
@@ -66,6 +76,15 @@ func _run() -> void:
 		game.player.move_and_slide()
 		await physics_frame
 	check(game.player.position.z > -10.0, "visible pawn flank stops the player capsule")
+	# Art animation must not relocate root meshes/collision and must freeze in a modal.
+	for id: String in game.actors:
+		var art: Node3D = game.actors[id].get_node("Art")
+		var before_transform: Transform3D = art.transform
+		game.Art.animate_character(art, id, 3.7, 0.5, 0.4)
+		check(art.transform.is_equal_approx(before_transform), "animation keeps %s's body origin fixed" % id)
+	var paused_clock: float = game.clock
+	game._physics_process(0.5)
+	check(is_equal_approx(game.clock, paused_clock), "new art animation clock pauses with modal gameplay")
 	# Exercise production menus and transaction callback paths, with independent persistence.
 	game.sim.fresh()
 	game._new_game()
@@ -107,6 +126,13 @@ func _run() -> void:
 	await physics_frame
 	game._punch()
 	check(is_equal_approx(game.enemy_hp, 102.0), "production melee ray deals one sober punch")
+	var recoil_pose: Vector3 = game.actors.lurch.get_node("Art").position
+	await create_timer(0.16).timeout
+	check(game.actors.lurch.get_node("Art").position.is_equal_approx(recoil_pose), "Lurch hit reaction freezes while gameplay is paused")
+	game.mode = "playing"
+	game._physics_process(0.12)
+	game.mode = "paused"
+	check(is_zero_approx(game.actors.lurch.get_node("Art").position.z), "hit reaction finishes on active simulation time")
 	game._punch()
 	check(is_equal_approx(game.enemy_hp, 102.0), "held/repeated attack cannot skip cooldown")
 	for swing in range(6):
@@ -132,3 +158,22 @@ func _run() -> void:
 	# Let the audio mixer release stopped playback resources before SceneTree shutdown.
 	await create_timer(0.2).timeout
 	quit(0 if failures.is_empty() else 1)
+
+func _walkable_cells(world: Node3D) -> Dictionary:
+	# One-metre cardinal flood fill with capsule clearance. Fixtures remain independent solids.
+	var seen: Dictionary = {}
+	var clear: Dictionary = {}
+	var queue: Array[Vector2i] = [Vector2i(0, 8)]
+	seen[queue[0]] = true
+	var cursor := 0
+	while cursor < queue.size():
+		var cell: Vector2i = queue[cursor]
+		cursor += 1
+		for step: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+			var next := cell + step
+			if seen.has(next): continue
+			seen[next] = true
+			if not world.is_clear_position(Vector3(next.x, 0.0, next.y), 0.36): continue
+			clear[next] = true
+			queue.append(next)
+	return clear

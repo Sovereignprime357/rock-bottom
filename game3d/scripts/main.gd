@@ -17,6 +17,7 @@ var camera: Camera3D
 var hands: Node3D
 var anchors: Dictionary
 var actors: Dictionary = {}
+var actor_positions: Dictionary = {}
 var targets: Dictionary = {}
 var mode := "title"
 var target_id := ""
@@ -28,6 +29,7 @@ var enemy_hp := 120.0
 var enemy_cooldown := 0.0
 var enemy_windup := 0.0
 var enemy_hit_ready := false
+var enemy_recoil := 0.0
 var last_day := 1
 var save_pending := false
 var loading := false
@@ -221,10 +223,14 @@ func _physics_process(delta: float) -> void:
 			_sync_finds()
 	attack_cd = maxf(0, attack_cd - delta)
 	attack_time = maxf(0, attack_time - delta)
+	if enemy_recoil > 0:
+		enemy_recoil = maxf(0.0, enemy_recoil - delta)
+		actors.lurch.get_node("Art").position.z = 0.10 * enemy_recoil / 0.12
 	hands.position.y = sin(clock * 8.0) * 0.012 * motion.length()
-	hands.position.z = -sin(attack_time / 0.22 * PI) * 0.22 if attack_time > 0 else 0.0
+	Art.animate_character(hands, "player_hands", clock, motion.length(), (0.22 - attack_time) / 0.22 if attack_time > 0 else 0.0)
 	_tick_enemy(delta)
 	_tick_possum(delta)
+	_animate_people(delta)
 	var hit := _ray(3.2)
 	target_id = ""
 	if not hit.is_empty(): target_id = str(hit.collider.get_meta("interaction_id", ""))
@@ -428,7 +434,7 @@ func _punch() -> void:
 	enemy_hp -= sim.damage()
 	var art: Node3D = actors.lurch.get_node("Art")
 	art.position.z = 0.10
-	create_tween().tween_property(art, "position:z", 0.0, 0.12)
+	enemy_recoil = 0.12
 	if enemy_hp <= 0:
 		enemy_hp = 0
 		art.rotation.x = PI * 0.5
@@ -446,6 +452,7 @@ func _restore_enemy() -> void:
 	enemy_windup = 0
 	enemy_cooldown = 1.0
 	enemy_hit_ready = false
+	enemy_recoil = 0.0
 	enemy_hp = 0 if sim.defeated.has("lurch") else 120
 	body.collision_layer = 0 if enemy_hp <= 0 else 2
 	art.rotation.x = PI * 0.5 if enemy_hp <= 0 else 0.0
@@ -487,8 +494,6 @@ func _tick_enemy(delta: float) -> void:
 		body.velocity.y = -2.0
 		body.move_and_slide()
 		body.rotation.y = atan2(direction.x, direction.z)
-		_animate_walk(body, clock * 7.0)
-	else: _animate_walk(body, 0)
 
 func _tick_possum(delta: float) -> void:
 	var body: CharacterBody3D = actors.possum
@@ -500,11 +505,16 @@ func _tick_possum(delta: float) -> void:
 		body.move_and_slide()
 		body.rotation.y = atan2(direction.x, direction.z)
 
-func _animate_walk(body: Node3D, phase: float) -> void:
-	var art: Node3D = body.get_node("Art")
-	for limb in ["left_leg", "right_leg", "left_arm", "right_arm"]:
-		var pivot := art.get_node_or_null(limb) as Node3D
-		if pivot != null: pivot.rotation.x = sin(phase) * (0.20 if limb.begins_with("left") else -0.20)
+func _animate_people(delta: float) -> void:
+	for id: String in actors:
+		var body: Node3D = actors[id]
+		var previous: Vector3 = actor_positions.get(id, body.position)
+		var travel := Vector2(body.position.x - previous.x, body.position.z - previous.z).length()
+		actor_positions[id] = body.position
+		if id == "lurch" and enemy_hp <= 0: continue
+		var moving := clampf(travel / maxf(delta, 0.001) / (0.7 if id == "possum" else 1.6), 0.0, 1.0)
+		var gesture := 1.0 - enemy_windup / 0.65 if id == "lurch" and enemy_windup > 0 else 0.0
+		Art.animate_character(body.get_node("Art"), id, clock, moving, gesture)
 
 func _zone() -> String:
 	if player.position.x < -23: return "SCRAP YARD"
@@ -525,11 +535,21 @@ func _qa_tour() -> void:
 	player.position = Vector3(0, 0.02, 8)
 	var accepted: Dictionary = sim.transact("smoke")
 	print("3D TOUR: purchase and real smoke ", accepted.ok)
+	if not accepted.ok or sim.high_remaining < 17.9:
+		push_error("Rendered tour did not ignite a real high.")
+		get_tree().quit(1)
+		return
 	var started := Time.get_ticks_msec()
+	var crash_started := -1.0
+	var cycle_finished := -1.0
 	while Time.get_ticks_msec() - started < 27500:
 		await get_tree().process_frame
+		var elapsed := float(Time.get_ticks_msec() - started) / 1000.0
+		if sim.crash_remaining > 0 and crash_started < 0: crash_started = elapsed
+		if crash_started > 0 and sim.crash_remaining <= 0 and cycle_finished < 0: cycle_finished = elapsed
 	print("3D TOUR: timers ", sim.high_remaining, " / ", sim.crash_remaining)
-	if sim.high_remaining > 0 or sim.crash_remaining > 0:
+	print("3D TOUR: observed crash at ", crash_started, "s; cycle complete at ", cycle_finished, "s")
+	if sim.high_remaining > 0 or sim.crash_remaining > 0 or absf(crash_started - 18.0) > 0.75 or absf(cycle_finished - 26.0) > 0.75:
 		get_tree().quit(1)
 		return
 	await store.write_save(sim.snapshot(player.position, player.rotation.y))
@@ -564,20 +584,6 @@ func _capture_views() -> void:
 		await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		_capture(view[0])
-	var samples: Array[float] = []
-	player.position = Vector3(0, 0.02, 8)
-	camera.rotation = Vector3(-0.04, 0, 0)
-	mode = "playing"
-	var last_stamp := Time.get_ticks_usec()
-	for frame in range(135):
-		await RenderingServer.frame_post_draw
-		var stamp := Time.get_ticks_usec()
-		if frame >= 15: samples.append(float(stamp - last_stamp) / 1000.0)
-		last_stamp = stamp
-	samples.sort()
-	var total := 0.0
-	for sample: float in samples: total += sample
-	print("3D RENDER: 1280x720; 6 NPCs; ", RenderingServer.get_video_adapter_name(), "; mean frame interval ", total / samples.size(), "ms; p95 ", samples[113], "ms; CPU process ", Performance.get_monitor(Performance.TIME_PROCESS) * 1000, "ms; draw calls ", Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
 	print("3D CAPTURE: PASS")
 	get_tree().quit()
 

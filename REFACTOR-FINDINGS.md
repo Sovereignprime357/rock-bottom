@@ -589,3 +589,27 @@ URL-identification safety stop. Native rendered evidence is separate and complet
 **Preserved:** original `index.html`, all `src/` gameplay, frozen v19, existing 19-gate definitions,
 all prior append-only decisions, VIBE identities and the distinction between build proof and
 operator acceptance. Next parity work is explicitly listed in DELEGATION and the slice README.
+
+## IMPL-3D-ART-01 — neighborhood materials, cast and static batching (2026-11-18)
+
+**Status:** executed under the operator's request to keep improving graphics, textures, assets,
+characters, buildings, streets and NPCs while away from the PC. Spec captured before generation
+in `SPEC-3D-ART-PASS.md` on `codex/3d-neighborhood-art-pass`.
+
+**Decision:** original deterministic 128px material tiles with mipmaps, original source-authored
+mesh detail and bounded pivot gestures. World tiles use world coordinates; character cloth/skin
+use object coordinates. A conservative construction-time batcher merges compatible static mesh
+leaves, including palette tints baked into sRGB vertex colors. The neutral shader carrier adds
+no visible palette color. Material flags, shadows, normals, collision, labels and moving pivots
+retain their roles. Unsupported/transparent/tagged geometry remains independent.
+
+**Reason:** readable surfaces and resident silhouettes need more detail than the first proof,
+but hundreds of tiny individually submitted parts do not scale. Measure the same camera before
+and after, and report an art/idle stress separately from full AI. A source fixture tests actual
+triangle/color preservation, not only node counts. Day/night sky updates throttle to four per
+simulation second and skip constant plateaus.
+
+**Scope:** existing six identities and transactions; no new economy, campaign, save schema,
+actor identities or 2D runtime changes. Lurch's short hit reaction now advances on active
+simulation time, so visual motion respects pause. Public GitHub Pages remains the existing
+release; local Windows and Web exports are the review artifacts for this pass.

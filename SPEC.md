@@ -5,6 +5,10 @@
 > Web export); `SPEC-3D-TRANSITION.md` remains the broader migration plan. The active v22 browser
 > contracts below remain in force for `index.html` and `src/`; the slice is not full v22 parity.
 
+> The subsequent requested graphics increment is `SPEC-3D-ART-PASS.md`: original cached materials,
+> richer existing cast/world art, bounded idle gestures and static mesh batching in `game3d/`.
+> Its validation is separate from the unchanged 2D sprite and gameplay gates.
+
 > SpecMesh format. Read VIBE.md before this if you haven't already. Spec without vibe is a soulless port.
 
 > ## ⚠️ AUDIT CORRECTIONS 2026-07-18 (`CORPUS-AUDIT.md`) — the unversioned "current state" sections drifted

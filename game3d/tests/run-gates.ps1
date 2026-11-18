@@ -41,11 +41,12 @@ function Invoke-Gate {
 }
 
 Invoke-Gate -Name 'import' -GodotArgs @('--editor', '--import', '--quit')
-foreach ($script in @('test_simulation.gd', 'test_scene.gd')) {
+foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd')) {
     if (-not (Test-Path -LiteralPath (Join-Path $PSScriptRoot $script) -PathType Leaf)) {
-        throw "Required gate $script is missing. Both simulation and scene checks must exist before this runner can pass."
+        throw "Required gate $script is missing. Simulation, scene and art checks must exist before this runner can pass."
     }
 }
 Invoke-Gate -Name 'simulation' -GodotArgs @('--script', 'res://tests/test_simulation.gd', '--quit-after', '6000') -PassPattern '3D SIMULATION GATE: PASS'
 Invoke-Gate -Name 'scene' -GodotArgs @('--script', 'res://tests/test_scene.gd', '--quit-after', '6000') -PassPattern '3D SCENE GATE: PASS'
-Write-Output '3D GATE RUNNER: 2/2 PASS (import clean; simulation and scene)'
+Invoke-Gate -Name 'art' -GodotArgs @('--script', 'res://tests/test_art.gd', '--quit-after', '6000') -PassPattern '3D ART GATE: PASS'
+Write-Output '3D GATE RUNNER: 3/3 PASS (import clean; simulation, scene and art)'

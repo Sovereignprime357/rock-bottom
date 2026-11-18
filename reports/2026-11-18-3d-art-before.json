@@ -1,0 +1,32 @@
+{
+	"device": "NVIDIA GeForce RTX 3080",
+	"engine": "4.5.1-stable (official)",
+	"measurements": [
+		{
+			"actors": 6,
+			"frames": 2327,
+			"mean_interval_ms": 2.14890760636012,
+			"median_cpu_process_ms": 5.259,
+			"median_draw_calls": 2506.0,
+			"observed_render_hz": 465.352720163631,
+			"p95_interval_ms": 3.233,
+			"seconds": 5.000508,
+			"view": "block_day"
+		},
+		{
+			"actors": 6,
+			"frames": 2300,
+			"mean_interval_ms": 2.17420260869565,
+			"median_cpu_process_ms": 4.74,
+			"median_draw_calls": 2586.0,
+			"observed_render_hz": 459.938736160343,
+			"p95_interval_ms": 3.285,
+			"seconds": 5.000666,
+			"view": "block_night"
+		}
+	],
+	"resolution": "1280x720",
+	"scope": "native render + six production actors; optional 54 art-only animated duplicates, not 60 full AI agents",
+	"vsync": "disabled for probe",
+	"window_focused": true
+}
