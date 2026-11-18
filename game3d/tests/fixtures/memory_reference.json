@@ -1,0 +1,2378 @@
+{
+  "source": "unchanged active v22 production methods",
+  "cases": [
+    {
+      "id": "real_block",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 1,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "smoke",
+          "block"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 18000,
+          "crashT": 0,
+          "shakes": 30,
+          "brain": 66,
+          "cred": 1,
+          "faction": {
+            "street": 1,
+            "scrap": 0,
+            "spiritual": -1
+          },
+          "lifetime": {
+            "rocksSmoked": 1,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "soap_priority",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 1,
+          "copper": 0,
+          "soapRocks": 1,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "smoke",
+          "block"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 1,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 1,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [
+          "soap_tongue"
+        ]
+      }
+    },
+    {
+      "id": "real_clears_hitter",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 1,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": true,
+          "rockedT": 0,
+          "crashT": 12000,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "smoke",
+          "block"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 18000,
+          "crashT": 0,
+          "shakes": 30,
+          "brain": 66,
+          "cred": 1,
+          "faction": {
+            "street": 1,
+            "scrap": 0,
+            "spiritual": -1
+          },
+          "lifetime": {
+            "rocksSmoked": 1,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "royal_block",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 1,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "anoint",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "smoke",
+          "block"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 18000,
+          "crashT": 0,
+          "shakes": 30,
+          "brain": 66,
+          "cred": 1,
+          "faction": {
+            "street": 1,
+            "scrap": 0,
+            "spiritual": -1
+          },
+          "lifetime": {
+            "rocksSmoked": 1,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "emperor_gate",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "royal_park_stays",
+      "setup": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 1,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 15,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "anoint",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.1
+      },
+      "operations": [
+        [
+          "smoke",
+          "park"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 18000,
+          "crashT": 0,
+          "shakes": 30,
+          "brain": 66,
+          "cred": 1,
+          "faction": {
+            "street": 1,
+            "scrap": 0,
+            "spiritual": -1
+          },
+          "lifetime": {
+            "rocksSmoked": 1,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 15,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "anoint",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "hitter_trade",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 2,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 80,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "craft"
+        ],
+        [
+          "hitter"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": true,
+          "rockedT": 6000,
+          "crashT": 0,
+          "shakes": 60,
+          "brain": 62,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "hitter_blocked",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 1,
+          "hitterHigh": false,
+          "rockedT": 1000,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "hitter"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 1,
+          "hitterHigh": false,
+          "rockedT": 1000,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "insufficient_copper",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 1,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "craft"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 1,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "found_hitter",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 2,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "found"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 3,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "recognition_conceded",
+      "setup": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "buy",
+          "pigeon"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 15,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "recognition_visit_dedup",
+      "setup": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "record",
+          "park",
+          "bother",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "bother",
+          "pigeon"
+        ],
+        [
+          "record",
+          "park",
+          "sit",
+          "bench"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 1,
+            "bother": 1,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "discovery_only",
+      "setup": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "discover",
+          "park"
+        ],
+        [
+          "discover",
+          "park"
+        ],
+        [
+          "discover",
+          "block"
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 2500,
+          "y": 1000,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [
+          "park"
+        ],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    },
+    {
+      "id": "clock_rollover",
+      "setup": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 3214060655,
+          "choir": {
+            "phase": "closed",
+            "t": 90024
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 79933
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": [],
+        "dayTime": 0.35
+      },
+      "operations": [
+        [
+          "clocks",
+          160000
+        ]
+      ],
+      "expected": {
+        "player": {
+          "x": 1050,
+          "y": 840,
+          "w": 24,
+          "h": 28,
+          "hp": 100,
+          "cash": 0,
+          "rocks": 0,
+          "copper": 0,
+          "soapRocks": 0,
+          "hitters": 0,
+          "hitterHigh": false,
+          "rockedT": 0,
+          "crashT": 0,
+          "shakes": 20,
+          "brain": 70,
+          "cred": 0,
+          "faction": {
+            "street": 0,
+            "scrap": 0,
+            "spiritual": 0
+          },
+          "lifetime": {
+            "rocksSmoked": 0,
+            "copsKilled": 0,
+            "arrests": 0,
+            "dayCount": 0,
+            "rocksCooked": 0,
+            "rocksFenced": 0,
+            "routesCompleted": 0,
+            "officeJobs": 0,
+            "territoriesClaimed": 0,
+            "pretendersDefeated": 0
+          }
+        },
+        "recognition": {
+          "park": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "laundromat": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "underpass": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          },
+          "choir_office": {
+            "sit": 0,
+            "bother": 0,
+            "buy": 0,
+            "sell": 0,
+            "full_high": 0
+          }
+        },
+        "discovered": [],
+        "clocks": {
+          "seed": 644080249,
+          "choir": {
+            "phase": "closed",
+            "t": 89654
+          },
+          "dryer": {
+            "phase": "idle",
+            "t": 45931
+          }
+        },
+        "kingdomStage": "locked",
+        "kingdomMarks": 0,
+        "achievements": []
+      }
+    }
+  ]
+}

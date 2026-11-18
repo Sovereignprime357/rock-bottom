@@ -3,6 +3,7 @@ extends Node3D
 const Simulation = preload("res://scripts/simulation.gd")
 const Neighborhood = preload("res://scripts/neighborhood.gd")
 const Art = preload("res://scripts/character_art.gd")
+const FirstPersonRig = preload("res://scripts/first_person_rig.gd")
 const Hud = preload("res://scripts/hud.gd")
 const Store = preload("res://scripts/save_store.gd")
 const Synth = preload("res://scripts/synth.gd")
@@ -37,6 +38,7 @@ var spawned := false
 var qa_mode := false
 var web_controls := OS.has_feature("web")
 var capture_acquired := false
+var view_look_delta := Vector2.ZERO
 
 func _ready() -> void:
 	_register_inputs()
@@ -92,7 +94,7 @@ func _make_player() -> void:
 	camera.far = 180
 	player.add_child(camera)
 	camera.current = true
-	hands = Art.create_character("player_hands")
+	hands = FirstPersonRig.create()
 	camera.add_child(hands)
 	_respawn()
 
@@ -188,8 +190,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mode != "playing": return
 	if event is InputEventMouseMotion and (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or
 			(web_controls and (event.button_mask & MOUSE_BUTTON_MASK_RIGHT) != 0)):
-		player.rotate_y(-event.relative.x * 0.0022)
-		pitch = clampf(pitch - event.relative.y * 0.0022, -1.25, 1.25)
+		var look_step: Vector2 = event.relative * -0.0022
+		view_look_delta += look_step
+		player.rotate_y(look_step.x)
+		pitch = clampf(pitch + look_step.y, -1.25, 1.25)
 		camera.rotation.x = pitch
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not web_controls and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
@@ -223,7 +227,10 @@ func _physics_process(delta: float) -> void:
 	player.velocity.x = direction.x * speed
 	player.velocity.z = direction.z * speed
 	player.velocity.y = -1.0 if player.is_on_floor() else player.velocity.y - 16.0 * delta
+	var movement_start: Vector3 = player.global_position
 	player.move_and_slide()
+	var local_travel: Vector3 = player.global_basis.inverse() * (player.global_position - movement_start) / maxf(delta, 0.001)
+	local_travel.y = 0.0
 	if player.position.y < -5.0: _respawn()
 	var at_block := Vector2(player.position.x, player.position.z - 4).length() < 5.5
 	var events: Array = sim.tick(delta, sprinting, at_block)
@@ -241,8 +248,9 @@ func _physics_process(delta: float) -> void:
 	if enemy_recoil > 0:
 		enemy_recoil = maxf(0.0, enemy_recoil - delta)
 		actors.lurch.get_node("Art").position.z = 0.10 * enemy_recoil / 0.12
-	hands.position.y = sin(clock * 8.0) * 0.012 * motion.length()
-	Art.animate_character(hands, "player_hands", clock, motion.length(), (0.22 - attack_time) / 0.22 if attack_time > 0 else 0.0)
+	hands.tick(delta, local_travel, sprinting, sim.high_remaining > 0.0,
+		sim.crash_remaining > 0.0, sim.shakes, view_look_delta)
+	view_look_delta = Vector2.ZERO
 	_tick_enemy(delta)
 	_tick_possum(delta)
 	_animate_people(delta)
@@ -269,6 +277,7 @@ func _prompt(id: String) -> String:
 
 func _interact(id: String) -> void:
 	if mode != "playing": return
+	if not id.is_empty(): hands.acknowledge("interact")
 	match id:
 		"tony":
 			_dialogue("TRE BAG TONY", "three coats. ten dollars. simple math.\ntony does not blink.", [
@@ -323,6 +332,11 @@ func _act(action: String, target: String) -> void:
 	_resume()
 	hud.show_receipt(str(result.get("text", "")))
 	if bool(result.get("ok", false)):
+		var gesture := "receipt"
+		if action == "smoke": gesture = "smoke"
+		elif action == "eat_food": gesture = "eat"
+		elif action.begins_with("collect_") or action.begins_with("dumpster_"): gesture = "pickup"
+		hands.acknowledge(gesture)
 		_sync_finds()
 		sound.play_sound(str(result.get("event", "pickup")))
 		_save(false)
@@ -358,6 +372,7 @@ func _resume() -> void:
 	if store.busy or loading: return
 	mode = "playing"
 	capture_acquired = false
+	view_look_delta = Vector2.ZERO
 	sound.ready_for_sound = true
 	hud.close_menu()
 	hands.show()
@@ -366,6 +381,7 @@ func _resume() -> void:
 func _pause() -> void:
 	mode = "paused"
 	capture_acquired = false
+	view_look_delta = Vector2.ZERO
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var controls := "WASD move · mouse look · shift sprint\nE bother · left mouse swing · I pockets · M mute"
 	if web_controls: controls += "\nright-drag look · Esc pause · click continue to resume"
@@ -404,6 +420,8 @@ func _load() -> void:
 		hud.show_receipt(store.last_error if not store.last_error.is_empty() else "the drawer is empty.")
 		return
 	var placement: Dictionary = sim.restore(data)
+	hands.reset()
+	view_look_delta = Vector2.ZERO
 	player.position = placement.position
 	player.rotation.y = placement.yaw
 	player.velocity = Vector3.ZERO
@@ -429,6 +447,8 @@ func _load() -> void:
 		hud.show_receipt("the file remembers.\nthe block continues.")
 
 func _respawn() -> void:
+	if hands != null: hands.reset()
+	view_look_delta = Vector2.ZERO
 	player.position = Vector3(0, 0.02, 8)
 	player.velocity = Vector3.ZERO
 	player.rotation = Vector3.ZERO
@@ -447,6 +467,7 @@ func _punch() -> void:
 	attack_time = 0.22
 	sound.play_sound("hit")
 	var hit := _ray(2.35, false)
+	hands.acknowledge("punch", true, not hit.is_empty())
 	if hit.is_empty(): return
 	var id := str(hit.collider.get_meta("interaction_id", ""))
 	if id != "lurch" or enemy_hp <= 0: return

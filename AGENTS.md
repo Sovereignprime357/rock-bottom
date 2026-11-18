@@ -1,5 +1,10 @@
 # AGENTS.md — Agent Operating Constraints
 
+> **2026-11-18 full-port successor:** the operator now requests complete pixel-game parity,
+> richer original geometry/animation and bounded agents continuing until done. Follow
+> `SPEC-3D-FULL-PORT.md` / `WORKFLOW-3D-PORT.md` for that work. This expands the earlier slice
+> scope only in `game3d/`; it does not relax the original2D contracts or assert finished parity.
+
 > **2026-11-18 scoped successor:** the operator selected first-person desktop with a secondary
 > browser target. `game3d/` follows `SPEC-3D-SLICE.md`: Godot 4.5.1, GDScript, original low-poly
 > meshes, Compatibility rendering and native/Web export. Its documented engine, art, audio,

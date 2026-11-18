@@ -85,6 +85,13 @@ This imports the project and runs production simulation, scene integration and a
 on engine error text as well as nonzero exits, because Godot can report a script error with exit0.
 The original suite remains `node tools/run-gates.mjs`.
 
+The full-port foundation expands that runner to12 checks: seven engine suites (slice simulation,
+scene, art, hands, full state, memory and progression), deterministic content/provenance checks,
+two unchanged-source oracle checks and parity coverage. Full state/model tests are not a claim
+that those systems are already reachable in the current slice scene. The32-feature/585-handler
+ledger is `data/parity_manifest.json`; `node tools/3d-parity-gate.mjs --complete` intentionally
+fails until every obligation has integrated native/Web evidence.
+
 Development-only engine arguments after `--`: `--qa-tour` runs a real-time rendered smoke/crash
 and isolated save roundtrip; `--qa-capture` captures the Block, Tony, Pete and Lurch.
 These are not player controls. Test saves/captures go under `../.build/3d/`;

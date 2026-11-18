@@ -2592,3 +2592,39 @@ or full60-agent/browser FPS claim. Raw logs/JSON and before/after captures are l
 Full neighborhood/AI parity and full browser save/encounter acceptance remain separate. The
 public GitHub Pages entry is still the original 2D release; this increment is in the local
 Windows/Web builds and the named source branch.
+
+## 2026-11-18 — full-port foundation checkpoint (active, not complete)
+
+**Changed/why.** Operator expanded the task to the entire pixel game and requested bounded
+agents working until done. Created an active persistent goal, `codex/3d-full-port`, source/world/
+animation audits, scoped specs,16-packet workflow and a32-feature/585-handler parity ledger.
+Source content export is deterministic and hash checked. Full-state/migration, memory/high/
+soap/hitter and progression/routes/hustles/territory are implemented as model foundations;
+the playable slice now uses the improved hand rig. Full map, skeletal actors and core vendors
+are independent packets being integrated after physical/model validation.
+
+**Decided.** .04m/source pixel with original source-unit simulation yields5.5m/s base walk;
+preserve actual route budgets. One GameState, separate rendering, weak subsystem references,
+fixed60Hz withdrawal oracle and explicit old-world save relocation. Legacy junk/food quantities
+retain virtual single-unit semantics through migration tags rather than disappearing at Pete.
+Full data/callback coverage never implies gameplay parity. Decision IMPL-3D-FULL-01.
+
+**Tried/corrected.** Corrected sleeve-hidden punches and receipt grip after native views. Save
+tests caught StringName keys discarding dynamically created locker ownership; normalized keys
+without weakening save checks. RefCounted callback cycles became weak back-references. Corrected
+an oracle fixture's uninitialized hustle fields. The first full-map test found nine inaccessible
+services, one indoor navigation failure and333.56m/60.65s base-walk route; returned to world
+owner. Its first assertion mistakenly used sprint; corrected to mandatory base walking.
+
+**Verified.** Original19/19; expanded3D12/12, including211 state,421 memory and898 progression
+checks,44 unchanged-source fixtures,4116 content checks and parity coverage. Independent review
+added crash-first/deferred tier receipts, missing flash/soap audio events and hitter-find APIs.
+Native hand poses
+reviewed, real-time cycle17.989→25.994s and isolated save roundtrip pass. Windows/Web exported;
+browser normal refresh loads new hands, movement/sprint/punch/dialogue/leave/pause/Continue work.
+Browser capture errors remain with functional fallback. Evidence/files/gate output in
+`reports/2026-11-18-3d-full-port-foundation.md`. No full60AI/performance or full-game claim.
+
+**Next.** Resolve physical world failures; validate skeletal roster and full vendor transactions;
+compose full model/controller/cast, port remaining combat/activities/campaign/day systems,
+then native/Web progression and60+ real-agent acceptance. Keep goal active until full delivery.

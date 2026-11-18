@@ -1,5 +1,9 @@
 # SPEC.md — Rock Bottom Behavioral Contract
 
+> **2026-11-18 — full 3D port authorized:** `SPEC-3D-FULL-PORT.md` and
+> `WORKFLOW-3D-PORT.md` govern the ongoing full v22 migration in `game3d/`, including
+> higher-detail original art and animation. Parity is a target, not a claim of current coverage.
+
 > **2026-11-18 — separate first-person 3D slice:** the operator selected desktop first-person,
 > with browser play desirable too. `SPEC-3D-SLICE.md` governs `game3d/` (Godot 4.5.1, Windows plus
 > Web export); `SPEC-3D-TRANSITION.md` remains the broader migration plan. The active v22 browser

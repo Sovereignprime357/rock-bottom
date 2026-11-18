@@ -41,7 +41,7 @@ function Invoke-Gate {
 }
 
 Invoke-Gate -Name 'import' -GodotArgs @('--editor', '--import', '--quit')
-foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd')) {
+foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd')) {
     if (-not (Test-Path -LiteralPath (Join-Path $PSScriptRoot $script) -PathType Leaf)) {
         throw "Required gate $script is missing. Simulation, scene and art checks must exist before this runner can pass."
     }
@@ -49,4 +49,20 @@ foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd')) {
 Invoke-Gate -Name 'simulation' -GodotArgs @('--script', 'res://tests/test_simulation.gd', '--quit-after', '6000') -PassPattern '3D SIMULATION GATE: PASS'
 Invoke-Gate -Name 'scene' -GodotArgs @('--script', 'res://tests/test_scene.gd', '--quit-after', '6000') -PassPattern '3D SCENE GATE: PASS'
 Invoke-Gate -Name 'art' -GodotArgs @('--script', 'res://tests/test_art.gd', '--quit-after', '6000') -PassPattern '3D ART GATE: PASS'
-Write-Output '3D GATE RUNNER: 3/3 PASS (import clean; simulation, scene and art)'
+Invoke-Gate -Name 'viewmodel' -GodotArgs @('--script', 'res://tests/test_viewmodel.gd', '--quit-after', '6000') -PassPattern '3D VIEWMODEL GATE: PASS'
+Invoke-Gate -Name 'full-state' -GodotArgs @('--script', 'res://tests/test_game_state.gd', '--quit-after', '6000') -PassPattern '3D FULL STATE GATE: PASS'
+Invoke-Gate -Name 'memory' -GodotArgs @('--script', 'res://tests/test_memory_loop.gd', '--quit-after', '6000') -PassPattern '3D MEMORY GATE: PASS'
+Invoke-Gate -Name 'progression' -GodotArgs @('--script', 'res://tests/test_progression.gd', '--quit-after', '6000') -PassPattern '3D PROGRESSION GATE: PASS'
+foreach ($entry in @(
+    @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
+    @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
+    @{ Name = 'memory-oracle'; Script = '3d-memory-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'progression-oracle'; Script = '3d-progression-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
+)) {
+    $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
+    $nodeArgs = @('--experimental-vm-modules', $scriptPath) + $entry.Arguments
+    & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
+    if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
+}
+Write-Output '3D GATE RUNNER: 12/12 PASS (import clean; 7 engine suites and 5 source/parity checks; full-port integration remains tracked separately)'

@@ -1,5 +1,23 @@
 # DELEGATION.md — Rock Bottom Backlog
 
+## Full 3D port — ACTIVE (November 18, 2026)
+
+Operator explicitly expanded the slice to the full active v22 game, with higher-poly original
+characters, improved hands/animation/interaction and desktop/Web validation. Named branch
+`codex/3d-full-port`; `SPEC-3D-FULL-PORT.md` and `WORKFLOW-3D-PORT.md` govern bounded packets.
+
+- [x] Source/world/animation audits; deterministic content export with52 source hashes.
+- [x] Natural first-person hand rig integrated into the playable slice; native pose review,
+  rendered18/8 tour and browser movement/punch/dialogue/pause exits checked.
+- [x] Full-state/migration, memory/high/soap/hitter and routes/hustles/territory model foundations
+  independently tested against unchanged source functions. These remain scene integration work.
+- [x] Machine-readable32-feature/585-handler coverage ledger; no full feature claimed verified yet.
+- [ ] Full world physical access/path budgets, all canonical character families and agent lifecycle.
+- [ ] Full vendor/action system, combat/bosses, activities/heists, campaigns, days and presentation.
+- [ ] Full native/Web progression tours,60+ real AI profile, save/recovery audit and final delivery.
+
+Foundation evidence: `reports/2026-11-18-3d-full-port-foundation.md`. Full port remains active.
+
 ## 3D character and street refinement — BUILT / OPERATOR EYE REVIEW (November 18, 2026)
 
 Branch: `codex/3d-character-street-polish`; contract `SPEC-3D-CHARACTER-STREET.md`.

@@ -664,3 +664,34 @@ floating shadow-casting puddles, detached moustache pieces and Pete's collar/jaw
 before handoff. Static review caught a shelf exactly on the ground-clearance cutoff; raised it
 5cm with its contents. Production gates preserve routes, transactions, menu exits and loop
 timing. Full evidence and measured limits: `reports/2026-11-18-3d-character-street.md`.
+
+## IMPL-3D-FULL-01 — bounded full-port foundation (2026-11-18)
+
+**Status:** executed foundation on `codex/3d-full-port`; full port remains active. User explicitly
+requested the full pixel game, higher-poly original characters and sustained bounded-agent work.
+`SPEC-3D-FULL-PORT.md` supersedes only the old slice scope, preserving the2D/frozen references.
+
+**Architecture/content:** source-pixel/millisecond state and shared resources; weakly composed
+subsystems; immutable provenance-checked JSON; manual semantic callback ports. All32 systems
+and585 serialized function omissions have explicit ledger rows. Native/Web stay Godot4.5.1
+Compatibility with local original art. No JS runtime is embedded. Audit coverage is not gameplay.
+
+**Spatial/timing adaptation:** .04m/pixel and5.5m/s base speed preserve137.5px/s travel; physical
+routes must pass60s base-walk constraints. Body radius.48m preserves source24px width, with
+documented depth adaptation. Fixed60Hz withdrawal preserves per-frame RNG/iframe semantics
+across render rates. The core partitions high/crash/day boundaries without time loss.
+
+**Saves:** schema2 remains separate from2D. Schema1 resources survive; obsolete slice coordinates
+relocate explicitly to the full Block. Collected IDs retain a receipt rather than claiming
+unrelated full-world pickups. Tagged migrated junk/food stacks preserve every unit through
+source record-based consumers. Safe JSON normalizes StringName keys/values to strings; tests
+protect dynamically assigned tool-locker ownership. High/crash ephemeral save reset is explicit.
+
+**Hands:** actual-travel gait and bounded look sway, articulated relaxed fingers, alternating
+punches and success-only gesture acknowledgements. Damage/cooldowns remain in gameplay. Native
+visual correction restored fist clearance beyond the cuff and connected props to the grip.
+
+**Evidence/limits:** foundation runner12/12 and original19/19,44 independent source fixtures,
+native real-time loop/save tour and browser controls; details in the foundation report.
+Full world, complete cast/AI, all domain systems and whole-game native/Web acceptance remain
+required before the persistent goal can be complete. Public deployment is unchanged.
