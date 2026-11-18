@@ -159,3 +159,6 @@ Playable local full browser entry: http://127.0.0.1:8074/ . Windows executable: 
 ## Files touched
 
 The complete checkpoint list is in [the touched-file ledger](2026-11-18-3d-neighborhood-systems-files.txt). Unfinished incident_corridors/test_incident_reservations files are excluded from this checkpoint.
+
+## Delivery
+Code/evidence commit `f77fb3862d4e00b68159a7e60e14a290b13e0876` was pushed to `origin/codex/3d-full-port`. This is the verified systems checkpoint, not completion of the full port. Gate output,177-file ledger, release hashes, screenshot and executed decisions are included. The unfinished dynamic incident helper/test remain unstaged for the next bounded packet.

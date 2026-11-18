@@ -111,3 +111,5 @@ editor-native diagnostic sceneCPU p95 is31.408/31.840ms, engine41.888/42.151ms, 
 in both short samples: performance still fails. Report: reports/2026-11-18-3d-neighborhood-systems.md.
 
 Both Full targets rebuilt after the browser-discovered journal shortcut fix; FullScene300PASS. Actual release-browser journal/inventory exits, minimap, movement, F and save/load verified. Local8074 now serves this systems checkpoint. Delivery is recorded in the checkpoint report; full port remains active.
+
+Systems checkpoint `f77fb3862d4e00b68159a7e60e14a290b13e0876` pushed to origin/codex/3d-full-port; report and177-file ledger contain evidence. Holds release after this delivery record. Full port remains ACTIVE.
