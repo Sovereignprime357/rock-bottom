@@ -173,9 +173,9 @@ func update_stats(sim: RefCounted, zone: String) -> void:
 		elif sim.cash >= 10: objective.text = "BAD IDEA   buy a rock from tre bag tony."
 		else: objective.text = "BAD IDEA   find ten dollars."
 
-func show_receipt(text: String) -> void:
+func show_receipt(text: String,duration_ms: float = 4000.0) -> void:
 	receipt.text = text
-	receipt_time = 4.0
+	receipt_time = clampf(duration_ms/1000.0,0.05,60.0) if is_finite(duration_ms) else 4.0
 
 func _process(delta: float) -> void:
 	if receipt_time > 0:

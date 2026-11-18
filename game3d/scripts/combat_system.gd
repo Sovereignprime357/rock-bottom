@@ -16,6 +16,9 @@ var _wall_ms: float = 0.0
 var _serial: int = 0
 var _wall_queue: Array[Dictionary] = []
 var _missing: Dictionary = {}
+var _prop_attack_ref: WeakRef
+var _prop_swing: Dictionary = {}
+var _prop_swing_serial: int = 0
 
 
 func _init(owner: RefCounted, physics_adapter: Object, owned_inventory: RefCounted = null, domain_adapter: Object = null) -> void:
@@ -30,8 +33,43 @@ func _sync_epoch() -> bool:
 	if host == null: return false
 	if not is_same(_player_epoch, host.p) or not is_same(_state_epoch, host.s):
 		_player_epoch = host.p; _state_epoch = host.s
-		_wall_queue.clear(); _missing.clear()
+		_wall_queue.clear(); _missing.clear(); _prop_swing.clear()
 	return true
+
+func set_prop_attack_owner(owner: Object) -> bool:
+	_prop_swing.clear()
+	if owner == null: _prop_attack_ref = null; return true
+	if not owner.has_method(&"resolve_swing") or not owner.has_method(&"bind_combat"): return false
+	_prop_attack_ref = weakref(owner)
+	owner.call(&"bind_combat",self)
+	return true
+
+func consume_prop_swing(token: Variant,candidates: Array,consumer: Object) -> Dictionary:
+	if not token is String or _prop_swing.is_empty() or token != _prop_swing.token: return {"ok":false,"reason":"stale_swing"}
+	var captured: Dictionary = _prop_swing; _prop_swing = {}
+	var bound: Object = _prop_attack_ref.get_ref() if _prop_attack_ref != null else null
+	if consumer == null or not is_same(consumer,bound): return {"ok":false,"reason":"wrong_consumer"}
+	if host == null or not is_same(captured.player,host.p) or not is_same(captured.state,host.s): return {"ok":false,"reason":"replaced_state"}
+	var hits: Array[String] = []
+	for raw: Variant in candidates:
+		if not raw is Dictionary or not raw.get("id") is String: continue
+		var valid: bool = true
+		for key: String in ["x","y","w","h"]: valid = valid and finite_number(raw.get(key))
+		if not valid or float(raw.w) <= 0 or float(raw.h) <= 0 or hits.has(raw.id): continue
+		if not _swing_overlaps(raw,captured.origin,captured.forward,captured.reach): continue
+		var clear: bool = can_hit(captured.center,center(raw),"player",raw.id)
+		if not is_same(captured.player,host.p) or not is_same(captured.state,host.s): return {"ok":false,"reason":"replaced_state"}
+		if clear: hits.append(raw.id)
+	return {"ok":true,"hits":hits}
+
+func _resolve_prop_swing(origin: Vector2,forward: Vector2,reach: float,player_epoch: Dictionary,state_epoch: Dictionary) -> void:
+	var owner: Object = _prop_attack_ref.get_ref() if _prop_attack_ref != null else null
+	if owner == null or not is_same(player_epoch,host.p) or not is_same(state_epoch,host.s): return
+	_prop_swing_serial += 1
+	var token := "%d:prop-swing:%d" % [get_instance_id(),_prop_swing_serial]
+	_prop_swing = {"token":token,"player":player_epoch,"state":state_epoch,"origin":origin,"forward":forward,"reach":reach,"center":host.player_center()}
+	owner.call(&"resolve_swing",token)
+	_prop_swing.clear()
 
 
 func actor(id: String) -> Dictionary:
@@ -163,18 +201,23 @@ func attack_player(horizontal_forward: Vector2) -> Dictionary:
 	if not horizontal_forward.is_finite() or horizontal_forward.length_squared() < 0.000001: return {"ok":false, "reason":"invalid_direction"}
 	if not has_physics(&"can_hit") or not has_physics(&"move_body"): return {"ok":false, "reason":"missing_physics"}
 	var forward := horizontal_forward.normalized()
-	var weapon: Dictionary = host.content.catalogs.weapons.get(host.p.weapon, host.content.catalogs.weapons.fists)
+	var used_weapon: String = str(host.p.weapon)
+	var weapon: Dictionary = host.content.catalogs.weapons.get(used_weapon, host.content.catalogs.weapons.fists)
 	var reach: float = 36.0 + float(weapon.get("reach", 0.0))
 	var front: float = absf(forward.x) * float(host.p.w) * 0.5 + absf(forward.y) * float(host.p.h) * 0.5
 	var origin: Vector2 = host.player_center() + forward * front
+	var swing_player: Dictionary = host.p; var swing_state: Dictionary = host.s
 	host.p.attackCd = float(weapon.cd); host.p.attacking = 160.0
 	_sound("hit")
 	var connected: bool = false
 	var rewardable: bool = false
 	var hits: Array[String] = []
 	for body: Dictionary in host.npcs.duplicate():
+		if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
 		if body.get("dead", false) or not _swing_overlaps(body, origin, forward, reach): continue
-		if not can_hit(host.player_center(), center(body), "player", str(body.id)): continue
+		var clear: bool = can_hit(host.player_center(), center(body), "player", str(body.id))
+		if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
+		if not clear: continue
 		if body.get("essential", false):
 			body.hitFlash = 120.0; body.showHp = false
 			host.s.shake = maxf(float(host.s.get("shake", 0.0)), 2.0); host.s.hitPause = 20.0
@@ -197,9 +240,13 @@ func attack_player(horizontal_forward: Vector2) -> Dictionary:
 		if body.get("aggroOnHit", false) and not body.get("aggro", false):
 			body.hostile = true; body.aggro = true
 			if body.get("archetype") == "swarmer" and body.id == "sherri": spawn_swarmer(body)
+		if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
 		move_actor(body, Vector2(body.x, body.y) + forward * 8.0)
+		if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
 		host.emit_event("actor_hit", {"actor_id":body.id, "damage":damage, "weapon":host.p.weapon})
 		if body.hp <= 0: kill_actor(body.id)
+	_resolve_prop_swing(origin,forward,reach,swing_player,swing_state)
+	if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
 	if rewardable:
 		host.s.combo += 1; host.s.comboT = 1800.0
 		if host.s.combo >= 3: host.s.shake = maxf(float(host.s.get("shake", 0.0)), 6.0)
@@ -209,8 +256,9 @@ func attack_player(horizontal_forward: Vector2) -> Dictionary:
 	else:
 		host.s.combo = 0
 		if connected: host.s.comboT = 0.0
-	host.emit_event("attack_props_requested", {"origin":origin, "forward":forward, "reach":reach, "width":8.0})
-	host.emit_event("player_attack", {"hits":hits, "connected":connected})
+	if _prop_attack_ref == null or _prop_attack_ref.get_ref() == null:
+		host.emit_event("attack_props_requested", {"origin":origin, "forward":forward, "reach":reach, "width":8.0})
+	host.emit_event("player_attack", {"hits":hits, "connected":connected, "used_weapon":used_weapon})
 	return {"ok":true, "connected":connected, "hits":hits}
 
 

@@ -23,6 +23,7 @@ func _run() -> void:
 	var wall: StaticBody3D = _box(world,Vector3(0,1.5,0),Vector3(0.2,3,20))
 	wall.set_meta("source_owner","test_wall")
 	var model: RefCounted = State.new()
+	model.npcs.clear() # Static-wall fixture; actor contact has separate physical witnesses.
 	var adapter: RefCounted = Adapter.new(world,model)
 	await physics_frame; await physics_frame
 	var body: Dictionary = {"id":"player","x":1000.0,"y":840.0,"w":24.0,"h":28.0}

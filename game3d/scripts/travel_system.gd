@@ -164,6 +164,9 @@ func destinations() -> Array[Dictionary]:
 	return result
 
 
+func bind_day_owner(owner: Object) -> void:
+	_day_ref = weakref(owner) if owner != null else null
+
 func _day_available() -> bool:
 	var adapter: Object = _day_ref.get_ref() if _day_ref != null else null
 	return adapter != null and adapter.has_method(&"advance_sleep_day")
@@ -207,11 +210,12 @@ func _options(service: String, page: int) -> Array[Dictionary]:
 			options.append(_option("sleep","sleep until morning. (+55 hp · +25 brain · +15 shakes)",host.s.dayTime <= 0.3 or _day_available(),"missing_day_adapter"))
 		"chest:mom", "chest:scrap", "chest:office", "office:chest":
 			var stash: Dictionary = host.s.hideoutStash
-			for resource: String in ["rocks","copper","cash"]:
-				var amount: int = 10 if resource == "cash" else 1
-				var noun: String = "$10" if resource == "cash" else ("1 rock" if resource == "rocks" else "1 copper")
-				options.append(_option("deposit:"+resource,"deposit " + noun + ".",host.p[resource] >= amount,"insufficient_"+resource))
-				options.append(_option("withdraw:"+resource,"withdraw " + noun + ".",stash[resource] >= amount,"stash_short"))
+			options.append(_option("deposit:rocks","deposit 1 rock. (chest: %d)" % stash.rocks if host.p.rocks > 0 else "deposit a rock. (you have none.)",host.p.rocks > 0,"insufficient_rocks"))
+			options.append(_option("withdraw:rocks","withdraw 1 rock. (chest: %d)" % stash.rocks if stash.rocks > 0 else "withdraw a rock. (chest empty.)",stash.rocks > 0,"stash_short"))
+			options.append(_option("deposit:copper","deposit 1 copper. (chest: %d)" % stash.copper if host.p.copper > 0 else "deposit copper. (you have none.)",host.p.copper > 0,"insufficient_copper"))
+			options.append(_option("withdraw:copper","withdraw 1 copper. (chest: %d)" % stash.copper if stash.copper > 0 else "withdraw copper. (chest empty.)",stash.copper > 0,"stash_short"))
+			options.append(_option("deposit:cash","deposit $10. (chest: $%d)" % stash.cash if host.p.cash >= 10 else "deposit $10. (short.)",host.p.cash >= 10,"insufficient_cash"))
+			options.append(_option("withdraw:cash","withdraw $10. (chest: $%d)" % stash.cash if stash.cash >= 10 else "withdraw $10. (chest short.)",stash.cash >= 10,"stash_short"))
 	if service.begins_with("chest:") or service == "office:chest": options.append(_option("back","close the chest."))
 	elif service == "office:cot": options.append(_option("back","back to the office."))
 	else: options.append(_option("leave","put the pass away." if service == "bus" else "leave."))
@@ -261,8 +265,10 @@ func select(token: Variant, action: String) -> Dictionary:
 	var service: String = _service
 	var page: int = _page
 	var permitted: Dictionary = session.consume(token,action)
+	if not permitted.ok:
+		if permitted.reason != "stale_session": _service = ""
+		return permitted
 	_service = ""
-	if not permitted.ok: return permitted
 	var reason: String = _reason(service)
 	if not reason.is_empty(): return _fail(reason)
 	var choice: Dictionary = {}

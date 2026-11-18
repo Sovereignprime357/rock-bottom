@@ -20,6 +20,7 @@ const LABELS = {
   'deposit:rocks': /^deposit (1 rock|a rock)/, 'withdraw:rocks': /^withdraw (1 rock|a rock)/,
   'deposit:copper': /^deposit (1 copper|copper)/, 'withdraw:copper': /^withdraw (1 copper|copper)/,
   'deposit:cash': /^deposit \$10/, 'withdraw:cash': /^withdraw \$10/,
+  back: /^(close the chest\.|back to the office\.)/,
 };
 
 export async function buildTravelOracle() {
@@ -82,6 +83,7 @@ export async function buildTravelOracle() {
     else if (service === 'mom') neighbors.momDialogue();
     else if (service === 'biggu') other.bigguDialogue();
     else if (service === 'office:cot') homes.openOfficeCot();
+    else if (service === 'office:chest') homes.openHideoutChest('office');
     else if (service.startsWith('chest:')) homes.openHideoutChest(service.split(':')[1]);
     else homes.openHideout(service.split(':')[1]);
   }
@@ -165,6 +167,26 @@ export async function buildTravelOracle() {
     for (const op of spec.ops) offered.push(await operation(op));
     cases.push({id:spec.id,setup,office:clone(ui.state.office),operations:spec.ops,offered,expected:snapshot()});
   }
+  const menuView=()=>ui.activeDialogue?{title:ui.activeDialogue.name,text:ui.activeDialogue.text,options:ui.activeDialogue.opts.map(option=>({label:option.label,enabled:!option.disabled}))}:null;
+  const presentation=[];
+  for(const service of ['chest:mom','chest:scrap','chest:office','office:chest']) for(const balance of ['empty','funded','partial']) {
+    const player=balance==='funded'?{rocks:2,copper:2,cash:20}:balance==='partial'?{rocks:1,copper:0,cash:9}:{rocks:0,copper:0,cash:0};
+    const stash=balance==='funded'?{rocks:3,copper:4,cash:30,items:[]}:balance==='partial'?{rocks:0,copper:2,cash:9,items:[{id:'junk',n:'a piece of junk',q:1}]}:{rocks:0,copper:0,cash:0,items:[]};
+    reset({player,stash,flags:{momHideoutOwned:true,scrapHideoutOwned:true},office:{owned:true,upgrades:{cot:true,locker:true}}});
+    at(service);ui.toastEl.textContent='';const setup=snapshot(),office=clone(ui.state.office);menu(service);
+    const opening=menuView(),steps=[];
+    if(balance==='funded')for(const action of ['deposit:rocks','withdraw:rocks','deposit:copper','withdraw:copper','deposit:cash','withdraw:cash','back']){
+      const choice=ui.activeDialogue.opts.find(option=>LABELS[action].test(option.label));assert.ok(choice&&!choice.disabled,'Source UI option '+action);
+      ui.closeDialogue();choice.action();steps.push({action,menu:menuView(),toast:ui.toastEl.textContent,mode:ui.state.mode});
+    }
+    presentation.push({id:service+'_'+balance,service,setup,office,opening,steps});
+  }
+  for(const generator of [false,true])for(const action of ['rest','sleep','back']){
+    reset({dayTime:.2,player:{hp:20,brain:20,shakes:10,wanted:3},office:{owned:true,upgrades:{cot:true,locker:true,generator}}});
+    at('office:cot');ui.toastEl.textContent='';const setup=snapshot(),office=clone(ui.state.office);menu('office:cot');const opening=menuView();
+    const choice=ui.activeDialogue.opts.find(option=>LABELS[action].test(option.label));assert.ok(choice&&!choice.disabled,'Source cot UI '+action);
+    ui.closeDialogue();choice.action();presentation.push({id:'cot_'+generator+'_'+action,service:'office:cot',setup,office,opening,steps:[{action,menu:menuView(),toast:ui.toastEl.textContent,mode:ui.state.mode}]});
+  }
   const busCases=[];
   for (let index=0;index<vendors.BUS_ZONE_TARGETS.length;index++) {
     const target=vendors.BUS_ZONE_TARGETS[index]; reset({player:{inventory:[pass()]}});
@@ -205,7 +227,7 @@ export async function buildTravelOracle() {
   const loaded={mounted:ui.P.cartMounted,cart:{x:props.rideableCart().x,y:props.rideableCart().y},stash:clone(ui.state.hideoutStash),savedCartKeys};
   start.startGame(false); const fresh={mounted:ui.P.cartMounted,cart:{x:props.rideableCart().x,y:props.rideableCart().y}};
   const hashes=Object.fromEntries([...sourceFiles(),path.join(ROOT,'VIBE.md')].map(file=>[path.relative(ROOT,file).replaceAll('\\','/'),hash(fs.readFileSync(file))]));
-  const artifact={schema:1,format:'rock-bottom-travel-reference',source:{authority:'unchanged active source functions and menu callbacks',hashes,corpusSha256:hash(stableStringify(hashes)),generatorSha256:hash(fs.readFileSync(fileURLToPath(import.meta.url))),harnessSha256:hash(fs.readFileSync(path.join(ROOT,'tools/runtime-harness.mjs')))},counts:{destinations:vendors.BUS_ZONE_TARGETS.length,hideouts:Object.keys(homes.HIDEOUT_DOORS).length,cart:props.PROPS.filter(p=>p.type==='cart').length,cartHusks:props.PROPS.filter(p=>p.type==='cart_husk').length,cases:cases.length,busCases:busCases.length,busGates:busGates.length},cases,busCases,busGates,knownZones,gatedZones,zoneCases,saveLifecycle:{loaded,fresh},scope:'source model evidence; physical destination/drop adaptations are separately tested'};
+  const artifact={schema:1,format:'rock-bottom-travel-reference',source:{authority:'unchanged active source functions and menu callbacks',hashes,corpusSha256:hash(stableStringify(hashes)),generatorSha256:hash(fs.readFileSync(fileURLToPath(import.meta.url))),harnessSha256:hash(fs.readFileSync(path.join(ROOT,'tools/runtime-harness.mjs')))},counts:{destinations:vendors.BUS_ZONE_TARGETS.length,hideouts:Object.keys(homes.HIDEOUT_DOORS).length,cart:props.PROPS.filter(p=>p.type==='cart').length,cartHusks:props.PROPS.filter(p=>p.type==='cart_husk').length,cases:cases.length,presentation:presentation.length,busCases:busCases.length,busGates:busGates.length},cases,presentation,busCases,busGates,knownZones,gatedZones,zoneCases,saveLifecycle:{loaded,fresh},scope:'source model evidence; physical destination/drop adaptations are separately tested'};
   assert.deepEqual([artifact.counts.destinations,artifact.counts.hideouts,artifact.counts.cart,artifact.counts.cartHusks],[18,2,1,6]);
   return artifact;
 }
@@ -215,5 +237,5 @@ if (process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta
   const text=stableStringify(await buildTravelOracle());
   if(process.argv.includes('--check')) assert.equal(fs.readFileSync(OUTPUT,'utf8'),text,'Travel oracle fixture drift; regenerate deliberately.');
   else {fs.mkdirSync(path.dirname(OUTPUT),{recursive:true});fs.writeFileSync(OUTPUT,text);}
-  const data=JSON.parse(text);console.log(`3D TRAVEL ORACLE: PASS (${data.counts.cases} source action cases,18 destinations,12 combat gates,2 hideouts,1 cart; explicit3D adaptations separate)`);
+  const data=JSON.parse(text);console.log(`3D TRAVEL ORACLE: PASS (${data.counts.cases} source action cases,${data.counts.presentation} exact chest/cot UI paths,18 destinations,12 combat gates,2 hideouts,1 cart; explicit3D adaptations separate)`);
 }

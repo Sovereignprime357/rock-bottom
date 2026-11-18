@@ -4,6 +4,12 @@ extends RefCounted
 var _host_ref: WeakRef
 var _records: Array[Dictionary] = []
 var _state_epoch: Dictionary = {}
+var _interactive: Array[Dictionary] = []
+var _interactive_player: Dictionary = {}
+var _interactive_state: Dictionary = {}
+const BOTTLE_INITIAL_POINTS := [Vector2(140,300),Vector2(680,240),Vector2(1100,540),Vector2(1740,520),
+	Vector2(240,980),Vector2(900,1100),Vector2(1500,1240),Vector2(1700,1180),Vector2(320,1420),
+	Vector2(540,1700),Vector2(1100,1640),Vector2(1380,1700),Vector2(920,1820),Vector2(280,1820),Vector2(1700,920),Vector2(1820,1380)]
 var host: RefCounted:
 	get: return _host_ref.get_ref() if _host_ref != null else null
 
@@ -12,9 +18,36 @@ func _init(owner: RefCounted) -> void:
 	for value: Variant in owner.content.get("props",[]):
 		if value is Dictionary: _records.append(value.duplicate(true))
 	reset_session("cold")
+	reset_interactive("cold")
 func ready() -> bool:
 	return host != null and not _records.is_empty() and _records.size() == host.content.get("props",[]).size() and is_same(_state_epoch,host.s)
 func records() -> Array[Dictionary]: return _records.duplicate(true)
+func interactive_ready() -> bool:
+	return ready() and _interactive.size() == 14 and is_same(_interactive_player,host.p) and is_same(_interactive_state,host.s)
+func interactive_records() -> Array[Dictionary]: return _interactive.duplicate(true) if interactive_ready() else []
+func interactive_record(id: String) -> Dictionary:
+	if not interactive_ready() or not id.begins_with("interactive:"): return {}
+	var suffix: String = id.trim_prefix("interactive:")
+	if not suffix.is_valid_int(): return {}
+	var index: int = int(suffix)
+	return _interactive[index] if index >= 0 and index < 14 and str(index) == suffix else {}
+func reset_interactive(reason: String) -> bool:
+	if not ready() or reason not in ["cold","fresh","restore"]: return false
+	# Root invokes this explicit seam at the source initInteractiveProps position.
+	# Repeated bindings of the same state cannot consume another24 draws.
+	if interactive_ready(): return true
+	var initial: Variant = host.content.get("interactiveProps",[])
+	if not initial is Array or initial.size() != 14: return false
+	for index: int in range(14):
+		if not initial[index] is Dictionary or initial[index].get("type") != ("trashcan" if index < 6 else "b_bottle"): return false
+	var next: Array[Dictionary] = []
+	for index: int in range(14):
+		if reason == "cold" or index < 6: next.append(initial[index].duplicate(true))
+		else:
+			var point: Vector2 = BOTTLE_INITIAL_POINTS[host.random_index(BOTTLE_INITIAL_POINTS.size())]
+			next.append({"type":"b_bottle","x":float(point.x)+(host.random_float()-0.5)*40.0,"y":float(point.y)+(host.random_float()-0.5)*40.0,"broken":false})
+	_interactive = next; _interactive_player = host.p; _interactive_state = host.s
+	return true
 func _index(id: String) -> int:
 	if not id.begins_with("prop:"): return -1
 	var suffix: String = id.trim_prefix("prop:")

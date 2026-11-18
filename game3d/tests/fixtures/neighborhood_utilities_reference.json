@@ -1,0 +1,8025 @@
+{
+  "cases": [
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "you sit. the crate accepts you. you remember nothing useful."
+          }
+        ]
+      },
+      "id": "thought_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "think",
+        "id": "thought_0",
+        "rolls": [
+          0.016666666666666666
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "you sit. a cloud passes. it does not acknowledge you.\n(+1 cred for the patience.)"
+          }
+        ]
+      },
+      "id": "thought_1",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "think",
+        "id": "thought_1",
+        "rolls": [
+          0.18333333333333335
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "you sit. a possum walks by. nods. continues.\nyou are on his route."
+          }
+        ]
+      },
+      "id": "thought_2",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "think",
+        "id": "thought_2",
+        "rolls": [
+          0.35000000000000003
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "you sit. you remember a birthday from 1996.\nit was not yours."
+          }
+        ]
+      },
+      "id": "thought_3",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "think",
+        "id": "thought_3",
+        "rolls": [
+          0.5166666666666667
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "you sit. the milk crate is very old.\nit has seen kings."
+          }
+        ]
+      },
+      "id": "thought_4",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "think",
+        "id": "thought_4",
+        "rolls": [
+          0.6833333333333332
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "you sit. you almost have a thought.\nit leaves."
+          }
+        ]
+      },
+      "id": "thought_5",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "think",
+        "id": "thought_5",
+        "rolls": [
+          0.85
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "· BREAKING · LOCAL MAN WINS $500. REFUSES INTERVIEW.   ◆   ",
+        "player": {
+          "brain": 70,
+          "cash": 520,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "won the lottery. immediately spent half of it. on what."
+          }
+        ],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 4500,
+            "text": "· $500 ·\nyou won. the world is wrong.\nthe ticket combusts."
+          }
+        ]
+      },
+      "id": "lottery_0_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0_0",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0,
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "· BREAKING · LOCAL MAN WINS $500. REFUSES INTERVIEW.   ◆   ",
+        "player": {
+          "brain": 70,
+          "cash": 520,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "won the lottery. immediately spent half of it. on what."
+          }
+        ],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 4500,
+            "text": "· $500 ·\nyou won. the world is wrong.\nthe ticket combusts."
+          }
+        ]
+      },
+      "id": "lottery_0_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0_0.999999",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0,
+          0.999999
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "· BREAKING · LOCAL MAN WINS $500. REFUSES INTERVIEW.   ◆   ",
+        "player": {
+          "brain": 70,
+          "cash": 520,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "won the lottery. immediately spent half of it. on what."
+          }
+        ],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 4500,
+            "text": "· $500 ·\nyou won. the world is wrong.\nthe ticket combusts."
+          }
+        ]
+      },
+      "id": "lottery_0.009999_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.009999_0",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.009999,
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "· BREAKING · LOCAL MAN WINS $500. REFUSES INTERVIEW.   ◆   ",
+        "player": {
+          "brain": 70,
+          "cash": 520,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "won the lottery. immediately spent half of it. on what."
+          }
+        ],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 4500,
+            "text": "· $500 ·\nyou won. the world is wrong.\nthe ticket combusts."
+          }
+        ]
+      },
+      "id": "lottery_0.009999_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.009999_0.999999",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.009999,
+          0.999999
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 25,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2500,
+            "text": "· $5 ·\na small win. dignity-shaped."
+          }
+        ]
+      },
+      "id": "lottery_0.01_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.01_0",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.01,
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 39,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2500,
+            "text": "· $19 ·\na small win. dignity-shaped."
+          }
+        ]
+      },
+      "id": "lottery_0.01_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.01_0.999999",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.01,
+          0.999999
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 25,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2500,
+            "text": "· $5 ·\na small win. dignity-shaped."
+          }
+        ]
+      },
+      "id": "lottery_0.149999_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.149999_0",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.149999,
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 39,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2500,
+            "text": "· $19 ·\na small win. dignity-shaped."
+          }
+        ]
+      },
+      "id": "lottery_0.149999_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.149999_0.999999",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.149999,
+          0.999999
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "nothing. as ever.\nthe ticket smells like a basement."
+          }
+        ]
+      },
+      "id": "lottery_0.15_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.15_0",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.15,
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "nothing. as ever.\nthe ticket smells like a basement."
+          }
+        ]
+      },
+      "id": "lottery_0.15_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.15_0.999999",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.15,
+          0.999999
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "nothing. as ever.\nthe ticket smells like a basement."
+          }
+        ]
+      },
+      "id": "lottery_0.999999_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.999999_0",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.999999,
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            }
+          ],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 1,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "nothing. as ever.\nthe ticket smells like a basement."
+          }
+        ]
+      },
+      "id": "lottery_0.999999_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "id": "lottery_0.999999_0.999999",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "one",
+              "q": 7
+            },
+            {
+              "id": "food",
+              "n": "food",
+              "q": 2
+            },
+            {
+              "id": "lottery",
+              "n": "two",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0.999999,
+          0.999999
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "· BREAKING · LOCAL MAN WINS $500. REFUSES INTERVIEW.   ◆   ",
+        "player": {
+          "brain": 70,
+          "cash": 520,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "won the lottery. immediately spent half of it. on what."
+          }
+        ],
+        "saves": 1,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 4500,
+            "text": "· $500 ·\nyou won. the world is wrong.\nthe ticket combusts."
+          }
+        ]
+      },
+      "id": "lottery_captured_removed",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "lottery",
+        "afterOpen": {
+          "inventory": []
+        },
+        "id": "lottery_captured_removed",
+        "player": {
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "ticket",
+              "q": 1
+            }
+          ]
+        },
+        "rolls": [
+          0
+        ],
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0.25_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0",
+        "rolls": [
+          0,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0.25_0.4499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.4499999",
+        "rolls": [
+          0.4499999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0.25_0.45",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.45",
+        "rolls": [
+          0.45,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0.25_0.6499999000000001",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.6499999000000001",
+        "rolls": [
+          0.6499999000000001,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0.25_0.65",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.65",
+        "rolls": [
+          0.65,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0.25_0.849999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.849999",
+        "rolls": [
+          0.849999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0.25_0.85",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.85",
+        "rolls": [
+          0.85,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0.25_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.25_0.999999",
+        "rolls": [
+          0.999999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0.75_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0",
+        "rolls": [
+          0,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0.75_0.4499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.4499999",
+        "rolls": [
+          0.4499999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0.75_0.45",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.45",
+        "rolls": [
+          0.45,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0.75_0.6499999000000001",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.6499999000000001",
+        "rolls": [
+          0.6499999000000001,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0.75_0.65",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.65",
+        "rolls": [
+          0.65,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0.75_0.849999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.849999",
+        "rolls": [
+          0.849999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0.75_0.85",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.85",
+        "rolls": [
+          0.85,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0.75_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.75_0.999999",
+        "rolls": [
+          0.999999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0",
+        "rolls": [
+          0,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0_0.2499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.2499999",
+        "rolls": [
+          0.2499999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0_0.25",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.25",
+        "rolls": [
+          0.25,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0_0.4499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.4499999",
+        "rolls": [
+          0.4499999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0_0.45",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.45",
+        "rolls": [
+          0.45,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0_0.849999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.849999",
+        "rolls": [
+          0.849999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0_0.85",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.85",
+        "rolls": [
+          0.85,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0_0.999999",
+        "rolls": [
+          0.999999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0.8_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0",
+        "rolls": [
+          0,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_0.8_0.2499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.2499999",
+        "rolls": [
+          0.2499999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0.8_0.25",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.25",
+        "rolls": [
+          0.25,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "change_0.8_0.4499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.4499999",
+        "rolls": [
+          0.4499999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0.8_0.45",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.45",
+        "rolls": [
+          0.45,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 69,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "change_0.8_0.849999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.849999",
+        "rolls": [
+          0.849999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0.8_0.85",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.85",
+        "rolls": [
+          0.85,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a man told you to 'get a job.'\nhe has not had one since 2003.\n+1 cred (out of spite)"
+          }
+        ]
+      },
+      "id": "change_0.8_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_0.8_0.999999",
+        "rolls": [
+          0.999999,
+          0.999999
+        ],
+        "state": {
+          "dayTime": 0.8
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_amount_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_amount_0",
+        "rolls": [
+          0,
+          0.025
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 22,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $2\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_amount_1",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_amount_1",
+        "rolls": [
+          0,
+          0.275
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 23,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $3\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_amount_2",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_amount_2",
+        "rolls": [
+          0,
+          0.525
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 1,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 24,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $4\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "change_amount_3",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "change_amount_3",
+        "rolls": [
+          0,
+          0.775
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 0,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "advice_brain_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "advice_brain_0",
+        "player": {
+          "brain": 0
+        },
+        "rolls": [
+          0.7
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 0,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "advice_brain_0.5",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "advice_brain_0.5",
+        "player": {
+          "brain": 0.5
+        },
+        "rolls": [
+          0.7
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 0,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "advice_brain_1",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "advice_brain_1",
+        "player": {
+          "brain": 1
+        },
+        "rolls": [
+          0.7
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 99,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "a woman gave you advice.\nthe advice was 'have you tried not.'\n(- 1 brain)"
+          }
+        ]
+      },
+      "id": "advice_brain_100",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "id": "advice_brain_100",
+        "player": {
+          "brain": 100
+        },
+        "rolls": [
+          0.7
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 23,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $3\nyou hummed. people walked faster. one tipped."
+          }
+        ]
+      },
+      "id": "song_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "song",
+        "id": "song_0",
+        "rolls": [
+          0
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 23,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $3\nyou hummed. people walked faster. one tipped."
+          }
+        ]
+      },
+      "id": "song_0.3999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "song",
+        "id": "song_0.3999999",
+        "rolls": [
+          0.3999999
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "you hummed. no one tipped.\nyou hum louder. still nothing.\nthe humming was the song."
+          }
+        ]
+      },
+      "id": "song_0.4",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "song",
+        "id": "song_0.4",
+        "rolls": [
+          0.4
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "you hummed. no one tipped.\nyou hum louder. still nothing.\nthe humming was the song."
+          }
+        ]
+      },
+      "id": "song_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "song",
+        "id": "song_0.999999",
+        "rolls": [
+          0.999999
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 28,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $8 + 1 cred\nit worked. you don't know how.\nneither does the audience."
+          }
+        ]
+      },
+      "id": "trick_0",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "trick",
+        "id": "trick_0",
+        "rolls": [
+          0
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 28,
+          "cred": 1,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $8 + 1 cred\nit worked. you don't know how.\nneither does the audience."
+          }
+        ]
+      },
+      "id": "trick_0.2499999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "trick",
+        "id": "trick_0.2499999",
+        "rolls": [
+          0.2499999
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 1
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "the trick was 'i have the card and now you don't.'\nthis is, in fact, theft.\nwanted +1"
+          }
+        ]
+      },
+      "id": "trick_0.25",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "trick",
+        "id": "trick_0.25",
+        "rolls": [
+          0.25
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 1
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "the trick was 'i have the card and now you don't.'\nthis is, in fact, theft.\nwanted +1"
+          }
+        ]
+      },
+      "id": "trick_0.999999",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "trick",
+        "id": "trick_0.999999",
+        "rolls": [
+          0.999999
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 3
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "the trick was 'i have the card and now you don't.'\nthis is, in fact, theft.\nwanted +1"
+          }
+        ]
+      },
+      "id": "trick_wanted_2",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "trick",
+        "id": "trick_wanted_2",
+        "player": {
+          "wanted": 2
+        },
+        "rolls": [
+          0.8
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 3
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "the trick was 'i have the card and now you don't.'\nthis is, in fact, theft.\nwanted +1"
+          }
+        ]
+      },
+      "id": "trick_wanted_3",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "trick",
+        "id": "trick_wanted_3",
+        "player": {
+          "wanted": 3
+        },
+        "rolls": [
+          0.8
+        ],
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 2,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [
+          "coin"
+        ],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\na person handed it to you and immediately regretted it."
+          }
+        ]
+      },
+      "id": "captured_day_now_night",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "afterOpenState": {
+          "dayTime": 0
+        },
+        "id": "captured_day_now_night",
+        "rolls": [
+          0.3,
+          0
+        ],
+        "state": {
+          "dayTime": 0.5
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 1,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 21,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": [
+          {
+            "duration_ms": 2200,
+            "text": "+ $1\nyou were given a single dollar with eye contact you did not consent to."
+          }
+        ]
+      },
+      "id": "captured_night_now_day",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "change",
+        "afterOpenState": {
+          "dayTime": 0.5
+        },
+        "id": "captured_night_now_day",
+        "rolls": [
+          0.3,
+          0
+        ],
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 0,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": []
+      },
+      "id": "block_leave",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "leave",
+        "id": "block_leave",
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 0,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": []
+      },
+      "id": "block_escape",
+      "menu": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 0. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "setup": {
+        "action": "escape",
+        "id": "block_escape",
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 0,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": []
+      },
+      "id": "market_leave",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "leave",
+        "id": "market_leave",
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "bigPan": 0,
+        "draws": 0,
+        "mode": "playing",
+        "news": "",
+        "player": {
+          "brain": 70,
+          "cash": 20,
+          "cred": 0,
+          "inventory": [],
+          "wanted": 0
+        },
+        "posts": [],
+        "saves": 0,
+        "sounds": [],
+        "toasts": []
+      },
+      "id": "market_escape",
+      "menu": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "setup": {
+        "action": "escape",
+        "id": "market_escape",
+        "zone": "market"
+      }
+    }
+  ],
+  "continuity": [
+    {
+      "after": {
+        "autoSaveT": 44999,
+        "held": false,
+        "tweakerCdT": 1234,
+        "tweakerT": -9
+      },
+      "before": {
+        "autoSaveT": 44999,
+        "held": true,
+        "tweakerCdT": 1234,
+        "tweakerT": -9
+      },
+      "kind": "fresh",
+      "persistedHasClocks": false
+    },
+    {
+      "after": {
+        "autoSaveT": 44999,
+        "held": false,
+        "tweakerCdT": 1234,
+        "tweakerT": -9
+      },
+      "before": {
+        "autoSaveT": 44999,
+        "held": true,
+        "tweakerCdT": 1234,
+        "tweakerT": -9
+      },
+      "kind": "restore",
+      "persistedHasClocks": false
+    }
+  ],
+  "entries": [
+    {
+      "center": [
+        1210,
+        350
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": true,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "under the bridge. the bridge has ears."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "the air changes.\nyou can hear yourself walk."
+          }
+        ]
+      },
+      "id": "underpass",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": true,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "under the bridge. the bridge has ears."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "the air changes.\nyou can hear yourself walk."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "underpass"
+      }
+    },
+    {
+      "center": [
+        810,
+        2980
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": true,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "trains stopped running here. they still come through."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the rails hum.\nthe rails are warm.\nthe rails are not used."
+          }
+        ]
+      },
+      "id": "trainyard",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": true,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "trains stopped running here. they still come through."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the rails hum.\nthe rails are warm.\nthe rails are not used."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "trainyard"
+      }
+    },
+    {
+      "center": [
+        2710,
+        1150
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": true,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@hardcandy",
+            "t": "the pigeons remember faces. the philosopher remembers names."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "you are in the park.\nthe fountain is still running."
+          }
+        ]
+      },
+      "id": "park",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": true,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@hardcandy",
+            "t": "the pigeons remember faces. the philosopher remembers names."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "you are in the park.\nthe fountain is still running."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "park"
+      }
+    },
+    {
+      "center": [
+        2930,
+        1880
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": true,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "skid row knows you didn't ask first."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "the alleys are tight.\nthe air is heavier here."
+          }
+        ]
+      },
+      "id": "skidrow",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": true,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "skid row knows you didn't ask first."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "the alleys are tight.\nthe air is heavier here."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "skidrow"
+      }
+    },
+    {
+      "center": [
+        3780,
+        600
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": true,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "the old school still has copper in the walls. the school still has brutus in the gym."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "the old school stands.\nthe paint is gone.\nthe building is not."
+          }
+        ]
+      },
+      "id": "oldschool",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": true,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "the old school still has copper in the walls. the school still has brutus in the gym."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3600,
+            "text": "the old school stands.\nthe paint is gone.\nthe building is not."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "oldschool"
+      }
+    },
+    {
+      "center": [
+        4950,
+        560
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": true
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "warehouse row received nothing. returns accepted nothing."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "two warehouses.\nthree unit numbers.\none manifest refuses all of them."
+          }
+        ]
+      },
+      "id": "warehouse_row",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": true
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "warehouse row received nothing. returns accepted nothing."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "two warehouses.\nthree unit numbers.\none manifest refuses all of them."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "warehouse_row"
+      }
+    },
+    {
+      "center": [
+        4975,
+        1880
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": true,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "the water department marked the canal water pending."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the canal is dry.\nthe water gauge says nine.\ngutter greg counted the duck."
+          }
+        ]
+      },
+      "id": "canal",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": true,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "the water department marked the canal water pending."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the canal is dry.\nthe water gauge says nine.\ngutter greg counted the duck."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "canal"
+      }
+    },
+    {
+      "center": [
+        4925,
+        3125
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": true,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@hardcandy",
+            "t": "walk-ins accepted at the office. tax help unavailable."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "the lot has forty spaces.\nzero cars.\none leasing guy."
+          }
+        ]
+      },
+      "id": "the_lot",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": true,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@hardcandy",
+            "t": "walk-ins accepted at the office. tax help unavailable."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "the lot has forty spaces.\nzero cars.\none leasing guy."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "the_lot"
+      }
+    },
+    {
+      "center": [
+        6500,
+        790
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": true,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "four tarps filed one court date. weather is named as counsel."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "four tarps share one court date.\nnone brought identification."
+          }
+        ]
+      },
+      "id": "blue_tarp_court",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": true,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "four tarps filed one court date. weather is named as counsel."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "four tarps share one court date.\nnone brought identification."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "blue_tarp_court"
+      }
+    },
+    {
+      "center": [
+        7860,
+        1950
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": true,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@hardcandy",
+            "t": "the cart cavalry formed a line. one wheel attended."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "six carts form a cavalry line.\none has a wheel."
+          }
+        ]
+      },
+      "id": "cart_cavalry_keep",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": true,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@hardcandy",
+            "t": "the cart cavalry formed a line. one wheel attended."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 3800,
+            "text": "six carts form a cavalry line.\none has a wheel."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "cart_cavalry_keep"
+      }
+    },
+    {
+      "center": [
+        6530,
+        3320
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": true,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "the copper choir is holding b flat until inventory closes."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the copper choir rehearses b flat.\nattendance is mandatory on paper."
+          }
+        ]
+      },
+      "id": "copper_choir_yard",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": true,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": false,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@blocklog",
+            "t": "the copper choir is holding b flat until inventory closes."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the copper choir rehearses b flat.\nattendance is mandatory on paper."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "copper_choir_yard"
+      }
+    },
+    {
+      "center": [
+        7680,
+        4760
+      ],
+      "first": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": true,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "the ditch has a chair. the chair has jurisdiction."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the ditch has a chair in it.\nthe chair has jurisdiction."
+          }
+        ]
+      },
+      "id": "throne_ditch",
+      "repeat": {
+        "flags": {
+          "blueTarpCourtEntered": false,
+          "canalEntered": false,
+          "cartKeepEntered": false,
+          "copperChoirEntered": false,
+          "oldSchoolEntered": false,
+          "parkEntered": false,
+          "skidRowEntered": false,
+          "theLotEntered": false,
+          "throneDitchEntered": true,
+          "trainYardEntered": false,
+          "underpassEntered": false,
+          "warehouseRowEntered": false
+        },
+        "posts": [
+          {
+            "day": 1,
+            "h": "@crackheadcent",
+            "t": "the ditch has a chair. the chair has jurisdiction."
+          }
+        ],
+        "saves": 1,
+        "toasts": [
+          {
+            "duration_ms": 4000,
+            "text": "the ditch has a chair in it.\nthe chair has jurisdiction."
+          }
+        ]
+      },
+      "setup": {
+        "entries": true,
+        "zone": "throne_ditch"
+      }
+    },
+    {
+      "center": [
+        150,
+        150
+      ],
+      "id": "independent_underpass_else_if_order",
+      "setup": {
+        "center": [
+          150,
+          150
+        ],
+        "entries": true,
+        "overlap": [
+          "underpass",
+          "trainyard",
+          "park"
+        ]
+      },
+      "steps": [
+        {
+          "flags": {
+            "blueTarpCourtEntered": false,
+            "canalEntered": false,
+            "cartKeepEntered": false,
+            "copperChoirEntered": false,
+            "oldSchoolEntered": false,
+            "parkEntered": false,
+            "skidRowEntered": false,
+            "theLotEntered": false,
+            "throneDitchEntered": false,
+            "trainYardEntered": true,
+            "underpassEntered": true,
+            "warehouseRowEntered": false
+          },
+          "posts": [
+            {
+              "day": 1,
+              "h": "@blocklog",
+              "t": "trains stopped running here. they still come through."
+            },
+            {
+              "day": 1,
+              "h": "@crackheadcent",
+              "t": "under the bridge. the bridge has ears."
+            }
+          ],
+          "saves": 2,
+          "toasts": [
+            {
+              "duration_ms": 3600,
+              "text": "the air changes.\nyou can hear yourself walk."
+            },
+            {
+              "duration_ms": 4000,
+              "text": "the rails hum.\nthe rails are warm.\nthe rails are not used."
+            }
+          ]
+        },
+        {
+          "flags": {
+            "blueTarpCourtEntered": false,
+            "canalEntered": false,
+            "cartKeepEntered": false,
+            "copperChoirEntered": false,
+            "oldSchoolEntered": false,
+            "parkEntered": true,
+            "skidRowEntered": false,
+            "theLotEntered": false,
+            "throneDitchEntered": false,
+            "trainYardEntered": true,
+            "underpassEntered": true,
+            "warehouseRowEntered": false
+          },
+          "posts": [
+            {
+              "day": 1,
+              "h": "@hardcandy",
+              "t": "the pigeons remember faces. the philosopher remembers names."
+            },
+            {
+              "day": 1,
+              "h": "@blocklog",
+              "t": "trains stopped running here. they still come through."
+            },
+            {
+              "day": 1,
+              "h": "@crackheadcent",
+              "t": "under the bridge. the bridge has ears."
+            }
+          ],
+          "saves": 3,
+          "toasts": [
+            {
+              "duration_ms": 3600,
+              "text": "the air changes.\nyou can hear yourself walk."
+            },
+            {
+              "duration_ms": 4000,
+              "text": "the rails hum.\nthe rails are warm.\nthe rails are not used."
+            },
+            {
+              "duration_ms": 3600,
+              "text": "you are in the park.\nthe fountain is still running."
+            }
+          ]
+        },
+        {
+          "flags": {
+            "blueTarpCourtEntered": false,
+            "canalEntered": false,
+            "cartKeepEntered": false,
+            "copperChoirEntered": false,
+            "oldSchoolEntered": false,
+            "parkEntered": true,
+            "skidRowEntered": false,
+            "theLotEntered": false,
+            "throneDitchEntered": false,
+            "trainYardEntered": true,
+            "underpassEntered": true,
+            "warehouseRowEntered": false
+          },
+          "posts": [
+            {
+              "day": 1,
+              "h": "@hardcandy",
+              "t": "the pigeons remember faces. the philosopher remembers names."
+            },
+            {
+              "day": 1,
+              "h": "@blocklog",
+              "t": "trains stopped running here. they still come through."
+            },
+            {
+              "day": 1,
+              "h": "@crackheadcent",
+              "t": "under the bridge. the bridge has ears."
+            }
+          ],
+          "saves": 3,
+          "toasts": [
+            {
+              "duration_ms": 3600,
+              "text": "the air changes.\nyou can hear yourself walk."
+            },
+            {
+              "duration_ms": 4000,
+              "text": "the rails hum.\nthe rails are warm.\nthe rails are not used."
+            },
+            {
+              "duration_ms": 3600,
+              "text": "you are in the park.\nthe fountain is still running."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "menus": [
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_0_0_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 0,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_0_0_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 0,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_0_3_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 0,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_0_3_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 0,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_18000_0_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 18000,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_18000_0_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 18000,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_18000_3_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 18000,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_0_18000_3_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 18000,
+          "rocks": 0,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_0_0_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 0,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_0_0_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 0,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_0_3_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 0,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_0_3_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 0,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_18000_0_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 18000,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": false,
+            "label": "cook a batch. (you have no packets.)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_18000_0_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 18000,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 0
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_18000_3_false",
+      "setup": {
+        "flags": {
+          "hasStripePackage": false
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [],
+          "rockedT": 18000,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "smoke a rock. (-1 rock, +18s rocked-up)"
+          },
+          {
+            "enabled": true,
+            "label": "open stripe's package. (alone, no one is watching.)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+50 hp · +25 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "cook a batch. (🧪3 → rocks)"
+          },
+          {
+            "enabled": true,
+            "label": "sit on the crate and think."
+          },
+          {
+            "enabled": true,
+            "label": "scratch the lottery ticket."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the milk crate is here. the sky is here.\nyour shakes are 50. your brain is 70.",
+        "title": "THE BLOCK"
+      },
+      "id": "block_1_18000_3_true",
+      "setup": {
+        "flags": {
+          "hasStripePackage": true
+        },
+        "player": {
+          "brain": 69.5,
+          "inventory": [
+            {
+              "id": "lottery",
+              "n": "a lottery ticket",
+              "q": 1
+            }
+          ],
+          "rockedT": 18000,
+          "rocks": 1,
+          "shakes": 49.5,
+          "soapRocks": 0,
+          "supplies": 3
+        },
+        "zone": "block"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_0",
+      "setup": {
+        "state": {
+          "dayTime": 0
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_0.249999",
+      "setup": {
+        "state": {
+          "dayTime": 0.249999
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_0.25",
+      "setup": {
+        "state": {
+          "dayTime": 0.25
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_0.5",
+      "setup": {
+        "state": {
+          "dayTime": 0.5
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "people are walking by.\nthey are pretending you are scenery.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_0.75",
+      "setup": {
+        "state": {
+          "dayTime": 0.75
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_0.750001",
+      "setup": {
+        "state": {
+          "dayTime": 0.750001
+        },
+        "zone": "market"
+      }
+    },
+    {
+      "expected": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "ask for change. (chance of $1-5)"
+          },
+          {
+            "enabled": true,
+            "label": "perform a song you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "do a card trick you don't know."
+          },
+          {
+            "enabled": true,
+            "label": "leave."
+          }
+        ],
+        "text": "the marketplace is asleep.\nyou could still try.",
+        "title": "THE MARKETPLACE"
+      },
+      "id": "market_1",
+      "setup": {
+        "state": {
+          "dayTime": 1
+        },
+        "zone": "market"
+      }
+    }
+  ],
+  "source": "Unchanged activities Block/panhandle callbacks, keyboard listeners, updateWorld, saveGame/loadGame/startGame; clock projections exclude unrelated world effects",
+  "timelines": [
+    {
+      "id": "activate_hold_release",
+      "setup": {
+        "id": "activate_hold_release",
+        "ops": [
+          {
+            "key": "down"
+          },
+          {
+            "dt": 16,
+            "held": true
+          },
+          {
+            "key": "up"
+          },
+          {
+            "dt": 16,
+            "held": false
+          },
+          {
+            "key": "down"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 65,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 64.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5984,
+            "tweakerT": 2984
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 64.968,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5984,
+            "tweakerT": 2984
+          },
+          "op": {
+            "key": "up"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 32,
+            "brain": 64.968,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5968,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 32,
+            "brain": 64.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5968,
+            "tweakerT": 0
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "deplete_activation",
+      "setup": {
+        "id": "deplete_activation",
+        "ops": [
+          {
+            "key": "down"
+          },
+          {
+            "dt": 16,
+            "held": true
+          },
+          {
+            "key": "up"
+          },
+          {
+            "dt": 16,
+            "held": false
+          }
+        ],
+        "player": {
+          "brain": 3
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 0,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 0,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5984,
+            "tweakerT": 3000
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 0,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5984,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "up"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 32,
+            "brain": 0,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5968,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "deplete_drain",
+      "setup": {
+        "id": "deplete_drain",
+        "ops": [
+          {
+            "key": "down"
+          },
+          {
+            "dt": 16,
+            "held": true
+          }
+        ],
+        "player": {
+          "brain": 5.03
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 0.03000000000000025,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 0,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [
+              {
+                "duration_ms": 1800,
+                "text": "your brain has nothing left to give."
+              }
+            ],
+            "tweakerCdT": 5984,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "vision_negative",
+      "setup": {
+        "id": "vision_negative",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          },
+          {
+            "dt": 16,
+            "held": true
+          },
+          {
+            "key": "down"
+          },
+          {
+            "key": "up"
+          },
+          {
+            "dt": 16,
+            "held": false
+          },
+          {
+            "key": "down"
+          }
+        ],
+        "state": {
+          "tweakerCdT": 1,
+          "tweakerT": 1
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 69.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": -15,
+            "tweakerT": -15
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 32,
+            "brain": 69.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": -15,
+            "tweakerT": -15
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 32,
+            "brain": 69.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": -15,
+            "tweakerT": -15
+          },
+          "op": {
+            "key": "down"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 32,
+            "brain": 69.968,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": -15,
+            "tweakerT": -15
+          },
+          "op": {
+            "key": "up"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 48,
+            "brain": 69.968,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": -15,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 48,
+            "brain": 64.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vision_equal",
+      "setup": {
+        "id": "vision_equal",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          },
+          {
+            "key": "down"
+          }
+        ],
+        "state": {
+          "tweakerCdT": 16,
+          "tweakerT": 16
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 69.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 64.968,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cooldown_only",
+      "setup": {
+        "id": "cooldown_only",
+        "ops": [
+          {
+            "key": "down"
+          },
+          {
+            "dt": 16,
+            "held": false
+          },
+          {
+            "key": "down"
+          }
+        ],
+        "state": {
+          "tweakerCdT": 1
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 1,
+            "tweakerT": 0
+          },
+          "op": {
+            "key": "down"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": -15,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 65,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stunned_press",
+      "setup": {
+        "id": "stunned_press",
+        "ops": [
+          {
+            "key": "down"
+          }
+        ],
+        "player": {
+          "stunT": 500
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "empty_brain_press",
+      "setup": {
+        "id": "empty_brain_press",
+        "ops": [
+          {
+            "key": "down"
+          }
+        ],
+        "player": {
+          "brain": 0
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 0,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [
+              {
+                "duration_ms": 1500,
+                "text": "your brain has nothing left to give."
+              }
+            ],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "empty_brain_cooldown",
+      "setup": {
+        "id": "empty_brain_cooldown",
+        "ops": [
+          {
+            "key": "down"
+          }
+        ],
+        "player": {
+          "brain": 0
+        },
+        "state": {
+          "tweakerCdT": 99
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 0,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [
+              {
+                "duration_ms": 1500,
+                "text": "your brain has nothing left to give."
+              }
+            ],
+            "tweakerCdT": 99,
+            "tweakerT": 0
+          },
+          "op": {
+            "key": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "paused_dialogue",
+      "setup": {
+        "id": "paused_dialogue",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          }
+        ],
+        "state": {
+          "mode": "dialogue",
+          "tweakerCdT": 200,
+          "tweakerT": 100
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "dialogue",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 200,
+            "tweakerT": 100
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "paused_inv",
+      "setup": {
+        "id": "paused_inv",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          }
+        ],
+        "state": {
+          "mode": "inv",
+          "tweakerCdT": 200,
+          "tweakerT": 100
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "inv",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 200,
+            "tweakerT": 100
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "paused_quest",
+      "setup": {
+        "id": "paused_quest",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          }
+        ],
+        "state": {
+          "mode": "quest",
+          "tweakerCdT": 200,
+          "tweakerT": 100
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "quest",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 200,
+            "tweakerT": 100
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "paused_cookmini",
+      "setup": {
+        "id": "paused_cookmini",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          }
+        ],
+        "state": {
+          "mode": "cookmini",
+          "tweakerCdT": 200,
+          "tweakerT": 100
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "cookmini",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 200,
+            "tweakerT": 100
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "paused_title",
+      "setup": {
+        "id": "paused_title",
+        "ops": [
+          {
+            "dt": 16,
+            "held": true
+          }
+        ],
+        "state": {
+          "mode": "title",
+          "tweakerCdT": 200,
+          "tweakerT": 100
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": true,
+            "mode": "title",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 200,
+            "tweakerT": 100
+          },
+          "op": {
+            "dt": 16,
+            "held": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "modal_input_release",
+      "setup": {
+        "id": "modal_input_release",
+        "ops": [
+          {
+            "key": "down"
+          },
+          {
+            "open": "block"
+          },
+          {
+            "dt": 16,
+            "held": false
+          },
+          {
+            "close": true
+          },
+          {
+            "dt": 16,
+            "held": false
+          }
+        ]
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 65,
+            "held": true,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "key": "down"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 65,
+            "held": false,
+            "mode": "dialogue",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "open": "block"
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 65,
+            "held": false,
+            "mode": "dialogue",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "dt": 16,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 65,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 6000,
+            "tweakerT": 3000
+          },
+          "op": {
+            "close": true
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 16,
+            "brain": 65,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 5984,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 16,
+            "held": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "autosave_44949",
+      "setup": {
+        "id": "autosave_44949",
+        "ops": [
+          {
+            "dt": 50,
+            "held": false
+          },
+          {
+            "dt": 1,
+            "held": false
+          }
+        ],
+        "state": {
+          "autoSaveT": 44949
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 44999,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 50,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 45000,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 1,
+            "held": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "autosave_44950",
+      "setup": {
+        "id": "autosave_44950",
+        "ops": [
+          {
+            "dt": 50,
+            "held": false
+          },
+          {
+            "dt": 1,
+            "held": false
+          }
+        ],
+        "state": {
+          "autoSaveT": 44950
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 45000,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 50,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 1,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 1,
+            "held": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "autosave_44951",
+      "setup": {
+        "id": "autosave_44951",
+        "ops": [
+          {
+            "dt": 50,
+            "held": false
+          },
+          {
+            "dt": 1,
+            "held": false
+          }
+        ],
+        "state": {
+          "autoSaveT": 44951
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 1,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 50,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 1,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 1,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 1,
+            "held": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "autosave_45000",
+      "setup": {
+        "id": "autosave_45000",
+        "ops": [
+          {
+            "dt": 50,
+            "held": false
+          },
+          {
+            "dt": 1,
+            "held": false
+          }
+        ],
+        "state": {
+          "autoSaveT": 45000
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 0,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 1,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 50,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 1,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 1,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 1,
+            "held": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "autosave_0",
+      "setup": {
+        "id": "autosave_0",
+        "ops": [
+          {
+            "dt": 50,
+            "held": false
+          },
+          {
+            "dt": 1,
+            "held": false
+          }
+        ],
+        "state": {
+          "autoSaveT": 0
+        }
+      },
+      "steps": [
+        {
+          "expected": {
+            "autoSaveT": 50,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 50,
+            "held": false
+          }
+        },
+        {
+          "expected": {
+            "autoSaveT": 51,
+            "brain": 70,
+            "held": false,
+            "mode": "playing",
+            "saves": 0,
+            "toasts": [],
+            "tweakerCdT": 0,
+            "tweakerT": 0
+          },
+          "op": {
+            "dt": 1,
+            "held": false
+          }
+        }
+      ]
+    }
+  ]
+}

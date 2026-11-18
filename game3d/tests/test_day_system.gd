@@ -35,14 +35,16 @@ class Spatial:
 			_: return point
 class Campaign:
 	extends RefCounted
+	const Schema = preload("res://scripts/campaign_system.gd")
 	var owner: WeakRef
 	var accepts: bool = true
-	var actors: Array = []
 	var calls: int = 0
 	func _init(host: RefCounted) -> void: owner = weakref(host)
-	func prepare_day(_day: int) -> Dictionary:
+	func prepare_day(day: int) -> Dictionary:
 		calls += 1
-		return {"ok":accepts,"kingdom":owner.get_ref().s.kingdom.duplicate(true),"actors":actors.duplicate(true)}
+		var result: Dictionary = Schema.plan_for_state(day,owner.get_ref().s.kingdom,owner.get_ref().p.lifetime.pretendersDefeated)
+		result.ok = accepts
+		return result
 class Communications:
 	extends RefCounted
 	var owner: WeakRef
@@ -229,11 +231,20 @@ func _pending_and_restore() -> void:
 	var b: Dictionary = _bundle(); var g: RefCounted = b.state
 	g.s.day = 2; g.s.dayTime = 0.3; b.spatial.placement = "blocked"
 	_check(g._advance_day("natural") and g.s.day == 3,"blocked physical placement cannot stall natural dawn")
-	_check(b.days._actor("day3_visitor_%d" % int(fixture.unixMs)).is_empty() and g.s.dayPendingPlacements.size() == 1,"blocked visitor has no invisible model body")
+	var guards: Array = g.s.dayPendingPlacements.filter(func(record: Dictionary) -> bool: return record.kind == "campaign")
+	var visitors: Array = g.s.dayPendingPlacements.filter(func(record: Dictionary) -> bool: return record.kind == "visitor")
+	_check(guards.size() == 15 and g.s.dayPendingPlacements.size() == 16,"blocked day3 retains all fifteen canonical guards plus one visitor")
+	_check(b.days._actor("day3_visitor_%d" % int(fixture.unixMs)).is_empty() and visitors.size() == 1,"blocked visitor has no invisible model body")
 	var count: int = g.rolls; b.days.tick_active(1)
-	_check(g.rolls == count and g.s.dayPendingPlacements.size() == 2,"price day defers separately without rerolling visitor")
-	b.spatial.placement = "clear"; b.days.tick_active(50); b.days.tick_active(50); b.days.tick_active(50); b.days.tick_active(50); b.days.tick_active(50)
-	_check(g.s.dayPendingPlacements.is_empty() and b.days.supports("price_guy"),"bounded retry drains visitor and Price Guy")
+	var prices: Array = g.s.dayPendingPlacements.filter(func(record: Dictionary) -> bool: return record.kind == "price")
+	_check(g.rolls == count and prices.size() == 1 and g.s.dayPendingPlacements.size() == 17,"price day defers separately without rerolling visitor or guards")
+	b.spatial.placement = "clear"
+	for index: int in range(45):
+		var pending_before: int = g.s.dayPendingPlacements.size()
+		b.days.tick_active(50)
+		_check(pending_before-g.s.dayPendingPlacements.size() <= 2,"each retry tick places at most two actual bodies")
+	var placed_guards: Array = g.npcs.filter(func(actor: Dictionary) -> bool: return actor.get("kingdomGuard",false))
+	_check(g.s.dayPendingPlacements.is_empty() and placed_guards.size() == 15 and not b.days._actor("price_guy").is_empty() and not b.days._actor("day3_visitor_%d" % int(fixture.unixMs)).is_empty() and g.rolls == count,"bounded retry drains exact guards visitor and Price Guy without rerolls")
 
 func _normalization() -> void:
 	var bundle: Dictionary = _bundle(); var days: RefCounted = bundle.days

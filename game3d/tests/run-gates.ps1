@@ -41,7 +41,7 @@ function Invoke-Gate {
 }
 
 Invoke-Gate -Name 'import' -GodotArgs @('--editor', '--import', '--quit')
-foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd', 'test_bosses.gd', 'test_travel.gd', 'test_actor_navigation.gd', 'test_full_hud.gd', 'test_full_scene.gd', 'test_resident_dialogue.gd', 'test_quest_dialogue.gd', 'test_street_dialogue.gd', 'test_rhythm.gd', 'test_robbery.gd', 'test_day_system.gd', 'test_communications.gd')) {
+foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd', 'test_bosses.gd', 'test_travel.gd', 'test_actor_navigation.gd', 'test_full_hud.gd', 'test_full_scene.gd', 'test_resident_dialogue.gd', 'test_quest_dialogue.gd', 'test_street_dialogue.gd', 'test_rhythm.gd', 'test_robbery.gd', 'test_day_system.gd', 'test_communications.gd', 'test_heists.gd', 'test_site_integration.gd', 'test_campaign.gd', 'test_office_campaign.gd', 'test_cooking.gd', 'test_cooking_presentation.gd', 'test_startup.gd', 'test_cooking_runtime.gd', 'test_companions.gd', 'test_kingdom_campaign.gd', 'test_kingdom_physics.gd', 'test_world_prop_actions.gd', 'test_interactive_props.gd', 'test_actor_contact.gd', 'test_presentation_visibility.gd', 'test_incidents.gd', 'test_neighborhood_utilities.gd', 'test_interactive_prop_view.gd', 'test_viewmodel_context.gd', 'test_guidance.gd', 'test_incident_presentation.gd')) {
     if (-not (Test-Path -LiteralPath (Join-Path $PSScriptRoot $script) -PathType Leaf)) {
         throw "Required gate $script is missing. Simulation, scene and art checks must exist before this runner can pass."
     }
@@ -72,6 +72,27 @@ Invoke-Gate -Name 'rhythm' -GodotArgs @('--script', 'res://tests/test_rhythm.gd'
 Invoke-Gate -Name 'robbery' -GodotArgs @('--script', 'res://tests/test_robbery.gd', '--quit-after', '6000') -PassPattern '3D ROBBERY GATE: PASS'
 Invoke-Gate -Name 'days' -GodotArgs @('--script', 'res://tests/test_day_system.gd', '--quit-after', '6000') -PassPattern '3D DAY GATE: PASS'
 Invoke-Gate -Name 'communications' -GodotArgs @('--script', 'res://tests/test_communications.gd', '--quit-after', '6000') -PassPattern '3D COMMUNICATIONS GATE: PASS'
+Invoke-Gate -Name 'heists' -GodotArgs @('--script', 'res://tests/test_heists.gd', '--quit-after', '12000') -PassPattern '3D HEIST GATE: PASS'
+Invoke-Gate -Name 'sites' -GodotArgs @('--script', 'res://tests/test_site_integration.gd', '--quit-after', '12000') -PassPattern '3D SITE INTEGRATION GATE: PASS'
+Invoke-Gate -Name 'campaign' -GodotArgs @('--script', 'res://tests/test_campaign.gd', '--quit-after', '12000') -PassPattern '3D CAMPAIGN FOUNDATION GATE: PASS'
+Invoke-Gate -Name 'office' -GodotArgs @('--script', 'res://tests/test_office_campaign.gd', '--quit-after', '12000') -PassPattern '3D OFFICE CAMPAIGN GATE: PASS'
+Invoke-Gate -Name 'cooking' -GodotArgs @('--script', 'res://tests/test_cooking.gd', '--quit-after', '12000') -PassPattern '3D COOKING GATE: PASS'
+Invoke-Gate -Name 'cooking-presentation' -GodotArgs @('--script', 'res://tests/test_cooking_presentation.gd', '--quit-after', '12000') -PassPattern '3D COOKING PRESENTATION GATE: PASS'
+Invoke-Gate -Name 'startup' -GodotArgs @('--script', 'res://tests/test_startup.gd', '--quit-after', '12000') -PassPattern '3D STARTUP GATE: PASS'
+Invoke-Gate -Name 'cooking-runtime' -GodotArgs @('--script', 'res://tests/test_cooking_runtime.gd', '--quit-after', '12000') -PassPattern '3D COOKING RUNTIME GATE: PASS'
+Invoke-Gate -Name 'companions' -GodotArgs @('--script', 'res://tests/test_companions.gd', '--quit-after', '6000') -PassPattern '3D COMPANION GATE: PASS'
+Invoke-Gate -Name 'kingdom' -GodotArgs @('--script', 'res://tests/test_kingdom_campaign.gd', '--quit-after', '12000') -PassPattern '3D KINGDOM CAMPAIGN GATE: PASS'
+Invoke-Gate -Name 'kingdom-physics' -GodotArgs @('--script', 'res://tests/test_kingdom_physics.gd', '--quit-after', '12000') -PassPattern '3D KINGDOM PHYSICS GATE: PASS'
+Invoke-Gate -Name 'world-props' -GodotArgs @('--script', 'res://tests/test_world_prop_actions.gd', '--quit-after', '12000') -PassPattern '3D WORLD PROP ACTIONS GATE: PASS'
+Invoke-Gate -Name 'interactive-props' -GodotArgs @('--script', 'res://tests/test_interactive_props.gd', '--quit-after', '12000') -PassPattern '3D INTERACTIVE PROPS GATE: PASS'
+Invoke-Gate -Name 'actor-contact' -GodotArgs @('--script', 'res://tests/test_actor_contact.gd', '--quit-after', '12000') -PassPattern '3D ACTOR CONTACT GATE: PASS'
+Invoke-Gate -Name 'presentation-visibility' -GodotArgs @('--script', 'res://tests/test_presentation_visibility.gd', '--quit-after', '12000') -PassPattern '3D PRESENTATION VISIBILITY GATE: PASS'
+Invoke-Gate -Name 'incidents' -GodotArgs @('--script', 'res://tests/test_incidents.gd', '--quit-after', '12000') -PassPattern '3D INCIDENTS GATE: PASS'
+Invoke-Gate -Name 'utilities' -GodotArgs @('--script', 'res://tests/test_neighborhood_utilities.gd', '--quit-after', '12000') -PassPattern '3D NEIGHBORHOOD UTILITIES GATE: PASS'
+Invoke-Gate -Name 'interactive-prop-view' -GodotArgs @('--script', 'res://tests/test_interactive_prop_view.gd', '--quit-after', '12000') -PassPattern '3D INTERACTIVE PROP VIEW GATE: PASS'
+Invoke-Gate -Name 'viewmodel-context' -GodotArgs @('--script', 'res://tests/test_viewmodel_context.gd', '--quit-after', '12000') -PassPattern '3D VIEWMODEL CONTEXT GATE: PASS'
+Invoke-Gate -Name 'guidance' -GodotArgs @('--script', 'res://tests/test_guidance.gd', '--quit-after', '12000') -PassPattern '3D GUIDANCE: PASS'
+Invoke-Gate -Name 'incident-presentation' -GodotArgs @('--script', 'res://tests/test_incident_presentation.gd', '--quit-after', '12000') -PassPattern '3D INCIDENT PRESENTATION GATE: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
@@ -89,6 +110,17 @@ foreach ($entry in @(
     @{ Name = 'robbery-oracle'; Script = '3d-robbery-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'day-oracle'; Script = '3d-day-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'communications-oracle'; Script = '3d-communications-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'heist-oracle'; Script = '3d-heist-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'campaign-oracle'; Script = '3d-campaign-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'office-oracle'; Script = '3d-office-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'cooking-oracle'; Script = '3d-cooking-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'companion-oracle'; Script = '3d-companion-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'kingdom-oracle'; Script = '3d-kingdom-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'world-props-oracle'; Script = '3d-world-props-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'interactive-props-oracle'; Script = '3d-interactive-props-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'incidents-oracle'; Script = '3d-incidents-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'utilities-oracle'; Script = '3d-neighborhood-utilities-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'guidance-oracle'; Script = '3d-guidance-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -96,4 +128,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 43/43 PASS (import clean; 26 engine suites and 17 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 75/75 PASS (import clean; 47 engine suites and 28 source/parity checks; complete-port acceptance remains tracked separately)'

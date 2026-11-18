@@ -86,6 +86,9 @@ fixed lunge direction, source lunge-speed multipliers2/2.4/3 and damage1.5/1.8/2
 300ms aim,1500ms throw,320px/s bottle15damage. Brendan charges4000ms for50damage/1000ms cooldown.
 Dog discomfort slows relevant cops within200px. Source pet follow/reveal and ally10damage/700ms
 behavior use physical motion. Cart contact14damage/600ms and10px knockback stays combat-owned.
+P06c delegates the possum reveal transaction to Companions so selected piles pass physical
+placement checks. Configured Runtime calls tick_dog_discomfort before Memory/companion
+lifecycle; Director retains follow motion and exposes reset_actor for a replaced dead dog row.
 P07b-only archetypes report unsupported rather than receiving the default chase pattern.
 
 Police wanted decays one star at18000ms/collar multiplier per source call; active target count

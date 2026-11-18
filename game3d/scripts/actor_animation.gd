@@ -20,13 +20,16 @@ static func reset(art: Node3D) -> void:
 	rig.finger_updates = 0
 	rig.bone_writes = 0
 	rig.visibility_writes = 0
+	for counter: String in ["global_pose_queries","global_pose_solves","attachment_queries","attachment_writes","hidden_pose_skips"]: rig[counter] = 0
+	rig.pose_deferred = false
+	_reset_working_pose(rig)
 	_apply_bones(rig,rig.base_poses)
 	for child: Dictionary in rig.companions: reset(child.node)
 	_set_coats(rig,3)
 	Roster._sync_attachments(rig)
 
 
-static func tick(art: Node3D, delta: float, snapshot: Dictionary, detail: int = 0) -> void:
+static func tick(art: Node3D, delta: float, snapshot: Dictionary, detail: int = 0, pose_needed: bool = true) -> void:
 	if art == null or not art.has_meta("roster_rig") or not is_finite(delta) or delta <= 0.0: return
 	var rig: Dictionary = art.get_meta("roster_rig")
 	var dt := minf(delta,0.10)
@@ -69,11 +72,17 @@ static func tick(art: Node3D, delta: float, snapshot: Dictionary, detail: int = 
 	for child: Dictionary in rig.companions:
 		var child_snapshot: Dictionary = snapshot.duplicate()
 		if not StringName(child.action).is_empty(): child_snapshot.action = child.action
-		tick(child.node,dt,child_snapshot,quality)
-	if quality == 2 and not changed and (action.is_empty() or ambient) and not dead and hurt == 0.0 and int(rig.frame)%3 != 0: return
-	if not rig.has("poses"): rig["poses"] = (rig.rests as Array[Transform3D]).duplicate()
+		tick(child.node,dt,child_snapshot,quality,pose_needed)
+	var may_skip: bool = not changed and (action.is_empty() or ambient) and not dead and hurt == 0.0
+	if not pose_needed and may_skip:
+		rig.pose_deferred = true
+		rig.hidden_pose_skips += 1
+		return
+	var returning: bool = pose_needed and bool(rig.pose_deferred)
+	if quality == 2 and not returning and may_skip and int(rig.frame)%3 != 0: return
+	rig.pose_deferred = false
+	_reset_working_pose(rig)
 	var poses: Array[Transform3D] = rig.poses
-	for i: int in range(poses.size()): poses[i] = rig.base_poses[i]
 	if bool(rig.definition.get("inert",false)) or rig.definition.family == "assembly":
 		# Furniture and mannequins consume current snapshots but never inherit an
 		# animal/human collapse. Child rigs above still own their individual poses.
@@ -96,7 +105,7 @@ static func tick(art: Node3D, delta: float, snapshot: Dictionary, detail: int = 
 	if dead:
 		# Only visual bones collapse. The caller retains collision placement and
 		# essential/dead behavior. Supplied death phase never advances here.
-		for i: int in range(poses.size()): poses[i] = rig.base_poses[i]
+		_reset_working_pose(rig)
 		var fall := death*death*(3.0-2.0*death)
 		if rig.definition.family == "human":
 			_pose(rig,"root",Vector3(1.48*fall,0,-0.10*fall),Vector3(0,0.22*fall,0))
@@ -128,6 +137,7 @@ static func _apply_bones(rig: Dictionary, poses: Array[Transform3D]) -> void:
 		if poses[i] == applied[i]: continue
 		skeleton.set_bone_pose(i,poses[i])
 		applied[i] = poses[i]
+		rig.attachments_dirty = true
 		rig.bone_writes += 1
 
 
@@ -167,7 +177,7 @@ static func _pose(rig: Dictionary, bone: String, angles: Vector3, offset: Vector
 	if not rig.lookup.has(bone): return
 	var index: int = rig.lookup[bone]
 	var rest: Transform3D = rig.base_poses[index]
-	rig.poses[index] = Transform3D(rest.basis*Basis.from_euler(angles),rest.origin+offset)
+	_set_local_pose(rig,index,Transform3D(rest.basis*Basis.from_euler(angles),rest.origin+offset))
 
 
 static func _add(rig: Dictionary, bone: String, angles: Vector3) -> void:
@@ -175,7 +185,26 @@ static func _add(rig: Dictionary, bone: String, angles: Vector3) -> void:
 	var index: int = rig.lookup[bone]
 	var current: Transform3D = rig.poses[index]
 	current.basis *= Basis.from_euler(angles)
-	rig.poses[index] = current
+	_set_local_pose(rig,index,current)
+
+
+static func _reset_working_pose(rig: Dictionary) -> void:
+	var poses: Array[Transform3D] = rig.poses
+	for i: int in range(poses.size()): poses[i] = rig.base_poses[i]
+	rig.global_valid.fill(0)
+	rig.global_cached_count = 0
+
+
+static func _set_local_pose(rig: Dictionary, index: int, value: Transform3D) -> void:
+	if rig.poses[index] == value: return
+	rig.poses[index] = value
+	# Normal pose authoring precedes all queries. Avoid walking descendants
+	# until contact IK has actually populated a working global cache.
+	if int(rig.global_cached_count) == 0: return
+	for descendant: int in rig.descendants[index]:
+		if rig.global_valid[descendant] == 0: continue
+		rig.global_valid[descendant] = 0
+		rig.global_cached_count -= 1
 
 
 static func _human(rig: Dictionary, velocity: Vector3, grounded: bool, time: float, quality: int) -> void:
@@ -339,11 +368,18 @@ static func _human_action(rig: Dictionary, action: StringName, phase: float, ser
 
 
 static func _global_pose(rig: Dictionary, index: int) -> Transform3D:
+	rig.global_pose_queries += 1
+	if rig.pose_cache_enabled and rig.global_valid[index] != 0: return rig.global_poses[index]
+	# Preserve the original multiplication association, including during IK.
 	var result: Transform3D = rig.poses[index]
 	var parent: int = rig.parents[index]
 	while parent >= 0:
 		result = (rig.poses[parent] as Transform3D)*result
 		parent = rig.parents[parent]
+	rig.global_poses[index] = result
+	if rig.global_valid[index] == 0: rig.global_cached_count += 1
+	rig.global_valid[index] = 1
+	rig.global_pose_solves += 1
 	return result
 
 
@@ -376,17 +412,17 @@ static func _arm_contact(rig: Dictionary, side: String, target: Vector3, wrist_b
 	var rotated := Basis(Quaternion((e.origin-s.origin).normalized(),aim.normalized()))*s.basis
 	var local: Transform3D = rig.poses[shoulder]
 	local.basis = _global_pose(rig,rig.parents[shoulder]).basis.inverse()*rotated
-	rig.poses[shoulder] = local
+	_set_local_pose(rig,shoulder,local)
 	e = _global_pose(rig,elbow)
 	w = _global_pose(rig,wrist)
 	var endpoint := s.origin+direction*distance
 	rotated = Basis(Quaternion((w.origin-e.origin).normalized(),(endpoint-e.origin).normalized()))*e.basis
 	local = rig.poses[elbow]
 	local.basis = _global_pose(rig,rig.parents[elbow]).basis.inverse()*rotated
-	rig.poses[elbow] = local
+	_set_local_pose(rig,elbow,local)
 	local = rig.poses[wrist]
 	local.basis = _global_pose(rig,rig.parents[wrist]).basis.inverse()*wrist_basis
-	rig.poses[wrist] = local
+	_set_local_pose(rig,wrist,local)
 
 
 static func _human_contacts(rig: Dictionary, action: StringName, phase: float) -> void:

@@ -15,6 +15,8 @@ class Spatial extends RefCounted:
 	func can_hit(_from: Vector2,_to: Vector2,_source: String,_target: String) -> bool: return visible
 	func sweep_projectile(start: Vector2,end: Vector2,_radius: float) -> Dictionary:
 		return {"blocked":blocked,"fraction":0.0 if blocked else 1.0,"position":start if blocked else end}
+class DaySpatial extends Spatial:
+	func stage_cash_pickup(center: Vector2,_maximum: float) -> Variant: return center if not blocked else null
 var checks: int = 0
 var failures: Array[String] = []
 func _initialize() -> void: call_deferred("_run")
@@ -38,6 +40,7 @@ func _run() -> void:
 	_test_quest_ordering()
 	_test_street_robbery_and_restore()
 	_test_communications_composition()
+	_test_day_composition()
 	if failures.is_empty():
 		print("3D FULL RUNTIME GATE: PASS (%d checks; composed intro/vendor/loop/save chain, pause, stale capabilities and physical access boundaries; full scene pending)" % checks)
 		quit(0)
@@ -45,6 +48,43 @@ func _run() -> void:
 		for failure: String in failures: push_error(failure)
 		print("3D FULL RUNTIME GATE: FAIL (%d failures / %d checks)" % [failures.size(),checks])
 		quit(1)
+
+func _test_day_composition() -> void:
+	var spatial := DaySpatial.new()
+	var runtime := Runtime.new(spatial,null,func(): return 1000.0)
+	_check(runtime.days_enabled and runtime.state.on_day_started.is_valid(),"real Campaign/Day owners install one rollover")
+	runtime.fresh(); runtime.drain_events(); runtime.s.flags.introDone = true
+	runtime.s.counters.heistsToday = 2; runtime.s.counters.copperStripped = 7
+	runtime.s.dayTime = 0.9999
+	var survived: int = runtime.p.lifetime.dayCount
+	runtime.advance(0.05)
+	_check(runtime.s.day == 2 and runtime.p.lifetime.dayCount == 2 and runtime.p.lifetime.dayCount > survived,"natural composed day increments exactly once")
+	_check(runtime.s.counters.heistsToday == 0 and runtime.s.counters.copperStripped == 7,"composed daily reset retains permanent copper count")
+	var guards: int = 0
+	for actor: Dictionary in runtime.state.npcs:
+		if actor.get("kingdomGuard",false): guards += 1; _check("_2_" in str(actor.id),"new day replaces old force generation")
+	_check(guards == 15,"single real Campaign generation after dawn")
+	var day_events: int = 0
+	for event: Dictionary in runtime.drain_events():
+		if event.kind == "day_started": day_events += 1; _check(event.payload.handled,"day receipt identifies real owner")
+	_check(day_events == 1,"one day-start event with no duplicate fallback rollover")
+	runtime.s.dayTime = 0.8
+	var slept: Dictionary = runtime.sleep_at_block()
+	_check(slept.get("ok",false) and runtime.s.day == 3,"actual block sleep delegates to same Day owner")
+	runtime.advance(1.0/60.0)
+	_check(not _actor(runtime,"price_guy").is_empty(),"day3 active scheduler creates real Price Guy")
+	var visitor: String = ""
+	for actor: Dictionary in runtime.state.npcs:
+		if actor.get("isDay3Visitor",false): visitor = actor.id
+	_check(not visitor.is_empty(),"day3 sleep event creates source visitor")
+	var price: Dictionary = _actor(runtime,"price_guy")
+	_put(runtime,Vector2(price.x+price.w*0.5,price.y+price.h*0.5))
+	var menu: Dictionary = runtime.open_day_actor("price_guy")
+	_check(menu.get("ok",false),"conditional resident uses real Day menu")
+	runtime.set_mode("paused")
+	_check(not runtime.select_day_actor(menu.get("token"),"pay").get("ok",false),"pause invalidates conditional menu")
+	runtime.s.dayTime = 0.8
+	_check(not runtime.days.actor_visible({"id":"mom"}) and not runtime.days.actor_visible({"id":"pete"}) and not runtime.days.actor_visible({"id":"hopper","daytimeOnly":true}),"source night visibility covers three explicit resident categories")
 
 func _test_communications_composition() -> void:
 	var spatial := Spatial.new()

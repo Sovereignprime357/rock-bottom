@@ -805,3 +805,24 @@ When you ship a task:
 2. Follow the existing format: title / status / spec (with sub-bullets for behavior and invariants) / estimated effort
 3. Be specific. "Add more juice" is not a task. "Add 200ms screen shake on hit (cap 4px translate, ease-out)" is a task.
 4. If the task touches an invariant in SPEC.md, call it out explicitly.
+
+
+## 2026-11-18 full-port checkpoint refinement
+
+Source-owned Cooking/Heists/Office/Day/Companions are integrated in the full scene; bounded verification and native/Web evidence are tracked in WORKFLOW-3D-PORT.md. Keep P13c Kingdom, static/interactive props, remaining Block activities, cart/old-school, incidents/weather, map/audio and final parity/performance tours open. The original v22 release remains unchanged. Completion still requires a named pushed commit and both runners; integrated packets are not a claim that the full port is shipped.
+
+
+2026-11-18 continuation: WorldProps and Kingdom production controls connected; native120s NPC
+camera-overlap fix validated. Working acceptance evidence: props34269, Kingdom22204/physics558,
+contact74, animation1521/roster1954, CookingRuntime175, controller245. Complete-port status remains
+in flight: interactive/incident presentations, neighborhood utility commands, actual60 CPU budget,
+full guidance/audio/weather/cart/OldSchool and native/Web progression tour. New68gate runner and
+original19runner are in progress; no full completion claim or release promotion.
+
+
+### Full-port bounded checkpoint continuation —2026-11-18
+Accepted local packets: Utilities1571/133sourcecases with fullSceneF/market/lottery/autosave; dynamic interactive3169physical+13015model with livecan/bottle controller controls; contact83+navigation4750 after exactliveIDlookup; viewmodelcontext1141 with63nativeframes; Guidance1125/165views58directions plusFullHUD21 and fullScene279; Kingdom22688/159paths369steps includes sourcekingdomBoss objective predicate. Nativeincident30frames and11737physical checks cover six trajectories/24beats/28mappedroads, but Runtimeactivation waitsdynamiccorridorreservation. Full75runner is in progress. Original19suite passed this batch. None of these alone closes full-portP16/native-Web/performance acceptance.
+Current bounded nextwork: architecture→projected objective marker; characters→realcart projection/drop/handlegrip proposal; world→dynamicincident corridor reservation and facetedpigeon refinement; root→performance/integration/fullgate/export/commit evidence. Allproduction packet files held during centralrunner.
+
+### Full neighborhood validation checkpoint — 2026-11-18
+Registered3D75/75 and original19/19 gates pass. Added current real Kingdom593 and Guidance1137 physical/HUD regressions; nine held weapons1141 and livepropview3169 remain green. Both Full Windows/Web exports rebuilt. See reports/2026-11-18-3d-neighborhood-systems.md for delivery/evidence. This ships a bounded checkpoint only: incident Runtime activation, projected marker integration, cart, OldSchool, audio/weather, complete tours and performance remain open.

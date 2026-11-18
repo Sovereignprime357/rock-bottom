@@ -393,3 +393,32 @@ func action_hint(point: Vector2) -> String:
 	var venue: String = venue_at(point)
 	if venue.is_empty() or not (unlocked(venue) or discovered(venue)): return ""
 	return TEXT[venue].hint
+
+
+func room_menu(venue: String) -> Dictionary:
+	# Read-only source discovery/concession presentation; smoke() owns acceptance.
+	if venue not in VENUES or not (discovered(venue) or unlocked(venue)): return {}
+	var title: String = venue
+	for row: Dictionary in venues:
+		if row.id == venue: title = str(row.label); break
+	if not unlocked(venue):
+		return {"title":title,"text":"you know this counts.\n"+TEXT[venue].keeper+"\n("+TEXT[venue].condition+".)","options":[{"id":"leave","label":"leave.","enabled":true}]}
+	var open: bool = condition(venue)
+	var body: String = ""
+	var closed: String = ""
+	match venue:
+		"park":
+			body = "the bench is here. the philosopher pretends to be asleep.\nhe is not." if open else "the bench is here. the philosopher is awake.\nthe arrangement is off until dark."
+			closed = "(the philosopher is awake.)"
+		"choir_office":
+			body = "the office is open. the choir is holding b flat.\na loose vent is louder." if open else "the office is closed.\noffice hours are b flat to b flat.\nthe schedule does not convert."
+			closed = "(the office is closed.)"
+		"underpass":
+			body = "the dog with the lanyard is here.\nthe dog does not know it is a condition." if open else "the dog is elsewhere.\nthe bridge tolerates you. the arrangement needs the dog."
+			closed = "(the dog is elsewhere.)"
+		"laundromat":
+			body = "the dryer is mid-cycle. the dryer provides cover.\nthe dryer knows." if open else ("the dryer is running. it is not mid-cycle.\nthe margins count." if condition_status(venue) == "running. not mid." else "the dryer is idle.\nprofessional courtesy is on break.")
+			closed = "(the dryer is not mid-cycle.)"
+	var total: int = int(host.p.rocks)+int(host.p.soapRocks)
+	var label: String = "smoke a rock. (you have none.)" if total <= 0 else ("smoke a rock. (-1 rock, +18s rocked-up)" if open else "smoke a rock. "+closed)
+	return {"title":title,"text":body+"\nyour shakes are %d. your brain is %d." % [int(floor(host.p.shakes+0.5)),int(floor(host.p.brain+0.5))],"options":[{"id":"smoke","label":label,"enabled":total>0 and host.p.rockedT<=0 and open},{"id":"leave","label":"leave.","enabled":true}]}

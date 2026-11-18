@@ -47,14 +47,42 @@ static func definition(visual_id: StringName) -> Dictionary:
 
 static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 	var def := definition(visual_id)
-	if def.is_empty(): return null
+	if def.is_empty() or not prepare(visual_id): return null
+	var source: Dictionary = _templates[visual_id]
+	return _instantiate(visual_id,instance_seed,def,source)
+
+
+static func prepare(visual_id: StringName) -> bool:
+	var def := definition(visual_id)
+	if def.is_empty(): return false
 	if not _templates.has(visual_id):
 		var built := _build_template(visual_id)
 		if built.is_empty():
 			push_error("Character construction failed: "+String(visual_id))
-			return null
+			return false
 		_templates[visual_id] = built
-	var source: Dictionary = _templates[visual_id]
+	for companion: Dictionary in def.get("companions",[]):
+		if not prepare(companion.visual_id): return false
+	return true
+
+
+static func is_prepared(visual_id: StringName) -> bool:
+	if not _templates.has(visual_id): return false
+	var def := definition(visual_id)
+	if def.is_empty(): return false
+	for companion: Dictionary in def.get("companions",[]):
+		if not is_prepared(companion.visual_id): return false
+	return true
+
+
+static func preparation_stats() -> Dictionary:
+	var result := {"templates":_templates.size(),"total":supported_visuals().size(),"build_usec":0,"weight_solves":0,"weight_cache_hits":0}
+	for template: Dictionary in _templates.values():
+		for key: String in ["build_usec","weight_solves","weight_cache_hits"]: result[key] += int(template.build_stats[key])
+	return result
+
+
+static func _instantiate(visual_id: StringName, instance_seed: int, def: Dictionary, source: Dictionary) -> Node3D:
 	var root := Node3D.new()
 	root.name = String(visual_id)
 	root.set_meta("visual_id",visual_id)
@@ -137,7 +165,23 @@ static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 		"markers":markers,"layers":layers,"definition":def,"time":0.0,
 		"phase":0.0,"motion":0.0,"seed":float(posmod(instance_seed,997))/997.0*TAU,
 		"detail":-1,"frame":0,"last_state":[],"pose_updates":0,"finger_updates":0,
-		"applied_poses":base_poses.duplicate(),"bone_writes":0,"last_coats":3,"visibility_writes":0}
+		"applied_poses":base_poses.duplicate(),"bone_writes":0,"last_coats":3,"visibility_writes":0,
+		"poses":base_poses.duplicate(),"pose_cache_enabled":true,"global_poses":base_poses.duplicate(),
+		"global_valid":PackedByteArray(),"descendants":[],"global_cached_count":0,"global_pose_queries":0,"global_pose_solves":0,
+		"attachment_globals":{},"attachments_dirty":true,"attachment_queries":0,"attachment_writes":0,
+		"pose_deferred":false,"hidden_pose_skips":0}
+	rig.global_valid.resize(parents.size())
+	rig.global_valid.fill(0)
+	for ancestor: int in range(parents.size()):
+		var descendants := PackedInt32Array()
+		for candidate: int in range(parents.size()):
+			var current: int = candidate
+			while current >= 0:
+				if current == ancestor:
+					descendants.append(candidate)
+					break
+				current = parents[current]
+		rig.descendants.append(descendants)
 	root.set_meta("roster_rig",rig)
 	root.set_meta("roster_metrics",metrics)
 	root.set_meta("roster_own_metrics",source.metrics.duplicate(true))
@@ -146,15 +190,33 @@ static func create(visual_id: StringName, instance_seed: int = 0) -> Node3D:
 
 
 static func _sync_attachments(rig: Dictionary) -> void:
-	var skeleton: Skeleton3D = rig.skeleton
+	if rig.attachments_dirty:
+		rig.attachment_globals.clear()
+		rig.attachments_dirty = false
 	for item: Dictionary in rig.attachments:
-		(item.node as Node3D).transform = skeleton.get_bone_global_pose(item.bone)*item.offset
+		_attachment_target(rig,item.node,_attachment_global(rig,item.bone)*item.offset)
 	for item: Dictionary in rig.companions:
-		(item.node as Node3D).transform = skeleton.get_bone_global_pose(item.bone)*item.offset if item.follow_bone else item.anchor
+		_attachment_target(rig,item.node,_attachment_global(rig,item.bone)*item.offset if item.follow_bone else item.anchor)
 	for key: String in rig.markers:
 		if key == "head": continue # The face attachment is also the legacy head marker.
 		var item: Dictionary = rig.markers[key]
-		(item.node as Node3D).transform = skeleton.get_bone_global_pose(item.bone)
+		_attachment_target(rig,item.node,_attachment_global(rig,item.bone))
+
+
+static func _attachment_global(rig: Dictionary, bone: int) -> Transform3D:
+	if rig.pose_cache_enabled and rig.attachment_globals.has(bone): return rig.attachment_globals[bone]
+	var value: Transform3D = (rig.skeleton as Skeleton3D).get_bone_global_pose(bone)
+	rig.attachment_queries += 1
+	rig.attachment_globals[bone] = value
+	return value
+
+
+static func _attachment_target(rig: Dictionary, node: Node3D, value: Transform3D) -> void:
+	# Compare the node itself: a released prop intentionally differs from its
+	# binding, even when the skeleton is unchanged on the next death frame.
+	if node.transform == value: return
+	node.transform = value
+	rig.attachment_writes += 1
 
 
 static func _raw_character(id: StringName) -> Node3D:
@@ -325,11 +387,13 @@ static func _set_owner(node: Node, owner_root: Node) -> void:
 		_set_owner(child,owner_root)
 
 
-static func _build_template(id: StringName) -> Dictionary:
+static func _build_template(id: StringName, memoize_weights: bool = true) -> Dictionary:
+	var started := Time.get_ticks_usec()
 	var raw := _raw_character(id)
 	if raw == null: return {}
 	var def := definition(id)
-	var data := {"bones":[],"lookup":{},"attachments":[],"skip":[],"groups":{},"meshes":[],"errors":[],"skin_color":String(def.get("skin",""))}
+	var data := {"bones":[],"lookup":{},"attachments":[],"skip":[],"groups":{},"meshes":[],"errors":[],"skin_color":String(def.get("skin","")),
+		"memoize_weights":memoize_weights,"weight_caches":{},"weight_solves":0,"weight_cache_hits":0}
 	_build_bones(data,raw,def)
 	_pack_attachment(data,raw,raw.get_node("head") as Node3D,"head")
 	var jaw := raw.get_node_or_null("jaw") as Node3D
@@ -378,7 +442,12 @@ static func _build_template(id: StringName) -> Dictionary:
 	data["metrics"] = metrics
 	data.erase("groups")
 	data.erase("skip")
+	data.erase("weight_caches")
 	raw.free()
+	data["build_stats"] = {"build_usec":Time.get_ticks_usec()-started,"weight_solves":data.weight_solves,"weight_cache_hits":data.weight_cache_hits}
+	data.erase("memoize_weights")
+	data.erase("weight_solves")
+	data.erase("weight_cache_hits")
 	return data
 
 
@@ -447,6 +516,13 @@ static func _append_part(data: Dictionary, raw: Node3D, part: MeshInstance3D, ro
 	var group: Dictionary = data.groups[key]
 	var bounds := part.mesh.get_aabb()
 	var chain := _chain(data,role,part,transform*(bounds.position+bounds.size*0.5))
+	var weights_cache: Dictionary = {}
+	if bool(data.memoize_weights):
+		# A chain is ordered: its segment projections and tie-breaking influence
+		# order must match. Exact Vector3 keys preserve the original float inputs.
+		var chain_key := "|".join(chain)
+		if not data.weight_caches.has(chain_key): data.weight_caches[chain_key] = {}
+		weights_cache = data.weight_caches[chain_key]
 	for surface: int in range(part.mesh.get_surface_count()):
 		var arrays := part.mesh.surface_get_arrays(surface)
 		if arrays.size() != Mesh.ARRAY_MAX or not arrays[Mesh.ARRAY_VERTEX] is PackedVector3Array or not arrays[Mesh.ARRAY_NORMAL] is PackedVector3Array:
@@ -479,11 +555,11 @@ static func _append_part(data: Dictionary, raw: Node3D, part: MeshInstance3D, ro
 				var nab := (norms[0]+norms[1]).normalized()
 				var nbc := (norms[1]+norms[2]).normalized()
 				var nca := (norms[2]+norms[0]).normalized()
-				_add_triangle(data,group,[points[0],ab,ca],[norms[0],nab,nca],chain,color)
-				_add_triangle(data,group,[ab,points[1],bc],[nab,norms[1],nbc],chain,color)
-				_add_triangle(data,group,[ca,bc,points[2]],[nca,nbc,norms[2]],chain,color)
-				_add_triangle(data,group,[ab,bc,ca],[nab,nbc,nca],chain,color)
-			else: _add_triangle(data,group,points,norms,chain,color)
+				_add_triangle(data,group,[points[0],ab,ca],[norms[0],nab,nca],chain,color,weights_cache)
+				_add_triangle(data,group,[ab,points[1],bc],[nab,norms[1],nbc],chain,color,weights_cache)
+				_add_triangle(data,group,[ca,bc,points[2]],[nca,nbc,norms[2]],chain,color,weights_cache)
+				_add_triangle(data,group,[ab,bc,ca],[nab,nbc,nca],chain,color,weights_cache)
+			else: _add_triangle(data,group,points,norms,chain,color,weights_cache)
 
 
 static func _chain(data: Dictionary, role: String, part: MeshInstance3D, center: Vector3) -> Array[String]:
@@ -549,9 +625,16 @@ static func _weights(data: Dictionary, chain: Array[String], point: Vector3) -> 
 	return [bones,weights]
 
 
-static func _add_triangle(data: Dictionary, group: Dictionary, points: Array[Vector3], normals: Array[Vector3], chain: Array[String], color: Color) -> void:
+static func _add_triangle(data: Dictionary, group: Dictionary, points: Array[Vector3], normals: Array[Vector3], chain: Array[String], color: Color, weights_cache: Dictionary) -> void:
 	for i: int in range(3):
-		var weight := _weights(data,chain,points[i])
+		var weight: Array
+		if bool(data.memoize_weights) and weights_cache.has(points[i]):
+			weight = weights_cache[points[i]]
+			data.weight_cache_hits += 1
+		else:
+			weight = _weights(data,chain,points[i])
+			data.weight_solves += 1
+			if bool(data.memoize_weights): weights_cache[points[i]] = weight
 		group.vertices.append(points[i])
 		group.normals.append(normals[i])
 		# Fixed at authoring time, before deformation. Repeated quiet fabric/skin

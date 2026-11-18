@@ -209,6 +209,20 @@ pass/use stamp; fresh/restore cancellation cannot refund into a replacement stat
 
 ## Independent verification plan
 
+Office handoff follow-up: all six shared-chest option labels retain the source dynamic
+stock count or exact empty/short wording (daily_hideouts.js292–303), including the two
+office service aliases. Source chest transfer receipts, cot text and powered/unpowered
+rest/sleep receipts are compared verbatim in18 additional UI paths. Preserve the shipped
+powered-cot sleep label saying+25brain although the generator raises the actual grant to30.
+The Scene displays the source choices only: cot/chest back links need no extra generic
+leave choice; Escape remains available. Chest/cot back returns the existing office
+navigation envelope, with Runtime/Scene responsible for reopening the real office owner.
+
+A rejected stale Travel token must leave a newer active service/token intact. Clear the
+captured service only after successful consumption, or on a non-stale capability failure;
+otherwise a stale action could strand the newer valid menu with unknown_service. No
+economy, day, cart, geometry, or source action-ID contract changes in this follow-up.
+
 `tools/3d-travel-oracle.mjs` runs unchanged source functions and actual menu callbacks
 under the seeded fixed-clock harness. Output is
 `game3d/tests/fixtures/travel_reference.json`; `--check` compares deterministic bytes,

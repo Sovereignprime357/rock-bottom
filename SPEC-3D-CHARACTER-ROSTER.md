@@ -83,6 +83,48 @@ epsilon comparisons, and zero coats/reset/zero coats rejects stale visibility ca
 reset for each explicit reset operation and count only engine writes made during/after it.
 Profile native results before claiming frame savings.
 
+### P04c exact caches and conservative hidden ambient scheduling (2026-11-18)
+
+Approved scope preserves every authored mesh/material/skin, source snapshot, AI tick and RNG
+draw. `ActorAnimation.tick(art, delta, snapshot, detail=0, pose_needed=true)` keeps the existing
+callers unchanged. A false final argument may skip only an unchanged idle/ambient pose without
+hurt/death. Clocks, gait integration, child snapshots and coats still consume every call;
+accepted actions and state transitions retain their existing immediate updates. Returning to
+`pose_needed=true` forces the current pose before the old distant schedule can skip it. Reset
+clears this deferred state. No hidden clip queues, replayed events or autonomous gameplay timers.
+
+Per-instance working global-pose caches retain the original child-to-parent multiplication
+order exactly. Local writes invalidate that bone and its descendants; full pose reset invalidates
+all entries. The uncached reference path remains available through the diagnostic-only rig
+flag `pose_cache_enabled=false`. Attachment globals use the real Skeleton query, once per
+distinct binding bone after a changed applied pose. Every binding still checks its current
+node transform: death-released props must restore their binding before each current release
+interpolation. Setters are omitted only on exact equality, never an epsilon. Presentation
+counters (`global_pose_queries`, `global_pose_solves`, `attachment_queries`, `attachment_writes`,
+`hidden_pose_skips`) are observational only and reset with the rig.
+
+`presentation_visibility.gd` exposes `frame_context(camera, sun, min_receiver_y=-INF)` and
+`needs_pose(art, context)`. The caller computes one context per render. Missing/nonfinite
+camera, light, certified receiver floor or rig bounds fails open. The conservative radius is
+derived from bone-chain reach, full mesh bounds, rigid attachment transforms, released-prop
+targets and nested independent rigs, including mounts and furniture. Its translation envelope
+covers current root death/sleep, pelvis gait and mouth offsets; new translation animation must
+extend that envelope. Scale and shear are bounded; it never uses an actor-center-only test.
+
+An actor touching the camera frustum or the light's shadow-distance region always receives a
+pose. Outside both, a directional-light sweep of the whole actor sphere continues to the
+caller-certified lowest receiving surface. Only separation of that entire capsule from a
+frustum plane permits hidden scheduling. This retains offscreen casters whose shadows enter
+view. Horizontal/upward or unknown light/floor data fails open. This helper does not change
+mesh visibility, renderer culling, collisions, shadow policy or actor existence. Root owns
+FullScene wiring and a separately measured world-only shadow trial.
+
+Tests compare actual weighted/attached geometry against uncached actors for all72 templates;
+exercise hidden-return, active actions, hurt/death, coats, reset and nested child clocks; and
+test frustum-edge, scale/shear, unknown bounds and offscreen-shadow counterexamples. Keep
+original initial-collision probe audits and both scene/whole-engine16ms thresholds. Model
+checks establish correctness only; report runtime gains only after central native measurement.
+
 ## Prop contact refinement — P05b visual review
 
 The guitar, laundry basket and equation board follow the chest through cached attachments.

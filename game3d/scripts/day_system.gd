@@ -3,6 +3,7 @@ extends RefCounted
 ## Source days and conditional residents; GameState alone owns the model and day increment.
 const Session = preload("res://scripts/action_session.gd")
 const Inventory = preload("res://scripts/inventory.gd")
+const CampaignSchema = preload("res://scripts/campaign_system.gd")
 const CAUSES := ["natural","hideout_sleep","office_sleep","block_sleep"]
 const MAX_PENDING := 64
 const OPTIONAL_PENDING_LIMIT := 40
@@ -91,19 +92,9 @@ func preflight_day(cause: String) -> bool:
 	if int(host.s.day) >= 1000000000: return false
 	if _prepared.get("day",0) == host.s.day and _prepared.get("cause","") == cause: return true
 	var result: Variant = _campaign_ref.get_ref().call(&"prepare_day",int(host.s.day)+1)
-	if not result is Dictionary or result.get("ok") != true or not result.get("actors") is Array or not result.get("kingdom") is Dictionary: return false
-	if result.actors.size() > 16: return false
-	var planned: Array[Dictionary] = []
-	for actor: Variant in result.actors:
-		if not actor is Dictionary: return false
-		var record: Dictionary = _pending("campaign",actor,int(host.s.day)+1)
-		if normalize_pending([record]).size() != 1: return false
-		planned.append(record)
-	var persistent: int = 0
-	for record: Dictionary in host.s.dayPendingPlacements:
-		if record.kind != "campaign": persistent += 1
-	if persistent+planned.size()+1 > MAX_PENDING: return false
-	_prepared = {"day":int(host.s.day),"cause":cause,"actors":planned,"kingdom":result.kingdom.duplicate(true)}
+	var checked: Dictionary = _validate_force_plan(result,int(host.s.day)+1,1)
+	if checked.is_empty(): return false
+	_prepared = {"day":int(host.s.day),"cause":cause,"forces":checked}
 	return true
 
 
@@ -118,13 +109,7 @@ func commit_day(cause: String) -> void:
 	for key: String in host.definition("src/systems/daily_hideouts.js","DAILY_COUNTER_KEYS",[]): host.s.counters[key] = 0
 	if host.s.office is Dictionary and host.s.office.get("workDay",0) != host.s.day:
 		host.s.office.workDay = host.s.day; host.s.office.workToday = 0
-	host.s.kingdom = plan.kingdom
-	for index: int in range(host.npcs.size()-1,-1,-1):
-		if host.npcs[index].get("kingdomGuard",false) or host.npcs[index].get("kingdomPretender",false):
-			host.emit_event("actor_removed",{"actor_id":host.npcs[index].id}); host.npcs.remove_at(index)
-	for index: int in range(host.s.dayPendingPlacements.size()-1,-1,-1):
-		if host.s.dayPendingPlacements[index].kind == "campaign": host.s.dayPendingPlacements.remove_at(index)
-	for record: Dictionary in plan.actors: _place_or_defer(record)
+	_commit_force_plan(plan.forces)
 	_progression_ref.get_ref().call(&"roll_hustles")
 	_communications_ref.get_ref().call(&"flush_pending_events")
 	if cause == "natural":
@@ -139,6 +124,91 @@ func commit_day(cause: String) -> void:
 		_travel_ref.get_ref().call(&"on_natural_dawn")
 	elif cause in ["office_sleep","block_sleep"] and host.s.day >= 7: host.unlock_achievement("tuesday_again")
 	host.emit_event("weather_changed",{"weather":host.s.weather,"day":host.s.day})
+
+
+static func _same_plan_data(expected: Variant,actual: Variant) -> bool:
+	if (expected is int or expected is float) and (actual is int or actual is float):
+		return is_finite(float(actual)) and float(expected) == float(actual)
+	if expected is Dictionary and actual is Dictionary:
+		if expected.size() != actual.size(): return false
+		for key: Variant in expected:
+			if not actual.has(key) or not _same_plan_data(expected[key],actual[key]): return false
+		return true
+	if expected is Array and actual is Array:
+		if expected.size() != actual.size(): return false
+		for index: int in range(expected.size()):
+			if not _same_plan_data(expected[index],actual[index]): return false
+		return true
+	return typeof(expected) == typeof(actual) and expected == actual
+
+func _validate_force_plan(raw: Variant,day: int,reserved: int = 0) -> Dictionary:
+	if not raw is Dictionary or raw.get("ok") != true or not raw.get("actors") is Array or not raw.get("kingdom") is Dictionary: return {}
+	if not _finite(raw.get("day")) or raw.day != day or day < 1 or day > 1000000000: return {}
+	if not _finite(raw.get("pretenders_defeated")) or raw.pretenders_defeated < 0 or raw.pretenders_defeated > 1000000000 or floor(raw.pretenders_defeated) != raw.pretenders_defeated: return {}
+	if raw.actors.size() > 16: return {}
+	var canonical: Dictionary = CampaignSchema.plan_for_state(day,host.s.get("kingdom"),host.p.lifetime.get("pretendersDefeated"))
+	if canonical.get("ok") != true or not _same_plan_data(canonical,raw): return {}
+	var records: Array[Dictionary] = []
+	var seen: Dictionary = {}
+	for actor: Variant in raw.actors:
+		if not actor is Dictionary or not actor.get("id") is String or seen.has(actor.id) or not _bounded_point(actor): return {}
+		var normalized: Array[Dictionary] = normalize_pending([_pending("campaign",actor,day)])
+		if normalized.size() != 1: return {}
+		seen[actor.id] = true; records.append(normalized[0])
+	var retained: int = 0
+	for record: Dictionary in host.s.dayPendingPlacements:
+		if record.kind != "campaign": retained += 1
+	if retained+records.size()+reserved > MAX_PENDING: return {}
+	return {"day":day,"kingdom":canonical.kingdom,"pretenders_defeated":int(canonical.pretenders_defeated),"records":records}
+
+
+func replace_campaign_forces(plan: Dictionary) -> bool:
+	if not _sync_epoch() or _object(_spatial_ref,&"clear_placement") == null: return false
+	var checked: Dictionary = _validate_force_plan(plan,int(host.s.day))
+	if checked.is_empty(): return false
+	_commit_force_plan(checked)
+	return true
+
+
+func can_replace_campaign_forces(prospective_kingdom: Dictionary,lifetime_pretenders: Variant) -> bool:
+	# Read-only preflight for a prospective victory/escape, before fatal damage.
+	if host == null or _object(_spatial_ref,&"clear_placement") == null: return false
+	if not _finite(lifetime_pretenders) or lifetime_pretenders < 0 or lifetime_pretenders > 1000000000 or floor(lifetime_pretenders) != lifetime_pretenders: return false
+	if not _same_plan_data(CampaignSchema.normalize_kingdom(prospective_kingdom),prospective_kingdom): return false
+	if prospective_kingdom.pretendersDefeated != lifetime_pretenders: return false
+	if not _finite(host.s.get("day")) or floor(host.s.day) != host.s.day or host.s.day < 1 or host.s.day > 1000000000: return false
+	var plan: Dictionary = CampaignSchema.plan_for_state(int(host.s.day),prospective_kingdom,lifetime_pretenders)
+	if plan.get("ok") != true or plan.actors.size() > 16: return false
+	for actor: Dictionary in plan.actors:
+		if normalize_pending([_pending("campaign",actor,int(host.s.day))]).size() != 1: return false
+	var retained: int = 0
+	for record: Dictionary in host.s.get("dayPendingPlacements",[]):
+		if record.kind != "campaign": retained += 1
+	return retained+plan.actors.size() <= MAX_PENDING
+
+
+func discard_pending_campaign_clan(clan: String,persist: bool = false) -> bool:
+	if clan not in ["blue_tarp","cart_cavalry","copper_choir","throne"] or not _sync_epoch(): return false
+	var removed: bool = false
+	for index: int in range(host.s.dayPendingPlacements.size()-1,-1,-1):
+		var record: Dictionary = host.s.dayPendingPlacements[index]
+		if record.kind == "campaign" and record.payload.get("kingdomGuard",false) and record.payload.get("kingdomClan") == clan:
+			host.s.dayPendingPlacements.remove_at(index); removed = true
+	if removed and persist: _save()
+	return true
+
+
+func _commit_force_plan(checked: Dictionary) -> void:
+	host.s.kingdom = checked.kingdom
+	host.p.lifetime.pretendersDefeated = checked.pretenders_defeated
+	for index: int in range(host.npcs.size()-1,-1,-1):
+		if host.npcs[index].get("kingdomGuard",false) or host.npcs[index].get("kingdomPretender",false):
+			host.emit_event("actor_removed",{"actor_id":host.npcs[index].id}); host.npcs.remove_at(index)
+	var removed_pending: bool = false
+	for index: int in range(host.s.dayPendingPlacements.size()-1,-1,-1):
+		if host.s.dayPendingPlacements[index].kind == "campaign": host.s.dayPendingPlacements.remove_at(index); removed_pending = true
+	for record: Dictionary in checked.records: _place_or_defer(record)
+	if removed_pending: _save()
 
 
 func advance_sleep_day(kind: String) -> bool:

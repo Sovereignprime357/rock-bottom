@@ -227,3 +227,16 @@ answer, movement/shape/height/frame/epoch changes do not reuse it, failed placem
 never cached, explicit topology invalidation rejects newly obstructed points, and
 movement casts plus endpoint proof remain present after a cache hit. Re-run existing
 actual physical detour/charge/contact tests and the native production probe centrally.
+
+Native measurement correction (2026-11-18): screenshots and clearance audits run before the initial120 active warmup frames, not immediately before measurement. Godot monitors can retain a value for up to1second (https://docs.godotengine.org/en/4.5/classes/class_performance.html); a PNG capture stall otherwise contaminates the sampled engine-process window. Keep scene and whole-engine p95 thresholds unchanged, report every measured frame, actor counts and unfiltered intervals; no artificial pause or sample dropping within measurement.
+
+Full Runtime preflights all live actor capsules through the existing clear_placement adapter before first ready/fresh/restore presentation. Commit placements only when every point is finite and valid. The Director still validates subsequent movement, but cannot be the first repair after an actor has already been displayed intersecting geometry. Native initial clearance remains a requirement before warmup; do not move that audit past the bug.
+
+
+Native measurement may enable a Runtime-only diagnostic profile dictionary. It measures
+movement, state/ambient, combat timers, memory/day/territory, quests/pickups, AI, projectiles/boss
+and progression with monotonic microseconds; it never participates in saved state, RNG, dt,
+input, governors or outcomes. Disabled normal play takes no timestamps. The actual60 probe
+reports these nested scopes to explain full frame failures; isolated planner timings are not
+substituted for the whole frame budget. Static prop ID dispatch indexes preserve source order
+and rebind only with their existing epoch/reset; they do not cache live action eligibility.

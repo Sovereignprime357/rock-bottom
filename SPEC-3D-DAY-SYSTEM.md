@@ -170,6 +170,9 @@ sleep_at_block() -> Dictionary
 tick_active(dt_ms: float) -> bool
 tick_wall(monotonic_ms: float) -> bool
 rehydrate() -> bool
+replace_campaign_forces(plan: Dictionary) -> bool
+can_replace_campaign_forces(prospective_kingdom: Dictionary, lifetime_pretenders: Variant) -> bool
+discard_pending_campaign_clan(clan: String, persist: bool = false) -> bool
 is_night() -> bool
 actor_visible(body: Dictionary) -> bool
 supports(actor_id: String) -> bool
@@ -187,6 +190,28 @@ owner; failed capability preparation prevents paid sleep/installation. Physical
 actors it cannot yet place follow the same saved deferral rule. No stub campaign or
 feed object may be passed by production to make install succeed. Root will supply
 final real callback adapter methods with the campaign/communications packets.
+
+P13a composition uses the real Campaign.prepare_day result
+`{ok,day,kingdom,pretenders_defeated,actors}`. Validate canonical Kingdom state,
+integer day/count bounds, exact generation day, unique canonical actor IDs and
+queue capacity before mutation. Commit the source max-reconciled pretender count to
+both Kingdom and lifetime. replace_campaign_forces accepts current-day plans only,
+and compares every field against Campaign's pure current-state canonical builder.
+An empty/partial actor list or a valid ID paired with wrong known visuals/stats is
+not a valid generation. JSON numeric representation differences are accepted only
+when the finite numeric values are exactly equal; keys, array order and nonnumeric
+types must match. No normalization silently repairs an untrusted generation.
+Replacement uses the same removal/validated placement/defer implementation as natural dawn.
+Restored queues and fresh/load/abort/victory refreshes therefore share one physical
+spawn authority; no caller injects an invisible model actor or a second pending queue.
+
+P13c approved seams: can_replace_campaign_forces is a pure current-day prospective
+canonical-state/count/generation/capacity check used before fatal battle damage;
+it never normalizes/mutates the live state, places actors, emits events or consumes
+RNG. discard_pending_campaign_clan accepts only the three source clan IDs or throne,
+removes only matching pending ordinary guards, and optionally requests one save.
+The boss-start owner calls it after all three encounter bodies pass actual placement
+and before its source save. It does not replace or clear other clans/event families.
 
 Natural dawn schedules garbage callback at8s only after its<.5 draw, then scripted
 events, then proud callback at12000+r*30000ms. Wall timers are ephemeral and tied to
@@ -209,3 +234,7 @@ callback cause/order/idempotence, no double resets/payments, stale/replaced menu
 pending physical refusal/restore/success without rerolls or phantom actors, malformed
 pending normalization, bounds/capacity and shared Unix vs monotonic clocks. Root runs
 all engine processes and adds real Runtime/scene/weather/departure evidence later.
+
+## Runtime composition
+
+FullRuntime composes one Campaign and Day owner against the same State, Progression, Travel, Communications and physical adapter. Travel sleep delegates through the bound Day owner. Campaign normalization is registered before restore; reconciliation and shared force refresh precede Day rehydration. Handled day_started receipts must not roll hustles or natural rent/pass twice. Active Price Guy/night-cash checks run after territory and before concession clocks/pickups; delayed callbacks use the existing monotonic wall input. Conditional actor menus resolve through the same physical closest-NPC scan. Night presentation follows source Mom/Pete/daytimeOnly visibility, while the unchanged-source interaction scan still includes those records. No second day counter, weather draw or guard population is introduced.

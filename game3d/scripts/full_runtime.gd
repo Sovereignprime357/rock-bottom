@@ -18,6 +18,18 @@ const Robbery = preload("res://scripts/robbery_system.gd")
 const Rhythm = preload("res://scripts/rhythm_system.gd")
 const Communications = preload("res://scripts/communications_system.gd")
 const Props = preload("res://scripts/prop_state.gd")
+const Heists = preload("res://scripts/heist_system.gd")
+const Campaign = preload("res://scripts/campaign_system.gd")
+const Days = preload("res://scripts/day_system.gd")
+const Lockpick = preload("res://scripts/lockpick_system.gd")
+const Companions = preload("res://scripts/companion_system.gd")
+const Office = preload("res://scripts/office_campaign.gd")
+const Cooking = preload("res://scripts/cooking_system.gd")
+const WorldProps = preload("res://scripts/world_prop_actions.gd")
+const Kingdom = preload("res://scripts/kingdom_campaign.gd")
+const InteractiveProps = preload("res://scripts/interactive_prop_actions.gd")
+const Guidance = preload("res://scripts/guidance_view.gd")
+const Utilities = preload("res://scripts/neighborhood_utilities.gd")
 const STEP_MS := 1000.0 / 60.0
 var state: RefCounted
 var memory: RefCounted
@@ -32,6 +44,22 @@ var robbery: RefCounted
 var rhythm: RefCounted
 var communications: RefCounted
 var props: RefCounted
+var heists: RefCounted
+var campaign: RefCounted
+var days: RefCounted
+var lockpick: RefCounted
+var companions: RefCounted
+var office: RefCounted
+var cooking: RefCounted
+var world_props: RefCounted
+var kingdom: RefCounted
+var guidance: RefCounted
+var utilities: RefCounted
+var interactive_props: RefCounted
+var _pending_lifecycle: Dictionary = {}
+var _presentation_tasks: Array[Dictionary] = []
+var _transition_events: Array[Dictionary] = []
+var days_enabled: bool = false
 var combat: RefCounted
 var director: RefCounted
 var bosses: RefCounted
@@ -43,6 +71,8 @@ var _outbox: Array[Dictionary] = []
 var _save_wanted: bool = false
 var _elapsed_ms: float = 0.0
 var last_advanced_ms: float = 0.0
+var profile_enabled: bool = false
+var profile_us: Dictionary = {}
 var p: Dictionary:
 	get: return state.p
 var s: Dictionary:
@@ -52,7 +82,8 @@ func _init(spatial_adapter: Object, boss_adapter: Object = null, unix_ms: Callab
 	_spatial = weakref(spatial_adapter) if spatial_adapter != null else null
 	state = State.new()
 	props = Props.new(state)
-	communications = Communications.new(state,props,unix_ms if unix_ms.is_valid() else func(): return Time.get_unix_time_from_system()*1000.0)
+	var clock_source: Callable = unix_ms if unix_ms.is_valid() else func(): return Time.get_unix_time_from_system()*1000.0
+	communications = Communications.new(state,props,clock_source)
 	memory = Memory.new(state)
 	progression = Progression.new(state)
 	inventory = Inventory.new(state)
@@ -63,6 +94,17 @@ func _init(spatial_adapter: Object, boss_adapter: Object = null, unix_ms: Callab
 	rhythm = Rhythm.new(state,spatial_adapter,memory)
 	street = Street.new(state,spatial_adapter,memory,travel,rhythm,communications)
 	robbery = Robbery.new(state)
+	lockpick = Lockpick.new(state)
+	heists = Heists.new(state,spatial_adapter,lockpick)
+	companions = Companions.new(state,spatial_adapter,communications,lockpick)
+	world_props = WorldProps.new(state,spatial_adapter,props,memory,companions)
+	utilities = Utilities.new(state,spatial_adapter)
+	campaign = Campaign.new(state,spatial_adapter,progression,travel,communications,memory)
+	days = Days.new(state,spatial_adapter,progression,travel,campaign,communications,clock_source)
+	campaign.bind_day_owner(days); travel.bind_day_owner(days)
+	days_enabled = days.install()
+	office = Office.new(state,spatial_adapter,campaign,progression,travel)
+	cooking = Cooking.new(state,spatial_adapter)
 	s.mode = "title"
 	state.drain_events()
 
@@ -71,16 +113,27 @@ func _reachable(id: String) -> bool:
 	return adapter != null and adapter.has_method(&"can_reach_target") and adapter.call(&"can_reach_target",id) == true
 
 func fresh() -> bool:
-	street.close(); rhythm.close()
+	if cooking.is_resolving(): return _defer_lifecycle("fresh")
+	cooking.cancel("fresh"); _presentation_tasks.clear(); _transition_events.clear(); _pending_lifecycle = {}
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close()
 	residents.close()
 	quests.close()
 	travel.cancel_travel("fresh")
 	_outbox.clear(); _save_wanted = false; _elapsed_ms = 0.0
 	if not state.fresh(): return false
+	companions.ready()
 	props.reset_session("fresh")
+	if interactive_props != null:
+		if not interactive_props.reset_session("fresh"): return false
+		_sync_interactive_props()
+	world_props.reset_session("fresh")
+	utilities.reset_session("fresh")
+	if kingdom != null: kingdom._sync_epoch()
 	travel.reset_session("fresh")
-	if _actors_enabled and not bosses.normalize_state(): return false
+	if _actors_enabled and (not bosses.normalize_state() or not _prepare_actor_placements()):
+		s.mode = "paused"; return false
+	if days_enabled and not campaign.refresh_forces(): return false
 	s.mode = "playing"
 	memory.normalize_state()
 	state.emit_event("placement_reset",{"source_position":state.player_center(),"reason":"fresh"})
@@ -96,27 +149,42 @@ func restore(data: Variant) -> bool:
 	if schema == 2 and (data.get("format") != State.SAVE_FORMAT or not data.get("player") is Dictionary or not data.get("state") is Dictionary): return false
 	if _actors_enabled:
 		var candidate: RefCounted = State.new()
+		var candidate_progression := Progression.new(candidate)
+		var candidate_campaign := Campaign.new(candidate,null,candidate_progression)
 		if candidate.restore(data).get("ok") != true: return false
 		var adapter: Object = _spatial.get_ref() if _spatial != null else null
 		var candidate_combat: RefCounted = Combat.new(candidate,adapter)
 		var candidate_bosses: RefCounted = Bosses.new(candidate,candidate_combat)
 		if not candidate_bosses.normalize_state(): return false
+	if cooking.is_resolving(): return _defer_lifecycle("restore",data.duplicate(true))
+	cooking.cancel("restore"); _presentation_tasks.clear(); _transition_events.clear(); _pending_lifecycle = {}
 	var previous_cart: Dictionary = travel.cart_record()
 	var restored: Dictionary = state.restore(data)
 	if restored.get("ok") != true: return false
+	companions.ready()
 	props.reset_session("restore")
+	if interactive_props != null:
+		if not interactive_props.reset_session("restore"): return false
+		_sync_interactive_props()
+	world_props.reset_session("restore")
+	utilities.reset_session("restore")
+	if kingdom != null: kingdom._sync_epoch()
+	if days_enabled and not campaign.reconcile_loaded_state().get("ok",false): return false
 	vendors.session.close()
-	street.close(); rhythm.close()
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	residents.close()
 	quests.close()
 	_outbox.clear(); _save_wanted = false; _elapsed_ms = 0.0
 	travel.reset_session("restore",previous_cart)
-	if _actors_enabled and not bosses.normalize_state():
+	if _actors_enabled and (not bosses.normalize_state() or not _prepare_actor_placements()):
 		s.mode = "paused"
 		state.emit_event("placement_blocked",{"reason":"boss_restore"})
 		return false
 	s.mode = "playing"
 	progression.ensure_route()
+	if days_enabled:
+		if not campaign.refresh_forces(): return false
+		days.rehydrate()
 	state.emit_event("placement_reset",{"source_position":state.player_center(),"reason":"restore"})
 	return true
 
@@ -124,24 +192,31 @@ func snapshot() -> Dictionary: return state.snapshot()
 
 func set_mode(mode: String) -> bool:
 	if mode not in ["title","playing","paused","dialogue","cookmini","heist","ending"]: return false
-	if mode != "dialogue": vendors.session.close()
+	if mode == "cookmini": return cooking.is_active() and s.mode == "cookmini"
+	if cooking.is_active():
+		if cooking.is_resolving(): return _defer_lifecycle("mode",mode)
+		cooking.cancel("mode")
+	if mode != "dialogue": cooking.cancel("mode"); vendors.session.close()
 	if mode != "dialogue": travel.close()
 	if mode != "dialogue": residents.close()
 	if mode != "dialogue": quests.close()
-	if mode != "dialogue": street.close(); rhythm.close()
+	if mode != "dialogue": street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	s.mode = mode
 	return true
 
-func close_dialogue() -> void:
-	street.close(); rhythm.close()
+func close_dialogue() -> bool:
+	if not cooking.cancel("close_dialogue"): return false
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close()
 	travel.close()
 	residents.close()
 	quests.close()
 	if s.mode == "dialogue": s.mode = "playing"
+	return true
 
 func open_vendor(id: String) -> Dictionary:
-	street.close(); rhythm.close()
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	travel.close()
 	residents.close()
 	quests.close()
@@ -156,7 +231,8 @@ func select_vendor(token: Variant, action: String) -> Dictionary:
 	return result
 
 func open_travel(service: String,page: int = 0) -> Dictionary:
-	street.close(); rhythm.close()
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close()
 	residents.close()
 	quests.close()
@@ -170,7 +246,8 @@ func select_travel(token: Variant,action: String) -> Dictionary:
 	return result
 
 func open_resident(id: String) -> Dictionary:
-	street.close(); rhythm.close()
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close(); travel.close()
 	quests.close()
 	var result: Dictionary = residents.open(id)
@@ -183,7 +260,8 @@ func select_resident(token: Variant,action: String) -> Dictionary:
 	return result
 
 func open_quest(id: String) -> Dictionary:
-	street.close(); rhythm.close()
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close(); travel.close(); residents.close()
 	var result: Dictionary = quests.open(id)
 	_resolve_events()
@@ -195,14 +273,16 @@ func select_quest(token: Variant,action: String) -> Dictionary:
 	return result
 
 func open_package() -> Dictionary:
-	street.close(); rhythm.close()
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close(); travel.close(); residents.close()
 	var result: Dictionary = quests.open_package()
 	_resolve_events()
 	return result
 
 func open_street(id: String) -> Dictionary:
-	rhythm.close()
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
 	vendors.session.close(); travel.close(); residents.close(); quests.close()
 	var result: Dictionary = street.open(id)
 	_resolve_events()
@@ -212,6 +292,198 @@ func select_street(token: Variant,action: String) -> Dictionary:
 	var result: Dictionary = street.select(token,action)
 	try_intro_remember(); _resolve_events()
 	return result
+
+func open_heist(id: String) -> Dictionary:
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	close_dialogue()
+	var result: Dictionary = heists.open(id)
+	_resolve_events()
+	return result
+
+func select_heist(token: Variant,action: String) -> Dictionary:
+	var result: Dictionary = heists.select(token,action)
+	try_intro_remember(); _resolve_events()
+	return result
+
+func open_day_actor(id: String) -> Dictionary:
+	if not cooking.cancel("replace_menu"): return {"ok":false,"reason":"resolution_pending"}
+	close_dialogue()
+	var result: Dictionary = days.open(id)
+	_resolve_events()
+	return result
+
+func select_day_actor(token: Variant,action: String) -> Dictionary:
+	var result: Dictionary = days.select(token,action)
+	try_intro_remember(); _resolve_events()
+	return result
+
+func sleep_at_block() -> Dictionary:
+	var result: Dictionary = days.sleep_at_block()
+	_resolve_events()
+	return result
+
+func open_companion(id: String) -> Dictionary:
+	if not close_dialogue(): return {"ok":false,"reason":"resolution_pending"}
+	var result: Dictionary = companions.open(id)
+	_resolve_events()
+	return result
+
+func select_companion(token: Variant,action: String) -> Dictionary:
+	var result: Dictionary = companions.select(token,action)
+	_resolve_events()
+	return result
+
+func open_office(id: String) -> Dictionary:
+	if not close_dialogue(): return {"ok":false,"reason":"resolution_pending"}
+	var result: Dictionary = office.open(id)
+	_resolve_events()
+	return result
+
+func select_office(token: Variant,action: String) -> Dictionary:
+	var result: Dictionary = office.select(token,action)
+	if result.get("reason") == "kingdom_actions_pending" and kingdom != null: result = kingdom.open_ledger()
+	_resolve_events()
+	return result
+
+func _close_kingdom() -> void:
+	if kingdom != null: kingdom.close()
+
+func select_kingdom(token: Variant,action: String) -> Dictionary:
+	if kingdom == null: return {"ok":false,"reason":"missing_dependency"}
+	var result: Dictionary = kingdom.select(token,action)
+	_resolve_events()
+	return result
+
+func use_kingdom(id: String,door: bool = false) -> Dictionary:
+	if kingdom == null: return {"ok":false,"reason":"missing_dependency"}
+	var result: Dictionary = kingdom.use_door(id) if door else kingdom.use_target(id)
+	_resolve_events()
+	return result
+
+func use_office_field(id: String) -> Dictionary:
+	var result: Dictionary = office.use_field_target({"target_id":id})
+	_resolve_events()
+	return result
+
+func open_zone(id: String) -> Dictionary:
+	if not close_dialogue(): return {"ok":false,"reason":"resolution_pending"}
+	var result: Dictionary = utilities.open_zone(id)
+	_resolve_events()
+	return result
+
+func select_utility(token: Variant,action: String) -> Dictionary:
+	var result: Dictionary = utilities.select(token,action)
+	if result.get("ok",false):
+		match result.get("handoff",""):
+			"smoke": result = smoke("block")
+			"sleep": result = sleep_at_block()
+			"cooking": result = open_cooking()
+			"package": result = open_package()
+	_resolve_events()
+	return result
+
+func press_squint() -> Dictionary:
+	var result: Dictionary = utilities.press_squint()
+	_resolve_events()
+	return result
+
+func open_world_prop(id: String) -> Dictionary:
+	if not close_dialogue(): return {"ok":false,"reason":"resolution_pending"}
+	var result: Dictionary = world_props.open(id)
+	_resolve_events()
+	return result
+
+func select_world_prop(token: Variant,action: String) -> Dictionary:
+	var result: Dictionary = world_props.select(token,action)
+	_resolve_events()
+	return result
+
+func open_cooking() -> Dictionary:
+	if not close_dialogue(): return {"ok":false,"reason":"resolution_pending"}
+	var result: Dictionary = cooking.open_menu()
+	_resolve_events()
+	return result
+
+func select_cooking(token: Variant,mode: String) -> Dictionary:
+	var result: Dictionary = cooking.select(token,mode)
+	_resolve_events()
+	return result
+
+func lock_cooking() -> Dictionary:
+	var result: Dictionary = cooking.lock()
+	_resolve_events()
+	return result
+
+func bail_cooking() -> Dictionary:
+	var result: Dictionary = cooking.bail()
+	_resolve_events()
+	return result
+
+func request_save() -> void:
+	_save_wanted = true
+
+func _defer_lifecycle(kind: String,payload: Variant = null) -> bool:
+	if not _pending_lifecycle.is_empty() and not _receipt_epoch(_pending_lifecycle): _pending_lifecycle = {}
+	if _pending_lifecycle.is_empty(): _pending_lifecycle = {"kind":kind,"payload":payload,"player_epoch":p,"state_epoch":s}
+	return false
+
+func _receipt_epoch(receipt: Dictionary) -> bool:
+	return is_same(receipt.get("player_epoch"),p) and is_same(receipt.get("state_epoch"),s)
+
+func _guard_cooking_transition() -> void:
+	if not _pending_lifecycle.is_empty() and not _receipt_epoch(_pending_lifecycle): _pending_lifecycle = {}
+	for index: int in range(_transition_events.size()-1,-1,-1):
+		if not _receipt_epoch(_transition_events[index]): _transition_events.remove_at(index)
+	if s.mode == "cookmini" and not cooking.is_active():
+		cooking.cancel("orphaned_heat"); s.mode = "playing"
+	if not cooking.is_resolving() or s.mode == "cookmini": return
+	# Legacy wall owners can write mode directly. Accepted settlement still owns
+	# this surface until it finishes; preserve the destination, not a stalled mode.
+	if s.mode in ["title","playing","paused","dialogue","heist","ending"]: _defer_lifecycle("mode",s.mode)
+	s.mode = "cookmini"
+
+func _hold_transition(event: Dictionary) -> void:
+	for receipt: Dictionary in _transition_events:
+		if _receipt_epoch(receipt) and receipt.event.kind == event.kind: return
+	_transition_events.append({"event":event.duplicate(true),"player_epoch":p,"state_epoch":s})
+
+func _death_cleanup(kind: String) -> void:
+	if kingdom != null: kingdom.abort(false,false)
+	travel.cancel_travel(kind)
+	vendors.session.close(); residents.close(); quests.close()
+	street.close(); rhythm.close(); heists.close(); days.close(); office.close(); companions.close(); world_props.close(); _close_kingdom(); utilities.close()
+
+func _release_transitions() -> void:
+	if cooking.is_resolving(): return
+	var pending: Array[Dictionary] = _transition_events; _transition_events = []
+	for receipt: Dictionary in pending:
+		if not _receipt_epoch(receipt): continue
+		var event: Dictionary = receipt.event
+		if event.kind == "kingdom_ending_due":
+			if s.mode in ["title","ending"] and kingdom != null: kingdom.commit_ending()
+			continue
+		if event.kind in ["ending_requested","ending"]:
+			if s.mode not in ["title","ending"]: continue # Earlier lifecycle request won.
+		elif event.kind in ["death","arrest"]: _death_cleanup(event.kind)
+		_outbox.append(event)
+
+func _apply_pending_lifecycle() -> void:
+	if _pending_lifecycle.is_empty() or cooking.is_resolving(): return
+	var pending: Dictionary = _pending_lifecycle; _pending_lifecycle = {}
+	if not _receipt_epoch(pending): return
+	var accepted: bool = false
+	match pending.kind:
+		"fresh": accepted = fresh()
+		"restore": accepted = restore(pending.payload)
+		"mode": accepted = set_mode(pending.payload)
+	state.emit_event("lifecycle_applied",{"kind":pending.kind,"mode":s.mode,"ok":accepted})
+
+func advance_presentation(seconds: float) -> bool:
+	if not is_finite(seconds) or seconds <= 0: return false
+	var step: float = minf(50.0,seconds*1000.0)
+	if s.mode not in ["playing","cookmini"] and float(s.get("hitPause",0)) > 0:
+		s.hitPause = maxf(0,float(s.hitPause)-step)
+	return cooking.tick_presentation(step)
 
 func attempt_robbery(actor: Dictionary) -> bool:
 	return robbery.attempt(actor)
@@ -228,16 +500,52 @@ func enable_actor_simulation() -> bool:
 	for method: StringName in [&"move_body",&"clear_placement",&"can_hit",&"sweep_projectile"]:
 		if not adapter.has_method(method): return false
 	combat = Combat.new(state,adapter,inventory,self)
-	bosses = Bosses.new(state,combat)
-	if not bosses.normalize_state(): return false
+	kingdom = Kingdom.new(state,adapter,campaign,office,combat,memory,communications,days)
+	bosses = Bosses.new(state,combat,kingdom)
+	if _wall_started:
+		kingdom.tick_wall(_wall_ms); bosses.tick_wall(_wall_ms)
+	if not bosses.normalize_state() or not _prepare_actor_placements(): return false
 	director = Director.new(state,combat)
+	companions.bind_director(director)
 	vendors.session.close()
 	vendors = Vendors.new(state,adapter,memory,bosses)
 	residents.close()
 	residents = Residents.new(state,adapter,memory,combat,bosses)
 	quests.close()
 	quests = Quests.new(state,adapter,memory,combat,bosses)
+	guidance = Guidance.new(state,progression,memory,office,kingdom,campaign)
 	_actors_enabled = true
+	return true
+
+func enable_interactive_props() -> bool:
+	if interactive_props != null: return interactive_props.ready()
+	var adapter: Object = _spatial.get_ref() if _spatial != null else null
+	if not _actors_enabled or adapter == null or not adapter.has_method(&"stage_interactive_prop"): return false
+	interactive_props = InteractiveProps.new(state,adapter,props,combat)
+	return interactive_props.ready()
+
+func _sync_interactive_props() -> void:
+	var adapter: Object = _spatial.get_ref() if _spatial != null else null
+	if interactive_props != null and adapter != null and adapter.has_method(&"sync_interactive_props"): adapter.sync_interactive_props()
+
+func kick_can(id: String) -> Dictionary:
+	if interactive_props == null or not _can_act(): return {"ok":false,"reason":"unavailable"}
+	var result: Dictionary = interactive_props.kick(id)
+	_sync_interactive_props(); _resolve_events()
+	return result
+
+func _prepare_actor_placements() -> bool:
+	var adapter: Object = _spatial.get_ref() if _spatial != null else null
+	if adapter == null or not adapter.has_method(&"clear_placement"): return false
+	var planned: Array[Dictionary] = []
+	for actor: Dictionary in state.npcs:
+		if actor.get("dead",false): continue
+		var point: Variant = adapter.call(&"clear_placement",combat._geometry(actor))
+		if not point is Vector2 or not point.is_finite(): return false
+		var bounds: Dictionary = state.content.world.bounds
+		if point.x < 0 or point.y < 0 or point.x+float(actor.w) > float(bounds.w) or point.y+float(actor.h) > float(bounds.h): return false
+		planned.append({"actor":actor,"position":point})
+	for item: Dictionary in planned: item.actor.x = item.position.x; item.actor.y = item.position.y
 	return true
 
 func can_handle_death(actor: Dictionary) -> bool:
@@ -252,6 +560,7 @@ func spawn_brutus_older() -> bool:
 func attack(forward: Vector2) -> Dictionary:
 	if not _actors_enabled: return {"ok":false,"reason":"missing_combat"}
 	var result: Dictionary = combat.attack_player(forward)
+	_sync_interactive_props()
 	_resolve_events()
 	return result
 
@@ -260,10 +569,19 @@ func advance_wall(monotonic_ms: float) -> bool:
 	_resolve_events() # Death/arrest cancels pending travel before wall time advances.
 	var elapsed: float = monotonic_ms-_wall_ms if _wall_started else 0.0
 	_wall_ms = monotonic_ms; _wall_started = true
+	var pending_receipts: Array[Dictionary] = []
+	for receipt: Dictionary in _presentation_tasks:
+		if not _receipt_epoch(receipt): continue
+		if receipt.due > monotonic_ms: pending_receipts.append(receipt)
+		else: state.emit_event("toast",receipt.payload)
+	_presentation_tasks = pending_receipts
 	communications.advance_wall(monotonic_ms)
+	if days_enabled: days.tick_wall(monotonic_ms)
+	companions.advance_wall(monotonic_ms)
 	if _actors_enabled:
 		combat.tick_wall(_wall_ms)
 		bosses.tick_wall(_wall_ms)
+		kingdom.tick_wall(_wall_ms)
 	while elapsed > 0.0:
 		var step: float = minf(240000.0,elapsed)
 		travel.tick_real(step); elapsed -= step
@@ -300,10 +618,26 @@ func stamp_route() -> bool:
 	_resolve_events()
 	return result
 
+func _profile_stage(key: String,started: int) -> int:
+	if not profile_enabled: return 0
+	var now: int = Time.get_ticks_usec()
+	profile_us[key] = int(profile_us.get(key,0))+now-started
+	return now
+
 func advance(seconds: float, context: Dictionary = {}) -> bool:
+	profile_us.clear()
+	if director != null:
+		director.profile_enabled = profile_enabled; director.profile_us.clear()
 	last_advanced_ms = 0.0
 	if not is_finite(seconds) or seconds <= 0.0 or seconds > 240.0: return false
 	if context.has("input_vector") and (not context.input_vector is Vector2 or not context.input_vector.is_finite()): return false
+	_guard_cooking_transition()
+	if s.mode == "cookmini":
+		var frame_step: float = minf(seconds*1000.0,50.0)
+		if float(s.get("hitPause",0)) > 0: s.hitPause = maxf(0,float(s.hitPause)-frame_step)
+		else: cooking.tick(frame_step)
+		_resolve_events(); _apply_pending_lifecycle(); _release_transitions(); _resolve_events()
+		return true
 	if s.mode != "playing": return true
 	var remaining: float = seconds*1000.0
 	while remaining > 0.000001 and s.mode == "playing":
@@ -314,21 +648,37 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 			s.hitPause = maxf(0.0,float(s.hitPause)-step)
 			continue # Source update() skips the whole step that began in hitpause.
 		last_advanced_ms += step
+		var profile_mark: int = Time.get_ticks_usec() if profile_enabled else 0
 		var body_context: Dictionary = _move_player(step,context)
+		profile_mark = _profile_stage("movement",profile_mark)
 		memory.sync_visit()
 		if not state.tick(step/1000.0,body_context): return false
+		utilities.tick_squint(step,context.get("squint_held",false))
 		_resolve_events()
 		_tick_ambient_phone(step)
 		s.hustleCheckT = float(s.get("hustleCheckT",0))+step
 		if float(s.hustleCheckT) > 800:
 			s.hustleCheckT = 0.0; progression.check_hustles()
 		_tick_random_events(step)
+		if interactive_props != null:
+			interactive_props.tick(step); _sync_interactive_props()
+		profile_mark = _profile_stage("state_ambient",profile_mark)
 		if _actors_enabled:
 			combat.tick_status(step)
 			combat.tick_police(step,_wall_ms)
 			bosses.tick_before_actors(step)
+			kingdom.tick_active(step)
+		profile_mark = _profile_stage("combat_timers",profile_mark)
+		world_props.tick_props(step)
 		progression.tick_territory(step,float(context.get("monotonic_ms",_elapsed_ms)))
+		utilities.tick_zone_entries()
+		world_props.tick_bench(step)
+		if days_enabled: days.tick_active(step)
+		world_props.tick_phone(step)
+		if _actors_enabled: director.tick_dog_discomfort()
 		memory.tick(step)
+		companions.tick_world(step)
+		profile_mark = _profile_stage("memory_day_territory",profile_mark)
 		quests.tick_before_pickups(step)
 		_auto_collect()
 		var automatic_menu: Dictionary = quests.tick_after_pickups()
@@ -337,14 +687,22 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 			state.emit_event("dialogue_requested",{"domain":"quest","menu":automatic_menu})
 		for actor: Dictionary in state.npcs:
 			if actor.id == "pete": actor.shopClosed = float(s.dayTime) < 0.25 or float(s.dayTime) > 0.75; break
+		profile_mark = _profile_stage("quests_pickups",profile_mark)
 		if _actors_enabled:
 			director.tick(step,_wall_ms)
+			profile_mark = _profile_stage("actors",profile_mark)
+			if profile_enabled:
+				for key: String in director.profile_us: profile_us["actor_"+key] = director.profile_us[key]
 			combat.tick_projectiles(step)
 			bosses.tick_after_actors(step,_wall_ms)
 			_resolve_events()
+		profile_mark = _profile_stage("projectiles_boss",profile_mark)
 		try_intro_remember()
 		progression.update_ranks()
+		heists.sync_rank_unlock()
+		utilities.finish_world_step(step)
 		_resolve_events()
+		_profile_stage("progression",profile_mark)
 	return true
 
 func _tick_ambient_phone(step_ms: float) -> void:
@@ -457,6 +815,7 @@ func try_intro_remember() -> bool:
 
 func _resolve_events() -> void:
 	# Domain consequences complete synchronously; the renderer never observes half a transaction.
+	_guard_cooking_transition()
 	while not state.events.is_empty():
 		var batch: Array = state.drain_events()
 		for event: Dictionary in batch:
@@ -465,21 +824,39 @@ func _resolve_events() -> void:
 					communications.consume_event(event)
 					_outbox.append(event)
 				"save_requested": _save_wanted = true
+				"delayed_toast":
+					if _presentation_tasks.size() >= 32: _presentation_tasks.pop_front()
+					_presentation_tasks.append({"due":_wall_ms+clampf(float(event.payload.get("delay_ms",0)),0,60000),"payload":{"text":str(event.payload.get("text","")),"duration_ms":event.payload.get("duration_ms",2200)},"player_epoch":p,"state_epoch":s})
 				"intro_completed":
 					progression.roll_hustles(); progression.roll_route()
 					state.emit_event("news",{"text":"the neighborhood notices you arrived. the neighborhood does not care."})
 					_feed("smoked one on the crate.\nthe sun moved.\nthe loop greeted me.","@crackheadcent")
 					_outbox.append(event)
 				"day_started":
-					progression.roll_hustles()
-					travel.on_natural_dawn()
+					if not event.payload.get("handled",false):
+						progression.roll_hustles()
+						travel.on_natural_dawn()
 					_outbox.append(event)
+				"kingdom_changed":
+					campaign.sync_quests(); _outbox.append(event)
+				"kingdom_abort_requested":
+					if kingdom != null: kingdom.abort(false,false)
+				"kingdom_ending_due":
+					if cooking.is_resolving():
+						_defer_lifecycle("mode","ending"); _hold_transition(event); continue
+					if kingdom != null and set_mode("ending"): kingdom.commit_ending()
 				"death", "arrest":
-					travel.cancel_travel(event.kind)
-					vendors.session.close()
-					residents.close()
-					quests.close()
-					street.close(); rhythm.close()
+					if not cooking.cancel(event.kind):
+						_hold_transition(event)
+						continue
+					_death_cleanup(event.kind)
+					_outbox.append(event)
+				"ending_requested", "ending":
+					if cooking.is_resolving():
+						_defer_lifecycle("mode","title" if event.kind == "ending_requested" else "ending")
+						_hold_transition(event)
+						continue
+					cooking.cancel("ending")
 					_outbox.append(event)
 				"faction_tier_changed":
 					var lines: Array = Content.definition("src/systems/factions.js","TIER_TRANSITION_LINES",{}).get(event.payload.faction,{}).get(event.payload.after,[])
@@ -494,7 +871,7 @@ func drain_events() -> Array[Dictionary]:
 	_resolve_events()
 	var events: Array[Dictionary] = _outbox.duplicate(true)
 	_outbox.clear()
-	if _save_wanted:
+	if _save_wanted and not cooking.is_resolving():
 		events.append({"kind":"save_requested","payload":{"snapshot":state.snapshot()}})
 		_save_wanted = false
 	return events

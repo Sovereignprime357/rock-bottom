@@ -12614,7 +12614,8 @@
     "cartHusks": 6,
     "cases": 48,
     "destinations": 18,
-    "hideouts": 2
+    "hideouts": 2,
+    "presentation": 18
   },
   "format": "rock-bottom-travel-reference",
   "gatedZones": [
@@ -12771,6 +12772,3340 @@
     "church",
     "projects"
   ],
+  "presentation": [
+    {
+      "id": "chest:mom_empty",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "deposit a rock. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw copper. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 0\n  cash: $0\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "chest:mom",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 1230,
+          "y": 1182
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "chest:mom_funded",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "chest:mom",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 20,
+          "copper": 2,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 2,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 1230,
+          "y": 1182
+        },
+        "stash": {
+          "cash": 30,
+          "copper": 4,
+          "items": [],
+          "rocks": 3
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "deposit:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 4\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 rock · → chest"
+        },
+        {
+          "action": "withdraw:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 rock"
+        },
+        {
+          "action": "deposit:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 5\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 copper · → chest"
+        },
+        {
+          "action": "withdraw:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 copper"
+        },
+        {
+          "action": "deposit:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $40\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- $10 · → chest"
+        },
+        {
+          "action": "withdraw:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        },
+        {
+          "action": "back",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "open the chest. (stash survives death.)"
+              },
+              {
+                "enabled": true,
+                "label": "rest 30 minutes. (+12 hp · -1 wanted)"
+              },
+              {
+                "enabled": true,
+                "label": "sleep until morning. advances a day."
+              },
+              {
+                "enabled": true,
+                "label": "use the apartment phone. (skip the next ambient call.)"
+              },
+              {
+                "enabled": true,
+                "label": "leave."
+              }
+            ],
+            "text": "the apartment is warm.\nben is at work.\nthe couch is cleared.\nyou recognize this couch.",
+            "title": "MOM'S COUCH"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        }
+      ]
+    },
+    {
+      "id": "chest:mom_partial",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 0)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 2)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 2\n  cash: $9\n  items: 1",
+        "title": "THE CHEST"
+      },
+      "service": "chest:mom",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 9,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 1,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 1230,
+          "y": 1182
+        },
+        "stash": {
+          "cash": 9,
+          "copper": 2,
+          "items": [
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            }
+          ],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "chest:scrap_empty",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "deposit a rock. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw copper. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 0\n  cash: $0\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "chest:scrap",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 520,
+          "y": 202
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "chest:scrap_funded",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "chest:scrap",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 20,
+          "copper": 2,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 2,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 520,
+          "y": 202
+        },
+        "stash": {
+          "cash": 30,
+          "copper": 4,
+          "items": [],
+          "rocks": 3
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "deposit:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 4\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 rock · → chest"
+        },
+        {
+          "action": "withdraw:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 rock"
+        },
+        {
+          "action": "deposit:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 5\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 copper · → chest"
+        },
+        {
+          "action": "withdraw:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 copper"
+        },
+        {
+          "action": "deposit:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $40\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- $10 · → chest"
+        },
+        {
+          "action": "withdraw:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        },
+        {
+          "action": "back",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "open the chest. (stash survives death.)"
+              },
+              {
+                "enabled": true,
+                "label": "rest 30 minutes. (+8 hp · -1 wanted)"
+              },
+              {
+                "enabled": true,
+                "label": "sleep until morning. advances a day."
+              },
+              {
+                "enabled": true,
+                "label": "leave."
+              }
+            ],
+            "text": "the shed smells like dust and old grease.\nthere is a chest in the corner.\nthere is a cot.\nthe door locks from the inside.",
+            "title": "THE SHED"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        }
+      ]
+    },
+    {
+      "id": "chest:scrap_partial",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 0)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 2)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 2\n  cash: $9\n  items: 1",
+        "title": "THE CHEST"
+      },
+      "service": "chest:scrap",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 9,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 1,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 520,
+          "y": 202
+        },
+        "stash": {
+          "cash": 9,
+          "copper": 2,
+          "items": [
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            }
+          ],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "chest:office_empty",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "deposit a rock. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw copper. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 0\n  cash: $0\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "chest:office",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "chest:office_funded",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "chest:office",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 20,
+          "copper": 2,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 2,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 30,
+          "copper": 4,
+          "items": [],
+          "rocks": 3
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "deposit:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 4\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 rock · → chest"
+        },
+        {
+          "action": "withdraw:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 rock"
+        },
+        {
+          "action": "deposit:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 5\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 copper · → chest"
+        },
+        {
+          "action": "withdraw:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 copper"
+        },
+        {
+          "action": "deposit:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $40\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- $10 · → chest"
+        },
+        {
+          "action": "withdraw:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        },
+        {
+          "action": "back",
+          "menu": {
+            "options": [
+              {
+                "enabled": false,
+                "label": "district claims need a desk."
+              },
+              {
+                "enabled": false,
+                "label": "work orders need a radio."
+              },
+              {
+                "enabled": true,
+                "label": "look at office upgrades. (2/6)"
+              },
+              {
+                "enabled": true,
+                "label": "open the chained locker."
+              },
+              {
+                "enabled": true,
+                "label": "use the cot."
+              },
+              {
+                "enabled": false,
+                "label": "route board not installed."
+              },
+              {
+                "enabled": true,
+                "label": "leave the office."
+              }
+            ],
+            "text": "one room. one lock. 0 districts entered in pen.\nupgrades: 2/6. orders filed: 0.\nthe smell has seniority.",
+            "title": "THE OFFICE"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        }
+      ]
+    },
+    {
+      "id": "chest:office_partial",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 0)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 2)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 2\n  cash: $9\n  items: 1",
+        "title": "THE CHEST"
+      },
+      "service": "chest:office",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 9,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 1,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 9,
+          "copper": 2,
+          "items": [
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            }
+          ],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "office:chest_empty",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": false,
+            "label": "deposit a rock. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw copper. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 0\n  cash: $0\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "office:chest",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "office:chest_funded",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 rock. (chest: 3)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 4)"
+          },
+          {
+            "enabled": true,
+            "label": "deposit $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw $10. (chest: $30)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+        "title": "THE CHEST"
+      },
+      "service": "office:chest",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 20,
+          "copper": 2,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 2,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 30,
+          "copper": 4,
+          "items": [],
+          "rocks": 3
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "deposit:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 4\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 rock · → chest"
+        },
+        {
+          "action": "withdraw:rocks",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 rock"
+        },
+        {
+          "action": "deposit:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 5)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 5\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- 1 copper · → chest"
+        },
+        {
+          "action": "withdraw:copper",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + 1 copper"
+        },
+        {
+          "action": "deposit:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $40)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $40\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "- $10 · → chest"
+        },
+        {
+          "action": "withdraw:cash",
+          "menu": {
+            "options": [
+              {
+                "enabled": true,
+                "label": "deposit 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 rock. (chest: 3)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw 1 copper. (chest: 4)"
+              },
+              {
+                "enabled": true,
+                "label": "deposit $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "withdraw $10. (chest: $30)"
+              },
+              {
+                "enabled": true,
+                "label": "close the chest."
+              }
+            ],
+            "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 3\n  pure copper: 4\n  cash: $30\n  items: 0",
+            "title": "THE CHEST"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        },
+        {
+          "action": "back",
+          "menu": {
+            "options": [
+              {
+                "enabled": false,
+                "label": "district claims need a desk."
+              },
+              {
+                "enabled": false,
+                "label": "work orders need a radio."
+              },
+              {
+                "enabled": true,
+                "label": "look at office upgrades. (2/6)"
+              },
+              {
+                "enabled": true,
+                "label": "open the chained locker."
+              },
+              {
+                "enabled": true,
+                "label": "use the cot."
+              },
+              {
+                "enabled": false,
+                "label": "route board not installed."
+              },
+              {
+                "enabled": true,
+                "label": "leave the office."
+              }
+            ],
+            "text": "one room. one lock. 0 districts entered in pen.\nupgrades: 2/6. orders filed: 0.\nthe smell has seniority.",
+            "title": "THE OFFICE"
+          },
+          "mode": "dialogue",
+          "toast": "← chest · + $10"
+        }
+      ]
+    },
+    {
+      "id": "office:chest_partial",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "deposit 1 rock. (chest: 0)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw a rock. (chest empty.)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit copper. (you have none.)"
+          },
+          {
+            "enabled": true,
+            "label": "withdraw 1 copper. (chest: 2)"
+          },
+          {
+            "enabled": false,
+            "label": "deposit $10. (short.)"
+          },
+          {
+            "enabled": false,
+            "label": "withdraw $10. (chest short.)"
+          },
+          {
+            "enabled": true,
+            "label": "close the chest."
+          }
+        ],
+        "text": "metal box. dented. heavy.\nin the chest:\n  rocks: 0\n  pure copper: 2\n  cash: $9\n  items: 1",
+        "title": "THE CHEST"
+      },
+      "service": "office:chest",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.35,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": true,
+          "momRentDay": 0,
+          "scrapHideoutOwned": true
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 70,
+          "cartMounted": false,
+          "cash": 9,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 100,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 1,
+          "shakes": 20,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 0,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 9,
+          "copper": 2,
+          "items": [
+            {
+              "id": "junk",
+              "n": "a piece of junk",
+              "q": 1
+            }
+          ],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": []
+    },
+    {
+      "id": "cot_false_rest",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "generator": false,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "rest 30 minutes. (+10 hp · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+55 hp · +25 brain · +15 shakes)"
+          },
+          {
+            "enabled": true,
+            "label": "back to the office."
+          }
+        ],
+        "text": "the cot is one inch shorter than you.\nthis has been entered as adequate.",
+        "title": "THE COT"
+      },
+      "service": "office:cot",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.2,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": false,
+          "momRentDay": 0,
+          "scrapHideoutOwned": false
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 20,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 20,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 10,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 3,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "rest",
+          "menu": null,
+          "mode": "playing",
+          "toast": "the generator clicks.\nthe cot files no complaint."
+        }
+      ]
+    },
+    {
+      "id": "cot_false_sleep",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "generator": false,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "rest 30 minutes. (+10 hp · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+55 hp · +25 brain · +15 shakes)"
+          },
+          {
+            "enabled": true,
+            "label": "back to the office."
+          }
+        ],
+        "text": "the cot is one inch shorter than you.\nthis has been entered as adequate.",
+        "title": "THE COT"
+      },
+      "service": "office:cot",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.2,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": false,
+          "momRentDay": 0,
+          "scrapHideoutOwned": false
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 20,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 20,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 10,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 3,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "sleep",
+          "menu": null,
+          "mode": "playing",
+          "toast": "you slept at the office.\nthe office opened before you did.\nthe day is the next day."
+        }
+      ]
+    },
+    {
+      "id": "cot_false_back",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "generator": false,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "rest 30 minutes. (+10 hp · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+55 hp · +25 brain · +15 shakes)"
+          },
+          {
+            "enabled": true,
+            "label": "back to the office."
+          }
+        ],
+        "text": "the cot is one inch shorter than you.\nthis has been entered as adequate.",
+        "title": "THE COT"
+      },
+      "service": "office:cot",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.2,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": false,
+          "momRentDay": 0,
+          "scrapHideoutOwned": false
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 20,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 20,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 10,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 3,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "back",
+          "menu": {
+            "options": [
+              {
+                "enabled": false,
+                "label": "district claims need a desk."
+              },
+              {
+                "enabled": false,
+                "label": "work orders need a radio."
+              },
+              {
+                "enabled": true,
+                "label": "look at office upgrades. (2/6)"
+              },
+              {
+                "enabled": true,
+                "label": "open the chained locker."
+              },
+              {
+                "enabled": true,
+                "label": "use the cot."
+              },
+              {
+                "enabled": false,
+                "label": "route board not installed."
+              },
+              {
+                "enabled": true,
+                "label": "leave the office."
+              }
+            ],
+            "text": "one room. one lock. 0 districts entered in pen.\nupgrades: 2/6. orders filed: 0.\nthe smell has seniority.",
+            "title": "THE OFFICE"
+          },
+          "mode": "dialogue",
+          "toast": ""
+        }
+      ]
+    },
+    {
+      "id": "cot_true_rest",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "generator": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "rest 30 minutes. (+18 hp · +5 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+55 hp · +25 brain · +15 shakes)"
+          },
+          {
+            "enabled": true,
+            "label": "back to the office."
+          }
+        ],
+        "text": "the cot is one inch shorter than you.\nthis has been entered as adequate.",
+        "title": "THE COT"
+      },
+      "service": "office:cot",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.2,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": false,
+          "momRentDay": 0,
+          "scrapHideoutOwned": false
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 20,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 20,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 10,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 3,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "rest",
+          "menu": null,
+          "mode": "playing",
+          "toast": "the generator clicks.\nthe cot files no complaint."
+        }
+      ]
+    },
+    {
+      "id": "cot_true_sleep",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "generator": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "rest 30 minutes. (+18 hp · +5 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+55 hp · +25 brain · +15 shakes)"
+          },
+          {
+            "enabled": true,
+            "label": "back to the office."
+          }
+        ],
+        "text": "the cot is one inch shorter than you.\nthis has been entered as adequate.",
+        "title": "THE COT"
+      },
+      "service": "office:cot",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.2,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": false,
+          "momRentDay": 0,
+          "scrapHideoutOwned": false
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 20,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 20,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 10,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 3,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "sleep",
+          "menu": null,
+          "mode": "playing",
+          "toast": "you slept at the office.\nthe office opened before you did.\nthe day is the next day."
+        }
+      ]
+    },
+    {
+      "id": "cot_true_back",
+      "office": {
+        "claimJob": null,
+        "jobsCompleted": 0,
+        "lastWorkId": "",
+        "orderSerial": 0,
+        "owned": true,
+        "rerollDay": 0,
+        "upgrades": {
+          "cot": true,
+          "generator": true,
+          "locker": true
+        },
+        "workDay": 1,
+        "workJob": null,
+        "workToday": 0
+      },
+      "opening": {
+        "options": [
+          {
+            "enabled": true,
+            "label": "rest 30 minutes. (+18 hp · +5 brain · -1 wanted)"
+          },
+          {
+            "enabled": true,
+            "label": "sleep until morning. (+55 hp · +25 brain · +15 shakes)"
+          },
+          {
+            "enabled": true,
+            "label": "back to the office."
+          }
+        ],
+        "text": "the cot is one inch shorter than you.\nthis has been entered as adequate.",
+        "title": "THE COT"
+      },
+      "service": "office:cot",
+      "setup": {
+        "achievements": [],
+        "cart": {
+          "color": "#888",
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "counters": {
+          "barbPacketsToday": 0,
+          "breakinsToday": 0,
+          "heistsToday": 0,
+          "peteCashToday": 0,
+          "robberiesToday": 0,
+          "stripeFencedToday": 0
+        },
+        "day": 2,
+        "dayTime": 0.2,
+        "flags": {
+          "busPassUsedDay": 0,
+          "momBusPassDay": 0,
+          "momHideoutOwned": false,
+          "momRentDay": 0,
+          "scrapHideoutOwned": false
+        },
+        "lifetimeDay": 2,
+        "phoneT": 30000,
+        "player": {
+          "brain": 20,
+          "cartMounted": false,
+          "cash": 0,
+          "copper": 0,
+          "equip": {
+            "coat": null,
+            "hat": null,
+            "shoes": null,
+            "tool": null
+          },
+          "faction": {
+            "scrap": 0,
+            "spiritual": 0,
+            "street": 0
+          },
+          "h": 28,
+          "hp": 20,
+          "inventory": [],
+          "maxHp": 100,
+          "rocks": 0,
+          "shakes": 10,
+          "speed": 2.2,
+          "w": 24,
+          "wanted": 3,
+          "x": 4908,
+          "y": 3206
+        },
+        "stash": {
+          "cash": 0,
+          "copper": 0,
+          "items": [],
+          "rocks": 0
+        },
+        "territoryGreeted": [
+          "already"
+        ],
+        "territoryHeat": 17,
+        "territoryZoneId": "market"
+      },
+      "steps": [
+        {
+          "action": "back",
+          "menu": {
+            "options": [
+              {
+                "enabled": false,
+                "label": "district claims need a desk."
+              },
+              {
+                "enabled": false,
+                "label": "work orders need a radio."
+              },
+              {
+                "enabled": true,
+                "label": "look at office upgrades. (3/6)"
+              },
+              {
+                "enabled": true,
+                "label": "open the chained locker."
+              },
+              {
+                "enabled": true,
+                "label": "use the cot."
+              },
+              {
+                "enabled": false,
+                "label": "route board not installed."
+              },
+              {
+                "enabled": true,
+                "label": "leave the office."
+              }
+            ],
+            "text": "one room. one lock. 0 districts entered in pen.\nupgrades: 3/6. orders filed: 0.\nthe smell has seniority.",
+            "title": "THE OFFICE"
+          },
+          "mode": "dialogue",
+          "toast": ""
+        }
+      ]
+    }
+  ],
   "saveLifecycle": {
     "fresh": {
       "cart": {
@@ -12805,7 +16140,7 @@
   "source": {
     "authority": "unchanged active source functions and menu callbacks",
     "corpusSha256": "04c8bff447a8de30d9fee156ca80a8331e10028d0b047eb09a22498541339224",
-    "generatorSha256": "58141baa8a4af2a9967eed9a42527d82dad4bf360f2f11947f7bc6550960b328",
+    "generatorSha256": "18de0fca4d09564bdd25d840548ef9d959b1456032f7dca6310d4cc0ac3b96fe",
     "harnessSha256": "8cd1c299ac5c7ff3bed637341ffb371639fb5fad27c6c01dbf50836b7d5a7867",
     "hashes": {
       "VIBE.md": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5",

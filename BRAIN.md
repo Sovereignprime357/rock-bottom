@@ -2702,3 +2702,60 @@ animals/followers/props/incidents, final interaction priority and site placement
 Integrate real Day and remaining guidance/audio; native/Web tours, persistence
 counterexamples and60AI measurements precede final delivery. See WORKFLOW-3D-PORT.md
 and reports/2026-11-18-3d-full-scene.md. Continue the active goal after checkpoint.
+
+
+## 2026-11-18 — Full-port activity and campaign composition, continued
+
+**Changed/why.** Connected real facade heists, Cooking's five modes/read-only heat view, Campaign/Day normalization and forces, Office lease/claims/upgrades/shared locker/cot, and four Companion conversations/lifecycles. One Runtime owns clocks; one Lockpick serves heists and the dog. Startup now shows an opaque progress surface, caches exact authored mesh weights and creates actors at their actual initial positions, removing giant origin flashes.
+
+**Decided.** Source quirks remain explicit;3D physical grants retain one frozen pending intent rather than minting phantom rewards. Accepted large cooking resolution cannot be canceled by an ending, save or native-close request. Epoch identity cancels stale presentation/transition work. Retained released animal records hide visually without acquiring a combat corpse. Detailed decisions: IMPL-3D-FULL-04.
+
+**Tried/fixed.** Review caught a same-mode heat cancellation, a delayed Tony ending that stopped settlement, and stale smell receipts. Office fixtures exposed normalization on locked-door/Greg paths and post-consumption refusal cleanup. Scene locker-back test initially searched for 'back'; the source label is 'close the chest.' Corrected the test and verified actual return to the Office menu. Runtime128, CookingRuntime156, liveScene165, Companion11638, Office23986, Heists16893, Combat2870 targeted checks pass; original2D19/19 remains green.
+
+**Next/in-flight.** Full57-suite run and new native/Web exports; corrected actual60 rendering measurement. P13c Kingdom underway; static benches/dumpsters/pay-phone packet underway; remaining interactive props/Block activities/cart/old-school/incidents/map/audio and performance/full progression tours remain. Full port is not complete. Continue the active goal after each committed checkpoint.
+
+
+### 2026-11-18 full-port continuation — contact and late gameplay owners
+
+Connected WorldProps and Kingdom to production Runtime/Scene. Corrected real range endpoints,
+actor-aware service approaches, source menu priorities, live death/ending/cooking boundaries,
+source quest fields/intro filters, stun input, discovery/concession menus and receipt durations.
+Native long-run camera obstruction reproduced as NPC head/body overlap and fixed with source
+contact-band collision;120s+movement captures remain clear while source attacks/recovery run.
+Central: Kingdom22204, physical558, props34269, interactive model13015, incidents21899,
+contact74, visibility1521, roster1954, CookingRuntime175; Scene248 before final UI tests;
+full integration245 actual roster/controller59.40197s. New68-suite runner is running, not yet
+claimed green. Original19 runner running too. Full Windows/Web exports still previous57-gate
+baseline; rebuild after new checkpoint. Last pushed commit remains dc4999d on codex/3d-full-port.
+
+Failed/learned: static service approaches .52m from actor centers became illegal after genuine
+body contact; corrected approaches instead of removing cast. A temporary undefined SCALE edit
+intersected a queued test parse, fixed to Content.METRES_PER_PIXEL. Four hidden-pose fixtures
+incorrectly marked nonambient default actions as ambient; production correctly refused skipping,
+fixtures corrected with nonambient assertions retained. Two trashcan50px oracle paths fell
+through to source Block; now explicitly classified as dispatcher handoffs, range unchanged.
+New native performance fails16ms and arrest drops60actors to56; CPU diagnostic required. Do not
+claim performance or full port complete. Missing source district entry/F/autosave/Block utilities
+now assigned to architecture; incident presenter world/path gates to world; dynamic interactive
+props/colliders to characters. Root next: native subsystem profiling, dynamic integration,
+full UI/objective/map/audio/weather/OldSchool/cart, nativeWeb complete playthrough and publish.
+
+
+### Full port continuation — live utilities/interactive props and measured bottleneck
+- Composed exact Block and marketplace choices, held/released F vision, cash visibility,12 zone-entry flags and strict45second autosave tail. Preserved source same-session unsaved clock continuity. Reentrant spatial callback replacement now fails before mode mutation (1571checks).
+- Dynamic cans/bottles reuse28 original meshes across14 slots. Added single Runtime owner, source tick ordering, immediate physical projection after reset/tick/swing; source strict E order remains bench→can→phone→cart→dumpster. Old epoch colliders clear before bottle randomization. Placement reserves prior approaches/eye rays and live NPC volumes. Actualview3169/model13015/sourceprop34269 checks passed; composed Scene new cases pending.
+- Smoke integration failed an obsolete exact-label fixture after adopting source choice text; corrected assertion to source label prefix rather than changing the game. Dynamiccold staging then exposed a bottle inside Karaoke Mike; fixed actual NPC-envelope exclusion, not the clearance assertion.
+- Full68runner failed legacy fullintegration because an unconditional dynamic interactive branch changed static mode; guarded production flag restored245 actualintegration checks. Runner now registers71; pending full run, no green claim yet.
+- Native profiler retained fullAI/shadows/60 real actors and exposed actor simulation as dominant:25.069/23.644ms p95 core/night, versus8.272/8.609ms mesh projection. Overall39.828/38.017ms sceneCPU remains failed; arrest legitimately removes cops and fails count invariant too. Added diagnostic-only clearance/motion/pose scope details for next measurement.
+- Approved pure source Guidance/journal/map with canonical ordering and explicit repair of source metVendors ReferenceError; original source remains frozen. Approved nine-weapon original viewmodels, current-context grips and captured attack-weapon metadata; no delayed combat authority. Approved bounded lateral mattress map sharing the exact visible and bump point; all28 actual static lanes clear, forklift tail lid correction/dynamic reservations pending.
+- Next: compose/physically inspect weapon rig and incidents, complete guidance/cart/OldSchool/weather/audio, optimize proven bottlenecks, rerun gates and native/Web tours, commit/push coherent checkpoint then continue full-port acceptance.
+
+
+### 2026-11-18 — full neighborhood checkpoint verification
+- WHAT/WHY: Composed Utilities/F, world props, live14prop projection, Kingdom, full journal/minimap and nine first-person weapon contexts. Verified source owners retain one-use actions and existing timing/resources; see the systems checkpoint report for earlier Campaign/Office/Cooking/Companion work in this batch.
+- COUNTEREXAMPLES: Full75 initially failed Kingdom routes because its static-only walking controller tried to pass through real Brutus/Lurch contact. Actual traces proved static clearance but zero-fraction actor contact. A bounded resident-aware test controller now preserves exact final service points, all live actors and production movement;593checks pass.
+- RENDER CHECK: Native screenshots exposed an offscreen map/receipt despite visible=true. Corrected actual anchored offsets and added global-rectangle checks at1280x720/960x540 plus bind/modal/unbind/resume. Guidance1137checks now pass.
+- MEASURED: Actual60 editor-native short diagnostic retains60 actors in both phases, sceneCPU p95=31.408/31.840ms and engine=41.888/42.151ms. Index optimization helps but target still fails. A release-template measurement is needed before selecting further optimizations; no AI clock/quality reductions were used.
+- GATES: Complete registered3D runner75/75PASS with clean import; original19/19PASS. Isolated unintegrated projected-marker helper341checks/30source draw casesPASS. Windows+Web Full exportsPASS; local browser verification follows before checkpoint delivery.
+- NEXT: Finish dynamic event reservation and predicted-time path validation (incidents remain OFF); replace incident bird meshes to fit actual declared query bounds; live cart and handles; OldSchool facade; world marker; audio/weather; release/native/Web performance and complete progression tours. Full parity remains incomplete.
+Browser follow-up found and corrected the journal Q/Escape mismatch; fullScene300PASS after the change, both exports rebuilt again. Actual browser Q→Q and I→Escape now resume movement; F updates brain; fulljournal scrolling/leave and real IndexedDB save/load pass. Current screenshot/hash records are under artifacts/3d-full-port/systems. Browser tab closed. The current report explicitly distinguishes the75-suite pre-follow-up run from the300-check post-fix full-scene run. No full campaign or performance completion claim.

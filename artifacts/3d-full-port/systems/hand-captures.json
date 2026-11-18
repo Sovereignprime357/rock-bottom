@@ -1,0 +1,518 @@
+{
+	"camera": {
+		"fov": 78.0,
+		"near": 0.0599999986588955,
+		"size": [
+			1280,
+			720
+		]
+	},
+	"captures": [
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "fists_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"file": "fists_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"file": "fists_miss_peak.png",
+			"phase": 0.1875,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"file": "fists_recovery.png",
+			"phase": 0.666666666666667,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"file": "fists_contact_peak.png",
+			"phase": 0.1875,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "pipe_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "pipe",
+			"file": "pipe_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "pipe",
+			"file": "pipe_miss_peak.png",
+			"phase": 0.160714285714286,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "pipe",
+			"file": "pipe_recovery.png",
+			"phase": 0.571428571428571,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "pipe",
+			"file": "pipe_contact_peak.png",
+			"phase": 0.160714285714286,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "brick_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "brick"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "brick",
+			"file": "brick_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "brick"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "brick",
+			"file": "brick_miss_peak.png",
+			"phase": 0.140625,
+			"visible": true,
+			"weapon": "brick"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "brick",
+			"file": "brick_recovery.png",
+			"phase": 0.5,
+			"visible": true,
+			"weapon": "brick"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "brick",
+			"file": "brick_contact_peak.png",
+			"phase": 0.140625,
+			"visible": true,
+			"weapon": "brick"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "cart_wheel_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "cart_wheel"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "cart_wheel",
+			"file": "cart_wheel_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "cart_wheel"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "cart_wheel",
+			"file": "cart_wheel_miss_peak.png",
+			"phase": 0.204545454545455,
+			"visible": true,
+			"weapon": "cart_wheel"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "cart_wheel",
+			"file": "cart_wheel_recovery.png",
+			"phase": 0.727272727272727,
+			"visible": true,
+			"weapon": "cart_wheel"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "cart_wheel",
+			"file": "cart_wheel_contact_peak.png",
+			"phase": 0.204545454545455,
+			"visible": true,
+			"weapon": "cart_wheel"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "shoe_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "shoe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "shoe",
+			"file": "shoe_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "shoe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "shoe",
+			"file": "shoe_miss_peak.png",
+			"phase": 0.155172413793103,
+			"visible": true,
+			"weapon": "shoe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "shoe",
+			"file": "shoe_recovery.png",
+			"phase": 0.551724137931035,
+			"visible": true,
+			"weapon": "shoe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "shoe",
+			"file": "shoe_contact_peak.png",
+			"phase": 0.155172413793103,
+			"visible": true,
+			"weapon": "shoe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "baguette_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "baguette"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "baguette",
+			"file": "baguette_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "baguette"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "baguette",
+			"file": "baguette_miss_peak.png",
+			"phase": 0.225,
+			"visible": true,
+			"weapon": "baguette"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "baguette",
+			"file": "baguette_recovery.png",
+			"phase": 0.8,
+			"visible": true,
+			"weapon": "baguette"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "baguette",
+			"file": "baguette_contact_peak.png",
+			"phase": 0.225,
+			"visible": true,
+			"weapon": "baguette"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "microphone_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "microphone"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "microphone",
+			"file": "microphone_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "microphone"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "microphone",
+			"file": "microphone_miss_peak.png",
+			"phase": 0.15,
+			"visible": true,
+			"weapon": "microphone"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "microphone",
+			"file": "microphone_recovery.png",
+			"phase": 0.533333333333333,
+			"visible": true,
+			"weapon": "microphone"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "microphone",
+			"file": "microphone_contact_peak.png",
+			"phase": 0.15,
+			"visible": true,
+			"weapon": "microphone"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "knife_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "knife"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "knife",
+			"file": "knife_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "knife"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "knife",
+			"file": "knife_miss_peak.png",
+			"phase": 0.204545454545455,
+			"visible": true,
+			"weapon": "knife"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "knife",
+			"file": "knife_recovery.png",
+			"phase": 0.727272727272727,
+			"visible": true,
+			"weapon": "knife"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "knife",
+			"file": "knife_contact_peak.png",
+			"phase": 0.204545454545455,
+			"visible": true,
+			"weapon": "knife"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "broken_bottle_rest.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "broken_bottle",
+			"file": "broken_bottle_immediate.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "broken_bottle",
+			"file": "broken_bottle_miss_peak.png",
+			"phase": 0.18,
+			"visible": true,
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "broken_bottle",
+			"file": "broken_bottle_recovery.png",
+			"phase": 0.64,
+			"visible": true,
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "broken_bottle",
+			"file": "broken_bottle_contact_peak.png",
+			"phase": 0.18,
+			"visible": true,
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "phone",
+			"attack_weapon": "",
+			"file": "context_phone_early.png",
+			"phase": 0.227272727272727,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "phone",
+			"attack_weapon": "",
+			"file": "context_phone_late.png",
+			"phase": 0.5,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "bench",
+			"attack_weapon": "",
+			"file": "context_bench_early.png",
+			"phase": 0.333333333333333,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "bench",
+			"attack_weapon": "",
+			"file": "context_bench_late.png",
+			"phase": 0.733333333333333,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "dumpster",
+			"attack_weapon": "",
+			"file": "context_dumpster_early.png",
+			"phase": 0.277777777777778,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "dumpster",
+			"attack_weapon": "",
+			"file": "context_dumpster_late.png",
+			"phase": 0.611111111111111,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"file": "context_kick_early.png",
+			"phase": 0.357142857142857,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"file": "context_kick_late.png",
+			"phase": 0.785714285714286,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_standing_fists.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_seated_fists.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_seated_pipe.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_walk_5_5.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_sprint_16_83.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_look_shakes.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_menu_hidden.png",
+			"phase": 0.0,
+			"visible": false,
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "context_reset.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "fists"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"file": "capture_original_fists_after_bottle_receipt.png",
+			"phase": 0.104166666666667,
+			"visible": true,
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"file": "capture_new_bottle_after_recovery.png",
+			"phase": 0.0,
+			"visible": true,
+			"weapon": "broken_bottle"
+		}
+	],
+	"count": 63,
+	"scope": "Production first-person rig, explicit presentation time, original full-world lighting; no gameplay/Runtime/save actions."
+}

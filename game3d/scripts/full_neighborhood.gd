@@ -3,6 +3,7 @@ class_name FullNeighborhood
 ## Full source world. Geometry owns presentation/physical access, never gameplay state.
 
 const Content = preload("res://scripts/content_catalog.gd")
+const BodyContact = preload("res://scripts/actor_contact.gd")
 const WORLD_RECT := Rect2(-42.0, -33.6, 344.0, 224.0)
 const WALK_RADIUS := 0.48
 const GRID_STEP := 0.4
@@ -33,6 +34,8 @@ var _record_id: String = ""
 var _blocked := PackedByteArray()
 var _grid_clearance: float = -1.0
 var _footprint_cells: Dictionary = {}
+var site_boards: Dictionary = {}
+var dynamic_interactive: bool = false # Production adopts these originals into the live prop view.
 
 
 func build() -> void:
@@ -56,10 +59,27 @@ func build() -> void:
 	_resolve_services()
 	_prepare_grid(WALK_RADIUS)
 	batch_stats = SliceMeshBatcher.batch_children(self, 32.0)
+	_make_site_boards()
 	build_metrics = {"milliseconds": Time.get_ticks_msec() - started,
 		"obstacles": _obstacles.size(), "footprints": solid_footprints.size(),
 		"grid_bytes": _blocked.size(), "batch": batch_stats.duplicate(true)}
 	set_day_time(84.0)
+
+func _make_site_boards() -> void:
+	var rect: Rect2 = service_points["copper:abandoned"].site_rect
+	var holder := Node3D.new(); holder.name = "AbandonedBoards"; add_child(holder)
+	# A visual record of the source lock. The real facade remains the collider.
+	for index: int in range(3):
+		var plank := MeshInstance3D.new()
+		var mesh := BoxMesh.new(); mesh.size = Vector3(1.7,0.19,0.06)
+		plank.mesh = mesh; plank.material_override = _mat("796a51",0.94,0.0,"wood")
+		holder.add_child(plank)
+		plank.position = Vector3(rect.get_center().x,0.65+index*0.51,rect.end.y+0.055)
+		plank.rotation.z = -0.13 if index == 1 else 0.11
+	site_boards.abandoned = holder
+
+func set_site_available(id: String,available: bool) -> void:
+	if site_boards.has(id): site_boards[id].visible = available
 
 
 func anchors() -> Dictionary:
@@ -406,16 +426,17 @@ func _full_props() -> void:
 		_begin_record("interactiveProps", str(prop.get("id", index)), prop)
 		var at: Vector3 = _point(prop)
 		if str(prop.type) == "trashcan":
-			_cylinder("kickable_metal_bin", 0.30, 0.76, at + Vector3(0, 0.38, 0), "687c62", true, 10)
+			_cylinder("kickable_metal_bin", 0.30, 0.76, at + Vector3(0, 0.38, 0), "687c62", not dynamic_interactive, 10)
 			_cylinder("kickable_metal_lid", 0.33, 0.08, at + Vector3(0, 0.80, 0), "899378", false, 10)
 		else:
-			_cylinder("breakable_bottle_glass", 0.065, 0.25, at + Vector3(0, 0.125, 0), "627458", true, 6)
+			_cylinder("breakable_bottle_glass", 0.065, 0.25, at + Vector3(0, 0.125, 0), "627458", not dynamic_interactive, 6)
 			_cylinder("bottle_neck_glass", 0.027, 0.10, at + Vector3(0, 0.30, 0), "627458", false, 6)
 		# Stateful props retain individually addressable geometry for later gameplay.
 		for child_index: int in range(_record_start, get_child_count()):
 			var child: Node = get_child(child_index)
 			if child is MeshInstance3D:
 				child.set_meta("source_owner", _owner)
+				if dynamic_interactive: child.visible = false
 		_end_record()
 
 
@@ -708,10 +729,10 @@ func _full_boundaries() -> void:
 			_box("distant_metal_roof", Vector3(10.5, 0.2, 5.4), Vector3(x, height, edge), "536859")
 
 
-func _service(key: String, point: Vector3, kind: String, owner: String = "", reach: float = 2.3) -> void:
+func _service(key: String, point: Vector3, kind: String, owner: String = "", reach: float = 2.3, source_point: Vector2 = Vector2.INF) -> void:
 	_anchors[key] = point
 	service_points[key] = {"target": Vector3(point.x, 1.25, point.z), "approach": Vector3.INF,
-		"source_point": Content.to_source(point), "structure_id": owner, "kind": kind, "reach": reach}
+		"source_point": source_point if source_point.is_finite() else Content.to_source(point), "structure_id": owner, "kind": kind, "reach": reach}
 
 
 func _register_services() -> void:
@@ -734,22 +755,22 @@ func _register_services() -> void:
 	for raw: Variant in Content.definition("src/systems/campaigns.js", "CLAIM_SITES", []):
 		var site: Dictionary = raw
 		for phase: String in ["survey", "sign"]:
-			_service("claim:" + str(site.id) + ":" + phase, _point(site[phase]), "claim")
+			_service("claim:" + str(site.id) + ":" + phase, _point(site[phase]), "claim", "", 2.32)
 	var quests: Dictionary = Content.definition("src/systems/campaigns.js", "QUEST_TARGETS", {})
 	for id: String in quests:
 		var target: Dictionary = quests[id]
 		if target.has("x") and target.has("y"): _service("quest:" + id, _point(target), "quest")
 	for raw: Variant in Content.definition("src/systems/campaigns.js", "KINGDOM_DOORS", []):
 		var door: Dictionary = raw
-		_service("kingdom:" + str(door.id), _point(door, true), "door", "", 1.76)
+		_service("kingdom:" + str(door.id), _point(door, true), "door", "", 1.76, Vector2(door.x+door.w*0.5,door.y+door.h*0.5))
 	for raw: Variant in Content.definition("src/systems/campaigns.js", "KINGDOM_CLAN_LIST", []):
 		var clan: Dictionary = raw
 		for index: int in range(clan.marks.size()):
-			_service("kingdom_mark:" + str(clan.id) + ":" + str(index), _point(clan.marks[index]), "kingdom", "", 2.32)
-		_service("kingdom_banner:" + str(clan.id), _point(clan.banner), "kingdom", "", 2.88)
+			_service("kingdom_mark:" + str(clan.id) + ":" + str(index), _point(clan.marks[index]), "kingdom", "", 2.32, Vector2(clan.marks[index].x,clan.marks[index].y))
+		_service("kingdom_banner:" + str(clan.id), _point(clan.banner), "kingdom", "", 2.88, Vector2(clan.banner.x,clan.banner.y))
 		_service("kingdom_boss:" + str(clan.id), _point(clan.boss), "combat")
 	var emperor: Dictionary = Content.definition("src/systems/campaigns.js", "KINGDOM_EMPEROR", {})
-	_service("kingdom_banner:throne", _point(emperor.banner), "kingdom", "", 2.88)
+	_service("kingdom_banner:throne", _point(emperor.banner), "kingdom", "", 2.88, Vector2(emperor.banner.x,emperor.banner.y))
 	_service("kingdom_boss:throne", _point(emperor.boss), "combat")
 	var office: Dictionary = Content.definition("src/systems/campaigns.js", "OFFICE_DOOR", {})
 	_service("office", _point(office, true), "door", "", 1.76)
@@ -775,6 +796,7 @@ func _register_services() -> void:
 					var prop: Dictionary = content.props[index]
 					if str(prop.type) == "freight_car" and float(prop.x) == float(site.anchor.x): owner = "props:" + str(index)
 		_service("copper:" + str(site.id), Vector3(rect.get_center().x, 0, rect.end.y + 0.03), "site", owner, 0.79)
+		service_points["copper:"+str(site.id)].site_rect = rect
 	for raw: Variant in Content.definition("src/data/props.js", "BREAKIN_SITES", []):
 		var site: Dictionary = raw
 		var rect: Rect2 = _rect(site.anchor)
@@ -782,11 +804,15 @@ func _register_services() -> void:
 		for index: int in range(content.props.size()):
 			if str(content.props[index].get("variant", "")) == str(site.id): owner = "props:" + str(index)
 		_service("breakin:" + str(site.id), Vector3(rect.get_center().x, 0, rect.end.y + 0.03), "site", owner, 0.79)
+		service_points["breakin:"+str(site.id)].site_rect = rect
 	for index: int in range(content.props.size()):
 		var prop: Dictionary = content.props[index]
 		if str(prop.type) in ["dumpster", "cart", "park_bench", "pay_phone"]:
 			var point: Vector3 = _point(prop, prop.has("w") and prop.has("h"))
-			_service("prop:" + str(index), point, str(prop.type), "props:" + str(index), 1.74 if str(prop.type) == "dumpster" else 1.9)
+			var source_center := Vector2(prop.x,prop.y)
+			if prop.has("w") and prop.has("h"): source_center += Vector2(prop.w,prop.h)*0.5
+			var source_reach: float = {"dumpster":44.0,"park_bench":50.0,"pay_phone":38.0}.get(str(prop.type),47.5)
+			_service("prop:" + str(index), point, str(prop.type), "props:" + str(index), source_reach*Content.METRES_PER_PIXEL,source_center)
 	for index: int in range(content.interactiveProps.size()):
 		var prop: Dictionary = content.interactiveProps[index]
 		_service("interactive:" + str(index), _point(prop), str(prop.type), "interactiveProps:" + str(prop.get("id", index)), 1.9)
@@ -813,12 +839,21 @@ func _resolve_services() -> void:
 			for step: int in range(16):
 				var angle: float = PI * 0.5 + step * TAU / 16.0
 				var candidate := Vector3(target.x + cos(angle) * radius, 0.06, target.z + sin(angle) * radius)
-				if is_clear_position(candidate) and sight_clear(candidate + Vector3(0, 1.45, 0), target, owner):
+				if _actor_approach_clear(candidate) and is_clear_position(candidate, WALK_RADIUS + 0.006) and sight_clear(candidate + Vector3(0, 1.45, 0), target, owner):
 					service.approach = candidate
 					break
 			if service.approach != Vector3.INF: break
 		if service.approach == Vector3.INF:
 			push_warning("Full world service has no clear physical approach: " + key)
+
+
+func _actor_approach_clear(point: Vector3) -> bool:
+	var center: Vector2 = Content.to_source(point)
+	var initial: Dictionary = content.initial.player
+	var body := {"id":"player","x":center.x-initial.w*0.5,"y":center.y-initial.h*0.5,"w":initial.w,"h":initial.h}
+	for actor: Dictionary in content.actors.day1:
+		if not actor.get("dead",false) and BodyContact.penetrating(body,Vector2(body.x,body.y),actor): return false
+	return true
 
 
 func sight_clear(from: Vector3, to: Vector3, ignored_owner: String = "") -> bool:

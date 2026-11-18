@@ -8,9 +8,19 @@
       "source": "`core/runtime_ui.js:init_runtime_ui`, `core/start.js:startGame`, `core/boot.js`, `core/update.js:update`",
       "acceptance": "Separate durable state from actor/render state. New game, load, ending continuation, cooking and asynchronous loading are distinct transitions. Initial source brain/time differ from slice.",
       "status": "partial",
-      "implementation": ["game3d/scripts/game_state.gd"],
-      "tests": ["game3d/tests/test_game_state.gd"],
-      "integration": [],
+      "implementation": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/game_state.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_game_state.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -19,10 +29,21 @@
       "name": "Movement and physicality",
       "source": "`core/update.js:updateWorld`; `systems/physicality.js` motion, door-gap, clear-placement and detour functions",
       "acceptance": "Preserve speed effects, stun/slow, collision on all real architecture, accessible counters/doors and reachable objectives. Convert world relations to metres; validate actual walking paths, not just straight lines.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/actor_navigation.gd",
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/world_adapter.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_actor_navigation.gd",
+        "game3d/tests/test_full_integration.gd",
+        "game3d/tests/test_full_world.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -31,10 +52,22 @@
       "name": "Main loop and withdrawal",
       "source": "`concessions.js:smokeRockAt`; `update.js:updateWorld`; `runtime_ui.js:applyEquipStats`",
       "acceptance": "Source normal high consumes one real rock, -50 shakes, -4 brain, +1 cred, lifetime and faction/quest hooks; +30 shakes at expiry. Soap, hitter, recognition and royal-static branches are missing. Source withdrawal is frame/RNG/iframe dependent; slice uses 0.72HP/s approximation.",
-      "status": "model_checked",
-      "implementation": ["game3d/scripts/game_state.gd", "game3d/scripts/memory_loop.gd"],
-      "tests": ["game3d/tests/test_game_state.gd", "game3d/tests/test_memory_loop.gd", "tools/3d-memory-oracle.mjs"],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/game_state.gd",
+        "game3d/scripts/memory_loop.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_game_state.gd",
+        "game3d/tests/test_memory_loop.gd",
+        "tools/3d-memory-oracle.mjs"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -43,10 +76,17 @@
       "name": "Input and interaction arbitration",
       "source": "`input/keyboard.js`, `input/mobile.js`, `interactions.js:tryInteract`, `campaigns.js:resolveActionHint`",
       "acceptance": "Preserve precedence for doors, campaign/route targets, NPCs, activity sites, props, zone verbs, then pockets. In 3D the reticle/reach/LOS should nominate an eligible target through the same resolver that produces the prompt. Menus clear held input; every conversation needs an exit. Desktop plus browser is the selected platform scope; touch controls are a separate parity decision, not an implied new primary platform.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/full_scene.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -55,10 +95,18 @@
       "name": "Inventory, equipment, weapons, tools",
       "source": "`catalogs.js:EQUIPMENT`, `activities.js:WEAPONS/pickupWeapon`, `runtime_ui.js:applyEquipStats/equipTool/renderInventory`, `heat.js:ownsTool/hasPropane`",
       "acceptance": "Preserve item identity/quantity, shoes/hat/coat/tool, derived HP/speed/cred/charisma/wanted decay, one weapon and one tool in hand. Torch/crowbar displacement goes to Pete's locker; ownership includes locker, usage checks equipped tool. Do not add weapon durability: no live durability system was found.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/inventory.gd",
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -67,10 +115,18 @@
       "name": "Core vendors and economy",
       "source": "`dialogue/neighborhood_a.js:tonyDialogue/yuriDialogue/peteDialogue`; `catalogs.js:vendorPrice`",
       "acceptance": "Source includes single/bulk sales, faction rates/refusals, charisma price quotes, license plates, tool stock/locker, loans, hideout offers, counters and quest hooks. Pete total outlay cap $200/day. Sock-for-$1 is a real source fallback. Yuri baseline25 vs Pete15; faction modifications must also port.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_integration.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -79,10 +135,19 @@
       "name": "Supply, fencing and cooking economy",
       "source": "`vendors_places.js:barbDialogue/pinkyDialogue/mathematicianDialogue`; `neighborhood_b.js:stripeDialogue`",
       "acceptance": "Clean/dirty packet distinction, dirty-first consumption, Barb six packets/day, crossword discount, Pinky alternatives, Stripe loyalty/betrayal and daily fence ladder/cap. Prices quoted through `vendorPrice` have source-specific exceptions; do not apply one universal discount policy.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd",
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_quest_dialogue.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -103,10 +168,20 @@
       "name": "NPC agency and lifecycle",
       "source": "`npc_spawns.js:spawnNpcs`, `npc_ai.js:updateNpcActors`, `update.js` schedules, `start.js` rehydration",
       "acceptance": "Default chase, zone-only aggression, patrol, wander, day/night presence, sleep, shop closure, chatter, pets, allies, walk-off and essential actors. Rendering an NPC is not implementing its behavior. Preserve stable base IDs and transient/guard/pretender distinctions.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/actor_animation.gd",
+        "game3d/scripts/actor_director.gd",
+        "game3d/scripts/character_roster.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_character_roster.gd",
+        "game3d/tests/test_combat.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -115,10 +190,18 @@
       "name": "Basic combat",
       "source": "`combat.js:aggroNpc/playerAttack/damagePlayer/onNpcDeath`; `npc_ai.js`; `update.js` projectile and combo updates",
       "acceptance": "Source weapons/reach/cooldowns, random14–22 base damage, high/cart/vulnerability multipliers, hit-stun, iframes, knockback, combo rewards/reset, breakable bottles, wanted-on-peaceful-hit, drops, faction and achievement effects. Lurch is source55HP, slice120HP; no daily respawn/reward substitute may silently become parity.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/combat_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_combat.gd",
+        "game3d/tests/test_full_runtime.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -127,10 +210,18 @@
       "name": "Combat archetypes/projectiles",
       "source": "`npc_ai.js:updateNpcActors`; `combat.js:spawnProjectile/spawnSwarmerSibling`; `update.js` projectile physics",
       "acceptance": "Charger windup→fixed-direction lunge→vulnerable recovery; grabber stun; swarmer pair/cap; ranged spacing/aim/throws; fallen-priest two phases; default chase; Brendan taser. Projectile collision and telegraphs need 3D adapters, not a rewrite of reward/status logic.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/actor_director.gd",
+        "game3d/scripts/combat_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_combat.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -139,10 +230,19 @@
       "name": "Police, death and arrest",
       "source": "`combat.js:manageCops/spawnCopAtEdge/damagePlayer/die/arrestScene`",
       "acceptance": "Wanted0–3, decay18s (collar multiplier), regular and Brendan spawn rules, radio backup, four-cop cap, dog slowdown and arrest. Death keeps cash/items, HP60/shakes30/cred-10/wanted0; arrest takes floor(70% cash), real rocks, HP40/shakes100. Source death does not explicitly clear high/crash; slice does.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/combat_system.gd",
+        "game3d/scripts/game_state.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_combat.gd",
+        "game3d/tests/test_game_state.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -151,10 +251,17 @@
       "name": "Tony, co-op and other local bosses",
       "source": "`combat.js:spawnBoss/onNpcDeath`; `update.js` boss phases; `neighborhood_b.js:spawnCoopBoss/triggerFallenPriestTransform`; `activities.js:spawnBrutusOlder`; `vendors_places.js:spawnOldSchoolBrutus`",
       "acceptance": "Tony challenge/offenses, coat phases and Sherri adds; Stripe ally and irreversible co-op choice; older Brutus trigger/phases; fallen priest; old-school encounter and guaranteed first challenge. Rewards and retry/ending state differ. Each real boss must remain defeatable in <90s by a competent player.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/boss_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_bosses.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -163,10 +270,19 @@
       "name": "Intro, quests, ranks and achievements",
       "source": "`runtime_ui.js` quests; `combat.js:tryCompleteIntroRemember/completeIntroSmoke/startPigeonCrownQuest`; dialogue/update completion hooks; `progression_routes.js:ACHIEVEMENTS`; `world.js:RANKS`",
       "acceptance": "All24 quest IDs and49 achievements; earn10→Tony→smoke intro, world suppression and one-shot old-save behavior; eight rank thresholds0/10/25/50/100/200/400/800. Rank does not simply recompute downwards when cred falls. Preserve quest flags, offers and alternate completion branches.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/progression_routes.gd",
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_progression.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -175,10 +291,19 @@
       "name": "Daily hustles and Block routes",
       "source": "`progression_routes.js:rollHustles/checkHustles/hustleProgress/rollBlockRoute/tryStampBlockRoute`",
       "acceptance": "Fourteen hustle templates and snapshot progress; three-stop endless routes, early pool, unlock flags, last-stop exclusion, bounded cash/cred, route milestones and office unlock. Route rewards must be one transaction, including freshly rolled next route.",
-      "status": "model_checked",
-      "implementation": ["game3d/scripts/progression_routes.gd"],
-      "tests": ["game3d/tests/test_progression.gd", "tools/3d-progression-oracle.mjs"],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/progression_routes.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_integration.gd",
+        "game3d/tests/test_progression.gd",
+        "tools/3d-progression-oracle.mjs"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -188,9 +313,18 @@
       "source": "`factions.js:adjustFaction/applyRep/factionTier/updateTerritory`; all action call sites",
       "acceptance": "Three independent reputations clamped -50..50; hated≤-10, liked≥10, loved≥25. Price/stock/loan/drop/refusal/ambient/brain/heat effects, territory cash multipliers, greetings and overlapping-zone resolution. Kingdom allegiance is deliberately separate.",
       "status": "partial",
-      "implementation": ["game3d/scripts/game_state.gd", "game3d/scripts/progression_routes.gd"],
-      "tests": ["game3d/tests/test_game_state.gd", "game3d/tests/test_progression.gd"],
-      "integration": [],
+      "implementation": [
+        "game3d/scripts/game_state.gd",
+        "game3d/scripts/progression_routes.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_game_state.gd",
+        "game3d/tests/test_progression.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -235,10 +369,17 @@
       "name": "Hideouts and shared stash",
       "source": "`daily_hideouts.js:openHideout/openHideoutChest`; Yuri/Mom offers",
       "acceptance": "Scrap shed ownership, Mom nightly rent/eviction, discrete rest/sleep, phone reset, shared rocks/copper/cash stash surviving death/arrest. `items` stash array exists but item deposit/withdraw is not wired; do not describe it as a shipped feature. Modal interiors are functional source truth; physical rooms can expose those same actions.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/travel_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_travel.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -247,10 +388,18 @@
       "name": "Cart and bus travel",
       "source": "`props.js:rideableCart/resetRideableCart`; `neighborhood_b.js:bigguDialogue`; `interactions.js`; `vendors_places.js` bus helpers",
       "acceptance": "Exactly one rideable cart, mount/dismount, equipment-aware capped speed and cart contact combat. Bus pass acquired via Pinky/Mom; one consumed ride/day; visited/known destinations, combat/wanted restriction and arrival placement. Existing optional bus travel must not be removed by misreading old “no fast travel” prose.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/travel_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_travel.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -260,9 +409,23 @@
       "source": "`recognition.js`, `concessions.js`, `discovery.js`; dialogue hooks",
       "acceptance": "Four venue ledgers; sit/bother/buy/sell/full_high; tiers3/8/15; visit dedup; no resource rewards. Conceded +night/choir clock/live freed dog/dryer midcycle enables four conditional spots. Discovery changes knowledge only. Clock seeds/phases persist separately from shared RNG. One real smoke transaction; action-time condition check; expiry records current venue.",
       "status": "partial",
-      "implementation": ["game3d/scripts/memory_loop.gd"],
-      "tests": ["game3d/tests/test_memory_loop.gd", "tools/3d-memory-oracle.mjs"],
-      "integration": [],
+      "implementation": [
+        "game3d/scripts/memory_loop.gd",
+        "game3d/scripts/quest_dialogue.gd",
+        "game3d/scripts/resident_dialogue.gd",
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_memory_loop.gd",
+        "game3d/tests/test_quest_dialogue.gd",
+        "game3d/tests/test_resident_dialogue.gd",
+        "game3d/tests/test_street_dialogue.gd",
+        "tools/3d-memory-oracle.mjs"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -271,10 +434,17 @@
       "name": "Emergency hitter",
       "source": "`hitter.js`; `update.js` high boundary; dumpster and pocket hooks",
       "acceptance": "Two copper craft or rare far dumpster find; location-free lowest-priority pocket action;6s high/14s crash, shakes relief20/+35 crash,brain-8; no normal smoke/recognition/royal-static reward. Cannot convert back to copper or create a second permanent smoke loop.",
-      "status": "partial",
-      "implementation": ["game3d/scripts/memory_loop.gd"],
-      "tests": ["game3d/tests/test_memory_loop.gd"],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/memory_loop.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_memory_loop.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -283,10 +453,19 @@
       "name": "Robbery",
       "source": "`robbery.js:attemptRobbery`; `npc_ai.js` skid grab",
       "acceptance": "Only `skid_lurch` landed grab; before damage;60s cooldown/two per day; one bounded cash/item/equipment/hitter loss; quest/progression/tool exemptions and no reclaim payout. Alley Lurch and other grabbers must not inherit this flag.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/actor_director.gd",
+        "game3d/scripts/robbery_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_robbery.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -295,10 +474,20 @@
       "name": "Copper sites and break-ins",
       "source": "`props.js:COPPER_SITES/BREAKIN_SITES`; `activities.js:startHeist/heistStage`",
       "acceptance": "One engine, four copper locations share3/day and2–4 copper; five break-ins use separate2/day counter and fixed small non-copper/non-rock loot. Tool/cred gate before charging attempt; stage-specific choices, lockpick, item/cash costs, failure/death, alternative no-take and exits. Site residents are real dialogue identities even without actor spawns.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/heist_system.gd",
+        "game3d/scripts/world_adapter.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_heists.gd",
+        "game3d/tests/test_site_integration.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -319,10 +508,18 @@
       "name": "Other activities",
       "source": "`activities.js:startRhythmMini/startLockpickMini/panhandle/sitOnCrate/scratchLottery`; `vendors_places.js:tryParkBenchSit/openOldSchoolInterior/priceGuyDialogue`",
       "acceptance": "Eight-step karaoke with forfeit, four-pin reset/brain penalty, market panhandle variants, crate thoughts/sleep, park continuous sit/movement cancel, old-school rip gates, all-cash Price Guy outcomes and departure. A menu with the name but no branches is not completion.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/rhythm_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_rhythm.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -331,10 +528,19 @@
       "name": "Communications, Possum and ambient events",
       "source": "`communications.js`, `catalogs.js` phone/chatter tables, `neighborhood_a.js:possumDialogue`, `update.js` timers",
       "acceptance": "Calls, intro mom tip/proud call, ticker, eight-post feed, public-phone ringing/window/planted cash,29 events, local prophecy pool and optional host bridge fallback, pet possum/revealed cash, garbage truck. Preserve no-network playable fallback; do not add an API-key requirement or other AI NPCs.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/communications_system.gd",
+        "game3d/scripts/prop_state.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_communications.gd",
+        "game3d/tests/test_full_runtime.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -355,10 +561,19 @@
       "name": "HUD, map, guidance and presentation",
       "source": "`ui/hud.js`, `ui/layout.js`, `runtime_ui.js` inventory/quests, `campaigns.js:currentPrimaryObjective/updateGuidance`, `render/*`",
       "acceptance": "One current BAD IDEA, urgency/nearest legal smoke target, inventory/equipment/lifetime/achievement panels, quest/faction/route/office/kingdom/recognition/vendor index, feed, full map, name/health/aggro labels, status effects, weather, graffiti/posters, district lights and audio feedback. Replace Canvas render mechanisms while preserving readable information and content.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/full_hud.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_hud.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -367,10 +582,20 @@
       "name": "Persistence and recovery",
       "source": "`core/audio_save.js:saveGame/loadGame`; `core/storage.js`; normalizers throughout systems",
       "acceptance": "Full schema needs all domain state listed below, stable spatial IDs and independent namespace. Persist the result of each paid transition once, await storage, no duplicate rewards, restore essential actors, clear unsafe modal/encounter state and reconcile progress witnesses.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/game_state.gd",
+        "game3d/scripts/save_store.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_game_state.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -379,10 +604,17 @@
       "name": "Audio and packaging",
       "source": "`core/audio_save.js:init_audio_save`; `core/boot.js`; 3D `synth.gd`, `save_store.gd`, export shell/build tools",
       "acceptance": "Keep input-gated initialization, mute and cached ugly short waveforms; add missing rank/boss/windup/projectile/radio/ambient cues. Retain pinned Godot4.5.1 Compatibility/single-thread Web, hashed game-data pack and capture fallback. Full actor AI/browser save/complete-campaign testing remains required.",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "partial",
+      "implementation": [
+        "game3d/scripts/synth.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     }
@@ -391,10 +623,18 @@
     {
       "id": "actors.base[0][\"interact\"]",
       "name": "tonyDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -411,50 +651,90 @@
     {
       "id": "actors.base[11][\"interact\"]",
       "name": "priestDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[12][\"interact\"]",
       "name": "conductorDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[13][\"interact\"]",
       "name": "larryDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[14][\"interact\"]",
       "name": "stripeDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[15][\"interact\"]",
       "name": "pigeonDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -471,150 +751,270 @@
     {
       "id": "actors.base[17][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[18][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[19][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[1][\"interact\"]",
       "name": "yuriDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[20][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[21][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[22][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_street_dialogue.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[23][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[24][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[25][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[26][\"interact\"]",
       "name": "barbDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[27][\"interact\"]",
       "name": "pinkyDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[28][\"interact\"]",
       "name": "mathematicianDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[29][\"interact\"]",
       "name": "hopperDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[30][\"interact\"]",
       "name": "philosopherDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -641,50 +1041,90 @@
     {
       "id": "actors.base[33][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[34][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[35][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[36][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[37][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -701,70 +1141,126 @@
     {
       "id": "actors.base[4][\"interact\"]",
       "name": "peteDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[5][\"interact\"]",
       "name": "lurchDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[6][\"interact\"]",
       "name": "sherriDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[7][\"interact\"]",
       "name": "paulieDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[8][\"interact\"]",
       "name": "daveDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.base[9][\"interact\"]",
       "name": "momDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[0][\"interact\"]",
       "name": "tonyDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -781,50 +1277,90 @@
     {
       "id": "actors.day1[11][\"interact\"]",
       "name": "priestDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[12][\"interact\"]",
       "name": "conductorDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[13][\"interact\"]",
       "name": "larryDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[14][\"interact\"]",
       "name": "stripeDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[15][\"interact\"]",
       "name": "pigeonDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -841,150 +1377,270 @@
     {
       "id": "actors.day1[17][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[18][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[19][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[1][\"interact\"]",
       "name": "yuriDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[20][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[21][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[22][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_street_dialogue.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[23][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[24][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[25][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[26][\"interact\"]",
       "name": "barbDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[27][\"interact\"]",
       "name": "pinkyDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[28][\"interact\"]",
       "name": "mathematicianDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[29][\"interact\"]",
       "name": "hopperDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[30][\"interact\"]",
       "name": "philosopherDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1011,50 +1667,90 @@
     {
       "id": "actors.day1[33][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[34][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[35][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[36][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[37][\"interact\"]",
       "name": "interact",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1071,60 +1767,108 @@
     {
       "id": "actors.day1[4][\"interact\"]",
       "name": "peteDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[5][\"interact\"]",
       "name": "lurchDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[6][\"interact\"]",
       "name": "sherriDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[7][\"interact\"]",
       "name": "paulieDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[8][\"interact\"]",
       "name": "daveDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "actors.day1[9][\"interact\"]",
       "name": "momDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1651,10 +2395,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"daveDialogue\"]",
       "name": "daveDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1681,40 +2433,72 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"lurchDialogue\"]",
       "name": "lurchDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"momDialogue\"]",
       "name": "momDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"paulieDialogue\"]",
       "name": "paulieDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"peteDialogue\"]",
       "name": "peteDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1731,10 +2515,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"priestDialogue\"]",
       "name": "priestDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1751,10 +2543,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"sherriDialogue\"]",
       "name": "sherriDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1771,20 +2571,36 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"tonyDialogue\"]",
       "name": "tonyDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"yuriDialogue\"]",
       "name": "yuriDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1801,10 +2617,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"conductorDialogue\"]",
       "name": "conductorDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1821,10 +2645,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"larryDialogue\"]",
       "name": "larryDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1861,10 +2693,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"pigeonDialogue\"]",
       "name": "pigeonDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1881,10 +2721,18 @@
     {
       "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"stripeDialogue\"]",
       "name": "stripeDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1901,10 +2749,18 @@
     {
       "id": "definitions[\"src/dialogue/vendors_places.js\"][\"barbDialogue\"]",
       "name": "barbDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1951,10 +2807,18 @@
     {
       "id": "definitions[\"src/dialogue/vendors_places.js\"][\"hopperDialogue\"]",
       "name": "hopperDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -1971,10 +2835,18 @@
     {
       "id": "definitions[\"src/dialogue/vendors_places.js\"][\"mathematicianDialogue\"]",
       "name": "mathematicianDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -2011,20 +2883,36 @@
     {
       "id": "definitions[\"src/dialogue/vendors_places.js\"][\"philosopherDialogue\"]",
       "name": "philosopherDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/resident_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_resident_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/dialogue/vendors_places.js\"][\"pinkyDialogue\"]",
       "name": "pinkyDialogue",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -2161,10 +3049,19 @@
     {
       "id": "definitions[\"src/minigames/activities.js\"][\"heistStage\"]",
       "name": "heistStage",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/heist_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_heists.gd",
+        "game3d/tests/test_site_integration.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -2231,30 +3128,56 @@
     {
       "id": "definitions[\"src/minigames/activities.js\"][\"startHeist\"]",
       "name": "startHeist",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/heist_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_heists.gd",
+        "game3d/tests/test_site_integration.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/minigames/activities.js\"][\"startLockpickMini\"]",
       "name": "startLockpickMini",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/heist_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_heists.gd",
+        "game3d/tests/test_site_integration.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/minigames/activities.js\"][\"startRhythmMini\"]",
       "name": "startRhythmMini",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/rhythm_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_rhythm.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
@@ -6171,30 +7094,54 @@
     {
       "id": "definitions[\"src/systems/robbery.js\"][\"attemptRobbery\"]",
       "name": "attemptRobbery",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/robbery_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_robbery.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/systems/robbery.js\"][\"robberyReady\"]",
       "name": "robberyReady",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/robbery_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_robbery.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },
     {
       "id": "definitions[\"src/systems/robbery.js\"][\"robberyWorldClockMs\"]",
       "name": "robberyWorldClockMs",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/robbery_system.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_robbery.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": []
     },

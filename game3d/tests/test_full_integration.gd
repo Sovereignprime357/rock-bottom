@@ -39,7 +39,7 @@ func _run() -> void:
 	_place(pickup)
 	_check(runtime.collect_cash("cp_intro_remember") and runtime.p.cash == 10,"actual low pickup visibility and guaranteed intro cash")
 	var destination: Vector3 = world.service_points.tony.approach
-	var route: PackedVector3Array = world.find_route(pickup,destination)
+	var route: PackedVector3Array = _resident_aware_route(pickup,destination)
 	_check(not route.is_empty(),"physical cash to Tony route exists")
 	var walk_seconds: float = 0.0
 	for waypoint: Vector3 in route:
@@ -70,6 +70,45 @@ func _run() -> void:
 	else:
 		for failure: String in failures: push_error(failure)
 		print("3D FULL INTEGRATION GATE: FAIL (%d / %d checks)" % [failures.size(),checks]); quit(1)
+
+func _resident_aware_route(start: Vector3,finish: Vector3) -> PackedVector3Array:
+	# A competent test controller walks around physical residents. The world
+	# route remains static; this bounded visibility graph adds only nearby body
+	# corners, then validates every edge with the actual player/contact sweep.
+	var base: PackedVector3Array = world.find_route(start,finish)
+	if base.is_empty(): return base
+	var points: Array[Vector3] = [start,finish]
+	for point: Vector3 in base:
+		if point not in points: points.append(point)
+	var half := Vector2(runtime.p.w,runtime.p.h)*0.5
+	for actor: Dictionary in runtime.state.npcs:
+		if not physics._contact_live(actor,runtime.state): continue
+		var center: Vector3 = Content.body_position(actor,game_feet())
+		var nearby: bool = false
+		for index: int in range(1,base.size()):
+			if Geometry3D.get_closest_point_to_segment(center,base[index-1],base[index]).distance_to(center) < 3.0: nearby = true; break
+		if not nearby: continue
+		var source_center := Vector2(actor.x+actor.w*0.5,actor.y+actor.h*0.5)
+		var extent := half+Vector2(actor.w,actor.h)*0.5+Vector2(2,2)
+		for sign_x: float in [-1,1]:
+			for sign_y: float in [-1,1]:
+				var candidate: Vector3 = Content.to_world(source_center+extent*Vector2(sign_x,sign_y),game_feet())
+				if candidate not in points: points.append(candidate)
+	var graph := AStar2D.new()
+	for index: int in range(points.size()): graph.add_point(index,Vector2(points[index].x,points[index].z))
+	for a: int in range(points.size()):
+		var source_a: Vector2 = Content.to_source(points[a])-half
+		var body := {"id":"player","x":source_a.x,"y":source_a.y,"w":runtime.p.w,"h":runtime.p.h}
+		if not physics._clear(body,source_a,false) or not physics._peer_clear(body,source_a,physics._contact_peers(body)): continue
+		for b: int in range(a+1,points.size()):
+			var source_b: Vector2 = Content.to_source(points[b])-half
+			var moved: Dictionary = physics.move_body(body,source_b)
+			if not moved.blocked and not moved.get("body_contact",false) and moved.position.distance_to(source_b) < 0.005: graph.connect_points(a,b)
+	var result := PackedVector3Array()
+	for index: int in graph.get_id_path(0,1): result.append(points[index])
+	return result
+
+func game_feet() -> float: return Adapter.FEET
 
 func _walk_critical_route() -> void:
 	runtime.fresh()

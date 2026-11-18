@@ -87,3 +87,20 @@ Complete means every parity row and visual/interaction criterion passes, a playa
 named committed/pushed branch, green gate output, touched-file list, BRAIN history and executed
 decision records. Public hosting is a separate deployment action. Keep the goal active until
 all required port, review and delivery work is achieved.
+
+
+## UI parity correction — action boundary and source receipts
+
+The first-person E resolver refuses action while player stunT>0, as the source keyboard does;
+read-only I/Q and pause remain usable. Source transaction callbacks retain their own existing
+validation. The Q view uses quest title/flav and source intro filtering, includes missing
+available as active, and distinguishes latent/done entries. Known but unearned venues expose
+only their source discovery text/leave; conceded rooms show the source condition and a disabled
+smoke option when unavailable or already high. Toast events retain their declared milliseconds
+through the shared HUD rather than silently becoming four-second receipts.
+
+The read-only Q journal and I inventory close on their own shortcut or Escape on both desktop
+and Web. This matches the journal's visible close instruction. A presentation-only menu key is
+cleared on every new menu/resume so these shortcuts cannot close or submit unrelated transactions.
+Key repeats are ignored. Web Escape on other dialogue pages retains the existing pause behavior;
+the ledger exit resets capture acquisition before any new pointer-lock request.

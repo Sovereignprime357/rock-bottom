@@ -17,6 +17,7 @@ class MeasuredScene:
 		scope_us.clear()
 		super._process(delta)
 		if not probe_running: return
+		for key: String in runtime.profile_us: scope_us["runtime_"+key] = runtime.profile_us[key]
 		sample_cpu_us = Time.get_ticks_usec()-started
 		sample_interval_us = started-previous_started if previous_started != 0 else 0
 		previous_started = started
@@ -111,6 +112,7 @@ func _phase(spec: Dictionary) -> Dictionary:
 	game._new_game()
 	game.runtime.state.rng_seed = int(spec.seed)
 	game.runtime.s.dayTime = float(spec.day_time)
+	game.runtime.profile_enabled = true
 	game.runtime.p.wanted = 4
 	game.runtime.p.wantedT = 0.0
 	game.sound.muted = true
@@ -128,6 +130,8 @@ func _phase(spec: Dictionary) -> Dictionary:
 		_fail(spec.id+": fixed street tour has no physical route")
 		return {"id":spec.id,"setup_failed":true}
 	var route_setup_us: int = Time.get_ticks_usec()-route_started
+	_validate_clearance(spec.id+":initial")
+	await _capture(spec.id+"_initial")
 	game.observed_events.clear(); game.previous_started = 0
 	game.probe_running = true; game.set_process(true)
 	# Police use their real source spawn transaction inside Runtime.advance.
@@ -135,8 +139,6 @@ func _phase(spec: Dictionary) -> Dictionary:
 		_drive()
 		await game.frame_sampled
 	game.set_process(false); _release_input()
-	_validate_clearance(spec.id+":warmup")
-	await _capture(spec.id+"_start")
 	var original: Dictionary = _actor_manifest()
 	var min_alive: int = 100000
 	var min_supported: int = 100000

@@ -4,6 +4,7 @@ const Travel = preload("res://scripts/travel_system.gd")
 var checks: int = 0
 var failures: Array[String] = []
 var fixture: Dictionary = {}
+var presentation_completed: int = 0
 
 class Spatial:
 	extends RefCounted
@@ -49,6 +50,7 @@ func _run() -> void:
 	if decoded is Dictionary:
 		fixture = decoded
 		_source_cases()
+		_presentation_cases()
 		_bus_cases()
 		_gates_and_zones()
 		_tokens_and_guards()
@@ -56,8 +58,9 @@ func _run() -> void:
 		_pending_safety()
 		_cart_safety()
 		_day_and_storage()
+	_check(presentation_completed == 18,"all18 exact source chest/cot UI paths completed without script abort")
 	if failures.is_empty():
-		print("3D TRAVEL GATE: PASS (%d checks;%d source action cases,18 bus arrivals,12 combat boundaries; live scene/day integration pending)" % [checks,fixture.cases.size()])
+		print("3D TRAVEL GATE: PASS (%d checks;%d source action cases,18 exact chest/cot UI paths,18 bus arrivals,12 combat boundaries; live scene/day integration pending)" % [checks,fixture.cases.size()])
 		quit(0)
 	else:
 		for failure: String in failures: push_error(failure)
@@ -129,6 +132,46 @@ func _act(travel: RefCounted, game: RefCounted, service: String, action: String,
 	if not menu.ok: return menu
 	if _option(menu,action).is_empty(): travel.close(); return {"ok":false,"reason":"missing_option"}
 	return travel.select(menu.token,action)
+
+
+func _menu_view(menu: Dictionary) -> Variant:
+	if not menu.get("ok",false) or not menu.has("options"): return null
+	var options: Array[Dictionary] = []
+	for option: Dictionary in menu.options: options.append({"label":option.label,"enabled":option.enabled})
+	return {"title":menu.title,"text":menu.text,"options":options}
+
+
+func _last_toast(game: RefCounted) -> String:
+	var result: String = ""
+	for event: Dictionary in game.events:
+		if event.kind == "toast": result = str(event.payload.text)
+		elif event.kind == "achievement": result = "· ACHIEVEMENT ·\n"+str(event.payload.definition.name)
+	return result
+
+
+func _presentation_cases() -> void:
+	_check(fixture.get("presentation",[]).size() == 18,"18 source chest/cot presentation fixtures present")
+	for test: Dictionary in fixture.presentation:
+		var game := State.new()
+		var spatial := Spatial.new()
+		var day := Day.new(game)
+		var travel := Travel.new(game,spatial,day)
+		_setup(game,test.setup,test.office)
+		_at(game,test.service)
+		var menu: Dictionary = travel.open(test.service)
+		_check(_same(_menu_view(menu),test.opening),test.id+" exact opening title/text/labels/enabled states")
+		for step: Dictionary in test.steps:
+			_check(menu.get("ok",false) and menu.has("token"),test.id+" live source page before "+str(step.action))
+			if not menu.get("ok",false) or not menu.has("token"): continue
+			menu = travel.select(menu.token,step.action)
+			_check(menu.get("ok",false),test.id+" selected "+str(step.action))
+			if step.action == "back" and str(test.service).contains("office"):
+				_check(menu.get("navigation") == "office" and step.menu.title == "THE OFFICE",test.id+" hands back to actual office domain")
+				continue # Office owns its reopened menu; scene integration verifies that envelope.
+			_check(_same(_menu_view(menu),step.menu),test.id+" exact next menu after "+str(step.action))
+			_check(_last_toast(game) == step.toast,test.id+" exact authored receipt after "+str(step.action))
+			_check(game.s.mode == step.mode,test.id+" source modal/playing state")
+		presentation_completed += 1
 
 
 func _compare(game: RefCounted, travel: RefCounted, expected: Dictionary, label: String, cart_adapted: bool = false) -> void:
@@ -280,6 +323,10 @@ func _tokens_and_guards() -> void:
 	menu = travel.open("pinky")
 	_check(not travel.select(menu.token,"made_up").ok,"unknown action consumes token")
 	_check(not travel.select(menu.token,"buy_pass").ok,"consumed token cannot replay valid action")
+	menu = travel.open("pinky")
+	var newer: Dictionary = travel.open("pinky")
+	_check(not travel.select(menu.token,"buy_pass").ok and game.s.mode == "dialogue","stale Travel token leaves newer modal in place")
+	_check(travel.select(newer.token,"leave").ok and game.p.cash == 100,"stale token cannot erase newer service and strand its valid capability")
 	menu = travel.open("pinky"); game.p.cash = 0
 	_check(not travel.select(menu.token,"buy_pass").ok and not travel.has_bus_pass(),"live resource recheck")
 	game.p.cash = 100; menu = travel.open("pinky")

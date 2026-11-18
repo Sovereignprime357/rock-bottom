@@ -779,3 +779,80 @@ Full Windows/Web export presets use Godot's native custom-feature main-scene
 override and separate output directories. The default slice and public2D hosting
 are unchanged. Full-game parity and60AI performance are not inferred from passing
 model tests or source data. Native actual60 remains diagnostic until measured.
+
+
+## IMPL-3D-FULL-04 — Shared activity owners and live campaign composition (2026-11-18)
+
+Scope: continued operator-authorized full first-person port in `game3d/`; active2D and frozen19 unchanged. Integrate one Cooking, Heists, Campaign, Day, Office and Companions owner into FullRuntime, with one shared four-pin Lockpick and the existing State/Memory/Progression/Travel/Combat/Director. Exact source oracle outcomes govern normal gameplay. All scene actions still require actual source range, live capability and physical access.
+
+Executed adaptations: extreme accepted cooking batches settle in bounded2048-packet chunks before mode/fresh/restore/save/native-close transitions; wall endings cannot stall settlement; delayed receipts/pending transitions are p/s-epoch-bound. A visible opaque startup prepares the same72 authored resources once, exact bytes/binds/materials preserved. Facade sites use nearest source-rectangle focus and own-facade LOS; source rank4 abandoned-site availability latch remains session-wide. Office field reach is strict58px/2.32m. Day validates complete canonical force plans rather than trusting caller actor data.
+
+Companions keep one pending physical pet/dog/reveal with frozen random intent. Released/dead possum records retain source reacquisition blocking; returned dog replaces its prior dead row because the3D scene uses unique rig IDs. Fresh/restore resets unsaved pet ownership/return timers instead of retaining phantom ownership without an actor. Deferred reveals relocate the selected existing pile, retaining identity/value/equipment and preventing further draws until committed/collected. Departed animals are hidden; combat deaths keep death poses.
+
+Counterexamples found and fixed: same-mode cookmini clearing active heat; Tony's delayed ending freezing accepted resolution; stale smoke receipts after forced epoch replacement; refused death/arrest cleanup; locked office/Greg normalizing unrelated office state; consumed Office capability leaving dialogue after changed-resource refusal. Live Scene165 includes cooking/save/close barriers, physical lease/claim/locker and pet/freed-dog lifecycle. Source Runtime128 and CookingRuntime156 pass. Full expanded runner and rendered native/Web acceptance are required at the checkpoint; these counts alone do not imply complete parity.
+
+
+## IMPL-3D-FULL-05 — Physical contact, props and Kingdom (2026-11-18)
+
+Authorized full-port continuation. Executed P04-CONTACT: player/live rendered NPC movement
+uses swept source Minkowski rectangles with a deliberate1px overlap band, preserving source
+melee/charge contact while keeping the camera outside torsos. Contacts slide symmetrically,
+never push peers, never become static-wall charge impacts or navigation replans. Initial
+coincidence repair is deterministic, wall/peer-swept and bounded; failed repair keeps a valid
+world point without suppressing AI. Dead/departed and exact Day-hidden residents do not leave
+invisible blockers. NPC/NPC collision remains the source behavior. Static service approaches
+now stand outside initial resident bodies. The intro walking fixture retains the entire cast
+and steers a real capsule around body corners instead of deleting actors from the test.
+
+Native reproduction isolated source skid_lurch0.2176m from camera after60s; older120s evidence
+also put the eye inside Sherri's hair attachment. All skeletons were finite. Fixed native120s
+plus D/S movement: zero sampled NPC bounds contain the camera, Lurch remains1.0–1.2m away,
+source overlap still permits damage and death recovery. Evidence: .build/full-port/contact-native-120.
+This is native evidence; updated browser replay remains required.
+
+PROP-DUMPSTER-TOOL preserves the source equipped-only torch overwrite, even if Pete's locker
+already holds a torch. PROP-PHONE-PHYSICAL reserves one drawn church phone tip until its actual
+50cash pile can be placed within100px, with250active-ms retries/no reroll; it never credits
+invisible cash. WorldProps shares live PropState and Companion authority; dumpster/bench/phone
+clocks run in source order. Escape does not select climb-out. Source159paths/287steps34269checks.
+
+Kingdom uses the real Campaign/Office/Day/Combat owners, validated17 service points, strict
+source44/58/72px ranges, canonical coordinates without world float round-trip or range epsilon.
+World approach clearance includes the actual capsule margin. Corrupt-stage completion is a pure
+rejection before damage/reward/repair; source normalization quirks remain in oracle evidence.
+Office ledger handoff, correction/banner inputs, three staged encounter bodies, abort preserving
+marks, anoint synchronization and2600ms ending are connected. Late owner installation seeds the
+current wall clock; ending waits behind accepted cooking settlement and is dropped on replaced
+epochs. Source157paths/361steps22204checks; physical558checks; liveScene248 before UI additions;
+CookingRuntime175 includes actual Kingdom completion/cook boundary/fresh cancellation.
+
+P04c exact pose/global-transform caches pass1521 visibility/return/bounds tests and1954 roster
+checks. Offscreen eligibility remains unconnected pending a certified receiver floor. Native
+cache-only actual60 run FAILED acceptance: scene CPU p95 day42.68/night35.964ms; police arrest
+also removed four source actors, leaving56. No frame-budget claim; profile source subsystems
+before changes. Probe .build/full-port/p04c-cache-only. Renderer shadow trial remains pending.
+
+UI correction: E input honors stun; Q uses source title/flav/intro visibility; discovery rooms
+are leave-only until conceded; concession labels/disabled conditions match source; receipts
+retain source duration. No generic inventory-use system added: source inventory is read-only.
+Full campaign/nativeWeb parity remains incomplete; incident/interactive-prop models are gated
+but their world presenters are separate activation dependencies.
+
+
+### IMPL-3D-FULL-06 — source utility composition and dynamic geometry
+**Executed in `codex/3d-full-port`,2026-11-18; checkpoint validation in flight.**
+- Production selects dynamic interactive geometry explicitly; legacy slice/static world preserves its old contracts. One shared14-record owner projects into original meshes and actual collider/navigation/service records after admitted commands/ticks, including synchronous epoch clear before the source24 initialization draws.
+- Prop staging must reject live NPC physical envelopes as well as walls, prior prop volumes and reserved player approach/eye rays. Root's composed cold startup caught Karaoke Mike intersection and retained the failing assertion until fixed.
+- Block/market/F/zone entries/autosave use the accepted Utilities owner; no invented inventory-use action. Source labels and odd clock boundaries remain. Spatial callbacks are reentrant and post-call epoch checks protect replacement sessions.
+- First-person attacks carry the original accepted weapon ID in presentation metadata, so an NPC drop or broken bottle cannot rewrite the swing already committed. Specific phone/bench/dumpster/kick gestures follow successful source actions only.
+- Mattress spatial adaptation preserves source longitudinal/ease/sine/time/RNG and source endpoint records, but may map physical endpoints laterally within100px when authored3D solids occupy them. The SAME mapped point is used for proximity and display; no invisible harmful trajectory. Actual28lane certificate passed; full incident activation awaits remaining continuous/dynamic/native checks.
+- Performance remains rejected by measured whole-scene/engine evidence; diagnostic scopes do not change dt, source simulation, actor counts or render settings.
+
+
+### IMPL-3D-FULL-07 — guidance source defects and directional compatibility
+**Executed2026-11-18 on `codex/3d-full-port`.** The unchanged pixel journal throws a ReferenceError on its first met vendor because it refers to an unbound `npcs`; the3D pure presenter intentionally reads the shared State roster. Original defect remains characterized separately. Quest/reward iteration retains source canonical order rather than alphabetized export order. At exact octant bisectors, V8 and Godot atan2 differ by ULPs; presentation snaps values within1e-12 of a half-octant, then uses floor(value+.5). Exact V8 outcomes remain in the fixture alongside explicit deterministic tie expectations and just-either-side checks. No target, mode, command, RNG or resource changes. The comparison also exposed an existingKingdom objective predicate drift: only live marked `kingdomBoss` rows may supply the live objective position; same-ID ordinary actors use the authored fallback. Kingdom's combat lookup is unchanged. Guidance1125checks/165views58directions andKingdom22688/159paths369steps passed centrally.
+
+### IMPL-3D-FULL-08 — physical witnesses and rendered HUD placement
+**Executed 2026-11-18 on `codex/3d-full-port`.** The accepted actor-contact rule exposed a static-only Kingdom walking controller: real traces stopped at `skid_brutus_1` and `skid_lurch`, with clear static capsules and zero-fraction actor contacts. The test now builds bounded, actual-sweep-certified resident detours and checks every walked position against live actor envelopes. Exact source service endpoints, production movement, NPC bodies and campaign assertions remain unchanged; the focused physical gate passes593 checks. Separately, native1280×720 images showed the new minimap outside the viewport: assigning Control.position after parenting overwrote its intended anchor-relative placement. FullHUD now uses anchored offsets for minimap/receipt, restores receipt offsets and objective visibility when guidance is unbound, and checks real viewport containment at1280×720 and960×540. The new contact index preserves exact live source records and per-frame/epoch identity validation; it caches neither collision outcomes nor actor flags. Its native diagnostic still fails performance, and no release-template or complete-port performance acceptance is claimed.
+
+Rendered browser follow-up to IMPL-3D-FULL-08: the source journal footer advertised Q/Escape close while FullScene only accepted those shortcuts from playing. Native/Web readonly journal/inventory pages now own a transient close key cleared by every new menu and resume. Same-key/Escape exit and echo/stale-menu boundaries pass the full300-check scene suite. Other dialogue and cooking paths retain their own exit rules. Browser QA uses a local export wrapper with existing --qa-interactive args; ?qa-full alone does not activate the isolated storage branch.

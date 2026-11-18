@@ -5,6 +5,7 @@ const Combat = preload("res://scripts/combat_system.gd")
 const METRES_PER_PIXEL := 0.04
 var _host_ref: WeakRef
 var _combat_ref: WeakRef
+var _companion_ref: WeakRef
 var host: RefCounted:
 	get: return _host_ref.get_ref() if _host_ref != null else null
 var combat: RefCounted:
@@ -14,11 +15,21 @@ var _state_epoch: Dictionary = {}
 var _poses: Dictionary = {}
 var _departures: Dictionary = {}
 var _wall_ms: float = 0.0
+var profile_enabled: bool = false
+var profile_us: Dictionary = {}
 
 
 func _init(owner: RefCounted, combat_system: RefCounted) -> void:
 	_host_ref = weakref(owner); _combat_ref = weakref(combat_system)
 	_sync_epoch()
+
+func set_companion_owner(owner: RefCounted) -> void:
+	_companion_ref = weakref(owner) if owner != null else null
+func reset_actor(id: String) -> void:
+	_poses.erase(id); _departures.erase(id)
+func tick_dog_discomfort() -> bool:
+	if not _sync_epoch(): return false
+	_dog_discomfort(); return true
 
 
 func _sync_epoch() -> bool:
@@ -42,7 +53,10 @@ func _damage(body: Dictionary, fallback: float) -> float:
 	var value: float = float(body.get("dmg", 0.0))
 	return value if value != 0.0 else fallback
 func _move(body: Dictionary, delta: Vector2, goal: Variant = null, stop: bool = false) -> Dictionary:
-	return combat.move_actor(body, _position(body) + delta, goal, stop)
+	var profile_started: int = Time.get_ticks_usec() if profile_enabled else 0
+	var result: Dictionary = combat.move_actor(body, _position(body) + delta, goal, stop)
+	if profile_enabled: profile_us.motion = int(profile_us.get("motion",0))+Time.get_ticks_usec()-profile_started
+	return result
 func _touching(body: Dictionary) -> bool:
 	return not body.get("essential", false) and Combat.overlaps(host.p, body) and combat.can_hit(Combat.center(body), host.player_center(), str(body.id), "player")
 func _hit(body: Dictionary, amount: float, cooldown: float) -> void:
@@ -53,14 +67,19 @@ func tick(dt_ms: float, wall_ms: float) -> bool:
 	if not _sync_epoch() or not Combat.valid_step(dt_ms) or not is_finite(wall_ms) or wall_ms < _wall_ms: return false
 	if not combat.has_physics(&"move_body") or not combat.has_physics(&"clear_placement") or not combat.has_physics(&"can_hit"): return false
 	_wall_ms = wall_ms
-	_dog_discomfort()
+	# Full Runtime calls the aura before clocks/companion returns, matching updateWorld.
+	# Standalone Director clients retain their prior ordering until a lifecycle owner is bound.
+	if _companion_ref == null or _companion_ref.get_ref() == null: _dog_discomfort()
 	for body: Dictionary in host.npcs.duplicate():
 		var start := _position(body)
 		var old_cd: float = float(body.get("attackCd", 0.0))
 		if body.get("dead", false): _record(body, start, dt_ms, old_cd); continue
 		if not supported(body):
 			combat.dependency_missing("actor:" + str(body.id)); _record(body, start, dt_ms, old_cd); continue
-		if not combat.clear_actor(body): continue
+		var profile_started: int = Time.get_ticks_usec() if profile_enabled else 0
+		var cleared: bool = combat.clear_actor(body)
+		if profile_enabled: profile_us.clearance = int(profile_us.get("clearance",0))+Time.get_ticks_usec()-profile_started
+		if not cleared: continue
 		body.attackCd = maxf(0.0, old_cd - dt_ms)
 		body.hitFlash = maxf(0.0, float(body.get("hitFlash", 0.0)) - dt_ms)
 		if body.get("hitStun", 0.0) > 0.0:
@@ -109,18 +128,10 @@ func _pet(body: Dictionary, dt: float) -> void:
 	if distance > 48.0: _move(body, delta / distance * _speed(body, 1.6) * dt / 16.0, host.player_center())
 	elif distance > 0.0 and distance < 24.0: _move(body, -delta / distance * 0.4 * dt / 16.0, host.player_center())
 	if body.id != "pet_possum": return
-	body.revealT = float(body.get("revealT", 0.0)) - dt
-	if body.revealT > 0.0: return
-	body.revealT = 30000.0 + host.random_float() * 15000.0
-	var available: Array[Dictionary] = []
-	for pile: Dictionary in host.cash_piles:
-		if not pile.get("collected", false): available.append(pile)
-	if available.is_empty(): return
-	var target: Dictionary = available[host.random_index(available.size())]
-	target.x = host.p.x + (host.random_float() - 0.5) * 60.0
-	target.y = host.p.y + 40.0 + host.random_float() * 30.0
-	host.emit_event("cash_revealed", {"pile_id":target.id})
-	host.emit_event("toast", {"text":"the possum has placed something for you.\n(look around your feet.)", "duration_ms":2400})
+	var companions: Object = _companion_ref.get_ref() if _companion_ref != null else null
+	if companions == null or not companions.has_method(&"tick_possum_reveal"):
+		combat.dependency_missing("companion_reveal"); return
+	companions.tick_possum_reveal(body,dt)
 
 
 func _ally(body: Dictionary, dt: float) -> void:
@@ -354,6 +365,7 @@ func _dog_discomfort() -> void:
 
 
 func _record(body: Dictionary, start: Vector2, dt: float, old_cd: float) -> void:
+	var profile_started: int = Time.get_ticks_usec() if profile_enabled else 0
 	var id: String = str(body.id)
 	var pose: Dictionary = _poses.get(id, {"yaw":0.0,"action":"","action_serial":0,"death_ms":0.0})
 	var movement := _position(body) - start
@@ -390,8 +402,10 @@ func _record(body: Dictionary, start: Vector2, dt: float, old_cd: float) -> void
 	pose.turn_rate = angle_difference(previous_yaw, pose.yaw) * 1000.0 / dt
 	pose.grounded = true; pose.hurt = clampf(float(body.get("hitFlash", 0.0)) / 200.0, 0.0, 1.0)
 	pose.asleep = body.get("asleep",false) == true
+	pose.tail_wag = clampf(float(body.get("tailWag",0.0)),0.0,1.0)
 	pose.coat_count = clampi(3 - int(body.get("coatsOff", 0)), 0, 3); pose.gaze = Vector2.ZERO
 	_poses[id] = pose
+	if profile_enabled: profile_us.pose = int(profile_us.get("pose",0))+Time.get_ticks_usec()-profile_started
 
 
 func snapshot(id: String) -> Dictionary:
