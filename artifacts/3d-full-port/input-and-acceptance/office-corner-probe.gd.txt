@@ -1,0 +1,173 @@
+extends "res://tests/office_acceptance_probe.gd"
+## Real physical diagnostic only; explicit initial placements are not acceptance.
+const EXACT_ORIGIN := Vector2(1588.16821289063,929.989440917969)
+const WAYPOINT := Vector3(22.647,0.06,4.172)
+var corner_cases: Array[Dictionary] = []
+var corner_start := 0
+
+func _xy(point: Vector2) -> Array: return [point.x,point.y]
+func _xyz(point: Vector3) -> Array: return [point.x,point.y,point.z]
+func _transform(value: Transform3D) -> Dictionary:
+	return {"origin":_xyz(value.origin),"basis":[_xyz(value.basis.x),_xyz(value.basis.y),_xyz(value.basis.z)]}
+func _shape_data(shape: Shape3D) -> Dictionary:
+	var result := {"type":shape.get_class()}
+	if shape is CapsuleShape3D: result.radius = shape.radius; result.height = shape.height
+	elif shape is BoxShape3D: result.size = _xyz(shape.size)
+	elif shape is CylinderShape3D: result.radius = shape.radius; result.height = shape.height
+	elif shape is SphereShape3D: result.radius = shape.radius
+	return result
+func _hit_data(hit: Dictionary) -> Dictionary:
+	if hit.is_empty(): return {}
+	var collider: Object = hit.get("collider")
+	var result := {"owner":str(collider.get_meta("source_owner","")) if is_instance_valid(collider) else "","name":str(collider.name) if collider is Node else ""}
+	for key: String in ["normal","point","position"]:
+		if hit.get(key) is Vector3: result[key] = _xyz(hit[key])
+	return result
+func _intersections(query: PhysicsShapeQueryParameters3D) -> Array:
+	var result: Array = []
+	for hit: Dictionary in game.physics._space().intersect_shape(query,16): result.append(_hit_data(hit))
+	return result
+func _cache() -> Dictionary:
+	var cache: Dictionary = game.physics._placement_clear.get("player",{}).duplicate(true)
+	if cache.get("point") is Vector2: cache.point = _xy(cache.point)
+	cache.physics_frame = game.physics._placement_physics; cache.render_frame = game.physics._placement_render
+	return cache
+func _body_at_source() -> Dictionary:
+	return {"id":"player","x":game.runtime.p.x,"y":game.runtime.p.y,"w":game.runtime.p.w,"h":game.runtime.p.h}
+func _move_result(value: Dictionary) -> Dictionary:
+	var result: Dictionary = value.duplicate(true)
+	if result.get("position") is Vector2: result.position = _xy(result.position)
+	return result
+func _nearby_colliders(world_point: Vector3) -> Array:
+	var result: Array = []
+	var area := AABB(Vector3(world_point.x-1.2,0,world_point.z-1.2),Vector3(2.4,3,2.4))
+	for obstacle: Dictionary in game.world.obstacle_records():
+		var bounds: AABB = obstacle.bounds
+		if not bounds.intersects(area): continue
+		var body: Node3D = obstacle.body
+		var shapes: Array = []
+		for child: Node in body.get_children():
+			if child is CollisionShape3D: shapes.append({"shape":_shape_data(child.shape),"transform":_transform(child.global_transform),"disabled":child.disabled})
+		result.append({"owner":obstacle.owner,"name":str(body.name),"bounds":{"position":_xyz(bounds.position),"size":_xyz(bounds.size)},"shapes":shapes})
+	return result
+func _cast_case(body: Dictionary,goal: Vector2) -> Dictionary:
+	var origin := Vector2(body.x,body.y)
+	var query: PhysicsShapeQueryParameters3D = game.physics._query(body,origin)
+	query.motion = Vector3(goal.x-origin.x,0,goal.y-origin.y)*0.04
+	var fractions: PackedFloat32Array = game.physics._space().cast_motion(query)
+	var raw: Array = []
+	for value: float in fractions: raw.append(value)
+	var contact: Dictionary = {}
+	var safe_hits: Array = []
+	if fractions.size() >= 2:
+		var unsafe_query: PhysicsShapeQueryParameters3D = game.physics._query(body,origin)
+		unsafe_query.transform.origin += query.motion*minf(1.0,float(fractions[1])+0.0001)
+		contact = _hit_data(game.physics._space().get_rest_info(unsafe_query))
+		var safe_origin: Vector2 = origin+(goal-origin)*float(fractions[0])
+		safe_hits = _intersections(game.physics._query(body,safe_origin))
+	var cache_before: Dictionary = _cache()
+	var moved: Dictionary = game.physics.move_body(body,goal)
+	var stopped: Dictionary = game.physics.move_body(body,goal,null,true)
+	return {"origin":_xy(origin),"goal":_xy(goal),"motion_world":_xyz(query.motion),"raw_fractions":raw,"unsafe_rest":contact,"safe_endpoint_overlap":safe_hits,"cache_before":cache_before,"moved":_move_result(moved),"stop_on_block":_move_result(stopped),"cache_after":_cache()}
+func _corner_snapshot(label: String) -> Dictionary:
+	var source: Dictionary = _body_at_source()
+	var reconstructed: Dictionary = _probe_body(game.player.position)
+	var origin := Vector2(source.x,source.y)
+	var roundtrip := Vector2(reconstructed.x,reconstructed.y)
+	var half := Vector2(source.w,source.h)*0.5
+	var query: PhysicsShapeQueryParameters3D = game.physics._query(source,origin)
+	var cache_before: Dictionary = _cache()
+	var cached_actual: bool = game.physics._clear(source,origin,true)
+	var uncached_actual: bool = game.physics._clear(source,origin,false)
+	var uncached_reconstructed: bool = game.physics._clear(reconstructed,roundtrip,false)
+	var cached_after_reconstruction: bool = game.physics._clear(source,origin,true)
+	var by_form: Array = []
+	for pair: Array in [["actual_source",source],["world_roundtrip",reconstructed]]:
+		var body: Dictionary = pair[1]; var at := Vector2(body.x,body.y)
+		var target_origin: Vector2 = Content.to_source(WAYPOINT)-half
+		var direction: Vector2 = (target_origin-at).normalized()
+		var rows: Array = []
+		rows.append({"kind":"long_waypoint","query":_cast_case(body,target_origin)})
+		for dt: float in [16.0,16.666667,20.0,50.0,100.0]:
+			rows.append({"kind":"short_dt","dt_ms":dt,"query":_cast_case(body,at+direction*float(game.runtime.p.speed)*dt/16.0)})
+		for escape: Vector2 in [Vector2.LEFT,Vector2.DOWN,Vector2(-1,1).normalized()]:
+			rows.append({"kind":"escape","direction":_xy(escape),"query":_cast_case(body,at+escape*2.2)})
+		by_form.append({"form":pair[0],"body":body.duplicate(true),"rows":rows})
+	var near_query: PhysicsShapeQueryParameters3D = game.physics._query(source,origin)
+	near_query.shape = near_query.shape.duplicate()
+	if near_query.shape is CapsuleShape3D: near_query.shape.radius += 0.03
+	var peers: Array = []
+	for peer: Dictionary in game.physics._contact_peers(source):
+		if Vector2(peer.x,peer.y).distance_to(origin) < 150.0: peers.append(peer.duplicate(true))
+	return {"label":label,"source_origin":_xy(origin),"source_origin_bytes":var_to_bytes(origin).hex_encode(),"source_center":_xy(origin+half),"node_position":_xyz(game.player.position),"roundtrip_origin":_xy(roundtrip),"roundtrip_origin_bytes":var_to_bytes(roundtrip).hex_encode(),"difference_px":_xy(roundtrip-origin),"shape":_shape_data(query.shape),"shape_transform":_transform(query.transform),"margin":query.margin,"cache_before":cache_before,"cached_actual":cached_actual,"uncached_actual":uncached_actual,"uncached_reconstructed":uncached_reconstructed,"cached_actual_after_reconstruction":cached_after_reconstruction,"actual_overlaps":_intersections(query),"expanded_nearby_overlaps":_intersections(near_query),"colliders":_nearby_colliders(game.player.position),"peers":peers,"forms":by_form,"player_context":{"speed":game.runtime.p.speed,"stun":game.runtime.p.stunT,"high":game.runtime.p.rockedT,"crash":game.runtime.p.crashT,"slow":game.runtime.p.slowT,"hp":game.runtime.p.hp,"shakes":game.runtime.p.shakes},"revision":game.physics._collision_revision}
+func _input_segment(label: String,target: Vector3,count: int,deadline: int) -> Dictionary:
+	var rows: Array = []
+	for frame: int in range(count):
+		if Time.get_ticks_msec() >= deadline or Time.get_ticks_msec()-corner_start >= 180000:
+			_check(false,"bounded corner diagnostic deadline"); break
+		if game.runtime.s.mode != "playing": _check(false,"diagnostic source left playing"); break
+		var before := Vector2(game.runtime.p.x,game.runtime.p.y)
+		var world_before: Vector3 = game.player.position
+		var delta := Vector2(target.x-world_before.x,target.z-world_before.z)
+		var alignment: float = _aim(Vector3(target.x,game.camera.global_position.y,target.z),_dt())
+		_motion(delta.normalized()*minf(1.0,delta.length()/0.4) if alignment > 0.96 else Vector2.ZERO)
+		var decoded: Vector2 = Input.get_vector("left","right","forward","back")
+		var requested: Vector3 = game.player.basis*Vector3(decoded.x,0,decoded.y)
+		await game.frame_sampled
+		var after := Vector2(game.runtime.p.x,game.runtime.p.y)
+		rows.append({"frame":frame,"source_before":_xy(before),"source_after":_xy(after),"delta_px":_xy(after-before),"node_before":_xyz(world_before),"node_after":_xyz(game.player.position),"decoded_input":_xy(decoded),"requested_world":_xyz(requested),"alignment":alignment,"basis":[_xyz(game.player.basis.x),_xyz(game.player.basis.z)],"admitted_ms":game.runtime.last_advanced_ms,"stun":game.runtime.p.stunT,"hp":game.runtime.p.hp,"shakes":game.runtime.p.shakes})
+	_release()
+	return {"label":label,"target":_xyz(target),"rows":rows}
+func _corner_capture(label: String) -> void:
+	# The diagnostic intentionally pauses scene processing during static snapshots.
+	# Wait for a render frame, never its disabled frame_sampled signal.
+	await process_frame; await RenderingServer.frame_post_draw
+	if _check(root.get_texture().get_image().save_png(output.path_join(label+".png")) == OK,"corner capture "+label): captures.append(label)
+func _corner_case(id: String,origin: Vector2) -> Dictionary:
+	game.set_process(false); _release(); game._new_game()
+	game.runtime.p.x = origin.x; game.runtime.p.y = origin.y
+	game._sync_model_nodes(0.0)
+	await physics_frame
+	var initial_ids: Array[String] = []
+	for actor: Dictionary in game.runtime.state.npcs: initial_ids.append(str(actor.id))
+	var result := {"id":id,"initial_placement_fixture":_xy(origin),"canonical_actor_ids":initial_ids,"rng_at_start":game.runtime.state.rng_seed,"initial":_corner_snapshot("initial"),"segments":[],"snapshots":[]}
+	if DisplayServer.get_name() != "headless": await _corner_capture(id+"_initial")
+	var deadline: int = Time.get_ticks_msec()+16000
+	game.set_process(true)
+	result.segments.append(await _input_segment("office_like_waypoint",WAYPOINT,120,deadline))
+	game.set_process(false); result.snapshots.append(_corner_snapshot("after_forward"))
+	if DisplayServer.get_name() != "headless": await _corner_capture(id+"_forward")
+	var outward: Vector3 = game.player.position+Vector3(0,0,0.35)
+	game.set_process(true)
+	result.segments.append(await _input_segment("southward_escape",outward,40,deadline))
+	result.segments.append(await _input_segment("return_to_same_waypoint",WAYPOINT,80,deadline))
+	game.set_process(false); result.snapshots.append(_corner_snapshot("after_escape_and_return"))
+	if DisplayServer.get_name() != "headless": await _corner_capture(id+"_escape")
+	return result
+func _run() -> void:
+	if "--qa-full" not in OS.get_cmdline_user_args(): push_error("corner diagnostic requires --qa-full"); quit(1); return
+	output = ProjectSettings.globalize_path("res://../.build/full-port/office-corner")
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): output = argument.trim_prefix("--output=")
+	DirAccess.make_dir_recursive_absolute(output)
+	root.size = Vector2i(1280,720); Engine.max_fps = 60
+	corner_start = Time.get_ticks_msec(); began_wall = corner_start; last_frame_wall = corner_start
+	game = ObservedScene.new(); root.add_child(game)
+	for frame: int in range(900):
+		await process_frame
+		if game.ready_for_play: break
+	if not _check(game.ready_for_play,"actual full scene ready for corner diagnostic"):
+		await _shutdown(1); return
+	game.store.save_path = output.path_join("diagnostic-only-save.json")
+	game.store.storage_key = "rockbottom_office_corner_diagnostic"
+	var half := Vector2(game.runtime.p.w,game.runtime.p.h)*0.5
+	var roundtrip: Vector2 = Content.to_source(Content.to_world(EXACT_ORIGIN+half,0.06))-half
+	corner_cases.append(await _corner_case("exact_source",EXACT_ORIGIN))
+	corner_cases.append(await _corner_case("source_world_roundtrip",roundtrip))
+	corner_cases.append(await _corner_case("south_0_25px",EXACT_ORIGIN+Vector2(0,0.25)))
+	var report := {"schema":1,"diagnostic_only":true,"office_acceptance":false,"complete":failures.is_empty() and corner_cases.size() == 3,"exact_source_origin":_xy(EXACT_ORIGIN),"waypoint":_xyz(WAYPOINT),"cases":corner_cases,"captures":captures,"failures":failures,"source_authority":"exact last numeric sample of office-service-range-native/office-tour.json; canonical fresh actor roster in each isolated diagnostic case, not a restored failure snapshot","engine":Engine.get_version_info().string,"headless":DisplayServer.get_name() == "headless"}
+	var file := FileAccess.open(output.path_join("office-corner.json"),FileAccess.WRITE)
+	if file == null: _check(false,"corner report writable")
+	else: file.store_string(JSON.stringify(report,"\t")+"\n"); file.close()
+	print("OFFICE CORNER DIAGNOSTIC: ","COMPLETE" if failures.is_empty() else "FAILED", "; ",output)
+	await _shutdown(0 if failures.is_empty() else 1)

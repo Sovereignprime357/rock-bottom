@@ -160,6 +160,26 @@ class ConstructionReference:
 
 
 
+# The reference differs only at the new sufficient test. Its repair path keeps
+# the accepted call-local query setup and therefore tests this change in isolation.
+class PrefilterObserved:
+	extends ObservedAdapter
+	var placement_trace: Array = []
+	func _clear_prepared(body: Dictionary,point: Vector2,allow_certificate: bool = true,prepared: BodyQuery = null) -> bool:
+		var before_query: int = query_count
+		var before_hits: int = placement_cache_hits
+		var result: bool = super._clear_prepared(body,point,allow_certificate,prepared)
+		placement_trace.append([point,allow_certificate,result,query_count-before_query,placement_cache_hits-before_hits])
+		return result
+
+class UnfilteredPlacementReference:
+	extends PrefilterObserved
+	func _player_footprint_separated(_body: Dictionary,_point: Vector2) -> bool:
+		return false
+
+var prefilter_completed: bool = false
+
+
 var checks: int = 0
 var failures: Array[String] = []
 func _initialize() -> void: call_deferred("_run")
@@ -223,6 +243,8 @@ func _run() -> void:
 	world.queue_free(); await process_frame
 	_check(not adapter.can_hit(from,to,"player","vendor"),"freed physics world fails closed")
 	await _query_setup_equivalence()
+	await _prefilter_equivalence()
+	_check(prefilter_completed,"prefilter async group completed")
 	if failures.is_empty():
 		print("3D PHYSICS ADAPTER GATE: PASS (%d checks; native shape/ray/sphere sweeps, slide/charge, live access, no model mutation)" % checks)
 		quit(0)
@@ -332,3 +354,120 @@ func _compare_queries(actual: RefCounted,reference: RefCounted,label: String) ->
 	for key: String in ["query_count","placement_overlap_queries","placement_cache_hits","body_contact_tests","body_contacts","body_repairs","body_repairs_deferred"]:
 		_check(actual.get(key) == reference.get(key),label+": same "+key)
 	_check(actual._placement_clear == reference._placement_clear,label+": exact certificate contents")
+
+
+func _prefilter_equivalence() -> void:
+	var world := TestWorld.new(); root.add_child(world)
+	_box(world,Vector3(0,-0.1,0),Vector3(100,0.2,100))
+	var wall: StaticBody3D = _box(world,Vector3(0,1.5,0),Vector3(0.2,3,20))
+	var host := State.new(); host.npcs.clear()
+	var actual := PrefilterObserved.new(world,host)
+	var reference := UnfilteredPlacementReference.new(world,host)
+	await physics_frame; await physics_frame
+	var cases: Array[Dictionary] = [
+		{"name":"far x","at":Vector2(900,840),"player":Vector2(500,840),"skip":true},
+		{"name":"far y","at":Vector2(900,840),"player":Vector2(900,500),"skip":true},
+		{"name":"threshold just outside","at":Vector2(900,840),"player":Vector2(926.999,843),"skip":true},
+		{"name":"threshold just inside","at":Vector2(900,840),"player":Vector2(926.997,843),"skip":false},
+		{"name":"initial peer overlap","at":Vector2(900,840),"player":Vector2(900,840),"skip":false},
+		{"name":"peer repair beside wall","at":Vector2(1018,840),"player":Vector2(1018,840),"skip":false},
+		{"name":"static wall recovery","at":Vector2(1038,840),"player":Vector2(500,500)},
+		{"name":"outside world refusal","at":Vector2(-1000,-1000),"player":Vector2(500,500)},
+		{"name":"hidden near actor","at":Vector2(900,840),"player":Vector2(900,840),"id":"pete","night":true,"skip":false},
+		{"name":"dead near actor","at":Vector2(900,840),"player":Vector2(900,840),"dead":true,"skip":false},
+		{"name":"departed near actor","at":Vector2(900,840),"player":Vector2(900,840),"departed":true,"skip":false},
+		{"name":"tiny quarter overlap outside","at":Vector2(900,840),"player":Vector2(900.4,840),"tiny":true,"skip":true},
+		{"name":"tiny quarter overlap inside","at":Vector2(900,840),"player":Vector2(900.2,840),"tiny":true,"skip":false},
+		{"name":"player branch","at":Vector2(900,840),"player":Vector2(500,500),"id":"player","skip":false},
+	]
+	var completed: int = 0
+	for row: Dictionary in cases:
+		host.npcs.clear(); host.s.dayTime = 0.8 if row.get("night",false) else 0.4
+		host.p.x = row.player.x; host.p.y = row.player.y
+		host.p.w = 0.5 if row.get("tiny",false) else 24.0
+		host.p.h = 0.75 if row.get("tiny",false) else 28.0
+		var body: Dictionary = {"id":row.get("id","prefilter_actor"),"x":row.at.x,"y":row.at.y,
+			"w":0.5 if row.get("tiny",false) else 28.0,"h":0.75 if row.get("tiny",false) else 34.0,
+			"dead":row.get("dead",false),"departed":row.get("departed",false)}
+		if body.id != "player": host.npcs.append(body)
+		var frozen_player: Dictionary = host.p.duplicate(true)
+		var frozen_body: Dictionary = body.duplicate(true)
+		_prefilter_prepare(actual,reference)
+		var got: Variant = actual.clear_placement(body)
+		var expected: Variant = reference.clear_placement(body)
+		_check(got == expected,row.name+": same exact returned placement/refusal")
+		_prefilter_compare(actual,reference,row.name)
+		_check(host.p == frozen_player and body == frozen_body,row.name+": no authoritative geometry mutation")
+		if row.has("skip"):
+			_check(actual._player_footprint_separated(body,row.at) == row.skip,row.name+": expected sufficient-test branch")
+			if row.skip: _check(actual.peer_builds == 0 and reference.peer_builds == 1,row.name+": avoids only unnecessary peer construction")
+			else: _check(actual.peer_builds == reference.peer_builds,row.name+": keeps original repair path")
+		completed += 1
+	_check(completed == 14,"all paired prefilter cases completed")
+
+	# An unchanged static certificate must not retain player separation. An earlier
+	# actor can move the same player dictionary before the next actor clearance.
+	host.npcs.clear(); host.s.dayTime = 0.4
+	host.p.w = 24.0; host.p.h = 28.0; host.p.x = 500.0; host.p.y = 500.0
+	var live_body := {"id":"live_prefilter","x":900.0,"y":840.0,"w":28.0,"h":34.0}
+	host.npcs.append(live_body)
+	_prefilter_prepare(actual,reference)
+	_check(actual.clear_placement(live_body) == reference.clear_placement(live_body),"first live player placement matches")
+	host.p.x = 900.0; host.p.y = 840.0
+	var repaired: Variant = actual.clear_placement(live_body)
+	_check(repaired == reference.clear_placement(live_body) and repaired != Vector2(900,840),"same-dictionary current player forces real repair despite static certificate")
+	_prefilter_compare(actual,reference,"current player after earlier actor")
+	_check(actual.placement_cache_hits > 0,"current-player witness actually used a static certificate")
+
+	for epoch_kind: String in ["p","s","fresh","restore"]:
+		_prefilter_prepare(actual,reference)
+		actual.clear_placement(live_body); reference.clear_placement(live_body)
+		if epoch_kind == "p": host.p = host.p.duplicate(true)
+		elif epoch_kind == "s": host.s = host.s.duplicate(true)
+		elif epoch_kind == "fresh": _check(host.fresh(),"actual fresh accepted for prefilter epoch")
+		else: _check(host.restore(host.snapshot()).get("ok",false),"actual restore accepted for prefilter epoch")
+		host.npcs.clear(); host.npcs.append(live_body)
+		host.s.dayTime = 0.4; host.p.x = 900.0; host.p.y = 840.0; host.p.w = 24.0; host.p.h = 28.0
+		var query_before: int = actual.query_count
+		_check(actual.clear_placement(live_body) == reference.clear_placement(live_body),epoch_kind+": current epoch repair matches")
+		_check(actual.query_count > query_before,epoch_kind+": changed epoch requires an actual origin proof")
+		_prefilter_compare(actual,reference,epoch_kind+" epoch")
+
+	# Input rejection is tested directly; malformed bodies never reach the engine.
+	var original_player: Dictionary = host.p.duplicate(true)
+	for invalid: Variant in [NAN,INF,-INF,"bad",null]:
+		host.p.x = invalid
+		_check(not actual._player_footprint_separated(live_body,Vector2(900,840)),"invalid current player falls through: "+str(invalid))
+	host.p = original_player
+	host.p.x = 1.0e39
+	_check(not actual._player_footprint_separated(live_body,Vector2(900,840)),"finite scalar overflowing Vector2 falls through")
+	host.p.x = 500.0
+	_check(not actual._player_footprint_separated(live_body,Vector2(NAN,840)),"nonfinite point falls through")
+	var invalid_body: Dictionary = live_body.duplicate(true); invalid_body.w = -1.0
+	_check(not actual._player_footprint_separated(invalid_body,Vector2(900,840)),"invalid body falls through")
+	invalid_body.w = 1.0e39
+	_check(not actual._player_footprint_separated(invalid_body,Vector2(900,840)),"finite extents overflowing Vector2 fall through")
+
+	# A static world mutation still invalidates the exact same certificates.
+	_prefilter_prepare(actual,reference)
+	actual.clear_placement(live_body); reference.clear_placement(live_body)
+	wall.position.x = -5.5
+	await physics_frame; await physics_frame
+	actual.invalidate_placement_cache(); reference.invalidate_placement_cache()
+	_check(actual.clear_placement(live_body) == reference.clear_placement(live_body),"changed wall uses live physical recovery")
+	_prefilter_compare(actual,reference,"changed physical wall")
+	world.queue_free(); await process_frame; await physics_frame
+	prefilter_completed = true
+
+
+func _prefilter_prepare(actual: RefCounted,reference: RefCounted) -> void:
+	_prepare_pair(actual,reference)
+	actual.placement_trace.clear(); reference.placement_trace.clear()
+
+
+func _prefilter_compare(actual: RefCounted,reference: RefCounted,label: String) -> void:
+	for key: String in ["query_count","placement_overlap_queries","placement_cache_hits","body_contacts","body_repairs","body_repairs_deferred"]:
+		_check(actual.get(key) == reference.get(key),label+": same "+key)
+	_check(actual.placement_trace == reference.placement_trace,label+": same ordered static-query attempts/results/cache use")
+	_check(actual._placement_clear == reference._placement_clear,label+": same exact placement certificates")
+	_check(actual.body_contact_tests <= reference.body_contact_tests,label+": removes only unnecessary contact tests")

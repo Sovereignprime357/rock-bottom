@@ -1,0 +1,4956 @@
+{
+	"active_ms": 1248.81339393939,
+	"canonical_actor_ids": [
+		"tony",
+		"yuri",
+		"brutus",
+		"scrap_dog",
+		"pete",
+		"lurch",
+		"sherri",
+		"paulie",
+		"dave",
+		"mom",
+		"possum",
+		"priest",
+		"conductor",
+		"larry",
+		"stripe",
+		"pigeon",
+		"biggu",
+		"cubscout",
+		"jogger",
+		"dogwalker",
+		"busker",
+		"horsecop",
+		"vapelord",
+		"pothole",
+		"mayorscousin",
+		"phoneguy",
+		"barb",
+		"pinky",
+		"math",
+		"train_hopper",
+		"philosopher",
+		"lease_guy",
+		"gutter_greg",
+		"laundromat_lady",
+		"meter_maid",
+		"food_truck",
+		"priests_son",
+		"karaoke",
+		"skid_brutus_1",
+		"skid_lurch",
+		"skid_sherri",
+		"kingdom_guard_blue_tarp_1_0",
+		"kingdom_guard_blue_tarp_1_1",
+		"kingdom_guard_blue_tarp_1_2",
+		"kingdom_guard_blue_tarp_1_3",
+		"kingdom_guard_cart_cavalry_1_0",
+		"kingdom_guard_cart_cavalry_1_1",
+		"kingdom_guard_cart_cavalry_1_2",
+		"kingdom_guard_cart_cavalry_1_3",
+		"kingdom_guard_copper_choir_1_0",
+		"kingdom_guard_copper_choir_1_1",
+		"kingdom_guard_copper_choir_1_2",
+		"kingdom_guard_copper_choir_1_3",
+		"kingdom_guard_throne_1_0",
+		"kingdom_guard_throne_1_1",
+		"kingdom_guard_throne_1_2"
+	],
+	"captures": [
+		"replay_initial",
+		"replay_outward",
+		"replay_final"
+	],
+	"complete": true,
+	"diagnostic_only": true,
+	"engine": "4.5.1-stable (official)",
+	"failures": [],
+	"final": {
+		"actual_overlaps": [],
+		"cache_before": {
+			"depth": 28.0,
+			"height": 1.8,
+			"physics_frame": 497,
+			"point": [
+				1603.90087890625,
+				930.996643066406
+			],
+			"render_frame": 38,
+			"revision": 49,
+			"width": 24.0
+		},
+		"cached_actual": true,
+		"cached_actual_after_reconstruction": true,
+		"colliders": [
+			{
+				"bounds": {
+					"position": [
+						18.7999992370605,
+						0.0,
+						3.36000037193298
+					],
+					"size": [
+						3.35999870300293,
+						4.5,
+						0.239999994635582
+					]
+				},
+				"name": "@StaticBody3D@1594",
+				"owner": "structures:building_01",
+				"shapes": [
+					{
+						"disabled": false,
+						"shape": {
+							"size": [
+								3.35999870300293,
+								4.5,
+								0.239999994635582
+							],
+							"type": "BoxShape3D"
+						},
+						"transform": {
+							"basis": [
+								[
+									1.0,
+									0.0,
+									0.0
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									0.0,
+									0.0,
+									1.0
+								]
+							],
+							"origin": [
+								20.4799995422363,
+								2.25,
+								3.48000025749207
+							]
+						}
+					}
+				]
+			},
+			{
+				"bounds": {
+					"position": [
+						22.1599979400635,
+						2.5,
+						3.36000037193298
+					],
+					"size": [
+						2.40000152587891,
+						2.0,
+						0.239999994635582
+					]
+				},
+				"name": "@StaticBody3D@1596",
+				"owner": "structures:building_01",
+				"shapes": [
+					{
+						"disabled": false,
+						"shape": {
+							"size": [
+								2.40000152587891,
+								2.0,
+								0.239999994635582
+							],
+							"type": "BoxShape3D"
+						},
+						"transform": {
+							"basis": [
+								[
+									1.0,
+									0.0,
+									0.0
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									0.0,
+									0.0,
+									1.0
+								]
+							],
+							"origin": [
+								23.3599987030029,
+								3.5,
+								3.48000025749207
+							]
+						}
+					}
+				]
+			},
+			{
+				"bounds": {
+					"position": [
+						22.0549983978271,
+						0.0,
+						3.3600001335144
+					],
+					"size": [
+						0.100000001490116,
+						2.57999992370605,
+						0.319999992847443
+					]
+				},
+				"name": "@StaticBody3D@1599",
+				"owner": "structures:building_01",
+				"shapes": [
+					{
+						"disabled": false,
+						"shape": {
+							"size": [
+								0.100000001490116,
+								2.57999992370605,
+								0.319999992847443
+							],
+							"type": "BoxShape3D"
+						},
+						"transform": {
+							"basis": [
+								[
+									1.0,
+									0.0,
+									0.0
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									0.0,
+									0.0,
+									1.0
+								]
+							],
+							"origin": [
+								22.1049976348877,
+								1.28999996185303,
+								3.52000021934509
+							]
+						}
+					}
+				]
+			}
+		],
+		"difference_px": [
+			0.0,
+			0.0
+		],
+		"expanded_nearby_overlaps": [],
+		"forms": [
+			{
+				"body": {
+					"h": 28.0,
+					"id": "player",
+					"w": 24.0,
+					"x": 1603.90087890625,
+					"y": 930.996643066406
+				},
+				"form": "actual_source",
+				"rows": [
+					{
+						"kind": "long_waypoint",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.17504882813,
+									930.299987792969
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1603.90087890625,
+									930.996643066406
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.17504882813,
+								930.299987792969
+							],
+							"motion_world": [
+								0.0109667964279652,
+								0.0,
+								-0.0278662107884884
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 16.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.70654296875,
+									928.949462890625
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.17504882813,
+									930.299987792969
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.70654296875,
+								928.949462890625
+							],
+							"motion_world": [
+								0.0322265625,
+								0.0,
+								-0.0818872079253197
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.70654296875,
+									928.949462890625
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.70654296875,
+									928.949462890625
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 16.666667,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.74011230469,
+									928.864196777344
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.70654296875,
+									928.949462890625
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.74011230469,
+								928.864196777344
+							],
+							"motion_world": [
+								0.0335693359375,
+								0.0,
+								-0.0852978527545929
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.74011230469,
+									928.864196777344
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.74011230469,
+									928.864196777344
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 20.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.90795898438,
+									928.437683105469
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.74011230469,
+									928.864196777344
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.90795898438,
+								928.437683105469
+							],
+							"motion_world": [
+								0.040283203125,
+								0.0,
+								-0.102358393371105
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.90795898438,
+									928.437683105469
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.90795898438,
+									928.437683105469
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 50.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1606.41857910156,
+									924.599243164063
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.90795898438,
+									928.437683105469
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1606.41857910156,
+								924.599243164063
+							],
+							"motion_world": [
+								0.1007080078125,
+								0.0,
+								-0.255896002054214
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1606.41857910156,
+									924.599243164063
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1606.41857910156,
+									924.599243164063
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 100.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1608.93627929688,
+									918.201843261719
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1606.41857910156,
+									924.599243164063
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1608.93627929688,
+								918.201843261719
+							],
+							"motion_world": [
+								0.201416015625,
+								0.0,
+								-0.511792004108429
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1608.93627929688,
+									918.201843261719
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1608.93627929688,
+									918.201843261719
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-1.0,
+							0.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1601.70092773438,
+									930.996643066406
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1608.93627929688,
+									918.201843261719
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1601.70092773438,
+								930.996643066406
+							],
+							"motion_world": [
+								-0.0879980474710464,
+								0.0,
+								0.0
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.70092773438,
+									930.996643066406
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.70092773438,
+									930.996643066406
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							0.0,
+							1.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1603.90087890625,
+									933.196655273438
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1601.70092773438,
+									930.996643066406
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1603.90087890625,
+								933.196655273438
+							],
+							"motion_world": [
+								0.0,
+								0.0,
+								0.0880004838109016
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1603.90087890625,
+									933.196655273438
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1603.90087890625,
+									933.196655273438
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-0.70710676908493,
+							0.70710676908493
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1602.34521484375,
+									932.552307128906
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1603.90087890625,
+									933.196655273438
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1602.34521484375,
+								932.552307128906
+							],
+							"motion_world": [
+								-0.0622265599668026,
+								0.0,
+								0.0622265599668026
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1602.34521484375,
+									932.552307128906
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1602.34521484375,
+									932.552307128906
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					}
+				]
+			},
+			{
+				"body": {
+					"h": 28.0,
+					"id": "player",
+					"w": 24.0,
+					"x": 1603.90087890625,
+					"y": 930.996643066406
+				},
+				"form": "world_roundtrip",
+				"rows": [
+					{
+						"kind": "long_waypoint",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.17504882813,
+									930.299987792969
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1602.34521484375,
+									932.552307128906
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.17504882813,
+								930.299987792969
+							],
+							"motion_world": [
+								0.0109667964279652,
+								0.0,
+								-0.0278662107884884
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 16.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.70654296875,
+									928.949462890625
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.17504882813,
+									930.299987792969
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.70654296875,
+								928.949462890625
+							],
+							"motion_world": [
+								0.0322265625,
+								0.0,
+								-0.0818872079253197
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.70654296875,
+									928.949462890625
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.70654296875,
+									928.949462890625
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 16.666667,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.74011230469,
+									928.864196777344
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.70654296875,
+									928.949462890625
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.74011230469,
+								928.864196777344
+							],
+							"motion_world": [
+								0.0335693359375,
+								0.0,
+								-0.0852978527545929
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.74011230469,
+									928.864196777344
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.74011230469,
+									928.864196777344
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 20.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.90795898438,
+									928.437683105469
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.74011230469,
+									928.864196777344
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1604.90795898438,
+								928.437683105469
+							],
+							"motion_world": [
+								0.040283203125,
+								0.0,
+								-0.102358393371105
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.90795898438,
+									928.437683105469
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.90795898438,
+									928.437683105469
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 50.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1606.41857910156,
+									924.599243164063
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1604.90795898438,
+									928.437683105469
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1606.41857910156,
+								924.599243164063
+							],
+							"motion_world": [
+								0.1007080078125,
+								0.0,
+								-0.255896002054214
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1606.41857910156,
+									924.599243164063
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1606.41857910156,
+									924.599243164063
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 100.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1608.93627929688,
+									918.201843261719
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1606.41857910156,
+									924.599243164063
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1608.93627929688,
+								918.201843261719
+							],
+							"motion_world": [
+								0.201416015625,
+								0.0,
+								-0.511792004108429
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1608.93627929688,
+									918.201843261719
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1608.93627929688,
+									918.201843261719
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-1.0,
+							0.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1601.70092773438,
+									930.996643066406
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1608.93627929688,
+									918.201843261719
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1601.70092773438,
+								930.996643066406
+							],
+							"motion_world": [
+								-0.0879980474710464,
+								0.0,
+								0.0
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.70092773438,
+									930.996643066406
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.70092773438,
+									930.996643066406
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							0.0,
+							1.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1603.90087890625,
+									933.196655273438
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1601.70092773438,
+									930.996643066406
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1603.90087890625,
+								933.196655273438
+							],
+							"motion_world": [
+								0.0,
+								0.0,
+								0.0880004838109016
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1603.90087890625,
+									933.196655273438
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1603.90087890625,
+									933.196655273438
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-0.70710676908493,
+							0.70710676908493
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1602.34521484375,
+									932.552307128906
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"cache_before": {
+								"depth": 28.0,
+								"height": 1.8,
+								"physics_frame": 499,
+								"point": [
+									1603.90087890625,
+									933.196655273438
+								],
+								"render_frame": 38,
+								"revision": 49,
+								"width": 24.0
+							},
+							"goal": [
+								1602.34521484375,
+								932.552307128906
+							],
+							"motion_world": [
+								-0.0622265599668026,
+								0.0,
+								0.0622265599668026
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1602.34521484375,
+									932.552307128906
+								]
+							},
+							"origin": [
+								1603.90087890625,
+								930.996643066406
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1602.34521484375,
+									932.552307128906
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					}
+				]
+			}
+		],
+		"label": "replay_final",
+		"margin": 0.0020000000949949,
+		"node_position": [
+			22.6360340118408,
+			0.0599999986588955,
+			4.19986581802368
+		],
+		"peers": [
+			{
+				"h": 32.0,
+				"id": "tony",
+				"neutral": true,
+				"w": 28.0,
+				"x": 1620.0,
+				"y": 870.0
+			}
+		],
+		"player_context": {
+			"crash": 0.0,
+			"high": 0.0,
+			"hp": 100.0,
+			"shakes": 20.9990507151515,
+			"slow": 0.0,
+			"speed": 2.2,
+			"stun": 0.0
+		},
+		"revision": 49,
+		"roundtrip_origin": [
+			1603.90087890625,
+			930.996643066406
+		],
+		"roundtrip_origin_bytes": "05000000d47cc844c9bf6844",
+		"shape": {
+			"height": 1.79999995231628,
+			"radius": 0.479999989271164,
+			"type": "CapsuleShape3D"
+		},
+		"shape_transform": {
+			"basis": [
+				[
+					1.0,
+					0.0,
+					0.0
+				],
+				[
+					0.0,
+					1.0,
+					0.0
+				],
+				[
+					0.0,
+					0.0,
+					1.0
+				]
+			],
+			"origin": [
+				22.6360340118408,
+				0.959999978542328,
+				4.19986581802368
+			]
+		},
+		"source_center": [
+			1615.90087890625,
+			944.996643066406
+		],
+		"source_origin": [
+			1603.90087890625,
+			930.996643066406
+		],
+		"source_origin_bytes": "05000000d47cc844c9bf6844",
+		"uncached_actual": true,
+		"uncached_reconstructed": true
+	},
+	"headless": false,
+	"initial": {
+		"actual_overlaps": [],
+		"cache_before": {
+			"physics_frame": 410,
+			"render_frame": -1
+		},
+		"cached_actual": true,
+		"cached_actual_after_reconstruction": true,
+		"colliders": [
+			{
+				"bounds": {
+					"position": [
+						18.7999992370605,
+						0.0,
+						3.36000037193298
+					],
+					"size": [
+						3.35999870300293,
+						4.5,
+						0.239999994635582
+					]
+				},
+				"name": "@StaticBody3D@1594",
+				"owner": "structures:building_01",
+				"shapes": [
+					{
+						"disabled": false,
+						"shape": {
+							"size": [
+								3.35999870300293,
+								4.5,
+								0.239999994635582
+							],
+							"type": "BoxShape3D"
+						},
+						"transform": {
+							"basis": [
+								[
+									1.0,
+									0.0,
+									0.0
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									0.0,
+									0.0,
+									1.0
+								]
+							],
+							"origin": [
+								20.4799995422363,
+								2.25,
+								3.48000025749207
+							]
+						}
+					}
+				]
+			},
+			{
+				"bounds": {
+					"position": [
+						22.1599979400635,
+						2.5,
+						3.36000037193298
+					],
+					"size": [
+						2.40000152587891,
+						2.0,
+						0.239999994635582
+					]
+				},
+				"name": "@StaticBody3D@1596",
+				"owner": "structures:building_01",
+				"shapes": [
+					{
+						"disabled": false,
+						"shape": {
+							"size": [
+								2.40000152587891,
+								2.0,
+								0.239999994635582
+							],
+							"type": "BoxShape3D"
+						},
+						"transform": {
+							"basis": [
+								[
+									1.0,
+									0.0,
+									0.0
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									0.0,
+									0.0,
+									1.0
+								]
+							],
+							"origin": [
+								23.3599987030029,
+								3.5,
+								3.48000025749207
+							]
+						}
+					}
+				]
+			},
+			{
+				"bounds": {
+					"position": [
+						22.0549983978271,
+						0.0,
+						3.3600001335144
+					],
+					"size": [
+						0.100000001490116,
+						2.57999992370605,
+						0.319999992847443
+					]
+				},
+				"name": "@StaticBody3D@1599",
+				"owner": "structures:building_01",
+				"shapes": [
+					{
+						"disabled": false,
+						"shape": {
+							"size": [
+								0.100000001490116,
+								2.57999992370605,
+								0.319999992847443
+							],
+							"type": "BoxShape3D"
+						},
+						"transform": {
+							"basis": [
+								[
+									1.0,
+									0.0,
+									0.0
+								],
+								[
+									0.0,
+									1.0,
+									0.0
+								],
+								[
+									0.0,
+									0.0,
+									1.0
+								]
+							],
+							"origin": [
+								22.1049976348877,
+								1.28999996185303,
+								3.52000021934509
+							]
+						}
+					}
+				]
+			}
+		],
+		"difference_px": [
+			0.0,
+			0.0
+		],
+		"expanded_nearby_overlaps": [
+			{
+				"name": "@StaticBody3D@1599",
+				"owner": "structures:building_01"
+			}
+		],
+		"forms": [
+			{
+				"body": {
+					"h": 28.0,
+					"id": "player",
+					"w": 24.0,
+					"x": 1588.16821289063,
+					"y": 929.989440917969
+				},
+				"form": "actual_source",
+				"rows": [
+					{
+						"kind": "long_waypoint",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1604.17504882813,
+								930.299987792969
+							],
+							"motion_world": [
+								0.640273451805115,
+								0.0,
+								0.0124218743294477
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 16.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1590.36779785156,
+								930.032104492188
+							],
+							"motion_world": [
+								0.0879833996295929,
+								0.0,
+								0.00170654291287065
+							],
+							"moved": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [
+								{
+									"name": "@StaticBody3D@1599",
+									"owner": "structures:building_01"
+								}
+							],
+							"stop_on_block": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+								"name": "",
+								"normal": [
+									0.0,
+									0.0,
+									1.0
+								],
+								"owner": "",
+								"point": [
+									22.0947113037109,
+									1.37999999523163,
+									3.68000030517578
+								]
+							}
+						}
+					},
+					{
+						"dt_ms": 16.666667,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1590.45947265625,
+								930.033874511719
+							],
+							"motion_world": [
+								0.0916503891348839,
+								0.0,
+								0.00177734368480742
+							],
+							"moved": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [
+								{
+									"name": "@StaticBody3D@1599",
+									"owner": "structures:building_01"
+								}
+							],
+							"stop_on_block": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+								"name": "",
+								"normal": [
+									0.0,
+									0.0,
+									1.0
+								],
+								"owner": "",
+								"point": [
+									22.0983772277832,
+									1.37999999523163,
+									3.68000030517578
+								]
+							}
+						}
+					},
+					{
+						"dt_ms": 20.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1590.91772460938,
+								930.042785644531
+							],
+							"motion_world": [
+								0.109980463981628,
+								0.0,
+								0.00213378900662065
+							],
+							"moved": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [
+								{
+									"name": "@StaticBody3D@1599",
+									"owner": "structures:building_01"
+								}
+							],
+							"stop_on_block": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+								"name": "",
+								"normal": [
+									0.0,
+									0.0,
+									1.0
+								],
+								"owner": "",
+								"point": [
+									22.1167068481445,
+									1.37999999523163,
+									3.68000030517578
+								]
+							}
+						}
+					},
+					{
+						"dt_ms": 50.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1595.04187011719,
+								930.122802734375
+							],
+							"motion_world": [
+								0.274946272373199,
+								0.0,
+								0.00533447274938226
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1595.04187011719,
+									930.122802734375
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1595.04187011719,
+									930.122802734375
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 100.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1601.91564941406,
+								930.256164550781
+							],
+							"motion_world": [
+								0.549897432327271,
+								0.0,
+								0.0106689454987645
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.91564941406,
+									930.256164550781
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.91564941406,
+									930.256164550781
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-1.0,
+							0.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1585.96826171875,
+								929.989440917969
+							],
+							"motion_world": [
+								-0.0879980474710464,
+								0.0,
+								0.0
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1585.96826171875,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1585.96826171875,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							0.0,
+							1.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1588.16821289063,
+								932.189453125
+							],
+							"motion_world": [
+								0.0,
+								0.0,
+								0.0880004838109016
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									932.189453125
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									932.189453125
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-0.70710676908493,
+							0.70710676908493
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1586.61254882813,
+								931.545104980469
+							],
+							"motion_world": [
+								-0.0622265599668026,
+								0.0,
+								0.0622265599668026
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1586.61254882813,
+									931.545104980469
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1586.61254882813,
+									931.545104980469
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					}
+				]
+			},
+			{
+				"body": {
+					"h": 28.0,
+					"id": "player",
+					"w": 24.0,
+					"x": 1588.16821289063,
+					"y": 929.989440917969
+				},
+				"form": "world_roundtrip",
+				"rows": [
+					{
+						"kind": "long_waypoint",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1604.17504882813,
+								930.299987792969
+							],
+							"motion_world": [
+								0.640273451805115,
+								0.0,
+								0.0124218743294477
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1604.17504882813,
+									930.299987792969
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 16.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1590.36779785156,
+								930.032104492188
+							],
+							"motion_world": [
+								0.0879833996295929,
+								0.0,
+								0.00170654291287065
+							],
+							"moved": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [
+								{
+									"name": "@StaticBody3D@1599",
+									"owner": "structures:building_01"
+								}
+							],
+							"stop_on_block": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+								"name": "",
+								"normal": [
+									0.0,
+									0.0,
+									1.0
+								],
+								"owner": "",
+								"point": [
+									22.0947113037109,
+									1.37999999523163,
+									3.68000030517578
+								]
+							}
+						}
+					},
+					{
+						"dt_ms": 16.666667,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1590.45947265625,
+								930.033874511719
+							],
+							"motion_world": [
+								0.0916503891348839,
+								0.0,
+								0.00177734368480742
+							],
+							"moved": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [
+								{
+									"name": "@StaticBody3D@1599",
+									"owner": "structures:building_01"
+								}
+							],
+							"stop_on_block": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+								"name": "",
+								"normal": [
+									0.0,
+									0.0,
+									1.0
+								],
+								"owner": "",
+								"point": [
+									22.0983772277832,
+									1.37999999523163,
+									3.68000030517578
+								]
+							}
+						}
+					},
+					{
+						"dt_ms": 20.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1590.91772460938,
+								930.042785644531
+							],
+							"motion_world": [
+								0.109980463981628,
+								0.0,
+								0.00213378900662065
+							],
+							"moved": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [
+								{
+									"name": "@StaticBody3D@1599",
+									"owner": "structures:building_01"
+								}
+							],
+							"stop_on_block": {
+								"blocked": true,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+								"name": "",
+								"normal": [
+									0.0,
+									0.0,
+									1.0
+								],
+								"owner": "",
+								"point": [
+									22.1167068481445,
+									1.37999999523163,
+									3.68000030517578
+								]
+							}
+						}
+					},
+					{
+						"dt_ms": 50.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1595.04187011719,
+								930.122802734375
+							],
+							"motion_world": [
+								0.274946272373199,
+								0.0,
+								0.00533447274938226
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1595.04187011719,
+									930.122802734375
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1595.04187011719,
+									930.122802734375
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"dt_ms": 100.0,
+						"kind": "short_dt",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1601.91564941406,
+								930.256164550781
+							],
+							"motion_world": [
+								0.549897432327271,
+								0.0,
+								0.0106689454987645
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.91564941406,
+									930.256164550781
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1601.91564941406,
+									930.256164550781
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-1.0,
+							0.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1585.96826171875,
+								929.989440917969
+							],
+							"motion_world": [
+								-0.0879980474710464,
+								0.0,
+								0.0
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1585.96826171875,
+									929.989440917969
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1585.96826171875,
+									929.989440917969
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							0.0,
+							1.0
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1588.16821289063,
+								932.189453125
+							],
+							"motion_world": [
+								0.0,
+								0.0,
+								0.0880004838109016
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									932.189453125
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1588.16821289063,
+									932.189453125
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					},
+					{
+						"direction": [
+							-0.70710676908493,
+							0.70710676908493
+						],
+						"kind": "escape",
+						"query": {
+							"cache_after": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"cache_before": {
+								"physics_frame": 411,
+								"render_frame": -1
+							},
+							"goal": [
+								1586.61254882813,
+								931.545104980469
+							],
+							"motion_world": [
+								-0.0622265599668026,
+								0.0,
+								0.0622265599668026
+							],
+							"moved": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1586.61254882813,
+									931.545104980469
+								]
+							},
+							"origin": [
+								1588.16821289063,
+								929.989440917969
+							],
+							"raw_fractions": [
+								1.0,
+								1.0
+							],
+							"safe_endpoint_overlap": [],
+							"stop_on_block": {
+								"blocked": false,
+								"body_contact": false,
+								"position": [
+									1586.61254882813,
+									931.545104980469
+								]
+							},
+							"unsafe_rest": {
+
+							}
+						}
+					}
+				]
+			}
+		],
+		"label": "replay_initial",
+		"margin": 0.0020000000949949,
+		"node_position": [
+			22.0067272186279,
+			0.0599999986588955,
+			4.15957736968994
+		],
+		"peers": [
+			{
+				"h": 32.0,
+				"id": "tony",
+				"neutral": true,
+				"w": 28.0,
+				"x": 1620.0,
+				"y": 870.0
+			}
+		],
+		"player_context": {
+			"crash": 0.0,
+			"high": 0.0,
+			"hp": 100.0,
+			"shakes": 20.0,
+			"slow": 0.0,
+			"speed": 2.2,
+			"stun": 0.0
+		},
+		"revision": 49,
+		"roundtrip_origin": [
+			1588.16821289063,
+			929.989440917969
+		],
+		"roundtrip_origin_bytes": "050000006285c644537f6844",
+		"shape": {
+			"height": 1.79999995231628,
+			"radius": 0.479999989271164,
+			"type": "CapsuleShape3D"
+		},
+		"shape_transform": {
+			"basis": [
+				[
+					1.0,
+					0.0,
+					0.0
+				],
+				[
+					0.0,
+					1.0,
+					0.0
+				],
+				[
+					0.0,
+					0.0,
+					1.0
+				]
+			],
+			"origin": [
+				22.0067272186279,
+				0.959999978542328,
+				4.15957736968994
+			]
+		},
+		"source_center": [
+			1600.16821289063,
+			943.989440917969
+		],
+		"source_origin": [
+			1588.16821289063,
+			929.989440917969
+		],
+		"source_origin_bytes": "050000006285c644537f6844",
+		"uncached_actual": true,
+		"uncached_reconstructed": true,
+		"world_goal_clear": true,
+		"world_start_clear": false
+	},
+	"initial_placement_fixture": [
+		1588.16821289063,
+		929.989440917969
+	],
+	"inputs": {
+		"capture_clicks": 1,
+		"clicks": 0,
+		"keys": 0,
+		"menu_clicks": 0,
+		"motion_frames": 6,
+		"mouse_motion": 38
+	},
+	"local_joins": 2,
+	"office_acceptance": false,
+	"rows": [
+		{
+			"admitted_ms": 100.0,
+			"decision": {
+				"elapsed_ms": 0,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 0,
+				"plans": 1,
+				"reason": "waiting_for_resident_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"segment": {
+					"actual_end": "(1608.834, 952.998)",
+					"from": "(1600.168, 943.9894)",
+					"ok": true,
+					"reason": "",
+					"to": "(1608.834, 952.998)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 83.3333333333333,
+			"decision": {
+				"elapsed_ms": 68,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 68,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 37.7653333333334,
+			"decision": {
+				"elapsed_ms": 127,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 127,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 32.641,
+			"decision": {
+				"elapsed_ms": 158,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 158,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 29.5936666666666,
+			"decision": {
+				"elapsed_ms": 186,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 186,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 29.1666666666667,
+			"decision": {
+				"elapsed_ms": 212,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 212,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 27.6860000000001,
+			"decision": {
+				"elapsed_ms": 237,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 237,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.118,
+			"decision": {
+				"elapsed_ms": 263,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 263,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"segment": {
+					"actual_end": "(1608.834, 952.998)",
+					"from": "(1600.168, 943.9894)",
+					"ok": true,
+					"reason": "",
+					"to": "(1608.834, 952.998)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.087,
+			"decision": {
+				"elapsed_ms": 289,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 289,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 26.511,
+			"decision": {
+				"elapsed_ms": 315,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 315,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 23.599,
+			"decision": {
+				"elapsed_ms": 339,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 339,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 27.7777777777778,
+			"decision": {
+				"elapsed_ms": 364,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 364,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 31.7212222222221,
+			"decision": {
+				"elapsed_ms": 398,
+				"from": "(22.00673, 0.06, 4.159577)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 398,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"short_step": {
+					"actual_end": "(1588.861, 930.7101)",
+					"from": "(1588.168, 929.9894)",
+					"ok": true,
+					"reason": "",
+					"to": "(1588.861, 930.7101)"
+				}
+			},
+			"decoded_input": [
+				0.178630858659744,
+				-0.983916163444519
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.1276798248291,
+				0.0599999986588955,
+				4.28531503677368
+			],
+			"node_before": [
+				22.0067272186279,
+				0.0599999986588955,
+				4.15957736968994
+			],
+			"requested_world": [
+				0.693256497383118,
+				0.0,
+				0.720690906047821
+			],
+			"source_after": [
+				1591.19201660156,
+				933.132873535156
+			],
+			"source_before": [
+				1588.16821289063,
+				929.989440917969
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 100.0,
+			"decision": {
+				"elapsed_ms": 581,
+				"from": "(22.12768, 0.06, 4.285315)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 0,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"segment": {
+					"actual_end": "(1608.834, 952.998)",
+					"from": "(1603.192, 947.1329)",
+					"ok": true,
+					"reason": "",
+					"to": "(1608.834, 952.998)"
+				},
+				"short_step": {
+					"actual_end": "(1591.885, 933.8536)",
+					"from": "(1591.192, 933.1329)",
+					"ok": true,
+					"reason": "",
+					"to": "(1591.885, 933.8536)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				-0.88364177942276
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.1276798248291,
+				0.0599999986588955,
+				4.28531503677368
+			],
+			"requested_world": [
+				0.61258852481842,
+				0.0,
+				0.636834442615509
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1591.19201660156,
+				933.132873535156
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 50.0,
+			"decision": {
+				"elapsed_ms": 621,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 0,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 33.3333333333333,
+			"decision": {
+				"elapsed_ms": 650,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 29,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 21.8536666666668,
+			"decision": {
+				"elapsed_ms": 678,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 57,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 28.1463333333332,
+			"decision": {
+				"elapsed_ms": 703,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 82,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 728,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 107,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 26.6666666666667,
+			"decision": {
+				"elapsed_ms": 753,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 132,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 776,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 155,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 26.1033333333334,
+			"decision": {
+				"elapsed_ms": 802,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 181,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 826,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 205,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.624,
+			"decision": {
+				"elapsed_ms": 852,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 231,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"segment": {
+					"actual_end": "(1608.834, 952.998)",
+					"from": "(1611.615, 955.8893)",
+					"ok": true,
+					"reason": "",
+					"to": "(1608.834, 952.998)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 877,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 256,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 23.821,
+			"decision": {
+				"elapsed_ms": 902,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 281,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 925,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 304,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.7575757575758,
+			"decision": {
+				"elapsed_ms": 958,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 337,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.7575757575758,
+			"decision": {
+				"elapsed_ms": 989,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 368,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.7575757575758,
+			"decision": {
+				"elapsed_ms": 1016,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 395,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 28.845606060606,
+			"decision": {
+				"elapsed_ms": 1044,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 423,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 1068,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 447,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 1091,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 470,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.0,
+			"decision": {
+				"elapsed_ms": 1115,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 494,
+				"plans": 1,
+				"reason": "following_route",
+				"replans": 0,
+				"route": {
+					"from": "(22.00673, 0.06, 4.159577)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"segment": {
+					"actual_end": "(1608.834, 952.998)",
+					"from": "(1611.615, 955.8893)",
+					"ok": true,
+					"reason": "",
+					"to": "(1608.834, 952.998)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				0.0
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"source_after": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 29.8740000000001,
+			"decision": {
+				"elapsed_ms": 1146,
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+
+				},
+				"no_progress_ms": 525,
+				"plans": 2,
+				"reason": "actual500ms_stagnation",
+				"replans": 1,
+				"route": {
+					"from": "(22.64767, 0.06, 4.170296)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"segment": {
+					"actual_end": "(1616.192, 944.2574)",
+					"from": "(1611.615, 955.8893)",
+					"ok": true,
+					"reason": "",
+					"to": "(1616.192, 944.2574)"
+				},
+				"short_step": {
+					"actual_end": "(1599.981, 940.9588)",
+					"from": "(1599.615, 941.8893)",
+					"ok": true,
+					"reason": "",
+					"to": "(1599.981, 940.9588)"
+				}
+			},
+			"decoded_input": [
+				0.224832162261009,
+				-0.974397540092468
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.5247554779053,
+				0.0599999986588955,
+				4.48267793655396
+			],
+			"node_before": [
+				22.4645938873291,
+				0.0599999986588955,
+				4.63557386398315
+			],
+			"requested_world": [
+				0.366150140762329,
+				0.0,
+				-0.930555939674377
+			],
+			"source_after": [
+				1601.11889648438,
+				938.066955566406
+			],
+			"source_before": [
+				1599.61486816406,
+				941.889343261719
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.7575757575758,
+			"decision": {
+				"elapsed_ms": 1180,
+				"from": "(22.52476, 0.06, 4.482678)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+					"candidates": [
+						{
+							"point": "(22.64767, 0.06, 4.170296)",
+							"reason": "local_steps_clear",
+							"steps": 13
+						}
+					],
+					"from": "(22.46459, 0.06, 4.635574)",
+					"goal": "(22.647, 0.06, 4.172)",
+					"reason": "certified_outward_join",
+					"selected": "(22.64767, 0.06, 4.170296)",
+					"steps": 13,
+					"tail_attempts": 1
+				},
+				"no_progress_ms": 0,
+				"plans": 2,
+				"reason": "following_route",
+				"replans": 1,
+				"route": {
+					"from": "(22.64767, 0.06, 4.170296)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"short_step": {
+					"actual_end": "(1601.485, 937.1364)",
+					"from": "(1601.119, 938.067)",
+					"ok": true,
+					"reason": "",
+					"to": "(1601.485, 937.1364)"
+				}
+			},
+			"decoded_input": [
+				0.102563105523586,
+				-0.893654644489288
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.5714149475098,
+				0.0599999986588955,
+				4.36409425735474
+			],
+			"node_before": [
+				22.5247554779053,
+				0.0599999986588955,
+				4.48267793655396
+			],
+			"requested_world": [
+				0.329357534646988,
+				0.0,
+				-0.837055325508118
+			],
+			"source_after": [
+				1602.28540039063,
+				935.102355957031
+			],
+			"source_before": [
+				1601.11889648438,
+				938.066955566406
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.7575757575758,
+			"decision": {
+				"elapsed_ms": 1206,
+				"from": "(22.57141, 0.06, 4.364094)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+					"candidates": [
+						{
+							"point": "(22.64767, 0.06, 4.170296)",
+							"reason": "local_steps_clear",
+							"steps": 13
+						}
+					],
+					"from": "(22.46459, 0.06, 4.635574)",
+					"goal": "(22.647, 0.06, 4.172)",
+					"reason": "certified_outward_join",
+					"selected": "(22.64767, 0.06, 4.170296)",
+					"steps": 13,
+					"tail_attempts": 1
+				},
+				"no_progress_ms": 0,
+				"plans": 2,
+				"reason": "following_route",
+				"replans": 1,
+				"route": {
+					"from": "(22.64767, 0.06, 4.170296)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"short_step": {
+					"actual_end": "(1602.651, 934.1718)",
+					"from": "(1602.285, 935.1024)",
+					"ok": true,
+					"reason": "",
+					"to": "(1602.651, 934.1718)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				-0.700406670570374
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.6077442169189,
+				0.0599999986588955,
+				4.27175998687744
+			],
+			"node_before": [
+				22.5714149475098,
+				0.0599999986588955,
+				4.36409425735474
+			],
+			"requested_world": [
+				0.25645187497139,
+				0.0,
+				-0.651768445968628
+			],
+			"source_after": [
+				1603.19360351563,
+				932.794006347656
+			],
+			"source_before": [
+				1602.28540039063,
+				935.102355957031
+			],
+			"stun": 0.0
+		},
+		{
+			"admitted_ms": 25.7575757575758,
+			"decision": {
+				"elapsed_ms": 1228,
+				"from": "(22.60774, 0.06, 4.27176)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"local": {
+					"candidates": [
+						{
+							"point": "(22.64767, 0.06, 4.170296)",
+							"reason": "local_steps_clear",
+							"steps": 13
+						}
+					],
+					"from": "(22.46459, 0.06, 4.635574)",
+					"goal": "(22.647, 0.06, 4.172)",
+					"reason": "certified_outward_join",
+					"selected": "(22.64767, 0.06, 4.170296)",
+					"steps": 13,
+					"tail_attempts": 1
+				},
+				"no_progress_ms": 0,
+				"plans": 2,
+				"reason": "following_route",
+				"replans": 1,
+				"route": {
+					"from": "(22.64767, 0.06, 4.170296)",
+					"reason": "static_route_has_no_peer_blocker",
+					"to": "(22.647, 0.06, 4.172)"
+				},
+				"short_step": {
+					"actual_end": "(1603.56, 931.8635)",
+					"from": "(1603.194, 932.794)",
+					"ok": true,
+					"reason": "",
+					"to": "(1603.56, 931.8635)"
+				}
+			},
+			"decoded_input": [
+				0.0,
+				-0.545368909835815
+			],
+			"hp": 100.0,
+			"node_after": [
+				22.6360340118408,
+				0.0599999986588955,
+				4.19986581802368
+			],
+			"node_before": [
+				22.6077442169189,
+				0.0599999986588955,
+				4.27175998687744
+			],
+			"requested_world": [
+				0.199692055583,
+				0.0,
+				-0.507494270801544
+			],
+			"source_after": [
+				1603.90087890625,
+				930.996643066406
+			],
+			"source_before": [
+				1603.19360351563,
+				932.794006347656
+			],
+			"stun": 0.0
+		}
+	],
+	"schema": 1,
+	"source_authority": "same exact source start as retained completed diagnostic; all subsequent movement is corrected inherited Office input orchestration",
+	"walking": [
+		{
+			"from": "(22.00673, 0.06, 4.159577)",
+			"joined_at": "(22.35336, 0.06, 4.519923)",
+			"reason": "actual_capsule_corner_link",
+			"steps": 13,
+			"tail_attempts": 1,
+			"wall_ms": 16041
+		},
+		{
+			"from": "(22.46459, 0.06, 4.635574)",
+			"goal": "(22.647, 0.06, 4.172)",
+			"reason": "actual500ms_stagnation",
+			"replans": 0,
+			"wall_ms": 17178,
+			"waypoint": "(22.35336, 0.06, 4.519923)"
+		},
+		{
+			"details": {
+				"candidates": [
+					{
+						"point": "(22.64767, 0.06, 4.170296)",
+						"reason": "local_steps_clear",
+						"steps": 13
+					}
+				],
+				"from": "(22.46459, 0.06, 4.635574)",
+				"goal": "(22.647, 0.06, 4.172)",
+				"reason": "certified_outward_join",
+				"selected": "(22.64767, 0.06, 4.170296)",
+				"steps": 13,
+				"tail_attempts": 1
+			},
+			"reason": "certified_outward_join",
+			"wall_ms": 17186
+		}
+	],
+	"walking_context": {
+		"elapsed_ms": 1250,
+		"from": "(22.63603, 0.06, 4.199866)",
+		"goal": "(22.647, 0.06, 4.172)",
+		"local": {
+			"candidates": [
+				{
+					"point": "(22.64767, 0.06, 4.170296)",
+					"reason": "local_steps_clear",
+					"steps": 13
+				}
+			],
+			"from": "(22.46459, 0.06, 4.635574)",
+			"goal": "(22.647, 0.06, 4.172)",
+			"reason": "certified_outward_join",
+			"selected": "(22.64767, 0.06, 4.170296)",
+			"steps": 13,
+			"tail_attempts": 1
+		},
+		"no_progress_ms": 0,
+		"plans": 2,
+		"reason": "following_route",
+		"replans": 1,
+		"route": {
+			"from": "(22.64767, 0.06, 4.170296)",
+			"reason": "static_route_has_no_peer_blocker",
+			"to": "(22.647, 0.06, 4.172)"
+		}
+	},
+	"wall_ms": 1427,
+	"waypoint": [
+		22.6469993591309,
+		0.0599999986588955,
+		4.17199993133545
+	]
+}

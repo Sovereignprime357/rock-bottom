@@ -402,7 +402,20 @@ func _peer_clear(body: Dictionary,point: Vector2,peers: Array[Dictionary]) -> bo
 func _repair_peer_placement(body: Dictionary,point: Vector2,original: Vector2) -> Vector2:
 	return _repair_peer_prepared(body,point,original)
 
+func _player_footprint_separated(body: Dictionary,point: Vector2) -> bool:
+	if str(body.get("id","player")) == "player" or not point.is_finite() or not _valid_body(body): return false
+	var host: RefCounted = _host()
+	if host == null or not _valid_body(host.p): return false
+	# The only possible non-player peer is this current player. Use Contact's
+	# exact float/vector arithmetic; equality and invalid intermediates fall back.
+	var delta: Vector2 = Contact.center(body,point)-Contact.center(host.p,Vector2(host.p.x,host.p.y))
+	var half: Vector2 = Contact.half_extents(body,host.p)
+	if not delta.is_finite() or not half.is_finite(): return false
+	return absf(delta.x) > half.x-Contact.EPSILON or absf(delta.y) > half.y-Contact.EPSILON
+
+
 func _repair_peer_prepared(body: Dictionary,point: Vector2,original: Vector2,prepared: BodyQuery = null) -> Vector2:
+	if _player_footprint_separated(body,point): return point
 	var peers: Array[Dictionary] = _contact_peers(body)
 	if _peer_clear(body,point,peers): return point
 	var space: PhysicsDirectSpaceState3D = prepared.space if prepared != null else _space()

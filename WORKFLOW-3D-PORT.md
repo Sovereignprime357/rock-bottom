@@ -196,3 +196,20 @@ pass. Browser menus/arrows/isolated save reload and source feed pass; fixture We
 15views/568checks/6pulsepairs pass. Raw reports/harness/source hashes are retained.
 Local8074 serves this build. Root next freezes/pushes and measures actual60, then
 runs Office. Pending bounded shortcuts: Space attack and M during cooking.
+
+### Input/acceptance batch — bounded ownership
+
+Delivered8bcd5bd baseline is immutable. Root integrated Space/M and clearance,
+registered Karaoke contract, and ran rendered Karaoke11views successfully.
+World owns Office probe/spec/contract retry correction only; Characters owns an
+isolated Webhands draft only; Architecture owns remaining-parity/feedback drafts
+only. Root owns shared docs/runner, all engine/native/Web/export/Git, and evidence.
+No draft becomes a verified feature without its platform evidence. Failed1080frame
+profile (arrest leaves56;CPU>16ms) and first Office resident-route run stay retained.
+
+Freeze update: tracked Office correction ends at contract1138 plus exact-corner
+native replay; later whole-tour occupied endpoint failure is retained. Any further
+Office correction stays under .build/3d/office-service-endpoint-draft until this
+input checkpoint is committed. Actual browser hand/cart16 phases pass at both
+desktop sizes, with synthetic input limits disclosed. Feedback/Companion/hand-art
+and sustained60 drafts cannot mutate this frozen production tree or launch engines.

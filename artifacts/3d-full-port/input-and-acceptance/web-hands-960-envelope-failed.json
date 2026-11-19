@@ -1,0 +1,282 @@
+{
+  "current": -1,
+  "engine": "4.5.1-stable (official)",
+  "events": [],
+  "failures": [
+    "idle: visible geometry or actual near-plane envelope"
+  ],
+  "finished": true,
+  "format": "rock-bottom-web-hands-draft",
+  "hashes": {
+    "res://data/source_content.json": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+    "res://scripts/cart_view.gd": "",
+    "res://scripts/first_person_rig.gd": "",
+    "res://scripts/full_scene.gd": "",
+    "res://tests/boss_acceptance_probe.gd": "",
+    "res://tests/web_hands_probe.gd": ""
+  },
+  "initial": {
+    "actors": 56,
+    "brain": 70,
+    "cart_mounted": false,
+    "cash": 0,
+    "cred": 0,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "fixture": "none",
+    "hp": 100,
+    "inventory": [],
+    "max_hp": 100,
+    "offenses": 0,
+    "rng": 4153385641,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "shakes": 20,
+    "speed": 2.2,
+    "weapon": "fists"
+  },
+  "input_frame_checks_pass": false,
+  "inputs": {
+    "capture_clicks": 0,
+    "clicks": 1,
+    "keys": 1,
+    "motion_frames": 0,
+    "mouse_motion": 1
+  },
+  "overflow": false,
+  "phases": [
+    "idle",
+    "right_attack",
+    "right_recovery",
+    "left_attack",
+    "left_recovery",
+    "pickup",
+    "pickup_recovery",
+    "cart_parked",
+    "cart_mount_level",
+    "cart_down_grip",
+    "cart_roll",
+    "cart_stop",
+    "cart_attack",
+    "cart_regrip",
+    "cart_level_release",
+    "cart_dismount"
+  ],
+  "ready": false,
+  "records": [
+    {
+      "action": "",
+      "active_ms": 53.571,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": false,
+      "envelope": {
+        "farthest_z": -0.693072617053986,
+        "finite": true,
+        "nearest_z": -0.200131356716156,
+        "on_screen": 0,
+        "vertices": 6512
+      },
+      "errors": [
+        "visible geometry or actual near-plane envelope"
+      ],
+      "events": [],
+      "framebuffer": [
+        960,
+        540
+      ],
+      "hands_visible": true,
+      "index": 0,
+      "label": "idle",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": false,
+      "pitch": -8.94069672463527e-10,
+      "png_bytes": 360128,
+      "png_sha256": "45a7fc849cdb78ec74bb536d22ecbdc38f137f7420f0c472934f52af7d0e155c",
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 0,
+        "cred": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 2898010883,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 20.0428568,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 194185
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "replacements": 0,
+  "requests": 1,
+  "samples": [
+    {
+      "action": "",
+      "active_ms": 17.857,
+      "age": 0,
+      "phase": 0,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 193622,
+      "wrists": {
+        "1": [
+          0.293640524148941,
+          -0.422170877456665,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.300033658742905,
+          -0.434210300445557,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 35.714,
+      "age": 0,
+      "phase": 0,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 194131,
+      "wrists": {
+        "1": [
+          0.293583303689957,
+          -0.422173380851746,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299816757440567,
+          -0.433937311172485,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 53.571,
+      "age": 0,
+      "phase": 0,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 194167,
+      "wrists": {
+        "1": [
+          0.293362230062485,
+          -0.422399640083313,
+          -0.536853194236755
+        ],
+        "-1": [
+          -0.299710720777512,
+          -0.433825016021729,
+          -0.520139455795288
+        ]
+      }
+    }
+  ],
+  "schema": 1,
+  "scope": "Actual Web frame + synthetic normal input routing. Not trusted hardware input, pointer-lock, audio, weapon catalog, visual approval or frame-budget evidence.",
+  "size": [
+    960,
+    540
+  ],
+  "visual_acceptance": false,
+  "walking": [],
+  "web": true,
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "devicePixelRatio": 1,
+    "webgl": {
+      "webgl2": true,
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "drawing_buffer": [
+        960,
+        540
+      ],
+      "attributes": {
+        "alpha": false,
+        "antialias": false,
+        "depth": true,
+        "desynchronized": false,
+        "failIfMajorPerformanceCaveat": false,
+        "powerPreference": "default",
+        "premultipliedAlpha": true,
+        "preserveDrawingBuffer": true,
+        "stencil": false,
+        "xrCompatible": false
+      }
+    },
+    "canvas": [
+      960,
+      540
+    ],
+    "trusted_event_counts": {
+      "keydown": 0,
+      "keyup": 0,
+      "mousedown": 0,
+      "mouseup": 0,
+      "mousemove": 0,
+      "pointerlock_changes": 0
+    },
+    "pointer_locked": false
+  },
+  "pngs_verified": true,
+  "engine_errors": [
+    "ERROR: idle: visible geometry or actual near-plane envelope",
+    "   at: push_error (core/variant/variant_utility.cpp:1024)"
+  ],
+  "browser_errors": [],
+  "provenance_note": "Empty exported GDScript hashes are unavailable, not proof. Preserve external frozen project/export hashes. Trusted event counts alone do not prove successful pointer lock or gameplay."
+}

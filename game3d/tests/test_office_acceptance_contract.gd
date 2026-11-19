@@ -28,23 +28,80 @@ class RecoveryRuntime:
 class RecoveryPhysics:
 	extends RefCounted
 	var _collision_revision := 49
+	var service_reachable := true
+	var service_queries := 0
+	func can_reach_target(_id: String) -> bool:
+		service_queries += 1; return service_reachable
 	func _contact_peers(_body: Dictionary) -> Array[Dictionary]: return []
 class RecoveryWorld:
 	extends Node3D
 	func is_clear_position(_point: Vector3) -> bool: return true
+
+class CornerPhysics:
+	extends RefCounted
+	var anchor := Vector2.ZERO
+	var refuse_all := false
+	var peer_contact := false
+	var queries := 0
+	var records: Array[Dictionary] = []
+	func move_body(body: Dictionary,goal: Vector2) -> Dictionary:
+		queries += 1
+		var origin := Vector2(body.x,body.y)
+		records.append({"origin":origin,"goal":goal,"length":origin.distance_to(goal)})
+		# A long endpoint clears a narrow synthetic margin band; short ones do not.
+		var blocked: bool = refuse_all or (goal.x > anchor.x+0.5 and goal.x < anchor.x+3.5 and absf(goal.y-anchor.y) < 0.125)
+		return {"position":origin if blocked or peer_contact else goal,"blocked":blocked,"body_contact":peer_contact}
 
 var recovery_driver_checks := false
 var recovery_routes_available := false
 var recovery_endpoints_clear := true
 var recovery_segments_clear := false
 var recovery_route_calls := 0
+var walking_driver_checks := false
+var walking_case := ""
+var walking_clock_ms := 1000
+var walking_frames := 0
+var walking_motion := Vector2.ZERO
+var walking_move_samples: Array[Dictionary] = []
+var walking_plan_origins: Array[Vector3] = []
+var walking_defended := false
+var walking_completed := false
+var walking_local_calls := 0
+var corner_completed := false
+var service_driver_checks := false
+var service_frames := 0
+var service_aims := 0
+var service_actor: Dictionary = {}
+var service_completed := false
+
+class ServiceScene:
+	extends Probe.ObservedScene
+	var service_result := {"kind":"route","id":"route:higher_priority"}
+	func resolve_interaction() -> Dictionary: return service_result.duplicate()
 
 func _combat_endpoint(_point: Vector3,_target_record: Dictionary,_peers: Array[Dictionary]) -> bool:
 	return recovery_endpoints_clear
 func _resident_route(from: Vector3,to: Vector3) -> PackedVector3Array:
 	recovery_route_calls += 1
+	if walking_driver_checks:
+		walking_plan_origins.append(from)
+		resident_route_context = {"reason":"controlled_resident_crossing","from":from,"to":to}
+		var ready: bool = walking_case in ["segment","leg_limit","short_step","stagnation"] or (walking_case == "transient" and walking_clock_ms >= 4000) or (walking_case == "defense" and walking_defended) or (walking_case == "last_plan" and recovery_route_calls == 33)
+		return PackedVector3Array([from,to]) if ready else PackedVector3Array()
 	return PackedVector3Array([from,to]) if recovery_routes_available else PackedVector3Array()
+func _walking_step(point: Vector3) -> Dictionary:
+	if not walking_driver_checks: return super._walking_step(point)
+	var clear: bool = walking_case != "short_step" or walking_local_calls > 0
+	return {"ok":clear,"reason":"" if clear else "controlled_short_endpoint_overlap"}
+func _walking_detour(from: Vector3,to: Vector3) -> PackedVector3Array:
+	if not walking_driver_checks: return super._walking_detour(from,to)
+	walking_local_calls += 1
+	walking_plan_origins.append(from)
+	return PackedVector3Array([from,from+Vector3(0,0,0.25),to])
 func _combat_segment(from: Vector3,to: Vector3) -> Dictionary:
+	if walking_driver_checks:
+		var clear: bool = walking_case != "segment" or walking_clock_ms < 1250 or walking_clock_ms >= 3250
+		return {"ok":clear,"reason":"" if clear else "controlled_new_peer_crossing","from":Content.to_source(from),"to":Content.to_source(to)}
 	return {"ok":recovery_segments_clear,"reason":"" if recovery_segments_clear else "controlled_live_peer_block","from":Content.to_source(from),"to":Content.to_source(to)}
 func _combat_blocker(_target_record: Dictionary) -> Dictionary:
 	return {"owner":"controlled_static_boundary"}
@@ -125,6 +182,194 @@ func _route_recovery_checks() -> void:
 	_check(held == Vector2.ZERO and combat_replans == 32 and recovery_route_calls == 0,"exhausted empty endpoint sets never manufacture a path or extra planner work")
 	game.free(); game = null
 	_recovery_reset()
+
+
+func _walk_clock() -> int:
+	return walking_clock_ms if walking_driver_checks else super._walk_clock()
+func _walk_frame() -> void:
+	if not walking_driver_checks:
+		await super._walk_frame(); return
+	walking_move_samples.append({"at":walking_clock_ms,"position":game.player.position,"input":walking_motion})
+	walking_frames += 1
+	if walking_case in ["leg_limit","cap"] or (walking_case == "last_plan" and recovery_route_calls < 33):
+		# Detached controller observations keep the physical-progress clock alive
+		# without changing source player/state. This is not movement evidence.
+		game.player.position.x = 0.04 if walking_frames%2 == 1 else 0.0
+	elif walking_case == "stagnation" and walking_local_calls == 0:
+		pass # Input was requested but actual observed controller motion is zero.
+	elif walking_motion.length_squared() > 0.0:
+		game.player.position += Vector3(walking_motion.x,0,walking_motion.y)*0.2
+	walking_clock_ms += 1000 if walking_case in ["leg_limit","cap","last_plan"] else 250
+	await process_frame
+func _reach_service(id: String) -> bool:
+	if walking_driver_checks: return false
+	return await super._reach_service(id)
+func _defend_exit() -> bool:
+	if not walking_driver_checks: return await super._defend_exit()
+	if walking_case != "defense" or walking_defended: return false
+	walking_defended = true; game.player.position = Vector3(1,0,0)
+	return true
+func _aim(target: Vector3,delta: float) -> float:
+	if service_driver_checks: service_aims += 1; return 1.0
+	return 1.0 if walking_driver_checks else super._aim(target,delta)
+func _motion(direction: Vector2) -> void:
+	if walking_driver_checks: walking_motion = direction
+	else: super._motion(direction)
+func _release() -> void:
+	if service_driver_checks: return
+	if walking_driver_checks: walking_motion = Vector2.ZERO
+	else: super._release()
+
+func _walking_recovery_checks() -> void:
+	game = Probe.ObservedScene.new()
+	game.runtime = RecoveryRuntime.new(); game.physics = RecoveryPhysics.new()
+	game.world = RecoveryWorld.new(); game.player = Node3D.new()
+	game.add_child(game.world); game.add_child(game.player)
+	game.camera = Camera3D.new(); root.add_child(game.camera)
+	began_wall = Time.get_ticks_msec()
+	var source_before := [game.runtime.p.duplicate(true),game.runtime.s.duplicate(true),game.runtime.state.center,game.runtime.state.rng_seed]
+	for scenario: String in ["transient","segment","defense","permanent","leg_limit","cap","last_plan","short_step","stagnation"]:
+		walking_case = scenario; walking_clock_ms = 1000; walking_frames = 0
+		walking_motion = Vector2.ZERO; walking_move_samples.clear(); walking_plan_origins.clear()
+		walking_defended = false; recovery_route_calls = 0; walking_local_calls = 0
+		game.player.position = Vector3.ZERO; resident_route_context.clear(); walking_context.clear()
+		var before: Array[String] = failures.duplicate()
+		walking_driver_checks = true; recovery_driver_checks = true
+		var arrived: bool = await _walk_to(Vector3(2,0,0))
+		walking_driver_checks = false; recovery_driver_checks = false
+		var actual_failures: Array = failures.slice(before.size()); failures.assign(before)
+		_check(walking_motion == Vector2.ZERO,"walking always releases input after "+scenario)
+		_check([game.runtime.p,game.runtime.s,game.runtime.state.center,game.runtime.state.rng_seed] == source_before,"walk orchestration cannot rewrite source resources/epoch/RNG: "+scenario)
+		match scenario:
+			"transient":
+				_check(arrived and actual_failures.is_empty() and recovery_route_calls == 5,"four empty resident plans wait then fifth current plan arrives normally")
+				for sample: Dictionary in walking_move_samples:
+					if int(sample.at) < 4000: _check(sample.input == Vector2.ZERO and sample.position == Vector3.ZERO,"uncertified transient route holds actual requested input")
+				_check(walking_clock_ms < 21000 and walking_plan_origins.all(func(point: Vector3) -> bool: return point == Vector3.ZERO),"retry origins remain current and do not consume a fictitious waypoint")
+			"segment":
+				_check(arrived and actual_failures.is_empty() and recovery_route_calls > 1,"newly blocked live segment can recover within unchanged walk")
+				for sample: Dictionary in walking_move_samples:
+					if int(sample.at) >= 1250 and int(sample.at) < 3250: _check(sample.input == Vector2.ZERO and sample.position.is_equal_approx(Vector3(0.2,0,0)),"blocked cached/new segment never keeps stale motion")
+			"defense":
+				_check(arrived and actual_failures.is_empty() and walking_defended and walking_plan_origins.size() == 2,"ordinary defense preserves bounded walking recovery")
+				_check(walking_plan_origins[0] == Vector3.ZERO and walking_plan_origins[1] == Vector3(1,0,0),"post-defense route starts from actual displaced controller endpoint")
+			"permanent":
+				_check(not arrived and actual_failures.size() == 1 and str(actual_failures[0]).begins_with("actual controller walking stalled"),"permanent crossing fails the real20s no-progress watchdog")
+				_check(walking_context.no_progress_ms > 20000 and walking_context.elapsed_ms < 120000 and recovery_route_calls <= 28,"plans/waypoint bookkeeping never renew20s progress time")
+			"leg_limit":
+				_check(not arrived and actual_failures.size() == 1 and walking_context.elapsed_ms == 120000 and walking_context.no_progress_ms == 0,"physical motion does not renew the120s leg watchdog")
+			"cap":
+				_check(not arrived and actual_failures == ["bounded live-resident approach replans"] and recovery_route_calls == 33 and walking_context.replans == 32,"initial plan plus32 replans cannot issue a34th request")
+			"last_plan":
+				_check(arrived and actual_failures.is_empty() and recovery_route_calls == 33 and walking_context.replans == 32,"valid32nd replan remains usable without a33rd replan")
+			"short_step":
+				_check(arrived and actual_failures.is_empty() and walking_local_calls == 1 and walking_context.replans == 1,"long route success with short-step refusal requests one bounded outward detour")
+				for sample: Dictionary in walking_move_samples:
+					if int(sample.at) < 1750: _check(sample.input == Vector2.ZERO,"short-step refusal releases stale motion until750ms replan opportunity")
+			"stagnation":
+				_check(arrived and actual_failures.is_empty() and walking_local_calls == 1 and walking_context.replans == 1,"500ms actual stagnation replans despite a successful long segment certificate")
+				_check(walking_plan_origins[1] == Vector3.ZERO,"stagnation detour begins at actual unchanged controller origin")
+	game.camera.free(); game.free(); game = null
+	walking_completed = true
+
+func _corner_checks() -> void:
+	game = Probe.ObservedScene.new(); game.runtime = RecoveryRuntime.new()
+	var physics := CornerPhysics.new(); game.physics = physics
+	game.world = RecoveryWorld.new(); game.player = Node3D.new()
+	game.add_child(game.world); game.add_child(game.player)
+	game.runtime.p = {"x":1588.16821289063,"y":929.989440917969,"w":24.0,"h":28.0,"hp":100.0}
+	var exact := Vector2(game.runtime.p.x,game.runtime.p.y)
+	physics.anchor = exact
+	game.player.position = Content.to_world(exact+Vector2(12,14),0.06)
+	var from: Vector3 = game.player.position
+	var target: Vector3 = from+Vector3(0.64,0,0)
+	var before: Dictionary = game.runtime.p.duplicate(true)
+	var body: Dictionary = _walking_body(from)
+	_check(body.x == game.runtime.p.x and body.y == game.runtime.p.y,"short-step origin preserves exact source scalars")
+	_check(_walking_query(body,exact+Vector2(16,0)).ok,"controlled long endpoint clears the narrow margin band")
+	_check(not _walking_step(target).ok,"same route's actual short endpoint is refused")
+	var blocked: Dictionary = _walking_local_link(from,target)
+	_check(not blocked.ok and blocked.steps == 1,"local proof cannot reuse a successful long endpoint cast")
+	var candidates: Array[Vector3] = Probe.walking_corner_candidates(from,target)
+	_check(candidates.size() == 24 and Probe.walking_corner_candidates(Vector3.INF,target).is_empty(),"local candidate set is exactly24 finite headings/radii or empty invalid input")
+	var last_distance := -1.0
+	for candidate: Vector3 in candidates:
+		_check(candidate.is_finite() and candidate.distance_to(from) <= 1.00001 and candidate.distance_to(from) >= 0.24999,"outward endpoint stays within finite local bounds")
+		_check(candidate.distance_squared_to(target) >= last_distance,"closest remaining target distance is considered first")
+		last_distance = candidate.distance_squared_to(target)
+	recovery_routes_available = true; recovery_route_calls = 0
+	physics.queries = 0; physics.records.clear()
+	var detour: PackedVector3Array = _walking_detour(from,target)
+	_check(detour.size() == 3 and detour[0] == from and detour[-1] == target and absf(detour[1].z-from.z) > 0.01,"real driver orchestration retains explicit outward point and original target")
+	_check(walking_local_context.reason == "certified_outward_join" and int(walking_local_context.tail_attempts) == 1,"closest locally clear candidate joins the existing route")
+	for row: Dictionary in physics.records: _check(float(row.length) <= 1.001,"each detached local query is at most one source pixel")
+	_check(game.runtime.p == before and game.player.position == from,"local proof never commits source or controller positions")
+	physics.refuse_all = true; physics.queries = 0; physics.records.clear()
+	detour = _walking_detour(from,target)
+	_check(detour.is_empty() and physics.queries == 24 and walking_local_context.tail_attempts == 0,"all blocked candidates remain failure with exactly24 first-step refusals")
+	physics.refuse_all = false; physics.peer_contact = true; physics.queries = 0
+	_check(not _walking_local_link(from,from+Vector3(0,0,0.25)).ok,"source peer contact invalidates otherwise static-clear outward motion")
+	physics.peer_contact = false; physics.queries = 0
+	_check(not _walking_local_link(from,from+Vector3(1.01,0,0)).ok and physics.queries == 0,"local proof never expands into unbounded district-path subdivision")
+	recovery_routes_available = false; recovery_route_calls = 0; physics.queries = 0
+	detour = _walking_detour(from,target)
+	_check(detour.is_empty() and recovery_route_calls == 4 and walking_local_context.tail_attempts == 4 and physics.queries <= 24*Probe.WALK_LOCAL_MAX_STEPS,"failed tail joins retain hard four-route and624-step bounds")
+	game.free(); game = null; corner_completed = true
+
+
+func _actor(id: String) -> Dictionary:
+	if service_driver_checks: return service_actor if id == "tony" else {}
+	return super._actor(id)
+func _service_frame() -> void:
+	if not service_driver_checks: await super._service_frame(); return
+	service_frames += 1
+	await process_frame
+
+func _service_range_checks() -> void:
+	game = ServiceScene.new(); game.runtime = RecoveryRuntime.new()
+	game.physics = RecoveryPhysics.new(); game.player = Node3D.new(); game.add_child(game.player)
+	began_wall = Time.get_ticks_msec()
+	service_actor = {"id":"tony","x":-14.0,"y":-16.0,"w":28.0,"h":32.0,"dead":false}
+	service_driver_checks = true; service_frames = 0; service_aims = 0
+	for distance: float in [59.999,60.0,60.001,67.2]:
+		game.runtime.state.center = Vector2(-distance,0)
+		var queries: int = game.physics.service_queries
+		var candidate: bool = _service_candidate("tony")
+		_check(candidate == (distance < 60.0),"NPC candidate uses resolver strict60px at "+str(distance))
+		_check(game.physics.service_queries-queries == (1 if distance < 60.0 else 0),"outer physical reach cannot override60px resolver filter")
+		if distance >= 60.0:
+			_check(not await _reach_service("tony") and service_frames == 0 and service_aims == 0,"out-of-resolver-range cannot stop movement for aim frames")
+	game.runtime.state.center = Vector2(-50,0)
+	service_actor.dead = true
+	_check(not _service_candidate("tony"),"dead actor cannot become an aim candidate")
+	service_actor.dead = false; service_actor.x = NAN
+	_check(not _service_candidate("tony"),"nonfinite actor cannot become an aim candidate")
+	service_actor.x = -14.0; game.runtime.state.center = Vector2.INF
+	_check(not _service_candidate("tony"),"nonfinite player cannot become an aim candidate")
+	game.runtime.state.center = Vector2(-50,0); game.physics.service_reachable = false
+	_check(not _service_candidate("tony"),"strict range never bypasses actual physical refusal")
+	game.physics.service_reachable = true
+	game.player.position = Content.to_world(game.runtime.state.player_center(),0.06)
+	service_aim_wait.clear()
+	_check(not await _reach_service("tony") and service_frames == 120 and service_aims == 120,"higher-priority actual resolver consumes only one120-frame attempt")
+	for attempt: int in range(3):
+		_check(not await _reach_service("tony") and service_frames == 120,"unchanged failed aim returns immediately so certified walking can resume")
+	var previous_frames: int = service_frames
+	game.player.position.x += 0.3; game.runtime.state.center.x += 7.5
+	_check(not await _reach_service("tony") and service_frames == previous_frames+120,"actual player displacement permits a new bounded aim")
+	previous_frames = service_frames; service_actor.x += 7.5
+	_check(not await _reach_service("tony") and service_frames == previous_frames+120,"actual target displacement permits a new bounded aim")
+	previous_frames = service_frames; game.physics._collision_revision += 1
+	_check(not await _reach_service("tony") and service_frames == previous_frames+120,"geometry revision invalidates only the probe aim suppression")
+	previous_frames = service_frames; game.runtime.p = game.runtime.p.duplicate(true)
+	_check(not await _reach_service("tony") and service_frames == previous_frames+120,"player-only epoch cannot inherit stale aim suppression")
+	previous_frames = service_frames; game.runtime.s = game.runtime.s.duplicate(true)
+	_check(not await _reach_service("tony") and service_frames == previous_frames+120,"state-only epoch cannot inherit stale aim suppression")
+	previous_frames = service_frames
+	var service_scene: ServiceScene = game as ServiceScene
+	service_scene.service_result = {"kind":"vendor","id":"tony"}
+	_check(await _reach_service("tony") and service_frames == previous_frames and service_aim_wait.is_empty(),"actual intended resolver immediately succeeds without waiting or weakening reach")
+	service_driver_checks = false; game.free(); game = null; service_completed = true
 
 
 func _base() -> Dictionary:
@@ -385,6 +630,12 @@ func _defense_checks() -> void:
 
 func _run() -> void:
 	_route_recovery_checks()
+	await _walking_recovery_checks()
+	_check(walking_completed,"inherited async walk counterexamples completed before acceptance")
+	_corner_checks()
+	_check(corner_completed,"short-step and bounded outward-join witnesses completed")
+	await _service_range_checks()
+	_check(service_completed,"strict resolver and bounded aim coroutine witnesses complete")
 	_counterexamples(); _input_checks(); _defense_checks()
 	var source: String = FileAccess.get_file_as_string("res://tests/office_acceptance_probe.gd")
 	var assignments: Array[String] = []

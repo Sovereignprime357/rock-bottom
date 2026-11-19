@@ -337,3 +337,46 @@ Pinned implementation references:
 https://github.com/godotengine/godot/blob/4.5.1-stable/main/main.cpp#L4484-L4518
 https://github.com/godotengine/godot/blob/4.5.1-stable/drivers/gles3/storage/utilities.cpp#L315-L350
 https://github.com/godotengine/godot/blob/4.5.1-stable/servers/rendering/renderer_viewport.cpp#L1493-L1510
+
+### Exact current-player clearance prefilter — 2026-11-18
+
+Approved production promotion of the reviewed clearance-prefilter draft after the8bcd
+baseline measurement. This is a call-local sufficient nonpenetration test, not a new
+collision result cache or navigation approximation. Root runs the physical gates and
+frozen native comparison; no speedup or16ms acceptance follows from source inspection.
+
+At the start of `_repair_peer_prepared`, only after the caller's existing static placement
+proof, a non-player body may return the same point before constructing contact peers when
+either axis is strictly outside the player penetration threshold. Read the current weak
+host's actual `p` on every call. Compute `Contact.center(body,point) -
+Contact.center(p,Vector2(p.x,p.y))` and `Contact.half_extents(body,p)` in that exact order.
+The sufficient condition is `abs(delta.x) > half.x - Contact.EPSILON` OR its y equivalent.
+Keep the source1px/tiny-body quarter-overlap convention and EPSILON0.002 source pixels.
+Do not replace this strict comparison with >= or change the contact margin.
+
+Body/player fields, point, resulting delta and half extents must be valid and finite.
+Missing host, player bodies, exact equality, overlap, and invalid or overflowed intermediates
+fall through to the unchanged original peer materialization/liveness/repair path. A
+non-player actor's peer set is either empty or contains only the current player; therefore
+the sufficient separation result is valid even when that actor is absent, hidden, dead or
+departed. Near cases still resolve current actor/duplicate-ID liveness through the existing
+index. No actor is omitted from simulation or moved by this test.
+
+Earlier actors may move the same player dictionary before later calls. No retained player
+snapshot or separation certificate is allowed, including alongside a positive static
+placement certificate. All static bounds/overlap checks, query order, mask1, feet0.06m,
+margin0.002m, shape/height resolution, cast/skin arithmetic, certificate contents and
+frame/epoch/collider-revision invalidation remain unchanged. Raw movement and its sweeps
+are untouched. Only peer-build/contact-test diagnostic counts may decrease; actual physics
+queries, accepted points/refusals, contacts, repairs and source outcomes must match.
+
+Paired regression uses the current adapter and a subclass whose sole behavioral override
+disables this sufficient test. Compare exact returned placements, ordered static query
+attempts/results/cache hits, total/overlap query counts, repair counts and certificate
+contents against the same real PhysicsServer world. Cases include far axes, either side of
+the strict boundary, tiny bodies, overlap, wall repair/recovery/refusal, player/hidden/dead/
+departed actors, current-player movement between calls, p-only/s-only epoch replacement,
+actual fresh/restore and changed wall revision. Invalid and Vector2-overflow helper inputs
+must fall through. An explicit async completion witness prevents an aborted test group from
+printing a false pass. Existing navigation/contact/combat/full-integration gates remain
+required, followed by comparable frozen60-actor active-workload measurements.

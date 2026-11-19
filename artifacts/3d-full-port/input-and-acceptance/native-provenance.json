@@ -1,0 +1,15 @@
+{
+  "scope": "Karaoke current editor-native source; Tony frozen 8bcd release uses 8bcd-performance-provenance.json executable/source hashes",
+  "base_revision": "8bcd5bd124b16b8e783a8d340043237d11cf72ae",
+  "karaoke_source_sha256": {
+    "game3d/scripts/full_scene.gd": "f33a195065b02ba251724193498a07ba3196bf98c28c2d34803829a7527eca3b",
+    "game3d/scripts/world_adapter.gd": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+    "game3d/tests/karaoke_acceptance_probe.gd": "06797b22e4a5d689c8bd15f65821bb587178f236608cedb1490579ab1aca7160",
+    "game3d/tests/boss_acceptance_probe.gd": "a8d990dfcf5ebc71c78bccb16886868a9a07d3ef7585e03c5c70554083bd27d9",
+    "game3d/data/source_content.json": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0"
+  },
+  "engine": "Godot4.5.1 stable Compatibility",
+  "karaoke_raw": ".build/full-port/karaoke-input-native",
+  "tony_raw": ".build/full-port/boss-8bcd-release",
+  "unaccepted_office_raw": ".build/full-port/office-8bcd-run"
+}

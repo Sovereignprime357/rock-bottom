@@ -142,3 +142,19 @@ gap, preserving their1280x720 sizes. Labels stay inside those plates; long distr
 names use visual ellipsis while retaining their complete text property. Source copy,
 resource values, input, menu choices and all gameplay remain unchanged. Resize must
 reflow the same controls, not rebuild them. Verify both960x540 and1280x720.
+
+### Advertised Space attack — 2026-11-18
+
+The live journal advertises left mouse or Space to hit. Source keyboard.js116
+dispatches every pressed Space keydown, including OS repeat, through playerAttack;
+the source cooldown/stun gates decide whether that event attacks. FullScene adds
+the same playing-only Space path using its current camera horizontal forward and
+the existing Runtime.attack owner. Do not add a second attack clock, poll held
+Space once per frame or suppress all echo events. A repeated event before cooldown
+expiry is refused; one after expiry can attack without a release/repress.
+
+Existing cooking and ending Space branches retain priority. Dialogue/paused/title,
+loading/not-ready and key-up cannot issue ordinary attacks. Mouse targeting,
+cooldowns, damage/LOS, accepted gesture events and the click-to-start policy remain
+unchanged. Actual-Scene tests exercise accepted/repeated/stunned/cooldown/modal
+inputs under native and Web control policies; existing cooking/ending tests remain.

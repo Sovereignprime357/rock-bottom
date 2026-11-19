@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rock Bottom — Web hands QA draft</title>
+<style>
+body{margin:0;background:#252925;color:#d4c896;font:14px/1.4 monospace}header,section{padding:10px 14px}h1{font-size:17px;margin:0}p{margin:6px 0}button,select{font:inherit;color:inherit;background:#38433a;border:1px solid #777d6a;padding:6px;margin:4px 6px 4px 0}button:disabled{opacity:.45}#stage{position:relative;max-width:1280px}#canvas,#held-frame{display:block;width:100%;height:auto;background:#1a1810}#held-frame{position:absolute;inset:0}#held-frame[hidden]{display:none}#frame-label{color:#e8c040}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:330px;overflow:auto;background:#1a1810;padding:10px}.failure{color:#dc9290}
+</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+<header>
+<h1>Web hands/cart — isolated QA draft</h1>
+<p id="status" role="status">LOADING actual Web engine</p>
+<button id="next" disabled>Start actual input sequence</button><button id="abort" disabled>Abort</button>
+<select id="frames" aria-label="Previously captured Web frame" disabled></select>
+<button id="live" disabled>Show live paused canvas</button><button id="png" disabled>Download this PNG</button><button id="json" disabled>Download JSON</button>
+<p id="frame-label">No rendered frame has been captured.</p>
+<p>Next uses real scene input routing. Each image is a captured Web frame from before normal Escape pause. It is not a live frozen pose. Do not send extra game input during the sequence.</p>
+</header>
+<div id="stage"><canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="Actual Godot Web canvas"></canvas><img id="held-frame" hidden alt="Captured actual Web frame; underlying game is normally paused"></div>
+<section>
+<details open><summary>Current actual frame</summary><pre id="frame-result">No evidence.</pre></details>
+<details><summary>Bounded complete JSON report</summary><pre id="report">No evidence.</pre></details>
+<details><summary>Engine and browser log</summary><pre id="log"></pre></details>
+<p>Machine checks do not certify visual quality, hardware keyboard/mouse, pointer lock, audio unlock, all equipment, or60fps. Review1280x720 and960x540 separately. Add ?size=960 before loading for the latter.</p>
+</section>
+<script src="storage.js"></script>
+<script src="$GODOT_URL"></script>
+<script src="web-hands-bridge.js"></script>
+<script>window.rbHandsBoot($GODOT_CONFIG);</script>
+</body>
+</html>

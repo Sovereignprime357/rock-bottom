@@ -6,7 +6,7 @@
       "id": "state_boot_and_modes",
       "name": "State, boot and modes",
       "source": "`core/runtime_ui.js:init_runtime_ui`, `core/start.js:startGame`, `core/boot.js`, `core/update.js:update`",
-      "acceptance": "Separate durable state from actor/render state. New game, load, ending continuation, cooking and asynchronous loading are distinct transitions. Initial source brain/time differ from slice.",
+      "acceptance": "One source-shaped player/state authority, separated from actor/render resources. Preserve source fresh defaults (brain70, dayTime0.35), distinct new/load/ending/cooking/loading transitions, and ordered startup wake receipt, two posts and ranked news. Fresh/restore invalidate unsafe capabilities while retaining only explicitly documented session-global continuity. Missing/non-array restored hustles reroll at the source start seam; explicit arrays retain normalized contents.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/full_runtime.gd",
@@ -51,7 +51,7 @@
       "id": "main_loop_and_withdrawal",
       "name": "Main loop and withdrawal",
       "source": "`concessions.js:smokeRockAt`; `update.js:updateWorld`; `runtime_ui.js:applyEquipStats`",
-      "acceptance": "Source normal high consumes one real rock, -50 shakes, -4 brain, +1 cred, lifetime and faction/quest hooks; +30 shakes at expiry. Soap, hitter, recognition and royal-static branches are missing. Source withdrawal is frame/RNG/iframe dependent; slice uses 0.72HP/s approximation.",
+      "acceptance": "One smoke transaction preserves soap-first handling, real rock effects (-50 shakes, -4 brain, +1 cred, lifetime/faction/intro/royal hooks), exact18s high then8s crash and +30 shakes at normal expiry. Hitter remains6s/14s with its separate costs and exclusions; recognition credits the current venue only for normal full-high expiry. Withdrawal uses the documented fixed60Hz adaptation: at shakes100, each quantum rolls0.006 for2HP through normal500ms iframes. The retired slice0.72HP/s expectation drain is not the full runtime.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/full_runtime.gd",
@@ -75,7 +75,7 @@
       "id": "input_and_interaction_arbitration",
       "name": "Input and interaction arbitration",
       "source": "`input/keyboard.js`, `input/mobile.js`, `interactions.js:tryInteract`, `campaigns.js:resolveActionHint`",
-      "acceptance": "Preserve precedence for doors, campaign/route targets, NPCs, activity sites, props, zone verbs, then pockets. In 3D the reticle/reach/LOS should nominate an eligible target through the same resolver that produces the prompt. Menus clear held input; every conversation needs an exit. Desktop plus browser is the selected platform scope; touch controls are a separate parity decision, not an implied new primary platform.",
+      "acceptance": "Preserve source precedence for Office/hideout/OldSchool/Kingdom doors, campaign and route targets, closest eligible NPC, heist sites, bench/trash/phone/cart/dumpster, zone verbs and finally pocket business. The first-person aim/reach/LOS resolver supplies both E prompt and action. Clear held input at modal/focus boundaries; retain exits, numbered choices, advertised mouse/Space attack, I/Q ledgers, F squint, P feed and global M mute including cooking. Desktop keyboard/mouse native/Web is selected scope; touch controls remain a separate unresolved obligation. Source title shortcuts are replaced by the documented click controls.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/full_scene.gd"
@@ -94,7 +94,7 @@
       "id": "inventory_equipment_weapons_tools",
       "name": "Inventory, equipment, weapons, tools",
       "source": "`catalogs.js:EQUIPMENT`, `activities.js:WEAPONS/pickupWeapon`, `runtime_ui.js:applyEquipStats/equipTool/renderInventory`, `heat.js:ownsTool/hasPropane`",
-      "acceptance": "Preserve item identity/quantity, shoes/hat/coat/tool, derived HP/speed/cred/charisma/wanted decay, one weapon and one tool in hand. Torch/crowbar displacement goes to Pete's locker; ownership includes locker, usage checks equipped tool. Do not add weapon durability: no live durability system was found.",
+      "acceptance": "Preserve source inventory record identity/quantity, shoes/hat/coat/tool slots, derived HP/speed/cred/charisma/wanted decay, and one selected weapon plus one equipped tool. Only migrated slice junk/food stacks use the documented virtual-unit marker. Torch/crowbar displacement goes to Pete's locker; ownership includes locker while use requires the equipped tool. The arm-only view shows held weapon/tool/coat/shoes where visible; hat/ear/chest route patches remain documented off-camera adaptations. Do not add durability or a generic inventory-use command absent from source.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/inventory.gd",
@@ -118,7 +118,7 @@
       "id": "core_vendors_and_economy",
       "name": "Core vendors and economy",
       "source": "`dialogue/neighborhood_a.js:tonyDialogue/yuriDialogue/peteDialogue`; `catalogs.js:vendorPrice`",
-      "acceptance": "Source includes single/bulk sales, faction rates/refusals, charisma price quotes, license plates, tool stock/locker, loans, hideout offers, counters and quest hooks. Pete total outlay cap $200/day. Sock-for-$1 is a real source fallback. Yuri baseline25 vs Pete15; faction modifications must also port.",
+      "acceptance": "Preserve single/bulk sales, faction rates/refusals, source-specific charisma prices, license plates, stock/locker, loans, hideout offers, counters and quest hooks. Pete's sale-payout ledger caps at$200/day; his source$50 loan is outside that cap, and food remains a fixed$3. Sock-for-$1 is the real source fallback. Yuri copper baseline25 versus Pete15 retains faction modifiers. Ordinary Tony/Pete/Yuri trade remains possible during non-Kingdom bosses; new encounter starts still require atomic boss capability.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/vendors_core.gd"
@@ -159,7 +159,7 @@
       "id": "dumpster_trash_pickups_and_lottery",
       "name": "Dumpster, trash, pickups and lottery",
       "source": "`interactions.js:startDumpsterDive/kickTrashCan`; `update.js` pickups/cooldowns; `npc_spawns.js:spawnCashPiles`; `activities.js:scratchLottery`; `communications.js:garbageTruckRumble`",
-      "acceptance": "Port randomized three-options/take-one dumpster contents, distance bias, equipment/food/packets/weapon/torch/hitter/possum outcomes, cooldowns, trash rat outcomes, tips jar, truck resets, real cash-pile identity, lottery and quest pickups. Slice daily reset and copper ground pickup are explicit substitutes.",
+      "acceptance": "Use the real three-options/take-one dumpster transaction with distance-biased equipment/food/packets/weapon/torch/hitter/possum outcomes, cooldowns, trash-can cash/junk/rat branches, tips jars and garbage resets. Preserve actual cash-pile IDs and quest pickups, source lottery offer semantics, and session-global dumpster fresh/load asymmetry. Rehydrate the intro cash pile only while intro is incomplete and uncollected; completing intro alone does not remove an already-present same-session pile. No slice copper pickup or daily reset substitute is a parity rule.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/world_prop_actions.gd",
@@ -183,7 +183,7 @@
       "id": "npc_agency_and_lifecycle",
       "name": "NPC agency and lifecycle",
       "source": "`npc_spawns.js:spawnNpcs`, `npc_ai.js:updateNpcActors`, `update.js` schedules, `start.js` rehydration",
-      "acceptance": "Default chase, zone-only aggression, patrol, wander, day/night presence, sleep, shop closure, chatter, pets, allies, walk-off and essential actors. Rendering an NPC is not implementing its behavior. Preserve stable base IDs and transient/guard/pretender distinctions.",
+      "acceptance": "Preserve chase, zone-only aggression, patrol/wander, day/night schedules, sleep/shop closure, chatter, companions/allies, essential actors and stable base versus transient/guard/pretender IDs. Current actor snapshots drive original rigs without owning AI/resources/timers. The two source walk-off writers use the documented visible inside-perimeter departure pads, ordinary physical walking and non-reward despawn; no collision bypass. Fresh/load companion and encounter recovery follow their explicit lifecycle adaptations. Rendering an identity alone is insufficient.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/actor_animation.gd",
@@ -205,7 +205,7 @@
       "id": "basic_combat",
       "name": "Basic combat",
       "source": "`combat.js:aggroNpc/playerAttack/damagePlayer/onNpcDeath`; `npc_ai.js`; `update.js` projectile and combo updates",
-      "acceptance": "Source weapons/reach/cooldowns, random14–22 base damage, high/cart/vulnerability multipliers, hit-stun, iframes, knockback, combo rewards/reset, breakable bottles, wanted-on-peaceful-hit, drops, faction and achievement effects. Lurch is source55HP, slice120HP; no daily respawn/reward substitute may silently become parity.",
+      "acceptance": "Preserve source weapons/reach/cooldowns, floor-based14+random*8 base damage with weapon/high/cart/vulnerability modifiers, hit-stun/iframes/knockback, combo rewards/reset, breakable bottles, wanted on peaceful hits, drops and faction/achievement effects. Source Lurch is55HP with permanent death semantics; no slice120HP or daily reward substitute. Retain the shipped ordinary-fists-kill→pipe precedence quirk and the registered atomic Brendan reward repair. Physics owns real swept wall/contact/LOS results; Combat remains the single damage/reward authority.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/combat_system.gd"
@@ -225,7 +225,7 @@
       "id": "combat_archetypes_projectiles",
       "name": "Combat archetypes/projectiles",
       "source": "`npc_ai.js:updateNpcActors`; `combat.js:spawnProjectile/spawnSwarmerSibling`; `update.js` projectile physics",
-      "acceptance": "Charger windup→fixed-direction lunge→vulnerable recovery; grabber stun; swarmer pair/cap; ranged spacing/aim/throws; fallen-priest two phases; default chase; Brendan taser. Projectile collision and telegraphs need 3D adapters, not a rewrite of reward/status logic.",
+      "acceptance": "Preserve charger windup→fixed lunge→vulnerable recovery, grabber stun, bounded swarmer sibling behavior, ranged spacing/aim/throws, Fallen priest phases, default chase and Brendan taser. Actual 3D projectile sweeps and player/actor contact preserve source damage/cooldown eligibility; contact is not a static-wall block. Telegraph/name/health/status presentation uses current snapshots and real occlusion without changing attacks, rewards, timing or AI steps.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/actor_director.gd",
@@ -245,7 +245,7 @@
       "id": "police_death_and_arrest",
       "name": "Police, death and arrest",
       "source": "`combat.js:manageCops/spawnCopAtEdge/damagePlayer/die/arrestScene`",
-      "acceptance": "Wanted0–3, decay18s (collar multiplier), regular and Brendan spawn rules, radio backup, four-cop cap, dog slowdown and arrest. Death keeps cash/items, HP60/shakes30/cred-10/wanted0; arrest takes floor(70% cash), real rocks, HP40/shakes100. Source death does not explicitly clear high/crash; slice does.",
+      "acceptance": "Preserve wanted0–3,18s decay with equipment modifiers, ordinary/Brendan spawning, radio backup and four-cop cap, dog slowdown and arrest. Death keeps cash/items and live high/crash, sets HP60/shakes30/cred-10 clamped0/wanted0 and returns to Block; arrest removes floor(70%cash) plus real rocks and sets HP40/shakes100. Police removal and encounter abort use the single source authority. Fresh/load ephemeral resets are separate from live death/arrest behavior.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/combat_system.gd",
@@ -306,7 +306,7 @@
       "id": "daily_hustles_and_block_routes",
       "name": "Daily hustles and Block routes",
       "source": "`progression_routes.js:rollHustles/checkHustles/hustleProgress/rollBlockRoute/tryStampBlockRoute`",
-      "acceptance": "Fourteen hustle templates and snapshot progress; three-stop endless routes, early pool, unlock flags, last-stop exclusion, bounded cash/cred, route milestones and office unlock. Route rewards must be one transaction, including freshly rolled next route.",
+      "acceptance": "Fourteen hustle templates use canonical rewards and snapshot progress. Preserve three-stop endless routes, early pool/unlocks/last-stop exclusion, bounded cash/cred, milestones and Office unlock. Route completion including the next route is one transaction. Restore missing/non-array hustles through the existing source-order roll, but preserve an explicit empty array and reject unvalidated saved descriptions/rewards.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/progression_routes.gd"
@@ -327,7 +327,7 @@
       "id": "factions_and_territory",
       "name": "Factions and territory",
       "source": "`factions.js:adjustFaction/applyRep/factionTier/updateTerritory`; all action call sites",
-      "acceptance": "Three independent reputations clamped -50..50; hated≤-10, liked≥10, loved≥25. Price/stock/loan/drop/refusal/ambient/brain/heat effects, territory cash multipliers, greetings and overlapping-zone resolution. Kingdom allegiance is deliberately separate.",
+      "acceptance": "Three independent reputations stay clamped-50..50 with hated≤-10, liked≥10 and loved≥25. Preserve action-site price/stock/loan/drop/refusal/ambient effects, territory brain/heat/cash multipliers, greetings and overlapping-zone resolution. Kingdom allegiance remains separate. The documented whole territory tuple resets on3D fresh/load; the border presenter reads it without changing gameplay clocks or inventing a second greeting timer.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/game_state.gd",
@@ -370,7 +370,7 @@
       "id": "kingdom_and_endless_succession",
       "name": "Kingdom and endless succession",
       "source": "`campaigns.js` kingdom functions/data; `concessions.js` Block royal-static hook",
-      "acceptance": "Owned office +four claims +Tony victory; radio summons; three correction marks then ruler per clan; seals; real Block rock; Emperor phases; folding-chair ending; guarded districts and daily paid pretender. Preserve abort-on-escape/death, save demotion to retry, no duplicate boss payouts and no guard/add/combo farming.",
+      "acceptance": "Preserve eligibility from owned Office, four claims and fallen_king; the installed radio accepts summons. Complete nine correction marks across three clan rulers, collect seals, smoke one real Block rock, then Emperor phases and the folding-chair ending. Preserve guarded districts, post-coronation daily paid pretenders, escape/death abort, load demotion to retry and no duplicate boss/guard/add/combo payouts. Source targets stay authoritative while original mounted marks/seal signs adapt to real3D faces.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/kingdom_campaign.gd",
@@ -392,7 +392,7 @@
       "id": "clock_weather_day_events_and_sleeping",
       "name": "Clock, weather, day events and sleeping",
       "source": "`update.js`; `daily_hideouts.js:resetDailyCounters/fireDayEvents`; `activities.js:blockMenu`; `runtime_ui.js:rollWeather`",
-      "acceptance": "Day3 visitor, day7 silence, day14 inheritance, day30 bus; weather rain/fog, night finds/shop/presence, Price Guy every third day, rent, mom calls/pass, schedules and sleeping. Distinguish active-world clocks from real-wall-time `Date.now` and UI timers; see discrepancy ledger below.",
+      "acceptance": "Preserve Day3 visitor, Day7 absolute-wall silence, Day14 inheritance, Day30 irreversible bus choice, every-third-day Price Guy, rent, Mom calls/pass and schedules. Natural, Block, hideout and Office dawn causes retain their distinct effects and strict sleep dayTime>.3 boundary. Gameplay night remains<.25 or>.75, separate from the visual daylight curve. Distinguish active-world, monotonic callback and Unix timestamp clocks; physically blocked conditional spawns/departures defer without rerolls or duplicate rewards.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/day_system.gd",
@@ -416,7 +416,7 @@
       "id": "hideouts_and_shared_stash",
       "name": "Hideouts and shared stash",
       "source": "`daily_hideouts.js:openHideout/openHideoutChest`; Yuri/Mom offers",
-      "acceptance": "Scrap shed ownership, Mom nightly rent/eviction, discrete rest/sleep, phone reset, shared rocks/copper/cash stash surviving death/arrest. `items` stash array exists but item deposit/withdraw is not wired; do not describe it as a shipped feature. Modal interiors are functional source truth; physical rooms can expose those same actions.",
+      "acceptance": "Preserve scrap shed ownership, Mom nightly rent/eviction, discrete rest/sleep and the apartment phone's ambient-call delay reset. The shared stash, also used by the Office locker, supports rocks/copper/cash and survives death/arrest. Source items[] has no deposit/withdraw transaction. Owned entry panels expose the same modal actions; canonical wall-less hideouts use the documented nonblocking ground hatches rather than invented interior rooms.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/travel_system.gd"
@@ -435,7 +435,7 @@
       "id": "cart_and_bus_travel",
       "name": "Cart and bus travel",
       "source": "`props.js:rideableCart/resetRideableCart`; `neighborhood_b.js:bigguDialogue`; `interactions.js`; `vendors_places.js` bus helpers",
-      "acceptance": "Exactly one rideable cart, mount/dismount, equipment-aware capped speed and cart contact combat. Bus pass acquired via Pinky/Mom; one consumed ride/day; visited/known destinations, combat/wanted restriction and arrival placement. Existing optional bus travel must not be removed by misreading old “no fast travel” prose.",
+      "acceptance": "Exactly one movable parked/mounted cart supports mount/dismount, equipment-aware capped speed and source contact combat with real physical placement. Pinky/Mom supply the pass; optional travel consumes one pass, once/day, using known/visited destinations and source combat/wanted gates. Preserve380ms ride timing and documented safe-arrival/refund behavior. This service is separate from the irreversible Day30 Bus Driver ending and must not be removed by old no-fast-travel prose.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/travel_system.gd",
@@ -523,7 +523,7 @@
       "id": "copper_sites_and_break_ins",
       "name": "Copper sites and break-ins",
       "source": "`props.js:COPPER_SITES/BREAKIN_SITES`; `activities.js:startHeist/heistStage`",
-      "acceptance": "One engine, four copper locations share3/day and2–4 copper; five break-ins use separate2/day counter and fixed small non-copper/non-rock loot. Tool/cred gate before charging attempt; stage-specific choices, lockpick, item/cash costs, failure/death, alternative no-take and exits. Site residents are real dialogue identities even without actor spawns.",
+      "acceptance": "One heist engine serves four copper locations sharing3/day and2–4 copper, plus five break-ins with a separate2/day cap and fixed small non-copper/non-rock loot. Tool/cred gates precede charging an attempt. Preserve stage-specific choices, four-pin lockpick, costs/effects order including fatal entry/getaway, no-take paths and exits. Physical entry uses each exact source expanded rectangle and real facade LOS; later modal choices do not invent repeated entry rays. Retain the documented abandoned-building session latch and V8 puzzle-order compatibility. Site residents have canonical dialogue identities without requiring ordinary actor spawns.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/heist_system.gd",
@@ -545,7 +545,7 @@
       "id": "cooking_heat_minigame",
       "name": "Cooking heat minigame",
       "source": "`heat.js` all domain functions and `COOK_MODES`",
-      "acceptance": "Five modes, packet quantity gates, dirty-first consumption, needle/sweet spot/brain/high effects, lock/auto-burn/600ms reveal, bail consumption and six outcome classes. Real rocks, inventory soap and smokeable soap-rock counter are distinct. Render the bar in Godot; keep mathematical outcomes independently testable.",
+      "acceptance": "Five modes preserve packet gates, dirty-first use, needle/sweet-spot/brain/high effects, source phase overshoot, lock/auto-burn/600ms reveal, bail semantics and six outcomes. Real rocks, inventory soap and smokeable soap-rock counters remain distinct. Presentation renders the actual heat owner; it owns no duplicate timer. Extremely large accepted batches use documented bounded authoritative-RNG chunks with one atomic settlement and deferred lifecycle transitions, without resource caps.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/cooking_system.gd",
@@ -595,7 +595,7 @@
       "id": "communications_possum_and_ambient_events",
       "name": "Communications, Possum and ambient events",
       "source": "`communications.js`, `catalogs.js` phone/chatter tables, `neighborhood_a.js:possumDialogue`, `update.js` timers",
-      "acceptance": "Calls, intro mom tip/proud call, ticker, eight-post feed, public-phone ringing/window/planted cash,29 events, local prophecy pool and optional host bridge fallback, pet possum/revealed cash, garbage truck. Preserve no-network playable fallback; do not add an API-key requirement or other AI NPCs.",
+      "acceptance": "Preserve12 calls, Mom intro/proud paths, ticker, eight-post feed, public-phone ring/window/planted cash,29 world events and garbage truck. Feed/ticker have documented session-global fresh/load continuity and exact silence asymmetries. Possum uses all16 local prophecies and their effects without a network/API-key requirement; the optional source external-host bridge is not required by the approved offline3D scope. Real dog/possum acquisition, release, follow/reveal and shared lockpick use the Companion owner, with documented physical deferral and epoch repairs.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/communications_system.gd",
@@ -616,7 +616,7 @@
       "id": "living_neighborhood_incidents",
       "name": "Living-neighborhood incidents",
       "source": "`incidents.js` scheduler, required-actor checks, six definitions and actor updates",
-      "acceptance": "Mattress, possum inventory, laundromat walkout, Yuri receipt, dry park committee, ticketed luggage. One ephemeral scene, three/day, seen mask, zone/weather/required NPC conditions, combat/script interruption, retained durable history, no rewards/quest/NPC mutation leakage.",
+      "acceptance": "Preserve the six source incidents: mattress, possum inventory, laundromat walkout, Yuri receipt, dry park committee and ticketed luggage. One ephemeral scene, three/day, seen mask/history, zone/weather/required actors and combat/script interruption remain authoritative. Retain the one-time14px mattress bump and temporary paper/wet effects; no cash/quest/reward or canonical actor mutation leakage. Physical corridor reservation precedes source choice/commit and may defer the incident without skipping ordinary simulation or rerolling its selected payload.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/incident_system.gd",
@@ -641,7 +641,7 @@
       "id": "hud_map_guidance_and_presentation",
       "name": "HUD, map, guidance and presentation",
       "source": "`ui/hud.js`, `ui/layout.js`, `runtime_ui.js` inventory/quests, `campaigns.js:currentPrimaryObjective/updateGuidance`, `render/*`",
-      "acceptance": "One current BAD IDEA, urgency/nearest legal smoke target, inventory/equipment/lifetime/achievement panels, quest/faction/route/office/kingdom/recognition/vendor index, feed, full map, name/health/aggro labels, status effects, weather, graffiti/posters, district lights and audio feedback. Replace Canvas render mechanisms while preserving readable information and content.",
+      "acceptance": "Preserve one current BAD IDEA with exact priority/urgency/legal smoke target, I inventory/equipment/lifetime/achievement details, complete Q quest/faction/route/Office/Kingdom/recognition/people-met sections, ticker/feed and the always-visible north-fixed minimap. Source has no separate full-map hotkey or map travel command. Actual projected objective/name/health/telegraph/status cues use safe HUD bounds and occlusion. Original3D weather, wall writing, ownership/Kingdom signs, leash/border, district grade, fixture motion/lights and audio preserve readable information under their documented adaptations. The source known-vendor journal ReferenceError is repaired through live actor ownership.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/full_hud.gd",
@@ -670,7 +670,7 @@
       "id": "persistence_and_recovery",
       "name": "Persistence and recovery",
       "source": "`core/audio_save.js:saveGame/loadGame`; `core/storage.js`; normalizers throughout systems",
-      "acceptance": "Full schema needs all domain state listed below, stable spatial IDs and independent namespace. Persist the result of each paid transition once, await storage, no duplicate rewards, restore essential actors, clear unsafe modal/encounter state and reconcile progress witnesses.",
+      "acceptance": "Schema2 preserves canonical durable domain state and stable IDs in a separate3D namespace, with explicit schema1 migration and safe physical placement. Await native/Web storage, expose failures, serialize pending saves and prevent duplicate paid rewards across restore. Reconcile essential actors, campaign witnesses and conditional intro cash; reset unsafe modal/encounter state according to the registered epoch policy. Preserve raw missing-field decisions for wall layouts and hustle fallback while retaining normalized bounded values—never reinsert untrusted arrays or rewards.",
       "status": "partial",
       "implementation": [
         "game3d/scripts/full_scene.gd",
@@ -692,7 +692,7 @@
       "id": "audio_and_packaging",
       "name": "Audio and packaging",
       "source": "`core/audio_save.js:init_audio_save`; `core/boot.js`; 3D `synth.gd`, `save_store.gd`, export shell/build tools",
-      "acceptance": "Keep input-gated initialization, mute and cached ugly short waveforms; add missing rank/boss/windup/projectile/radio/ambient cues. Retain pinned Godot4.5.1 Compatibility/single-thread Web, hashed game-data pack and capture fallback. Full actor AI/browser save/complete-campaign testing remains required.",
+      "acceptance": "FullScene uses all24 source audio recipes plus the real ambient owner; the original six-sound slice synth stays separate. Preserve actual-input unlock, per-note ready/mute gating, exact source cue parameters/delays and queued wall callbacks across modes/epochs. Document independent cosmetic RNG, eight cached PCM banks and32-voice/256-note bounds; global M includes cooking and the source800ms receipt. Keep pinned Godot4.5.1 Compatibility/single-thread Web, hashed data packs, pointer-lock fallback and isolated native/Web saves. Audible platform behavior, complete progression and the unchanged full-frame budget still require evidence.",
       "status": "integrated",
       "implementation": [
         "game3d/scripts/synth.gd",

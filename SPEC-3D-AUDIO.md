@@ -97,3 +97,18 @@ transitions, bounded saturation, immutable cache reuse, finite PCM and analytic
 envelopes/frequencies/noise bounds, actual gain/duration, reset/epoch behavior and
 unchanged gameplay RNG. Root must integrate and verify native/Web audible controls,
 18s high→8s crash and actual cues before claiming full audio parity.
+
+## Global mute while cooking — 2026-11-18
+
+Source keyboard.js68 handles M before cooking and shows `muted.` / `unmuted.`
+for800ms. FullScene therefore dispatches pressed, non-repeat M after its existing
+readiness/loading guard and before cookmini. Reuse the existing audio ready/muted
+fields and toast/HUD consumer. Do not pump audio wall time, beep, restart voices,
+advance heat/world clocks, consume resources or replace the active menu.
+
+Retain the existing3D title/paused/dialogue/ending mute scope and non-repeat policy;
+only the formerly swallowed cooking input and missing receipt are corrected.
+The source title ignores M and source repeat can toggle it repeatedly; this bounded
+change deliberately preserves the established3D policy for those cases. Loading,
+not-ready, key-up and repeat remain inert. Actual heat input tests verify unchanged
+heat/player/RNG, real cue gating and the exact800ms receipt.

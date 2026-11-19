@@ -1,0 +1,8655 @@
+{
+  "current": 15,
+  "engine": "4.5.1-stable (official)",
+  "events": [
+    {
+      "active_ms": 279.760333333333,
+      "kind": "player_attack",
+      "payload": {
+        "connected": false,
+        "hits": [],
+        "used_weapon": "fists"
+      },
+      "phase": 1,
+      "wall_ms": 78787
+    },
+    {
+      "active_ms": 851.309,
+      "kind": "player_attack",
+      "payload": {
+        "connected": false,
+        "hits": [],
+        "used_weapon": "fists"
+      },
+      "phase": 3,
+      "wall_ms": 80293
+    },
+    {
+      "active_ms": 2187.21366666667,
+      "kind": "toast",
+      "payload": {
+        "text": "+ $10\nyou bend down. the ten dollars is yours now.\n(it was always there.)"
+      },
+      "phase": 5,
+      "wall_ms": 90327
+    },
+    {
+      "active_ms": 2187.21366666667,
+      "kind": "toast",
+      "payload": {
+        "text": "you arrive somewhere by walking. who knew."
+      },
+      "phase": 5,
+      "wall_ms": 90327
+    },
+    {
+      "active_ms": 2187.21366666667,
+      "kind": "gesture",
+      "payload": {
+        "action": "pickup"
+      },
+      "phase": 5,
+      "wall_ms": 90327
+    },
+    {
+      "active_ms": 8366.34044444444,
+      "kind": "cart_changed",
+      "payload": {
+        "cart": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "mounted": true,
+        "target_id": "prop:5"
+      },
+      "phase": 8,
+      "wall_ms": 182726
+    },
+    {
+      "active_ms": 8366.34044444444,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ shopping cart\n+1 speed. you can hit people now."
+      },
+      "phase": 8,
+      "wall_ms": 182726
+    },
+    {
+      "active_ms": 9075.06488888888,
+      "kind": "player_attack",
+      "payload": {
+        "connected": false,
+        "hits": [],
+        "used_weapon": "fists"
+      },
+      "phase": 12,
+      "wall_ms": 237645
+    },
+    {
+      "active_ms": 9956.62482539682,
+      "kind": "cart_changed",
+      "payload": {
+        "cart": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1008.9638671875,
+          "y": 1587.92993164062
+        },
+        "mounted": false,
+        "target_id": "prop:5"
+      },
+      "phase": 15,
+      "wall_ms": 274036
+    },
+    {
+      "active_ms": 9956.62482539682,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 1800,
+        "text": "you abandon the cart.\nit rolls slightly. accuses you."
+      },
+      "phase": 15,
+      "wall_ms": 274036
+    }
+  ],
+  "failures": [],
+  "finished": true,
+  "format": "rock-bottom-web-hands-draft",
+  "hashes": {
+    "res://data/source_content.json": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+    "res://scripts/cart_view.gd": "",
+    "res://scripts/first_person_rig.gd": "",
+    "res://scripts/full_scene.gd": "",
+    "res://tests/boss_acceptance_probe.gd": "",
+    "res://tests/web_hands_probe.gd": ""
+  },
+  "initial": {
+    "actors": 56,
+    "brain": 70,
+    "cart_mounted": false,
+    "cash": 0,
+    "cred": 0,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "fixture": "none",
+    "hp": 100,
+    "inventory": [],
+    "max_hp": 100,
+    "offenses": 0,
+    "rng": 4153385641,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "shakes": 20,
+    "speed": 2.2,
+    "weapon": "fists"
+  },
+  "input_frame_checks_pass": true,
+  "inputs": {
+    "capture_clicks": 0,
+    "clicks": 16,
+    "keys": 21,
+    "motion_frames": 149,
+    "mouse_motion": 184
+  },
+  "overflow": false,
+  "phases": [
+    "idle",
+    "right_attack",
+    "right_recovery",
+    "left_attack",
+    "left_recovery",
+    "pickup",
+    "pickup_recovery",
+    "cart_parked",
+    "cart_mount_level",
+    "cart_down_grip",
+    "cart_roll",
+    "cart_stop",
+    "cart_attack",
+    "cart_regrip",
+    "cart_level_release",
+    "cart_dismount"
+  ],
+  "ready": false,
+  "records": [
+    {
+      "action": "",
+      "active_ms": 171.428,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": false,
+      "envelope": {
+        "farthest_z": -0.693226099014282,
+        "finite": true,
+        "nearest_z": -0.200293242931366,
+        "on_screen": 5397,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 0,
+      "label": "idle",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -8.94069672463527e-10,
+      "png_bytes": 592263,
+      "png_sha256": "2c92c4a5caf4c4ae77fc6117341639fbed2898adf1ea698ef922a9c89fcad8a6",
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 0,
+        "cred": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 2898010883,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 20.1371424,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 78290
+    },
+    {
+      "action": "punch",
+      "active_ms": 315.474333333333,
+      "age": 0.035714,
+      "attack_weapon": "fists",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": false,
+      "envelope": {
+        "farthest_z": -0.882405281066895,
+        "finite": true,
+        "nearest_z": -0.206986099481583,
+        "on_screen": 6079,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [
+        {
+          "active_ms": 279.760333333333,
+          "kind": "player_attack",
+          "payload": {
+            "connected": false,
+            "hits": [],
+            "used_weapon": "fists"
+          },
+          "phase": 1,
+          "wall_ms": 78787
+        }
+      ],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 1,
+      "label": "right_attack",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -8.94069672463527e-10,
+      "png_bytes": 595436,
+      "png_sha256": "032abb7b6bb874877537308695116af5159fcd1169ae0d091c49f2d609f06272",
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 0,
+        "cred": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 2898010883,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 20.2523794666666,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 78852
+    },
+    {
+      "action": "",
+      "active_ms": 727.375666666667,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": false,
+      "envelope": {
+        "farthest_z": -0.693687319755554,
+        "finite": true,
+        "nearest_z": -0.200779616832733,
+        "on_screen": 5401,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 2,
+      "label": "right_recovery",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -8.94069672463527e-10,
+      "png_bytes": 592114,
+      "png_sha256": "8a0ddbcc208448f7733ee162d918bf2953bc1ffa4667309fad3da2dbb52ecdcd",
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 0,
+        "cred": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 2898010883,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 20.5819005333333,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 79725
+    },
+    {
+      "action": "punch",
+      "active_ms": 911.309,
+      "age": 0.06,
+      "attack_weapon": "fists",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": false,
+      "envelope": {
+        "farthest_z": -0.881954550743103,
+        "finite": true,
+        "nearest_z": -0.207024097442627,
+        "on_screen": 6082,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [
+        {
+          "active_ms": 851.309,
+          "kind": "player_attack",
+          "payload": {
+            "connected": false,
+            "hits": [],
+            "used_weapon": "fists"
+          },
+          "phase": 3,
+          "wall_ms": 80293
+        }
+      ],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 3,
+      "label": "left_attack",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -8.94069672463527e-10,
+      "png_bytes": 597287,
+      "png_sha256": "ffd71ce5443d4f644cf523c1be6dfbf2a7f19c9d3e41a89156098254b2f36457",
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 0,
+        "cred": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 2898010883,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 20.7290472,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 80378
+    },
+    {
+      "action": "",
+      "active_ms": 1271.74233333333,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": false,
+      "envelope": {
+        "farthest_z": -0.693687319755554,
+        "finite": true,
+        "nearest_z": -0.200779646635056,
+        "on_screen": 5399,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 4,
+      "label": "left_recovery",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -8.94069672463527e-10,
+      "png_bytes": 593185,
+      "png_sha256": "bd99f6f64821f3eb894041974ce59c8824f651982a8612612fe7690d20b54e58",
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 0,
+        "cred": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 2898010883,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 21.0173938666667,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 81189
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2333.64166666667,
+      "age": 0.075,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.76648998260498,
+        "finite": true,
+        "nearest_z": -0.202029705047607,
+        "on_screen": 5618,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [
+        {
+          "active_ms": 2187.21366666667,
+          "kind": "toast",
+          "payload": {
+            "text": "+ $10\nyou bend down. the ten dollars is yours now.\n(it was always there.)"
+          },
+          "phase": 5,
+          "wall_ms": 90327
+        },
+        {
+          "active_ms": 2187.21366666667,
+          "kind": "toast",
+          "payload": {
+            "text": "you arrive somewhere by walking. who knew."
+          },
+          "phase": 5,
+          "wall_ms": 90327
+        },
+        {
+          "active_ms": 2187.21366666667,
+          "kind": "gesture",
+          "payload": {
+            "action": "pickup"
+          },
+          "phase": 5,
+          "wall_ms": 90327
+        }
+      ],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 5,
+      "label": "pickup",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": 0,
+      "png_bytes": 619922,
+      "png_sha256": "fd03e70b4523405b1ba22a06af99a41e03572cc679c0577b100043a95f4241e7",
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 3179705768,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 21.8669133333333,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 90461
+    },
+    {
+      "action": "",
+      "active_ms": 2770.2941111111,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.693678855895996,
+        "finite": true,
+        "nearest_z": -0.200782299041748,
+        "on_screen": 5396,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 6,
+      "label": "pickup_recovery",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": 0,
+      "png_bytes": 608896,
+      "png_sha256": "b0c2ca5821d9a530c50fa6585de1c31cd3299147073e51ec3d377aa4bd91d7b1",
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 3331326385,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 22.2162352888888,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 117668
+    },
+    {
+      "action": "",
+      "active_ms": 8366.34044444444,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.693950653076172,
+        "finite": true,
+        "nearest_z": -0.200887680053711,
+        "on_screen": 5401,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 7,
+      "label": "cart_parked",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -0.107999995350838,
+      "png_bytes": 533464,
+      "png_sha256": "b92f0c28d5191c1458bd802afe147562e4407cd153920caf69442b3442dd7ac7",
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 4216909498,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 26.6930723555555,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 138242
+    },
+    {
+      "action": "",
+      "active_ms": 8455.62544444444,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {},
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.693368911743164,
+        "finite": true,
+        "nearest_z": -0.200399398803711,
+        "on_screen": 5400,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [
+        {
+          "active_ms": 8366.34044444444,
+          "kind": "cart_changed",
+          "payload": {
+            "cart": {
+              "h": 20,
+              "type": "cart",
+              "w": 24,
+              "x": 1000,
+              "y": 1600
+            },
+            "mounted": true,
+            "target_id": "prop:5"
+          },
+          "phase": 8,
+          "wall_ms": 182726
+        },
+        {
+          "active_ms": 8366.34044444444,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ shopping cart\n+1 speed. you can hit people now."
+          },
+          "phase": 8,
+          "wall_ms": 182726
+        }
+      ],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 8,
+      "label": "cart_mount_level",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": 0,
+      "png_bytes": 518699,
+      "png_sha256": "06f7b1b53f547ea831949ae0f75b96e4d1fec27499a5dbe2bcf00882cdc7893c",
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 427858428,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 26.7645003555555,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 182913
+    },
+    {
+      "action": "",
+      "active_ms": 8697.2901111111,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {
+          "left": 0.00000270003124569484,
+          "right": 2.38418579101562e-7
+        },
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [
+          "left",
+          "right"
+        ],
+        "wheel_angle": 0
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.782215118408203,
+        "finite": true,
+        "nearest_z": -0.343103408813477,
+        "on_screen": 6032,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 9,
+      "label": "cart_down_grip",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -0.549999911338091,
+      "png_bytes": 589348,
+      "png_sha256": "463db4e94cecda4d58fcebd55ada12d799d5b494b90a2f16f1d28241ee1cd10e",
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 3487180194,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 26.9578320888888,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 183608
+    },
+    {
+      "action": "",
+      "active_ms": 8858.0031111111,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {
+          "left": 0.000003814697265625,
+          "right": 0.00000191107028513215
+        },
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [
+          "left",
+          "right"
+        ],
+        "wheel_angle": 2.65070009314135
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.782217025756836,
+        "finite": true,
+        "nearest_z": -0.343103408813477,
+        "on_screen": 6032,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 10,
+      "label": "cart_roll",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -0.549999911338091,
+      "png_bytes": 562830,
+      "png_sha256": "7cb69698d109a79cc3da2dd7876bb8274ee100c7aa762ddbf467f4bbfb869549",
+      "roll": {
+        "metres": 1.16140484809875,
+        "wheel_after": 2.65070009314135,
+        "wheel_before": 0
+      },
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 1649633433,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 27.0864024888888,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 223322
+    },
+    {
+      "action": "",
+      "active_ms": 8976.05766666666,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {
+          "left": 0.000003814697265625,
+          "right": 0.00000191107028513215
+        },
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [
+          "left",
+          "right"
+        ],
+        "wheel_angle": 2.65070009314135
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.782217025756836,
+        "finite": true,
+        "nearest_z": -0.343103408813477,
+        "on_screen": 6032,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 11,
+      "label": "cart_stop",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -0.549999911338091,
+      "png_bytes": 562837,
+      "png_sha256": "7bc0f0a11cd51d4dcd87bd3b40a4db48fd4ad5520474bf7d6fbbf5441f3ace58",
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 1649633433,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 27.1808461333333,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 223806
+    },
+    {
+      "action": "punch",
+      "active_ms": 9110.58033333333,
+      "age": 0.0355154444444444,
+      "attack_weapon": "fists",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {
+          "left": 0.000003814697265625,
+          "right": 0.20435257256031
+        },
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [
+          "left",
+          "right"
+        ],
+        "wheel_angle": 2.65070009314135
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.882753372192383,
+        "finite": true,
+        "nearest_z": -0.343107223510742,
+        "on_screen": 6190,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [
+        {
+          "active_ms": 9075.06488888888,
+          "kind": "player_attack",
+          "payload": {
+            "connected": false,
+            "hits": [],
+            "used_weapon": "fists"
+          },
+          "phase": 12,
+          "wall_ms": 237645
+        }
+      ],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 12,
+      "label": "cart_attack",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -0.549999911338091,
+      "png_bytes": 568520,
+      "png_sha256": "2d1a693693d9c1b4d4d153a4f9fcbcf2c0356a4bb4660745cf1a03a7de98bbb5",
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 3396284979,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 27.2884642666666,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 237697
+    },
+    {
+      "action": "",
+      "active_ms": 9508.19638095237,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {
+          "left": 0.000003814697265625,
+          "right": 0.00000191107028513215
+        },
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [
+          "left",
+          "right"
+        ],
+        "wheel_angle": 2.65070009314135
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.782217025756836,
+        "finite": true,
+        "nearest_z": -0.343103408813477,
+        "on_screen": 6032,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 13,
+      "label": "cart_regrip",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": -0.549999911338091,
+      "png_bytes": 563327,
+      "png_sha256": "3453ffac8e76e2f18204176c2d8435af90cab70cac26da8e44688bee7565ab47",
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 3396284979,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 27.6065571047618,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 248648
+    },
+    {
+      "action": "",
+      "active_ms": 9686.76638095237,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": true,
+        "grip_error": {},
+        "layer": 0,
+        "mounted": true,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1000,
+          "y": 1600
+        },
+        "targets": [],
+        "wheel_angle": 2.65070009314135
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.693145751953125,
+        "finite": true,
+        "nearest_z": -0.200206756591797,
+        "on_screen": 5397,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 14,
+      "label": "cart_level_release",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": 0,
+      "png_bytes": 509721,
+      "png_sha256": "fe02650c7fa5eadd40330a6467c93c7e189a095a6b40c93a00f9e69f449f50ae",
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": true,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 110,
+        "offenses": 0,
+        "rng": 3104821750,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 27.7494131047618,
+        "speed": 3.7,
+        "weapon": "fists"
+      },
+      "wall_ms": 273393
+    },
+    {
+      "action": "",
+      "active_ms": 10476.8914920635,
+      "age": 0,
+      "attack_weapon": "",
+      "camera_near": 0.0599999986588955,
+      "cart": {
+        "clear": false,
+        "grip_error": {},
+        "layer": 1,
+        "mounted": false,
+        "offset": "(0.0, 0.0, 0.0)",
+        "record": {
+          "h": 20,
+          "type": "cart",
+          "w": 24,
+          "x": 1008.9638671875,
+          "y": 1587.92993164062
+        },
+        "targets": [],
+        "wheel_angle": 0
+      },
+      "cash_collected": true,
+      "envelope": {
+        "farthest_z": -0.69383430480957,
+        "finite": true,
+        "nearest_z": -0.200935363769531,
+        "on_screen": 5396,
+        "vertices": 6512
+      },
+      "errors": [],
+      "events": [
+        {
+          "active_ms": 9956.62482539682,
+          "kind": "cart_changed",
+          "payload": {
+            "cart": {
+              "h": 20,
+              "type": "cart",
+              "w": 24,
+              "x": 1008.9638671875,
+              "y": 1587.92993164062
+            },
+            "mounted": false,
+            "target_id": "prop:5"
+          },
+          "phase": 15,
+          "wall_ms": 274036
+        },
+        {
+          "active_ms": 9956.62482539682,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 1800,
+            "text": "you abandon the cart.\nit rolls slightly. accuses you."
+          },
+          "phase": 15,
+          "wall_ms": 274036
+        }
+      ],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "hands_visible": true,
+      "index": 15,
+      "label": "cart_dismount",
+      "mode": "playing",
+      "mouse_captured": false,
+      "pass": true,
+      "pitch": 0,
+      "png_bytes": 517556,
+      "png_sha256": "b7d11dc00a729e80d516098779067bc787830bd136c51b21de5f0e176b279dd2",
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "summary": {
+        "actors": 56,
+        "brain": 70,
+        "cart_mounted": false,
+        "cash": 10,
+        "cred": 1,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "hp": 100,
+        "inventory": [],
+        "max_hp": 100,
+        "offenses": 0,
+        "rng": 1524554694,
+        "rocks": 0,
+        "rocks_smoked": 0,
+        "shakes": 28.3815131936507,
+        "speed": 2.2,
+        "weapon": "fists"
+      },
+      "wall_ms": 274554
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "replacements": 0,
+  "requests": 16,
+  "samples": [
+    {
+      "action": "",
+      "active_ms": 17.857,
+      "age": 0,
+      "phase": 0,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 77684,
+      "wrists": {
+        "1": [
+          0.293640524148941,
+          -0.422170877456665,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.300033658742905,
+          -0.434210300445557,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 117.857,
+      "age": 0,
+      "phase": 0,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78213,
+      "wrists": {
+        "1": [
+          0.292965441942215,
+          -0.422545552253723,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.30013507604599,
+          -0.433994770050049,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 171.428,
+      "age": 0,
+      "phase": 0,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78260,
+      "wrists": {
+        "1": [
+          0.293570011854172,
+          -0.421833157539368,
+          -0.537007689476013
+        ],
+        "-1": [
+          -0.300212681293488,
+          -0.433938384056091,
+          -0.520292639732361
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 189.285,
+      "age": 0,
+      "phase": 1,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78663,
+      "wrists": {
+        "1": [
+          0.29344853758812,
+          -0.421892881393433,
+          -0.537135243415833
+        ],
+        "-1": [
+          -0.300209105014801,
+          -0.433867573738098,
+          -0.520419180393219
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 207.142,
+      "age": 0,
+      "phase": 1,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78695,
+      "wrists": {
+        "1": [
+          0.293280571699142,
+          -0.422003507614136,
+          -0.537227809429169
+        ],
+        "-1": [
+          -0.300090730190277,
+          -0.433684706687927,
+          -0.520510971546173
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 224.999,
+      "age": 0,
+      "phase": 1,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78725,
+      "wrists": {
+        "1": [
+          0.293161004781723,
+          -0.422068953514099,
+          -0.537294924259186
+        ],
+        "-1": [
+          -0.299883157014847,
+          -0.433414936065674,
+          -0.520577549934387
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 251.871333333328,
+      "age": 0,
+      "phase": 1,
+      "side": 0,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78755,
+      "wrists": {
+        "1": [
+          0.293099015951157,
+          -0.422054409980774,
+          -0.53736275434494
+        ],
+        "-1": [
+          -0.299669146537781,
+          -0.433110356330872,
+          -0.520644843578339
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 279.760333333333,
+      "age": 0,
+      "phase": 1,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78790,
+      "wrists": {
+        "1": [
+          0.238049954175949,
+          -0.35034167766571,
+          -0.615765929222107
+        ],
+        "-1": [
+          -0.297128438949585,
+          -0.417898178100586,
+          -0.523685455322266
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 315.474333333333,
+      "age": 0.035714,
+      "phase": 1,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 78827,
+      "wrists": {
+        "1": [
+          0.120575994253159,
+          -0.198937892913818,
+          -0.777768194675446
+        ],
+        "-1": [
+          -0.288982510566711,
+          -0.38150954246521,
+          -0.533117532730103
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 333.331333333333,
+      "age": 0.053571,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79282,
+      "wrists": {
+        "1": [
+          0.120742470026016,
+          -0.19873058795929,
+          -0.777777552604675
+        ],
+        "-1": [
+          -0.28899484872818,
+          -0.381466031074524,
+          -0.533126950263977
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 351.188333333333,
+      "age": 0.071428,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79313,
+      "wrists": {
+        "1": [
+          0.12470468878746,
+          -0.203231334686279,
+          -0.7724649310112
+        ],
+        "-1": [
+          -0.288778126239777,
+          -0.381981730461121,
+          -0.533115684986115
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 372.112999999994,
+      "age": 0.0923526666666609,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79346,
+      "wrists": {
+        "1": [
+          0.139011889696121,
+          -0.221084356307983,
+          -0.752544701099396
+        ],
+        "-1": [
+          -0.288732558488846,
+          -0.384967684745789,
+          -0.532752513885498
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 405.949666666667,
+      "age": 0.126189333333333,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79384,
+      "wrists": {
+        "1": [
+          0.177267640829086,
+          -0.270952343940735,
+          -0.699266195297241
+        ],
+        "-1": [
+          -0.291115462779999,
+          -0.396382927894592,
+          -0.52998274564743
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 441.663666666667,
+      "age": 0.161903333333333,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79418,
+      "wrists": {
+        "1": [
+          0.226567000150681,
+          -0.335768342018127,
+          -0.631249010562897
+        ],
+        "-1": [
+          -0.296323508024216,
+          -0.413854241371155,
+          -0.524834871292114
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 477.377666666667,
+      "age": 0.197617333333333,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79450,
+      "wrists": {
+        "1": [
+          0.270457535982132,
+          -0.391820549964905,
+          -0.570485174655914
+        ],
+        "-1": [
+          -0.299725621938705,
+          -0.427535176277161,
+          -0.521354675292969
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 513.091666666667,
+      "age": 0.233331333333333,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79491,
+      "wrists": {
+        "1": [
+          0.292990952730179,
+          -0.420124053955078,
+          -0.538420677185059
+        ],
+        "-1": [
+          -0.300152063369751,
+          -0.432677984237671,
+          -0.520752608776093
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 548.805666666667,
+      "age": 0,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79526,
+      "wrists": {
+        "1": [
+          0.293286949396133,
+          -0.4212566614151,
+          -0.537471354007721
+        ],
+        "-1": [
+          -0.300047218799591,
+          -0.432612895965576,
+          -0.520752549171448
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 584.519666666667,
+      "age": 0,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79565,
+      "wrists": {
+        "1": [
+          0.29296001791954,
+          -0.421536564826965,
+          -0.5374715924263
+        ],
+        "-1": [
+          -0.299832344055176,
+          -0.432308197021484,
+          -0.520752787590027
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 620.233666666667,
+      "age": 0,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79602,
+      "wrists": {
+        "1": [
+          0.293089777231216,
+          -0.421365976333618,
+          -0.53747171163559
+        ],
+        "-1": [
+          -0.29988768696785,
+          -0.432277798652649,
+          -0.520752906799316
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 655.947666666667,
+      "age": 0,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79637,
+      "wrists": {
+        "1": [
+          0.293219894170761,
+          -0.42120099067688,
+          -0.537471830844879
+        ],
+        "-1": [
+          -0.300392359495163,
+          -0.432701349258423,
+          -0.520752966403961
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 691.661666666667,
+      "age": 0,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79672,
+      "wrists": {
+        "1": [
+          0.293376117944717,
+          -0.421016216278076,
+          -0.537471830844879
+        ],
+        "-1": [
+          -0.300364375114441,
+          -0.432596921920776,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 727.375666666667,
+      "age": 0,
+      "phase": 2,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 79707,
+      "wrists": {
+        "1": [
+          0.293444663286209,
+          -0.420925378799438,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299722582101822,
+          -0.431883692741394,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 744.775666666667,
+      "age": 0,
+      "phase": 3,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80169,
+      "wrists": {
+        "1": [
+          0.293286949396133,
+          -0.421074628829956,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299596667289734,
+          -0.431724786758423,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 769.700999999995,
+      "age": 0,
+      "phase": 3,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80202,
+      "wrists": {
+        "1": [
+          0.292930513620377,
+          -0.421421527862549,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.29983514547348,
+          -0.431918263435364,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 790.609,
+      "age": 0,
+      "phase": 3,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80231,
+      "wrists": {
+        "1": [
+          0.292783349752426,
+          -0.421563267707825,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.300201028585434,
+          -0.432248473167419,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 822.309,
+      "age": 0,
+      "phase": 3,
+      "side": 1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80263,
+      "wrists": {
+        "1": [
+          0.293150216341019,
+          -0.421192288398743,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.300410956144333,
+          -0.432407975196838,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 851.309,
+      "age": 0,
+      "phase": 3,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80293,
+      "wrists": {
+        "1": [
+          0.292512744665146,
+          -0.407930135726929,
+          -0.53642863035202
+        ],
+        "-1": [
+          -0.243363156914711,
+          -0.357612729072571,
+          -0.603418111801147
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 882.809,
+      "age": 0.0315,
+      "phase": 3,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80324,
+      "wrists": {
+        "1": [
+          0.288861721754074,
+          -0.379991173744202,
+          -0.533156514167786
+        ],
+        "-1": [
+          -0.12377467751503,
+          -0.202281713485718,
+          -0.773234605789185
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 911.309,
+      "age": 0.06,
+      "phase": 3,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80351,
+      "wrists": {
+        "1": [
+          0.288357347249985,
+          -0.379902124404907,
+          -0.533151924610138
+        ],
+        "-1": [
+          -0.120898932218552,
+          -0.198622703552246,
+          -0.777287602424622
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 929.409,
+      "age": 0.0781,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80805,
+      "wrists": {
+        "1": [
+          0.288215130567551,
+          -0.381537556648254,
+          -0.533175051212311
+        ],
+        "-1": [
+          -0.127823114395142,
+          -0.207358121871948,
+          -0.767475843429565
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 951.067666666661,
+      "age": 0.0997586666666608,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80834,
+      "wrists": {
+        "1": [
+          0.288546055555344,
+          -0.385468721389771,
+          -0.533405601978302
+        ],
+        "-1": [
+          -0.145971864461899,
+          -0.230498671531677,
+          -0.741780817508698
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 970.942333333334,
+      "age": 0.119633333333333,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80862,
+      "wrists": {
+        "1": [
+          0.289392620325089,
+          -0.39080548286438,
+          -0.533983528614044
+        ],
+        "-1": [
+          -0.169943690299988,
+          -0.261417865753174,
+          -0.707934737205505
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 999.842333333334,
+      "age": 0.148533333333333,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80892,
+      "wrists": {
+        "1": [
+          0.291103810071945,
+          -0.400656938552856,
+          -0.53536719083786
+        ],
+        "-1": [
+          -0.211913108825684,
+          -0.316119313240051,
+          -0.648656845092773
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 1028.24233333333,
+      "age": 0.176933333333333,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80920,
+      "wrists": {
+        "1": [
+          0.292538434267044,
+          -0.410476565361023,
+          -0.536700785160065
+        ],
+        "-1": [
+          -0.252837926149368,
+          -0.369813561439514,
+          -0.590122699737549
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 1060.14233333333,
+      "age": 0.208833333333333,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80952,
+      "wrists": {
+        "1": [
+          0.293257564306259,
+          -0.418389439582825,
+          -0.537401676177979
+        ],
+        "-1": [
+          -0.286981463432312,
+          -0.414739012718201,
+          -0.539876520633698
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 1089.64233333333,
+      "age": 0.238333333333333,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 80981,
+      "wrists": {
+        "1": [
+          0.293223887681961,
+          -0.421277642250061,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299554169178009,
+          -0.431302905082703,
+          -0.520813703536987
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1117.73433333333,
+      "age": 0,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 81011,
+      "wrists": {
+        "1": [
+          0.292971402406693,
+          -0.421576619148254,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299844890832901,
+          -0.431602239608765,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1147.24233333333,
+      "age": 0,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 81039,
+      "wrists": {
+        "1": [
+          0.292901664972305,
+          -0.421689867973328,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.300392836332321,
+          -0.432150363922119,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1178.44233333333,
+      "age": 0,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 81073,
+      "wrists": {
+        "1": [
+          0.29333284497261,
+          -0.421309113502502,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.300433367490768,
+          -0.432195901870728,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1209.24233333333,
+      "age": 0,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 81102,
+      "wrists": {
+        "1": [
+          0.293680101633072,
+          -0.421015858650208,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299978911876678,
+          -0.431751132011414,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1238.87196296296,
+      "age": 0,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 81132,
+      "wrists": {
+        "1": [
+          0.293352037668228,
+          -0.421399712562561,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.29977411031723,
+          -0.431560277938843,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1271.74233333333,
+      "age": 0,
+      "phase": 4,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 81165,
+      "wrists": {
+        "1": [
+          0.292792350053787,
+          -0.422025322914124,
+          -0.537471890449524
+        ],
+        "-1": [
+          -0.299953639507294,
+          -0.431760549545288,
+          -0.520753026008606
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1289.59933333333,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 87255,
+      "wrists": {
+        "1": [
+          0.295114040374756,
+          -0.422075629234314,
+          -0.537509083747864
+        ],
+        "-1": [
+          -0.29771101474762,
+          -0.431875228881836,
+          -0.520712673664093
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1389.59933333333,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 88633,
+      "wrists": {
+        "1": [
+          0.295418977737427,
+          -0.4217768907547,
+          -0.537505626678467
+        ],
+        "-1": [
+          -0.298065632581711,
+          -0.432107329368591,
+          -0.520716786384583
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1489.59933333333,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1050,
+        840
+      ],
+      "wall_ms": 88892,
+      "wrists": {
+        "1": [
+          0.297612249851227,
+          -0.422340750694275,
+          -0.537540316581726
+        ],
+        "-1": [
+          -0.295716822147369,
+          -0.432413697242737,
+          -0.520668506622314
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1589.59933333333,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1063.734375,
+        840.649658203125
+      ],
+      "wall_ms": 89675,
+      "wrists": {
+        "1": [
+          0.299275279045105,
+          -0.417753458023071,
+          -0.53192150592804
+        ],
+        "-1": [
+          -0.296640902757645,
+          -0.436527729034424,
+          -0.526309609413147
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1680.28133333333,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1076.18896484375,
+        841.23876953125
+      ],
+      "wall_ms": 89764,
+      "wrists": {
+        "1": [
+          0.29956042766571,
+          -0.412992835044861,
+          -0.526006102561951
+        ],
+        "-1": [
+          -0.300268799066544,
+          -0.442112803459167,
+          -0.532250761985779
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1768.16933333333,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1088.25988769531,
+        841.809753417969
+      ],
+      "wall_ms": 89847,
+      "wrists": {
+        "1": [
+          0.294696450233459,
+          -0.419792294502258,
+          -0.533327102661133
+        ],
+        "-1": [
+          -0.300330311059952,
+          -0.435932278633118,
+          -0.524919271469116
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1863.61466666666,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1101.36877441406,
+        842.429504394531
+      ],
+      "wall_ms": 89934,
+      "wrists": {
+        "1": [
+          0.290986955165863,
+          -0.430724620819092,
+          -0.546566963195801
+        ],
+        "-1": [
+          -0.297970712184906,
+          -0.426077008247375,
+          -0.511586666107178
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 1955.07266666667,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1113.69152832031,
+        844.939147949219
+      ],
+      "wall_ms": 90016,
+      "wrists": {
+        "1": [
+          0.291735351085663,
+          -0.434845209121704,
+          -0.550816535949707
+        ],
+        "-1": [
+          -0.293869733810425,
+          -0.42218291759491,
+          -0.507289409637451
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2044.35766666667,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1125.72143554688,
+        847.38916015625
+      ],
+      "wall_ms": 90106,
+      "wrists": {
+        "1": [
+          0.29280960559845,
+          -0.42758047580719,
+          -0.542582988739014
+        ],
+        "-1": [
+          -0.298271358013153,
+          -0.429480195045471,
+          -0.51560640335083
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2115.78566666667,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1135.34533691406,
+        849.349182128906
+      ],
+      "wall_ms": 90179,
+      "wrists": {
+        "1": [
+          0.294411897659302,
+          -0.419947743415833,
+          -0.532034397125244
+        ],
+        "-1": [
+          -0.301230013370514,
+          -0.438104867935181,
+          -0.526216506958008
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2187.21366666667,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1144.96923828125,
+        851.309204101562
+      ],
+      "wall_ms": 90256,
+      "wrists": {
+        "1": [
+          0.296734035015106,
+          -0.413663506507874,
+          -0.524739265441895
+        ],
+        "-1": [
+          -0.303714573383331,
+          -0.444724917411804,
+          -0.533525943756104
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2258.64166666667,
+      "age": 0,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 90331,
+      "wrists": {
+        "1": [
+          0.296616315841675,
+          -0.414140701293945,
+          -0.525105953216553
+        ],
+        "-1": [
+          -0.303065299987793,
+          -0.44407331943512,
+          -0.533158779144287
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2333.64166666667,
+      "age": 0.075,
+      "phase": 5,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 90407,
+      "wrists": {
+        "1": [
+          0.230085015296936,
+          -0.426604747772217,
+          -0.603790283203125
+        ],
+        "-1": [
+          -0.301547646522522,
+          -0.438366770744324,
+          -0.525098323822021
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2351.49866666667,
+      "age": 0.092857,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117100,
+      "wrists": {
+        "1": [
+          0.218692302703857,
+          -0.42808985710144,
+          -0.617227554321289
+        ],
+        "-1": [
+          -0.301421463489532,
+          -0.437768697738647,
+          -0.524137020111084
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2369.35566666667,
+      "age": 0.110714,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117143,
+      "wrists": {
+        "1": [
+          0.209948539733887,
+          -0.429325222969055,
+          -0.628058433532715
+        ],
+        "-1": [
+          -0.301099181175232,
+          -0.437090277671814,
+          -0.523388385772705
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2387.21266666667,
+      "age": 0.128571,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117187,
+      "wrists": {
+        "1": [
+          0.203832268714905,
+          -0.430397391319275,
+          -0.635941505432129
+        ],
+        "-1": [
+          -0.30067503452301,
+          -0.436399698257446,
+          -0.522806644439697
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2405.06966666667,
+      "age": 0.146428,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117231,
+      "wrists": {
+        "1": [
+          0.200243830680847,
+          -0.431325316429138,
+          -0.640586376190186
+        ],
+        "-1": [
+          -0.300312459468842,
+          -0.435840845108032,
+          -0.522351264953613
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2422.92666666667,
+      "age": 0.164285,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117287,
+      "wrists": {
+        "1": [
+          0.199177742004395,
+          -0.432019472122192,
+          -0.641815185546875
+        ],
+        "-1": [
+          -0.300121665000916,
+          -0.435507893562317,
+          -0.521998405456543
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2475.02666666667,
+      "age": 0.216385,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117341,
+      "wrists": {
+        "1": [
+          0.211987972259521,
+          -0.43146288394928,
+          -0.626387596130371
+        ],
+        "-1": [
+          -0.300179839134216,
+          -0.435357451438904,
+          -0.521353721618652
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2525.84966666666,
+      "age": 0.267207999999991,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117394,
+      "wrists": {
+        "1": [
+          0.246645450592041,
+          -0.428685784339905,
+          -0.589542388916016
+        ],
+        "-1": [
+          -0.300299465656281,
+          -0.435442924499512,
+          -0.521047592163086
+        ]
+      }
+    },
+    {
+      "action": "pickup",
+      "active_ms": 2575.84966666666,
+      "age": 0.317207999999991,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117440,
+      "wrists": {
+        "1": [
+          0.290890574455261,
+          -0.425167798995972,
+          -0.540331363677979
+        ],
+        "-1": [
+          -0.300258219242096,
+          -0.435443043708801,
+          -0.520899295806885
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2625.84966666666,
+      "age": 0,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117495,
+      "wrists": {
+        "1": [
+          0.293143272399902,
+          -0.425085306167603,
+          -0.537399291992188
+        ],
+        "-1": [
+          -0.299627602100372,
+          -0.43488597869873,
+          -0.520825862884521
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2675.84966666666,
+      "age": 0,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117541,
+      "wrists": {
+        "1": [
+          0.292977929115295,
+          -0.425307750701904,
+          -0.537435531616211
+        ],
+        "-1": [
+          -0.300342381000519,
+          -0.435685276985168,
+          -0.520789623260498
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2723.07188888888,
+      "age": 0,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117586,
+      "wrists": {
+        "1": [
+          0.293495535850525,
+          -0.424822807312012,
+          -0.537453174591064
+        ],
+        "-1": [
+          -0.30033552646637,
+          -0.435758233070374,
+          -0.520771503448486
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2770.2941111111,
+      "age": 0,
+      "phase": 6,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 117634,
+      "wrists": {
+        "1": [
+          0.293402194976807,
+          -0.424933075904846,
+          -0.53746223449707
+        ],
+        "-1": [
+          -0.299660325050354,
+          -0.435158133506775,
+          -0.52076244354248
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2788.1511111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 131660,
+      "wrists": {
+        "1": [
+          0.295370817184448,
+          -0.425301790237427,
+          -0.537501811981201
+        ],
+        "-1": [
+          -0.297409534454346,
+          -0.435277938842773,
+          -0.520720481872559
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2806.0081111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 131733,
+      "wrists": {
+        "1": [
+          0.296780109405518,
+          -0.425585627555847,
+          -0.537527084350586
+        ],
+        "-1": [
+          -0.295926094055176,
+          -0.435519695281982,
+          -0.520686149597168
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 2906.0081111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1154.59313964844,
+        853.269226074219
+      ],
+      "wall_ms": 132545,
+      "wrists": {
+        "1": [
+          0.298447132110596,
+          -0.424780607223511,
+          -0.537542939186096
+        ],
+        "-1": [
+          -0.295235633850098,
+          -0.43584144115448,
+          -0.520663499832153
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3006.0081111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1152.46691894531,
+        866.853820800781
+      ],
+      "wall_ms": 132825,
+      "wrists": {
+        "1": [
+          0.298191547393799,
+          -0.423113703727722,
+          -0.535088717937469
+        ],
+        "-1": [
+          -0.296206951141357,
+          -0.437753915786743,
+          -0.523128807544708
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3082.59444444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1150.83911132812,
+        877.257751464844
+      ],
+      "wall_ms": 132888,
+      "wrists": {
+        "1": [
+          0.296308040618896,
+          -0.429229855537415,
+          -0.543146848678589
+        ],
+        "-1": [
+          -0.294272422790527,
+          -0.431252717971802,
+          -0.515024185180664
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3149.26111111109,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1149.42163085938,
+        886.314147949219
+      ],
+      "wall_ms": 132943,
+      "wrists": {
+        "1": [
+          0.290878772735596,
+          -0.435214519500732,
+          -0.549605965614319
+        ],
+        "-1": [
+          -0.295372486114502,
+          -0.42576789855957,
+          -0.50851571559906
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3184.5781111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1148.67102050781,
+        891.11181640625
+      ],
+      "wall_ms": 132985,
+      "wrists": {
+        "1": [
+          0.290114879608154,
+          -0.435831546783447,
+          -0.550513863563538
+        ],
+        "-1": [
+          -0.296207427978516,
+          -0.425479769706726,
+          -0.50759756565094
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3238.1491111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1147.53234863281,
+        898.389221191406
+      ],
+      "wall_ms": 133034,
+      "wrists": {
+        "1": [
+          0.291208267211914,
+          -0.432748794555664,
+          -0.547895431518555
+        ],
+        "-1": [
+          -0.297021865844727,
+          -0.427272081375122,
+          -0.510244846343994
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3288.1491111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1146.46923828125,
+        905.181518554688
+      ],
+      "wall_ms": 133076,
+      "wrists": {
+        "1": [
+          0.291901588439941,
+          -0.428457379341125,
+          -0.541949272155762
+        ],
+        "-1": [
+          -0.298614501953125,
+          -0.431924700737,
+          -0.516245365142822
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3332.59355555555,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1145.52453613281,
+        911.219116210938
+      ],
+      "wall_ms": 133119,
+      "wrists": {
+        "1": [
+          0.293597221374512,
+          -0.422908663749695,
+          -0.535356044769287
+        ],
+        "-1": [
+          -0.300400733947754,
+          -0.437217950820923,
+          -0.522880554199219
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3371.48144444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1144.69775390625,
+        916.501892089844
+      ],
+      "wall_ms": 133162,
+      "wrists": {
+        "1": [
+          0.2953200340271,
+          -0.41802704334259,
+          -0.52991247177124
+        ],
+        "-1": [
+          -0.302326679229736,
+          -0.4420565366745,
+          -0.528345108032227
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3416.7191111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1143.73620605469,
+        922.647277832031
+      ],
+      "wall_ms": 133210,
+      "wrists": {
+        "1": [
+          0.296576023101807,
+          -0.414116859436035,
+          -0.525381803512573
+        ],
+        "-1": [
+          -0.303549766540527,
+          -0.445685863494873,
+          -0.532883167266846
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3460.76644444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1142.79968261719,
+        928.630920410156
+      ],
+      "wall_ms": 133252,
+      "wrists": {
+        "1": [
+          0.296887874603271,
+          -0.412831783294678,
+          -0.523858785629272
+        ],
+        "-1": [
+          -0.303210258483887,
+          -0.446103096008301,
+          -0.534406661987305
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3506.0041111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1141.83813476562,
+        934.776306152344
+      ],
+      "wall_ms": 133295,
+      "wrists": {
+        "1": [
+          0.295923233032227,
+          -0.414661288261414,
+          -0.525650262832642
+        ],
+        "-1": [
+          -0.303291320800781,
+          -0.445115208625793,
+          -0.532614469528198
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3550.05144444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1140.90161132812,
+        940.759948730469
+      ],
+      "wall_ms": 133337,
+      "wrists": {
+        "1": [
+          0.295192718505859,
+          -0.417815804481506,
+          -0.530234813690186
+        ],
+        "-1": [
+          -0.302412509918213,
+          -0.441630005836487,
+          -0.528021812438965
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3595.05144444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1140.11682128906,
+        945.774841308594
+      ],
+      "wall_ms": 133381,
+      "wrists": {
+        "1": [
+          0.294164180755615,
+          -0.421716928482056,
+          -0.535621166229248
+        ],
+        "-1": [
+          -0.300373554229736,
+          -0.436538815498352,
+          -0.522612571716309
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3639.33644444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1138.28295898438,
+        951.581420898438
+      ],
+      "wall_ms": 133420,
+      "wrists": {
+        "1": [
+          0.294867038726807,
+          -0.427542686462402,
+          -0.541910171508789
+        ],
+        "-1": [
+          -0.295524120330811,
+          -0.431358695030212,
+          -0.516278743743896
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3675.05044444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1136.80395507812,
+        956.26416015625
+      ],
+      "wall_ms": 133461,
+      "wrists": {
+        "1": [
+          0.29218864440918,
+          -0.431160569190979,
+          -0.546441555023193
+        ],
+        "-1": [
+          -0.295937061309814,
+          -0.427677273750305,
+          -0.51171350479126
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3719.49488888888,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1134.96350097656,
+        962.091613769531
+      ],
+      "wall_ms": 133502,
+      "wrists": {
+        "1": [
+          0.290877342224121,
+          -0.433502316474915,
+          -0.550137519836426
+        ],
+        "-1": [
+          -0.296111583709717,
+          -0.424780130386353,
+          -0.507978916168213
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3762.82822222221,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1133.16906738281,
+        967.773376464844
+      ],
+      "wall_ms": 133545,
+      "wrists": {
+        "1": [
+          0.290163040161133,
+          -0.43405020236969,
+          -0.550800323486328
+        ],
+        "-1": [
+          -0.296311855316162,
+          -0.424084305763245,
+          -0.507308006286621
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3800.04944444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1131.62768554688,
+        972.653747558594
+      ],
+      "wall_ms": 133585,
+      "wrists": {
+        "1": [
+          0.290352344512939,
+          -0.432501673698425,
+          -0.548891544342041
+        ],
+        "-1": [
+          -0.296409130096436,
+          -0.424949049949646,
+          -0.509237766265869
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3835.76344444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1130.14868164062,
+        977.336486816406
+      ],
+      "wall_ms": 133628,
+      "wrists": {
+        "1": [
+          0.291060924530029,
+          -0.429523587226868,
+          -0.545207023620605
+        ],
+        "-1": [
+          -0.297592163085938,
+          -0.427959561347961,
+          -0.512960433959961
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3882.59444444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1128.20935058594,
+        983.476867675781
+      ],
+      "wall_ms": 133671,
+      "wrists": {
+        "1": [
+          0.292811393737793,
+          -0.423881411552429,
+          -0.538628101348877
+        ],
+        "-1": [
+          -0.300230026245117,
+          -0.434006333351135,
+          -0.519589900970459
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3925.01868686867,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1126.45251464844,
+        989.039428710938
+      ],
+      "wall_ms": 133712,
+      "wrists": {
+        "1": [
+          0.295045852661133,
+          -0.417969346046448,
+          -0.532329559326172
+        ],
+        "-1": [
+          -0.30141019821167,
+          -0.438486099243164,
+          -0.525920867919922
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 3967.61127946126,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1124.68872070312,
+        994.624084472656
+      ],
+      "wall_ms": 133754,
+      "wrists": {
+        "1": [
+          0.295930862426758,
+          -0.414044976234436,
+          -0.5271315574646
+        ],
+        "-1": [
+          -0.302462100982666,
+          -0.442245364189148,
+          -0.531131744384766
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4009.27794612793,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1122.96325683594,
+        1000.08734130859
+      ],
+      "wall_ms": 133797,
+      "wrists": {
+        "1": [
+          0.296182632446289,
+          -0.412061095237732,
+          -0.524252891540527
+        ],
+        "-1": [
+          -0.303671360015869,
+          -0.444897532463074,
+          -0.534012794494629
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4050.04744444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1121.27502441406,
+        1005.43292236328
+      ],
+      "wall_ms": 133838,
+      "wrists": {
+        "1": [
+          0.296899795532227,
+          -0.411164879798889,
+          -0.524150371551514
+        ],
+        "-1": [
+          -0.303804874420166,
+          -0.444955348968506,
+          -0.534114837646484
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4092.47168686868,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1119.51818847656,
+        1010.99548339844
+      ],
+      "wall_ms": 133882,
+      "wrists": {
+        "1": [
+          0.296318054199219,
+          -0.413161993026733,
+          -0.526913166046143
+        ],
+        "-1": [
+          -0.303051471710205,
+          -0.442548990249634,
+          -0.531349182128906
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4134.13835353535,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1117.79272460938,
+        1016.45874023438
+      ],
+      "wall_ms": 133923,
+      "wrists": {
+        "1": [
+          0.294540882110596,
+          -0.417598605155945,
+          -0.531888961791992
+        ],
+        "-1": [
+          -0.301376819610596,
+          -0.438011646270752,
+          -0.526362419128418
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4175.04644444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1116.09875488281,
+        1021.82250976562
+      ],
+      "wall_ms": 133968,
+      "wrists": {
+        "1": [
+          0.292924404144287,
+          -0.422482967376709,
+          -0.53792667388916
+        ],
+        "-1": [
+          -0.299602508544922,
+          -0.432797789573669,
+          -0.520296096801758
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4217.47068686868,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1114.34191894531,
+        1027.38513183594
+      ],
+      "wall_ms": 134007,
+      "wrists": {
+        "1": [
+          0.291373252868652,
+          -0.427370429039001,
+          -0.544065475463867
+        ],
+        "-1": [
+          -0.298686981201172,
+          -0.428386688232422,
+          -0.514111518859863
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4259.13735353535,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1112.61645507812,
+        1032.84838867188
+      ],
+      "wall_ms": 134048,
+      "wrists": {
+        "1": [
+          0.290514945983887,
+          -0.430728793144226,
+          -0.548686504364014
+        ],
+        "-1": [
+          -0.297290325164795,
+          -0.424331903457642,
+          -0.509445190429688
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4300.04544444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1110.92248535156,
+        1038.21215820312
+      ],
+      "wall_ms": 134085,
+      "wrists": {
+        "1": [
+          0.289885520935059,
+          -0.432523131370544,
+          -0.550915241241455
+        ],
+        "-1": [
+          -0.295953750610352,
+          -0.42165195941925,
+          -0.507192611694336
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4335.75944444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1109.44348144531,
+        1042.89489746094
+      ],
+      "wall_ms": 134126,
+      "wrists": {
+        "1": [
+          0.289324283599854,
+          -0.432843208312988,
+          -0.550617694854736
+        ],
+        "-1": [
+          -0.296350479125977,
+          -0.422104597091675,
+          -0.507490634918213
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4382.59444444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1107.50402832031,
+        1049.03576660156
+      ],
+      "wall_ms": 134166,
+      "wrists": {
+        "1": [
+          0.290539741516113,
+          -0.429594993591309,
+          -0.54716682434082
+        ],
+        "-1": [
+          -0.297772407531738,
+          -0.425279974937439,
+          -0.510980606079102
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4424.26111111109,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1105.77856445312,
+        1054.4990234375
+      ],
+      "wall_ms": 134207,
+      "wrists": {
+        "1": [
+          0.292562484741211,
+          -0.424528956413269,
+          -0.541877746582031
+        ],
+        "-1": [
+          -0.298924922943115,
+          -0.429213047027588,
+          -0.516317367553711
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4460.75844444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1104.26721191406,
+        1059.28442382812
+      ],
+      "wall_ms": 134248,
+      "wrists": {
+        "1": [
+          0.29350757598877,
+          -0.420472383499146,
+          -0.536426544189453
+        ],
+        "-1": [
+          -0.300256729125977,
+          -0.433433651924133,
+          -0.52180290222168
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4496.47244444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1102.78820800781,
+        1063.96716308594
+      ],
+      "wall_ms": 134286,
+      "wrists": {
+        "1": [
+          0.294501304626465,
+          -0.416533470153809,
+          -0.531245231628418
+        ],
+        "-1": [
+          -0.301498413085938,
+          -0.437424540519714,
+          -0.527007102966309
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4535.36133333333,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1101.17810058594,
+        1069.06616210938
+      ],
+      "wall_ms": 134327,
+      "wrists": {
+        "1": [
+          0.295966625213623,
+          -0.412504076957703,
+          -0.526729583740234
+        ],
+        "-1": [
+          -0.302866458892822,
+          -0.441174268722534,
+          -0.531532287597656
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4574.25022222221,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1099.56762695312,
+        1074.16516113281
+      ],
+      "wall_ms": 134364,
+      "wrists": {
+        "1": [
+          0.296811103820801,
+          -0.410213351249695,
+          -0.524201393127441
+        ],
+        "-1": [
+          -0.304073333740234,
+          -0.443678379058838,
+          -0.534064292907715
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4613.1391111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1097.95751953125,
+        1079.26416015625
+      ],
+      "wall_ms": 134404,
+      "wrists": {
+        "1": [
+          0.296942234039307,
+          -0.410009741783142,
+          -0.524131774902344
+        ],
+        "-1": [
+          -0.303730964660645,
+          -0.44329035282135,
+          -0.534133911132812
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4652.02799999999,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1096.34704589844,
+        1084.36315917969
+      ],
+      "wall_ms": 134442,
+      "wrists": {
+        "1": [
+          0.296164989471436,
+          -0.412098526954651,
+          -0.526532173156738
+        ],
+        "-1": [
+          -0.302458763122559,
+          -0.440622448921204,
+          -0.531731605529785
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4690.91688888888,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1094.73693847656,
+        1089.46215820312
+      ],
+      "wall_ms": 134482,
+      "wrists": {
+        "1": [
+          0.294500350952148,
+          -0.416211843490601,
+          -0.53095817565918
+        ],
+        "-1": [
+          -0.301815509796143,
+          -0.437480330467224,
+          -0.527297973632812
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4728.61344444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1093.17590332031,
+        1094.40490722656
+      ],
+      "wall_ms": 134521,
+      "wrists": {
+        "1": [
+          0.293380260467529,
+          -0.42036497592926,
+          -0.536401748657227
+        ],
+        "-1": [
+          -0.300804615020752,
+          -0.433420538902283,
+          -0.521829605102539
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4767.50233333332,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1091.56579589844,
+        1099.50390625
+      ],
+      "wall_ms": 134561,
+      "wrists": {
+        "1": [
+          0.292506217956543,
+          -0.424483895301819,
+          -0.542196273803711
+        ],
+        "-1": [
+          -0.298787117004395,
+          -0.428170084953308,
+          -0.515997886657715
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4806.39122222221,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1089.95532226562,
+        1104.60290527344
+      ],
+      "wall_ms": 134601,
+      "wrists": {
+        "1": [
+          0.290697574615479,
+          -0.42905855178833,
+          -0.547109603881836
+        ],
+        "-1": [
+          -0.29723596572876,
+          -0.423876523971558,
+          -0.511039733886719
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4845.2791111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1088.34521484375,
+        1109.70178222656
+      ],
+      "wall_ms": 134637,
+      "wrists": {
+        "1": [
+          0.289364814758301,
+          -0.432166576385498,
+          -0.550236701965332
+        ],
+        "-1": [
+          -0.296505451202393,
+          -0.421388387680054,
+          -0.507878303527832
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4882.59444444442,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1086.79992675781,
+        1114.59448242188
+      ],
+      "wall_ms": 134677,
+      "wrists": {
+        "1": [
+          0.289615631103516,
+          -0.432379603385925,
+          -0.551023483276367
+        ],
+        "-1": [
+          -0.296432018280029,
+          -0.420847773551941,
+          -0.507081031799316
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4920.92777777776,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1085.21276855469,
+        1119.62072753906
+      ],
+      "wall_ms": 134715,
+      "wrists": {
+        "1": [
+          0.29031229019165,
+          -0.430812478065491,
+          -0.549430847167969
+        ],
+        "-1": [
+          -0.297177314758301,
+          -0.422433972358704,
+          -0.508691787719727
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4961.94477777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1083.51428222656,
+        1124.99877929688
+      ],
+      "wall_ms": 134753,
+      "wrists": {
+        "1": [
+          0.291224479675293,
+          -0.427648186683655,
+          -0.545361518859863
+        ],
+        "-1": [
+          -0.297956943511963,
+          -0.425416707992554,
+          -0.51280403137207
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 4999.26111111109,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1081.96899414062,
+        1129.8916015625
+      ],
+      "wall_ms": 134793,
+      "wrists": {
+        "1": [
+          0.292447090148926,
+          -0.423580288887024,
+          -0.540215492248535
+        ],
+        "-1": [
+          -0.298802852630615,
+          -0.429064750671387,
+          -0.517988204956055
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5049.26111111109,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1079.89880371094,
+        1136.44750976562
+      ],
+      "wall_ms": 134833,
+      "wrists": {
+        "1": [
+          0.294126987457275,
+          -0.41778826713562,
+          -0.53275203704834
+        ],
+        "-1": [
+          -0.301599502563477,
+          -0.435944437980652,
+          -0.525495529174805
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5085.75344444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1078.38757324219,
+        1141.23229980469
+      ],
+      "wall_ms": 134873,
+      "wrists": {
+        "1": [
+          0.295798778533936,
+          -0.413565635681152,
+          -0.528080940246582
+        ],
+        "-1": [
+          -0.303050994873047,
+          -0.439958572387695,
+          -0.530181884765625
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5121.46744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1076.90881347656,
+        1145.9150390625
+      ],
+      "wall_ms": 134910,
+      "wrists": {
+        "1": [
+          0.297011852264404,
+          -0.410689473152161,
+          -0.524986267089844
+        ],
+        "-1": [
+          -0.303234100341797,
+          -0.441846966743469,
+          -0.53327751159668
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5159.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1075.33935546875,
+        1150.88439941406
+      ],
+      "wall_ms": 134947,
+      "wrists": {
+        "1": [
+          0.29668140411377,
+          -0.410455584526062,
+          -0.523847579956055
+        ],
+        "-1": [
+          -0.303390502929688,
+          -0.442644715309143,
+          -0.534418106079102
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5196.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1073.78674316406,
+        1155.80126953125
+      ],
+      "wall_ms": 134987,
+      "wrists": {
+        "1": [
+          0.295948028564453,
+          -0.41195023059845,
+          -0.525080680847168
+        ],
+        "-1": [
+          -0.303431987762451,
+          -0.442031264305115,
+          -0.533183097839355
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5234.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1072.23388671875,
+        1160.71813964844
+      ],
+      "wall_ms": 135030,
+      "wrists": {
+        "1": [
+          0.295708656311035,
+          -0.414146780967712,
+          -0.528451919555664
+        ],
+        "-1": [
+          -0.302640914916992,
+          -0.439421415328979,
+          -0.529809951782227
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5271.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1070.91552734375,
+        1164.89270019531
+      ],
+      "wall_ms": 135069,
+      "wrists": {
+        "1": [
+          0.294811248779297,
+          -0.417591094970703,
+          -0.532865524291992
+        ],
+        "-1": [
+          -0.301504611968994,
+          -0.43590235710144,
+          -0.525382995605469
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5309.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1070.02209472656,
+        1167.7216796875
+      ],
+      "wall_ms": 135107,
+      "wrists": {
+        "1": [
+          0.293551683425903,
+          -0.420746207237244,
+          -0.536094665527344
+        ],
+        "-1": [
+          -0.300397872924805,
+          -0.433068990707397,
+          -0.522138595581055
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5346.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1068.87866210938,
+        1172.74951171875
+      ],
+      "wall_ms": 135145,
+      "wrists": {
+        "1": [
+          0.290313959121704,
+          -0.424927353858948,
+          -0.540838241577148
+        ],
+        "-1": [
+          -0.30054759979248,
+          -0.428813099861145,
+          -0.517360687255859
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5384.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1067.73522949219,
+        1177.77734375
+      ],
+      "wall_ms": 135186,
+      "wrists": {
+        "1": [
+          0.289943933486938,
+          -0.42898166179657,
+          -0.545639038085938
+        ],
+        "-1": [
+          -0.298808574676514,
+          -0.425410985946655,
+          -0.512521743774414
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5421.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1066.591796875,
+        1178.80993652344
+      ],
+      "wall_ms": 135222,
+      "wrists": {
+        "1": [
+          0.290534257888794,
+          -0.427716135978699,
+          -0.54419994354248
+        ],
+        "-1": [
+          -0.299703121185303,
+          -0.427200198173523,
+          -0.513973236083984
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5459.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1065.45849609375,
+        1179.36889648438
+      ],
+      "wall_ms": 135261,
+      "wrists": {
+        "1": [
+          0.291178226470947,
+          -0.426336884498596,
+          -0.542898178100586
+        ],
+        "-1": [
+          -0.299568176269531,
+          -0.427742719650269,
+          -0.515288352966309
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5496.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1064.33654785156,
+        1184.40173339844
+      ],
+      "wall_ms": 135300,
+      "wrists": {
+        "1": [
+          0.290209293365479,
+          -0.429981589317322,
+          -0.546784400939941
+        ],
+        "-1": [
+          -0.297675609588623,
+          -0.424180388450623,
+          -0.511364936828613
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5534.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1063.21459960938,
+        1189.4345703125
+      ],
+      "wall_ms": 135339,
+      "wrists": {
+        "1": [
+          0.289416790008545,
+          -0.432085514068604,
+          -0.548439979553223
+        ],
+        "-1": [
+          -0.297483921051025,
+          -0.423434138298035,
+          -0.509695053100586
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5572.60077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1062.07067871094,
+        1194.56579589844
+      ],
+      "wall_ms": 135378,
+      "wrists": {
+        "1": [
+          0.290355205535889,
+          -0.430800676345825,
+          -0.547344207763672
+        ],
+        "-1": [
+          -0.297898769378662,
+          -0.424689650535583,
+          -0.510802268981934
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5611.00077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1060.92175292969,
+        1199.71936035156
+      ],
+      "wall_ms": 135415,
+      "wrists": {
+        "1": [
+          0.291956901550293,
+          -0.42739999294281,
+          -0.543779373168945
+        ],
+        "-1": [
+          -0.298551559448242,
+          -0.427474021911621,
+          -0.514400482177734
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5648.90077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1059.78784179688,
+        1204.80590820312
+      ],
+      "wall_ms": 135454,
+      "wrists": {
+        "1": [
+          0.292834758758545,
+          -0.423840761184692,
+          -0.538700103759766
+        ],
+        "-1": [
+          -0.299727439880371,
+          -0.431575298309326,
+          -0.519515037536621
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5687.70077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1058.626953125,
+        1210.01318359375
+      ],
+      "wall_ms": 135492,
+      "wrists": {
+        "1": [
+          0.294013738632202,
+          -0.419646382331848,
+          -0.533041954040527
+        ],
+        "-1": [
+          -0.301001071929932,
+          -0.436079859733582,
+          -0.525203704833984
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5727.00077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1057.451171875,
+        1215.28759765625
+      ],
+      "wall_ms": 135534,
+      "wrists": {
+        "1": [
+          0.295614719390869,
+          -0.41539466381073,
+          -0.528037071228027
+        ],
+        "-1": [
+          -0.302583694458008,
+          -0.440530300140381,
+          -0.530224800109863
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5764.80077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1056.32019042969,
+        1220.36071777344
+      ],
+      "wall_ms": 135571,
+      "wrists": {
+        "1": [
+          0.296606302261353,
+          -0.412769675254822,
+          -0.524868965148926
+        ],
+        "-1": [
+          -0.303959846496582,
+          -0.443760395050049,
+          -0.533394813537598
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5804.30077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1055.13842773438,
+        1225.66198730469
+      ],
+      "wall_ms": 135610,
+      "wrists": {
+        "1": [
+          0.297034740447998,
+          -0.411949753761292,
+          -0.523931503295898
+        ],
+        "-1": [
+          -0.303706645965576,
+          -0.444143772125244,
+          -0.534332275390625
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5843.30077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1053.97155761719,
+        1230.89611816406
+      ],
+      "wall_ms": 135648,
+      "wrists": {
+        "1": [
+          0.296380996704102,
+          -0.413635969161987,
+          -0.525559425354004
+        ],
+        "-1": [
+          -0.302706241607666,
+          -0.442369103431702,
+          -0.532706260681152
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5882.90077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1052.78674316406,
+        1236.21081542969
+      ],
+      "wall_ms": 135690,
+      "wrists": {
+        "1": [
+          0.294821739196777,
+          -0.417512655258179,
+          -0.529495239257812
+        ],
+        "-1": [
+          -0.302309989929199,
+          -0.439938902854919,
+          -0.528762817382812
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5921.80077777777,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1051.62292480469,
+        1241.43151855469
+      ],
+      "wall_ms": 135726,
+      "wrists": {
+        "1": [
+          0.293911457061768,
+          -0.421540975570679,
+          -0.534860610961914
+        ],
+        "-1": [
+          -0.301187992095947,
+          -0.435995936393738,
+          -0.523378372192383
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5960.68966666666,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1050.45935058594,
+        1246.65075683594
+      ],
+      "wall_ms": 135763,
+      "wrists": {
+        "1": [
+          0.292922019958496,
+          -0.425922632217407,
+          -0.540708541870117
+        ],
+        "-1": [
+          -0.299131393432617,
+          -0.43086040019989,
+          -0.517496109008789
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 5999.57855555554,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1049.29577636719,
+        1251.86999511719
+      ],
+      "wall_ms": 135803,
+      "wrists": {
+        "1": [
+          0.290872097015381,
+          -0.431032180786133,
+          -0.545951843261719
+        ],
+        "-1": [
+          -0.297577381134033,
+          -0.426559090614319,
+          -0.512208938598633
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6038.46744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1048.13220214844,
+        1257.08923339844
+      ],
+      "wall_ms": 135842,
+      "wrists": {
+        "1": [
+          0.28955602645874,
+          -0.434526681900024,
+          -0.549623489379883
+        ],
+        "-1": [
+          -0.296647548675537,
+          -0.423744201660156,
+          -0.50849723815918
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6077.35633333332,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1046.96862792969,
+        1262.30847167969
+      ],
+      "wall_ms": 135880,
+      "wrists": {
+        "1": [
+          0.289698839187622,
+          -0.435296416282654,
+          -0.551050186157227
+        ],
+        "-1": [
+          -0.296475887298584,
+          -0.422917246818542,
+          -0.507059097290039
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6116.75027272726,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1045.7900390625,
+        1267.59545898438
+      ],
+      "wall_ms": 135919,
+      "wrists": {
+        "1": [
+          0.290141105651855,
+          -0.434332370758057,
+          -0.549934387207031
+        ],
+        "-1": [
+          -0.297103881835938,
+          -0.424280762672424,
+          -0.508182525634766
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6156.1442121212,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1044.61145019531,
+        1272.88244628906
+      ],
+      "wall_ms": 135960,
+      "wrists": {
+        "1": [
+          0.290949583053589,
+          -0.431668758392334,
+          -0.546457290649414
+        ],
+        "-1": [
+          -0.297523975372314,
+          -0.426728129386902,
+          -0.511695861816406
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6195.53815151514,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1043.43286132812,
+        1278.16943359375
+      ],
+      "wall_ms": 135996,
+      "wrists": {
+        "1": [
+          0.2921142578125,
+          -0.427687525749207,
+          -0.541271209716797
+        ],
+        "-1": [
+          -0.298508167266846,
+          -0.430674195289612,
+          -0.516929626464844
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6234.93209090908,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1042.25427246094,
+        1283.45642089844
+      ],
+      "wall_ms": 136035,
+      "wrists": {
+        "1": [
+          0.293394327163696,
+          -0.423187732696533,
+          -0.535358428955078
+        ],
+        "-1": [
+          -0.300872325897217,
+          -0.436400651931763,
+          -0.522878646850586
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6274.32603030302,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1041.07568359375,
+        1288.74340820312
+      ],
+      "wall_ms": 136073,
+      "wrists": {
+        "1": [
+          0.295366525650024,
+          -0.418218016624451,
+          -0.529838562011719
+        ],
+        "-1": [
+          -0.302570343017578,
+          -0.441242694854736,
+          -0.528421401977539
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6313.71996969696,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1039.89709472656,
+        1294.03039550781
+      ],
+      "wall_ms": 136113,
+      "wrists": {
+        "1": [
+          0.29681396484375,
+          -0.414579629898071,
+          -0.525764465332031
+        ],
+        "-1": [
+          -0.30295991897583,
+          -0.443983793258667,
+          -0.532501220703125
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6352.60885858584,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1038.73352050781,
+        1299.24963378906
+      ],
+      "wall_ms": 136151,
+      "wrists": {
+        "1": [
+          0.29652214050293,
+          -0.413918375968933,
+          -0.523916244506836
+        ],
+        "-1": [
+          -0.303430557250977,
+          -0.445577025413513,
+          -0.534347534179688
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6391.7341111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1037.56298828125,
+        1304.50061035156
+      ],
+      "wall_ms": 136190,
+      "wrists": {
+        "1": [
+          0.296140909194946,
+          -0.414742469787598,
+          -0.52459716796875
+        ],
+        "-1": [
+          -0.303575992584229,
+          -0.445459127426147,
+          -0.533668518066406
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6431.12805050504,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1036.38439941406,
+        1309.78759765625
+      ],
+      "wall_ms": 136237,
+      "wrists": {
+        "1": [
+          0.296054363250732,
+          -0.41662609577179,
+          -0.527715682983398
+        ],
+        "-1": [
+          -0.302850246429443,
+          -0.443126082420349,
+          -0.530544281005859
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6474.10077777776,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1035.09875488281,
+        1315.55493164062
+      ],
+      "wall_ms": 136287,
+      "wrists": {
+        "1": [
+          0.29457950592041,
+          -0.421217083930969,
+          -0.533197402954102
+        ],
+        "-1": [
+          -0.301424026489258,
+          -0.438802361488342,
+          -0.525049209594727
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6519.50077777776,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1033.74047851562,
+        1321.64794921875
+      ],
+      "wall_ms": 136328,
+      "wrists": {
+        "1": [
+          0.292418003082275,
+          -0.427233815193176,
+          -0.539997100830078
+        ],
+        "-1": [
+          -0.299016952514648,
+          -0.432777523994446,
+          -0.518211364746094
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6561.16744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1032.49389648438,
+        1327.23999023438
+      ],
+      "wall_ms": 136368,
+      "wrists": {
+        "1": [
+          0.290840148925781,
+          -0.432058453559875,
+          -0.545709609985352
+        ],
+        "-1": [
+          -0.297624588012695,
+          -0.428349494934082,
+          -0.512453079223633
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6602.8341111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1031.24731445312,
+        1332.83203125
+      ],
+      "wall_ms": 136407,
+      "wrists": {
+        "1": [
+          0.289893388748169,
+          -0.435265421867371,
+          -0.549673080444336
+        ],
+        "-1": [
+          -0.29733943939209,
+          -0.425981044769287,
+          -0.508445739746094
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6644.50077777776,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1030.00073242188,
+        1338.42407226562
+      ],
+      "wall_ms": 136443,
+      "wrists": {
+        "1": [
+          0.290050268173218,
+          -0.435906767845154,
+          -0.551054000854492
+        ],
+        "-1": [
+          -0.296416759490967,
+          -0.424382567405701,
+          -0.507047653198242
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6686.16744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1028.75415039062,
+        1344.01611328125
+      ],
+      "wall_ms": 136479,
+      "wrists": {
+        "1": [
+          0.290059328079224,
+          -0.435067296028137,
+          -0.549562454223633
+        ],
+        "-1": [
+          -0.296315670013428,
+          -0.425170421600342,
+          -0.508562088012695
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6726.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1027.53649902344,
+        1349.47839355469
+      ],
+      "wall_ms": 136517,
+      "wrists": {
+        "1": [
+          0.290478706359863,
+          -0.432437062263489,
+          -0.545621871948242
+        ],
+        "-1": [
+          -0.297961235046387,
+          -0.429033994674683,
+          -0.512538909912109
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6767.16744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1026.33081054688,
+        1354.88696289062
+      ],
+      "wall_ms": 136557,
+      "wrists": {
+        "1": [
+          0.292643070220947,
+          -0.427163124084473,
+          -0.540090560913086
+        ],
+        "-1": [
+          -0.299612522125244,
+          -0.433769106864929,
+          -0.518112182617188
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6805.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1025.17297363281,
+        1360.08081054688
+      ],
+      "wall_ms": 136597,
+      "wrists": {
+        "1": [
+          0.294546604156494,
+          -0.421986818313599,
+          -0.534269332885742
+        ],
+        "-1": [
+          -0.30100154876709,
+          -0.438393712043762,
+          -0.523971557617188
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6843.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1024.05102539062,
+        1365.11364746094
+      ],
+      "wall_ms": 136633,
+      "wrists": {
+        "1": [
+          0.295297145843506,
+          -0.418369650840759,
+          -0.529170989990234
+        ],
+        "-1": [
+          -0.302202224731445,
+          -0.44242799282074,
+          -0.529087066650391
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6880.86744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1022.92919921875,
+        1370.146484375
+      ],
+      "wall_ms": 136672,
+      "wrists": {
+        "1": [
+          0.296073198318481,
+          -0.415521621704102,
+          -0.52549934387207
+        ],
+        "-1": [
+          -0.302932739257812,
+          -0.445204257965088,
+          -0.532766342163086
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6919.75633333332,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1021.76580810547,
+        1375.36572265625
+      ],
+      "wall_ms": 136709,
+      "wrists": {
+        "1": [
+          0.296731472015381,
+          -0.4139244556427,
+          -0.523876190185547
+        ],
+        "-1": [
+          -0.303770065307617,
+          -0.446957111358643,
+          -0.534391403198242
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6956.26744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1020.67352294922,
+        1380.26586914062
+      ],
+      "wall_ms": 136746,
+      "wrists": {
+        "1": [
+          0.296674251556396,
+          -0.414370059967041,
+          -0.524642944335938
+        ],
+        "-1": [
+          -0.304054260253906,
+          -0.446835279464722,
+          -0.533622741699219
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 6993.66744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1019.5546875,
+        1385.28527832031
+      ],
+      "wall_ms": 136782,
+      "wrists": {
+        "1": [
+          0.296123027801514,
+          -0.416520953178406,
+          -0.52760124206543
+        ],
+        "-1": [
+          -0.302665233612061,
+          -0.443831443786621,
+          -0.530660629272461
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7032.59444444442,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1018.39013671875,
+        1390.50964355469
+      ],
+      "wall_ms": 136824,
+      "wrists": {
+        "1": [
+          0.294548034667969,
+          -0.420753479003906,
+          -0.532464981079102
+        ],
+        "-1": [
+          -0.300840377807617,
+          -0.439341306686401,
+          -0.525781631469727
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7070.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1017.26013183594,
+        1395.5791015625
+      ],
+      "wall_ms": 136861,
+      "wrists": {
+        "1": [
+          0.292524337768555,
+          -0.425854444503784,
+          -0.538076400756836
+        ],
+        "-1": [
+          -0.300002574920654,
+          -0.435421705245972,
+          -0.520147323608398
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7170.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1014.2685546875,
+        1409
+      ],
+      "wall_ms": 137047,
+      "wrists": {
+        "1": [
+          0.291502714157104,
+          -0.430568218231201,
+          -0.54499626159668
+        ],
+        "-1": [
+          -0.29786205291748,
+          -0.42944061756134,
+          -0.513172149658203
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7224.20711111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1012.65789794922,
+        1416.22570800781
+      ],
+      "wall_ms": 137089,
+      "wrists": {
+        "1": [
+          0.289613723754883,
+          -0.434813022613525,
+          -0.549396514892578
+        ],
+        "-1": [
+          -0.29666805267334,
+          -0.425792574882507,
+          -0.50872802734375
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7270.36744444443,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1011.27697753906,
+        1422.42077636719
+      ],
+      "wall_ms": 137128,
+      "wrists": {
+        "1": [
+          0.290155410766602,
+          -0.434204459190369,
+          -0.549472808837891
+        ],
+        "-1": [
+          -0.296965599060059,
+          -0.425995469093323,
+          -0.508651733398438
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7303.70077777776,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1010.27978515625,
+        1426.89440917969
+      ],
+      "wall_ms": 137157,
+      "wrists": {
+        "1": [
+          0.290832757949829,
+          -0.432201147079468,
+          -0.547264099121094
+        ],
+        "-1": [
+          -0.297867298126221,
+          -0.428062796592712,
+          -0.510879516601562
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7337.03411111109,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1009.28259277344,
+        1431.36804199219
+      ],
+      "wall_ms": 137190,
+      "wrists": {
+        "1": [
+          0.291770458221436,
+          -0.429074287414551,
+          -0.543527603149414
+        ],
+        "-1": [
+          -0.298453807830811,
+          -0.430644869804382,
+          -0.514656066894531
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7374.53411111109,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1008.16076660156,
+        1436.40087890625
+      ],
+      "wall_ms": 137227,
+      "wrists": {
+        "1": [
+          0.293015956878662,
+          -0.424747586250305,
+          -0.538213729858398
+        ],
+        "-1": [
+          -0.29927921295166,
+          -0.434320092201233,
+          -0.520008087158203
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7411.20077777776,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1007.06384277344,
+        1441.32189941406
+      ],
+      "wall_ms": 137264,
+      "wrists": {
+        "1": [
+          0.294055461883545,
+          -0.420575737953186,
+          -0.532798767089844
+        ],
+        "-1": [
+          -0.301299571990967,
+          -0.439243316650391,
+          -0.525447845458984
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7447.24044444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1005.98565673828,
+        1446.15869140625
+      ],
+      "wall_ms": 137299,
+      "wrists": {
+        "1": [
+          0.295504331588745,
+          -0.416446924209595,
+          -0.52818489074707
+        ],
+        "-1": [
+          -0.303114891052246,
+          -0.443520426750183,
+          -0.530078887939453
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7482.95473015872,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1004.91723632812,
+        1450.95190429688
+      ],
+      "wall_ms": 137336,
+      "wrists": {
+        "1": [
+          0.297008991241455,
+          -0.413095355033875,
+          -0.525054931640625
+        ],
+        "-1": [
+          -0.303473472595215,
+          -0.445519924163818,
+          -0.533210754394531
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7518.37139682539,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1003.85772705078,
+        1455.705078125
+      ],
+      "wall_ms": 137373,
+      "wrists": {
+        "1": [
+          0.297053337097168,
+          -0.412287354469299,
+          -0.523874282836914
+        ],
+        "-1": [
+          -0.303356170654297,
+          -0.445972442626953,
+          -0.534389495849609
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7553.78806349206,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1002.79821777344,
+        1460.45825195312
+      ],
+      "wall_ms": 137413,
+      "wrists": {
+        "1": [
+          0.296042919158936,
+          -0.413700222969055,
+          -0.524795532226562
+        ],
+        "-1": [
+          -0.303321838378906,
+          -0.445350050926208,
+          -0.533470153808594
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7589.20473015872,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1001.73870849609,
+        1465.21142578125
+      ],
+      "wall_ms": 137447,
+      "wrists": {
+        "1": [
+          0.295497894287109,
+          -0.415736079216003,
+          -0.527673721313477
+        ],
+        "-1": [
+          -0.302752494812012,
+          -0.443113565444946,
+          -0.530590057373047
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7624.62139682539,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        1000.67919921875,
+        1469.96459960938
+      ],
+      "wall_ms": 137482,
+      "wrists": {
+        "1": [
+          0.294970273971558,
+          -0.418599963188171,
+          -0.532060623168945
+        ],
+        "-1": [
+          -0.301717758178711,
+          -0.439581274986267,
+          -0.526191711425781
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7660.03806349206,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        999.619689941406,
+        1474.7177734375
+      ],
+      "wall_ms": 137514,
+      "wrists": {
+        "1": [
+          0.293515205383301,
+          -0.422860264778137,
+          -0.537281036376953
+        ],
+        "-1": [
+          -0.300375938415527,
+          -0.435284972190857,
+          -0.520946502685547
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7695.45473015873,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        998.560180664062,
+        1479.47094726562
+      ],
+      "wall_ms": 137548,
+      "wrists": {
+        "1": [
+          0.291829109191895,
+          -0.427372097969055,
+          -0.542522430419922
+        ],
+        "-1": [
+          -0.298484325408936,
+          -0.43042266368866,
+          -0.515665054321289
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7730.87139682539,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        997.500671386719,
+        1484.22412109375
+      ],
+      "wall_ms": 137584,
+      "wrists": {
+        "1": [
+          0.290542364120483,
+          -0.431052565574646,
+          -0.54698371887207
+        ],
+        "-1": [
+          -0.297004222869873,
+          -0.426397800445557,
+          -0.511167526245117
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7766.28806349206,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        996.441162109375,
+        1488.97729492188
+      ],
+      "wall_ms": 137627,
+      "wrists": {
+        "1": [
+          0.289646625518799,
+          -0.433522343635559,
+          -0.549980163574219
+        ],
+        "-1": [
+          -0.296882629394531,
+          -0.424532771110535,
+          -0.508138656616211
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7801.80711111111,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        995.378601074219,
+        1493.74426269531
+      ],
+      "wall_ms": 137665,
+      "wrists": {
+        "1": [
+          0.289660692214966,
+          -0.4339998960495,
+          -0.551054000854492
+        ],
+        "-1": [
+          -0.296981811523438,
+          -0.423938155174255,
+          -0.507049560546875
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7837.52139682539,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        994.31005859375,
+        1498.53747558594
+      ],
+      "wall_ms": 137702,
+      "wrists": {
+        "1": [
+          0.290395021438599,
+          -0.43256938457489,
+          -0.550018310546875
+        ],
+        "-1": [
+          -0.296562194824219,
+          -0.423975825309753,
+          -0.508102416992188
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7873.23568253968,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        993.241516113281,
+        1503.33068847656
+      ],
+      "wall_ms": 137739,
+      "wrists": {
+        "1": [
+          0.290743350982666,
+          -0.430422186851501,
+          -0.547019958496094
+        ],
+        "-1": [
+          -0.29700231552124,
+          -0.425946116447449,
+          -0.511127471923828
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7908.94996825396,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        992.172973632812,
+        1508.12390136719
+      ],
+      "wall_ms": 137772,
+      "wrists": {
+        "1": [
+          0.291279554367065,
+          -0.427252411842346,
+          -0.542524337768555
+        ],
+        "-1": [
+          -0.2987060546875,
+          -0.429996728897095,
+          -0.515663146972656
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7944.66425396825,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        991.104431152344,
+        1512.91711425781
+      ],
+      "wall_ms": 137805,
+      "wrists": {
+        "1": [
+          0.293154716491699,
+          -0.422304511070251,
+          -0.537239074707031
+        ],
+        "-1": [
+          -0.300386428833008,
+          -0.434461116790771,
+          -0.520988464355469
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 7980.08092063491,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        990.044921875,
+        1517.67028808594
+      ],
+      "wall_ms": 137839,
+      "wrists": {
+        "1": [
+          0.295166015625,
+          -0.417273044586182,
+          -0.532020568847656
+        ],
+        "-1": [
+          -0.301677227020264,
+          -0.438499212265015,
+          -0.526227951049805
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8015.49758730158,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        988.985290527344,
+        1522.42346191406
+      ],
+      "wall_ms": 137872,
+      "wrists": {
+        "1": [
+          0.295970439910889,
+          -0.413922905921936,
+          -0.527637481689453
+        ],
+        "-1": [
+          -0.302740097045898,
+          -0.441852331161499,
+          -0.53062629699707
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8050.91425396825,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        987.925659179688,
+        1527.17663574219
+      ],
+      "wall_ms": 137909,
+      "wrists": {
+        "1": [
+          0.296279191970825,
+          -0.411917209625244,
+          -0.524765014648438
+        ],
+        "-1": [
+          -0.303192138671875,
+          -0.443766355514526,
+          -0.533498764038086
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8086.33092063492,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        986.866027832031,
+        1531.92980957031
+      ],
+      "wall_ms": 137941,
+      "wrists": {
+        "1": [
+          0.29661226272583,
+          -0.41098153591156,
+          -0.523849487304688
+        ],
+        "-1": [
+          -0.303415298461914,
+          -0.444379329681396,
+          -0.534414291381836
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8121.74758730158,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        985.806518554688,
+        1536.68298339844
+      ],
+      "wall_ms": 137979,
+      "wrists": {
+        "1": [
+          0.296440601348877,
+          -0.411720991134644,
+          -0.525035858154297
+        ],
+        "-1": [
+          -0.303761005401611,
+          -0.443963050842285,
+          -0.533233642578125
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8157.16425396825,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        984.746887207031,
+        1541.43615722656
+      ],
+      "wall_ms": 138013,
+      "wrists": {
+        "1": [
+          0.295846939086914,
+          -0.413952946662903,
+          -0.528133392333984
+        ],
+        "-1": [
+          -0.303050518035889,
+          -0.441441416740417,
+          -0.530126571655273
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8192.58092063492,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        983.687377929688,
+        1546.18933105469
+      ],
+      "wall_ms": 138046,
+      "wrists": {
+        "1": [
+          0.294837951660156,
+          -0.417409539222717,
+          -0.532669067382812
+        ],
+        "-1": [
+          -0.301021575927734,
+          -0.436816811561584,
+          -0.525581359863281
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8227.99758730158,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 138083,
+      "wrists": {
+        "1": [
+          0.292951345443726,
+          -0.422163486480713,
+          -0.537937164306641
+        ],
+        "-1": [
+          -0.299434661865234,
+          -0.432235240936279,
+          -0.520284652709961
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8263.41425396825,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 138117,
+      "wrists": {
+        "1": [
+          0.28912353515625,
+          -0.422358989715576,
+          -0.539007186889648
+        ],
+        "-1": [
+          -0.303657054901123,
+          -0.433002948760986,
+          -0.521821975708008
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8298.83092063491,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 138149,
+      "wrists": {
+        "1": [
+          0.291418433189392,
+          -0.421563625335693,
+          -0.538307189941406
+        ],
+        "-1": [
+          -0.302230715751648,
+          -0.433160781860352,
+          -0.521293640136719
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8333.34044444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 138182,
+      "wrists": {
+        "1": [
+          0.29280698299408,
+          -0.42092227935791,
+          -0.537933349609375
+        ],
+        "-1": [
+          -0.301019072532654,
+          -0.432731628417969,
+          -0.521030426025391
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8366.34044444444,
+      "age": 0,
+      "phase": 7,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 138217,
+      "wrists": {
+        "1": [
+          0.292739152908325,
+          -0.421354293823242,
+          -0.53773307800293
+        ],
+        "-1": [
+          -0.300430059432983,
+          -0.43251371383667,
+          -0.520895004272461
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8384.19744444444,
+      "age": 0,
+      "phase": 8,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 182755,
+      "wrists": {
+        "1": [
+          0.29263961315155,
+          -0.421700119972229,
+          -0.536287307739258
+        ],
+        "-1": [
+          -0.300140380859375,
+          -0.432445406913757,
+          -0.519485473632812
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8402.05444444444,
+      "age": 0,
+      "phase": 8,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 182791,
+      "wrists": {
+        "1": [
+          0.292549610137939,
+          -0.421829342842102,
+          -0.536617279052734
+        ],
+        "-1": [
+          -0.300037145614624,
+          -0.432379126548767,
+          -0.519830703735352
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8419.91144444444,
+      "age": 0,
+      "phase": 8,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 182819,
+      "wrists": {
+        "1": [
+          0.292693018913269,
+          -0.421708345413208,
+          -0.536855697631836
+        ],
+        "-1": [
+          -0.299980044364929,
+          -0.432337164878845,
+          -0.520084381103516
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8437.76844444444,
+      "age": 0,
+      "phase": 8,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 182850,
+      "wrists": {
+        "1": [
+          0.292963743209839,
+          -0.421448469161987,
+          -0.537023544311523
+        ],
+        "-1": [
+          -0.300041556358337,
+          -0.432398557662964,
+          -0.520265579223633
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8455.62544444444,
+      "age": 0,
+      "phase": 8,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 182879,
+      "wrists": {
+        "1": [
+          0.293204069137573,
+          -0.421211123466492,
+          -0.537149429321289
+        ],
+        "-1": [
+          -0.300241351127625,
+          -0.432587623596191,
+          -0.520395278930664
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8473.48244444444,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183330,
+      "wrists": {
+        "1": [
+          0.2932049036026,
+          -0.421075820922852,
+          -0.538618087768555
+        ],
+        "-1": [
+          -0.300604581832886,
+          -0.432821273803711,
+          -0.521862030029297
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8491.33944444444,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183357,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.44338321685791,
+          -0.596897125244141
+        ],
+        "-1": [
+          -0.250933527946472,
+          -0.44338321685791,
+          -0.596900939941406
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8509.19644444444,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183385,
+      "wrists": {
+        "1": [
+          0.250933647155762,
+          -0.384276390075684,
+          -0.632905960083008
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.38427734375,
+          -0.632907867431641
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8527.05344444444,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183414,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.322355270385742,
+          -0.663827896118164
+        ],
+        "-1": [
+          -0.250933527946472,
+          -0.322355270385742,
+          -0.663827896118164
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8554.4341111111,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183441,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933766365051,
+          -0.30572509765625,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8590.1481111111,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183479,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933766365051,
+          -0.30572509765625,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8625.8621111111,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183513,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933766365051,
+          -0.30572509765625,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8661.5761111111,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183552,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933766365051,
+          -0.30572509765625,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8697.2901111111,
+      "age": 0,
+      "phase": 9,
+      "side": -1,
+      "source": [
+        982.627746582031,
+        1550.94250488281
+      ],
+      "wall_ms": 183588,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933766365051,
+          -0.30572509765625,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8715.1471111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        982.44287109375,
+        1554.16333007812
+      ],
+      "wall_ms": 223048,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.30572509765625,
+          -0.671058654785156
+        ],
+        "-1": [
+          -0.250933289527893,
+          -0.30572509765625,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8733.0041111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        982.257995605469,
+        1557.38415527344
+      ],
+      "wall_ms": 223080,
+      "wrists": {
+        "1": [
+          0.250933289527893,
+          -0.30572509765625,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933170318604,
+          -0.305723190307617,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8750.8611111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        982.073120117188,
+        1560.60498046875
+      ],
+      "wall_ms": 223108,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305727005004883,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.30572509765625,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8768.7181111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        981.888244628906,
+        1563.82580566406
+      ],
+      "wall_ms": 223143,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305727005004883,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.30572509765625,
+          -0.671056747436523
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8786.5751111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        981.703369140625,
+        1567.04663085938
+      ],
+      "wall_ms": 223175,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8804.4321111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        981.518493652344,
+        1570.26745605469
+      ],
+      "wall_ms": 223203,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305727005004883,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8822.2891111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        981.333618164062,
+        1573.48828125
+      ],
+      "wall_ms": 223229,
+      "wrists": {
+        "1": [
+          0.250933289527893,
+          -0.305727005004883,
+          -0.671056747436523
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.30572509765625,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8840.1461111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        981.148742675781,
+        1576.70910644531
+      ],
+      "wall_ms": 223271,
+      "wrists": {
+        "1": [
+          0.250933527946472,
+          -0.305728912353516,
+          -0.671058654785156
+        ],
+        "-1": [
+          -0.250933527946472,
+          -0.30572509765625,
+          -0.671060562133789
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8858.0031111111,
+      "age": 0,
+      "phase": 10,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 223303,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8880.65377777775,
+      "age": 0,
+      "phase": 11,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 223678,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8902.87599999997,
+      "age": 0,
+      "phase": 11,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 223705,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8925.0982222222,
+      "age": 0,
+      "phase": 11,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 223733,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8953.83544444444,
+      "age": 0,
+      "phase": 11,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 223762,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8976.05766666666,
+      "age": 0,
+      "phase": 11,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 223789,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 8993.91466666666,
+      "age": 0,
+      "phase": 12,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 237527,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9011.77166666666,
+      "age": 0,
+      "phase": 12,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 237556,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9029.62866666666,
+      "age": 0,
+      "phase": 12,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 237584,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9057.00933333333,
+      "age": 0,
+      "phase": 12,
+      "side": -1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 237614,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9075.06488888888,
+      "age": 0,
+      "phase": 12,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 237647,
+      "wrists": {
+        "1": [
+          0.234442114830017,
+          -0.345544815063477,
+          -0.613128662109375
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9110.58033333333,
+      "age": 0.0355154444444444,
+      "phase": 12,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 237679,
+      "wrists": {
+        "1": [
+          0.120025038719177,
+          -0.199468612670898,
+          -0.778100967407227
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9128.43733333333,
+      "age": 0.0533724444444444,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248197,
+      "wrists": {
+        "1": [
+          0.120395302772522,
+          -0.199098587036133,
+          -0.778034210205078
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9146.29433333333,
+      "age": 0.0712294444444444,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248232,
+      "wrists": {
+        "1": [
+          0.124516367912292,
+          -0.203271865844727,
+          -0.772781372070312
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9164.15133333333,
+      "age": 0.0890864444444444,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248263,
+      "wrists": {
+        "1": [
+          0.136191964149475,
+          -0.217401504516602,
+          -0.756534576416016
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9182.00833333333,
+      "age": 0.106943444444444,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248298,
+      "wrists": {
+        "1": [
+          0.15349543094635,
+          -0.239406585693359,
+          -0.731733322143555
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9199.86533333333,
+      "age": 0.124800444444444,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248322,
+      "wrists": {
+        "1": [
+          0.174660921096802,
+          -0.266984939575195,
+          -0.700876235961914
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9217.72233333333,
+      "age": 0.142657444444444,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248348,
+      "wrists": {
+        "1": [
+          0.198057293891907,
+          -0.297691345214844,
+          -0.666496276855469
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9245.10299999999,
+      "age": 0.170038111111111,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248374,
+      "wrists": {
+        "1": [
+          0.234468460083008,
+          -0.345285415649414,
+          -0.612878799438477
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9264.54744444444,
+      "age": 0.189482555555556,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248402,
+      "wrists": {
+        "1": [
+          0.257627725601196,
+          -0.375408172607422,
+          -0.578756332397461
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "punch",
+      "active_ms": 9298.67399999999,
+      "age": 0.223609111111111,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248432,
+      "wrists": {
+        "1": [
+          0.284713745117188,
+          -0.410743713378906,
+          -0.53870964050293
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9334.38799999999,
+      "age": 0,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248471,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9370.10199999999,
+      "age": 0,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248504,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9405.81599999999,
+      "age": 0,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248543,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9441.52999999999,
+      "age": 0,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248573,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9477.24399999999,
+      "age": 0,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248606,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9508.19638095237,
+      "age": 0,
+      "phase": 13,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 248632,
+      "wrists": {
+        "1": [
+          0.250933408737183,
+          -0.305728912353516,
+          -0.671054840087891
+        ],
+        "-1": [
+          -0.250933408737183,
+          -0.305728912353516,
+          -0.671058654785156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9526.05338095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273127,
+      "wrists": {
+        "1": [
+          0.293923497200012,
+          -0.422103881835938,
+          -0.536090850830078
+        ],
+        "-1": [
+          -0.299924492835999,
+          -0.4324951171875,
+          -0.519384384155273
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9543.91038095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273155,
+      "wrists": {
+        "1": [
+          0.293698906898499,
+          -0.422442436218262,
+          -0.535495758056641
+        ],
+        "-1": [
+          -0.299785017967224,
+          -0.432448387145996,
+          -0.518793106079102
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9561.76738095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273179,
+      "wrists": {
+        "1": [
+          0.293360114097595,
+          -0.422910928726196,
+          -0.53474235534668
+        ],
+        "-1": [
+          -0.299671292304993,
+          -0.432441711425781,
+          -0.518043518066406
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9579.62438095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273204,
+      "wrists": {
+        "1": [
+          0.293100476264954,
+          -0.423262000083923,
+          -0.534378051757812
+        ],
+        "-1": [
+          -0.299580097198486,
+          -0.432426452636719,
+          -0.517683029174805
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9597.48138095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273232,
+      "wrists": {
+        "1": [
+          0.293023824691772,
+          -0.423359394073486,
+          -0.534746170043945
+        ],
+        "-1": [
+          -0.299556493759155,
+          -0.432419180870056,
+          -0.518049240112305
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9615.33838095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273260,
+      "wrists": {
+        "1": [
+          0.293118953704834,
+          -0.423248171806335,
+          -0.535497665405273
+        ],
+        "-1": [
+          -0.299653291702271,
+          -0.432502388954163,
+          -0.518795013427734
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9633.19538095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273292,
+      "wrists": {
+        "1": [
+          0.293288588523865,
+          -0.42308247089386,
+          -0.536037445068359
+        ],
+        "-1": [
+          -0.299887180328369,
+          -0.432740569114685,
+          -0.519330978393555
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9651.05238095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273319,
+      "wrists": {
+        "1": [
+          0.293402552604675,
+          -0.422987341880798,
+          -0.536434173583984
+        ],
+        "-1": [
+          -0.300219178199768,
+          -0.433090209960938,
+          -0.519721984863281
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9668.90938095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273345,
+      "wrists": {
+        "1": [
+          0.293435573577881,
+          -0.422983765602112,
+          -0.536720275878906
+        ],
+        "-1": [
+          -0.30048656463623,
+          -0.433384895324707,
+          -0.52000617980957
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9686.76638095237,
+      "age": 0,
+      "phase": 14,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273376,
+      "wrists": {
+        "1": [
+          0.293442845344543,
+          -0.423013806343079,
+          -0.53692626953125
+        ],
+        "-1": [
+          -0.30050802230835,
+          -0.433440446853638,
+          -0.520214080810547
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9704.39149206348,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273759,
+      "wrists": {
+        "1": [
+          0.293587327003479,
+          -0.423043251037598,
+          -0.535711288452148
+        ],
+        "-1": [
+          -0.300111532211304,
+          -0.433193206787109,
+          -0.519002914428711
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9724.39149206348,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273787,
+      "wrists": {
+        "1": [
+          0.293624877929688,
+          -0.423097610473633,
+          -0.535421371459961
+        ],
+        "-1": [
+          -0.299587368965149,
+          -0.43275260925293,
+          -0.518720626831055
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9744.39149206348,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273811,
+      "wrists": {
+        "1": [
+          0.293555617332458,
+          -0.423294067382812,
+          -0.534763336181641
+        ],
+        "-1": [
+          -0.299201965332031,
+          -0.432480812072754,
+          -0.518068313598633
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9764.52482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273836,
+      "wrists": {
+        "1": [
+          0.293290853500366,
+          -0.423648834228516,
+          -0.53449821472168
+        ],
+        "-1": [
+          -0.29928195476532,
+          -0.432642936706543,
+          -0.517801284790039
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9788.22482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273859,
+      "wrists": {
+        "1": [
+          0.292996287345886,
+          -0.424026489257812,
+          -0.534425735473633
+        ],
+        "-1": [
+          -0.299831748008728,
+          -0.433271408081055,
+          -0.517730712890625
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9812.32482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273884,
+      "wrists": {
+        "1": [
+          0.293105959892273,
+          -0.423984527587891,
+          -0.53448486328125
+        ],
+        "-1": [
+          -0.300310373306274,
+          -0.433820724487305,
+          -0.517791748046875
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9835.52482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273906,
+      "wrists": {
+        "1": [
+          0.293633341789246,
+          -0.423538208007812,
+          -0.534395217895508
+        ],
+        "-1": [
+          -0.300255298614502,
+          -0.433843612670898,
+          -0.517702102661133
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9858.42482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273929,
+      "wrists": {
+        "1": [
+          0.294073939323425,
+          -0.423160552978516,
+          -0.534456253051758
+        ],
+        "-1": [
+          -0.299865007400513,
+          -0.43351936340332,
+          -0.517763137817383
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9884.72482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273955,
+      "wrists": {
+        "1": [
+          0.293929934501648,
+          -0.423372268676758,
+          -0.534601211547852
+        ],
+        "-1": [
+          -0.299526333808899,
+          -0.433250427246094,
+          -0.517902374267578
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9906.94704761904,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 273978,
+      "wrists": {
+        "1": [
+          0.293399214744568,
+          -0.423988342285156,
+          -0.534383773803711
+        ],
+        "-1": [
+          -0.299500465393066,
+          -0.433315277099609,
+          -0.517690658569336
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9929.72482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274001,
+      "wrists": {
+        "1": [
+          0.292948126792908,
+          -0.424503326416016,
+          -0.534444808959961
+        ],
+        "-1": [
+          -0.299631357192993,
+          -0.433511734008789,
+          -0.517749786376953
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9956.62482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274037,
+      "wrists": {
+        "1": [
+          0.293006777763367,
+          -0.424467086791992,
+          -0.535003662109375
+        ],
+        "-1": [
+          -0.299791216850281,
+          -0.433713912963867,
+          -0.518304824829102
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 9992.72482539682,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274070,
+      "wrists": {
+        "1": [
+          0.293424606323242,
+          -0.423896789550781,
+          -0.537618637084961
+        ],
+        "-1": [
+          -0.300245761871338,
+          -0.43406867980957,
+          -0.520896911621094
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10022.2248253968,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274096,
+      "wrists": {
+        "1": [
+          0.293401956558228,
+          -0.42387580871582,
+          -0.538946151733398
+        ],
+        "-1": [
+          -0.300575852394104,
+          -0.434389114379883,
+          -0.522214889526367
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10050.0026031746,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274121,
+      "wrists": {
+        "1": [
+          0.293164849281311,
+          -0.42413330078125,
+          -0.539478302001953
+        ],
+        "-1": [
+          -0.30040454864502,
+          -0.43426513671875,
+          -0.522745132446289
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10077.7803809524,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274150,
+      "wrists": {
+        "1": [
+          0.293007612228394,
+          -0.424335479736328,
+          -0.539754867553711
+        ],
+        "-1": [
+          -0.299868226051331,
+          -0.433794021606445,
+          -0.523017883300781
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10105.5581587301,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274180,
+      "wrists": {
+        "1": [
+          0.292835593223572,
+          -0.424546241760254,
+          -0.540096282958984
+        ],
+        "-1": [
+          -0.299731373786926,
+          -0.433717727661133,
+          -0.523353576660156
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10137.9248253968,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274211,
+      "wrists": {
+        "1": [
+          0.292621970176697,
+          -0.42482852935791,
+          -0.540170669555664
+        ],
+        "-1": [
+          -0.300431728363037,
+          -0.434511184692383,
+          -0.523429870605469
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10167.0914920635,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274241,
+      "wrists": {
+        "1": [
+          0.292808294296265,
+          -0.424690246582031,
+          -0.540374755859375
+        ],
+        "-1": [
+          -0.300957083702087,
+          -0.435110092163086,
+          -0.52363395690918
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10196.2581587301,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274270,
+      "wrists": {
+        "1": [
+          0.293363451957703,
+          -0.424195289611816,
+          -0.540414810180664
+        ],
+        "-1": [
+          -0.300596594810486,
+          -0.434834480285645,
+          -0.523672103881836
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10225.046037518,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274297,
+      "wrists": {
+        "1": [
+          0.293472170829773,
+          -0.424138069152832,
+          -0.540496826171875
+        ],
+        "-1": [
+          -0.299968004226685,
+          -0.434284687042236,
+          -0.523752212524414
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10252.9441587301,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274324,
+      "wrists": {
+        "1": [
+          0.292874932289124,
+          -0.424797654151917,
+          -0.540409088134766
+        ],
+        "-1": [
+          -0.299890398979187,
+          -0.434295177459717,
+          -0.523666381835938
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10281.732037518,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274349,
+      "wrists": {
+        "1": [
+          0.292319059371948,
+          -0.425406813621521,
+          -0.540407180786133
+        ],
+        "-1": [
+          -0.300273180007935,
+          -0.434759616851807,
+          -0.523666381835938
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10310.5199163059,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274376,
+      "wrists": {
+        "1": [
+          0.292621254920959,
+          -0.425165891647339,
+          -0.540281295776367
+        ],
+        "-1": [
+          -0.300501823425293,
+          -0.435078024864197,
+          -0.523540496826172
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10339.0913448773,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274401,
+      "wrists": {
+        "1": [
+          0.29338812828064,
+          -0.424543619155884,
+          -0.539234161376953
+        ],
+        "-1": [
+          -0.300419569015503,
+          -0.435155510902405,
+          -0.522502899169922
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10367.6627734487,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274426,
+      "wrists": {
+        "1": [
+          0.293594837188721,
+          -0.42444634437561,
+          -0.53852653503418
+        ],
+        "-1": [
+          -0.300355911254883,
+          -0.435222983360291,
+          -0.521797180175781
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10396.2342020202,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274455,
+      "wrists": {
+        "1": [
+          0.293233752250671,
+          -0.424886226654053,
+          -0.538101196289062
+        ],
+        "-1": [
+          -0.300172567367554,
+          -0.435145616531372,
+          -0.521379470825195
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10424.8056305916,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274482,
+      "wrists": {
+        "1": [
+          0.292962193489075,
+          -0.425216197967529,
+          -0.537851333618164
+        ],
+        "-1": [
+          -0.29976487159729,
+          -0.434827923774719,
+          -0.521127700805664
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10452.2914920635,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274508,
+      "wrists": {
+        "1": [
+          0.292976260185242,
+          -0.425245404243469,
+          -0.537700653076172
+        ],
+        "-1": [
+          -0.29961895942688,
+          -0.434758067131042,
+          -0.520980834960938
+        ]
+      }
+    },
+    {
+      "action": "",
+      "active_ms": 10476.8914920635,
+      "age": 0,
+      "phase": 15,
+      "side": 1,
+      "source": [
+        980.9638671875,
+        1579.92993164062
+      ],
+      "wall_ms": 274533,
+      "wrists": {
+        "1": [
+          0.293022513389587,
+          -0.425229907035828,
+          -0.537620544433594
+        ],
+        "-1": [
+          -0.300012588500977,
+          -0.435213208198547,
+          -0.520900726318359
+        ]
+      }
+    }
+  ],
+  "schema": 1,
+  "scope": "Actual Web frame + synthetic normal input routing. Not trusted hardware input, pointer-lock, audio, weapon catalog, visual approval or frame-budget evidence.",
+  "sequence_errors": [],
+  "size": [
+    1280,
+    720
+  ],
+  "visual_acceptance": false,
+  "walking": [],
+  "web": true,
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "devicePixelRatio": 1,
+    "webgl": {
+      "webgl2": true,
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "vendor": "WebKit",
+      "drawing_buffer": [
+        1280,
+        720
+      ],
+      "attributes": {
+        "alpha": false,
+        "antialias": false,
+        "depth": true,
+        "desynchronized": false,
+        "failIfMajorPerformanceCaveat": false,
+        "powerPreference": "default",
+        "premultipliedAlpha": true,
+        "preserveDrawingBuffer": true,
+        "stencil": false,
+        "xrCompatible": false
+      }
+    },
+    "canvas": [
+      1280,
+      720
+    ],
+    "trusted_event_counts": {
+      "keydown": 0,
+      "keyup": 0,
+      "mousedown": 0,
+      "mouseup": 0,
+      "mousemove": 0,
+      "pointerlock_changes": 0
+    },
+    "pointer_locked": false
+  },
+  "pngs_verified": true,
+  "engine_errors": [],
+  "browser_errors": [],
+  "provenance_note": "Empty exported GDScript hashes are unavailable, not proof. Preserve external frozen project/export hashes. Trusted event counts alone do not prove successful pointer lock or gameplay."
+}

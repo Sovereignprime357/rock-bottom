@@ -1,0 +1,4573 @@
+{
+	"acceptance": true,
+	"captures": [
+		"01_mike_menu",
+		"02_note_1",
+		"03_note_2",
+		"04_note_3",
+		"05_note_4",
+		"06_note_5",
+		"07_note_6",
+		"08_note_7",
+		"09_note_8",
+		"10_actual_result_and_intro_receipt",
+		"11_movement_resumed"
+	],
+	"durable": {
+		"achievement": true,
+		"cash": 24.0,
+		"cred": 5.0,
+		"intro_remember": true,
+		"schema": 2.0
+	},
+	"dwell": {
+		"active_after": 8981.08467340068,
+		"active_before": 8981.08467340068,
+		"after": {
+			"menu": {
+				"body": "next: ↓\n\nyour line:\n",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 1 / 8 ·"
+			},
+			"state": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			}
+		},
+		"before": {
+			"menu": {
+				"body": "next: ↓\n\nyour line:\n",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 1 / 8 ·"
+			},
+			"state": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			}
+		},
+		"wall_ms": 551
+	},
+	"engine": "4.5.1-stable (official)",
+	"entry": {
+		"after": {
+			"achievement": false,
+			"activity": true,
+			"cash": 0,
+			"cred": 0,
+			"hp": 100.0,
+			"intro_remember": false,
+			"intro_tony": false,
+			"modal": true,
+			"mode": "dialogue",
+			"weapon": "fists"
+		},
+		"alive": true,
+		"before": {
+			"achievement": false,
+			"activity": false,
+			"cash": 5,
+			"cred": 0,
+			"hp": 100.0,
+			"intro_remember": false,
+			"intro_tony": false,
+			"modal": true,
+			"mode": "dialogue",
+			"weapon": "fists"
+		},
+		"distance": 58.4117012023926,
+		"reachable": true,
+		"resolved": {
+			"id": "karaoke",
+			"kind": "street"
+		},
+		"rng_after": 2796173706,
+		"rng_before": 3487180194
+	},
+	"events": [
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "activity_started",
+			"payload": {
+				"id": "karaoke"
+			},
+			"wall_ms": 24098
+		},
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "toast",
+			"payload": {
+				"duration_ms": 3000,
+				"text": "· 8/8 hits ·\n+ $24 · + 4 cred\nthe crowd was three people.\ntwo of them were waiting for the bus."
+			},
+			"wall_ms": 25917
+		},
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "achievement",
+			"payload": {
+				"definition": {
+					"flav": "hit a 5x combo.",
+					"name": "NOT A PHASE"
+				},
+				"id": "not_a_phase"
+			},
+			"wall_ms": 25917
+		},
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "news",
+			"payload": {
+				"text": "KARAOKE PERFECTION REPORTED. WITNESSES UNAVAILABLE."
+			},
+			"wall_ms": 25917
+		},
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "activity_completed",
+			"payload": {
+				"hits": 8,
+				"id": "karaoke"
+			},
+			"wall_ms": 25917
+		},
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "quest_completed",
+			"payload": {
+				"id": "intro_remember"
+			},
+			"wall_ms": 25917
+		},
+		{
+			"active_ms": 8981.08467340068,
+			"kind": "toast",
+			"payload": {
+				"text": "you arrive somewhere by walking. who knew."
+			},
+			"wall_ms": 25917
+		}
+	],
+	"failures": [],
+	"final": {
+		"achievement": true,
+		"activity": false,
+		"cash": 24,
+		"cred": 5,
+		"hp": 100.0,
+		"intro_remember": true,
+		"intro_tony": true,
+		"modal": false,
+		"mode": "playing",
+		"weapon": "fists"
+	},
+	"fixture_after": {
+		"player": {
+			"attackCd": 0.0,
+			"attacking": 0.0,
+			"barbAside": false,
+			"brain": 70.0,
+			"brutusDefeated": 0,
+			"cartMounted": false,
+			"cash": 5,
+			"charisma": 0,
+			"copper": 0,
+			"crashT": 0.0,
+			"cred": 0,
+			"credBonus": 0,
+			"dirtySupplies": 0,
+			"equip": {
+				"coat": null,
+				"hat": null,
+				"shoes": null,
+				"tool": null
+			},
+			"facing": "down",
+			"faction": {
+				"scrap": 0,
+				"spiritual": 0,
+				"street": 0
+			},
+			"frame": 0,
+			"frameT": 0.0,
+			"h": 28.0,
+			"hasPossum": false,
+			"hitFlash": 0.0,
+			"hitterHigh": false,
+			"hitters": 0,
+			"hp": 100.0,
+			"iframes": 0.0,
+			"inventory": [],
+			"lifetime": {
+				"arrests": 0,
+				"copsKilled": 0,
+				"dayCount": 0,
+				"officeJobs": 0,
+				"pretendersDefeated": 0,
+				"rocksCooked": 0,
+				"rocksFenced": 0,
+				"rocksSmoked": 0,
+				"routesCompleted": 0,
+				"territoriesClaimed": 0
+			},
+			"maxHp": 100.0,
+			"rank": 0,
+			"rockedT": 0.0,
+			"rocks": 0,
+			"shakes": 20.0,
+			"slowT": 0.0,
+			"soapRocks": 0,
+			"speed": 2.2,
+			"stripeLoyalty": 0,
+			"stunT": 0.0,
+			"supplies": 0,
+			"tonyOffenses": 0,
+			"vx": 0.0,
+			"vy": 0.0,
+			"w": 24.0,
+			"wanted": 0,
+			"wantedDecayMult": 1.0,
+			"wantedT": 0.0,
+			"weapon": "fists",
+			"x": 1050.0,
+			"y": 840.0
+		},
+		"rng": 4153385641,
+		"state": {
+			"achievements": [],
+			"barbAside": false,
+			"blockRoute": null,
+			"bossActive": false,
+			"bossKind": "",
+			"bossNPC": null,
+			"bossPhase": 0,
+			"brutusOlderActive": false,
+			"brutusOlderNPC": null,
+			"brutusOlderPhase": 1,
+			"cam": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"carEngineT": 0.0,
+			"cashPilesCollected": [],
+			"combo": 0,
+			"comboT": 0.0,
+			"concessionClocks": {
+				"choir": {
+					"phase": "closed",
+					"t": 90024.0
+				},
+				"dryer": {
+					"phase": "idle",
+					"t": 79933.0
+				},
+				"seed": 3214060655
+			},
+			"conductorWaitT": 0.0,
+			"counters": {
+				"alleyKills": 0,
+				"barbPacketsToday": 0,
+				"barbVisits": 0,
+				"bigPan": 0,
+				"brendanFirstKill": 0,
+				"brutusDeaths": 0,
+				"churchDonations": 0,
+				"copperStripped": 0,
+				"dumpDives": 0,
+				"gutterInventoryDay": 0,
+				"heistsToday": 0,
+				"introCashEarned": 0,
+				"kombuchaAskDay": 0,
+				"kombuchaComplimentDay": 0,
+				"laundryDone": 0,
+				"lurchDollarDay": 0,
+				"mathInteractions": 0,
+				"pauliCompliments": 0,
+				"paulieFaceDay": 0,
+				"peteCashToday": 0,
+				"peteSold": 0,
+				"philosopherRepDay": 0,
+				"pigeonTrade": 0,
+				"pigeonVisits": 0,
+				"pinkyFirstBuy": 0,
+				"plateStolen": 0,
+				"possumProphecies": 0,
+				"priestDonateDay": 0,
+				"rocksBought": 0,
+				"sherriSpiderDay": 0,
+				"slept": 0,
+				"stripeBetrayed": 0,
+				"stripeFencedToday": 0,
+				"stripeVisits": 0,
+				"tacosEaten": 0
+			},
+			"crownPickup": null,
+			"day": 1,
+			"dayEventActor": null,
+			"dayPendingPlacements": [],
+			"dayTime": 0.35,
+			"discoveredVenues": [],
+			"districtClaims": {
+
+			},
+			"endingContinue": false,
+			"endingSavePromise": null,
+			"flags": {
+				"blueTarpCleared": false,
+				"blueTarpCourtEntered": false,
+				"busPassUsedDay": 0.0,
+				"busRefused": false,
+				"busTaken": false,
+				"canalEntered": false,
+				"cartKeepCleared": false,
+				"cartKeepEntered": false,
+				"churchLoadedDumpsterX": 0.0,
+				"churchLoadedDumpsterY": 0.0,
+				"copperChoirCleared": false,
+				"copperChoirEntered": false,
+				"crownSpotIdx": -1.0,
+				"daveHasCrossword": false,
+				"day14Collected": false,
+				"day14Fired": false,
+				"day30Fired": false,
+				"day3Fired": false,
+				"day7Fired": false,
+				"dumpsterPropaneAwarded": false,
+				"hasCrossword": false,
+				"hasStripePackage": false,
+				"incidentDay": 0.0,
+				"incidentMask": 0.0,
+				"incidentsToday": 0.0,
+				"introDone": false,
+				"lastIncidentId": "",
+				"lovedAmbient_scrap_day": 0.0,
+				"lovedAmbient_spiritual_day": 0.0,
+				"lovedAmbient_street_day": 0.0,
+				"momBusPassDay": 0.0,
+				"momHideoutOwned": false,
+				"momIntroFired": false,
+				"momProudCallDay": 0.0,
+				"momRentDay": 0.0,
+				"oldSchoolEntered": false,
+				"parkEntered": false,
+				"parkNightCashDay": 0.0,
+				"peteToolLocker": null,
+				"priceGuyDay": 0.0,
+				"priceGuyVisits": 0.0,
+				"scrapHideoutOwned": false,
+				"scrapLoanDay": 0.0,
+				"silenceUntilT": 0.0,
+				"skidRowEntered": false,
+				"stripeBetrayed": false,
+				"theLotEntered": false,
+				"throneDitchCleared": false,
+				"throneDitchEntered": false,
+				"trainHopperTalkedTo": false,
+				"trainYardEntered": false,
+				"underpassEntered": false,
+				"warehouseRowEntered": false
+			},
+			"flash": 0.0,
+			"flashColor": "#fff",
+			"freedDogFirstReturn": false,
+			"freedDogFollowT": 0.0,
+			"freedDogT": 0.0,
+			"graffiti": [
+				{
+					"col": "#a89878",
+					"layoutV": 2,
+					"rot": 0.0641895702341571,
+					"sz": 10,
+					"text": "PETE WEIGHED MY SOUL. $1.",
+					"textW": 151,
+					"wallKind": "rightside",
+					"wallW": 348.0,
+					"wallX": 7286.0,
+					"x": 7425.64893853199,
+					"y": 4330.67821815936
+				},
+				{
+					"col": "#a08070",
+					"layoutV": 2,
+					"rot": -0.039488071622327,
+					"sz": 8,
+					"text": "if you are reading this you owe sherri money",
+					"textW": 212,
+					"wallKind": "rightside",
+					"wallW": 368.0,
+					"wallX": 6006.0,
+					"x": 6061.18800742831,
+					"y": 2872.39314381592
+				},
+				{
+					"col": "#a06868",
+					"layoutV": 2,
+					"rot": -0.0138399492809549,
+					"sz": 9,
+					"text": "ECCLESIASTES 1:9",
+					"textW": 87,
+					"wallKind": "rightside",
+					"wallW": 88.0,
+					"wallX": 2726.0,
+					"x": 2726.51599005098,
+					"y": 1781.27002569241
+				},
+				{
+					"col": "#a89878",
+					"layoutV": 2,
+					"rot": 0.0326494945026934,
+					"sz": 10,
+					"text": "DAVE WAS RIGHT ABOUT THE PIGEONS",
+					"textW": 193,
+					"wallKind": "leftside",
+					"wallW": 328.0,
+					"wallX": 6666.0,
+					"x": 6750.52261232422,
+					"y": 375.17969440762
+				},
+				{
+					"col": "#b8706e",
+					"layoutV": 2,
+					"rot": -0.0641663045017049,
+					"sz": 10,
+					"text": "call mom",
+					"textW": 49,
+					"wallKind": "leftside",
+					"wallW": 128.0,
+					"wallX": 2586.0,
+					"x": 2624.99146214686,
+					"y": 1950.27064970555
+				},
+				{
+					"col": "#a89878",
+					"layoutV": 2,
+					"rot": -0.0599394508358091,
+					"sz": 8,
+					"text": "yell louder. larry is listening.",
+					"textW": 154,
+					"wallKind": "rightside",
+					"wallW": 328.0,
+					"wallX": 6666.0,
+					"x": 6721.91811865708,
+					"y": 341.582500763237
+				},
+				{
+					"col": "#a08070",
+					"layoutV": 2,
+					"rot": -0.0385579968290403,
+					"sz": 9,
+					"text": "tony does not blink",
+					"textW": 103,
+					"wallKind": "rightside",
+					"wallW": 408.0,
+					"wallX": 7846.0,
+					"x": 7919.60708705848,
+					"y": 4456.49097514199
+				},
+				{
+					"col": "#d09048",
+					"layoutV": 2,
+					"rot": 0.0502304242551327,
+					"sz": 8,
+					"text": "the wire is copper. probably.",
+					"textW": 140,
+					"wallKind": "leftside",
+					"wallW": 148.0,
+					"wallX": 186.0,
+					"x": 188.628895452246,
+					"y": 644.569960451685
+				},
+				{
+					"col": "#c08038",
+					"layoutV": 2,
+					"rot": 0.0412469946825877,
+					"sz": 9,
+					"text": "yuri's bird is plastic",
+					"textW": 119,
+					"wallKind": "leftside",
+					"wallW": 388.0,
+					"wallX": 5016.0,
+					"x": 5268.05063802097,
+					"y": 505.855136340018
+				},
+				{
+					"col": "#a87038",
+					"layoutV": 2,
+					"rot": 0.0541776481177658,
+					"sz": 8,
+					"text": "the wire is copper. probably.",
+					"textW": 140,
+					"wallKind": "bottom",
+					"wallW": 388.0,
+					"wallX": 5016.0,
+					"x": 5172.8450250905,
+					"y": 679.359121099114
+				},
+				{
+					"col": "#c08038",
+					"layoutV": 2,
+					"rot": 0.0761704171216115,
+					"sz": 10,
+					"text": "DO NOT TRUST THE SCALE",
+					"textW": 133,
+					"wallKind": "bottom",
+					"wallW": 148.0,
+					"wallX": 186.0,
+					"x": 189.913367881905,
+					"y": 709.637708809227
+				},
+				{
+					"col": "#a8b0c8",
+					"layoutV": 2,
+					"rot": -0.0803890491463244,
+					"sz": 8,
+					"text": "kneel where the chalk is",
+					"textW": 116,
+					"wallKind": "bottom",
+					"wallW": 228.0,
+					"wallX": 1686.0,
+					"x": 1708.20220601931,
+					"y": 1541.51229878515
+				},
+				{
+					"col": "#a87038",
+					"layoutV": 2,
+					"rot": 0.0245008894102648,
+					"sz": 10,
+					"text": "pete owes me a dollar from 2009",
+					"textW": 187,
+					"wallKind": "bottom",
+					"wallW": 508.0,
+					"wallX": 3526.0,
+					"x": 3827.78248426318,
+					"y": 711.43197548762
+				},
+				{
+					"col": "#a87a80",
+					"layoutV": 2,
+					"rot": -0.0153384740184993,
+					"sz": 8,
+					"text": "the conductor is real",
+					"textW": 101,
+					"wallKind": "leftside",
+					"wallW": 118.0,
+					"wallX": 2906.0,
+					"x": 2917.03013089229,
+					"y": 1645.49800099432
+				},
+				{
+					"col": "#c08070",
+					"layoutV": 2,
+					"rot": -0.0242824358912185,
+					"sz": 9,
+					"text": "the bus is late",
+					"textW": 82,
+					"wallKind": "rightside",
+					"wallW": 118.0,
+					"wallX": 2906.0,
+					"x": 2916.88851210289,
+					"y": 1654.11833895929
+				},
+				{
+					"col": "#b8706e",
+					"layoutV": 2,
+					"rot": 0.00496154453605413,
+					"sz": 8,
+					"text": "ECCLESIASTES 1:9",
+					"textW": 77,
+					"wallKind": "rightside",
+					"wallW": 88.0,
+					"wallX": 2726.0,
+					"x": 2733.06501003006,
+					"y": 1786.95552462805
+				},
+				{
+					"col": "#88a070",
+					"layoutV": 2,
+					"rot": 0.0126759108016267,
+					"sz": 8,
+					"text": "the conductor is real",
+					"textW": 101,
+					"wallKind": "bottom",
+					"wallW": 348.0,
+					"wallX": 7286.0,
+					"x": 7297.83017411549,
+					"y": 4485.65970076993
+				}
+			],
+			"guidanceT": 0.0,
+			"heat": null,
+			"hideoutStash": {
+				"cash": 0,
+				"copper": 0,
+				"items": [],
+				"rocks": 0
+			},
+			"hitPause": 0.0,
+			"hustleSnapshot": {
+
+			},
+			"hustles": [],
+			"incident": null,
+			"incidentPaperT": 0.0,
+			"incidentT": 43706.9016182795,
+			"incidentWetT": 0.0,
+			"keys": [],
+			"kingdom": {
+				"bossId": "",
+				"defeats": [],
+				"marks": 0,
+				"pretenderDay": 0,
+				"pretenderDefeatedDay": 0,
+				"pretendersDefeated": 0,
+				"stage": "locked"
+			},
+			"kingdomBattle": null,
+			"loadedNpcDeaths": null,
+			"lootedDumpsters": [],
+			"metVendors": [],
+			"mode": "playing",
+			"momTipT": 30000.0,
+			"office": {
+				"claimJob": null,
+				"jobsCompleted": 0,
+				"lastWorkId": "",
+				"orderSerial": 0,
+				"owned": false,
+				"rerollDay": 0,
+				"upgrades": {
+					"cot": false,
+					"desk": false,
+					"generator": false,
+					"locker": false,
+					"radio": false,
+					"route_board": false
+				},
+				"workDay": 0,
+				"workJob": null,
+				"workToday": 0
+			},
+			"phonePropRingT": 0.0,
+			"posters": [
+				{
+					"faction": "scrap",
+					"h": 24,
+					"text": "CASH FOR\nCOPPER",
+					"w": 16,
+					"x": 184.0,
+					"y": 676.633476102725
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "DJ DANGER\nPRESENTS\nA DJ NIGHT",
+					"w": 16,
+					"x": 1641.21891365759,
+					"y": 900.0
+				},
+				{
+					"faction": "spiritual",
+					"h": 24,
+					"text": "THE CHURCH IS\nA BUILDING.\nTHE BUILDING\nIS A CHURCH.",
+					"w": 16,
+					"x": 1728.86675624549,
+					"y": 1530.0
+				},
+				{
+					"faction": "scrap",
+					"h": 24,
+					"text": "ASK ABOUT\nTHE PRICE",
+					"w": 16,
+					"x": 3524.0,
+					"y": 435.657136589289
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "MISSING DOG\n(REWARD)",
+					"w": 16,
+					"x": 2640.0,
+					"y": 1692.45508112945
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "MISSING DOG\n(REWARD)",
+					"w": 16,
+					"x": 2904.0,
+					"y": 1650.73088870617
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "WANTED\nLOOKS JUST\nLIKE YOU",
+					"w": 16,
+					"x": 2700.0,
+					"y": 1936.20807870291
+				},
+				{
+					"faction": "scrap",
+					"h": 24,
+					"text": "PETE'S PAWN\nOPEN ALWAYS",
+					"w": 16,
+					"x": 4464.0,
+					"y": 322.877777833492
+				}
+			],
+			"primaryObjective": null,
+			"propRuntime": [
+				{
+					"color": "#2a3818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 140.0,
+					"y": 1320.0
+				},
+				{
+					"color": "#3a2818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 440.0,
+					"y": 1640.0
+				},
+				{
+					"color": "#2a2818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 1340.0,
+					"y": 1480.0
+				},
+				{
+					"color": "#2a3818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 1620.0,
+					"y": 280.0
+				},
+				{
+					"color": "#2a2828",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 780.0,
+					"y": 240.0
+				},
+				{
+					"color": "#888",
+					"h": 20.0,
+					"type": "cart",
+					"w": 24.0,
+					"x": 1000.0,
+					"y": 1600.0
+				},
+				{
+					"type": "lamp",
+					"x": 740.0,
+					"y": 840.0
+				},
+				{
+					"type": "lamp",
+					"x": 1340.0,
+					"y": 840.0
+				},
+				{
+					"type": "lamp",
+					"x": 1740.0,
+					"y": 1100.0
+				},
+				{
+					"type": "lamp",
+					"x": 240.0,
+					"y": 1100.0
+				},
+				{
+					"type": "lamp",
+					"x": 1600.0,
+					"y": 1700.0
+				},
+				{
+					"type": "lamp",
+					"x": 840.0,
+					"y": 1700.0
+				},
+				{
+					"type": "lamp",
+					"x": 340.0,
+					"y": 560.0
+				},
+				{
+					"type": "lamp",
+					"x": 1500.0,
+					"y": 560.0
+				},
+				{
+					"type": "lamp",
+					"x": 1240.0,
+					"y": 340.0
+				},
+				{
+					"type": "lamp",
+					"x": 1100.0,
+					"y": 1200.0
+				},
+				{
+					"type": "hydrant",
+					"x": 680.0,
+					"y": 920.0
+				},
+				{
+					"type": "hydrant",
+					"x": 1480.0,
+					"y": 1200.0
+				},
+				{
+					"type": "hydrant",
+					"x": 280.0,
+					"y": 1240.0
+				},
+				{
+					"type": "hydrant",
+					"x": 1740.0,
+					"y": 1660.0
+				},
+				{
+					"type": "mailbox",
+					"x": 920.0,
+					"y": 1100.0
+				},
+				{
+					"type": "mailbox",
+					"x": 1500.0,
+					"y": 1000.0
+				},
+				{
+					"type": "mailbox",
+					"x": 440.0,
+					"y": 840.0
+				},
+				{
+					"type": "cone",
+					"x": 1080.0,
+					"y": 340.0
+				},
+				{
+					"type": "cone",
+					"x": 1200.0,
+					"y": 380.0
+				},
+				{
+					"type": "cone",
+					"x": 1360.0,
+					"y": 420.0
+				},
+				{
+					"type": "cone",
+					"x": 380.0,
+					"y": 380.0
+				},
+				{
+					"type": "trash",
+					"x": 240.0,
+					"y": 1500.0
+				},
+				{
+					"type": "trash",
+					"x": 380.0,
+					"y": 1620.0
+				},
+				{
+					"type": "trash",
+					"x": 120.0,
+					"y": 1380.0
+				},
+				{
+					"type": "trash",
+					"x": 1640.0,
+					"y": 340.0
+				},
+				{
+					"type": "trash",
+					"x": 1800.0,
+					"y": 240.0
+				},
+				{
+					"type": "crate",
+					"x": 1050.0,
+					"y": 880.0
+				},
+				{
+					"type": "crate",
+					"x": 1080.0,
+					"y": 870.0
+				},
+				{
+					"type": "syringe",
+					"x": 280.0,
+					"y": 1440.0
+				},
+				{
+					"type": "syringe",
+					"x": 520.0,
+					"y": 1540.0
+				},
+				{
+					"type": "syringe",
+					"x": 420.0,
+					"y": 1340.0
+				},
+				{
+					"type": "bottle",
+					"x": 340.0,
+					"y": 1620.0
+				},
+				{
+					"type": "bottle",
+					"x": 580.0,
+					"y": 1380.0
+				},
+				{
+					"type": "bottle",
+					"x": 1380.0,
+					"y": 1520.0
+				},
+				{
+					"color": "#3a5a8a",
+					"type": "tent",
+					"x": 1060.0,
+					"y": 330.0
+				},
+				{
+					"color": "#3a2a18",
+					"type": "tent",
+					"x": 1120.0,
+					"y": 380.0
+				},
+				{
+					"color": "#605850",
+					"type": "tent",
+					"x": 1230.0,
+					"y": 350.0
+				},
+				{
+					"color": "#4a3050",
+					"type": "tent",
+					"x": 1300.0,
+					"y": 400.0
+				},
+				{
+					"text": "WILL TRADE\nWORDS FOR\nMATH",
+					"type": "cardsign",
+					"x": 1340.0,
+					"y": 412.0
+				},
+				{
+					"color": "#705028",
+					"h": 18.0,
+					"type": "scrap_pile",
+					"w": 32.0,
+					"x": 200.0,
+					"y": 200.0
+				},
+				{
+					"color": "#604028",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 520.0,
+					"y": 340.0
+				},
+				{
+					"color": "#684830",
+					"h": 16.0,
+					"type": "scrap_pile",
+					"w": 28.0,
+					"x": 380.0,
+					"y": 380.0
+				},
+				{
+					"color": "#503820",
+					"h": 18.0,
+					"type": "scrap_pile",
+					"w": 30.0,
+					"x": 160.0,
+					"y": 330.0
+				},
+				{
+					"color": "#5a3030",
+					"h": 28.0,
+					"type": "car_wreck",
+					"w": 60.0,
+					"x": 430.0,
+					"y": 160.0
+				},
+				{
+					"color": "#4a4838",
+					"h": 30.0,
+					"type": "car_wreck",
+					"w": 62.0,
+					"x": 240.0,
+					"y": 380.0
+				},
+				{
+					"type": "leash_post",
+					"x": 570.0,
+					"y": 130.0
+				},
+				{
+					"type": "pay_phone",
+					"x": 130.0,
+					"y": 220.0
+				},
+				{
+					"color": "#5a2a20",
+					"h": 64.0,
+					"type": "freight_car",
+					"w": 220.0,
+					"x": 380.0,
+					"y": 2820.0
+				},
+				{
+					"color": "#2a3a5a",
+					"h": 64.0,
+					"type": "freight_car",
+					"w": 240.0,
+					"x": 720.0,
+					"y": 2900.0
+				},
+				{
+					"color": "#3a4030",
+					"h": 60.0,
+					"type": "freight_car",
+					"w": 200.0,
+					"x": 1040.0,
+					"y": 2780.0
+				},
+				{
+					"text": "the bus knows where\nthe train doesn't go",
+					"type": "chalk_message",
+					"x": 760.0,
+					"y": 2898.0
+				},
+				{
+					"type": "weeds",
+					"x": 540.0,
+					"y": 2730.0
+				},
+				{
+					"type": "weeds",
+					"x": 990.0,
+					"y": 2880.0
+				},
+				{
+					"type": "weeds",
+					"x": 320.0,
+					"y": 3100.0
+				},
+				{
+					"type": "weeds",
+					"x": 1230.0,
+					"y": 3060.0
+				},
+				{
+					"type": "weeds",
+					"x": 700.0,
+					"y": 3180.0
+				},
+				{
+					"type": "weeds",
+					"x": 470.0,
+					"y": 2980.0
+				},
+				{
+					"type": "fountain",
+					"x": 2700.0,
+					"y": 1140.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2520.0,
+					"y": 1040.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2880.0,
+					"y": 1040.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2520.0,
+					"y": 1240.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2880.0,
+					"y": 1240.0
+				},
+				{
+					"type": "swing_set",
+					"x": 2480.0,
+					"y": 1320.0
+				},
+				{
+					"type": "drink_fountain",
+					"x": 2820.0,
+					"y": 1340.0
+				},
+				{
+					"type": "tree",
+					"x": 2460.0,
+					"y": 950.0
+				},
+				{
+					"type": "tree",
+					"x": 2980.0,
+					"y": 970.0
+				},
+				{
+					"type": "tree",
+					"x": 2460.0,
+					"y": 1350.0
+				},
+				{
+					"type": "tree",
+					"x": 2980.0,
+					"y": 1330.0
+				},
+				{
+					"type": "tree",
+					"x": 2620.0,
+					"y": 970.0
+				},
+				{
+					"type": "tree",
+					"x": 2820.0,
+					"y": 970.0
+				},
+				{
+					"type": "trash",
+					"x": 2580.0,
+					"y": 1620.0
+				},
+				{
+					"type": "trash",
+					"x": 2780.0,
+					"y": 1700.0
+				},
+				{
+					"type": "trash",
+					"x": 2980.0,
+					"y": 1680.0
+				},
+				{
+					"type": "trash",
+					"x": 3200.0,
+					"y": 1820.0
+				},
+				{
+					"type": "trash",
+					"x": 2640.0,
+					"y": 1900.0
+				},
+				{
+					"type": "trash",
+					"x": 2880.0,
+					"y": 2000.0
+				},
+				{
+					"type": "trash",
+					"x": 3100.0,
+					"y": 2080.0
+				},
+				{
+					"type": "trash",
+					"x": 2700.0,
+					"y": 2160.0
+				},
+				{
+					"color": "#1a1a14",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 2820.0,
+					"y": 1780.0
+				},
+				{
+					"color": "#1a1614",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 3100.0,
+					"y": 1980.0
+				},
+				{
+					"type": "lamp",
+					"x": 2920.0,
+					"y": 1880.0
+				},
+				{
+					"type": "bottle",
+					"x": 2680.0,
+					"y": 1740.0
+				},
+				{
+					"type": "bottle",
+					"x": 3040.0,
+					"y": 1840.0
+				},
+				{
+					"type": "bottle",
+					"x": 2780.0,
+					"y": 2040.0
+				},
+				{
+					"type": "syringe",
+					"x": 2960.0,
+					"y": 1660.0
+				},
+				{
+					"type": "syringe",
+					"x": 3220.0,
+					"y": 1940.0
+				},
+				{
+					"text": "FUTU EA HE M C",
+					"type": "school_mural",
+					"x": 3530.0,
+					"y": 720.0
+				},
+				{
+					"type": "swing_set",
+					"x": 3520.0,
+					"y": 800.0
+				},
+				{
+					"type": "broken_hoop",
+					"x": 3920.0,
+					"y": 540.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 720.0,
+					"x": 3420.0,
+					"y": 880.0
+				},
+				{
+					"type": "weeds",
+					"x": 3640.0,
+					"y": 350.0
+				},
+				{
+					"type": "weeds",
+					"x": 3820.0,
+					"y": 480.0
+				},
+				{
+					"type": "weeds",
+					"x": 3500.0,
+					"y": 620.0
+				},
+				{
+					"type": "weeds",
+					"x": 4040.0,
+					"y": 760.0
+				},
+				{
+					"type": "weeds",
+					"x": 3760.0,
+					"y": 820.0
+				},
+				{
+					"type": "weeds",
+					"x": 3960.0,
+					"y": 380.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3600.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3700.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3800.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3900.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 4000.0,
+					"y": 460.0
+				},
+				{
+					"color": "#604028",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 4430.0,
+					"y": 820.0
+				},
+				{
+					"color": "#503820",
+					"h": 18.0,
+					"type": "scrap_pile",
+					"w": 34.0,
+					"x": 5200.0,
+					"y": 850.0
+				},
+				{
+					"color": "#3f3a34",
+					"h": 30.0,
+					"type": "car_wreck",
+					"w": 62.0,
+					"x": 4860.0,
+					"y": 760.0
+				},
+				{
+					"color": "#25231d",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 5350.0,
+					"y": 760.0
+				},
+				{
+					"text": "MANIFEST\nPENDING",
+					"type": "cardsign",
+					"x": 4930.0,
+					"y": 850.0
+				},
+				{
+					"type": "weeds",
+					"x": 4440.0,
+					"y": 900.0
+				},
+				{
+					"type": "weeds",
+					"x": 5480.0,
+					"y": 880.0
+				},
+				{
+					"text": "CITY WATER\nIS A THEORY",
+					"type": "cardsign",
+					"x": 4380.0,
+					"y": 1640.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 120.0,
+					"x": 4560.0,
+					"y": 2120.0
+				},
+				{
+					"type": "trash",
+					"x": 4700.0,
+					"y": 2040.0
+				},
+				{
+					"type": "trash",
+					"x": 5260.0,
+					"y": 1740.0
+				},
+				{
+					"type": "weeds",
+					"x": 4380.0,
+					"y": 2180.0
+				},
+				{
+					"type": "weeds",
+					"x": 5560.0,
+					"y": 1580.0
+				},
+				{
+					"color": "#1e2520",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 5480.0,
+					"y": 2140.0
+				},
+				{
+					"color": "#49382b",
+					"h": 28.0,
+					"type": "car_wreck",
+					"w": 60.0,
+					"x": 4380.0,
+					"y": 3340.0
+				},
+				{
+					"color": "#2a281e",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 5320.0,
+					"y": 3400.0
+				},
+				{
+					"type": "trash",
+					"x": 4560.0,
+					"y": 3420.0
+				},
+				{
+					"type": "trash",
+					"x": 5220.0,
+					"y": 2780.0
+				},
+				{
+					"type": "weeds",
+					"x": 4340.0,
+					"y": 3500.0
+				},
+				{
+					"type": "weeds",
+					"x": 5480.0,
+					"y": 3480.0
+				},
+				{
+					"color": "#3a4f5c",
+					"type": "tent",
+					"x": 5980.0,
+					"y": 650.0
+				},
+				{
+					"color": "#334752",
+					"type": "tent",
+					"x": 6040.0,
+					"y": 820.0
+				},
+				{
+					"color": "#3a4f5c",
+					"type": "tent",
+					"x": 6900.0,
+					"y": 650.0
+				},
+				{
+					"color": "#2f414b",
+					"type": "tent",
+					"x": 6960.0,
+					"y": 820.0
+				},
+				{
+					"text": "COURT OPEN\nROOF PENDING",
+					"type": "cardsign",
+					"x": 5960.0,
+					"y": 600.0
+				},
+				{
+					"type": "trash",
+					"x": 5960.0,
+					"y": 1260.0
+				},
+				{
+					"type": "trash",
+					"x": 7040.0,
+					"y": 300.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 1160.0,
+					"x": 5920.0,
+					"y": 1280.0
+				},
+				{
+					"type": "weeds",
+					"x": 5940.0,
+					"y": 300.0
+				},
+				{
+					"type": "weeds",
+					"x": 7040.0,
+					"y": 1260.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 7420.0,
+					"y": 1810.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 7480.0,
+					"y": 2250.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 8240.0,
+					"y": 1810.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 8280.0,
+					"y": 2250.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 7440.0,
+					"y": 2100.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 8260.0,
+					"y": 2070.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 840.0,
+					"x": 7420.0,
+					"y": 2380.0
+				},
+				{
+					"type": "cone",
+					"x": 7380.0,
+					"y": 1500.0
+				},
+				{
+					"type": "cone",
+					"x": 8340.0,
+					"y": 2400.0
+				},
+				{
+					"text": "CARTS FORM\nONE UNIT",
+					"type": "cardsign",
+					"x": 7440.0,
+					"y": 1780.0
+				},
+				{
+					"color": "#8a5b3a",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 5980.0,
+					"y": 3200.0
+				},
+				{
+					"color": "#70452d",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 7000.0,
+					"y": 3200.0
+				},
+				{
+					"color": "#70452d",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 5980.0,
+					"y": 3540.0
+				},
+				{
+					"color": "#8a5b3a",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 7000.0,
+					"y": 3540.0
+				},
+				{
+					"color": "#61412d",
+					"h": 30.0,
+					"type": "car_wreck",
+					"w": 62.0,
+					"x": 6100.0,
+					"y": 3160.0
+				},
+				{
+					"text": "B FLAT\nRECEIVED",
+					"type": "cardsign",
+					"x": 7000.0,
+					"y": 3760.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 1220.0,
+					"x": 5920.0,
+					"y": 3840.0
+				},
+				{
+					"type": "weeds",
+					"x": 5960.0,
+					"y": 3100.0
+				},
+				{
+					"type": "weeds",
+					"x": 7060.0,
+					"y": 3820.0
+				},
+				{
+					"color": "#5a5044",
+					"h": 150.0,
+					"sign": "MODEL HOME",
+					"type": "breakin_shell",
+					"variant": "model_home",
+					"w": 240.0,
+					"x": 950.0,
+					"y": 4350.0
+				},
+				{
+					"color": "#4a3c2c",
+					"h": 140.0,
+					"sign": "BANK (FORMER)",
+					"type": "breakin_shell",
+					"variant": "spoil_bank",
+					"w": 260.0,
+					"x": 3350.0,
+					"y": 4450.0
+				},
+				{
+					"color": "#3c4030",
+					"h": 130.0,
+					"sign": "SOD · OFFICE",
+					"type": "breakin_shell",
+					"variant": "sod_office",
+					"w": 240.0,
+					"x": 4800.0,
+					"y": 5050.0
+				},
+				{
+					"text": "IF YOU LIVED HERE\nYOU WOULD BE\nHOME NOW",
+					"type": "cardsign",
+					"x": 1000.0,
+					"y": 4530.0
+				},
+				{
+					"type": "weeds",
+					"x": 920.0,
+					"y": 4520.0
+				},
+				{
+					"type": "weeds",
+					"x": 1220.0,
+					"y": 4380.0
+				},
+				{
+					"type": "weeds",
+					"x": 3320.0,
+					"y": 4610.0
+				},
+				{
+					"type": "weeds",
+					"x": 3640.0,
+					"y": 4470.0
+				},
+				{
+					"type": "weeds",
+					"x": 4770.0,
+					"y": 5200.0
+				},
+				{
+					"type": "weeds",
+					"x": 5070.0,
+					"y": 5090.0
+				},
+				{
+					"color": "#3a4248",
+					"h": 140.0,
+					"sign": "MUNICIPAL POOL",
+					"type": "breakin_shell",
+					"variant": "drained_pool",
+					"w": 250.0,
+					"x": 1880.0,
+					"y": 3820.0
+				},
+				{
+					"color": "#4c4638",
+					"h": 130.0,
+					"sign": "VISITOR CENTER",
+					"type": "breakin_shell",
+					"variant": "visitor_center",
+					"w": 240.0,
+					"x": 2960.0,
+					"y": 3840.0
+				},
+				{
+					"text": "CLOSED FOR\nWINTER\n(2011)",
+					"type": "cardsign",
+					"x": 1930.0,
+					"y": 3990.0
+				},
+				{
+					"text": "YOU ARE HERE",
+					"type": "cardsign",
+					"x": 3010.0,
+					"y": 4000.0
+				},
+				{
+					"type": "weeds",
+					"x": 1850.0,
+					"y": 3980.0
+				},
+				{
+					"type": "weeds",
+					"x": 2160.0,
+					"y": 3860.0
+				},
+				{
+					"type": "weeds",
+					"x": 2930.0,
+					"y": 3990.0
+				},
+				{
+					"type": "weeds",
+					"x": 3230.0,
+					"y": 3880.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 7580.0,
+					"y": 400.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 7650.0,
+					"y": 400.0
+				},
+				{
+					"type": "drink_fountain",
+					"x": 7720.0,
+					"y": 420.0
+				},
+				{
+					"type": "tree",
+					"x": 7530.0,
+					"y": 360.0
+				},
+				{
+					"text": "SCENIC OVERLOOK\nTHE VIEW IS\nBEING DISCUSSED",
+					"type": "cardsign",
+					"x": 7600.0,
+					"y": 460.0
+				},
+				{
+					"text": "DO NOT\nFEED THE",
+					"type": "cardsign",
+					"x": 7740.0,
+					"y": 470.0
+				},
+				{
+					"type": "weeds",
+					"x": 7550.0,
+					"y": 470.0
+				},
+				{
+					"type": "weeds",
+					"x": 7700.0,
+					"y": 380.0
+				},
+				{
+					"type": "weeds",
+					"x": 7810.0,
+					"y": 440.0
+				},
+				{
+					"text": "ONE CHAIR\nNO APPEALS",
+					"type": "cardsign",
+					"x": 7660.0,
+					"y": 4540.0
+				},
+				{
+					"type": "crate",
+					"x": 7630.0,
+					"y": 4565.0
+				},
+				{
+					"type": "crate",
+					"x": 7690.0,
+					"y": 4565.0
+				},
+				{
+					"type": "trash",
+					"x": 7080.0,
+					"y": 4620.0
+				},
+				{
+					"type": "trash",
+					"x": 8280.0,
+					"y": 4620.0
+				},
+				{
+					"type": "trash",
+					"x": 7080.0,
+					"y": 5120.0
+				},
+				{
+					"type": "trash",
+					"x": 8280.0,
+					"y": 5120.0
+				},
+				{
+					"color": "#3e3b34",
+					"h": 28.0,
+					"type": "car_wreck",
+					"w": 60.0,
+					"x": 8160.0,
+					"y": 5050.0
+				},
+				{
+					"type": "weeds",
+					"x": 7060.0,
+					"y": 4260.0
+				},
+				{
+					"type": "weeds",
+					"x": 8300.0,
+					"y": 5280.0
+				}
+			],
+			"publicPhoneAnswered": 0,
+			"publicPhoneT": 344482.819419354,
+			"quests": {
+				"all_business": {
+					"available": false,
+					"done": false,
+					"flav": "enter every claimable district. the neighborhood will not acknowledge this.",
+					"title": "ALL BUSINESS"
+				},
+				"barb_crossword": {
+					"available": false,
+					"done": false,
+					"flav": "find the saturday crossword. she is unwell without it.",
+					"title": "BARB'S MISSING CROSSWORD"
+				},
+				"blue_weather": {
+					"available": false,
+					"done": false,
+					"flav": "serve three corrections on blue tarp court. weather is named as counsel.",
+					"title": "BLUE WEATHER"
+				},
+				"cart_appeal": {
+					"available": false,
+					"done": false,
+					"flav": "appeal the cavalry. retain the receipt. retain everything.",
+					"title": "CART APPEAL"
+				},
+				"conductor": {
+					"done": false,
+					"flav": "sell 3 pure copper to the conductor. he is still waiting.",
+					"title": "THE CONDUCTOR'S BARGAIN"
+				},
+				"copper_mass": {
+					"available": false,
+					"done": false,
+					"flav": "enter the choir register. the note is b flat. again.",
+					"title": "COPPER MASS"
+				},
+				"copper_sings": {
+					"done": false,
+					"flav": "strip copper from the abandoned building. in b flat.",
+					"title": "THE COPPER SINGS"
+				},
+				"fallen_king": {
+					"done": false,
+					"flav": "defeat tre bag tony at the corner. take what you can.",
+					"title": "THE FALLEN KING"
+				},
+				"fallen_priest": {
+					"available": false,
+					"done": false,
+					"flav": "the priest has been wrong for a while. someone should say so.",
+					"title": "THE FALLEN PRIEST"
+				},
+				"finisher": {
+					"done": false,
+					"flav": "cook a rock on the crate. the crate is the kitchen now.",
+					"title": "THE FINISHER"
+				},
+				"first_rock": {
+					"done": false,
+					"flav": "buy a rock from tre bag tony. that is the entire quest.",
+					"title": "THE FIRST ROCK"
+				},
+				"hostile_correspondence": {
+					"available": false,
+					"done": false,
+					"flav": "the office received a kingdom notice. postage is due.",
+					"title": "HOSTILE CORRESPONDENCE"
+				},
+				"intro_remember": {
+					"done": false,
+					"flav": "find ten dollars somewhere on the block.",
+					"intro": true,
+					"title": "I DON'T REMEMBER"
+				},
+				"intro_smoke": {
+					"available": false,
+					"done": false,
+					"flav": "the crate is for sitting. the rock is for smoking.",
+					"intro": true,
+					"title": "YOU SMOKE THE ROCK"
+				},
+				"intro_tony": {
+					"available": false,
+					"done": false,
+					"flav": "the man at the corner has a job for you. go see him.",
+					"intro": true,
+					"title": "THE MAN AT THE CORNER"
+				},
+				"office_space": {
+					"available": false,
+					"done": false,
+					"flav": "the leasing guy has one unit. the unit has four walls and a smell.",
+					"title": "THE OFFICE"
+				},
+				"one_cracklord": {
+					"available": false,
+					"done": false,
+					"flav": "one curb. one ruler. one folding chair.",
+					"title": "ONE CRACKLORD"
+				},
+				"paper_empire": {
+					"available": false,
+					"done": false,
+					"flav": "put one bent sign where no one asked. file it in the desk.",
+					"title": "PAPER EMPIRE"
+				},
+				"pigeon_crown": {
+					"available": false,
+					"done": false,
+					"flav": "find the crown. the pigeons grieve.",
+					"title": "THE PIGEON KING'S LOST CROWN"
+				},
+				"priest_mercy": {
+					"done": false,
+					"flav": "accept a blessed tic-tac. let father o'malley help.",
+					"title": "THE PRIEST'S MERCY"
+				},
+				"regional_office": {
+					"available": false,
+					"done": false,
+					"flav": "enter four districts in pen. pencil has been rejected.",
+					"title": "REGIONAL OFFICE"
+				},
+				"royal_static": {
+					"available": false,
+					"done": false,
+					"flav": "smoke one real rock at the block. the crown has poor reception.",
+					"title": "ROYAL STATIC"
+				},
+				"scrap_dog": {
+					"available": false,
+					"done": false,
+					"flav": "the dog. brown. matted. he blinks at you twice.",
+					"state": "idle",
+					"title": "THE SCRAP YARD DOG"
+				},
+				"stripe_package": {
+					"available": false,
+					"done": false,
+					"flav": "take the package to the conductor. don't open it.",
+					"title": "STRIPE'S PACKAGE"
+				}
+			},
+			"rainT": 0.0,
+			"recognition": {
+				"choir_office": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				},
+				"laundromat": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				},
+				"park": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				},
+				"underpass": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				}
+			},
+			"recognitionVisit": {
+				"seen": {
+
+				},
+				"venue": ""
+			},
+			"shake": 0.0,
+			"smokeT": 0.0,
+			"stickMag": 0.0,
+			"stickX": 0.0,
+			"stickY": 0.0,
+			"toastT": 0.0,
+			"touchMode": false,
+			"travelRuntime": {
+				"cart": {
+					"h": 20.0,
+					"type": "cart",
+					"w": 24.0,
+					"x": 1000.0,
+					"y": 1600.0
+				},
+				"naturalDawnDay": 0
+			},
+			"tweakerCdT": 0.0,
+			"tweakerT": 0.0,
+			"weather": "clear"
+		}
+	},
+	"fixture_before": {
+		"player": {
+			"attackCd": 0.0,
+			"attacking": 0.0,
+			"barbAside": false,
+			"brain": 70.0,
+			"brutusDefeated": 0,
+			"cartMounted": false,
+			"cash": 0,
+			"charisma": 0,
+			"copper": 0,
+			"crashT": 0.0,
+			"cred": 0,
+			"credBonus": 0,
+			"dirtySupplies": 0,
+			"equip": {
+				"coat": null,
+				"hat": null,
+				"shoes": null,
+				"tool": null
+			},
+			"facing": "down",
+			"faction": {
+				"scrap": 0,
+				"spiritual": 0,
+				"street": 0
+			},
+			"frame": 0,
+			"frameT": 0.0,
+			"h": 28.0,
+			"hasPossum": false,
+			"hitFlash": 0.0,
+			"hitterHigh": false,
+			"hitters": 0,
+			"hp": 100.0,
+			"iframes": 0.0,
+			"inventory": [],
+			"lifetime": {
+				"arrests": 0,
+				"copsKilled": 0,
+				"dayCount": 0,
+				"officeJobs": 0,
+				"pretendersDefeated": 0,
+				"rocksCooked": 0,
+				"rocksFenced": 0,
+				"rocksSmoked": 0,
+				"routesCompleted": 0,
+				"territoriesClaimed": 0
+			},
+			"maxHp": 100.0,
+			"rank": 0,
+			"rockedT": 0.0,
+			"rocks": 0,
+			"shakes": 20.0,
+			"slowT": 0.0,
+			"soapRocks": 0,
+			"speed": 2.2,
+			"stripeLoyalty": 0,
+			"stunT": 0.0,
+			"supplies": 0,
+			"tonyOffenses": 0,
+			"vx": 0.0,
+			"vy": 0.0,
+			"w": 24.0,
+			"wanted": 0,
+			"wantedDecayMult": 1.0,
+			"wantedT": 0.0,
+			"weapon": "fists",
+			"x": 1050.0,
+			"y": 840.0
+		},
+		"rng": 4153385641,
+		"state": {
+			"achievements": [],
+			"barbAside": false,
+			"blockRoute": null,
+			"bossActive": false,
+			"bossKind": "",
+			"bossNPC": null,
+			"bossPhase": 0,
+			"brutusOlderActive": false,
+			"brutusOlderNPC": null,
+			"brutusOlderPhase": 1,
+			"cam": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"carEngineT": 0.0,
+			"cashPilesCollected": [],
+			"combo": 0,
+			"comboT": 0.0,
+			"concessionClocks": {
+				"choir": {
+					"phase": "closed",
+					"t": 90024.0
+				},
+				"dryer": {
+					"phase": "idle",
+					"t": 79933.0
+				},
+				"seed": 3214060655
+			},
+			"conductorWaitT": 0.0,
+			"counters": {
+				"alleyKills": 0,
+				"barbPacketsToday": 0,
+				"barbVisits": 0,
+				"bigPan": 0,
+				"brendanFirstKill": 0,
+				"brutusDeaths": 0,
+				"churchDonations": 0,
+				"copperStripped": 0,
+				"dumpDives": 0,
+				"gutterInventoryDay": 0,
+				"heistsToday": 0,
+				"introCashEarned": 0,
+				"kombuchaAskDay": 0,
+				"kombuchaComplimentDay": 0,
+				"laundryDone": 0,
+				"lurchDollarDay": 0,
+				"mathInteractions": 0,
+				"pauliCompliments": 0,
+				"paulieFaceDay": 0,
+				"peteCashToday": 0,
+				"peteSold": 0,
+				"philosopherRepDay": 0,
+				"pigeonTrade": 0,
+				"pigeonVisits": 0,
+				"pinkyFirstBuy": 0,
+				"plateStolen": 0,
+				"possumProphecies": 0,
+				"priestDonateDay": 0,
+				"rocksBought": 0,
+				"sherriSpiderDay": 0,
+				"slept": 0,
+				"stripeBetrayed": 0,
+				"stripeFencedToday": 0,
+				"stripeVisits": 0,
+				"tacosEaten": 0
+			},
+			"crownPickup": null,
+			"day": 1,
+			"dayEventActor": null,
+			"dayPendingPlacements": [],
+			"dayTime": 0.35,
+			"discoveredVenues": [],
+			"districtClaims": {
+
+			},
+			"endingContinue": false,
+			"endingSavePromise": null,
+			"flags": {
+				"blueTarpCleared": false,
+				"blueTarpCourtEntered": false,
+				"busPassUsedDay": 0.0,
+				"busRefused": false,
+				"busTaken": false,
+				"canalEntered": false,
+				"cartKeepCleared": false,
+				"cartKeepEntered": false,
+				"churchLoadedDumpsterX": 0.0,
+				"churchLoadedDumpsterY": 0.0,
+				"copperChoirCleared": false,
+				"copperChoirEntered": false,
+				"crownSpotIdx": -1.0,
+				"daveHasCrossword": false,
+				"day14Collected": false,
+				"day14Fired": false,
+				"day30Fired": false,
+				"day3Fired": false,
+				"day7Fired": false,
+				"dumpsterPropaneAwarded": false,
+				"hasCrossword": false,
+				"hasStripePackage": false,
+				"incidentDay": 0.0,
+				"incidentMask": 0.0,
+				"incidentsToday": 0.0,
+				"introDone": false,
+				"lastIncidentId": "",
+				"lovedAmbient_scrap_day": 0.0,
+				"lovedAmbient_spiritual_day": 0.0,
+				"lovedAmbient_street_day": 0.0,
+				"momBusPassDay": 0.0,
+				"momHideoutOwned": false,
+				"momIntroFired": false,
+				"momProudCallDay": 0.0,
+				"momRentDay": 0.0,
+				"oldSchoolEntered": false,
+				"parkEntered": false,
+				"parkNightCashDay": 0.0,
+				"peteToolLocker": null,
+				"priceGuyDay": 0.0,
+				"priceGuyVisits": 0.0,
+				"scrapHideoutOwned": false,
+				"scrapLoanDay": 0.0,
+				"silenceUntilT": 0.0,
+				"skidRowEntered": false,
+				"stripeBetrayed": false,
+				"theLotEntered": false,
+				"throneDitchCleared": false,
+				"throneDitchEntered": false,
+				"trainHopperTalkedTo": false,
+				"trainYardEntered": false,
+				"underpassEntered": false,
+				"warehouseRowEntered": false
+			},
+			"flash": 0.0,
+			"flashColor": "#fff",
+			"freedDogFirstReturn": false,
+			"freedDogFollowT": 0.0,
+			"freedDogT": 0.0,
+			"graffiti": [
+				{
+					"col": "#a89878",
+					"layoutV": 2,
+					"rot": 0.0641895702341571,
+					"sz": 10,
+					"text": "PETE WEIGHED MY SOUL. $1.",
+					"textW": 151,
+					"wallKind": "rightside",
+					"wallW": 348.0,
+					"wallX": 7286.0,
+					"x": 7425.64893853199,
+					"y": 4330.67821815936
+				},
+				{
+					"col": "#a08070",
+					"layoutV": 2,
+					"rot": -0.039488071622327,
+					"sz": 8,
+					"text": "if you are reading this you owe sherri money",
+					"textW": 212,
+					"wallKind": "rightside",
+					"wallW": 368.0,
+					"wallX": 6006.0,
+					"x": 6061.18800742831,
+					"y": 2872.39314381592
+				},
+				{
+					"col": "#a06868",
+					"layoutV": 2,
+					"rot": -0.0138399492809549,
+					"sz": 9,
+					"text": "ECCLESIASTES 1:9",
+					"textW": 87,
+					"wallKind": "rightside",
+					"wallW": 88.0,
+					"wallX": 2726.0,
+					"x": 2726.51599005098,
+					"y": 1781.27002569241
+				},
+				{
+					"col": "#a89878",
+					"layoutV": 2,
+					"rot": 0.0326494945026934,
+					"sz": 10,
+					"text": "DAVE WAS RIGHT ABOUT THE PIGEONS",
+					"textW": 193,
+					"wallKind": "leftside",
+					"wallW": 328.0,
+					"wallX": 6666.0,
+					"x": 6750.52261232422,
+					"y": 375.17969440762
+				},
+				{
+					"col": "#b8706e",
+					"layoutV": 2,
+					"rot": -0.0641663045017049,
+					"sz": 10,
+					"text": "call mom",
+					"textW": 49,
+					"wallKind": "leftside",
+					"wallW": 128.0,
+					"wallX": 2586.0,
+					"x": 2624.99146214686,
+					"y": 1950.27064970555
+				},
+				{
+					"col": "#a89878",
+					"layoutV": 2,
+					"rot": -0.0599394508358091,
+					"sz": 8,
+					"text": "yell louder. larry is listening.",
+					"textW": 154,
+					"wallKind": "rightside",
+					"wallW": 328.0,
+					"wallX": 6666.0,
+					"x": 6721.91811865708,
+					"y": 341.582500763237
+				},
+				{
+					"col": "#a08070",
+					"layoutV": 2,
+					"rot": -0.0385579968290403,
+					"sz": 9,
+					"text": "tony does not blink",
+					"textW": 103,
+					"wallKind": "rightside",
+					"wallW": 408.0,
+					"wallX": 7846.0,
+					"x": 7919.60708705848,
+					"y": 4456.49097514199
+				},
+				{
+					"col": "#d09048",
+					"layoutV": 2,
+					"rot": 0.0502304242551327,
+					"sz": 8,
+					"text": "the wire is copper. probably.",
+					"textW": 140,
+					"wallKind": "leftside",
+					"wallW": 148.0,
+					"wallX": 186.0,
+					"x": 188.628895452246,
+					"y": 644.569960451685
+				},
+				{
+					"col": "#c08038",
+					"layoutV": 2,
+					"rot": 0.0412469946825877,
+					"sz": 9,
+					"text": "yuri's bird is plastic",
+					"textW": 119,
+					"wallKind": "leftside",
+					"wallW": 388.0,
+					"wallX": 5016.0,
+					"x": 5268.05063802097,
+					"y": 505.855136340018
+				},
+				{
+					"col": "#a87038",
+					"layoutV": 2,
+					"rot": 0.0541776481177658,
+					"sz": 8,
+					"text": "the wire is copper. probably.",
+					"textW": 140,
+					"wallKind": "bottom",
+					"wallW": 388.0,
+					"wallX": 5016.0,
+					"x": 5172.8450250905,
+					"y": 679.359121099114
+				},
+				{
+					"col": "#c08038",
+					"layoutV": 2,
+					"rot": 0.0761704171216115,
+					"sz": 10,
+					"text": "DO NOT TRUST THE SCALE",
+					"textW": 133,
+					"wallKind": "bottom",
+					"wallW": 148.0,
+					"wallX": 186.0,
+					"x": 189.913367881905,
+					"y": 709.637708809227
+				},
+				{
+					"col": "#a8b0c8",
+					"layoutV": 2,
+					"rot": -0.0803890491463244,
+					"sz": 8,
+					"text": "kneel where the chalk is",
+					"textW": 116,
+					"wallKind": "bottom",
+					"wallW": 228.0,
+					"wallX": 1686.0,
+					"x": 1708.20220601931,
+					"y": 1541.51229878515
+				},
+				{
+					"col": "#a87038",
+					"layoutV": 2,
+					"rot": 0.0245008894102648,
+					"sz": 10,
+					"text": "pete owes me a dollar from 2009",
+					"textW": 187,
+					"wallKind": "bottom",
+					"wallW": 508.0,
+					"wallX": 3526.0,
+					"x": 3827.78248426318,
+					"y": 711.43197548762
+				},
+				{
+					"col": "#a87a80",
+					"layoutV": 2,
+					"rot": -0.0153384740184993,
+					"sz": 8,
+					"text": "the conductor is real",
+					"textW": 101,
+					"wallKind": "leftside",
+					"wallW": 118.0,
+					"wallX": 2906.0,
+					"x": 2917.03013089229,
+					"y": 1645.49800099432
+				},
+				{
+					"col": "#c08070",
+					"layoutV": 2,
+					"rot": -0.0242824358912185,
+					"sz": 9,
+					"text": "the bus is late",
+					"textW": 82,
+					"wallKind": "rightside",
+					"wallW": 118.0,
+					"wallX": 2906.0,
+					"x": 2916.88851210289,
+					"y": 1654.11833895929
+				},
+				{
+					"col": "#b8706e",
+					"layoutV": 2,
+					"rot": 0.00496154453605413,
+					"sz": 8,
+					"text": "ECCLESIASTES 1:9",
+					"textW": 77,
+					"wallKind": "rightside",
+					"wallW": 88.0,
+					"wallX": 2726.0,
+					"x": 2733.06501003006,
+					"y": 1786.95552462805
+				},
+				{
+					"col": "#88a070",
+					"layoutV": 2,
+					"rot": 0.0126759108016267,
+					"sz": 8,
+					"text": "the conductor is real",
+					"textW": 101,
+					"wallKind": "bottom",
+					"wallW": 348.0,
+					"wallX": 7286.0,
+					"x": 7297.83017411549,
+					"y": 4485.65970076993
+				}
+			],
+			"guidanceT": 0.0,
+			"heat": null,
+			"hideoutStash": {
+				"cash": 0,
+				"copper": 0,
+				"items": [],
+				"rocks": 0
+			},
+			"hitPause": 0.0,
+			"hustleSnapshot": {
+
+			},
+			"hustles": [],
+			"incident": null,
+			"incidentPaperT": 0.0,
+			"incidentT": 43706.9016182795,
+			"incidentWetT": 0.0,
+			"keys": [],
+			"kingdom": {
+				"bossId": "",
+				"defeats": [],
+				"marks": 0,
+				"pretenderDay": 0,
+				"pretenderDefeatedDay": 0,
+				"pretendersDefeated": 0,
+				"stage": "locked"
+			},
+			"kingdomBattle": null,
+			"loadedNpcDeaths": null,
+			"lootedDumpsters": [],
+			"metVendors": [],
+			"mode": "playing",
+			"momTipT": 30000.0,
+			"office": {
+				"claimJob": null,
+				"jobsCompleted": 0,
+				"lastWorkId": "",
+				"orderSerial": 0,
+				"owned": false,
+				"rerollDay": 0,
+				"upgrades": {
+					"cot": false,
+					"desk": false,
+					"generator": false,
+					"locker": false,
+					"radio": false,
+					"route_board": false
+				},
+				"workDay": 0,
+				"workJob": null,
+				"workToday": 0
+			},
+			"phonePropRingT": 0.0,
+			"posters": [
+				{
+					"faction": "scrap",
+					"h": 24,
+					"text": "CASH FOR\nCOPPER",
+					"w": 16,
+					"x": 184.0,
+					"y": 676.633476102725
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "DJ DANGER\nPRESENTS\nA DJ NIGHT",
+					"w": 16,
+					"x": 1641.21891365759,
+					"y": 900.0
+				},
+				{
+					"faction": "spiritual",
+					"h": 24,
+					"text": "THE CHURCH IS\nA BUILDING.\nTHE BUILDING\nIS A CHURCH.",
+					"w": 16,
+					"x": 1728.86675624549,
+					"y": 1530.0
+				},
+				{
+					"faction": "scrap",
+					"h": 24,
+					"text": "ASK ABOUT\nTHE PRICE",
+					"w": 16,
+					"x": 3524.0,
+					"y": 435.657136589289
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "MISSING DOG\n(REWARD)",
+					"w": 16,
+					"x": 2640.0,
+					"y": 1692.45508112945
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "MISSING DOG\n(REWARD)",
+					"w": 16,
+					"x": 2904.0,
+					"y": 1650.73088870617
+				},
+				{
+					"faction": "street",
+					"h": 24,
+					"text": "WANTED\nLOOKS JUST\nLIKE YOU",
+					"w": 16,
+					"x": 2700.0,
+					"y": 1936.20807870291
+				},
+				{
+					"faction": "scrap",
+					"h": 24,
+					"text": "PETE'S PAWN\nOPEN ALWAYS",
+					"w": 16,
+					"x": 4464.0,
+					"y": 322.877777833492
+				}
+			],
+			"primaryObjective": null,
+			"propRuntime": [
+				{
+					"color": "#2a3818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 140.0,
+					"y": 1320.0
+				},
+				{
+					"color": "#3a2818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 440.0,
+					"y": 1640.0
+				},
+				{
+					"color": "#2a2818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 1340.0,
+					"y": 1480.0
+				},
+				{
+					"color": "#2a3818",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 1620.0,
+					"y": 280.0
+				},
+				{
+					"color": "#2a2828",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 780.0,
+					"y": 240.0
+				},
+				{
+					"color": "#888",
+					"h": 20.0,
+					"type": "cart",
+					"w": 24.0,
+					"x": 1000.0,
+					"y": 1600.0
+				},
+				{
+					"type": "lamp",
+					"x": 740.0,
+					"y": 840.0
+				},
+				{
+					"type": "lamp",
+					"x": 1340.0,
+					"y": 840.0
+				},
+				{
+					"type": "lamp",
+					"x": 1740.0,
+					"y": 1100.0
+				},
+				{
+					"type": "lamp",
+					"x": 240.0,
+					"y": 1100.0
+				},
+				{
+					"type": "lamp",
+					"x": 1600.0,
+					"y": 1700.0
+				},
+				{
+					"type": "lamp",
+					"x": 840.0,
+					"y": 1700.0
+				},
+				{
+					"type": "lamp",
+					"x": 340.0,
+					"y": 560.0
+				},
+				{
+					"type": "lamp",
+					"x": 1500.0,
+					"y": 560.0
+				},
+				{
+					"type": "lamp",
+					"x": 1240.0,
+					"y": 340.0
+				},
+				{
+					"type": "lamp",
+					"x": 1100.0,
+					"y": 1200.0
+				},
+				{
+					"type": "hydrant",
+					"x": 680.0,
+					"y": 920.0
+				},
+				{
+					"type": "hydrant",
+					"x": 1480.0,
+					"y": 1200.0
+				},
+				{
+					"type": "hydrant",
+					"x": 280.0,
+					"y": 1240.0
+				},
+				{
+					"type": "hydrant",
+					"x": 1740.0,
+					"y": 1660.0
+				},
+				{
+					"type": "mailbox",
+					"x": 920.0,
+					"y": 1100.0
+				},
+				{
+					"type": "mailbox",
+					"x": 1500.0,
+					"y": 1000.0
+				},
+				{
+					"type": "mailbox",
+					"x": 440.0,
+					"y": 840.0
+				},
+				{
+					"type": "cone",
+					"x": 1080.0,
+					"y": 340.0
+				},
+				{
+					"type": "cone",
+					"x": 1200.0,
+					"y": 380.0
+				},
+				{
+					"type": "cone",
+					"x": 1360.0,
+					"y": 420.0
+				},
+				{
+					"type": "cone",
+					"x": 380.0,
+					"y": 380.0
+				},
+				{
+					"type": "trash",
+					"x": 240.0,
+					"y": 1500.0
+				},
+				{
+					"type": "trash",
+					"x": 380.0,
+					"y": 1620.0
+				},
+				{
+					"type": "trash",
+					"x": 120.0,
+					"y": 1380.0
+				},
+				{
+					"type": "trash",
+					"x": 1640.0,
+					"y": 340.0
+				},
+				{
+					"type": "trash",
+					"x": 1800.0,
+					"y": 240.0
+				},
+				{
+					"type": "crate",
+					"x": 1050.0,
+					"y": 880.0
+				},
+				{
+					"type": "crate",
+					"x": 1080.0,
+					"y": 870.0
+				},
+				{
+					"type": "syringe",
+					"x": 280.0,
+					"y": 1440.0
+				},
+				{
+					"type": "syringe",
+					"x": 520.0,
+					"y": 1540.0
+				},
+				{
+					"type": "syringe",
+					"x": 420.0,
+					"y": 1340.0
+				},
+				{
+					"type": "bottle",
+					"x": 340.0,
+					"y": 1620.0
+				},
+				{
+					"type": "bottle",
+					"x": 580.0,
+					"y": 1380.0
+				},
+				{
+					"type": "bottle",
+					"x": 1380.0,
+					"y": 1520.0
+				},
+				{
+					"color": "#3a5a8a",
+					"type": "tent",
+					"x": 1060.0,
+					"y": 330.0
+				},
+				{
+					"color": "#3a2a18",
+					"type": "tent",
+					"x": 1120.0,
+					"y": 380.0
+				},
+				{
+					"color": "#605850",
+					"type": "tent",
+					"x": 1230.0,
+					"y": 350.0
+				},
+				{
+					"color": "#4a3050",
+					"type": "tent",
+					"x": 1300.0,
+					"y": 400.0
+				},
+				{
+					"text": "WILL TRADE\nWORDS FOR\nMATH",
+					"type": "cardsign",
+					"x": 1340.0,
+					"y": 412.0
+				},
+				{
+					"color": "#705028",
+					"h": 18.0,
+					"type": "scrap_pile",
+					"w": 32.0,
+					"x": 200.0,
+					"y": 200.0
+				},
+				{
+					"color": "#604028",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 520.0,
+					"y": 340.0
+				},
+				{
+					"color": "#684830",
+					"h": 16.0,
+					"type": "scrap_pile",
+					"w": 28.0,
+					"x": 380.0,
+					"y": 380.0
+				},
+				{
+					"color": "#503820",
+					"h": 18.0,
+					"type": "scrap_pile",
+					"w": 30.0,
+					"x": 160.0,
+					"y": 330.0
+				},
+				{
+					"color": "#5a3030",
+					"h": 28.0,
+					"type": "car_wreck",
+					"w": 60.0,
+					"x": 430.0,
+					"y": 160.0
+				},
+				{
+					"color": "#4a4838",
+					"h": 30.0,
+					"type": "car_wreck",
+					"w": 62.0,
+					"x": 240.0,
+					"y": 380.0
+				},
+				{
+					"type": "leash_post",
+					"x": 570.0,
+					"y": 130.0
+				},
+				{
+					"type": "pay_phone",
+					"x": 130.0,
+					"y": 220.0
+				},
+				{
+					"color": "#5a2a20",
+					"h": 64.0,
+					"type": "freight_car",
+					"w": 220.0,
+					"x": 380.0,
+					"y": 2820.0
+				},
+				{
+					"color": "#2a3a5a",
+					"h": 64.0,
+					"type": "freight_car",
+					"w": 240.0,
+					"x": 720.0,
+					"y": 2900.0
+				},
+				{
+					"color": "#3a4030",
+					"h": 60.0,
+					"type": "freight_car",
+					"w": 200.0,
+					"x": 1040.0,
+					"y": 2780.0
+				},
+				{
+					"text": "the bus knows where\nthe train doesn't go",
+					"type": "chalk_message",
+					"x": 760.0,
+					"y": 2898.0
+				},
+				{
+					"type": "weeds",
+					"x": 540.0,
+					"y": 2730.0
+				},
+				{
+					"type": "weeds",
+					"x": 990.0,
+					"y": 2880.0
+				},
+				{
+					"type": "weeds",
+					"x": 320.0,
+					"y": 3100.0
+				},
+				{
+					"type": "weeds",
+					"x": 1230.0,
+					"y": 3060.0
+				},
+				{
+					"type": "weeds",
+					"x": 700.0,
+					"y": 3180.0
+				},
+				{
+					"type": "weeds",
+					"x": 470.0,
+					"y": 2980.0
+				},
+				{
+					"type": "fountain",
+					"x": 2700.0,
+					"y": 1140.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2520.0,
+					"y": 1040.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2880.0,
+					"y": 1040.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2520.0,
+					"y": 1240.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 2880.0,
+					"y": 1240.0
+				},
+				{
+					"type": "swing_set",
+					"x": 2480.0,
+					"y": 1320.0
+				},
+				{
+					"type": "drink_fountain",
+					"x": 2820.0,
+					"y": 1340.0
+				},
+				{
+					"type": "tree",
+					"x": 2460.0,
+					"y": 950.0
+				},
+				{
+					"type": "tree",
+					"x": 2980.0,
+					"y": 970.0
+				},
+				{
+					"type": "tree",
+					"x": 2460.0,
+					"y": 1350.0
+				},
+				{
+					"type": "tree",
+					"x": 2980.0,
+					"y": 1330.0
+				},
+				{
+					"type": "tree",
+					"x": 2620.0,
+					"y": 970.0
+				},
+				{
+					"type": "tree",
+					"x": 2820.0,
+					"y": 970.0
+				},
+				{
+					"type": "trash",
+					"x": 2580.0,
+					"y": 1620.0
+				},
+				{
+					"type": "trash",
+					"x": 2780.0,
+					"y": 1700.0
+				},
+				{
+					"type": "trash",
+					"x": 2980.0,
+					"y": 1680.0
+				},
+				{
+					"type": "trash",
+					"x": 3200.0,
+					"y": 1820.0
+				},
+				{
+					"type": "trash",
+					"x": 2640.0,
+					"y": 1900.0
+				},
+				{
+					"type": "trash",
+					"x": 2880.0,
+					"y": 2000.0
+				},
+				{
+					"type": "trash",
+					"x": 3100.0,
+					"y": 2080.0
+				},
+				{
+					"type": "trash",
+					"x": 2700.0,
+					"y": 2160.0
+				},
+				{
+					"color": "#1a1a14",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 2820.0,
+					"y": 1780.0
+				},
+				{
+					"color": "#1a1614",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 3100.0,
+					"y": 1980.0
+				},
+				{
+					"type": "lamp",
+					"x": 2920.0,
+					"y": 1880.0
+				},
+				{
+					"type": "bottle",
+					"x": 2680.0,
+					"y": 1740.0
+				},
+				{
+					"type": "bottle",
+					"x": 3040.0,
+					"y": 1840.0
+				},
+				{
+					"type": "bottle",
+					"x": 2780.0,
+					"y": 2040.0
+				},
+				{
+					"type": "syringe",
+					"x": 2960.0,
+					"y": 1660.0
+				},
+				{
+					"type": "syringe",
+					"x": 3220.0,
+					"y": 1940.0
+				},
+				{
+					"text": "FUTU EA HE M C",
+					"type": "school_mural",
+					"x": 3530.0,
+					"y": 720.0
+				},
+				{
+					"type": "swing_set",
+					"x": 3520.0,
+					"y": 800.0
+				},
+				{
+					"type": "broken_hoop",
+					"x": 3920.0,
+					"y": 540.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 720.0,
+					"x": 3420.0,
+					"y": 880.0
+				},
+				{
+					"type": "weeds",
+					"x": 3640.0,
+					"y": 350.0
+				},
+				{
+					"type": "weeds",
+					"x": 3820.0,
+					"y": 480.0
+				},
+				{
+					"type": "weeds",
+					"x": 3500.0,
+					"y": 620.0
+				},
+				{
+					"type": "weeds",
+					"x": 4040.0,
+					"y": 760.0
+				},
+				{
+					"type": "weeds",
+					"x": 3760.0,
+					"y": 820.0
+				},
+				{
+					"type": "weeds",
+					"x": 3960.0,
+					"y": 380.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3600.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3700.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3800.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 3900.0,
+					"y": 460.0
+				},
+				{
+					"type": "broken_window",
+					"x": 4000.0,
+					"y": 460.0
+				},
+				{
+					"color": "#604028",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 4430.0,
+					"y": 820.0
+				},
+				{
+					"color": "#503820",
+					"h": 18.0,
+					"type": "scrap_pile",
+					"w": 34.0,
+					"x": 5200.0,
+					"y": 850.0
+				},
+				{
+					"color": "#3f3a34",
+					"h": 30.0,
+					"type": "car_wreck",
+					"w": 62.0,
+					"x": 4860.0,
+					"y": 760.0
+				},
+				{
+					"color": "#25231d",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 5350.0,
+					"y": 760.0
+				},
+				{
+					"text": "MANIFEST\nPENDING",
+					"type": "cardsign",
+					"x": 4930.0,
+					"y": 850.0
+				},
+				{
+					"type": "weeds",
+					"x": 4440.0,
+					"y": 900.0
+				},
+				{
+					"type": "weeds",
+					"x": 5480.0,
+					"y": 880.0
+				},
+				{
+					"text": "CITY WATER\nIS A THEORY",
+					"type": "cardsign",
+					"x": 4380.0,
+					"y": 1640.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 120.0,
+					"x": 4560.0,
+					"y": 2120.0
+				},
+				{
+					"type": "trash",
+					"x": 4700.0,
+					"y": 2040.0
+				},
+				{
+					"type": "trash",
+					"x": 5260.0,
+					"y": 1740.0
+				},
+				{
+					"type": "weeds",
+					"x": 4380.0,
+					"y": 2180.0
+				},
+				{
+					"type": "weeds",
+					"x": 5560.0,
+					"y": 1580.0
+				},
+				{
+					"color": "#1e2520",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 5480.0,
+					"y": 2140.0
+				},
+				{
+					"color": "#49382b",
+					"h": 28.0,
+					"type": "car_wreck",
+					"w": 60.0,
+					"x": 4380.0,
+					"y": 3340.0
+				},
+				{
+					"color": "#2a281e",
+					"h": 24.0,
+					"looted": false,
+					"type": "dumpster",
+					"w": 36.0,
+					"x": 5320.0,
+					"y": 3400.0
+				},
+				{
+					"type": "trash",
+					"x": 4560.0,
+					"y": 3420.0
+				},
+				{
+					"type": "trash",
+					"x": 5220.0,
+					"y": 2780.0
+				},
+				{
+					"type": "weeds",
+					"x": 4340.0,
+					"y": 3500.0
+				},
+				{
+					"type": "weeds",
+					"x": 5480.0,
+					"y": 3480.0
+				},
+				{
+					"color": "#3a4f5c",
+					"type": "tent",
+					"x": 5980.0,
+					"y": 650.0
+				},
+				{
+					"color": "#334752",
+					"type": "tent",
+					"x": 6040.0,
+					"y": 820.0
+				},
+				{
+					"color": "#3a4f5c",
+					"type": "tent",
+					"x": 6900.0,
+					"y": 650.0
+				},
+				{
+					"color": "#2f414b",
+					"type": "tent",
+					"x": 6960.0,
+					"y": 820.0
+				},
+				{
+					"text": "COURT OPEN\nROOF PENDING",
+					"type": "cardsign",
+					"x": 5960.0,
+					"y": 600.0
+				},
+				{
+					"type": "trash",
+					"x": 5960.0,
+					"y": 1260.0
+				},
+				{
+					"type": "trash",
+					"x": 7040.0,
+					"y": 300.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 1160.0,
+					"x": 5920.0,
+					"y": 1280.0
+				},
+				{
+					"type": "weeds",
+					"x": 5940.0,
+					"y": 300.0
+				},
+				{
+					"type": "weeds",
+					"x": 7040.0,
+					"y": 1260.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 7420.0,
+					"y": 1810.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 7480.0,
+					"y": 2250.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 8240.0,
+					"y": 1810.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 8280.0,
+					"y": 2250.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 7440.0,
+					"y": 2100.0
+				},
+				{
+					"h": 20.0,
+					"type": "cart_husk",
+					"w": 24.0,
+					"x": 8260.0,
+					"y": 2070.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 840.0,
+					"x": 7420.0,
+					"y": 2380.0
+				},
+				{
+					"type": "cone",
+					"x": 7380.0,
+					"y": 1500.0
+				},
+				{
+					"type": "cone",
+					"x": 8340.0,
+					"y": 2400.0
+				},
+				{
+					"text": "CARTS FORM\nONE UNIT",
+					"type": "cardsign",
+					"x": 7440.0,
+					"y": 1780.0
+				},
+				{
+					"color": "#8a5b3a",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 5980.0,
+					"y": 3200.0
+				},
+				{
+					"color": "#70452d",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 7000.0,
+					"y": 3200.0
+				},
+				{
+					"color": "#70452d",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 5980.0,
+					"y": 3540.0
+				},
+				{
+					"color": "#8a5b3a",
+					"h": 20.0,
+					"type": "scrap_pile",
+					"w": 36.0,
+					"x": 7000.0,
+					"y": 3540.0
+				},
+				{
+					"color": "#61412d",
+					"h": 30.0,
+					"type": "car_wreck",
+					"w": 62.0,
+					"x": 6100.0,
+					"y": 3160.0
+				},
+				{
+					"text": "B FLAT\nRECEIVED",
+					"type": "cardsign",
+					"x": 7000.0,
+					"y": 3760.0
+				},
+				{
+					"h": 6.0,
+					"type": "school_fence",
+					"w": 1220.0,
+					"x": 5920.0,
+					"y": 3840.0
+				},
+				{
+					"type": "weeds",
+					"x": 5960.0,
+					"y": 3100.0
+				},
+				{
+					"type": "weeds",
+					"x": 7060.0,
+					"y": 3820.0
+				},
+				{
+					"color": "#5a5044",
+					"h": 150.0,
+					"sign": "MODEL HOME",
+					"type": "breakin_shell",
+					"variant": "model_home",
+					"w": 240.0,
+					"x": 950.0,
+					"y": 4350.0
+				},
+				{
+					"color": "#4a3c2c",
+					"h": 140.0,
+					"sign": "BANK (FORMER)",
+					"type": "breakin_shell",
+					"variant": "spoil_bank",
+					"w": 260.0,
+					"x": 3350.0,
+					"y": 4450.0
+				},
+				{
+					"color": "#3c4030",
+					"h": 130.0,
+					"sign": "SOD · OFFICE",
+					"type": "breakin_shell",
+					"variant": "sod_office",
+					"w": 240.0,
+					"x": 4800.0,
+					"y": 5050.0
+				},
+				{
+					"text": "IF YOU LIVED HERE\nYOU WOULD BE\nHOME NOW",
+					"type": "cardsign",
+					"x": 1000.0,
+					"y": 4530.0
+				},
+				{
+					"type": "weeds",
+					"x": 920.0,
+					"y": 4520.0
+				},
+				{
+					"type": "weeds",
+					"x": 1220.0,
+					"y": 4380.0
+				},
+				{
+					"type": "weeds",
+					"x": 3320.0,
+					"y": 4610.0
+				},
+				{
+					"type": "weeds",
+					"x": 3640.0,
+					"y": 4470.0
+				},
+				{
+					"type": "weeds",
+					"x": 4770.0,
+					"y": 5200.0
+				},
+				{
+					"type": "weeds",
+					"x": 5070.0,
+					"y": 5090.0
+				},
+				{
+					"color": "#3a4248",
+					"h": 140.0,
+					"sign": "MUNICIPAL POOL",
+					"type": "breakin_shell",
+					"variant": "drained_pool",
+					"w": 250.0,
+					"x": 1880.0,
+					"y": 3820.0
+				},
+				{
+					"color": "#4c4638",
+					"h": 130.0,
+					"sign": "VISITOR CENTER",
+					"type": "breakin_shell",
+					"variant": "visitor_center",
+					"w": 240.0,
+					"x": 2960.0,
+					"y": 3840.0
+				},
+				{
+					"text": "CLOSED FOR\nWINTER\n(2011)",
+					"type": "cardsign",
+					"x": 1930.0,
+					"y": 3990.0
+				},
+				{
+					"text": "YOU ARE HERE",
+					"type": "cardsign",
+					"x": 3010.0,
+					"y": 4000.0
+				},
+				{
+					"type": "weeds",
+					"x": 1850.0,
+					"y": 3980.0
+				},
+				{
+					"type": "weeds",
+					"x": 2160.0,
+					"y": 3860.0
+				},
+				{
+					"type": "weeds",
+					"x": 2930.0,
+					"y": 3990.0
+				},
+				{
+					"type": "weeds",
+					"x": 3230.0,
+					"y": 3880.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 7580.0,
+					"y": 400.0
+				},
+				{
+					"h": 12.0,
+					"type": "park_bench",
+					"w": 40.0,
+					"x": 7650.0,
+					"y": 400.0
+				},
+				{
+					"type": "drink_fountain",
+					"x": 7720.0,
+					"y": 420.0
+				},
+				{
+					"type": "tree",
+					"x": 7530.0,
+					"y": 360.0
+				},
+				{
+					"text": "SCENIC OVERLOOK\nTHE VIEW IS\nBEING DISCUSSED",
+					"type": "cardsign",
+					"x": 7600.0,
+					"y": 460.0
+				},
+				{
+					"text": "DO NOT\nFEED THE",
+					"type": "cardsign",
+					"x": 7740.0,
+					"y": 470.0
+				},
+				{
+					"type": "weeds",
+					"x": 7550.0,
+					"y": 470.0
+				},
+				{
+					"type": "weeds",
+					"x": 7700.0,
+					"y": 380.0
+				},
+				{
+					"type": "weeds",
+					"x": 7810.0,
+					"y": 440.0
+				},
+				{
+					"text": "ONE CHAIR\nNO APPEALS",
+					"type": "cardsign",
+					"x": 7660.0,
+					"y": 4540.0
+				},
+				{
+					"type": "crate",
+					"x": 7630.0,
+					"y": 4565.0
+				},
+				{
+					"type": "crate",
+					"x": 7690.0,
+					"y": 4565.0
+				},
+				{
+					"type": "trash",
+					"x": 7080.0,
+					"y": 4620.0
+				},
+				{
+					"type": "trash",
+					"x": 8280.0,
+					"y": 4620.0
+				},
+				{
+					"type": "trash",
+					"x": 7080.0,
+					"y": 5120.0
+				},
+				{
+					"type": "trash",
+					"x": 8280.0,
+					"y": 5120.0
+				},
+				{
+					"color": "#3e3b34",
+					"h": 28.0,
+					"type": "car_wreck",
+					"w": 60.0,
+					"x": 8160.0,
+					"y": 5050.0
+				},
+				{
+					"type": "weeds",
+					"x": 7060.0,
+					"y": 4260.0
+				},
+				{
+					"type": "weeds",
+					"x": 8300.0,
+					"y": 5280.0
+				}
+			],
+			"publicPhoneAnswered": 0,
+			"publicPhoneT": 344482.819419354,
+			"quests": {
+				"all_business": {
+					"available": false,
+					"done": false,
+					"flav": "enter every claimable district. the neighborhood will not acknowledge this.",
+					"title": "ALL BUSINESS"
+				},
+				"barb_crossword": {
+					"available": false,
+					"done": false,
+					"flav": "find the saturday crossword. she is unwell without it.",
+					"title": "BARB'S MISSING CROSSWORD"
+				},
+				"blue_weather": {
+					"available": false,
+					"done": false,
+					"flav": "serve three corrections on blue tarp court. weather is named as counsel.",
+					"title": "BLUE WEATHER"
+				},
+				"cart_appeal": {
+					"available": false,
+					"done": false,
+					"flav": "appeal the cavalry. retain the receipt. retain everything.",
+					"title": "CART APPEAL"
+				},
+				"conductor": {
+					"done": false,
+					"flav": "sell 3 pure copper to the conductor. he is still waiting.",
+					"title": "THE CONDUCTOR'S BARGAIN"
+				},
+				"copper_mass": {
+					"available": false,
+					"done": false,
+					"flav": "enter the choir register. the note is b flat. again.",
+					"title": "COPPER MASS"
+				},
+				"copper_sings": {
+					"done": false,
+					"flav": "strip copper from the abandoned building. in b flat.",
+					"title": "THE COPPER SINGS"
+				},
+				"fallen_king": {
+					"done": false,
+					"flav": "defeat tre bag tony at the corner. take what you can.",
+					"title": "THE FALLEN KING"
+				},
+				"fallen_priest": {
+					"available": false,
+					"done": false,
+					"flav": "the priest has been wrong for a while. someone should say so.",
+					"title": "THE FALLEN PRIEST"
+				},
+				"finisher": {
+					"done": false,
+					"flav": "cook a rock on the crate. the crate is the kitchen now.",
+					"title": "THE FINISHER"
+				},
+				"first_rock": {
+					"done": false,
+					"flav": "buy a rock from tre bag tony. that is the entire quest.",
+					"title": "THE FIRST ROCK"
+				},
+				"hostile_correspondence": {
+					"available": false,
+					"done": false,
+					"flav": "the office received a kingdom notice. postage is due.",
+					"title": "HOSTILE CORRESPONDENCE"
+				},
+				"intro_remember": {
+					"done": false,
+					"flav": "find ten dollars somewhere on the block.",
+					"intro": true,
+					"title": "I DON'T REMEMBER"
+				},
+				"intro_smoke": {
+					"available": false,
+					"done": false,
+					"flav": "the crate is for sitting. the rock is for smoking.",
+					"intro": true,
+					"title": "YOU SMOKE THE ROCK"
+				},
+				"intro_tony": {
+					"available": false,
+					"done": false,
+					"flav": "the man at the corner has a job for you. go see him.",
+					"intro": true,
+					"title": "THE MAN AT THE CORNER"
+				},
+				"office_space": {
+					"available": false,
+					"done": false,
+					"flav": "the leasing guy has one unit. the unit has four walls and a smell.",
+					"title": "THE OFFICE"
+				},
+				"one_cracklord": {
+					"available": false,
+					"done": false,
+					"flav": "one curb. one ruler. one folding chair.",
+					"title": "ONE CRACKLORD"
+				},
+				"paper_empire": {
+					"available": false,
+					"done": false,
+					"flav": "put one bent sign where no one asked. file it in the desk.",
+					"title": "PAPER EMPIRE"
+				},
+				"pigeon_crown": {
+					"available": false,
+					"done": false,
+					"flav": "find the crown. the pigeons grieve.",
+					"title": "THE PIGEON KING'S LOST CROWN"
+				},
+				"priest_mercy": {
+					"done": false,
+					"flav": "accept a blessed tic-tac. let father o'malley help.",
+					"title": "THE PRIEST'S MERCY"
+				},
+				"regional_office": {
+					"available": false,
+					"done": false,
+					"flav": "enter four districts in pen. pencil has been rejected.",
+					"title": "REGIONAL OFFICE"
+				},
+				"royal_static": {
+					"available": false,
+					"done": false,
+					"flav": "smoke one real rock at the block. the crown has poor reception.",
+					"title": "ROYAL STATIC"
+				},
+				"scrap_dog": {
+					"available": false,
+					"done": false,
+					"flav": "the dog. brown. matted. he blinks at you twice.",
+					"state": "idle",
+					"title": "THE SCRAP YARD DOG"
+				},
+				"stripe_package": {
+					"available": false,
+					"done": false,
+					"flav": "take the package to the conductor. don't open it.",
+					"title": "STRIPE'S PACKAGE"
+				}
+			},
+			"rainT": 0.0,
+			"recognition": {
+				"choir_office": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				},
+				"laundromat": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				},
+				"park": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				},
+				"underpass": {
+					"bother": 0,
+					"buy": 0,
+					"full_high": 0,
+					"sell": 0,
+					"sit": 0
+				}
+			},
+			"recognitionVisit": {
+				"seen": {
+
+				},
+				"venue": ""
+			},
+			"shake": 0.0,
+			"smokeT": 0.0,
+			"stickMag": 0.0,
+			"stickX": 0.0,
+			"stickY": 0.0,
+			"toastT": 0.0,
+			"touchMode": false,
+			"travelRuntime": {
+				"cart": {
+					"h": 20.0,
+					"type": "cart",
+					"w": 24.0,
+					"x": 1000.0,
+					"y": 1600.0
+				},
+				"naturalDawnDay": 0
+			},
+			"tweakerCdT": 0.0,
+			"tweakerT": 0.0,
+			"weather": "clear"
+		}
+	},
+	"format": "rock-bottom-karaoke-acceptance",
+	"inputs": {
+		"capture_clicks": 2,
+		"clicks": 0,
+		"keys": 10,
+		"motion_frames": 246,
+		"mouse_motion": 333
+	},
+	"movement": {
+		"cash": 24,
+		"cred": 5,
+		"inputs": 2,
+		"metres": 0.266670018434525
+	},
+	"notes": [
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 1,
+			"key": 50,
+			"menu": {
+				"body": "next: ↓\n\nyour line:\n",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 1 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 2,
+			"key": 51,
+			"menu": {
+				"body": "next: ←\n\nyour line:\n↓",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ "
+					},
+					{
+						"enabled": true,
+						"label": "← (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 2 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 3,
+			"key": 52,
+			"menu": {
+				"body": "next: →\n\nyour line:\n↓ ←",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ "
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 3 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 2,
+			"key": 51,
+			"menu": {
+				"body": "next: ←\n\nyour line:\n↓ ← →",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ "
+					},
+					{
+						"enabled": true,
+						"label": "← (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 4 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 1,
+			"key": 50,
+			"menu": {
+				"body": "next: ↓\n\nyour line:\n↓ ← → ←",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 5 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 0,
+			"key": 49,
+			"menu": {
+				"body": "next: ↑\n\nyour line:\n↓ ← → ← ↓",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "↓ "
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 6 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 0,
+			"key": 49,
+			"menu": {
+				"body": "next: ↑\n\nyour line:\n↓ ← → ← ↓ ↑",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "↓ "
+					},
+					{
+						"enabled": true,
+						"label": "← "
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 7 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		},
+		{
+			"after": {
+				"achievement": true,
+				"activity": false,
+				"cash": 24,
+				"cred": 5,
+				"hp": 100.0,
+				"intro_remember": true,
+				"intro_tony": true,
+				"modal": false,
+				"mode": "playing",
+				"weapon": "fists"
+			},
+			"before": {
+				"achievement": false,
+				"activity": true,
+				"cash": 0,
+				"cred": 0,
+				"hp": 100.0,
+				"intro_remember": false,
+				"intro_tony": false,
+				"modal": true,
+				"mode": "dialogue",
+				"weapon": "fists"
+			},
+			"index": 2,
+			"key": 51,
+			"menu": {
+				"body": "next: ←\n\nyour line:\n↓ ← → ← ↓ ↑ ↑",
+				"choices": [
+					{
+						"enabled": true,
+						"label": "↑ "
+					},
+					{
+						"enabled": true,
+						"label": "↓ "
+					},
+					{
+						"enabled": true,
+						"label": "← (now!)"
+					},
+					{
+						"enabled": true,
+						"label": "→ "
+					},
+					{
+						"enabled": true,
+						"label": "forfeit. (you sound tired)"
+					}
+				],
+				"title": "· 8 / 8 ·"
+			},
+			"released": true,
+			"rendered": true
+		}
+	],
+	"overflow": false,
+	"platform": "Windows",
+	"probe_sha256": "06797b22e4a5d689c8bd15f65821bb587178f236608cedb1490579ab1aca7160",
+	"renderer": "gl_compatibility",
+	"replacements": 0,
+	"schema": 1,
+	"scope": "Actual native input/menu/movement and one source Karaoke completion; not Web/audio/performance evidence.",
+	"source_corpus": "04c8bff447a8de30d9fee156ca80a8331e10028d0b047eb09a22498541339224",
+	"visible_receipt": "you arrive somewhere by walking. who knew.",
+	"walking": [
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 26,
+			"route_points": 7,
+			"wall_ms": 14883
+		},
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 21,
+			"route_points": 6,
+			"wall_ms": 18158
+		},
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 21,
+			"route_points": 6,
+			"wall_ms": 18938
+		},
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 21,
+			"route_points": 6,
+			"wall_ms": 19456
+		},
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 20,
+			"route_points": 6,
+			"wall_ms": 19954
+		},
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 20,
+			"route_points": 6,
+			"wall_ms": 20452
+		},
+		{
+			"blockers": [
+				"horsecop"
+			],
+			"graph_points": 21,
+			"route_points": 6,
+			"wall_ms": 21285
+		},
+		{
+			"blockers": [
+				"jogger"
+			],
+			"graph_points": 27,
+			"route_points": 7,
+			"wall_ms": 26383
+		}
+	],
+	"wall_ms": 12449
+}

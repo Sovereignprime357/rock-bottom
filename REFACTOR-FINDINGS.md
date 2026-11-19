@@ -1050,3 +1050,46 @@ fixed spawn definitions do not imply omitted random generation. Aggregate frame
 rows remain partial for explicit first-person/pixel-helper/touch-scope dispositions
 and platform/performance acceptance. No original sprite contract or completion
 gate is relaxed to admit3D geometry or to convert incomplete evidence into a pass.
+
+### IMPL-3D-FULL-28 — source shortcuts through existing owners
+
+Dispatch ordinary pressed Space, including OS repeats, through Runtime.attack and
+its real cooldown/stun gates. Keep cook/ending priority. Dispatch non-repeat M before
+cooking through the existing ready/mute owner and800ms source receipt; preserve
+established3D mode/loading policy. No parallel audio/input/resource owner. Correct23
+feature acceptance descriptions without changing statuses or evidence obligations.
+
+### IMPL-3D-FULL-29 — sufficient current-player clearance
+
+After existing static clearance, exact finite Contact center/half-extent arithmetic
+may prove a non-player body separated from its only possible peer, the current
+player. Strict > keeps equality on the old path. Invalid/overflow/current-state
+changes fall through or are reread; no retained snapshot or static proof is removed.
+Paired real-physics adapter437 checks pass. Performance benefit remains unproven.
+
+### IMPL-3D-FULL-30 — rendered Karaoke acceptance and failed workload retention
+
+Promote the declared-$5 actual-input Karaoke tour and synthetic59-check contract;
+register it separately from actual platform evidence. Read notes from rendered
+choices, preserve untimed dialogue and verify exact source/intro reward ordering,
+durable save and resumed movement. Retain8bcd failed Office resident routing and
+1080-frame performance evidence. An arrest reducing population to56 cannot become
+a60-actor pass, and CPU above16ms remains independently failed.
+
+### IMPL-3D-FULL-31 — Office resident retry without obstacle changes
+
+Retain the failed8bcd bus-glass approach. Empty/newly blocked driver routes release
+input and retry actual capsule/contact planning at750ms, preserving initial+32
+plans,80points,20s real-displacement and120s leg limits. Neither planning nor
+waypoint bookkeeping resets progress. Current certificates authorize each segment;
+report graph/endpoint refusals and bounded walking context. Contract305 passes
+including seven orchestration counterexamples; actual Office acceptance still
+requires a completed native run. No production geometry, actor or stat changes.
+
+IMPL-3D-FULL-31 continuation: strict NPC service range and unchanged-failed-aim
+suppression prevent the driver waiting outside the actual 60px resolver. A later
+real corner diagnostic showed that long casts can skip a narrow endpoint margin
+band that short controller steps correctly refuse. Add exact-source short-step
+checks and a finite local detour (24 candidates, four tail joins, at most 26 local
+steps per candidate), retaining all original time/replan limits. Contract 1138 and
+the focused native exact-origin replay pass; whole-tour acceptance stays separate.

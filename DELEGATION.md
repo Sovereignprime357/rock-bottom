@@ -885,3 +885,26 @@ Motion/color packet locally validated:114/1143D,19/19original,bothFull exports,
 menu exits,arrows,isolatedsave/reload/feed verified. Commit/push and frozen60 follow;
 actual Office/Web campaigns remain open. Nexttinyinput packet corrects advertised
 Space attack and cooking mute; draft held while the baseline is frozen.
+
+### Input and rendered acceptance continuation
+
+Motion/color8bcd5bd is pushed. Source Space/cooking-M and exact current-player
+clearance are integrated with focused checks. Karaoke actual native11views and
+schema2 handoff pass; its synthetic contract is centrally registered. Office
+driver failed on a transient resident route; World owns the bounded retry repair.
+Characters drafts actual Web hand/cart evidence; Architecture audits the30 remaining
+handler mappings and camera-shake/particle gaps. Root owns engine/Git and115-suite
+freeze. Sustained60/frame target and full native/Web campaigns remain unaccepted.
+
+Input continuation: actual Web hands/cart16/16 passes at1280×720 and960×540;
+selected capture hashes and visuals checked. Office1138 contract and focused corner
+replay pass; full tour remains failed at a live-prop-occupied guidance destination.
+World now drafts alternate service endpoint selection outside tracked source.
+Architecture drafts world-feedback integration; Characters holds hooks/Companion
+guard and reviews the next hand-art refinement. Root runs final gates/exports and
+commits this bounded checkpoint. No full-port completion or performance waiver.
+
+Input checkpoint validation:115/1153D,19/19original,Full Windows/Web builds and
+refreshed browser menu/mute/movement smoke pass. Current local8074 is refreshed.
+Whole Office/other campaign tours, browser progression and sustained60 performance
+remain open. No draft particle/hand-art work is included in this frozen packet.

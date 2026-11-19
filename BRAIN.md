@@ -2982,3 +2982,54 @@ hands verified. Chromium pointer-lock UnknownError persists; fallback is display
 No browser campaign or mounted-cart claim. Source audit found Space ordinary attack
 and M while cooking remain missing; draft narrow fixes after frozen baseline, with
 no status promotion from this discovery. Nextroot actions:commit/push,frozen60,Office.
+
+### 2026-11-19 — input and physical acceptance continuation
+
+Motion/color checkpoint8bcd5bd is pushed on codex/3d-full-port. Frozen1080-frame
+profile fails independently on CPU21.626/20.746ms scene p95 and min56actors after
+real arrests remove4police. Preserve raw reports/provenance; do not compare these
+unequal workloads as an isolated optimization win. Sustained60 needs a lawful
+normal-input evasion driver, not invulnerability, forced wanted or cloned actors.
+
+Promoted exact current-player clearance prefilter after spec: Adapter437PASS.
+Space now reaches existing Combat cooldown/stun including OS repeat; M precedes
+heat handling and gives800ms receipt. Audio72 and Scene418PASS. Manifest23 feature
+descriptions corrected without status/evidence changes. Actual Karaoke12.449s/11
+views PASS: declared fresh$5 only, realMike/pay/eight UI notes, $24/5cred including
+intro, durable save and movement. Contract59PASS; root fixed test-only child method
+signature conflict by naming its routine _karaoke_scenario.
+
+Office frozen8bcd failed after full18/8loop and first route stamp at a transient
+jogger/meter-maid detour. Retain failure screenshot/receipts; boundeddriver repair
+is in progress. Two detached launches had no completion report and count as no
+acceptance. Root now supervises native processes until exit. First focused import
+combined --quit and --quit-after, so root stopped only that identified import and
+reran correct flags. Root still owns all engine/export/Git; agents own disjoint
+source/test packets. Next: correctedOffice,115gates,exports,Webhands,input review,
+frozencomparison, remainingcamera-shake/particle visualgap and adaptationledger.
+
+Additional frozen8bcd release TonyPASS:4.211s wall/3.588s active fight,all3phases,
+217damage,actualending/continue,18.031s high/7.993s crash. Source-earned accepted;
+strictfists-only remains failed. RawJSON/victory/log retained. Navigation4756,
+Contact83,Combat2870,Integration245 focused checks also pass after prefilter;
+original19/19runner green. No silent police lifecycle or source sprite changes.
+
+Input continuation: actual Web hand/cart sequences pass all16 phases at1280 and960,
+with zero engine/browser errors. Retained captures cover alternating punches,
+pickup, both grips, roll/stop, mounted punch/regrip and dismount. Initial harness
+failures (missing storage.js; physical-vs-logical projection rectangle) are kept.
+Corrected harness93 checks pass. This proves synthetic normal-input routing and
+actual Web frames, not hardware capture/audio/performance. Selected visuals reviewed.
+
+Office contract1138 and exact-origin corner replay pass; the whole tour then fails
+on an alley_can guidance endpoint occupied by the later interactive collider.
+Retain failure; draft bounded alternate service endpoints separately. No production
+collision safety is relaxed. Complete115-suite is running; original19/19 passes.
+Feedback pool/hooks/integration and Companion return guard remain isolated drafts.
+
+Input checkpoint complete regressions:115/1153D and19/19original pass; Full Windows
+and Web exports rebuilt. Refreshed production browser wake/M receipt/pause/journal/
+inventory exits and arrow movement observed. Chromium capture UnknownError remains;
+fallback visible, no pointer-lock claim. Current8074 serves this checkpoint.
+Root next commits/pushes, then validates isolated feedback/Companion and the live
+service-endpoint correction. Hand anatomy/cart wrap candidates remain separate.

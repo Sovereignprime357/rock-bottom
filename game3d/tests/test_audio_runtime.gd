@@ -14,8 +14,8 @@ func _initialize() -> void: call_deferred("_run")
 func _check(ok: bool,label: String) -> void:
 	checks += 1
 	if not ok: failures.append(label)
-func _key(code: Key) -> void:
-	var event := InputEventKey.new(); event.pressed = true; event.physical_keycode = code
+func _key(code: Key,echo: bool = false) -> void:
+	var event := InputEventKey.new(); event.pressed = true; event.physical_keycode = code; event.echo = echo
 	game._unhandled_input(event)
 func _stop() -> void:
 	for voice: AudioStreamPlayer in game.sound.players: voice.stop(); voice.stream = null
@@ -76,6 +76,74 @@ func _choice_gate() -> void:
 	game.hud.menu("THE DOOR","",[game._option("leave.",game._resume)])
 	var started: int = game.sound.metrics().started; _key(KEY_ESCAPE)
 	_check(game.runtime.s.mode == "playing" and game.sound.metrics().started == started,"Escape closes without a source option beep")
+	groups += 1
+func _cooking_mute_gate() -> void:
+	game.runtime.fresh(); game._resume(); _place(game.world.service_points["smoke:block"].approach)
+	game.runtime.p.supplies = 1; game.runtime.p.dirtySupplies = 0
+	var menu: Dictionary = game.runtime.open_cooking()
+	_check(menu.get("ok",false),"real cook menu opens for global mute witness")
+	var started: Dictionary = game.runtime.select_cooking(menu.get("token",""),"slow")
+	_check(started.get("started",false) and game.runtime.s.mode == "cookmini","real accepted heat starts before M")
+	game._consume_events(); _stop(); game.sound.muted = false
+	var heat: Dictionary = game.runtime.cooking.snapshot()
+	var player: Dictionary = game.runtime.p.duplicate(true)
+	var seed: int = game.runtime.state.rng_seed
+	var sounds: int = game.sound.metrics().started
+	_key(KEY_M)
+	_check(game.sound.muted and game.hud.receipt.text == "muted." and is_equal_approx(game.hud.receipt_time,0.8),"M during heat mutes with exact source800ms receipt")
+	game.runtime.state.emit_event("sound",{"id":"hurt"}); game._consume_events()
+	_check(game.sound.metrics().started == sounds,"muted cooking suppresses the actual source cue")
+	_key(KEY_M)
+	_check(not game.sound.muted and game.hud.receipt.text == "unmuted." and is_equal_approx(game.hud.receipt_time,0.8),"second M during heat restores sound and source receipt")
+	game.runtime.state.emit_event("sound",{"id":"hurt"}); game._consume_events()
+	_check(_cue_playing("hurt"),"unmuted cooking plays the actual source cue")
+	_check(game.runtime.s.mode == "cookmini" and game.runtime.cooking.snapshot() == heat and game.runtime.p == player and game.runtime.state.rng_seed == seed,"M never locks/bails heat or advances clocks/resources/RNG")
+	for repeated: bool in [true,false]:
+		var ignored := InputEventKey.new(); ignored.physical_keycode = KEY_M
+		ignored.pressed = repeated; ignored.echo = repeated
+		game._unhandled_input(ignored)
+		_check(not game.sound.muted and game.hud.receipt.text == "unmuted." and game.runtime.cooking.snapshot() == heat,"M repeat/key-up is inert during heat")
+	game.runtime.bail_cooking(); game._consume_events(); game._resume()
+	for mode: String in ["paused","title"]:
+		game.runtime.set_mode(mode); game.sound.muted = false
+		_key(KEY_M)
+		_check(game.sound.muted and game.runtime.s.mode == mode and game.hud.receipt.text == "muted.","existing3D M scope retained in "+mode)
+	game.loading = true; _key(KEY_M); game.loading = false
+	_check(game.sound.muted,"loading still refuses global M")
+	game.sound.muted = false; game._resume(); _stop()
+	groups += 1
+func _playing_space_gate() -> void:
+	for web: bool in [false,true]:
+		game.web_controls = web; game.runtime.fresh(); game._resume()
+		_place(game.world.service_points["smoke:block"].approach)
+		game.runtime.p.weapon = "fists"; game.runtime.p.attackCd = 0; game.runtime.p.attacking = 0; game.runtime.p.stunT = 0
+		game.runtime.p.iframes = 1000000 # Isolate input/cooldown from unrelated incoming damage.
+		game.runtime.drain_events(); _stop()
+		var cooldown_ms: float = float(game.runtime.state.content.catalogs.weapons.fists.cd)
+		_key(KEY_SPACE)
+		_check(game.runtime.p.attackCd == cooldown_ms and game.runtime.p.attacking == 160,"advertised playing Space starts actual weapon cooldown/attack on web="+str(web))
+		var after_player: Dictionary = game.runtime.p.duplicate(true)
+		var after_actors: Array = game.runtime.state.npcs.duplicate(true)
+		var seed: int = game.runtime.state.rng_seed
+		_key(KEY_SPACE,true)
+		_check(game.runtime.p == after_player and game.runtime.state.npcs == after_actors and game.runtime.state.rng_seed == seed,"repeated Space before cooldown expiry cannot attack or draw RNG")
+		game.runtime.advance((cooldown_ms+1.0)/1000.0); game._consume_events()
+		_check(game.runtime.p.attackCd == 0 and game.runtime.p.stunT == 0,"actual Runtime elapsed time expires the attack cooldown")
+		_key(KEY_SPACE,true)
+		_check(game.runtime.p.attackCd == cooldown_ms and game.runtime.p.attacking == 160,"source OS-repeat event can attack after actual cooldown expiry")
+		game.runtime.p.attackCd = 0; game.runtime.p.attacking = 0
+		var released := InputEventKey.new(); released.physical_keycode = KEY_SPACE
+		game._unhandled_input(released)
+		_check(game.runtime.p.attackCd == 0 and game.runtime.p.attacking == 0,"Space key-up cannot create an attack")
+		game.runtime.p.stunT = 100; _key(KEY_SPACE,true)
+		_check(game.runtime.p.attackCd == 0 and game.runtime.p.attacking == 0,"repeated Space retains Combat stun gate")
+		game.runtime.p.stunT = 0
+		game.loading = true; _key(KEY_SPACE); game.loading = false
+		_check(game.runtime.p.attackCd == 0 and game.runtime.p.attacking == 0,"loading refuses ordinary Space attack")
+		for mode: String in ["paused","dialogue","title"]:
+			game.runtime.set_mode(mode); _key(KEY_SPACE)
+			_check(game.runtime.s.mode == mode and game.runtime.p.attackCd == 0 and game.runtime.p.attacking == 0,"Space cannot attack from "+mode)
+	game.web_controls = false; game._resume(); _stop()
 	groups += 1
 func _ambient_clock() -> void:
 	game.runtime.fresh(); game._resume(); game.runtime.drain_events()
@@ -152,10 +220,10 @@ func _run() -> void:
 	if not game.ready_for_play: await _finish(); return
 	game.set_process(false); game.qa_mode = true; game.web_controls = false
 	game.store.free(); game.store = MemoryStore.new(); game.add_child(game.store)
-	_input_gate(); _choice_gate(); _ambient_clock(); await _wall_and_lifecycle(); await _high_crash()
+	_input_gate(); _choice_gate(); _cooking_mute_gate(); _playing_space_gate(); _ambient_clock(); await _wall_and_lifecycle(); await _high_crash()
 	await _finish()
 func _finish() -> void:
-	_check(groups == 5,"all5actual-input/choice/ambient/wall/high-crash groups completed")
+	_check(groups == 7,"all7actual-input/choice/cooking-mute/Space/ambient/wall/high-crash groups completed")
 	if game != null and game.sound != null: _stop()
 	await _wait_wall(100)
 	if game != null: game.free(); game = null
@@ -164,4 +232,4 @@ func _finish() -> void:
 		print("3D AUDIO RUNTIME GATE: PASS (%d checks;actual FullScene input/ambient/wall/fresh/restore/18s8s loop)" % checks); quit(0)
 	else:
 		for failure: String in failures: push_error(failure)
-		print("3D AUDIO RUNTIME GATE: FAIL (%d/%d checks;groups%d/5)" % [failures.size(),checks,groups]); quit(1)
+		print("3D AUDIO RUNTIME GATE: FAIL (%d/%d checks;groups%d/7)" % [failures.size(),checks,groups]); quit(1)

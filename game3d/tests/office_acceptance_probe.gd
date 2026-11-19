@@ -6,6 +6,9 @@ const Contact = preload("res://scripts/actor_contact.gd")
 const CombatDriver = preload("res://tests/boss_acceptance_probe.gd")
 const PHASE_LIMITS := {"intro":120000,"routes":480000,"office_claim":480000,"work_restore":300000,"cot_day":150000}
 const TOTAL_LIMIT := 1600000
+const WALK_LOCAL_STEP := 0.04
+const WALK_LOCAL_MAX_STEPS := 26
+const WALK_LOCAL_TAILS := 4
 
 class ObservedScene:
 	extends "res://scripts/full_scene.gd"
@@ -80,6 +83,11 @@ var last_frame_wall := 0
 var walking: Array[Dictionary] = []
 var failure_context: Dictionary = {}
 var walking_goal := Vector3.INF
+var walking_context: Dictionary = {}
+var resident_route_context: Dictionary = {}
+var walking_local_context: Dictionary = {}
+var service_aim_wait: Dictionary = {}
+var service_aim_context: Dictionary = {}
 var last_requested_motion := Vector2.ZERO
 var last_actual_input := Vector2.ZERO
 var rest_count := 0
@@ -541,7 +549,7 @@ func _report() -> Dictionary:
 		elif event.kind == "dependency_missing": dependencies.append(JSON.stringify(event.payload))
 	for id: String in initial_actor_ids:
 		if _actor(id).is_empty(): preserved_ids = false
-	return {"schema":1,"format":"rock-bottom-office-acceptance","fixture":{"kind":"fresh_resources_only","cash":300,"copper":6,"writes":2},"initial":initial,"final":_summary(),"loop":loop,"receipts":receipts,"route_receipts":route_receipts,"phases":phases,"legs":legs,"saves":saves,"attack_receipts":attack_receipts,"weapon_audit":weapon_chain(attack_receipts),"weapon_changes":game.weapon_changes,"events":game.trace,"samples":game.samples,"inputs":inputs,"captures":captures,"walking":walking,"rest_count":rest_count,"canonical_roster_retained":preserved_ids,"initial_actor_ids":initial_actor_ids,"epoch_replacements":game.replacements.size(),"epoch_events":game.replacements,"defense_driver":{"version":2,"combat_replans":combat_replans,"endpoint_route_attempts":combat_endpoint_attempts,"occluded_decisions":combat_occluded_decisions},"combat_navigation":combat_navigation,"combat_context":combat_context.duplicate(true),"overflow":game.overflow,"deaths":deaths,"arrests":arrests,"boss_starts":bosses,"dependencies":dependencies,"wall_ms":Time.get_ticks_msec()-began_wall,"active_ms":game.admitted_ms,"handoff_save":game.store.save_path,"engine":Engine.get_version_info().string,"renderer":RenderingServer.get_current_rendering_method(),"gpu":RenderingServer.get_video_adapter_name(),"scope":"actual native input from fresh progression plus labeled300cash/6copper through3routes/Office/canal/work/persistence/cotday; not resource earning, other claims, Kingdom, Web or performance"}
+	return {"schema":1,"format":"rock-bottom-office-acceptance","fixture":{"kind":"fresh_resources_only","cash":300,"copper":6,"writes":2},"initial":initial,"final":_summary(),"loop":loop,"receipts":receipts,"route_receipts":route_receipts,"phases":phases,"legs":legs,"saves":saves,"attack_receipts":attack_receipts,"weapon_audit":weapon_chain(attack_receipts),"weapon_changes":game.weapon_changes,"events":game.trace,"samples":game.samples,"inputs":inputs,"captures":captures,"walking":walking,"walking_context":walking_context.duplicate(true),"service_aim_context":service_aim_context.duplicate(true),"rest_count":rest_count,"canonical_roster_retained":preserved_ids,"initial_actor_ids":initial_actor_ids,"epoch_replacements":game.replacements.size(),"epoch_events":game.replacements,"defense_driver":{"version":2,"combat_replans":combat_replans,"endpoint_route_attempts":combat_endpoint_attempts,"occluded_decisions":combat_occluded_decisions},"combat_navigation":combat_navigation,"combat_context":combat_context.duplicate(true),"overflow":game.overflow,"deaths":deaths,"arrests":arrests,"boss_starts":bosses,"dependencies":dependencies,"wall_ms":Time.get_ticks_msec()-began_wall,"active_ms":game.admitted_ms,"handoff_save":game.store.save_path,"engine":Engine.get_version_info().string,"renderer":RenderingServer.get_current_rendering_method(),"gpu":RenderingServer.get_video_adapter_name(),"scope":"actual native input from fresh progression plus labeled300cash/6copper through3routes/Office/canal/work/persistence/cotday; not resource earning, other claims, Kingdom, Web or performance"}
 func _run() -> void:
 	if DisplayServer.get_name() == "headless": push_error("Office acceptance requires native rendering"); quit(1); return
 	if "--qa-full" not in OS.get_cmdline_user_args(): push_error("Office acceptance requires --qa-full before FullScene startup; no scenario was started."); quit(1); return
@@ -630,7 +638,7 @@ func _capture_failure() -> void:
 	var nearby: Array[Dictionary] = []
 	for peer: Dictionary in game.physics._contact_peers(game.runtime.p):
 		if _center(peer).distance_to(game.runtime.state.player_center()) <= 200.0: nearby.append(peer.duplicate(true))
-	failure_context = {"world_position":game.player.position,"source_center":game.runtime.state.player_center(),"mode":game.runtime.s.mode,"hp":game.runtime.p.hp,"nearby":nearby,"walks":walking.duplicate(true),"walking_goal":walking_goal,"requested_motion":last_requested_motion,"actual_input":last_actual_input,"mouse_captured":Input.mouse_mode == Input.MOUSE_MODE_CAPTURED,"combat":combat_context.duplicate(true),"combat_replans":combat_replans}
+	failure_context = {"world_position":game.player.position,"source_center":game.runtime.state.player_center(),"mode":game.runtime.s.mode,"hp":game.runtime.p.hp,"nearby":nearby,"walks":walking.duplicate(true),"walking_goal":walking_goal,"walking_context":walking_context.duplicate(true),"service_aim_context":service_aim_context.duplicate(true),"requested_motion":last_requested_motion,"actual_input":last_actual_input,"mouse_captured":Input.mouse_mode == Input.MOUSE_MODE_CAPTURED,"combat":combat_context.duplicate(true),"combat_replans":combat_replans}
 	print("OFFICE PROBE FAILURE CONTEXT: ",JSON.stringify(failure_context))
 	# Freeze only an already-failed scenario; unwind frame_sampled before readback.
 	game.set_process(false)
@@ -648,30 +656,107 @@ func _probe_body(point: Vector3) -> Dictionary:
 	var origin: Vector2 = Content.to_source(point)-half
 	return {"id":"player","x":origin.x,"y":origin.y,"w":game.runtime.p.w,"h":game.runtime.p.h}
 
+static func walking_corner_candidates(from: Vector3,to: Vector3) -> Array[Vector3]:
+	var result: Array[Vector3] = []
+	if not from.is_finite() or not to.is_finite(): return result
+	var heading: float = atan2(to.z-from.z,to.x-from.x)
+	var ordered: Array[Dictionary] = []
+	for radius: float in [0.25,0.5,1.0]:
+		for offset: float in [0.0,PI*0.25,-PI*0.25,PI*0.5,-PI*0.5,PI*0.75,-PI*0.75,PI]:
+			var point: Vector3 = from+Vector3(cos(heading+offset)*radius,0,sin(heading+offset)*radius)
+			ordered.append({"point":point,"distance":point.distance_squared_to(to),"order":ordered.size()})
+	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return a.order < b.order if a.distance == b.distance else a.distance < b.distance)
+	for entry: Dictionary in ordered: result.append(entry.point)
+	return result
+
+func _walking_body(from: Vector3) -> Dictionary:
+	# The current origin comes directly from the model, never a rounded world copy.
+	if from == game.player.position:
+		return {"id":"player","x":game.runtime.p.x,"y":game.runtime.p.y,"w":game.runtime.p.w,"h":game.runtime.p.h}
+	return _probe_body(from)
+
+func _walking_query(body: Dictionary,goal: Vector2) -> Dictionary:
+	var moved: Dictionary = game.physics.move_body(body,goal)
+	var reached: Vector2 = moved.get("position",Vector2.INF)
+	var reason := ""
+	if moved.get("blocked",true): reason = "static_short_step_blocked"
+	elif moved.get("body_contact",false): reason = "live_peer_contact"
+	elif not reached.is_finite() or reached.distance_to(goal) >= 0.005: reason = "short_endpoint_not_reached"
+	return {"ok":reason.is_empty(),"reason":reason,"from":Vector2(body.x,body.y),"to":goal,"actual_end":reached}
+
+func _walking_step(point: Vector3) -> Dictionary:
+	var body: Dictionary = _walking_body(game.player.position)
+	var origin := Vector2(body.x,body.y)
+	var destination: Vector2 = Content.to_source(point)-Vector2(body.w,body.h)*0.5
+	var goal: Vector2 = origin+(destination-origin).limit_length(WALK_LOCAL_STEP/0.04)
+	return _walking_query(body,goal)
+
+func _walking_local_link(from: Vector3,to: Vector3) -> Dictionary:
+	var distance: float = from.distance_to(to)
+	if not from.is_finite() or not to.is_finite() or distance > 1.00001:
+		return {"ok":false,"reason":"local_link_bounds","steps":0}
+	var steps: int = maxi(1,int(ceil(distance/WALK_LOCAL_STEP)))
+	if steps > WALK_LOCAL_MAX_STEPS: return {"ok":false,"reason":"local_step_cap","steps":0}
+	var body: Dictionary = _walking_body(from)
+	var origin := Vector2(body.x,body.y)
+	var destination: Vector2 = Content.to_source(to)-Vector2(body.w,body.h)*0.5
+	for index: int in range(1,steps+1):
+		var goal: Vector2 = origin.lerp(destination,float(index)/float(steps))
+		var checked: Dictionary = _walking_query(body,goal)
+		if not checked.ok: checked.steps = index; return checked
+		# Detached query state only. This never writes the authoritative player.
+		body.x = checked.actual_end.x; body.y = checked.actual_end.y
+	return {"ok":true,"reason":"local_steps_clear","steps":steps,"from":from,"to":to}
+
+func _walking_detour(from: Vector3,to: Vector3) -> PackedVector3Array:
+	var attempts: Array[Dictionary] = []
+	var tails := 0; var total_steps := 0
+	walking_local_context = {"reason":"no_certified_local_join","from":from,"goal":to,"candidates":attempts,"tail_attempts":0,"steps":0}
+	for candidate: Vector3 in walking_corner_candidates(from,to):
+		if not game.world.is_clear_position(candidate):
+			attempts.append({"point":candidate,"reason":"world_endpoint_blocked","steps":0}); continue
+		var link: Dictionary = _walking_local_link(from,candidate)
+		total_steps += int(link.steps)
+		attempts.append({"point":candidate,"reason":link.reason,"steps":link.steps})
+		if not link.ok: continue
+		tails += 1
+		var tail: PackedVector3Array = _resident_route(candidate,to)
+		if tail.size() >= 2:
+			var joined := PackedVector3Array([from,candidate])
+			for index: int in range(1,tail.size()): joined.append(tail[index])
+			walking_local_context.merge({"reason":"certified_outward_join","selected":candidate,"tail_attempts":tails,"steps":total_steps},true)
+			if walking.size() < 128: walking.append({"wall_ms":_walk_clock(),"reason":"certified_outward_join","details":walking_local_context.duplicate(true)})
+			return joined
+		if tails >= WALK_LOCAL_TAILS: break
+	walking_local_context.merge({"tail_attempts":tails,"steps":total_steps},true)
+	return PackedVector3Array()
+
 func _static_route(from: Vector3,to: Vector3) -> PackedVector3Array:
 	var direct: PackedVector3Array = game.world.find_route(from,to)
 	if not direct.is_empty() or game.world.is_clear_position(from) or not game.world.is_clear_position(to): return direct
-	var body: Dictionary = _probe_body(from)
+	var body: Dictionary = _walking_body(from)
 	if not game.physics._clear(body,Vector2(body.x,body.y),false): return direct
-	var heading: float = atan2(to.z-from.z,to.x-from.x)
-	for radius: float in [0.25,0.5,1.0]:
-		for offset: float in [0.0,PI*0.25,-PI*0.25,PI*0.5,-PI*0.5,PI*0.75,-PI*0.75,PI]:
-			var candidate: Vector3 = from+Vector3(cos(heading+offset)*radius,0,sin(heading+offset)*radius)
-			if not game.world.is_clear_position(candidate): continue
-			var destination: Dictionary = _probe_body(candidate); var goal := Vector2(destination.x,destination.y)
-			var moved: Dictionary = game.physics.move_body(body,goal)
-			if moved.blocked or moved.get("body_contact",false) or moved.position.distance_to(goal) >= 0.005: continue
-			var tail: PackedVector3Array = game.world.find_route(candidate,to)
-			if tail.size() < 2: continue
-			var joined := PackedVector3Array([from]); joined.append_array(tail)
-			if walking.size() < 128: walking.append({"wall_ms":Time.get_ticks_msec(),"reason":"actual_capsule_corner_link","from":from,"joined_at":candidate,"metres":radius})
+	var tails := 0
+	for candidate: Vector3 in walking_corner_candidates(from,to):
+		if not game.world.is_clear_position(candidate): continue
+		var link: Dictionary = _walking_local_link(from,candidate)
+		if not link.ok: continue
+		tails += 1
+		var tail: PackedVector3Array = game.world.find_route(candidate,to)
+		if tail.size() >= 2:
+			var joined := PackedVector3Array([from,candidate])
+			for index: int in range(1,tail.size()): joined.append(tail[index])
+			if walking.size() < 128: walking.append({"wall_ms":_walk_clock(),"reason":"actual_capsule_corner_link","from":from,"joined_at":candidate,"steps":link.steps,"tail_attempts":tails})
 			return joined
+		if tails >= WALK_LOCAL_TAILS: break
 	return direct
 
 func _resident_route(from: Vector3,to: Vector3) -> PackedVector3Array:
+	resident_route_context = {"reason":"planning","from":from,"to":to}
 	var base: PackedVector3Array = _static_route(from,to)
 	if base.size() < 2:
 		if walking.size() < 128: walking.append({"wall_ms":Time.get_ticks_msec(),"reason":"static_route_unavailable","from":from,"to":to,"metrics":game.world.last_route_metrics.duplicate(true)})
+		resident_route_context.reason = "static_route_unavailable"
 		return base
 	var peers: Array[Dictionary] = game.physics._contact_peers(game.runtime.p)
 	var blockers: Array[String] = []
@@ -682,7 +767,9 @@ func _resident_route(from: Vector3,to: Vector3) -> PackedVector3Array:
 		for peer: Dictionary in peers:
 			var one: Array[Dictionary] = [peer]
 			if not Contact.first_hit(body,origin,Vector2(destination.x,destination.y)-origin,one).is_empty() and str(peer.id) not in blockers: blockers.append(str(peer.id))
-	if blockers.is_empty(): return base
+	if blockers.is_empty():
+		resident_route_context.reason = "static_route_has_no_peer_blocker"
+		return base
 	var points: Array[Vector3] = [from,to]
 	for point: Vector3 in base:
 		if point not in points: points.append(point)
@@ -699,12 +786,16 @@ func _resident_route(from: Vector3,to: Vector3) -> PackedVector3Array:
 			for sign_y: float in [-1,1]:
 				var candidate: Vector3 = Content.to_world(center+extent*Vector2(sign_x,sign_y),from.y)
 				if candidate not in points: points.append(candidate)
-		if points.size() > 80: return PackedVector3Array()
+		if points.size() > 80:
+			resident_route_context.merge({"reason":"resident_graph_cap","graph_points":points.size(),"blockers":blockers},true)
+			return PackedVector3Array()
 	var graph := AStar2D.new()
 	for index: int in range(points.size()):
 		var body: Dictionary = _probe_body(points[index]); var origin := Vector2(body.x,body.y)
 		if game.physics._clear(body,origin,false) and game.physics._peer_clear(body,origin,peers): graph.add_point(index,Vector2(points[index].x,points[index].z))
-	if not graph.has_point(0) or not graph.has_point(1): return PackedVector3Array()
+	if not graph.has_point(0) or not graph.has_point(1):
+		resident_route_context.merge({"reason":"resident_graph_endpoint_blocked","start_clear":graph.has_point(0),"goal_clear":graph.has_point(1),"blockers":blockers,"graph_points":points.size()},true)
+		return PackedVector3Array()
 	for a: int in range(points.size()):
 		if not graph.has_point(a): continue
 		var body: Dictionary = _probe_body(points[a])
@@ -716,6 +807,7 @@ func _resident_route(from: Vector3,to: Vector3) -> PackedVector3Array:
 			if not moved.blocked and not moved.get("body_contact",false) and moved.position.distance_to(goal) < 0.005: graph.connect_points(a,b)
 	var result := PackedVector3Array()
 	for index: int in graph.get_id_path(0,1): result.append(points[index])
+	resident_route_context.merge({"reason":"resident_graph_disconnected" if result.size() < 2 else "resident_detour_ready","blockers":blockers,"graph_points":points.size(),"route_points":result.size()},true)
 	if walking.size() < 128: walking.append({"wall_ms":Time.get_ticks_msec(),"blockers":blockers,"graph_points":points.size(),"route_points":result.size()})
 	return result
 
@@ -726,19 +818,38 @@ func _resident_ahead(point: Vector3) -> bool:
 	var motion: Vector2 = (goal-origin).limit_length(75.0)
 	return not Contact.first_hit(body,origin,motion,game.physics._contact_peers(body)).is_empty()
 
+static func npc_service_range(player_center: Vector2,actor: Dictionary) -> bool:
+	if actor.is_empty() or actor.get("dead",false) or not player_center.is_finite(): return false
+	for key: String in ["x","y","w","h"]:
+		if not (actor.get(key) is int or actor.get(key) is float) or not is_finite(float(actor[key])): return false
+	var center := Vector2(float(actor.x)+float(actor.w)*0.5,float(actor.y)+float(actor.h)*0.5)
+	return center.is_finite() and player_center.distance_squared_to(center) < 3600.0
+
 func _service_candidate(id: String) -> bool:
 	if id.is_empty(): return false
 	if id == "smoke:block": return game.runtime.memory._zone_contains("block",game.runtime.state.player_center()) and game.physics.can_use_zone("block")
+	var actor: Dictionary = _actor(id)
+	if not actor.is_empty() and not npc_service_range(game.runtime.state.player_center(),actor): return false
 	return game.physics.can_reach_target(id)
+
+func _service_frame() -> void: await game.frame_sampled
 
 func _reach_service(id: String) -> bool:
 	if not _service_candidate(id): return false
+	if interaction_matches(game.resolve_interaction(),id): service_aim_wait.clear(); return true
+	var focus: Vector3 = _service_target(id)
+	if not service_aim_wait.is_empty() and service_aim_wait.id == id and is_same(service_aim_wait.player_epoch,game.runtime.p) and is_same(service_aim_wait.state_epoch,game.runtime.s) and int(service_aim_wait.revision) == game.physics._collision_revision and game.player.position.distance_to(service_aim_wait.position) < 0.25 and focus.distance_to(service_aim_wait.focus) < 0.25:
+		return false
 	_release()
+	var resolved: Dictionary = {}
 	for frame: int in range(120):
 		if not _alive() or game.runtime.s.mode != "playing" or not _service_candidate(id): return false
 		_aim(_service_target(id),_dt())
-		if interaction_matches(game.resolve_interaction(),id): return true
-		await game.frame_sampled
+		resolved = game.resolve_interaction()
+		if interaction_matches(resolved,id): service_aim_wait.clear(); return true
+		await _service_frame()
+	service_aim_wait = {"id":id,"position":game.player.position,"focus":_service_target(id),"revision":game.physics._collision_revision,"player_epoch":game.runtime.p,"state_epoch":game.runtime.s}
+	service_aim_context = {"reason":"intended_action_not_resolved_after120frames","id":id,"resolved":resolved.duplicate(true),"position":game.player.position,"target":_service_target(id)}
 	return false
 
 func _defend_exit() -> bool:
@@ -761,41 +872,88 @@ func _finish_defense(target: Dictionary,started: int,result: String) -> bool:
 	walking.append({"defended_against":target.id,"wall_ms":Time.get_ticks_msec()-started,"dead":target.get("dead",false),"result":result,"actual_position":game.player.position,"combat":combat_context.duplicate(true)})
 	return failures.is_empty() # Ordinary bounded attempts still require a fresh walking route.
 
+# Clock/frame seams are overridden only by detached orchestration contract tests.
+func _walk_clock() -> int: return Time.get_ticks_msec()
+func _walk_frame() -> void: await game.frame_sampled
+
 func _walk_to(target: Vector3,service_id: String = "") -> bool:
-	var leg_started: int = Time.get_ticks_msec()
-	if await _reach_service(service_id): return true
-	var route: PackedVector3Array = _resident_route(game.player.position,target)
-	if route.is_empty() and await _defend_exit(): route = _resident_route(game.player.position,target)
-	if not _check(not route.is_empty(),"real authored walking route exists"): return false
-	var index := 0; var replans := 0; var last_check := -1000
-	var waypoint_start: int = Time.get_ticks_msec(); var progressed_at: int = waypoint_start
+	service_aim_wait.clear()
+	walking_local_context.clear()
+	var leg_started: int = _walk_clock()
+	var progressed_at: int = leg_started
 	var last_position: Vector3 = game.player.position
-	while index < route.size():
-		if await _reach_service(service_id): _release(); return true
-		var point: Vector3 = route[index]; var now: int = Time.get_ticks_msec()
-		if Vector2(game.player.position.x-point.x,game.player.position.z-point.z).length() <= 0.085:
-			index += 1; waypoint_start = now; progressed_at = now; last_position = game.player.position; continue
+	var route := PackedVector3Array()
+	var index := 0; var replans := 0; var plans := 0
+	var last_plan := -1000000; var last_check := -1000000
+	var local_needed := false; var motion_attempt_at := -1
+	while true:
+		var now: int = _walk_clock()
+		if game.player.position.distance_to(last_position) > 0.025:
+			last_position = game.player.position; progressed_at = now
+		walking_context = {"reason":"following_route" if not route.is_empty() else "waiting_for_resident_route","from":game.player.position,"goal":target,"replans":replans,"plans":plans,"elapsed_ms":now-leg_started,"no_progress_ms":now-progressed_at,"route":resident_route_context.duplicate(true),"local":walking_local_context.duplicate(true)}
 		if not _alive() or now-progressed_at > 20000 or now-leg_started >= 120000:
-			_release(); return _check(false,"actual controller walking stalled at "+str(game.player.position)+" toward "+str(point))
-		if game.runtime.s.mode != "playing": _release(); return _check(false,"unexpected modal during real approach: "+str(game.runtime.s.mode))
-		if game.player.position.distance_to(last_position) > 0.025: last_position = game.player.position; progressed_at = now
-		if now-last_check >= 250:
+			_release(); return _check(false,"actual controller walking stalled at "+str(game.player.position)+" toward "+str(target))
+		if game.runtime.s.mode != "playing":
+			_release(); return _check(false,"unexpected modal during real approach: "+str(game.runtime.s.mode))
+		if await _reach_service(service_id):
+			_release()
+			return _check(_walk_clock()-leg_started < 120000 and _walk_clock()-progressed_at <= 20000,"actual service resolution retains walking watchdogs")
+		now = _walk_clock()
+		if Vector2(game.player.position.x-target.x,game.player.position.z-target.z).length() <= 0.085:
+			_release(); return true
+		while index < route.size() and Vector2(game.player.position.x-route[index].x,game.player.position.z-route[index].z).length() <= 0.085: index += 1
+		if index >= route.size(): route.clear()
+		if not route.is_empty() and motion_attempt_at >= 0 and now-progressed_at >= 500 and now-motion_attempt_at >= 500:
+			walking_context.reason = "actual500ms_stagnation"
+			if walking.size() < 128: walking.append({"wall_ms":now,"reason":"actual500ms_stagnation","from":game.player.position,"waypoint":route[index],"goal":target,"replans":replans})
+			local_needed = true; route.clear(); motion_attempt_at = -1; _release()
+		if not route.is_empty() and now-last_check >= 250:
 			last_check = now
-			if _resident_ahead(point) or now-progressed_at >= 500:
-				_release(); replans += 1
-				if not _check(replans <= 32,"bounded live-resident approach replans"): return false
-				route = _resident_route(game.player.position,target)
-				if route.size() < 2 and await _defend_exit():
-					if await _reach_service(service_id): return true
-					route = _resident_route(game.player.position,target)
-				if not _check(route.size() >= 2,"actual residents leave a swept detour without moving them"): return false
-				index = 1; point = route[index]; progressed_at = now
-		var delta: Vector2 = Vector2(point.x-game.player.position.x,point.z-game.player.position.z)
+			var segment: Dictionary = _combat_segment(game.player.position,route[index])
+			walking_context.segment = segment
+			if not segment.get("ok",false):
+				walking_context.reason = "cached_walking_segment_blocked"; route.clear(); _release()
+		if route.is_empty():
+			_release()
+			if now-last_plan >= 750:
+				if plans > 0:
+					if not _check(replans < 32,"bounded live-resident approach replans"): return false
+					replans += 1
+				plans += 1; last_plan = now; motion_attempt_at = -1
+				route = _walking_detour(game.player.position,target) if local_needed else _resident_route(game.player.position,target)
+				if not route.is_empty(): local_needed = false
+				walking_context.merge({"replans":replans,"plans":plans,"route":resident_route_context.duplicate(true)},true)
+				index = 1; last_check = now
+				if route.size() < 2:
+					route.clear(); walking_context.reason = "resident_route_unavailable_retry"
+					# Real defense may move the controller. Retain timers/budget and replan
+					# from its actual endpoint on the next permitted opportunity.
+					if await _defend_exit(): walking_context.reason = "defense_invalidated_walking_route"
+				else:
+					var segment: Dictionary = _combat_segment(game.player.position,route[index])
+					walking_context.segment = segment
+					if not segment.get("ok",false):
+						route.clear(); walking_context.reason = "new_walking_segment_blocked"
+			if route.is_empty():
+				walking_goal = Vector3.INF
+				await _walk_frame(); continue
+		var point: Vector3 = route[index]
 		walking_goal = point
+		var delta := Vector2(point.x-game.player.position.x,point.z-game.player.position.z)
 		var aligned: float = _aim(Vector3(point.x,game.camera.global_position.y,point.z),_dt())
-		_motion(delta.normalized()*minf(1.0,delta.length()/0.4) if aligned > 0.96 else Vector2.ZERO)
-		await game.frame_sampled
-	_release(); return true
+		if aligned > 0.96:
+			var step: Dictionary = _walking_step(point)
+			walking_context.short_step = step
+			if not step.get("ok",false):
+				walking_context.reason = "actual_short_step_refused"
+				if walking.size() < 128: walking.append({"wall_ms":now,"reason":"actual_short_step_refused","query":step.duplicate(true),"waypoint":point,"goal":target,"replans":replans})
+				local_needed = true; route.clear(); motion_attempt_at = -1; _release()
+				await _walk_frame(); continue
+			if motion_attempt_at < 0: motion_attempt_at = now
+			_motion(delta.normalized()*minf(1.0,delta.length()/0.4))
+		else: _motion(Vector2.ZERO)
+		await _walk_frame()
+	return false
 
 func _send_attack(geometry: Dictionary) -> void:
 	var before: Dictionary = {}

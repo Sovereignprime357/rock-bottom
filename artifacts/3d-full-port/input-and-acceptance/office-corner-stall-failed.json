@@ -1,0 +1,1271 @@
+{
+  "acceptance": false,
+  "active_ms": 24310.6060606062,
+  "arrests": 0,
+  "attack_receipts": [],
+  "boss_starts": 0,
+  "canonical_roster_retained": true,
+  "captures": [
+    "failure"
+  ],
+  "combat_context": {
+
+  },
+  "combat_navigation": [],
+  "deaths": 0,
+  "defense_driver": {
+    "combat_replans": 0,
+    "endpoint_route_attempts": 0,
+    "occluded_decisions": 0,
+    "version": 2
+  },
+  "dependencies": [],
+  "diagnostic": false,
+  "engine": "4.5.1-stable (official)",
+  "epoch_events": [],
+  "epoch_replacements": 0,
+  "events": [
+    {
+      "active_ms": 0.0,
+      "kind": "toast",
+      "payload": {
+        "text": "you arrive somewhere by walking. who knew."
+      },
+      "wall_ms": 15805,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 1058.75966666667,
+      "kind": "toast",
+      "payload": {
+        "text": "+ $10\nyou bend down. the ten dollars is yours now.\n(it was always there.)"
+      },
+      "wall_ms": 16758,
+      "weapon": "fists"
+    }
+  ],
+  "failure_context": {
+    "actual_input": "(0.0, -1.0)",
+    "combat": {
+
+    },
+    "combat_replans": 0,
+    "hp": 100.0,
+    "mode": "playing",
+    "mouse_captured": true,
+    "nearby": [
+      {
+        "h": 32.0,
+        "id": "tony",
+        "neutral": true,
+        "w": 28.0,
+        "x": 1620.0,
+        "y": 870.0
+      },
+      {
+        "h": 24.0,
+        "id": "skid_brutus_1",
+        "neutral": false,
+        "w": 32.0,
+        "x": 1627.55004882813,
+        "y": 965.723571777344
+      }
+    ],
+    "requested_motion": "(0.0, -0.999999)",
+    "service_aim_context": {
+
+    },
+    "source_center": "(1600.168, 943.9894)",
+    "walking_context": {
+      "elapsed_ms": 24307,
+      "from": "(22.00673, 0.06, 4.159577)",
+      "goal": "(23.36, 0.06, 3.09)",
+      "no_progress_ms": 20002,
+      "plans": 1,
+      "reason": "following_route",
+      "replans": 0,
+      "route": {
+        "blockers": [
+          "meter_maid"
+        ],
+        "from": "(0.48, 0.06, 0.56)",
+        "graph_points": 14,
+        "reason": "resident_detour_ready",
+        "route_points": 6,
+        "to": "(23.36, 0.06, 3.09)"
+      }
+    },
+    "walking_goal": "(22.647, 0.06, 4.172)",
+    "walks": [
+      {
+        "blockers": [
+          "meter_maid"
+        ],
+        "graph_points": 14,
+        "route_points": 6,
+        "wall_ms": 15753
+      }
+    ],
+    "world_position": "(22.00673, 0.06, 4.159577)"
+  },
+  "failures": [
+    "actual controller walking stalled at (22.00673, 0.06, 4.159577) toward (23.36, 0.06, 3.09)",
+    "nine real source route stamps required",
+    "exactly one accepted progression action required: lease",
+    "exactly one accepted progression action required: desk",
+    "exactly one accepted progression action required: radio",
+    "exactly one accepted progression action required: cot",
+    "exactly one accepted progression action required: select_claim",
+    "exactly one accepted progression action required: survey",
+    "exactly one accepted progression action required: file_claim",
+    "exactly one accepted progression action required: install",
+    "exactly one accepted progression action required: work",
+    "exactly one accepted progression action required: inspect",
+    "exactly one accepted progression action required: file_work",
+    "exactly one accepted progression action required: sleep",
+    "exactly one accepted progression action required: work_next",
+    "exactly one accepted progression action required: disabled_cap",
+    "actual Office progression order differs",
+    "actual purchase/smoke receipts missing",
+    "actual purchased rock and intro smoke missing",
+    "actual source loop incomplete: high_ms",
+    "actual source loop incomplete: crash_ms",
+    "exact two intentional load epochs required",
+    "ordered phases incomplete",
+    "input walk did not arrive within bound",
+    "actual input leg missing: smoke:block",
+    "actual input leg missing: lease_guy",
+    "actual input leg missing: claim:canal:survey",
+    "Office survey/work return legs missing",
+    "nine generated route approaches required",
+    "missing actual input: keys",
+    "earned handoff milestone mismatch"
+  ],
+  "final": {
+    "actors": 56,
+    "brain": 70.0,
+    "cart_mounted": false,
+    "cash": 310,
+    "charisma": 0,
+    "claims": {
+
+    },
+    "copper": 6,
+    "crash": 0.0,
+    "cred": 1,
+    "day": 1,
+    "day_time": 0.451294191919193,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "faction": {
+      "scrap": 0,
+      "spiritual": 0,
+      "street": 0
+    },
+    "high": 0.0,
+    "hp": 100.0,
+    "intro": false,
+    "inventory": [],
+    "max_hp": 100.0,
+    "offenses": 0,
+    "office": {
+      "claimJob": null,
+      "jobsCompleted": 0,
+      "lastWorkId": "",
+      "orderSerial": 0,
+      "owned": false,
+      "rerollDay": 0,
+      "upgrades": {
+        "cot": false,
+        "desk": false,
+        "generator": false,
+        "locker": false,
+        "radio": false,
+        "route_board": false
+      },
+      "workDay": 0,
+      "workJob": null,
+      "workToday": 0
+    },
+    "office_available": false,
+    "office_jobs": 0,
+    "paper_done": false,
+    "rng": 329433668,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "route": {
+
+    },
+    "routes": 0,
+    "shakes": 39.448484848485,
+    "source_position": "(1600.168, 943.9894)",
+    "speed": 2.2,
+    "wanted": 0,
+    "weapon": "fists"
+  },
+  "fixture": {
+    "cash": 300,
+    "copper": 6,
+    "kind": "fresh_resources_only",
+    "writes": 2
+  },
+  "format": "rock-bottom-office-acceptance",
+  "gpu": "NVIDIA GeForce RTX 3080",
+  "handoff_save": "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\office-service-range-native/earned-handoff.json",
+  "initial": {
+    "actors": 56,
+    "brain": 70.0,
+    "cart_mounted": false,
+    "cash": 300,
+    "charisma": 0,
+    "claims": {
+
+    },
+    "copper": 6,
+    "crash": 0.0,
+    "cred": 0,
+    "day": 1,
+    "day_time": 0.35,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "faction": {
+      "scrap": 0,
+      "spiritual": 0,
+      "street": 0
+    },
+    "high": 0.0,
+    "hp": 100.0,
+    "intro": false,
+    "inventory": [],
+    "max_hp": 100.0,
+    "offenses": 0,
+    "office": {
+      "claimJob": null,
+      "jobsCompleted": 0,
+      "lastWorkId": "",
+      "orderSerial": 0,
+      "owned": false,
+      "rerollDay": 0,
+      "upgrades": {
+        "cot": false,
+        "desk": false,
+        "generator": false,
+        "locker": false,
+        "radio": false,
+        "route_board": false
+      },
+      "workDay": 0,
+      "workJob": null,
+      "workToday": 0
+    },
+    "office_available": false,
+    "office_jobs": 0,
+    "paper_done": false,
+    "rng": 4153385641,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "route": {
+
+    },
+    "routes": 0,
+    "shakes": 20.0,
+    "source_position": "(1062.0, 854.0)",
+    "speed": 2.2,
+    "wanted": 0,
+    "weapon": "fists"
+  },
+  "initial_actor_ids": [
+    "tony",
+    "yuri",
+    "brutus",
+    "scrap_dog",
+    "pete",
+    "lurch",
+    "sherri",
+    "paulie",
+    "dave",
+    "mom",
+    "possum",
+    "priest",
+    "conductor",
+    "larry",
+    "stripe",
+    "pigeon",
+    "biggu",
+    "cubscout",
+    "jogger",
+    "dogwalker",
+    "busker",
+    "horsecop",
+    "vapelord",
+    "pothole",
+    "mayorscousin",
+    "phoneguy",
+    "barb",
+    "pinky",
+    "math",
+    "train_hopper",
+    "philosopher",
+    "lease_guy",
+    "gutter_greg",
+    "laundromat_lady",
+    "meter_maid",
+    "food_truck",
+    "priests_son",
+    "karaoke",
+    "skid_brutus_1",
+    "skid_lurch",
+    "skid_sherri"
+  ],
+  "inputs": {
+    "capture_clicks": 1,
+    "clicks": 0,
+    "keys": 0,
+    "menu_clicks": 1,
+    "motion_frames": 886,
+    "mouse_motion": 890
+  },
+  "legs": [
+    {
+      "active_ms": 24310.6060606062,
+      "arrived": false,
+      "crash": 0.0,
+      "from": "(0.48, 0.06, 0.56)",
+      "high": 0.0,
+      "inter_stop": false,
+      "service": "tony",
+      "speed": 2.2,
+      "to": "(22.00673, 0.06, 4.159577)",
+      "wall_ms": 24308
+    }
+  ],
+  "loop": {
+
+  },
+  "overflow": false,
+  "phases": [],
+  "receipts": [],
+  "renderer": "gl_compatibility",
+  "rest_count": 0,
+  "route_receipts": [],
+  "samples": [
+    {
+      "active_ms": 100.0,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.350416666666667,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1050.0,
+        840.0
+      ],
+      "shakes": 20.08,
+      "speed": 2.2,
+      "wall_ms": 15818,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 631.873,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.352632804166667,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1097.33227539063,
+        842.238708496094
+      ],
+      "shakes": 20.5054984,
+      "speed": 2.2,
+      "wall_ms": 16311,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 1145.0,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.354770833333333,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1165.22399902344,
+        854.249328613281
+      ],
+      "shakes": 20.916,
+      "speed": 2.2,
+      "wall_ms": 16822,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 1659.52380952381,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.356914682539683,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1234.81713867188,
+        866.977233886719
+      ],
+      "shakes": 21.327619047619,
+      "speed": 2.2,
+      "wall_ms": 17343,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 2167.587,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.3590316125,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1303.5361328125,
+        879.545593261719
+      ],
+      "shakes": 21.7340696,
+      "speed": 2.2,
+      "wall_ms": 17839,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 2692.63211111111,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.361219300462963,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1374.55163574219,
+        892.533874511719
+      ],
+      "shakes": 22.1541056888889,
+      "speed": 2.2,
+      "wall_ms": 18382,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 3193.28455555556,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.363305352314815,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1438.80151367188,
+        909.821533203125
+      ],
+      "shakes": 22.5546276444444,
+      "speed": 2.2,
+      "wall_ms": 18883,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 3706.6720909091,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.365444467045455,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1503.27587890625,
+        928.34326171875
+      ],
+      "shakes": 22.9653376727273,
+      "speed": 2.2,
+      "wall_ms": 19392,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 4219.37600000001,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.367580733333334,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1573.76025390625,
+        929.710083007813
+      ],
+      "shakes": 23.3755008,
+      "speed": 2.2,
+      "wall_ms": 19891,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 4724.17757575758,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.369684073232324,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 23.779342060606,
+      "speed": 2.2,
+      "wall_ms": 20402,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 5234.09090909092,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.371808712121213,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 24.1872727272727,
+      "speed": 2.2,
+      "wall_ms": 20914,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 5746.96969696971,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.373945707070708,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 24.5975757575758,
+      "speed": 2.2,
+      "wall_ms": 21429,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 6260.35581818183,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.376084815909092,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 25.0082846545455,
+      "speed": 2.2,
+      "wall_ms": 21942,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 6775.7575757576,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.378232323232324,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 25.4206060606061,
+      "speed": 2.2,
+      "wall_ms": 22463,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 7290.90909090912,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.380378787878789,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 25.8327272727273,
+      "speed": 2.2,
+      "wall_ms": 22977,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 7806.29121212124,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.382526213383839,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 26.245032969697,
+      "speed": 2.2,
+      "wall_ms": 23491,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 8322.01748484852,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.384675072853536,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 26.6576139878788,
+      "speed": 2.2,
+      "wall_ms": 24010,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 8822.03011111114,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.386758458796297,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 27.0576240888889,
+      "speed": 2.2,
+      "wall_ms": 24509,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 9348.0158730159,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.388950066137567,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 27.4784126984127,
+      "speed": 2.2,
+      "wall_ms": 25027,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 9868.10433333336,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.39111710138889,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 27.8944834666667,
+      "speed": 2.2,
+      "wall_ms": 25556,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 10383.015,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.393262562500001,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16491699219,
+        929.989379882813
+      ],
+      "shakes": 28.306412,
+      "speed": 2.2,
+      "wall_ms": 26055,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 10910.2623333334,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.395459426388889,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 28.7282098666667,
+      "speed": 2.2,
+      "wall_ms": 26619,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11431.286,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.397630358333334,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 29.1450288,
+      "speed": 2.2,
+      "wall_ms": 27108,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11950.4149259259,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.399793395524691,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 29.5603319407407,
+      "speed": 2.2,
+      "wall_ms": 27623,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12460.0528181818,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.401916886742424,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 29.9680422545454,
+      "speed": 2.2,
+      "wall_ms": 28140,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12980.7202857143,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.404086334523809,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 30.3845762285714,
+      "speed": 2.2,
+      "wall_ms": 28668,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 13485.0,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.4061875,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 30.7879999999999,
+      "speed": 2.2,
+      "wall_ms": 29170,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 13985.1131111111,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.408271304629629,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16809082031,
+        929.989440917969
+      ],
+      "shakes": 31.1880904888888,
+      "speed": 2.2,
+      "wall_ms": 29660,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 14509.775,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.410457395833333,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 31.6078199999999,
+      "speed": 2.2,
+      "wall_ms": 30181,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 15012.8136666667,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.412553390277778,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 32.0102509333333,
+      "speed": 2.2,
+      "wall_ms": 30693,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 15533.524,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.414723016666667,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 32.4268192,
+      "speed": 2.2,
+      "wall_ms": 31208,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 16050.689,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.416877870833333,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 32.8405512,
+      "speed": 2.2,
+      "wall_ms": 31734,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 16575.9259259259,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.419066358024691,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 33.2607407407407,
+      "speed": 2.2,
+      "wall_ms": 32247,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 17094.4444444445,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.421226851851851,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 33.6755555555555,
+      "speed": 2.2,
+      "wall_ms": 32766,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 17597.4976666667,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.423322906944444,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 34.0779981333333,
+      "speed": 2.2,
+      "wall_ms": 33282,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 18114.473909091,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.425476974621212,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 34.4915791272727,
+      "speed": 2.2,
+      "wall_ms": 33802,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 18640.4367619048,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.427668486507937,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 34.9123494095238,
+      "speed": 2.2,
+      "wall_ms": 34325,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 19140.8192222223,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.429753413425926,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 35.3126553777778,
+      "speed": 2.2,
+      "wall_ms": 34827,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 19647.1100000001,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.431862958333334,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 35.717688,
+      "speed": 2.2,
+      "wall_ms": 35319,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 20152.3684545455,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.43396820189394,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 36.1218947636363,
+      "speed": 2.2,
+      "wall_ms": 35834,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 20667.0405757577,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.436112669065658,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 36.533632460606,
+      "speed": 2.2,
+      "wall_ms": 36355,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 21194.7483333334,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.43831145138889,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 36.9557986666666,
+      "speed": 2.2,
+      "wall_ms": 36885,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 21716.6666666668,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.440486111111113,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 37.3733333333333,
+      "speed": 2.2,
+      "wall_ms": 37390,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 22227.0833333334,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.442612847222223,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 37.7816666666667,
+      "speed": 2.2,
+      "wall_ms": 37913,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 22752.8860000001,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.444803691666667,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 38.2023088000001,
+      "speed": 2.2,
+      "wall_ms": 38425,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 23279.1666666668,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.446996527777778,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 38.6233333333334,
+      "speed": 2.2,
+      "wall_ms": 38959,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 23803.6210000001,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.449181754166667,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 39.0428968000001,
+      "speed": 2.2,
+      "wall_ms": 39475,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 24310.6060606062,
+      "actors": 56,
+      "crash": 0.0,
+      "day": 1,
+      "day_time": 0.451294191919193,
+      "high": 0.0,
+      "hp": 100.0,
+      "mode": "playing",
+      "player": [
+        1588.16821289063,
+        929.989440917969
+      ],
+      "shakes": 39.448484848485,
+      "speed": 2.2,
+      "wall_ms": 39996,
+      "weapon": "fists"
+    }
+  ],
+  "saves": [],
+  "schema": 1,
+  "scope": "actual native input from fresh progression plus labeled300cash/6copper through3routes/Office/canal/work/persistence/cotday; not resource earning, other claims, Kingdom, Web or performance",
+  "service_aim_context": {
+
+  },
+  "walking": [
+    {
+      "blockers": [
+        "meter_maid"
+      ],
+      "graph_points": 14,
+      "route_points": 6,
+      "wall_ms": 15753
+    }
+  ],
+  "walking_context": {
+    "elapsed_ms": 24307,
+    "from": "(22.00673, 0.06, 4.159577)",
+    "goal": "(23.36, 0.06, 3.09)",
+    "no_progress_ms": 20002,
+    "plans": 1,
+    "reason": "following_route",
+    "replans": 0,
+    "route": {
+      "blockers": [
+        "meter_maid"
+      ],
+      "from": "(0.48, 0.06, 0.56)",
+      "graph_points": 14,
+      "reason": "resident_detour_ready",
+      "route_points": 6,
+      "to": "(23.36, 0.06, 3.09)"
+    }
+  },
+  "wall_ms": 24378,
+  "weapon_audit": {
+    "accepted_attacks": 0,
+    "errors": [],
+    "final_weapon": "fists",
+    "fists_only": true,
+    "ok": true,
+    "transitions": [],
+    "weapons_used": []
+  },
+  "weapon_changes": []
+}

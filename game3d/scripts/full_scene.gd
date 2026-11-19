@@ -376,6 +376,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not ready_for_play or loading: return
 	if event is InputEventKey and not event.pressed and event.physical_keycode == KEY_F:
 		squint_held = false; runtime.utilities.release_squint()
+	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_M:
+		sound.ready_for_sound = true
+		sound.muted = not sound.muted
+		runtime.state.emit_event("toast",{"text":"muted." if sound.muted else "unmuted.","duration_ms":800})
+		_consume_events(); get_viewport().set_input_as_handled(); return
 	if runtime.s.mode == "cookmini":
 		if event is InputEventKey and event.pressed and not event.echo:
 			sound.ready_for_sound = true
@@ -385,6 +390,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			sound.ready_for_sound = true; runtime.lock_cooking()
 		_consume_events(); get_viewport().set_input_as_handled(); return
+	# Source ordinary Space accepts OS repeats; Combat owns the cooldown gate.
+	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_SPACE and runtime.s.mode == "playing":
+		sound.ready_for_sound = true
+		var keyboard_forward: Vector3 = -camera.global_basis.z
+		runtime.attack(Vector2(keyboard_forward.x,keyboard_forward.z)); _consume_events()
+		get_viewport().set_input_as_handled(); return
 	if event is InputEventKey and event.pressed and not event.echo:
 		sound.ready_for_sound = true
 		if runtime.s.mode == "ending" and event.physical_keycode == KEY_SPACE:
@@ -394,7 +405,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if runtime.s.mode == "dialogue" and event.physical_keycode >= KEY_1 and event.physical_keycode <= KEY_9:
 			hud.activate_choice(int(event.physical_keycode)-int(KEY_1))
 			get_viewport().set_input_as_handled(); return
-		if event.physical_keycode == KEY_M: sound.muted = not sound.muted
 		if event.physical_keycode == KEY_ESCAPE:
 			if runtime.s.mode == "playing" or (web_controls and runtime.s.mode == "dialogue"): _pause()
 			elif not web_controls and runtime.s.mode not in ["title","ending"]: _resume()

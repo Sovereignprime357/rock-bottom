@@ -155,3 +155,111 @@ the same retry/hold correction, with no changes to the shared pure helper signat
 Its contract test inherits the real Office orchestration and supplies OFF-tree
 geometry fixtures for failure/wait/recovery/blocked-final-segment/direct-reacquisition
 and32-plan exhaustion. No production model or collision implementation is replaced.
+
+
+## Transient resident obstruction correction — 2026-11-18
+
+The retained frozen8bcd native report fails on the second generated stop, bus_glass,
+3.48s into that leg: a jogger detour was initially available, then a later resident
+plan returned empty near Meter Maid. The probe immediately failed before its20s
+no-progress allowance. The report did not identify whether the later graph lacked
+an endpoint or a connecting edge; it does not prove the world has no route.
+
+Only the test driver's walking orchestration changes. An empty or newly blocked
+resident route clears stale motion and waits for normal actors to move. It retries
+from the actual current controller position at most once per750ms, with the same
+initial plan plus at most32 replans and the existing80-point graph cap. No accepted
+source action, player position, HP, actor, collision or progression is changed.
+A valid next segment must pass the actual capsule/contact sweep; it is rechecked
+at most250ms apart and ordinary production movement still checks every step.
+A failed fresh certificate never authorizes the old waypoint.
+
+The20s no-progress deadline advances only after actual controller displacement
+exceeding.025m. Planning, waiting, turning, waypoint bookkeeping and failed defense
+do not reset it. The original120s leg and all phase/route/total watchdogs remain.
+Ordinary10s defense may still occur after a failed plan; its resulting physical
+position invalidates the old route, retains the same timers/replan count, and the
+next bounded plan starts there. Failed plans are not arrival; only actual service
+resolution or physical destination arrival succeeds. Permanent obstruction or
+budget exhaustion fails and releases input. A32nd successful replan remains usable.
+
+Record the current plan reason, source/current/goal positions, next segment verdict,
+replan count and elapsed/no-progress times; graph refusals identify static-path,
+start/goal clearance,80-point cap or disconnected visibility graph. Preserve the
+failed frozen report. Headless contract witnesses exercise the inherited async walk
+loop with detached geometry dependencies and an injected test-only clock/frame:
+transient empty plan then recovery, a newly blocked segment, defensive displacement,
+permanent obstruction beyond20s, unchanged120s limit, and32-replan exhaustion.
+These prove orchestration, not real geometry or successful native progression.
+
+
+## Strict NPC resolver range and bounded aiming — 2026-11-18
+
+The retained resident-retry native run completes its first sheet, then reaches
+67.2px from Tony and stops for repeated120-frame aim attempts. The physical service
+allows this outer range, but FullScene.resolve_interaction filters NPC centers with
+strict squared distance<3600 before physical reach/aim. The probe must honor both.
+Its live-NPC candidate uses that exact60px center test, without epsilon expansion,
+plus current physical reach. Static Office/route/claim/zone checks keep their own
+existing source reach rules. Dead/nonfinite NPC candidates are refused.
+
+At an unchanged player position, target position, geometry revision and player/state
+epoch, a failed120-frame aiming attempt is not repeated every walking iteration.
+The driver resumes certified walking. Actual movement of at least.25m, target
+movement of at least.25m, a new revision/epoch/service, or the actual resolver now
+returning the intended action can permit a fresh attempt. The live resolver remains
+the sole success proof; higher-priority actions are never bypassed. An unreachable
+intended action fails explicitly at the real approach rather than renewing an aim
+loop. Existing20s/120s/phase caps and120-frame per-attempt limit remain unchanged.
+Tests cover59.999/60/60.001/67.2px, dead/nonfinite candidates, physical refusal,
+a higher-priority resolver after120 frames, repeated unchanged requests, changed
+position/target/revision/epoch, and immediate real-resolution recovery.
+
+## Short-step corner refusal and finite outward joins — 2026-11-18
+
+The completed real-world corner diagnostic isolates the retained stall at exact
+source top-left(1588.16821289063,929.989440917969). Origin overlap is clear and its
+world roundtrip is identical. A long cast to world(22.647,.06,4.172) reaches beyond
+the CORNER doorway jamb, but normal16–20ms endpoints overlap its unchanged2mm query
+margin. The actual Adapter correctly refuses those endpoints.120 real input frames
+make no progress; normal southward input followed by the same destination succeeds.
+This evidence does not authorize reducing collision margins or changing geometry.
+
+Only the Office probe changes. Each walking frame checks a detached source-owned
+player body for the first at most.04m toward the current waypoint, using the real
+Adapter capsule/contact path. This is a conservative short-step certificate, not a
+prediction of the next frame duration. The game still determines actual speed,
+movement and collisions. Refusal releases input and requests a finite local detour.
+500ms without observed controller progress also invalidates a route once per newly
+issued motion attempt; turning alone does not repeatedly consume replans. Neither
+event resets the20s progress deadline or120s leg deadline.
+
+An outward search has exactly24 candidates: radii.25/.5/1m and eight headings
+relative to the current target, ordered by remaining target distance with stable
+ties. Reject nonfinite/occupied endpoints. Each local join is at most1m and is
+certified as at most26 detached Adapter steps, each at most.04m. All steps retain
+actual static clearance, source live-peer contact and endpoint equality checks;
+the returned detached endpoint becomes the next query origin. No local result
+commits player or actor position. Try at most four existing resident-route joins
+from certified candidates to the original target. The chosen outward point remains
+an explicit waypoint, so a later graph cannot shortcut the short-step proof. The
+existing static-route corner-link fallback uses the same local proof. Never
+subdivide a whole district path or introduce an unbounded search.
+
+Local and ordinary route attempts share the existing initial-plus32 replan budget,
+750ms minimum and80-point resident graph cap. A failed local attempt holds input
+and retries within those bounds. Dynamic obstruction, defense or source movement
+can invalidate its current route normally. Reports retain bounded candidate,
+step/refusal and selected-join facts; exhaustion fails rather than inventing access.
+Headless contract witnesses cover a long-cast success with a blocked short step,
+safe outward selection, live-peer refusal, all-candidates refusal, work caps,
+source-body precision, and500ms actual stagnation without renewing watchdogs.
+
+The focused draft probe's optional --replay runs this inherited walking method from
+only the exact initial diagnostic placement, with canonical actors and real input.
+It captures the start, observed outward motion and destination, and records all
+per-frame numeric source positions and the chosen join. It must arrive within the
+unchanged walk caps and retain all actor identities. This is physical driver proof,
+not earned Office progression or permission to rewrite retained failed reports.
+The sustained-population performance draft needs the same short-step consideration
+before adoption; a long-edge certificate alone does not prove small-step traversal.

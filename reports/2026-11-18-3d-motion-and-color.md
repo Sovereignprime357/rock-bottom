@@ -94,11 +94,19 @@ GDScript hashes unavailable inside the package are explicitly marked unavailable
 The first harness import failed for a missing empty `exclude_filter` preset field;
 the corrected harness imports/exports cleanly, without a production change.
 
-Commit/push and frozen performance follow this local validation. Full campaign/
-platform acceptance and the 60-actor budget remain open. The ongoing feature audit
-also found two narrow advertised shortcut gaps: Space attack in ordinary play and
-M mute during cooking. Their fixes are held for the next bounded packet after
-freezing this measurement baseline.
+Delivered as `8bcd5bd124b16b8e783a8d340043237d11cf72ae` on
+`codex/3d-full-port`, pushed to origin. The frozen 1080-frame-per-phase release
+measurement fails: core/day scene CPU p95 21.626ms, trainyard/night 20.746ms;
+held engine-process monitor p95 43.411/36.963ms. Both phases record an actual arrest
+and lose their four spawned officers, reaching only 56 live supported actors/rigs.
+This is neither sustained60 evidence nor a performance pass. The raw report and
+source/executable provenance are retained under the next packet's
+`artifacts/3d-full-port/input-and-acceptance/`. Different active time and actor
+counts prevent an isolated optimization claim against earlier shorter runs.
+
+Full campaign/platform acceptance and the 60-actor budget remain open. The source
+audit found two advertised shortcut gaps: Space attack in ordinary play and M mute
+during cooking. Their bounded fixes proceed after this frozen baseline.
 
 Evidence: `artifacts/3d-full-port/motion-and-color/`. Decision register:
 `REFACTOR-FINDINGS.md`, IMPL-3D-FULL-21 through 27. Bounded next drafts stay under

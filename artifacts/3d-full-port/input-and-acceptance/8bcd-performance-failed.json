@@ -1,0 +1,3124 @@
+{
+	"acceptance": false,
+	"diagnostic": true,
+	"elapsed_ms": 69891,
+	"engine": "4.5.1-stable (official)",
+	"engine_monitor_semantics": "Frame-weighted samples of TIME_PROCESS's held approximately one-second maximum, not independent engine-frame CPU times. The existing16ms p95 gate is retained conservatively.",
+	"failures": [
+		"core_day: fewer than60 live supported actors with rigs",
+		"core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+		"trainyard_night: fewer than60 live supported actors with rigs",
+		"trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+	],
+	"fps_cap": 60,
+	"frame_intervals_include_probe_bookkeeping": true,
+	"gpu": "NVIDIA GeForce RTX 3080",
+	"msaa": 4,
+	"phases": [
+		{
+			"active_ms": {
+				"frames": {
+					"above16ms": 1080,
+					"max": 43.484,
+					"p50": 25.751333333334,
+					"p95": 28.3333333333333,
+					"p99": 35.087333333334,
+					"samples": 1080
+				},
+				"total": 27372.7594550266
+			},
+			"actor_manifest": {
+				"barb": {
+					"archetype": "default",
+					"name": "BAGGIE BARB",
+					"query_height_m": 1.69000005722046,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1540.0,
+						1190.0
+					],
+					"speed": 0.0,
+					"sprite": "barb",
+					"supported": true,
+					"visual": "barb"
+				},
+				"biggu": {
+					"archetype": "default",
+					"name": "THE BIG GUY",
+					"query_height_m": 2.23000001907349,
+					"size_px": [
+						32.0,
+						38.0
+					],
+					"source_position_px": [
+						1192.60900878906,
+						336.938537597656
+					],
+					"speed": 0.0,
+					"sprite": "biggu",
+					"supported": true,
+					"visual": "biggu"
+				},
+				"brendan_3d_-9223371433529304333_4": {
+					"archetype": "brendan",
+					"name": "COUSIN BRENDAN",
+					"query_height_m": 1.86000001430511,
+					"size_px": [
+						26,
+						30
+					],
+					"source_position_px": [
+						740.951293945313,
+						1392.11938476563
+					],
+					"speed": 2.3,
+					"sprite": "brendan",
+					"supported": true,
+					"visual": "brendan"
+				},
+				"brutus": {
+					"archetype": "charger",
+					"name": "BRUTUS",
+					"query_height_m": 0.95,
+					"size_px": [
+						32.0,
+						24.0
+					],
+					"source_position_px": [
+						480.0,
+						280.0
+					],
+					"speed": 1.4,
+					"sprite": "brutus",
+					"supported": true,
+					"visual": "brutus"
+				},
+				"busker": {
+					"archetype": "default",
+					"name": "BUSKER",
+					"query_height_m": 1.86000001430511,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1100.0,
+						1500.0
+					],
+					"speed": 0.0,
+					"sprite": "busker",
+					"supported": true,
+					"visual": "busker"
+				},
+				"conductor": {
+					"archetype": "default",
+					"name": "THE CONDUCTOR",
+					"query_height_m": 1.87999999523163,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						680.0,
+						2960.0
+					],
+					"speed": 0.0,
+					"sprite": "conductor",
+					"supported": true,
+					"visual": "conductor"
+				},
+				"cop_3d_-9223371433529304333_1": {
+					"archetype": "cop",
+					"name": "COP",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						28,
+						32
+					],
+					"source_position_px": [
+						1039.9033203125,
+						1336.9443359375
+					],
+					"speed": 1.5,
+					"sprite": "cop",
+					"supported": true,
+					"visual": "cop"
+				},
+				"cop_3d_-9223371433529304333_2": {
+					"archetype": "cop",
+					"name": "COP",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						28,
+						32
+					],
+					"source_position_px": [
+						1041.43786621094,
+						1252.52624511719
+					],
+					"speed": 1.5,
+					"sprite": "cop",
+					"supported": true,
+					"visual": "cop"
+				},
+				"cop_3d_-9223371433529304333_3": {
+					"archetype": "cop",
+					"name": "COP",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						28,
+						32
+					],
+					"source_position_px": [
+						1041.54821777344,
+						1338.00598144531
+					],
+					"speed": 1.5,
+					"sprite": "cop",
+					"supported": true,
+					"visual": "cop"
+				},
+				"cubscout": {
+					"archetype": "default",
+					"name": "CUBSCOUT",
+					"query_height_m": 1.27999997138977,
+					"size_px": [
+						22.0,
+						26.0
+					],
+					"source_position_px": [
+						885.50244140625,
+						1452.10388183594
+					],
+					"speed": 1.2,
+					"sprite": "cubscout",
+					"supported": true,
+					"visual": "cubscout"
+				},
+				"dave": {
+					"archetype": "default",
+					"name": "CHATTY DAVE",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						900.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "dave",
+					"supported": true,
+					"visual": "dave"
+				},
+				"dogwalker": {
+					"archetype": "default",
+					"name": "DOG WALKER (PAISLEY)",
+					"query_height_m": 1.83000004291534,
+					"size_px": [
+						22.0,
+						26.0
+					],
+					"source_position_px": [
+						996.668762207031,
+						1180.69689941406
+					],
+					"speed": 0.9,
+					"sprite": "dogwalker",
+					"supported": true,
+					"visual": "dogwalker"
+				},
+				"food_truck": {
+					"archetype": "default",
+					"name": "FOOD TRUCK GUY",
+					"query_height_m": 1.86000001430511,
+					"size_px": [
+						30.0,
+						32.0
+					],
+					"source_position_px": [
+						920.0,
+						1500.0
+					],
+					"speed": 0.0,
+					"sprite": "foodtruck",
+					"supported": true,
+					"visual": "foodtruck"
+				},
+				"gutter_greg": {
+					"archetype": "default",
+					"name": "GUTTER GREG",
+					"query_height_m": 1.82000005245209,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						4500.0,
+						2050.0
+					],
+					"speed": 0.0,
+					"sprite": "gutter_greg",
+					"supported": true,
+					"visual": "gutter_greg"
+				},
+				"horsecop": {
+					"archetype": "default",
+					"name": "HORSE COP",
+					"query_height_m": 3.05,
+					"size_px": [
+						36.0,
+						32.0
+					],
+					"source_position_px": [
+						1398.79357910156,
+						1080.0
+					],
+					"speed": 0.0,
+					"sprite": "horsecop",
+					"supported": true,
+					"visual": "horsecop"
+				},
+				"jogger": {
+					"archetype": "default",
+					"name": "JOGGER",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						22.0,
+						26.0
+					],
+					"source_position_px": [
+						1149.51281738281,
+						600.0
+					],
+					"speed": 2.4,
+					"sprite": "jogger",
+					"supported": true,
+					"visual": "jogger"
+				},
+				"karaoke": {
+					"archetype": "default",
+					"name": "KARAOKE MIKE",
+					"query_height_m": 1.82000005245209,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1660.0,
+						1180.0
+					],
+					"speed": 0.0,
+					"sprite": "karaoke",
+					"supported": true,
+					"visual": "karaoke"
+				},
+				"kingdom_guard_blue_tarp_1_0": {
+					"archetype": "charger",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6044.0,
+						644.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_blue_tarp_1_1": {
+					"archetype": "swarmer",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6124.0,
+						1104.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_blue_tarp_1_2": {
+					"archetype": "ranged",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6784.0,
+						684.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_blue_tarp_1_3": {
+					"archetype": "swarmer",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6484.0,
+						1164.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_0": {
+					"archetype": "charger",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7427.0615234375,
+						1831.39099121094
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_1": {
+					"archetype": "swarmer",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7524.0,
+						2224.0
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_2": {
+					"archetype": "ranged",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						8227.0615234375,
+						1831.39099121094
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_3": {
+					"archetype": "swarmer",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7784.0,
+						1784.0
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_copper_choir_1_0": {
+					"archetype": "charger",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6024.0,
+						3184.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_copper_choir_1_1": {
+					"archetype": "swarmer",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6484.0,
+						3184.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_copper_choir_1_2": {
+					"archetype": "ranged",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6924.0,
+						3204.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_copper_choir_1_3": {
+					"archetype": "swarmer",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7024.0,
+						3684.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_throne_1_0": {
+					"archetype": "charger",
+					"name": "KNIGHT EMERITUS",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7124.0,
+						4664.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_throne_1_1": {
+					"archetype": "charger",
+					"name": "KNIGHT EMERITUS",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7484.0,
+						4684.0
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_throne_1_2": {
+					"archetype": "ranged",
+					"name": "KNIGHT EMERITUS",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7784.0,
+						4984.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"larry": {
+					"archetype": "default",
+					"name": "LOUD LARRY",
+					"query_height_m": 1.98000001907349,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						440.0,
+						1780.0
+					],
+					"speed": 1.3,
+					"sprite": "larry",
+					"supported": true,
+					"visual": "larry"
+				},
+				"laundromat_lady": {
+					"archetype": "default",
+					"name": "LAUNDROMAT LADY",
+					"query_height_m": 1.72000002861023,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1720.0,
+						1180.0
+					],
+					"speed": 0.0,
+					"sprite": "launderlady",
+					"supported": true,
+					"visual": "launderlady"
+				},
+				"lease_guy": {
+					"archetype": "default",
+					"name": "THE LEASING GUY",
+					"query_height_m": 1.8400000333786,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						5400.0,
+						3100.0
+					],
+					"speed": 0.0,
+					"sprite": "lease_guy",
+					"supported": true,
+					"visual": "lease_guy"
+				},
+				"lurch": {
+					"archetype": "grabber",
+					"name": "LURCH",
+					"query_height_m": 2.24,
+					"size_px": [
+						28.0,
+						34.0
+					],
+					"source_position_px": [
+						191.678619384766,
+						1402.216796875
+					],
+					"speed": 1.4,
+					"sprite": "lurch",
+					"supported": true,
+					"visual": "lurch"
+				},
+				"math": {
+					"archetype": "default",
+					"name": "THE MATHEMATICIAN",
+					"query_height_m": 1.87000000476837,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						1340.0,
+						380.0
+					],
+					"speed": 0.0,
+					"sprite": "math",
+					"supported": true,
+					"visual": "math"
+				},
+				"mayorscousin": {
+					"archetype": "default",
+					"name": "MAYOR'S COUSIN",
+					"query_height_m": 1.91999995708466,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1345.65686035156,
+						1505.65686035156
+					],
+					"speed": 0.0,
+					"sprite": "mayorscousin",
+					"supported": true,
+					"visual": "mayorscousin"
+				},
+				"meter_maid": {
+					"archetype": "default",
+					"name": "METER MAID",
+					"query_height_m": 1.76999998092651,
+					"size_px": [
+						26.0,
+						30.0
+					],
+					"source_position_px": [
+						1430.52038574219,
+						916.560974121094
+					],
+					"speed": 1.6,
+					"sprite": "metermaid",
+					"supported": true,
+					"visual": "metermaid"
+				},
+				"mom": {
+					"archetype": "default",
+					"name": "WHOLE FOODS MOM",
+					"query_height_m": 1.79999995231628,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1200.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "mom",
+					"supported": true,
+					"visual": "mom"
+				},
+				"paulie": {
+					"archetype": "ranged",
+					"name": "PAULIE THE FACE",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						438.703216552734,
+						1545.83032226563
+					],
+					"speed": 1.5,
+					"sprite": "paulie",
+					"supported": true,
+					"visual": "paulie"
+				},
+				"pete": {
+					"archetype": "default",
+					"name": "PAWN SHOP PETE",
+					"query_height_m": 1.77,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						250.0,
+						700.0
+					],
+					"speed": 0.0,
+					"sprite": "pete",
+					"supported": true,
+					"visual": "pete"
+				},
+				"philosopher": {
+					"archetype": "default",
+					"name": "PARK BENCH PHILOSOPHER",
+					"query_height_m": 1.64999997615814,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						2680.0,
+						1080.0
+					],
+					"speed": 0.0,
+					"sprite": "philosopher",
+					"supported": true,
+					"visual": "philosopher"
+				},
+				"phoneguy": {
+					"archetype": "default",
+					"name": "THE PHONE GUY",
+					"query_height_m": 1.88999998569489,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1180.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "phoneguy",
+					"supported": true,
+					"visual": "phoneguy"
+				},
+				"pigeon": {
+					"archetype": "default",
+					"name": "THE PIGEON KING",
+					"query_height_m": 0.63,
+					"size_px": [
+						24.0,
+						20.0
+					],
+					"source_position_px": [
+						2653.04272460938,
+						1175.63024902344
+					],
+					"speed": 0.8,
+					"sprite": "pigeon",
+					"supported": true,
+					"visual": "pigeon"
+				},
+				"pinky": {
+					"archetype": "default",
+					"name": "PINKY POLENTA",
+					"query_height_m": 1.83000004291534,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						1330.0,
+						1160.0
+					],
+					"speed": 0.0,
+					"sprite": "pinky",
+					"supported": true,
+					"visual": "pinky"
+				},
+				"possum": {
+					"archetype": "default",
+					"name": "THE POSSUM",
+					"query_height_m": 0.55,
+					"size_px": [
+						28.0,
+						24.0
+					],
+					"source_position_px": [
+						600.0,
+						1500.0
+					],
+					"speed": 0.0,
+					"sprite": "possum",
+					"supported": true,
+					"visual": "possum"
+				},
+				"pothole": {
+					"archetype": "default",
+					"name": "A POTHOLE (TALKING)",
+					"query_height_m": 0.065,
+					"size_px": [
+						32.0,
+						18.0
+					],
+					"source_position_px": [
+						980.0,
+						920.0
+					],
+					"speed": 0.0,
+					"sprite": "pothole",
+					"supported": true,
+					"visual": "pothole"
+				},
+				"priest": {
+					"archetype": "default",
+					"name": "FATHER O'MALLEY",
+					"query_height_m": 1.87000000476837,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1800.0,
+						1460.0
+					],
+					"speed": 0.0,
+					"sprite": "priest",
+					"supported": true,
+					"visual": "priest"
+				},
+				"priests_son": {
+					"archetype": "default",
+					"name": "THE PRIEST'S SON",
+					"query_height_m": 1.74000000953674,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1740.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "priestson",
+					"supported": true,
+					"visual": "priestson"
+				},
+				"scrap_dog": {
+					"archetype": "passive",
+					"name": "THE DOG",
+					"query_height_m": 0.88,
+					"size_px": [
+						26.0,
+						20.0
+					],
+					"source_position_px": [
+						580.0,
+						150.0
+					],
+					"speed": 0.0,
+					"sprite": "scrap_dog",
+					"supported": true,
+					"visual": "scrap_dog"
+				},
+				"sherri": {
+					"archetype": "swarmer",
+					"name": "SPIDER-BITE SHERRI",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						26.0,
+						30.0
+					],
+					"source_position_px": [
+						395.715179443359,
+						1447.36254882813
+					],
+					"speed": 2.0,
+					"sprite": "sherri",
+					"supported": true,
+					"visual": "sherri"
+				},
+				"skid_brutus_1": {
+					"archetype": "charger",
+					"name": "BRUTUS (SKID)",
+					"query_height_m": 0.95,
+					"size_px": [
+						32.0,
+						24.0
+					],
+					"source_position_px": [
+						2396.22412109375,
+						1714.146484375
+					],
+					"speed": 1.5,
+					"sprite": "brutus",
+					"supported": true,
+					"visual": "brutus"
+				},
+				"skid_lurch": {
+					"archetype": "grabber",
+					"name": "LURCH (SKID)",
+					"query_height_m": 2.24,
+					"size_px": [
+						28.0,
+						34.0
+					],
+					"source_position_px": [
+						2710.69067382813,
+						1842.42077636719
+					],
+					"speed": 1.5,
+					"sprite": "lurch",
+					"supported": true,
+					"visual": "lurch"
+				},
+				"skid_sherri": {
+					"archetype": "swarmer",
+					"name": "SHERRI (SKID)",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						26.0,
+						30.0
+					],
+					"source_position_px": [
+						2786.060546875,
+						2098.05004882813
+					],
+					"speed": 2.1,
+					"sprite": "sherri",
+					"supported": true,
+					"visual": "sherri"
+				},
+				"stripe": {
+					"archetype": "default",
+					"name": "STRIPE",
+					"query_height_m": 1.83000004291534,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						620.0,
+						1780.0
+					],
+					"speed": 0.0,
+					"sprite": "stripe",
+					"supported": true,
+					"visual": "stripe"
+				},
+				"tony": {
+					"archetype": "default",
+					"name": "TRE BAG TONY",
+					"query_height_m": 1.96,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1620.0,
+						870.0
+					],
+					"speed": 0.0,
+					"sprite": "tony",
+					"supported": true,
+					"visual": "tony"
+				},
+				"train_hopper": {
+					"archetype": "default",
+					"name": "THE TRAIN HOPPER",
+					"query_height_m": 1.87999999523163,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						820.0,
+						2940.0
+					],
+					"speed": 0.0,
+					"sprite": "train_hopper",
+					"supported": true,
+					"visual": "train_hopper"
+				},
+				"vapelord": {
+					"archetype": "default",
+					"name": "THE VAPE LORD",
+					"query_height_m": 1.88999998569489,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						840.0,
+						1100.0
+					],
+					"speed": 0.0,
+					"sprite": "vapelord",
+					"supported": true,
+					"visual": "vapelord"
+				},
+				"yuri": {
+					"archetype": "default",
+					"name": "YURI",
+					"query_height_m": 2.02,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						300.0,
+						200.0
+					],
+					"speed": 0.0,
+					"sprite": "yuri",
+					"supported": true,
+					"visual": "yuri"
+				}
+			},
+			"born_ids": [],
+			"charging_actor_ids": [
+				"skid_brutus_1"
+			],
+			"completed_laps": 1,
+			"dead_ids": [],
+			"dependencies": [],
+			"diagnostic_switches": {
+				"without_grade": false,
+				"without_pose_input_memo": false
+			},
+			"draw_calls": {
+				"max": 2812.0,
+				"p50": 2150.0,
+				"p95": 2191.0,
+				"p99": 2197.0,
+				"samples": 1080
+			},
+			"elapsed_ms": 27370,
+			"end_day_time": 0.429269841358026,
+			"engine_process_monitor_window_max_ms": {
+				"above16ms": 1080,
+				"max": 44.392,
+				"p50": 28.583,
+				"p95": 43.411,
+				"p99": 44.392,
+				"samples": 1080
+			},
+			"events": {
+				"actor_chatter": 9,
+				"actor_spawned": 4,
+				"arrest": 1,
+				"communications_changed": 2,
+				"feed": 1,
+				"flash": 2,
+				"hurt": 4,
+				"sound": 30,
+				"toast": 8
+			},
+			"frame_interval_ms": {
+				"above16ms": 1079,
+				"max": 44.442,
+				"p50": 25.155,
+				"p95": 29.004,
+				"p99": 35.646,
+				"samples": 1079
+			},
+			"frames": 1080,
+			"gpu_timing_available": true,
+			"id": "core_day",
+			"initial_player_top_left_px": [
+				660.0,
+				1296.0
+			],
+			"max_nodes": 5397.0,
+			"max_video_memory_bytes": 202708832.0,
+			"min_live_actors": 56,
+			"min_live_rigs": 56,
+			"min_supported_live_actors": 56,
+			"moving_actor_ids": [
+				"sherri",
+				"paulie",
+				"pigeon",
+				"cubscout",
+				"jogger",
+				"dogwalker",
+				"horsecop",
+				"meter_maid",
+				"skid_brutus_1",
+				"skid_lurch",
+				"cop_3d_-9223371433529304333_1",
+				"cop_3d_-9223371433529304333_2",
+				"cop_3d_-9223371433529304333_3",
+				"brendan_3d_-9223371433529304333_4",
+				"lurch",
+				"skid_sherri"
+			],
+			"navigation_after": {
+				"actors": 11,
+				"body_contact_tests": 383914,
+				"body_contacts": 122,
+				"body_repairs": 0,
+				"body_repairs_deferred": 0,
+				"buckets": 638,
+				"cache_hits": 2150,
+				"colliders": 1037,
+				"completed": 63,
+				"contact_index_builds": 1241,
+				"deferred": 0,
+				"failed": 103,
+				"frame": 1200,
+				"frame_starts": 0,
+				"frame_tests": 0,
+				"geometry_candidates": 304217,
+				"index_us": 685,
+				"max_completion_ms": 502.585393939393,
+				"max_plan_us": 1122,
+				"max_queue": 3,
+				"max_starts": 2,
+				"max_tests": 38,
+				"max_wait_ms": 100.0,
+				"oldest_pending_ms": 0.0,
+				"placement_cache_hits": 138814,
+				"placement_overlap_queries": 138379,
+				"planning_p50_us": 11,
+				"planning_p95_us": 1031,
+				"queued": 0,
+				"requests": 183,
+				"revision": 52,
+				"sample_frames": 1200,
+				"scope": "local planner only; real physics movement and60AI/rig rendering are separately measured"
+			},
+			"navigation_before": {
+				"actors": 16,
+				"body_contact_tests": 38265,
+				"body_contacts": 0,
+				"body_repairs": 0,
+				"body_repairs_deferred": 0,
+				"buckets": 638,
+				"cache_hits": 245,
+				"colliders": 1037,
+				"completed": 10,
+				"contact_index_builds": 160,
+				"deferred": 0,
+				"failed": 11,
+				"frame": 120,
+				"frame_starts": 0,
+				"frame_tests": 26,
+				"geometry_candidates": 21028,
+				"index_us": 685,
+				"max_completion_ms": 208.439,
+				"max_plan_us": 1052,
+				"max_queue": 2,
+				"max_starts": 2,
+				"max_tests": 34,
+				"max_wait_ms": 100.0,
+				"oldest_pending_ms": 268.620804232804,
+				"placement_cache_hits": 16630,
+				"placement_overlap_queries": 13113,
+				"planning_p50_us": 11,
+				"planning_p95_us": 1031,
+				"queued": 1,
+				"requests": 24,
+				"revision": 51,
+				"sample_frames": 120,
+				"scope": "local planner only; real physics movement and60AI/rig rendering are separately measured"
+			},
+			"navigation_phase_max_queue": 3,
+			"navigation_phase_max_starts": 2,
+			"navigation_phase_max_tests": 38,
+			"physics_queries": 171024,
+			"physics_queries_per_active_second": 6247.96342805672,
+			"player_walked_m": 88.5193674681448,
+			"projectile_peak": 0,
+			"removed_ids": [
+				"cop_3d_-9223371433529304333_1",
+				"cop_3d_-9223371433529304333_2",
+				"cop_3d_-9223371433529304333_3",
+				"brendan_3d_-9223371433529304333_4"
+			],
+			"render_setup_cpu_ms": {
+				"above16ms": 0,
+				"max": 0.908,
+				"p50": 0.397,
+				"p95": 0.523,
+				"p99": 0.623,
+				"samples": 1080
+			},
+			"rendered_objects": {
+				"max": 4298.0,
+				"p50": 3519.0,
+				"p95": 3688.0,
+				"p99": 3794.0,
+				"samples": 1080
+			},
+			"rendered_primitives": {
+				"max": 1504282.0,
+				"p50": 1114092.0,
+				"p95": 1139594.0,
+				"p99": 1143507.0,
+				"samples": 1080
+			},
+			"route_setup_us": 3407,
+			"sampled_oldest_pending_ms": 303.469289081289,
+			"scene_cpu_ms": {
+				"above16ms": 1080,
+				"max": 34.871,
+				"p50": 19.376,
+				"p95": 21.626,
+				"p99": 27.294,
+				"samples": 1080
+			},
+			"scene_scope_totals_ms": {
+				"events": 30.7769999999999,
+				"interaction": 882.749999999999,
+				"model_input_hud_world": 14172.505,
+				"models": 6074.37199999999,
+				"runtime_actor_clearance": 3970.702,
+				"runtime_actor_motion": 1898.957,
+				"runtime_actor_pose": 924.144000000001,
+				"runtime_actors": 8654.72499999999,
+				"runtime_combat_timers": 117.874999999999,
+				"runtime_memory_day_territory": 677.775999999999,
+				"runtime_movement": 1358.665,
+				"runtime_progression": 49.7599999999999,
+				"runtime_projectiles_boss": 52.1779999999998,
+				"runtime_quests_pickups": 86.3469999999997,
+				"runtime_state_ambient": 865.944
+			},
+			"scene_scopes_ms": {
+				"events": {
+					"above16ms": 0,
+					"max": 4.069,
+					"p50": 0.022,
+					"p95": 0.036,
+					"p99": 0.047,
+					"samples": 1080
+				},
+				"interaction": {
+					"above16ms": 0,
+					"max": 1.667,
+					"p50": 0.798,
+					"p95": 0.985,
+					"p99": 1.177,
+					"samples": 1080
+				},
+				"model_input_hud_world": {
+					"above16ms": 29,
+					"max": 23.503,
+					"p50": 12.908,
+					"p95": 15.045,
+					"p99": 19.118,
+					"samples": 1080
+				},
+				"models": {
+					"above16ms": 0,
+					"max": 11.056,
+					"p50": 5.476,
+					"p95": 6.938,
+					"p99": 7.745,
+					"samples": 1080
+				},
+				"runtime_actor_clearance": {
+					"above16ms": 0,
+					"max": 6.8,
+					"p50": 3.621,
+					"p95": 4.18,
+					"p99": 5.397,
+					"samples": 1080
+				},
+				"runtime_actor_motion": {
+					"above16ms": 0,
+					"max": 3.991,
+					"p50": 1.681,
+					"p95": 2.363,
+					"p99": 2.607,
+					"samples": 1080
+				},
+				"runtime_actor_pose": {
+					"above16ms": 0,
+					"max": 1.683,
+					"p50": 0.844,
+					"p95": 0.984,
+					"p99": 1.297,
+					"samples": 1080
+				},
+				"runtime_actors": {
+					"above16ms": 0,
+					"max": 15.505,
+					"p50": 7.899,
+					"p95": 9.296,
+					"p99": 12.062,
+					"samples": 1080
+				},
+				"runtime_combat_timers": {
+					"above16ms": 0,
+					"max": 0.328,
+					"p50": 0.103,
+					"p95": 0.159,
+					"p99": 0.211,
+					"samples": 1080
+				},
+				"runtime_memory_day_territory": {
+					"above16ms": 0,
+					"max": 1.384,
+					"p50": 0.611,
+					"p95": 0.76,
+					"p99": 1.016,
+					"samples": 1080
+				},
+				"runtime_movement": {
+					"above16ms": 0,
+					"max": 2.819,
+					"p50": 1.332,
+					"p95": 1.635,
+					"p99": 2.138,
+					"samples": 1080
+				},
+				"runtime_progression": {
+					"above16ms": 0,
+					"max": 0.137,
+					"p50": 0.045,
+					"p95": 0.065,
+					"p99": 0.085,
+					"samples": 1080
+				},
+				"runtime_projectiles_boss": {
+					"above16ms": 0,
+					"max": 0.148,
+					"p50": 0.047,
+					"p95": 0.071,
+					"p99": 0.093,
+					"samples": 1080
+				},
+				"runtime_quests_pickups": {
+					"above16ms": 0,
+					"max": 0.201,
+					"p50": 0.077,
+					"p95": 0.107,
+					"p99": 0.133,
+					"samples": 1080
+				},
+				"runtime_state_ambient": {
+					"above16ms": 0,
+					"max": 1.556,
+					"p50": 0.786,
+					"p95": 0.981,
+					"p99": 1.278,
+					"samples": 1080
+				}
+			},
+			"seed": 432484078,
+			"source_route_centers_px": [
+				[
+					672.0,
+					1310.0
+				],
+				[
+					1432.0,
+					1310.0
+				],
+				[
+					1432.0,
+					1022.0
+				],
+				[
+					918.049987792969,
+					1027.17504882813
+				],
+				[
+					881.950012207031,
+					1027.17504882813
+				],
+				[
+					672.0,
+					1022.0
+				],
+				[
+					672.0,
+					1310.0
+				]
+			],
+			"stage_calls": {
+				"actors": {
+					"cpu_ms_per_active_second": 316.180216109366,
+					"cpu_ms_per_call": 3.97552824988516,
+					"cpu_total_ms": 8654.72499999999,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"combat_timers": {
+					"cpu_ms_per_active_second": 4.306288527237,
+					"cpu_ms_per_call": 0.0541456132292141,
+					"cpu_total_ms": 117.874999999999,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"memory_day_territory": {
+					"cpu_ms_per_active_second": 24.7609672350931,
+					"cpu_ms_per_call": 0.31133486449242,
+					"cpu_total_ms": 677.775999999999,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"movement": {
+					"cpu_ms_per_active_second": 49.6356606732428,
+					"cpu_ms_per_call": 0.624099678456591,
+					"cpu_total_ms": 1358.665,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"progression": {
+					"cpu_ms_per_active_second": 1.81786568072377,
+					"cpu_ms_per_call": 0.0228571428571428,
+					"cpu_total_ms": 49.7599999999999,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"projectiles_boss": {
+					"cpu_ms_per_active_second": 1.90620167782967,
+					"cpu_ms_per_call": 0.0239678456591639,
+					"cpu_total_ms": 52.1779999999998,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"quests_pickups": {
+					"cpu_ms_per_active_second": 3.15448649383953,
+					"cpu_ms_per_call": 0.0396632981166742,
+					"cpu_total_ms": 86.3469999999997,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				},
+				"state_ambient": {
+					"cpu_ms_per_active_second": 31.6352467650455,
+					"cpu_ms_per_call": 0.397769407441433,
+					"cpu_total_ms": 865.944,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 3.0,
+						"samples": 1080
+					},
+					"total": 2177.0
+				}
+			},
+			"start_day_time": 0.3,
+			"supplied_delta_ms": {
+				"above16ms": 1080,
+				"max": 43.484,
+				"p50": 25.751333333334,
+				"p95": 28.3333333333333,
+				"p99": 35.087333333334,
+				"samples": 1080
+			},
+			"viewport_render_cpu_ms": {
+				"above16ms": 0,
+				"max": 8.85599994659424,
+				"p50": 4.625,
+				"p95": 6.51000022888184,
+				"p99": 7.51900005340576,
+				"samples": 1080
+			},
+			"viewport_render_gpu_ms": {
+				"above16ms": 2,
+				"max": 16.8409996032715,
+				"p50": 5.31400012969971,
+				"p95": 9.41800022125244,
+				"p99": 14.753999710083,
+				"samples": 1080
+			},
+			"warmup_frames": 120
+		},
+		{
+			"active_ms": {
+				"frames": {
+					"above16ms": 1080,
+					"max": 38.3443333333333,
+					"p50": 24.2424242424242,
+					"p95": 25.9611111111111,
+					"p99": 27.9882222222222,
+					"samples": 1080
+				},
+				"total": 25830.1188359787
+			},
+			"actor_manifest": {
+				"barb": {
+					"archetype": "default",
+					"name": "BAGGIE BARB",
+					"query_height_m": 1.69000005722046,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1540.0,
+						1190.0
+					],
+					"speed": 0.0,
+					"sprite": "barb",
+					"supported": true,
+					"visual": "barb"
+				},
+				"biggu": {
+					"archetype": "default",
+					"name": "THE BIG GUY",
+					"query_height_m": 2.23000001907349,
+					"size_px": [
+						32.0,
+						38.0
+					],
+					"source_position_px": [
+						1192.60900878906,
+						336.938537597656
+					],
+					"speed": 0.0,
+					"sprite": "biggu",
+					"supported": true,
+					"visual": "biggu"
+				},
+				"brendan_3d_-9223371433529304333_7": {
+					"archetype": "brendan",
+					"name": "COUSIN BRENDAN",
+					"query_height_m": 1.86000001430511,
+					"size_px": [
+						26,
+						30
+					],
+					"source_position_px": [
+						1120.93676757813,
+						2642.35522460938
+					],
+					"speed": 2.3,
+					"sprite": "brendan",
+					"supported": true,
+					"visual": "brendan"
+				},
+				"brutus": {
+					"archetype": "charger",
+					"name": "BRUTUS",
+					"query_height_m": 0.95,
+					"size_px": [
+						32.0,
+						24.0
+					],
+					"source_position_px": [
+						480.0,
+						280.0
+					],
+					"speed": 1.4,
+					"sprite": "brutus",
+					"supported": true,
+					"visual": "brutus"
+				},
+				"busker": {
+					"archetype": "default",
+					"name": "BUSKER",
+					"query_height_m": 1.86000001430511,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1100.0,
+						1500.0
+					],
+					"speed": 0.0,
+					"sprite": "busker",
+					"supported": true,
+					"visual": "busker"
+				},
+				"conductor": {
+					"archetype": "default",
+					"name": "THE CONDUCTOR",
+					"query_height_m": 1.87999999523163,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						680.0,
+						2960.0
+					],
+					"speed": 0.0,
+					"sprite": "conductor",
+					"supported": true,
+					"visual": "conductor"
+				},
+				"cop_3d_-9223371433529304333_5": {
+					"archetype": "cop",
+					"name": "COP",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						28,
+						32
+					],
+					"source_position_px": [
+						1081.88525390625,
+						2571.02465820313
+					],
+					"speed": 1.5,
+					"sprite": "cop",
+					"supported": true,
+					"visual": "cop"
+				},
+				"cop_3d_-9223371433529304333_6": {
+					"archetype": "cop",
+					"name": "COP",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						28,
+						32
+					],
+					"source_position_px": [
+						1011.94006347656,
+						2783.78637695313
+					],
+					"speed": 1.5,
+					"sprite": "cop",
+					"supported": true,
+					"visual": "cop"
+				},
+				"cop_3d_-9223371433529304333_8": {
+					"archetype": "cop",
+					"name": "COP",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						28,
+						32
+					],
+					"source_position_px": [
+						571.630859375,
+						2884.05493164063
+					],
+					"speed": 1.5,
+					"sprite": "cop",
+					"supported": true,
+					"visual": "cop"
+				},
+				"cubscout": {
+					"archetype": "default",
+					"name": "CUBSCOUT",
+					"query_height_m": 1.27999997138977,
+					"size_px": [
+						22.0,
+						26.0
+					],
+					"source_position_px": [
+						847.533325195313,
+						1452.11291503906
+					],
+					"speed": 1.2,
+					"sprite": "cubscout",
+					"supported": true,
+					"visual": "cubscout"
+				},
+				"dave": {
+					"archetype": "default",
+					"name": "CHATTY DAVE",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						900.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "dave",
+					"supported": true,
+					"visual": "dave"
+				},
+				"dogwalker": {
+					"archetype": "default",
+					"name": "DOG WALKER (PAISLEY)",
+					"query_height_m": 1.83000004291534,
+					"size_px": [
+						22.0,
+						26.0
+					],
+					"source_position_px": [
+						968.677062988281,
+						1180.82800292969
+					],
+					"speed": 0.9,
+					"sprite": "dogwalker",
+					"supported": true,
+					"visual": "dogwalker"
+				},
+				"food_truck": {
+					"archetype": "default",
+					"name": "FOOD TRUCK GUY",
+					"query_height_m": 1.86000001430511,
+					"size_px": [
+						30.0,
+						32.0
+					],
+					"source_position_px": [
+						920.0,
+						1500.0
+					],
+					"speed": 0.0,
+					"sprite": "foodtruck",
+					"supported": true,
+					"visual": "foodtruck"
+				},
+				"gutter_greg": {
+					"archetype": "default",
+					"name": "GUTTER GREG",
+					"query_height_m": 1.82000005245209,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						4500.0,
+						2050.0
+					],
+					"speed": 0.0,
+					"sprite": "gutter_greg",
+					"supported": true,
+					"visual": "gutter_greg"
+				},
+				"horsecop": {
+					"archetype": "default",
+					"name": "HORSE COP",
+					"query_height_m": 3.05,
+					"size_px": [
+						36.0,
+						32.0
+					],
+					"source_position_px": [
+						1367.25732421875,
+						1080.0
+					],
+					"speed": 0.0,
+					"sprite": "horsecop",
+					"supported": true,
+					"visual": "horsecop"
+				},
+				"jogger": {
+					"archetype": "default",
+					"name": "JOGGER",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						22.0,
+						26.0
+					],
+					"source_position_px": [
+						1073.79724121094,
+						600.0
+					],
+					"speed": 2.4,
+					"sprite": "jogger",
+					"supported": true,
+					"visual": "jogger"
+				},
+				"karaoke": {
+					"archetype": "default",
+					"name": "KARAOKE MIKE",
+					"query_height_m": 1.82000005245209,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1660.0,
+						1180.0
+					],
+					"speed": 0.0,
+					"sprite": "karaoke",
+					"supported": true,
+					"visual": "karaoke"
+				},
+				"kingdom_guard_blue_tarp_1_0": {
+					"archetype": "charger",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6044.0,
+						644.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_blue_tarp_1_1": {
+					"archetype": "swarmer",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6124.0,
+						1104.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_blue_tarp_1_2": {
+					"archetype": "ranged",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6784.0,
+						684.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_blue_tarp_1_3": {
+					"archetype": "swarmer",
+					"name": "TARP KNIGHT",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6484.0,
+						1164.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_0": {
+					"archetype": "charger",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7427.0615234375,
+						1831.39099121094
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_1": {
+					"archetype": "swarmer",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7524.0,
+						2224.0
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_2": {
+					"archetype": "ranged",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						8227.0615234375,
+						1831.39099121094
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_cart_cavalry_1_3": {
+					"archetype": "swarmer",
+					"name": "CART LANCER",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7784.0,
+						1784.0
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_copper_choir_1_0": {
+					"archetype": "charger",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6024.0,
+						3184.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_copper_choir_1_1": {
+					"archetype": "swarmer",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6484.0,
+						3184.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_copper_choir_1_2": {
+					"archetype": "ranged",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						6924.0,
+						3204.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_copper_choir_1_3": {
+					"archetype": "swarmer",
+					"name": "WIRE DEACON",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7024.0,
+						3684.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"kingdom_guard_throne_1_0": {
+					"archetype": "charger",
+					"name": "KNIGHT EMERITUS",
+					"query_height_m": 1.9099999666214,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7124.0,
+						4664.0
+					],
+					"speed": 1.25,
+					"sprite": "blue_tarp_guard",
+					"supported": true,
+					"visual": "blue_tarp_guard"
+				},
+				"kingdom_guard_throne_1_1": {
+					"archetype": "charger",
+					"name": "KNIGHT EMERITUS",
+					"query_height_m": 1.94000005722046,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7484.0,
+						4684.0
+					],
+					"speed": 1.25,
+					"sprite": "receipt_guard",
+					"supported": true,
+					"visual": "receipt_guard"
+				},
+				"kingdom_guard_throne_1_2": {
+					"archetype": "ranged",
+					"name": "KNIGHT EMERITUS",
+					"query_height_m": 1.99000000953674,
+					"size_px": [
+						32,
+						32
+					],
+					"source_position_px": [
+						7784.0,
+						4984.0
+					],
+					"speed": 1.25,
+					"sprite": "wire_guard",
+					"supported": true,
+					"visual": "wire_guard"
+				},
+				"larry": {
+					"archetype": "default",
+					"name": "LOUD LARRY",
+					"query_height_m": 1.98000001907349,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						440.0,
+						1780.0
+					],
+					"speed": 1.3,
+					"sprite": "larry",
+					"supported": true,
+					"visual": "larry"
+				},
+				"laundromat_lady": {
+					"archetype": "default",
+					"name": "LAUNDROMAT LADY",
+					"query_height_m": 1.72000002861023,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1720.0,
+						1180.0
+					],
+					"speed": 0.0,
+					"sprite": "launderlady",
+					"supported": true,
+					"visual": "launderlady"
+				},
+				"lease_guy": {
+					"archetype": "default",
+					"name": "THE LEASING GUY",
+					"query_height_m": 1.8400000333786,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						5400.0,
+						3100.0
+					],
+					"speed": 0.0,
+					"sprite": "lease_guy",
+					"supported": true,
+					"visual": "lease_guy"
+				},
+				"lurch": {
+					"archetype": "grabber",
+					"name": "LURCH",
+					"query_height_m": 2.24,
+					"size_px": [
+						28.0,
+						34.0
+					],
+					"source_position_px": [
+						209.363891601563,
+						1395.11364746094
+					],
+					"speed": 1.4,
+					"sprite": "lurch",
+					"supported": true,
+					"visual": "lurch"
+				},
+				"math": {
+					"archetype": "default",
+					"name": "THE MATHEMATICIAN",
+					"query_height_m": 1.87000000476837,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						1340.0,
+						380.0
+					],
+					"speed": 0.0,
+					"sprite": "math",
+					"supported": true,
+					"visual": "math"
+				},
+				"mayorscousin": {
+					"archetype": "default",
+					"name": "MAYOR'S COUSIN",
+					"query_height_m": 1.91999995708466,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1345.65686035156,
+						1505.65686035156
+					],
+					"speed": 0.0,
+					"sprite": "mayorscousin",
+					"supported": true,
+					"visual": "mayorscousin"
+				},
+				"meter_maid": {
+					"archetype": "default",
+					"name": "METER MAID",
+					"query_height_m": 1.76999998092651,
+					"size_px": [
+						26.0,
+						30.0
+					],
+					"source_position_px": [
+						1382.16381835938,
+						906.690002441406
+					],
+					"speed": 1.6,
+					"sprite": "metermaid",
+					"supported": true,
+					"visual": "metermaid"
+				},
+				"mom": {
+					"archetype": "default",
+					"name": "WHOLE FOODS MOM",
+					"query_height_m": 1.79999995231628,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1200.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "mom",
+					"supported": true,
+					"visual": "mom"
+				},
+				"paulie": {
+					"archetype": "ranged",
+					"name": "PAULIE THE FACE",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						477.300018310547,
+						1623.4521484375
+					],
+					"speed": 1.5,
+					"sprite": "paulie",
+					"supported": true,
+					"visual": "paulie"
+				},
+				"pete": {
+					"archetype": "default",
+					"name": "PAWN SHOP PETE",
+					"query_height_m": 1.77,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						250.0,
+						700.0
+					],
+					"speed": 0.0,
+					"sprite": "pete",
+					"supported": true,
+					"visual": "pete"
+				},
+				"philosopher": {
+					"archetype": "default",
+					"name": "PARK BENCH PHILOSOPHER",
+					"query_height_m": 1.64999997615814,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						2680.0,
+						1080.0
+					],
+					"speed": 0.0,
+					"sprite": "philosopher",
+					"supported": true,
+					"visual": "philosopher"
+				},
+				"phoneguy": {
+					"archetype": "default",
+					"name": "THE PHONE GUY",
+					"query_height_m": 1.88999998569489,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1180.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "phoneguy",
+					"supported": true,
+					"visual": "phoneguy"
+				},
+				"pigeon": {
+					"archetype": "default",
+					"name": "THE PIGEON KING",
+					"query_height_m": 0.63,
+					"size_px": [
+						24.0,
+						20.0
+					],
+					"source_position_px": [
+						2668.22265625,
+						1200.17797851563
+					],
+					"speed": 0.8,
+					"sprite": "pigeon",
+					"supported": true,
+					"visual": "pigeon"
+				},
+				"pinky": {
+					"archetype": "default",
+					"name": "PINKY POLENTA",
+					"query_height_m": 1.83000004291534,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						1330.0,
+						1160.0
+					],
+					"speed": 0.0,
+					"sprite": "pinky",
+					"supported": true,
+					"visual": "pinky"
+				},
+				"possum": {
+					"archetype": "default",
+					"name": "THE POSSUM",
+					"query_height_m": 0.55,
+					"size_px": [
+						28.0,
+						24.0
+					],
+					"source_position_px": [
+						600.0,
+						1500.0
+					],
+					"speed": 0.0,
+					"sprite": "possum",
+					"supported": true,
+					"visual": "possum"
+				},
+				"pothole": {
+					"archetype": "default",
+					"name": "A POTHOLE (TALKING)",
+					"query_height_m": 0.065,
+					"size_px": [
+						32.0,
+						18.0
+					],
+					"source_position_px": [
+						980.0,
+						920.0
+					],
+					"speed": 0.0,
+					"sprite": "pothole",
+					"supported": true,
+					"visual": "pothole"
+				},
+				"priest": {
+					"archetype": "default",
+					"name": "FATHER O'MALLEY",
+					"query_height_m": 1.87000000476837,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1800.0,
+						1460.0
+					],
+					"speed": 0.0,
+					"sprite": "priest",
+					"supported": true,
+					"visual": "priest"
+				},
+				"priests_son": {
+					"archetype": "default",
+					"name": "THE PRIEST'S SON",
+					"query_height_m": 1.74000000953674,
+					"size_px": [
+						24.0,
+						28.0
+					],
+					"source_position_px": [
+						1740.0,
+						1480.0
+					],
+					"speed": 0.0,
+					"sprite": "priestson",
+					"supported": true,
+					"visual": "priestson"
+				},
+				"scrap_dog": {
+					"archetype": "passive",
+					"name": "THE DOG",
+					"query_height_m": 0.88,
+					"size_px": [
+						26.0,
+						20.0
+					],
+					"source_position_px": [
+						580.0,
+						150.0
+					],
+					"speed": 0.0,
+					"sprite": "scrap_dog",
+					"supported": true,
+					"visual": "scrap_dog"
+				},
+				"sherri": {
+					"archetype": "swarmer",
+					"name": "SPIDER-BITE SHERRI",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						26.0,
+						30.0
+					],
+					"source_position_px": [
+						286.451782226563,
+						1522.43762207031
+					],
+					"speed": 2.0,
+					"sprite": "sherri",
+					"supported": true,
+					"visual": "sherri"
+				},
+				"skid_brutus_1": {
+					"archetype": "charger",
+					"name": "BRUTUS (SKID)",
+					"query_height_m": 0.95,
+					"size_px": [
+						32.0,
+						24.0
+					],
+					"source_position_px": [
+						2434.87646484375,
+						1934.65844726563
+					],
+					"speed": 1.5,
+					"sprite": "brutus",
+					"supported": true,
+					"visual": "brutus"
+				},
+				"skid_lurch": {
+					"archetype": "grabber",
+					"name": "LURCH (SKID)",
+					"query_height_m": 2.24,
+					"size_px": [
+						28.0,
+						34.0
+					],
+					"source_position_px": [
+						3054.20068359375,
+						1945.93994140625
+					],
+					"speed": 1.5,
+					"sprite": "lurch",
+					"supported": true,
+					"visual": "lurch"
+				},
+				"skid_sherri": {
+					"archetype": "swarmer",
+					"name": "SHERRI (SKID)",
+					"query_height_m": 1.77999997138977,
+					"size_px": [
+						26.0,
+						30.0
+					],
+					"source_position_px": [
+						2643.5712890625,
+						2209.341796875
+					],
+					"speed": 2.1,
+					"sprite": "sherri",
+					"supported": true,
+					"visual": "sherri"
+				},
+				"stripe": {
+					"archetype": "default",
+					"name": "STRIPE",
+					"query_height_m": 1.83000004291534,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						620.0,
+						1780.0
+					],
+					"speed": 0.0,
+					"sprite": "stripe",
+					"supported": true,
+					"visual": "stripe"
+				},
+				"tony": {
+					"archetype": "default",
+					"name": "TRE BAG TONY",
+					"query_height_m": 1.96,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						1620.0,
+						870.0
+					],
+					"speed": 0.0,
+					"sprite": "tony",
+					"supported": true,
+					"visual": "tony"
+				},
+				"train_hopper": {
+					"archetype": "default",
+					"name": "THE TRAIN HOPPER",
+					"query_height_m": 1.87999999523163,
+					"size_px": [
+						26.0,
+						32.0
+					],
+					"source_position_px": [
+						820.0,
+						2940.0
+					],
+					"speed": 0.0,
+					"sprite": "train_hopper",
+					"supported": true,
+					"visual": "train_hopper"
+				},
+				"vapelord": {
+					"archetype": "default",
+					"name": "THE VAPE LORD",
+					"query_height_m": 1.88999998569489,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						840.0,
+						1100.0
+					],
+					"speed": 0.0,
+					"sprite": "vapelord",
+					"supported": true,
+					"visual": "vapelord"
+				},
+				"yuri": {
+					"archetype": "default",
+					"name": "YURI",
+					"query_height_m": 2.02,
+					"size_px": [
+						28.0,
+						32.0
+					],
+					"source_position_px": [
+						300.0,
+						200.0
+					],
+					"speed": 0.0,
+					"sprite": "yuri",
+					"supported": true,
+					"visual": "yuri"
+				}
+			},
+			"born_ids": [],
+			"charging_actor_ids": [
+				"skid_brutus_1"
+			],
+			"completed_laps": 0,
+			"dead_ids": [],
+			"dependencies": [],
+			"diagnostic_switches": {
+				"without_grade": false,
+				"without_pose_input_memo": false
+			},
+			"draw_calls": {
+				"max": 2026.0,
+				"p50": 1934.0,
+				"p95": 2009.0,
+				"p99": 2019.0,
+				"samples": 1080
+			},
+			"elapsed_ms": 25836,
+			"end_day_time": 0.900740227094363,
+			"engine_process_monitor_window_max_ms": {
+				"above16ms": 1080,
+				"max": 39.73,
+				"p50": 27.545,
+				"p95": 36.963,
+				"p99": 39.73,
+				"samples": 1080
+			},
+			"events": {
+				"actor_chatter": 6,
+				"actor_spawned": 4,
+				"arrest": 1,
+				"cash_spawned": 1,
+				"communications_changed": 3,
+				"day_placement": 1,
+				"feed": 1,
+				"flash": 2,
+				"hurt": 12,
+				"sound": 19,
+				"toast": 4
+			},
+			"frame_interval_ms": {
+				"above16ms": 1079,
+				"max": 39.783,
+				"p50": 24.201,
+				"p95": 26.912,
+				"p99": 28.795,
+				"samples": 1079
+			},
+			"frames": 1080,
+			"gpu_timing_available": true,
+			"id": "trainyard_night",
+			"initial_player_top_left_px": [
+				744.0,
+				2634.0
+			],
+			"max_nodes": 5400.0,
+			"max_video_memory_bytes": 203392672.0,
+			"min_live_actors": 56,
+			"min_live_rigs": 56,
+			"min_supported_live_actors": 56,
+			"moving_actor_ids": [
+				"lurch",
+				"sherri",
+				"paulie",
+				"pigeon",
+				"cubscout",
+				"jogger",
+				"dogwalker",
+				"horsecop",
+				"meter_maid",
+				"skid_brutus_1",
+				"skid_lurch",
+				"skid_sherri",
+				"cop_3d_-9223371433529304333_5",
+				"cop_3d_-9223371433529304333_6",
+				"brendan_3d_-9223371433529304333_7",
+				"cop_3d_-9223371433529304333_8"
+			],
+			"navigation_after": {
+				"actors": 11,
+				"body_contact_tests": 753708,
+				"body_contacts": 494,
+				"body_repairs": 0,
+				"body_repairs_deferred": 0,
+				"buckets": 638,
+				"cache_hits": 5485,
+				"colliders": 1037,
+				"completed": 153,
+				"contact_index_builds": 2483,
+				"deferred": 0,
+				"failed": 210,
+				"frame": 2400,
+				"frame_starts": 1,
+				"frame_tests": 2,
+				"geometry_candidates": 331233,
+				"index_us": 642,
+				"max_completion_ms": 502.585393939393,
+				"max_plan_us": 1122,
+				"max_queue": 3,
+				"max_starts": 3,
+				"max_tests": 38,
+				"max_wait_ms": 100.0,
+				"oldest_pending_ms": 0.0,
+				"placement_cache_hits": 273401,
+				"placement_overlap_queries": 253243,
+				"planning_p50_us": 8,
+				"planning_p95_us": 327,
+				"queued": 0,
+				"requests": 382,
+				"revision": 87,
+				"sample_frames": 1200,
+				"scope": "local planner only; real physics movement and60AI/rig rendering are separately measured"
+			},
+			"navigation_before": {
+				"actors": 16,
+				"body_contact_tests": 416286,
+				"body_contacts": 122,
+				"body_repairs": 0,
+				"body_repairs_deferred": 0,
+				"buckets": 638,
+				"cache_hits": 2806,
+				"colliders": 1037,
+				"completed": 91,
+				"contact_index_builds": 1400,
+				"deferred": 0,
+				"failed": 113,
+				"frame": 1320,
+				"frame_starts": 0,
+				"frame_tests": 0,
+				"geometry_candidates": 321839,
+				"index_us": 642,
+				"max_completion_ms": 502.585393939393,
+				"max_plan_us": 1122,
+				"max_queue": 3,
+				"max_starts": 2,
+				"max_tests": 38,
+				"max_wait_ms": 100.0,
+				"oldest_pending_ms": 0.0,
+				"placement_cache_hits": 153815,
+				"placement_overlap_queries": 150516,
+				"planning_p50_us": 12,
+				"planning_p95_us": 1031,
+				"queued": 0,
+				"requests": 221,
+				"revision": 86,
+				"sample_frames": 1200,
+				"scope": "local planner only; real physics movement and60AI/rig rendering are separately measured"
+			},
+			"navigation_phase_max_queue": 3,
+			"navigation_phase_max_starts": 3,
+			"navigation_phase_max_tests": 31,
+			"physics_queries": 146983,
+			"physics_queries_per_active_second": 5690.37258145587,
+			"player_walked_m": 128.309279196262,
+			"projectile_peak": 0,
+			"removed_ids": [
+				"cop_3d_-9223371433529304333_5",
+				"cop_3d_-9223371433529304333_6",
+				"brendan_3d_-9223371433529304333_7",
+				"cop_3d_-9223371433529304333_8"
+			],
+			"render_setup_cpu_ms": {
+				"above16ms": 0,
+				"max": 0.941,
+				"p50": 0.357,
+				"p95": 0.472,
+				"p99": 0.673,
+				"samples": 1080
+			},
+			"rendered_objects": {
+				"max": 3622.0,
+				"p50": 3202.0,
+				"p95": 3587.0,
+				"p99": 3607.0,
+				"samples": 1080
+			},
+			"rendered_primitives": {
+				"max": 1092782.0,
+				"p50": 1021958.0,
+				"p95": 1087654.0,
+				"p99": 1092233.0,
+				"samples": 1080
+			},
+			"route_setup_us": 5368,
+			"sampled_oldest_pending_ms": 0.0,
+			"scene_cpu_ms": {
+				"above16ms": 1080,
+				"max": 30.632,
+				"p50": 18.552,
+				"p95": 20.746,
+				"p99": 22.64,
+				"samples": 1080
+			},
+			"scene_scope_totals_ms": {
+				"events": 29.7259999999998,
+				"interaction": 898.037,
+				"model_input_hud_world": 13498.486,
+				"models": 5810.95300000001,
+				"runtime_actor_clearance": 3907.674,
+				"runtime_actor_motion": 1752.944,
+				"runtime_actor_pose": 917.218999999999,
+				"runtime_actors": 8429.77,
+				"runtime_combat_timers": 104.406999999999,
+				"runtime_memory_day_territory": 680.609,
+				"runtime_movement": 1399.876,
+				"runtime_progression": 49.5369999999998,
+				"runtime_projectiles_boss": 51.2929999999998,
+				"runtime_quests_pickups": 93.6079999999997,
+				"runtime_state_ambient": 857.617000000002
+			},
+			"scene_scopes_ms": {
+				"events": {
+					"above16ms": 0,
+					"max": 4.015,
+					"p50": 0.021,
+					"p95": 0.034,
+					"p99": 0.047,
+					"samples": 1080
+				},
+				"interaction": {
+					"above16ms": 0,
+					"max": 1.598,
+					"p50": 0.809,
+					"p95": 0.994,
+					"p99": 1.159,
+					"samples": 1080
+				},
+				"model_input_hud_world": {
+					"above16ms": 10,
+					"max": 20.606,
+					"p50": 12.363,
+					"p95": 14.083,
+					"p99": 15.651,
+					"samples": 1080
+				},
+				"models": {
+					"above16ms": 0,
+					"max": 9.194,
+					"p50": 5.449,
+					"p95": 6.645,
+					"p99": 7.18,
+					"samples": 1080
+				},
+				"runtime_actor_clearance": {
+					"above16ms": 0,
+					"max": 6.006,
+					"p50": 3.572,
+					"p95": 4.12,
+					"p99": 4.67,
+					"samples": 1080
+				},
+				"runtime_actor_motion": {
+					"above16ms": 0,
+					"max": 3.248,
+					"p50": 1.536,
+					"p95": 2.308,
+					"p99": 2.582,
+					"samples": 1080
+				},
+				"runtime_actor_pose": {
+					"above16ms": 0,
+					"max": 1.392,
+					"p50": 0.842,
+					"p95": 0.977,
+					"p99": 1.088,
+					"samples": 1080
+				},
+				"runtime_actors": {
+					"above16ms": 0,
+					"max": 13.526,
+					"p50": 7.676,
+					"p95": 9.157,
+					"p99": 10.303,
+					"samples": 1080
+				},
+				"runtime_combat_timers": {
+					"above16ms": 0,
+					"max": 0.298,
+					"p50": 0.084,
+					"p95": 0.155,
+					"p99": 0.179,
+					"samples": 1080
+				},
+				"runtime_memory_day_territory": {
+					"above16ms": 0,
+					"max": 1.301,
+					"p50": 0.618,
+					"p95": 0.762,
+					"p99": 0.972,
+					"samples": 1080
+				},
+				"runtime_movement": {
+					"above16ms": 0,
+					"max": 2.726,
+					"p50": 1.325,
+					"p95": 1.597,
+					"p99": 1.923,
+					"samples": 1080
+				},
+				"runtime_progression": {
+					"above16ms": 0,
+					"max": 0.221,
+					"p50": 0.045,
+					"p95": 0.064,
+					"p99": 0.077,
+					"samples": 1080
+				},
+				"runtime_projectiles_boss": {
+					"above16ms": 0,
+					"max": 0.144,
+					"p50": 0.047,
+					"p95": 0.07,
+					"p99": 0.079,
+					"samples": 1080
+				},
+				"runtime_quests_pickups": {
+					"above16ms": 0,
+					"max": 0.218,
+					"p50": 0.084,
+					"p95": 0.115,
+					"p99": 0.138,
+					"samples": 1080
+				},
+				"runtime_state_ambient": {
+					"above16ms": 0,
+					"max": 1.502,
+					"p50": 0.786,
+					"p95": 0.94,
+					"p99": 1.107,
+					"samples": 1080
+				}
+			},
+			"seed": 432484079,
+			"source_route_centers_px": [
+				[
+					756.0,
+					2648.0
+				],
+				[
+					1416.0,
+					2648.0
+				],
+				[
+					1416.0,
+					3300.0
+				],
+				[
+					756.0,
+					3300.0
+				],
+				[
+					707.700073242188,
+					2976.30004882813
+				],
+				[
+					707.700012207031,
+					2887.7001953125
+				],
+				[
+					756.0,
+					2648.0
+				]
+			],
+			"stage_calls": {
+				"actors": {
+					"cpu_ms_per_active_second": 326.35428638672,
+					"cpu_ms_per_call": 3.90086534012031,
+					"cpu_total_ms": 8429.77,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"combat_timers": {
+					"cpu_ms_per_active_second": 4.0420642530909,
+					"cpu_ms_per_call": 0.0483142063859321,
+					"cpu_total_ms": 104.406999999999,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"memory_day_territory": {
+					"cpu_ms_per_active_second": 26.3494335555275,
+					"cpu_ms_per_call": 0.314950948634891,
+					"cpu_total_ms": 680.609,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"movement": {
+					"cpu_ms_per_active_second": 54.1954920489996,
+					"cpu_ms_per_call": 0.647790837575197,
+					"cpu_total_ms": 1399.876,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"progression": {
+					"cpu_ms_per_active_second": 1.91779992630153,
+					"cpu_ms_per_call": 0.0229231837112447,
+					"cpu_total_ms": 49.5369999999998,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"projectiles_boss": {
+					"cpu_ms_per_active_second": 1.98578257907795,
+					"cpu_ms_per_call": 0.0237357704766311,
+					"cpu_total_ms": 51.2929999999998,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"quests_pickups": {
+					"cpu_ms_per_active_second": 3.62398642431383,
+					"cpu_ms_per_call": 0.0433169828782969,
+					"cpu_total_ms": 93.6079999999997,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				},
+				"state_ambient": {
+					"cpu_ms_per_active_second": 33.2022088417739,
+					"cpu_ms_per_call": 0.396861175381768,
+					"cpu_total_ms": 857.617000000002,
+					"frames": {
+						"max": 3.0,
+						"p50": 2.0,
+						"p95": 2.0,
+						"p99": 2.0,
+						"samples": 1080
+					},
+					"total": 2161.0
+				}
+			},
+			"start_day_time": 0.78,
+			"supplied_delta_ms": {
+				"above16ms": 1080,
+				"max": 38.3443333333333,
+				"p50": 24.2424242424242,
+				"p95": 25.9611111111111,
+				"p99": 27.9882222222222,
+				"samples": 1080
+			},
+			"viewport_render_cpu_ms": {
+				"above16ms": 0,
+				"max": 7.84000015258789,
+				"p50": 3.91499996185303,
+				"p95": 5.25299978256226,
+				"p99": 5.98999977111816,
+				"samples": 1080
+			},
+			"viewport_render_gpu_ms": {
+				"above16ms": 1,
+				"max": 16.1800003051758,
+				"p50": 3.99600005149841,
+				"p95": 10.4049997329712,
+				"p99": 12.2080001831055,
+				"samples": 1080
+			},
+			"warmup_frames": 120
+		}
+	],
+	"platform": "Windows",
+	"processor": "11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz",
+	"render_timing_semantics": "Delayed completed-frame viewport CPU/GPU distributions; not paired to current scene samples. Timestamp instrumentation enabled; zero-only GPU means unavailable. Frame setup excludes scripts.",
+	"renderer": "gl_compatibility",
+	"resolution": [
+		1280,
+		720
+	],
+	"schema": 1,
+	"scope": "Actual FullScene/Runtime/Combat/ActorDirector, source police spawning and authored rigs/animation/HUD in native Compatibility. This is not a Web result. Viewport GPU timing is reported only when the driver returns nonzero measurements.",
+	"script_hashes_available": false,
+	"script_sha256": {
+		"scripts/actor_animation.gd": "",
+		"scripts/actor_director.gd": "",
+		"scripts/actor_navigation.gd": "",
+		"scripts/cast_profiles.gd": "",
+		"scripts/character_roster.gd": "",
+		"scripts/combat_system.gd": "",
+		"scripts/full_neighborhood.gd": "",
+		"scripts/full_runtime.gd": "",
+		"scripts/full_scene.gd": "",
+		"scripts/world_adapter.gd": "",
+		"tests/full_actor_performance_probe.gd": ""
+	},
+	"source_corpus": "04c8bff447a8de30d9fee156ca80a8331e10028d0b047eb09a22498541339224",
+	"source_provenance": "Compiled exports may omit raw GDScript; use profile-release.ps1's external archived-source and executable hashes. Empty in-package script hashes are unavailable, not proof of equality.",
+	"timing_boundary": "scene_cpu_ms wraps the complete unchanged FullScene._process plus event counters; route setup and probe validation are outside it",
+	"vsync": false,
+	"workload_semantics": "Stage calls include final partial subdivisions; distributions include zero-call frames. Query rate is whole-scene, not actor-only.",
+	"world": {
+		"batch": {
+			"batches": 585,
+			"palette_surfaces": 10320,
+			"skipped_meshes": 56,
+			"source_meshes": 10396,
+			"source_surfaces": 10396,
+			"surfaces": 585,
+			"triangles": 133062,
+			"vertices": 254669
+		},
+		"footprints": 830,
+		"grid_bytes": 481600,
+		"milliseconds": 2575,
+		"obstacles": 1098
+	}
+}

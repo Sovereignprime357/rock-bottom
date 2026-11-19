@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "scope": "Isolated actual Web harness; production source snapshot unchanged. GDScript hashes unavailable inside release export are supplied externally.",
+  "production_parent": "8bcd5bd124b16b8e783a8d340043237d11cf72ae",
+  "candidate_changes": [
+    "full_scene ordinary Space and cooking mute",
+    "world_adapter current-player separation prefilter"
+  ],
+  "harness": {
+    "tests/web_hands_probe.gd": "48a6454a5082731278b9f86f265d932d5615714d169a803142ac92537e1d61d8",
+    "tests/test_web_hands_contract.gd": "59af9ab1729017d12d97438a8f2c18ec32cefd568e2aa86c16517773120e7041",
+    "tests/boss_acceptance_probe.gd": "a8d990dfcf5ebc71c78bccb16886868a9a07d3ef7585e03c5c70554083bd27d9",
+    "web-hands-shell.html": "24c367d0b483c72cf08952a3f676a1f8b66795e6d72e460546f38fc2f5f88391",
+    "web-hands-bridge.js": "b76f0f6177d5a8d801d14f60639ac9716f3410f8587a5d110c9799784ee73fc3",
+    "export_presets.cfg": "8bc309f29e2f7b243f66ff74b1e5f130843f0edbd2b4e44befdadde4afeb21fd",
+    "project.godot": "4f4ce82dbd6794d6e6bdb38dcdf687e9307f1d22f79f00358622b8a5e20a7d98",
+    "web/storage.js": "87635873270e428bbb538c5a4fa591a6e9a95f80afd9e32496caa9af305e8457"
+  },
+  "export": {
+    "index.html": "5d798e2d1dc18341904dbc1b1bf7cf86354c66abdb026f9291829aefc0f281fc",
+    "index.js": "8a7c7d57f7da69bb71da9de302480b87e4c7ecb467ce643665b4a288683cd18f",
+    "index.pck": "d6c9a14e257abcd40a622f64c51a744924094581393848571127660631ae5390",
+    "index.wasm": "6498359ba889796a0d95a2f71113ac184badc0f2d84cf28f4103c7e399d2d547",
+    "storage.js": "87635873270e428bbb538c5a4fa591a6e9a95f80afd9e32496caa9af305e8457",
+    "web-hands-bridge.js": "b76f0f6177d5a8d801d14f60639ac9716f3410f8587a5d110c9799784ee73fc3"
+  },
+  "notes": [
+    "This is the v3 harness; 1280 pass used v2 (identical production, physical-size envelope comparison).",
+    "Early retained 1280 idle/right/left PNGs came from the first incomplete storage-bridge run, not the later passing report.",
+    "No trusted hardware input, pointer-lock, audio or performance claim.",
+    "Raw machine reports leave visual_acceptance false. Selected PNG review is reported separately."
+  ]
+}
