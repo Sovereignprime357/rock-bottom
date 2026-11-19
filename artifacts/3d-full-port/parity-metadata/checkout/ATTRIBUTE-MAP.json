@@ -1,0 +1,4172 @@
+{
+  "schema": 1,
+  "status": "PROPOSED exact attributes; no Git checkout performed",
+  "inputs": {
+    "accepted_candidate_manifest_sha256": "8f5c40dc111b31999296202fb85376cb60743b7872157a99503a4dd4bad2bd78",
+    "root_attributes_sha256": "c3889fcc0ce47adbf38fb609f79ae666eb9530a9aa601df872c204638c7dd1d9",
+    "root_eol_census_sha256": "2d263732a0a8032bb2f99e5e82c679740c5fc6064277a5a103f6b98e0a44ea19",
+    "portability_census_sha256": "37bda8d3c20d3a6601b0967c23993d9a127a76b85ef3e8265d29aa0f34f9a065"
+  },
+  "counts": {
+    "references": 247,
+    "delivered": 17,
+    "union": 259,
+    "lf": 152,
+    "crlf": 63,
+    "raw": 44,
+    "raw_evidence": 33,
+    "raw_restages": 5
+  },
+  "checks": 1194,
+  "rows": [
+    {
+      "path": "SPEC-3D-FULL-PORT.md",
+      "attributes": "-text",
+      "reason": "mixed original source/spec",
+      "accepted_raw_sha256": "2225222c1c27835fc93a4c4da27501aefbbc74f358f2840de14ae1b2f7649c26",
+      "bytes": 10832,
+      "crlf": 12,
+      "lf": 148,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ea92876df985b3a89af8e3128e6884285ac997b6bc1580ace103c1b4b3047c85",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "SPEC-3D-PARITY-METADATA.md",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "506af8d3202fe257edaad59e3b4109fb4eb4c80d1197cba55ff2f716fb3c7004",
+      "bytes": 8870,
+      "crlf": 0,
+      "lf": 135,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input",
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new_candidate_input"
+    },
+    {
+      "path": "SPEC-3D-VIEWMODEL-GEAR.md",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "de451965c7be0f0f35261f183d10c377f3d315ba3a212fb2a06bec4827d253ae",
+      "bytes": 4843,
+      "crlf": 0,
+      "lf": 71,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "de451965c7be0f0f35261f183d10c377f3d315ba3a212fb2a06bec4827d253ae",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "VIBE.md",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5",
+      "bytes": 30162,
+      "crlf": 0,
+      "lf": 435,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/build.log",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "39a5cb594c3b1e7c81ee60b3daaade9e440966a42f3c81e6a23eb91818ef8d20",
+      "bytes": 27370,
+      "crlf": 399,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "39a5cb594c3b1e7c81ee60b3daaade9e440966a42f3c81e6a23eb91818ef8d20",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/gates-3d.log",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "d39cc0691555296307c11147520101dc9c965e0b7123756e5039b057c62595e0",
+      "bytes": 53732,
+      "crlf": 643,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d39cc0691555296307c11147520101dc9c965e0b7123756e5039b057c62595e0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/native-cart/captures.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "00a9f1f40e9441f2e8b86bce700bf6b28089df3fb0cf52cf38531c80e412a4da",
+      "bytes": 24032,
+      "crlf": 0,
+      "lf": 822,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "00a9f1f40e9441f2e8b86bce700bf6b28089df3fb0cf52cf38531c80e412a4da",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/native-context/captures.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a594e01182fb276140eef913eb6cb5433d2b83ef029e02cbea2b64585418287f",
+      "bytes": 18365,
+      "crlf": 0,
+      "lf": 1129,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a594e01182fb276140eef913eb6cb5433d2b83ef029e02cbea2b64585418287f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/native-gear/captures.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a1c8099c96bf13e71930856f06c916728c2ef84823338748a92c04c3b5b74c5c",
+      "bytes": 21852,
+      "crlf": 0,
+      "lf": 1031,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a1c8099c96bf13e71930856f06c916728c2ef84823338748a92c04c3b5b74c5c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/production-export-hashes.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "708a53bdf3928e6a0ffa782d42917cc1f718d9c31f4fd9847fd9f1473e4c34c7",
+      "bytes": 939,
+      "crlf": 12,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "708a53bdf3928e6a0ffa782d42917cc1f718d9c31f4fd9847fd9f1473e4c34c7",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/provenance.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "9bc76859cbf4916f24c851bb0a3ba120a39208a2a911d76c7859b0d3c84c2ec7",
+      "bytes": 49517,
+      "crlf": 0,
+      "lf": 558,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9bc76859cbf4916f24c851bb0a3ba120a39208a2a911d76c7859b0d3c84c2ec7",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/test_cart_view.log",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "1a68049e181c17a474ad9887a18f4ae47b48b9e59e6762d60966b8e8b50db72a",
+      "bytes": 174,
+      "crlf": 3,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1a68049e181c17a474ad9887a18f4ae47b48b9e59e6762d60966b8e8b50db72a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/web-hands-1280.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "7d34f0079e0171ba3ce4eddbc68b6eb7467af3389b5916641cf6ed71fcdc58b9",
+      "bytes": 174931,
+      "crlf": 0,
+      "lf": 8558,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7d34f0079e0171ba3ce4eddbc68b6eb7467af3389b5916641cf6ed71fcdc58b9",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/web-hands-960.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "2830847aa5265bcf677e363157ea285db8a2161b04055f5990cb76a0af908e9e",
+      "bytes": 174396,
+      "crlf": 0,
+      "lf": 8534,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2830847aa5265bcf677e363157ea285db8a2161b04055f5990cb76a0af908e9e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/karaoke-native.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "5173612239441a37785ff6977a093cad6d815f657667f5f44bbab11830ae58e8",
+      "bytes": 83197,
+      "crlf": 0,
+      "lf": 4572,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5173612239441a37785ff6977a093cad6d815f657667f5f44bbab11830ae58e8",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/native-provenance.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "8e4152d3c9a51170e00936f1375b1215f8e2816b426d40c2d078cdb6ca3325d4",
+      "bytes": 1021,
+      "crlf": 15,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "501ff0127be34e61095e82b1121fb8db7846125522ed210b83931bba13a1632f",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/tony-8bcd-release.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "9530415a5e920733a50a9bfe8f820c983eb73e5904a168e86b354b050fc93465",
+      "bytes": 170403,
+      "crlf": 0,
+      "lf": 7726,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9530415a5e920733a50a9bfe8f820c983eb73e5904a168e86b354b050fc93465",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/live-neighborhood/departure-native.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "f917b7de7ff13bf2191a8fa9e5245f02fcc09e02bda01fd74a9886dbbeb229fa",
+      "bytes": 866,
+      "crlf": 0,
+      "lf": 36,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f917b7de7ff13bf2191a8fa9e5245f02fcc09e02bda01fd74a9886dbbeb229fa",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/district-grade-web-raster.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "2d223b847c1ca868fda99fd168ccf88f3a2b2c08c4b6c212d6415c585d1b384c",
+      "bytes": 759,
+      "crlf": 1,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e438a3ade47a76ed42165ebfd8d2699f8f8f405d9b8c0b11c015d190dce98ef0",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/district-scene.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "667aea2b29052f8c81d19a53c8883bcdb52e45860ddbe1de8e6a9f8d4ed415ea",
+      "bytes": 8521,
+      "crlf": 0,
+      "lf": 535,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "667aea2b29052f8c81d19a53c8883bcdb52e45860ddbe1de8e6a9f8d4ed415ea",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/fixture-web-evidence.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "3f98f98cd8db85c5c421d1637473216c492e22da14958322db1eaca60c40a428",
+      "bytes": 47211,
+      "crlf": 0,
+      "lf": 2122,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "3f98f98cd8db85c5c421d1637473216c492e22da14958322db1eaca60c40a428",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/office-endpoint-acceptance/provenance.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "d267739974efecf247423fe30aaca2bdd5a9057af8bd941becf6967e29984b95",
+      "bytes": 21705,
+      "crlf": 203,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d267739974efecf247423fe30aaca2bdd5a9057af8bd941becf6967e29984b95",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/office-endpoint-acceptance/tour/office-tour.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708",
+      "bytes": 500367,
+      "crlf": 0,
+      "lf": 21744,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/p04/world-render-evidence.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "8729c276ed964c9fc438051173f978f6b94e748986c14a7d6135a35db6df7bee",
+      "bytes": 28941,
+      "crlf": 0,
+      "lf": 1387,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "8729c276ed964c9fc438051173f978f6b94e748986c14a7d6135a35db6df7bee",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/p15a/native-tour.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a9b77bae480aedc2b0024a633c1024a1330acc34ae68f90941ed9b7906379d73",
+      "bytes": 344,
+      "crlf": 0,
+      "lf": 10,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a9b77bae480aedc2b0024a633c1024a1330acc34ae68f90941ed9b7906379d73",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/full-actor-performance.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "c24174d216c927fdbcf82aae2c6c64b850c380b09ec006082746a3a0c01582d7",
+      "bytes": 3525924,
+      "crlf": 0,
+      "lf": 145209,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c24174d216c927fdbcf82aae2c6c64b850c380b09ec006082746a3a0c01582d7",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/provenance.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "21ec85bcdb0ed4117b9415a0b111620c92a4f044c155b87a2fc71bf7ad6e037e",
+      "bytes": 144070,
+      "crlf": 1433,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "21ec85bcdb0ed4117b9415a0b111620c92a4f044c155b87a2fc71bf7ad6e037e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/hideout_mom.png",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "1fc022fc37c41511587e986fba101d27fd1186690b89361b96c90e17d56c69e0",
+      "bytes": 690663,
+      "crlf": 13,
+      "lf": 2307,
+      "loneCR": 2558,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1fc022fc37c41511587e986fba101d27fd1186690b89361b96c90e17d56c69e0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/kingdom-release.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "504995c92ef374a5612aa51f4fe44772231a0d941996ab427affa7217da61917",
+      "bytes": 52357,
+      "crlf": 0,
+      "lf": 2532,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "504995c92ef374a5612aa51f4fe44772231a0d941996ab427affa7217da61917",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/leash-border-native.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "b2e0285ee00b14858a619cb8b0e13085604ab639e7093500562d716c53fd14b5",
+      "bytes": 14270,
+      "crlf": 0,
+      "lf": 818,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b2e0285ee00b14858a619cb8b0e13085604ab639e7093500562d716c53fd14b5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/ownership-release.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "988a31a720b8f20fea930e5ea4ed1d3e581ae2ce585cc028ae72649e16525cdc",
+      "bytes": 76489,
+      "crlf": 0,
+      "lf": 3781,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "988a31a720b8f20fea930e5ea4ed1d3e581ae2ce585cc028ae72649e16525cdc",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/data/courier_canvas_metrics.json",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "73679c61dcfb7b3141e1a01b086bdc01dc6256a50bacbb55ab1f80ca9dce69c0",
+      "bytes": 36083,
+      "crlf": 0,
+      "lf": 1630,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "73679c61dcfb7b3141e1a01b086bdc01dc6256a50bacbb55ab1f80ca9dce69c0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/data/parity_manifest.json",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+      "bytes": 996721,
+      "crlf": 0,
+      "lf": 25233,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "game3d/data/source_content.json",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+      "bytes": 797484,
+      "crlf": 0,
+      "lf": 31215,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_animation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "bytes": 27821,
+      "crlf": 0,
+      "lf": 573,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_contact.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1041e31b12a61b2847ca3706c49516f337d53f85f31edccf2bb280e06bb4b345",
+      "bytes": 6085,
+      "crlf": 0,
+      "lf": 124,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1041e31b12a61b2847ca3706c49516f337d53f85f31edccf2bb280e06bb4b345",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_director.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc",
+      "bytes": 25017,
+      "crlf": 0,
+      "lf": 425,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_hud_overlay.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "9fef9e190550a4cafce7051992ab4b0842ad747fa6bdf9b69be1dc21c9083b48",
+      "bytes": 15263,
+      "crlf": 0,
+      "lf": 225,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9fef9e190550a4cafce7051992ab4b0842ad747fa6bdf9b69be1dc21c9083b48",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_hud_projection.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f17b603912a3a4c093aee13ce7143f549b10485b451e510d131acdedede92e5a",
+      "bytes": 1680,
+      "crlf": 0,
+      "lf": 27,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f17b603912a3a4c093aee13ce7143f549b10485b451e510d131acdedede92e5a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_hud_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "e626018a64b434352e1653636a24ffd28474502848e7fc49b7d90a26e32497e4",
+      "bytes": 8268,
+      "crlf": 0,
+      "lf": 112,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e626018a64b434352e1653636a24ffd28474502848e7fc49b7d90a26e32497e4",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/actor_navigation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "addd843ec3506c493eefbf412593bf3ff87f60208ff509043f369bd24a471dc6",
+      "bytes": 19103,
+      "crlf": 0,
+      "lf": 416,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "addd843ec3506c493eefbf412593bf3ff87f60208ff509043f369bd24a471dc6",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/ambient_audio.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "562af74b2530f87ddcecd4e4d942359963cf465d4d39d8e29dc609e1dc207965",
+      "bytes": 2238,
+      "crlf": 0,
+      "lf": 40,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "562af74b2530f87ddcecd4e4d942359963cf465d4d39d8e29dc609e1dc207965",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/boss_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08",
+      "bytes": 22667,
+      "crlf": 0,
+      "lf": 414,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/campaign_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff",
+      "bytes": 20002,
+      "crlf": 0,
+      "lf": 281,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/cart_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "75045b6da57ce5f1cd9d47aeb57ba1485932fe2ad2e8762a6a12a7b09ac688a7",
+      "bytes": 14048,
+      "crlf": 0,
+      "lf": 243,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "75045b6da57ce5f1cd9d47aeb57ba1485932fe2ad2e8762a6a12a7b09ac688a7",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/cast_profiles.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "4bc71adc2c9d2e89ba6d207ec8bc7904d7655251cb74d9c30f3e966f1ea6d3cd",
+      "bytes": 64713,
+      "crlf": 0,
+      "lf": 782,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "4bc71adc2c9d2e89ba6d207ec8bc7904d7655251cb74d9c30f3e966f1ea6d3cd",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/character_art.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8",
+      "bytes": 44144,
+      "crlf": 0,
+      "lf": 677,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/character_roster.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+      "bytes": 34759,
+      "crlf": 0,
+      "lf": 682,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75",
+      "bytes": 34428,
+      "crlf": 0,
+      "lf": 623,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/communications_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "c8257c3107a6f961684426048323c8ca1340081c32e96aebb09a0763dc07a6a3",
+      "bytes": 9857,
+      "crlf": 0,
+      "lf": 198,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c8257c3107a6f961684426048323c8ca1340081c32e96aebb09a0763dc07a6a3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/companion_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "07f14c99a48e2adf736361e287af756920d6c65a16daaf2fbb2c05c7e96537c8",
+      "bytes": 20243,
+      "crlf": 0,
+      "lf": 342,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "07f14c99a48e2adf736361e287af756920d6c65a16daaf2fbb2c05c7e96537c8",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/content_catalog.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668",
+      "bytes": 3458,
+      "crlf": 0,
+      "lf": 93,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/cooking_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "49f4a6dfb4abe116fb6a492de4d68f7e8ea0e4708cbd5e622b67011611c6e36e",
+      "bytes": 9523,
+      "crlf": 0,
+      "lf": 207,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "49f4a6dfb4abe116fb6a492de4d68f7e8ea0e4708cbd5e622b67011611c6e36e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/cooking_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d00a62ac9c118a94e2f99c9f543740285a2744895fa7393323f731b425211496",
+      "bytes": 15405,
+      "crlf": 0,
+      "lf": 256,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d00a62ac9c118a94e2f99c9f543740285a2744895fa7393323f731b425211496",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/day_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2eb5c3b28215223fb94049abff5b47abbaa7c78f1479a22a504054c8520321d3",
+      "bytes": 32811,
+      "crlf": 0,
+      "lf": 532,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2eb5c3b28215223fb94049abff5b47abbaa7c78f1479a22a504054c8520321d3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/district_border_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "e6cfabf5da7ee689afacbd3b85669837ec1fba6525a2c0362e14139aa419f02b",
+      "bytes": 3090,
+      "crlf": 0,
+      "lf": 61,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e6cfabf5da7ee689afacbd3b85669837ec1fba6525a2c0362e14139aa419f02b",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/district_grade.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a0da001b14887a682ebab46a670b021a4449da849cbc4b2dfa2e9adf8ba20d5c",
+      "bytes": 4660,
+      "crlf": 0,
+      "lf": 99,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a0da001b14887a682ebab46a670b021a4449da849cbc4b2dfa2e9adf8ba20d5c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/district_grade.gdshader",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "77f80686d17bbb7548fbb3d7e9fbcc1388cc4cb79f70d6681e06a43b0b1a8df6",
+      "bytes": 1003,
+      "crlf": 0,
+      "lf": 23,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "77f80686d17bbb7548fbb3d7e9fbcc1388cc4cb79f70d6681e06a43b0b1a8df6",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/district_grade_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f6210fb4ef6e5f4ab6a9b4b92fdb9da2269530d9e0b5c59a07d6f91067dc3b38",
+      "bytes": 2441,
+      "crlf": 0,
+      "lf": 56,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f6210fb4ef6e5f4ab6a9b4b92fdb9da2269530d9e0b5c59a07d6f91067dc3b38",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/dog_leash_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f664fbc0ab8d4eb995fd0acfe9bf124e72133f583aa8bbb4b5713633d7d50b85",
+      "bytes": 5516,
+      "crlf": 0,
+      "lf": 112,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f664fbc0ab8d4eb995fd0acfe9bf124e72133f583aa8bbb4b5713633d7d50b85",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/dynamic_emitters.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "4752adf90eeb6157a1296290c046a760435c6ca0e700d99e40dca46c579c68cb",
+      "bytes": 7819,
+      "crlf": 0,
+      "lf": 146,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "4752adf90eeb6157a1296290c046a760435c6ca0e700d99e40dca46c579c68cb",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/ending_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "666173b92fe5e7737c572d6f78589c010ea7dbb9ffaeb44638934be42c935598",
+      "bytes": 1070,
+      "crlf": 0,
+      "lf": 11,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "666173b92fe5e7737c572d6f78589c010ea7dbb9ffaeb44638934be42c935598",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/find_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f8f578df9da8f7170e153432da5323c17f0992f15f32cca0ce8e6baf8a18e429",
+      "bytes": 15444,
+      "crlf": 0,
+      "lf": 244,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f8f578df9da8f7170e153432da5323c17f0992f15f32cca0ce8e6baf8a18e429",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/first_person_rig.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "7c40fc0aead4285bf975a2847631685a0642822656fffb794ba604a31d4a59e2",
+      "bytes": 47507,
+      "crlf": 0,
+      "lf": 889,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7c40fc0aead4285bf975a2847631685a0642822656fffb794ba604a31d4a59e2",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/fixture_motion_view.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "be1fca284102d71c3122a1ceee9ad331f49d01c80c78ba20696dc0d60bdecc59",
+      "bytes": 21641,
+      "crlf": 322,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5783511be8c33a2d6d1295d45cd1939971e332f1c6e162792670945b52083c21",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/full_hud.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d07ead67f77cb4e1addd8dc9341c66a639232910b13cd7a30bd809ab351e4a31",
+      "bytes": 20531,
+      "crlf": 0,
+      "lf": 362,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d07ead67f77cb4e1addd8dc9341c66a639232910b13cd7a30bd809ab351e4a31",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/full_neighborhood.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9",
+      "bytes": 79421,
+      "crlf": 1422,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2cd20ecd9e4064dee8ad5da7c39d7112f222d936ff5c278598fcb984f2ba1a5e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/full_runtime.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+      "bytes": 50312,
+      "crlf": 0,
+      "lf": 1116,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/full_scene.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+      "bytes": 46423,
+      "crlf": 0,
+      "lf": 843,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/game_state.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c",
+      "bytes": 26416,
+      "crlf": 0,
+      "lf": 612,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/guidance_projection.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "bc409a0e1cdf087213b14d4e97cb37b2057ba0a85e3757f3766bad3914b34763",
+      "bytes": 3827,
+      "crlf": 0,
+      "lf": 59,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "bc409a0e1cdf087213b14d4e97cb37b2057ba0a85e3757f3766bad3914b34763",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/guidance_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "129d644e40ca4604e4273608b1f4355fd1b3a34d99de49ec52cbf17cc70109d6",
+      "bytes": 20131,
+      "crlf": 0,
+      "lf": 269,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "129d644e40ca4604e4273608b1f4355fd1b3a34d99de49ec52cbf17cc70109d6",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/heist_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f",
+      "bytes": 11939,
+      "crlf": 0,
+      "lf": 234,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/incident_corridors.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "c82e995a7179669aa814378587a0f7d6ae3418bbe7d95449777b06e686a59cef",
+      "bytes": 11060,
+      "crlf": 0,
+      "lf": 155,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c82e995a7179669aa814378587a0f7d6ae3418bbe7d95449777b06e686a59cef",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/incident_path_map.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "e32c047d8435d5bdcb6accacd418ec9a5988f4e01c4e76551f33b77b9cc19ff5",
+      "bytes": 17913,
+      "crlf": 0,
+      "lf": 263,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e32c047d8435d5bdcb6accacd418ec9a5988f4e01c4e76551f33b77b9cc19ff5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/incident_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "62bc10fa6bdc0f01355fdbc21453b6a605b36c3a2fd2effb54dfb3bbbda76472",
+      "bytes": 20250,
+      "crlf": 0,
+      "lf": 299,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "62bc10fa6bdc0f01355fdbc21453b6a605b36c3a2fd2effb54dfb3bbbda76472",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/incident_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "bf5b8a772358c66cbf236ec81de391f060be02651f17cb3580068124c2f88acd",
+      "bytes": 18363,
+      "crlf": 0,
+      "lf": 289,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "bf5b8a772358c66cbf236ec81de391f060be02651f17cb3580068124c2f88acd",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/interactive_prop_actions.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "b56d56868f4c91867ff917b327a5b203feebb859a694e011845386564200f7fe",
+      "bytes": 10810,
+      "crlf": 0,
+      "lf": 200,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b56d56868f4c91867ff917b327a5b203feebb859a694e011845386564200f7fe",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/interactive_prop_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "5ed6e69aed290475a051d0cb3f01453584825294d4585b63d69aa2aa6fd40e40",
+      "bytes": 7812,
+      "crlf": 0,
+      "lf": 132,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5ed6e69aed290475a051d0cb3f01453584825294d4585b63d69aa2aa6fd40e40",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/inventory.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "cd468425793df5988de49b8b95ffd4abadf930c6ad756ad5d9fd1ff8d58e7ee1",
+      "bytes": 3304,
+      "crlf": 0,
+      "lf": 95,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "cd468425793df5988de49b8b95ffd4abadf930c6ad756ad5d9fd1ff8d58e7ee1",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/kingdom_campaign.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073",
+      "bytes": 25407,
+      "crlf": 0,
+      "lf": 364,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/kingdom_world_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2e75908c26b0a0eec2631d7e5d65ef5629615f7aa9bb9c063738d0fc4ab5d6b3",
+      "bytes": 10769,
+      "crlf": 0,
+      "lf": 212,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2e75908c26b0a0eec2631d7e5d65ef5629615f7aa9bb9c063738d0fc4ab5d6b3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/lockpick_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a6bef386e9d771bf525e1df921b9938253e937b5e3c3c23b80e1410c654c4c74",
+      "bytes": 2928,
+      "crlf": 0,
+      "lf": 62,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a6bef386e9d771bf525e1df921b9938253e937b5e3c3c23b80e1410c654c4c74",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/memory_loop.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "1729200f9428acc6ea98fb68f0740e3a983186e98d871336723cd7e337a3ea28",
+      "bytes": 19517,
+      "crlf": 424,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "35a1fc2d545d17218a0a96af84426754fd52d3413fc6ba3aa1835797bbad480d",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/mesh_batcher.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d6bfd693feb3895049219bdb9ad55ce79c34a37c7dae1a59a277b8aa86679f09",
+      "bytes": 9466,
+      "crlf": 0,
+      "lf": 181,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d6bfd693feb3895049219bdb9ad55ce79c34a37c7dae1a59a277b8aa86679f09",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/neighborhood_utilities.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "7b8604ecafabbd796df4099a237d901ad2ca9972749b064478d85aff83a59d62",
+      "bytes": 13631,
+      "crlf": 0,
+      "lf": 221,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7b8604ecafabbd796df4099a237d901ad2ca9972749b064478d85aff83a59d62",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/office_campaign.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f",
+      "bytes": 23413,
+      "crlf": 0,
+      "lf": 334,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/old_school.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ce50d15c72494a21bcd592aa303470711a3afdbce9f63a90c4d8b676479f0765",
+      "bytes": 7043,
+      "crlf": 0,
+      "lf": 121,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ce50d15c72494a21bcd592aa303470711a3afdbce9f63a90c4d8b676479f0765",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/presentation_visibility.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "76697233cbcd0bd26f6fb1beb76906505ff74ec73fdf2605e765b1abc41a3555",
+      "bytes": 10955,
+      "crlf": 0,
+      "lf": 190,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "76697233cbcd0bd26f6fb1beb76906505ff74ec73fdf2605e765b1abc41a3555",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/progression_routes.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "87dc5ce17875faec9c3b68509bc5ae81b036ce0a597bb6c2b57ed65d417d0c65",
+      "bytes": 15240,
+      "crlf": 0,
+      "lf": 305,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "87dc5ce17875faec9c3b68509bc5ae81b036ce0a597bb6c2b57ed65d417d0c65",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/projectile_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1a3d3b56414e28aad9e5d2f454d8a6deb0109cd743fb4c2850e97e6c69d74a60",
+      "bytes": 9333,
+      "crlf": 0,
+      "lf": 177,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1a3d3b56414e28aad9e5d2f454d8a6deb0109cd743fb4c2850e97e6c69d74a60",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/prop_state.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ddc75238637cad84ac5390e01337777255f8fa27a7ddfca46214263b8fbf7a0e",
+      "bytes": 5193,
+      "crlf": 0,
+      "lf": 100,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ddc75238637cad84ac5390e01337777255f8fa27a7ddfca46214263b8fbf7a0e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/quest_dialogue.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044",
+      "bytes": 29240,
+      "crlf": 0,
+      "lf": 467,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/resident_dialogue.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ca595b65f6370e334a7106efee9f4cc52115f5c41e433052d568693527e50d8e",
+      "bytes": 19516,
+      "crlf": 0,
+      "lf": 314,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ca595b65f6370e334a7106efee9f4cc52115f5c41e433052d568693527e50d8e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/rhythm_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a7d9fe429956ec79ea4faebce460b9994b4f7c6eb4c642503c761ae00bc483d0",
+      "bytes": 5050,
+      "crlf": 0,
+      "lf": 97,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a7d9fe429956ec79ea4faebce460b9994b4f7c6eb4c642503c761ae00bc483d0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/robbery_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "da66e5208145b7f460fc8e609f5cb8e37c19716a2b498c5ecfa4a166f24bf48c",
+      "bytes": 3208,
+      "crlf": 0,
+      "lf": 61,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "da66e5208145b7f460fc8e609f5cb8e37c19716a2b498c5ecfa4a166f24bf48c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/save_store.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a33112ac0906b6c586fdc2b3f50be0db87f5fc019e2ed5d6f5a4b4aabe52570c",
+      "bytes": 2377,
+      "crlf": 0,
+      "lf": 80,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a33112ac0906b6c586fdc2b3f50be0db87f5fc019e2ed5d6f5a4b4aabe52570c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/site_cast_profiles.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "4ac5a33f2b8e1d2adff9f81724d5cb95b8a6b74fa94abacbf3aa20b07bae69c4",
+      "bytes": 28447,
+      "crlf": 0,
+      "lf": 348,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "4ac5a33f2b8e1d2adff9f81724d5cb95b8a6b74fa94abacbf3aa20b07bae69c4",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/source_audio.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "e873ccee707025c31da014bbe17b39e8d45c1da91abedc64ce4decc59e7c1f70",
+      "bytes": 8656,
+      "crlf": 0,
+      "lf": 155,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e873ccee707025c31da014bbe17b39e8d45c1da91abedc64ce4decc59e7c1f70",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/startup_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "0006ceb0652483f311706bf89be299d694fcf13135d9417c7a134d5b15ca42dc",
+      "bytes": 3503,
+      "crlf": 0,
+      "lf": 100,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "0006ceb0652483f311706bf89be299d694fcf13135d9417c7a134d5b15ca42dc",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/street_dialogue.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2c58c0c6f3e044f394780683db1367ab8491185e032e4324c52fa42d01b6265c",
+      "bytes": 19390,
+      "crlf": 0,
+      "lf": 285,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2c58c0c6f3e044f394780683db1367ab8491185e032e4324c52fa42d01b6265c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/surface_kit.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f9626b490d8569fd8d649634f4bc64e3bb887650e04e53ce402b221eb2831ae4",
+      "bytes": 8143,
+      "crlf": 0,
+      "lf": 173,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f9626b490d8569fd8d649634f4bc64e3bb887650e04e53ce402b221eb2831ae4",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/synth.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "557c00d2caeb82cc538f9b7182d82dfcf3017f0aca9f756a230d797d3e93dfec",
+      "bytes": 1834,
+      "crlf": 0,
+      "lf": 60,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "557c00d2caeb82cc538f9b7182d82dfcf3017f0aca9f756a230d797d3e93dfec",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/travel_system.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5",
+      "bytes": 26171,
+      "crlf": 473,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9087a8aabb862b8a77d7694c961bbec6ef278d37a6e6de1e253a3342ba2f2af0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/vendors_core.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+      "bytes": 16929,
+      "crlf": 0,
+      "lf": 339,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/wall_marking_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1f13a233195b62df5d2480077949f8df6e3c21b516265a95ca9b57b7226d37bd",
+      "bytes": 12456,
+      "crlf": 0,
+      "lf": 199,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1f13a233195b62df5d2480077949f8df6e3c21b516265a95ca9b57b7226d37bd",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/wall_markings.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f65da191c567d48d5f65ed18cf7e2452890ba04e80298db106004ef972cfc0da",
+      "bytes": 10464,
+      "crlf": 0,
+      "lf": 211,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f65da191c567d48d5f65ed18cf7e2452890ba04e80298db106004ef972cfc0da",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/weather_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2076ac43ed41f015f93a4d9e5e8a38ec381cbad3a1dc1a66db507b63e711d643",
+      "bytes": 13757,
+      "crlf": 0,
+      "lf": 234,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2076ac43ed41f015f93a4d9e5e8a38ec381cbad3a1dc1a66db507b63e711d643",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/world_adapter.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "bytes": 74082,
+      "crlf": 0,
+      "lf": 1321,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/world_ownership_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "6a1d63abd2ae1b097e768c3adf793733e065def62bf288b05f49be677a6f0a7c",
+      "bytes": 15432,
+      "crlf": 0,
+      "lf": 259,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6a1d63abd2ae1b097e768c3adf793733e065def62bf288b05f49be677a6f0a7c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/scripts/world_prop_actions.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1d44fa2613314feafd31a59a4c0139d29632334e293e2819f5b3f3331ac703b7",
+      "bytes": 18477,
+      "crlf": 0,
+      "lf": 342,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1d44fa2613314feafd31a59a4c0139d29632334e293e2819f5b3f3331ac703b7",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_actor_contact.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "4adf020539a1e7a105dfeb2ce828d9c90095eb9474682b657c700b71ddb736f7",
+      "bytes": 17862,
+      "crlf": 242,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "4b504e281fa4f6d7883952c082e6a1f5feafba3e6d28d45bb75862a5a0e036ba",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_actor_hud.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "5aa89fc9d36dda822c3d4cae96b562992c46652a9936ea67c63fc53a6f97bb45",
+      "bytes": 15500,
+      "crlf": 0,
+      "lf": 208,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5aa89fc9d36dda822c3d4cae96b562992c46652a9936ea67c63fc53a6f97bb45",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_actor_navigation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ffd3711eb06202fdcd8c4c088f5d02672cda821d59fcec36affe56f7681e9121",
+      "bytes": 28942,
+      "crlf": 0,
+      "lf": 461,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ffd3711eb06202fdcd8c4c088f5d02672cda821d59fcec36affe56f7681e9121",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_art.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2a4636fffa03709eab75151f80a9e9a93ea9e78eab2f6574efbeb66385044ae8",
+      "bytes": 26793,
+      "crlf": 0,
+      "lf": 476,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2a4636fffa03709eab75151f80a9e9a93ea9e78eab2f6574efbeb66385044ae8",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_audio_runtime.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "b11148c6518e383962f1ba3344a95019e0ecfc67690dcce9a19b8ec1b4ef7653",
+      "bytes": 17094,
+      "crlf": 0,
+      "lf": 235,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b11148c6518e383962f1ba3344a95019e0ecfc67690dcce9a19b8ec1b4ef7653",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_bosses.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a7df62191ab2fcad592074481a1d8a1904c18e2d740dcdc624689cde751bfb1b",
+      "bytes": 18730,
+      "crlf": 0,
+      "lf": 300,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a7df62191ab2fcad592074481a1d8a1904c18e2d740dcdc624689cde751bfb1b",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_campaign.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f7efb01e8aa658c8788e97df8406dfc6021083bf7484cef1bb13086d0e013a1a",
+      "bytes": 14083,
+      "crlf": 0,
+      "lf": 193,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f7efb01e8aa658c8788e97df8406dfc6021083bf7484cef1bb13086d0e013a1a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_cart_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "0073121f0e302f25b1308774aecd8136567a4d841395b8d92bf27e8df349b48b",
+      "bytes": 50272,
+      "crlf": 0,
+      "lf": 640,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "0073121f0e302f25b1308774aecd8136567a4d841395b8d92bf27e8df349b48b",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_character_roster.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "75c992e163dd39756483b57ce6bb52dbfca8a8a6594bcc022515c733685c0c5c",
+      "bytes": 63480,
+      "crlf": 0,
+      "lf": 981,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "75c992e163dd39756483b57ce6bb52dbfca8a8a6594bcc022515c733685c0c5c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_combat.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "dbbb027a70c62514795cc1f894201d7ea1ad7c560571e96c9154bd5225fa2ab9",
+      "bytes": 19714,
+      "crlf": 0,
+      "lf": 323,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "dbbb027a70c62514795cc1f894201d7ea1ad7c560571e96c9154bd5225fa2ab9",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_communications.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "835998debe77879452d1b168f2a36ad81835604bb0732508bf3a82a76760e3a1",
+      "bytes": 16911,
+      "crlf": 0,
+      "lf": 256,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "835998debe77879452d1b168f2a36ad81835604bb0732508bf3a82a76760e3a1",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_companions.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d01ed17962775a3efc51b328351759fc19adb8ccb17df8a6ca648cc52550e69e",
+      "bytes": 23962,
+      "crlf": 0,
+      "lf": 362,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d01ed17962775a3efc51b328351759fc19adb8ccb17df8a6ca648cc52550e69e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_cooking.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "025ff5c5c8b33a122ed499df1af9dcee8e1d837aaac965bc5ceec6f2c134add0",
+      "bytes": 13404,
+      "crlf": 0,
+      "lf": 226,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "025ff5c5c8b33a122ed499df1af9dcee8e1d837aaac965bc5ceec6f2c134add0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_cooking_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ed00364569e6ee951bd6244006451d087ecc9c545fd4312a559098cedfe1a36f",
+      "bytes": 12223,
+      "crlf": 0,
+      "lf": 173,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ed00364569e6ee951bd6244006451d087ecc9c545fd4312a559098cedfe1a36f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_cooking_runtime.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "5a22969828e46d331a71842152f2357a0419cfc663ac611f4fbca913dda6ac61",
+      "bytes": 14222,
+      "crlf": 239,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6b4ffcbcf998966987bd72af68faab6171b6bef4d7bb9bdc40977247a87b3152",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_day_system.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ac50107d2eb76a487241aa3ec2c6c1898c489099cd4c19507a51e3f8881313ec",
+      "bytes": 20738,
+      "crlf": 0,
+      "lf": 338,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ac50107d2eb76a487241aa3ec2c6c1898c489099cd4c19507a51e3f8881313ec",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_departures.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "b494803d031b8a12e968dd559df24f540958208a3b90ae6d34c381947251de2c",
+      "bytes": 14726,
+      "crlf": 0,
+      "lf": 225,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b494803d031b8a12e968dd559df24f540958208a3b90ae6d34c381947251de2c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_district_grade.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "c5d8d5850f3bc3d18a8858b8578c9aefe8bc11f0bda733ad7fb87c4421bf52bc",
+      "bytes": 8139,
+      "crlf": 0,
+      "lf": 122,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c5d8d5850f3bc3d18a8858b8578c9aefe8bc11f0bda733ad7fb87c4421bf52bc",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_dynamic_emitters.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "10681fa556c3915fcbe2ab5e1eb3ef10c2946d6b359c5b374f90f59f9f1136e8",
+      "bytes": 19050,
+      "crlf": 0,
+      "lf": 216,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "10681fa556c3915fcbe2ab5e1eb3ef10c2946d6b359c5b374f90f59f9f1136e8",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_economy.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "241e5cceff1c5a7b2b369352e2b3e543b96a7ff87aa6e20d884b3a1a1d170fbd",
+      "bytes": 17531,
+      "crlf": 0,
+      "lf": 318,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "241e5cceff1c5a7b2b369352e2b3e543b96a7ff87aa6e20d884b3a1a1d170fbd",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_find_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "24223d34a122a47f20f09ff01d85dbcd6d9fbe4eccb63128c9c85cd6ff2d1510",
+      "bytes": 16399,
+      "crlf": 0,
+      "lf": 208,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "24223d34a122a47f20f09ff01d85dbcd6d9fbe4eccb63128c9c85cd6ff2d1510",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_fixture_motion.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "ac05da26e027cbe1b2ccfc4b66ff860a6e504c2324d0a87f394aedf618bfecf0",
+      "bytes": 18420,
+      "crlf": 201,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7d7367f908d5362d16981bc2750fbe8176ca2de7ace7dbfe1d2bcbc983ca9845",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_fixture_motion_world.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "e40ea14d7c97ca53fa9e24f3ec71ceb0c80a142bad1ae2d5463c4c9c15e6c662",
+      "bytes": 14891,
+      "crlf": 182,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1f59b3e4ca736b92286f91e5b64eb99f22b35c7062a875515925a065ca58c2c3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_full_hud.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2a3db70e563d0cbe8b75df297baef0ee8761f931aaed492cd940068f6a24246a",
+      "bytes": 7539,
+      "crlf": 0,
+      "lf": 102,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2a3db70e563d0cbe8b75df297baef0ee8761f931aaed492cd940068f6a24246a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_full_integration.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "e4345c95012551422b0969f3d1a29f8d8e51743d42c097e2645cd1461217e47f",
+      "bytes": 9853,
+      "crlf": 177,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "55fadadfd735fea82a039c6af45718c53260a4c8fa191bc96d75a39347a85704",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_full_runtime.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "8f75e13e2a023a0a3fe67dabb63df39455042eb74104d38c6093c6f83021b29c",
+      "bytes": 34285,
+      "crlf": 487,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9dabb32c7225cce5ccc7685c42ef704c22b0d8bdd270444bdb562a33b2516304",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_full_scene.gd",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "355cdc4d93e0c045f8693bc1c0785f1a673e566391437c135e5dd6287d3b4378",
+      "bytes": 61080,
+      "crlf": 864,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "75301e0ae5eefccd90a023bfe98bec0dfa0e9d0de47008ba63e236f285e1badb",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_full_world.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "6dd158f9d693c5d472b9e8ed5ca678a9e151dc826743ad6412a3dd9b8d0e65ff",
+      "bytes": 12591,
+      "crlf": 0,
+      "lf": 223,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6dd158f9d693c5d472b9e8ed5ca678a9e151dc826743ad6412a3dd9b8d0e65ff",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_game_state.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "7d9dda33df719fee3424157ac8e97652e47e784fb36c610281b79013f576f40b",
+      "bytes": 21401,
+      "crlf": 0,
+      "lf": 321,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "7d9dda33df719fee3424157ac8e97652e47e784fb36c610281b79013f576f40b",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_guidance.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "daa87904ea62589af825d0217383f51064c254a2bbf09293d916060cecf963c2",
+      "bytes": 13676,
+      "crlf": 0,
+      "lf": 181,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "daa87904ea62589af825d0217383f51064c254a2bbf09293d916060cecf963c2",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_guidance_projection.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ac1c1feed6708428d79158793a7d955267b75499a07ccbd11e54681c7b74cbb5",
+      "bytes": 13412,
+      "crlf": 0,
+      "lf": 165,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ac1c1feed6708428d79158793a7d955267b75499a07ccbd11e54681c7b74cbb5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_heists.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "03d282f49644f6106a11dc45643a646a3f63ceae6be518041e15d4984add3cd0",
+      "bytes": 14259,
+      "crlf": 0,
+      "lf": 234,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "03d282f49644f6106a11dc45643a646a3f63ceae6be518041e15d4984add3cd0",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_incident_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2c9cdbde31d0930a941803dfd13a1360d80494a96b5149102e81885b895fb1d1",
+      "bytes": 16723,
+      "crlf": 0,
+      "lf": 204,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2c9cdbde31d0930a941803dfd13a1360d80494a96b5149102e81885b895fb1d1",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_incident_reservations.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "6fd0263626b0cd4444697db0ec3f47aadf5204f2244e837538c425e687c8fa96",
+      "bytes": 20238,
+      "crlf": 0,
+      "lf": 257,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6fd0263626b0cd4444697db0ec3f47aadf5204f2244e837538c425e687c8fa96",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_incident_runtime.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "8573504899e795b9928cc90e718ed8f16a63dc6c409e5c1e0e51c72aa6fc0c14",
+      "bytes": 15813,
+      "crlf": 0,
+      "lf": 223,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "8573504899e795b9928cc90e718ed8f16a63dc6c409e5c1e0e51c72aa6fc0c14",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_incidents.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "00873d29dfbfd4a86c3e9542155488fbabb531004d155e73ce31b2d1bd8b4015",
+      "bytes": 13638,
+      "crlf": 0,
+      "lf": 182,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "00873d29dfbfd4a86c3e9542155488fbabb531004d155e73ce31b2d1bd8b4015",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_interactive_prop_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "17ae33b0a2b0c5f4b74443d233b28b712459bb7f69128b6df0724c179735d59a",
+      "bytes": 35430,
+      "crlf": 0,
+      "lf": 490,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "17ae33b0a2b0c5f4b74443d233b28b712459bb7f69128b6df0724c179735d59a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_interactive_props.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "6ab201c2fee039bedd5f73b7e1557820f1c93f794e63b4762e13ab3e780b0f48",
+      "bytes": 23379,
+      "crlf": 0,
+      "lf": 353,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6ab201c2fee039bedd5f73b7e1557820f1c93f794e63b4762e13ab3e780b0f48",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_kingdom_campaign.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ca11bfeb1eae794f38430dda853e2f5ddab551a55b2c858ec12b3cefa287d386",
+      "bytes": 27308,
+      "crlf": 0,
+      "lf": 343,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ca11bfeb1eae794f38430dda853e2f5ddab551a55b2c858ec12b3cefa287d386",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_kingdom_physics.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f75bd38394e0e5cf7d728d63bfdae8afa0500d97700aca3883b22db2648a8160",
+      "bytes": 22451,
+      "crlf": 0,
+      "lf": 327,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f75bd38394e0e5cf7d728d63bfdae8afa0500d97700aca3883b22db2648a8160",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_kingdom_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f2d27f977d81cf63450eb7c9bde1388ad439fd201f4f0c8bcde2c001d288511d",
+      "bytes": 12401,
+      "crlf": 0,
+      "lf": 185,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f2d27f977d81cf63450eb7c9bde1388ad439fd201f4f0c8bcde2c001d288511d",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_leash_border.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "225afbbb117a3063d42b556da587e47fc213c25936045889d63530f5f6f4c5ad",
+      "bytes": 12505,
+      "crlf": 0,
+      "lf": 145,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "225afbbb117a3063d42b556da587e47fc213c25936045889d63530f5f6f4c5ad",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_memory_loop.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "ba55081316166d439c39d2a7dea6b2b41776adc20fb38a6955d296aa45871c44",
+      "bytes": 12824,
+      "crlf": 0,
+      "lf": 231,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ba55081316166d439c39d2a7dea6b2b41776adc20fb38a6955d296aa45871c44",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_neighborhood_utilities.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "88ddb571b9673dad6117f821caae4d72671e7f8e1d8eef99305e04dfaf7d1dce",
+      "bytes": 20009,
+      "crlf": 0,
+      "lf": 327,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "88ddb571b9673dad6117f821caae4d72671e7f8e1d8eef99305e04dfaf7d1dce",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_office_campaign.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "5792f5c3eb2afeaa328bf27cc84600c803bf37154345acd87129e9adc91f5c87",
+      "bytes": 15222,
+      "crlf": 0,
+      "lf": 217,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5792f5c3eb2afeaa328bf27cc84600c803bf37154345acd87129e9adc91f5c87",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_old_school.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "25aaa793936f80bdca593442d14e159ea037a9e68e741eb0a3693631b126db7a",
+      "bytes": 14221,
+      "crlf": 0,
+      "lf": 200,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "25aaa793936f80bdca593442d14e159ea037a9e68e741eb0a3693631b126db7a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_old_school_physical.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "c12d276cd3e274955a79953cd6d2f03686e95b22f9012b497374259a97c98de9",
+      "bytes": 13830,
+      "crlf": 0,
+      "lf": 206,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c12d276cd3e274955a79953cd6d2f03686e95b22f9012b497374259a97c98de9",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_presentation_visibility.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2caa8eb0cb2e8ea25c010c2c8236c1b7a0e8257346f61217dad151ce68dac37a",
+      "bytes": 18140,
+      "crlf": 0,
+      "lf": 289,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2caa8eb0cb2e8ea25c010c2c8236c1b7a0e8257346f61217dad151ce68dac37a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_progression.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2665d543d7751232b313d79c340704187b53c9537df31587c9c0c835fdaf433f",
+      "bytes": 10252,
+      "crlf": 0,
+      "lf": 194,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2665d543d7751232b313d79c340704187b53c9537df31587c9c0c835fdaf433f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_projectile_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "83b08d5068d7c75e29fbf7c37fb4deb797c51630de0f56ed9c5b15af49113abf",
+      "bytes": 12510,
+      "crlf": 0,
+      "lf": 151,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "83b08d5068d7c75e29fbf7c37fb4deb797c51630de0f56ed9c5b15af49113abf",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_quest_dialogue.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d8cffa0285f41dd208992b2f072a5600c648eb70377359ec3fbf639cd126e330",
+      "bytes": 21707,
+      "crlf": 0,
+      "lf": 356,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d8cffa0285f41dd208992b2f072a5600c648eb70377359ec3fbf639cd126e330",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_resident_dialogue.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "6aca23311c7509a1da6a1f58e9ed8137ed16fc12e42b8256950df4288d017d51",
+      "bytes": 14767,
+      "crlf": 0,
+      "lf": 260,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6aca23311c7509a1da6a1f58e9ed8137ed16fc12e42b8256950df4288d017d51",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_rhythm.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "8cb7d44529b3239cf7ee26bea4058c6239fdd66bea79e81db5ffb2527cd08898",
+      "bytes": 9311,
+      "crlf": 0,
+      "lf": 162,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "8cb7d44529b3239cf7ee26bea4058c6239fdd66bea79e81db5ffb2527cd08898",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_robbery.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "e84465fd26b88e239f4125caad6bfa7d7b381178e27999010bb79520c52b884e",
+      "bytes": 3566,
+      "crlf": 0,
+      "lf": 67,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e84465fd26b88e239f4125caad6bfa7d7b381178e27999010bb79520c52b884e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_scene.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "984e755f9c10f64015cc9603b37751b9727a1499ead7c331aab4889849525996",
+      "bytes": 18054,
+      "crlf": 0,
+      "lf": 344,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "984e755f9c10f64015cc9603b37751b9727a1499ead7c331aab4889849525996",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_site_integration.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "fdc3ee56a779f6eff0bb62671b33934013cd9528ec7a1b10810463a899c599c3",
+      "bytes": 5054,
+      "crlf": 0,
+      "lf": 80,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "fdc3ee56a779f6eff0bb62671b33934013cd9528ec7a1b10810463a899c599c3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_source_audio.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "76531b7aae4704fd680c7bef4c303c492a58318cbd3836f1b415c335ecc2460a",
+      "bytes": 14330,
+      "crlf": 0,
+      "lf": 211,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "76531b7aae4704fd680c7bef4c303c492a58318cbd3836f1b415c335ecc2460a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_startup.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "34acd3526f410ca3b0541d320e7531af608a400cffeb4fc210b2a5268b77ad9a",
+      "bytes": 10868,
+      "crlf": 0,
+      "lf": 180,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "34acd3526f410ca3b0541d320e7531af608a400cffeb4fc210b2a5268b77ad9a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_startup_parity.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "3fb0bfd1498b98129cc64bbe81a80026ba379e7b0a271861e75f66aeeef96c96",
+      "bytes": 14062,
+      "crlf": 0,
+      "lf": 185,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "3fb0bfd1498b98129cc64bbe81a80026ba379e7b0a271861e75f66aeeef96c96",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_street_dialogue.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "1e689b9450b44f57e8e5189597d64471a4ce38cc941cd0f4ddcbd81da91df1ba",
+      "bytes": 16973,
+      "crlf": 0,
+      "lf": 295,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1e689b9450b44f57e8e5189597d64471a4ce38cc941cd0f4ddcbd81da91df1ba",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_travel.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "c3cc51b6e4e04bc2b890664ebcdf2d25ee9980ecc45bc6ca991ae22317f690ce",
+      "bytes": 25915,
+      "crlf": 0,
+      "lf": 478,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c3cc51b6e4e04bc2b890664ebcdf2d25ee9980ecc45bc6ca991ae22317f690ce",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_viewmodel.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "fa094a40fe4223405e0cf33ec497f076244f71de0f99e036af8d4b7b7d8321ce",
+      "bytes": 12604,
+      "crlf": 0,
+      "lf": 239,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "fa094a40fe4223405e0cf33ec497f076244f71de0f99e036af8d4b7b7d8321ce",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_viewmodel_context.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "27750aa7c770b1bdd35e4c89dd6115e7f25f038dd33192130bf63c8c0be7fe61",
+      "bytes": 27416,
+      "crlf": 0,
+      "lf": 399,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "27750aa7c770b1bdd35e4c89dd6115e7f25f038dd33192130bf63c8c0be7fe61",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_viewmodel_gear.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "713bb3567f0b739a4568dcd046e981274f1f7c720f2b0bc2b485ee761b5b0fc4",
+      "bytes": 23313,
+      "crlf": 0,
+      "lf": 321,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "713bb3567f0b739a4568dcd046e981274f1f7c720f2b0bc2b485ee761b5b0fc4",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_wall_marking_view.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "a3b2037e5c68e9e95c6c8cd003d0e2bf1d020b9d70ebd75ea6166f431d0a760d",
+      "bytes": 13251,
+      "crlf": 0,
+      "lf": 167,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a3b2037e5c68e9e95c6c8cd003d0e2bf1d020b9d70ebd75ea6166f431d0a760d",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_wall_markings.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "568ff492c79f027fac26e4e102693c646255ef08de3622c8e96e0ba3fd743ef3",
+      "bytes": 14730,
+      "crlf": 0,
+      "lf": 210,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "568ff492c79f027fac26e4e102693c646255ef08de3622c8e96e0ba3fd743ef3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_weather_presentation.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "b184f0c3544c8699acf9b3cb65e33eb2ec986fb8c4e900b5588d0925fc3b9d41",
+      "bytes": 13021,
+      "crlf": 0,
+      "lf": 177,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b184f0c3544c8699acf9b3cb65e33eb2ec986fb8c4e900b5588d0925fc3b9d41",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_world_adapter.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "642661ebc93827b51d414983de9986aa53bbffb39eeac3b5936639a5dd752b9e",
+      "bytes": 28511,
+      "crlf": 0,
+      "lf": 473,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "642661ebc93827b51d414983de9986aa53bbffb39eeac3b5936639a5dd752b9e",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_world_ownership.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "24481141708d2b72dfbcde252366d4a22e437efe29ef12a8b1ade62e0cb15242",
+      "bytes": 12364,
+      "crlf": 0,
+      "lf": 196,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "24481141708d2b72dfbcde252366d4a22e437efe29ef12a8b1ade62e0cb15242",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "game3d/tests/test_world_prop_actions.gd",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "f232f774ca78b6bc0a4a3012f90c856fdca914923bafd5b449067b6144f55803",
+      "bytes": 21165,
+      "crlf": 0,
+      "lf": 330,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f232f774ca78b6bc0a4a3012f90c856fdca914923bafd5b449067b6144f55803",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-18-3d-full-scene.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a4aa1d9aa2d335a5cc01a9f12f8690df14ea2e982c588c2eb168efdbe82d5fde",
+      "bytes": 15532,
+      "crlf": 272,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5b612ead84b6432636a501d55f7194a258f909b1857937a09567ca5493da645c",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-18-3d-live-neighborhood.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "124a6abb78a17c22533923bea9bb98f4bdacfefaf1c508ab261370933ce41648",
+      "bytes": 15620,
+      "crlf": 0,
+      "lf": 183,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "124a6abb78a17c22533923bea9bb98f4bdacfefaf1c508ab261370933ce41648",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-18-3d-motion-and-color.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "dd4be6479dca36a03399c23cf355a4caf1c140a3d09956db6543f53a28a77ff7",
+      "bytes": 7143,
+      "crlf": 0,
+      "lf": 113,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "dd4be6479dca36a03399c23cf355a4caf1c140a3d09956db6543f53a28a77ff7",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-18-3d-world-details.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "56bbbd835e720db9a0f01569d7f4ae71de16e4d5580d5734cb1bd368be097deb",
+      "bytes": 19420,
+      "crlf": 0,
+      "lf": 236,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "56bbbd835e720db9a0f01569d7f4ae71de16e4d5580d5734cb1bd368be097deb",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-19-3d-hands-and-office.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a27401aa77db467347fdbe9bb78bc8a6ed74cf1d69a14883cdcdba921ee7c09f",
+      "bytes": 5077,
+      "crlf": 2,
+      "lf": 83,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "cdc0c3710eccb8f75da54741788b35c0ec003f4eddc905d3441a36bfd1db5f44",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-19-3d-input-and-acceptance.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "d5172e8233e8a140c61492f73c6e2db539b0dddba269526ab1a920b90c477d44",
+      "bytes": 8668,
+      "crlf": 0,
+      "lf": 136,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d5172e8233e8a140c61492f73c6e2db539b0dddba269526ab1a920b90c477d44",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/3d-full-port-system-inventory.md",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "c09c09646e0ced65426b528398daee0a0dfd25dbe30f57bb626ab4c20ddf37d5",
+      "bytes": 34569,
+      "crlf": 0,
+      "lf": 155,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c09c09646e0ced65426b528398daee0a0dfd25dbe30f57bb626ab4c20ddf37d5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/3d-parity-metadata/PROPOSAL.md",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "fc1ea755e97046870d65cd880eca5a89801435aad838bb63ab35d5d6d91aad72",
+      "bytes": 12046,
+      "crlf": 0,
+      "lf": 181,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input",
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new_candidate_input"
+    },
+    {
+      "path": "reports/3d-parity-metadata/baseline-manifest.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "99a7a875d8e9c7b26561808b4c158de1a6e62c7946238d965b99cf7736f6d4cf",
+      "bytes": 418746,
+      "crlf": 0,
+      "lf": 12197,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input",
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new_candidate_input"
+    },
+    {
+      "path": "reports/3d-parity-metadata/evidence-index.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "d7628709673521fff62ef65c81ed224061902d0862218deda7b8323a36a40b05",
+      "bytes": 85220,
+      "crlf": 1696,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input",
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new_candidate_input"
+    },
+    {
+      "path": "reports/3d-parity-metadata/handler-dispositions.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "3cb0e505a5c0903b5586e009e653cd1f72a4e58697ee5b4048c653c410e6f657",
+      "bytes": 39607,
+      "crlf": 842,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input",
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new_candidate_input"
+    },
+    {
+      "path": "reports/3d-parity-metadata/input-pins-metadata-v1.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "15fa21a1b0bdf41353155146f31b8365bbd1c0f3a21b3d3bdb3f8239cde5c171",
+      "bytes": 27724,
+      "crlf": 0,
+      "lf": 257,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "reports/3d-parity-metadata/integration-map.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "49b9edbccca3114005d92be7a25cdeaf8e02cd15bc1efa1007b2a6302ef5d8d6",
+      "bytes": 1422,
+      "crlf": 0,
+      "lf": 24,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/INPUT-PINS-v2.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "0d1d13076bb7ed083d57a09ce6deb595dfaba8e64083c203642bcf1280c4ac5b",
+      "bytes": 27736,
+      "crlf": 0,
+      "lf": 257,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/INPUT-PINS.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "5a9e90bacb4efa2d604ad5d217f8b3e9b35d020e9f613c6f0e9487447c29ca75",
+      "bytes": 27571,
+      "crlf": 0,
+      "lf": 253,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/INPUT-REBASE-v2.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "dae0107acae9b636bfd2bcf7b45613a1e37071474210363e8a0ce048b71d7ae0",
+      "bytes": 2972,
+      "crlf": 0,
+      "lf": 68,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/draft-manifest.json",
+      "attributes": "-text",
+      "reason": "exact historical/metadata input",
+      "accepted_raw_sha256": "d8667f7ff52cf4729a7a5b7d883fff204112a46df0c68f1f8d587c6d560162f2",
+      "bytes": 2288,
+      "crlf": 0,
+      "lf": 47,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "src/core/audio_save.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "814eff4e13f8b47b5de925d65b85f4e10cbafe8f026db73c129aa88224fc9ebd",
+      "bytes": 20097,
+      "crlf": 328,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "acb505f0db2cd7637bfcc56fe35b4167e3a57072213dd99bdefa0d0a16b78f2f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/core/boot.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "cfb262c7d9ab5eb8920d126f1abc4d4fcd033d4baf17905a3e63f1f03fbdfdb1",
+      "bytes": 910,
+      "crlf": 25,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "05037a81bcf7a4805e931869839c561d4a8e59865b1bf0378d262ec6708674ed",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/core/runtime_ui.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b8db9270fba6b7542b9a8d61eaaa1be168845ebbd6f87f975b92a537ca58ba8c",
+      "bytes": 32944,
+      "crlf": 563,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e04fdd0c909571e9560bd93e044ae31cef0b0dcf2b0fea9dbc0a50cdb1a34464",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/core/start.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "450087778bbcaad6d4b8adff9bf64042c012a301f1f0a1c16b648fe263970971",
+      "bytes": 8080,
+      "crlf": 161,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b125a7d5436f8b2e2746971c450c0c590e6c1c9d424ad57f899acc29807e4509",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/core/storage.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "7a4e3ef9257d240743cb3dfd3912cfe95601738eb57382e8e508679372a223da",
+      "bytes": 2277,
+      "crlf": 55,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "94e88b108acea3c27cac26c9e4d24e054877589776081567c1ba6d64a7a0540c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/core/update.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "f21f8b4761209e953ebeb57d81f8f97253565f8c5de6eb432ff988ab2780108e",
+      "bytes": 41369,
+      "crlf": 921,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "352ae428b1b0fcf3e2a1b5b9e29e6a3a1cecd6c1e5228b5a37ec30f644f57bf3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/data/catalogs.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "86cec397deba805e74b540d39ec0ecd0cc8759b1ab014733ebc358f32cbf2903",
+      "bytes": 11546,
+      "crlf": 196,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a3b5fae3488348c259514be87399cd4b844bc869c74f6eac09db56b3f741da5d",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/data/npc_spawns.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "d179baf0bd6a9ebf2e99a06238f6a089dd7f8d4e6d2baae4627074011ab58ff6",
+      "bytes": 26178,
+      "crlf": 417,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9df007f05568596ac5c066b2331a549cc450cddb94d6f214c150dec249c32315",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/data/props.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787",
+      "bytes": 49823,
+      "crlf": 766,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "896edc21f61ee7d0f7d47d98be27796a10e109e6ef3013fc608b01e34e2f7fa2",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/data/world.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b196933c3521dd894d50129ef49c7f14d6f3c19dcbf45ce6a2591e7854db75df",
+      "bytes": 29109,
+      "crlf": 392,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "699d9f18c4cec653a5f5d5466b798c9022ac70bb948816cb86db45965fefa02a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/dialogue/neighborhood_a.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "17ca187e2788dc7bf5a974e120abcf1c0adbe6089e2a40956df213e7365e5728",
+      "bytes": 39528,
+      "crlf": 752,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e81580df2fbfcef6ee35a8142bdeca0e5ecf66fa274cf599b517a1c17962cb61",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/dialogue/neighborhood_b.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "ec77cae030b199de4401d21c82a43b79174565f46f7bc36778da658555535c2f",
+      "bytes": 18060,
+      "crlf": 391,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "3e823c70bc8e95e49cc9fe5e9cd8c33996901b99e1ae7a02a9a95b28ce1d74a2",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/dialogue/vendors_places.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "e588294c72a60f50b51b92820e91abce788b3e118d881001e1a63cfba311d812",
+      "bytes": 32764,
+      "crlf": 662,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d51ad190443e4edadcb9f436615682a3224f6c9234a0ad437ae9eb48cfb3e2b4",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/input/keyboard.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "41ffa846f4130dc27d93cb25286e894660a9a307053474526c38065421a1ecf5",
+      "bytes": 5747,
+      "crlf": 139,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1c93d38db54f847062331bd32a07ff5b79df16d19ee03ae01321484ae25b5937",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/input/mobile.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "7fc506dfafa882993c92010c1ac6f652251916e19dec872657a73da644216e35",
+      "bytes": 9157,
+      "crlf": 213,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "42f93458675ad667b5fa5efd02a4b79865ac0f9141c24fba74c215d16ecb9687",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/main.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "c1af21eb684b34599ba73e7f2cb8183f57cd9ed71b88b92bc6a46ea23365e998",
+      "bytes": 3232,
+      "crlf": 84,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "8c3c7e94c8eb18d1c88a00839e2b60c04f0584449002a42ac229baa83b622df6",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/minigames/activities.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "943e740548f2e2720053ff0a56a9ad030f0bad69518b9148798c2ccc16f152d0",
+      "bytes": 20645,
+      "crlf": 462,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d824c1446aacefcec93abcb7d040e310912b921f39df312709c2d0a1a3c547fd",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/minigames/heat.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "bed99ea57e986e30da890922ee232a1742dd6185bc29a9ad45093cc6dca84051",
+      "bytes": 20251,
+      "crlf": 482,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "509b5643c63de1b38ede9a174b2100600f6c54a9a18ba7c32098a9b29a0b5040",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/module-manifest.json",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "6c8faa62458008a2a647bb7c1c8afdfe0e9b6e0b1fe5f7aa0550abd7f2c0a45d",
+      "bytes": 8908,
+      "crlf": 479,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "418488c874e0adb6a36fe039d3452fd30130a07cdf59c49946a55ec74127167f",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/actors_weather.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "3690bea5ce51e0801e87d65ad1fe359ae287cd0c123580ede9c1411262d71f29",
+      "bytes": 18733,
+      "crlf": 435,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a68a61f666908f7d647aaa65dc48efc86a080404fbf7c66011abc7aba4023447",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/canvas_geography.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "d0c46907762ba2657fbc783d41bdb659814232ef999ac4eb85b51ade2f761c95",
+      "bytes": 15260,
+      "crlf": 313,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "77378a10f6a328f9668a30acc9c5b439332327a1a989353ebf1dde3efaf50ec9",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/frame.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "85e881dd7bb4af75dc89bb3747e5faf65e890fb240c9f7c74429ffc094ffd08c",
+      "bytes": 13657,
+      "crlf": 362,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "6b7a2c7307718047cbdee173ded028354bf63137b20608e7c5c3e0115a1b65f5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/landmarks_a.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "58dca57ee9e6ec2f9d42ee22f2f84e7efa161b87e2a84f2f98a2b98f8d752878",
+      "bytes": 20609,
+      "crlf": 418,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "8aeb713181c8fe34b0bf7988959616c0420d225e32ea5e1f368ea6340158dce8",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/landmarks_b.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b4058dac204196cadbd8f77706043851cd67c18d4667e8ddd9ec1802fa526ada",
+      "bytes": 4376,
+      "crlf": 124,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "60f7ed53cc279dbc3d06245b0d4eb3436eafb128f657946e0255c34f9c1b47a3",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/minimap.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b5ef3362d4464944e1ff4c44bda26aca981d35a69eba558a5de2cfebd48a6136",
+      "bytes": 3417,
+      "crlf": 74,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a5d3be5879aea3719efd5b1437e0e28854b27f188b2ead1bac512caafd60f732",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/props.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "3aa9fa457c4e4c5e1c6c8b325cbaa890d57c8ccf095efef0eb2c164af12a8fa5",
+      "bytes": 25964,
+      "crlf": 695,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a87ca6de94477f058f7bb626e8fd070f500190d0f640ef592e1c557ffeae5e89",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/sprite_art_npc_32.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b712359121b7cb1d0e75660643e434d79cb69e3c40e5ce6bfc63f2e2246cd531",
+      "bytes": 26036,
+      "crlf": 525,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "38be1c53f959dd92d01819d0247deb35685b4e2778fff0a877f60860e6122773",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/sprite_art_player_32.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "7773af69217815b693f94bfb38cc4faa6f1ac28bd1cf46562ecf4a5947253f44",
+      "bytes": 25078,
+      "crlf": 535,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "9a9808401ccd14db22e6622a5cf3dbde00db9d5cdc2d84b20e818b5d6d4cf6a2",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/sprite_art_special_32.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "01ade8fd58f9b3759a0752ec60aacb916e2ddf66bca85fea59d98417c976eae3",
+      "bytes": 10182,
+      "crlf": 232,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1f316da99e3c60471dbe14ae04f2f0df8dea675abd348b351a5e7ddadc55f3ca",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/sprite_manifest.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "02212210f0b999531b734bc014a0124abe5ce1ea9f9f5ae8e9782918cd452555",
+      "bytes": 1952,
+      "crlf": 98,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "28d5974c1e28045007aaec3b9ca27e30dff3d442af32715357131cf7f0ce9d80",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/sprite_toolkit.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca",
+      "bytes": 5078,
+      "crlf": 136,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "0af284c6c308e170c934934416a0213bfe6dd4063bfca829e7650dbcd5a4dfcc",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/sprites.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec",
+      "bytes": 46901,
+      "crlf": 909,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "c18e3039e896923375a061d110999034e6f8b53a927c78ba450d28b325221e40",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/structures.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b807236d0e6c3c7ba249688c61d5e7c8024a25c1c2dbc2713f651f1a7206bb72",
+      "bytes": 22388,
+      "crlf": 523,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b7de1ad444e401c70ce2ef17098d9005c896c5b46457170e26374f5159a93096",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/render/tiles.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "2f0fd56e6703a6b559757afefb0cbe6bf6ae432175804611accac91e72bd3958",
+      "bytes": 14054,
+      "crlf": 315,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a85c060ad319526a630278fd3d4160878816c3af75cb16e9717e5fff1dd6a1de",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/campaigns.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c",
+      "bytes": 53095,
+      "crlf": 836,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "54c27c86a137b31ad7b544f49d29482c753f2a02f4d37ddb7b462fdf70640461",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/combat.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "ea4b39a246e918e57bd6a561e19cee6d8396a6a328adb2b041db48cd7ada3eb4",
+      "bytes": 27547,
+      "crlf": 599,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b0d8257f95588497a078b442c389647c0d75637019591a6eb8f96fb53e23ab03",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/communications.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "822daf105608a97a0bc15bfa5d4e6bd4c38071268a873b1693d6d0fae04bb3ef",
+      "bytes": 14974,
+      "crlf": 243,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "0b25edcaea64cbd63e3bded0decf2bd12cbb3182c31f0e40a7e5a4ca9442523c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/concessions.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "875abe4453ef7d1ad234c25fa5c9fad561afbc7a461c00598cc767368a5f280f",
+      "bytes": 14690,
+      "crlf": 312,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "bc132f480906abb583865407563229b8556b281374417a059b4300bd4ba2d803",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/daily_hideouts.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "63bab30519539f0ab117cf6a847a188aa1a6b511da5d3769006e20e77aa0ba56",
+      "bytes": 20941,
+      "crlf": 362,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b2e5803afe7b3c990d1851de488306e9456ea49f0a0c7d0af4ebb3450490d8d5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/discovery.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "72df9dd94cff7d3157bc90d19d2963387420c831a44f348d31b8abeade0cc47f",
+      "bytes": 4685,
+      "crlf": 96,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d28f2a68e180ab6e6e0f7e058b411a01733752a7a797608412ac5c28dad1e239",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/factions.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "3238b7b5d19eb062d168188cb06046c7ec568f1771906af4eeee9a414f7dd50c",
+      "bytes": 10570,
+      "crlf": 238,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "2b74746c2650ab7b2d7e1a065cc34a250cff260a2860df37c9735ac9cf8d9bcc",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/hitter.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "b2b173423bbabbf74447fb2a6110b32e66e2da683b2439586208681b9ba76f44",
+      "bytes": 4950,
+      "crlf": 95,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "fbcbfdc8892b895469c6aaf65b3a231b1a31a09d36f85dfd98282d0e41feb21a",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/incidents.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "e1f35f54498873c537a66f47a4587459a44b205c95239f9750fb11b63f7f1cd4",
+      "bytes": 14718,
+      "crlf": 354,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f38af8231b64bceaa79cd0d474c0da7580abf755f968bd1a9c1544f0fcb0eb68",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/interactions.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "9d1794000d61e776d53bf79a689e6a64bdc557801141a191f205b54cb9046d4c",
+      "bytes": 18116,
+      "crlf": 377,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5b8a4c06dad1dcd3a6b1dd780040ebb27a99b9548356cebce4f0296d062870fa",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/npc_ai.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "9b757902f72b08004b94a90908a6b92578f39935e351ff1f7ddac9886dfec212",
+      "bytes": 22709,
+      "crlf": 506,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "15943129706ca5ee74db27abd0f6f149a34f01f39780672c51ae1872c6adc202",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/physicality.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "17c67cc51136bf9b6373d881465631508222cdca825a3504c204dcb7bd2000dc",
+      "bytes": 15958,
+      "crlf": 326,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "f818f138d8a130ec573a8b402346cd5ffef089abb890a0d73040330de205cfed",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/progression_routes.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "9c4116b5b08e60249c9d8815ffdfc865bee453914fb1084e8ef20e81d635a5b7",
+      "bytes": 23604,
+      "crlf": 322,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "1f05f7014b35baa3fef843bb1c2797c8644430f67641cc4ba237a6498ca8ab76",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/recognition.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "9856c54df6f26998b1f663be473e305291f5645950e056770eff4595f15b4734",
+      "bytes": 7416,
+      "crlf": 147,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "398f38c87eb3a95bf510738865c9b8499df9e2e26a296619170d1a1040ec0a00",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/systems/robbery.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "663f642825ecd09e3a024bbf2f516d6f3c89978c3b5b21076af71dc4b1fcb86a",
+      "bytes": 5529,
+      "crlf": 112,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "cd55539df2cb05d34019aac94e195e4060b7e7489c219a00b369917a00b49517",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/ui/hud.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "61fe70ac81ce4faa3b4bdd3950ab427c3e563ba663ec94bdf2764978da3caf30",
+      "bytes": 2718,
+      "crlf": 51,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "d48d6b592ae94521f2fbe79f0d2c2d5c9b1b824182b28449c2b38517e7f8b92c",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "src/ui/layout.js",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "ac19adc4dd71111d5d6878c6593a915e058f6fa0058309f6847e524f2256ccf3",
+      "bytes": 1387,
+      "crlf": 29,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "728f756fac377956fe681d678d4d69e4005bf09d1eb0a9e205124c26e861d6c4",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "tools/3d-fixture-motion-oracle.mjs",
+      "attributes": "text eol=crlf",
+      "reason": "uniform original CRLF source/input",
+      "accepted_raw_sha256": "5827b14b3d4754d6598401d418069f85ae403491cf353a387b11fb642cad4014",
+      "bytes": 15402,
+      "crlf": 159,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "a51474683b92bcd7e0fc44c60d5d2969612f9138fda006fc13be2f17116fcd60",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "tools/3d-memory-oracle.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "b87481143aa078f194b097dda62e5d67092d0cb1422c5ffaaed544114fc03bd5",
+      "bytes": 4198,
+      "crlf": 0,
+      "lf": 71,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "b87481143aa078f194b097dda62e5d67092d0cb1422c5ffaaed544114fc03bd5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "tools/3d-progression-oracle.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "4399f109f66ed18cfde413429148beea2f318930e75232cd3af6260965608134",
+      "bytes": 5578,
+      "crlf": 0,
+      "lf": 82,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "4399f109f66ed18cfde413429148beea2f318930e75232cd3af6260965608134",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "tools/3d-startup-oracle.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "cbcb035f0382840c44075d0aa8a5e71bb9fe95ad22cfb3a742bbfd00f1566e13",
+      "bytes": 8934,
+      "crlf": 0,
+      "lf": 107,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "cbcb035f0382840c44075d0aa8a5e71bb9fe95ad22cfb3a742bbfd00f1566e13",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "tools/district-grade-oracle.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "830867252cbecca2c65d9406e578a5d1b0ad42156b10d35cecc9a893693208b5",
+      "bytes": 6842,
+      "crlf": 0,
+      "lf": 87,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "830867252cbecca2c65d9406e578a5d1b0ad42156b10d35cecc9a893693208b5",
+      "raw_restage_required": false,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "tools/parity-metadata-gate.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "d84c4579ae8052d2edeeda7b7be2e9ad9c4b4c9f71219a0a93312851a1bf364d",
+      "bytes": 1056,
+      "crlf": 0,
+      "lf": 16,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "tools/parity-metadata-migrate.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "fa960f41a3a391859409519792a3e0edd8748465c0a81a70fbc626f16560c2c3",
+      "bytes": 1399,
+      "crlf": 0,
+      "lf": 20,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "tools/parity-metadata-test.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "2388c4874d86dfe6895725a37404acfd7657f7ccdc542cdf4e55951ec129d6c3",
+      "bytes": 15293,
+      "crlf": 0,
+      "lf": 146,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "tools/parity-metadata.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "bd26a4634bd15e58ccfa25b40f074ddbd755d4a089a5728e2e6c88c1454d1426",
+      "bytes": 18010,
+      "crlf": 0,
+      "lf": 226,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    },
+    {
+      "path": "tools/parity-source-proof.mjs",
+      "attributes": "text eol=lf",
+      "reason": "uniform original LF source/input",
+      "accepted_raw_sha256": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47",
+      "bytes": 6820,
+      "crlf": 0,
+      "lf": 124,
+      "loneCR": 0,
+      "roles": [
+        "delivered_candidate"
+      ],
+      "root_index_sha256": null,
+      "raw_restage_required": false,
+      "root_index_observation": "new delivered file"
+    }
+  ]
+}

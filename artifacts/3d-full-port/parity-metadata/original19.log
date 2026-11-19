@@ -1,0 +1,47 @@
+corpus-gate: the seed must not shrink by accident
+
+[32m
+PASS — corpus intact.
+[0m
+docs-gate: the README must not lie about the suite
+[32mDOCS GATE: PASS (19 gates in the runner, 19 documented, all present on disk, both lists agree)[0m
+version-gate: the game must not lie about which game it is
+[32mVERSION GATE: PASS (title, subtitle, and README all say v22)[0m
+MODULE GATE: PASS (37/37 chunks extracted, 50 JS files linked)
+SPRITE GATE: PASS (377 exact nonblank keys, 94 declared 32-logical character bases + 11 explicit 16-logical environment sprites, 14 frozen draw sites, palette-use/no smoothing)
+  structural gate only: sprite quality remains an operator visual decision
+NPC REGISTRY GATE: PASS (63 canonical rows, 59 source identities, 56 runtime actors/45 identities, 4 aliases, 1 generated family, 60 actor sites)
+LEGIBILITY GATE: PASS (24 signs, 23 zone labels, 56 active nameplates, 14 fitted tags)
+PRESENTATION GATE: PASS (6 viewport fixtures, 1 rideable cart, 106.2px nearest NPC, ordinary/Big Guy/save paths)
+phase1-lighting-gate: PASS (887 checks)
+RECOGNITION GATE: PASS (4 venues, 5-lane schema, 12 beats/3 clerical, stranger->conceded ladder, zero reward leakage, high-boundary 18000->8000, malformed-save + save/load roundtrip)
+CONCESSION GATE: PASS (1 ignition site, 5-spot identity + soap parity, tier/condition/race gating, Block-only coronation, 16-combo honest BAD IDEA + tie->block, mid-high expiry 18000->8000, clock persistence)
+COPPER SITES GATE: PASS (4 sites, one engine, shared cap 3/day, yield locked 2-4, 13 entries + 8 exits exhaustively walked, cold_not quiet / rust_car hot)
+HITTER GATE: PASS (full-cycle marathon: rock 72.0 shakes vs hitter 100.0 at 40s; high 18000/6000ms, crash 8000/14000ms, brain -4/-8, cred +3/+0; craft 2 copper one-way, find 4% far-only, save additive)
+DISCOVERY GATE: PASS (structural door sweep, byte-identical reveals at 4 tiers x 4 venues, 4 teller reveals + idempotent retells through real dialogue, Block excluded, visibility contract + grant-nothing room, 14/15 orthogonality both ways, save roundtrip + pre-5.2 all-undiscovered)
+ROBBERY GATE: PASS (1 robber flag on skid_lurch, real-path grab takes / alley grab doesn't, 8-id + 12-id allowlists with keys untouchable across 8 rolls, all 5 theft categories pure-sink with no return over live minutes, governor 60s + 2/day through the real dawn reset, gear layer provably undrawn after coat theft, save additive at v10)
+BREAKIN GATE: PASS (5 sites through the one engine, tool/cred doors refuse both directions at the exact boundary, both-gates precedence tool->cred, governors separate (2/day vs 3/day) through the real dawn reset, take locked <= $40/day with vetted item ids, 15 entries + 10 exits + take/alt/leave exhaustively walked, crowbar + locker + governor round-trip)
+SOLIDITY TRAVERSAL READINGS (arbitrary-heading analog; production collision replay)
+  kingdom emperor: block -> throne banner: straight 7900.4px | baseline traversal 7939.4px | v21 traversal 7947.8px | collision delta +8.5px | 57.802s = 96.337% budget
+  route pawn_sill <-> ditch_gauge: straight 8123.8px | baseline traversal 8123.9px | v21 traversal 8167.6px | collision delta +43.7px | 59.400s = 99.001% budget
+  campaign maximum collision delta — claim canal: office -> survey: straight 1244.8px | baseline traversal 1450.5px | v21 traversal 1555.9px | collision delta +105.5px | 11.316s = 18.860% budget
+  route maximum collision delta — route motel_no <-> canal_gauge: straight 2605.1px | baseline traversal 2605.1px | v21 traversal 2785.1px | collision delta +179.9px | 20.255s = 33.758% budget
+  excluded ledger control — route scrap_gate <-> ditch_gauge: straight 8274.6px | baseline traversal 8282.8px | v21 traversal 8324.5px | collision delta +41.6px | 60.542s = 100.903% budget
+  WASD sensitivity (unobstructed octile lower bound): emperor 8404.6px = 101.874%; pawn_sill <-> ditch_gauge 8614.7px = 104.420%
+  measured 69 campaign legs + 252 assignable route pairs; 4 impossible Tony-center occurrences resolved within the live 60px action region; 0 new budget crossings (use --full for every row)
+SOLIDITY GATE: PASS (53 declared structures, 28 solid facades/0 flat, 28 road-clear facades, frozen 8600x5600/23 zones/193 props/56 NPCs, one collision source, 28 direct + 28 save ejections, 21 doorway preservations + 96 legacy motion probes, 28 player/28 projectile blocks, 28 player + 56 production actor traversals, 56 charge wall stops, 28 facade + 1 unregistered + 1 misplaced legacy actor ejections, 8 exact legacy spawns preserved, 69 campaign legs, 252 assignable route pairs, 0 new budget crossings)
+RUNTIME SMOKE: PASS (56 NPCs, WASD chord/release, exact 18s->8s status, dialogue, 373 sprite keys, save/load)
+WORLD GATE — measured, not vibed. All distances straight-line (lower bounds).
+  walk 137.5px/s (walked & cross-checked) · withdrawal 0.80/s · shakes 20->100
+  runway 100.0s = 13750.0px · leg budget 60% = 8250.0px · coverage budget 45% = 6187.5px
+  world 8600x5600 · diagonal 10262.6px = 74.6s of a 100s runway
+  ok RUNWAY-CAMPAIGN: 69 legs, worst "kingdom emperor: block -> throne banner" 7900.4px (57.5s) / 8250.0px
+  ok RUNWAY-ROUTES-DAY1 (10000 rolls): 20000 legs, worst "route scrap_gate -> church_step" 1826.7px (13.3s) / 8250.0px
+  ok RUNWAY-ROUTES-PREOFFICE (10000 rolls): 20000 legs, worst "route school_chain -> train_signal" 3982.8px (29.0s) / 8250.0px
+  ok RUNWAY-ROUTES-FULL-UNLOCK (10000 rolls): 20000 legs, worst "route pawn_sill -> ditch_gauge" 8123.8px (59.1s) / 8250.0px
+  ok ROUTE-TABLE: 253 pairs, 252 legal (99.6%) · 1 ratified exclusion(s) (worst scrap_gate <-> ditch_gauge 8274.6px) · min partners 21 (scrap_gate), floor 3 · co-routable · src budget 8250.0px
+  ok BLOCK-DAY-1: 20 day-1 objectives, farthest "quest conductor" 2072.4px / 8250.0px
+  ok COVERAGE: worst point (0,5600) 4671.2px (34.0s) from laundromat / 6187.5px
+  ok TRANSPORT: 1 rideable cart(s)
+WORLD GATE: PASS (runway legs within 60% of a fresh runway, block covers day 1, coverage within 45%, one cart)
+GATE RUNNER: 19/19 PASS

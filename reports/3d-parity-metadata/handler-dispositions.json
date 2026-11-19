@@ -1,0 +1,842 @@
+{
+  "schema": 1,
+  "status": "proposal_only",
+  "source_manifest_sha256": "99a7a875d8e9c7b26561808b4c158de1a6e62c7946238d965b99cf7736f6d4cf",
+  "counts": {
+    "handlers": 585,
+    "integrated": 555,
+    "partial": 28,
+    "planned": 2,
+    "classified": 30
+  },
+  "handlers": [
+    {
+      "id": "definitions[\"src/input/mobile.js\"][\"init_mobile\"]",
+      "name": "init_mobile",
+      "ledger_status_unchanged": "planned",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/input/mobile.js",
+        "line": 175,
+        "sha256": "7fc506dfafa882993c92010c1ac6f652251916e19dec872657a73da644216e35"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "mixed_scope_boot_adapter",
+      "source_obligation": "Calls setupMobile, wires source load pointer/touch/click handlers, probes async save availability, starts update RAF and exposes QA helpers.",
+      "first_person_equivalent": "Split obligations: coarse-touch excluded; actual Remember/load and storage failure UI retained; SceneTree replaces RAF; isolated QA harness replaces source window._rb inspection.",
+      "implementation_refs": [
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/startup_presentation.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_startup.gd",
+        "game3d/tests/test_startup_parity.gd"
+      ],
+      "acceptance": "Real native/Web cold title, save-present/missing/refused load and continue/fresh. Document source hidden-load button versus3D always-available Remember error behavior. Never blanket-exclude this mixed handler as mobile."
+    },
+    {
+      "id": "definitions[\"src/input/mobile.js\"][\"setupMobile\"]",
+      "name": "setupMobile",
+      "ledger_status_unchanged": "planned",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/input/mobile.js",
+        "line": 22,
+        "sha256": "7fc506dfafa882993c92010c1ac6f652251916e19dec872657a73da644216e35"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "outside_selected_input_target",
+      "source_obligation": "Entire setup is gated on pointer:coarse: analog touch stick, touch action buttons/title forwarding, touch cook lock and gesture suppression.",
+      "first_person_equivalent": "Keyboard/mouse Windows and browser controls are selected. No virtual stick, touch chrome or mobile acceptance is claimed.",
+      "implementation_refs": [
+        "game3d/scripts/full_scene.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "acceptance": "Ratified target decision plus source gate proof. Desktop attack/interact/cook/menu functions still require their normal target evidence; lack of mobile UI is not a reason to fabricate a parallel mechanic."
+    },
+    {
+      "id": "definitions[\"src/input/mobile.js\"][\"titleLoadTap\"]",
+      "name": "titleLoadTap",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/input/mobile.js",
+        "line": 182,
+        "sha256": "7fc506dfafa882993c92010c1ac6f652251916e19dec872657a73da644216e35"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "desktop_behavior_adaptation",
+      "source_obligation": "Prevent propagation/default, invoke loadFromTitle once from the title load button.",
+      "first_person_equivalent": "FullScene title Remember button routes once into its real asynchronous load path; fresh/cancel/late-result guards remain.",
+      "implementation_refs": [
+        "game3d/scripts/full_scene.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "acceptance": "Normal native/Web click with save present/absent/refused, one load transaction, fresh-session callback isolation and resumed controls; not a mobile-only exclusion."
+    },
+    {
+      "id": "definitions[\"src/render/actors_weather.js\"][\"drawPlayerContactShadow\"]",
+      "name": "drawPlayerContactShadow",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/actors_weather.js",
+        "line": 311,
+        "sha256": "3690bea5ce51e0801e87d65ad1fe359ae287cd0c123580ede9c1411262d71f29"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "off_camera_embodiment",
+      "source_obligation": "Source top-down player-foot soft contact blob.",
+      "first_person_equivalent": "Arms-only first-person body is not rendered. Viewmodel shadows are disabled; world/NPC shadows remain. Ratify absence of a fabricated disembodied player-foot blob.",
+      "implementation_refs": [
+        "game3d/scripts/first_person_rig.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_viewmodel.gd"
+      ],
+      "spec_refs": [
+        "SPEC-3D-FULL-PORT.md"
+      ],
+      "acceptance": "Native/Web low-rest/attack/kick/cart views establish no floating fist shadow. This is an explicit missing-body adaptation, not a claim that source player-foot shadow exists."
+    },
+    {
+      "id": "definitions[\"src/render/frame.js\"][\"drawAll\"]",
+      "name": "drawAll",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/frame.js",
+        "line": 25,
+        "sha256": "85e881dd7bb4af75dc89bb3747e5faf65e890fb240c9f7c74429ffc094ffd08c"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "aggregate_renderer",
+      "source_obligation": "Source render/visual-clock compositor including world, actors, particles, shake, overlays, maps and cooking; child calls are not one interchangeable operation.",
+      "first_person_equivalent": "FullScene and original presenters compose perspective geometry, lighting, UI and overlays with declared source clock adaptations.",
+      "implementation_refs": [
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/full_hud.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "acceptance": "Union all observable source render sub-obligations and their native/Web evidence. Current world-feedback/impact-shake and ambient dust/mote drafts are not yet production integration; retain partial until accepted. Explicit body/pixel/touch dispositions cannot conceal these real remaining visual gaps."
+    },
+    {
+      "id": "definitions[\"src/render/frame.js\"][\"init_frame\"]",
+      "name": "init_frame",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/frame.js",
+        "line": 358,
+        "sha256": "85e881dd7bb4af75dc89bb3747e5faf65e890fb240c9f7c74429ffc094ffd08c"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "proven_empty_initializer",
+      "source_obligation": "Empty exported function body in active source.",
+      "first_person_equivalent": "No independent runtime action to port; frame composition remains a separate drawAll obligation.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Hash/AST proof of empty body and explicit approved no-op disposition. No invented screenshot or side effect; source-body change invalidates the proof."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_art_player_32.js\"][\"makeRoutePatch32\"]",
+      "name": "makeRoutePatch32",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_art_player_32.js",
+        "line": 380,
+        "sha256": "7773af69217815b693f94bfb38cc4faa6f1ac28bd1cf46562ecf4a5947253f44"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "off_camera_embodiment",
+      "source_obligation": "Authored32x32 tier1–4 route patch rendered over the player chest; tier=min(4,floor(routesCompleted/5)).",
+      "first_person_equivalent": "Chest is outside the arm-only camera. Keep source route count/progression/Office unlock and reachable FILED journal; no floating badge or relocated wrist patch.",
+      "implementation_refs": [
+        "game3d/scripts/progression_routes.gd",
+        "game3d/scripts/guidance_view.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_progression.gd",
+        "game3d/tests/test_guidance.gd"
+      ],
+      "spec_refs": [
+        "SPEC-3D-VIEWMODEL-GEAR.md"
+      ],
+      "acceptance": "Explicitly accept unseen chest-art omission and retain actual route progression/journal evidence. Legacy helper requires current-cache call-site proof, not a false alias or independent rendered badge.",
+      "extra_source_refs": [
+        "src/render/sprites.js#buildSprites",
+        "src/render/actors_weather.js#drawPlayer",
+        "src/systems/progression_routes.js#routePatchTier"
+      ]
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"anchorGridToBottom\"]",
+      "name": "anchorGridToBottom",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 72,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Anchor visible sprite pixels to the declared footprint bottom.",
+      "first_person_equivalent": "Character origin/feet and actual weighted bounds are grounded to authored world coordinates.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"applyVars\"]",
+      "name": "applyVars",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 23,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Replace authored palette-grid symbols.",
+      "first_person_equivalent": "Source identity palettes and immutable per-profile materials provide original variants without per-frame rewriting.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"assertSupportedLogicalSize\"]",
+      "name": "assertSupportedLogicalSize",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 133,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Reject undeclared16/32 Canvas art sizes.",
+      "first_person_equivalent": "Explicit authored mesh/profile families and finite bounds replace the two raster resolutions; retain source provenance/geometry validation.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"blankSpriteGrid\"]",
+      "name": "blankSpriteGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 31,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Create an empty declared-size art grid.",
+      "first_person_equivalent": "Allocate and populate original mesh builders only at cache construction; no per-frame canvas allocation.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"cloneGrid\"]",
+      "name": "cloneGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 68,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Clone art grid data.",
+      "first_person_equivalent": "Cached immutable mesh/material resources plus per-instance skeleton/pose state replace grid cloning.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridBox\"]",
+      "name": "gridBox",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 42,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Fill a bounded rectangular cell region.",
+      "first_person_equivalent": "Authored box/loft mesh primitives with exact physical-independent visual bounds.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridEllipse\"]",
+      "name": "gridEllipse",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 54,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Rasterize an ellipse into the grid.",
+      "first_person_equivalent": "Faceted rounded authored mesh sections; finite normals and coherent silhouettes are tested.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridLine\"]",
+      "name": "gridLine",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 46,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Rasterize a source line into the grid.",
+      "first_person_equivalent": "Authored trim/edge/shaft mesh geometry; no claim of a one-to-one Bresenham translation.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridPut\"]",
+      "name": "gridPut",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 36,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Write a clipped grid cell.",
+      "first_person_equivalent": "Original triangle/vertex authoring replaces individual pixels; malformed bounds still fail validation.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"mirrorGrid\"]",
+      "name": "mirrorGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 64,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Mirror a grid without changing the source.",
+      "first_person_equivalent": "Authored left/right mesh geometry/pivots preserve independent poses and shared immutable resources.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"parseGrid\"]",
+      "name": "parseGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 9,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Parse rectangular palette-index grids and transparent cells.",
+      "first_person_equivalent": "Authored mesh profiles/vertices/material assignment are validated at construction; no text-grid parser is required in the3D runtime.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprite_toolkit.js\"][\"rasterize\"]",
+      "name": "rasterize",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprite_toolkit.js",
+        "line": 90,
+        "sha256": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "raster_authoring_adaptation",
+      "source_obligation": "Resolve palette, outline and cache exact32x32 Canvas art.",
+      "first_person_equivalent": "Cached original Godot meshes/materials and Compatibility rendering replace sprite caching; palette/caches/finite geometry and rendered identity remain obligations.",
+      "implementation_refs": [
+        "game3d/scripts/character_art.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/surface_kit.gd",
+        "game3d/scripts/mesh_batcher.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_art.gd",
+        "game3d/tests/test_character_roster.gd"
+      ],
+      "acceptance": "Ratify original-mesh replacement, then link source identity/geometry/material/caching checks and actual native/Web rendered cast. Helpers need no fabricated gameplay invocation."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+      "name": "anchorGridToBottom",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"anchorGridToBottom\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"applyVars\"]",
+      "name": "applyVars",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"applyVars\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"blankSpriteGrid\"]",
+      "name": "blankSpriteGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"blankSpriteGrid\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"gridBox\"]",
+      "name": "gridBox",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridBox\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"gridLine\"]",
+      "name": "gridLine",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridLine\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"gridPut\"]",
+      "name": "gridPut",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridPut\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"makeRoutePatch\"]",
+      "name": "makeRoutePatch",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 137,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "legacy_raster_helper",
+      "source_obligation": "Authored16x16 tier1–4 patch generator; current buildSprites uses makeRoutePatch32 instead.",
+      "first_person_equivalent": "Chest is outside the arm-only camera. Keep source route count/progression/Office unlock and reachable FILED journal; no floating badge or relocated wrist patch.",
+      "implementation_refs": [
+        "game3d/scripts/progression_routes.gd",
+        "game3d/scripts/guidance_view.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_progression.gd",
+        "game3d/tests/test_guidance.gd"
+      ],
+      "spec_refs": [
+        "SPEC-3D-VIEWMODEL-GEAR.md"
+      ],
+      "acceptance": "Explicitly accept unseen chest-art omission and retain actual route progression/journal evidence. Legacy helper requires current-cache call-site proof, not a false alias or independent rendered badge.",
+      "extra_source_refs": [
+        "src/render/sprites.js#buildSprites",
+        "src/render/actors_weather.js#drawPlayer",
+        "src/systems/progression_routes.js#routePatchTier"
+      ]
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"mirrorGrid\"]",
+      "name": "mirrorGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"mirrorGrid\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"parseGrid\"]",
+      "name": "parseGrid",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"parseGrid\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/render/sprites.js\"][\"rasterize\"]",
+      "name": "rasterize",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/render/sprites.js",
+        "line": 25,
+        "sha256": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "exact_reexport_alias",
+      "canonical_id": "definitions[\"src/render/sprite_toolkit.js\"][\"rasterize\"]",
+      "source_obligation": "Exact reexport of the canonical toolkit symbol; no independent implementation body.",
+      "first_person_equivalent": "Inherit the canonical authoring adaptation and its explicit covered obligations.",
+      "implementation_refs": [],
+      "regression_refs": [],
+      "acceptance": "Validate exact source reexport and acyclic canonical edge; require the canonical disposition/evidence. Do not duplicate reports or delete this source identity."
+    },
+    {
+      "id": "definitions[\"src/ui/layout.js\"][\"resolvePresentationLayout\"]",
+      "name": "resolvePresentationLayout",
+      "ledger_status_unchanged": "partial",
+      "decision_status": "proposed_not_ratified",
+      "source": {
+        "path": "src/ui/layout.js",
+        "line": 8,
+        "sha256": "ac19adc4dd71111d5d6878c6593a915e058f6fa0058309f6847e524f2256ccf3"
+      },
+      "target_scope": [
+        "windows_first_person",
+        "web_keyboard_mouse"
+      ],
+      "requires_new_gameplay": false,
+      "classification": "mixed_responsive_projection_adaptation",
+      "source_obligation": "Finite canvas/content/HUD/ticker layout, source4:3 logical viewport, compact width and coarse-touch topbar accommodation.",
+      "first_person_equivalent": "Perspective viewport plus anchored HUD/menu/minimap at1280x720 and960x540; logical-to-framebuffer projection is explicit. Touch topbar inset is outside selected targets.",
+      "implementation_refs": [
+        "game3d/scripts/full_hud.gd",
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/guidance_view.gd"
+      ],
+      "regression_refs": [
+        "game3d/tests/test_full_hud.gd",
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_guidance_projection.gd"
+      ],
+      "acceptance": "Native/Web actual resizes and menu/ledger/cooking/feed/input at both aspect sizes; validate visible geometry in logical viewport coordinates, screenshot pixels separately."
+    }
+  ]
+}

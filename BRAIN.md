@@ -3130,3 +3130,44 @@ performance remain pending; indexing has not entered production. A separate exac
 source snapshot adds diagnostic pose timers only. Next: profile the committed
 effects build against the unchanged 60-actor / 16ms requirement, resume campaign
 acceptance, and finish reviewed additive parity metadata without verified claims.
+
+### Committed effects profile and campaign retry
+
+Effects checkpoint 2c32cb155567b859be067736ca63bc0c81005576 is pushed on
+codex/3d-full-port, with its 248-file ledger, green runner output and register entry.
+The unchanged sustained workload completed both phases with 60 actors but scene
+p95 remained 32.919/26.988ms. Separate pose instrumentation completed all accounting
+checks; reset/application is only 0.327/0.225ms mean, so no speculative touched-bone
+rewrite was made. The diagnostic's overhead and overlapping scopes are explicit.
+Both raw failed-performance reports are retained in effects-profile.
+
+The campaign's bounded defense/checkpoint contract passed 843 checks across all
+11 groups. Native-v4 now runs against an exact archive of 2c32cb1 plus only its two
+test files, retaining the original pinned Office input and its disclosed fixture.
+Only an actual validated Pause/Save may create a Tony checkpoint; old failed
+reports/autosaves are never accepted as one. Next: inspect that actual outcome,
+compare indexed native/Web rendering, and measure indexing before promotion.
+
+### Scoped metadata and continuation checkpoint — 2026-11-19
+
+Promoted the reviewed17-file additive parity metadata implementation with explicit
+metadata-v1 pins, lexical executable-source proofs and check-only migration. All
+585 handlers/32 features retain their original verification status. Complete mode
+still refuses617 obligations. The actual fresh Git checkout reproduces259 accepted
+raw hashes using finite LF/CRLF/raw path rules; five index-only restages preserve
+the original working bytes. Independent review837 and focused152/1315/10498 pass.
+
+Native indexed meshes match90 reference frames exactly. Web v1/v2 each captured32
+valid originals but emitted a Godot allocator error at exit; both remain failed.
+An explicit keepalive rendering-scope amendment is being reviewed. Dave's one-field
+wake fix passes487 composed-scene checks in isolation after correcting test reset
+event ordering; actual walked native/Web evidence remains pending. The campaign's
+genuine Tony prefix is retained separately from the failed fullv4 run. Its next
+driver corrects hostile-guard selection and exact JSON number representation;
+actual resumed Kingdom acceptance remains outstanding. No full-port claim.
+
+Final checkpoint validation: original19/19 and expanded130/1303D runners pass,
+including clean import,85engine suites and45source/parity checks. Metadata-only
+runtime data additions do not change the already-built gameplay. The separate
+Dave/index/laundry candidates are not included. Exact raw logs and checkout proof
+are retained in artifacts/3d-full-port/parity-metadata. No full-port completion.

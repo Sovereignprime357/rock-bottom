@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "scope": "Exact relocated additive metadata; no status/platform promotion",
+  "approvedCandidateManifestSha256": "d8667f7ff52cf4729a7a5b7d883fff204112a46df0c68f1f8d587c6d560162f2",
+  "rootAttributedCheckpoint": "2c32cb1",
+  "gitVerifiedByThisTool": false,
+  "sourceInputPaths": {
+    "game3d/data/parity_manifest.json": "reports/3d-parity-metadata/baseline-manifest.json",
+    ".build/3d/parity-disposition-draft/handler-dispositions.json": "reports/3d-parity-metadata/handler-dispositions.json",
+    ".build/3d/parity-disposition-draft/evidence-index.json": "reports/3d-parity-metadata/evidence-index.json",
+    ".build/3d/parity-disposition-draft/PROPOSAL.md": "reports/3d-parity-metadata/PROPOSAL.md",
+    ".build/3d/parity-metadata-integration-draft/SPEC-DRAFT.md": "SPEC-3D-PARITY-METADATA.md"
+  },
+  "originalPinsSha256": "0d1d13076bb7ed083d57a09ce6deb595dfaba8e64083c203642bcf1280c4ac5b",
+  "pinCount": 247,
+  "sourceAndEvidenceHashChanges": 0,
+  "decisionSpec": {
+    "original": "2f4634b9be93eab1b76dd2ceba56e240e71730820e91608d5fcb1f0b3d4ba401",
+    "relocated": "506af8d3202fe257edaad59e3b4109fb4eb4c80d1197cba55ff2f716fb3c7004",
+    "amendment": "c4cbec9b4f42b64c702424c7a239d5eece68cbd3c26e3b9942f2c85df85a1dbf"
+  },
+  "helperSha256": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47",
+  "outputSha256": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42"
+}

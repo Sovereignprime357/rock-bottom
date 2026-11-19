@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "Additive parity metadata draft only; no production/engine/Git or status promotion",
+  "selectedPins": "INPUT-PINS-v2.json",
+  "inputs": 247,
+  "counts": {
+    "handlers": 585,
+    "features": 32,
+    "dispositions": 30,
+    "aliases": 9,
+    "narrowEvidenceReferences": 96,
+    "distinctArtifacts": 29
+  },
+  "validation": {
+    "gateChecks": 1315,
+    "contractChecks": 149,
+    "completedGroups": 5,
+    "negativeLedgerCases": 26,
+    "completeExit": 1,
+    "incompleteObligations": 617
+  },
+  "remaining": {
+    "fullPortComplete": false,
+    "productionPromoted": false,
+    "platformAcceptanceClaimed": false,
+    "sourceSemanticsCertifiedByRebase": false
+  },
+  "hashes": {
+    "COMPLETE-EXPECTED-FAIL.log": "ac357bce8084b46aa509e4b6e5f03c2ac33e911d62a74df49ae1afd5799ae02d",
+    "CONTRACT-RESULT.json": "72fcf5ce977701163c3e52f164547d90526ffda16c7cc434e289dc70f67bf590",
+    "INPUT-PINS-v2.json": "0d1d13076bb7ed083d57a09ce6deb595dfaba8e64083c203642bcf1280c4ac5b",
+    "INPUT-PINS.json": "5a9e90bacb4efa2d604ad5d217f8b3e9b35d020e9f613c6f0e9487447c29ca75",
+    "INPUT-REBASE-v2.json": "dae0107acae9b636bfd2bcf7b45613a1e37071474210363e8a0ce048b71d7ae0",
+    "LEXICAL-CORRECTION.md": "c4cbec9b4f42b64c702424c7a239d5eece68cbd3c26e3b9942f2c85df85a1dbf",
+    "README.md": "5be3fea5d8eb3b08b90c73eaeb135ee5fd9a6db385a124934d3e750869e0fbfd",
+    "SPEC-DRAFT.md": "2f4634b9be93eab1b76dd2ceba56e240e71730820e91608d5fcb1f0b3d4ba401",
+    "data/parity_manifest.json": "aaaf49124905a8fc9c47bd134d18bf679fb9b1702411a40ce8584c4ddf3ab4d5",
+    "gate.mjs": "c7ba0cf32356289f2c09533c3709cce02391514b22796a5dc7d72f1076c7e690",
+    "metadata.mjs": "86128477ed62a75cccf72f084cc9d94f3d723612cb09b89d2ab0980cadf3428e",
+    "migrate.mjs": "1cb89d8fc02898ea06599934d2a11d92355dc73d50eeb2e3be12b859ca1e184c",
+    "pin-inputs.mjs": "107c49ab16042e8095dffd1cad0ce8e138ff5d05647866e54b91753ec939600a",
+    "rebase-inputs-v2.mjs": "237c3027cb96039f21f30371ef04d63e0e19679c995fb79e4dc214b95dd01576",
+    "source-proof.mjs": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47",
+    "test-metadata.mjs": "b1004d3992f402ef40f69ba0941e575721c8ad4473dad06815a8b834327a7c96",
+    "write-handoff.mjs": "b1d1dd1a8802736feba0f41fc92804c1c38bc80a7b574bded89033d6acf0c0b7"
+  }
+}

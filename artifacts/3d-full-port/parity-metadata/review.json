@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "pass": true,
+  "checks": 837,
+  "review_scope": "Read-only filesystem and Node audit; no engine/Git; checkout operation attributed to retained root proof, actual checkout files independently rehashed",
+  "production_files": 17,
+  "checkout_files": 259,
+  "pins": 247,
+  "raw_evidence_files": 33,
+  "raw_restages": 5,
+  "existing_rows_unchanged": 617,
+  "references": 96,
+  "unique_reference_artifacts": 29,
+  "status_promotions": 0,
+  "platform_evidence_promotions": 0,
+  "contract": {
+    "schema": 1,
+    "pass": true,
+    "checks": 152,
+    "groups": 5,
+    "pins": "metadata-v1",
+    "negativeCases": [
+      {
+        "label": "missing source handler",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed",
+          "Exact unique 585 handlers",
+          "handlers actual source census drift"
+        ]
+      },
+      {
+        "label": "duplicate source identity",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed",
+          "Exact unique 585 handlers",
+          "handlers actual source census drift"
+        ]
+      },
+      {
+        "label": "missing feature",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed",
+          "Exact unique 32 features",
+          "features actual source census drift"
+        ]
+      },
+      {
+        "label": "invented excluded terminal status",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed",
+          "Unknown terminal status: actors.base[0][\"interact\"]"
+        ]
+      },
+      {
+        "label": "verified without actual existing platform proof",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed"
+        ]
+      },
+      {
+        "label": "metadata cannot write native evidence list",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed"
+        ]
+      },
+      {
+        "label": "unknown baseline field mutation",
+        "errors": [
+          "Existing manifest fields/statuses/reference lists changed"
+        ]
+      },
+      {
+        "label": "wrong canonical symbol",
+        "errors": [
+          "Exact source reexport proof: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+          "Disposition differs from exact ratification: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]"
+        ]
+      },
+      {
+        "label": "alias cycle",
+        "errors": [
+          "Exact source reexport proof: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+          "Exactly9 cycle-free canonical aliases",
+          "Disposition differs from exact ratification: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]"
+        ]
+      },
+      {
+        "label": "legacy generator falsely aliased",
+        "errors": [
+          "Retained/excluded subbehaviors changed: definitions[\"src/render/sprites.js\"][\"makeRoutePatch\"]",
+          "Exact source reexport proof: definitions[\"src/render/sprites.js\"][\"makeRoutePatch\"]",
+          "Exactly9 cycle-free canonical aliases"
+        ]
+      },
+      {
+        "label": "alias cross-target laundering",
+        "errors": [
+          "Scoped decision cannot discharge status: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+          "Disposition differs from exact ratification: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]"
+        ]
+      },
+      {
+        "label": "mixed init retains title load",
+        "errors": [
+          "Retained/excluded subbehaviors changed: definitions[\"src/input/mobile.js\"][\"init_mobile\"]",
+          "Disposition differs from exact ratification: definitions[\"src/input/mobile.js\"][\"init_mobile\"]"
+        ]
+      },
+      {
+        "label": "touch exclusion cannot broaden to whole startup",
+        "errors": [
+          "Retained/excluded subbehaviors changed: definitions[\"src/input/mobile.js\"][\"init_mobile\"]",
+          "Disposition differs from exact ratification: definitions[\"src/input/mobile.js\"][\"init_mobile\"]"
+        ]
+      },
+      {
+        "label": "drawAll cannot discharge aggregate gaps",
+        "errors": [
+          "Scoped decision cannot discharge status: definitions[\"src/render/frame.js\"][\"drawAll\"]",
+          "Disposition differs from exact ratification: definitions[\"src/render/frame.js\"][\"drawAll\"]"
+        ]
+      },
+      {
+        "label": "source empty row cannot discharge drawAll",
+        "errors": [
+          "Retained/excluded subbehaviors changed: definitions[\"src/render/frame.js\"][\"drawAll\"]",
+          "Source initializer is not empty: definitions[\"src/render/frame.js\"][\"drawAll\"]",
+          "Disposition differs from exact ratification: definitions[\"src/render/frame.js\"][\"drawAll\"]"
+        ]
+      },
+      {
+        "label": "Web artifact cannot enter native slot",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: movement_and_physicality",
+          "Actual JSON platform differs from evidence slot: movement_and_physicality/web_keyboard_mouse/0"
+        ]
+      },
+      {
+        "label": "native artifact cannot enter Web slot",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+          "Actual JSON platform differs from evidence slot: state_boot_and_modes/windows_first_person/0"
+        ]
+      },
+      {
+        "label": "forged positive outcome field",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes"
+        ]
+      },
+      {
+        "label": "synthetic input cannot become trusted hardware",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: movement_and_physicality"
+        ]
+      },
+      {
+        "label": "fixture resources cannot become earned play",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes"
+        ]
+      },
+      {
+        "label": "invented human review",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+          "Index cannot fabricate full-feature or human acceptance: state_boot_and_modes/windows_first_person/0"
+        ]
+      },
+      {
+        "label": "narrow artifact cannot verify whole feature",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+          "Index cannot fabricate full-feature or human acceptance: state_boot_and_modes/windows_first_person/0"
+        ]
+      },
+      {
+        "label": "one generic image cannot replace96 refs",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+          "Evidence target/qualification/outcome/coverage mismatch: movement_and_physicality",
+          "Evidence target/qualification/outcome/coverage mismatch: main_loop_and_withdrawal"
+        ]
+      },
+      {
+        "label": "duplicate evidence witness cannot inflate coverage",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+          "Exactly96 narrow original references, not96 full-feature passes"
+        ]
+      },
+      {
+        "label": "remaining branch coverage cannot disappear",
+        "errors": [
+          "Remaining coverage erased: state_boot_and_modes"
+        ]
+      },
+      {
+        "label": "failed performance cannot become a pass",
+        "errors": [
+          "Evidence target/qualification/outcome/coverage mismatch: audio_and_packaging",
+          "Failed outcome concealed: audio_and_packaging/windows_first_person/3/acceptance"
+        ]
+      }
+    ],
+    "scope": "Node metadata contracts only; no engine/platform/human acceptance",
+    "sourceFilesChanged": 0,
+    "originalStatusesChanged": 0
+  },
+  "commands": [
+    {
+      "name": "contract",
+      "argv": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {runContract} from './tools/parity-metadata-test.mjs';runContract({pinArgs:['--pins=metadata-v1'],reportPath:'.build/3d/parity-evidence-promotion-review/contract.json'});"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "contract.stdout.log",
+      "stdout_sha256": "01b3426e96c02e4662c292b3b11ecac03b084f8ecc685211a9a0b50518857355",
+      "stderr": "contract.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "migration",
+      "argv": [
+        "node",
+        "tools/parity-metadata-migrate.mjs",
+        "--pins=metadata-v1",
+        "--check"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "migration.stdout.log",
+      "stdout_sha256": "85fe3d3b1720357789c37bf9c373803c1fbb65c9ca83559da75b60872be14892",
+      "stderr": "migration.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "metadata-gate",
+      "argv": [
+        "node",
+        "tools/parity-metadata-gate.mjs",
+        "--pins=metadata-v1"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "metadata-gate.stdout.log",
+      "stdout_sha256": "5fd5a1ef1c098812f7fedb1fcfd881aac079e33ff5b80053d9719e9dc73d8104",
+      "stderr": "metadata-gate.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "legacy-gate",
+      "argv": [
+        "node",
+        "tools/3d-parity-gate.mjs"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "legacy-gate.stdout.log",
+      "stdout_sha256": "270860678da1cc87c955d3fc13b19e4d3fafcb250e50a934b141de3e9ed7d8c9",
+      "stderr": "legacy-gate.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "complete-expected-refusal",
+      "argv": [
+        "node",
+        "tools/parity-metadata-gate.mjs",
+        "--pins=metadata-v1",
+        "--complete"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stdout": "complete-expected-refusal.stdout.log",
+      "stdout_sha256": "4e4453cb98b998d45bbb01252f59ce13ca860af5c4d00a2b92be4046e7d39c11",
+      "stderr": "complete-expected-refusal.stderr.log",
+      "stderr_sha256": "7486fb1916f2f747627f4da446e451f5d150c25312638d9d54fac8a6e326b464"
+    }
+  ],
+  "checkout_proof": {
+    "path": ".build/3d/parity-production-mapping/actual-checkout-result.json",
+    "sha256": "c0f8e5cecbd8a521715b95f86225fc0d59894edc26a963f5b9b12f8f66100d13"
+  },
+  "production_manifest_sha256": "8f5c40dc111b31999296202fb85376cb60743b7872157a99503a4dd4bad2bd78",
+  "attribute_counts": {
+    "references": 247,
+    "delivered": 17,
+    "union": 259,
+    "lf": 152,
+    "crlf": 63,
+    "raw": 44,
+    "raw_evidence": 33,
+    "raw_restages": 5
+  },
+  "findings": [],
+  "limitations": [
+    "No independent Git index operation; root-provided actual checkout provenance retained.",
+    "No full130 or original19 runner, engine, platform or delivery acceptance performed by this review.",
+    "Do not append to pinned metadata/full-port specs without a new explicitly reviewed pin revision."
+  ]
+}

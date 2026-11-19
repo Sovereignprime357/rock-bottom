@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "reason": "Root integration updated ten implementation owners while metadata contract was running. Original pin set and failures retained; root notified before explicit revision. No semantic equivalence or evidence-currentness is inferred.",
+  "previousPins": {
+    "path": "INPUT-PINS.json",
+    "sha256": "5a9e90bacb4efa2d604ad5d217f8b3e9b35d020e9f613c6f0e9487447c29ca75"
+  },
+  "selectedPins": {
+    "path": "INPUT-PINS-v2.json",
+    "sha256": "0d1d13076bb7ed083d57a09ce6deb595dfaba8e64083c203642bcf1280c4ac5b"
+  },
+  "changes": [
+    {
+      "path": "game3d/scripts/actor_director.gd",
+      "before": "729950cce4965d88f1e4e142c777a116ecc8b2254c0105c4dd6bbeee6c533316",
+      "after": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc"
+    },
+    {
+      "path": "game3d/scripts/boss_system.gd",
+      "before": "b4d74e9cc3b8e168a2dc42dcd3c7ec33767f61a4a9e5f5b047f73e6caaa7c062",
+      "after": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08"
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "before": "469cba30720f20dd76cf01ec53187c7ab351e4bf21077883436be6e888519925",
+      "after": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75"
+    },
+    {
+      "path": "game3d/scripts/companion_system.gd",
+      "before": "43b640baa07f592bfde4352dadc31b3b3a917781a17b3086821791afe3036d8f",
+      "after": "07f14c99a48e2adf736361e287af756920d6c65a16daaf2fbb2c05c7e96537c8"
+    },
+    {
+      "path": "game3d/scripts/district_grade.gdshader",
+      "before": "ddcc0a0f38d404096c4d35b8082828d06ae92932013b6c50409e59e0bb8194ca",
+      "after": "77f80686d17bbb7548fbb3d7e9fbcc1388cc4cb79f70d6681e06a43b0b1a8df6"
+    },
+    {
+      "path": "game3d/scripts/district_grade_view.gd",
+      "before": "02cd0d753f35ab4ce9b31bfbe329516fd70ed372b7e5f08819befd29b7e7cd36",
+      "after": "f6210fb4ef6e5f4ab6a9b4b92fdb9da2269530d9e0b5c59a07d6f91067dc3b38"
+    },
+    {
+      "path": "game3d/scripts/full_runtime.gd",
+      "before": "590c22f89a20fff9eb1b6bed50a7a85500af81b3ca41a8f2c8efc8c8c7225027",
+      "after": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9"
+    },
+    {
+      "path": "game3d/scripts/full_scene.gd",
+      "before": "f33a195065b02ba251724193498a07ba3196bf98c28c2d34803829a7527eca3b",
+      "after": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43"
+    },
+    {
+      "path": "game3d/scripts/interactive_prop_actions.gd",
+      "before": "6b611db5b4986078995846363861eb6e6541c34c3d9e7dc95b15797fac1ea388",
+      "after": "b56d56868f4c91867ff917b327a5b203feebb859a694e011845386564200f7fe"
+    },
+    {
+      "path": "game3d/scripts/world_prop_actions.gd",
+      "before": "c8ad61583136b5ec895adbb0e84911f51b937e2b27a67212182c6bc9bb30e9d1",
+      "after": "1d44fa2613314feafd31a59a4c0139d29632334e293e2819f5b3f3331ac703b7"
+    }
+  ],
+  "sourceESChanges": 0,
+  "evidenceChanges": 0,
+  "statusChanges": 0,
+  "requiresExplicitSelection": true
+}

@@ -173,6 +173,9 @@ foreach ($entry in @(
     @{ Name = 'startup-oracle'; Script = '3d-startup-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'world-feedback-oracle'; Script = 'world-feedback-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'world-dust-oracle'; Script = 'world-dust-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'parity-metadata-contract'; Script = 'parity-metadata-test.mjs'; Arguments = @('--pins=metadata-v1') },
+    @{ Name = 'parity-metadata-check'; Script = 'parity-metadata-migrate.mjs'; Arguments = @('--pins=metadata-v1','--check') },
+    @{ Name = 'parity-metadata-gate'; Script = 'parity-metadata-gate.mjs'; Arguments = @('--pins=metadata-v1') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -180,4 +183,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 127/127 PASS (import clean; 85 engine suites and 42 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 130/130 PASS (import clean; 85 engine suites and 45 source/parity checks; complete-port acceptance remains tracked separately)'

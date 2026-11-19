@@ -952,3 +952,20 @@ additive scoped parity metadata with unchanged statuses; Architecture owns exact
 weighted-index GPU preparation and isolated pose-cost instrumentation. No worker
 runs Godot/Git. Sustained 60 actors under 16ms and aggregate native/Web gameplay
 acceptance remain open.
+
+### Bounded continuation — 2026-11-19
+
+Additive metadata and byte-preserved checkout are integrated for final130/19 gates
+and delivery. Effects performance evidence remains failed above16ms at60 actors.
+Characters owns a minimal Dave actual-input tour and held campaign continuation;
+World owns only the folded-shirt accessory correction; Architecture owns strict
+Web mesh rendering acceptance and held performance instrumentation. Root alone
+runs engines, browser checks, integration and Git. Indexed meshes, Dave and laundry
+remain isolated until their focused acceptance passes; full campaign/pretenders,
+all11 claims and sustained performance remain open.
+
+Final checkpoint validation: original19/19 and expanded130/1303D runners pass,
+including clean import,85engine suites and45source/parity checks. Metadata-only
+runtime data additions do not change the already-built gameplay. The separate
+Dave/index/laundry candidates are not included. Exact raw logs and checkout proof
+are retained in artifacts/3d-full-port/parity-metadata. No full-port completion.

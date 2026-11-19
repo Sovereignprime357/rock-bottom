@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "pass": true,
+  "checks": 152,
+  "groups": 5,
+  "pins": "metadata-v1",
+  "negativeCases": [
+    {
+      "label": "missing source handler",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed",
+        "Exact unique 585 handlers",
+        "handlers actual source census drift"
+      ]
+    },
+    {
+      "label": "duplicate source identity",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed",
+        "Exact unique 585 handlers",
+        "handlers actual source census drift"
+      ]
+    },
+    {
+      "label": "missing feature",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed",
+        "Exact unique 32 features",
+        "features actual source census drift"
+      ]
+    },
+    {
+      "label": "invented excluded terminal status",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed",
+        "Unknown terminal status: actors.base[0][\"interact\"]"
+      ]
+    },
+    {
+      "label": "verified without actual existing platform proof",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed"
+      ]
+    },
+    {
+      "label": "metadata cannot write native evidence list",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed"
+      ]
+    },
+    {
+      "label": "unknown baseline field mutation",
+      "errors": [
+        "Existing manifest fields/statuses/reference lists changed"
+      ]
+    },
+    {
+      "label": "wrong canonical symbol",
+      "errors": [
+        "Exact source reexport proof: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+        "Disposition differs from exact ratification: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]"
+      ]
+    },
+    {
+      "label": "alias cycle",
+      "errors": [
+        "Exact source reexport proof: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+        "Exactly9 cycle-free canonical aliases",
+        "Disposition differs from exact ratification: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]"
+      ]
+    },
+    {
+      "label": "legacy generator falsely aliased",
+      "errors": [
+        "Retained/excluded subbehaviors changed: definitions[\"src/render/sprites.js\"][\"makeRoutePatch\"]",
+        "Exact source reexport proof: definitions[\"src/render/sprites.js\"][\"makeRoutePatch\"]",
+        "Exactly9 cycle-free canonical aliases"
+      ]
+    },
+    {
+      "label": "alias cross-target laundering",
+      "errors": [
+        "Scoped decision cannot discharge status: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+        "Disposition differs from exact ratification: definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]"
+      ]
+    },
+    {
+      "label": "mixed init retains title load",
+      "errors": [
+        "Retained/excluded subbehaviors changed: definitions[\"src/input/mobile.js\"][\"init_mobile\"]",
+        "Disposition differs from exact ratification: definitions[\"src/input/mobile.js\"][\"init_mobile\"]"
+      ]
+    },
+    {
+      "label": "touch exclusion cannot broaden to whole startup",
+      "errors": [
+        "Retained/excluded subbehaviors changed: definitions[\"src/input/mobile.js\"][\"init_mobile\"]",
+        "Disposition differs from exact ratification: definitions[\"src/input/mobile.js\"][\"init_mobile\"]"
+      ]
+    },
+    {
+      "label": "drawAll cannot discharge aggregate gaps",
+      "errors": [
+        "Scoped decision cannot discharge status: definitions[\"src/render/frame.js\"][\"drawAll\"]",
+        "Disposition differs from exact ratification: definitions[\"src/render/frame.js\"][\"drawAll\"]"
+      ]
+    },
+    {
+      "label": "source empty row cannot discharge drawAll",
+      "errors": [
+        "Retained/excluded subbehaviors changed: definitions[\"src/render/frame.js\"][\"drawAll\"]",
+        "Source initializer is not empty: definitions[\"src/render/frame.js\"][\"drawAll\"]",
+        "Disposition differs from exact ratification: definitions[\"src/render/frame.js\"][\"drawAll\"]"
+      ]
+    },
+    {
+      "label": "Web artifact cannot enter native slot",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: movement_and_physicality",
+        "Actual JSON platform differs from evidence slot: movement_and_physicality/web_keyboard_mouse/0"
+      ]
+    },
+    {
+      "label": "native artifact cannot enter Web slot",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+        "Actual JSON platform differs from evidence slot: state_boot_and_modes/windows_first_person/0"
+      ]
+    },
+    {
+      "label": "forged positive outcome field",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes"
+      ]
+    },
+    {
+      "label": "synthetic input cannot become trusted hardware",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: movement_and_physicality"
+      ]
+    },
+    {
+      "label": "fixture resources cannot become earned play",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes"
+      ]
+    },
+    {
+      "label": "invented human review",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+        "Index cannot fabricate full-feature or human acceptance: state_boot_and_modes/windows_first_person/0"
+      ]
+    },
+    {
+      "label": "narrow artifact cannot verify whole feature",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+        "Index cannot fabricate full-feature or human acceptance: state_boot_and_modes/windows_first_person/0"
+      ]
+    },
+    {
+      "label": "one generic image cannot replace96 refs",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+        "Evidence target/qualification/outcome/coverage mismatch: movement_and_physicality",
+        "Evidence target/qualification/outcome/coverage mismatch: main_loop_and_withdrawal"
+      ]
+    },
+    {
+      "label": "duplicate evidence witness cannot inflate coverage",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: state_boot_and_modes",
+        "Exactly96 narrow original references, not96 full-feature passes"
+      ]
+    },
+    {
+      "label": "remaining branch coverage cannot disappear",
+      "errors": [
+        "Remaining coverage erased: state_boot_and_modes"
+      ]
+    },
+    {
+      "label": "failed performance cannot become a pass",
+      "errors": [
+        "Evidence target/qualification/outcome/coverage mismatch: audio_and_packaging",
+        "Failed outcome concealed: audio_and_packaging/windows_first_person/3/acceptance"
+      ]
+    }
+  ],
+  "scope": "Node metadata contracts only; no engine/platform/human acceptance",
+  "sourceFilesChanged": 0,
+  "originalStatusesChanged": 0
+}

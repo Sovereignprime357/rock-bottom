@@ -1,0 +1,660 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] loading_editor_layout | Started Loading editor (5 steps)
+[   0% ] loading_editor_layout | Loading editor layout...
+[  16% ] loading_editor_layout | Loading docks...
+[  33% ] loading_editor_layout | Reopening scenes...
+[  50% ] loading_editor_layout | Loading central editor layout...
+[  66% ] loading_editor_layout | Loading plugin window layout...
+[  83% ] loading_editor_layout | Editor layout ready.
+[ DONE ] loading_editor_layout
+
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D SIMULATION GATE: PASS (106 checks; transactions, exact 18/8 boundary, daily governors, death and save normalization)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D SCENE GATE: PASS (92 checks; scene boot, physical rays, collision, menus, real loop, persistence, recovery and browser capture/fallback controls)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D ART GATE: PASS (196 checks; deterministic periodic tiles, transformed geometry, bounded character meshes, selective normals, render state and untouched pivots/collision)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D VIEWMODEL GATE: PASS (41 checks; relaxed articulated hands, resolved-action gestures, alternating contact/recovery, bounded inputs and shared geometry)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL STATE GATE: PASS (211 checks; source defaults, clocks, equipment, failure and schema2 migration; scene integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D MEMORY GATE: PASS (421 checks; source oracle, smoke/soap/hitter, exact boundaries, conditions, recognition/discovery and save clocks)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D PROGRESSION GATE: PASS (898 checks; 31 source fixtures, routes/hustles, territory, ranks and save guards; scene integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D ECONOMY GATE: PASS (679 checks; 27 source fixtures, inventory/migration, live action sessions and Tony/Pete/Yuri; scene/combat integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+FULL WORLD CRITICAL ROUTE: 326.705034255981m / 59.4009153192694s base walk; physical radius0.48m; turn/approach controller trial still required
+FULL WORLD CRITICAL SOURCE BENDS: [(390.0, 703.0), (695.8, 904.2), (881.95, 1027.175), (1118.05, 1181.95), (1667.7, 1572.3), (2718.3, 2141.7), (2767.7, 2172.3), (3192.3, 2277.7), (3822.3, 2667.7), (4421.95, 3157.175), (7120.0, 5253.0)]
+FULL WORLD ORACLE PROGRESS: 32/321; 8053ms
+FULL WORLD ORACLE PROGRESS: 64/321; 10775ms
+FULL WORLD ORACLE PROGRESS: 96/321; 18841ms
+FULL WORLD ORACLE PROGRESS: 128/321; 26266ms
+FULL WORLD ORACLE PROGRESS: 160/321; 33124ms
+FULL WORLD ORACLE PROGRESS: 192/321; 40307ms
+FULL WORLD ORACLE PROGRESS: 224/321; 47631ms
+FULL WORLD ORACLE PROGRESS: 256/321; 56765ms
+FULL WORLD ORACLE PROGRESS: 288/321; 62473ms
+FULL WORLD ORACLE PROGRESS: 320/321; 66856ms
+FULL WORLD ORACLE: 321 legs; worst 59.3957654779608s base walk (pawn_sill <-> ditch_gauge); elapsed 66883ms; actual capsule sweep per segment
+FULL WORLD BUILD METRICS: { "milliseconds": 2229, "obstacles": 1114, "footprints": 846, "grid_bytes": 481600, "batch": { "source_meshes": 10402, "source_surfaces": 10402, "batches": 585, "surfaces": 585, "triangles": 133134, "vertices": 254813, "skipped_meshes": 51, "palette_surfaces": 10326 } }
+FULL WORLD GEOMETRY PASS: 7783 checks; 0 failures
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+BUILD tony: first=433.108ms cached=0.336ms
+ROSTER tony: family=human meshes=10 surfaces=10 triangles=17074 bones=26 max_weights=4 blended_vertices=44190
+BUILD pete: first=84.990ms cached=0.227ms
+ROSTER pete: family=human meshes=6 surfaces=6 triangles=7870 bones=26 max_weights=4 blended_vertices=15738
+BUILD yuri: first=82.645ms cached=0.269ms
+ROSTER yuri: family=human meshes=6 surfaces=6 triangles=7962 bones=26 max_weights=4 blended_vertices=16272
+BUILD lurch: first=78.726ms cached=0.447ms
+ROSTER lurch: family=human meshes=5 surfaces=5 triangles=7640 bones=26 max_weights=4 blended_vertices=15840
+BUILD brutus: first=69.044ms cached=0.184ms
+ROSTER brutus: family=quadruped meshes=6 surfaces=6 triangles=6615 bones=22 max_weights=4 blended_vertices=18024
+BUILD possum: first=56.832ms cached=0.153ms
+ROSTER possum: family=quadruped meshes=4 surfaces=4 triangles=5546 bones=21 max_weights=4 blended_vertices=13872
+BUILD sherri: first=149.017ms cached=0.315ms
+ROSTER sherri: family=human meshes=8 surfaces=8 triangles=7722 bones=26 max_weights=4 blended_vertices=15156
+BUILD paulie: first=84.482ms cached=0.260ms
+ROSTER paulie: family=human meshes=7 surfaces=7 triangles=7734 bones=26 max_weights=4 blended_vertices=16218
+BUILD dave: first=79.885ms cached=0.268ms
+ROSTER dave: family=human meshes=9 surfaces=9 triangles=7772 bones=26 max_weights=4 blended_vertices=16254
+BUILD mom: first=104.117ms cached=0.268ms
+ROSTER mom: family=human meshes=10 surfaces=10 triangles=9978 bones=26 max_weights=4 blended_vertices=21384
+BUILD priest: first=78.445ms cached=0.255ms
+ROSTER priest: family=human meshes=7 surfaces=7 triangles=7578 bones=26 max_weights=4 blended_vertices=15756
+BUILD priest_fallen: first=84.533ms cached=0.237ms
+ROSTER priest_fallen: family=human meshes=7 surfaces=7 triangles=7924 bones=26 max_weights=4 blended_vertices=16254
+BUILD conductor: first=81.909ms cached=0.260ms
+ROSTER conductor: family=human meshes=10 surfaces=10 triangles=7798 bones=26 max_weights=4 blended_vertices=15648
+BUILD larry: first=80.609ms cached=0.252ms
+ROSTER larry: family=human meshes=7 surfaces=7 triangles=7554 bones=26 max_weights=4 blended_vertices=15648
+BUILD stripe: first=79.344ms cached=0.258ms
+ROSTER stripe: family=human meshes=8 surfaces=8 triangles=7852 bones=26 max_weights=4 blended_vertices=15630
+BUILD biggu: first=77.388ms cached=0.252ms
+ROSTER biggu: family=human meshes=7 surfaces=7 triangles=7542 bones=26 max_weights=4 blended_vertices=15624
+BUILD cubscout: first=85.251ms cached=0.257ms
+ROSTER cubscout: family=human meshes=9 surfaces=9 triangles=8092 bones=26 max_weights=4 blended_vertices=16710
+BUILD jogger: first=85.235ms cached=0.316ms
+ROSTER jogger: family=human meshes=9 surfaces=9 triangles=7846 bones=26 max_weights=4 blended_vertices=16164
+BUILD dogwalker: first=121.471ms cached=0.413ms
+ROSTER dogwalker: family=human meshes=13 surfaces=13 triangles=11354 bones=47 max_weights=4 blended_vertices=25128
+BUILD busker: first=169.253ms cached=0.261ms
+ROSTER busker: family=human meshes=9 surfaces=9 triangles=8240 bones=26 max_weights=4 blended_vertices=16194
+BUILD vapelord: first=78.404ms cached=0.243ms
+ROSTER vapelord: family=human meshes=8 surfaces=8 triangles=8024 bones=26 max_weights=4 blended_vertices=16206
+BUILD mayorscousin: first=78.300ms cached=0.261ms
+ROSTER mayorscousin: family=human meshes=8 surfaces=8 triangles=7844 bones=26 max_weights=4 blended_vertices=16338
+BUILD phoneguy: first=86.324ms cached=0.264ms
+ROSTER phoneguy: family=human meshes=8 surfaces=8 triangles=7802 bones=26 max_weights=4 blended_vertices=15756
+BUILD barb: first=95.352ms cached=0.275ms
+ROSTER barb: family=human meshes=10 surfaces=10 triangles=8300 bones=26 max_weights=4 blended_vertices=16218
+BUILD pinky: first=102.466ms cached=0.282ms
+ROSTER pinky: family=human meshes=7 surfaces=7 triangles=7916 bones=26 max_weights=4 blended_vertices=16194
+BUILD math: first=95.943ms cached=0.320ms
+ROSTER math: family=human meshes=9 surfaces=9 triangles=7948 bones=26 max_weights=4 blended_vertices=16194
+BUILD train_hopper: first=94.802ms cached=0.344ms
+ROSTER train_hopper: family=human meshes=8 surfaces=8 triangles=8264 bones=26 max_weights=4 blended_vertices=17286
+BUILD philosopher: first=75.347ms cached=0.259ms
+ROSTER philosopher: family=human meshes=9 surfaces=9 triangles=7726 bones=26 max_weights=4 blended_vertices=15180
+BUILD lease_guy: first=141.123ms cached=0.268ms
+ROSTER lease_guy: family=human meshes=11 surfaces=11 triangles=8026 bones=26 max_weights=4 blended_vertices=15648
+BUILD gutter_greg: first=117.236ms cached=0.286ms
+ROSTER gutter_greg: family=human meshes=10 surfaces=10 triangles=7946 bones=26 max_weights=4 blended_vertices=15624
+BUILD launderlady: first=80.624ms cached=0.436ms
+ROSTER launderlady: family=human meshes=9 surfaces=9 triangles=7814 bones=26 max_weights=4 blended_vertices=15648
+BUILD metermaid: first=85.102ms cached=0.265ms
+ROSTER metermaid: family=human meshes=10 surfaces=10 triangles=7865 bones=26 max_weights=4 blended_vertices=15657
+BUILD foodtruck: first=79.484ms cached=0.290ms
+ROSTER foodtruck: family=human meshes=11 surfaces=11 triangles=7630 bones=26 max_weights=4 blended_vertices=15144
+BUILD priestson: first=81.197ms cached=0.247ms
+ROSTER priestson: family=human meshes=9 surfaces=9 triangles=7778 bones=26 max_weights=4 blended_vertices=15684
+BUILD karaoke: first=82.922ms cached=0.261ms
+ROSTER karaoke: family=human meshes=9 surfaces=9 triangles=8048 bones=26 max_weights=4 blended_vertices=16218
+BUILD blue_tarp_guard: first=80.759ms cached=0.261ms
+ROSTER blue_tarp_guard: family=human meshes=8 surfaces=8 triangles=8070 bones=26 max_weights=4 blended_vertices=15612
+BUILD receipt_guard: first=78.572ms cached=0.261ms
+ROSTER receipt_guard: family=human meshes=10 surfaces=10 triangles=7826 bones=26 max_weights=4 blended_vertices=15636
+BUILD wire_guard: first=90.902ms cached=0.258ms
+ROSTER wire_guard: family=human meshes=10 surfaces=10 triangles=8982 bones=26 max_weights=4 blended_vertices=17460
+BUILD mounted_rider: first=83.142ms cached=0.296ms
+ROSTER mounted_rider: family=human meshes=8 surfaces=8 triangles=7681 bones=26 max_weights=4 blended_vertices=15657
+BUILD scrap_dog: first=34.156ms cached=0.170ms
+ROSTER scrap_dog: family=quadruped meshes=4 surfaces=4 triangles=3143 bones=21 max_weights=4 blended_vertices=8505
+BUILD paisley: first=0.227ms cached=0.159ms
+ROSTER paisley: family=quadruped meshes=4 surfaces=4 triangles=3416 bones=21 max_weights=4 blended_vertices=9324
+BUILD pigeon: first=20.142ms cached=0.112ms
+ROSTER pigeon: family=bird meshes=5 surfaces=5 triangles=1552 bones=12 max_weights=4 blended_vertices=3012
+BUILD horsecop: first=41.340ms cached=0.417ms
+ROSTER horsecop: family=mounted meshes=14 surfaces=14 triangles=11413 bones=47 max_weights=4 blended_vertices=25999
+BUILD pothole: first=6.280ms cached=0.052ms
+ROSTER pothole: family=object meshes=2 surfaces=2 triangles=364 bones=3 max_weights=0 blended_vertices=0
+BUILD cop: first=80.828ms cached=0.254ms
+ROSTER cop: family=human meshes=10 surfaces=10 triangles=7933 bones=26 max_weights=4 blended_vertices=15825
+BUILD brendan: first=79.159ms cached=0.259ms
+ROSTER brendan: family=human meshes=10 surfaces=10 triangles=7869 bones=26 max_weights=4 blended_vertices=15801
+BUILD price_guy: first=73.906ms cached=0.246ms
+ROSTER price_guy: family=human meshes=8 surfaces=8 triangles=7556 bones=26 max_weights=4 blended_vertices=15258
+BUILD bus_driver: first=77.495ms cached=0.253ms
+ROSTER bus_driver: family=human meshes=10 surfaces=10 triangles=7805 bones=26 max_weights=4 blended_vertices=15669
+BUILD day3_visitor: first=74.113ms cached=0.240ms
+ROSTER day3_visitor: family=human meshes=7 surfaces=7 triangles=7398 bones=26 max_weights=4 blended_vertices=15192
+BUILD darryl_under_blue: first=79.065ms cached=0.245ms
+ROSTER darryl_under_blue: family=human meshes=8 surfaces=8 triangles=8134 bones=26 max_weights=4 blended_vertices=15780
+BUILD general_receipt: first=78.514ms cached=0.248ms
+ROSTER general_receipt: family=human meshes=9 surfaces=9 triangles=7838 bones=26 max_weights=4 blended_vertices=15996
+BUILD bishop_wire: first=90.601ms cached=0.253ms
+ROSTER bishop_wire: family=human meshes=10 surfaces=10 triangles=9090 bones=26 max_weights=4 blended_vertices=18036
+BUILD curb_emperor: first=147.486ms cached=0.315ms
+ROSTER curb_emperor: family=human meshes=12 surfaces=12 triangles=8800 bones=26 max_weights=4 blended_vertices=18234
+BUILD pretender_tarp: first=75.780ms cached=0.323ms
+ROSTER pretender_tarp: family=human meshes=10 surfaces=10 triangles=8162 bones=26 max_weights=4 blended_vertices=15612
+BUILD pretender_receipt: first=79.679ms cached=0.300ms
+ROSTER pretender_receipt: family=human meshes=12 surfaces=12 triangles=7918 bones=26 max_weights=4 blended_vertices=15636
+BUILD pretender_wire: first=86.531ms cached=0.277ms
+ROSTER pretender_wire: family=human meshes=12 surfaces=12 triangles=9074 bones=26 max_weights=4 blended_vertices=17460
+BUILD os_brutus: first=70.390ms cached=0.205ms
+ROSTER os_brutus: family=quadruped meshes=11 surfaces=11 triangles=6627 bones=22 max_weights=4 blended_vertices=18060
+BUILD brutus_older: first=80.603ms cached=0.256ms
+ROSTER brutus_older: family=quadruped meshes=11 surfaces=11 triangles=6691 bones=22 max_weights=4 blended_vertices=18252
+BUILD dennis: first=95.119ms cached=0.295ms
+ROSTER dennis: family=human meshes=9 surfaces=9 triangles=7934 bones=26 max_weights=4 blended_vertices=15864
+BUILD transit_dan: first=97.079ms cached=0.314ms
+ROSTER transit_dan: family=human meshes=11 surfaces=11 triangles=7836 bones=26 max_weights=4 blended_vertices=15702
+BUILD former_teller: first=109.355ms cached=0.336ms
+ROSTER former_teller: family=human meshes=10 surfaces=10 triangles=8275 bones=26 max_weights=4 blended_vertices=16659
+BUILD docent: first=105.432ms cached=0.299ms
+ROSTER docent: family=human meshes=9 surfaces=9 triangles=7876 bones=26 max_weights=4 blended_vertices=16290
+BUILD lifeguard_seated: first=104.811ms cached=0.337ms
+ROSTER lifeguard_seated: family=human meshes=9 surfaces=9 triangles=8018 bones=26 max_weights=4 blended_vertices=16392
+BUILD lifeguard: first=7.804ms cached=0.348ms
+ROSTER lifeguard: family=assembly meshes=10 surfaces=10 triangles=8486 bones=28 max_weights=4 blended_vertices=16392
+BUILD model_father: first=90.216ms cached=0.349ms
+ROSTER model_father: family=human meshes=7 surfaces=7 triangles=7580 bones=26 max_weights=4 blended_vertices=16218
+BUILD model_mother: first=102.922ms cached=0.336ms
+ROSTER model_mother: family=human meshes=7 surfaces=7 triangles=7686 bones=26 max_weights=4 blended_vertices=15648
+BUILD model_son: first=113.981ms cached=0.600ms
+ROSTER model_son: family=human meshes=8 surfaces=8 triangles=7770 bones=26 max_weights=4 blended_vertices=15648
+BUILD model_family: first=32.296ms cached=1.298ms
+ROSTER model_family: family=assembly meshes=28 surfaces=28 triangles=24200 bones=80 max_weights=4 blended_vertices=47514
+BUILD quorum_raccoon: first=38.832ms cached=0.250ms
+ROSTER quorum_raccoon: family=quadruped meshes=17 surfaces=17 triangles=2620 bones=21 max_weights=4 blended_vertices=6744
+BUILD raccoon_quorum: first=8.474ms cached=1.978ms
+ROSTER raccoon_quorum: family=assembly meshes=121 surfaces=121 triangles=18544 bones=149 max_weights=4 blended_vertices=47208
+BUILD goose_body: first=38.556ms cached=0.205ms
+ROSTER goose_body: family=bird meshes=18 surfaces=18 triangles=2890 bones=15 max_weights=4 blended_vertices=5304
+BUILD goose_manager: first=5.211ms cached=0.290ms
+ROSTER goose_manager: family=assembly meshes=19 surfaces=19 triangles=2962 bones=17 max_weights=4 blended_vertices=5304
+ROSTER BUILD TOTAL: first=6100.668ms cached=22.684ms (lazy per identity; companion templates may already be warm)
+3D CHARACTER ROSTER GATE: PASS (1954 checks; B1/B2/B3 cast, exact actor/site mappings, shared resources/independent poses, finite joints/UVs and current actions)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D COMBAT GATE: PASS (2870 checks; 63 source fixtures; physics, archetypes, police lifecycle, atomic death seams; P07b and scene integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL RUNTIME GATE: PASS (160 checks; composed intro/vendor/loop/save chain, pause, stale capabilities and physical access boundaries; full scene pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D PHYSICS ADAPTER GATE: PASS (437 checks; native shape/ray/sphere sweeps, slide/charge, live access, no model mutation)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+FULL INTEGRATION WALK: 3.48201383677395s; physics queries 1500
+FULL INTEGRATION CRITICAL WALK: 59.4019668085626s; 11 waypoints; blocked=false; actual fixed-step movement, no sprint/teleport between endpoints
+3D FULL INTEGRATION GATE: PASS (245 checks; real world services, controller walk, purchase and smoke)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D BOSS GATE: PASS (2200 checks;39 source fixtures;atomic special deaths,phase boundaries,restore repairs;campaign and scene fight tours pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D TRAVEL GATE: PASS (3739 checks;48 source action cases,18 exact chest/cot UI paths,18 bus arrivals,12 combat boundaries; live scene/day integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+NAVIGATION LOCAL BUDGET: {"actors":60,"buckets":4,"cache_hits":0,"colliders":1,"completed":60,"deferred":0,"failed":0,"frame":1702,"frame_starts":4,"frame_tests":60,"geometry_candidates":420,"index_us":6,"max_completion_ms":249.999999999964,"max_plan_us":728,"max_queue":60,"max_starts":4,"max_tests":60,"max_wait_ms":249.999999999964,"oldest_pending_ms":0.0,"planning_p50_us":418,"planning_p95_us":588,"queued":0,"requests":60,"revision":1,"sample_frames":16,"scope":"local planner only; real physics movement and60AI/rig rendering are separately measured"}
+3D ACTOR NAVIGATION GATE: PASS (4756 checks; real box sweeps, bounded detours/caches/work, source48px target drift; full60AI/rig performance pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL HUD GATE: PASS (37 checks; pure model view, full ledger, status units and reachable scrolling menus)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL STARTUP: {"elapsed_usec":8920913,"resources":{"build_usec":5379531,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":2907295,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":5434596,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":574430,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+3D FULL SCENE GATE: PASS (418 checks;56actors, controls, realcash/Tony/Block, readonlyledger, isolatedsave/load)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D RESIDENT GATE: PASS (4753 checks;38 source fixtures;exact menus,daily governors,discovery,atomic Fallen transition;runtime/scene pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D QUEST GATE: PASS (6514 checks;56 source fixtures;five linked handlers,crown/package lifecycle,live sessions;runtime/scene pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D STREET GATE: PASS (3166 checks;53 source fixtures;15 authored handlers;Phone/Karaoke production dependencies explicitly partial)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D RHYTHM GATE: PASS (1432 checks;14 source fixtures;real untimed8-choice session;scene/native/Web pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D ROBBERY GATE: PASS (462 checks;30 unchanged-source cases;governor/save/allowlists)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D DAY GATE: PASS (3487 checks;68 source cases,4 causes,4 scripted events; real Campaign/Runtime integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D COMMUNICATIONS GATE: PASS (1219 checks;69 source fixtures;12 calls/29 events,real feed/ticker/prop reset;Runtime/UI scheduling pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D HEIST GATE: PASS (16893 checks;162 source paths/98 comparator streams;9 sites/4 pins;physical Runtime integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D SITE INTEGRATION GATE: PASS (62 checks;9actual sites,facade/capsule/LOS,modal and rank latch)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D CAMPAIGN FOUNDATION GATE: PASS (1364 checks;215 source cases; P13b/c menus/battles remain pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D OFFICE CAMPAIGN GATE: PASS (23986 checks;136 source paths/592 steps; Kingdom actions remain P13c)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D COOKING GATE: PASS (3857 checks;206 source fixtures;five modes/six outcomes/phase clocks/atomic chunks;Runtime/UI integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D COOKING PRESENTATION GATE: PASS (106 checks; pure supplied-state view, source labels, finite bar, smoke, narrow layout; root input/render acceptance pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+STARTUP PREPARE: templates=72 memoized=5731.492ms reference=11590.296ms solves=233115 hits=1125426 (same-process diagnostic, not cold-Web timing)
+3D STARTUP GATE: PASS (590 checks;72 exact authored templates, shared immutable resources and opaque progress)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D COOKING RUNTIME GATE: PASS (175 checks; real cook commands/boss wall ending, atomic settlement, lifecycle precedence, forced epochs, clocks and receipt isolation)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D COMPANION GATE: PASS (11638 checks;114 source paths;four handlers/shared puzzle/physical deferred lifecycle;Runtime and dumpster integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D KINGDOM CAMPAIGN GATE: PASS (22688 checks;159 source paths/369 steps; physical/native fight budgets remain root evidence)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+KINGDOM PHYSICAL WALKS: 1166.954m / 212.173s base-walk geometry; 4271 actual capsule steps; queries 18946; 3 resident detours ["kingdom_guard_copper_choir_6_3", "skid_lurch", "skid_brutus_1", "horsecop", "meter_maid"]
+3D KINGDOM PHYSICS GATE: PASS (593 checks; actual world/17 service points/4 arenas/12 rigs; competent fight timing remains pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D WORLD PROP ACTIONS GATE: PASS (34269 checks; 159 unchanged-source paths; shared props/capabilities/physical phone/continuity; root integration pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D INTERACTIVE PROPS GATE: PASS (13040 checks; 126 unchanged-source paths; shared14 records/real Combat/physical pending/epoch reset; world binding pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D ACTOR CONTACT GATE: PASS (83 checks; real casts, symmetric overlap band, source combat/charges, repairs and lifecycle)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D PRESENTATION VISIBILITY GATE: PASS (2112 checks; 72 templates; exact caches, hidden return, full bounds and shadows)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D INCIDENTS GATE: PASS (21899 checks;132 source paths458steps/6 scenes24beats; presenter/physical paths/Runtime activation pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D NEIGHBORHOOD UTILITIES GATE: PASS (1571 checks;133 source cases;Block/market/squint/12zone entries/autosave/session continuity;Runtime/Scene pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D INTERACTIVE PROP VIEW GATE: PASS (3172 checks; original28meshes/14slots, actual rays/capsules, live owner topology, source-only clocks, pending/stale/cleanup)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D VIEWMODEL CONTEXT GATE: PASS (1329 checks;9canonical weapons, original grip geometry, immutable accepted weapon, camera bounds, contexts/caches)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D GUIDANCE: PASS (1137 checks / 165 source views / 58 directions)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D INCIDENT PRESENTATION GATE: PASS (11737 checks;6 trajectories/24beats/28 corridors; Runtime OFF)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D GUIDANCE PROJECTION: PASS (362 checks / 30 source draw cases)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D INCIDENT RESERVATION GATE: PASS (1413 checks; six prospective scenes/actual props/revisions/epochs/source RNG)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL STARTUP: {"elapsed_usec":9143504,"resources":{"build_usec":5598729,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":2867756,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":5648923,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":622274,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+3D INCIDENT RUNTIME GATE: PASS (81 checks;4 actual Scene groups; cold/fresh/load/menu/clock/cart/props)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D CART VIEW GATE: PASS (3640 checks; original17/real capsule and drop/strict36/epochs/resources)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D OLD SCHOOL: PASS (1170 checks / 22 source entries / 48 paths / 57 steps)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL STARTUP: {"elapsed_usec":9873398,"resources":{"build_usec":6095315,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":3096276,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":6148786,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":624200,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+3D OLD SCHOOL PHYSICAL GATE: PASS (69 checks;actual44px/LOS/controller/spawn/epoch/corpse)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D SOURCE AUDIO GATE: PASS (11225 checks;192recipe banks/6gate timelines/94ambient cases)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FULL STARTUP: {"elapsed_usec":8806564,"resources":{"build_usec":5316753,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":2878541,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":5366504,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":556318,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+3D AUDIO RUNTIME GATE: PASS (72 checks;actual FullScene input/ambient/wall/fresh/restore/18s8s loop)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FIND VIEW GATE: PASS (230 checks;4cached kinds/source visibility/no authority)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D WEATHER PRESENTATION GATE: PASS (8045 checks;49 curves/48 render cases/936 fixture cases; actual roof/revision coverage)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D ACTOR HUD: PASS (14252 checks / 249 actor + 208 combat source views)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D VIEWMODEL GEAR GATE: PASS (729 checks;2tools/4coats/4shoe slots/9independent weapons)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+DEPARTURE METRICS: {"cache_hits":5377,"entries":1,"failed":1,"frame":3083,"max_entries":2,"max_sweeps":4,"max_us":2281,"max_work":57,"microseconds":0,"queued":0,"ready":4,"started":8,"work":0}
+3D DEPARTURE PHYSICS GATE: PASS (6286 checks; actual two-source transactions, full-height paths and physical removals; no native timing claim)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D PROJECTILE VIEW GATE: PASS (113 checks; two source kinds)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D DYNAMIC EMITTER GATE: PASS (149 checks;fixed six lights)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D WORLD OWNERSHIP: PASS (3552 checks; 1078 unchanged-source views)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D LEASH BORDER GATE: PASS (167 checks)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D KINGDOM VIEW: PASS (3488 checks; 1599 unchanged-source views)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D WALL MARKINGS GATE: PASS (1277 checks;37 cases/66 source steps/198 Canvas measurements)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D WALL MARKING VIEW GATE: PASS (6473 checks)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D BOSS ACCEPTANCE CONTRACT: PASS (329 counterexample checks; no simulated fight claim)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+POSE INPUT MEMO WORK: 31039 reused / 37568 calculated / 68607 uncached calculations
+3D POSE INPUT MEMO GATE: PASS (13458 checks; 72 original templates)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+DISTRICT GRADE DRAFT GATE: PASS (1300 checks;676 source lookups/585 mathematical blends; GPU/native/Web acceptance pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D OFFICE ACCEPTANCE CONTRACT: PASS (1138 checks; synthetic assessor counterexamples, not native progression)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+OFFICE SERVICE ENDPOINT CONTRACT: PASS (85 checks; detached orchestration only)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+HAND RAW MISMATCH 1 original generated paths key=right_arm/forearm/wrist/phone/@MeshInstance3D@23 candidate=["MeshInstance3D", 0, 3, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.008, 0.069), true] baseline="<missing>"
+HAND RAW MISMATCH 2 original generated paths key=right_arm/forearm/wrist/phone/@MeshInstance3D@24 candidate=["MeshInstance3D", 0, 4, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.031, 0.069), true] baseline="<missing>"
+HAND RAW MISMATCH 3 original generated paths key=WeaponPool/pipe/@MeshInstance3D@2 candidate=["MeshInstance3D", 0, 4, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.019, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 4 original generated paths key=WeaponPool/cart_wheel/@MeshInstance3D@3 candidate=["MeshInstance3D", 0, 2, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115, 0, 0.044), true] baseline="<missing>"
+HAND RAW MISMATCH 5 original generated paths key=WeaponPool/cart_wheel/wheel/@Node3D@4 candidate=["Node3D", 1, 4, Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 6 original generated paths key=WeaponPool/cart_wheel/wheel/@Node3D@4/hub_spoke candidate=["MeshInstance3D", 0, 0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034, 0, 0.02), true] baseline="<missing>"
+HAND RAW MISMATCH 7 original generated paths key=WeaponPool/cart_wheel/wheel/@Node3D@5 candidate=["Node3D", 1, 5, Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 8 original generated paths key=WeaponPool/cart_wheel/wheel/@Node3D@5/hub_spoke candidate=["MeshInstance3D", 0, 0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034, 0, 0.02), true] baseline="<missing>"
+HAND RAW MISMATCH 9 original generated paths key=WeaponPool/cart_wheel/wheel/@Node3D@6 candidate=["Node3D", 1, 6, Transform3D(1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 10 original generated paths key=WeaponPool/cart_wheel/wheel/@Node3D@6/hub_spoke candidate=["MeshInstance3D", 0, 0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034, 0, 0.02), true] baseline="<missing>"
+HAND RAW MISMATCH 11 original generated paths key=WeaponPool/shoe/shoe_form/@MeshInstance3D@7 candidate=["MeshInstance3D", 0, 4, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, 0.045, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 12 original generated paths key=WeaponPool/shoe/shoe_form/@MeshInstance3D@8 candidate=["MeshInstance3D", 0, 5, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 0.045, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 13 original generated paths key=WeaponPool/baguette/@Node3D@9 candidate=["Node3D", 1, 2, Transform3D(0.9286646, 0, 0.37092048, 0, 1, 0, -0.37092048, 0, 0.9286646, -0.15, 0.03, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 14 original generated paths key=WeaponPool/baguette/@Node3D@9/score candidate=["MeshInstance3D", 0, 0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 15 original generated paths key=WeaponPool/baguette/@Node3D@10 candidate=["Node3D", 1, 3, Transform3D(0.9286646, 0, 0.37092048, 0, 1, 0, -0.37092048, 0, 0.9286646, -0.23, 0.03, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 16 original generated paths key=WeaponPool/baguette/@Node3D@10/score candidate=["MeshInstance3D", 0, 0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 17 original generated paths key=WeaponPool/baguette/@Node3D@11 candidate=["Node3D", 1, 4, Transform3D(0.9286646, 0, 0.37092048, 0, 1, 0, -0.37092048, 0, 0.9286646, -0.31, 0.03, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 18 original generated paths key=WeaponPool/baguette/@Node3D@11/score candidate=["MeshInstance3D", 0, 0, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 19 original generated paths key=WeaponPool/microphone/@MeshInstance3D@12 candidate=["MeshInstance3D", 0, 2, Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.01, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 20 original generated paths key=WeaponPool/microphone/@MeshInstance3D@13 candidate=["MeshInstance3D", 0, 3, Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.015, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 21 original generated paths key=WeaponPool/knife/@MeshInstance3D@14 candidate=["MeshInstance3D", 0, 2, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 22 original generated paths key=WeaponPool/knife/@MeshInstance3D@15 candidate=["MeshInstance3D", 0, 3, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 23 original generated paths key=WeaponPool/knife/@MeshInstance3D@16 candidate=["MeshInstance3D", 0, 4, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 24 original generated paths key=WeaponPool/broken_bottle/@MeshInstance3D@17 candidate=["MeshInstance3D", 0, 3, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 25 original generated paths key=WeaponPool/broken_bottle/@MeshInstance3D@18 candidate=["MeshInstance3D", 0, 4, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 26 original generated paths key=WeaponPool/broken_bottle/@MeshInstance3D@19 candidate=["MeshInstance3D", 0, 5, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 27 original generated paths key=WeaponPool/broken_bottle/@MeshInstance3D@20 candidate=["MeshInstance3D", 0, 6, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 28 original generated paths key=WeaponPool/broken_bottle/@MeshInstance3D@21 candidate=["MeshInstance3D", 0, 7, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 29 original generated paths key=WeaponPool/broken_bottle/@MeshInstance3D@22 candidate=["MeshInstance3D", 0, 8, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 30 original generated paths key=kick_foot/worn_shoe/shoe_form/@MeshInstance3D@25 candidate=["MeshInstance3D", 0, 4, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, 0.045, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 31 original generated paths key=kick_foot/worn_shoe/shoe_form/@MeshInstance3D@26 candidate=["MeshInstance3D", 0, 5, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 0.045, 0), true] baseline="<missing>"
+HAND RAW MISMATCH 32 original generated paths key=kick_foot/footwear_crocs/@MeshInstance3D@27 candidate=["MeshInstance3D", 0, 3, Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.043, 0.023), true] baseline="<missing>"
+HAND ART METRICS: baseline=4984 triangles; candidate=5368; surfaces=166; materials=51
+CART PAD rest left index gap=0.00223568151705
+CART PAD rest left middle gap=0.00207514828071
+CART PAD rest left ring gap=0.00257034879178
+CART PAD rest left little gap=0.00266237766482
+CART PAD rest right index gap=0.00223568128422
+CART PAD rest right middle gap=0.00207514688373
+CART PAD rest right ring gap=0.00257035042159
+CART PAD rest right little gap=0.00266237766482
+CART PAD during right attack left index gap=0.00223568151705
+CART PAD during right attack left middle gap=0.00207514828071
+CART PAD during right attack left ring gap=0.00257034879178
+CART PAD during right attack left little gap=0.00266237766482
+CART PAD recovery right index gap=0.00223568128422
+CART PAD recovery right middle gap=0.00207514688373
+CART PAD recovery right ring gap=0.00257035042159
+CART PAD recovery right little gap=0.00266237766482
+CART PAD rest left index gap=0.00223568151705
+CART PAD rest left middle gap=0.00207514828071
+CART PAD rest left ring gap=0.00257034879178
+CART PAD rest left little gap=0.00266237766482
+CART PAD rest right index gap=0.00223568128422
+CART PAD rest right middle gap=0.00207514688373
+CART PAD rest right ring gap=0.00257035042159
+CART PAD rest right little gap=0.00266237766482
+CART PAD during right attack left index gap=0.00223568151705
+CART PAD during right attack left middle gap=0.00207514828071
+CART PAD during right attack left ring gap=0.00257034879178
+CART PAD during right attack left little gap=0.00266237766482
+CART PAD recovery right index gap=0.00223568128422
+CART PAD recovery right middle gap=0.00207514688373
+CART PAD recovery right ring gap=0.00257035042159
+CART PAD recovery right little gap=0.00266237766482
+DRAFT HAND ART REFINEMENT: PASS; 1537 checks; 3 groups. Geometry/contract evidence, not visual acceptance.
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D KARAOKE ACCEPTANCE CONTRACT: PASS (59 synthetic checks; not native evidence)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FIXTURE MOTION GATE: PASS (1286 checks)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D FIXTURE MOTION WORLD GATE: PASS (195 checks)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+3D STARTUP PARITY GATE: PASS (321 checks;14 publication paths/20 starts/4 cash variants/12 seeded hustle starts, real lifecycle and stale pickup)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+FEEDBACK MULTIMESH READBACK: {"aabb":"[P: (2.0, 3.0, 4.0), S: (2.0, 3.0, 4.0)]","color":"(0.0, 0.0, 0.0, 1.0)","display":"headless","origin":"(0.0, 0.0, 0.0)","supported":false}
+WORLD FEEDBACK DRAFT: PASS (5483 checks; 20 supported recipes; 84 unchanged burst source cases; renderer_readback=false; actual_vertex_checks=0; native readback required separately when false)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+WORLD FEEDBACK INTEGRATION DRAFT: PASS (361 checks;18 metadata recipes;8 groups; paired source owners; native/Web/performance pending)
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+DRAFT COMPANION REVEAL EPOCH: PASS; 119 checks; 14 groups
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+WORLD DUST DRAFT: PASS; 4532 checks; 72 source cases;6 source intent witnesses;5 groups; no native/Web acceptance.
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+WORLD DUST RUNTIME DRAFT: PASS; 140 checks;5 groups; actual scene visual/native/Web pending.
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+FEEDBACK VIEW ART DETAIL: {"actual_vertex_checks":76800,"checks":83644,"color_diagnostic_rows":0,"color_readbacks":0,"failures":0,"groups":4,"max_source_color_delta":0.0,"max_stored_color_delta":0.0,"renderer":"gl_compatibility","renderer_readback":false,"renderer_vertex_checks":0,"stored_color_mismatches":0,"visual_acceptance":false}
+3D FEEDBACK VIEW ART GATE: PASS
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+WORLD DUST VISUAL CONTRACT: PASS; 23 checks; 3 groups; real render evidence pending
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+ACTUAL DOMAIN FEEDBACK VISUAL CONTRACT: PASS (219 checks; no renderer/visual acceptance)
+3D CONTENT GATE PASS: 4116 assertions
+source: 52 hashes; 50 modules; 632 exports (145 data)
+world: 23 zones / 53 solids / 193 props / 14 interactive props / 29 cash piles
+actors: 41 base / 56 real day-one / 63 canonical registry rows; exact IDs and order
+catalogs: 16 equipment / 9 weapons / 49 achievements / 24 quests / 23 route stops / 13 inventory IDs (19 variants)
+items: 52 audited declarations / 29 dumpster outcomes / 6 explicit computed-field omissions
+omissions: 627 explicit callback/resource/undefined/computed paths; data coverage is not gameplay parity
+determinism: two fresh seeded/fixed-clock runs and committed artifact byte-identical
+counterexamples: missing prop, replaced actor, stale alias, hidden callback, host resource, cycle and non-finite data rejected
+(node:47096) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D CONTENT EXPORT CHECK PASS: source data and provenance match
+(node:33532) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D MEMORY ORACLE: PASS (13 independent source-method fixtures)
+(node:15736) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D PROGRESSION ORACLE: PASS (31 independent source-method fixtures)
+(node:31016) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D ECONOMY ORACLE: PASS (27 independent source-method fixtures)
+(node:37292) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D WORLD ORACLE CHECK PASS: source hashes, selectors and deterministic fixture match
+(node:41088) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D COMBAT ORACLE: PASS (63 source fixtures; Brendan ReferenceError retained as explicit defect)
+(node:42332) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D BOSS ORACLE: PASS (39 source fixtures; 3 separate defect characterizations)
+(node:11024) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D TRAVEL ORACLE: PASS (48 source action cases,18 exact chest/cot UI paths,18 destinations,12 combat gates,2 hideouts,1 cart; explicit3D adaptations separate)
+(node:39700) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D RESIDENT ORACLE: PASS (38 source fixtures; exact menus, opening effects and transaction state)
+(node:30844) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D QUEST ORACLE: PASS (56 source fixtures; linked dialogue, crown/package lifecycle, strict ranges and caps)
+(node:17240) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D STREET ORACLE: PASS (53 source fixtures;15 exact menus,direct commerce/banter,approved quirks;feed/rhythm integration partial)
+(node:37884) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D RHYTHM ORACLE: PASS (14 source fixtures;0–8hits,exact note/history menus,forfeit,Escape,repeat)
+(node:43044) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D ROBBERY ORACLE: PASS (30 source cases)
+(node:41628) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D DAY ORACLE: PASS (68 source cases;4 causes,4 events,6 daily reset keys,3 conditional families)
+(node:25148) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D COMMUNICATIONS ORACLE: PASS (69 source fixtures;12 calls/29 events/feed/ticker/garbage;fresh-load characterization={"fresh":{"looted":true,"tipsJar":true,"postRetained":true},"load":{"ok":true,"priorLooted":true,"addedLooted":true,"tipsJar":true}})
+(node:3544) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D HEIST ORACLE: PASS (162 source paths;98 exact sort streams;9 sites/4 pins/session availability)
+(node:20212) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D CAMPAIGN ORACLE: PASS (215 P13a source cases; office actions/battles remain separate)
+(node:43340) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D OFFICE ORACLE: PASS (136 source paths; 592 source steps;11 claims,6 upgrades,2 residents)
+(node:40692) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D COOKING ORACLE: PASS (38/93/40/30/5 menus/outcomes/starts/boundaries/timelines)
+(node:33624) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D COMPANION ORACLE: PASS (98 dialogue paths/11 world boundaries/5 reveal paths; original lifecycle defects characterized)
+(node:15668) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D KINGDOM ORACLE: PASS (159 source paths; 369 source steps; 9 marks,4 doors,4 bosses,3 pretender profiles)
+(node:27896) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D WORLD PROPS ORACLE: PASS (159 source paths; 287 steps; 22 fillers,10 phone lines,5 passers)
+(node:48064) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D INTERACTIVE PROPS ORACLE: PASS (126 source paths; 132 steps; 6 cans/8 bottles,16 initial/12 respawn candidates)
+(node:8364) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D INCIDENTS ORACLE: PASS (132 source paths/458 steps;6 scenes/24 beats; actual fresh/load characterization)
+(node:15628) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D NEIGHBORHOOD UTILITIES ORACLE: PASS (23 menus / 75 action cases / 20 timelines / 13 entry cases / 2 continuity; unchanged source)
+(node:38064) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D GUIDANCE ORACLE: PASS (165 views / 58 direction cases; unchanged source; original journal ReferenceError separately recorded)
+(node:38696) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D GUIDANCE PROJECTION ORACLE: PASS (30 unchanged-source draw cases; modal/RNG zero)
+(node:48656) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D OLD SCHOOL ORACLE: PASS (22 entries / 48 paths / 57 steps; unchanged source)
+(node:20332) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D AUDIO ORACLE: PASS (192 recipe banks / 6 gate timelines / 8 original RNG cases / 94 ambient cases)
+(node:24960) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D WEATHER ORACLE: PASS (49 curve/48 render/936 fixture cases;39 static sources)
+(node:21136) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D ACTOR HUD ORACLE: PASS (249 actor views / 208 combat views; zero random draws)
+(node:1580) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D WORLD OWNERSHIP ORACLE: PASS (1078 views; 11 claims / 6 upgrades; zero RNG and state mutation)
+(node:2520) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+LEASH BORDER ORACLE: PASS (20 border/11 leash cases)
+(node:30156) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D KINGDOM VIEW ORACLE: PASS (1599 views; 4 banners / 9 marks; zero RNG and state mutation)
+(node:33244) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+WALL MARKINGS ORACLE: PASS (37 cases/66 steps/198 Canvas metrics)
+(node:28752) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+DISTRICT GRADE DRAFT ORACLE: PASS (676 lookups / 39 grades / 585 mathematical blends; zero RNG)
+(node:19704) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FIXTURE MOTION ORACLE: PASS (53 samples/1 actual title draw/1 source-covered tail; zero RNG/save/timer work)
+(node:38844) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+3D STARTUP SOURCE ORACLE: PASS (14 publication paths, 20 starts, 4 cash variants, 12 seeded hustle starts; zero publication RNG draws)
+hustles_missing: 432078830 -> 1519427481; bottles:24 > hustles:13
+hustles_null: 432078830 -> 1519427481; bottles:24 > hustles:13
+hustles_scalar: 432078830 -> 1519427481; bottles:24 > hustles:13
+hustles_object: 432078830 -> 1519427481; bottles:24 > hustles:13
+hustles_empty: 432078830 -> 1123532582; bottles:24
+hustles_valid: 432078830 -> 1123532582; bottles:24
+hustles_missing_route: 432078830 -> 1817249595; bottles:24 > hustles:13 > route:10
+hustles_rebuild_1: 1 -> 357326185; bottles:24 > graffiti:85 > posters:36 > hustles:13 > route:10
+hustles_rebuild_432078830: 432078830 -> 174564623; bottles:24 > graffiti:85 > posters:31 > hustles:13 > route:10
+hustles_rebuild_4294967295: 4294967295 -> 345046489; bottles:24 > graffiti:127 > posters:36 > hustles:13 > route:10
+hustles_dead_fighters: 432078830 -> 944564300; bottles:24 > hustles:12 > route:10
+hustles_intro_suppressed: 432078830 -> 987771242; bottles:24 > graffiti:85 > posters:31
+(node:40512) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+WORLD FEEDBACK RECIPE ORACLE: PASS (18 recipes; 84 cases; 696 source particles; original source unchanged)
+WORLD DUST SOURCE ORACLE: PASS; 72 schedule cases; 6 actual source input/stun/blocked witnesses; 148 births; original source unchanged.
+ADDITIVE PARITY CONTRACT: PASS (152 checks;5/5 groups;26 ledger counterexamples; --complete still fails)
+ADDITIVE PARITY MIGRATION: PASS (1315 checks;585 handlers/32 features/30 dispositions/96 narrow refs; all statuses unchanged; pins=metadata-v1)
+ADDITIVE PARITY GATE: PASS (1315 checks; metadata only; FULL PORT INCOMPLETE; pins=metadata-v1)
+3D PARITY COVERAGE: PASS (10498 checks; 32 features, 585 explicit function obligations; 0/32 verified, full port INCOMPLETE)
+3D GATE RUNNER: 130/130 PASS (import clean; 85 engine suites and 45 source/parity checks; complete-port acceptance remains tracked separately)

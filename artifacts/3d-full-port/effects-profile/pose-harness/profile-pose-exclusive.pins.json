@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "workload_version": "sustained60_normal_input_v2_draft",
+  "wrapper_sha256": "7396a6e2c887c4ed629497dc4a46dbc98554da965ffcebdfb2064b1e6e225feb",
+  "overlay": {
+    "scripts/actor_animation.gd": "e32081241d159b0736c4ca56a036ca00d532226c1a3a73e4d4e44769d17f61b3",
+    "scripts/character_roster.gd": "b217e7e9529782aef51a05dad46cc11defba3d98de0763f182cfe98fe253f1b4",
+    "scripts/pose_cost_metrics.gd": "5b4ce46315309482556a016ff543a297443b0c4508b75397f641956e23a9d274",
+    "tests/test_pose_cost_metrics.gd": "4c12fa46d18e93ea49d7b4dff085a99cca1d913777c5a1da93abe589b79e250e",
+    "tests/full_actor_performance_probe.gd": "c92e77d0f5fea66403cb404e7e3e08d939f22d2a92cda4b11eb16593a505b840",
+    "tests/sustained_actor_driver.gd": "0732e2d8d6994be3f44e13576da09bfd46d09fb7cda050cf0113a10f936d08fb",
+    "tests/test_sustained_actor_driver.gd": "85038f4c7a679585da3d285a1d727fa1b89b2a8a0463784130d68f32cdadf818"
+  },
+  "measured_scene_sha256": "3b5eaf2ee0a6a94b283c0d7bd360cb4bc8226748c82ca15b9a8e3bc6d1c58d27",
+  "engine_launcher_sha256": "f0336c8b2ae039d39767a64c416f01b1b49d95d8dde87724012874dd4be1c1a8",
+  "engine_runtime_sha256": "a829242096d640007de9fa93ea923d0f666d13d6a3b472a0231c820be6dc7627",
+  "release_template_sha256": "78ccc576e8f8bffd7ef6ad6f36ebd72a41e609a1052225a55b3407c96ea84065",
+  "engine_distribution": "Godot4.5.1-stable official Windows x86_64; installed repository .tools binaries",
+  "timing_baseline": "BASELINE.json; exact normalized MeasuredScene class is verified against each archived revision",
+  "note": "Current working-source snapshot, not a committed archive. Exact seven overlays, fixed sustained60; acceptance always false.",
+  "revision": "working-c3d25e0d7a38",
+  "game3d_tree": "not_a_git_tree",
+  "archive": ".build/3d/pose-exclusive-cost-draft/source.zip",
+  "archive_sha256": "776bc541a72d0aa60f962a9da6c1fa31311dedd8f77d5ad874ef00e9bdfcbc4b",
+  "stripped_originals": {
+    "scripts/actor_animation.gd": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+    "scripts/character_roster.gd": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+    "tests/full_actor_performance_probe.gd": "5013ed6ed7bee55213bc9f84060d9a5fbb68e44ddc9cf95fe3526fd4bcf58bef"
+  },
+  "reviewed_wrapper_sha256": "338dd5509873a29b9a6f25711794b9a369c1ea65b6e9dc41085de8dada213754",
+  "reviewed_pins_sha256": "82dfddc0c77b1e1604e781c1e819d5f8c173b106acdae94be57b820f8674dbe8",
+  "reviewed_cost_wrapper_sha256": "7e656b46311aa918fff461c4227e04048f045aa391bc01adb194716986f67911",
+  "snapshot_kind": "current working production with promoted effects, not a Git revision",
+  "snapshot_sha256": "c3d25e0d7a3838ea043858a3183083c6ad0b0b0af7baf8c47fe2df63268b76f6",
+  "variant": "instrumentation_only_exclusive_pose_costs"
+}

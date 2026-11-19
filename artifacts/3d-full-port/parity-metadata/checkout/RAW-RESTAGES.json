@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "root_owned": true,
+  "byte_changes_allowed": false,
+  "files": [
+    {
+      "path": "SPEC-3D-FULL-PORT.md",
+      "attributes": "-text",
+      "reason": "mixed original source/spec",
+      "accepted_raw_sha256": "2225222c1c27835fc93a4c4da27501aefbbc74f358f2840de14ae1b2f7649c26",
+      "bytes": 10832,
+      "crlf": 12,
+      "lf": 148,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "ea92876df985b3a89af8e3128e6884285ac997b6bc1580ace103c1b4b3047c85",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/native-provenance.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "8e4152d3c9a51170e00936f1375b1215f8e2816b426d40c2d078cdb6ca3325d4",
+      "bytes": 1021,
+      "crlf": 15,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "501ff0127be34e61095e82b1121fb8db7846125522ed210b83931bba13a1632f",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/district-grade-web-raster.json",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "2d223b847c1ca868fda99fd168ccf88f3a2b2c08c4b6c212d6415c585d1b384c",
+      "bytes": 759,
+      "crlf": 1,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "e438a3ade47a76ed42165ebfd8d2699f8f8f405d9b8c0b11c015d190dce98ef0",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-18-3d-full-scene.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a4aa1d9aa2d335a5cc01a9f12f8690df14ea2e982c588c2eb168efdbe82d5fde",
+      "bytes": 15532,
+      "crlf": 272,
+      "lf": 0,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "5b612ead84b6432636a501d55f7194a258f909b1857937a09567ca5493da645c",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    },
+    {
+      "path": "reports/2026-11-19-3d-hands-and-office.md",
+      "attributes": "-text",
+      "reason": "raw evidence",
+      "accepted_raw_sha256": "a27401aa77db467347fdbe9bb78bc8a6ed74cf1d69a14883cdcdba921ee7c09f",
+      "bytes": 5077,
+      "crlf": 2,
+      "lf": 83,
+      "loneCR": 0,
+      "roles": [
+        "referenced_input"
+      ],
+      "root_index_sha256": "cdc0c3710eccb8f75da54741788b35c0ec003f4eddc905d3441a36bfd1db5f44",
+      "raw_restage_required": true,
+      "root_index_observation": "existing measured file"
+    }
+  ]
+}

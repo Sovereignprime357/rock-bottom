@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "decision": "IMPL-3D-FULL-37",
+  "status": "DRAFT raw evidence promotion list; no copy or status change performed",
+  "review": "independent read-only filesystem and Node review; root checkout provenance retained",
+  "files": [
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/complete-expected-refusal.stderr.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/complete-expected-refusal.stderr.log",
+      "bytes": 41368,
+      "sha256": "7486fb1916f2f747627f4da446e451f5d150c25312638d9d54fac8a6e326b464",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/complete-expected-refusal.stdout.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/complete-expected-refusal.stdout.log",
+      "bytes": 67,
+      "sha256": "4e4453cb98b998d45bbb01252f59ce13ca860af5c4d00a2b92be4046e7d39c11",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/contract.stderr.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/contract.stdout.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/contract.stdout.log",
+      "bytes": 105,
+      "sha256": "01b3426e96c02e4662c292b3b11ecac03b084f8ecc685211a9a0b50518857355",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/legacy-gate.stderr.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/legacy-gate.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/legacy-gate.stdout.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/legacy-gate.stdout.log",
+      "bytes": 125,
+      "sha256": "270860678da1cc87c955d3fc13b19e4d3fafcb250e50a934b141de3e9ed7d8c9",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/metadata-gate.stderr.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/metadata-gate.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/metadata-gate.stdout.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/metadata-gate.stdout.log",
+      "bytes": 96,
+      "sha256": "5fd5a1ef1c098812f7fedb1fcfd881aac079e33ff5b80053d9719e9dc73d8104",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/migration.stderr.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/migration.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/migration.stdout.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/focused/migration.stdout.log",
+      "bytes": 144,
+      "sha256": "85fe3d3b1720357789c37bf9c373803c1fbb65c9ca83559da75b60872be14892",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/review.json",
+      "destination": "artifacts/3d-full-port/parity-metadata/review.json",
+      "bytes": 11688,
+      "sha256": "3df512c5347314eaa9b661810dd598ebc2afe98657496b41e6fe6b534601567e",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-evidence-promotion-review/contract.json",
+      "destination": "artifacts/3d-full-port/parity-metadata/contract.json",
+      "bytes": 7093,
+      "sha256": "765f9cc8d22ac2207b262ec4442e9fc0ac94e1f6dd2664df7d447663e6a0199e",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-production-mapping/actual-checkout-result.json",
+      "destination": "artifacts/3d-full-port/parity-metadata/checkout/actual-checkout-result.json",
+      "bytes": 66643,
+      "sha256": "c0f8e5cecbd8a521715b95f86225fc0d59894edc26a963f5b9b12f8f66100d13",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-production-mapping/actual-checkout-v2.log",
+      "destination": "artifacts/3d-full-port/parity-metadata/checkout/actual-checkout-v2.log",
+      "bytes": 99,
+      "sha256": "6bb7693d76cee2a7679b4e04c95fcd001a8bfa171571002cdf8e49d3c2542457",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-production-mapping/PRODUCTION-FILES.json",
+      "destination": "artifacts/3d-full-port/parity-metadata/checkout/PRODUCTION-FILES.json",
+      "bytes": 2026,
+      "sha256": "8f5c40dc111b31999296202fb85376cb60743b7872157a99503a4dd4bad2bd78",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-production-mapping/checkout-attributes-amendment/ATTRIBUTE-MAP.json",
+      "destination": "artifacts/3d-full-port/parity-metadata/checkout/ATTRIBUTE-MAP.json",
+      "bytes": 145931,
+      "sha256": "d663e51fc800afe2207c48210254d6fd00533ee018f9cf5201251041279f1549",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-production-mapping/checkout-attributes-amendment/RAW-RESTAGES.json",
+      "destination": "artifacts/3d-full-port/parity-metadata/checkout/RAW-RESTAGES.json",
+      "bytes": 2854,
+      "sha256": "097c002e019baa5ac02043aa2ae3b64f7aebf563150d21ccd607773a8fb4e59d",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    },
+    {
+      "source": ".build/3d/parity-production-mapping/checkout-attributes-amendment/ATTRIBUTES-BLOCK.txt",
+      "destination": "artifacts/3d-full-port/parity-metadata/checkout/ATTRIBUTES-BLOCK.txt",
+      "bytes": 12530,
+      "sha256": "45c17ddc63e9267d6be738be46f3f11091627cd2307f7357dc9a92c2a97407dc",
+      "copy_policy": "raw bytes; no newline/JSON/whitespace conversion"
+    }
+  ],
+  "required_destination_attribute": "artifacts/3d-full-port/parity-metadata/** -text",
+  "existing_production_overlay": {
+    "path": ".build/3d/parity-production-mapping/PRODUCTION-FILES.json",
+    "sha256": "8f5c40dc111b31999296202fb85376cb60743b7872157a99503a4dd4bad2bd78",
+    "files": 17
+  },
+  "raw_invariants": {
+    "input_pins": 247,
+    "explicit_checkout_paths": 259,
+    "raw_evidence_paths": 33,
+    "raw_index_restages": 5,
+    "original_obligations_unchanged": 617,
+    "status_promotions": 0,
+    "platform_evidence_promotions": 0,
+    "expected_complete_exit": 1,
+    "expected_complete_refusals": 617
+  },
+  "draft_paragraphs": {
+    "SPEC-PARAGRAPH.md": "8ba77fd95a76cc162f541b4797b39be53a1b474936ef609fdb6f4a504e7e632a",
+    "REGISTER-PARAGRAPH.md": "eecba296ebdadcb390fb1b24f153e1e1e35336c1a5c42e0d1402162c851c56ae",
+    "README.md": "bc8b7a25e992e364d8f30d5e47be8f89bab7f97e1e4c8c9965e122d52be7901c"
+  },
+  "pending_root_evidence": [
+    "Full130 3D runner and original19 output",
+    "Final artifact byte verification and safe raw destination attributes",
+    "Named branch commit and origin push"
+  ],
+  "no_claims": [
+    "No new engine/native/Web/human visual/performance acceptance",
+    "No independent Git checkout/index invocation by reviewer",
+    "No promotion of original handlers/features to verified"
+  ]
+}

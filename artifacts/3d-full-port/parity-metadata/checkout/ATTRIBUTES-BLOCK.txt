@@ -1,0 +1,261 @@
+# Exact parity metadata checkout bytes (finite247 references plus delivered metadata/tools).
+# Append after existing rules; source/evidence bytes and raw pins remain unchanged.
+SPEC-3D-FULL-PORT.md -text
+SPEC-3D-PARITY-METADATA.md text eol=lf
+SPEC-3D-VIEWMODEL-GEAR.md text eol=lf
+VIBE.md text eol=lf
+artifacts/3d-full-port/hand-art-refinement/build.log -text
+artifacts/3d-full-port/hand-art-refinement/gates-3d.log -text
+artifacts/3d-full-port/hand-art-refinement/native-cart/captures.json -text
+artifacts/3d-full-port/hand-art-refinement/native-context/captures.json -text
+artifacts/3d-full-port/hand-art-refinement/native-gear/captures.json -text
+artifacts/3d-full-port/hand-art-refinement/production-export-hashes.json -text
+artifacts/3d-full-port/hand-art-refinement/provenance.json -text
+artifacts/3d-full-port/hand-art-refinement/test_cart_view.log -text
+artifacts/3d-full-port/hand-art-refinement/web-hands-1280.json -text
+artifacts/3d-full-port/hand-art-refinement/web-hands-960.json -text
+artifacts/3d-full-port/input-and-acceptance/karaoke-native.json -text
+artifacts/3d-full-port/input-and-acceptance/native-provenance.json -text
+artifacts/3d-full-port/input-and-acceptance/tony-8bcd-release.json -text
+artifacts/3d-full-port/live-neighborhood/departure-native.json -text
+artifacts/3d-full-port/motion-and-color/district-grade-web-raster.json -text
+artifacts/3d-full-port/motion-and-color/district-scene.json -text
+artifacts/3d-full-port/motion-and-color/fixture-web-evidence.json -text
+artifacts/3d-full-port/office-endpoint-acceptance/provenance.json -text
+artifacts/3d-full-port/office-endpoint-acceptance/tour/office-tour.json -text
+artifacts/3d-full-port/p04/world-render-evidence.json -text
+artifacts/3d-full-port/p15a/native-tour.json -text
+artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/full-actor-performance.json -text
+artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/provenance.json -text
+artifacts/3d-full-port/world-details/hideout_mom.png -text
+artifacts/3d-full-port/world-details/kingdom-release.json -text
+artifacts/3d-full-port/world-details/leash-border-native.json -text
+artifacts/3d-full-port/world-details/ownership-release.json -text
+game3d/data/courier_canvas_metrics.json text eol=lf
+game3d/data/parity_manifest.json text eol=lf
+game3d/data/source_content.json text eol=lf
+game3d/scripts/actor_animation.gd text eol=lf
+game3d/scripts/actor_contact.gd text eol=lf
+game3d/scripts/actor_director.gd text eol=lf
+game3d/scripts/actor_hud_overlay.gd text eol=lf
+game3d/scripts/actor_hud_projection.gd text eol=lf
+game3d/scripts/actor_hud_view.gd text eol=lf
+game3d/scripts/actor_navigation.gd text eol=lf
+game3d/scripts/ambient_audio.gd text eol=lf
+game3d/scripts/boss_system.gd text eol=lf
+game3d/scripts/campaign_system.gd text eol=lf
+game3d/scripts/cart_view.gd text eol=lf
+game3d/scripts/cast_profiles.gd text eol=lf
+game3d/scripts/character_art.gd text eol=lf
+game3d/scripts/character_roster.gd text eol=lf
+game3d/scripts/combat_system.gd text eol=lf
+game3d/scripts/communications_system.gd text eol=lf
+game3d/scripts/companion_system.gd text eol=lf
+game3d/scripts/content_catalog.gd text eol=lf
+game3d/scripts/cooking_presentation.gd text eol=lf
+game3d/scripts/cooking_system.gd text eol=lf
+game3d/scripts/day_system.gd text eol=lf
+game3d/scripts/district_border_view.gd text eol=lf
+game3d/scripts/district_grade.gd text eol=lf
+game3d/scripts/district_grade.gdshader text eol=lf
+game3d/scripts/district_grade_view.gd text eol=lf
+game3d/scripts/dog_leash_view.gd text eol=lf
+game3d/scripts/dynamic_emitters.gd text eol=lf
+game3d/scripts/ending_view.gd text eol=lf
+game3d/scripts/find_view.gd text eol=lf
+game3d/scripts/first_person_rig.gd text eol=lf
+game3d/scripts/fixture_motion_view.gd text eol=crlf
+game3d/scripts/full_hud.gd text eol=lf
+game3d/scripts/full_neighborhood.gd text eol=crlf
+game3d/scripts/full_runtime.gd text eol=lf
+game3d/scripts/full_scene.gd text eol=lf
+game3d/scripts/game_state.gd text eol=lf
+game3d/scripts/guidance_projection.gd text eol=lf
+game3d/scripts/guidance_view.gd text eol=lf
+game3d/scripts/heist_system.gd text eol=lf
+game3d/scripts/incident_corridors.gd text eol=lf
+game3d/scripts/incident_path_map.gd text eol=lf
+game3d/scripts/incident_presentation.gd text eol=lf
+game3d/scripts/incident_system.gd text eol=lf
+game3d/scripts/interactive_prop_actions.gd text eol=lf
+game3d/scripts/interactive_prop_view.gd text eol=lf
+game3d/scripts/inventory.gd text eol=lf
+game3d/scripts/kingdom_campaign.gd text eol=lf
+game3d/scripts/kingdom_world_view.gd text eol=lf
+game3d/scripts/lockpick_system.gd text eol=lf
+game3d/scripts/memory_loop.gd text eol=crlf
+game3d/scripts/mesh_batcher.gd text eol=lf
+game3d/scripts/neighborhood_utilities.gd text eol=lf
+game3d/scripts/office_campaign.gd text eol=lf
+game3d/scripts/old_school.gd text eol=lf
+game3d/scripts/presentation_visibility.gd text eol=lf
+game3d/scripts/progression_routes.gd text eol=lf
+game3d/scripts/projectile_view.gd text eol=lf
+game3d/scripts/prop_state.gd text eol=lf
+game3d/scripts/quest_dialogue.gd text eol=lf
+game3d/scripts/resident_dialogue.gd text eol=lf
+game3d/scripts/rhythm_system.gd text eol=lf
+game3d/scripts/robbery_system.gd text eol=lf
+game3d/scripts/save_store.gd text eol=lf
+game3d/scripts/site_cast_profiles.gd text eol=lf
+game3d/scripts/source_audio.gd text eol=lf
+game3d/scripts/startup_presentation.gd text eol=lf
+game3d/scripts/street_dialogue.gd text eol=lf
+game3d/scripts/surface_kit.gd text eol=lf
+game3d/scripts/synth.gd text eol=lf
+game3d/scripts/travel_system.gd text eol=crlf
+game3d/scripts/vendors_core.gd text eol=lf
+game3d/scripts/wall_marking_view.gd text eol=lf
+game3d/scripts/wall_markings.gd text eol=lf
+game3d/scripts/weather_presentation.gd text eol=lf
+game3d/scripts/world_adapter.gd text eol=lf
+game3d/scripts/world_ownership_view.gd text eol=lf
+game3d/scripts/world_prop_actions.gd text eol=lf
+game3d/tests/test_actor_contact.gd text eol=crlf
+game3d/tests/test_actor_hud.gd text eol=lf
+game3d/tests/test_actor_navigation.gd text eol=lf
+game3d/tests/test_art.gd text eol=lf
+game3d/tests/test_audio_runtime.gd text eol=lf
+game3d/tests/test_bosses.gd text eol=lf
+game3d/tests/test_campaign.gd text eol=lf
+game3d/tests/test_cart_view.gd text eol=lf
+game3d/tests/test_character_roster.gd text eol=lf
+game3d/tests/test_combat.gd text eol=lf
+game3d/tests/test_communications.gd text eol=lf
+game3d/tests/test_companions.gd text eol=lf
+game3d/tests/test_cooking.gd text eol=lf
+game3d/tests/test_cooking_presentation.gd text eol=lf
+game3d/tests/test_cooking_runtime.gd text eol=crlf
+game3d/tests/test_day_system.gd text eol=lf
+game3d/tests/test_departures.gd text eol=lf
+game3d/tests/test_district_grade.gd text eol=lf
+game3d/tests/test_dynamic_emitters.gd text eol=lf
+game3d/tests/test_economy.gd text eol=lf
+game3d/tests/test_find_view.gd text eol=lf
+game3d/tests/test_fixture_motion.gd text eol=crlf
+game3d/tests/test_fixture_motion_world.gd text eol=crlf
+game3d/tests/test_full_hud.gd text eol=lf
+game3d/tests/test_full_integration.gd text eol=crlf
+game3d/tests/test_full_runtime.gd text eol=crlf
+game3d/tests/test_full_scene.gd text eol=crlf
+game3d/tests/test_full_world.gd text eol=lf
+game3d/tests/test_game_state.gd text eol=lf
+game3d/tests/test_guidance.gd text eol=lf
+game3d/tests/test_guidance_projection.gd text eol=lf
+game3d/tests/test_heists.gd text eol=lf
+game3d/tests/test_incident_presentation.gd text eol=lf
+game3d/tests/test_incident_reservations.gd text eol=lf
+game3d/tests/test_incident_runtime.gd text eol=lf
+game3d/tests/test_incidents.gd text eol=lf
+game3d/tests/test_interactive_prop_view.gd text eol=lf
+game3d/tests/test_interactive_props.gd text eol=lf
+game3d/tests/test_kingdom_campaign.gd text eol=lf
+game3d/tests/test_kingdom_physics.gd text eol=lf
+game3d/tests/test_kingdom_view.gd text eol=lf
+game3d/tests/test_leash_border.gd text eol=lf
+game3d/tests/test_memory_loop.gd text eol=lf
+game3d/tests/test_neighborhood_utilities.gd text eol=lf
+game3d/tests/test_office_campaign.gd text eol=lf
+game3d/tests/test_old_school.gd text eol=lf
+game3d/tests/test_old_school_physical.gd text eol=lf
+game3d/tests/test_presentation_visibility.gd text eol=lf
+game3d/tests/test_progression.gd text eol=lf
+game3d/tests/test_projectile_view.gd text eol=lf
+game3d/tests/test_quest_dialogue.gd text eol=lf
+game3d/tests/test_resident_dialogue.gd text eol=lf
+game3d/tests/test_rhythm.gd text eol=lf
+game3d/tests/test_robbery.gd text eol=lf
+game3d/tests/test_scene.gd text eol=lf
+game3d/tests/test_site_integration.gd text eol=lf
+game3d/tests/test_source_audio.gd text eol=lf
+game3d/tests/test_startup.gd text eol=lf
+game3d/tests/test_startup_parity.gd text eol=lf
+game3d/tests/test_street_dialogue.gd text eol=lf
+game3d/tests/test_travel.gd text eol=lf
+game3d/tests/test_viewmodel.gd text eol=lf
+game3d/tests/test_viewmodel_context.gd text eol=lf
+game3d/tests/test_viewmodel_gear.gd text eol=lf
+game3d/tests/test_wall_marking_view.gd text eol=lf
+game3d/tests/test_wall_markings.gd text eol=lf
+game3d/tests/test_weather_presentation.gd text eol=lf
+game3d/tests/test_world_adapter.gd text eol=lf
+game3d/tests/test_world_ownership.gd text eol=lf
+game3d/tests/test_world_prop_actions.gd text eol=lf
+reports/2026-11-18-3d-full-scene.md -text
+reports/2026-11-18-3d-live-neighborhood.md -text
+reports/2026-11-18-3d-motion-and-color.md -text
+reports/2026-11-18-3d-world-details.md -text
+reports/2026-11-19-3d-hands-and-office.md -text
+reports/2026-11-19-3d-input-and-acceptance.md -text
+reports/3d-full-port-system-inventory.md text eol=lf
+reports/3d-parity-metadata/PROPOSAL.md -text
+reports/3d-parity-metadata/baseline-manifest.json -text
+reports/3d-parity-metadata/evidence-index.json -text
+reports/3d-parity-metadata/handler-dispositions.json -text
+reports/3d-parity-metadata/input-pins-metadata-v1.json -text
+reports/3d-parity-metadata/integration-map.json -text
+reports/3d-parity-metadata/origin/INPUT-PINS-v2.json -text
+reports/3d-parity-metadata/origin/INPUT-PINS.json -text
+reports/3d-parity-metadata/origin/INPUT-REBASE-v2.json -text
+reports/3d-parity-metadata/origin/draft-manifest.json -text
+src/core/audio_save.js text eol=crlf
+src/core/boot.js text eol=crlf
+src/core/runtime_ui.js text eol=crlf
+src/core/start.js text eol=crlf
+src/core/storage.js text eol=crlf
+src/core/update.js text eol=crlf
+src/data/catalogs.js text eol=crlf
+src/data/npc_spawns.js text eol=crlf
+src/data/props.js text eol=crlf
+src/data/world.js text eol=crlf
+src/dialogue/neighborhood_a.js text eol=crlf
+src/dialogue/neighborhood_b.js text eol=crlf
+src/dialogue/vendors_places.js text eol=crlf
+src/input/keyboard.js text eol=crlf
+src/input/mobile.js text eol=crlf
+src/main.js text eol=crlf
+src/minigames/activities.js text eol=crlf
+src/minigames/heat.js text eol=crlf
+src/module-manifest.json text eol=crlf
+src/render/actors_weather.js text eol=crlf
+src/render/canvas_geography.js text eol=crlf
+src/render/frame.js text eol=crlf
+src/render/landmarks_a.js text eol=crlf
+src/render/landmarks_b.js text eol=crlf
+src/render/minimap.js text eol=crlf
+src/render/props.js text eol=crlf
+src/render/sprite_art_npc_32.js text eol=crlf
+src/render/sprite_art_player_32.js text eol=crlf
+src/render/sprite_art_special_32.js text eol=crlf
+src/render/sprite_manifest.js text eol=crlf
+src/render/sprite_toolkit.js text eol=crlf
+src/render/sprites.js text eol=crlf
+src/render/structures.js text eol=crlf
+src/render/tiles.js text eol=crlf
+src/systems/campaigns.js text eol=crlf
+src/systems/combat.js text eol=crlf
+src/systems/communications.js text eol=crlf
+src/systems/concessions.js text eol=crlf
+src/systems/daily_hideouts.js text eol=crlf
+src/systems/discovery.js text eol=crlf
+src/systems/factions.js text eol=crlf
+src/systems/hitter.js text eol=crlf
+src/systems/incidents.js text eol=crlf
+src/systems/interactions.js text eol=crlf
+src/systems/npc_ai.js text eol=crlf
+src/systems/physicality.js text eol=crlf
+src/systems/progression_routes.js text eol=crlf
+src/systems/recognition.js text eol=crlf
+src/systems/robbery.js text eol=crlf
+src/ui/hud.js text eol=crlf
+src/ui/layout.js text eol=crlf
+tools/3d-fixture-motion-oracle.mjs text eol=crlf
+tools/3d-memory-oracle.mjs text eol=lf
+tools/3d-progression-oracle.mjs text eol=lf
+tools/3d-startup-oracle.mjs text eol=lf
+tools/district-grade-oracle.mjs text eol=lf
+tools/parity-metadata-gate.mjs text eol=lf
+tools/parity-metadata-migrate.mjs text eol=lf
+tools/parity-metadata-test.mjs text eol=lf
+tools/parity-metadata.mjs text eol=lf
+tools/parity-source-proof.mjs text eol=lf
