@@ -1,0 +1,47 @@
+{
+  "status": "failed",
+  "engine_stages": [
+    {
+      "exit_code": 0,
+      "name": "import",
+      "elapsed_ms": 5585,
+      "pid": 20208,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\web-progression\\current-v2-empty-save\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\web-progression\\current-v2-empty-save\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ]
+    },
+    {
+      "exit_code": 0,
+      "name": "save_contract",
+      "elapsed_ms": 213,
+      "pid": 24148,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\web-progression\\current-v2-empty-save\\save_contract.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\web-progression\\current-v2-empty-save\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\web-progression\\current-v2-empty-save\\game3d\\tests\\test_save_store_read.gd"
+      ]
+    },
+    {
+      "pid": 25888,
+      "exit_code": -1,
+      "stderr_complete": true,
+      "incomplete": true,
+      "stdout_complete": true,
+      "name": "full_scene",
+      "elapsed_ms": 180461
+    }
+  ],
+  "browser_acceptance": false,
+  "error": "Timeout: full_scene"
+}

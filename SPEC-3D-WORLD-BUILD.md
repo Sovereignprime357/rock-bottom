@@ -116,3 +116,21 @@ an unmeasured replacement algorithm. Gate time is not gameplay frame time.
 views and seven important service interiors into `.build/full-port/p04/`. Its scene contains
 only the full geometry and a camera. No NPC or gameplay claim is implied; the manifest
 records exact camera placement, source hash, scope and still-frame rendering counters.
+
+## Decorative piers preserve facade openings (2026-11-19)
+
+Facade pier emission omits a cuboid whose complete horizontal interval has
+positive overlap with an authored opening. Exact tangency and nonoverlapping
+piers retain their original dimensions, transforms and materials. Openings,
+jambs, colliders, footprints, service points, navigation and source records remain
+authoritative; only removed-mesh counts and resulting batches change.
+
+The real original CORNER pier intruded into Tony's noncolliding service aperture
+and obscured the legal view of Tony and a receipt. The focused four-group gate
+retains the original actual rendered-triangle obstruction and clear physical ray,
+then proves candidate visibility and unchanged physical/service geometry. It also
+checks every structure and strict interval boundaries. This is a rendering fix,
+not a wider doorway, relaxed interaction ray or hand depth-test override.
+
+Root's scoped native/Web paid-transaction review is separate from the geometry
+gate and retains previous obscured captures as failed appearance evidence.

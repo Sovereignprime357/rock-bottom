@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "files": {
+    "prepare-packet.py": "1dc03c95fd677d893fb8003bfe4bd1794a7d90259d00be8fe83ff2345bf198ef",
+    "prepare.py": "1a9a2824a4350bf5b4aab7b27a51df46f9484662176d6e85fd2c6bcac957712b",
+    "README.md": "e18332a545507a2653792e6f2aff5d0b9bb62acc0b2c7d7b9541348fb1a7e9d5",
+    "run-validation.ps1": "33e01c1279f5798a56195a6e4f540e963ccf0835dabcb2cf3ddba6c69a46f6b7",
+    "SPEC-DRAFT.md": "931e572ed642f21ed8b1ae10ddb51552a4f181616a17cc1296fd9e15835c8868",
+    "TEST-REVERSE.json": "77208e49ff2cd3c85c2baeb14e3ea1226e3ad26127df2f5d30484da16bf67f57"
+  },
+  "previous_test_sha256": "dcdc54b8f6bb8dcd3e8c30d1f0c24940cbbcf80785e169f7022335c80db8db86",
+  "diagnostic_test_sha256": "830a1694fb49caf9b69ea1020956d1be12600ab9d5eb4d8185b6b01a6cc46e7d",
+  "unchanged_art_sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8",
+  "stage_provenance_sha256": "a678f244392d92fe2d3ff4d698a5f5938e8947643704b072258791aa593e9de2",
+  "retained_failed_v4": {
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/import.godot.log": "0b84d82ebec12d72a3bb78d0286da0261d23610bfae791fda297b8e3c9291794",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/import.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/import.stdout.log": "8fa5d8a05dbe7403c8421ecf29379a0f301694992d37ba95c80e4dd6ca1addef",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/surfaces.godot.log": "a781c080ae6b8f577105d8374ae002225a022f54c2cf2a99297af00da6fb05de",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/surfaces.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/surfaces.stdout.log": "786872ba7b0c64d66709f08d8c6bd6fa582b2df59cd1aa144ae95abe7b6e9297",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/validation-result.json": "78e341838f7549c8a60e5ecfaf2d817543c847bc921ba7ddd5574eb985d452f2"
+  },
+  "stage": {
+    "source_files": 509,
+    "staged_files": 510,
+    "overlays": 2,
+    "generated_test_uid": null,
+    "cache_files_excluded": 0
+  },
+  "unchanged_assertion_calls": 37,
+  "engine_run": false,
+  "expected_result": "same failed conditions; diagnostic only"
+}

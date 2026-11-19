@@ -1,0 +1,873 @@
+{
+	"checks_pass": true,
+	"cleanup": {
+		"complete": true,
+		"completion_code": 0,
+		"freed_children": 3,
+		"initial_children_preserved": true,
+		"owned_children": 3,
+		"remaining_children": 0,
+		"render_drains": 2
+	},
+	"complete": true,
+	"engine": "4.5.1-stable (official)",
+	"errors": [],
+	"expected_frames": 17,
+	"format": "rock-bottom-tony-coat-visual",
+	"packet": "tonyfit",
+	"performance_acceptance": false,
+	"records": [
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_rest_2m.png",
+			"fixture": {
+				"duration": 0.0,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_front_rest_2m",
+				"quarter": false,
+				"snapshot": {
+					"coat_count": 3
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 840792,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "56d48559e360a92cdbd1f67192bd6fcc05a05f3e049e03f202f4d52a7211a293"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_quarter_rest_2m.png",
+			"fixture": {
+				"duration": 0.0,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_quarter_rest_2m",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 3
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 830575,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "93332e05292dae5f7c46c20c325c3811fc0eb8d8fd546b4441ffd7f187caffa8"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_walk_2m.png",
+			"fixture": {
+				"duration": 0.2,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_front_walk_2m",
+				"quarter": false,
+				"snapshot": {
+					"coat_count": 3,
+					"local_velocity": "(0.0, 0.0, 1.6)"
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 843641,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "267c6cb52688ebf2e654adc9b9edd5db80baecc649635b436d6161910cac2e7c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "9078789f4f7af74cd520e51b85b1e8f96194ea61807ef72eccad216b1727205f"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_quarter_walk_2m.png",
+			"fixture": {
+				"duration": 0.2,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_quarter_walk_2m",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 3,
+					"local_velocity": "(0.0, 0.0, 1.6)"
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 832251,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "267c6cb52688ebf2e654adc9b9edd5db80baecc649635b436d6161910cac2e7c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "1aebb030c6d7ac1e511c690d16364d63bbf343ba6dfdbd2b7d0aced5c33fdaed"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_peak_strike_2m.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_front_peak_strike_2m",
+				"quarter": false,
+				"snapshot": {
+					"action": "strike",
+					"action_phase": 0.03,
+					"action_serial": 0,
+					"coat_count": 3,
+					"contact": true
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 846483,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "a806ae76affa59155456cfbe80e9abd745f853599a3d5aa6394856d5e17d4e22",
+					"state": [
+						"strike",
+						0,
+						true,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "9787b528686e042e310a25db718043daabc35fbc5c0187c546b4362e400213a9"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_quarter_peak_strike_2m.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_quarter_peak_strike_2m",
+				"quarter": true,
+				"snapshot": {
+					"action": "strike",
+					"action_phase": 0.03,
+					"action_serial": 0,
+					"coat_count": 3,
+					"contact": true
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 831460,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "a806ae76affa59155456cfbe80e9abd745f853599a3d5aa6394856d5e17d4e22",
+					"state": [
+						"strike",
+						0,
+						true,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "987ced9cb37ae5044ab49fde3c4d65b5887fe6f29cf01e78cc0f6a1bebbd2266"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_windup_2m.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_front_windup_2m",
+				"quarter": false,
+				"snapshot": {
+					"action": "windup",
+					"action_phase": 0.9,
+					"coat_count": 3
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 844436,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "bf48638cab27723bc1ab54f1f63bfcb3fd482c6d35503d0c30eb8aaf5b7e29f5",
+					"state": [
+						"windup",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "9d46bfa85ce5671cdaefae65fc136ec06645084f5b48647fd9070735888bb6e3"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_quarter_windup_2m.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_quarter_windup_2m",
+				"quarter": true,
+				"snapshot": {
+					"action": "windup",
+					"action_phase": 0.9,
+					"coat_count": 3
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 832886,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "bf48638cab27723bc1ab54f1f63bfcb3fd482c6d35503d0c30eb8aaf5b7e29f5",
+					"state": [
+						"windup",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "84aeff8a4f584c6d2ec79fac152866cc1d73da55864d6e9f477e4b3c6794f575"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+			"camera_sha256": "85654a4916b984726394f35a1efa1d93f7ff691e0be805d967bcb1b53e38f0f9",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_rest_20m.png",
+			"fixture": {
+				"duration": 0.0,
+				"far": true,
+				"fit_steps": false,
+				"label": "tony_front_rest_20m",
+				"quarter": false,
+				"snapshot": {
+					"coat_count": 3
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 614147,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+					"visual": "tony"
+				}
+			],
+			"sha256": "3db8523c93f69ac0ce1da80955fa3f1ea0d5485491b16c264507ad5d37a0fd45"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_coats_3.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_coats_3",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 3
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 829716,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "009b77c1cdb3777d8305d6b64b09e72cdf8384721c212e81d6e1c37c697406b1"
+		},
+		{
+			"actual_coats": 2,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_coats_2.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_coats_2",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 2
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 833657,
+			"rigs": [
+				{
+					"coats": 2,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						2,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "1f07b2d70be41e253968f96748b222bf5f1aad408780345f373f05a85a46b8c6"
+		},
+		{
+			"actual_coats": 1,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_coats_1.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_coats_1",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 1
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 825221,
+			"rigs": [
+				{
+					"coats": 1,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						1,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "8397516b9fa67514eb2a6056597d6181d7aeea0458e0e9e412ac5c48a84b4f20"
+		},
+		{
+			"actual_coats": 0,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_coats_0.png",
+			"fixture": {
+				"duration": 0.0166666666666667,
+				"far": false,
+				"fit_steps": false,
+				"label": "tony_coats_0",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 0
+				}
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 822548,
+			"rigs": [
+				{
+					"coats": 0,
+					"pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						0,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "ecdbfd9179ed29752fe84c9e1593b570d37fdc2512edb12653a1f87c2f892216"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_late_walk_coats_3.png",
+			"fixture": {
+				"duration": 4.75,
+				"far": false,
+				"fit_steps": true,
+				"label": "tony_front_late_walk_coats_3",
+				"quarter": false,
+				"snapshot": {
+					"coat_count": 3,
+					"local_velocity": "(0.0, 0.0, 1.8)"
+				},
+				"step_seconds": 0.05
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 844314,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "a96eb50e1128755dc54ec502fba3882f270aff8158f8e054df04be223c3647de"
+		},
+		{
+			"actual_coats": 3,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_quarter_late_walk_coats_3.png",
+			"fixture": {
+				"duration": 4.75,
+				"far": false,
+				"fit_steps": true,
+				"label": "tony_quarter_late_walk_coats_3",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 3,
+					"local_velocity": "(0.0, 0.0, 1.8)"
+				},
+				"step_seconds": 0.05
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 833783,
+			"rigs": [
+				{
+					"coats": 3,
+					"pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						3,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "8a0ef235a5fdce6a9a0117a989f7848a3de303464b730d5e69094e005f916045"
+		},
+		{
+			"actual_coats": 2,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_front_late_walk_coats_2.png",
+			"fixture": {
+				"duration": 4.75,
+				"far": false,
+				"fit_steps": true,
+				"label": "tony_front_late_walk_coats_2",
+				"quarter": false,
+				"snapshot": {
+					"coat_count": 2,
+					"local_velocity": "(0.0, 0.0, 1.8)"
+				},
+				"step_seconds": 0.05
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 847261,
+			"rigs": [
+				{
+					"coats": 2,
+					"pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						2,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "90a114db7a161ca6941fbf95011c5155a2688329894aaa904c869179b138274d"
+		},
+		{
+			"actual_coats": 2,
+			"art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+			"camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+			"expected_size": [
+				1280,
+				720
+			],
+			"file": "tony_quarter_late_walk_coats_2.png",
+			"fixture": {
+				"duration": 4.75,
+				"far": false,
+				"fit_steps": true,
+				"label": "tony_quarter_late_walk_coats_2",
+				"quarter": true,
+				"snapshot": {
+					"coat_count": 2,
+					"local_velocity": "(0.0, 0.0, 1.8)"
+				},
+				"step_seconds": 0.05
+			},
+			"fov": 78.0,
+			"metrics": {
+				"bones": 26,
+				"max_weights": 4,
+				"meshes": 10,
+				"surfaces": 10,
+				"triangles": 17074
+			},
+			"png_bytes": 835148,
+			"rigs": [
+				{
+					"coats": 2,
+					"pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+					"state": [
+						"",
+						0,
+						false,
+						false,
+						2,
+						true,
+						false,
+						false
+					],
+					"transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+					"visual": "tony"
+				}
+			],
+			"sha256": "0fc97620740151202cdf1d04a097a9e6513b201fa57635105e0ebd1c712ab5aa"
+		}
+	],
+	"renderer": "gl_compatibility",
+	"source_hash_note": "Compiled exports may omit script bytes; external archive/overlay/export hashes remain authoritative.",
+	"source_hashes": {
+		"scripts/actor_animation.gd": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+		"scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+		"scripts/character_art.gd": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c",
+		"scripts/character_roster.gd": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+		"scripts/neighborhood.gd": "d67b77225075fde0c91afe0e77296c2914a3527973d1be7afabb0838698cdb62",
+		"tests/character_roster_probe.gd": "448cb01bfe68b913b19149cf837fc68ab0270b2ce2ca66e4e042179217f69165",
+		"tests/tony_coat_evidence.gd": "85b2a61fa1943213553b49eae5cbf6b4aa1e5f3ddbb7784660ab28ed113db585"
+	},
+	"variant": "candidate",
+	"visual_acceptance": false,
+	"web": false
+}

@@ -1,0 +1,1085 @@
+{
+	"acceptance": true,
+	"checks": 791,
+	"collections": [
+		{
+			"active_ms": 1219.17924242424,
+			"cash_after": 10,
+			"cash_before": 0,
+			"id": "cp_intro_remember",
+			"player_center": "(1172.354, 879.9427)",
+			"process_frame": 156,
+			"record": {
+				"amt": 10.0,
+				"collected": false,
+				"id": "cp_intro_remember",
+				"intro": true,
+				"x": 1180.0,
+				"y": 870.0
+			}
+		}
+	],
+	"events": [
+		{
+			"active_ms": 1177.51257575758,
+			"kind": "toast",
+			"payload": {
+				"text": "+ $10\nyou bend down. the ten dollars is yours now.\n(it was always there.)"
+			},
+			"process_frame": 156,
+			"wall_ms": 18206
+		},
+		{
+			"active_ms": 1177.51257575758,
+			"kind": "quest_completed",
+			"payload": {
+				"id": "intro_remember"
+			},
+			"process_frame": 156,
+			"wall_ms": 18206
+		},
+		{
+			"active_ms": 1177.51257575758,
+			"kind": "toast",
+			"payload": {
+				"text": "you arrive somewhere by walking. who knew."
+			},
+			"process_frame": 156,
+			"wall_ms": 18206
+		},
+		{
+			"active_ms": 1177.51257575758,
+			"kind": "gesture",
+			"payload": {
+				"action": "pickup"
+			},
+			"process_frame": 156,
+			"wall_ms": 18206
+		},
+		{
+			"active_ms": 6083.82957575757,
+			"kind": "quest_completed",
+			"payload": {
+				"id": "intro_tony"
+			},
+			"process_frame": 270,
+			"wall_ms": 23214
+		},
+		{
+			"active_ms": 6083.82957575757,
+			"kind": "toast",
+			"payload": {
+				"duration_ms": 3400,
+				"text": "he charges ten dollars. that is the price.\nhe does not negotiate. sometimes he does."
+			},
+			"process_frame": 270,
+			"wall_ms": 23214
+		},
+		{
+			"active_ms": 6083.82957575757,
+			"kind": "quest_completed",
+			"payload": {
+				"id": "first_rock"
+			},
+			"process_frame": 272,
+			"wall_ms": 23364
+		},
+		{
+			"active_ms": 6083.82957575757,
+			"kind": "toast",
+			"payload": {
+				"duration_ms": 2200,
+				"text": "- $10\n+ 1 rock"
+			},
+			"process_frame": 272,
+			"wall_ms": 23364
+		},
+		{
+			"active_ms": 6083.82957575757,
+			"kind": "vendor_action",
+			"payload": {
+				"action": "buy_rock",
+				"ok": true,
+				"vendor": "tony"
+			},
+			"process_frame": 272,
+			"wall_ms": 23364
+		}
+	],
+	"failures": [],
+	"finished": true,
+	"fixture": "none",
+	"format": "rock-bottom-vendor-receipt-visual",
+	"framebuffer": [
+		1280,
+		720
+	],
+	"frames": [
+		{
+			"action": "pickup",
+			"active_ms": 1260.84590909091,
+			"age": 0.0416666666666667,
+			"camera": "[X: (-0.371262, 0.0, 0.928528), Y: (0.0, 1.0, 0.0), Z: (-0.928528, 0.0, -0.371262), O: (4.894145, 1.69, 1.597708)]",
+			"fov": 78.0,
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "01_intro_cash",
+			"left_wrist": "[X: (0.953471, 0.232098, -0.192416), Y: (-0.242995, 0.969404, -0.034777), Z: (0.178457, 0.079915, 0.980697), O: (0.0, 0.205, -0.205)]",
+			"logical_viewport": [
+				0.0,
+				0.0,
+				1280.0,
+				720.0
+			],
+			"modal": false,
+			"mode": "playing",
+			"paper_logical_pixels": [
+				[
+					382.137115478516,
+					646.945373535156
+				],
+				[
+					404.732940673828,
+					698.452575683594
+				],
+				[
+					381.650390625,
+					647.864562988281
+				],
+				[
+					404.321228027344,
+					699.516540527344
+				],
+				[
+					428.252227783203,
+					626.020629882813
+				],
+				[
+					449.821960449219,
+					676.782409667969
+				],
+				[
+					427.914459228516,
+					626.858276367188
+				],
+				[
+					449.552856445313,
+					677.760803222656
+				]
+			],
+			"paper_projected": true,
+			"paper_transform": "[X: (-0.157393, 0.341297, 0.926684), Y: (-0.987044, -0.024744, -0.158532), Z: (-0.031177, -0.93963, 0.34077), O: (5.612915, 1.251361, 1.535926)]",
+			"paper_visible": false,
+			"phase": 0.130208333333333,
+			"player": [
+				1160.35363769531,
+				865.942687988281
+			],
+			"png_bytes": 607405,
+			"png_sha256": "f8219e46013405ebd293903d9ea129c0d51dea9f14aa90dcdf7dc0dfc850fa08",
+			"process_frame": 157,
+			"right_wrist": "[X: (0.988813, -0.125211, 0.081058), Y: (0.134483, 0.983452, -0.121391), Z: (-0.064518, 0.130934, 0.989289), O: (0.0, 0.205, -0.205)]",
+			"wall_ms": 13401
+		},
+		{
+			"action": "",
+			"active_ms": 6083.82957575757,
+			"age": 0.0,
+			"camera": "[X: (0.699147, 0.0, 0.714978), Y: (0.0, 1.0, 0.0), Z: (-0.714978, 0.0, 0.699147), O: (22.76468, 1.69, 3.967642)]",
+			"fov": 78.0,
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "02_tony_menu",
+			"left_wrist": "[X: (0.953471, 0.232098, -0.192416), Y: (-0.242995, 0.969404, -0.034777), Z: (0.178457, 0.079915, 0.980697), O: (0.0, 0.205, -0.205)]",
+			"logical_viewport": [
+				0.0,
+				0.0,
+				1280.0,
+				720.0
+			],
+			"modal": true,
+			"mode": "dialogue",
+			"paper_logical_pixels": [
+				[
+					380.2294921875,
+					646.438781738281
+				],
+				[
+					403.520935058594,
+					697.9892578125
+				],
+				[
+					379.675354003906,
+					647.380310058594
+				],
+				[
+					403.045532226563,
+					699.077514648438
+				],
+				[
+					425.857696533203,
+					626.114318847656
+				],
+				[
+					448.213012695313,
+					677.106994628906
+				],
+				[
+					425.452331542969,
+					626.978576660156
+				],
+				[
+					447.88037109375,
+					678.11474609375
+				]
+			],
+			"paper_projected": true,
+			"paper_transform": "[X: (0.758164, 0.350635, 0.549766), Y: (-0.576092, -0.034769, 0.816645), Z: (0.305459, -0.935867, 0.175637), O: (22.99562, 1.253907, 3.287073)]",
+			"paper_visible": false,
+			"phase": 0.0,
+			"player": [
+				1607.11694335938,
+				925.191040039063
+			],
+			"png_bytes": 388539,
+			"png_sha256": "db5d17c5475a8525c1f10fabbf7c6df780e8f6bce2ec4bf0c0294118f574c148",
+			"process_frame": 271,
+			"right_wrist": "[X: (0.981162, -0.164219, 0.101746), Y: (0.165401, 0.986221, -0.003231), Z: (-0.099813, 0.019999, 0.994805), O: (0.0, 0.205, -0.205)]",
+			"wall_ms": 18325
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6190.03957575757,
+			"age": 0.10621,
+			"camera": "[X: (0.699147, 0.0, 0.714978), Y: (0.0, 1.0, 0.0), Z: (-0.714978, 0.0, 0.699147), O: (22.76468, 1.69, 3.967642)]",
+			"fov": 78.0,
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "03_receipt_mid",
+			"left_wrist": "[X: (0.976149, 0.160979, 0.145669), Y: (-0.193065, 0.95054, 0.24331), Z: (-0.099297, -0.26563, 0.958948), O: (0.0, 0.205, -0.205)]",
+			"logical_viewport": [
+				0.0,
+				0.0,
+				1280.0,
+				720.0
+			],
+			"modal": false,
+			"mode": "playing",
+			"paper_logical_pixels": [
+				[
+					472.950408935547,
+					544.044250488281
+				],
+				[
+					492.674377441406,
+					585.466979980469
+				],
+				[
+					472.459655761719,
+					545.059509277344
+				],
+				[
+					492.258331298828,
+					586.54931640625
+				],
+				[
+					514.251708984375,
+					536.731323242188
+				],
+				[
+					532.334533691406,
+					578.858581542969
+				],
+				[
+					513.873718261719,
+					537.735656738281
+				],
+				[
+					532.022338867188,
+					579.932922363281
+				]
+			],
+			"paper_projected": true,
+			"paper_transform": "[X: (0.611211, 0.206188, 0.764138), Y: (-0.674731, -0.368925, 0.639244), Z: (0.413714, -0.906301, -0.08637), O: (23.10084, 1.383762, 3.348775)]",
+			"paper_visible": true,
+			"phase": 0.331906249999999,
+			"player": [
+				1607.11694335938,
+				925.191040039063
+			],
+			"png_bytes": 506295,
+			"png_sha256": "efeabe68711e91608578aec30c28573d308f545acbf6a4690674defe57ebd53a",
+			"process_frame": 275,
+			"right_wrist": "[X: (0.981162, -0.164219, 0.101746), Y: (0.165401, 0.986221, -0.003231), Z: (-0.099813, 0.019999, 0.994805), O: (0.0, 0.205, -0.205)]",
+			"wall_ms": 18596
+		},
+		{
+			"action": "",
+			"active_ms": 6468.54757575757,
+			"age": 0.0,
+			"camera": "[X: (0.699147, 0.0, 0.714978), Y: (0.0, 1.0, 0.0), Z: (-0.714978, 0.0, 0.699147), O: (22.76468, 1.69, 3.967642)]",
+			"fov": 78.0,
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "04_recovered_hands",
+			"left_wrist": "[X: (0.953471, 0.232098, -0.192416), Y: (-0.242995, 0.969404, -0.034777), Z: (0.178457, 0.079915, 0.980697), O: (0.0, 0.205, -0.205)]",
+			"logical_viewport": [
+				0.0,
+				0.0,
+				1280.0,
+				720.0
+			],
+			"modal": false,
+			"mode": "playing",
+			"paper_logical_pixels": [
+				[
+					381.638031005859,
+					649.3115234375
+				],
+				[
+					404.411437988281,
+					700.728149414063
+				],
+				[
+					381.149749755859,
+					650.241455078125
+				],
+				[
+					403.997528076172,
+					701.802978515625
+				],
+				[
+					427.785461425781,
+					628.261108398438
+				],
+				[
+					449.516754150391,
+					678.945678710938
+				],
+				[
+					427.445037841797,
+					629.109375
+				],
+				[
+					449.246948242188,
+					679.933776855469
+				]
+			],
+			"paper_projected": true,
+			"paper_transform": "[X: (0.782936, 0.343011, 0.518994), Y: (-0.544204, -0.026576, 0.838532), Z: (0.301419, -0.938955, 0.165861), O: (22.99808, 1.248626, 3.285707)]",
+			"paper_visible": false,
+			"phase": 0.0,
+			"player": [
+				1607.11694335938,
+				925.191040039063
+			],
+			"png_bytes": 505828,
+			"png_sha256": "d5515eafb5791ec5c6d315b4da7be8effcd146f8a5dc56912e735b90674b93ad",
+			"process_frame": 280,
+			"right_wrist": "[X: (0.981162, -0.164219, 0.101746), Y: (0.165401, 0.986221, -0.003231), Z: (-0.099813, 0.019999, 0.994805), O: (0.0, 0.205, -0.205)]",
+			"wall_ms": 18947
+		}
+	],
+	"hand_frames": [
+		{
+			"action": "receipt",
+			"active_ms": 6083.82957575757,
+			"admitted_ms": 44.898,
+			"age": 0.0,
+			"frame": 272,
+			"mode": "playing",
+			"paper_visible": false,
+			"phase": 0.0
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6107.12857575757,
+			"admitted_ms": 23.2989999999997,
+			"age": 0.0232989999999997,
+			"frame": 273,
+			"mode": "playing",
+			"paper_visible": false,
+			"phase": 0.0728093749999991
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6144.79457575757,
+			"admitted_ms": 37.666,
+			"age": 0.0609649999999997,
+			"frame": 274,
+			"mode": "playing",
+			"paper_visible": true,
+			"phase": 0.190515624999999
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6190.03957575757,
+			"admitted_ms": 45.245,
+			"age": 0.10621,
+			"frame": 275,
+			"mode": "playing",
+			"paper_visible": true,
+			"phase": 0.331906249999999
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6290.03957575757,
+			"admitted_ms": 100.0,
+			"age": 0.20621,
+			"frame": 276,
+			"mode": "playing",
+			"paper_visible": true,
+			"phase": 0.644406249999999
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6345.01390909091,
+			"admitted_ms": 54.9743333333336,
+			"age": 0.261184333333333,
+			"frame": 277,
+			"mode": "playing",
+			"paper_visible": true,
+			"phase": 0.816201041666667
+		},
+		{
+			"action": "receipt",
+			"active_ms": 6395.01390909091,
+			"admitted_ms": 50.0,
+			"age": 0.311184333333333,
+			"frame": 278,
+			"mode": "playing",
+			"paper_visible": false,
+			"phase": 0.972451041666667
+		},
+		{
+			"action": "",
+			"active_ms": 6429.00757575757,
+			"admitted_ms": 33.9936666666664,
+			"age": 0.0,
+			"frame": 279,
+			"mode": "playing",
+			"paper_visible": false,
+			"phase": 0.0
+		},
+		{
+			"action": "",
+			"active_ms": 6468.54757575757,
+			"admitted_ms": 39.54,
+			"age": 0.0,
+			"frame": 280,
+			"mode": "playing",
+			"paper_visible": false,
+			"phase": 0.0
+		}
+	],
+	"hashes": {
+		"res://data/source_content.json": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+		"res://scripts/first_person_rig.gd": "7c40fc0aead4285bf975a2847631685a0642822656fffb794ba604a31d4a59e2",
+		"res://scripts/full_scene.gd": "8b214bea4c9246b8af2c5611ce9c4f9d5531ed116f40bdaf339ef7ce13a83ea6",
+		"res://scripts/save_store.gd": "ccf37a234ac3dae5ac9b1580d18e6bb60aa4ae35f9544956d1b522065777e0e3",
+		"res://scripts/vendors_core.gd": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+		"res://tests/office_acceptance_probe.gd": "7433cf8ceaccb769f9034124e3dec62beb46801a71877ec659b699a0dab156b7",
+		"res://tests/vendor_receipt_probe.gd": "b115d080a3b67fce945f0fc221df776253b2a96a5a473dcd719651980d80e1e5"
+	},
+	"initial": {
+		"actors": 56,
+		"brain": 70.0,
+		"cart_mounted": false,
+		"cash": 0,
+		"charisma": 0,
+		"claims": {
+
+		},
+		"copper": 0,
+		"crash": 0.0,
+		"cred": 0,
+		"day": 1,
+		"day_time": 0.35,
+		"equip": {
+			"coat": null,
+			"hat": null,
+			"shoes": null,
+			"tool": null
+		},
+		"faction": {
+			"scrap": 0,
+			"spiritual": 0,
+			"street": 0
+		},
+		"high": 0.0,
+		"hp": 100.0,
+		"intro": false,
+		"inventory": [],
+		"max_hp": 100.0,
+		"offenses": 0,
+		"office": {
+			"claimJob": null,
+			"jobsCompleted": 0,
+			"lastWorkId": "",
+			"orderSerial": 0,
+			"owned": false,
+			"rerollDay": 0,
+			"upgrades": {
+				"cot": false,
+				"desk": false,
+				"generator": false,
+				"locker": false,
+				"radio": false,
+				"route_board": false
+			},
+			"workDay": 0,
+			"workJob": null,
+			"workToday": 0
+		},
+		"office_available": false,
+		"office_jobs": 0,
+		"paper_done": false,
+		"rng": 4153385641,
+		"rocks": 0,
+		"rocks_smoked": 0,
+		"route": {
+
+		},
+		"routes": 0,
+		"shakes": 20.0,
+		"source_position": [
+			1050.0,
+			840.0
+		],
+		"speed": 2.2,
+		"wanted": 0,
+		"weapon": "fists"
+	},
+	"inputs": {
+		"capture_clicks": 1,
+		"clicks": 0,
+		"keys": 2,
+		"menu_clicks": 1,
+		"motion_frames": 102,
+		"mouse_motion": 132
+	},
+	"performance_acceptance": false,
+	"phases": [
+		{
+			"active_ms": 1260.84590909091,
+			"id": "cash",
+			"state": {
+				"actors": 56,
+				"brain": 70.0,
+				"cart_mounted": false,
+				"cash": 10,
+				"charisma": 0,
+				"claims": {
+
+				},
+				"copper": 0,
+				"crash": 0.0,
+				"cred": 1,
+				"day": 1,
+				"day_time": 0.355253524621212,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 0
+				},
+				"high": 0.0,
+				"hp": 100.0,
+				"intro": false,
+				"inventory": [],
+				"max_hp": 100.0,
+				"offenses": 0,
+				"office": {
+					"claimJob": null,
+					"jobsCompleted": 0,
+					"lastWorkId": "",
+					"orderSerial": 0,
+					"owned": false,
+					"rerollDay": 0,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					},
+					"workDay": 0,
+					"workJob": null,
+					"workToday": 0
+				},
+				"office_available": false,
+				"office_jobs": 0,
+				"paper_done": false,
+				"rng": 2898010883,
+				"rocks": 0,
+				"rocks_smoked": 0,
+				"route": {
+
+				},
+				"routes": 0,
+				"shakes": 21.0086767272727,
+				"source_position": "(1172.354, 879.9427)",
+				"speed": 2.2,
+				"wanted": 0,
+				"weapon": "fists"
+			},
+			"wall_ms": 1385
+		},
+		{
+			"active_ms": 4822.98366666666,
+			"id": "tony",
+			"state": {
+				"actors": 56,
+				"brain": 70.0,
+				"cart_mounted": false,
+				"cash": 10,
+				"charisma": 0,
+				"claims": {
+
+				},
+				"copper": 0,
+				"crash": 0.0,
+				"cred": 2,
+				"day": 1,
+				"day_time": 0.375349289898991,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 0
+				},
+				"high": 0.0,
+				"hp": 100.0,
+				"intro": false,
+				"inventory": [],
+				"max_hp": 100.0,
+				"offenses": 0,
+				"office": {
+					"claimJob": null,
+					"jobsCompleted": 0,
+					"lastWorkId": "",
+					"orderSerial": 0,
+					"owned": false,
+					"rerollDay": 0,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					},
+					"workDay": 0,
+					"workJob": null,
+					"workToday": 0
+				},
+				"office_available": false,
+				"office_jobs": 0,
+				"paper_done": false,
+				"rng": 1041985,
+				"rocks": 0,
+				"rocks_smoked": 0,
+				"route": {
+
+				},
+				"routes": 0,
+				"shakes": 24.8670636606061,
+				"source_position": "(1619.117, 939.191)",
+				"speed": 2.2,
+				"wanted": 0,
+				"weapon": "fists"
+			},
+			"wall_ms": 4780
+		},
+		{
+			"active_ms": 0.0,
+			"id": "menu",
+			"state": {
+				"actors": 56,
+				"brain": 70.0,
+				"cart_mounted": false,
+				"cash": 0,
+				"charisma": 0,
+				"claims": {
+
+				},
+				"copper": 0,
+				"crash": 0.0,
+				"cred": 2,
+				"day": 1,
+				"day_time": 0.375349289898991,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 1
+				},
+				"high": 0.0,
+				"hp": 100.0,
+				"intro": false,
+				"inventory": [],
+				"max_hp": 100.0,
+				"offenses": 0,
+				"office": {
+					"claimJob": null,
+					"jobsCompleted": 0,
+					"lastWorkId": "",
+					"orderSerial": 0,
+					"owned": false,
+					"rerollDay": 0,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					},
+					"workDay": 0,
+					"workJob": null,
+					"workToday": 0
+				},
+				"office_available": false,
+				"office_jobs": 0,
+				"paper_done": false,
+				"rng": 1041985,
+				"rocks": 1,
+				"rocks_smoked": 0,
+				"route": {
+
+				},
+				"routes": 0,
+				"shakes": 24.8670636606061,
+				"source_position": "(1619.117, 939.191)",
+				"speed": 2.2,
+				"wanted": 0,
+				"weapon": "fists"
+			},
+			"wall_ms": 151
+		},
+		{
+			"active_ms": 384.718,
+			"id": "gesture",
+			"state": {
+				"actors": 56,
+				"brain": 70.0,
+				"cart_mounted": false,
+				"cash": 0,
+				"charisma": 0,
+				"claims": {
+
+				},
+				"copper": 0,
+				"crash": 0.0,
+				"cred": 2,
+				"day": 1,
+				"day_time": 0.376952281565658,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 1
+				},
+				"high": 0.0,
+				"hp": 100.0,
+				"intro": false,
+				"inventory": [],
+				"max_hp": 100.0,
+				"offenses": 0,
+				"office": {
+					"claimJob": null,
+					"jobsCompleted": 0,
+					"lastWorkId": "",
+					"orderSerial": 0,
+					"owned": false,
+					"rerollDay": 0,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					},
+					"workDay": 0,
+					"workJob": null,
+					"workToday": 0
+				},
+				"office_available": false,
+				"office_jobs": 0,
+				"paper_done": false,
+				"rng": 2442495166,
+				"rocks": 1,
+				"rocks_smoked": 0,
+				"route": {
+
+				},
+				"routes": 0,
+				"shakes": 25.1748380606061,
+				"source_position": "(1619.117, 939.191)",
+				"speed": 2.2,
+				"wanted": 0,
+				"weapon": "fists"
+			},
+			"wall_ms": 615
+		}
+	],
+	"ready": false,
+	"replacements": [],
+	"run_id": "receipt-native-v2-observer",
+	"run_ms": 6997,
+	"schema": 1,
+	"scope": "Actual unaltered viewport; automated ordinary input, no gameplay fixtures. Visual approval, trusted hardware, audio, performance and Web shutdown remain unclaimed.",
+	"shutdown_acceptance": false,
+	"source_hashes_available": true,
+	"storage_fresh": true,
+	"transaction": {
+		"after": {
+			"bought": 1,
+			"cash": 0,
+			"first_rock": true,
+			"player": {
+				"attackCd": 0.0,
+				"attacking": 0.0,
+				"barbAside": false,
+				"brain": 70.0,
+				"brutusDefeated": 0,
+				"cartMounted": false,
+				"cash": 0,
+				"charisma": 0,
+				"copper": 0,
+				"crashT": 0.0,
+				"cred": 2,
+				"credBonus": 0,
+				"dirtySupplies": 0,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"facing": "up",
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 1
+				},
+				"frame": 0,
+				"frameT": 0.0,
+				"h": 28.0,
+				"hasPossum": false,
+				"hitFlash": 0.0,
+				"hitterHigh": false,
+				"hitters": 0,
+				"hp": 100.0,
+				"iframes": 0.0,
+				"inventory": [],
+				"lifetime": {
+					"arrests": 0,
+					"copsKilled": 0,
+					"dayCount": 0,
+					"officeJobs": 0,
+					"pretendersDefeated": 0,
+					"rocksCooked": 0,
+					"rocksFenced": 0,
+					"rocksSmoked": 0,
+					"routesCompleted": 0,
+					"territoriesClaimed": 0
+				},
+				"maxHp": 100.0,
+				"rank": 0,
+				"rockedT": 0.0,
+				"rocks": 1,
+				"shakes": 24.8670636606061,
+				"slowT": 0.0,
+				"soapRocks": 0,
+				"speed": 2.2,
+				"stripeLoyalty": 0,
+				"stunT": 0.0,
+				"supplies": 0,
+				"tonyOffenses": 0,
+				"vx": 0.0,
+				"vy": 0.0,
+				"w": 24.0,
+				"wanted": 0,
+				"wantedDecayMult": 1.0,
+				"wantedT": 0.0,
+				"weapon": "fists",
+				"x": 1607.11694335938,
+				"y": 925.191040039063
+			},
+			"rng": 1041985,
+			"rocks": 1,
+			"street": 1
+		},
+		"before": {
+			"bought": 0,
+			"cash": 10,
+			"first_rock": false,
+			"player": {
+				"attackCd": 0.0,
+				"attacking": 0.0,
+				"barbAside": false,
+				"brain": 70.0,
+				"brutusDefeated": 0,
+				"cartMounted": false,
+				"cash": 10,
+				"charisma": 0,
+				"copper": 0,
+				"crashT": 0.0,
+				"cred": 2,
+				"credBonus": 0,
+				"dirtySupplies": 0,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"facing": "up",
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 0
+				},
+				"frame": 0,
+				"frameT": 0.0,
+				"h": 28.0,
+				"hasPossum": false,
+				"hitFlash": 0.0,
+				"hitterHigh": false,
+				"hitters": 0,
+				"hp": 100.0,
+				"iframes": 0.0,
+				"inventory": [],
+				"lifetime": {
+					"arrests": 0,
+					"copsKilled": 0,
+					"dayCount": 0,
+					"officeJobs": 0,
+					"pretendersDefeated": 0,
+					"rocksCooked": 0,
+					"rocksFenced": 0,
+					"rocksSmoked": 0,
+					"routesCompleted": 0,
+					"territoriesClaimed": 0
+				},
+				"maxHp": 100.0,
+				"rank": 0,
+				"rockedT": 0.0,
+				"rocks": 0,
+				"shakes": 24.8670636606061,
+				"slowT": 0.0,
+				"soapRocks": 0,
+				"speed": 2.2,
+				"stripeLoyalty": 0,
+				"stunT": 0.0,
+				"supplies": 0,
+				"tonyOffenses": 0,
+				"vx": 0.0,
+				"vy": 0.0,
+				"w": 24.0,
+				"wanted": 0,
+				"wantedDecayMult": 1.0,
+				"wantedT": 0.0,
+				"weapon": "fists",
+				"x": 1607.11694335938,
+				"y": 925.191040039063
+			},
+			"rng": 1041985,
+			"rocks": 0,
+			"street": 0
+		},
+		"distance": 55.2339744567871,
+		"events": [
+			{
+				"active_ms": 6083.82957575757,
+				"hand_after": {
+					"action": "receipt",
+					"age": 0.0,
+					"phase": 0.0
+				},
+				"kind": "vendor_action",
+				"payload": {
+					"action": "buy_rock",
+					"ok": true,
+					"vendor": "tony"
+				},
+				"process_frame": 272,
+				"wall_ms": 23364
+			}
+		],
+		"reachable": true,
+		"resolved": {
+			"id": "tony",
+			"kind": "vendor"
+		}
+	},
+	"visual_acceptance": false,
+	"walking": [
+		{
+			"blockers": [
+				"meter_maid"
+			],
+			"graph_points": 14,
+			"route_points": 5,
+			"wall_ms": 19303
+		},
+		{
+			"blockers": [
+				"meter_maid"
+			],
+			"graph_points": 13,
+			"route_points": 6,
+			"wall_ms": 20082
+		}
+	],
+	"walking_context": {
+		"elapsed_ms": 4771,
+		"from": "(22.76468, 0.06, 3.967642)",
+		"goal": "(23.36, 0.06, 3.09)",
+		"local": {
+
+		},
+		"no_progress_ms": 0,
+		"plans": 4,
+		"reason": "following_route",
+		"replans": 3,
+		"route": {
+			"from": "(18.26845, 0.06, 4.072136)",
+			"reason": "static_route_has_no_peer_blocker",
+			"to": "(23.36, 0.06, 3.09)"
+		}
+	},
+	"wall_ms": 18949,
+	"web": false
+}

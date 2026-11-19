@@ -1,0 +1,136 @@
+{
+  "acceptance": false,
+  "active_ms": 0,
+  "attack_receipts": [],
+  "cash_transactions": [],
+  "collections": [],
+  "core_cash": [],
+  "domain_events": [],
+  "events": [],
+  "failures": [
+    "operator aborted finite attempt"
+  ],
+  "fight": {},
+  "final": {
+    "actors": 56,
+    "brain": 70,
+    "cart_mounted": false,
+    "cash": 0,
+    "charisma": 0,
+    "claims": {},
+    "copper": 0,
+    "crash": 0,
+    "cred": 0,
+    "day": 1,
+    "day_time": 0.35,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "faction": {
+      "scrap": 0,
+      "spiritual": 0,
+      "street": 0
+    },
+    "high": 0,
+    "hp": 100,
+    "intro": false,
+    "inventory": [],
+    "max_hp": 100,
+    "offenses": 0,
+    "office": {
+      "claimJob": null,
+      "jobsCompleted": 0,
+      "lastWorkId": "",
+      "orderSerial": 0,
+      "owned": false,
+      "rerollDay": 0,
+      "upgrades": {
+        "cot": false,
+        "desk": false,
+        "generator": false,
+        "locker": false,
+        "radio": false,
+        "route_board": false
+      },
+      "workDay": 0,
+      "workJob": null,
+      "workToday": 0
+    },
+    "office_available": false,
+    "office_jobs": 0,
+    "paper_done": false,
+    "rng": 432078830,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "route": {},
+    "routes": 0,
+    "shakes": 20,
+    "source_position": "(1062.0, 854.0)",
+    "speed": 2.2,
+    "wanted": 0,
+    "weapon": "fists"
+  },
+  "finished": true,
+  "fixture_writes": 0,
+  "format": "rock-bottom-web-progression-draft",
+  "fresh_key_absent": true,
+  "initial": {},
+  "inputs": {
+    "capture_clicks": 0,
+    "clicks": 0,
+    "keys": 0,
+    "menu_clicks": 0,
+    "motion_frames": 0,
+    "mouse_motion": 0
+  },
+  "loop": {},
+  "movement": {},
+  "notes": [],
+  "overflow": false,
+  "persistence": {},
+  "phase": "ready",
+  "ready": false,
+  "records": [],
+  "replacements": 0,
+  "run_id": "current-v1-960",
+  "samples": [],
+  "schema": 1,
+  "scope": "Actual Web synthetic normal-input fresh earning/paid score/Tony/same18s8s/IndexedDB reload. No cooking, later campaign, hardware/audio or performance claim.",
+  "started": false,
+  "visual_acceptance": false,
+  "walking": [],
+  "wall_ms": 63032,
+  "web": true,
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "devicePixelRatio": 1,
+    "canvas": [
+      960,
+      540
+    ],
+    "webgl": {
+      "webgl2": true,
+      "renderer": "WebKit WebGL",
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "drawing_buffer": [
+        960,
+        540
+      ]
+    },
+    "wall_ms": 66061.60000002384
+  },
+  "pngs_verified": false,
+  "engine_errors": [
+    "ERROR: Parse JSON failed. Error at line 0: Unknown error getting token",
+    "   at: parse_string (core/io/json.cpp:604)",
+    "ERROR: operator aborted finite attempt",
+    "   at: push_error (core/variant/variant_utility.cpp:1024)"
+  ],
+  "browser_errors": [],
+  "engine_acceptance": false,
+  "provenance_note": "Synthetic production input. External pinned project/export hashes required; no hardware capture/audio/performance or later campaign claim."
+}

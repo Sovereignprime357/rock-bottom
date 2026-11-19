@@ -539,3 +539,27 @@ It rechecks the actual segment before normal movement and fails if all direction
 remain blocked. The expanded walkthrough contract passes121 checks/five groups;
 Web-v2 has no recorded errors and moves0.294327m after Leave. This changes no
 production collision, simulation, input binding or gameplay rule.
+
+## Tony layered coat and shoulder fit (2026-11-19)
+
+At original template construction, Tony's middle front shell retains its
+0.0235m cosine-profile bulge. Separately authored upper garment rings fit around
+the unchanged bare shoulders, and existing lapel vertices move only in front
+depth to preserve visible outer/middle/inner order. These bounded construction
+edits preserve topology, materials, layer controls, bones, weighting algorithm,
+animation, resource counts, bare torso/neck and71 other identities. They add no
+per-frame work or gameplay changes. Default coat-builder inputs stay exact.
+
+The expanded surfaces suite inherits the original fit helper and four unchanged
+reference builders. It preserves all actual1mm shell/resource/48-pose checks and
+71-other-identity equivalence, then checks48 surface poses with two additional
+completion groups for lapel order and clothed shoulder coverage. Only the old
+one-part raw-scope assertion is superseded by the explicit named ring/lapel scope;
+the old fit script remains a helper and is not run independently. No hidden
+geometry, count reduction, whole-body shrink or clearance tolerance is introduced.
+
+Finite headless geometry is distinct from actual native/Web front/quarter/rest,
+walk, windup, peak strike,20m and coats3/2/1/0 appearance. Root retains all previous
+failed scope/cardinality assertions and visible breakthroughs. Final scoped
+acceptance requires the corrected focused successor and actual original captures;
+this contract does not declare complete pose coverage or performance acceptance.

@@ -577,6 +577,14 @@ func _front_wall(left: float, right: float, front: float, height: float, finish:
 		_box("front_" + finish, Vector3(right - left, height, 0.24), Vector3((left + right) * 0.5, height * 0.5, front - 0.12), color, true)
 
 
+static func _pier_overlaps_opening(center_x: float, half_width: float, openings: Array[Vector2]) -> bool:
+	# Match the actual Vector3 mesh endpoints, including native float precision.
+	var extent := Vector2(center_x - half_width, center_x + half_width)
+	for gap: Vector2 in openings:
+		if extent.y > gap.x and extent.x < gap.y: return true
+	return false
+
+
 func _facade_bays(rect: Rect2, height: float, index: int, finish: String, color: String, openings: Array[Vector2]) -> void:
 	var bays: int = maxi(1, int(rect.size.x / 2.8))
 	for bay: int in range(bays):
@@ -601,7 +609,10 @@ func _facade_bays(rect: Rect2, height: float, index: int, finish: String, color:
 				_fixture_motion_data.tv_window = {"transform":global_transform*Transform3D(Basis.IDENTITY,Vector3(x,1.65,rect.end.y+0.025)),"size":Vector2(window_width,1.35),"source_index":0}
 		if height > 5.8:
 			_framed_window(Vector3(x, 4.65, rect.end.y + 0.01), 1.25, 1.35, "929782", index + bay + 1)
-		_box("facade_" + finish + "_pier", Vector3(0.20, height, 0.13), Vector3(rect.position.x + bay * rect.size.x / bays, height * 0.5, rect.end.y + 0.03), color)
+		var pier_size := Vector3(0.20, height, 0.13)
+		var pier_at := Vector3(rect.position.x + bay * rect.size.x / bays, height * 0.5, rect.end.y + 0.03)
+		if not _pier_overlaps_opening(pier_at.x,pier_size.x*0.5,openings):
+			_box("facade_" + finish + "_pier", pier_size, pier_at, color)
 	for side: int in range(2):
 		var yaw: float = -90.0 if side == 0 else 90.0
 		var x: float = rect.position.x if side == 0 else rect.end.x

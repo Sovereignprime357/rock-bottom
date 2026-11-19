@@ -1,0 +1,51 @@
+{
+  "format": "rock-bottom-tony-surfaces-central-validation",
+  "status": "failed",
+  "project": "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v4-surfaces\\game3d",
+  "engine": "C:\\Users\\zenit\\projects\\Rock Bottom\\.tools\\godot-4.5.1\\Godot_v4.5.1-stable_win64_console.exe",
+  "stages": [
+    {
+      "name": "import",
+      "status": "pass",
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v4-surfaces\\game3d",
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v4-surfaces\\validation-v1\\import.godot.log",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "timeout_seconds": 180,
+      "pid": 26596,
+      "exit_code": 0,
+      "elapsed_ms": 5738,
+      "stdout_retained": true,
+      "stderr_retained": true
+    },
+    {
+      "name": "surfaces",
+      "status": "failed",
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v4-surfaces\\game3d",
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v4-surfaces\\validation-v1\\surfaces.godot.log",
+        "--script",
+        "res://tests/test_tony_coat_surfaces.gd"
+      ],
+      "timeout_seconds": 600,
+      "pid": 38344,
+      "exit_code": 1,
+      "elapsed_ms": 33029,
+      "stdout_retained": true,
+      "stderr_retained": true,
+      "error": "Nonzero engine exit: surfaces"
+    }
+  ],
+  "source_verified_after": true,
+  "visual_acceptance": false,
+  "error": "Nonzero engine exit: surfaces"
+}

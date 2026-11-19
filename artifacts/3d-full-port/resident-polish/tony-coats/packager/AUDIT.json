@@ -1,0 +1,1563 @@
+{
+  "schema": 1,
+  "core": [
+    {
+      "run": "v1-failed",
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "arguments": [
+          "--headless",
+          "--path",
+          "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v1\\game3d",
+          "--log-file",
+          "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v1\\fit.godot.log",
+          "--script",
+          "res://tests/test_tony_coat_fit.gd"
+        ],
+        "exit_code": 1,
+        "pid": 31608,
+        "elapsed_ms": 20984,
+        "error": "Headless stage failed; retain raw logs"
+      }
+    },
+    {
+      "run": "v2-diagnostic-failed",
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "arguments": [
+          "--headless",
+          "--path",
+          "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v2-diagnostic\\game3d",
+          "--log-file",
+          "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v2-diagnostic\\fit.godot.log",
+          "--script",
+          "res://tests/test_tony_coat_fit.gd"
+        ],
+        "exit_code": 1,
+        "pid": 41044,
+        "elapsed_ms": 20884,
+        "error": "Headless stage failed; retain raw logs"
+      }
+    },
+    {
+      "run": "v3-shell-pass",
+      "status": "pass",
+      "result": {
+        "status": "pass",
+        "arguments": [
+          "--headless",
+          "--path",
+          "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v3-fit\\game3d",
+          "--log-file",
+          "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v3-fit\\fit.godot.log",
+          "--script",
+          "res://tests/test_tony_coat_fit.gd"
+        ],
+        "exit_code": 0,
+        "pid": 9836,
+        "elapsed_ms": 20781
+      }
+    },
+    {
+      "run": "v4-surfaces-failed",
+      "status": "failed",
+      "checks": 1357,
+      "failures": [
+        "raw topology and every non-position/normal channel remain exact: 14",
+        "raw topology and every non-position/normal channel remain exact: 15",
+        "raw topology and every non-position/normal channel remain exact: 16",
+        "actual shoulder coverage front rest 0.05 coats3 skin193 missing0 min0.061597833 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 0.05 coats2 skin193 missing0 min0.032132698 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 0.05 coats1 skin193 missing0 min0.013289043 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 1.25 coats3 skin191 missing0 min0.061576838 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 1.25 coats2 skin191 missing0 min0.032121649 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 1.25 coats1 skin191 missing0 min0.013285266 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 4.75 coats3 skin191 missing0 min0.061589889 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 4.75 coats2 skin191 missing0 min0.032128505 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 4.75 coats1 skin191 missing0 min0.013287612 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 0.05 coats3 skin192 missing0 min0.061698392 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 0.05 coats2 skin192 missing0 min0.032188643 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 0.05 coats1 skin192 missing0 min0.013299660 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 1.25 coats3 skin193 missing0 min0.061673361 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top walk 1.25 coats3 skin283 missing0 min0.021493272 rest(-0.18515, 1.45375, 0.084)",
+        "actual shoulder coverage front walk 1.25 coats2 skin193 missing0 min0.032192577 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top walk 1.25 coats2 skin283 missing0 min0.004064753 rest(-0.186633, 1.456667, -0.0102)",
+        "actual shoulder coverage front walk 1.25 coats1 skin193 missing0 min0.013298692 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top walk 1.25 coats1 skin283 missing0 min0.002182972 rest(-0.2256, 1.445, 0.06825)",
+        "actual shoulder coverage front walk 4.75 coats3 skin192 missing0 min0.061144288 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 4.75 coats2 skin192 missing0 min0.031880531 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 4.75 coats1 skin192 missing0 min0.013240140 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front windup 0.05 coats3 skin189 missing0 min0.059810863 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top windup 0.05 coats3 skin279 missing0 min0.021439154 rest(-0.18515, 1.45375, 0.084)",
+        "actual shoulder coverage front windup 0.05 coats2 skin189 missing0 min0.031545391 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top windup 0.05 coats2 skin279 missing0 min0.004049921 rest(-0.186633, 1.456667, -0.0102)",
+        "actual shoulder coverage front windup 0.05 coats1 skin189 missing0 min0.013480378 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top windup 0.05 coats1 skin279 missing0 min0.002172937 rest(-0.2352, 1.445, 0.02275)",
+        "actual shoulder coverage front windup 1.25 coats3 skin192 missing0 min0.059791706 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front windup 1.25 coats2 skin192 missing0 min0.031535355 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front windup 1.25 coats1 skin192 missing0 min0.013476474 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage left windup 4.75 coats3 skin173 missing0 min0.062717353 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage left windup 4.75 coats2 skin173 missing0 min0.034748690 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage left windup 4.75 coats1 skin173 missing0 min0.006331506 rest(-0.29, 1.405, 0.0)",
+        "actual shoulder coverage front peak_strike 0.05 coats3 skin192 missing0 min0.060032060 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 0.05 coats2 skin192 missing0 min0.031290477 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 0.05 coats1 skin192 missing0 min0.013171664 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 1.25 coats3 skin191 missing0 min0.060011725 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 1.25 coats2 skin191 missing0 min0.031279878 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 1.25 coats1 skin191 missing0 min0.013167826 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 4.75 coats3 skin189 missing0 min0.060024371 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top peak_strike 4.75 coats3 skin287 missing0 min0.021457332 rest(-0.18515, 1.45375, 0.084)",
+        "actual shoulder coverage front peak_strike 4.75 coats2 skin189 missing0 min0.031286439 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top peak_strike 4.75 coats2 skin287 missing0 min0.004083742 rest(0.1872, 1.456667, 0.0105)",
+        "actual shoulder coverage front peak_strike 4.75 coats1 skin189 missing0 min0.013170227 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top peak_strike 4.75 coats1 skin287 missing0 min0.002178572 rest(0.2328, 1.445, -0.0216)"
+      ],
+      "diagnostic": {
+        "checks": 1357,
+        "failures": [
+          "raw topology and every non-position/normal channel remain exact: 14",
+          "raw topology and every non-position/normal channel remain exact: 15",
+          "raw topology and every non-position/normal channel remain exact: 16",
+          "actual shoulder coverage front rest 0.05 coats3 skin193 missing0 min0.061597833 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 0.05 coats2 skin193 missing0 min0.032132698 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 0.05 coats1 skin193 missing0 min0.013289043 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 1.25 coats3 skin191 missing0 min0.061576838 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 1.25 coats2 skin191 missing0 min0.032121649 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 1.25 coats1 skin191 missing0 min0.013285266 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 4.75 coats3 skin191 missing0 min0.061589889 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 4.75 coats2 skin191 missing0 min0.032128505 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 4.75 coats1 skin191 missing0 min0.013287612 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 0.05 coats3 skin192 missing0 min0.061698392 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 0.05 coats2 skin192 missing0 min0.032188643 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 0.05 coats1 skin192 missing0 min0.013299660 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 1.25 coats3 skin193 missing0 min0.061673361 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top walk 1.25 coats3 skin283 missing0 min0.021493272 rest(-0.18515, 1.45375, 0.084)",
+          "actual shoulder coverage front walk 1.25 coats2 skin193 missing0 min0.032192577 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top walk 1.25 coats2 skin283 missing0 min0.004064753 rest(-0.186633, 1.456667, -0.0102)",
+          "actual shoulder coverage front walk 1.25 coats1 skin193 missing0 min0.013298692 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top walk 1.25 coats1 skin283 missing0 min0.002182972 rest(-0.2256, 1.445, 0.06825)",
+          "actual shoulder coverage front walk 4.75 coats3 skin192 missing0 min0.061144288 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 4.75 coats2 skin192 missing0 min0.031880531 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 4.75 coats1 skin192 missing0 min0.013240140 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front windup 0.05 coats3 skin189 missing0 min0.059810863 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top windup 0.05 coats3 skin279 missing0 min0.021439154 rest(-0.18515, 1.45375, 0.084)",
+          "actual shoulder coverage front windup 0.05 coats2 skin189 missing0 min0.031545391 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top windup 0.05 coats2 skin279 missing0 min0.004049921 rest(-0.186633, 1.456667, -0.0102)",
+          "actual shoulder coverage front windup 0.05 coats1 skin189 missing0 min0.013480378 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top windup 0.05 coats1 skin279 missing0 min0.002172937 rest(-0.2352, 1.445, 0.02275)",
+          "actual shoulder coverage front windup 1.25 coats3 skin192 missing0 min0.059791706 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front windup 1.25 coats2 skin192 missing0 min0.031535355 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front windup 1.25 coats1 skin192 missing0 min0.013476474 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage left windup 4.75 coats3 skin173 missing0 min0.062717353 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage left windup 4.75 coats2 skin173 missing0 min0.034748690 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage left windup 4.75 coats1 skin173 missing0 min0.006331506 rest(-0.29, 1.405, 0.0)",
+          "actual shoulder coverage front peak_strike 0.05 coats3 skin192 missing0 min0.060032060 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 0.05 coats2 skin192 missing0 min0.031290477 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 0.05 coats1 skin192 missing0 min0.013171664 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 1.25 coats3 skin191 missing0 min0.060011725 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 1.25 coats2 skin191 missing0 min0.031279878 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 1.25 coats1 skin191 missing0 min0.013167826 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 4.75 coats3 skin189 missing0 min0.060024371 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top peak_strike 4.75 coats3 skin287 missing0 min0.021457332 rest(-0.18515, 1.45375, 0.084)",
+          "actual shoulder coverage front peak_strike 4.75 coats2 skin189 missing0 min0.031286439 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top peak_strike 4.75 coats2 skin287 missing0 min0.004083742 rest(0.1872, 1.456667, 0.0105)",
+          "actual shoulder coverage front peak_strike 4.75 coats1 skin189 missing0 min0.013170227 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top peak_strike 4.75 coats1 skin287 missing0 min0.002178572 rest(0.2328, 1.445, -0.0216)"
+        ],
+        "inherited_groups": 4,
+        "lapel_minima_m": {
+          "2:1": 0.00175811897883113,
+          "3:1": 0.0127412148835583,
+          "3:2": 0.00168179061744467
+        },
+        "lapel_rays": 1770,
+        "layer_minimum_m": 0.00463371438265892,
+        "layer_rays": 58985,
+        "missing_cloth": 0,
+        "original_lapel_minima_m": {
+          "2:1": -0.0066335126329351,
+          "3:1": -0.0173963181488869,
+          "3:2": -0.0201828848764469
+        },
+        "original_skin_defects": {
+          "front": 3399,
+          "left": 2775,
+          "right": 2760,
+          "top": 5011
+        },
+        "other_identities": 71,
+        "shell_inner_minimum_m": 0.00319135189056396,
+        "shell_outer_minimum_m": 0.0101551413536072,
+        "shell_pose_cases": 48,
+        "skin_minimum_m": 0.00217293724069401,
+        "skin_rays": 29643,
+        "surface_groups": 2,
+        "surface_pose_cases": 48,
+        "worst": []
+      }
+    },
+    {
+      "run": "v5-diagnostic-failed",
+      "status": "failed",
+      "checks": 1357,
+      "failures": [
+        "raw topology and every non-position/normal channel remain exact: 14",
+        "raw topology and every non-position/normal channel remain exact: 15",
+        "raw topology and every non-position/normal channel remain exact: 16",
+        "actual shoulder coverage front rest 0.05 coats3 skin193 missing0 min0.061597833 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 0.05 coats2 skin193 missing0 min0.032132698 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 0.05 coats1 skin193 missing0 min0.013289043 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 1.25 coats3 skin191 missing0 min0.061576838 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 1.25 coats2 skin191 missing0 min0.032121649 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 1.25 coats1 skin191 missing0 min0.013285266 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 4.75 coats3 skin191 missing0 min0.061589889 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 4.75 coats2 skin191 missing0 min0.032128505 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front rest 4.75 coats1 skin191 missing0 min0.013287612 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 0.05 coats3 skin192 missing0 min0.061698392 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 0.05 coats2 skin192 missing0 min0.032188643 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 0.05 coats1 skin192 missing0 min0.013299660 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 1.25 coats3 skin193 missing0 min0.061673361 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top walk 1.25 coats3 skin283 missing0 min0.021493272 rest(-0.18515, 1.45375, 0.084)",
+        "actual shoulder coverage front walk 1.25 coats2 skin193 missing0 min0.032192577 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top walk 1.25 coats2 skin283 missing0 min0.004064753 rest(-0.186633, 1.456667, -0.0102)",
+        "actual shoulder coverage front walk 1.25 coats1 skin193 missing0 min0.013298692 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top walk 1.25 coats1 skin283 missing0 min0.002182972 rest(-0.2256, 1.445, 0.06825)",
+        "actual shoulder coverage front walk 4.75 coats3 skin192 missing0 min0.061144288 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 4.75 coats2 skin192 missing0 min0.031880531 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front walk 4.75 coats1 skin192 missing0 min0.013240140 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front windup 0.05 coats3 skin189 missing0 min0.059810863 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top windup 0.05 coats3 skin279 missing0 min0.021439154 rest(-0.18515, 1.45375, 0.084)",
+        "actual shoulder coverage front windup 0.05 coats2 skin189 missing0 min0.031545391 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top windup 0.05 coats2 skin279 missing0 min0.004049921 rest(-0.186633, 1.456667, -0.0102)",
+        "actual shoulder coverage front windup 0.05 coats1 skin189 missing0 min0.013480378 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top windup 0.05 coats1 skin279 missing0 min0.002172937 rest(-0.2352, 1.445, 0.02275)",
+        "actual shoulder coverage front windup 1.25 coats3 skin192 missing0 min0.059791706 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front windup 1.25 coats2 skin192 missing0 min0.031535355 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front windup 1.25 coats1 skin192 missing0 min0.013476474 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage left windup 4.75 coats3 skin173 missing0 min0.062717353 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage left windup 4.75 coats2 skin173 missing0 min0.034748690 rest(-0.2668, 1.405, 0.105)",
+        "actual shoulder coverage left windup 4.75 coats1 skin173 missing0 min0.006331506 rest(-0.29, 1.405, 0.0)",
+        "actual shoulder coverage front peak_strike 0.05 coats3 skin192 missing0 min0.060032060 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 0.05 coats2 skin192 missing0 min0.031290477 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 0.05 coats1 skin192 missing0 min0.013171664 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 1.25 coats3 skin191 missing0 min0.060011725 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 1.25 coats2 skin191 missing0 min0.031279878 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 1.25 coats1 skin191 missing0 min0.013167826 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage front peak_strike 4.75 coats3 skin189 missing0 min0.060024371 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top peak_strike 4.75 coats3 skin287 missing0 min0.021457332 rest(-0.18515, 1.45375, 0.084)",
+        "actual shoulder coverage front peak_strike 4.75 coats2 skin189 missing0 min0.031286439 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top peak_strike 4.75 coats2 skin287 missing0 min0.004083742 rest(0.1872, 1.456667, 0.0105)",
+        "actual shoulder coverage front peak_strike 4.75 coats1 skin189 missing0 min0.013170227 rest(0.2668, 1.405, 0.105)",
+        "actual shoulder coverage top peak_strike 4.75 coats1 skin287 missing0 min0.002178572 rest(0.2328, 1.445, -0.0216)"
+      ],
+      "diagnostic": {
+        "channel_differences": [
+          {
+            "after_size": 1440,
+            "after_type": "PackedFloat32Array",
+            "before_size": 1440,
+            "before_type": "PackedFloat32Array",
+            "channel": 2,
+            "differences": 540,
+            "first": [
+              {
+                "after": -0.000832130725029856,
+                "before": -0.000768389320001006,
+                "index": 288
+              },
+              {
+                "after": -0.999592661857605,
+                "before": -0.999626934528351,
+                "index": 289
+              },
+              {
+                "after": 0.0285284444689751,
+                "before": 0.0273018330335617,
+                "index": 290
+              },
+              {
+                "after": -0.000832130725029856,
+                "before": -0.000768389320001006,
+                "index": 300
+              }
+            ],
+            "name": "coat_one",
+            "part": 14
+          },
+          {
+            "after_size": 4080,
+            "after_type": "PackedFloat32Array",
+            "before_size": 4080,
+            "before_type": "PackedFloat32Array",
+            "channel": 2,
+            "differences": 2682,
+            "first": [
+              {
+                "after": -0.377885341644287,
+                "before": -0.335710674524307,
+                "index": 0
+              },
+              {
+                "after": -0.910801231861115,
+                "before": -0.932880878448486,
+                "index": 1
+              },
+              {
+                "after": 0.166264310479164,
+                "before": 0.130505457520485,
+                "index": 2
+              },
+              {
+                "after": -0.515363216400146,
+                "before": -0.483795255422592,
+                "index": 4
+              }
+            ],
+            "name": "coat_two",
+            "part": 15
+          },
+          {
+            "after_size": 4080,
+            "after_type": "PackedFloat32Array",
+            "before_size": 4080,
+            "before_type": "PackedFloat32Array",
+            "channel": 2,
+            "differences": 2142,
+            "first": [
+              {
+                "after": -0.389842689037323,
+                "before": -0.394634485244751,
+                "index": 816
+              },
+              {
+                "after": -0.902564823627472,
+                "before": -0.898495614528656,
+                "index": 817
+              },
+              {
+                "after": 0.182754948735237,
+                "before": 0.192274004220963,
+                "index": 818
+              },
+              {
+                "after": -0.391512393951416,
+                "before": -0.396269589662552,
+                "index": 828
+              }
+            ],
+            "name": "coat_three",
+            "part": 16
+          }
+        ],
+        "checks": 1357,
+        "failures": [
+          "raw topology and every non-position/normal channel remain exact: 14",
+          "raw topology and every non-position/normal channel remain exact: 15",
+          "raw topology and every non-position/normal channel remain exact: 16",
+          "actual shoulder coverage front rest 0.05 coats3 skin193 missing0 min0.061597833 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 0.05 coats2 skin193 missing0 min0.032132698 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 0.05 coats1 skin193 missing0 min0.013289043 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 1.25 coats3 skin191 missing0 min0.061576838 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 1.25 coats2 skin191 missing0 min0.032121649 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 1.25 coats1 skin191 missing0 min0.013285266 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 4.75 coats3 skin191 missing0 min0.061589889 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 4.75 coats2 skin191 missing0 min0.032128505 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front rest 4.75 coats1 skin191 missing0 min0.013287612 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 0.05 coats3 skin192 missing0 min0.061698392 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 0.05 coats2 skin192 missing0 min0.032188643 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 0.05 coats1 skin192 missing0 min0.013299660 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 1.25 coats3 skin193 missing0 min0.061673361 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top walk 1.25 coats3 skin283 missing0 min0.021493272 rest(-0.18515, 1.45375, 0.084)",
+          "actual shoulder coverage front walk 1.25 coats2 skin193 missing0 min0.032192577 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top walk 1.25 coats2 skin283 missing0 min0.004064753 rest(-0.186633, 1.456667, -0.0102)",
+          "actual shoulder coverage front walk 1.25 coats1 skin193 missing0 min0.013298692 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top walk 1.25 coats1 skin283 missing0 min0.002182972 rest(-0.2256, 1.445, 0.06825)",
+          "actual shoulder coverage front walk 4.75 coats3 skin192 missing0 min0.061144288 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 4.75 coats2 skin192 missing0 min0.031880531 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front walk 4.75 coats1 skin192 missing0 min0.013240140 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front windup 0.05 coats3 skin189 missing0 min0.059810863 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top windup 0.05 coats3 skin279 missing0 min0.021439154 rest(-0.18515, 1.45375, 0.084)",
+          "actual shoulder coverage front windup 0.05 coats2 skin189 missing0 min0.031545391 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top windup 0.05 coats2 skin279 missing0 min0.004049921 rest(-0.186633, 1.456667, -0.0102)",
+          "actual shoulder coverage front windup 0.05 coats1 skin189 missing0 min0.013480378 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top windup 0.05 coats1 skin279 missing0 min0.002172937 rest(-0.2352, 1.445, 0.02275)",
+          "actual shoulder coverage front windup 1.25 coats3 skin192 missing0 min0.059791706 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front windup 1.25 coats2 skin192 missing0 min0.031535355 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front windup 1.25 coats1 skin192 missing0 min0.013476474 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage left windup 4.75 coats3 skin173 missing0 min0.062717353 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage left windup 4.75 coats2 skin173 missing0 min0.034748690 rest(-0.2668, 1.405, 0.105)",
+          "actual shoulder coverage left windup 4.75 coats1 skin173 missing0 min0.006331506 rest(-0.29, 1.405, 0.0)",
+          "actual shoulder coverage front peak_strike 0.05 coats3 skin192 missing0 min0.060032060 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 0.05 coats2 skin192 missing0 min0.031290477 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 0.05 coats1 skin192 missing0 min0.013171664 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 1.25 coats3 skin191 missing0 min0.060011725 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 1.25 coats2 skin191 missing0 min0.031279878 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 1.25 coats1 skin191 missing0 min0.013167826 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage front peak_strike 4.75 coats3 skin189 missing0 min0.060024371 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top peak_strike 4.75 coats3 skin287 missing0 min0.021457332 rest(-0.18515, 1.45375, 0.084)",
+          "actual shoulder coverage front peak_strike 4.75 coats2 skin189 missing0 min0.031286439 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top peak_strike 4.75 coats2 skin287 missing0 min0.004083742 rest(0.1872, 1.456667, 0.0105)",
+          "actual shoulder coverage front peak_strike 4.75 coats1 skin189 missing0 min0.013170227 rest(0.2668, 1.405, 0.105)",
+          "actual shoulder coverage top peak_strike 4.75 coats1 skin287 missing0 min0.002178572 rest(0.2328, 1.445, -0.0216)"
+        ],
+        "inherited_groups": 4,
+        "lapel_minima_m": {
+          "2:1": 0.00175811897883113,
+          "3:1": 0.0127412148835583,
+          "3:2": 0.00168179061744467
+        },
+        "lapel_rays": 1770,
+        "layer_minimum_m": 0.00463371438265892,
+        "layer_rays": 58985,
+        "missing_cloth": 0,
+        "original_lapel_minima_m": {
+          "2:1": -0.0066335126329351,
+          "3:1": -0.0173963181488869,
+          "3:2": -0.0201828848764469
+        },
+        "original_skin_defects": {
+          "front": 3399,
+          "left": 2775,
+          "right": 2760,
+          "top": 5011
+        },
+        "other_identities": 71,
+        "self_ray_details": [
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "closest_projected_min_bary": -2.25953517331838e-06,
+            "facing_dot": 5.7556368119549e-05,
+            "facing_normal": [
+              0.00054981786524877,
+              0.00244126515462995,
+              5.7556368119549e-05
+            ],
+            "label": "rest 0.05 coats3",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -6.32833689451218e-06
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245574951172,
+                0.0314962789416313
+              ],
+              [
+                0.1624925583601,
+                1.46243321895599,
+                -2.70793680101633e-06
+              ],
+              [
+                0.239996314048767,
+                1.44497811794281,
+                -9.94873698800802e-06
+              ]
+            ],
+            "projection_determinant": -5.75563675493385e-05,
+            "recomputed_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "closest_projected_min_bary": -2.25953517331838e-06,
+            "facing_dot": 5.7556368119549e-05,
+            "facing_normal": [
+              0.00054981786524877,
+              0.00244126515462995,
+              5.7556368119549e-05
+            ],
+            "label": "rest 0.05 coats2",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -6.32833689451218e-06
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245574951172,
+                0.0314962789416313
+              ],
+              [
+                0.1624925583601,
+                1.46243321895599,
+                -2.70793680101633e-06
+              ],
+              [
+                0.239996314048767,
+                1.44497811794281,
+                -9.94873698800802e-06
+              ]
+            ],
+            "projection_determinant": -5.75563675493385e-05,
+            "recomputed_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "closest_projected_min_bary": -2.25953517331838e-06,
+            "facing_dot": 5.7556368119549e-05,
+            "facing_normal": [
+              0.00054981786524877,
+              0.00244126515462995,
+              5.7556368119549e-05
+            ],
+            "label": "rest 0.05 coats1",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -6.32833689451218e-06
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245574951172,
+                0.0314962789416313
+              ],
+              [
+                0.1624925583601,
+                1.46243321895599,
+                -2.70793680101633e-06
+              ],
+              [
+                0.239996314048767,
+                1.44497811794281,
+                -9.94873698800802e-06
+              ]
+            ],
+            "projection_determinant": -5.75563675493385e-05,
+            "recomputed_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "closest_projected_min_bary": -1.46825130766829e-06,
+            "facing_dot": 0.000608927162829787,
+            "facing_normal": [
+              0.00275635509751737,
+              -0.000787607161328197,
+              0.000608927162829787
+            ],
+            "label": "rest 1.25 coats3",
+            "point": [
+              0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                0.278387248516083,
+                1.404944896698,
+                0.052420686930418
+              ],
+              [
+                0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000608927202154774,
+            "recomputed_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "rest": [
+              0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.5,
+              0.0,
+              0.5
+            ],
+            "closest_projected_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "closest_projected_min_bary": -1.63724465438474e-06,
+            "facing_dot": 0.000546074938029051,
+            "facing_normal": [
+              -0.00294007873162627,
+              -0.000840092077851295,
+              0.000546074938029051
+            ],
+            "label": "rest 1.25 coats3",
+            "point": [
+              -0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                -0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                -0.264591902494431,
+                1.35247111320496,
+                0.0559137761592865
+              ],
+              [
+                -0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000546074869411939,
+            "recomputed_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "rest": [
+              -0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.26098598492784e-06,
+              0.500002263966127,
+              0.499999997019858
+            ],
+            "closest_projected_min_bary": -2.26098598492784e-06,
+            "facing_dot": 5.75202211621217e-05,
+            "facing_normal": [
+              0.000549821241293103,
+              0.00244116759859025,
+              5.75202211621217e-05
+            ],
+            "label": "rest 1.25 coats3",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -2.7442816644907e-05
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245634555817,
+                0.0314870439469814
+              ],
+              [
+                0.1624925583601,
+                1.46243333816528,
+                -1.17435120046139e-05
+              ],
+              [
+                0.239996314048767,
+                1.44497799873352,
+                -4.31421212852001e-05
+              ]
+            ],
+            "projection_determinant": -5.75202208903391e-05,
+            "recomputed_bary": [
+              -2.26098598492784e-06,
+              0.500002263966127,
+              0.499999997019858
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "closest_projected_min_bary": -1.46825130766829e-06,
+            "facing_dot": 0.000608927162829787,
+            "facing_normal": [
+              0.00275635509751737,
+              -0.000787607161328197,
+              0.000608927162829787
+            ],
+            "label": "rest 1.25 coats2",
+            "point": [
+              0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                0.278387248516083,
+                1.404944896698,
+                0.052420686930418
+              ],
+              [
+                0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000608927202154774,
+            "recomputed_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "rest": [
+              0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.5,
+              0.0,
+              0.5
+            ],
+            "closest_projected_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "closest_projected_min_bary": -1.63724465438474e-06,
+            "facing_dot": 0.000546074938029051,
+            "facing_normal": [
+              -0.00294007873162627,
+              -0.000840092077851295,
+              0.000546074938029051
+            ],
+            "label": "rest 1.25 coats2",
+            "point": [
+              -0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                -0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                -0.264591902494431,
+                1.35247111320496,
+                0.0559137761592865
+              ],
+              [
+                -0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000546074869411939,
+            "recomputed_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "rest": [
+              -0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          }
+        ],
+        "self_ray_misses": 99,
+        "shell_inner_minimum_m": 0.00319135189056396,
+        "shell_outer_minimum_m": 0.0101551413536072,
+        "shell_pose_cases": 48,
+        "skin_minimum_m": 0.00217293724069401,
+        "skin_rays": 29643,
+        "surface_groups": 2,
+        "surface_pose_cases": 48,
+        "worst": []
+      }
+    },
+    {
+      "run": "v6-surfaces-pass",
+      "status": "pass",
+      "checks": 1368,
+      "failures": [],
+      "diagnostic": {
+        "channel_differences": [
+          {
+            "after_size": 1440,
+            "after_type": "PackedFloat32Array",
+            "before_size": 1440,
+            "before_type": "PackedFloat32Array",
+            "channel": 2,
+            "differences": 540,
+            "first": [
+              {
+                "after": -0.000832130725029856,
+                "before": -0.000768389320001006,
+                "index": 288
+              },
+              {
+                "after": -0.999592661857605,
+                "before": -0.999626934528351,
+                "index": 289
+              },
+              {
+                "after": 0.0285284444689751,
+                "before": 0.0273018330335617,
+                "index": 290
+              },
+              {
+                "after": -0.000832130725029856,
+                "before": -0.000768389320001006,
+                "index": 300
+              }
+            ],
+            "name": "coat_one",
+            "part": 14
+          },
+          {
+            "after_size": 4080,
+            "after_type": "PackedFloat32Array",
+            "before_size": 4080,
+            "before_type": "PackedFloat32Array",
+            "channel": 2,
+            "differences": 2682,
+            "first": [
+              {
+                "after": -0.377885341644287,
+                "before": -0.335710674524307,
+                "index": 0
+              },
+              {
+                "after": -0.910801231861115,
+                "before": -0.932880878448486,
+                "index": 1
+              },
+              {
+                "after": 0.166264310479164,
+                "before": 0.130505457520485,
+                "index": 2
+              },
+              {
+                "after": -0.515363216400146,
+                "before": -0.483795255422592,
+                "index": 4
+              }
+            ],
+            "name": "coat_two",
+            "part": 15
+          },
+          {
+            "after_size": 4080,
+            "after_type": "PackedFloat32Array",
+            "before_size": 4080,
+            "before_type": "PackedFloat32Array",
+            "channel": 2,
+            "differences": 2142,
+            "first": [
+              {
+                "after": -0.389842689037323,
+                "before": -0.394634485244751,
+                "index": 816
+              },
+              {
+                "after": -0.902564823627472,
+                "before": -0.898495614528656,
+                "index": 817
+              },
+              {
+                "after": 0.182754948735237,
+                "before": 0.192274004220963,
+                "index": 818
+              },
+              {
+                "after": -0.391512393951416,
+                "before": -0.396269589662552,
+                "index": 828
+              }
+            ],
+            "name": "coat_three",
+            "part": 16
+          }
+        ],
+        "checks": 1368,
+        "failures": [],
+        "inherited_groups": 4,
+        "lapel_minima_m": {
+          "2:1": 0.00175811897883113,
+          "3:1": 0.0127412148835583,
+          "3:2": 0.00168179061744467
+        },
+        "lapel_rays": 1770,
+        "layer_minimum_m": 0.00463371438265892,
+        "layer_rays": 58985,
+        "missing_cloth": 0,
+        "original_lapel_minima_m": {
+          "2:1": -0.0066335126329351,
+          "3:1": -0.0173963181488869,
+          "3:2": -0.0201828848764469
+        },
+        "original_skin_defects": {
+          "front": 3399,
+          "left": 2775,
+          "right": 2760,
+          "top": 5011
+        },
+        "other_identities": 71,
+        "self_ray_details": [
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "closest_projected_min_bary": -2.25953517331838e-06,
+            "facing_dot": 5.7556368119549e-05,
+            "facing_normal": [
+              0.00054981786524877,
+              0.00244126515462995,
+              5.7556368119549e-05
+            ],
+            "label": "rest 0.05 coats3",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -6.32833689451218e-06
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245574951172,
+                0.0314962789416313
+              ],
+              [
+                0.1624925583601,
+                1.46243321895599,
+                -2.70793680101633e-06
+              ],
+              [
+                0.239996314048767,
+                1.44497811794281,
+                -9.94873698800802e-06
+              ]
+            ],
+            "projection_determinant": -5.75563675493385e-05,
+            "recomputed_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "closest_projected_min_bary": -2.25953517331838e-06,
+            "facing_dot": 5.7556368119549e-05,
+            "facing_normal": [
+              0.00054981786524877,
+              0.00244126515462995,
+              5.7556368119549e-05
+            ],
+            "label": "rest 0.05 coats2",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -6.32833689451218e-06
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245574951172,
+                0.0314962789416313
+              ],
+              [
+                0.1624925583601,
+                1.46243321895599,
+                -2.70793680101633e-06
+              ],
+              [
+                0.239996314048767,
+                1.44497811794281,
+                -9.94873698800802e-06
+              ]
+            ],
+            "projection_determinant": -5.75563675493385e-05,
+            "recomputed_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "closest_projected_min_bary": -2.25953517331838e-06,
+            "facing_dot": 5.7556368119549e-05,
+            "facing_normal": [
+              0.00054981786524877,
+              0.00244126515462995,
+              5.7556368119549e-05
+            ],
+            "label": "rest 0.05 coats1",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -6.32833689451218e-06
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245574951172,
+                0.0314962789416313
+              ],
+              [
+                0.1624925583601,
+                1.46243321895599,
+                -2.70793680101633e-06
+              ],
+              [
+                0.239996314048767,
+                1.44497811794281,
+                -9.94873698800802e-06
+              ]
+            ],
+            "projection_determinant": -5.75563675493385e-05,
+            "recomputed_bary": [
+              -2.25953517331838e-06,
+              0.500002262451718,
+              0.499999997083455
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "closest_projected_min_bary": -1.46825130766829e-06,
+            "facing_dot": 0.000608927162829787,
+            "facing_normal": [
+              0.00275635509751737,
+              -0.000787607161328197,
+              0.000608927162829787
+            ],
+            "label": "rest 1.25 coats3",
+            "point": [
+              0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                0.278387248516083,
+                1.404944896698,
+                0.052420686930418
+              ],
+              [
+                0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000608927202154774,
+            "recomputed_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "rest": [
+              0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.5,
+              0.0,
+              0.5
+            ],
+            "closest_projected_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "closest_projected_min_bary": -1.63724465438474e-06,
+            "facing_dot": 0.000546074938029051,
+            "facing_normal": [
+              -0.00294007873162627,
+              -0.000840092077851295,
+              0.000546074938029051
+            ],
+            "label": "rest 1.25 coats3",
+            "point": [
+              -0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                -0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                -0.264591902494431,
+                1.35247111320496,
+                0.0559137761592865
+              ],
+              [
+                -0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000546074869411939,
+            "recomputed_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "rest": [
+              -0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -2.26098598492784e-06,
+              0.500002263966127,
+              0.499999997019858
+            ],
+            "closest_projected_min_bary": -2.26098598492784e-06,
+            "facing_dot": 5.75202211621217e-05,
+            "facing_normal": [
+              0.000549821241293103,
+              0.00244116759859025,
+              5.75202211621217e-05
+            ],
+            "label": "rest 1.25 coats3",
+            "point": [
+              0.201244443655014,
+              1.4537056684494,
+              -2.7442816644907e-05
+            ],
+            "posed_triangle": [
+              [
+                0.159095123410225,
+                1.46245634555817,
+                0.0314870439469814
+              ],
+              [
+                0.1624925583601,
+                1.46243333816528,
+                -1.17435120046139e-05
+              ],
+              [
+                0.239996314048767,
+                1.44497799873352,
+                -4.31421212852001e-05
+              ]
+            ],
+            "projection_determinant": -5.75202208903391e-05,
+            "recomputed_bary": [
+              -2.26098598492784e-06,
+              0.500002263966127,
+              0.499999997019858
+            ],
+            "rest": [
+              0.201249986886978,
+              1.4537501335144,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.0,
+              0.5,
+              0.5
+            ],
+            "closest_projected_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "closest_projected_min_bary": -1.46825130766829e-06,
+            "facing_dot": 0.000608927162829787,
+            "facing_normal": [
+              0.00275635509751737,
+              -0.000787607161328197,
+              0.000608927162829787
+            ],
+            "label": "rest 1.25 coats2",
+            "point": [
+              0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                0.278387248516083,
+                1.404944896698,
+                0.052420686930418
+              ],
+              [
+                0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000608927202154774,
+            "recomputed_bary": [
+              -1.46825130766829e-06,
+              0.500000331973397,
+              0.50000113627791
+            ],
+            "rest": [
+              0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          },
+          {
+            "authored_bary": [
+              0.5,
+              0.0,
+              0.5
+            ],
+            "closest_projected_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "closest_projected_min_bary": -1.63724465438474e-06,
+            "facing_dot": 0.000546074938029051,
+            "facing_normal": [
+              -0.00294007873162627,
+              -0.000840092077851295,
+              0.000546074938029051
+            ],
+            "label": "rest 1.25 coats2",
+            "point": [
+              -0.282495677471161,
+              1.37872862815857,
+              -8.5367588326335e-05
+            ],
+            "posed_triangle": [
+              [
+                -0.289995580911636,
+                1.40497827529907,
+                -8.21356661617756e-05
+              ],
+              [
+                -0.264591902494431,
+                1.35247111320496,
+                0.0559137761592865
+              ],
+              [
+                -0.274995774030685,
+                1.35247910022736,
+                -8.85995104908943e-05
+              ]
+            ],
+            "projection_determinant": -0.000546074869411939,
+            "recomputed_bary": [
+              0.499998864406509,
+              -1.63724465438474e-06,
+              0.500002772838145
+            ],
+            "rest": [
+              -0.282499969005585,
+              1.3787499666214,
+              0.0
+            ],
+            "view": "front"
+          }
+        ],
+        "self_ray_misses": 99,
+        "shell_inner_minimum_m": 0.00319135189056396,
+        "shell_outer_minimum_m": 0.0101551413536072,
+        "shell_pose_cases": 48,
+        "skin_minimum_m": 0.00217293724069401,
+        "skin_rays": 29742,
+        "surface_groups": 2,
+        "surface_pose_cases": 48,
+        "worst": []
+      }
+    }
+  ],
+  "visual": [
+    {
+      "run": "old-native",
+      "source_report_sha256": "67ac2eac75ea835360ea93078de8376f02f7bf4be283e2c0f355f38adf8ef62d",
+      "art_sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c",
+      "frames": {
+        "tony_front_rest_2m.png": "56d48559e360a92cdbd1f67192bd6fcc05a05f3e049e03f202f4d52a7211a293",
+        "tony_quarter_rest_2m.png": "93332e05292dae5f7c46c20c325c3811fc0eb8d8fd546b4441ffd7f187caffa8",
+        "tony_front_walk_2m.png": "9078789f4f7af74cd520e51b85b1e8f96194ea61807ef72eccad216b1727205f",
+        "tony_quarter_walk_2m.png": "1aebb030c6d7ac1e511c690d16364d63bbf343ba6dfdbd2b7d0aced5c33fdaed",
+        "tony_front_peak_strike_2m.png": "9787b528686e042e310a25db718043daabc35fbc5c0187c546b4362e400213a9",
+        "tony_quarter_peak_strike_2m.png": "987ced9cb37ae5044ab49fde3c4d65b5887fe6f29cf01e78cc0f6a1bebbd2266",
+        "tony_front_windup_2m.png": "9d46bfa85ce5671cdaefae65fc136ec06645084f5b48647fd9070735888bb6e3",
+        "tony_quarter_windup_2m.png": "84aeff8a4f584c6d2ec79fac152866cc1d73da55864d6e9f477e4b3c6794f575",
+        "tony_front_rest_20m.png": "3db8523c93f69ac0ce1da80955fa3f1ea0d5485491b16c264507ad5d37a0fd45",
+        "tony_coats_3.png": "009b77c1cdb3777d8305d6b64b09e72cdf8384721c212e81d6e1c37c697406b1",
+        "tony_coats_2.png": "1f07b2d70be41e253968f96748b222bf5f1aad408780345f373f05a85a46b8c6",
+        "tony_coats_1.png": "8397516b9fa67514eb2a6056597d6181d7aeea0458e0e9e412ac5c48a84b4f20",
+        "tony_coats_0.png": "ecdbfd9179ed29752fe84c9e1593b570d37fdc2512edb12653a1f87c2f892216",
+        "tony_front_late_walk_coats_3.png": "a96eb50e1128755dc54ec502fba3882f270aff8158f8e054df04be223c3647de",
+        "tony_quarter_late_walk_coats_3.png": "8a0ef235a5fdce6a9a0117a989f7848a3de303464b730d5e69094e005f916045",
+        "tony_front_late_walk_coats_2.png": "90a114db7a161ca6941fbf95011c5155a2688329894aaa904c869179b138274d",
+        "tony_quarter_late_walk_coats_2.png": "0fc97620740151202cdf1d04a097a9e6513b201fa57635105e0ebd1c712ab5aa"
+      },
+      "machine_capture_pass": true,
+      "visual_acceptance_decided_by_copier": false
+    },
+    {
+      "run": "old-web",
+      "source_report_sha256": "49910f402168f176d2f287ff6dacc65ca9ed25d2c4f1aed0a7c8edd3967daa02",
+      "art_sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c",
+      "frames": {
+        "tony_front_rest_2m.png": "6236c4e6555390f33d8c5c2aedf5f3e0726c2913e9c802a95e580c9fcbfaded0",
+        "tony_quarter_rest_2m.png": "aa59137862fa3da649ee259f91dc5449fe34759ebeeb7a495743ef49d7634a8b",
+        "tony_front_walk_2m.png": "315ecab4fbdf63a26ab872d13898b3295e3e645c03313e870639b3a88f67011b",
+        "tony_quarter_walk_2m.png": "bf0615c69d975b79372936b594009401bf499640a12cb48fc59002f469faa147",
+        "tony_front_peak_strike_2m.png": "a6bd87e81e8bc216f861ce55d9b74fa74d0356fbaa6a657f69f93b44173898bc",
+        "tony_quarter_peak_strike_2m.png": "43e0c7a6520b2f1ccabae9be9322ddbf33b09bf3be62ce28d93174d7bf4b1f71",
+        "tony_front_windup_2m.png": "a87a9c2da8c32afef7b6bcd972a5faf4f74d627530c259f035ad6d594a931504",
+        "tony_quarter_windup_2m.png": "f540cb555a9df3b66d1b11fb627c8131ef2bb0733bc3a7bef6d356c131e70e14",
+        "tony_front_rest_20m.png": "534e396c18ff20ef402c9bfa11da26d12055c8600f8c1873c5398fadc12f944c",
+        "tony_coats_3.png": "baf1d6a64c15fc7179b1bf1ef56a030cdd45b5a8f613adaedb4ffbd6137b39ee",
+        "tony_coats_2.png": "0ee79a0ef338d51c029790d787a3116e7042d0da0e2d2c7cfa04f487cf49c51f",
+        "tony_coats_1.png": "a74720d9e02a52f8a70dda9c840c2aab2cc85053b2556847956dbf6069b13666",
+        "tony_coats_0.png": "4897f665f860bb3411fe0abc1b0639041898d35c8b097b1057d2968982f81f44",
+        "tony_front_late_walk_coats_3.png": "adb63e778bd9641f5f7fc8540ef4ae9ec648975efac5ad87a08ff5dbba7bebbf",
+        "tony_quarter_late_walk_coats_3.png": "c63cb9be8e417d5f8219171c242c1fae7bc6277733844ec48e55e2336e89edf4",
+        "tony_front_late_walk_coats_2.png": "ce63249fa4e976c142dc8a005f7eb09236f9553e24e45bdb3425d60b937ebca1",
+        "tony_quarter_late_walk_coats_2.png": "216f15befafb873c3505d580a56e06803428224e7e12cdbb7af97b4b4a37fb37"
+      },
+      "machine_capture_pass": true,
+      "visual_acceptance_decided_by_copier": false
+    },
+    {
+      "run": "new-native",
+      "source_report_sha256": "fa55128cb0759c1d34b3c0e6e133dd6dbf2cd1413a5629cf6db746c77ec1adfd",
+      "art_sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8",
+      "frames": {
+        "tony_front_rest_2m.png": "e7bf6596332dd46ce2a12c452cb3004f3727d4ea57e0f3085c4f8d7585f427c2",
+        "tony_quarter_rest_2m.png": "f3d53de1342a2c7b97dc57fe59696acd04b9ea47bef7c28f5167b7a345bb42a0",
+        "tony_front_walk_2m.png": "1ec0bd25f2f3d00396f5a886437cb28d8b8574cd3872c8f839c90f4580ca908a",
+        "tony_quarter_walk_2m.png": "753c79187cff0483ffc5e7dc37de7364556d2b1f3a9a2f50871ee30cc5bd9fc3",
+        "tony_front_peak_strike_2m.png": "9f267cc884dbb676f208501b6d7af5e884f3e489886a91c105b9acc919e1e5a1",
+        "tony_quarter_peak_strike_2m.png": "b90cb4e364ab248db21ab7170c4bbac833ec84e50c01dc75b6884af6ee05a203",
+        "tony_front_windup_2m.png": "fe0c7d838a0276b7029093537a3f5fd9ff6634c8d478b0abea0bb8e3b41634aa",
+        "tony_quarter_windup_2m.png": "007260d4dcb3404a5623210c6c01965ece59b34d6fa022944694aac72cf0dccd",
+        "tony_front_rest_20m.png": "f6956e861105a2d35294c5a66e61ce834f6cc218977cbc5eb19dc83d656cea95",
+        "tony_coats_3.png": "0935bd3dd0e103426b04019e7a42fc3d7ae04c8336b09fe798bf109c3ee607f4",
+        "tony_coats_2.png": "d1e98035d5e269622033f6559ae169f124da56e278f30095913cdb4e78e5ad4f",
+        "tony_coats_1.png": "4ad950a5787c9d0b6d544a69fd67284f27602cedf2d97f24db7f6fc0d2cda402",
+        "tony_coats_0.png": "ecdbfd9179ed29752fe84c9e1593b570d37fdc2512edb12653a1f87c2f892216",
+        "tony_front_late_walk_coats_3.png": "d83660157eb0641657e4064ddca0559f6ddf38b3621e98c4866b1b586e2cf3fd",
+        "tony_quarter_late_walk_coats_3.png": "fc23bdb77e44e815fb595176a6879b5a2abc7689a98582a4d1371585b277887e",
+        "tony_front_late_walk_coats_2.png": "728c5b3fd72a13afa40210aaf1c45459f121e61917e91a29bb5646cb33a00fcd",
+        "tony_quarter_late_walk_coats_2.png": "314170948fd379a30e692e1f7e8bb7693e3deb256fb0eb9fa789482a892caf24"
+      },
+      "machine_capture_pass": true,
+      "visual_acceptance_decided_by_copier": false
+    },
+    {
+      "run": "new-web",
+      "source_report_sha256": "b02ec9f69972fa743d0b27e1df7e9f73c10ab68ed93d58ec53f7d895746505c1",
+      "art_sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8",
+      "frames": {
+        "tony_front_rest_2m.png": "488ba284c9dec060d0da3127f8f2c8e6ac20c2a60230a328865d9246d8434e11",
+        "tony_quarter_rest_2m.png": "2ff8d29fa456a1ccad7d882d6c089ed87651c5c0ce4567e3579bf72e095f9b68",
+        "tony_front_walk_2m.png": "0707bdf77956a0b69f8c6aaac3fd23e8a00be05916c5b81e2ba904dd595f4c75",
+        "tony_quarter_walk_2m.png": "8cd0e6e275ef90335de595becbaeebf76215ba890b20a1d91d878825610817cc",
+        "tony_front_peak_strike_2m.png": "13f4dae2d793d3a62a4a2631566d6208a93f9bfd1f00354f2d7eed709d6b2eb1",
+        "tony_quarter_peak_strike_2m.png": "13be249d3cf1a33252455dd8e33ea1b0c7f159bc3f0b46e7cd2cdfb2e0e74ab0",
+        "tony_front_windup_2m.png": "68b4aa4bf75d1e83fedd7f2232d638f21360db6132f436365dbfe18f4b6d5efb",
+        "tony_quarter_windup_2m.png": "77fdf78bcc622a82b88bd128d2d2c1431d30c4b76c8cd7e55b619351244d476b",
+        "tony_front_rest_20m.png": "6a9d87dca5b418fbb482d95dbf1badc23ec01b05a84c8175ebc2758c4290232a",
+        "tony_coats_3.png": "f8d27537575b3eaf9edbe01b19535df76895cf97df2eb4b479d93d50b1d56ac0",
+        "tony_coats_2.png": "d4803741053c76c24f06348d315cd2a9fa944f2eed7bed2c812ffcac4f950297",
+        "tony_coats_1.png": "a2e67de0b6d20356d4b1174e6fdb61aef37bff8d2323e5ae3aad35fa1ee6609b",
+        "tony_coats_0.png": "4897f665f860bb3411fe0abc1b0639041898d35c8b097b1057d2968982f81f44",
+        "tony_front_late_walk_coats_3.png": "9567e66494cba259cf42b9c0624feb7d7e7b773d88b705ec7c75a1c3c591de2a",
+        "tony_quarter_late_walk_coats_3.png": "b4f493f395c05bfdb5fc5a903b46bfefac0ce1f4cab872a25709645c912262b2",
+        "tony_front_late_walk_coats_2.png": "be3ab4055f096bf702a1727cba520e75b5ffe5d592e2bcc1cbd610fa01c485a8",
+        "tony_quarter_late_walk_coats_2.png": "4810e790e91ed1b4981b3af17aef76ccc4ef2598a81e482d16994ee05261f87b"
+      },
+      "machine_capture_pass": true,
+      "visual_acceptance_decided_by_copier": false
+    }
+  ],
+  "original_pngs": 68,
+  "source_archive_reference": {
+    "path": ".build/3d/web-progression-current-staging-draft/source.zip",
+    "sha256": "5ff05b84ad5d0edb0352680ccf2cf3df2f39c18f1c31639316938b53cf0d6842",
+    "inventory_path": ".build/3d/web-progression-current-staging-draft/PLAN.json",
+    "copied": false,
+    "observed_source_files": 499,
+    "git_equivalence_claimed": false
+  },
+  "visual_acceptance_decided_by_copier": false,
+  "full_port_or_performance_acceptance": false
+}

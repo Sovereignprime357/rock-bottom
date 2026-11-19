@@ -450,21 +450,27 @@ static func _lapel(parent: Node3D, side: float, y: float, z: float, width: float
 	_panel(parent,PackedVector3Array([Vector3(side*0.06,y+0.14,z-0.018),Vector3(side*width,y+0.09,z-0.035),Vector3(side*width*0.82,y+0.012,z+0.015),Vector3(side*0.075,y-0.16,z+0.026),Vector3(side*0.115,y+0.024,z+0.012)]),color,"lapel")
 
 
-static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vector2, depths: Vector2, color: String, node_name: String) -> void:
+static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vector2, depths: Vector2, color: String, node_name: String, front_outset: float = 0.0, upper_profiles: Array[Vector3] = []) -> void:
 	# Open down the front; the other coats remain genuinely visible through the gap.
 	var rings: Array[PackedVector3Array] = []
 	var height := top-bottom
 	var profiles := [Vector3(widths.x,bottom,depths.x),Vector3(widths.x*0.96,bottom+height*0.28,depths.x*0.94),Vector3(widths.y*0.98,bottom+height*0.68,depths.y),Vector3(widths.y,bottom+height*0.88,depths.y),Vector3(widths.y*0.80,bottom+height*0.96,depths.y*0.84),Vector3(widths.y*0.40,top,depths.y*0.60)]
+	# Tony's existing upper rings follow his shoulders; other callers remain exact.
+	for index in range(upper_profiles.size()): profiles[index+3] = upper_profiles[index]
 	# Duplicate end points across the gap so the generic ring builder's closing
 	# segment becomes the inner facing of the coat, not a panel across the opening.
 	for profile in profiles:
 		var ring := PackedVector3Array()
 		for index in range(17):
 			var angle := 0.45+(TAU-0.90)*float(index)/16.0
-			ring.append(Vector3(sin(angle)*profile.x,profile.y,cos(angle)*profile.z))
+			var outer := Vector3(sin(angle)*profile.x,profile.y,cos(angle)*profile.z)
+			if front_outset > 0.0 and outer.z > 0.0: outer.z += cos(angle)*front_outset
+			ring.append(outer)
 		for index in range(16,-1,-1):
 			var angle := 0.45+(TAU-0.90)*float(index)/16.0
-			ring.append(Vector3(sin(angle)*(profile.x-0.009),profile.y,cos(angle)*(profile.z-0.009)))
+			var inner := Vector3(sin(angle)*(profile.x-0.009),profile.y,cos(angle)*(profile.z-0.009))
+			if front_outset > 0.0 and inner.z > 0.0: inner.z += cos(angle)*front_outset
+			ring.append(inner)
 		rings.append(ring)
 	_instance(parent,_sculpt_mesh(rings,0.82,false),Vector3.ZERO,color,node_name)
 
@@ -472,17 +478,18 @@ static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vecto
 static func _tony(root: Node3D) -> void:
 	for side in [-1.0,1.0]:
 		_leg(root,side,0.76,0.64,0.13,"393328","51432c")
-	_garment(root,[Vector4(0.245,0.72,0.17,0.15),Vector4(0.255,1.02,0.175,0.16),Vector4(0.285,1.32,0.18,0.17),Vector4(0.245,1.42,0.16,0.15),Vector4(0.115,1.48,0.12,0.105)],"454c2e","coat_one")
-	_coat_shell(root,0.61,1.47,Vector2(0.30,0.32),Vector2(0.20,0.21),"8c6b3b","coat_two")
-	_coat_shell(root,0.39,1.49,Vector2(0.38,0.35),Vector2(0.27,0.245),"604020","coat_three")
+	_garment(root,[Vector4(0.245,0.72,0.17,0.15),Vector4(0.255,1.02,0.175,0.16),Vector4(0.285,1.32,0.18,0.17),Vector4(0.30,1.4315,0.16,0.15),Vector4(0.115,1.48,0.12,0.105)],"454c2e","coat_one")
+	# The flat inner front needs clearance; the middle coat back stays unchanged.
+	_coat_shell(root,0.61,1.47,Vector2(0.30,0.32),Vector2(0.20,0.21),"8c6b3b","coat_two",0.0235,[Vector3(0.34,1.43,0.21),Vector3(0.27,1.455,0.1764),Vector3(0.19,1.47,0.155)])
+	_coat_shell(root,0.39,1.49,Vector2(0.38,0.35),Vector2(0.27,0.245),"604020","coat_three",0.0,[Vector3(0.365,1.43,0.25),Vector3(0.26,1.465,0.2058)])
 	for side in [-1.0,1.0]:
 		var arm := _arm(root,side,Vector3(side*0.34,1.39,0),0.62,0.13,"604020",SKIN_PALE)
 		var cuff := arm.get_node("forearm") as Node3D
 		_box(cuff,Vector3(0,-0.265,0.116),Vector3(0.105,0.032,0.02),"8c6b3b","second_cuff")
 		_oval(cuff,Vector3(side*0.045,-0.25,0.115),Vector3(0.012,0.014,0.009),"b29a56","cuff_button")
 		_lapel(root,side,1.34,0.24,0.30,"946b3c")
-		_lapel(root,side,1.31,0.255,0.19,"b08e4e")
-		_lapel(root,side,1.25,0.26,0.105,"69703e")
+		_lapel(root,side,1.31,0.233,0.19,"b08e4e")
+		_lapel(root,side,1.25,0.2295,0.105,"69703e")
 		_box(root,Vector3(side*0.27,0.77,0.235),Vector3(0.13,0.045,0.027),"3e2c1c")
 		_box(root,Vector3(side*0.275,0.70,0.238),Vector3(0.12,0.10,0.014),"694725","pocket_panel")
 		_between(root,Vector3(side*0.178,0.43,0.236),Vector3(side*0.164,1.19,0.217),0.007,0.006,"946b3c","coat_seam")

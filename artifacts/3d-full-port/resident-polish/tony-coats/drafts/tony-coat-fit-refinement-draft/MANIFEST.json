@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "status": "atomic READY and held after bounded peer review; actual posed/native/Web validation pending",
+  "inputs": {
+    "game3d/scripts/character_art.gd": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8",
+    "game3d/scripts/character_roster.gd": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+    "game3d/scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+    "game3d/scripts/site_cast_profiles.gd": "4ac5a33f2b8e1d2adff9f81724d5cb95b8a6b74fa94abacbf3aa20b07bae69c4",
+    "game3d/scripts/actor_animation.gd": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+    "game3d/tests/test_character_roster.gd": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c",
+    "game3d/scripts/surface_kit.gd": "f9626b490d8569fd8d649634f4bc64e3bb887650e04e53ce402b221eb2831ae4",
+    "game3d/scripts/mesh_batcher.gd": "d6bfd693feb3895049219bdb9ad55ce79c34a37c7dae1a59a277b8aa86679f09",
+    "game3d/scripts/presentation_visibility.gd": "76697233cbcd0bd26f6fb1beb76906505ff74ec73fdf2605e765b1abc41a3555",
+    ".build/3d/tony-coat-fit-draft/MANIFEST.json": "c14b4f6c91187e3e1d335fe9845b427b58f94a42aa409b1db99dc1469d002a30",
+    ".build/3d/tony-coat-fit-draft/candidate/game3d/scripts/character_art.gd": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+    ".build/3d/tony-coat-fit-diagnostic-draft/MANIFEST.json": "8f0830dffb0a9d91d8c30405bb5ccc942b97c062fb38ce83684a01e957c92890",
+    ".build/3d/tony-coat-fit-diagnostic-draft/candidate/game3d/tests/test_tony_coat_fit.gd": "b8e2810b12ab43c913fe2e173a076d60bcd9d881d44a7959291c98e31717b98f",
+    ".build/3d/tony-coat-central-v1/fit.stdout.log": "716d90f6a77edd60811860261bfcff682ceec588b618d6627ce3eb51e25599c3",
+    ".build/3d/tony-coat-central-v1/fit.result.json": "dc7e371fb1f831794dcf658d32f20ba784251c2e64458b295320a2c8a2ad46d6",
+    ".build/3d/tony-coat-central-v2-diagnostic/fit.stdout.log": "2879cafce714976c962df680b9776ff6a3432bc1feee42e6370962de62b8acaf"
+  },
+  "files": {
+    "candidate/game3d/scripts/character_art.gd": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c",
+    "candidate/game3d/tests/test_tony_coat_fit.gd": "0c35355866713e7ea5088bba7b0c8d993097b49ba9ac9cc6fbed817d4c39a13f",
+    "EDITS.json": "c63792306f890d3e63ca330eb202f0d9ed7a6b66b3810cf16db1b8d34bee15ef",
+    "README.md": "8925a11a52e7715a1abc44008557b32a4f0ad236a336b24f4cffe549162f6bdd",
+    "recompute-fit.py": "a8267ff9908b8a9f1b0061ba9ddd3b8b47a26416b281049ce395b6d802ef429a",
+    "selection.json": "825ba4880f18704449f7cb7e447125c2f97550ae366537340501cd0bec30b9bf",
+    "SPEC-DRAFT.md": "a25f2961de7ab4e007c4c8e917f14c69dc985d6850c01a7f529f7e2592bc4a25",
+    "verify.py": "ef126417d48dd8849f45476881b7bf18dc83f658144fa7a6ab10130d541e3c2c",
+    "PEER-REVIEW.md": "9aba5bf4b5d3e95f37237f56ca601687e2fb852c10a458dbab2a71d51b6134e5"
+  },
+  "overlays": [
+    {
+      "target": "game3d/scripts/character_art.gd",
+      "candidate": "candidate/game3d/scripts/character_art.gd",
+      "base": ".build/3d/tony-coat-fit-draft/candidate/game3d/scripts/character_art.gd",
+      "old_sha256": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+      "sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c",
+      "recipe": "production"
+    },
+    {
+      "target": "game3d/tests/test_tony_coat_fit.gd",
+      "candidate": "candidate/game3d/tests/test_tony_coat_fit.gd",
+      "base": ".build/3d/tony-coat-fit-diagnostic-draft/candidate/game3d/tests/test_tony_coat_fit.gd",
+      "old_sha256": "b8e2810b12ab43c913fe2e173a076d60bcd9d881d44a7959291c98e31717b98f",
+      "sha256": "0c35355866713e7ea5088bba7b0c8d993097b49ba9ac9cc6fbed817d4c39a13f",
+      "recipe": "focused_test"
+    }
+  ],
+  "unchanged_test_conditions": "all1mm clearance/count/pose guards; only authorized profile displacement bound and its message differ",
+  "engine_run": false,
+  "production_edit": false
+}

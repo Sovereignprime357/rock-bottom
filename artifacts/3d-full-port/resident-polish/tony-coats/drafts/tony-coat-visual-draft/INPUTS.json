@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "archive": ".build/3d/web-progression-current-staging-draft/source.zip",
+  "archive_plan": ".build/3d/web-progression-current-staging-draft/PLAN.json",
+  "archive_sha256": "5ff05b84ad5d0edb0352680ccf2cf3df2f39c18f1c31639316938b53cf0d6842",
+  "files": [
+    {
+      "path": ".build/3d/web-progression-current-staging-draft/source.zip",
+      "sha256": "5ff05b84ad5d0edb0352680ccf2cf3df2f39c18f1c31639316938b53cf0d6842",
+      "bytes": 3014722
+    },
+    {
+      "path": ".build/3d/web-progression-current-staging-draft/PLAN.json",
+      "sha256": "f7611c68e53d855affecc94682afbee5b23054bd8bf0357f945112dcc079e1a4",
+      "bytes": 88498
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-refinement-draft/candidate/game3d/scripts/character_art.gd",
+      "sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c",
+      "bytes": 44459
+    },
+    {
+      "path": ".build/3d/tony-coat-central-v3-fit/provenance.json",
+      "sha256": "428c97453634d9fd605ba988f65f53ac4ff6e512d40907e6dff68ab659b9362f",
+      "bytes": 55491
+    },
+    {
+      "path": ".build/3d/tony-coat-central-v3-fit/fit.result.json",
+      "sha256": "a2c5733a42234e0b7db3dfe2e76cc1770d1c72a0b0192f65eab1a9a604f83195",
+      "bytes": 413
+    },
+    {
+      "path": ".build/3d/tony-coat-central-v3-fit/fit.stdout.log",
+      "sha256": "a2bd44235c7850259f1068c020cc45568d263d922dcb9c997c7eb8a06243db0f",
+      "bytes": 661
+    },
+    {
+      "path": ".build/3d/tony-coat-central-v3-fit/roster.result.json",
+      "sha256": "e44b56bd3187912aebfc505188e7c10afa7ac09217ce320257d755fc533e68dd",
+      "bytes": 420
+    },
+    {
+      "path": ".build/3d/tony-coat-central-v3-fit/art.result.json",
+      "sha256": "1a15ef99cb5ac8ce7b05ae1e62a701f305a84b6cb309bc47ea0bb974e23ba724",
+      "bytes": 403
+    },
+    {
+      "path": ".build/3d/resident-index-composition-draft/indexed_roster_evidence.gd",
+      "sha256": "cc345c8a2fe1ce177480eddfbcdf2881ada02cbf2862e5801b33682db21dc3e0",
+      "bytes": 8147
+    },
+    {
+      "path": ".build/3d/resident-index-composition-draft/roster-bridge.js",
+      "sha256": "10907291abbeddeb173568382f766b52671fa7f289afa258734aa796c7822ea6",
+      "bytes": 5530
+    },
+    {
+      "path": ".build/3d/resident-index-composition-draft/test-bridge.mjs",
+      "sha256": "d61e51cb4cd63cf3707240b47ca5d31a32e17f149f1999e99a3e189665c4a651",
+      "bytes": 5453
+    },
+    {
+      "path": ".build/3d/vendor-receipt-runner-draft/run-staged.ps1",
+      "sha256": "58aa4d9adb48bc09c4c1026756bc4011c412fb2b032041bccfb082bf591a5447",
+      "bytes": 7344
+    },
+    {
+      "path": ".tools/godot-4.5.1/Godot_v4.5.1-stable_win64_console.exe",
+      "sha256": "f0336c8b2ae039d39767a64c416f01b1b49d95d8dde87724012874dd4be1c1a8",
+      "bytes": 197640
+    },
+    {
+      "path": ".tools/godot-4.5.1/Godot_v4.5.1-stable_win64.exe",
+      "sha256": "a829242096d640007de9fa93ea923d0f666d13d6a3b472a0231c820be6dc7627",
+      "bytes": 163358216
+    },
+    {
+      "path": ".tools/templates/web_nothreads_release.zip",
+      "sha256": "7f6c5efc9952f6f02509adfb92298161c0152a1f6a81c0bf9b9f4f913676e9c8",
+      "bytes": 9436583
+    },
+    {
+      "path": ".build/3d/tony-coat-visual-draft/character_roster_probe.gd",
+      "sha256": "448cb01bfe68b913b19149cf837fc68ab0270b2ce2ca66e4e042179217f69165",
+      "bytes": 10807
+    },
+    {
+      "path": ".build/3d/tony-coat-visual-draft/tony_coat_evidence.gd",
+      "sha256": "85b2a61fa1943213553b49eae5cbf6b4aa1e5f3ddbb7784660ab28ed113db585",
+      "bytes": 10266
+    },
+    {
+      "path": ".build/3d/tony-coat-visual-draft/test_tony_visual_contract.gd",
+      "sha256": "d4fe2694b120bded2c87f17aa00068046678bae6708d5c6859ad360ba6ac6b20",
+      "bytes": 2469
+    },
+    {
+      "path": ".build/3d/tony-coat-visual-draft/roster-shell.html",
+      "sha256": "203c79dba3a6d0e398aa0ea7ceb54455faf96176d2bbfb90cc9699e8399f4ab8",
+      "bytes": 1358
+    }
+  ],
+  "overlays": [
+    {
+      "source": ".build/3d/tony-coat-fit-refinement-draft/candidate/game3d/scripts/character_art.gd",
+      "target": "game3d/scripts/character_art.gd",
+      "kind": "production"
+    },
+    {
+      "source": ".build/3d/tony-coat-visual-draft/character_roster_probe.gd",
+      "target": "game3d/tests/character_roster_probe.gd",
+      "kind": "completion_hook"
+    },
+    {
+      "source": ".build/3d/tony-coat-visual-draft/tony_coat_evidence.gd",
+      "target": "game3d/tests/tony_coat_evidence.gd",
+      "kind": "visual_probe"
+    },
+    {
+      "source": ".build/3d/tony-coat-visual-draft/test_tony_visual_contract.gd",
+      "target": "game3d/tests/test_tony_visual_contract.gd",
+      "kind": "contract"
+    },
+    {
+      "source": ".build/3d/tony-coat-visual-draft/roster-shell.html",
+      "target": "game3d/roster-shell.html",
+      "kind": "shell"
+    }
+  ],
+  "no_engine": true
+}

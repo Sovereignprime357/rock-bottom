@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "previous_manifest": {
+    "path": ".build/3d/tony-coat-visual-draft/MANIFEST.json",
+    "sha256": "5741081c5c67f6d598fba3038100b906d01aa65ed1832c7eebec85e55c53fd3e"
+  },
+  "previous_art": {
+    "path": ".build/3d/tony-coat-fit-refinement-draft/candidate/game3d/scripts/character_art.gd",
+    "sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c"
+  },
+  "candidate_art": {
+    "path": ".build/3d/tony-coat-surfaces-next-draft/candidate/game3d/scripts/character_art.gd",
+    "sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8"
+  },
+  "old_inputs_sha256": "6e6c33af21a655b0974911d789c8f86627b6de6f09d2345ea9938d5abfda5c6e",
+  "only_prepared_source_change": "game3d/scripts/character_art.gd",
+  "surface_manifest": {
+    "path": ".build/3d/tony-coat-surfaces-next-draft/manifest.json",
+    "sha256": "5372b584d03831ed3f5dc0ff845684a8a1baa6ec632cd129156ea0f8cd8bdb6c"
+  },
+  "expected_frames": 17,
+  "engine_run": false,
+  "visual_acceptance": false
+}

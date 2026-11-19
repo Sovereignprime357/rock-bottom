@@ -1,0 +1,98 @@
+{
+  "status": "pass",
+  "engine_stages": [
+    {
+      "exit_code": 0,
+      "name": "import",
+      "pid": 11628,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "elapsed_ms": 5629
+    },
+    {
+      "exit_code": 0,
+      "name": "facade_apertures",
+      "pid": 35760,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\facade_apertures.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d\\tests\\test_facade_apertures.gd"
+      ],
+      "elapsed_ms": 4475
+    },
+    {
+      "exit_code": 0,
+      "name": "save_store",
+      "pid": 27720,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\save_store.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d\\tests\\test_save_store_read.gd"
+      ],
+      "elapsed_ms": 204
+    },
+    {
+      "exit_code": 0,
+      "name": "full_scene",
+      "pid": 27668,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\full_scene.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d\\tests\\test_full_scene.gd"
+      ],
+      "elapsed_ms": 14865
+    },
+    {
+      "exit_code": 0,
+      "name": "receipt_contract",
+      "pid": 40360,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\receipt_contract.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d\\tests\\test_vendor_receipt_visual.gd"
+      ],
+      "elapsed_ms": 1972
+    },
+    {
+      "exit_code": 0,
+      "name": "web_export",
+      "pid": 1788,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\web_export.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\game3d",
+        "--export-release",
+        "Receipt Visual",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v3-aperture\\web\\index.html"
+      ],
+      "elapsed_ms": 6634
+    }
+  ],
+  "browser_acceptance": false
+}

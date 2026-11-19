@@ -1,6 +1,13 @@
 extends SceneTree
 const Scene = preload("res://scripts/full_scene.gd")
 const Content = preload("res://scripts/content_catalog.gd")
+const EconomyFixtures = preload("res://tests/test_economy.gd")
+class ReceiptObserverRig:
+	extends "res://scripts/first_person_rig.gd"
+	var observed: Array[StringName] = []
+	func acknowledge(kind: StringName,success: bool = true,contact: bool = false,used_weapon: StringName = &"") -> void:
+		observed.append(kind)
+		super.acknowledge(kind,success,contact,used_weapon)
 class DelayedStore:
 	extends "res://scripts/save_store.gd"
 	signal read_started
@@ -19,6 +26,7 @@ var game: Node3D
 var checks: int = 0
 var failures: Array[String] = []
 var dave_wake_completed := false
+var vendor_receipts_completed := false
 func _initialize() -> void: call_deferred("_run")
 func check(ok: bool,label: String) -> void:
 	checks += 1
@@ -239,6 +247,7 @@ func _run() -> void:
 	check(buttons.size() == 5,"vendor renders each source choice once including Leave")
 	if not buttons.is_empty(): buttons[0].pressed.emit()
 	check(game.runtime.p.rocks == 1 and game.runtime.p.cash == 0 and game.runtime.s.mode == "playing","real menu buy commits once and closes")
+	check(game.hands.action == &"receipt","actual committed vendor menu purchase reaches the existing hand receipt")
 	var block: Dictionary = game.world.service_points["smoke:block"]
 	_place(block.approach)
 	game.camera.rotation = Vector3.ZERO
@@ -331,7 +340,130 @@ func _run() -> void:
 	await _load_arrival_race(false)
 	await _load_arrival_race(true)
 	_test_ending_receipts()
+	await _test_vendor_receipts()
+	check(vendor_receipts_completed,"receipt source/event/rig regression completed without script abort")
 	await _finish()
+
+func _receipt_fixture(vendor: String,action: String) -> Dictionary:
+	# Reuse the existing economy gate's bounded spatial/boss seams; no world-play claim.
+	var owner: RefCounted = EconomyFixtures.State.new()
+	var spatial: RefCounted = EconomyFixtures.Spatial.new()
+	var boss: RefCounted = EconomyFixtures.Boss.new(owner)
+	var vendors: RefCounted = EconomyFixtures.Vendors.new(owner,spatial,null,boss)
+	owner.p.cash = 200; owner.p.copper = 3; owner.p.rank = 3; owner.p.cred = 100
+	owner.p.faction.scrap = 30; owner.s.quests.intro_tony.available = false
+	owner.p.inventory.append({"id":"license","n":"license plate","q":1})
+	owner.p.inventory.append({"id":"junk","n":"a piece of junk","q":1})
+	if action == "torch_again": owner.s.flags.peteTorchSold = true
+	if action == "swap_tools": owner.equip_tool("crowbar"); owner.equip_tool("propane_torch")
+	for body: Dictionary in owner.npcs:
+		if body.id == vendor:
+			owner.p.x = float(body.x)+(float(body.w)-float(owner.p.w))*0.5
+			owner.p.y = float(body.y)+(float(body.h)-float(owner.p.h))*0.5
+			break
+	return {"owner":owner,"spatial":spatial,"boss":boss,"vendors":vendors}
+
+func _receipt_events(owner: RefCounted) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for event: Dictionary in owner.events:
+		if event.kind == "vendor_action": result.append(event.duplicate(true))
+	return result
+
+func _project_receipt_events(events: Array[Dictionary],rig: ReceiptObserverRig) -> void:
+	var before: Dictionary = game.runtime.snapshot()
+	var seed: int = game.runtime.state.rng_seed
+	game.runtime._outbox.append_array(events.duplicate(true))
+	game._consume_events()
+	check(game.runtime.snapshot() == before and game.runtime.state.rng_seed == seed,"receipt projection changes no source state or RNG")
+	var count: int = rig.observed.size()
+	game._consume_events()
+	check(rig.observed.size() == count,"second event drain cannot replay a transaction gesture")
+
+func _test_vendor_receipts() -> void:
+	while game.saving or not game.pending_save.is_empty(): await process_frame
+	game.runtime.fresh(); game._resume(); game.runtime.drain_events()
+	var original: Node3D = game.hands
+	var original_visible: bool = original.visible
+	var rig := ReceiptObserverRig.new(); rig._build(); rig.reset()
+	original.get_parent().add_child(rig); original.hide(); game.hands = rig
+	game._hand_context.clear(); game._sync_hand_context()
+	var paper: MeshInstance3D = rig.get_node("left_arm/forearm/wrist/receipt/paper")
+	var paper_mesh: Mesh = paper.mesh; var paper_material: Material = paper.material_override
+	var completed := 0
+	var positive: Array = [["tony","buy_rock"],["tony","short"],
+		["yuri","sell_copper"],["yuri","sell_all_copper"],["yuri","rent_shed"],
+		["pete","sell_copper"],["pete","sock"],["pete","sell_license"],["pete","sell_junk"],
+		["pete","buy_food"],["pete","buy_torch"],["pete","buy_crowbar"],["pete","loan"]]
+	for pair: Array in positive:
+		var f: Dictionary = _receipt_fixture(pair[0],pair[1])
+		var menu: Dictionary = f.vendors.open(pair[0])
+		check(menu.get("ok",false),"real vendor fixture opens "+str(pair))
+		if not menu.get("ok",false): continue
+		f.owner.events.clear()
+		var cash: int = f.owner.p.cash
+		var result: Dictionary = f.vendors.select(menu.token,pair[1])
+		var events: Array[Dictionary] = _receipt_events(f.owner)
+		check(result.get("ok",false) and f.owner.p.cash != cash and events.size() == 1,"one economically committed source event "+str(pair))
+		var committed: Dictionary = f.owner.snapshot(); var event_copy: Array = events.duplicate(true)
+		rig.reset(); rig.observed.clear(); _project_receipt_events(events,rig)
+		check(rig.observed == [&"receipt"] and rig.action == &"receipt","one existing receipt acknowledgement "+str(pair))
+		check(f.owner.snapshot() == committed and events == event_copy,"presentation preserves committed producer and event payload "+str(pair))
+		rig.tick(0.08,Vector3.ZERO,false); rig.tick(0.08,Vector3.ZERO,false)
+		check(paper.is_visible_in_tree() and is_equal_approx(rig.action_phase,0.5),"existing paper is visible at original receipt midpoint")
+		var phase: float = rig.action_phase; rig.tick(0.0,Vector3.ZERO,false)
+		check(rig.action_phase == phase,"zero admitted time cannot spend receipt recovery")
+		rig.tick(0.08,Vector3.ZERO,false); rig.tick(0.08,Vector3.ZERO,false)
+		check(rig.action.is_empty() and not paper.is_visible_in_tree(),"original0.32second recovery hides paper")
+		completed += 1
+	check(completed == 13,"all thirteen committed pair witnesses completed")
+	var excluded: Array = [["tony","leave"],["tony","negotiate"],["tony","challenge"],
+		["yuri","brutus"],["yuri","dog"],["pete","torch_again"],["pete","swap_tools"]]
+	var negatives := 0
+	for pair: Array in excluded:
+		var f: Dictionary = _receipt_fixture(pair[0],pair[1]); var menu: Dictionary = f.vendors.open(pair[0])
+		check(menu.get("ok",false),"excluded real vendor fixture opens "+str(pair))
+		if not menu.get("ok",false): continue
+		f.owner.events.clear()
+		var result: Dictionary = f.vendors.select(menu.token,pair[1])
+		check(result.get("ok",false),"source nonreceipt path really succeeds "+str(pair))
+		rig.reset(); rig.observed.clear(); _project_receipt_events(_receipt_events(f.owner),rig)
+		check(rig.observed.is_empty() and rig.action.is_empty(),"success alone cannot fabricate economic receipt "+str(pair))
+		if pair[1] == "challenge": check(f.boss.starts == 1 and f.owner.s.bossActive,"actual source challenge dispatched its existing boss seam")
+		negatives += 1
+	check(negatives == 7,"all seven excluded successful paths completed")
+	for stale: bool in [false,true]:
+		var f: Dictionary = _receipt_fixture("tony","buy_rock"); var menu: Dictionary = f.vendors.open("tony")
+		if stale: check(f.vendors.select(menu.token,"buy_rock").ok,"stale witness first transaction really commits")
+		else: f.owner.p.cash = 0
+		f.owner.events.clear()
+		var result: Dictionary = f.vendors.select(menu.token,"buy_rock")
+		check(not result.ok and _receipt_events(f.owner).is_empty(),"refused/stale token emits no committed event: "+str(stale))
+		rig.reset(); rig.observed.clear(); _project_receipt_events(_receipt_events(f.owner),rig)
+		check(rig.observed.is_empty(),"refused/stale request cannot acknowledge receipt")
+	for payload: Dictionary in [{},{"ok":false,"vendor":"tony","action":"buy_rock"},
+		{"ok":1,"vendor":"tony","action":"buy_rock"},{"ok":"true","vendor":"tony","action":"buy_rock"},
+		{"ok":true,"vendor":"tony","action":"loan"},{"ok":true,"vendor":"pete","action":"rent_shed"},
+		{"ok":true,"vendor":"TONY","action":"buy_rock"},{"ok":true,"vendor":"unknown","action":"buy_rock"},
+		{"ok":true,"vendor":null,"action":"buy_rock"},{"ok":true,"vendor":"tony","action":["buy_rock"]}]:
+		check(not Scene._vendor_receipt(payload),"malformed or wrong-vendor action refuses atomically "+str(payload))
+	var event: Dictionary = {"kind":"vendor_action","payload":{"ok":true,"vendor":"pete","action":"sock"}}
+	rig.reset(); rig.observed.clear(); rig.acknowledge(&"punch",true,true,&"fists")
+	var punch_phase: float = rig.action_phase; rig.observed.clear()
+	_project_receipt_events([event],rig)
+	check(rig.observed == [&"receipt"] and rig.action == &"punch" and rig.action_phase == punch_phase,"successful transaction cannot interrupt an accepted punch")
+	rig.reset(); rig.observed.clear()
+	_project_receipt_events([event,{"kind":"player_attack","payload":{"connected":true,"used_weapon":"fists"}}],rig)
+	check(rig.observed == [&"receipt",&"punch"] and rig.action == &"punch","original batch ordering lets later accepted attack replace receipt immediately")
+	var third: Dictionary = _receipt_fixture("tony","short"); third.owner.p.tonyOffenses = 2
+	var third_menu: Dictionary = third.vendors.open("tony"); third.owner.events.clear()
+	check(third.vendors.select(third_menu.token,"short").ok and third.boss.starts == 1 and third.owner.p.cash == 195,"third short retains actual paid boss consequence")
+	rig.reset(); rig.observed.clear(); _project_receipt_events(_receipt_events(third.owner),rig)
+	check(rig.observed == [&"receipt"],"third short is still one committed money transaction")
+	rig.reset()
+	check(paper.mesh == paper_mesh and paper.material_override == paper_material and not paper.is_visible_in_tree(),"reset clears presentation and retains original paper resources")
+	game.hands = original; original.visible = original_visible; game._hand_context.clear(); game._sync_hand_context(); rig.free()
+	vendor_receipts_completed = true
+
 
 func _test_bounded_wall_load(saved: Dictionary) -> void:
 	# Process is disabled: inspect restored authority, then the caller reloads ordinary

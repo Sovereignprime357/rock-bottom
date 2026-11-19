@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "status": "atomic READY and held for root engine/native/Web validation; no production edits",
+  "context_supplied_by_root": "fac5083",
+  "files": {
+    "BASELINE.json": "602e2891f5deb9276e49590450a35b2d2daaa6009914e4bc58d437ff7ea318fa",
+    "candidate/game3d/scripts/character_art.gd": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+    "candidate/game3d/tests/reference_tony_cast_profiles.gd": "ef30b193740cfa9d1f515de67e1c654dd78e249f740f32102bb94029ee30e1e5",
+    "candidate/game3d/tests/reference_tony_character_art.gd": "d063323e00029ce86fe6546e222e546de9530ce6b699ea0670264473d6a2fafd",
+    "candidate/game3d/tests/reference_tony_character_roster.gd": "453e57379c095cbcf2bb8aeda1001ab724402b9444fa2139335e493d50512cbd",
+    "candidate/game3d/tests/reference_tony_site_cast_profiles.gd": "420fd25cf815038e0778b57ea20cdd6542f54615ac1d2c250d35ac07f5980b32",
+    "candidate/game3d/tests/test_tony_coat_fit.gd": "1f5b732b9b23472f4e6d1c49919e3dc0ce1ab2101b2cf7bad5d212da540a9e33",
+    "EDITS.json": "86014e1f4235275a18987f7bbea04f26ddcb5549a7e435a27b2dbb42eb3a39c4",
+    "original/game3d/scripts/actor_animation.gd": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+    "original/game3d/scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+    "original/game3d/scripts/character_art.gd": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8",
+    "original/game3d/scripts/character_roster.gd": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+    "original/game3d/scripts/site_cast_profiles.gd": "4ac5a33f2b8e1d2adff9f81724d5cb95b8a6b74fa94abacbf3aa20b07bae69c4",
+    "prepare.py": "ef221c14d47886d92bb0ec691483e2771de7c7575bb8df6b8b86b3a4a408cae4",
+    "README.md": "5f5f1a4b802bdd4f9b3395b293f42c808f083ed27dba2b3badc74661f417cca5",
+    "select-fit.py": "3bf0455c23f838a314213d0589f06118b0cfcd4d442658e52e679ef492312114",
+    "selection.json": "e7d79c44c0a5a4b85f1252140cb0058b6ef9e169b0d0581dcccdf58ebea0c449",
+    "SPEC-DRAFT.md": "8c4d65b1c0c714798a42e7703a755940cf5773e63e73a1b9341361d27540befc",
+    "PEER-REVIEW.md": "7f802a0bf6a9d8519aaad44ab14a3f25f1327e8641a9c036d03b6c9eefcb1ac1",
+    "STATIC-VERIFY.json": "89694352bacfcb73475dff3f6199398ca8607a538fe5ac20650a2b99407e432c"
+  },
+  "overlays": [
+    {
+      "target": "game3d/scripts/character_art.gd",
+      "candidate": "candidate/game3d/scripts/character_art.gd",
+      "sha256": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+      "old_sha256": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8"
+    },
+    {
+      "target": "game3d/tests/reference_tony_cast_profiles.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_cast_profiles.gd",
+      "sha256": "ef30b193740cfa9d1f515de67e1c654dd78e249f740f32102bb94029ee30e1e5",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/reference_tony_character_art.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_character_art.gd",
+      "sha256": "d063323e00029ce86fe6546e222e546de9530ce6b699ea0670264473d6a2fafd",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/reference_tony_character_roster.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_character_roster.gd",
+      "sha256": "453e57379c095cbcf2bb8aeda1001ab724402b9444fa2139335e493d50512cbd",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/reference_tony_site_cast_profiles.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_site_cast_profiles.gd",
+      "sha256": "420fd25cf815038e0778b57ea20cdd6542f54615ac1d2c250d35ac07f5980b32",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/test_tony_coat_fit.gd",
+      "candidate": "candidate/game3d/tests/test_tony_coat_fit.gd",
+      "sha256": "1f5b732b9b23472f4e6d1c49919e3dc0ce1ab2101b2cf7bad5d212da540a9e33",
+      "old_sha256": null
+    }
+  ],
+  "production_owners": [
+    "game3d/scripts/character_art.gd"
+  ],
+  "test_completion_groups": 4,
+  "test_pose_removal_cases": 48,
+  "unchanged_other_identities": 71,
+  "engine_run": false,
+  "git_run": false,
+  "peer_review": "PEER-REVIEW.md",
+  "static_evidence": "STATIC-VERIFY.json"
+}

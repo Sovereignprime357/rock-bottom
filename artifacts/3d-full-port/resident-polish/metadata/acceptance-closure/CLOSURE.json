@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "scope": "Later root appearance acceptance closes only the sealed conditional delivery prerequisite",
+  "root_appearance_accepted": true,
+  "sealed_packet_modified": false,
+  "full_live_gate_acceptance": false,
+  "full_port_acceptance": false,
+  "performance_acceptance": false,
+  "web_engine_shutdown_acceptance": false,
+  "web_actual_exit": null,
+  "native_originals_inspected_by_root": 17,
+  "web_originals_verified": 17,
+  "web_critical_originals_inspected_by_root": 5,
+  "unchanged_parity": {
+    "pin_path_keys": 247,
+    "statuses": 617,
+    "evidence_references": 96
+  },
+  "evidence": [
+    {
+      "path": ".build/3d/metadata-v4-release-draft/MANIFEST.json",
+      "bytes": 8439,
+      "sha256": "c99db892a171cd91619f51ce20618b38c1525543baa7153a1a42cde46492fed9"
+    },
+    {
+      "path": ".build/3d/metadata-v4-release-draft/DELIVERY.json",
+      "bytes": 7250,
+      "sha256": "c84004e28918ea6f02bedc9537222a1115f91a8689a3b8bdd5e397f7d4f803ad"
+    },
+    {
+      "path": ".build/full-port/tony-coat-surfaces-visual/VISUAL-ACCEPTANCE.md",
+      "bytes": 1629,
+      "sha256": "cbc5c35cbdd1f29088995471fc75f9c7ecebd2e1a46e605d35c487c6915b03ec"
+    },
+    {
+      "path": ".build/3d/tony-coat-central-v6-corrected/validation-v1/validation-result.json",
+      "bytes": 2922,
+      "sha256": "f4d17efd3fb5208cfc86f34cd7870706e2bba2ee53202f15660b60011a515704"
+    },
+    {
+      "path": ".build/full-port/tony-coat-surfaces-visual/native-v1/validation-result.json",
+      "bytes": 2065,
+      "sha256": "14da7ba91a2f90e9cb2849f903360b878081f79627bb13612cde8dea3730e0ff"
+    },
+    {
+      "path": ".build/full-port/tony-coat-surfaces-visual/native-v1/capture-validation.json",
+      "bytes": 59054,
+      "sha256": "59ea4e84ef4b5772e476155ff5b03306c328cce824a6a0a38bae9d463f866a34"
+    },
+    {
+      "path": ".build/full-port/tony-coat-surfaces-visual/web-v1/browser-evidence/original-bundle.json",
+      "bytes": 18670189,
+      "sha256": "b02ec9f69972fa743d0b27e1df7e9f73c10ab68ed93d58ec53f7d895746505c1"
+    },
+    {
+      "path": ".build/full-port/tony-coat-surfaces-visual/web-v1/browser-evidence/original-verification.json",
+      "bytes": 2881,
+      "sha256": "098e5491beed0adf17267f3c2e5ab8113ff51dc9442e96d497281608ae311826"
+    }
+  ]
+}

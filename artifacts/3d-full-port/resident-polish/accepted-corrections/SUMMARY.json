@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "scope": "Root-accepted empty-save/purchase receipt/clear authored doorway only; candidate source not yet promoted",
+  "productionOwners": {
+    "game3d/scripts/save_store.gd": "ccf37a234ac3dae5ac9b1580d18e6bb60aa4ae35f9544956d1b522065777e0e3",
+    "game3d/scripts/full_scene.gd": "8b214bea4c9246b8af2c5611ce9c4f9d5531ed116f40bdaf339ef7ce13a83ea6",
+    "game3d/scripts/full_neighborhood.gd": "2c57bcbcc946f13f8d20ebfed9f47901d8f77e8bb6215ebfc596610e88d49ce5"
+  },
+  "testFullSceneSha256": "d99b7e790cceca15b111df71b6a71533a9e33cfaa840b48db5318665c3c903f4",
+  "actualModelChecks": {
+    "saveStore": 27,
+    "saveStoreGroups": 5,
+    "fullScene": 674,
+    "facade": 766,
+    "facadeGroups": 4,
+    "receiptContract": 183,
+    "receiptGroups": 4,
+    "fullWorld": 7783,
+    "actualSweptRouteLegs": 321
+  },
+  "actualNative": {
+    "checks": 675,
+    "frames": 4,
+    "dimensions": [
+      1280,
+      720
+    ],
+    "mechanicalAcceptance": true
+  },
+  "actualWeb": {
+    "checks": 610,
+    "frames": 4,
+    "dimensions": [
+      960,
+      540
+    ],
+    "actualExit": null,
+    "mechanicalAcceptance": true,
+    "mode": "capture_keepalive"
+  },
+  "visualDispositionSource": ".build/full-port/vendor-receipt/VISUAL-ACCEPTANCE-v3.md",
+  "sourceAttribution": "Exact accepted505 prepared-source map and external export hashes; Web raw GDScript hashes are unavailable, not fabricated.",
+  "retainedFailures": [
+    {
+      "id": "empty-key-web-v1",
+      "path": ".build/full-port/web-progression/current-v1/browser-evidence",
+      "disposition": "original parser error before Start; retained failed"
+    },
+    {
+      "id": "missing-save-parent-v2",
+      "path": ".build/full-port/web-progression/current-v2-empty-save",
+      "disposition": "environment setup timeout; exact source guard not blamed or failure erased"
+    },
+    {
+      "id": "receipt-observer-v1",
+      "path": ".build/full-port/vendor-receipt/current-v1",
+      "disposition": "malformed-value observer error; source transaction owner unchanged"
+    },
+    {
+      "id": "receipt-obscured-v2",
+      "path": ".build/full-port/vendor-receipt/native-v2-observer",
+      "disposition": "791 mechanical checks passed; root held visual acceptance for foreground pier"
+    }
+  ],
+  "metadataStatusesChanged": 0,
+  "performanceAcceptance": false,
+  "fullPortAcceptance": false,
+  "shutdownAcceptance": false,
+  "TonyArtAcceptance": false,
+  "engineRunByIndexer": false
+}

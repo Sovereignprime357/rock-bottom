@@ -1,0 +1,88 @@
+{
+  "format": "rock-bottom-tony-surfaces-central-validation",
+  "status": "pass",
+  "project": "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\game3d",
+  "engine": "C:\\Users\\zenit\\projects\\Rock Bottom\\.tools\\godot-4.5.1\\Godot_v4.5.1-stable_win64_console.exe",
+  "stages": [
+    {
+      "name": "import",
+      "status": "pass",
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\game3d",
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\validation-v1\\import.godot.log",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "timeout_seconds": 180,
+      "pid": 24428,
+      "exit_code": 0,
+      "elapsed_ms": 7413,
+      "stdout_retained": true,
+      "stderr_retained": true
+    },
+    {
+      "name": "surfaces",
+      "status": "pass",
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\game3d",
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\validation-v1\\surfaces.godot.log",
+        "--script",
+        "res://tests/test_tony_coat_surfaces.gd"
+      ],
+      "timeout_seconds": 600,
+      "pid": 16376,
+      "exit_code": 0,
+      "elapsed_ms": 51274,
+      "stdout_retained": true,
+      "stderr_retained": true,
+      "focused_checks": 1368
+    },
+    {
+      "name": "roster",
+      "status": "pass",
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\game3d",
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\validation-v1\\roster.godot.log",
+        "--script",
+        "res://tests/test_character_roster.gd"
+      ],
+      "timeout_seconds": 300,
+      "pid": 36428,
+      "exit_code": 0,
+      "elapsed_ms": 33585,
+      "stdout_retained": true,
+      "stderr_retained": true
+    },
+    {
+      "name": "art",
+      "status": "pass",
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\game3d",
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v6-corrected\\validation-v1\\art.godot.log",
+        "--script",
+        "res://tests/test_art.gd"
+      ],
+      "timeout_seconds": 180,
+      "pid": 36776,
+      "exit_code": 0,
+      "elapsed_ms": 3240,
+      "stdout_retained": true,
+      "stderr_retained": true
+    }
+  ],
+  "source_verified_after": true,
+  "visual_acceptance": false
+}

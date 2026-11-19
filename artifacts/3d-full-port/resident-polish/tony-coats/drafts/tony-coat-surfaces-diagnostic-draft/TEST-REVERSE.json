@@ -1,0 +1,31 @@
+{
+  "before": "dcdc54b8f6bb8dcd3e8c30d1f0c24940cbbcf80785e169f7022335c80db8db86",
+  "after": "830a1694fb49caf9b69ea1020956d1be12600ab9d5eb4d8185b6b01a6cc46e7d",
+  "unchanged_assertion_calls": 37,
+  "splices": [
+    {
+      "before": "",
+      "after": "var surface_channel_differences: Array[Dictionary] = []\nvar surface_self_ray_misses := 0\nvar surface_self_ray_details: Array[Dictionary] = []\n"
+    },
+    {
+      "before": "\t\t\t\tif channel not in [Mesh.ARRAY_VERTEX,Mesh.ARRAY_NORMAL]: attributes_equal = attributes_equal and before[channel] == after[channel]\n",
+      "after": "\t\t\t\tif channel not in [Mesh.ARRAY_VERTEX,Mesh.ARRAY_NORMAL]:\n\t\t\t\t\tif before[channel] != after[channel]: _surface_channel_diagnostic(part_index,part_name,channel,before[channel],after[channel])\n\t\t\t\t\tattributes_equal = attributes_equal and before[channel] == after[channel]\n"
+    },
+    {
+      "before": "\tprint(\"TONY COAT SURFACES DIAGNOSTIC: \",JSON.stringify(_surface_json_safe({\"failures\":failures,\"checks\":checks,\"inherited_groups\":fit_groups,\"surface_groups\":surface_groups,\"shell_pose_cases\":fit_pose_cases,\"surface_pose_cases\":surface_pose_cases,\"other_identities\":fit_other_models,\"shell_inner_minimum_m\":fit_minimum,\"shell_outer_minimum_m\":fit_outer_minimum,\"lapel_rays\":surface_lapel_rays,\"lapel_minima_m\":surface_lapel_minima,\"original_lapel_minima_m\":surface_original_lapels,\"skin_rays\":surface_skin_rays,\"skin_minimum_m\":surface_skin_minimum,\"missing_cloth\":surface_missing_cloth,\"original_skin_defects\":surface_original_skin,\"layer_rays\":surface_layer_rays,\"layer_minimum_m\":surface_layer_minimum,\"worst\":surface_worst})))\n",
+      "after": "\tprint(\"TONY COAT SURFACES DIAGNOSTIC: \",JSON.stringify(_surface_json_safe({\"failures\":failures,\"checks\":checks,\"inherited_groups\":fit_groups,\"surface_groups\":surface_groups,\"shell_pose_cases\":fit_pose_cases,\"surface_pose_cases\":surface_pose_cases,\"other_identities\":fit_other_models,\"shell_inner_minimum_m\":fit_minimum,\"shell_outer_minimum_m\":fit_outer_minimum,\"lapel_rays\":surface_lapel_rays,\"lapel_minima_m\":surface_lapel_minima,\"original_lapel_minima_m\":surface_original_lapels,\"skin_rays\":surface_skin_rays,\"skin_minimum_m\":surface_skin_minimum,\"missing_cloth\":surface_missing_cloth,\"original_skin_defects\":surface_original_skin,\"layer_rays\":surface_layer_rays,\"layer_minimum_m\":surface_layer_minimum,\"channel_differences\":surface_channel_differences,\"self_ray_misses\":surface_self_ray_misses,\"self_ray_details\":surface_self_ray_details,\"worst\":surface_worst})))\n"
+    },
+    {
+      "before": "\t\t\tif _surface_shoulder(at) and not unique.has(at): unique[at] = {\"rest\":at,\"point\":posed[0]*bary.x+posed[1]*bary.y+posed[2]*bary.z}\n",
+      "after": "\t\t\tif _surface_shoulder(at) and not unique.has(at): unique[at] = {\"rest\":at,\"point\":posed[0]*bary.x+posed[1]*bary.y+posed[2]*bary.z,\"face\":posed,\"bary\":bary}\n"
+    },
+    {
+      "before": "",
+      "after": "func _surface_channel_diagnostic(part: int,part_name: String,channel: int,before: Variant,after: Variant) -> void:\n\tvar before_count: int = before.size() if before is Array or typeof(before) >= TYPE_PACKED_BYTE_ARRAY else 0\n\tvar after_count: int = after.size() if after is Array or typeof(after) >= TYPE_PACKED_BYTE_ARRAY else 0\n\tvar examples: Array[Dictionary] = []\n\tvar differences := 0\n\tfor index: int in range(maxi(before_count,after_count)):\n\t\tvar a: Variant = before[index] if index < before_count else null\n\t\tvar b: Variant = after[index] if index < after_count else null\n\t\tif a == b: continue\n\t\tdifferences += 1\n\t\tif examples.size() < 4: examples.append({\"index\":index,\"before\":a,\"after\":b})\n\tsurface_channel_differences.append({\"part\":part,\"name\":part_name,\"channel\":channel,\"before_type\":type_string(typeof(before)),\"after_type\":type_string(typeof(after)),\"before_size\":before_count,\"after_size\":after_count,\"differences\":differences,\"first\":examples})\n\nfunc _surface_bary_diagnostic(triangle: PackedFloat64Array,point: Vector2) -> Array[float]:\n\tvar u: float = ((triangle[3]-triangle[5])*(point.x-triangle[4])+(triangle[4]-triangle[2])*(point.y-triangle[5]))/triangle[9]\n\tvar v: float = ((triangle[5]-triangle[1])*(point.x-triangle[4])+(triangle[0]-triangle[4])*(point.y-triangle[5]))/triangle[9]\n\treturn [u,v,1.0-u-v]\n\nfunc _surface_self_ray_diagnostic(sample: Dictionary,projected: Array[PackedFloat64Array],direction: Vector3,view: String,label: String) -> void:\n\tsurface_self_ray_misses += 1\n\tif surface_self_ray_details.size() >= 8: return\n\tvar face: PackedVector3Array = sample.face\n\tvar point := _surface_uv(sample.point,direction)\n\tvar own_rows: Array[Dictionary] = [{\"posed\":face}]\n\tvar own := _surface_projection(own_rows,direction)\n\tvar own_bary: Array[float] = []\n\tvar determinant := 0.0\n\tif not own.is_empty():\n\t\tdeterminant = own[0][9]\n\t\town_bary = _surface_bary_diagnostic(own[0],point)\n\tvar closest_minimum := -INF\n\tvar closest_bary: Array[float] = []\n\tfor triangle: PackedFloat64Array in projected:\n\t\tvar bary := _surface_bary_diagnostic(triangle,point)\n\t\tvar minimum := minf(bary[0],minf(bary[1],bary[2]))\n\t\tif minimum > closest_minimum: closest_minimum = minimum; closest_bary = bary\n\tvar facing := -(face[1]-face[0]).cross(face[2]-face[0])\n\tsurface_self_ray_details.append({\"label\":label,\"view\":view,\"rest\":sample.rest,\"point\":sample.point,\"posed_triangle\":[face[0],face[1],face[2]],\"authored_bary\":sample.bary,\"projection_determinant\":determinant,\"recomputed_bary\":own_bary,\"facing_normal\":facing,\"facing_dot\":facing.dot(direction),\"closest_projected_min_bary\":closest_minimum,\"closest_projected_bary\":closest_bary})\n\n"
+    },
+    {
+      "before": "\t\tif not is_finite(body): continue\n",
+      "after": "\t\tif not is_finite(body):\n\t\t\t_surface_self_ray_diagnostic(sample,skin_projection,direction,view,label)\n\t\t\tcontinue\n"
+    }
+  ]
+}

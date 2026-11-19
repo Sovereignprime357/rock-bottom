@@ -1,0 +1,53 @@
+{
+  "status": "pass",
+  "engine_stages": [
+    {
+      "elapsed_ms": 7430,
+      "name": "import",
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "pid": 18104,
+      "exit_code": 0
+    },
+    {
+      "elapsed_ms": 610,
+      "name": "contract",
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\contract.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\game3d\\tests\\test_tony_visual_contract.gd"
+      ],
+      "pid": 1760,
+      "exit_code": 0
+    },
+    {
+      "elapsed_ms": 9344,
+      "name": "web_export",
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\web_export.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\game3d",
+        "--export-release",
+        "Tony Visual",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\tony-coat-surfaces-visual\\web-v1\\web\\index.html"
+      ],
+      "pid": 19608,
+      "exit_code": 0
+    }
+  ],
+  "browser_acceptance": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "scope": "Root-authorized exactly two unpinned self-EOL overrides; original33 and247 pins immutable",
+  "failure": {
+    "path": ".build/3d/resident-polish-checkout-result.json",
+    "sha256": "de6cb7fb0eec383727636fd23e10c2fa4dd582737f94aaf560ad35c9353287da",
+    "checks": 573,
+    "failures": [
+      ".gitattributes"
+    ]
+  },
+  "application_order": [
+    "SPEC-3D-PARITY-METADATA-V4.md",
+    ".gitattributes"
+  ],
+  "files": [
+    {
+      "path": "SPEC-3D-PARITY-METADATA-V4.md",
+      "beforeSha256": "04ca0084964f0ffafe62776ff186bbdbf7d03226f1e8fa556203e89a31261880",
+      "sha256": "192cf9160808ad5a47e8086a2e413872b445f95c219629725f7e8a0371547444",
+      "appendBytes": 754
+    },
+    {
+      "path": ".gitattributes",
+      "beforeSha256": "88ee3cb7e6ffa2217a9c53212af33a0b73fed073ffe021f7be5c732f62239fa4",
+      "sha256": "5b9c011264924605a925a706fc03ccbf6cbba06acbaa35d659d6b6f379497c24",
+      "appendBytes": 88
+    }
+  ],
+  "actual_v2_checkout_pass": false
+}

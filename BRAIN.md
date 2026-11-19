@@ -3302,3 +3302,154 @@ indexing remains isolated with strict browser pixel failures explicitly retained
 the scoped image review only permits continued evaluation. Next are fresh paid
 Web progression, the one campaign suffix, and a measured index comparison using
 the corrected common observer. Full port and sustained16ms are still incomplete.
+
+After fac508342630f46fd8a5db96b67e968a719c7373 was pushed, the single All11
+normal-load suffix completed Underpass, Old School, Warehouse Row and Market,
+then refused a25th cumulative cot at Park FILE. Nine claims are retained, not
+eleven. The original failed prefix and this failed suffix remain separate.
+Actual damage was123 withdrawal events at2HP each; all eight suffix recoveries
+left shakes100. The prefix had five redundant full-health forced-day sleeps.
+A separately specified fresh full-tour driver may reuse an already eligible
+unused day after recovery, retaining40min/24cots and the original Pretender input;
+no further suffix or budget extension is admitted by the failed result.
+
+The first fresh Web progression attempt stopped before Start because SaveStore
+parsed an empty successful IndexedDB payload as JSON. A two-line empty-payload
+guard passes27 checks/five groups. Its first broader isolated run lacked the
+FullScene test's expected scratch-save parent; that setup failure is preserved.
+The corrected setup passes FullScene487 and progression97/six groups and exports.
+Actual Web then earns intro cash, pays/completes all eight Karaoke notes, buys
+and smokes a rock, but Lurch steals$7 and kills the input driver before Tony's
+third short. Keep all13 original PNGs and this failure. Empty-save behavior is
+proven; combat/loop/persistence completion is not. Transit defense was explicitly
+disabled in this test driver; a bounded ordinary-input evasion draft is separate.
+
+Two visible candidates are held for actual renders. Successful vendor commits
+now drive the existing receipt gesture in an isolated FullScene candidate:
+FullScene674/economy679/viewmodel41/context1329/gear729 pass. Its separate visual
+observer needs type guards for malformed counterexamples before native/Web use.
+Tony's middle-coat fit at23mm failed two late-walk1mm-clearance checks. Retain
+both failed original/diagnostic runs. The explicit23.5mm successor passes738
+checks,48 pose/removal cases,71 unchanged identities, roster2040 and art196;
+actual inner/outer minima are1.166403/1.896977mm. Native/Web views still pending.
+
+The corrected-observer indexed pair also remains held: the baseline is above
+16ms, and indexed day hit the existing20s no-progress watchdog after its finite
+headings were blocked. The wrapper correctly refused a valid comparison. This
+is neither a passing optimization nor evidence by itself of a geometry-caused
+regression. Root continues to serialize all engines and browser activity.
+
+### 2026-11-19 — resumed visual review found defects beyond the contracts
+
+Receipt observer strict-type successor passes183 checks/four groups; its isolated
+SaveStore27/5, FullScene674 and Web export pass. Actual native ordinary input
+passes791 checks and captures cash/menu/receipt/recovery. Root rejects visual
+acceptance: a decorative CORNER facade pier masks the left hand and Tony at the
+recorded legal interaction stance. World traced its full-height noncolliding
+geometry to an authored doorway and is preparing an aperture-overlap correction;
+no hand-depth workaround, source/collision or interaction-rule change is intended.
+
+Tony's23.5mm shell candidate renders all17 native and17 actual browser frames,
+with clean engine checks, original hashes and Web capture-only cleanup. Root
+inspected original PNGs: the lower shell sliver is improved but green still cuts
+through lapel tips, and exposed shoulders show skin through remaining coats.
+The shell test's geometric pass is retained with this limit; it is not whole-art
+acceptance. A narrow lapel/shoulder correction and broader surface checks follow.
+The browser originals bundle SHA256 is49910f402168f176d2f287ff6dacc65ca9ed25d2c4f1aed0a7c8edd3967daa02.
+
+The bounded Web transit input draft is held for a strict malformed-type observer
+successor before root staging. Production still matchesfac5083. Metadata-v4
+composition remains provisional until actual graphics and interaction review.
+
+The facade successor now passes766 aperture checks/four groups and7783 existing
+world checks across321 swept legs. Actual native purchase675 checks/four PNGs and
+actual Web610 checks/four original960x540 PNGs pass without engine/browser errors.
+Root accepts the scoped visible receipt gesture and clear doorway after inspecting
+both platforms' mid/recovery originals. No camera-identical pixel comparison is
+claimed. Tony's separate lapel/shoulder correction remains pending.
+
+Transitv4 fails a missing typed-return tail in the new test driver. Explicitv5
+parser successor then passes the unchanged97/six progression checks but fails one
+of291 focused checks/seven groups. Diagnostic-only output proves the alternating
+threat fixture keeps a safe diagonal after two plans and correctly reaches8s;
+it does not exercise the24-plan cap it claimed. Preserve both failures. A test-only
+query-obstruction fixture now isolates planning exhaustion without changing policy
+or budgets. The separate fresh All11 day-eligibility driver passes53/five plus
+original343/eight groups; no new full tour has yet run.
+
+### Continued verification and graphics composition — 2026-11-19
+
+The fresh day-eligibility All11 run failed after116.007s at the laundromat
+return route, exhausting32 replans. It completed no new earning circuit and
+did not exercise the later redundant-cot reduction. Four clear local steps
+did not establish a complete route; the report omits live prop placements and
+the hit collider, so the screenshot alone cannot prove a collision defect.
+Preserve this failed attempt and avoid another whole-tour retry without a
+specific route correction. Production still matchesfac5083.
+
+Actual browser progressionv6 earned intro/song cash, purchased its rock and
+shorts, smoked, defeated all three Tony phases in4.807s, and continued the
+ending. Its later transit helper refused a player outside actual contact but
+inside the preferred clearance buffer. The same-loop/persistence tail remains
+unaccepted. All17 original960x540 frames and raw report are retained locally.
+The explicit near-band egress successorv7 passes preceding suites but fails
+one180-check boundary fixture. At exactly the outside-band boundary, the old
+Vector2 predicate rounds an extremely shallow inward segment back to its
+boundary. The next test-only successor must preserve outside-band behavior,
+retain that witness, and use a numerically distinguishable refusal case.
+
+Tony's expanded lapel/shoulder candidateb8b4 passes positive measured shell,
+skin and layer clearances but fails48 of1357 focused assertions: three channel
+comparisons and45 self-ray completeness checks. A diagnostic-only repeat keeps
+all assertions and the same art. It records derived channel differences and
+edge barycentric rounding; no visual or production acceptance follows yet.
+The accepted SaveStore, receipt and facade candidates are queued for the next
+scoped release with conditional Tony acceptance; full-port/performance work
+does not become complete merely because that graphics checkpoint ships.
+
+Corrected Tony gate passes1368 checks, original roster2040 and Art196. The
+normal-derived tangent exception is limited to three changed garments; every
+sample retains known actual-body depth and uses any farther finite self-ray.
+Missing cloth and sub1mm spacing still fail. Root inspected all17 native
+originals and five critical Web originals from17 verified1280x720 captures.
+The scoped lapel/shoulder correction is accepted; raw Web bundleb02ec9f6 and
+earlier defects remain retained with their actual dispositions.
+
+Browser progressionv8 again earns its purchases and wins Tony in4.529s, then
+refuses escape from actual Lurch contact (34.78px versus40.46px contact band).
+Its HP93/stun165.9ms/cash0 are real source outcomes. This is a driver limitation,
+not a production collision failure or full-browser pass. All17 original frames
+and raw error report remain local. A single bounded normal-input defense
+successor is authorized only for this post-Tony contact; no grants or clock
+resets and no new attempt until focused review.
+
+The user asked when the current build would be testable. Root first linked the
+validated8074 build, then prioritized an updated preview after scoped acceptance.
+Applied33 exact files, five specifications first, and exported Full Windows/Web.
+Actual browser preview loads the remembered save, moves, pauses and resumes
+movement. The new pack digest is42d868a892f384e6d7ca1525842fb2ef952fed73fcda273aadb7cb9acf1bd97b.
+User was told the updated preview is ready and that full regression continues.
+Original19/19 passes; final1353D suite is running. No public deploy or full-port
+completion is claimed. Final source/checkout/evidence/commit/push still required.
+
+The complete composed runners subsequently pass135/1353D (90 engine suites,
+45 source/parity checks, clean import) and19/19original. Full Windows/Web export
+and actual remembered-save/menu/pause/movement preview checks pass. Embedded
+pointer capture reports WrongDocumentError; fallback remains usable and this
+diagnostic is retained. Tony compact evidence copies24 original PNGs and core
+records in21,809,318 bytes, with all299 local originals indexed and68 local
+images verified; large raw Web bundles remain local/hash-only. No exported
+engine/PCK/WASM is committed. Root proceeds to staged checkout and feature push.
+
+First actual staged checkout verifies573 selected files and fails only the
+attributes file's default Windows LF-to-CRLF conversion. Root preserves that
+failure and applies an explicit two-file successor: spec appendix first, then
+the self `.gitattributes text eol=lf` rule. The247 metadata inputs and all tested
+runtime bytes remain exact. No gameplay rebuild or repeated135-suite run is
+needed for this checkout-only correction. Decision48 records the exception.
+
+Successor staged checkout passes577 raw-byte comparisons and the1315-check
+literal metadata-v4 gate. Staged corpus and source-format checks pass. Raw
+evidence is excluded from formatting cleanup: its original CRLF/trailing bytes
+are intentional and must retain their hashes. Both gameplay runners and the
+exported production source remain unchanged by the checkout correction.

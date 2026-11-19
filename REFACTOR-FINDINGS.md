@@ -1354,3 +1354,70 @@ actors, source hashes and raw logs. This experiment uses the frozen d1b9b87
 resident source, not the later Dave support working tree. Preserve its88 exact
 files in artifacts/3d-full-port/positive-certificate-rejected-v2, including eight
 original PNGs; executables remain hash-only. No retry or production promotion.
+
+### IMPL-3D-FULL-45 — empty Web slot and visible purchase acknowledgment
+
+Accept the exact SaveStore empty-payload guard before JSON parsing. A successful
+empty read returns the existing empty-save result; malformed nonempty payloads
+retain the original parser/error behavior. Five groups/27 actual checks pass,
+and fresh browser progression now starts through the normal menu. Retain the
+earlier empty-slot error and missing test-directory setup failure separately.
+
+Connect thirteen successful vendor transaction pairs to the existing receipt
+gesture. Failed, stale, leave and nonmoney actions do not acknowledge a purchase;
+combat priority, tool stow, clocks and transaction authority remain unchanged.
+The extended FullScene gate passes674 checks. Actual native purchase675 checks
+and actual Web610 checks retain four original images each.
+
+The first mechanically successful visual run was obscured by a decorative
+facade pier across an authored doorway. Accept the narrow FullNeighborhood
+correction which omits full-height piers overlapping that doorway interval.
+No collision or service coordinate changes and no hand depth-test exemption.
+The actual aperture gate passes766/four groups and the full-world gate passes
+7783 checks across321 swept legs. Root reviewed both platforms' receipt/recovery
+originals and accepted visible Tony, paper and returning hand. Timing differs,
+so this is not a camera-identical pixel comparison. Web capture does not claim
+clean shutdown, hardware pointer capture or audible audio. Raw accepted and
+earlier failed evidence is in artifacts/3d-full-port/resident-polish/accepted-corrections.
+
+### IMPL-3D-FULL-46 — Tony's layered coats follow the existing rig
+
+Accept the expanded Tony-only construction correction:23.5mm middle front
+profile, corrected lapel depth order and upper cloth fitted around the unchanged
+body/shoulder. Mesh topology, surfaces, bone counts, actor animation and the
+other71 identities remain unchanged. The actual final focused gate passes1368
+checks across48 shell and48 surface poses, plus the original roster/art gates.
+
+Retain failed predecessor results. Godot's regenerated tangent channel is
+validated only for the three changed garments; all authored unrelated channels
+remain exact. Every known skin triangle sample is measured, using the farther
+finite body ray when present; missing cloth and sub1mm clearance still fail.
+Root reviewed all17 native originals and five critical browser views from17
+verified captures. Lapel breakthrough and shoulder exposure are resolved in
+these views. This does not claim a change to gameplay or performance.
+
+### IMPL-3D-FULL-47 — explicit five-pin graphics composition
+
+Compose only the accepted SaveStore, vendor receipt, authored doorway and Tony
+changes. Explicit metadata-v4 changes five existing pins and preserves all247
+referenced paths,617 statuses and96 evidence references. The final runner adds
+three suites for135 total:90 engine and45 source/parity checks. Preserve actual
+CRLF for FullScene test, FullNeighborhood and its new original reference; all
+new UID bytes come from actual imports. Append specifications before applying
+the accepted implementation bytes. Conditional draft generation preceded the
+final visual decision; a separate root acceptance closure authorizes application.
+
+The user requested a current test build. Publish the local preview after clean
+Windows/Web export while full regression/checkpoint delivery is still running;
+label that distinction explicitly. No public deployment, full-port completion,
+Web progression completion or16ms performance acceptance is implied.
+
+### IMPL-3D-FULL-48 — attributes file reproduces its own checkout
+
+The actual staged573-file checkout fails only `.gitattributes`: default Windows
+text conversion turns the intended LF bytes into CRLF. Preserve that failed
+result. Append a specification entry, then the explicit self-rule
+`.gitattributes text eol=lf`. These are exactly two later delivery overrides,
+outside the247 metadata pins. No gameplay source, evidence result or threshold
+changes. Verify the successor checkout with the same raw hashes and literal
+metadata-v4 gate, retaining the original33-file composition and failure record.

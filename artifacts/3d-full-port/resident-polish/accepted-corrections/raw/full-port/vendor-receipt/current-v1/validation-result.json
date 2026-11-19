@@ -1,0 +1,68 @@
+{
+  "status": "failed",
+  "engine_stages": [
+    {
+      "pid": 41840,
+      "exit_code": 0,
+      "elapsed_ms": 5538,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "name": "import"
+    },
+    {
+      "pid": 9396,
+      "exit_code": 0,
+      "elapsed_ms": 217,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\save_store.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d\\tests\\test_save_store_read.gd"
+      ],
+      "name": "save_store"
+    },
+    {
+      "pid": 38016,
+      "exit_code": 0,
+      "elapsed_ms": 14958,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\full_scene.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d\\tests\\test_full_scene.gd"
+      ],
+      "name": "full_scene"
+    },
+    {
+      "pid": 6304,
+      "exit_code": 1,
+      "elapsed_ms": 1983,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\receipt_contract.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\vendor-receipt\\current-v1\\game3d\\tests\\test_vendor_receipt_visual.gd"
+      ],
+      "name": "receipt_contract"
+    }
+  ],
+  "browser_acceptance": false,
+  "error": "Engine stage failed: receipt_contract"
+}

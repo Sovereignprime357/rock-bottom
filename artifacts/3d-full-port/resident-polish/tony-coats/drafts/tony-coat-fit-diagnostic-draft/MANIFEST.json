@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "scope": "report-only diagnostic successor; original failed test retained",
+  "status": "READY; unrun",
+  "base_manifest_sha256": "c14b4f6c91187e3e1d335fe9845b427b58f94a42aa409b1db99dc1469d002a30",
+  "unchanged_art_sha256": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+  "files": {
+    "SPEC-DRAFT.md": "d422511445c00ec9b80f5e6945d2d776975c19cc588006b2d4a4dda3ce11d6b6",
+    "candidate/game3d/tests/test_tony_coat_fit.gd": "b8e2810b12ab43c913fe2e173a076d60bcd9d881d44a7959291c98e31717b98f"
+  },
+  "overlays": [
+    {
+      "candidate": "candidate/game3d/tests/test_tony_coat_fit.gd",
+      "target": "game3d/tests/test_tony_coat_fit.gd",
+      "old_sha256": "1f5b732b9b23472f4e6d1c49919e3dc0ce1ab2101b2cf7bad5d212da540a9e33",
+      "sha256": "b8e2810b12ab43c913fe2e173a076d60bcd9d881d44a7959291c98e31717b98f"
+    }
+  ],
+  "reverse_patch": {
+    "remove_exact_once": "\tprint(\"TONY COAT FIT DIAGNOSTIC: \",JSON.stringify({\"failures\":failures,\"checks\":checks,\"groups\":fit_groups,\"pose_cases\":fit_pose_cases,\"other_identities\":fit_other_models,\"inner_rays\":fit_shared_rays,\"outer_rays\":fit_outer_rays,\"inner_minimum_m\":fit_minimum if is_finite(fit_minimum) else null,\"outer_minimum_m\":fit_outer_minimum if is_finite(fit_outer_minimum) else null,\"original_minimum_m\":fit_baseline_minimum if is_finite(fit_baseline_minimum) else null}))\n"
+  },
+  "static_reverse_source": "exact",
+  "engine_run": false
+}

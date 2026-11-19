@@ -779,6 +779,15 @@ func _load() -> void:
 	runtime.set_mode("paused"); _begin_menu()
 	hud.menu("REMEMBERED" if accepted else "THE DRAWER","the file remembers.\nthe block continues." if accepted else (store.last_error if not store.last_error.is_empty() else "nothing legible in there."),[_option("continue.",_resume)])
 
+static func _vendor_receipt(payload: Dictionary) -> bool:
+	if not payload.get("ok") is bool or not payload.ok: return false
+	if not payload.get("vendor") is String or not payload.get("action") is String: return false
+	match payload.vendor:
+		"tony": return payload.action in ["buy_rock","short"]
+		"yuri": return payload.action in ["sell_copper","sell_all_copper","rent_shed"]
+		"pete": return payload.action in ["sell_copper","sock","sell_license","sell_junk","buy_food","buy_torch","buy_crowbar","loan"]
+	return false
+
 func _consume_events() -> void:
 	_sync_hand_context()
 	for event: Dictionary in runtime.drain_events():
@@ -800,6 +809,8 @@ func _consume_events() -> void:
 			"dialogue_requested": _domain_menu(str(payload.domain),payload.menu)
 			"toast": hud.show_receipt(str(payload.get("text","")),float(payload.get("duration_ms",2200)))
 			"sound","audio": sound.play_sound(str(payload.get("id","")))
+			"vendor_action":
+				if _vendor_receipt(payload): hands.acknowledge(&"receipt")
 			"gesture": hands.acknowledge(StringName(payload.get("action","interact")))
 			"player_attack": hands.acknowledge(&"punch",true,payload.get("connected",false),StringName(payload.get("used_weapon","")))
 			"placement_reset","death","arrest": _reset_presentation(); _sync_player()

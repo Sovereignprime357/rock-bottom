@@ -1,0 +1,35 @@
+{
+  "source": ".build/3d/vendor-receipt-runner-draft/run-staged.ps1",
+  "source_sha256": "58aa4d9adb48bc09c4c1026756bc4011c412fb2b032041bccfb082bf591a5447",
+  "candidate_sha256": "dfef0a5598fbf9fb6c4915e1daa7a69f0e05ee57e994f8c5c41df61807eaec92",
+  "edits": [
+    {
+      "before": "'validate.py'",
+      "after": "'prepare.py'"
+    },
+    {
+      "before": "if ($stage.commands.Count -ne 5 -or ($stage.commands.name -join ',') -ne 'import,save_store,full_scene,receipt_contract,web_export') { throw 'Unexpected stage commands.' }",
+      "after": "if ($stage.commands.Count -ne 3 -or ($stage.commands.name -join ',') -notin @('import,contract,native','import,contract,web_export')) { throw 'Unexpected Tony stage commands.' }"
+    },
+    {
+      "before": "$completionMarkers = @{save_store='; 5/5 groups)'; full_scene='readonlyledger, isolatedsave/load)'; receipt_contract='; 4/4 groups)'}",
+      "after": "$completionMarkers = @{contract='; 3/3 groups;17 explicit cases'; native='candidate/tonyfit; 17 original PNGs'}"
+    },
+    {
+      "before": "Receipt stage preflight failed.",
+      "after": "Tony stage preflight failed."
+    },
+    {
+      "before": "& $pythonPath $helperPath sidecars --path $runPath --write",
+      "after": "& $pythonPath $helperPath finalize --path $runPath --write"
+    },
+    {
+      "before": "Export sidecar/provenance check failed.",
+      "after": "Tony originals/provenance check failed."
+    },
+    {
+      "before": "VENDOR RECEIPT SETUP: PASS; actual native/Web visual run remains pending:",
+      "after": "TONY VISUAL STAGE: PASS; external manual/native-Web visual decision remains pending:"
+    }
+  ]
+}

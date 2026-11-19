@@ -1,0 +1,18 @@
+{
+  "production": [
+    {
+      "before": "\"8c6b3b\",\"coat_two\",0.023)",
+      "after": "\"8c6b3b\",\"coat_two\",0.0235)"
+    }
+  ],
+  "focused_test": [
+    {
+      "before": "bv[v].z-av[v].z <= 0.02072",
+      "after": "bv[v].z-av[v].z <= 0.0235*cos(0.45)+(0.02072-0.023*cos(0.45))"
+    },
+    {
+      "before": "bounded20.72mm displacement",
+      "after": "bounded23.5mm front-profile displacement"
+    }
+  ]
+}

@@ -121,3 +121,23 @@ clearance during gait/crash/sprint. Retain the original 41 P01 checks unchanged.
 the context native probe with both sizes, empty idle/crash/walk/settle/sprint, pickup and
 dumpster transition poses, and alternating fist contact. Native review remains required;
 mathematical bounds alone do not establish that the new stance reads naturally.
+
+## Committed core-vendor receipt gesture (2026-11-19)
+
+The existing vendor_action event may acknowledge the existing receipt gesture
+once at its original queue position. Require actual boolean success and one exact
+canonical pair:Tony buy_rock/short; Yuri sell_copper/sell_all_copper/rent_shed;
+Pete sell_copper/sock/sell_license/sell_junk/buy_food/buy_torch/buy_crowbar/loan.
+These thirteen actions commit their source transaction before this projection.
+Third-offense short still spends5 dollars and starts its unchanged consequence.
+
+Exclude ordinary talk, leave, challenge, refusals, stale capabilities and the
+free swap_tools action. Do not infer a transaction from cash, sound or toast.
+Do not also acknowledge from menu selection, enqueue a delayed receipt, change
+the0.32s gesture clock or interrupt an accepted punch. Existing pause/reset/tool
+context and action priority remain unchanged; no model, RNG or event mutations.
+
+The existing FullScene gate consumes actual source-owner events for all13 pairs,
+tests excluded/malformed/stale paths and one-time consumption, and retains its
+completion guard. Actual native/Web paid transaction originals remain required
+for visual acceptance; the model extension alone does not establish appearance.

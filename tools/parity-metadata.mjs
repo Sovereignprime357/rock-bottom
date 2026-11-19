@@ -18,7 +18,7 @@ export const INPUT = {
 export const TARGETS = ['windows_first_person','web_keyboard_mouse'];
 export const LIVE_MANIFEST='game3d/data/parity_manifest.json';
 export const CONTRACT_REPORT='.build/3d/gates/parity-metadata-contract.json';
-export const PIN_REVISIONS=Object.freeze({'metadata-v1':'reports/3d-parity-metadata/input-pins-metadata-v1.json','metadata-v2':'reports/3d-parity-metadata/input-pins-metadata-v2.json','metadata-v3':'reports/3d-parity-metadata/input-pins-metadata-v3.json'});
+export const PIN_REVISIONS=Object.freeze({'metadata-v1':'reports/3d-parity-metadata/input-pins-metadata-v1.json','metadata-v2':'reports/3d-parity-metadata/input-pins-metadata-v2.json','metadata-v3':'reports/3d-parity-metadata/input-pins-metadata-v3.json','metadata-v4':'reports/3d-parity-metadata/input-pins-metadata-v4.json'});
 export function selectedPins(args=process.argv.slice(2),reader=read) {
   const flags=args.filter(arg=>arg.startsWith('--pins='));
   if(flags.length!==1)throw Error('Exactly one explicit --pins=<named revision> selection is required.');

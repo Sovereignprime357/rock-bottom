@@ -1,0 +1,86 @@
+{
+  "production": [
+    {
+      "before": "static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vector2, depths: Vector2, color: String, node_name: String) -> void:",
+      "after": "static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vector2, depths: Vector2, color: String, node_name: String, front_outset: float = 0.0) -> void:"
+    },
+    {
+      "before": "\t\t\tring.append(Vector3(sin(angle)*profile.x,profile.y,cos(angle)*profile.z))",
+      "after": "\t\t\tvar outer := Vector3(sin(angle)*profile.x,profile.y,cos(angle)*profile.z)\n\t\t\tif front_outset > 0.0 and outer.z > 0.0: outer.z += cos(angle)*front_outset\n\t\t\tring.append(outer)"
+    },
+    {
+      "before": "\t\t\tring.append(Vector3(sin(angle)*(profile.x-0.009),profile.y,cos(angle)*(profile.z-0.009)))",
+      "after": "\t\t\tvar inner := Vector3(sin(angle)*(profile.x-0.009),profile.y,cos(angle)*(profile.z-0.009))\n\t\t\tif front_outset > 0.0 and inner.z > 0.0: inner.z += cos(angle)*front_outset\n\t\t\tring.append(inner)"
+    },
+    {
+      "before": "\t_coat_shell(root,0.61,1.47,Vector2(0.30,0.32),Vector2(0.20,0.21),\"8c6b3b\",\"coat_two\")",
+      "after": "\t# The flat inner front needs clearance; the middle coat back stays unchanged.\n\t_coat_shell(root,0.61,1.47,Vector2(0.30,0.32),Vector2(0.20,0.21),\"8c6b3b\",\"coat_two\",0.023)"
+    }
+  ],
+  "reference_normalizations": [
+    {
+      "source": "game3d/scripts/character_art.gd",
+      "reference": "candidate/game3d/tests/reference_tony_character_art.gd",
+      "edits": [
+        {
+          "before": "class_name SliceCharacterArt\n",
+          "after": ""
+        }
+      ]
+    },
+    {
+      "source": "game3d/scripts/cast_profiles.gd",
+      "reference": "candidate/game3d/tests/reference_tony_cast_profiles.gd",
+      "edits": [
+        {
+          "before": "class_name RockBottomCastProfiles\n",
+          "after": ""
+        },
+        {
+          "before": "res://scripts/character_art.gd",
+          "after": "res://tests/reference_tony_character_art.gd"
+        }
+      ]
+    },
+    {
+      "source": "game3d/scripts/site_cast_profiles.gd",
+      "reference": "candidate/game3d/tests/reference_tony_site_cast_profiles.gd",
+      "edits": [
+        {
+          "before": "class_name RockBottomSiteCastProfiles\n",
+          "after": ""
+        },
+        {
+          "before": "res://scripts/character_art.gd",
+          "after": "res://tests/reference_tony_character_art.gd"
+        },
+        {
+          "before": "res://scripts/cast_profiles.gd",
+          "after": "res://tests/reference_tony_cast_profiles.gd"
+        }
+      ]
+    },
+    {
+      "source": "game3d/scripts/character_roster.gd",
+      "reference": "candidate/game3d/tests/reference_tony_character_roster.gd",
+      "edits": [
+        {
+          "before": "class_name RockBottomCharacterRoster\n",
+          "after": ""
+        },
+        {
+          "before": "res://scripts/character_art.gd",
+          "after": "res://tests/reference_tony_character_art.gd"
+        },
+        {
+          "before": "res://scripts/cast_profiles.gd",
+          "after": "res://tests/reference_tony_cast_profiles.gd"
+        },
+        {
+          "before": "res://scripts/site_cast_profiles.gd",
+          "after": "res://tests/reference_tony_site_cast_profiles.gd"
+        }
+      ]
+    }
+  ]
+}

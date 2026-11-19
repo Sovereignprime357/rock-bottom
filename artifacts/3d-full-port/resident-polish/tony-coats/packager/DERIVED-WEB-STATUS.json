@@ -1,0 +1,1817 @@
+{
+  "schema": 1,
+  "derived": true,
+  "original_bundles_copied": false,
+  "records": [
+    {
+      "kind": "DERIVED status; not original browser bytes",
+      "source": ".build/full-port/tony-coat-visual/web-v1/browser-evidence/original-bundle.json",
+      "source_bytes": 18684377,
+      "source_sha256": "49910f402168f176d2f287ff6dacc65ca9ed25d2c4f1aed0a7c8edd3967daa02",
+      "omitted": "frames array containing base64 PNG payloads; all original record hashes remain in report.records",
+      "run": "old-web",
+      "status_without_frames": {
+        "format": "rock-bottom-tony-coat-web-keepalive-v1",
+        "completion_mode": "web_capture_keepalive",
+        "report": {
+          "checks_pass": true,
+          "cleanup": {
+            "complete": true,
+            "completion_code": 0,
+            "freed_children": 3,
+            "initial_children_preserved": true,
+            "owned_children": 3,
+            "remaining_children": 0,
+            "render_drains": 2
+          },
+          "complete": true,
+          "completion_mode": "web_capture_keepalive",
+          "engine": "4.5.1-stable (official)",
+          "engine_shutdown_acceptance": false,
+          "engine_shutdown_tested": false,
+          "errors": [],
+          "expected_frames": 17,
+          "format": "rock-bottom-tony-coat-visual",
+          "packet": "tonyfit",
+          "performance_acceptance": false,
+          "records": [
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_rest_2m.png",
+              "fixture": {
+                "duration": 0,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_rest_2m",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 841418,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "6236c4e6555390f33d8c5c2aedf5f3e0726c2913e9c802a95e580c9fcbfaded0"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_rest_2m.png",
+              "fixture": {
+                "duration": 0,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_rest_2m",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 830557,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "aa59137862fa3da649ee259f91dc5449fe34759ebeeb7a495743ef49d7634a8b"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_walk_2m.png",
+              "fixture": {
+                "duration": 0.2,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_walk_2m",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.6)"
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 843712,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "267c6cb52688ebf2e654adc9b9edd5db80baecc649635b436d6161910cac2e7c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "315ecab4fbdf63a26ab872d13898b3295e3e645c03313e870639b3a88f67011b"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_walk_2m.png",
+              "fixture": {
+                "duration": 0.2,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_walk_2m",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.6)"
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 832742,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "267c6cb52688ebf2e654adc9b9edd5db80baecc649635b436d6161910cac2e7c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "bf0615c69d975b79372936b594009401bf499640a12cb48fc59002f469faa147"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_peak_strike_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_peak_strike_2m",
+                "quarter": false,
+                "snapshot": {
+                  "action": "strike",
+                  "action_phase": 0.03,
+                  "action_serial": 0,
+                  "coat_count": 3,
+                  "contact": true
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 846478,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "a806ae76affa59155456cfbe80e9abd745f853599a3d5aa6394856d5e17d4e22",
+                  "state": [
+                    "strike",
+                    0,
+                    true,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "a6bd87e81e8bc216f861ce55d9b74fa74d0356fbaa6a657f69f93b44173898bc"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_peak_strike_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_peak_strike_2m",
+                "quarter": true,
+                "snapshot": {
+                  "action": "strike",
+                  "action_phase": 0.03,
+                  "action_serial": 0,
+                  "coat_count": 3,
+                  "contact": true
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 831726,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "a806ae76affa59155456cfbe80e9abd745f853599a3d5aa6394856d5e17d4e22",
+                  "state": [
+                    "strike",
+                    0,
+                    true,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "43e0c7a6520b2f1ccabae9be9322ddbf33b09bf3be62ce28d93174d7bf4b1f71"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_windup_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_windup_2m",
+                "quarter": false,
+                "snapshot": {
+                  "action": "windup",
+                  "action_phase": 0.9,
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 844800,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "bf48638cab27723bc1ab54f1f63bfcb3fd482c6d35503d0c30eb8aaf5b7e29f5",
+                  "state": [
+                    "windup",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "a87a9c2da8c32afef7b6bcd972a5faf4f74d627530c259f035ad6d594a931504"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_windup_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_windup_2m",
+                "quarter": true,
+                "snapshot": {
+                  "action": "windup",
+                  "action_phase": 0.9,
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 832838,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "bf48638cab27723bc1ab54f1f63bfcb3fd482c6d35503d0c30eb8aaf5b7e29f5",
+                  "state": [
+                    "windup",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "f540cb555a9df3b66d1b11fb627c8131ef2bb0733bc3a7bef6d356c131e70e14"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+              "camera_sha256": "85654a4916b984726394f35a1efa1d93f7ff691e0be805d967bcb1b53e38f0f9",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_rest_20m.png",
+              "fixture": {
+                "duration": 0,
+                "far": true,
+                "fit_steps": false,
+                "label": "tony_front_rest_20m",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 613695,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "534e396c18ff20ef402c9bfa11da26d12055c8600f8c1873c5398fadc12f944c"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_3.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_3",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 829700,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "baf1d6a64c15fc7179b1bf1ef56a030cdd45b5a8f613adaedb4ffbd6137b39ee"
+            },
+            {
+              "actual_coats": 2,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_2.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_2",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 2
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 833852,
+              "rigs": [
+                {
+                  "coats": 2,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    2,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "0ee79a0ef338d51c029790d787a3116e7042d0da0e2d2c7cfa04f487cf49c51f"
+            },
+            {
+              "actual_coats": 1,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_1.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_1",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 1
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 825789,
+              "rigs": [
+                {
+                  "coats": 1,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    1,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "a74720d9e02a52f8a70dda9c840c2aab2cc85053b2556847956dbf6069b13666"
+            },
+            {
+              "actual_coats": 0,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_0.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_0",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 0
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 822793,
+              "rigs": [
+                {
+                  "coats": 0,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    0,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "4897f665f860bb3411fe0abc1b0639041898d35c8b097b1057d2968982f81f44"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_late_walk_coats_3.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_front_late_walk_coats_3",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 844245,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "adb63e778bd9641f5f7fc8540ef4ae9ec648975efac5ad87a08ff5dbba7bebbf"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_late_walk_coats_3.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_quarter_late_walk_coats_3",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 833376,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "c63cb9be8e417d5f8219171c242c1fae7bc6277733844ec48e55e2336e89edf4"
+            },
+            {
+              "actual_coats": 2,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_late_walk_coats_2.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_front_late_walk_coats_2",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 2,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 847220,
+              "rigs": [
+                {
+                  "coats": 2,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    2,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "ce63249fa4e976c142dc8a005f7eb09236f9553e24e45bdb3425d60b937ebca1"
+            },
+            {
+              "actual_coats": 2,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_late_walk_coats_2.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_quarter_late_walk_coats_2",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 2,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 835262,
+              "rigs": [
+                {
+                  "coats": 2,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    2,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "216f15befafb873c3505d580a56e06803428224e7e12cdbb7af97b4b4a37fb37"
+            }
+          ],
+          "renderer": "gl_compatibility",
+          "source_hash_note": "Compiled exports may omit script bytes; external archive/overlay/export hashes remain authoritative.",
+          "source_hashes": {
+            "scripts/actor_animation.gd": "",
+            "scripts/cast_profiles.gd": "",
+            "scripts/character_art.gd": "",
+            "scripts/character_roster.gd": "",
+            "scripts/neighborhood.gd": "",
+            "tests/character_roster_probe.gd": "",
+            "tests/tony_coat_evidence.gd": ""
+          },
+          "variant": "candidate",
+          "visual_acceptance": false,
+          "web": true
+        },
+        "capture_finished": true,
+        "capture_complete": true,
+        "render_receipts_pass": true,
+        "engine_exit_observed": false,
+        "exit_code": null,
+        "engine_shutdown_tested": false,
+        "engine_shutdown_acceptance": false,
+        "pngs_verified": true,
+        "webgl2": true,
+        "errors": [],
+        "capture_count": 17,
+        "pending_hashes": 0,
+        "capture_completed_ms": 17626,
+        "observation_ms": 35508,
+        "complete": true,
+        "visual_acceptance": false,
+        "performance_acceptance": false
+      }
+    },
+    {
+      "kind": "DERIVED status; not original browser bytes",
+      "source": ".build/full-port/tony-coat-surfaces-visual/web-v1/browser-evidence/original-bundle.json",
+      "source_bytes": 18670189,
+      "source_sha256": "b02ec9f69972fa743d0b27e1df7e9f73c10ab68ed93d58ec53f7d895746505c1",
+      "omitted": "frames array containing base64 PNG payloads; all original record hashes remain in report.records",
+      "run": "new-web",
+      "status_without_frames": {
+        "format": "rock-bottom-tony-coat-web-keepalive-v1",
+        "completion_mode": "web_capture_keepalive",
+        "report": {
+          "checks_pass": true,
+          "cleanup": {
+            "complete": true,
+            "completion_code": 0,
+            "freed_children": 3,
+            "initial_children_preserved": true,
+            "owned_children": 3,
+            "remaining_children": 0,
+            "render_drains": 2
+          },
+          "complete": true,
+          "completion_mode": "web_capture_keepalive",
+          "engine": "4.5.1-stable (official)",
+          "engine_shutdown_acceptance": false,
+          "engine_shutdown_tested": false,
+          "errors": [],
+          "expected_frames": 17,
+          "format": "rock-bottom-tony-coat-visual",
+          "packet": "tonyfit",
+          "performance_acceptance": false,
+          "records": [
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_rest_2m.png",
+              "fixture": {
+                "duration": 0,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_rest_2m",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 840638,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "488ba284c9dec060d0da3127f8f2c8e6ac20c2a60230a328865d9246d8434e11"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_rest_2m.png",
+              "fixture": {
+                "duration": 0,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_rest_2m",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 830129,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "2ff8d29fa456a1ccad7d882d6c089ed87651c5c0ce4567e3579bf72e095f9b68"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_walk_2m.png",
+              "fixture": {
+                "duration": 0.2,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_walk_2m",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.6)"
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 842923,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "267c6cb52688ebf2e654adc9b9edd5db80baecc649635b436d6161910cac2e7c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "0707bdf77956a0b69f8c6aaac3fd23e8a00be05916c5b81e2ba904dd595f4c75"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_walk_2m.png",
+              "fixture": {
+                "duration": 0.2,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_walk_2m",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.6)"
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 831934,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "267c6cb52688ebf2e654adc9b9edd5db80baecc649635b436d6161910cac2e7c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "8cd0e6e275ef90335de595becbaeebf76215ba890b20a1d91d878825610817cc"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_peak_strike_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_peak_strike_2m",
+                "quarter": false,
+                "snapshot": {
+                  "action": "strike",
+                  "action_phase": 0.03,
+                  "action_serial": 0,
+                  "coat_count": 3,
+                  "contact": true
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 845406,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "a806ae76affa59155456cfbe80e9abd745f853599a3d5aa6394856d5e17d4e22",
+                  "state": [
+                    "strike",
+                    0,
+                    true,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "13f4dae2d793d3a62a4a2631566d6208a93f9bfd1f00354f2d7eed709d6b2eb1"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_peak_strike_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_peak_strike_2m",
+                "quarter": true,
+                "snapshot": {
+                  "action": "strike",
+                  "action_phase": 0.03,
+                  "action_serial": 0,
+                  "coat_count": 3,
+                  "contact": true
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 831441,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "a806ae76affa59155456cfbe80e9abd745f853599a3d5aa6394856d5e17d4e22",
+                  "state": [
+                    "strike",
+                    0,
+                    true,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "13be249d3cf1a33252455dd8e33ea1b0c7f159bc3f0b46e7cd2cdfb2e0e74ab0"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_windup_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_front_windup_2m",
+                "quarter": false,
+                "snapshot": {
+                  "action": "windup",
+                  "action_phase": 0.9,
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 844307,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "bf48638cab27723bc1ab54f1f63bfcb3fd482c6d35503d0c30eb8aaf5b7e29f5",
+                  "state": [
+                    "windup",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "68b4aa4bf75d1e83fedd7f2232d638f21360db6132f436365dbfe18f4b6d5efb"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_windup_2m.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_quarter_windup_2m",
+                "quarter": true,
+                "snapshot": {
+                  "action": "windup",
+                  "action_phase": 0.9,
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 831746,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "bf48638cab27723bc1ab54f1f63bfcb3fd482c6d35503d0c30eb8aaf5b7e29f5",
+                  "state": [
+                    "windup",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "77fdf78bcc622a82b88bd128d2d2c1431d30c4b76c8cd7e55b619351244d476b"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+              "camera_sha256": "85654a4916b984726394f35a1efa1d93f7ff691e0be805d967bcb1b53e38f0f9",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_rest_20m.png",
+              "fixture": {
+                "duration": 0,
+                "far": true,
+                "fit_steps": false,
+                "label": "tony_front_rest_20m",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 613671,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "6a9d87dca5b418fbb482d95dbf1badc23ec01b05a84c8175ebc2758c4290232a"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_3.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_3",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 829287,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "f8d27537575b3eaf9edbe01b19535df76895cf97df2eb4b479d93d50b1d56ac0"
+            },
+            {
+              "actual_coats": 2,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_2.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_2",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 2
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 833239,
+              "rigs": [
+                {
+                  "coats": 2,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    2,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "d4803741053c76c24f06348d315cd2a9fa944f2eed7bed2c812ffcac4f950297"
+            },
+            {
+              "actual_coats": 1,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_1.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_1",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 1
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 824975,
+              "rigs": [
+                {
+                  "coats": 1,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    1,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "a2e67de0b6d20356d4b1174e6fdb61aef37bff8d2323e5ae3aad35fa1ee6609b"
+            },
+            {
+              "actual_coats": 0,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_coats_0.png",
+              "fixture": {
+                "duration": 0.0166666666666667,
+                "far": false,
+                "fit_steps": false,
+                "label": "tony_coats_0",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 0
+                }
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 822793,
+              "rigs": [
+                {
+                  "coats": 0,
+                  "pose_sha256": "c2ab6925fa4ef38526ec796b504f3117fede88ae3b498ea970b6d7658b37d09c",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    0,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "4897f665f860bb3411fe0abc1b0639041898d35c8b097b1057d2968982f81f44"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_late_walk_coats_3.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_front_late_walk_coats_3",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 843209,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "9567e66494cba259cf42b9c0624feb7d7e7b773d88b705ec7c75a1c3c591de2a"
+            },
+            {
+              "actual_coats": 3,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_late_walk_coats_3.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_quarter_late_walk_coats_3",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 3,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 832517,
+              "rigs": [
+                {
+                  "coats": 3,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    3,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "b4f493f395c05bfdb5fc5a903b46bfefac0ce1f4cab872a25709645c912262b2"
+            },
+            {
+              "actual_coats": 2,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "d9689d7626b7d28999b5033b39ff8dc49a2327ec3c9503206746170b123d81a7",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_front_late_walk_coats_2.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_front_late_walk_coats_2",
+                "quarter": false,
+                "snapshot": {
+                  "coat_count": 2,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 846692,
+              "rigs": [
+                {
+                  "coats": 2,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    2,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "be3ab4055f096bf702a1727cba520e75b5ffe5d592e2bcc1cbd610fa01c485a8"
+            },
+            {
+              "actual_coats": 2,
+              "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "camera_sha256": "1d3c1f3f59436a7c58d81d3c78385abadc29ab5b080885c28f88426e022f0bd4",
+              "expected_size": [
+                1280,
+                720
+              ],
+              "file": "tony_quarter_late_walk_coats_2.png",
+              "fixture": {
+                "duration": 4.75,
+                "far": false,
+                "fit_steps": true,
+                "label": "tony_quarter_late_walk_coats_2",
+                "quarter": true,
+                "snapshot": {
+                  "coat_count": 2,
+                  "local_velocity": "(0.0, 0.0, 1.8)"
+                },
+                "step_seconds": 0.05
+              },
+              "fov": 78,
+              "metrics": {
+                "bones": 26,
+                "max_weights": 4,
+                "meshes": 10,
+                "surfaces": 10,
+                "triangles": 17074
+              },
+              "png_bytes": 834653,
+              "rigs": [
+                {
+                  "coats": 2,
+                  "pose_sha256": "da8fd7ee1ea902e5daa074ed9575259f7c509df973c80db193f1ffa33bf97f7d",
+                  "state": [
+                    "",
+                    0,
+                    false,
+                    false,
+                    2,
+                    true,
+                    false,
+                    false
+                  ],
+                  "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+                  "visual": "tony"
+                }
+              ],
+              "sha256": "4810e790e91ed1b4981b3af17aef76ccc4ef2598a81e482d16994ee05261f87b"
+            }
+          ],
+          "renderer": "gl_compatibility",
+          "source_hash_note": "Compiled exports may omit script bytes; external archive/overlay/export hashes remain authoritative.",
+          "source_hashes": {
+            "scripts/actor_animation.gd": "",
+            "scripts/cast_profiles.gd": "",
+            "scripts/character_art.gd": "",
+            "scripts/character_roster.gd": "",
+            "scripts/neighborhood.gd": "",
+            "tests/character_roster_probe.gd": "",
+            "tests/tony_coat_evidence.gd": ""
+          },
+          "variant": "candidate",
+          "visual_acceptance": false,
+          "web": true
+        },
+        "capture_finished": true,
+        "capture_complete": true,
+        "render_receipts_pass": true,
+        "engine_exit_observed": false,
+        "exit_code": null,
+        "engine_shutdown_tested": false,
+        "engine_shutdown_acceptance": false,
+        "pngs_verified": true,
+        "webgl2": true,
+        "errors": [],
+        "capture_count": 17,
+        "pending_hashes": 0,
+        "capture_completed_ms": 19787,
+        "observation_ms": 44717,
+        "complete": true,
+        "visual_acceptance": false,
+        "performance_acceptance": false
+      }
+    }
+  ]
+}

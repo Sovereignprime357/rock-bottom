@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "files": {
+    "prepare-packet.py": "16dbce8f48d5d63c20e9b4963af4e19d7942eb06ca191583a17578c579b8550c",
+    "prepare.py": "5fd25cefe17c40656d21880188efdd6ff688ed744e68ddb6582d6a8522c9c270",
+    "README.md": "9dc7ffafd8734c253811297556e8562bb5a062e9362f84606ccdf3747b4192aa",
+    "run-validation.ps1": "ff3e85ac15886ae01aced723d42beb0fb81118037fae2486134972f6e3e57bf7",
+    "SPEC-DRAFT.md": "b25d70f845b0d209d1c5009e520f413288c4def939fc204a567e4922408dff60",
+    "TEST-REVERSE.json": "1a9e7f19b34a94dee03758d26b1d21e9c1f28b163a14ee8b5ba64e037a157046",
+    "test.diff": "9d297df855b6219bfe8ba2390750181ed36a172d9f3babcced9cff72524848b4"
+  },
+  "previous_test_sha256": "830a1694fb49caf9b69ea1020956d1be12600ab9d5eb4d8185b6b01a6cc46e7d",
+  "corrected_test_sha256": "481754d629d101df88d7861a3c0a095530c0001af8f680e315fd1ac198bfbb1a",
+  "unchanged_art_sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8",
+  "stage_provenance_sha256": "970629db6c0730deec23eeafa986bb200d19dff8cb58fcaa6b415e8f426c1fc3",
+  "retained_failed_evidence": {
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/import.godot.log": "0b84d82ebec12d72a3bb78d0286da0261d23610bfae791fda297b8e3c9291794",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/import.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/import.stdout.log": "8fa5d8a05dbe7403c8421ecf29379a0f301694992d37ba95c80e4dd6ca1addef",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/surfaces.godot.log": "a781c080ae6b8f577105d8374ae002225a022f54c2cf2a99297af00da6fb05de",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/surfaces.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/surfaces.stdout.log": "786872ba7b0c64d66709f08d8c6bd6fa582b2df59cd1aa144ae95abe7b6e9297",
+    ".build/3d/tony-coat-central-v4-surfaces/validation-v1/validation-result.json": "78e341838f7549c8a60e5ecfaf2d817543c847bc921ba7ddd5574eb985d452f2",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/import.godot.log": "0b84d82ebec12d72a3bb78d0286da0261d23610bfae791fda297b8e3c9291794",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/import.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/import.stdout.log": "8fa5d8a05dbe7403c8421ecf29379a0f301694992d37ba95c80e4dd6ca1addef",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/surfaces.godot.log": "f56ced5151e9ad5e9310663a8b15d645fa629527d8a89f375ca5954c1e06a4dc",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/surfaces.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/surfaces.stdout.log": "517a5119ac8987e6e5dfeb7614659e268ed96e994458f34da1c0663bc78f8529",
+    ".build/3d/tony-coat-central-v5-diagnostic/validation-v1/validation-result.json": "203fa2144f5bc14db737052828a7b1990489aa7f8ed3e624c04c22bd2d708e99"
+  },
+  "stage": {
+    "source_files": 509,
+    "staged_files": 510,
+    "overlays": 2,
+    "generated_test_uid": null,
+    "cache_files_excluded": 0
+  },
+  "required_groups": {
+    "inherited": 4,
+    "surface": 2,
+    "shell_poses": 48,
+    "surface_poses": 48,
+    "other_identities": 71
+  },
+  "clearance_m": 0.001,
+  "engine_run": false,
+  "visual_acceptance": false
+}

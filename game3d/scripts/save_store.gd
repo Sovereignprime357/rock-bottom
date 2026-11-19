@@ -62,6 +62,8 @@ func read_save() -> Dictionary:
 			return {}
 		payload = file.get_as_text()
 		file.close()
+	if payload.is_empty():
+		return {}
 	var parsed: Variant = JSON.parse_string(payload)
 	if not parsed is Dictionary:
 		if not payload.is_empty():

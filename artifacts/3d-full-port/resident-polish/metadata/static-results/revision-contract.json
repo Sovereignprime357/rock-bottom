@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "pass": true,
+  "checks": 923,
+  "revision": "metadata-v4-release-conditional",
+  "changedExistingPins": [
+    "game3d/scripts/save_store.gd",
+    "game3d/scripts/full_scene.gd",
+    "game3d/tests/test_full_scene.gd",
+    "game3d/scripts/full_neighborhood.gd",
+    "game3d/scripts/character_art.gd"
+  ],
+  "metadataContract": 152,
+  "gateChecks": 1315,
+  "completeRefusals": 617,
+  "manifestSha256": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+  "statusesChanged": 0,
+  "evidenceRefsChanged": 0,
+  "productionWrites": false,
+  "visualAcceptance": false,
+  "promotionApproved": false,
+  "engineRun": false,
+  "gitRun": false
+}

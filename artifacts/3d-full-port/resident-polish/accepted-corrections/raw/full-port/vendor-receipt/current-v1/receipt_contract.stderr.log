@@ -1,0 +1,26 @@
+SCRIPT ERROR: Invalid operands 'int' and 'bool' in operator '!='.
+   at: commit_errors (res://tests/vendor_receipt_probe.gd:73)
+   GDScript backtrace (most recent call first):
+       [0] commit_errors (res://tests/vendor_receipt_probe.gd:73)
+       [1] _commits (res://tests/test_vendor_receipt_visual.gd:56)
+       [2] _run (res://tests/test_vendor_receipt_visual.gd:113)
+SCRIPT ERROR: Invalid operands 'bool' and 'String' in operator '!='.
+   at: commit_errors (res://tests/vendor_receipt_probe.gd:79)
+   GDScript backtrace (most recent call first):
+       [0] commit_errors (res://tests/vendor_receipt_probe.gd:79)
+       [1] _commits (res://tests/test_vendor_receipt_visual.gd:65)
+       [2] _run (res://tests/test_vendor_receipt_visual.gd:113)
+ERROR: reject wrong committed first_rock
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/test_vendor_receipt_visual.gd:116)
+       [1] _transient_route (res://tests/test_vendor_receipt_visual.gd:111)
+       [2] _walk_to (res://tests/office_acceptance_probe.gd:903)
+       [3] _walk_frame (res://tests/test_vendor_receipt_visual.gd:30)
+ERROR: invalid emitted vendor
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _run (res://tests/test_vendor_receipt_visual.gd:116)
+       [1] _transient_route (res://tests/test_vendor_receipt_visual.gd:111)
+       [2] _walk_to (res://tests/office_acceptance_probe.gd:903)
+       [3] _walk_frame (res://tests/test_vendor_receipt_visual.gd:30)

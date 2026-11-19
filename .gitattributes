@@ -292,3 +292,31 @@ game3d/tests/test_dave_sleep_support.gd text eol=lf
 game3d/tests/test_dave_sleep_support.gd.uid text eol=lf
 reports/3d-parity-metadata/input-pins-metadata-v3.json -text
 reports/3d-parity-metadata/revisions/metadata-v3.json -text
+
+# Explicit metadata-v4 delivery; retain all prior checkout rules.
+game3d/tests/test_save_store_read.gd text eol=lf
+game3d/tests/test_tony_coat_fit.gd text eol=lf
+game3d/tests/reference_tony_character_art.gd text eol=lf
+game3d/tests/reference_tony_character_roster.gd text eol=lf
+game3d/tests/reference_tony_cast_profiles.gd text eol=lf
+game3d/tests/reference_tony_site_cast_profiles.gd text eol=lf
+game3d/tests/test_facade_apertures.gd text eol=lf
+game3d/tests/reference_full_neighborhood.gd text eol=crlf
+game3d/tests/test_tony_coat_surfaces.gd text eol=lf
+game3d/tests/test_save_store_read.gd.uid text eol=lf
+game3d/tests/test_tony_coat_fit.gd.uid text eol=lf
+game3d/tests/reference_tony_character_art.gd.uid text eol=lf
+game3d/tests/reference_tony_character_roster.gd.uid text eol=lf
+game3d/tests/reference_tony_cast_profiles.gd.uid text eol=lf
+game3d/tests/reference_tony_site_cast_profiles.gd.uid text eol=lf
+game3d/tests/test_facade_apertures.gd.uid text eol=lf
+game3d/tests/reference_full_neighborhood.gd.uid text eol=lf
+game3d/tests/test_tony_coat_surfaces.gd.uid text eol=lf
+reports/3d-parity-metadata/input-pins-metadata-v4.json -text
+reports/3d-parity-metadata/revisions/metadata-v4.json -text
+
+# Resident polish raw evidence: preserve exact original logs/images/reports.
+artifacts/3d-full-port/resident-polish/** -text
+
+# Preserve this policy file itself as exact LF on checkout.
+.gitattributes text eol=lf

@@ -1,0 +1,184 @@
+{
+  "schema": 1,
+  "status": "atomic_ready_held_for_root_central_validation",
+  "previous_art": {
+    "path": ".build/3d/tony-coat-fit-refinement-draft/candidate/game3d/scripts/character_art.gd",
+    "sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c"
+  },
+  "previous_refinement_manifest_sha256": "d1dd98e20e56f273e7eb2d94cf11953c23b5f6fc3ef8d6d41b472d3719c65eae",
+  "baseline": [
+    {
+      "path": ".build/3d/tony-coat-fit-refinement-draft/candidate/game3d/scripts/character_art.gd",
+      "sha256": "9cc532faae1bce276c0dd7843e98c65795b52f7e58c10a6976ca854c1afddd2c"
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-refinement-draft/manifest.json",
+      "sha256": "d1dd98e20e56f273e7eb2d94cf11953c23b5f6fc3ef8d6d41b472d3719c65eae"
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-refinement-draft/candidate/game3d/tests/test_tony_coat_fit.gd",
+      "sha256": "0c35355866713e7ea5088bba7b0c8d993097b49ba9ac9cc6fbed817d4c39a13f"
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-draft/candidate/game3d/tests/reference_tony_cast_profiles.gd",
+      "sha256": "ef30b193740cfa9d1f515de67e1c654dd78e249f740f32102bb94029ee30e1e5"
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-draft/candidate/game3d/tests/reference_tony_character_art.gd",
+      "sha256": "d063323e00029ce86fe6546e222e546de9530ce6b699ea0670264473d6a2fafd"
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-draft/candidate/game3d/tests/reference_tony_character_roster.gd",
+      "sha256": "453e57379c095cbcf2bb8aeda1001ab724402b9444fa2139335e493d50512cbd"
+    },
+    {
+      "path": ".build/3d/tony-coat-fit-draft/candidate/game3d/tests/reference_tony_site_cast_profiles.gd",
+      "sha256": "420fd25cf815038e0778b57ea20cdd6542f54615ac1d2c250d35ac07f5980b32"
+    },
+    {
+      "path": "game3d/scripts/character_roster.gd",
+      "sha256": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1"
+    },
+    {
+      "path": "game3d/scripts/cast_profiles.gd",
+      "sha256": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668"
+    },
+    {
+      "path": "game3d/scripts/actor_animation.gd",
+      "sha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e"
+    },
+    {
+      "path": "game3d/scripts/surface_kit.gd",
+      "sha256": "f9626b490d8569fd8d649634f4bc64e3bb887650e04e53ce402b221eb2831ae4"
+    },
+    {
+      "path": "game3d/scripts/mesh_batcher.gd",
+      "sha256": "d6bfd693feb3895049219bdb9ad55ce79c34a37c7dae1a59a277b8aa86679f09"
+    }
+  ],
+  "overlays": [
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/candidate/game3d/scripts/character_art.gd",
+      "sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8",
+      "target": "game3d/scripts/character_art.gd"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/candidate/game3d/tests/test_tony_coat_surfaces.gd",
+      "sha256": "dcdc54b8f6bb8dcd3e8c30d1f0c24940cbbcf80785e169f7022335c80db8db86",
+      "target": "game3d/tests/test_tony_coat_surfaces.gd"
+    }
+  ],
+  "files": [
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/candidate/game3d/scripts/character_art.gd",
+      "sha256": "b8b4b58bd9b5cb8493b0bf56683cb01271df7ed97691c0f70c855d27b0bef5a8"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/candidate/game3d/tests/test_tony_coat_surfaces.gd",
+      "sha256": "dcdc54b8f6bb8dcd3e8c30d1f0c24940cbbcf80785e169f7022335c80db8db86"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/character_art.gd.diff",
+      "sha256": "038aca8c02b988046407238fefe862e5f087b3c03ee598639ab360ab42e0d670"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/README.md",
+      "sha256": "5b11ae58fc194edbaca9b6e69608c74e7a0ef07a6a00a75074400d2a03aff19a"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/rest-initial-unfiltered-backface-diagnostic.json",
+      "sha256": "cc5cebb6948c442ba676b24cc4c5c158d754822359b6b84ed63347bdcbb52e08"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/rest-witnesses.json",
+      "sha256": "544c5b10f01b3b16491f2b24b5dbea9aae4c8ab87a1288b321444c92ccce3f5d"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/REVIEW.md",
+      "sha256": "59dee017efd75a5c9602c15e005c344925c5438f6781f9d15e765c67b4c0727f"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/seal.py",
+      "sha256": "18682cb62807d52b54d4f01311b45b8a2b1fe32eebbd8be598cd8d2d7d9e90d2"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/select-surfaces.py",
+      "sha256": "94ce7a5d646026f02b1fc3c17715754a3fa84875c7648e097d8ba7054a84394c"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/SPEC-DRAFT.md",
+      "sha256": "523959e1897c8fb13d13463dde9878047aa7219b4e6cfc4c8eda6cc7d181a575"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/upper-ring-selection.json",
+      "sha256": "9055ab3286a0e0ef986cf70d0edee285880eae2a6ddd81f94c39b6a21b6a03d6"
+    },
+    {
+      "path": ".build/3d/tony-coat-surfaces-next-draft/verify.py",
+      "sha256": "563a7880de63f5e414ba72c9932296c57a191ad05032596133b22486418de1a8"
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".build/full-port/tony-coat-visual/native-v1/evidence/tony_front_rest_2m.png",
+      "sha256": "56d48559e360a92cdbd1f67192bd6fcc05a05f3e049e03f202f4d52a7211a293"
+    },
+    {
+      "path": ".build/full-port/tony-coat-visual/native-v1/evidence/tony_front_peak_strike_2m.png",
+      "sha256": "9787b528686e042e310a25db718043daabc35fbc5c0187c546b4362e400213a9"
+    },
+    {
+      "path": ".build/full-port/tony-coat-visual/native-v1/evidence/tony_coats_2.png",
+      "sha256": "1f07b2d70be41e253968f96748b222bf5f1aad408780345f373f05a85a46b8c6"
+    },
+    {
+      "path": ".build/full-port/tony-coat-visual/native-v1/evidence/tony_coats_1.png",
+      "sha256": "8397516b9fa67514eb2a6056597d6181d7aeea0458e0e9e412ac5c48a84b4f20"
+    },
+    {
+      "path": ".build/full-port/tony-coat-visual/web-v1/browser-evidence/original-bundle.json",
+      "sha256": "49910f402168f176d2f287ff6dacc65ca9ed25d2c4f1aed0a7c8edd3967daa02"
+    }
+  ],
+  "reverse_splices": [
+    {
+      "before": "static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vector2, depths: Vector2, color: String, node_name: String, front_outset: float = 0.0) -> void:\n",
+      "after": "static func _coat_shell(parent: Node3D, bottom: float, top: float, widths: Vector2, depths: Vector2, color: String, node_name: String, front_outset: float = 0.0, upper_profiles: Array[Vector3] = []) -> void:\n"
+    },
+    {
+      "before": "",
+      "after": "\t# Tony's existing upper rings follow his shoulders; other callers remain exact.\n\tfor index in range(upper_profiles.size()): profiles[index+3] = upper_profiles[index]\n"
+    },
+    {
+      "before": "\t_garment(root,[Vector4(0.245,0.72,0.17,0.15),Vector4(0.255,1.02,0.175,0.16),Vector4(0.285,1.32,0.18,0.17),Vector4(0.245,1.42,0.16,0.15),Vector4(0.115,1.48,0.12,0.105)],\"454c2e\",\"coat_one\")\n",
+      "after": "\t_garment(root,[Vector4(0.245,0.72,0.17,0.15),Vector4(0.255,1.02,0.175,0.16),Vector4(0.285,1.32,0.18,0.17),Vector4(0.30,1.4315,0.16,0.15),Vector4(0.115,1.48,0.12,0.105)],\"454c2e\",\"coat_one\")\n"
+    },
+    {
+      "before": "\t_coat_shell(root,0.61,1.47,Vector2(0.30,0.32),Vector2(0.20,0.21),\"8c6b3b\",\"coat_two\",0.0235)\n\t_coat_shell(root,0.39,1.49,Vector2(0.38,0.35),Vector2(0.27,0.245),\"604020\",\"coat_three\")\n",
+      "after": "\t_coat_shell(root,0.61,1.47,Vector2(0.30,0.32),Vector2(0.20,0.21),\"8c6b3b\",\"coat_two\",0.0235,[Vector3(0.34,1.43,0.21),Vector3(0.27,1.455,0.1764),Vector3(0.19,1.47,0.155)])\n\t_coat_shell(root,0.39,1.49,Vector2(0.38,0.35),Vector2(0.27,0.245),\"604020\",\"coat_three\",0.0,[Vector3(0.365,1.43,0.25),Vector3(0.26,1.465,0.2058)])\n"
+    },
+    {
+      "before": "\t\t_lapel(root,side,1.31,0.255,0.19,\"b08e4e\")\n\t\t_lapel(root,side,1.25,0.26,0.105,\"69703e\")\n",
+      "after": "\t\t_lapel(root,side,1.31,0.233,0.19,\"b08e4e\")\n\t\t_lapel(root,side,1.25,0.2295,0.105,\"69703e\")\n"
+    }
+  ],
+  "central_commands": [
+    "test_tony_coat_surfaces.gd",
+    "test_character_roster.gd",
+    "test_art.gd"
+  ],
+  "superseded_invocation": "standalone test_tony_coat_fit.gd; retained unchanged as inherited reference",
+  "expected_completion_groups": {
+    "inherited": 4,
+    "surface": 2,
+    "shell_poses": 48,
+    "surface_poses": 48,
+    "other_identities": 71
+  },
+  "checks_count": "unknown until actual central run",
+  "required_clearance_m": 0.001,
+  "engine_executed": false,
+  "production_edits": false,
+  "git_executed": false,
+  "rendered_acceptance": false
+}

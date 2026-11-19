@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "scope": "Python static verification only; no GDScript parse or rendered result",
+  "python_ast": "pass",
+  "exit_code": 0,
+  "stderr": "",
+  "result": {
+    "reverse_source": "exact",
+    "normalized_references": 4,
+    "inner_samples": 3538,
+    "front_depth_m": 0.023,
+    "inner_minimum_m": 0.0012293626041290084,
+    "outer_samples": 10156,
+    "outer_minimum_m": 0.004690658331283213,
+    "outer_boundary_minimum_m": 0.002325197168173008,
+    "engine_run": false
+  },
+  "inputs": {
+    "prepare.py": "ef221c14d47886d92bb0ec691483e2771de7c7575bb8df6b8b86b3a4a408cae4",
+    "select-fit.py": "3bf0455c23f838a314213d0589f06118b0cfcd4d442658e52e679ef492312114",
+    "candidate/game3d/scripts/character_art.gd": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+    "candidate/game3d/tests/test_tony_coat_fit.gd": "1f5b732b9b23472f4e6d1c49919e3dc0ce1ab2101b2cf7bad5d212da540a9e33"
+  },
+  "engine_run": false,
+  "git_run": false
+}

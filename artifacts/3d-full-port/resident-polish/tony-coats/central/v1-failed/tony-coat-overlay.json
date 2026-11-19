@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "scope": "isolated Tony coat overlay, no engine run",
+  "project": "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\3d\\tony-coat-central-v1\\game3d",
+  "manifest_sha256": "c14b4f6c91187e3e1d335fe9845b427b58f94a42aa409b1db99dc1469d002a30",
+  "overlays": [
+    {
+      "target": "game3d/scripts/character_art.gd",
+      "candidate": "candidate/game3d/scripts/character_art.gd",
+      "sha256": "a4a935c2759b4980cc59eb87399b3286c349ae47eb5cf16315fb310aeb625eef",
+      "old_sha256": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8"
+    },
+    {
+      "target": "game3d/tests/reference_tony_cast_profiles.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_cast_profiles.gd",
+      "sha256": "ef30b193740cfa9d1f515de67e1c654dd78e249f740f32102bb94029ee30e1e5",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/reference_tony_character_art.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_character_art.gd",
+      "sha256": "d063323e00029ce86fe6546e222e546de9530ce6b699ea0670264473d6a2fafd",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/reference_tony_character_roster.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_character_roster.gd",
+      "sha256": "453e57379c095cbcf2bb8aeda1001ab724402b9444fa2139335e493d50512cbd",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/reference_tony_site_cast_profiles.gd",
+      "candidate": "candidate/game3d/tests/reference_tony_site_cast_profiles.gd",
+      "sha256": "420fd25cf815038e0778b57ea20cdd6542f54615ac1d2c250d35ac07f5980b32",
+      "old_sha256": null
+    },
+    {
+      "target": "game3d/tests/test_tony_coat_fit.gd",
+      "candidate": "candidate/game3d/tests/test_tony_coat_fit.gd",
+      "sha256": "1f5b732b9b23472f4e6d1c49919e3dc0ce1ab2101b2cf7bad5d212da540a9e33",
+      "old_sha256": null
+    }
+  ]
+}

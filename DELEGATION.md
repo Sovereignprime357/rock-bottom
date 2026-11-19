@@ -1031,3 +1031,26 @@ Architecture owns that bounded driver and the isolated index comparison wrapper;
 Characters owns the fresh paid browser progression stage; World provides peer
 review and the next visible hand improvement recommendation. Only root runs
 engines, native/browser work, export, integration and Git. Full port remains open.
+
+### Coat, hand and doorway checkpoint — 2026-11-19
+
+Accepted Tony coat layering, successful-purchase receipt gesture, decorative
+doorway obstruction correction and empty Web save handling are composed into
+source. Root owns local preview export, final135/19 gates, delivery evidence and
+commit/push. This is a scoped graphics/interaction checkpoint; the617 parity
+statuses remain unchanged. User may test the preview at localhost8074 as soon
+as export passes, before the full checkpoint is declared validated.
+
+The actual paid browser run reaches and defeats Tony, but its return route
+still fails at Lurch contact. Characters owns a bounded ordinary-input defense
+successor and the compact Tony evidence package. World retains the short-horizon
+performance driver and All11 collision diagnostic; no new whole-tour attempt is
+authorized by those preparations alone. Architecture completes the explicit
+five-pin metadata revision/acceptance closure. Root alone runs engines/browser,
+exports and Git.60-actor16ms performance and full native/Web acceptance stay open.
+
+The composed checkpoint now passes135/1353D and19/19original checks, Full
+Windows/Web export and actual browser remembered-load/movement/pause/resume.
+The user has the updated8074 preview. Root completes exact staged checkout and
+push before the next isolated driver/performance work; no acceptance status is
+upgraded by these scoped graphics results.

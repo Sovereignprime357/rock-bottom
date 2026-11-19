@@ -125,3 +125,19 @@ avoid a continuous generator dependency for single-threaded web compatibility.
 
 Source contracts: `SPEC-3D-TRANSITION.md`, `src/core/update.js`, `src/systems/concessions.js`,
 `src/dialogue/neighborhood_a.js`, `src/systems/combat.js`, `VIBE.md`.
+
+## Exact empty save payload boundary (2026-11-19)
+
+SaveStore treats an exact empty payload as no save before the shared JSON parser.
+This includes a successful Web missing-key envelope with data="" and an existing
+zero-byte native file. Do not trim whitespace or reinterpret any nonempty bytes:
+the original JSON/type/error path remains unchanged for malformed/non-Dictionary
+data. Transport cleanup, busy state, error strings, namespaces and async storage
+remain authoritative. This fixes the fresh Web engine parser error without
+suppressing observer errors or changing saved gameplay state.
+
+The dedicated read gate covers five completed groups:missing file, zero-byte
+file, actual Dictionary write/read, valid non-Dictionary rejection and busy
+refusal. The optional malformed literal characterization retains its original
+engine parser error; it is not a clean gate. Root's fresh Web successor evidence
+remains separate from these27 model checks and from prior failed observations.
