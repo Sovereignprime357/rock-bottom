@@ -1,0 +1,551 @@
+{
+  "schema": 1,
+  "status": "READY_FOR_CENTRAL_VALIDATION",
+  "date": "2026-11-19",
+  "scope": "normal-input four-claim campaign; explicit earned Tony prefix/Kingdom suffix composition optional; no all11/Web/performance acceptance",
+  "production_edits": false,
+  "engine_runs": false,
+  "git_operations": false,
+  "files": [
+    {
+      "path": ".build/3d/campaign-continuation-draft/FEASIBILITY.md",
+      "sha256": "9e54e8de452a050209d6951d25364a25099a7a877bae63e8db00709caa87251c",
+      "bytes": 1876
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/README.md",
+      "sha256": "93c0f75ad69031cc2da4a5e1139169fc1320be49088a57e7e79bf17b4b834006",
+      "bytes": 12332
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/refresh_manifest.py",
+      "sha256": "d6b6a2e37cf646f5b9f456df380bf70ddb58d410a116e10d3a573d7c6f1d315b",
+      "bytes": 9306
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/SPEC-CAMPAIGN-CONTINUATION-DRAFT.md",
+      "sha256": "409bf0e11380e511d5ca346393ca7fa0e2532ffc7de0c66750a983e233fb05a0",
+      "bytes": 28969
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/tests/campaign_continuation_probe.gd",
+      "sha256": "7801ef1f37a86703a14bda0fdbb9055a1326269bd4609030660710686f6b798c",
+      "bytes": 88038
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/tests/test_campaign_continuation_contract.gd",
+      "sha256": "5091ba1f4fb5125a371e9282c6f2bb7829955adfcc7e33a1364b0b5b4a9bdaa2",
+      "bytes": 82922
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/V4-DEFENSE-REVIEW.md",
+      "sha256": "9f8be95ea19925329d91d2532fb0ae1d3178d1c8ece4af7340089217353b77f7",
+      "bytes": 2915
+    }
+  ],
+  "source_bases": [
+    {
+      "path": "game3d/tests/office_endpoint_driver.gd",
+      "sha256": "69f6890b18e0c131d69e435fee2eecbaa8c8e39e049adcc0d070e4ad61b3fb6c",
+      "bytes": 6406
+    },
+    {
+      "path": "game3d/tests/office_acceptance_probe.gd",
+      "sha256": "7433cf8ceaccb769f9034124e3dec62beb46801a71877ec659b699a0dab156b7",
+      "bytes": 84117
+    },
+    {
+      "path": "game3d/tests/boss_acceptance_probe.gd",
+      "sha256": "a8d990dfcf5ebc71c78bccb16886868a9a07d3ef7585e03c5c70554083bd27d9",
+      "bytes": 54246
+    },
+    {
+      "path": "game3d/scripts/full_scene.gd",
+      "sha256": "f33a195065b02ba251724193498a07ba3196bf98c28c2d34803829a7527eca3b",
+      "bytes": 45507
+    },
+    {
+      "path": "game3d/scripts/full_runtime.gd",
+      "sha256": "590c22f89a20fff9eb1b6bed50a7a85500af81b3ca41a8f2c8efc8c8c7225027",
+      "bytes": 46701
+    },
+    {
+      "path": "game3d/scripts/game_state.gd",
+      "sha256": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c",
+      "bytes": 26416
+    },
+    {
+      "path": "game3d/scripts/office_campaign.gd",
+      "sha256": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f",
+      "bytes": 23413
+    },
+    {
+      "path": "game3d/scripts/campaign_system.gd",
+      "sha256": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff",
+      "bytes": 20002
+    },
+    {
+      "path": "game3d/scripts/kingdom_campaign.gd",
+      "sha256": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073",
+      "bytes": 25407
+    },
+    {
+      "path": "game3d/scripts/heist_system.gd",
+      "sha256": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f",
+      "bytes": 11939
+    },
+    {
+      "path": "game3d/scripts/quest_dialogue.gd",
+      "sha256": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044",
+      "bytes": 29240
+    },
+    {
+      "path": "game3d/scripts/vendors_core.gd",
+      "sha256": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+      "bytes": 16929
+    },
+    {
+      "path": "game3d/scripts/memory_loop.gd",
+      "sha256": "1729200f9428acc6ea98fb68f0740e3a983186e98d871336723cd7e337a3ea28",
+      "bytes": 19517
+    },
+    {
+      "path": "game3d/scripts/travel_system.gd",
+      "sha256": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5",
+      "bytes": 26171
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "sha256": "469cba30720f20dd76cf01ec53187c7ab351e4bf21077883436be6e888519925",
+      "bytes": 33228
+    },
+    {
+      "path": "game3d/scripts/boss_system.gd",
+      "sha256": "b4d74e9cc3b8e168a2dc42dcd3c7ec33767f61a4a9e5f5b047f73e6caaa7c062",
+      "bytes": 22034
+    },
+    {
+      "path": "game3d/scripts/world_adapter.gd",
+      "sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "bytes": 74082
+    },
+    {
+      "path": "game3d/scripts/full_neighborhood.gd",
+      "sha256": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9",
+      "bytes": 79421
+    },
+    {
+      "path": "game3d/scripts/content_catalog.gd",
+      "sha256": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668",
+      "bytes": 3458
+    },
+    {
+      "path": "game3d/data/source_content.json",
+      "sha256": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+      "bytes": 797484
+    },
+    {
+      "path": "src/data/props.js",
+      "sha256": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787",
+      "bytes": 49823
+    },
+    {
+      "path": "src/minigames/activities.js",
+      "sha256": "943e740548f2e2720053ff0a56a9ad030f0bad69518b9148798c2ccc16f152d0",
+      "bytes": 20645
+    },
+    {
+      "path": "src/systems/campaigns.js",
+      "sha256": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c",
+      "bytes": 53095
+    },
+    {
+      "path": "src/systems/concessions.js",
+      "sha256": "875abe4453ef7d1ad234c25fa5c9fad561afbc7a461c00598cc767368a5f280f",
+      "bytes": 14690
+    },
+    {
+      "path": "src/core/audio_save.js",
+      "sha256": "814eff4e13f8b47b5de925d65b85f4e10cbafe8f026db73c129aa88224fc9ebd",
+      "bytes": 20097
+    }
+  ],
+  "retained_evidence": [
+    {
+      "path": ".build/full-port/office-endpoint-tour-native/earned-handoff.json",
+      "sha256": "dc13e35bc438725c69fd9d41299b85bb0665fb0a776abc9314cb6c035d0bc066",
+      "bytes": 12270
+    },
+    {
+      "path": ".build/full-port/office-endpoint-tour-native/office-tour.json",
+      "sha256": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708",
+      "bytes": 500367
+    }
+  ],
+  "parent_fixture": {
+    "cash": 300,
+    "copper": 6,
+    "kind": "fresh_resources_only",
+    "writes": 2
+  },
+  "new_fixture_writes": 0,
+  "static_checks": [
+    {
+      "path": "tests/campaign_continuation_probe.gd",
+      "check": "delimiter/string and duplicate-function scan; not Godot parse",
+      "passed": true
+    },
+    {
+      "path": "tests/test_campaign_continuation_contract.gd",
+      "check": "delimiter/string and duplicate-function scan; not Godot parse",
+      "passed": true
+    },
+    {
+      "check": "narrow authority scan; eleven actual completion tails; watchdog wiring",
+      "passed": true,
+      "scope": "static only; not execution"
+    },
+    {
+      "check": "complete assess_campaign body equals retained root-staged previous driver",
+      "passed": true,
+      "scope": "normalized text comparison only"
+    }
+  ],
+  "independent_review": {
+    "agent": "/root/slice_characters/site_visual_audit",
+    "scope": "source menu lifetime and expected encounter/ending gates, receipt contract",
+    "previous_result": "No additional concrete blocker after Emperor phase-field correction. Not parser/native acceptance.",
+    "result": "Recovery revision read-only review found no concrete blocker; central parser/contract/native pending.",
+    "recovery_review": {
+      "agent": "/root/slice_world",
+      "result": "No concrete blocker; immediate real-handler receipt boundaries, strict calendar/counters/job preservation, shared12 actions, no active/expected-boss recovery, real menus and nine tails checked. No engine/native acceptance.",
+      "scope_note": "Review preceded the native-v2 observer correction; updated observer has static source review only pending central execution."
+    },
+    "v3_defense_checkpoint": {
+      "agent": "/root/slice_world",
+      "result": "No actionable budget-reset/prefix-acceptance blocker in read-only review; no engine/native claim",
+      "inventory_scope": "actual scripts/shaders/data/project bytes; not Git tree"
+    },
+    "v5_numeric_admission": {
+      "agent": "/root/slice_characters/site_visual_audit",
+      "result": "Read-only review found no concrete parse/type or false-rejection blocker. Three literal numeric containers and two mixed identity boundaries corrected; exact retained90-source/8-cot/545484ms evidence checked. Required retained-input guards and eleventh completion tail verified statically.",
+      "engine_run": false,
+      "native_acceptance": false
+    }
+  },
+  "limits": {
+    "cold_title_ms": 120000,
+    "global_ms": 1800000,
+    "fight_ms": 90000,
+    "screenshots": 24,
+    "samples": 3600,
+    "events": 40000,
+    "rests": 12,
+    "cold_visits": 3,
+    "phase_ms": {
+      "load": 30000,
+      "resources": 480000,
+      "claims": 600000,
+      "tony": 180000,
+      "blue_tarp": 270000,
+      "cart_cavalry": 270000,
+      "copper_choir": 270000,
+      "anoint": 180000,
+      "emperor": 270000,
+      "persistence": 60000
+    },
+    "day_event_receipts": 64,
+    "court_unique_guard_ids": 15,
+    "court_bouts_per_id": 2,
+    "court_bouts_total": 30,
+    "court_ms_per_id": 10000,
+    "court_ms_total": 150000,
+    "shared_cot_commands_across_runs": 12,
+    "shared_global_ms_across_runs": 1800000
+  },
+  "verification_pending": [
+    "exact JSON evidence correction import",
+    "eleven-group contract requiring actual pinned v4 prefix/save paths",
+    "native suffix from exact accepted v4 Tony prefix",
+    "honest two-run aggregate review"
+  ],
+  "review_amendment": "Prior source LOS/aim-token/watchdog corrections retained. Native-v1 withdrawal failure is preserved. Ordinary cot recovery now runs before all required Office departures with target90 HP, rest at80\u2013<90 else source sleep,12 total, no combat and exact immediate source/day/job/timer receipts. Nine contract completion tails. Native-v2 observer-only correction: campaign subclass captures actual day_started events separately before inherited filtered consumer; per-command cursor and detached payload projection; exact event and delta requirements retained. Native-v3 retained: all3claims/Tony3.454s/ending/blue marks, then guard death on viable route. Court ordinary input shares finite guard budgets including fallback. Real Pause-save prefix and explicit two-run aggregate add no authority. Original complete assessor unchanged. Native-v4 retained FAIL617.866s; hostile-only source guards now admitted by OR predicate and actual Campaign-generated witnesses. Exact accepted v4 Tony prefix may resume unchanged2c32 source with reviewed test-only overlay changes. Resume-v5 failure retained unchanged. Exact finite evidence numeric equality fixes only three literal schema containers and two mixed-composition identities. Required actual pinned prefix/save JSON regression plus individual admission diagnostics; no epsilon/coercion, no original assess_campaign change, no evidence repair. Engine/native rerun pending.",
+  "prior_evidence": [
+    {
+      "path": ".build/full-port/campaign-continuation/native-v1/campaign-continuation.json",
+      "sha256": "10e1e3fb3d8ea32b4073faca54a49e6b8af9c65aea21739638c3aba84437378e",
+      "outcome": "FAIL; original retained; resource leg completed, death during first claim installation,rest_count0"
+    },
+    {
+      "path": ".build/3d/campaign-continuation-native-v1.log",
+      "sha256": "da37a77ecc7fe1f55055627fdddcb4582a0a4d92ee5072142508355e4061055d",
+      "outcome": "original native failure log retained"
+    },
+    {
+      "path": ".build/full-port/campaign-continuation/native-v2/campaign-continuation.json",
+      "sha256": "9d7d6c51ffef75f5364c8db86b6fb6e0e12454c6d7f7d8d9b964ae58ef95932e",
+      "outcome": "FAIL retained: actual cot HP/day correct; inherited observer filtered day_started; source gameplay not altered"
+    },
+    {
+      "path": ".build/3d/campaign-continuation-native-v2.log",
+      "sha256": "8111b32ac2585cee742eaec02a0f61485c4a7f520ffa6fff6e2f695da67a9c7c",
+      "outcome": "FAIL retained: actual cot HP/day correct; inherited observer filtered day_started; source gameplay not altered"
+    },
+    {
+      "path": ".build/full-port/campaign-continuation/native-v3/campaign-continuation.json",
+      "sha256": "fb89bc7d25144bc5dbc2dea02167ac1d20c56e4a31f6c02166952cd2522fd1e4",
+      "outcome": "FAIL retained601.931s: claims/Tony3.454s/ending/blue marks, guard death; never accepted prefix"
+    },
+    {
+      "path": ".build/3d/campaign-continuation-native-v3.log",
+      "sha256": "3fadac5f3d4c6368915410486a87ad4737fa6eeebd4aa7113a14d2b6719792c3",
+      "outcome": "original native-v3 failure log retained"
+    },
+    {
+      "path": ".build/full-port/campaign-continuation/native-v4/campaign-continuation.json",
+      "sha256": "33da4b5f0364b4ecf456f423e5caab0a87cea81a65038e65e34fbb2f9c1273d4",
+      "outcome": "FAIL retained617.866s: no defense rows; hostile-only actual guards excluded by old driver"
+    },
+    {
+      "path": ".build/3d/campaign-2c32-v4/native-v4.log",
+      "sha256": "180634ee7c1c330affe75c944a72a58555dcfbc5e8639875b8d512e6d309a9a7",
+      "outcome": "original native-v4 log retained"
+    },
+    {
+      "path": ".build/3d/campaign-contract-v4.log",
+      "sha256": "d40e3de8f60abd082ab3506e6aba0dd0448ef3e5b86b447571e611e402ffdcd6",
+      "outcome": "prior843-check/11-group contract passed but missed hostile-only actual guard admission"
+    },
+    {
+      "path": ".build/full-port/campaign-continuation/native-v4/campaign-tony-prefix.json",
+      "sha256": "6cb8aa6a7b21c9e8cc3b7b97eb2752f74c78fe173c1069e7ff150c60ebe836fa",
+      "outcome": "accepted Tony prefix ONLY; full run later failed"
+    },
+    {
+      "path": ".build/full-port/campaign-continuation/native-v4/earned-tony-handoff.json",
+      "sha256": "5de5c3210a855e8f7cfd98945439bce1dc30a906cb7108bea079388d877d112a",
+      "outcome": "actual immutable prefix Pause-save bytes; no repair"
+    },
+    {
+      "path": ".build/3d/campaign-2c32-resume-v5/native.log",
+      "sha256": "ec518ef055094d495bff081d6d1f0c69a03a6b363c9f685e0d233b16af68bba4",
+      "outcome": "FAIL before startup retained: generic prefix admission rejected valid decoded numeric containers"
+    },
+    {
+      "path": ".build/3d/campaign-2c32-resume-v5/prefix-admission-diagnostic.log",
+      "sha256": "71cd5bf15c635dbc9451936cea0082d1e25fb75330ec20d39b47ab8d188dc855",
+      "outcome": "retained diagnostic: three literal numeric-container failures; all90 source hashes and stored save match"
+    }
+  ],
+  "current_dependency_observations": [
+    {
+      "path": "game3d/tests/office_endpoint_driver.gd",
+      "prior_sha256": "69f6890b18e0c131d69e435fee2eecbaa8c8e39e049adcc0d070e4ad61b3fb6c",
+      "current_sha256": "69f6890b18e0c131d69e435fee2eecbaa8c8e39e049adcc0d070e4ad61b3fb6c",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/tests/office_acceptance_probe.gd",
+      "prior_sha256": "7433cf8ceaccb769f9034124e3dec62beb46801a71877ec659b699a0dab156b7",
+      "current_sha256": "7433cf8ceaccb769f9034124e3dec62beb46801a71877ec659b699a0dab156b7",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/tests/boss_acceptance_probe.gd",
+      "prior_sha256": "a8d990dfcf5ebc71c78bccb16886868a9a07d3ef7585e03c5c70554083bd27d9",
+      "current_sha256": "a8d990dfcf5ebc71c78bccb16886868a9a07d3ef7585e03c5c70554083bd27d9",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/full_scene.gd",
+      "prior_sha256": "f33a195065b02ba251724193498a07ba3196bf98c28c2d34803829a7527eca3b",
+      "current_sha256": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/full_runtime.gd",
+      "prior_sha256": "590c22f89a20fff9eb1b6bed50a7a85500af81b3ca41a8f2c8efc8c8c7225027",
+      "current_sha256": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/game_state.gd",
+      "prior_sha256": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c",
+      "current_sha256": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/office_campaign.gd",
+      "prior_sha256": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f",
+      "current_sha256": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/campaign_system.gd",
+      "prior_sha256": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff",
+      "current_sha256": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/kingdom_campaign.gd",
+      "prior_sha256": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073",
+      "current_sha256": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/heist_system.gd",
+      "prior_sha256": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f",
+      "current_sha256": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/quest_dialogue.gd",
+      "prior_sha256": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044",
+      "current_sha256": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/vendors_core.gd",
+      "prior_sha256": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+      "current_sha256": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/memory_loop.gd",
+      "prior_sha256": "1729200f9428acc6ea98fb68f0740e3a983186e98d871336723cd7e337a3ea28",
+      "current_sha256": "1729200f9428acc6ea98fb68f0740e3a983186e98d871336723cd7e337a3ea28",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/travel_system.gd",
+      "prior_sha256": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5",
+      "current_sha256": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "prior_sha256": "469cba30720f20dd76cf01ec53187c7ab351e4bf21077883436be6e888519925",
+      "current_sha256": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/boss_system.gd",
+      "prior_sha256": "b4d74e9cc3b8e168a2dc42dcd3c7ec33767f61a4a9e5f5b047f73e6caaa7c062",
+      "current_sha256": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/world_adapter.gd",
+      "prior_sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "current_sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/full_neighborhood.gd",
+      "prior_sha256": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9",
+      "current_sha256": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/content_catalog.gd",
+      "prior_sha256": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668",
+      "current_sha256": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "game3d/data/source_content.json",
+      "prior_sha256": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+      "current_sha256": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "src/data/props.js",
+      "prior_sha256": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787",
+      "current_sha256": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "src/minigames/activities.js",
+      "prior_sha256": "943e740548f2e2720053ff0a56a9ad030f0bad69518b9148798c2ccc16f152d0",
+      "current_sha256": "943e740548f2e2720053ff0a56a9ad030f0bad69518b9148798c2ccc16f152d0",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "src/systems/campaigns.js",
+      "prior_sha256": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c",
+      "current_sha256": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "src/systems/concessions.js",
+      "prior_sha256": "875abe4453ef7d1ad234c25fa5c9fad561afbc7a461c00598cc767368a5f280f",
+      "current_sha256": "875abe4453ef7d1ad234c25fa5c9fad561afbc7a461c00598cc767368a5f280f",
+      "matches_prior": true,
+      "read_only": true
+    },
+    {
+      "path": "src/core/audio_save.js",
+      "prior_sha256": "814eff4e13f8b47b5de925d65b85f4e10cbafe8f026db73c129aa88224fc9ebd",
+      "current_sha256": "814eff4e13f8b47b5de925d65b85f4e10cbafe8f026db73c129aa88224fc9ebd",
+      "matches_prior": true,
+      "read_only": true
+    }
+  ],
+  "next_production_context": {
+    "revision": "2c32cb1",
+    "reported_by": "/root",
+    "verified_by_this_worker_with_git": false,
+    "parent_office_provenance": "2a1f6ca retained/disclosed",
+    "composition_requires_equal_actual_runtime_hashes": true
+  },
+  "accepted_prefix_input": {
+    "report": {
+      "path": ".build/full-port/campaign-continuation/native-v4/campaign-tony-prefix.json",
+      "sha256": "6cb8aa6a7b21c9e8cc3b7b97eb2752f74c78fe173c1069e7ff150c60ebe836fa",
+      "bytes": 1434568
+    },
+    "save": {
+      "path": ".build/full-port/campaign-continuation/native-v4/earned-tony-handoff.json",
+      "sha256": "5de5c3210a855e8f7cfd98945439bce1dc30a906cb7108bea079388d877d112a",
+      "bytes": 12392
+    },
+    "scope": "Tony prefix only; no full campaign/suffix/aggregate acceptance",
+    "retained_source_inventory_count": 90,
+    "retained_source_inventory_matches": true,
+    "rest_count_carried": 8,
+    "wall_ms_carried": 545484
+  },
+  "retained_input_contract": {
+    "required_args": [
+      "--retained-prefix=<absolute-original-v4-prefix>",
+      "--retained-save=<absolute-original-v4-save>"
+    ],
+    "read_only": true,
+    "no_synthetic_fallback": true,
+    "prefix_sha256": "6cb8aa6a7b21c9e8cc3b7b97eb2752f74c78fe173c1069e7ff150c60ebe836fa",
+    "save_sha256": "5de5c3210a855e8f7cfd98945439bce1dc30a906cb7108bea079388d877d112a"
+  }
+}

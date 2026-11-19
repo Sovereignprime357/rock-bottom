@@ -1,0 +1,27 @@
+{
+  "status": "static_only_pass",
+  "scripts": [
+    {
+      "path": ".build/3d/pretender-continuation-draft/tests/pretender_continuation_probe.gd",
+      "sha256": "e10c58de4715524bb7dbf12628c209b145f62dc8b1bf581f69acc172288f6352",
+      "functions": 33,
+      "delimiter_scan": "pass",
+      "duplicate_function_scan": "pass",
+      "narrow_authority_write_scan": "pass",
+      "godot_parse": "not_run"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/tests/test_pretender_continuation_contract.gd",
+      "sha256": "03eae44d00f21d852f9c24a23d3ea2a7fa267f81d49d39ef1998d343451ad669",
+      "functions": 30,
+      "delimiter_scan": "pass",
+      "duplicate_function_scan": "pass",
+      "narrow_authority_write_scan": "pass",
+      "godot_parse": "not_run"
+    }
+  ],
+  "held_campaign_hashes_unchanged": true,
+  "contract_completion_tails": 11,
+  "manifest_sha256": "04749a9a55cc3ecc295d0d084ff75e60d378e598675f8b01dfba4be6172e1c39",
+  "caveat": "A text scan is not a Godot parser or a runtime/native acceptance result."
+}

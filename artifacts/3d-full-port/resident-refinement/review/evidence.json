@@ -1,0 +1,1047 @@
+{
+  "format": "rock-bottom-resident-acceptance-review-v1",
+  "original_reports_unchanged": true,
+  "engine_run_by_reviewer": false,
+  "dave": {
+    "native-v1": {
+      "frames": [
+        {
+          "path": ".build/full-port/dave-wake/native-v1/01_sleeping_dave.png",
+          "receipt": {
+            "asleep": true,
+            "camera": [
+              -6.60553932189941,
+              1.68999993801117,
+              24.2359180450439
+            ],
+            "clear_ray": true,
+            "focus": [
+              -6.21166467666626,
+              0.515257358551025,
+              26.2510948181152
+            ],
+            "framebuffer": [
+              1280,
+              720
+            ],
+            "label": "01_sleeping_dave",
+            "menu": {
+              "buttons": [],
+              "labels": [
+                "ROCK BOTTOM",
+                "the same block.\nthe same business."
+              ]
+            },
+            "mode": "playing",
+            "png_bytes": 615816,
+            "png_sha256": "83db93f1d7cd006e7c8e7b1fa0cab5403f7b7f9b35121aa4d502cb96864b5734",
+            "process_frame": 287,
+            "projected": true,
+            "reachable": true,
+            "root_up": 0.0906714797019959,
+            "sleep_markers": 2
+          },
+          "independent_bytes_hash_dimensions_verified": true,
+          "original_image_visually_inspected": true
+        },
+        {
+          "path": ".build/full-port/dave-wake/native-v1/02_awake_dave.png",
+          "receipt": {
+            "asleep": false,
+            "camera": [
+              -6.60553932189941,
+              1.68999993801117,
+              24.2359180450439
+            ],
+            "clear_ray": true,
+            "focus": [
+              -5.44000005722046,
+              1.08486938476563,
+              26.2507400512695
+            ],
+            "framebuffer": [
+              1280,
+              720
+            ],
+            "label": "02_awake_dave",
+            "menu": {
+              "buttons": [],
+              "labels": [
+                "CHATTY DAVE",
+                "dave is asleep. his wallet is half out."
+              ]
+            },
+            "mode": "playing",
+            "png_bytes": 591991,
+            "png_sha256": "3bec417c96c518a96ef8b77bbcb7944d16b65259eb6ef5275321e5b86f9f88c4",
+            "process_frame": 394,
+            "projected": true,
+            "reachable": true,
+            "root_up": 1.0,
+            "sleep_markers": 0
+          },
+          "independent_bytes_hash_dimensions_verified": true,
+          "original_image_visually_inspected": true
+        },
+        {
+          "path": ".build/full-port/dave-wake/native-v1/03_pigeon_dialogue.png",
+          "receipt": {
+            "asleep": false,
+            "camera": [
+              -6.60553932189941,
+              1.68999993801117,
+              24.2359180450439
+            ],
+            "clear_ray": true,
+            "focus": [
+              -5.44000005722046,
+              1.08486938476563,
+              26.2507400512695
+            ],
+            "framebuffer": [
+              1280,
+              720
+            ],
+            "label": "03_pigeon_dialogue",
+            "menu": {
+              "buttons": [
+                "listen for a while. (-5 brain)",
+                "leave."
+              ],
+              "labels": [
+                "CHATTY DAVE",
+                "dave is explaining a theory about pigeons.\nthe theory has 17 parts."
+              ]
+            },
+            "mode": "dialogue",
+            "png_bytes": 497802,
+            "png_sha256": "4c9f8c9ea42b9db75ab46ee225e0dbc71e43591e3951bf9e9f970dcc969d67ae",
+            "process_frame": 395,
+            "projected": true,
+            "reachable": true,
+            "root_up": 1.0,
+            "sleep_markers": 0
+          },
+          "independent_bytes_hash_dimensions_verified": true,
+          "original_image_visually_inspected": true
+        }
+      ],
+      "immediate_actor_changes": {
+        "asleep": [
+          true,
+          false
+        ]
+      },
+      "player_unchanged": true,
+      "rng_unchanged": true,
+      "idle_samples": 104,
+      "idle_active_ms": 4015.949,
+      "movement": {
+        "input_frames": 1,
+        "metres": 0.229168564081192,
+        "modal": false,
+        "mode": "playing"
+      },
+      "wake_distance_source_px": 57.9591865539551,
+      "wake_resolved": {
+        "id": "dave",
+        "kind": "quest"
+      },
+      "wake_pressed": true,
+      "inputs": {
+        "capture_clicks": 3,
+        "clicks": 3,
+        "keys": 2,
+        "motion_frames": 128,
+        "mouse_motion": 170
+      },
+      "wall_ms": 22676,
+      "events": [
+        {
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "dave wakes up. he is talking immediately."
+          },
+          "wall_ms": 21921
+        }
+      ],
+      "scope": "Actual rendered viewport and synthetic ordinary input; visual review still required. No trusted hardware/pointer-lock/audio/performance claim. Empty packaged hashes are unavailable."
+    },
+    "web-v1": {
+      "frames": [
+        {
+          "path": ".build/full-port/dave-wake/web-v1/01_sleeping_dave_960.png",
+          "receipt": {
+            "asleep": true,
+            "camera": [
+              -6.56444787979126,
+              1.68999993801117,
+              24.2740421295166
+            ],
+            "clear_ray": true,
+            "focus": [
+              -6.2116641998291,
+              0.515257358551025,
+              26.251106262207
+            ],
+            "framebuffer": [
+              960,
+              540
+            ],
+            "label": "01_sleeping_dave",
+            "menu": {
+              "buttons": [],
+              "labels": [
+                "ROCK BOTTOM",
+                "the same block.\nthe same business."
+              ]
+            },
+            "mode": "playing",
+            "png_bytes": 373253,
+            "png_sha256": "0173d6c89bb38d8e229b15bdf14a613e78a88d743b228b4575444a656f5b4f3b",
+            "process_frame": 263,
+            "projected": true,
+            "reachable": true,
+            "root_up": 0.0906714797019958,
+            "sleep_markers": 2
+          },
+          "independent_bytes_hash_dimensions_verified": true,
+          "original_image_visually_inspected": true
+        },
+        {
+          "path": ".build/full-port/dave-wake/web-v1/02_awake_dave_960.png",
+          "receipt": {
+            "asleep": false,
+            "camera": [
+              -6.56444787979126,
+              1.68999993801117,
+              24.2740421295166
+            ],
+            "clear_ray": true,
+            "focus": [
+              -5.44000005722046,
+              1.08486866950989,
+              26.2507591247559
+            ],
+            "framebuffer": [
+              960,
+              540
+            ],
+            "label": "02_awake_dave",
+            "menu": {
+              "buttons": [],
+              "labels": [
+                "CHATTY DAVE",
+                "dave is asleep. his wallet is half out."
+              ]
+            },
+            "mode": "playing",
+            "png_bytes": 362499,
+            "png_sha256": "23f2116b036a8fd06145446bd1e192ad993b0dd4ab04b2f20f9ba151cae10372",
+            "process_frame": 338,
+            "projected": true,
+            "reachable": true,
+            "root_up": 1,
+            "sleep_markers": 0
+          },
+          "independent_bytes_hash_dimensions_verified": true,
+          "original_image_visually_inspected": true
+        },
+        {
+          "path": ".build/full-port/dave-wake/web-v1/03_pigeon_dialogue_960.png",
+          "receipt": {
+            "asleep": false,
+            "camera": [
+              -6.56444787979126,
+              1.68999993801117,
+              24.2740421295166
+            ],
+            "clear_ray": true,
+            "focus": [
+              -5.44000005722046,
+              1.08486866950989,
+              26.2507591247559
+            ],
+            "framebuffer": [
+              960,
+              540
+            ],
+            "label": "03_pigeon_dialogue",
+            "menu": {
+              "buttons": [
+                "listen for a while. (-5 brain)",
+                "leave."
+              ],
+              "labels": [
+                "CHATTY DAVE",
+                "dave is explaining a theory about pigeons.\nthe theory has 17 parts."
+              ]
+            },
+            "mode": "dialogue",
+            "png_bytes": 310085,
+            "png_sha256": "923621df878661454e0a663da0064340cf0cc752daf24050544d4af7169fab73",
+            "process_frame": 339,
+            "projected": true,
+            "reachable": true,
+            "root_up": 1,
+            "sleep_markers": 0
+          },
+          "independent_bytes_hash_dimensions_verified": true,
+          "original_image_visually_inspected": true
+        }
+      ],
+      "immediate_actor_changes": {
+        "asleep": [
+          true,
+          false
+        ]
+      },
+      "player_unchanged": true,
+      "rng_unchanged": true,
+      "idle_samples": 72,
+      "idle_active_ms": 4029.66666666666,
+      "movement": {
+        "input_frames": 1,
+        "metres": 0.373440235853195,
+        "modal": false,
+        "mode": "playing"
+      },
+      "wake_distance_source_px": 56.620288848877,
+      "wake_resolved": {
+        "id": "dave",
+        "kind": "quest"
+      },
+      "wake_pressed": true,
+      "inputs": {
+        "capture_clicks": 0,
+        "clicks": 3,
+        "keys": 3,
+        "motion_frames": 102,
+        "mouse_motion": 137
+      },
+      "wall_ms": 37897,
+      "events": [
+        {
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "dave wakes up. he is talking immediately."
+          },
+          "wall_ms": 33847
+        }
+      ],
+      "scope": "Actual rendered viewport and synthetic ordinary input; visual review still required. No trusted hardware/pointer-lock/audio/performance claim. Empty packaged hashes are unavailable."
+    },
+    "browser_report_download_byte_equal": true
+  },
+  "laundry": {
+    "all_web_originals_independently_verified": [
+      {
+        "file": "busker_front_rest_2m.png",
+        "sha256": "08d062b80f6797f71d83c6ef15485356871d08f7b6923205327e8ee08adc95f7",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 845782
+      },
+      {
+        "file": "busker_quarter_walk_2m.png",
+        "sha256": "16d0000066f25d599d8059415548bb9bcf2a194af92f5e656b2292a4d357a33b",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 843913
+      },
+      {
+        "file": "busker_identity_gesture.png",
+        "sha256": "9f969a0e44d1328f53419f27d30c9ba7b3db52a6f7a47da2aee076d115951147",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 843926
+      },
+      {
+        "file": "busker_contact_15.png",
+        "sha256": "04b6d4dd1e7c36d5321791d930108b9259cce0ea552d42f337772d7eed03f436",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 861736
+      },
+      {
+        "file": "busker_contact_80.png",
+        "sha256": "6211dd95e6e2706dc2216ac03b8f15add0d3c1062e85f776887d4156cc25f4d0",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 862764
+      },
+      {
+        "file": "busker_front_peak_strike_2m.png",
+        "sha256": "814050922e9e684e1af9f5f32167a67afb3de8701ed8667272e3336d5d07e051",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 846164
+      },
+      {
+        "file": "busker_front_rest_20m.png",
+        "sha256": "b107daecca3b7dd9e4dac650dcd47ad32abefa24725f9e5275cf2875bce45a6b",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 613244
+      },
+      {
+        "file": "math_front_rest_2m.png",
+        "sha256": "9c47fff6f1dfbc0cd239349aa79d92e73cf9e1e99afcffa42202bce02c444ef2",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 841624
+      },
+      {
+        "file": "math_quarter_walk_2m.png",
+        "sha256": "15c23bf61e7d76ade9f8958f032f61cff164122de6f0b62b51a8bf116e23a660",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 834121
+      },
+      {
+        "file": "math_identity_gesture.png",
+        "sha256": "467c53bd872a90884149228eca48444b01ae007347af2711cd7ef46a708cf88a",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 838862
+      },
+      {
+        "file": "math_contact_15.png",
+        "sha256": "41c73bd380561907c2066a2841d264ee9200073fbcd4a7a321b328526071ac64",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 854614
+      },
+      {
+        "file": "math_contact_80.png",
+        "sha256": "929970f10ff6a3ed6049eb3b1154a74cfd0c18de392f897b1c42b99b1c76160c",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 855027
+      },
+      {
+        "file": "math_front_peak_strike_2m.png",
+        "sha256": "98a8c1c095415a4b510679373ec9b9ec86e17575148c95a13b0ab94d2ba74884",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 845114
+      },
+      {
+        "file": "math_front_rest_20m.png",
+        "sha256": "a904e693767761fbaf5de545fc10302bf94ddb5f6146dc7c2e2d858f48e52124",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 611027
+      },
+      {
+        "file": "launderlady_front_rest_2m.png",
+        "sha256": "c3417439853e76d555355c4f31165cde7433634f651bea9c11bf9c7db8b10c3e",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 844474
+      },
+      {
+        "file": "launderlady_quarter_walk_2m.png",
+        "sha256": "3f3c7f4bc5cf313cd8bda518eb9dd55a697b766e44481467e94191676daa550e",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 834341
+      },
+      {
+        "file": "launderlady_identity_gesture.png",
+        "sha256": "58859da743108260f4c396febfb73182ae25d458fde77f45b6d13ebfd2bd71f8",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 839278
+      },
+      {
+        "file": "launderlady_contact_15.png",
+        "sha256": "b710680ecb2663bedd44a4f4bb80e6155acab0fe61d6802d341242fc821a41af",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 858082
+      },
+      {
+        "file": "launderlady_contact_80.png",
+        "sha256": "b427ca54954e63e5ea6ff016842228cc3cdb94ae4841820a49d3177ca4d902f3",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 858789
+      },
+      {
+        "file": "launderlady_front_peak_strike_2m.png",
+        "sha256": "76ea81c9e4625bf1367577603da082e94a7010a586358dc1a46e56b18a03dd0e",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 846147
+      },
+      {
+        "file": "launderlady_quarter_death.png",
+        "sha256": "97300cb53608d857a3654e667a1e0b761bd1e0d19b6492533070ecb7d987295b",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 838125
+      },
+      {
+        "file": "launderlady_front_rest_20m.png",
+        "sha256": "f391e5ba9b4c425e439f617dcac7f780f274493c86025dc0576150a0b0ca04c2",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 612921
+      },
+      {
+        "file": "horsecop_front_rest_3m.png",
+        "sha256": "4d9d09929840ed444e16bc7a01ea6567e315a40c6105cce7afdfb2e66215782c",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 787005
+      },
+      {
+        "file": "horsecop_quarter_walk_3m.png",
+        "sha256": "c2f15ed01bb0fccb1fdcbb630d886fc748aafa1f4a11d4c95daec84faf2df962",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 791770
+      },
+      {
+        "file": "horsecop_identity_gesture.png",
+        "sha256": "a394beb8daa8e6c9f1b4b49658bd12befb89ffbbef55b04496f31402e4def5ba",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 792692
+      },
+      {
+        "file": "horsecop_front_rest_20m.png",
+        "sha256": "296645970a5b95f29872b8b6e5484a3af0f39320458f21f47b1326dafb0fb64d",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 630281
+      },
+      {
+        "file": "dogwalker_front_rest_2m.png",
+        "sha256": "fff75d1a51846545d4cd4a358b93f50027cca93a09cbcea808ddfdb05e420f4b",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 859498
+      },
+      {
+        "file": "dogwalker_quarter_walk_2m.png",
+        "sha256": "5c2aabf62ab4aac6e04be633fa3bc24a45e70f34d21c22fabc23336973d642a1",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 848234
+      },
+      {
+        "file": "dogwalker_identity_gesture.png",
+        "sha256": "3a66eaf9020a3cfb4f7013bb248c58bcf63b38d94b96e87c8655733225fafb1d",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 851590
+      },
+      {
+        "file": "dogwalker_front_peak_strike_2m.png",
+        "sha256": "0a2be792fa66e767b7b270291643276f6a749f5cc6ad96932206a15d28495ec1",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 862488
+      },
+      {
+        "file": "dogwalker_quarter_death.png",
+        "sha256": "d3df89493a2e1ee92eb99fe8ef051e6bdc6234c8d7f6bb6f53aca06414c99a72",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 846784
+      },
+      {
+        "file": "dogwalker_front_rest_20m.png",
+        "sha256": "5852db706ac2286a108ca2ae84b291d47f6c31effee25f6dc76a7463a83ec5e7",
+        "dimensions": [
+          1280,
+          720
+        ],
+        "png_bytes": 614097
+      }
+    ],
+    "visually_reviewed_pairs": [
+      {
+        "file": "launderlady_front_rest_2m.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "f1878f0ff8d3b9c9f61eeee5754845775b3d905d40a639ebe84ef90b29205af1",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_front_rest_2m.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 844474,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "58d1194d3461ca909973739ea422ca351cde658e072ea3651bc48e8b0870302a",
+              "state": [
+                "",
+                0,
+                false,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "c3417439853e76d555355c4f31165cde7433634f651bea9c11bf9c7db8b10c3e"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_front_rest_2m.png",
+        "native_sha256": "86c77a5daca83c1d00c54debd3b5a85d773e3b2c3f02e58f93b5f3999a761e01",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_quarter_walk_2m.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "3b90175e476226468527a8a72522e4907d89f59960bb0497dad5e76a8726b947",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_quarter_walk_2m.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 834341,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "9f72875d69e3ec573913fb159755ded9ee15c06f5a4621b5c10a286db9815800",
+              "state": [
+                "",
+                0,
+                false,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "3f3c7f4bc5cf313cd8bda518eb9dd55a697b766e44481467e94191676daa550e"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_quarter_walk_2m.png",
+        "native_sha256": "ff3dbd0e8199e62c21c3c0ec3c6cb3fcef8352a83c008298b76eed0bf2ba8779",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_identity_gesture.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "3b90175e476226468527a8a72522e4907d89f59960bb0497dad5e76a8726b947",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_identity_gesture.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 839278,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "603a2c238699dca8c4351ff5d39789daf92181791be56fb0b83e6444fce8c3f1",
+              "state": [
+                "fold",
+                0,
+                false,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "58859da743108260f4c396febfb73182ae25d458fde77f45b6d13ebfd2bd71f8"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_identity_gesture.png",
+        "native_sha256": "20676bfc1757ef51d989981141b4e4ab159f2ec1fddc3545a004f57003ab671f",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_contact_15.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_contact_15.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 858082,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "7e759d5cd6766147bbc479da055e6a1e0b88ff9ed86cfd61474699196b3750f3",
+              "state": [
+                "fold",
+                0,
+                false,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "b710680ecb2663bedd44a4f4bb80e6155acab0fe61d6802d341242fc821a41af"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_contact_15.png",
+        "native_sha256": "4a840d1b58611b045e1859f1b8b6320bad487c7de0874da21c7aa47159187218",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_contact_80.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_contact_80.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 858789,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "d44cab4eff552da164f5daf5316a274422d3fc49bd91ae1005379f59b72186d0",
+              "state": [
+                "fold",
+                0,
+                false,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "b427ca54954e63e5ea6ff016842228cc3cdb94ae4841820a49d3177ca4d902f3"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_contact_80.png",
+        "native_sha256": "ee1494f2dcbe36bf391662cb90fc7b08d0d33a72c76207f38b49374915002dbb",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_front_peak_strike_2m.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "f1878f0ff8d3b9c9f61eeee5754845775b3d905d40a639ebe84ef90b29205af1",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_front_peak_strike_2m.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 846147,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "8c3b23286f364de225d53cad597992be59f5b5b5e0fdcc5bebd4715d3b2485bc",
+              "state": [
+                "strike",
+                0,
+                true,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "76ea81c9e4625bf1367577603da082e94a7010a586358dc1a46e56b18a03dd0e"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_front_peak_strike_2m.png",
+        "native_sha256": "7cd6cb97a3cedf58772ed6247281dba5f69682ca203f2fe984318ee1da0a25a3",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_quarter_death.png",
+        "web_record": {
+          "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+          "camera_sha256": "ae0878f387557fd097494efae8c28eaa1700947b00f18ebb101ede871138c344",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_quarter_death.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 838125,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "fe86a93ca2aebda96ac4ff3d65b36b3060c109f9a5124cca501eb68d64a6375d",
+              "state": [
+                "",
+                0,
+                false,
+                true,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "97300cb53608d857a3654e667a1e0b761bd1e0d19b6492533070ecb7d987295b"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_quarter_death.png",
+        "native_sha256": "7a6e1d1777ad0572b23d7ae0111889a75785a0287ffbdf59da0da3c6af33c463",
+        "native_and_web_originals_visually_inspected": true
+      },
+      {
+        "file": "launderlady_front_rest_20m.png",
+        "web_record": {
+          "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+          "camera_sha256": "c9d5c84ebcf7339e6635da3c90f819c0ab8a32096fe4b9f533918d525f237306",
+          "expected_size": [
+            1280,
+            720
+          ],
+          "file": "launderlady_front_rest_20m.png",
+          "fov": 78,
+          "indexed_weighted_surfaces": 0,
+          "metrics": {
+            "bones": 26,
+            "max_weights": 4,
+            "meshes": 9,
+            "surfaces": 9,
+            "triangles": 7806
+          },
+          "png_bytes": 612921,
+          "rigs": [
+            {
+              "coats": 3,
+              "pose_sha256": "58d1194d3461ca909973739ea422ca351cde658e072ea3651bc48e8b0870302a",
+              "state": [
+                "",
+                0,
+                false,
+                false,
+                3,
+                true,
+                false,
+                false
+              ],
+              "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+              "visual": "launderlady"
+            }
+          ],
+          "sha256": "f391e5ba9b4c425e439f617dcac7f780f274493c86025dc0576150a0b0ca04c2"
+        },
+        "native_path": ".build/full-port/resident-art/laundry-native-v1/launderlady_front_rest_20m.png",
+        "native_sha256": "25cf1a70329ecb003e9ba306c839bf73f1cdcb59b7da0d076b7ed9b856a720d9",
+        "native_and_web_originals_visually_inspected": true
+      }
+    ],
+    "capture_summary": {
+      "format": "rock-bottom-indexed-roster-web-keepalive-v3",
+      "completion_mode": "web_capture_keepalive",
+      "capture_complete": true,
+      "render_receipts_pass": true,
+      "engine_exit_observed": false,
+      "exit_code": null,
+      "engine_shutdown_tested": false,
+      "engine_shutdown_acceptance": false,
+      "errors": [],
+      "capture_count": 32,
+      "observation_ms": 33910
+    },
+    "native_web_visual_review": "No new blocker identified in eight selected poses; no indexing or exact-pixel comparison",
+    "web_visual_pending": false,
+    "shutdown_claim": false
+  },
+  "pending": [
+    "Dave posed geometry vs actual ground measurement"
+  ],
+  "not_claimed": [
+    "exact native/Web pixels",
+    "trusted physical input",
+    "browser shutdown",
+    "performance acceptance",
+    "all-resident review",
+    "release completion"
+  ],
+  "selected_candidate_sources": {
+    "scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+    "scripts/actor_animation.gd": "058012dbc4a6f7c5e33532b41ffa9492625cd789b17b55712fc41b77750cb417",
+    "scripts/character_roster.gd": "90e5ebed9e8d65e190a89c969c8cfa2bf8bee1f01f1565c4d0fa50de78c5bdab",
+    "data/source_content.json": "907ac979ef628c68015363078274d0403e952ed6e6e941cd868471905337ff54",
+    "tests/dave_walkthrough_probe.gd": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2"
+  },
+  "raw_input_sha256": {
+    ".build/full-port/dave-wake/native-v1/dave-walkthrough.json": "6ee6972e628e7a803212925618395c41828b01f31197440133f6228dd444f2f3",
+    ".build/full-port/dave-wake/native-v1/01_sleeping_dave.png": "83db93f1d7cd006e7c8e7b1fa0cab5403f7b7f9b35121aa4d502cb96864b5734",
+    ".build/full-port/dave-wake/native-v1/02_awake_dave.png": "3bec417c96c518a96ef8b77bbcb7944d16b65259eb6ef5275321e5b86f9f88c4",
+    ".build/full-port/dave-wake/native-v1/03_pigeon_dialogue.png": "4c9f8c9ea42b9db75ab46ee225e0dbc71e43591e3951bf9e9f970dcc969d67ae",
+    ".build/full-port/dave-wake/web-v1/browser-report.json": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745",
+    ".build/full-port/dave-wake/web-v1/01_sleeping_dave_960.png": "0173d6c89bb38d8e229b15bdf14a613e78a88d743b228b4575444a656f5b4f3b",
+    ".build/full-port/dave-wake/web-v1/02_awake_dave_960.png": "23f2116b036a8fd06145446bd1e192ad993b0dd4ab04b2f20f9ba151cae10372",
+    ".build/full-port/dave-wake/web-v1/03_pigeon_dialogue_960.png": "923621df878661454e0a663da0064340cf0cc752daf24050544d4af7169fab73",
+    ".build/full-port/dave-wake/web-v1/browser-console.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    ".build/full-port/dave-wake/web-v1/dave-walkthrough-web-960.json": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745",
+    ".build/full-port/resident-art/laundry-web-v1/browser-originals.json": "3363a0243315fe49e527bd411b28c663e896b7ec906ff636034eb63e637342af",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_front_rest_2m.png": "86c77a5daca83c1d00c54debd3b5a85d773e3b2c3f02e58f93b5f3999a761e01",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_quarter_walk_2m.png": "ff3dbd0e8199e62c21c3c0ec3c6cb3fcef8352a83c008298b76eed0bf2ba8779",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_identity_gesture.png": "20676bfc1757ef51d989981141b4e4ab159f2ec1fddc3545a004f57003ab671f",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_contact_15.png": "4a840d1b58611b045e1859f1b8b6320bad487c7de0874da21c7aa47159187218",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_contact_80.png": "ee1494f2dcbe36bf391662cb90fc7b08d0d33a72c76207f38b49374915002dbb",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_front_peak_strike_2m.png": "7cd6cb97a3cedf58772ed6247281dba5f69682ca203f2fe984318ee1da0a25a3",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_quarter_death.png": "7a6e1d1777ad0572b23d7ae0111889a75785a0287ffbdf59da0da3c6af33c463",
+    ".build/full-port/resident-art/laundry-native-v1/launderlady_front_rest_20m.png": "25cf1a70329ecb003e9ba306c839bf73f1cdcb59b7da0d076b7ed9b856a720d9",
+    ".build/3d/resident-art-integration/laundry-native-v1.log": "2ffc46d61f5aeb83ed376ef3c90d48d35fca8f81dca6bdc3ddb73a9c8b1acc40",
+    ".build/3d/resident-art-integration/test_character_roster.log": "1b562cf4c28e0149113f6d4c272852fe61261b540fd770d5b512fc869ef43673",
+    ".build/3d/resident-art-integration/test_full_scene.log": "46c2abb7d4a1212680b9246c4e8bb50d21e56b525eedc1285139076e46fbc636",
+    ".build/3d/resident-art-integration/overlays.json": "27820b02b389bb70ae3bc7ffff7f102d0354ffa0bc5e4db66704de1c9dbc49c3",
+    ".build/3d/resident-art-integration/web-exports.json": "8cad823249b28195c3940a35687b2cc7e4c2d6ddefff222b3dd5ef205365b24b",
+    ".build/3d/resident-art-integration/web-preparation.json": "67f9f7656321e547dfb7907db0e42af5e14cc58f9c27e7f7209c2f9e11eefba1",
+    ".build/3d/laundry-shirt-draft/SPEC-LAUNDRY-SHIRT-DRAFT.md": "ced165793ef31917ee2c12ed947fb0967ce848e49bfe5a8f27552ce40fc1a76c",
+    ".build/3d/dave-ground-diagnostic/manifest.json": "017e34877f0f951ef31e07fbf685a5fa7a30a99d337a071c53ec7ae6c6093d83"
+  }
+}

@@ -1,0 +1,815 @@
+{
+  "acceptance": true,
+  "engine": "4.5.1-stable (official)",
+  "events": [
+    {
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "dave wakes up. he is talking immediately."
+      },
+      "wall_ms": 33847
+    }
+  ],
+  "failures": [],
+  "finished": true,
+  "fixture": "none",
+  "format": "rock-bottom-dave-walkthrough",
+  "frames": [
+    {
+      "asleep": true,
+      "camera": [
+        -6.56444787979126,
+        1.68999993801117,
+        24.2740421295166
+      ],
+      "clear_ray": true,
+      "focus": [
+        -6.2116641998291,
+        0.515257358551025,
+        26.251106262207
+      ],
+      "framebuffer": [
+        960,
+        540
+      ],
+      "label": "01_sleeping_dave",
+      "menu": {
+        "buttons": [],
+        "labels": [
+          "ROCK BOTTOM",
+          "the same block.\nthe same business."
+        ]
+      },
+      "mode": "playing",
+      "png_bytes": 373253,
+      "png_sha256": "0173d6c89bb38d8e229b15bdf14a613e78a88d743b228b4575444a656f5b4f3b",
+      "process_frame": 263,
+      "projected": true,
+      "reachable": true,
+      "root_up": 0.0906714797019958,
+      "sleep_markers": 2
+    },
+    {
+      "asleep": false,
+      "camera": [
+        -6.56444787979126,
+        1.68999993801117,
+        24.2740421295166
+      ],
+      "clear_ray": true,
+      "focus": [
+        -5.44000005722046,
+        1.08486866950989,
+        26.2507591247559
+      ],
+      "framebuffer": [
+        960,
+        540
+      ],
+      "label": "02_awake_dave",
+      "menu": {
+        "buttons": [],
+        "labels": [
+          "CHATTY DAVE",
+          "dave is asleep. his wallet is half out."
+        ]
+      },
+      "mode": "playing",
+      "png_bytes": 362499,
+      "png_sha256": "23f2116b036a8fd06145446bd1e192ad993b0dd4ab04b2f20f9ba151cae10372",
+      "process_frame": 338,
+      "projected": true,
+      "reachable": true,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "camera": [
+        -6.56444787979126,
+        1.68999993801117,
+        24.2740421295166
+      ],
+      "clear_ray": true,
+      "focus": [
+        -5.44000005722046,
+        1.08486866950989,
+        26.2507591247559
+      ],
+      "framebuffer": [
+        960,
+        540
+      ],
+      "label": "03_pigeon_dialogue",
+      "menu": {
+        "buttons": [
+          "listen for a while. (-5 brain)",
+          "leave."
+        ],
+        "labels": [
+          "CHATTY DAVE",
+          "dave is explaining a theory about pigeons.\nthe theory has 17 parts."
+        ]
+      },
+      "mode": "dialogue",
+      "png_bytes": 310085,
+      "png_sha256": "923621df878661454e0a663da0064340cf0cc752daf24050544d4af7169fab73",
+      "process_frame": 339,
+      "projected": true,
+      "reachable": true,
+      "root_up": 1,
+      "sleep_markers": 0
+    }
+  ],
+  "hashes": {
+    "res://data/source_content.json": "907ac979ef628c68015363078274d0403e952ed6e6e941cd868471905337ff54",
+    "res://scripts/actor_animation.gd": "",
+    "res://scripts/cast_profiles.gd": "",
+    "res://scripts/full_scene.gd": "",
+    "res://scripts/quest_dialogue.gd": "",
+    "res://tests/boss_acceptance_probe.gd": "",
+    "res://tests/dave_walkthrough_probe.gd": ""
+  },
+  "idle": [
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    },
+    {
+      "asleep": false,
+      "root_up": 1,
+      "sleep_markers": 0
+    }
+  ],
+  "idle_active_ms": 4029.66666666666,
+  "initial": {
+    "actors": 56,
+    "brain": 70,
+    "cart_mounted": false,
+    "cash": 0,
+    "cred": 0,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "hp": 100,
+    "inventory": [],
+    "max_hp": 100,
+    "offenses": 0,
+    "rng": 4153385641,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "shakes": 20,
+    "source_position": [
+      1050,
+      840
+    ],
+    "speed": 2.2,
+    "weapon": "fists"
+  },
+  "inputs": {
+    "capture_clicks": 0,
+    "clicks": 3,
+    "keys": 3,
+    "motion_frames": 102,
+    "mouse_motion": 137
+  },
+  "movement": {
+    "input_frames": 1,
+    "metres": 0.373440235853195,
+    "modal": false,
+    "mode": "playing"
+  },
+  "overflow": false,
+  "renderer": "gl_compatibility",
+  "replacements": 0,
+  "schema": 1,
+  "scope": "Actual rendered viewport and synthetic ordinary input; visual review still required. No trusted hardware/pointer-lock/audio/performance claim. Empty packaged hashes are unavailable.",
+  "title_input": true,
+  "visual_acceptance": false,
+  "wake": {
+    "after": {
+      "actor": {
+        "asleep": false,
+        "attackCd": 0,
+        "chatterCd": -6241.96428571431,
+        "color": "#3a2818",
+        "h": 32,
+        "hitFlash": 0,
+        "hostile": false,
+        "hp": 40,
+        "hpMax": 40,
+        "id": "dave",
+        "maxHp": 40,
+        "name": "CHATTY DAVE",
+        "showHp": false,
+        "speed": 0,
+        "sprite": "dave",
+        "targetX": 900,
+        "targetY": 1480,
+        "w": 28,
+        "wanderT": 0,
+        "x": 900,
+        "y": 1480
+      },
+      "player": {
+        "attackCd": 0,
+        "attacking": 0,
+        "barbAside": false,
+        "brain": 70,
+        "brutusDefeated": 0,
+        "cartMounted": false,
+        "cash": 0,
+        "charisma": 0,
+        "copper": 0,
+        "crashT": 0,
+        "cred": 0,
+        "credBonus": 0,
+        "dirtySupplies": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "facing": "down",
+        "faction": {
+          "scrap": 0,
+          "spiritual": 0,
+          "street": 0
+        },
+        "frame": 0,
+        "frameT": 0,
+        "h": 28,
+        "hasPossum": false,
+        "hitFlash": 0,
+        "hitterHigh": false,
+        "hitters": 0,
+        "hp": 100,
+        "iframes": 0,
+        "inventory": [],
+        "lifetime": {
+          "arrests": 0,
+          "copsKilled": 0,
+          "dayCount": 0,
+          "officeJobs": 0,
+          "pretendersDefeated": 0,
+          "rocksCooked": 0,
+          "rocksFenced": 0,
+          "rocksSmoked": 0,
+          "routesCompleted": 0,
+          "territoriesClaimed": 0
+        },
+        "maxHp": 100,
+        "rank": 0,
+        "rockedT": 0,
+        "rocks": 0,
+        "shakes": 24.9935714285713,
+        "slowT": 0,
+        "soapRocks": 0,
+        "speed": 2.2,
+        "stripeLoyalty": 0,
+        "stunT": 0,
+        "supplies": 0,
+        "tonyOffenses": 0,
+        "vx": 0,
+        "vy": 0,
+        "w": 24,
+        "wanted": 0,
+        "wantedDecayMult": 1,
+        "wantedT": 0,
+        "weapon": "fists",
+        "x": 873.888793945312,
+        "y": 1432.85107421875
+      },
+      "rng": 2685966314
+    },
+    "before": {
+      "actor": {
+        "asleep": true,
+        "attackCd": 0,
+        "chatterCd": -6241.96428571431,
+        "color": "#3a2818",
+        "h": 32,
+        "hitFlash": 0,
+        "hostile": false,
+        "hp": 40,
+        "hpMax": 40,
+        "id": "dave",
+        "maxHp": 40,
+        "name": "CHATTY DAVE",
+        "showHp": false,
+        "speed": 0,
+        "sprite": "dave",
+        "targetX": 900,
+        "targetY": 1480,
+        "w": 28,
+        "wanderT": 0,
+        "x": 900,
+        "y": 1480
+      },
+      "player": {
+        "attackCd": 0,
+        "attacking": 0,
+        "barbAside": false,
+        "brain": 70,
+        "brutusDefeated": 0,
+        "cartMounted": false,
+        "cash": 0,
+        "charisma": 0,
+        "copper": 0,
+        "crashT": 0,
+        "cred": 0,
+        "credBonus": 0,
+        "dirtySupplies": 0,
+        "equip": {
+          "coat": null,
+          "hat": null,
+          "shoes": null,
+          "tool": null
+        },
+        "facing": "down",
+        "faction": {
+          "scrap": 0,
+          "spiritual": 0,
+          "street": 0
+        },
+        "frame": 0,
+        "frameT": 0,
+        "h": 28,
+        "hasPossum": false,
+        "hitFlash": 0,
+        "hitterHigh": false,
+        "hitters": 0,
+        "hp": 100,
+        "iframes": 0,
+        "inventory": [],
+        "lifetime": {
+          "arrests": 0,
+          "copsKilled": 0,
+          "dayCount": 0,
+          "officeJobs": 0,
+          "pretendersDefeated": 0,
+          "rocksCooked": 0,
+          "rocksFenced": 0,
+          "rocksSmoked": 0,
+          "routesCompleted": 0,
+          "territoriesClaimed": 0
+        },
+        "maxHp": 100,
+        "rank": 0,
+        "rockedT": 0,
+        "rocks": 0,
+        "shakes": 24.9935714285713,
+        "slowT": 0,
+        "soapRocks": 0,
+        "speed": 2.2,
+        "stripeLoyalty": 0,
+        "stunT": 0,
+        "supplies": 0,
+        "tonyOffenses": 0,
+        "vx": 0,
+        "vy": 0,
+        "w": 24,
+        "wanted": 0,
+        "wantedDecayMult": 1,
+        "wantedT": 0,
+        "weapon": "fists",
+        "x": 873.888793945312,
+        "y": 1432.85107421875
+      },
+      "rng": 2685966314
+    },
+    "distance": 56.620288848877,
+    "pressed": true,
+    "reachable": true,
+    "resolved": {
+      "id": "dave",
+      "kind": "quest"
+    }
+  },
+  "walking": [
+    {
+      "blockers": [
+        "dave",
+        "pothole"
+      ],
+      "graph_points": 19,
+      "route_points": 5,
+      "wall_ms": 23753
+    },
+    {
+      "blockers": [
+        "dave",
+        "pothole"
+      ],
+      "graph_points": 19,
+      "route_points": 6,
+      "wall_ms": 25330
+    },
+    {
+      "blockers": [
+        "dave",
+        "pothole"
+      ],
+      "graph_points": 18,
+      "route_points": 4,
+      "wall_ms": 26644
+    },
+    {
+      "blockers": [
+        "dave",
+        "pothole"
+      ],
+      "graph_points": 18,
+      "route_points": 4,
+      "wall_ms": 27809
+    },
+    {
+      "blockers": [
+        "dave",
+        "pothole"
+      ],
+      "graph_points": 18,
+      "route_points": 4,
+      "wall_ms": 28818
+    },
+    {
+      "blockers": [
+        "dogwalker",
+        "pothole"
+      ],
+      "graph_points": 19,
+      "route_points": 5,
+      "wall_ms": 38427
+    }
+  ],
+  "wall_ms": 37897,
+  "web": true,
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "platform": "Win32",
+    "devicePixelRatio": 1,
+    "canvas": [
+      960,
+      540
+    ]
+  },
+  "pngs_verified": true,
+  "browser_errors": [],
+  "machine_checks_pass": true
+}

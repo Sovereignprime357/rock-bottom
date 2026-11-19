@@ -3171,3 +3171,67 @@ including clean import,85engine suites and45source/parity checks. Metadata-only
 runtime data additions do not change the already-built gameplay. The separate
 Dave/index/laundry candidates are not included. Exact raw logs and checkout proof
 are retained in artifacts/3d-full-port/parity-metadata. No full-port completion.
+
+### Earned Kingdom continuation — 2026-11-19
+
+Metadata/evidence checkpoint85144a464edbfe981efbb9b44c0b88ced2904361 is pushed,
+130/1303D and19/19original green. Campaignresume-v6 completed all three courts,
+royal smoke, Emperor, ending and actual save/load/movement. Its explicit two-run
+aggregate with the genuine Tony prefix passes; it does not rewrite failedv4.
+The exact parent/save hashes and25original captures are retained. Final231cash,
+5copper,28.59HP,shoe,fourclaims. The follow-on pretender test passed408/10contract
+checks and won two days but died returning through a guard; its phase gate had
+excluded proactive defense. Characters is correcting that bounded driver only.
+Dave wake passes487scene/6514quest/1954roster checks in isolation. Laundry has
+composed with the Dave change using exact per-file EOL fragments/reverse proof.
+Actual resident art, Web indexing and sustained performance remain pending.
+
+### Resident and earned-pretender continuation — 2026-11-19
+
+Dave wake and folded laundry are integrated after the actual native/Web checks.
+Dave stays upright for four active seconds, removes sleep markers and reopens the
+source pigeon conversation; Leave resumes movement. Eight laundry views show
+folded cloth and retained rim contacts in both renderers. Original32 Web PNGs
+verify; that wrapper is explicitly capture-only. Source promotion changes only
+cast_profiles plus existing tests and the bounded Dave probe/contract. The
+roster test is converted from reviewed CRLF to its existing LF checkout policy;
+the exact before/candidate/final hashes are retained. Metadata-v2 remains an
+explicit three-pin revision, with no status or historical-evidence upgrades.
+
+Pretender-v2 completes all three source days and save/reloads after adding the
+missing transit defense to the driver. All90 original gameplay hashes match.
+The earlier two-win death stays failed. An initial root import crashed with a
+relative log path; an absolute-path import then passed759/11 contract checks.
+Native-v2 succeeds with zero deaths/arrests/grants, five cots and three genuine
+rewards. Its ObjectDB exit warning remains disclosed. The next all11 route is
+conditional on this actual accepted parent and earned save.
+
+Further evidence does not close performance: contact-attribution scene p95 is
+27.871/26.782ms at60 actors. Most counted peer tests originate in the diagnostic
+driver; no collision optimization is promoted from that count alone. Native
+indexed meshes remain exact across90 frames, while actual Web exact comparison
+fails13 frames/41 RGB channels by one byte. A fresh identical-build control also
+fails14/44, so a separately named narrow rounding analysis is held for review.
+The strict failure is unchanged. Court eave A/B renders and8476 geometry checks
+pass in isolation; the subtle visual change and inferred owners remain held.
+
+Dave sleep-ground measurement finds a localized support/clipping issue, not
+general hovering: body minimum−0.031m, pillow−0.089m, rigid head above ground.
+Do not move the entire rig downward. Keep this follow-up separate from the wake
+fix. Next: finish the explicit source-pin revision, final gates/export/playtest,
+checkpoint delivery, remaining earned claims and measured performance work.
+
+Resident release validation completed:131/1313D and19/19original, Full Windows
+and Web exports pass. Actual exported browser remembered the existing save,
+continued to play, opened/closed pause, journal and inventory, then moved again.
+The embedded Chromium pointer-capture UnknownError still occurs; right-mouse look
+fallback remains, with no hardware-audio claim. Local8074 now serves the resident
+build. Raw runner/build output, console and screenshot are retained in its release
+packet. Full-port acceptance remains open.
+
+All11 native-v1 stopped before startup because recomputing a serialized cot HP
+addition differed by one binary64 ULP. No gameplay from that attempt is accepted.
+A separate four-comparison test-proof amendment uses the source JSON scalar
+encoding, retains finite numeric guards and all resource/calendar checks. Original
+report/save/failure bytes remain unchanged. Fresh v2 is staged with an actual
+retained-JSON gate before the normal eight-group contract and bounded native run.

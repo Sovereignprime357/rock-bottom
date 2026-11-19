@@ -1,0 +1,19 @@
+{
+  "path": ".build\\full-port\\pretender-continuation\\native-v1\\pretender-continuation.json",
+  "sha256": "53fe58f5d50417fbbbb01fc7dfea8a700cc6c04b95f165dc9ef198332b8e637d",
+  "status": "failed",
+  "acceptance": false,
+  "failures": [
+    "source event invalidates pretender continuation: death",
+    "forbidden lifecycle/write: deaths",
+    "three consecutive days with preserved earned campaign",
+    "three actual spawns",
+    "three actual rewards",
+    "three actual reloads",
+    "three actual fights"
+  ],
+  "wall_ms": 101079,
+  "rest_count": 5,
+  "court_defenses_count": 0,
+  "note": "Guard-targeted attacks occurred during the day15 fight; proactive day_N transit defenses were absent. Original failed report/save/log remain unchanged."
+}

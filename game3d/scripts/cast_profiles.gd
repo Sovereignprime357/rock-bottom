@@ -23,7 +23,7 @@ const BASE_NAMES := {
 const HUMANS := {
 	&"sherri":{"shape":Vector4(1.78,0.86,0.205,0.12),"arm":0.61,"face":Vector4(0.87,0.80,1.12,-0.018),"head_scale":Vector3(0.94,1.04,0.96),"hair":"spikes","hair_color":"3e2825","wear":"cropped","shirt":"57404c","pants":"3a282d","skin":"ad8055","accent":"9d8a60","action":&"phone"},
 	&"paulie":{"shape":Vector4(1.78,0.72,0.28,0.18),"arm":0.52,"face":Vector4(1.42,1.40,0.80,0.004),"head_scale":Vector3(1.12,1.16,1.02),"hair":"slick","hair_color":"261f1b","wear":"open_jacket","shirt":"8a5050","pants":"604020","skin":"bd9b69","accent":"b19b67","action":&"talk"},
-	&"dave":{"shape":Vector4(1.78,0.74,0.29,0.235),"arm":0.55,"face":Vector4(1.07,1.05,0.92,0.008),"head_scale":Vector3(1.0,0.96,1.0),"hair":"receding","hair_color":"604020","wear":"cardigan","shirt":"7c633f","pants":"67543b","skin":"ad8055","accent":"a7976e","action":&"sleep"},
+	&"dave":{"shape":Vector4(1.78,0.74,0.29,0.235),"arm":0.55,"face":Vector4(1.07,1.05,0.92,0.008),"head_scale":Vector3(1.0,0.96,1.0),"hair":"receding","hair_color":"604020","wear":"cardigan","shirt":"7c633f","pants":"67543b","skin":"ad8055","accent":"a7976e","action":&""},
 	&"mom":{"shape":Vector4(1.80,0.86,0.255,0.17),"arm":0.56,"face":Vector4(0.97,0.88,0.95,0.008),"head_scale":Vector3(0.98,1.0,1.0),"hair":"bob","hair_color":"685237","wear":"zip_jacket","shirt":"6c724d","pants":"4a4a3c","skin":"bd9b69","accent":"a9996f","action":&"eat"},
 	&"priest":{"shape":Vector4(1.87,0.81,0.28,0.19),"arm":0.59,"face":Vector4(1.00,1.06,1.06,0.0),"head_scale":Vector3(1,1,1),"hair":"receding","hair_color":"30261b","wear":"cassock","shirt":"292a25","pants":"24251f","skin":"bd9b69","accent":"b9ad7f","action":&"talk"},
 	&"priest_fallen":{"shape":Vector4(1.87,0.81,0.28,0.19),"arm":0.59,"face":Vector4(1.00,1.06,1.06,-0.008),"head_scale":Vector3(1,1,1),"hair":"untidy","hair_color":"30261b","wear":"open_jacket","shirt":"554b35","pants":"292a25","skin":"bd9b69","accent":"b9ad7f","action":&"talk"},
@@ -510,7 +510,7 @@ static func _signatures(raw: Node3D, p: Dictionary, head: Node3D, shoulder: floa
 			Art._garment(basket,[Vector4(0.25,-0.12,0.14,0.14),Vector4(0.31,0.10,0.185,0.185)],"a79b76","basket")
 			for y: float in [-0.06,0.01,0.08]: Art._box(basket,Vector3(0,y,0.18),Vector3(0.57,0.015,0.012),"5e5c45","weave")
 			for x: float in [-0.22,-0.11,0.0,0.11,0.22]: Art._box(basket,Vector3(x,-0.005,0.185),Vector3(0.012,0.18,0.012),"5e5c45","weave")
-			Art._oval(basket,Vector3(0,0.11,0),Vector3(0.26,0.06,0.15),"8c8164","folded_shirt")
+			Art._instance(basket,_folded_laundry_mesh(),Vector3(0,0.11,0),"8c8164","folded_shirt")
 		&"metermaid":
 			_board(_held(raw,p,"right","ticket_book"),Vector2(0.16,0.23),"b5a878")
 			var meter := _held(raw,p,"left","personal_meter")
@@ -643,6 +643,51 @@ static func _paper_crown(head: Node3D, color: String, point_height: float) -> vo
 			ring.append(Vector3(sin(angle)*0.185,y,cos(angle)*0.17))
 		rings.append(ring)
 	Art._instance(crown,Art._sculpt_mesh(rings,0.15,false),Vector3.ZERO,color,"paper")
+
+
+static func _folded_laundry_mesh() -> ArrayMesh:
+	# One cached opaque fabric surface; all folds remain inside the old oval bounds.
+	var key := "laundry_folded_shirt_v1"
+	if Art._meshes.has(key): return Art._meshes[key] as ArrayMesh
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_laundry_box(st,Vector3(-0.205,-0.042,-0.123),Vector3(0.205,0.013,0.124))
+	_laundry_box(st,Vector3(-0.195,-0.036,0.123),Vector3(0.195,-0.018,0.140))
+	# Tucked sleeves overlap the folded body; the narrow raised edges catch light.
+	_laundry_fold(st,Vector3(-0.232,0.015,-0.090),Vector3(-0.038,0.028,0.021),Vector3(-0.205,0.018,0.090),0.009)
+	_laundry_fold(st,Vector3(0.232,0.015,-0.080),Vector3(0.040,0.030,0.030),Vector3(0.203,0.018,0.100),0.009)
+	# Two collar leaves retain an actual V-shaped recess between them.
+	_laundry_fold(st,Vector3(-0.072,0.018,-0.114),Vector3(-0.022,0.047,-0.041),Vector3(-0.006,0.021,-0.105),0.009)
+	_laundry_fold(st,Vector3(0.072,0.018,-0.114),Vector3(0.022,0.047,-0.041),Vector3(0.006,0.021,-0.105),0.009)
+	var result: ArrayMesh = st.commit()
+	Art._meshes[key] = result
+	return result
+
+
+static func _laundry_quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3) -> void:
+	Art._triangle(st,a,b,c)
+	Art._triangle(st,a,c,d)
+
+
+static func _laundry_box(st: SurfaceTool, low: Vector3, high: Vector3) -> void:
+	var a := Vector3(low.x,low.y,low.z); var b := Vector3(high.x,low.y,low.z)
+	var c := Vector3(high.x,low.y,high.z); var d := Vector3(low.x,low.y,high.z)
+	var e := Vector3(low.x,high.y,low.z); var f := Vector3(high.x,high.y,low.z)
+	var g := Vector3(high.x,high.y,high.z); var h := Vector3(low.x,high.y,high.z)
+	_laundry_quad(st,a,b,c,d); _laundry_quad(st,e,h,g,f)
+	_laundry_quad(st,d,c,g,h); _laundry_quad(st,a,e,f,b)
+	_laundry_quad(st,a,d,h,e); _laundry_quad(st,b,f,g,c)
+
+
+static func _laundry_fold(st: SurfaceTool, a: Vector3, source_b: Vector3, source_c: Vector3, thickness: float) -> void:
+	var b := source_b; var c := source_c
+	if (b-a).cross(c-a).y < 0.0:
+		b = source_c; c = source_b
+	var drop := Vector3(0,thickness,0)
+	Art._triangle(st,a,b,c); Art._triangle(st,c-drop,b-drop,a-drop)
+	_laundry_quad(st,a,a-drop,b-drop,b)
+	_laundry_quad(st,b,b-drop,c-drop,c)
+	_laundry_quad(st,c,c-drop,a-drop,a)
 
 
 static func _folding_chair(raw: Node3D) -> void:

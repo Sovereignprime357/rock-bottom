@@ -1,0 +1,459 @@
+extends "res://tests/campaign_continuation_probe.gd"
+## Isolated normal-input continuation. All inherited production state is read-only.
+const CampaignProof = preload("res://tests/campaign_continuation_probe.gd")
+const PRETENDER_LIMIT := 600000
+const PRETENDER_PHASE_LIMIT := 180000
+const PRETENDER_COT_LIMIT := 9
+const PRETENDER_CLANS := ["blue_tarp","cart_cavalry","copper_choir"]
+const PRETENDER_ARCHETYPES := ["charger","grabber","ranged"]
+const PRETENDER_SPRITES := ["blue_tarp_guard","receipt_guard","wire_guard"]
+const PRETENDER_ANCHORS := [Vector2(6500,760),Vector2(7860,2050),Vector2(6510,3480)]
+const DURABLE_PLAYER := ["cash","copper","cred","weapon","equip","inventory","rocks","lifetime","faction"]
+const DURABLE_STATE := ["day","office","districtClaims","kingdom","quests"]
+var pretender_spawns: Array[Dictionary] = []
+var pretender_rewards: Array[Dictionary] = []
+var pretender_reloads: Array[Dictionary] = []
+var pretender_fights: Array[Dictionary] = []
+var pretender_engagements: Dictionary = {}
+var pretender_capture_pending := ""
+var pretender_capture_started := -1
+var pretender_day_target := -1
+var pretender_fight_started := -1
+var inherited_parent: Dictionary = {}
+var initial_saved: Dictionary = {}
+
+static func valid_sha(value: Variant) -> bool:
+	if not value is String or value.length() != 64: return false
+	for character: String in value:
+		if character not in "0123456789abcdef": return false
+	return true
+
+static func pretender_launch_error(arguments: PackedStringArray) -> String:
+	var seen: Dictionary = {}
+	for argument: String in arguments:
+		var key: String = argument.get_slice("=",0)
+		if key not in ["--qa-full","--handoff","--parent-report","--handoff-sha","--parent-sha","--output","--diagnostic"]: return "unknown argument"
+		if seen.has(key): return "duplicate argument"
+		seen[key] = true
+		if key in ["--qa-full","--diagnostic"]:
+			if argument != key: return "flag takes no value"
+		elif key in ["--handoff-sha","--parent-sha"]:
+			if not argument.begins_with(key+"=") or not valid_sha(argument.trim_prefix(key+"=")): return "explicit lowercase SHA256 required"
+		elif not argument.begins_with(key+"=") or not argument.trim_prefix(key+"=").is_absolute_path(): return "absolute path required"
+	for key: String in ["--qa-full","--handoff","--parent-report","--handoff-sha","--parent-sha","--output"]:
+		if not seen.has(key): return "missing "+key
+	return ""
+
+static func exact_saved_equal(a: Variant,b: Variant) -> bool:
+	if (a is int or a is float) and (b is int or b is float): return is_finite(float(a)) and is_finite(float(b)) and a == b
+	if a is Dictionary and b is Dictionary:
+		if a.size() != b.size(): return false
+		for key: Variant in a:
+			if not b.has(key) or not exact_saved_equal(a[key],b[key]): return false
+		return true
+	if a is Array and b is Array:
+		if a.size() != b.size(): return false
+		for index: int in range(a.size()):
+			if not exact_saved_equal(a[index],b[index]): return false
+		return true
+	return typeof(a) == typeof(b) and a == b
+
+static func durable_equal(a: Dictionary,b: Dictionary) -> bool:
+	for key: String in DURABLE_PLAYER:
+		if not a.get("player",{}).has(key) or not b.get("player",{}).has(key) or not exact_saved_equal(a.player[key],b.player[key]): return false
+	for key: String in DURABLE_STATE:
+		if not a.get("state",{}).has(key) or not b.get("state",{}).has(key) or not exact_saved_equal(a.state[key],b.state[key]): return false
+	return true
+
+static func completed_parent_run(parent: Dictionary) -> Dictionary:
+	if parent.get("acceptance") != true or parent.get("status") != "complete" or parent.get("failures",["missing"]) != []: return {}
+	if parent.get("format") == "rock-bottom-campaign-continuation": return parent.duplicate(true)
+	if parent.get("format") != "rock-bottom-campaign-two-run-aggregate" or parent.get("runs") != 2 or parent.get("continuous_run") != false: return {}
+	for key: String in ["prefix","suffix"]:
+		var part: Variant = parent.get(key)
+		if not part is Dictionary or part.get("acceptance") != true or part.get("status") != "complete" or part.get("failures",["missing"]) != []: return {}
+	if parent.prefix.get("format") != "rock-bottom-campaign-tony-prefix" or parent.suffix.get("format") != "rock-bottom-campaign-kingdom-suffix": return {}
+	return parent.suffix.duplicate(true)
+
+static func parent_contract_errors(parent: Dictionary) -> Array[String]:
+	if completed_parent_run(parent).is_empty(): return ["accepted complete campaign parent required"]
+	if parent.get("format") == "rock-bottom-campaign-continuation": return CampaignProof.assess_campaign(parent)
+	return CampaignProof.assess_aggregate(parent)
+
+static func assess_parent_binding(parent: Dictionary,saved: Dictionary,report_sha: String,save_sha: String,pinned_report_sha: String,pinned_save_sha: String) -> Array[String]:
+	var errors: Array[String] = []
+	if not valid_sha(report_sha) or not valid_sha(save_sha) or report_sha != pinned_report_sha or save_sha != pinned_save_sha: errors.append("exact accepted input hashes")
+	var completed: Dictionary = completed_parent_run(parent)
+	if completed.is_empty(): errors.append("successful actual completed parent report")
+	var persistence: Dictionary = completed.get("persistence",{})
+	if persistence.get("save_sha256") != save_sha or not CampaignProof.evidence_value_equal(persistence.get("stored"),saved) or not durable_equal(persistence.get("after",{}),saved): errors.append("exact parent saved lineage")
+	if saved.get("state",{}).get("kingdom",{}).get("stage") != "complete" or saved.get("state",{}).get("kingdom",{}).get("defeats") != CampaignProof.REWARDS.keys(): errors.append("earned completed Kingdom")
+	return errors
+
+static func pretender_profile(day: int,prior: int = 0) -> Dictionary:
+	if day < 1 or day > 1000000000 or prior < 0: return {}
+	var index: int = day%3
+	return {"id":"curb_pretender_%d" % day,"name":"CURB PRETENDER No. %d" % (prior+1),"kingdomClan":PRETENDER_CLANS[index],"archetype":PRETENDER_ARCHETYPES[index],"sprite":PRETENDER_SPRITES[index],"hp":100,"maxHp":100,"dmg":9,"speed":1.45,"w":32,"h":32,"hostile":true,"showHp":true,"kingdomPretender":true,"transient":false,"noComboReward":true,"dead":false}
+
+static func assess_spawn(row: Dictionary) -> Array[String]:
+	var errors: Array[String] = []; var day: int = int(row.get("day",0)); var prior: int = int(row.get("prior",-1)); var body: Dictionary = row.get("actor",{}); var expected: Dictionary = pretender_profile(day,prior)
+	if expected.is_empty(): return ["valid source day and prior counter"]
+	for key: String in expected:
+		if body.get(key,false if key == "dead" else null) != expected[key]: errors.append("source pretender field: "+key)
+	if row.get("live_count") != 1 or row.get("stage") != "complete" or row.get("defeated_day") == day or row.get("spawn_day") != day: errors.append("one current-day source pretender")
+	var x: float = _c_number(body,"x"); var y: float = _c_number(body,"y")
+	if not is_finite(x) or not is_finite(y) or Vector2(x+16,y+16).distance_to(PRETENDER_ANCHORS[day%3]) > 100.0001: errors.append("existing bounded physical spawn placement")
+	return errors
+
+static func next_cot_action(row: Dictionary,used: int,target_day: int,in_combat: bool) -> String:
+	var hp: float = _c_number(row,"hp"); var maximum: float = _c_number(row,"max_hp"); var day: float = _c_number(row,"day")
+	if in_combat or not is_finite(hp) or hp <= 0 or not is_finite(maximum) or maximum < 90 or hp > maximum or not is_finite(day) or day != floorf(day) or day > target_day or day < target_day-1 or used < 0 or used > PRETENDER_COT_LIMIT: return "refuse"
+	if day == target_day: return "done" if hp >= 90 else "refuse"
+	if used >= PRETENDER_COT_LIMIT: return "refuse"
+	return "rest" if hp < 35 else "sleep"
+
+static func guard_transit_allowed(phase: String,expected: String,mode: String,boss_active: bool) -> bool:
+	return phase in ["day_1","day_2","day_3"] and expected.is_empty() and mode == "playing" and not boss_active
+
+static func assess_transit_defenses(rows: Array,attacks: Array) -> Array[String]:
+	var errors: Array[String] = []; var totals: Dictionary = {}; var bouts: Dictionary = {}; var total := 0.0; var ordinal := 0
+	if rows.size() > 30: errors.append("at most30 shared transit defense bouts")
+	for raw: Variant in rows:
+		ordinal += 1
+		if not raw is Dictionary: errors.append("defense row is an object"); continue
+		var row: Dictionary = raw; var admission: Dictionary = row.get("admission",{}); var budget: Dictionary = row.get("budget",{})
+		var id: String = str(row.get("id","")); var body: Dictionary = row.get("source_before",{})
+		var center: Variant = admission.get("source_center"); var day: float = _c_number(row,"day")
+		if not center is Array or center.size() != 2 or not (center[0] is int or center[0] is float) or not (center[1] is int or center[1] is float) or not is_finite(float(center[0])) or not is_finite(float(center[1])):
+			errors.append("finite captured defense player point"); continue
+		if admission.get("boss_active") != false or not guard_transit_allowed(str(admission.get("phase","")),str(admission.get("expected","missing")),str(admission.get("mode","")),false): errors.append("actual transit phase only")
+		if not is_finite(day) or day != floorf(day) or day < 1 or body.get("id") != id or not CampaignProof.court_guard_candidate(body,int(day),Vector2(center[0],center[1])): errors.append("canonical live current-day nearby hostile guard")
+		var elapsed: float = _c_number(budget,"elapsed_ms"); var started: float = _c_number(row,"start_wall"); var ended: float = _c_number(row,"end_wall")
+		# The inherited receipt reads end_wall just after budget.finish reads its clock.
+		if not is_finite(elapsed) or elapsed < 0 or elapsed != floorf(elapsed) or not is_finite(started) or started < 0 or not is_finite(ended) or ended < started+elapsed or ended-started >= 10000: errors.append("actual finite defense time receipt"); continue
+		total += elapsed; totals[id] = float(totals.get(id,0.0))+elapsed; bouts[id] = int(bouts.get(id,0))+1
+		if budget.get("ok") != true or budget.get("id") != id or _c_number(budget,"guard_ms") != totals[id] or _c_number(budget,"total_ms") != total or _c_number(budget,"bouts") != ordinal or _c_number(budget,"unique_guards") != totals.size(): errors.append("persistent exact defense budget ledger")
+		if totals.size() > 15 or int(bouts[id]) > 2 or float(totals[id]) >= 10000 or total >= 150000: errors.append("shared defense budget exceeded")
+		var first: float = _c_number(row,"first_attack"); var last: float = _c_number(row,"last_attack")
+		if not is_finite(first) or not is_finite(last) or first != floorf(first) or last != floorf(last) or first < 0 or last < first or last > attacks.size(): errors.append("actual bounded defense attack slice")
+	return errors
+
+static func assess_pretender_reward(row: Dictionary) -> Array[String]:
+	var errors: Array[String] = []; var a: Dictionary = row.get("before",{}); var b: Dictionary = row.get("after",{}); var id: String = str(row.get("id","")); var day: int = int(a.get("day",-1))
+	if id != "curb_pretender_%d" % day or a.get("kingdom",{}).get("stage") != "complete" or a.get("kingdom",{}).get("pretenderDefeatedDay") == day or b.get("day") != day: errors.append("current-day single reward capability")
+	if _c_number(b,"cash")-_c_number(a,"cash") != 10 or _c_number(b,"cred")-_c_number(a,"cred") != 2: errors.append("exact ten cash two cred")
+	if b.get("kingdom",{}).get("pretenderDefeatedDay") != day or b.get("kingdom",{}).get("pretendersDefeated") != a.get("kingdom",{}).get("pretendersDefeated",-1)+1 or b.get("pretenders_lifetime") != a.get("pretenders_lifetime",-1)+1 or b.get("pretenders_lifetime") != b.get("kingdom",{}).get("pretendersDefeated"): errors.append("both counters once and same-day stamp")
+	for key: String in ["copper","rocks","weapon","equip","inventory","claims"]:
+		if a.get(key) != b.get(key): errors.append("reward preserves "+key)
+	for key: String in ["stage","defeats","marks","bossId","pretenderDay"]:
+		if a.get("kingdom",{}).get(key) != b.get("kingdom",{}).get(key): errors.append("reward preserves Kingdom "+key)
+	var deaths := 0; var hits := 0
+	for event: Dictionary in row.get("events",[]):
+		if event.get("kind") == "actor_died" and event.get("payload",{}).get("actor_id") == id: deaths += 1
+		if event.get("kind") == "player_attack" and id in event.get("payload",{}).get("hits",[]): hits += 1
+	if row.get("target_before",{}).get("id") != id or row.get("target_after",{}).get("id") != id or deaths != 1 or hits != 1 or row.get("target_before",{}).get("dead",false) or _c_number(row.get("target_before",{}),"hp") <= 0 or not is_finite(_c_number(row.get("target_before",{}),"hp")) or row.get("target_after",{}).get("dead") != true or not is_finite(_c_number(row.get("target_after",{}),"hp")) or _c_number(row.get("target_after",{}),"hp") > 0: errors.append("actual accepted hit and fatal source receipt")
+	return errors
+
+static func assess_pretender_reload(row: Dictionary) -> Array[String]:
+	var errors: Array[String] = []; var before: Dictionary = row.get("before",{}); var stored: Dictionary = row.get("stored",{}); var after: Dictionary = row.get("after",{}); var day: int = int(row.get("day",-1))
+	if not durable_equal(before,stored) or not durable_equal(stored,after): errors.append("save/load preserves all durable fields")
+	for snapshot: Dictionary in [before,stored,after]:
+		if snapshot.get("state",{}).get("day") != day or snapshot.get("state",{}).get("kingdom",{}).get("pretenderDefeatedDay") != day: errors.append("same-day reload preserves defeat stamp")
+	if row.get("epoch_delta") != 1 or row.get("live_count") != 0 or row.get("resumed_motion") != true or not valid_sha(row.get("save_sha256")): errors.append("one real load no duplicate actor and resumed input")
+	return errors
+
+static func assess_pretender_tour(report: Dictionary) -> Array[String]:
+	var errors: Array[String] = []; var proof: Dictionary = report.get("input",{})
+	if report.get("format") != "rock-bottom-pretender-continuation" or proof.get("parent_contract_valid") != true or proof.get("parent_accepted") != true or proof.get("fixture_writes") != 0 or not valid_sha(proof.get("handoff_sha256")) or not valid_sha(proof.get("parent_report_sha256")): errors.append("accepted parent lineage")
+	if proof.get("parent_format") not in ["rock-bottom-campaign-continuation","rock-bottom-campaign-two-run-aggregate"] or proof.get("parent_runs") != (2 if proof.get("parent_format") == "rock-bottom-campaign-two-run-aggregate" else 1): errors.append("truthful parent run composition")
+	for key: String in ["state_writes","deaths","arrests","escapes","unexpected_epochs"]:
+		if report.get(key,-1) != 0: errors.append("forbidden lifecycle/write: "+key)
+	if not report.get("court_defenses") is Array: errors.append("transit defense ledger present")
+	else: errors.append_array(assess_transit_defenses(report.court_defenses,report.get("attack_receipts",[])))
+	if report.get("bounded") != true or not CampaignProof.evidence_bounded(report) or not is_finite(_c_number(report,"wall_ms")) or _c_number(report,"wall_ms") <= 0 or _c_number(report,"wall_ms") >= PRETENDER_LIMIT or int(report.get("rest_count",-1)) < 3 or int(report.get("rest_count",99)) > PRETENDER_COT_LIMIT: errors.append("finite continuation and cot budget")
+	var a: Dictionary = report.get("initial",{}); var b: Dictionary = report.get("final",{}); var start_day: int = int(a.get("day",-1))
+	if b.get("day") != start_day+3 or b.get("kingdom",{}).get("stage") != "complete" or b.get("kingdom",{}).get("pretendersDefeated") != a.get("kingdom",{}).get("pretendersDefeated",-1)+3 or b.get("pretenders_lifetime") != a.get("pretenders_lifetime",-1)+3 or b.get("claims") != a.get("claims") or b.get("kingdom",{}).get("defeats") != a.get("kingdom",{}).get("defeats"): errors.append("three consecutive days with preserved earned campaign")
+	for key: String in ["spawns","rewards","reloads","fights"]:
+		if report.get(key,[]).size() != 3: errors.append("three actual "+key)
+	if not errors.is_empty(): return errors
+	for index: int in range(3):
+		var day: int = start_day+index+1; var spawn: Dictionary = report.spawns[index]; var reward: Dictionary = report.rewards[index]; var reload_row: Dictionary = report.reloads[index]; var fight: Dictionary = report.fights[index]; var id: String = "curb_pretender_%d" % day
+		errors.append_array(assess_spawn(spawn)); errors.append_array(assess_pretender_reward(reward)); errors.append_array(assess_pretender_reload(reload_row))
+		if spawn.day != day or reward.before.day != day or reload_row.day != day or fight.get("id") != id or fight.get("day") != day: errors.append("ordered day identities")
+		var count: int = int(a.get("pretenders_lifetime",-1))+index
+		if spawn.prior != count or reward.before.get("pretenders_lifetime") != count or reward.after.get("pretenders_lifetime") != count+1 or reward.before.get("kingdom",{}).get("pretendersDefeated") != count or reload_row.get("after",{}).get("player",{}).get("lifetime",{}).get("pretendersDefeated") != count+1: errors.append("continuous three-day counter lineage")
+		if fight.get("won") != true or not is_finite(_c_number(fight,"wall_ms")) or _c_number(fight,"wall_ms") <= 0 or _c_number(fight,"wall_ms") >= 90000 or fight.get("source_damage") != true or fight.get("cooldowns_valid") != true or int(fight.get("accepted_attacks",0)) <= 0: errors.append("real sub90s fight")
+		var view: Dictionary = fight.get("engagement_view",{})
+		if view.get("id") != id or view.get("kind") != "completed_frame_before_first_click" or view.get("saved") != true or view.get("alive") != true or view.get("on_screen") != true or view.get("static_los") != true or int(view.get("process_frame",-1)) < 0 or not is_finite(_c_number(view,"distance")) or _c_number(view,"distance") < 0 or _c_number(view,"distance") >= 65: errors.append("actual completed engagement framing")
+	var cot_rows: Array = report.get("transactions",[])
+	if cot_rows.size() != report.rest_count: errors.append("cot count matches real receipt count")
+	for row: Dictionary in cot_rows: errors.append_array(CampaignProof.assess_cot(row))
+	if report.get("captures",[]).size() < 10 or report.get("captures",[]).size() > 12 or report.get("phase_states",[]).size() != 4 or report.get("weapon_errors",["missing"]) != []: errors.append("rendered phases and inherited combat audit")
+	for index: int in range(mini(4,report.get("phase_states",[]).size())):
+		var phase: Dictionary = report.phase_states[index]
+		if phase.get("id") != (["load","day_1","day_2","day_3"][index]) or not is_finite(_c_number(phase,"wall_ms")) or _c_number(phase,"wall_ms") <= 0 or _c_number(phase,"wall_ms") >= (30000 if index == 0 else PRETENDER_PHASE_LIMIT): errors.append("phase watchdog witness")
+	for key: String in ["motion_frames","mouse_motion","keys","clicks"]:
+		if int(report.get("input_counts",{}).get(key,0)) <= 0: errors.append("actual input: "+key)
+	return errors
+
+func _summary() -> Dictionary:
+	var row: Dictionary = super._summary()
+	row.pretenders_lifetime = game.runtime.p.lifetime.pretendersDefeated
+	return row
+
+func _live_pretenders() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = []
+	for body: Dictionary in game.runtime.state.npcs:
+		if body.get("kingdomPretender",false) and not body.get("dead",false): rows.append(body.duplicate(true))
+	return rows
+
+func _alive() -> bool:
+	if finish_latch.started or not failures.is_empty(): return false
+	if not campaign_started: return true
+	if not court_defense_budget.active_id.is_empty():
+		var elapsed: int = Time.get_ticks_msec()-court_defense_budget.active_start
+		if not _check(elapsed >= 0 and elapsed < court_defense_budget.remaining_ms(court_defense_budget.active_id),"independent transit guard cumulative deadline"): return false
+	if not _check(Time.get_ticks_msec()-began_wall < PRETENDER_LIMIT,"pretender10min independent global watchdog"): return false
+	if pretender_fight_started >= 0 and not _check(Time.get_ticks_msec()-pretender_fight_started < 90000,"strict90s approach and combat watchdog"): return false
+	if pretender_capture_started >= 0 and not _check(Time.get_ticks_msec()-pretender_capture_started < 2000,"bounded completed engagement capture"): return false
+	if not phase_name.is_empty() and not _check(Time.get_ticks_msec()-phase_wall < (30000 if phase_name == "load" else PRETENDER_PHASE_LIMIT),"pretender phase watchdog: "+phase_name): return false
+	if not _check(not game.overflow and game.replacements.size() <= allowed_epochs,"bounded evidence and only real reload epochs"): return false
+	if game.runtime.s.get("bossActive",false) or game.runtime.s.get("brutusOlderActive",false) or game.runtime.s.mode == "ending": return _check(false,"no unrelated boss or ending during pretender continuation")
+	if pretender_day_target > 0 and game.runtime.s.day != pretender_day_target: return _check(false,"no natural dawn or skipped encounter day")
+	while checked_event_count < game.trace.size():
+		var event: Dictionary = game.trace[checked_event_count]; checked_event_count += 1
+		if event.kind in ["death","arrest","dependency_missing","boss_started"]: return _check(false,"source event invalidates pretender continuation: "+event.kind)
+	if game.samples.size() > 3600 or game.trace.size() > 40000 or walking.size() > 1024 or legs.size() > 96 or receipts.size() > 256 or campaign_transactions.size() > PRETENDER_COT_LIMIT or combat_navigation.size() > 2048 or attack_receipts.size() > 3000 or captures.size() > 12: return _check(false,"bounded pretender evidence arrays")
+	return true
+
+func _court_defensive_target(require_los: bool = true) -> Dictionary:
+	if not guard_transit_allowed(phase_name,expected_boss,str(game.runtime.s.mode),bool(game.runtime.s.bossActive)): return {}
+	var chosen: Dictionary = {}; var nearest := 85.0; var center: Vector2 = game.runtime.state.player_center()
+	for body: Dictionary in game.runtime.state.npcs:
+		if not CampaignProof.court_guard_candidate(body,int(game.runtime.s.day),center): continue
+		var distance: float = _center(body).distance_to(center)
+		if distance < nearest and (not require_los or game.physics.can_hit(center,_center(body),"player",str(body.id))):
+			chosen = body; nearest = distance
+	return chosen
+
+func _court_defend(candidate: Dictionary = {}) -> void:
+	var target: Dictionary = _court_defensive_target() if candidate.is_empty() else candidate
+	if target.is_empty(): return
+	var center: Vector2 = game.runtime.state.player_center()
+	var admission := {"phase":phase_name,"expected":expected_boss,"mode":str(game.runtime.s.mode),"boss_active":bool(game.runtime.s.bossActive),"source_center":[center.x,center.y]}
+	var prior: int = court_defenses.size()
+	await super._court_defend(target)
+	if court_defenses.size() == prior+1:
+		court_defenses.back().admission = admission
+		for reason: String in assess_transit_defenses(court_defenses,attack_receipts): _check(false,reason)
+		_checkpoint("transit_defense:"+str(target.id))
+
+func _send_attack(geometry: Dictionary) -> void:
+	if not expected_boss.is_empty() and geometry.get("target_id") == expected_boss and not pretender_engagements.has(expected_boss):
+		if pretender_capture_pending.is_empty():
+			pretender_capture_pending = expected_boss; pretender_capture_started = Time.get_ticks_msec()
+			call_deferred("_capture_pretender_engagement",expected_boss)
+		return
+	var before: Dictionary = _summary(); var body: Dictionary = _actor(expected_boss).duplicate(true); var first: int = attack_receipts.size()
+	super._send_attack(geometry)
+	if attack_receipts.size() == first or int(game.runtime.s.kingdom.pretendersDefeated) == int(before.kingdom.pretendersDefeated): return
+	var row := {"id":expected_boss,"before":before,"after":_summary(),"target_before":body,"target_after":_actor(expected_boss).duplicate(true),"events":attack_receipts.back().events.duplicate(true),"attack_index":attack_receipts.size()-1,"active_ms":game.admitted_ms,"wall_ms":Time.get_ticks_msec()}
+	pretender_rewards.append(row)
+	for error: String in assess_pretender_reward(row): _check(false,error)
+	if failures.is_empty(): pretender_fight_started = -1
+	_checkpoint("pretender_reward:"+expected_boss)
+
+func _capture_pretender_engagement(id: String) -> void:
+	await game.frame_sampled; await RenderingServer.frame_post_draw
+	if finish_latch.started or not _alive(): return
+	var body: Dictionary = _actor(id)
+	if not _check(not body.is_empty(),"engagement actor survives until actual draw"): return
+	var point: Vector3 = Content.to_world(_center(body),1.35)
+	var viewport: Rect2 = game.camera.get_viewport().get_visible_rect(); var screen: Vector2 = game.camera.unproject_position(point)
+	var visible_point: bool = not game.camera.is_position_behind(point) and viewport.grow(-24).has_point(screen)
+	var distance: float = _center(body).distance_to(game.runtime.state.player_center())
+	var clear: bool = game.physics._ray(game.camera.global_position,point).is_empty()
+	var label: String = "%02d_day_%d_engagement_%s" % [capture_serial+1,int(game.runtime.s.day),str(body.get("archetype",""))]
+	var saved := false
+	if _check(capture_serial < 11 and not body.is_empty() and not body.get("dead",false) and visible_point and clear and distance < 65,"real completed frame contains a live clear engagement anchor"):
+		saved = root.get_texture().get_image().save_png(output.path_join(label+".png")) == OK
+		_check(saved,"engagement PNG writable")
+		if saved: captures.append(label); capture_serial += 1
+	pretender_engagements[id] = {"id":id,"kind":"completed_frame_before_first_click","saved":saved,"alive":not body.is_empty() and not body.get("dead",false),"on_screen":visible_point,"static_los":clear,"distance":distance,"process_frame":Engine.get_process_frames(),"screen_point":[screen.x,screen.y],"viewport":[viewport.size.x,viewport.size.y],"camera_origin":game.camera.global_position,"world_anchor":point,"path":label+".png"}
+	pretender_capture_pending = ""; pretender_capture_started = -1
+	_checkpoint("engagement:"+id)
+
+func _cot_reopen() -> bool:
+	if game.runtime.s.mode == "playing": return await _open_target("office")
+	if game.runtime.s.mode == "dialogue": return await _c_choose("back to the office.")
+	return _check(false,"cot returns through ordinary Office menu lifetime")
+
+func _advance_pretender_day(target: int) -> bool:
+	if not _check(expected_boss.is_empty() and game.runtime.s.day == target-1,"next consecutive day before normal cot"): return false
+	# The inherited raw Office helper has no automatic recovery/sleep command.
+	if not await _office_open(): return false
+	pretender_day_target = -1
+	while _alive():
+		var action: String = next_cot_action(_summary(),rest_count,target,not expected_boss.is_empty() or game.runtime.s.bossActive)
+		if action == "done": break
+		if not _check(action != "refuse","nine actual cot actions and living recovery budget"): return false
+		if not await _c_choose("use the cot."): return false
+		if not await _c_choose("rest 30 minutes." if action == "rest" else "sleep until morning.",action,{"source":"office:cot","action":action,"boss_active":false}): return false
+		_checkpoint("cot:"+action)
+		if game.runtime.s.day == target: break
+		if action == "sleep":
+			# Source closes sleep to active play. Let actual time become strictly>.3.
+			if not _check(game.runtime.s.mode == "playing","same-day sleep resumes real clock"): return false
+			var wait_start: int = Time.get_ticks_msec()
+			while game.runtime.s.dayTime <= 0.3 and _alive() and Time.get_ticks_msec()-wait_start < 5000: await game.frame_sampled
+			if not _check(game.runtime.s.dayTime > 0.3 and game.runtime.s.day == target-1,"strict real-frame cot rollover threshold"): return false
+		if not await _cot_reopen(): return false
+	if not _check(game.runtime.s.day == target and game.runtime.p.hp >= 90,"exact next day and90HP departure"): return false
+	pretender_day_target = target
+	var pending_since: int = Time.get_ticks_msec(); var live: Array[Dictionary] = _live_pretenders()
+	while live.is_empty() and _alive() and Time.get_ticks_msec()-pending_since < 5000:
+		await game.frame_sampled; live = _live_pretenders()
+	if not _check(live.size() == 1,"actual day actor physically staged once"): return false
+	var row := {"day":target,"prior":game.runtime.s.kingdom.pretendersDefeated,"actor":live[0],"live_count":live.size(),"stage":game.runtime.s.kingdom.stage,"defeated_day":game.runtime.s.kingdom.pretenderDefeatedDay,"spawn_day":game.runtime.s.kingdom.pretenderDay,"wall_ms":Time.get_ticks_msec()}
+	pretender_spawns.append(row)
+	for error: String in assess_spawn(row): _check(false,error)
+	if game.runtime.s.mode == "dialogue":
+		if not await _c_choose("back to the office.") or not await _c_choose("leave the office."): return false
+	return _alive()
+
+func _fight_pretender() -> bool:
+	var spawn: Dictionary = pretender_spawns.back(); var body: Dictionary = _actor(str(spawn.actor.id)); expected_boss = str(body.get("id",""))
+	var started: int = Time.get_ticks_msec(); pretender_fight_started = started
+	var first: int = attack_receipts.size(); var errors_before: int = campaign_weapon_errors.size(); var reward_before: int = pretender_rewards.size()
+	combat_plan = {}; combat_replans = 0; combat_last_plan = -1000; decision_wall = -1000
+	var service: String = "kingdom_banner:"+str(spawn.actor.kingdomClan)
+	if not _check(game.world.service_points.has(service),"real authored clan navigation anchor"): return false
+	# No E at a conquered banner: it is only an existing physical approach reference.
+	if not await _walk_to(game.world.service_points[service].approach): return false
+	while not body.get("dead",false) and _alive() and Time.get_ticks_msec()-started < 90000:
+		_combat_input(_c_combat_target()); await game.frame_sampled
+	_release()
+	var damage := false
+	for attack: Dictionary in attack_receipts.slice(first):
+		for event: Dictionary in attack.events:
+			if event.kind == "actor_hit" and event.payload.get("actor_id") == expected_boss and event.payload.get("damage",0) > 0: damage = true
+	var won: bool = body.get("dead",false) and pretender_rewards.size() == reward_before+1
+	var ended: int = int(pretender_rewards.back().wall_ms) if won else Time.get_ticks_msec()
+	var row := {"id":expected_boss,"day":spawn.day,"archetype":spawn.actor.archetype,"won":won,"wall_ms":ended-started,"accepted_attacks":attack_receipts.size()-first,"source_damage":damage,"cooldowns_valid":campaign_weapon_errors.size() == errors_before,"first_attack":first,"last_attack":attack_receipts.size(),"replans":combat_replans,"engagement_view":pretender_engagements.get(expected_boss,{}).duplicate(true)}
+	pretender_fights.append(row)
+	if not _check(row.won and row.wall_ms < 90000 and damage,"actual normal-input sub90s pretender defeat"): return false
+	expected_boss = ""; pretender_fight_started = -1; await _c_capture("day_%d_reward" % spawn.day)
+	return _alive()
+
+func _reload_pretender_day() -> bool:
+	_release(); _key(KEY_ESCAPE)
+	if not await _c_choose("remember this."): return false
+	var waited: int = Time.get_ticks_msec()
+	while (game.saving or not game.pending_save.is_empty()) and _alive() and Time.get_ticks_msec()-waited < 10000: await game.frame_sampled
+	var before: Dictionary = game.runtime.state.snapshot(); var payload: String = FileAccess.get_file_as_string(game.store.save_path); var saved: Variant = JSON.parse_string(payload)
+	if not _check(saved is Dictionary and not game.saving and game.pending_save.is_empty() and not game.save_failed,"real same-day durable save completes"): return false
+	var epochs_before: int = game.replacements.size(); allowed_epochs += 1
+	if not await _c_choose("remember before."): return false
+	waited = Time.get_ticks_msec()
+	while (game.loading or game.replacements.size() < allowed_epochs) and _alive() and Time.get_ticks_msec()-waited < 10000: await game.frame_sampled
+	if not _check(not game.loading and game.replacements.size() == allowed_epochs,"one actual ordinary load completes"): return false
+	var after: Dictionary = game.runtime.state.snapshot()
+	if not await _c_choose("continue."): return false
+	var origin: Vector3 = game.player.position; var moved := false
+	for direction: Vector2 in [Vector2.RIGHT,Vector2.LEFT,Vector2.UP,Vector2.DOWN]:
+		var target: Vector3 = origin+Vector3(direction.x,0,direction.y)*0.75
+		if not _combat_segment(origin,target).ok: continue
+		moved = await _walk_to(target); break
+	var row := {"day":pretender_day_target,"before":before,"stored":saved,"after":after,"epoch_delta":game.replacements.size()-epochs_before,"live_count":_live_pretenders().size(),"resumed_motion":moved and game.player.position.distance_to(origin) > 0.35,"save_sha256":payload.sha256_text()}
+	pretender_reloads.append(row)
+	for error: String in assess_pretender_reload(row): _check(false,error)
+	await _c_capture("day_%d_loaded_and_moving" % pretender_day_target)
+	return _alive()
+
+func _pretender_scenario() -> bool:
+	for index: int in range(3):
+		_c_phase("day_%d" % (index+1))
+		if not await _advance_pretender_day(int(campaign_initial.day)+index+1): return false
+		if not await _fight_pretender() or not await _reload_pretender_day(): return false
+	return true
+
+func _c_capture(label: String) -> void:
+	if not _check(capture_serial < 11,"bounded normal pretender captures with failure reserve"): return
+	capture_serial += 1; await _capture("%02d_%s" % [capture_serial,label]); _checkpoint("captured:"+label)
+
+func _campaign_report() -> Dictionary:
+	var row: Dictionary = super._campaign_report()
+	row.merge({"format":"rock-bottom-pretender-continuation","spawns":pretender_spawns,"rewards":pretender_rewards,"reloads":pretender_reloads,"fights":pretender_fights,"scope":"Actual native normal-input continuation of a pinned completed campaign: three consecutive source days/three pretenders/reward once/same-day saves. Original Office fixture provenance retained. No all11/Web/performance claim."},true)
+	return row
+
+func _checkpoint(status: String) -> void:
+	if not campaign_output_owned or not is_instance_valid(game) or game.runtime == null: return
+	var row: Dictionary = _campaign_report(); row.status = status; row.acceptance = false; row.failures = failures.duplicate()
+	var file := FileAccess.open(output.path_join("pretender-continuation.json"),FileAccess.WRITE)
+	if file == null: _check(false,"partial pretender evidence writable"); return
+	file.store_string(JSON.stringify(row,"\t")); file.close()
+
+func _force_failed_exit(reason: String) -> void:
+	_check(false,reason)
+	if campaign_output_owned:
+		var path: String = output.path_join("pretender-continuation.json"); var existing: Variant = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+		var report: Dictionary = existing if existing is Dictionary else {"schema":1,"format":"rock-bottom-pretender-continuation","input":campaign_input}
+		report.acceptance = false; report.status = "failed"; report.failures = failures.duplicate(); report.watchdog_reason = reason
+		var file := FileAccess.open(path,FileAccess.WRITE)
+		if file != null: file.store_string(JSON.stringify(report,"\t")); file.close()
+	quit(1)
+
+func _run() -> void:
+	var arguments: PackedStringArray = OS.get_cmdline_user_args(); var error: String = pretender_launch_error(arguments)
+	if not error.is_empty() or DisplayServer.get_name() == "headless": push_error("Pretender native launch refused: "+error); quit(1); return
+	var handoff := ""; var parent_path := ""; var save_pin := ""; var report_pin := ""
+	for argument: String in arguments:
+		if argument.begins_with("--output="): output = argument.trim_prefix("--output=")
+		elif argument.begins_with("--handoff="): handoff = argument.trim_prefix("--handoff=")
+		elif argument.begins_with("--parent-report="): parent_path = argument.trim_prefix("--parent-report=")
+		elif argument.begins_with("--handoff-sha="): save_pin = argument.trim_prefix("--handoff-sha=")
+		elif argument.begins_with("--parent-sha="): report_pin = argument.trim_prefix("--parent-sha=")
+		elif argument == "--diagnostic": diagnostic = true
+	if DirAccess.dir_exists_absolute(output) or FileAccess.file_exists(output): push_error("Pretender output already exists"); quit(1); return
+	var parent: Variant = JSON.parse_string(FileAccess.get_file_as_string(parent_path)); var saved: Variant = JSON.parse_string(FileAccess.get_file_as_string(handoff))
+	if not parent is Dictionary or not saved is Dictionary: push_error("Pretender parent/save unavailable"); quit(1); return
+	var admission: Array[String] = assess_parent_binding(parent,saved,FileAccess.get_sha256(parent_path),FileAccess.get_sha256(handoff),report_pin,save_pin)
+	admission.append_array(parent_contract_errors(parent))
+	var completed: Dictionary = completed_parent_run(parent)
+	immutable_source_hashes = _source_hashes()
+	if completed.get("source_hashes") != immutable_source_hashes: admission.append("parent and current production inventories differ")
+	if not admission.is_empty(): push_error("Pretender parent refused: "+str(admission)); quit(1); return
+	inherited_parent = parent.duplicate(true); initial_saved = saved.duplicate(true)
+	if DirAccess.make_dir_recursive_absolute(output) != OK: push_error("Pretender output unavailable"); quit(1); return
+	campaign_output_owned = true
+	var copied: String = output.path_join("pretender-save.json")
+	if DirAccess.copy_absolute(handoff,copied) != OK: _force_failed_exit("could not copy exact accepted handoff"); return
+	campaign_input = {"handoff_sha256":save_pin,"parent_report_sha256":report_pin,"parent_accepted":true,"parent_contract_valid":true,"fixture_writes":0,"parent_input":completed.input.duplicate(true),"parent_format":parent.format,"parent_runs":2 if parent.format == "rock-bottom-campaign-two-run-aggregate" else 1,"input_path":handoff,"parent_path":parent_path}
+	root.size = Vector2i(1280,720); Engine.max_fps = 60
+	game = CampaignObservedScene.new(); game.qa_mode = true; root.add_child(game)
+	var boot: int = Time.get_ticks_msec()
+	while not game.ready_for_play and Time.get_ticks_msec()-boot < 120000: await process_frame
+	if not game.ready_for_play: _force_failed_exit("cold title120s watchdog"); return
+	game.store.save_path = copied; game.store.storage_key = "rockbottom_pretender_continuation_qa"
+	began_wall = Time.get_ticks_msec(); last_frame_wall = began_wall; campaign_started = true; _c_phase("load")
+	if not await _c_choose("remember."): await _finish_campaign(); return
+	var waiting: int = Time.get_ticks_msec()
+	while game.loading and Time.get_ticks_msec()-waiting < 15000: await game.frame_sampled
+	if not _check(not game.loading and durable_equal(initial_saved,game.runtime.state.snapshot()),"actual title load preserves exact earned durable projection"): await _finish_campaign(); return
+	campaign_initial = _summary(); campaign_last_weapon = str(game.runtime.p.weapon); game.start_audit(); game.frame_sampled.connect(_tick_campaign)
+	if not await _c_choose("continue."): await _finish_campaign(); return
+	await _c_capture("earned_campaign_loaded")
+	await _pretender_scenario(); await _finish_campaign()
+
+func _finish_campaign() -> void:
+	if not finish_latch.begin(Time.get_ticks_msec()): return
+	if not is_instance_valid(game) or game.runtime == null: _force_failed_exit("pretender finalization before scene ready"); return
+	_release(); _finish_phase()
+	var report: Dictionary = _campaign_report()
+	for error: String in assess_pretender_tour(report): _check(false,error)
+	if not failures.is_empty(): await _capture_failure(); report.failure_context = failure_context
+	report.acceptance = failures.is_empty(); report.failures = failures.duplicate(); report.diagnostic = diagnostic; report.status = "complete" if failures.is_empty() else "failed"; report.captures = captures
+	var file := FileAccess.open(output.path_join("pretender-continuation.json"),FileAccess.WRITE)
+	if file != null: file.store_string(JSON.stringify(report,"\t")); file.close()
+	print("PRETENDER CONTINUATION: ","PASS" if failures.is_empty() else "FAIL","; three source-day fights; ",output)
+	await _shutdown(0 if diagnostic or failures.is_empty() else 1)

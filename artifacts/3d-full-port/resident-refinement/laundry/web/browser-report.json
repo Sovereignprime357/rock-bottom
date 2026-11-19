@@ -1,0 +1,1433 @@
+{
+  "format": "rock-bottom-indexed-roster-web-keepalive-v3",
+  "completion_mode": "web_capture_keepalive",
+  "report": {
+    "checks_pass": true,
+    "cleanup": {
+      "complete": true,
+      "completion_code": 0,
+      "freed_children": 3,
+      "initial_children_preserved": true,
+      "owned_children": 3,
+      "remaining_children": 0,
+      "render_drains": 2
+    },
+    "complete": true,
+    "completion_mode": "web_capture_keepalive",
+    "engine": "4.5.1-stable (official)",
+    "engine_shutdown_acceptance": false,
+    "engine_shutdown_tested": false,
+    "errors": [],
+    "expected_frames": 32,
+    "format": "rock-bottom-indexed-roster-gpu",
+    "packet": "contacts",
+    "performance_acceptance": false,
+    "records": [
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "2710be49e31295634bee74730e53627fbc09040c8bbea5711767f437f7af08d1",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_front_rest_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 845782,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "a330e9fc6c7c36f56969625e4c8370194983956e56f6f3304246c8d06a490f24",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "08d062b80f6797f71d83c6ef15485356871d08f7b6923205327e8ee08adc95f7"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "aa3345e036244ae0448ba8356927c27e0b511206be2eeba78f2a25f6c9f98549",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_quarter_walk_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 843913,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "0421701449ee56d34c3ece9027fee06291381888206d427e3d271a6b8c1c14d2",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "16d0000066f25d599d8059415548bb9bcf2a194af92f5e656b2292a4d357a33b"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "aa3345e036244ae0448ba8356927c27e0b511206be2eeba78f2a25f6c9f98549",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_identity_gesture.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 843926,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "08e031291af1fc5288408f6861bb8ed235ed3639a37b773266d31e5da98f471f",
+            "state": [
+              "strum",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "9f969a0e44d1328f53419f27d30c9ba7b3db52a6f7a47da2aee076d115951147"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_contact_15.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 861736,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "00b59f3eb233a487acef0e511dfe1168ac65ae57136c52b1a9ff286aa16d963f",
+            "state": [
+              "strum",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "04b6d4dd1e7c36d5321791d930108b9259cce0ea552d42f337772d7eed03f436"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_contact_80.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 862764,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "5ee8323021d0e3ce266e9b0969f1dd7afa0e99a229f18b3b460d8c83a579fd29",
+            "state": [
+              "strum",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "6211dd95e6e2706dc2216ac03b8f15add0d3c1062e85f776887d4156cc25f4d0"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "2710be49e31295634bee74730e53627fbc09040c8bbea5711767f437f7af08d1",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_front_peak_strike_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 846164,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "e391157e0ccd135e02c4c12aad2fefd12a81c9245a8777cc095db30da47fa8f0",
+            "state": [
+              "strike",
+              0,
+              true,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "814050922e9e684e1af9f5f32167a67afb3de8701ed8667272e3336d5d07e051"
+      },
+      {
+        "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+        "camera_sha256": "8b01ef0ea53ba1e93729db16fd88e35c08bd7bca3ce6a7e33aeaa2d86ab4bc6a",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "busker_front_rest_20m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 8240
+        },
+        "png_bytes": 613244,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "a330e9fc6c7c36f56969625e4c8370194983956e56f6f3304246c8d06a490f24",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+            "visual": "busker"
+          }
+        ],
+        "sha256": "b107daecca3b7dd9e4dac650dcd47ad32abefa24725f9e5275cf2875bce45a6b"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "5e0fcdaeda1103145314319bffb465f86b465f8fb7783141e7ad5aeec47363fc",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_front_rest_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 841624,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "e06ee514ab57e21207c61a0476a11d06bcb9c672be99e909fe798c0fe8c2d89a",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "math"
+          }
+        ],
+        "sha256": "9c47fff6f1dfbc0cd239349aa79d92e73cf9e1e99afcffa42202bce02c444ef2"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "86d248de2c724133adf6ee8104b102b74e29ee1647c48cb3efc5e7273c9ff7f6",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_quarter_walk_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 834121,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "0e9a24c7833e4b0bbacaa25d091aa3a6b26d52edf05c58a64ef4cfd002c9d194",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "math"
+          }
+        ],
+        "sha256": "15c23bf61e7d76ade9f8958f032f61cff164122de6f0b62b51a8bf116e23a660"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "86d248de2c724133adf6ee8104b102b74e29ee1647c48cb3efc5e7273c9ff7f6",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_identity_gesture.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 838862,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "485582e8d1d92adc05dafa41493b24d028949f0482533d342634538311b63892",
+            "state": [
+              "write",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "math"
+          }
+        ],
+        "sha256": "467c53bd872a90884149228eca48444b01ae007347af2711cd7ef46a708cf88a"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_contact_15.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 854614,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "72533ab3e63fe1df079f7b6200d0f581c4b3cc0ab1320311153958f5b537382a",
+            "state": [
+              "write",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "math"
+          }
+        ],
+        "sha256": "41c73bd380561907c2066a2841d264ee9200073fbcd4a7a321b328526071ac64"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_contact_80.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 855027,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "8e195639de692c81da0926c8fdb55f4f8994d29d2956e7f865239a23393241d4",
+            "state": [
+              "write",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "math"
+          }
+        ],
+        "sha256": "929970f10ff6a3ed6049eb3b1154a74cfd0c18de392f897b1c42b99b1c76160c"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "5e0fcdaeda1103145314319bffb465f86b465f8fb7783141e7ad5aeec47363fc",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_front_peak_strike_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 845114,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "8099de27eba8b196dc02d85f8d4beaa60e13bf651f17f425e48fc3c7eef883ca",
+            "state": [
+              "strike",
+              0,
+              true,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "math"
+          }
+        ],
+        "sha256": "98a8c1c095415a4b510679373ec9b9ec86e17575148c95a13b0ab94d2ba74884"
+      },
+      {
+        "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+        "camera_sha256": "8535fc677de4a29a09e906089d553900b6c0b3a95ff92731d4ffef15c37ce017",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "math_front_rest_20m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7948
+        },
+        "png_bytes": 611027,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "e06ee514ab57e21207c61a0476a11d06bcb9c672be99e909fe798c0fe8c2d89a",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+            "visual": "math"
+          }
+        ],
+        "sha256": "a904e693767761fbaf5de545fc10302bf94ddb5f6146dc7c2e2d858f48e52124"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "f1878f0ff8d3b9c9f61eeee5754845775b3d905d40a639ebe84ef90b29205af1",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_front_rest_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 844474,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "58d1194d3461ca909973739ea422ca351cde658e072ea3651bc48e8b0870302a",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "c3417439853e76d555355c4f31165cde7433634f651bea9c11bf9c7db8b10c3e"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "3b90175e476226468527a8a72522e4907d89f59960bb0497dad5e76a8726b947",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_quarter_walk_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 834341,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "9f72875d69e3ec573913fb159755ded9ee15c06f5a4621b5c10a286db9815800",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "3f3c7f4bc5cf313cd8bda518eb9dd55a697b766e44481467e94191676daa550e"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "3b90175e476226468527a8a72522e4907d89f59960bb0497dad5e76a8726b947",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_identity_gesture.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 839278,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "603a2c238699dca8c4351ff5d39789daf92181791be56fb0b83e6444fce8c3f1",
+            "state": [
+              "fold",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "58859da743108260f4c396febfb73182ae25d458fde77f45b6d13ebfd2bd71f8"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_contact_15.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 858082,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "7e759d5cd6766147bbc479da055e6a1e0b88ff9ed86cfd61474699196b3750f3",
+            "state": [
+              "fold",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "b710680ecb2663bedd44a4f4bb80e6155acab0fe61d6802d341242fc821a41af"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9a75093e7c503db74c16a338fe1b7d48b7def98cf86b062c0738f6200d882907",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_contact_80.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 858789,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "d44cab4eff552da164f5daf5316a274422d3fc49bd91ae1005379f59b72186d0",
+            "state": [
+              "fold",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "b427ca54954e63e5ea6ff016842228cc3cdb94ae4841820a49d3177ca4d902f3"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "f1878f0ff8d3b9c9f61eeee5754845775b3d905d40a639ebe84ef90b29205af1",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_front_peak_strike_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 846147,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "8c3b23286f364de225d53cad597992be59f5b5b5e0fdcc5bebd4715d3b2485bc",
+            "state": [
+              "strike",
+              0,
+              true,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "76ea81c9e4625bf1367577603da082e94a7010a586358dc1a46e56b18a03dd0e"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "ae0878f387557fd097494efae8c28eaa1700947b00f18ebb101ede871138c344",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_quarter_death.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 838125,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "fe86a93ca2aebda96ac4ff3d65b36b3060c109f9a5124cca501eb68d64a6375d",
+            "state": [
+              "",
+              0,
+              false,
+              true,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "97300cb53608d857a3654e667a1e0b761bd1e0d19b6492533070ecb7d987295b"
+      },
+      {
+        "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+        "camera_sha256": "c9d5c84ebcf7339e6635da3c90f819c0ab8a32096fe4b9f533918d525f237306",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "launderlady_front_rest_20m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 26,
+          "max_weights": 4,
+          "meshes": 9,
+          "surfaces": 9,
+          "triangles": 7806
+        },
+        "png_bytes": 612921,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "58d1194d3461ca909973739ea422ca351cde658e072ea3651bc48e8b0870302a",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+            "visual": "launderlady"
+          }
+        ],
+        "sha256": "f391e5ba9b4c425e439f617dcac7f780f274493c86025dc0576150a0b0ca04c2"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "1734ac23d02f20b355ff0c31d262241b397a1682b4df6e65c602e6a4f3665899",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "horsecop_front_rest_3m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 14,
+          "surfaces": 14,
+          "triangles": 11413
+        },
+        "png_bytes": 787005,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "9e0835c47c57419285ca36bfcd70d88b0f7d9a053220eb1e773b156c0cf9a090",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "horsecop"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "c81f118a361b71d4d6cbb840c786a5dbd041954f64b669a2bdc244063833366c",
+            "state": [
+              "seated",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "43aaad64a854bf9a66cea7f3a2e3bacd666f9eb6ddc63c9e248b1bd457d8db7e",
+            "visual": "mounted_rider"
+          }
+        ],
+        "sha256": "4d9d09929840ed444e16bc7a01ea6567e315a40c6105cce7afdfb2e66215782c"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "1c096a535bc3242ebedbf8d91f739877070161458d566549a19a41426d7993ae",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "horsecop_quarter_walk_3m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 14,
+          "surfaces": 14,
+          "triangles": 11413
+        },
+        "png_bytes": 791770,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "962cedd6679c6827a8477252d33d487da0a95e84b06f4408febc9b6511aafbe5",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "horsecop"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "b40cdb5c03fbab7db4c067a8220cefc08ce9b16b736d4d99637ac23a2a6417e8",
+            "state": [
+              "seated",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "dc91fd32e59b5738a15c05418abdde4745fdddd7838be09b1a017413f47c7924",
+            "visual": "mounted_rider"
+          }
+        ],
+        "sha256": "c2f15ed01bb0fccb1fdcbb630d886fc748aafa1f4a11d4c95daec84faf2df962"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "1c096a535bc3242ebedbf8d91f739877070161458d566549a19a41426d7993ae",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "horsecop_identity_gesture.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 14,
+          "surfaces": 14,
+          "triangles": 11413
+        },
+        "png_bytes": 792692,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "57f6052af70add79a251cde07c78e7bbcc79abd406cd2304281017e429818031",
+            "state": [
+              "talk",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "horsecop"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "6078c4e4fd50b7a3e8d68da5e1e64ea5ff18f40fe5ec82a7898527b76b67aae5",
+            "state": [
+              "seated",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "43aaad64a854bf9a66cea7f3a2e3bacd666f9eb6ddc63c9e248b1bd457d8db7e",
+            "visual": "mounted_rider"
+          }
+        ],
+        "sha256": "a394beb8daa8e6c9f1b4b49658bd12befb89ffbbef55b04496f31402e4def5ba"
+      },
+      {
+        "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+        "camera_sha256": "6f23ccc6e1f4f21b45ee18f0fcf634454f8ca36ff429432f4692d602e89562a6",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "horsecop_front_rest_20m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 14,
+          "surfaces": 14,
+          "triangles": 11413
+        },
+        "png_bytes": 630281,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "9e0835c47c57419285ca36bfcd70d88b0f7d9a053220eb1e773b156c0cf9a090",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+            "visual": "horsecop"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "c81f118a361b71d4d6cbb840c786a5dbd041954f64b669a2bdc244063833366c",
+            "state": [
+              "seated",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "43aaad64a854bf9a66cea7f3a2e3bacd666f9eb6ddc63c9e248b1bd457d8db7e",
+            "visual": "mounted_rider"
+          }
+        ],
+        "sha256": "296645970a5b95f29872b8b6e5484a3af0f39320458f21f47b1326dafb0fb64d"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "25e03f903a53e730817d04f4d2fd3495fc222cb7f9e5127edad855f4f9a7bda7",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "dogwalker_front_rest_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 13,
+          "surfaces": 13,
+          "triangles": 11354
+        },
+        "png_bytes": 859498,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "784fc689c30d205f4425dca2f6fe4ccae4b3a246de569d20bb2bd91582e1fb7b",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "dogwalker"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "ab06a4618f6620c916be29d5d70a0f559e2a0375be119289ea67b224f5cbaf0b",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "bbeef4221369761529b7c53a1373017c543abba283a9caf56e601d0f83d0daf0",
+            "visual": "paisley"
+          }
+        ],
+        "sha256": "fff75d1a51846545d4cd4a358b93f50027cca93a09cbcea808ddfdb05e420f4b"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9c186175a4df432ba058fae4aa00117d20c199ce8de3d843354b4947958008b0",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "dogwalker_quarter_walk_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 13,
+          "surfaces": 13,
+          "triangles": 11354
+        },
+        "png_bytes": 848234,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "9aca22e61d33c07f78806a5a5018befbadb96a83b4acfc13edb039f0de84163b",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "dogwalker"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "648b25e69cac77217ed52df3c2a6b6e0f70f2eeca93e7ce175e378a5985bed76",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "bbeef4221369761529b7c53a1373017c543abba283a9caf56e601d0f83d0daf0",
+            "visual": "paisley"
+          }
+        ],
+        "sha256": "5c2aabf62ab4aac6e04be633fa3bc24a45e70f34d21c22fabc23336973d642a1"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "9c186175a4df432ba058fae4aa00117d20c199ce8de3d843354b4947958008b0",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "dogwalker_identity_gesture.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 13,
+          "surfaces": 13,
+          "triangles": 11354
+        },
+        "png_bytes": 851590,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "9cf1a05de846a0f569ea52d48350d9e75faf96dfd47db0fa60b66d01b11a5071",
+            "state": [
+              "talk",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "dogwalker"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "ab06a4618f6620c916be29d5d70a0f559e2a0375be119289ea67b224f5cbaf0b",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "bbeef4221369761529b7c53a1373017c543abba283a9caf56e601d0f83d0daf0",
+            "visual": "paisley"
+          }
+        ],
+        "sha256": "3a66eaf9020a3cfb4f7013bb248c58bcf63b38d94b96e87c8655733225fafb1d"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "25e03f903a53e730817d04f4d2fd3495fc222cb7f9e5127edad855f4f9a7bda7",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "dogwalker_front_peak_strike_2m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 13,
+          "surfaces": 13,
+          "triangles": 11354
+        },
+        "png_bytes": 862488,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "8a15d77138623a12730aa0be425853896b96244b870b236367d53d294b34ccef",
+            "state": [
+              "strike",
+              0,
+              true,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "dogwalker"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "ab06a4618f6620c916be29d5d70a0f559e2a0375be119289ea67b224f5cbaf0b",
+            "state": [
+              "",
+              0,
+              true,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "bbeef4221369761529b7c53a1373017c543abba283a9caf56e601d0f83d0daf0",
+            "visual": "paisley"
+          }
+        ],
+        "sha256": "0a2be792fa66e767b7b270291643276f6a749f5cc6ad96932206a15d28495ec1"
+      },
+      {
+        "art_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+        "camera_sha256": "ae0878f387557fd097494efae8c28eaa1700947b00f18ebb101ede871138c344",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "dogwalker_quarter_death.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 13,
+          "surfaces": 13,
+          "triangles": 11354
+        },
+        "png_bytes": 846784,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "63d264709324367668287493997739107fa2f03bbad342a261d745a17b908e77",
+            "state": [
+              "",
+              0,
+              false,
+              true,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "c608c2b23ae263db20d77baff3e8762f65816bf55edf894d53e9fd400c7fd208",
+            "visual": "dogwalker"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "f366ec2e9928771c74d53a1711e793fa6df8b37c3dde6aa6cf4ee45f1bed6b52",
+            "state": [
+              "",
+              0,
+              false,
+              true,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "bbeef4221369761529b7c53a1373017c543abba283a9caf56e601d0f83d0daf0",
+            "visual": "paisley"
+          }
+        ],
+        "sha256": "d3df89493a2e1ee92eb99fe8ef051e6bdc6234c8d7f6bb6f53aca06414c99a72"
+      },
+      {
+        "art_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+        "camera_sha256": "aed5a88f1fcfceedea2123e23e05941d8be91af4d2d2bfb73ba60debd3e3c079",
+        "expected_size": [
+          1280,
+          720
+        ],
+        "file": "dogwalker_front_rest_20m.png",
+        "fov": 78,
+        "indexed_weighted_surfaces": 0,
+        "metrics": {
+          "bones": 47,
+          "max_weights": 4,
+          "meshes": 13,
+          "surfaces": 13,
+          "triangles": 11354
+        },
+        "png_bytes": 614097,
+        "rigs": [
+          {
+            "coats": 3,
+            "pose_sha256": "784fc689c30d205f4425dca2f6fe4ccae4b3a246de569d20bb2bd91582e1fb7b",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "b3e4d59745c1e31ca3773acd5b42fd829be33b525dda76b34ccc4676be2e9ae4",
+            "visual": "dogwalker"
+          },
+          {
+            "coats": 3,
+            "pose_sha256": "ab06a4618f6620c916be29d5d70a0f559e2a0375be119289ea67b224f5cbaf0b",
+            "state": [
+              "",
+              0,
+              false,
+              false,
+              3,
+              true,
+              false,
+              false
+            ],
+            "transform_sha256": "bbeef4221369761529b7c53a1373017c543abba283a9caf56e601d0f83d0daf0",
+            "visual": "paisley"
+          }
+        ],
+        "sha256": "5852db706ac2286a108ca2ae84b291d47f6c31effee25f6dc76a7463a83ec5e7"
+      }
+    ],
+    "renderer": "gl_compatibility",
+    "source_hash_note": "Compiled exports may omit script bytes; external archive/overlay/export hashes remain authoritative.",
+    "source_hashes": {
+      "scripts/actor_animation.gd": "",
+      "scripts/character_roster.gd": "",
+      "scripts/exact_vertex_indexer.gd": "",
+      "tests/character_roster_probe.gd": "",
+      "tests/indexed_roster_evidence.gd": ""
+    },
+    "variant": "baseline",
+    "visual_acceptance": false,
+    "web": true
+  },
+  "capture_finished": true,
+  "capture_complete": true,
+  "render_receipts_pass": true,
+  "engine_exit_observed": false,
+  "exit_code": null,
+  "engine_shutdown_tested": false,
+  "engine_shutdown_acceptance": false,
+  "pngs_verified": true,
+  "webgl2": true,
+  "errors": [],
+  "capture_count": 32,
+  "pending_hashes": 0,
+  "capture_completed_ms": 15769,
+  "observation_ms": 33910,
+  "complete": true,
+  "visual_acceptance": false,
+  "performance_acceptance": false
+}

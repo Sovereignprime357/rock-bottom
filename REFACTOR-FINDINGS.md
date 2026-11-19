@@ -1210,3 +1210,63 @@ including clean import,85engine suites and45source/parity checks. Metadata-only
 runtime data additions do not change the already-built gameplay. The separate
 Dave/index/laundry candidates are not included. Exact raw logs and checkout proof
 are retained in artifacts/3d-full-port/parity-metadata. No full-port completion.
+
+### IMPL-3D-FULL-38 — earned campaign with explicit two-run lineage
+
+Accept the separately validated native-v4 Tony prefix plus actual resume-v6
+Kingdom suffix as a two-run gameplay composition. Keep the failed fullv4 and
+pre-start v5 attempts failed. Exact90 source hashes, original fixture disclosure,
+shared12-cot/30min budget, actual save bytes and both original report hashes link
+all five real victories. Tests alone do not supply this acceptance: normal
+movement/menu/combat/ending/save/load inputs completed the suffix in315136ms.
+The four court/Emperor fights were5.079/4.007/4.704/9.539s; Tony was3.370s.
+The retained1072-check contract includes original JSON roundtrip counterexamples.
+Native exit0 retained an ObjectDB shutdown warning, with no SCRIPT ERROR/ERROR.
+No clean-shutdown, Web, all11-claims, pretender or16ms acceptance follows. Exact
+source archive, test overlays,25original PNGs, prior failures and raw reports are
+retained under artifacts/3d-full-port/campaign-composed. The first pretender run
+subsequently won two days but died on a guard-blocked return; it remains failed.
+
+### IMPL-3D-FULL-39 — resident wake behavior and folded clothing
+
+Promote the one-field Dave profile correction and cached 56-triangle folded
+laundry contents after native and actual Web review. Dave's source asleep flag
+now owns the idle sleep selection; ordinary wake remains upright and opens the
+unchanged pigeon conversation. Cloth stays inside its former bounds with the
+same basket, material, rim contacts and collapse behavior. No physics, random
+stream or per-frame geometry work is added. Focused composed checks pass:
+roster2040, FullScene487, Dave contract103/4 groups; native/Web walkthroughs
+complete three captures each with four active seconds upright and resumed movement.
+
+All eight laundry native/Web views were reviewed; Web32 originals hash-match.
+Its keepalive wrapper accepts capture receipts only, not engine shutdown. A
+separate passive diagnostic finds slight sleeping-body/pillow penetration, not
+general hovering; leave that local pose follow-up separate from this fix.
+Retain original failures, exact PNGs and source composition in resident-refinement.
+The roster test's reviewed CRLF bytes are explicitly converted to the existing
+LF checkout rule; source semantics are identical. Metadata advances only the
+three approved existing pins, with unchanged617 statuses and96 references.
+Indexing, eaves, ground-pose correction and performance are not included.
+
+### IMPL-3D-FULL-40 — three earned pretender days
+
+Accept native-v2 after the bounded transit guard selector fixes the failed v1
+driver. The original gameplay sources remain the exact90-file campaign snapshot.
+Actual days14/15/16 complete ranged/charger/grabber fights in16.008/29.583/27.523s,
+with three fatal source reward receipts, three same-day save/reloads and five
+normal cot commands. Two canonical guard bouts total1.771s within the existing
+defense budget. There are no deaths, arrests, resource grants or state writes.
+Contract759/11 groups passes. Final earned save has$297,5copper,65HP; resumed
+simulation later records63HP. Keep these distinct. Three incidental source$12
+receipts account for cash beyond the three$10 pretender rewards.
+
+Retain failedv1, the failed relative-log import launch and native-v2's ObjectDB
+exit warning. Native input/result acceptance does not imply clean shutdown, Web,
+all11 properties, full-port parity or16ms performance. The next claim continuation
+must admit the actual accepted report and exact earned save, without fresh grants.
+
+Resident release checks:131/1313D and19/19original pass; Full Windows/Web exports
+pass. Actual exported browser loads the existing save and exits pause, journal
+and inventory back to movement. Preserve Chromium pointer-capture errors and the
+right-mouse fallback limitation. The separate all11v1 attempt refuses pre-start
+on a one-ULP serialized cot comparison; no additional gameplay is accepted by it.

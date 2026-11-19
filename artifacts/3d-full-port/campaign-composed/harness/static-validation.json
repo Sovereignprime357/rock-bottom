@@ -1,0 +1,60 @@
+{
+  "status": "static_only_pass",
+  "checks": [
+    {
+      "path": "tests/campaign_continuation_probe.gd",
+      "check": "delimiter/string and duplicate-function scan; not Godot parse",
+      "passed": true
+    },
+    {
+      "path": "tests/test_campaign_continuation_contract.gd",
+      "check": "delimiter/string and duplicate-function scan; not Godot parse",
+      "passed": true
+    },
+    {
+      "check": "narrow authority scan; eleven actual completion tails; watchdog wiring",
+      "passed": true,
+      "scope": "static only; not execution"
+    },
+    {
+      "check": "complete assess_campaign body equals retained root-staged previous driver",
+      "passed": true,
+      "scope": "normalized text comparison only"
+    }
+  ],
+  "manifest_sha256": "3031226845db5bda4c179125892f514c7edb7d6a8d1bf91dba22614327e8064b",
+  "changed_read_only_dependencies": [
+    {
+      "path": "game3d/scripts/full_scene.gd",
+      "prior_sha256": "f33a195065b02ba251724193498a07ba3196bf98c28c2d34803829a7527eca3b",
+      "current_sha256": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/full_runtime.gd",
+      "prior_sha256": "590c22f89a20fff9eb1b6bed50a7a85500af81b3ca41a8f2c8efc8c8c7225027",
+      "current_sha256": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "prior_sha256": "469cba30720f20dd76cf01ec53187c7ab351e4bf21077883436be6e888519925",
+      "current_sha256": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75",
+      "matches_prior": false,
+      "read_only": true
+    },
+    {
+      "path": "game3d/scripts/boss_system.gd",
+      "prior_sha256": "b4d74e9cc3b8e168a2dc42dcd3c7ec33767f61a4a9e5f5b047f73e6caaa7c062",
+      "current_sha256": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08",
+      "matches_prior": false,
+      "read_only": true
+    }
+  ],
+  "production_edits": false,
+  "godot_parse": "not_run",
+  "native": "not_run",
+  "failed_evidence_preserved": true
+}

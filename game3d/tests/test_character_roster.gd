@@ -330,8 +330,79 @@ func _geometry(first: Node3D, second: Node3D, id: String) -> bool:
 	if id == "pigeon": _check(first.has_node("single_leg") and not first.has_node("right_leg"),"pigeon anatomy has the source's one foot")
 	if id in ["dogwalker","horsecop"]:
 		_check(rig.companions.size() == 1 and (rig.companions[0].node as Node3D).has_meta("roster_rig") and total_bones > skeleton.get_bone_count(),id+": companion is an actual independently rigged animal/person")
+	var laundry_complete: bool = true
+	if id == "launderlady": laundry_complete = _laundry_contents_geometry(first,second)
+	_check(laundry_complete,id+": folded contents geometry gate reaches completion")
 	_signatures(first,id,rest_vertices)
 	if bool(rig.definition.get("site_resident",false)): _site_signatures(first,id)
+	return laundry_complete
+
+
+func _laundry_contents_geometry(first: Node3D, second: Node3D) -> bool:
+	# The ordinary packer merges static leaves. Check raw identity, then actual
+	# published palette-batch vertices rather than assuming a removed leaf survives.
+	var raw := Roster.Profiles.build_raw(&"launderlady")
+	var raw_shirt := raw.get_node_or_null("laundry_basket/folded_shirt") as MeshInstance3D
+	_check(raw_shirt != null,"authored folded shirt remains one named construction mesh")
+	if raw_shirt == null:
+		raw.free(); return false
+	var raw_material := raw_shirt.get_active_material(0) as StandardMaterial3D
+	_check(raw_shirt.mesh is ArrayMesh and raw_shirt.mesh.get_surface_count() == 1,"authored folded shirt has one actual surface")
+	_check(raw_material != null and raw_material.albedo_color.is_equal_approx(Color("8c8164")),"folded shirt preserves its original dirty fabric color")
+	_check(raw_shirt.position.is_equal_approx(Vector3(0,0.11,0)) and raw_shirt.basis.is_equal_approx(Basis.IDENTITY),"contents retain the old attachment-local transform")
+	raw.free()
+	var basket := first.get_node("laundry_basket") as Node3D
+	var matches: Array[MeshInstance3D] = []
+	for part: MeshInstance3D in _meshes(basket):
+		for surface: int in range(part.mesh.get_surface_count()):
+			var fields: Array = part.mesh.surface_get_arrays(surface)
+			if not fields[Mesh.ARRAY_COLOR] is PackedColorArray: continue
+			var colors: PackedColorArray = fields[Mesh.ARRAY_COLOR]
+			if colors.is_empty() or not colors[0].is_equal_approx(Color("8c8164")): continue
+			var same := true
+			for color: Color in colors: same = same and color.is_equal_approx(Color("8c8164"))
+			_check(same,"published shirt tint is unchanged on every actual cloth vertex")
+			matches.append(part)
+	_check(matches.size() == 1,"actual basket has exactly one published folded-cloth surface")
+	if matches.size() != 1: return false
+	var shirt: MeshInstance3D = matches[0]
+	var other := second.get_node("laundry_basket").get_node_or_null(NodePath(str(shirt.name))) as MeshInstance3D
+	_check(other != null,"the second instance contains the same published cloth batch")
+	if other == null: return false
+	_check(shirt.mesh == other.mesh and shirt.mesh is ArrayMesh,"folded shirt shares its actual published cached mesh between instances")
+	_check(shirt.mesh.get_surface_count() == 1,"folded shirt retains one actual mesh surface")
+	if shirt.mesh.get_surface_count() != 1: return false
+	var material := shirt.get_active_material(0) as StandardMaterial3D
+	_check(material != null and material == other.get_active_material(0) and material.vertex_color_use_as_albedo,"folded shirt retains the shared ordinary palette fabric material")
+	if material == null: return false
+	var arrays: Array = shirt.mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var indices := PackedInt32Array()
+	if arrays[Mesh.ARRAY_INDEX] is PackedInt32Array: indices = arrays[Mesh.ARRAY_INDEX]
+	if indices.is_empty():
+		for i: int in range(vertices.size()): indices.append(i)
+	_check(indices.size() >= 3 and indices.size()%3 == 0 and indices.size()/3 <= 64,"actual folded contents stay within the old64-triangle budget")
+	_check(normals.size() == vertices.size(),"all folded-cloth vertices have actual normals")
+	if indices.size()%3 != 0 or normals.size() != vertices.size(): return false
+	var finite := true; var bounded := true; var faces := true; var winding := true
+	var transform := Roster._relative(shirt,basket)
+	for vertex: Vector3 in vertices:
+		var point: Vector3 = transform*vertex
+		finite = finite and point.is_finite()
+		bounded = bounded and point.x >= -0.260002 and point.x <= 0.260002 and point.y >= 0.049998 and point.y <= 0.170002 and point.z >= -0.150002 and point.z <= 0.150002
+	for index: int in indices:
+		if index < 0 or index >= vertices.size():
+			_check(false,"folded cloth index addresses actual vertices"); return false
+	for i: int in range(0,indices.size(),3):
+		var a: int = indices[i]; var b: int = indices[i+1]; var c: int = indices[i+2]
+		var cross := (vertices[b]-vertices[a]).cross(vertices[c]-vertices[a])
+		faces = faces and cross.length_squared() > 0.000000000001
+		for index: int in [a,b,c]:
+			finite = finite and normals[index].is_finite()
+			winding = winding and is_equal_approx(normals[index].length_squared(),1.0) and cross.dot(normals[index]) < 0.0
+	_check(finite and bounded,"actual folded cloth fits the original finite basket-local contents envelope")
+	_check(faces and winding,"actual opaque cloth triangles are nondegenerate and consistently outward shaded")
 	return true
 
 

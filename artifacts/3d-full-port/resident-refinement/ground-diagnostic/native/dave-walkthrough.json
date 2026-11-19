@@ -1,0 +1,1660 @@
+{
+	"acceptance": true,
+	"engine": "4.5.1-stable (official)",
+	"events": [
+		{
+			"kind": "toast",
+			"payload": {
+				"duration_ms": 2200,
+				"text": "dave wakes up. he is talking immediately."
+			},
+			"wall_ms": 23166
+		}
+	],
+	"failures": [],
+	"finished": true,
+	"fixture": "none",
+	"format": "rock-bottom-dave-walkthrough",
+	"frames": [
+		{
+			"asleep": true,
+			"camera": [
+				-6.25312232971191,
+				1.68999993801117,
+				24.0636367797852
+			],
+			"clear_ray": true,
+			"focus": [
+				-6.2116641998291,
+				0.515257358551025,
+				26.2510986328125
+			],
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "01_sleeping_dave",
+			"menu": {
+				"buttons": [],
+				"labels": [
+					"ROCK BOTTOM",
+					"the same block.\nthe same business."
+				]
+			},
+			"mode": "playing",
+			"png_bytes": 590886,
+			"png_sha256": "9492451cccdf85073cfbfc69b60ae7726de3ba7495c5bad4a450e547b42221de",
+			"posed_ground": {
+				"art_global_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-5.44, 0.06, 26.24)]",
+				"format": "dave-posed-ground-diagnostic-v1",
+				"groups": {
+					"all_visible": {
+						"minimum_world": [
+							-6.57108545303345,
+							-0.0886193290352821,
+							26.682653427124
+						],
+						"support": {
+							"ok": false,
+							"point": [
+								-6.57108545303345,
+								-0.0886193290352821,
+								26.682653427124
+							],
+							"reason": "no_support_ray_hit"
+						},
+						"vertices": 23316
+					},
+					"pillow": {
+						"minimum_world": [
+							-6.57108545303345,
+							-0.0886193290352821,
+							26.682653427124
+						],
+						"support": {
+							"ok": false,
+							"point": [
+								-6.57108545303345,
+								-0.0886193290352821,
+								26.682653427124
+							],
+							"reason": "no_support_ray_hit"
+						},
+						"vertices": 192
+					},
+					"rigid_attachments": {
+						"minimum_world": [
+							-6.57108545303345,
+							-0.0886193290352821,
+							26.682653427124
+						],
+						"support": {
+							"ok": false,
+							"point": [
+								-6.57108545303345,
+								-0.0886193290352821,
+								26.682653427124
+							],
+							"reason": "no_support_ray_hit"
+						},
+						"vertices": 1806
+					},
+					"skinned_body": {
+						"minimum_world": [
+							-6.49363613128662,
+							-0.0310746915638447,
+							26.4784507751465
+						],
+						"support": {
+							"clearance_m": -0.0310746915638447,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-6.49363613128662,
+								0.0,
+								26.4784507751465
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-6.49363613128662,
+								-0.0310746915638447,
+								26.4784507751465
+							]
+						},
+						"vertices": 21510
+					}
+				},
+				"no_pose_or_simulation_writes": true,
+				"ok": false,
+				"parts": [
+					{
+						"minimum_world": [
+							-6.57108545303345,
+							-0.0886193290352821,
+							26.682653427124
+						],
+						"path": "pillow/static_batch_000",
+						"skinned": false,
+						"vertices": 192
+					},
+					{
+						"minimum_world": [
+							-7.07665777206421,
+							0.334523767232895,
+							26.4106750488281
+						],
+						"path": "head/static_batch_002",
+						"skinned": false,
+						"vertices": 12
+					},
+					{
+						"minimum_world": [
+							-7.03976964950562,
+							0.348810523748398,
+							26.417308807373
+						],
+						"path": "head/static_batch_001",
+						"skinned": false,
+						"vertices": 36
+					},
+					{
+						"minimum_world": [
+							-7.01784944534302,
+							0.239447101950645,
+							26.259557723999
+						],
+						"path": "head/static_batch_000",
+						"skinned": false,
+						"vertices": 1182
+					},
+					{
+						"minimum_world": [
+							-7.01521778106689,
+							0.278959095478058,
+							26.2599639892578
+						],
+						"path": "head/hair_style/static_batch_000",
+						"skinned": false,
+						"vertices": 384
+					},
+					{
+						"minimum_world": [
+							-6.53046226501465,
+							-0.00817892327904701,
+							26.7228679656982
+						],
+						"path": "@MeshInstance3D@14468",
+						"skinned": true,
+						"vertices": 5664
+					},
+					{
+						"minimum_world": [
+							-5.57791423797607,
+							0.0945322960615158,
+							26.3714962005615
+						],
+						"path": "@MeshInstance3D@14467",
+						"skinned": true,
+						"vertices": 342
+					},
+					{
+						"minimum_world": [
+							-5.48276138305664,
+							0.0257660709321499,
+							26.2399997711182
+						],
+						"path": "@MeshInstance3D@14466",
+						"skinned": true,
+						"vertices": 3456
+					},
+					{
+						"minimum_world": [
+							-6.49363613128662,
+							-0.0310746915638447,
+							26.4784507751465
+						],
+						"path": "body_layer_0",
+						"skinned": true,
+						"vertices": 12048
+					}
+				],
+				"physics_frame": 832,
+				"process_frame": 292,
+				"rig_state": [
+					"sleep",
+					0,
+					false,
+					false,
+					3,
+					true,
+					false,
+					false
+				],
+				"rig_time": 6.23627933333333,
+				"root_support": {
+					"clearance_m": 0.0599999986588955,
+					"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+					"ground": [
+						-5.44000053405762,
+						0.0,
+						26.2399997711182
+					],
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"ok": true,
+					"point": [
+						-5.44000005722046,
+						0.0599999986588955,
+						26.2399997711182
+					]
+				},
+				"vertices": 23316
+			},
+			"process_frame": 292,
+			"projected": true,
+			"reachable": true,
+			"root_up": 0.0906714797019959,
+			"sleep_markers": 2
+		},
+		{
+			"asleep": false,
+			"camera": [
+				-6.25312232971191,
+				1.68999993801117,
+				24.0636367797852
+			],
+			"clear_ray": true,
+			"focus": [
+				-5.44000005722046,
+				1.08486938476563,
+				26.2507362365723
+			],
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "02_awake_dave",
+			"menu": {
+				"buttons": [],
+				"labels": [
+					"CHATTY DAVE",
+					"dave is asleep. his wallet is half out."
+				]
+			},
+			"mode": "playing",
+			"png_bytes": 583558,
+			"png_sha256": "c2d0f5bbd9ecc03a112cc13bf16b58b6817e912e1fcc13cb6a1c311caa9eef41",
+			"posed_ground": {
+				"art_global_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-5.44, 0.06, 26.24)]",
+				"format": "dave-posed-ground-diagnostic-v1",
+				"groups": {
+					"all_visible": {
+						"minimum_world": [
+							-5.5593090057373,
+							0.074999988079071,
+							26.4659996032715
+						],
+						"support": {
+							"clearance_m": 0.074999988079071,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.5593090057373,
+								0.0,
+								26.4659996032715
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.5593090057373,
+								0.074999988079071,
+								26.4659996032715
+							]
+						},
+						"vertices": 23316
+					},
+					"pillow": {
+						"minimum_world": [
+							-5.82414388656616,
+							0.535057842731476,
+							26.3278999328613
+						],
+						"support": {
+							"clearance_m": 0.535057820379734,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.82414436340332,
+								0.0000000223517417907715,
+								26.3278999328613
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.82414388656616,
+								0.535057842731476,
+								26.3278999328613
+							]
+						},
+						"vertices": 192
+					},
+					"rigid_attachments": {
+						"minimum_world": [
+							-5.82414388656616,
+							0.535057842731476,
+							26.3278999328613
+						],
+						"support": {
+							"clearance_m": 0.535057820379734,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.82414436340332,
+								0.0000000223517417907715,
+								26.3278999328613
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.82414388656616,
+								0.535057842731476,
+								26.3278999328613
+							]
+						},
+						"vertices": 1806
+					},
+					"skinned_body": {
+						"minimum_world": [
+							-5.5593090057373,
+							0.074999988079071,
+							26.4659996032715
+						],
+						"support": {
+							"clearance_m": 0.074999988079071,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.5593090057373,
+								0.0,
+								26.4659996032715
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.5593090057373,
+								0.074999988079071,
+								26.4659996032715
+							]
+						},
+						"vertices": 21510
+					}
+				},
+				"no_pose_or_simulation_writes": true,
+				"ok": true,
+				"parts": [
+					{
+						"minimum_world": [
+							-5.82414388656616,
+							0.535057842731476,
+							26.3278999328613
+						],
+						"path": "pillow/static_batch_000",
+						"skinned": false,
+						"vertices": 192
+					},
+					{
+						"minimum_world": [
+							-5.5789475440979,
+							1.67831981182098,
+							26.4100551605225
+						],
+						"path": "head/static_batch_002",
+						"skinned": false,
+						"vertices": 12
+					},
+					{
+						"minimum_world": [
+							-5.44326114654541,
+							1.48545825481415,
+							26.4225940704346
+						],
+						"path": "head/static_batch_001",
+						"skinned": false,
+						"vertices": 36
+					},
+					{
+						"minimum_world": [
+							-5.43875741958618,
+							1.4027783870697,
+							26.2015914916992
+						],
+						"path": "head/static_batch_000",
+						"skinned": false,
+						"vertices": 1182
+					},
+					{
+						"minimum_world": [
+							-5.43654632568359,
+							1.57457435131073,
+							26.0918273925781
+						],
+						"path": "head/hair_style/static_batch_000",
+						"skinned": false,
+						"vertices": 384
+					},
+					{
+						"minimum_world": [
+							-5.09464931488037,
+							0.638756930828094,
+							26.298677444458
+						],
+						"path": "@MeshInstance3D@14468",
+						"skinned": true,
+						"vertices": 5664
+					},
+					{
+						"minimum_world": [
+							-5.6869945526123,
+							0.175996467471123,
+							26.3714962005615
+						],
+						"path": "@MeshInstance3D@14467",
+						"skinned": true,
+						"vertices": 342
+					},
+					{
+						"minimum_world": [
+							-5.5593090057373,
+							0.074999988079071,
+							26.4659996032715
+						],
+						"path": "@MeshInstance3D@14466",
+						"skinned": true,
+						"vertices": 3456
+					},
+					{
+						"minimum_world": [
+							-5.57801008224487,
+							0.179996341466904,
+							26.3099975585938
+						],
+						"path": "body_layer_0",
+						"skinned": true,
+						"vertices": 12048
+					}
+				],
+				"physics_frame": 1085,
+				"process_frame": 401,
+				"rig_state": [
+					"",
+					0,
+					false,
+					false,
+					3,
+					true,
+					false,
+					true
+				],
+				"rig_time": 10.3173366666667,
+				"root_support": {
+					"clearance_m": 0.0599999986588955,
+					"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+					"ground": [
+						-5.44000053405762,
+						0.0,
+						26.2399997711182
+					],
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"ok": true,
+					"point": [
+						-5.44000005722046,
+						0.0599999986588955,
+						26.2399997711182
+					]
+				},
+				"vertices": 23316
+			},
+			"process_frame": 401,
+			"projected": true,
+			"reachable": true,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"camera": [
+				-6.25312232971191,
+				1.68999993801117,
+				24.0636367797852
+			],
+			"clear_ray": true,
+			"focus": [
+				-5.44000005722046,
+				1.08486938476563,
+				26.2507362365723
+			],
+			"framebuffer": [
+				1280,
+				720
+			],
+			"label": "03_pigeon_dialogue",
+			"menu": {
+				"buttons": [
+					"listen for a while. (-5 brain)",
+					"leave."
+				],
+				"labels": [
+					"CHATTY DAVE",
+					"dave is explaining a theory about pigeons.\nthe theory has 17 parts."
+				]
+			},
+			"mode": "dialogue",
+			"png_bytes": 490024,
+			"png_sha256": "fe34d0c2e2d6fc90898f4ce04388f513323585791e5425d6d2971e6ad2f7d24e",
+			"posed_ground": {
+				"art_global_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-5.44, 0.06, 26.24)]",
+				"format": "dave-posed-ground-diagnostic-v1",
+				"groups": {
+					"all_visible": {
+						"minimum_world": [
+							-5.5593090057373,
+							0.074999988079071,
+							26.4659996032715
+						],
+						"support": {
+							"clearance_m": 0.074999988079071,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.5593090057373,
+								0.0,
+								26.4659996032715
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.5593090057373,
+								0.074999988079071,
+								26.4659996032715
+							]
+						},
+						"vertices": 23316
+					},
+					"pillow": {
+						"minimum_world": [
+							-5.82414388656616,
+							0.535057842731476,
+							26.3278999328613
+						],
+						"support": {
+							"clearance_m": 0.535057820379734,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.82414436340332,
+								0.0000000223517417907715,
+								26.3278999328613
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.82414388656616,
+								0.535057842731476,
+								26.3278999328613
+							]
+						},
+						"vertices": 192
+					},
+					"rigid_attachments": {
+						"minimum_world": [
+							-5.82414388656616,
+							0.535057842731476,
+							26.3278999328613
+						],
+						"support": {
+							"clearance_m": 0.535057820379734,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.82414436340332,
+								0.0000000223517417907715,
+								26.3278999328613
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.82414388656616,
+								0.535057842731476,
+								26.3278999328613
+							]
+						},
+						"vertices": 1806
+					},
+					"skinned_body": {
+						"minimum_world": [
+							-5.5593090057373,
+							0.074999988079071,
+							26.4659996032715
+						],
+						"support": {
+							"clearance_m": 0.074999988079071,
+							"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+							"ground": [
+								-5.5593090057373,
+								0.0,
+								26.4659996032715
+							],
+							"normal": [
+								0.0,
+								1.0,
+								0.0
+							],
+							"ok": true,
+							"point": [
+								-5.5593090057373,
+								0.074999988079071,
+								26.4659996032715
+							]
+						},
+						"vertices": 21510
+					}
+				},
+				"no_pose_or_simulation_writes": true,
+				"ok": true,
+				"parts": [
+					{
+						"minimum_world": [
+							-5.82414388656616,
+							0.535057842731476,
+							26.3278999328613
+						],
+						"path": "pillow/static_batch_000",
+						"skinned": false,
+						"vertices": 192
+					},
+					{
+						"minimum_world": [
+							-5.5789475440979,
+							1.67831981182098,
+							26.4100551605225
+						],
+						"path": "head/static_batch_002",
+						"skinned": false,
+						"vertices": 12
+					},
+					{
+						"minimum_world": [
+							-5.44326114654541,
+							1.48545825481415,
+							26.4225940704346
+						],
+						"path": "head/static_batch_001",
+						"skinned": false,
+						"vertices": 36
+					},
+					{
+						"minimum_world": [
+							-5.43875741958618,
+							1.4027783870697,
+							26.2015914916992
+						],
+						"path": "head/static_batch_000",
+						"skinned": false,
+						"vertices": 1182
+					},
+					{
+						"minimum_world": [
+							-5.43654632568359,
+							1.57457435131073,
+							26.0918273925781
+						],
+						"path": "head/hair_style/static_batch_000",
+						"skinned": false,
+						"vertices": 384
+					},
+					{
+						"minimum_world": [
+							-5.09464931488037,
+							0.638756930828094,
+							26.298677444458
+						],
+						"path": "@MeshInstance3D@14468",
+						"skinned": true,
+						"vertices": 5664
+					},
+					{
+						"minimum_world": [
+							-5.6869945526123,
+							0.175996467471123,
+							26.3714962005615
+						],
+						"path": "@MeshInstance3D@14467",
+						"skinned": true,
+						"vertices": 342
+					},
+					{
+						"minimum_world": [
+							-5.5593090057373,
+							0.074999988079071,
+							26.4659996032715
+						],
+						"path": "@MeshInstance3D@14466",
+						"skinned": true,
+						"vertices": 3456
+					},
+					{
+						"minimum_world": [
+							-5.57801008224487,
+							0.179996341466904,
+							26.3099975585938
+						],
+						"path": "body_layer_0",
+						"skinned": true,
+						"vertices": 12048
+					}
+				],
+				"physics_frame": 1093,
+				"process_frame": 402,
+				"rig_state": [
+					"",
+					0,
+					false,
+					false,
+					3,
+					true,
+					false,
+					true
+				],
+				"rig_time": 10.3173366666667,
+				"root_support": {
+					"clearance_m": 0.0599999986588955,
+					"collider": "/root/@Node3D@2/@Node3D@56/@StaticBody3D@83",
+					"ground": [
+						-5.44000053405762,
+						0.0,
+						26.2399997711182
+					],
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"ok": true,
+					"point": [
+						-5.44000005722046,
+						0.0599999986588955,
+						26.2399997711182
+					]
+				},
+				"vertices": 23316
+			},
+			"process_frame": 402,
+			"projected": true,
+			"reachable": true,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		}
+	],
+	"hashes": {
+		"res://data/source_content.json": "907ac979ef628c68015363078274d0403e952ed6e6e941cd868471905337ff54",
+		"res://scripts/actor_animation.gd": "058012dbc4a6f7c5e33532b41ffa9492625cd789b17b55712fc41b77750cb417",
+		"res://scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+		"res://scripts/full_scene.gd": "cc582475fafd49f9117c8785cdc116fb4612ccb9d9c6e91a0d2fa51376042635",
+		"res://scripts/quest_dialogue.gd": "ad4757bfb39337a2e51acacbbb0aaaf895cafddcfcc28af3768ddc31d413ce03",
+		"res://tests/boss_acceptance_probe.gd": "9dd72568a3bf7f6d8dda8e07dfe4a406dfa92b7aa929e8e32bf41903fac4e0df",
+		"res://tests/dave_walkthrough_probe.gd": "66eb032356c1fe8a34607a537ca9645164d7cab88fe5d934e8de7a597b3dd242"
+	},
+	"idle": [
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		},
+		{
+			"asleep": false,
+			"root_up": 1.0,
+			"sleep_markers": 0
+		}
+	],
+	"idle_active_ms": 4008.53696969696,
+	"initial": {
+		"actors": 56,
+		"brain": 70.0,
+		"cart_mounted": false,
+		"cash": 0,
+		"cred": 0,
+		"equip": {
+			"coat": null,
+			"hat": null,
+			"shoes": null,
+			"tool": null
+		},
+		"hp": 100.0,
+		"inventory": [],
+		"max_hp": 100.0,
+		"offenses": 0,
+		"rng": 4153385641,
+		"rocks": 0,
+		"rocks_smoked": 0,
+		"shakes": 20.0,
+		"source_position": [
+			1050.0,
+			840.0
+		],
+		"speed": 2.2,
+		"weapon": "fists"
+	},
+	"inputs": {
+		"capture_clicks": 3,
+		"clicks": 3,
+		"keys": 2,
+		"motion_frames": 131,
+		"mouse_motion": 173
+	},
+	"movement": {
+		"input_frames": 1,
+		"metres": 0.266605794429779,
+		"modal": false,
+		"mode": "playing"
+	},
+	"overflow": false,
+	"renderer": "gl_compatibility",
+	"replacements": 0,
+	"schema": 1,
+	"scope": "Actual rendered viewport and synthetic ordinary input; visual review still required. No trusted hardware/pointer-lock/audio/performance claim. Empty packaged hashes are unavailable.",
+	"title_input": true,
+	"visual_acceptance": false,
+	"wake": {
+		"after": {
+			"actor": {
+				"asleep": false,
+				"attackCd": 0.0,
+				"chatterCd": -6236.27933333335,
+				"color": "#3a2818",
+				"h": 32.0,
+				"hitFlash": 0.0,
+				"hostile": false,
+				"hp": 40.0,
+				"hpMax": 40.0,
+				"id": "dave",
+				"maxHp": 40.0,
+				"name": "CHATTY DAVE",
+				"showHp": false,
+				"speed": 0.0,
+				"sprite": "dave",
+				"targetX": 900.0,
+				"targetY": 1480.0,
+				"w": 28.0,
+				"wanderT": 0.0,
+				"x": 900.0,
+				"y": 1480.0
+			},
+			"player": {
+				"attackCd": 0.0,
+				"attacking": 0.0,
+				"barbAside": false,
+				"brain": 70.0,
+				"brutusDefeated": 0,
+				"cartMounted": false,
+				"cash": 0,
+				"charisma": 0,
+				"copper": 0,
+				"crashT": 0.0,
+				"cred": 0,
+				"credBonus": 0,
+				"dirtySupplies": 0,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"facing": "down",
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 0
+				},
+				"frame": 0,
+				"frameT": 0.0,
+				"h": 28.0,
+				"hasPossum": false,
+				"hitFlash": 0.0,
+				"hitterHigh": false,
+				"hitters": 0,
+				"hp": 100.0,
+				"iframes": 0.0,
+				"inventory": [],
+				"lifetime": {
+					"arrests": 0,
+					"copsKilled": 0,
+					"dayCount": 0,
+					"officeJobs": 0,
+					"pretendersDefeated": 0,
+					"rocksCooked": 0,
+					"rocksFenced": 0,
+					"rocksSmoked": 0,
+					"routesCompleted": 0,
+					"territoriesClaimed": 0
+				},
+				"maxHp": 100.0,
+				"rank": 0,
+				"rockedT": 0.0,
+				"rocks": 0,
+				"shakes": 24.9890234666666,
+				"slowT": 0.0,
+				"soapRocks": 0,
+				"speed": 2.2,
+				"stripeLoyalty": 0,
+				"stunT": 0.0,
+				"supplies": 0,
+				"tonyOffenses": 0,
+				"vx": 0.0,
+				"vy": 0.0,
+				"w": 24.0,
+				"wanted": 0,
+				"wantedDecayMult": 1.0,
+				"wantedT": 0.0,
+				"weapon": "fists",
+				"x": 881.671936035156,
+				"y": 1427.59094238281
+			},
+			"rng": 2685966314
+		},
+		"before": {
+			"actor": {
+				"asleep": true,
+				"attackCd": 0.0,
+				"chatterCd": -6236.27933333335,
+				"color": "#3a2818",
+				"h": 32.0,
+				"hitFlash": 0.0,
+				"hostile": false,
+				"hp": 40.0,
+				"hpMax": 40.0,
+				"id": "dave",
+				"maxHp": 40.0,
+				"name": "CHATTY DAVE",
+				"showHp": false,
+				"speed": 0.0,
+				"sprite": "dave",
+				"targetX": 900.0,
+				"targetY": 1480.0,
+				"w": 28.0,
+				"wanderT": 0.0,
+				"x": 900.0,
+				"y": 1480.0
+			},
+			"player": {
+				"attackCd": 0.0,
+				"attacking": 0.0,
+				"barbAside": false,
+				"brain": 70.0,
+				"brutusDefeated": 0,
+				"cartMounted": false,
+				"cash": 0,
+				"charisma": 0,
+				"copper": 0,
+				"crashT": 0.0,
+				"cred": 0,
+				"credBonus": 0,
+				"dirtySupplies": 0,
+				"equip": {
+					"coat": null,
+					"hat": null,
+					"shoes": null,
+					"tool": null
+				},
+				"facing": "down",
+				"faction": {
+					"scrap": 0,
+					"spiritual": 0,
+					"street": 0
+				},
+				"frame": 0,
+				"frameT": 0.0,
+				"h": 28.0,
+				"hasPossum": false,
+				"hitFlash": 0.0,
+				"hitterHigh": false,
+				"hitters": 0,
+				"hp": 100.0,
+				"iframes": 0.0,
+				"inventory": [],
+				"lifetime": {
+					"arrests": 0,
+					"copsKilled": 0,
+					"dayCount": 0,
+					"officeJobs": 0,
+					"pretendersDefeated": 0,
+					"rocksCooked": 0,
+					"rocksFenced": 0,
+					"rocksSmoked": 0,
+					"routesCompleted": 0,
+					"territoriesClaimed": 0
+				},
+				"maxHp": 100.0,
+				"rank": 0,
+				"rockedT": 0.0,
+				"rocks": 0,
+				"shakes": 24.9890234666666,
+				"slowT": 0.0,
+				"soapRocks": 0,
+				"speed": 2.2,
+				"stripeLoyalty": 0,
+				"stunT": 0.0,
+				"supplies": 0,
+				"tonyOffenses": 0,
+				"vx": 0.0,
+				"vy": 0.0,
+				"w": 24.0,
+				"wanted": 0,
+				"wantedDecayMult": 1.0,
+				"wantedT": 0.0,
+				"weapon": "fists",
+				"x": 881.671936035156,
+				"y": 1427.59094238281
+			},
+			"rng": 2685966314
+		},
+		"distance": 58.0824890136719,
+		"pressed": true,
+		"reachable": true,
+		"resolved": {
+			"id": "dave",
+			"kind": "quest"
+		}
+	},
+	"walking": [
+		{
+			"blockers": [
+				"dave",
+				"pothole"
+			],
+			"graph_points": 19,
+			"route_points": 5,
+			"wall_ms": 16707
+		},
+		{
+			"blockers": [
+				"dave",
+				"dogwalker"
+			],
+			"graph_points": 18,
+			"route_points": 4,
+			"wall_ms": 19496
+		},
+		{
+			"blockers": [
+				"dave",
+				"dogwalker"
+			],
+			"graph_points": 18,
+			"route_points": 4,
+			"wall_ms": 19783
+		},
+		{
+			"blockers": [
+				"dogwalker",
+				"pothole"
+			],
+			"graph_points": 19,
+			"route_points": 4,
+			"wall_ms": 27813
+		}
+	],
+	"wall_ms": 23248,
+	"web": false
+}

@@ -969,3 +969,29 @@ including clean import,85engine suites and45source/parity checks. Metadata-only
 runtime data additions do not change the already-built gameplay. The separate
 Dave/index/laundry candidates are not included. Exact raw logs and checkout proof
 are retained in artifacts/3d-full-port/parity-metadata. No full-port completion.
+
+### Resident refinement and earned continuation — 2026-11-19
+
+Dave wake and folded laundry now pass focused native/Web review and are composed
+into source. Root owns metadata-v2 integration,131-suite regression, Full exports,
+browser smoke, raw evidence and commit/push. Architecture owns the explicit
+three-pin revision and a separate Dave sleep-support diagnostic; no ground-pose
+or eave change is in this promotion. The original19 gates pass after composition.
+
+The two-run Tony/Kingdom campaign and three subsequent pretender days have actual
+native acceptance with disclosed initial fixture lineage and preserved failures.
+Characters owns the bounded all11 continuation, admitted only from the actual
+accepted pretender report/save. No new resources may be granted. Root runs it.
+
+World owns the qualified Web repeatability analysis and actual contact-counter
+attribution review. Exact Web indexing stays failed; performance stays above16ms
+with60 actors. Indexing/eaves remain isolated. All original617 parity statuses
+remain unchanged. No worker runs engines, browser, exports or Git; root continues
+to serialize those actions and retains all original unsuccessful evidence.
+
+Resident checkpoint validation is complete:131/1313D,19/19original, Full Windows/
+Web exports and actual browser remembered-save/menu-exit/movement checks pass.
+Local8074 serves this build; pointer-capture fallback remains disclosed. Root
+finishes byte-exact checkout and push before the next isolated native continuation.
+All11v1 refused before startup on serialized cot arithmetic; the bounded proof
+amendment and fresh v2 are staged, with no new gameplay acceptance yet.

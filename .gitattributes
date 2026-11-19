@@ -271,3 +271,14 @@ tools/parity-metadata.mjs text eol=lf
 tools/parity-source-proof.mjs text eol=lf
 
 artifacts/3d-full-port/parity-metadata/** -text
+
+artifacts/3d-full-port/campaign-composed/** -text
+
+artifacts/3d-full-port/resident-refinement/** -text
+artifacts/3d-full-port/pretender-acceptance/** -text
+game3d/tests/dave_walkthrough_probe.gd text eol=lf
+game3d/tests/test_dave_walkthrough_contract.gd text eol=lf
+game3d/tests/dave_walkthrough_probe.gd.uid text eol=lf
+game3d/tests/test_dave_walkthrough_contract.gd.uid text eol=lf
+reports/3d-parity-metadata/input-pins-metadata-v2.json -text
+reports/3d-parity-metadata/revisions/metadata-v2.json -text

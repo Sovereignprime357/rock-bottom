@@ -1,0 +1,2324 @@
+{
+  "schema": 1,
+  "scope": "Actual staged checkout: old exact-path policies plus reviewed resident/metadata deltas and raw evidence",
+  "method": "git checkout-index",
+  "failures": [],
+  "checks": 463,
+  "files": [
+    {
+      "path": "SPEC-3D-FULL-PORT.md",
+      "expected": "2225222c1c27835fc93a4c4da27501aefbbc74f358f2840de14ae1b2f7649c26",
+      "actual": "2225222c1c27835fc93a4c4da27501aefbbc74f358f2840de14ae1b2f7649c26"
+    },
+    {
+      "path": "SPEC-3D-PARITY-METADATA.md",
+      "expected": "506af8d3202fe257edaad59e3b4109fb4eb4c80d1197cba55ff2f716fb3c7004",
+      "actual": "506af8d3202fe257edaad59e3b4109fb4eb4c80d1197cba55ff2f716fb3c7004"
+    },
+    {
+      "path": "SPEC-3D-VIEWMODEL-GEAR.md",
+      "expected": "de451965c7be0f0f35261f183d10c377f3d315ba3a212fb2a06bec4827d253ae",
+      "actual": "de451965c7be0f0f35261f183d10c377f3d315ba3a212fb2a06bec4827d253ae"
+    },
+    {
+      "path": "VIBE.md",
+      "expected": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5",
+      "actual": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/build.log",
+      "expected": "39a5cb594c3b1e7c81ee60b3daaade9e440966a42f3c81e6a23eb91818ef8d20",
+      "actual": "39a5cb594c3b1e7c81ee60b3daaade9e440966a42f3c81e6a23eb91818ef8d20"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/gates-3d.log",
+      "expected": "d39cc0691555296307c11147520101dc9c965e0b7123756e5039b057c62595e0",
+      "actual": "d39cc0691555296307c11147520101dc9c965e0b7123756e5039b057c62595e0"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/native-cart/captures.json",
+      "expected": "00a9f1f40e9441f2e8b86bce700bf6b28089df3fb0cf52cf38531c80e412a4da",
+      "actual": "00a9f1f40e9441f2e8b86bce700bf6b28089df3fb0cf52cf38531c80e412a4da"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/native-context/captures.json",
+      "expected": "a594e01182fb276140eef913eb6cb5433d2b83ef029e02cbea2b64585418287f",
+      "actual": "a594e01182fb276140eef913eb6cb5433d2b83ef029e02cbea2b64585418287f"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/native-gear/captures.json",
+      "expected": "a1c8099c96bf13e71930856f06c916728c2ef84823338748a92c04c3b5b74c5c",
+      "actual": "a1c8099c96bf13e71930856f06c916728c2ef84823338748a92c04c3b5b74c5c"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/production-export-hashes.json",
+      "expected": "708a53bdf3928e6a0ffa782d42917cc1f718d9c31f4fd9847fd9f1473e4c34c7",
+      "actual": "708a53bdf3928e6a0ffa782d42917cc1f718d9c31f4fd9847fd9f1473e4c34c7"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/provenance.json",
+      "expected": "9bc76859cbf4916f24c851bb0a3ba120a39208a2a911d76c7859b0d3c84c2ec7",
+      "actual": "9bc76859cbf4916f24c851bb0a3ba120a39208a2a911d76c7859b0d3c84c2ec7"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/test_cart_view.log",
+      "expected": "1a68049e181c17a474ad9887a18f4ae47b48b9e59e6762d60966b8e8b50db72a",
+      "actual": "1a68049e181c17a474ad9887a18f4ae47b48b9e59e6762d60966b8e8b50db72a"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/web-hands-1280.json",
+      "expected": "7d34f0079e0171ba3ce4eddbc68b6eb7467af3389b5916641cf6ed71fcdc58b9",
+      "actual": "7d34f0079e0171ba3ce4eddbc68b6eb7467af3389b5916641cf6ed71fcdc58b9"
+    },
+    {
+      "path": "artifacts/3d-full-port/hand-art-refinement/web-hands-960.json",
+      "expected": "2830847aa5265bcf677e363157ea285db8a2161b04055f5990cb76a0af908e9e",
+      "actual": "2830847aa5265bcf677e363157ea285db8a2161b04055f5990cb76a0af908e9e"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/karaoke-native.json",
+      "expected": "5173612239441a37785ff6977a093cad6d815f657667f5f44bbab11830ae58e8",
+      "actual": "5173612239441a37785ff6977a093cad6d815f657667f5f44bbab11830ae58e8"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/native-provenance.json",
+      "expected": "8e4152d3c9a51170e00936f1375b1215f8e2816b426d40c2d078cdb6ca3325d4",
+      "actual": "8e4152d3c9a51170e00936f1375b1215f8e2816b426d40c2d078cdb6ca3325d4"
+    },
+    {
+      "path": "artifacts/3d-full-port/input-and-acceptance/tony-8bcd-release.json",
+      "expected": "9530415a5e920733a50a9bfe8f820c983eb73e5904a168e86b354b050fc93465",
+      "actual": "9530415a5e920733a50a9bfe8f820c983eb73e5904a168e86b354b050fc93465"
+    },
+    {
+      "path": "artifacts/3d-full-port/live-neighborhood/departure-native.json",
+      "expected": "f917b7de7ff13bf2191a8fa9e5245f02fcc09e02bda01fd74a9886dbbeb229fa",
+      "actual": "f917b7de7ff13bf2191a8fa9e5245f02fcc09e02bda01fd74a9886dbbeb229fa"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/district-grade-web-raster.json",
+      "expected": "2d223b847c1ca868fda99fd168ccf88f3a2b2c08c4b6c212d6415c585d1b384c",
+      "actual": "2d223b847c1ca868fda99fd168ccf88f3a2b2c08c4b6c212d6415c585d1b384c"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/district-scene.json",
+      "expected": "667aea2b29052f8c81d19a53c8883bcdb52e45860ddbe1de8e6a9f8d4ed415ea",
+      "actual": "667aea2b29052f8c81d19a53c8883bcdb52e45860ddbe1de8e6a9f8d4ed415ea"
+    },
+    {
+      "path": "artifacts/3d-full-port/motion-and-color/fixture-web-evidence.json",
+      "expected": "3f98f98cd8db85c5c421d1637473216c492e22da14958322db1eaca60c40a428",
+      "actual": "3f98f98cd8db85c5c421d1637473216c492e22da14958322db1eaca60c40a428"
+    },
+    {
+      "path": "artifacts/3d-full-port/office-endpoint-acceptance/provenance.json",
+      "expected": "d267739974efecf247423fe30aaca2bdd5a9057af8bd941becf6967e29984b95",
+      "actual": "d267739974efecf247423fe30aaca2bdd5a9057af8bd941becf6967e29984b95"
+    },
+    {
+      "path": "artifacts/3d-full-port/office-endpoint-acceptance/tour/office-tour.json",
+      "expected": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708",
+      "actual": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708"
+    },
+    {
+      "path": "artifacts/3d-full-port/p04/world-render-evidence.json",
+      "expected": "8729c276ed964c9fc438051173f978f6b94e748986c14a7d6135a35db6df7bee",
+      "actual": "8729c276ed964c9fc438051173f978f6b94e748986c14a7d6135a35db6df7bee"
+    },
+    {
+      "path": "artifacts/3d-full-port/p15a/native-tour.json",
+      "expected": "a9b77bae480aedc2b0024a633c1024a1330acc34ae68f90941ed9b7906379d73",
+      "actual": "a9b77bae480aedc2b0024a633c1024a1330acc34ae68f90941ed9b7906379d73"
+    },
+    {
+      "path": "artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/full-actor-performance.json",
+      "expected": "c24174d216c927fdbcf82aae2c6c64b850c380b09ec006082746a3a0c01582d7",
+      "actual": "c24174d216c927fdbcf82aae2c6c64b850c380b09ec006082746a3a0c01582d7"
+    },
+    {
+      "path": "artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/provenance.json",
+      "expected": "21ec85bcdb0ed4117b9415a0b111620c92a4f044c155b87a2fc71bf7ad6e037e",
+      "actual": "21ec85bcdb0ed4117b9415a0b111620c92a4f044c155b87a2fc71bf7ad6e037e"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/hideout_mom.png",
+      "expected": "1fc022fc37c41511587e986fba101d27fd1186690b89361b96c90e17d56c69e0",
+      "actual": "1fc022fc37c41511587e986fba101d27fd1186690b89361b96c90e17d56c69e0"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/kingdom-release.json",
+      "expected": "504995c92ef374a5612aa51f4fe44772231a0d941996ab427affa7217da61917",
+      "actual": "504995c92ef374a5612aa51f4fe44772231a0d941996ab427affa7217da61917"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/leash-border-native.json",
+      "expected": "b2e0285ee00b14858a619cb8b0e13085604ab639e7093500562d716c53fd14b5",
+      "actual": "b2e0285ee00b14858a619cb8b0e13085604ab639e7093500562d716c53fd14b5"
+    },
+    {
+      "path": "artifacts/3d-full-port/world-details/ownership-release.json",
+      "expected": "988a31a720b8f20fea930e5ea4ed1d3e581ae2ce585cc028ae72649e16525cdc",
+      "actual": "988a31a720b8f20fea930e5ea4ed1d3e581ae2ce585cc028ae72649e16525cdc"
+    },
+    {
+      "path": "game3d/data/courier_canvas_metrics.json",
+      "expected": "73679c61dcfb7b3141e1a01b086bdc01dc6256a50bacbb55ab1f80ca9dce69c0",
+      "actual": "73679c61dcfb7b3141e1a01b086bdc01dc6256a50bacbb55ab1f80ca9dce69c0"
+    },
+    {
+      "path": "game3d/data/parity_manifest.json",
+      "expected": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+      "actual": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42"
+    },
+    {
+      "path": "game3d/data/source_content.json",
+      "expected": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+      "actual": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0"
+    },
+    {
+      "path": "game3d/scripts/actor_animation.gd",
+      "expected": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "actual": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d"
+    },
+    {
+      "path": "game3d/scripts/actor_contact.gd",
+      "expected": "1041e31b12a61b2847ca3706c49516f337d53f85f31edccf2bb280e06bb4b345",
+      "actual": "1041e31b12a61b2847ca3706c49516f337d53f85f31edccf2bb280e06bb4b345"
+    },
+    {
+      "path": "game3d/scripts/actor_director.gd",
+      "expected": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc",
+      "actual": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc"
+    },
+    {
+      "path": "game3d/scripts/actor_hud_overlay.gd",
+      "expected": "9fef9e190550a4cafce7051992ab4b0842ad747fa6bdf9b69be1dc21c9083b48",
+      "actual": "9fef9e190550a4cafce7051992ab4b0842ad747fa6bdf9b69be1dc21c9083b48"
+    },
+    {
+      "path": "game3d/scripts/actor_hud_projection.gd",
+      "expected": "f17b603912a3a4c093aee13ce7143f549b10485b451e510d131acdedede92e5a",
+      "actual": "f17b603912a3a4c093aee13ce7143f549b10485b451e510d131acdedede92e5a"
+    },
+    {
+      "path": "game3d/scripts/actor_hud_view.gd",
+      "expected": "e626018a64b434352e1653636a24ffd28474502848e7fc49b7d90a26e32497e4",
+      "actual": "e626018a64b434352e1653636a24ffd28474502848e7fc49b7d90a26e32497e4"
+    },
+    {
+      "path": "game3d/scripts/actor_navigation.gd",
+      "expected": "addd843ec3506c493eefbf412593bf3ff87f60208ff509043f369bd24a471dc6",
+      "actual": "addd843ec3506c493eefbf412593bf3ff87f60208ff509043f369bd24a471dc6"
+    },
+    {
+      "path": "game3d/scripts/ambient_audio.gd",
+      "expected": "562af74b2530f87ddcecd4e4d942359963cf465d4d39d8e29dc609e1dc207965",
+      "actual": "562af74b2530f87ddcecd4e4d942359963cf465d4d39d8e29dc609e1dc207965"
+    },
+    {
+      "path": "game3d/scripts/boss_system.gd",
+      "expected": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08",
+      "actual": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08"
+    },
+    {
+      "path": "game3d/scripts/campaign_system.gd",
+      "expected": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff",
+      "actual": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff"
+    },
+    {
+      "path": "game3d/scripts/cart_view.gd",
+      "expected": "75045b6da57ce5f1cd9d47aeb57ba1485932fe2ad2e8762a6a12a7b09ac688a7",
+      "actual": "75045b6da57ce5f1cd9d47aeb57ba1485932fe2ad2e8762a6a12a7b09ac688a7"
+    },
+    {
+      "path": "game3d/scripts/cast_profiles.gd",
+      "expected": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+      "actual": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668"
+    },
+    {
+      "path": "game3d/scripts/character_art.gd",
+      "expected": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8",
+      "actual": "d935c7715015385812bbbdc8fc0c8948af19855a181b7bf3c3ed75277606a0c8"
+    },
+    {
+      "path": "game3d/scripts/character_roster.gd",
+      "expected": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1",
+      "actual": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1"
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "expected": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75",
+      "actual": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75"
+    },
+    {
+      "path": "game3d/scripts/communications_system.gd",
+      "expected": "c8257c3107a6f961684426048323c8ca1340081c32e96aebb09a0763dc07a6a3",
+      "actual": "c8257c3107a6f961684426048323c8ca1340081c32e96aebb09a0763dc07a6a3"
+    },
+    {
+      "path": "game3d/scripts/companion_system.gd",
+      "expected": "07f14c99a48e2adf736361e287af756920d6c65a16daaf2fbb2c05c7e96537c8",
+      "actual": "07f14c99a48e2adf736361e287af756920d6c65a16daaf2fbb2c05c7e96537c8"
+    },
+    {
+      "path": "game3d/scripts/content_catalog.gd",
+      "expected": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668",
+      "actual": "ad69c3512f767ba82d6f720716dad6456839a101a179e9bd9d336070d596f668"
+    },
+    {
+      "path": "game3d/scripts/cooking_presentation.gd",
+      "expected": "49f4a6dfb4abe116fb6a492de4d68f7e8ea0e4708cbd5e622b67011611c6e36e",
+      "actual": "49f4a6dfb4abe116fb6a492de4d68f7e8ea0e4708cbd5e622b67011611c6e36e"
+    },
+    {
+      "path": "game3d/scripts/cooking_system.gd",
+      "expected": "d00a62ac9c118a94e2f99c9f543740285a2744895fa7393323f731b425211496",
+      "actual": "d00a62ac9c118a94e2f99c9f543740285a2744895fa7393323f731b425211496"
+    },
+    {
+      "path": "game3d/scripts/day_system.gd",
+      "expected": "2eb5c3b28215223fb94049abff5b47abbaa7c78f1479a22a504054c8520321d3",
+      "actual": "2eb5c3b28215223fb94049abff5b47abbaa7c78f1479a22a504054c8520321d3"
+    },
+    {
+      "path": "game3d/scripts/district_border_view.gd",
+      "expected": "e6cfabf5da7ee689afacbd3b85669837ec1fba6525a2c0362e14139aa419f02b",
+      "actual": "e6cfabf5da7ee689afacbd3b85669837ec1fba6525a2c0362e14139aa419f02b"
+    },
+    {
+      "path": "game3d/scripts/district_grade.gd",
+      "expected": "a0da001b14887a682ebab46a670b021a4449da849cbc4b2dfa2e9adf8ba20d5c",
+      "actual": "a0da001b14887a682ebab46a670b021a4449da849cbc4b2dfa2e9adf8ba20d5c"
+    },
+    {
+      "path": "game3d/scripts/district_grade.gdshader",
+      "expected": "77f80686d17bbb7548fbb3d7e9fbcc1388cc4cb79f70d6681e06a43b0b1a8df6",
+      "actual": "77f80686d17bbb7548fbb3d7e9fbcc1388cc4cb79f70d6681e06a43b0b1a8df6"
+    },
+    {
+      "path": "game3d/scripts/district_grade_view.gd",
+      "expected": "f6210fb4ef6e5f4ab6a9b4b92fdb9da2269530d9e0b5c59a07d6f91067dc3b38",
+      "actual": "f6210fb4ef6e5f4ab6a9b4b92fdb9da2269530d9e0b5c59a07d6f91067dc3b38"
+    },
+    {
+      "path": "game3d/scripts/dog_leash_view.gd",
+      "expected": "f664fbc0ab8d4eb995fd0acfe9bf124e72133f583aa8bbb4b5713633d7d50b85",
+      "actual": "f664fbc0ab8d4eb995fd0acfe9bf124e72133f583aa8bbb4b5713633d7d50b85"
+    },
+    {
+      "path": "game3d/scripts/dynamic_emitters.gd",
+      "expected": "4752adf90eeb6157a1296290c046a760435c6ca0e700d99e40dca46c579c68cb",
+      "actual": "4752adf90eeb6157a1296290c046a760435c6ca0e700d99e40dca46c579c68cb"
+    },
+    {
+      "path": "game3d/scripts/ending_view.gd",
+      "expected": "666173b92fe5e7737c572d6f78589c010ea7dbb9ffaeb44638934be42c935598",
+      "actual": "666173b92fe5e7737c572d6f78589c010ea7dbb9ffaeb44638934be42c935598"
+    },
+    {
+      "path": "game3d/scripts/find_view.gd",
+      "expected": "f8f578df9da8f7170e153432da5323c17f0992f15f32cca0ce8e6baf8a18e429",
+      "actual": "f8f578df9da8f7170e153432da5323c17f0992f15f32cca0ce8e6baf8a18e429"
+    },
+    {
+      "path": "game3d/scripts/first_person_rig.gd",
+      "expected": "7c40fc0aead4285bf975a2847631685a0642822656fffb794ba604a31d4a59e2",
+      "actual": "7c40fc0aead4285bf975a2847631685a0642822656fffb794ba604a31d4a59e2"
+    },
+    {
+      "path": "game3d/scripts/fixture_motion_view.gd",
+      "expected": "be1fca284102d71c3122a1ceee9ad331f49d01c80c78ba20696dc0d60bdecc59",
+      "actual": "be1fca284102d71c3122a1ceee9ad331f49d01c80c78ba20696dc0d60bdecc59"
+    },
+    {
+      "path": "game3d/scripts/full_hud.gd",
+      "expected": "d07ead67f77cb4e1addd8dc9341c66a639232910b13cd7a30bd809ab351e4a31",
+      "actual": "d07ead67f77cb4e1addd8dc9341c66a639232910b13cd7a30bd809ab351e4a31"
+    },
+    {
+      "path": "game3d/scripts/full_neighborhood.gd",
+      "expected": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9",
+      "actual": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9"
+    },
+    {
+      "path": "game3d/scripts/full_runtime.gd",
+      "expected": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+      "actual": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9"
+    },
+    {
+      "path": "game3d/scripts/full_scene.gd",
+      "expected": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+      "actual": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43"
+    },
+    {
+      "path": "game3d/scripts/game_state.gd",
+      "expected": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c",
+      "actual": "0b1f69076a1da8c9242998bbc54c13681d5726ddecff88a0352d18584c47ba1c"
+    },
+    {
+      "path": "game3d/scripts/guidance_projection.gd",
+      "expected": "bc409a0e1cdf087213b14d4e97cb37b2057ba0a85e3757f3766bad3914b34763",
+      "actual": "bc409a0e1cdf087213b14d4e97cb37b2057ba0a85e3757f3766bad3914b34763"
+    },
+    {
+      "path": "game3d/scripts/guidance_view.gd",
+      "expected": "129d644e40ca4604e4273608b1f4355fd1b3a34d99de49ec52cbf17cc70109d6",
+      "actual": "129d644e40ca4604e4273608b1f4355fd1b3a34d99de49ec52cbf17cc70109d6"
+    },
+    {
+      "path": "game3d/scripts/heist_system.gd",
+      "expected": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f",
+      "actual": "d22e681d9eebb2bbaeb223845703f3725da563c8f7afa4f4c3f86f3ea3ffb67f"
+    },
+    {
+      "path": "game3d/scripts/incident_corridors.gd",
+      "expected": "c82e995a7179669aa814378587a0f7d6ae3418bbe7d95449777b06e686a59cef",
+      "actual": "c82e995a7179669aa814378587a0f7d6ae3418bbe7d95449777b06e686a59cef"
+    },
+    {
+      "path": "game3d/scripts/incident_path_map.gd",
+      "expected": "e32c047d8435d5bdcb6accacd418ec9a5988f4e01c4e76551f33b77b9cc19ff5",
+      "actual": "e32c047d8435d5bdcb6accacd418ec9a5988f4e01c4e76551f33b77b9cc19ff5"
+    },
+    {
+      "path": "game3d/scripts/incident_presentation.gd",
+      "expected": "62bc10fa6bdc0f01355fdbc21453b6a605b36c3a2fd2effb54dfb3bbbda76472",
+      "actual": "62bc10fa6bdc0f01355fdbc21453b6a605b36c3a2fd2effb54dfb3bbbda76472"
+    },
+    {
+      "path": "game3d/scripts/incident_system.gd",
+      "expected": "bf5b8a772358c66cbf236ec81de391f060be02651f17cb3580068124c2f88acd",
+      "actual": "bf5b8a772358c66cbf236ec81de391f060be02651f17cb3580068124c2f88acd"
+    },
+    {
+      "path": "game3d/scripts/interactive_prop_actions.gd",
+      "expected": "b56d56868f4c91867ff917b327a5b203feebb859a694e011845386564200f7fe",
+      "actual": "b56d56868f4c91867ff917b327a5b203feebb859a694e011845386564200f7fe"
+    },
+    {
+      "path": "game3d/scripts/interactive_prop_view.gd",
+      "expected": "5ed6e69aed290475a051d0cb3f01453584825294d4585b63d69aa2aa6fd40e40",
+      "actual": "5ed6e69aed290475a051d0cb3f01453584825294d4585b63d69aa2aa6fd40e40"
+    },
+    {
+      "path": "game3d/scripts/inventory.gd",
+      "expected": "cd468425793df5988de49b8b95ffd4abadf930c6ad756ad5d9fd1ff8d58e7ee1",
+      "actual": "cd468425793df5988de49b8b95ffd4abadf930c6ad756ad5d9fd1ff8d58e7ee1"
+    },
+    {
+      "path": "game3d/scripts/kingdom_campaign.gd",
+      "expected": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073",
+      "actual": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073"
+    },
+    {
+      "path": "game3d/scripts/kingdom_world_view.gd",
+      "expected": "2e75908c26b0a0eec2631d7e5d65ef5629615f7aa9bb9c063738d0fc4ab5d6b3",
+      "actual": "2e75908c26b0a0eec2631d7e5d65ef5629615f7aa9bb9c063738d0fc4ab5d6b3"
+    },
+    {
+      "path": "game3d/scripts/lockpick_system.gd",
+      "expected": "a6bef386e9d771bf525e1df921b9938253e937b5e3c3c23b80e1410c654c4c74",
+      "actual": "a6bef386e9d771bf525e1df921b9938253e937b5e3c3c23b80e1410c654c4c74"
+    },
+    {
+      "path": "game3d/scripts/memory_loop.gd",
+      "expected": "1729200f9428acc6ea98fb68f0740e3a983186e98d871336723cd7e337a3ea28",
+      "actual": "1729200f9428acc6ea98fb68f0740e3a983186e98d871336723cd7e337a3ea28"
+    },
+    {
+      "path": "game3d/scripts/mesh_batcher.gd",
+      "expected": "d6bfd693feb3895049219bdb9ad55ce79c34a37c7dae1a59a277b8aa86679f09",
+      "actual": "d6bfd693feb3895049219bdb9ad55ce79c34a37c7dae1a59a277b8aa86679f09"
+    },
+    {
+      "path": "game3d/scripts/neighborhood_utilities.gd",
+      "expected": "7b8604ecafabbd796df4099a237d901ad2ca9972749b064478d85aff83a59d62",
+      "actual": "7b8604ecafabbd796df4099a237d901ad2ca9972749b064478d85aff83a59d62"
+    },
+    {
+      "path": "game3d/scripts/office_campaign.gd",
+      "expected": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f",
+      "actual": "96e4c56dda007942a81451cd2b3b0ffffed241b69acba23e09c0306e5c27361f"
+    },
+    {
+      "path": "game3d/scripts/old_school.gd",
+      "expected": "ce50d15c72494a21bcd592aa303470711a3afdbce9f63a90c4d8b676479f0765",
+      "actual": "ce50d15c72494a21bcd592aa303470711a3afdbce9f63a90c4d8b676479f0765"
+    },
+    {
+      "path": "game3d/scripts/presentation_visibility.gd",
+      "expected": "76697233cbcd0bd26f6fb1beb76906505ff74ec73fdf2605e765b1abc41a3555",
+      "actual": "76697233cbcd0bd26f6fb1beb76906505ff74ec73fdf2605e765b1abc41a3555"
+    },
+    {
+      "path": "game3d/scripts/progression_routes.gd",
+      "expected": "87dc5ce17875faec9c3b68509bc5ae81b036ce0a597bb6c2b57ed65d417d0c65",
+      "actual": "87dc5ce17875faec9c3b68509bc5ae81b036ce0a597bb6c2b57ed65d417d0c65"
+    },
+    {
+      "path": "game3d/scripts/projectile_view.gd",
+      "expected": "1a3d3b56414e28aad9e5d2f454d8a6deb0109cd743fb4c2850e97e6c69d74a60",
+      "actual": "1a3d3b56414e28aad9e5d2f454d8a6deb0109cd743fb4c2850e97e6c69d74a60"
+    },
+    {
+      "path": "game3d/scripts/prop_state.gd",
+      "expected": "ddc75238637cad84ac5390e01337777255f8fa27a7ddfca46214263b8fbf7a0e",
+      "actual": "ddc75238637cad84ac5390e01337777255f8fa27a7ddfca46214263b8fbf7a0e"
+    },
+    {
+      "path": "game3d/scripts/quest_dialogue.gd",
+      "expected": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044",
+      "actual": "7c1eff8de289bea48d74bcc49a952d51b73ee77188016f52bffbdddc545ac044"
+    },
+    {
+      "path": "game3d/scripts/resident_dialogue.gd",
+      "expected": "ca595b65f6370e334a7106efee9f4cc52115f5c41e433052d568693527e50d8e",
+      "actual": "ca595b65f6370e334a7106efee9f4cc52115f5c41e433052d568693527e50d8e"
+    },
+    {
+      "path": "game3d/scripts/rhythm_system.gd",
+      "expected": "a7d9fe429956ec79ea4faebce460b9994b4f7c6eb4c642503c761ae00bc483d0",
+      "actual": "a7d9fe429956ec79ea4faebce460b9994b4f7c6eb4c642503c761ae00bc483d0"
+    },
+    {
+      "path": "game3d/scripts/robbery_system.gd",
+      "expected": "da66e5208145b7f460fc8e609f5cb8e37c19716a2b498c5ecfa4a166f24bf48c",
+      "actual": "da66e5208145b7f460fc8e609f5cb8e37c19716a2b498c5ecfa4a166f24bf48c"
+    },
+    {
+      "path": "game3d/scripts/save_store.gd",
+      "expected": "a33112ac0906b6c586fdc2b3f50be0db87f5fc019e2ed5d6f5a4b4aabe52570c",
+      "actual": "a33112ac0906b6c586fdc2b3f50be0db87f5fc019e2ed5d6f5a4b4aabe52570c"
+    },
+    {
+      "path": "game3d/scripts/site_cast_profiles.gd",
+      "expected": "4ac5a33f2b8e1d2adff9f81724d5cb95b8a6b74fa94abacbf3aa20b07bae69c4",
+      "actual": "4ac5a33f2b8e1d2adff9f81724d5cb95b8a6b74fa94abacbf3aa20b07bae69c4"
+    },
+    {
+      "path": "game3d/scripts/source_audio.gd",
+      "expected": "e873ccee707025c31da014bbe17b39e8d45c1da91abedc64ce4decc59e7c1f70",
+      "actual": "e873ccee707025c31da014bbe17b39e8d45c1da91abedc64ce4decc59e7c1f70"
+    },
+    {
+      "path": "game3d/scripts/startup_presentation.gd",
+      "expected": "0006ceb0652483f311706bf89be299d694fcf13135d9417c7a134d5b15ca42dc",
+      "actual": "0006ceb0652483f311706bf89be299d694fcf13135d9417c7a134d5b15ca42dc"
+    },
+    {
+      "path": "game3d/scripts/street_dialogue.gd",
+      "expected": "2c58c0c6f3e044f394780683db1367ab8491185e032e4324c52fa42d01b6265c",
+      "actual": "2c58c0c6f3e044f394780683db1367ab8491185e032e4324c52fa42d01b6265c"
+    },
+    {
+      "path": "game3d/scripts/surface_kit.gd",
+      "expected": "f9626b490d8569fd8d649634f4bc64e3bb887650e04e53ce402b221eb2831ae4",
+      "actual": "f9626b490d8569fd8d649634f4bc64e3bb887650e04e53ce402b221eb2831ae4"
+    },
+    {
+      "path": "game3d/scripts/synth.gd",
+      "expected": "557c00d2caeb82cc538f9b7182d82dfcf3017f0aca9f756a230d797d3e93dfec",
+      "actual": "557c00d2caeb82cc538f9b7182d82dfcf3017f0aca9f756a230d797d3e93dfec"
+    },
+    {
+      "path": "game3d/scripts/travel_system.gd",
+      "expected": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5",
+      "actual": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5"
+    },
+    {
+      "path": "game3d/scripts/vendors_core.gd",
+      "expected": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749",
+      "actual": "5f9259a43799f88a43ee4cb7573a986701d8ca3341eed393e4b96ace37b7f749"
+    },
+    {
+      "path": "game3d/scripts/wall_marking_view.gd",
+      "expected": "1f13a233195b62df5d2480077949f8df6e3c21b516265a95ca9b57b7226d37bd",
+      "actual": "1f13a233195b62df5d2480077949f8df6e3c21b516265a95ca9b57b7226d37bd"
+    },
+    {
+      "path": "game3d/scripts/wall_markings.gd",
+      "expected": "f65da191c567d48d5f65ed18cf7e2452890ba04e80298db106004ef972cfc0da",
+      "actual": "f65da191c567d48d5f65ed18cf7e2452890ba04e80298db106004ef972cfc0da"
+    },
+    {
+      "path": "game3d/scripts/weather_presentation.gd",
+      "expected": "2076ac43ed41f015f93a4d9e5e8a38ec381cbad3a1dc1a66db507b63e711d643",
+      "actual": "2076ac43ed41f015f93a4d9e5e8a38ec381cbad3a1dc1a66db507b63e711d643"
+    },
+    {
+      "path": "game3d/scripts/world_adapter.gd",
+      "expected": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "actual": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802"
+    },
+    {
+      "path": "game3d/scripts/world_ownership_view.gd",
+      "expected": "6a1d63abd2ae1b097e768c3adf793733e065def62bf288b05f49be677a6f0a7c",
+      "actual": "6a1d63abd2ae1b097e768c3adf793733e065def62bf288b05f49be677a6f0a7c"
+    },
+    {
+      "path": "game3d/scripts/world_prop_actions.gd",
+      "expected": "1d44fa2613314feafd31a59a4c0139d29632334e293e2819f5b3f3331ac703b7",
+      "actual": "1d44fa2613314feafd31a59a4c0139d29632334e293e2819f5b3f3331ac703b7"
+    },
+    {
+      "path": "game3d/tests/test_actor_contact.gd",
+      "expected": "4adf020539a1e7a105dfeb2ce828d9c90095eb9474682b657c700b71ddb736f7",
+      "actual": "4adf020539a1e7a105dfeb2ce828d9c90095eb9474682b657c700b71ddb736f7"
+    },
+    {
+      "path": "game3d/tests/test_actor_hud.gd",
+      "expected": "5aa89fc9d36dda822c3d4cae96b562992c46652a9936ea67c63fc53a6f97bb45",
+      "actual": "5aa89fc9d36dda822c3d4cae96b562992c46652a9936ea67c63fc53a6f97bb45"
+    },
+    {
+      "path": "game3d/tests/test_actor_navigation.gd",
+      "expected": "ffd3711eb06202fdcd8c4c088f5d02672cda821d59fcec36affe56f7681e9121",
+      "actual": "ffd3711eb06202fdcd8c4c088f5d02672cda821d59fcec36affe56f7681e9121"
+    },
+    {
+      "path": "game3d/tests/test_art.gd",
+      "expected": "2a4636fffa03709eab75151f80a9e9a93ea9e78eab2f6574efbeb66385044ae8",
+      "actual": "2a4636fffa03709eab75151f80a9e9a93ea9e78eab2f6574efbeb66385044ae8"
+    },
+    {
+      "path": "game3d/tests/test_audio_runtime.gd",
+      "expected": "b11148c6518e383962f1ba3344a95019e0ecfc67690dcce9a19b8ec1b4ef7653",
+      "actual": "b11148c6518e383962f1ba3344a95019e0ecfc67690dcce9a19b8ec1b4ef7653"
+    },
+    {
+      "path": "game3d/tests/test_bosses.gd",
+      "expected": "a7df62191ab2fcad592074481a1d8a1904c18e2d740dcdc624689cde751bfb1b",
+      "actual": "a7df62191ab2fcad592074481a1d8a1904c18e2d740dcdc624689cde751bfb1b"
+    },
+    {
+      "path": "game3d/tests/test_campaign.gd",
+      "expected": "f7efb01e8aa658c8788e97df8406dfc6021083bf7484cef1bb13086d0e013a1a",
+      "actual": "f7efb01e8aa658c8788e97df8406dfc6021083bf7484cef1bb13086d0e013a1a"
+    },
+    {
+      "path": "game3d/tests/test_cart_view.gd",
+      "expected": "0073121f0e302f25b1308774aecd8136567a4d841395b8d92bf27e8df349b48b",
+      "actual": "0073121f0e302f25b1308774aecd8136567a4d841395b8d92bf27e8df349b48b"
+    },
+    {
+      "path": "game3d/tests/test_character_roster.gd",
+      "expected": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c",
+      "actual": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c"
+    },
+    {
+      "path": "game3d/tests/test_combat.gd",
+      "expected": "dbbb027a70c62514795cc1f894201d7ea1ad7c560571e96c9154bd5225fa2ab9",
+      "actual": "dbbb027a70c62514795cc1f894201d7ea1ad7c560571e96c9154bd5225fa2ab9"
+    },
+    {
+      "path": "game3d/tests/test_communications.gd",
+      "expected": "835998debe77879452d1b168f2a36ad81835604bb0732508bf3a82a76760e3a1",
+      "actual": "835998debe77879452d1b168f2a36ad81835604bb0732508bf3a82a76760e3a1"
+    },
+    {
+      "path": "game3d/tests/test_companions.gd",
+      "expected": "d01ed17962775a3efc51b328351759fc19adb8ccb17df8a6ca648cc52550e69e",
+      "actual": "d01ed17962775a3efc51b328351759fc19adb8ccb17df8a6ca648cc52550e69e"
+    },
+    {
+      "path": "game3d/tests/test_cooking.gd",
+      "expected": "025ff5c5c8b33a122ed499df1af9dcee8e1d837aaac965bc5ceec6f2c134add0",
+      "actual": "025ff5c5c8b33a122ed499df1af9dcee8e1d837aaac965bc5ceec6f2c134add0"
+    },
+    {
+      "path": "game3d/tests/test_cooking_presentation.gd",
+      "expected": "ed00364569e6ee951bd6244006451d087ecc9c545fd4312a559098cedfe1a36f",
+      "actual": "ed00364569e6ee951bd6244006451d087ecc9c545fd4312a559098cedfe1a36f"
+    },
+    {
+      "path": "game3d/tests/test_cooking_runtime.gd",
+      "expected": "5a22969828e46d331a71842152f2357a0419cfc663ac611f4fbca913dda6ac61",
+      "actual": "5a22969828e46d331a71842152f2357a0419cfc663ac611f4fbca913dda6ac61"
+    },
+    {
+      "path": "game3d/tests/test_day_system.gd",
+      "expected": "ac50107d2eb76a487241aa3ec2c6c1898c489099cd4c19507a51e3f8881313ec",
+      "actual": "ac50107d2eb76a487241aa3ec2c6c1898c489099cd4c19507a51e3f8881313ec"
+    },
+    {
+      "path": "game3d/tests/test_departures.gd",
+      "expected": "b494803d031b8a12e968dd559df24f540958208a3b90ae6d34c381947251de2c",
+      "actual": "b494803d031b8a12e968dd559df24f540958208a3b90ae6d34c381947251de2c"
+    },
+    {
+      "path": "game3d/tests/test_district_grade.gd",
+      "expected": "c5d8d5850f3bc3d18a8858b8578c9aefe8bc11f0bda733ad7fb87c4421bf52bc",
+      "actual": "c5d8d5850f3bc3d18a8858b8578c9aefe8bc11f0bda733ad7fb87c4421bf52bc"
+    },
+    {
+      "path": "game3d/tests/test_dynamic_emitters.gd",
+      "expected": "10681fa556c3915fcbe2ab5e1eb3ef10c2946d6b359c5b374f90f59f9f1136e8",
+      "actual": "10681fa556c3915fcbe2ab5e1eb3ef10c2946d6b359c5b374f90f59f9f1136e8"
+    },
+    {
+      "path": "game3d/tests/test_economy.gd",
+      "expected": "241e5cceff1c5a7b2b369352e2b3e543b96a7ff87aa6e20d884b3a1a1d170fbd",
+      "actual": "241e5cceff1c5a7b2b369352e2b3e543b96a7ff87aa6e20d884b3a1a1d170fbd"
+    },
+    {
+      "path": "game3d/tests/test_find_view.gd",
+      "expected": "24223d34a122a47f20f09ff01d85dbcd6d9fbe4eccb63128c9c85cd6ff2d1510",
+      "actual": "24223d34a122a47f20f09ff01d85dbcd6d9fbe4eccb63128c9c85cd6ff2d1510"
+    },
+    {
+      "path": "game3d/tests/test_fixture_motion.gd",
+      "expected": "ac05da26e027cbe1b2ccfc4b66ff860a6e504c2324d0a87f394aedf618bfecf0",
+      "actual": "ac05da26e027cbe1b2ccfc4b66ff860a6e504c2324d0a87f394aedf618bfecf0"
+    },
+    {
+      "path": "game3d/tests/test_fixture_motion_world.gd",
+      "expected": "e40ea14d7c97ca53fa9e24f3ec71ceb0c80a142bad1ae2d5463c4c9c15e6c662",
+      "actual": "e40ea14d7c97ca53fa9e24f3ec71ceb0c80a142bad1ae2d5463c4c9c15e6c662"
+    },
+    {
+      "path": "game3d/tests/test_full_hud.gd",
+      "expected": "2a3db70e563d0cbe8b75df297baef0ee8761f931aaed492cd940068f6a24246a",
+      "actual": "2a3db70e563d0cbe8b75df297baef0ee8761f931aaed492cd940068f6a24246a"
+    },
+    {
+      "path": "game3d/tests/test_full_integration.gd",
+      "expected": "e4345c95012551422b0969f3d1a29f8d8e51743d42c097e2645cd1461217e47f",
+      "actual": "e4345c95012551422b0969f3d1a29f8d8e51743d42c097e2645cd1461217e47f"
+    },
+    {
+      "path": "game3d/tests/test_full_runtime.gd",
+      "expected": "8f75e13e2a023a0a3fe67dabb63df39455042eb74104d38c6093c6f83021b29c",
+      "actual": "8f75e13e2a023a0a3fe67dabb63df39455042eb74104d38c6093c6f83021b29c"
+    },
+    {
+      "path": "game3d/tests/test_full_scene.gd",
+      "expected": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e",
+      "actual": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e"
+    },
+    {
+      "path": "game3d/tests/test_full_world.gd",
+      "expected": "6dd158f9d693c5d472b9e8ed5ca678a9e151dc826743ad6412a3dd9b8d0e65ff",
+      "actual": "6dd158f9d693c5d472b9e8ed5ca678a9e151dc826743ad6412a3dd9b8d0e65ff"
+    },
+    {
+      "path": "game3d/tests/test_game_state.gd",
+      "expected": "7d9dda33df719fee3424157ac8e97652e47e784fb36c610281b79013f576f40b",
+      "actual": "7d9dda33df719fee3424157ac8e97652e47e784fb36c610281b79013f576f40b"
+    },
+    {
+      "path": "game3d/tests/test_guidance.gd",
+      "expected": "daa87904ea62589af825d0217383f51064c254a2bbf09293d916060cecf963c2",
+      "actual": "daa87904ea62589af825d0217383f51064c254a2bbf09293d916060cecf963c2"
+    },
+    {
+      "path": "game3d/tests/test_guidance_projection.gd",
+      "expected": "ac1c1feed6708428d79158793a7d955267b75499a07ccbd11e54681c7b74cbb5",
+      "actual": "ac1c1feed6708428d79158793a7d955267b75499a07ccbd11e54681c7b74cbb5"
+    },
+    {
+      "path": "game3d/tests/test_heists.gd",
+      "expected": "03d282f49644f6106a11dc45643a646a3f63ceae6be518041e15d4984add3cd0",
+      "actual": "03d282f49644f6106a11dc45643a646a3f63ceae6be518041e15d4984add3cd0"
+    },
+    {
+      "path": "game3d/tests/test_incident_presentation.gd",
+      "expected": "2c9cdbde31d0930a941803dfd13a1360d80494a96b5149102e81885b895fb1d1",
+      "actual": "2c9cdbde31d0930a941803dfd13a1360d80494a96b5149102e81885b895fb1d1"
+    },
+    {
+      "path": "game3d/tests/test_incident_reservations.gd",
+      "expected": "6fd0263626b0cd4444697db0ec3f47aadf5204f2244e837538c425e687c8fa96",
+      "actual": "6fd0263626b0cd4444697db0ec3f47aadf5204f2244e837538c425e687c8fa96"
+    },
+    {
+      "path": "game3d/tests/test_incident_runtime.gd",
+      "expected": "8573504899e795b9928cc90e718ed8f16a63dc6c409e5c1e0e51c72aa6fc0c14",
+      "actual": "8573504899e795b9928cc90e718ed8f16a63dc6c409e5c1e0e51c72aa6fc0c14"
+    },
+    {
+      "path": "game3d/tests/test_incidents.gd",
+      "expected": "00873d29dfbfd4a86c3e9542155488fbabb531004d155e73ce31b2d1bd8b4015",
+      "actual": "00873d29dfbfd4a86c3e9542155488fbabb531004d155e73ce31b2d1bd8b4015"
+    },
+    {
+      "path": "game3d/tests/test_interactive_prop_view.gd",
+      "expected": "17ae33b0a2b0c5f4b74443d233b28b712459bb7f69128b6df0724c179735d59a",
+      "actual": "17ae33b0a2b0c5f4b74443d233b28b712459bb7f69128b6df0724c179735d59a"
+    },
+    {
+      "path": "game3d/tests/test_interactive_props.gd",
+      "expected": "6ab201c2fee039bedd5f73b7e1557820f1c93f794e63b4762e13ab3e780b0f48",
+      "actual": "6ab201c2fee039bedd5f73b7e1557820f1c93f794e63b4762e13ab3e780b0f48"
+    },
+    {
+      "path": "game3d/tests/test_kingdom_campaign.gd",
+      "expected": "ca11bfeb1eae794f38430dda853e2f5ddab551a55b2c858ec12b3cefa287d386",
+      "actual": "ca11bfeb1eae794f38430dda853e2f5ddab551a55b2c858ec12b3cefa287d386"
+    },
+    {
+      "path": "game3d/tests/test_kingdom_physics.gd",
+      "expected": "f75bd38394e0e5cf7d728d63bfdae8afa0500d97700aca3883b22db2648a8160",
+      "actual": "f75bd38394e0e5cf7d728d63bfdae8afa0500d97700aca3883b22db2648a8160"
+    },
+    {
+      "path": "game3d/tests/test_kingdom_view.gd",
+      "expected": "f2d27f977d81cf63450eb7c9bde1388ad439fd201f4f0c8bcde2c001d288511d",
+      "actual": "f2d27f977d81cf63450eb7c9bde1388ad439fd201f4f0c8bcde2c001d288511d"
+    },
+    {
+      "path": "game3d/tests/test_leash_border.gd",
+      "expected": "225afbbb117a3063d42b556da587e47fc213c25936045889d63530f5f6f4c5ad",
+      "actual": "225afbbb117a3063d42b556da587e47fc213c25936045889d63530f5f6f4c5ad"
+    },
+    {
+      "path": "game3d/tests/test_memory_loop.gd",
+      "expected": "ba55081316166d439c39d2a7dea6b2b41776adc20fb38a6955d296aa45871c44",
+      "actual": "ba55081316166d439c39d2a7dea6b2b41776adc20fb38a6955d296aa45871c44"
+    },
+    {
+      "path": "game3d/tests/test_neighborhood_utilities.gd",
+      "expected": "88ddb571b9673dad6117f821caae4d72671e7f8e1d8eef99305e04dfaf7d1dce",
+      "actual": "88ddb571b9673dad6117f821caae4d72671e7f8e1d8eef99305e04dfaf7d1dce"
+    },
+    {
+      "path": "game3d/tests/test_office_campaign.gd",
+      "expected": "5792f5c3eb2afeaa328bf27cc84600c803bf37154345acd87129e9adc91f5c87",
+      "actual": "5792f5c3eb2afeaa328bf27cc84600c803bf37154345acd87129e9adc91f5c87"
+    },
+    {
+      "path": "game3d/tests/test_old_school.gd",
+      "expected": "25aaa793936f80bdca593442d14e159ea037a9e68e741eb0a3693631b126db7a",
+      "actual": "25aaa793936f80bdca593442d14e159ea037a9e68e741eb0a3693631b126db7a"
+    },
+    {
+      "path": "game3d/tests/test_old_school_physical.gd",
+      "expected": "c12d276cd3e274955a79953cd6d2f03686e95b22f9012b497374259a97c98de9",
+      "actual": "c12d276cd3e274955a79953cd6d2f03686e95b22f9012b497374259a97c98de9"
+    },
+    {
+      "path": "game3d/tests/test_presentation_visibility.gd",
+      "expected": "2caa8eb0cb2e8ea25c010c2c8236c1b7a0e8257346f61217dad151ce68dac37a",
+      "actual": "2caa8eb0cb2e8ea25c010c2c8236c1b7a0e8257346f61217dad151ce68dac37a"
+    },
+    {
+      "path": "game3d/tests/test_progression.gd",
+      "expected": "2665d543d7751232b313d79c340704187b53c9537df31587c9c0c835fdaf433f",
+      "actual": "2665d543d7751232b313d79c340704187b53c9537df31587c9c0c835fdaf433f"
+    },
+    {
+      "path": "game3d/tests/test_projectile_view.gd",
+      "expected": "83b08d5068d7c75e29fbf7c37fb4deb797c51630de0f56ed9c5b15af49113abf",
+      "actual": "83b08d5068d7c75e29fbf7c37fb4deb797c51630de0f56ed9c5b15af49113abf"
+    },
+    {
+      "path": "game3d/tests/test_quest_dialogue.gd",
+      "expected": "d8cffa0285f41dd208992b2f072a5600c648eb70377359ec3fbf639cd126e330",
+      "actual": "d8cffa0285f41dd208992b2f072a5600c648eb70377359ec3fbf639cd126e330"
+    },
+    {
+      "path": "game3d/tests/test_resident_dialogue.gd",
+      "expected": "6aca23311c7509a1da6a1f58e9ed8137ed16fc12e42b8256950df4288d017d51",
+      "actual": "6aca23311c7509a1da6a1f58e9ed8137ed16fc12e42b8256950df4288d017d51"
+    },
+    {
+      "path": "game3d/tests/test_rhythm.gd",
+      "expected": "8cb7d44529b3239cf7ee26bea4058c6239fdd66bea79e81db5ffb2527cd08898",
+      "actual": "8cb7d44529b3239cf7ee26bea4058c6239fdd66bea79e81db5ffb2527cd08898"
+    },
+    {
+      "path": "game3d/tests/test_robbery.gd",
+      "expected": "e84465fd26b88e239f4125caad6bfa7d7b381178e27999010bb79520c52b884e",
+      "actual": "e84465fd26b88e239f4125caad6bfa7d7b381178e27999010bb79520c52b884e"
+    },
+    {
+      "path": "game3d/tests/test_scene.gd",
+      "expected": "984e755f9c10f64015cc9603b37751b9727a1499ead7c331aab4889849525996",
+      "actual": "984e755f9c10f64015cc9603b37751b9727a1499ead7c331aab4889849525996"
+    },
+    {
+      "path": "game3d/tests/test_site_integration.gd",
+      "expected": "fdc3ee56a779f6eff0bb62671b33934013cd9528ec7a1b10810463a899c599c3",
+      "actual": "fdc3ee56a779f6eff0bb62671b33934013cd9528ec7a1b10810463a899c599c3"
+    },
+    {
+      "path": "game3d/tests/test_source_audio.gd",
+      "expected": "76531b7aae4704fd680c7bef4c303c492a58318cbd3836f1b415c335ecc2460a",
+      "actual": "76531b7aae4704fd680c7bef4c303c492a58318cbd3836f1b415c335ecc2460a"
+    },
+    {
+      "path": "game3d/tests/test_startup.gd",
+      "expected": "34acd3526f410ca3b0541d320e7531af608a400cffeb4fc210b2a5268b77ad9a",
+      "actual": "34acd3526f410ca3b0541d320e7531af608a400cffeb4fc210b2a5268b77ad9a"
+    },
+    {
+      "path": "game3d/tests/test_startup_parity.gd",
+      "expected": "3fb0bfd1498b98129cc64bbe81a80026ba379e7b0a271861e75f66aeeef96c96",
+      "actual": "3fb0bfd1498b98129cc64bbe81a80026ba379e7b0a271861e75f66aeeef96c96"
+    },
+    {
+      "path": "game3d/tests/test_street_dialogue.gd",
+      "expected": "1e689b9450b44f57e8e5189597d64471a4ce38cc941cd0f4ddcbd81da91df1ba",
+      "actual": "1e689b9450b44f57e8e5189597d64471a4ce38cc941cd0f4ddcbd81da91df1ba"
+    },
+    {
+      "path": "game3d/tests/test_travel.gd",
+      "expected": "c3cc51b6e4e04bc2b890664ebcdf2d25ee9980ecc45bc6ca991ae22317f690ce",
+      "actual": "c3cc51b6e4e04bc2b890664ebcdf2d25ee9980ecc45bc6ca991ae22317f690ce"
+    },
+    {
+      "path": "game3d/tests/test_viewmodel.gd",
+      "expected": "fa094a40fe4223405e0cf33ec497f076244f71de0f99e036af8d4b7b7d8321ce",
+      "actual": "fa094a40fe4223405e0cf33ec497f076244f71de0f99e036af8d4b7b7d8321ce"
+    },
+    {
+      "path": "game3d/tests/test_viewmodel_context.gd",
+      "expected": "27750aa7c770b1bdd35e4c89dd6115e7f25f038dd33192130bf63c8c0be7fe61",
+      "actual": "27750aa7c770b1bdd35e4c89dd6115e7f25f038dd33192130bf63c8c0be7fe61"
+    },
+    {
+      "path": "game3d/tests/test_viewmodel_gear.gd",
+      "expected": "713bb3567f0b739a4568dcd046e981274f1f7c720f2b0bc2b485ee761b5b0fc4",
+      "actual": "713bb3567f0b739a4568dcd046e981274f1f7c720f2b0bc2b485ee761b5b0fc4"
+    },
+    {
+      "path": "game3d/tests/test_wall_marking_view.gd",
+      "expected": "a3b2037e5c68e9e95c6c8cd003d0e2bf1d020b9d70ebd75ea6166f431d0a760d",
+      "actual": "a3b2037e5c68e9e95c6c8cd003d0e2bf1d020b9d70ebd75ea6166f431d0a760d"
+    },
+    {
+      "path": "game3d/tests/test_wall_markings.gd",
+      "expected": "568ff492c79f027fac26e4e102693c646255ef08de3622c8e96e0ba3fd743ef3",
+      "actual": "568ff492c79f027fac26e4e102693c646255ef08de3622c8e96e0ba3fd743ef3"
+    },
+    {
+      "path": "game3d/tests/test_weather_presentation.gd",
+      "expected": "b184f0c3544c8699acf9b3cb65e33eb2ec986fb8c4e900b5588d0925fc3b9d41",
+      "actual": "b184f0c3544c8699acf9b3cb65e33eb2ec986fb8c4e900b5588d0925fc3b9d41"
+    },
+    {
+      "path": "game3d/tests/test_world_adapter.gd",
+      "expected": "642661ebc93827b51d414983de9986aa53bbffb39eeac3b5936639a5dd752b9e",
+      "actual": "642661ebc93827b51d414983de9986aa53bbffb39eeac3b5936639a5dd752b9e"
+    },
+    {
+      "path": "game3d/tests/test_world_ownership.gd",
+      "expected": "24481141708d2b72dfbcde252366d4a22e437efe29ef12a8b1ade62e0cb15242",
+      "actual": "24481141708d2b72dfbcde252366d4a22e437efe29ef12a8b1ade62e0cb15242"
+    },
+    {
+      "path": "game3d/tests/test_world_prop_actions.gd",
+      "expected": "f232f774ca78b6bc0a4a3012f90c856fdca914923bafd5b449067b6144f55803",
+      "actual": "f232f774ca78b6bc0a4a3012f90c856fdca914923bafd5b449067b6144f55803"
+    },
+    {
+      "path": "reports/2026-11-18-3d-full-scene.md",
+      "expected": "a4aa1d9aa2d335a5cc01a9f12f8690df14ea2e982c588c2eb168efdbe82d5fde",
+      "actual": "a4aa1d9aa2d335a5cc01a9f12f8690df14ea2e982c588c2eb168efdbe82d5fde"
+    },
+    {
+      "path": "reports/2026-11-18-3d-live-neighborhood.md",
+      "expected": "124a6abb78a17c22533923bea9bb98f4bdacfefaf1c508ab261370933ce41648",
+      "actual": "124a6abb78a17c22533923bea9bb98f4bdacfefaf1c508ab261370933ce41648"
+    },
+    {
+      "path": "reports/2026-11-18-3d-motion-and-color.md",
+      "expected": "dd4be6479dca36a03399c23cf355a4caf1c140a3d09956db6543f53a28a77ff7",
+      "actual": "dd4be6479dca36a03399c23cf355a4caf1c140a3d09956db6543f53a28a77ff7"
+    },
+    {
+      "path": "reports/2026-11-18-3d-world-details.md",
+      "expected": "56bbbd835e720db9a0f01569d7f4ae71de16e4d5580d5734cb1bd368be097deb",
+      "actual": "56bbbd835e720db9a0f01569d7f4ae71de16e4d5580d5734cb1bd368be097deb"
+    },
+    {
+      "path": "reports/2026-11-19-3d-hands-and-office.md",
+      "expected": "a27401aa77db467347fdbe9bb78bc8a6ed74cf1d69a14883cdcdba921ee7c09f",
+      "actual": "a27401aa77db467347fdbe9bb78bc8a6ed74cf1d69a14883cdcdba921ee7c09f"
+    },
+    {
+      "path": "reports/2026-11-19-3d-input-and-acceptance.md",
+      "expected": "d5172e8233e8a140c61492f73c6e2db539b0dddba269526ab1a920b90c477d44",
+      "actual": "d5172e8233e8a140c61492f73c6e2db539b0dddba269526ab1a920b90c477d44"
+    },
+    {
+      "path": "reports/3d-full-port-system-inventory.md",
+      "expected": "c09c09646e0ced65426b528398daee0a0dfd25dbe30f57bb626ab4c20ddf37d5",
+      "actual": "c09c09646e0ced65426b528398daee0a0dfd25dbe30f57bb626ab4c20ddf37d5"
+    },
+    {
+      "path": "reports/3d-parity-metadata/PROPOSAL.md",
+      "expected": "fc1ea755e97046870d65cd880eca5a89801435aad838bb63ab35d5d6d91aad72",
+      "actual": "fc1ea755e97046870d65cd880eca5a89801435aad838bb63ab35d5d6d91aad72"
+    },
+    {
+      "path": "reports/3d-parity-metadata/baseline-manifest.json",
+      "expected": "99a7a875d8e9c7b26561808b4c158de1a6e62c7946238d965b99cf7736f6d4cf",
+      "actual": "99a7a875d8e9c7b26561808b4c158de1a6e62c7946238d965b99cf7736f6d4cf"
+    },
+    {
+      "path": "reports/3d-parity-metadata/evidence-index.json",
+      "expected": "d7628709673521fff62ef65c81ed224061902d0862218deda7b8323a36a40b05",
+      "actual": "d7628709673521fff62ef65c81ed224061902d0862218deda7b8323a36a40b05"
+    },
+    {
+      "path": "reports/3d-parity-metadata/handler-dispositions.json",
+      "expected": "3cb0e505a5c0903b5586e009e653cd1f72a4e58697ee5b4048c653c410e6f657",
+      "actual": "3cb0e505a5c0903b5586e009e653cd1f72a4e58697ee5b4048c653c410e6f657"
+    },
+    {
+      "path": "reports/3d-parity-metadata/input-pins-metadata-v1.json",
+      "expected": "15fa21a1b0bdf41353155146f31b8365bbd1c0f3a21b3d3bdb3f8239cde5c171",
+      "actual": "15fa21a1b0bdf41353155146f31b8365bbd1c0f3a21b3d3bdb3f8239cde5c171"
+    },
+    {
+      "path": "reports/3d-parity-metadata/integration-map.json",
+      "expected": "49b9edbccca3114005d92be7a25cdeaf8e02cd15bc1efa1007b2a6302ef5d8d6",
+      "actual": "49b9edbccca3114005d92be7a25cdeaf8e02cd15bc1efa1007b2a6302ef5d8d6"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/INPUT-PINS-v2.json",
+      "expected": "0d1d13076bb7ed083d57a09ce6deb595dfaba8e64083c203642bcf1280c4ac5b",
+      "actual": "0d1d13076bb7ed083d57a09ce6deb595dfaba8e64083c203642bcf1280c4ac5b"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/INPUT-PINS.json",
+      "expected": "5a9e90bacb4efa2d604ad5d217f8b3e9b35d020e9f613c6f0e9487447c29ca75",
+      "actual": "5a9e90bacb4efa2d604ad5d217f8b3e9b35d020e9f613c6f0e9487447c29ca75"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/INPUT-REBASE-v2.json",
+      "expected": "dae0107acae9b636bfd2bcf7b45613a1e37071474210363e8a0ce048b71d7ae0",
+      "actual": "dae0107acae9b636bfd2bcf7b45613a1e37071474210363e8a0ce048b71d7ae0"
+    },
+    {
+      "path": "reports/3d-parity-metadata/origin/draft-manifest.json",
+      "expected": "d8667f7ff52cf4729a7a5b7d883fff204112a46df0c68f1f8d587c6d560162f2",
+      "actual": "d8667f7ff52cf4729a7a5b7d883fff204112a46df0c68f1f8d587c6d560162f2"
+    },
+    {
+      "path": "src/core/audio_save.js",
+      "expected": "814eff4e13f8b47b5de925d65b85f4e10cbafe8f026db73c129aa88224fc9ebd",
+      "actual": "814eff4e13f8b47b5de925d65b85f4e10cbafe8f026db73c129aa88224fc9ebd"
+    },
+    {
+      "path": "src/core/boot.js",
+      "expected": "cfb262c7d9ab5eb8920d126f1abc4d4fcd033d4baf17905a3e63f1f03fbdfdb1",
+      "actual": "cfb262c7d9ab5eb8920d126f1abc4d4fcd033d4baf17905a3e63f1f03fbdfdb1"
+    },
+    {
+      "path": "src/core/runtime_ui.js",
+      "expected": "b8db9270fba6b7542b9a8d61eaaa1be168845ebbd6f87f975b92a537ca58ba8c",
+      "actual": "b8db9270fba6b7542b9a8d61eaaa1be168845ebbd6f87f975b92a537ca58ba8c"
+    },
+    {
+      "path": "src/core/start.js",
+      "expected": "450087778bbcaad6d4b8adff9bf64042c012a301f1f0a1c16b648fe263970971",
+      "actual": "450087778bbcaad6d4b8adff9bf64042c012a301f1f0a1c16b648fe263970971"
+    },
+    {
+      "path": "src/core/storage.js",
+      "expected": "7a4e3ef9257d240743cb3dfd3912cfe95601738eb57382e8e508679372a223da",
+      "actual": "7a4e3ef9257d240743cb3dfd3912cfe95601738eb57382e8e508679372a223da"
+    },
+    {
+      "path": "src/core/update.js",
+      "expected": "f21f8b4761209e953ebeb57d81f8f97253565f8c5de6eb432ff988ab2780108e",
+      "actual": "f21f8b4761209e953ebeb57d81f8f97253565f8c5de6eb432ff988ab2780108e"
+    },
+    {
+      "path": "src/data/catalogs.js",
+      "expected": "86cec397deba805e74b540d39ec0ecd0cc8759b1ab014733ebc358f32cbf2903",
+      "actual": "86cec397deba805e74b540d39ec0ecd0cc8759b1ab014733ebc358f32cbf2903"
+    },
+    {
+      "path": "src/data/npc_spawns.js",
+      "expected": "d179baf0bd6a9ebf2e99a06238f6a089dd7f8d4e6d2baae4627074011ab58ff6",
+      "actual": "d179baf0bd6a9ebf2e99a06238f6a089dd7f8d4e6d2baae4627074011ab58ff6"
+    },
+    {
+      "path": "src/data/props.js",
+      "expected": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787",
+      "actual": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787"
+    },
+    {
+      "path": "src/data/world.js",
+      "expected": "b196933c3521dd894d50129ef49c7f14d6f3c19dcbf45ce6a2591e7854db75df",
+      "actual": "b196933c3521dd894d50129ef49c7f14d6f3c19dcbf45ce6a2591e7854db75df"
+    },
+    {
+      "path": "src/dialogue/neighborhood_a.js",
+      "expected": "17ca187e2788dc7bf5a974e120abcf1c0adbe6089e2a40956df213e7365e5728",
+      "actual": "17ca187e2788dc7bf5a974e120abcf1c0adbe6089e2a40956df213e7365e5728"
+    },
+    {
+      "path": "src/dialogue/neighborhood_b.js",
+      "expected": "ec77cae030b199de4401d21c82a43b79174565f46f7bc36778da658555535c2f",
+      "actual": "ec77cae030b199de4401d21c82a43b79174565f46f7bc36778da658555535c2f"
+    },
+    {
+      "path": "src/dialogue/vendors_places.js",
+      "expected": "e588294c72a60f50b51b92820e91abce788b3e118d881001e1a63cfba311d812",
+      "actual": "e588294c72a60f50b51b92820e91abce788b3e118d881001e1a63cfba311d812"
+    },
+    {
+      "path": "src/input/keyboard.js",
+      "expected": "41ffa846f4130dc27d93cb25286e894660a9a307053474526c38065421a1ecf5",
+      "actual": "41ffa846f4130dc27d93cb25286e894660a9a307053474526c38065421a1ecf5"
+    },
+    {
+      "path": "src/input/mobile.js",
+      "expected": "7fc506dfafa882993c92010c1ac6f652251916e19dec872657a73da644216e35",
+      "actual": "7fc506dfafa882993c92010c1ac6f652251916e19dec872657a73da644216e35"
+    },
+    {
+      "path": "src/main.js",
+      "expected": "c1af21eb684b34599ba73e7f2cb8183f57cd9ed71b88b92bc6a46ea23365e998",
+      "actual": "c1af21eb684b34599ba73e7f2cb8183f57cd9ed71b88b92bc6a46ea23365e998"
+    },
+    {
+      "path": "src/minigames/activities.js",
+      "expected": "943e740548f2e2720053ff0a56a9ad030f0bad69518b9148798c2ccc16f152d0",
+      "actual": "943e740548f2e2720053ff0a56a9ad030f0bad69518b9148798c2ccc16f152d0"
+    },
+    {
+      "path": "src/minigames/heat.js",
+      "expected": "bed99ea57e986e30da890922ee232a1742dd6185bc29a9ad45093cc6dca84051",
+      "actual": "bed99ea57e986e30da890922ee232a1742dd6185bc29a9ad45093cc6dca84051"
+    },
+    {
+      "path": "src/module-manifest.json",
+      "expected": "6c8faa62458008a2a647bb7c1c8afdfe0e9b6e0b1fe5f7aa0550abd7f2c0a45d",
+      "actual": "6c8faa62458008a2a647bb7c1c8afdfe0e9b6e0b1fe5f7aa0550abd7f2c0a45d"
+    },
+    {
+      "path": "src/render/actors_weather.js",
+      "expected": "3690bea5ce51e0801e87d65ad1fe359ae287cd0c123580ede9c1411262d71f29",
+      "actual": "3690bea5ce51e0801e87d65ad1fe359ae287cd0c123580ede9c1411262d71f29"
+    },
+    {
+      "path": "src/render/canvas_geography.js",
+      "expected": "d0c46907762ba2657fbc783d41bdb659814232ef999ac4eb85b51ade2f761c95",
+      "actual": "d0c46907762ba2657fbc783d41bdb659814232ef999ac4eb85b51ade2f761c95"
+    },
+    {
+      "path": "src/render/frame.js",
+      "expected": "85e881dd7bb4af75dc89bb3747e5faf65e890fb240c9f7c74429ffc094ffd08c",
+      "actual": "85e881dd7bb4af75dc89bb3747e5faf65e890fb240c9f7c74429ffc094ffd08c"
+    },
+    {
+      "path": "src/render/landmarks_a.js",
+      "expected": "58dca57ee9e6ec2f9d42ee22f2f84e7efa161b87e2a84f2f98a2b98f8d752878",
+      "actual": "58dca57ee9e6ec2f9d42ee22f2f84e7efa161b87e2a84f2f98a2b98f8d752878"
+    },
+    {
+      "path": "src/render/landmarks_b.js",
+      "expected": "b4058dac204196cadbd8f77706043851cd67c18d4667e8ddd9ec1802fa526ada",
+      "actual": "b4058dac204196cadbd8f77706043851cd67c18d4667e8ddd9ec1802fa526ada"
+    },
+    {
+      "path": "src/render/minimap.js",
+      "expected": "b5ef3362d4464944e1ff4c44bda26aca981d35a69eba558a5de2cfebd48a6136",
+      "actual": "b5ef3362d4464944e1ff4c44bda26aca981d35a69eba558a5de2cfebd48a6136"
+    },
+    {
+      "path": "src/render/props.js",
+      "expected": "3aa9fa457c4e4c5e1c6c8b325cbaa890d57c8ccf095efef0eb2c164af12a8fa5",
+      "actual": "3aa9fa457c4e4c5e1c6c8b325cbaa890d57c8ccf095efef0eb2c164af12a8fa5"
+    },
+    {
+      "path": "src/render/sprite_art_npc_32.js",
+      "expected": "b712359121b7cb1d0e75660643e434d79cb69e3c40e5ce6bfc63f2e2246cd531",
+      "actual": "b712359121b7cb1d0e75660643e434d79cb69e3c40e5ce6bfc63f2e2246cd531"
+    },
+    {
+      "path": "src/render/sprite_art_player_32.js",
+      "expected": "7773af69217815b693f94bfb38cc4faa6f1ac28bd1cf46562ecf4a5947253f44",
+      "actual": "7773af69217815b693f94bfb38cc4faa6f1ac28bd1cf46562ecf4a5947253f44"
+    },
+    {
+      "path": "src/render/sprite_art_special_32.js",
+      "expected": "01ade8fd58f9b3759a0752ec60aacb916e2ddf66bca85fea59d98417c976eae3",
+      "actual": "01ade8fd58f9b3759a0752ec60aacb916e2ddf66bca85fea59d98417c976eae3"
+    },
+    {
+      "path": "src/render/sprite_manifest.js",
+      "expected": "02212210f0b999531b734bc014a0124abe5ce1ea9f9f5ae8e9782918cd452555",
+      "actual": "02212210f0b999531b734bc014a0124abe5ce1ea9f9f5ae8e9782918cd452555"
+    },
+    {
+      "path": "src/render/sprite_toolkit.js",
+      "expected": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca",
+      "actual": "61dce808ef7066465cc9cc23c0f96b7c42df1b0aa9e3f39f05dc297f04e03cca"
+    },
+    {
+      "path": "src/render/sprites.js",
+      "expected": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec",
+      "actual": "a99c146f297f99fc553c9123235d10094d8443ec8d86b1476891a95d599b37ec"
+    },
+    {
+      "path": "src/render/structures.js",
+      "expected": "b807236d0e6c3c7ba249688c61d5e7c8024a25c1c2dbc2713f651f1a7206bb72",
+      "actual": "b807236d0e6c3c7ba249688c61d5e7c8024a25c1c2dbc2713f651f1a7206bb72"
+    },
+    {
+      "path": "src/render/tiles.js",
+      "expected": "2f0fd56e6703a6b559757afefb0cbe6bf6ae432175804611accac91e72bd3958",
+      "actual": "2f0fd56e6703a6b559757afefb0cbe6bf6ae432175804611accac91e72bd3958"
+    },
+    {
+      "path": "src/systems/campaigns.js",
+      "expected": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c",
+      "actual": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c"
+    },
+    {
+      "path": "src/systems/combat.js",
+      "expected": "ea4b39a246e918e57bd6a561e19cee6d8396a6a328adb2b041db48cd7ada3eb4",
+      "actual": "ea4b39a246e918e57bd6a561e19cee6d8396a6a328adb2b041db48cd7ada3eb4"
+    },
+    {
+      "path": "src/systems/communications.js",
+      "expected": "822daf105608a97a0bc15bfa5d4e6bd4c38071268a873b1693d6d0fae04bb3ef",
+      "actual": "822daf105608a97a0bc15bfa5d4e6bd4c38071268a873b1693d6d0fae04bb3ef"
+    },
+    {
+      "path": "src/systems/concessions.js",
+      "expected": "875abe4453ef7d1ad234c25fa5c9fad561afbc7a461c00598cc767368a5f280f",
+      "actual": "875abe4453ef7d1ad234c25fa5c9fad561afbc7a461c00598cc767368a5f280f"
+    },
+    {
+      "path": "src/systems/daily_hideouts.js",
+      "expected": "63bab30519539f0ab117cf6a847a188aa1a6b511da5d3769006e20e77aa0ba56",
+      "actual": "63bab30519539f0ab117cf6a847a188aa1a6b511da5d3769006e20e77aa0ba56"
+    },
+    {
+      "path": "src/systems/discovery.js",
+      "expected": "72df9dd94cff7d3157bc90d19d2963387420c831a44f348d31b8abeade0cc47f",
+      "actual": "72df9dd94cff7d3157bc90d19d2963387420c831a44f348d31b8abeade0cc47f"
+    },
+    {
+      "path": "src/systems/factions.js",
+      "expected": "3238b7b5d19eb062d168188cb06046c7ec568f1771906af4eeee9a414f7dd50c",
+      "actual": "3238b7b5d19eb062d168188cb06046c7ec568f1771906af4eeee9a414f7dd50c"
+    },
+    {
+      "path": "src/systems/hitter.js",
+      "expected": "b2b173423bbabbf74447fb2a6110b32e66e2da683b2439586208681b9ba76f44",
+      "actual": "b2b173423bbabbf74447fb2a6110b32e66e2da683b2439586208681b9ba76f44"
+    },
+    {
+      "path": "src/systems/incidents.js",
+      "expected": "e1f35f54498873c537a66f47a4587459a44b205c95239f9750fb11b63f7f1cd4",
+      "actual": "e1f35f54498873c537a66f47a4587459a44b205c95239f9750fb11b63f7f1cd4"
+    },
+    {
+      "path": "src/systems/interactions.js",
+      "expected": "9d1794000d61e776d53bf79a689e6a64bdc557801141a191f205b54cb9046d4c",
+      "actual": "9d1794000d61e776d53bf79a689e6a64bdc557801141a191f205b54cb9046d4c"
+    },
+    {
+      "path": "src/systems/npc_ai.js",
+      "expected": "9b757902f72b08004b94a90908a6b92578f39935e351ff1f7ddac9886dfec212",
+      "actual": "9b757902f72b08004b94a90908a6b92578f39935e351ff1f7ddac9886dfec212"
+    },
+    {
+      "path": "src/systems/physicality.js",
+      "expected": "17c67cc51136bf9b6373d881465631508222cdca825a3504c204dcb7bd2000dc",
+      "actual": "17c67cc51136bf9b6373d881465631508222cdca825a3504c204dcb7bd2000dc"
+    },
+    {
+      "path": "src/systems/progression_routes.js",
+      "expected": "9c4116b5b08e60249c9d8815ffdfc865bee453914fb1084e8ef20e81d635a5b7",
+      "actual": "9c4116b5b08e60249c9d8815ffdfc865bee453914fb1084e8ef20e81d635a5b7"
+    },
+    {
+      "path": "src/systems/recognition.js",
+      "expected": "9856c54df6f26998b1f663be473e305291f5645950e056770eff4595f15b4734",
+      "actual": "9856c54df6f26998b1f663be473e305291f5645950e056770eff4595f15b4734"
+    },
+    {
+      "path": "src/systems/robbery.js",
+      "expected": "663f642825ecd09e3a024bbf2f516d6f3c89978c3b5b21076af71dc4b1fcb86a",
+      "actual": "663f642825ecd09e3a024bbf2f516d6f3c89978c3b5b21076af71dc4b1fcb86a"
+    },
+    {
+      "path": "src/ui/hud.js",
+      "expected": "61fe70ac81ce4faa3b4bdd3950ab427c3e563ba663ec94bdf2764978da3caf30",
+      "actual": "61fe70ac81ce4faa3b4bdd3950ab427c3e563ba663ec94bdf2764978da3caf30"
+    },
+    {
+      "path": "src/ui/layout.js",
+      "expected": "ac19adc4dd71111d5d6878c6593a915e058f6fa0058309f6847e524f2256ccf3",
+      "actual": "ac19adc4dd71111d5d6878c6593a915e058f6fa0058309f6847e524f2256ccf3"
+    },
+    {
+      "path": "tools/3d-fixture-motion-oracle.mjs",
+      "expected": "5827b14b3d4754d6598401d418069f85ae403491cf353a387b11fb642cad4014",
+      "actual": "5827b14b3d4754d6598401d418069f85ae403491cf353a387b11fb642cad4014"
+    },
+    {
+      "path": "tools/3d-memory-oracle.mjs",
+      "expected": "b87481143aa078f194b097dda62e5d67092d0cb1422c5ffaaed544114fc03bd5",
+      "actual": "b87481143aa078f194b097dda62e5d67092d0cb1422c5ffaaed544114fc03bd5"
+    },
+    {
+      "path": "tools/3d-progression-oracle.mjs",
+      "expected": "4399f109f66ed18cfde413429148beea2f318930e75232cd3af6260965608134",
+      "actual": "4399f109f66ed18cfde413429148beea2f318930e75232cd3af6260965608134"
+    },
+    {
+      "path": "tools/3d-startup-oracle.mjs",
+      "expected": "cbcb035f0382840c44075d0aa8a5e71bb9fe95ad22cfb3a742bbfd00f1566e13",
+      "actual": "cbcb035f0382840c44075d0aa8a5e71bb9fe95ad22cfb3a742bbfd00f1566e13"
+    },
+    {
+      "path": "tools/district-grade-oracle.mjs",
+      "expected": "830867252cbecca2c65d9406e578a5d1b0ad42156b10d35cecc9a893693208b5",
+      "actual": "830867252cbecca2c65d9406e578a5d1b0ad42156b10d35cecc9a893693208b5"
+    },
+    {
+      "path": "tools/parity-metadata-gate.mjs",
+      "expected": "d84c4579ae8052d2edeeda7b7be2e9ad9c4b4c9f71219a0a93312851a1bf364d",
+      "actual": "d84c4579ae8052d2edeeda7b7be2e9ad9c4b4c9f71219a0a93312851a1bf364d"
+    },
+    {
+      "path": "tools/parity-metadata-migrate.mjs",
+      "expected": "fa960f41a3a391859409519792a3e0edd8748465c0a81a70fbc626f16560c2c3",
+      "actual": "fa960f41a3a391859409519792a3e0edd8748465c0a81a70fbc626f16560c2c3"
+    },
+    {
+      "path": "tools/parity-metadata-test.mjs",
+      "expected": "2388c4874d86dfe6895725a37404acfd7657f7ccdc542cdf4e55951ec129d6c3",
+      "actual": "2388c4874d86dfe6895725a37404acfd7657f7ccdc542cdf4e55951ec129d6c3"
+    },
+    {
+      "path": "tools/parity-metadata.mjs",
+      "expected": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd",
+      "actual": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd"
+    },
+    {
+      "path": "tools/parity-source-proof.mjs",
+      "expected": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47",
+      "actual": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47"
+    },
+    {
+      "path": "game3d/tests/dave_walkthrough_probe.gd",
+      "expected": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2",
+      "actual": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2"
+    },
+    {
+      "path": "game3d/tests/test_dave_walkthrough_contract.gd",
+      "expected": "c2a7dec8778dd8121cf5f6218770504ca34c914925821e5998947ff65e64564f",
+      "actual": "c2a7dec8778dd8121cf5f6218770504ca34c914925821e5998947ff65e64564f"
+    },
+    {
+      "path": "SPEC-3D-PARITY-METADATA-V2.md",
+      "expected": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a",
+      "actual": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a"
+    },
+    {
+      "path": "reports/3d-parity-metadata/input-pins-metadata-v2.json",
+      "expected": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276",
+      "actual": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276"
+    },
+    {
+      "path": "reports/3d-parity-metadata/revisions/metadata-v2.json",
+      "expected": "51097b8ff3611cca2dd5e5cdf1d76b9e1b6a5d4dab08e36bc0ff5b351e4b355d",
+      "actual": "51097b8ff3611cca2dd5e5cdf1d76b9e1b6a5d4dab08e36bc0ff5b351e4b355d"
+    },
+    {
+      "path": "game3d/tests/run-gates.ps1",
+      "expected": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b",
+      "actual": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b"
+    },
+    {
+      "path": "game3d/tests/dave_walkthrough_probe.gd.uid",
+      "expected": "027438c8528284655ad20a56d981c64f16631e12dd9e601af23c17b2a3123cd4",
+      "actual": "027438c8528284655ad20a56d981c64f16631e12dd9e601af23c17b2a3123cd4"
+    },
+    {
+      "path": "game3d/tests/test_dave_walkthrough_contract.gd.uid",
+      "expected": "eebffcdd2fcd988309436f45f4d13e6be8d25d4a1e64c96636ffbc4fa877f475",
+      "actual": "eebffcdd2fcd988309436f45f4d13e6be8d25d4a1e64c96636ffbc4fa877f475"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/campaign-two-run-aggregate.json",
+      "expected": "c3c00e775243fa10d1d0caf2e88173b67e827b32cef423a502fdc5c4d31af1a9",
+      "actual": "c3c00e775243fa10d1d0caf2e88173b67e827b32cef423a502fdc5c4d31af1a9"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/copy-provenance.json",
+      "expected": "68220b6d48779e632318a849ad1151752766e7a48215bf55a764b2910d90fd66",
+      "actual": "68220b6d48779e632318a849ad1151752766e7a48215bf55a764b2910d90fd66"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/candidate-manifest.json",
+      "expected": "3031226845db5bda4c179125892f514c7edb7d6a8d1bf91dba22614327e8064b",
+      "actual": "3031226845db5bda4c179125892f514c7edb7d6a8d1bf91dba22614327e8064b"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/FEASIBILITY.md",
+      "expected": "9e54e8de452a050209d6951d25364a25099a7a877bae63e8db00709caa87251c",
+      "actual": "9e54e8de452a050209d6951d25364a25099a7a877bae63e8db00709caa87251c"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/README.md",
+      "expected": "93c0f75ad69031cc2da4a5e1139169fc1320be49088a57e7e79bf17b4b834006",
+      "actual": "93c0f75ad69031cc2da4a5e1139169fc1320be49088a57e7e79bf17b4b834006"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/refresh_manifest.py",
+      "expected": "d6b6a2e37cf646f5b9f456df380bf70ddb58d410a116e10d3a573d7c6f1d315b",
+      "actual": "d6b6a2e37cf646f5b9f456df380bf70ddb58d410a116e10d3a573d7c6f1d315b"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/SPEC-CAMPAIGN-CONTINUATION-DRAFT.md",
+      "expected": "409bf0e11380e511d5ca346393ca7fa0e2532ffc7de0c66750a983e233fb05a0",
+      "actual": "409bf0e11380e511d5ca346393ca7fa0e2532ffc7de0c66750a983e233fb05a0"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/static-validation.json",
+      "expected": "ab4a88cf6dbda57be3f710a6647c6e5d144bf274856a438f2e7e31d59038cfcb",
+      "actual": "ab4a88cf6dbda57be3f710a6647c6e5d144bf274856a438f2e7e31d59038cfcb"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/tests/campaign_continuation_probe.gd",
+      "expected": "7801ef1f37a86703a14bda0fdbb9055a1326269bd4609030660710686f6b798c",
+      "actual": "7801ef1f37a86703a14bda0fdbb9055a1326269bd4609030660710686f6b798c"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/tests/test_campaign_continuation_contract.gd",
+      "expected": "5091ba1f4fb5125a371e9282c6f2bb7829955adfcc7e33a1364b0b5b4a9bdaa2",
+      "actual": "5091ba1f4fb5125a371e9282c6f2bb7829955adfcc7e33a1364b0b5b4a9bdaa2"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/harness/V4-DEFENSE-REVIEW.md",
+      "expected": "9f8be95ea19925329d91d2532fb0ae1d3178d1c8ece4af7340089217353b77f7",
+      "actual": "9f8be95ea19925329d91d2532fb0ae1d3178d1c8ece4af7340089217353b77f7"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/original-office-input/earned-handoff.json",
+      "expected": "dc13e35bc438725c69fd9d41299b85bb0665fb0a776abc9314cb6c035d0bc066",
+      "actual": "dc13e35bc438725c69fd9d41299b85bb0665fb0a776abc9314cb6c035d0bc066"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/original-office-input/office-tour.json",
+      "expected": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708",
+      "actual": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/packet-hashes.json",
+      "expected": "6e365e74fbdde7a561530f09c4a04a6ceccae1901b74c0263799377b29666deb",
+      "actual": "6e365e74fbdde7a561530f09c4a04a6ceccae1901b74c0263799377b29666deb"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/01_retained_office_loaded.png",
+      "expected": "84a20a845000d0cc5a9a830599a01d8787708e14c8e81efdc87f269436a90641",
+      "actual": "84a20a845000d0cc5a9a830599a01d8787708e14c8e81efdc87f269436a90641"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/02_earned_copper.png",
+      "expected": "ce8fe45b9cec902e2e27e56345a9665fcad8c855a450402d665b32b40bd40038",
+      "actual": "ce8fe45b9cec902e2e27e56345a9665fcad8c855a450402d665b32b40bd40038"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/03_claimed_alley.png",
+      "expected": "a0c1093a16f745944b93de489d4e6cb6bb6aadb4d1dae95e199b326bdd2acd67",
+      "actual": "a0c1093a16f745944b93de489d4e6cb6bb6aadb4d1dae95e199b326bdd2acd67"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/04_claimed_projects.png",
+      "expected": "25e233450e4a42b5c1a1c7d1dfd9d597a965413726d637d339473ccb2ac090e2",
+      "actual": "25e233450e4a42b5c1a1c7d1dfd9d597a965413726d637d339473ccb2ac090e2"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/05_claimed_skidrow.png",
+      "expected": "d2ef0ead83e4c20fd5125725ba275efbbf2a558fabfd89540a8fc3fa03cd31ea",
+      "actual": "d2ef0ead83e4c20fd5125725ba275efbbf2a558fabfd89540a8fc3fa03cd31ea"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/06_admitted_tony.png",
+      "expected": "96e979f4f90d4ad2c0fbda57c3465ecad2801e94b36eb519862f5eb49a2294e2",
+      "actual": "96e979f4f90d4ad2c0fbda57c3465ecad2801e94b36eb519862f5eb49a2294e2"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/07_tony_phase_three.png",
+      "expected": "063ec28861dcf1a4033018c338df27f3d492964ed9a5241e3ea645c81c41e504",
+      "actual": "063ec28861dcf1a4033018c338df27f3d492964ed9a5241e3ea645c81c41e504"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/08_victory_tony.png",
+      "expected": "b39f1a27954eaf2965357d40f8dd6721214769807839b81f1013c9ddcfdae69d",
+      "actual": "b39f1a27954eaf2965357d40f8dd6721214769807839b81f1013c9ddcfdae69d"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/09_ending_tony.png",
+      "expected": "0bc0ed625f2fa24c063363ba53acc8725419b614f45668d298902bb588d50587",
+      "actual": "0bc0ed625f2fa24c063363ba53acc8725419b614f45668d298902bb588d50587"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/campaign-tony-prefix.json",
+      "expected": "6cb8aa6a7b21c9e8cc3b7b97eb2752f74c78fe173c1069e7ff150c60ebe836fa",
+      "actual": "6cb8aa6a7b21c9e8cc3b7b97eb2752f74c78fe173c1069e7ff150c60ebe836fa"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/prefix/earned-tony-handoff.json",
+      "expected": "5de5c3210a855e8f7cfd98945439bce1dc30a906cb7108bea079388d877d112a",
+      "actual": "5de5c3210a855e8f7cfd98945439bce1dc30a906cb7108bea079388d877d112a"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/README.md",
+      "expected": "0a269804abbaf763a74c1e1fcb3a00eff06628deebf27ee322c8669d474aefd9",
+      "actual": "0a269804abbaf763a74c1e1fcb3a00eff06628deebf27ee322c8669d474aefd9"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/retained-failures/native-v4-full.json",
+      "expected": "33da4b5f0364b4ecf456f423e5caab0a87cea81a65038e65e34fbb2f9c1273d4",
+      "actual": "33da4b5f0364b4ecf456f423e5caab0a87cea81a65038e65e34fbb2f9c1273d4"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/retained-failures/native-v4.log",
+      "expected": "180634ee7c1c330affe75c944a72a58555dcfbc5e8639875b8d512e6d309a9a7",
+      "actual": "180634ee7c1c330affe75c944a72a58555dcfbc5e8639875b8d512e6d309a9a7"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/retained-failures/resume-v5-diagnostic.log",
+      "expected": "71cd5bf15c635dbc9451936cea0082d1e25fb75330ec20d39b47ab8d188dc855",
+      "actual": "71cd5bf15c635dbc9451936cea0082d1e25fb75330ec20d39b47ab8d188dc855"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/retained-failures/resume-v5.log",
+      "expected": "ec518ef055094d495bff081d6d1f0c69a03a6b363c9f685e0d233b16af68bba4",
+      "actual": "ec518ef055094d495bff081d6d1f0c69a03a6b363c9f685e0d233b16af68bba4"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/source-2c32.zip",
+      "expected": "8758df0960e2b6aa31a0a8ebec671070168939a1b4e2349065131cae4b2cd9d3",
+      "actual": "8758df0960e2b6aa31a0a8ebec671070168939a1b4e2349065131cae4b2cd9d3"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/01_accepted_tony_prefix_loaded.png",
+      "expected": "4566ada03949739a731e50ea2146fffc6fe94366093b60c041601e73111166bc",
+      "actual": "4566ada03949739a731e50ea2146fffc6fe94366093b60c041601e73111166bc"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/02_blue_tarp_three_corrections.png",
+      "expected": "78431d34dffa352d520f9ae0cdecac1008a7fbb4f28926577ed604830d7c0862",
+      "actual": "78431d34dffa352d520f9ae0cdecac1008a7fbb4f28926577ed604830d7c0862"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/03_admitted_darryl_under_blue.png",
+      "expected": "a259fddc00553f994005cb7ae4aa1a3a4003b4070d532642f3c39de8f517c26e",
+      "actual": "a259fddc00553f994005cb7ae4aa1a3a4003b4070d532642f3c39de8f517c26e"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/04_victory_darryl_under_blue.png",
+      "expected": "ef9207c4672eba6a9c243250999d5e8c16b9f3a291e07f5670821ab7406b3883",
+      "actual": "ef9207c4672eba6a9c243250999d5e8c16b9f3a291e07f5670821ab7406b3883"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/05_cart_cavalry_three_corrections.png",
+      "expected": "8de60d734e6e54794e216814a45b4d9c76014be5c88af122dd22c2b2c1fdb57d",
+      "actual": "8de60d734e6e54794e216814a45b4d9c76014be5c88af122dd22c2b2c1fdb57d"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/06_admitted_general_receipt.png",
+      "expected": "8beb81d6da670439e0547b26bfbbc8c395b6f4b506fdcb0c85af581e0d2a46a6",
+      "actual": "8beb81d6da670439e0547b26bfbbc8c395b6f4b506fdcb0c85af581e0d2a46a6"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/07_victory_general_receipt.png",
+      "expected": "3f48d28312e26777ac90b931fda79fe6205844729df130a0a7a70e38fc8c0c1d",
+      "actual": "3f48d28312e26777ac90b931fda79fe6205844729df130a0a7a70e38fc8c0c1d"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/08_copper_choir_three_corrections.png",
+      "expected": "5b41420620e1dc7c7313707c6ae7faf21440336a4c80583fd89d7a212394630a",
+      "actual": "5b41420620e1dc7c7313707c6ae7faf21440336a4c80583fd89d7a212394630a"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/09_admitted_bishop_wire.png",
+      "expected": "e49e4753c85657a6ed8ddfd7b442500859b0c2fe1045752b2b692d06d3fe6a23",
+      "actual": "e49e4753c85657a6ed8ddfd7b442500859b0c2fe1045752b2b692d06d3fe6a23"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/10_victory_bishop_wire.png",
+      "expected": "94e7bdfadb0b4c7e953b92a3c7a8237fd7f0d53d28ab25d2826a2057626c945c",
+      "actual": "94e7bdfadb0b4c7e953b92a3c7a8237fd7f0d53d28ab25d2826a2057626c945c"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/11_royal_static_real_rock.png",
+      "expected": "c98e943c76b72dd710a8f39d87bff5aa6955671b2ae7849b3556c9650d09a51b",
+      "actual": "c98e943c76b72dd710a8f39d87bff5aa6955671b2ae7849b3556c9650d09a51b"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/12_admitted_curb_emperor.png",
+      "expected": "e54156072022225abd4464c7e29f15eb4cf65873a8ee967858b95de60c587889",
+      "actual": "e54156072022225abd4464c7e29f15eb4cf65873a8ee967858b95de60c587889"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/13_curb_emperor_phase_three.png",
+      "expected": "6cef7270765c9816a508687f49181467d92b455a66342e4e295a895ff60f34d8",
+      "actual": "6cef7270765c9816a508687f49181467d92b455a66342e4e295a895ff60f34d8"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/14_victory_curb_emperor.png",
+      "expected": "3ec4062298367219563a411d67564d012df6611c42d00dbd4f2cc425a57e60f6",
+      "actual": "3ec4062298367219563a411d67564d012df6611c42d00dbd4f2cc425a57e60f6"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/15_ending_kingdom.png",
+      "expected": "f1055a961b754f4c6894f54b22e0f16c8cfbfcedee03762923415afed07c48be",
+      "actual": "f1055a961b754f4c6894f54b22e0f16c8cfbfcedee03762923415afed07c48be"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/16_completed_loaded_and_moving.png",
+      "expected": "3f01cd85d720c39c1fbc44ecf649eab9800bfbb852bdfb402503c75c5a73d6ef",
+      "actual": "3f01cd85d720c39c1fbc44ecf649eab9800bfbb852bdfb402503c75c5a73d6ef"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/campaign-kingdom-suffix.json",
+      "expected": "919ee9ab07bc5ed7871dd3e7d3b89f08361c95a980b0201d23482051f012eec4",
+      "actual": "919ee9ab07bc5ed7871dd3e7d3b89f08361c95a980b0201d23482051f012eec4"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/suffix/campaign-save.json",
+      "expected": "bc2e8a9f638022bfa83e63d3e24a61157e67ccb45beb2ff314f9d4082f626787",
+      "actual": "bc2e8a9f638022bfa83e63d3e24a61157e67ccb45beb2ff314f9d4082f626787"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/validation/contract.log",
+      "expected": "7746edd9233a04400c0a3a9413354de666e8c37ace5d399bff527ac94528ffc2",
+      "actual": "7746edd9233a04400c0a3a9413354de666e8c37ace5d399bff527ac94528ffc2"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/validation/import.log",
+      "expected": "a00c9900196fe9801501200d3d8ea2c7e2d8da28e6567b11869bc493cff5bfa0",
+      "actual": "a00c9900196fe9801501200d3d8ea2c7e2d8da28e6567b11869bc493cff5bfa0"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/validation/native.log",
+      "expected": "13b4761bcfc79365255ea94e8c6dbae89e1f8c7c4cbdd7cf9469324cc049a531",
+      "actual": "13b4761bcfc79365255ea94e8c6dbae89e1f8c7c4cbdd7cf9469324cc049a531"
+    },
+    {
+      "path": "artifacts/3d-full-port/campaign-composed/validation/provenance.json",
+      "expected": "5c225903c0f47bc66523f060c0b455a1184214252df8838f3d4394738e4aff42",
+      "actual": "5c225903c0f47bc66523f060c0b455a1184214252df8838f3d4394738e4aff42"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/ALL11-FEASIBILITY.md",
+      "expected": "25f388e3b89363b0a01d51c2d03da4b7338c18a53c1131b94ae493e0cdc16449",
+      "actual": "25f388e3b89363b0a01d51c2d03da4b7338c18a53c1131b94ae493e0cdc16449"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/build_manifest.py",
+      "expected": "32fcd6d313849ef1a8bebc23feb44e1e1512318bb3c3343ef76cfb9bc3fe50dc",
+      "actual": "32fcd6d313849ef1a8bebc23feb44e1e1512318bb3c3343ef76cfb9bc3fe50dc"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/candidate-manifest.json",
+      "expected": "04749a9a55cc3ecc295d0d084ff75e60d378e598675f8b01dfba4be6172e1c39",
+      "actual": "04749a9a55cc3ecc295d0d084ff75e60d378e598675f8b01dfba4be6172e1c39"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/evidence/native-v1-failure.json",
+      "expected": "5de3bfde0b180770e236d7ddef7c105c680a192bfc505a0982e8f7fc32da6abc",
+      "actual": "5de3bfde0b180770e236d7ddef7c105c680a192bfc505a0982e8f7fc32da6abc"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/evidence/native-v1-probe.gd.txt",
+      "expected": "1a0b8fd72b7d13aeac9a9cf2f9ea473f3181520a140f58192301d9e0f5bfe18c",
+      "actual": "1a0b8fd72b7d13aeac9a9cf2f9ea473f3181520a140f58192301d9e0f5bfe18c"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/README.md",
+      "expected": "2458519b5f31f7ec2284d1f625b2d857c7e8658fb39e0afc4c3001b2d641d2fa",
+      "actual": "2458519b5f31f7ec2284d1f625b2d857c7e8658fb39e0afc4c3001b2d641d2fa"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/REVIEW.md",
+      "expected": "1d461951df0f9039a6d87b1f802fef28621c2cc58b5089397297105d14fa136d",
+      "actual": "1d461951df0f9039a6d87b1f802fef28621c2cc58b5089397297105d14fa136d"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/SPEC-PRETENDER-CONTINUATION-DRAFT.md",
+      "expected": "4a39a3c84d3251a11c647775f6326733ea7684c1a281caa78d6788b241a84b43",
+      "actual": "4a39a3c84d3251a11c647775f6326733ea7684c1a281caa78d6788b241a84b43"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/static-validation.json",
+      "expected": "b11c7b12217e301c5f5c61e0e409ae0f12e063f9d1ec99a89fa712a5b716a704",
+      "actual": "b11c7b12217e301c5f5c61e0e409ae0f12e063f9d1ec99a89fa712a5b716a704"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/tests/pretender_continuation_probe.gd",
+      "expected": "e10c58de4715524bb7dbf12628c209b145f62dc8b1bf581f69acc172288f6352",
+      "actual": "e10c58de4715524bb7dbf12628c209b145f62dc8b1bf581f69acc172288f6352"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/harness/tests/test_pretender_continuation_contract.gd",
+      "expected": "03eae44d00f21d852f9c24a23d3ea2a7fa267f81d49d39ef1998d343451ad669",
+      "actual": "03eae44d00f21d852f9c24a23d3ea2a7fa267f81d49d39ef1998d343451ad669"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/01_earned_campaign_loaded.png",
+      "expected": "91184444d75fe44136cebe59803b4657a45b04cf5a9a1e009e94f682b5e52686",
+      "actual": "91184444d75fe44136cebe59803b4657a45b04cf5a9a1e009e94f682b5e52686"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/02_day_14_engagement_ranged.png",
+      "expected": "ad4afc0eac9dcc5c899593adf275f07635c21ce9d3d945da85097a40b098c838",
+      "actual": "ad4afc0eac9dcc5c899593adf275f07635c21ce9d3d945da85097a40b098c838"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/03_day_14_reward.png",
+      "expected": "68b6dedd200edfcc7d6c642311fbbbffd7de6d30e4478b300d1ef2d44f992e16",
+      "actual": "68b6dedd200edfcc7d6c642311fbbbffd7de6d30e4478b300d1ef2d44f992e16"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/04_day_14_loaded_and_moving.png",
+      "expected": "652498bcd5c70513f231b42fa5ab5b4c3c219dd8316ab00c6df1ffc34f133078",
+      "actual": "652498bcd5c70513f231b42fa5ab5b4c3c219dd8316ab00c6df1ffc34f133078"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/05_day_15_engagement_charger.png",
+      "expected": "7f1dac0fb14f294eb4a010998a72e78fd7215d79a1beaa9af29917d7c29cbd57",
+      "actual": "7f1dac0fb14f294eb4a010998a72e78fd7215d79a1beaa9af29917d7c29cbd57"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/06_day_15_reward.png",
+      "expected": "ce56ea9582e74ddb841bffb1fac371a279cdd0c5b9a1794078d19fda3d35e4f3",
+      "actual": "ce56ea9582e74ddb841bffb1fac371a279cdd0c5b9a1794078d19fda3d35e4f3"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/07_day_15_loaded_and_moving.png",
+      "expected": "e074865aa55e9abb871b33303c57c8d53cbfda3d5c3471bd52c8ca90c5e01aef",
+      "actual": "e074865aa55e9abb871b33303c57c8d53cbfda3d5c3471bd52c8ca90c5e01aef"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/08_day_16_engagement_grabber.png",
+      "expected": "31fe2a50227d12f257fe32e513ba07ea1c333ee5dbb60e7ccdd9b84b552df557",
+      "actual": "31fe2a50227d12f257fe32e513ba07ea1c333ee5dbb60e7ccdd9b84b552df557"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/09_day_16_reward.png",
+      "expected": "88951d0e29a2bb63bb3ae66169b2f6afa7997a7a0698e1ca3142e269a14a515e",
+      "actual": "88951d0e29a2bb63bb3ae66169b2f6afa7997a7a0698e1ca3142e269a14a515e"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/10_day_16_loaded_and_moving.png",
+      "expected": "dcb86e0e5beccbb6e1daf3a58960769464ea8474b79eb824ad6964f235451d18",
+      "actual": "dcb86e0e5beccbb6e1daf3a58960769464ea8474b79eb824ad6964f235451d18"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/pretender-continuation.json",
+      "expected": "5b79e40158f15eae1f0885bd8faf6cf9d223f27786d99c43f13eef0700650b1b",
+      "actual": "5b79e40158f15eae1f0885bd8faf6cf9d223f27786d99c43f13eef0700650b1b"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/pretender-save.json",
+      "expected": "5947a2c7cfd3321fbde167a5ac376aaa7dd985b76ec7973b36fbfd633782263e",
+      "actual": "5947a2c7cfd3321fbde167a5ac376aaa7dd985b76ec7973b36fbfd633782263e"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/packet-hashes.json",
+      "expected": "405f2a58db04d44b5aef388dc58789b69a620db2ed52a0c1e2e768ce9f4e4eb2",
+      "actual": "405f2a58db04d44b5aef388dc58789b69a620db2ed52a0c1e2e768ce9f4e4eb2"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/README.md",
+      "expected": "b2514e553d48e38b2d6a4fc4b6da920919f03031af859e29a06dae2af347e6cd",
+      "actual": "b2514e553d48e38b2d6a4fc4b6da920919f03031af859e29a06dae2af347e6cd"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/retained-failures/native-v1-failure.png",
+      "expected": "c340966f57a3141577c9464105fb75837bbbcc8699b8690068ed4577a0ecbc1e",
+      "actual": "c340966f57a3141577c9464105fb75837bbbcc8699b8690068ed4577a0ecbc1e"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/retained-failures/native-v1-incomplete-save.json",
+      "expected": "63e43b5ed5048c19c384cc30e95a11ca2e585f4cfe08279e421a35f229417da8",
+      "actual": "63e43b5ed5048c19c384cc30e95a11ca2e585f4cfe08279e421a35f229417da8"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/retained-failures/native-v1-provenance.json",
+      "expected": "c9d60280ad1da22b39ffe6db0b9d48653201defc38ea2ab7d7e02d289062c02a",
+      "actual": "c9d60280ad1da22b39ffe6db0b9d48653201defc38ea2ab7d7e02d289062c02a"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/retained-failures/native-v1-report.json",
+      "expected": "53fe58f5d50417fbbbb01fc7dfea8a700cc6c04b95f165dc9ef198332b8e637d",
+      "actual": "53fe58f5d50417fbbbb01fc7dfea8a700cc6c04b95f165dc9ef198332b8e637d"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/retained-failures/native-v1.log",
+      "expected": "cf616bf563698df2223804a4d5861821f2bcc6bb2cfc176f04b223bd61fd2b75",
+      "actual": "cf616bf563698df2223804a4d5861821f2bcc6bb2cfc176f04b223bd61fd2b75"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/retained-failures/relative-log-import-failure.log",
+      "expected": "6ea109f7a72662f32cf91f969fd788993c0207e035e95abff5a738468218ebb0",
+      "actual": "6ea109f7a72662f32cf91f969fd788993c0207e035e95abff5a738468218ebb0"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/validation/contract.log",
+      "expected": "440ffabdc971edba155c791266e4af278166b16450028996d38e1b23b02537dc",
+      "actual": "440ffabdc971edba155c791266e4af278166b16450028996d38e1b23b02537dc"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/validation/import-console.log",
+      "expected": "e369be837599be3fae8ef969dcfbfc17769b98c335264535a7c410a4ee680e1b",
+      "actual": "e369be837599be3fae8ef969dcfbfc17769b98c335264535a7c410a4ee680e1b"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/validation/import.log",
+      "expected": "da8a1c1b37c50e939655663a2218eb0cc571872ec06e8f1e451c0ef64e941b52",
+      "actual": "da8a1c1b37c50e939655663a2218eb0cc571872ec06e8f1e451c0ef64e941b52"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/validation/native.log",
+      "expected": "e7f1a45b1118b6ebef017b5765ca65373225580facc54b2c6a83962bf82a9d82",
+      "actual": "e7f1a45b1118b6ebef017b5765ca65373225580facc54b2c6a83962bf82a9d82"
+    },
+    {
+      "path": "artifacts/3d-full-port/pretender-acceptance/validation/provenance.json",
+      "expected": "a91ba6ae5a66af9d8d16035687147a40fe719782e3f5fd592119c1b4f0b22331",
+      "actual": "a91ba6ae5a66af9d8d16035687147a40fe719782e3f5fd592119c1b4f0b22331"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/copy-provenance.json",
+      "expected": "b2dd4280d0a14660b8a805471ebf4bd6773c29342697e57b814ded4fabd0f038",
+      "actual": "b2dd4280d0a14660b8a805471ebf4bd6773c29342697e57b814ded4fabd0f038"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/counterexamples/baseline-v2.log",
+      "expected": "01404b78bd556c98904754f33af5dd9280c3d8da286d422d0736776f283406aa",
+      "actual": "01404b78bd556c98904754f33af5dd9280c3d8da286d422d0736776f283406aa"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/counterexamples/candidate-v1.log",
+      "expected": "8176b56d178d5a7b83203fc9df64dcd1b47b9c3ceed5e41b385e59863525a35f",
+      "actual": "8176b56d178d5a7b83203fc9df64dcd1b47b9c3ceed5e41b385e59863525a35f"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/counterexamples/candidate-v2.log",
+      "expected": "79becb38b08e63a8eba3dc9f171e40c85552854ad2e64d4dbaf002ecf21fb115",
+      "actual": "79becb38b08e63a8eba3dc9f171e40c85552854ad2e64d4dbaf002ecf21fb115"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/counterexamples/test_quest_dialogue.log",
+      "expected": "b6695ef1670f8a1572c5481bbd1a6a80722e21afb2ca8ebb76d88debef340853",
+      "actual": "b6695ef1670f8a1572c5481bbd1a6a80722e21afb2ca8ebb76d88debef340853"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/native/01_sleeping_dave.png",
+      "expected": "83db93f1d7cd006e7c8e7b1fa0cab5403f7b7f9b35121aa4d502cb96864b5734",
+      "actual": "83db93f1d7cd006e7c8e7b1fa0cab5403f7b7f9b35121aa4d502cb96864b5734"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/native/02_awake_dave.png",
+      "expected": "3bec417c96c518a96ef8b77bbcb7944d16b65259eb6ef5275321e5b86f9f88c4",
+      "actual": "3bec417c96c518a96ef8b77bbcb7944d16b65259eb6ef5275321e5b86f9f88c4"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/native/03_pigeon_dialogue.png",
+      "expected": "4c9f8c9ea42b9db75ab46ee225e0dbc71e43591e3951bf9e9f970dcc969d67ae",
+      "actual": "4c9f8c9ea42b9db75ab46ee225e0dbc71e43591e3951bf9e9f970dcc969d67ae"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/native/dave-walkthrough.json",
+      "expected": "6ee6972e628e7a803212925618395c41828b01f31197440133f6228dd444f2f3",
+      "actual": "6ee6972e628e7a803212925618395c41828b01f31197440133f6228dd444f2f3"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/01_sleeping_dave_960.png",
+      "expected": "0173d6c89bb38d8e229b15bdf14a613e78a88d743b228b4575444a656f5b4f3b",
+      "actual": "0173d6c89bb38d8e229b15bdf14a613e78a88d743b228b4575444a656f5b4f3b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/02_awake_dave_960.png",
+      "expected": "23f2116b036a8fd06145446bd1e192ad993b0dd4ab04b2f20f9ba151cae10372",
+      "actual": "23f2116b036a8fd06145446bd1e192ad993b0dd4ab04b2f20f9ba151cae10372"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/03_pigeon_dialogue_960.png",
+      "expected": "923621df878661454e0a663da0064340cf0cc752daf24050544d4af7169fab73",
+      "actual": "923621df878661454e0a663da0064340cf0cc752daf24050544d4af7169fab73"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/browser-console.json",
+      "expected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/browser-report.json",
+      "expected": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745",
+      "actual": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/browser.jpg",
+      "expected": "f64262488a44c8b6c8c66b2feb3d4bc72953065eb7d6c8e4eadb58899f0e0853",
+      "actual": "f64262488a44c8b6c8c66b2feb3d4bc72953065eb7d6c8e4eadb58899f0e0853"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/dave-walkthrough-web-960.json",
+      "expected": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745",
+      "actual": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/helper/manifest.json",
+      "expected": "017e34877f0f951ef31e07fbf685a5fa7a30a99d337a071c53ec7ae6c6093d83",
+      "actual": "017e34877f0f951ef31e07fbf685a5fa7a30a99d337a071c53ec7ae6c6093d83"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/helper/posed_ground_diagnostic.gd",
+      "expected": "3cf6d457fac1563d1c40ae086dd85f425695b6bf97d1e791bf0c0bd51dd83674",
+      "actual": "3cf6d457fac1563d1c40ae086dd85f425695b6bf97d1e791bf0c0bd51dd83674"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/helper/README.md",
+      "expected": "d2ad1a13830ef995938726ef5bebd1164e9425d7bc933914dca8b9ee209f4099",
+      "actual": "d2ad1a13830ef995938726ef5bebd1164e9425d7bc933914dca8b9ee209f4099"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/import.log",
+      "expected": "da8a1c1b37c50e939655663a2218eb0cc571872ec06e8f1e451c0ef64e941b52",
+      "actual": "da8a1c1b37c50e939655663a2218eb0cc571872ec06e8f1e451c0ef64e941b52"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/native/01_sleeping_dave.png",
+      "expected": "9492451cccdf85073cfbfc69b60ae7726de3ba7495c5bad4a450e547b42221de",
+      "actual": "9492451cccdf85073cfbfc69b60ae7726de3ba7495c5bad4a450e547b42221de"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/native/02_awake_dave.png",
+      "expected": "c2d0f5bbd9ecc03a112cc13bf16b58b6817e912e1fcc13cb6a1c311caa9eef41",
+      "actual": "c2d0f5bbd9ecc03a112cc13bf16b58b6817e912e1fcc13cb6a1c311caa9eef41"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/native/03_pigeon_dialogue.png",
+      "expected": "fe34d0c2e2d6fc90898f4ce04388f513323585791e5425d6d2971e6ad2f7d24e",
+      "actual": "fe34d0c2e2d6fc90898f4ce04388f513323585791e5425d6d2971e6ad2f7d24e"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/native/dave-walkthrough.json",
+      "expected": "46b2737a04ec1a5d48283d7c296c462c54139b35e5ea8b001994cee3371eced8",
+      "actual": "46b2737a04ec1a5d48283d7c296c462c54139b35e5ea8b001994cee3371eced8"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/native.log",
+      "expected": "7b5e78f656c79d710374868314bf5962083ee4b849a2b4f0b4860c41de308535",
+      "actual": "7b5e78f656c79d710374868314bf5962083ee4b849a2b4f0b4860c41de308535"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/ground-diagnostic/provenance.json",
+      "expected": "3a52b6784190132aab419fc606d42805849ec4e12268d7a1f72460eab81a293d",
+      "actual": "3a52b6784190132aab419fc606d42805849ec4e12268d7a1f72460eab81a293d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_contact_15.png",
+      "expected": "4a840d1b58611b045e1859f1b8b6320bad487c7de0874da21c7aa47159187218",
+      "actual": "4a840d1b58611b045e1859f1b8b6320bad487c7de0874da21c7aa47159187218"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_contact_80.png",
+      "expected": "ee1494f2dcbe36bf391662cb90fc7b08d0d33a72c76207f38b49374915002dbb",
+      "actual": "ee1494f2dcbe36bf391662cb90fc7b08d0d33a72c76207f38b49374915002dbb"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_front_peak_strike_2m.png",
+      "expected": "7cd6cb97a3cedf58772ed6247281dba5f69682ca203f2fe984318ee1da0a25a3",
+      "actual": "7cd6cb97a3cedf58772ed6247281dba5f69682ca203f2fe984318ee1da0a25a3"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_front_rest_20m.png",
+      "expected": "25cf1a70329ecb003e9ba306c839bf73f1cdcb59b7da0d076b7ed9b856a720d9",
+      "actual": "25cf1a70329ecb003e9ba306c839bf73f1cdcb59b7da0d076b7ed9b856a720d9"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_front_rest_2m.png",
+      "expected": "86c77a5daca83c1d00c54debd3b5a85d773e3b2c3f02e58f93b5f3999a761e01",
+      "actual": "86c77a5daca83c1d00c54debd3b5a85d773e3b2c3f02e58f93b5f3999a761e01"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_identity_gesture.png",
+      "expected": "20676bfc1757ef51d989981141b4e4ab159f2ec1fddc3545a004f57003ab671f",
+      "actual": "20676bfc1757ef51d989981141b4e4ab159f2ec1fddc3545a004f57003ab671f"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_quarter_death.png",
+      "expected": "7a6e1d1777ad0572b23d7ae0111889a75785a0287ffbdf59da0da3c6af33c463",
+      "actual": "7a6e1d1777ad0572b23d7ae0111889a75785a0287ffbdf59da0da3c6af33c463"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/native/launderlady_quarter_walk_2m.png",
+      "expected": "ff3dbd0e8199e62c21c3c0ec3c6cb3fcef8352a83c008298b76eed0bf2ba8779",
+      "actual": "ff3dbd0e8199e62c21c3c0ec3c6cb3fcef8352a83c008298b76eed0bf2ba8779"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/web/browser-console.json",
+      "expected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/web/browser-originals.json",
+      "expected": "3363a0243315fe49e527bd411b28c663e896b7ec906ff636034eb63e637342af",
+      "actual": "3363a0243315fe49e527bd411b28c663e896b7ec906ff636034eb63e637342af"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/web/browser-report.json",
+      "expected": "5567b9f257b62fe6de04aa5abd2aa8a0a6cd6576dfb66ec72992cdcc29ba1ff6",
+      "actual": "5567b9f257b62fe6de04aa5abd2aa8a0a6cd6576dfb66ec72992cdcc29ba1ff6"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/laundry/web/browser.jpg",
+      "expected": "b519e10e428e296a7e3c373747acba7fa2b33f9dd980cf9e1192d9c95004e797",
+      "actual": "b519e10e428e296a7e3c373747acba7fa2b33f9dd980cf9e1192d9c95004e797"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/candidate/game3d/tests/run-gates.ps1",
+      "expected": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b",
+      "actual": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/candidate/reports/3d-parity-metadata/input-pins-metadata-v2.json",
+      "expected": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276",
+      "actual": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/candidate/reports/3d-parity-metadata/revisions/metadata-v2.json",
+      "expected": "51097b8ff3611cca2dd5e5cdf1d76b9e1b6a5d4dab08e36bc0ff5b351e4b355d",
+      "actual": "51097b8ff3611cca2dd5e5cdf1d76b9e1b6a5d4dab08e36bc0ff5b351e4b355d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/candidate/SPEC-3D-PARITY-METADATA-V2.md",
+      "expected": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a",
+      "actual": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/candidate/tools/parity-metadata.mjs",
+      "expected": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd",
+      "actual": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/composed-inputs/game3d/scripts/cast_profiles.gd",
+      "expected": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+      "actual": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/composed-inputs/game3d/tests/test_character_roster.gd",
+      "expected": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c",
+      "actual": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/composed-inputs/game3d/tests/test_full_scene.gd",
+      "expected": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e",
+      "actual": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/DELIVERY.json",
+      "expected": "6c682eca618e648cb246b929af007e069234711a29528e8531e2be9077a6ce33",
+      "actual": "6c682eca618e648cb246b929af007e069234711a29528e8531e2be9077a6ce33"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/MANIFEST.json",
+      "expected": "c40f0543b35fc1ef9957d0703e4a41a4cf80edb43bdf68bb8fd2e3b51b9a8c3b",
+      "actual": "c40f0543b35fc1ef9957d0703e4a41a4cf80edb43bdf68bb8fd2e3b51b9a8c3b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/originals/game3d/scripts/cast_profiles.gd",
+      "expected": "4bc71adc2c9d2e89ba6d207ec8bc7904d7655251cb74d9c30f3e966f1ea6d3cd",
+      "actual": "4bc71adc2c9d2e89ba6d207ec8bc7904d7655251cb74d9c30f3e966f1ea6d3cd"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/originals/game3d/tests/run-gates.ps1",
+      "expected": "04963dc185fba8118fb5a510cc55a414e17200473628b25520ef51fa1f5ec1fa",
+      "actual": "04963dc185fba8118fb5a510cc55a414e17200473628b25520ef51fa1f5ec1fa"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/originals/game3d/tests/test_character_roster.gd",
+      "expected": "75c992e163dd39756483b57ce6bb52dbfca8a8a6594bcc022515c733685c0c5c",
+      "actual": "75c992e163dd39756483b57ce6bb52dbfca8a8a6594bcc022515c733685c0c5c"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/originals/game3d/tests/test_full_scene.gd",
+      "expected": "355cdc4d93e0c045f8693bc1c0785f1a673e566391437c135e5dd6287d3b4378",
+      "actual": "355cdc4d93e0c045f8693bc1c0785f1a673e566391437c135e5dd6287d3b4378"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/originals/tools/parity-metadata.mjs",
+      "expected": "bd26a4634bd15e58ccfa25b40f074ddbd755d4a089a5728e2e6c88c1454d1426",
+      "actual": "bd26a4634bd15e58ccfa25b40f074ddbd755d4a089a5728e2e6c88c1454d1426"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/prepare.py",
+      "expected": "f73fc4201f1f597966c492ec3c90318caeeba86421a66a5211f866b6725505bb",
+      "actual": "f73fc4201f1f597966c492ec3c90318caeeba86421a66a5211f866b6725505bb"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/README.md",
+      "expected": "90457852710bc1b9335acfb17bbde2641009d650d012b6d4f6924ae0eece4037",
+      "actual": "90457852710bc1b9335acfb17bbde2641009d650d012b6d4f6924ae0eece4037"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/results/metadata-contract.json",
+      "expected": "c35986fdb2fe071ec5f640ac0718db612d8ddcba6c74cdecefe211d892bbf8d8",
+      "actual": "c35986fdb2fe071ec5f640ac0718db612d8ddcba6c74cdecefe211d892bbf8d8"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/results/metadata-exports.log",
+      "expected": "b72b9c4fe3569733f9e31cc198f21168103c3274d8c09e8204bd68b27d61448b",
+      "actual": "b72b9c4fe3569733f9e31cc198f21168103c3274d8c09e8204bd68b27d61448b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/results/revision-contract.json",
+      "expected": "a6d66123e6da9fa481e8f9813e1fa9cf311a5d92782a1f301ef35c7c74fecb3d",
+      "actual": "a6d66123e6da9fa481e8f9813e1fa9cf311a5d92782a1f301ef35c7c74fecb3d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/SPEC-DRAFT.md",
+      "expected": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a",
+      "actual": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/test-revision.mjs",
+      "expected": "0a7febd74207ef062c17d0a9b2047c0ed835f4432a5d7786eae6b6998ae596c6",
+      "actual": "0a7febd74207ef062c17d0a9b2047c0ed835f4432a5d7786eae6b6998ae596c6"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/validation/tools/parity-metadata-gate.mjs",
+      "expected": "d84c4579ae8052d2edeeda7b7be2e9ad9c4b4c9f71219a0a93312851a1bf364d",
+      "actual": "d84c4579ae8052d2edeeda7b7be2e9ad9c4b4c9f71219a0a93312851a1bf364d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/validation/tools/parity-metadata-migrate.mjs",
+      "expected": "fa960f41a3a391859409519792a3e0edd8748465c0a81a70fbc626f16560c2c3",
+      "actual": "fa960f41a3a391859409519792a3e0edd8748465c0a81a70fbc626f16560c2c3"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/validation/tools/parity-metadata-test.mjs",
+      "expected": "2388c4874d86dfe6895725a37404acfd7657f7ccdc542cdf4e55951ec129d6c3",
+      "actual": "2388c4874d86dfe6895725a37404acfd7657f7ccdc542cdf4e55951ec129d6c3"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/validation/tools/parity-metadata.mjs",
+      "expected": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd",
+      "actual": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/metadata-v2/validation/tools/parity-source-proof.mjs",
+      "expected": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47",
+      "actual": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/packet-hashes.json",
+      "expected": "d166967fdf235f5d16a0e9c7405c786278c219e86ddcdaf93840b522239fa77a",
+      "actual": "d166967fdf235f5d16a0e9c7405c786278c219e86ddcdaf93840b522239fa77a"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/README.md",
+      "expected": "ececbf55ee9041f3a36d8fca0abca2d33953f96035e9350868f999f59b396246",
+      "actual": "ececbf55ee9041f3a36d8fca0abca2d33953f96035e9350868f999f59b396246"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/3d-gates.log",
+      "expected": "f1f6ee55d2ba1580ddcd27d90ff47e36d66b940b19882a55adc440866e022a13",
+      "actual": "f1f6ee55d2ba1580ddcd27d90ff47e36d66b940b19882a55adc440866e022a13"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/browser-console.json",
+      "expected": "a5db9c5e8e6ee89de40ad7a93329197e7ead2101dd1cc67d32ba069e41158f8a",
+      "actual": "a5db9c5e8e6ee89de40ad7a93329197e7ead2101dd1cc67d32ba069e41158f8a"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/build.log",
+      "expected": "0543c0a9ae8d601e4a436a4324bdc1a7809684d3d58c9302af121d5ac853bc9e",
+      "actual": "0543c0a9ae8d601e4a436a4324bdc1a7809684d3d58c9302af121d5ac853bc9e"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/export-hashes.json",
+      "expected": "7047d4157dac792434854a1b588af7c0518f5d3859b06a2db99ce68b2947e8b4",
+      "actual": "7047d4157dac792434854a1b588af7c0518f5d3859b06a2db99ce68b2947e8b4"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/manual-play.jpg",
+      "expected": "83c27d8564c1f5b3997f3541e2a7316ef1d0aab155e269430880b74cffde3799",
+      "actual": "83c27d8564c1f5b3997f3541e2a7316ef1d0aab155e269430880b74cffde3799"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/metadata-live.log",
+      "expected": "9b2312b235fff3841f17cbb709da04c82451f5b98c8f7c0cf23aeb120cbd418a",
+      "actual": "9b2312b235fff3841f17cbb709da04c82451f5b98c8f7c0cf23aeb120cbd418a"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/original-gates.log",
+      "expected": "fed1ca55b4ae97a4f91390aa811aaabf2becdece404e5278877a63e2d4de930b",
+      "actual": "fed1ca55b4ae97a4f91390aa811aaabf2becdece404e5278877a63e2d4de930b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/README.md",
+      "expected": "33cdcda86d0523ef4bfd0e1750c2e3f87cb07c6e505bf9e939a044c6893f58fa",
+      "actual": "33cdcda86d0523ef4bfd0e1750c2e3f87cb07c6e505bf9e939a044c6893f58fa"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/release/release-file-hashes.json",
+      "expected": "4b7c31413bccb9721f5ba49424fa15538f6e07b73e8ea27b3f7ac214b49749b7",
+      "actual": "4b7c31413bccb9721f5ba49424fa15538f6e07b73e8ea27b3f7ac214b49749b7"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/review/evidence.json",
+      "expected": "a249c73e70515b91be419c74c0de42472ac38d035a1687de87adfa3c002dcd03",
+      "actual": "a249c73e70515b91be419c74c0de42472ac38d035a1687de87adfa3c002dcd03"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/review/manifest.json",
+      "expected": "c170129e6148efa7d70da87cdb161ec4a5fdd7fc641e893a067bffa08bfb51c7",
+      "actual": "c170129e6148efa7d70da87cdb161ec4a5fdd7fc641e893a067bffa08bfb51c7"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/review/REVIEW.md",
+      "expected": "e3e32f704148cf280bdf1c851eb5387bdd3d3a75a01c339cd35691305fbf3f29",
+      "actual": "e3e32f704148cf280bdf1c851eb5387bdd3d3a75a01c339cd35691305fbf3f29"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/spec-and-composition/promote-resident-refinement.py",
+      "expected": "dde97e60db88030c9207986c23fc08a2f4a19ccee6e88a81686dfeedd1982c5d",
+      "actual": "dde97e60db88030c9207986c23fc08a2f4a19ccee6e88a81686dfeedd1982c5d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/spec-and-composition/README.md",
+      "expected": "4336415a6c901f93c301a43c3229339e4fb6482cca08479d3139f29a98b82028",
+      "actual": "4336415a6c901f93c301a43c3229339e4fb6482cca08479d3139f29a98b82028"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/spec-and-composition/resident-promotion.json",
+      "expected": "840a9d04e1969818f0293cf842d7663b4c45b1cf136ce5c01eb0091f6e24afe6",
+      "actual": "840a9d04e1969818f0293cf842d7663b4c45b1cf136ce5c01eb0091f6e24afe6"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/spec-and-composition/SPEC-3D-RESIDENT-REFINEMENT.md",
+      "expected": "e0d9ef3d5209089dea0c7dc745fd326c17024326dc41cf437a7380c7770e301a",
+      "actual": "e0d9ef3d5209089dea0c7dc745fd326c17024326dc41cf437a7380c7770e301a"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/spec-and-composition/SPEC-DAVE-WAKE-DRAFT.md",
+      "expected": "802622e57eb68cc87d8dbc04276d6d402997d17fccadca1f45d01105b354aeee",
+      "actual": "802622e57eb68cc87d8dbc04276d6d402997d17fccadca1f45d01105b354aeee"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/spec-and-composition/SPEC-LAUNDRY-SHIRT-DRAFT.md",
+      "expected": "ced165793ef31917ee2c12ed947fb0967ce848e49bfe5a8f27552ce40fc1a76c",
+      "actual": "ced165793ef31917ee2c12ed947fb0967ce848e49bfe5a8f27552ce40fc1a76c"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/dave-native-v1.log",
+      "expected": "92f4bd3ddaf89c39aba006187f7d2e6c34301aed8391e8bdbe38bd18a8161be8",
+      "actual": "92f4bd3ddaf89c39aba006187f7d2e6c34301aed8391e8bdbe38bd18a8161be8"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/import-console.log",
+      "expected": "11eadde123ee4cd96d65aa30273402ed6efab1f06f2388835841ea213c495080",
+      "actual": "11eadde123ee4cd96d65aa30273402ed6efab1f06f2388835841ea213c495080"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/import.log",
+      "expected": "a00c9900196fe9801501200d3d8ea2c7e2d8da28e6567b11869bc493cff5bfa0",
+      "actual": "a00c9900196fe9801501200d3d8ea2c7e2d8da28e6567b11869bc493cff5bfa0"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/index-web-export-console.log",
+      "expected": "1282e34d421ff003363d340beee1f04956d45bfa94d6733ce4841018a3e9826b",
+      "actual": "1282e34d421ff003363d340beee1f04956d45bfa94d6733ce4841018a3e9826b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/index-web-export.log",
+      "expected": "28d9142eb846e6d0ed58555dedc73853f75757d0b16fa2a4329919c014f80c4b",
+      "actual": "28d9142eb846e6d0ed58555dedc73853f75757d0b16fa2a4329919c014f80c4b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/laundry-native-v1.log",
+      "expected": "2ffc46d61f5aeb83ed376ef3c90d48d35fca8f81dca6bdc3ddb73a9c8b1acc40",
+      "actual": "2ffc46d61f5aeb83ed376ef3c90d48d35fca8f81dca6bdc3ddb73a9c8b1acc40"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/original-export-presets.cfg",
+      "expected": "23faf5fc1fc42bcb635f87e6471bcd86baae978a1592166acb26ef74cee79f30",
+      "actual": "23faf5fc1fc42bcb635f87e6471bcd86baae978a1592166acb26ef74cee79f30"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/overlays.json",
+      "expected": "27820b02b389bb70ae3bc7ffff7f102d0354ffa0bc5e4db66704de1c9dbc49c3",
+      "actual": "27820b02b389bb70ae3bc7ffff7f102d0354ffa0bc5e4db66704de1c9dbc49c3"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/roster-web-export-console.log",
+      "expected": "1282e34d421ff003363d340beee1f04956d45bfa94d6733ce4841018a3e9826b",
+      "actual": "1282e34d421ff003363d340beee1f04956d45bfa94d6733ce4841018a3e9826b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/roster-web-export.log",
+      "expected": "28d9142eb846e6d0ed58555dedc73853f75757d0b16fa2a4329919c014f80c4b",
+      "actual": "28d9142eb846e6d0ed58555dedc73853f75757d0b16fa2a4329919c014f80c4b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/test_character_roster-console.log",
+      "expected": "23d52ee9915aa1ca76f349bbd4905685d5762930b7360af4cda55ae922d1eb70",
+      "actual": "23d52ee9915aa1ca76f349bbd4905685d5762930b7360af4cda55ae922d1eb70"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/test_character_roster.log",
+      "expected": "1b562cf4c28e0149113f6d4c272852fe61261b540fd770d5b512fc869ef43673",
+      "actual": "1b562cf4c28e0149113f6d4c272852fe61261b540fd770d5b512fc869ef43673"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/test_dave_walkthrough_contract-console.log",
+      "expected": "17be87aeb53e96e0b3c2796cd3383ff7868432f96c17c9f40fd942901a09515d",
+      "actual": "17be87aeb53e96e0b3c2796cd3383ff7868432f96c17c9f40fd942901a09515d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/test_dave_walkthrough_contract.log",
+      "expected": "c09fa3183ece65f47cf45c1e9f6c6aee55797143e6bd0925dbca0c7f2dab9a11",
+      "actual": "c09fa3183ece65f47cf45c1e9f6c6aee55797143e6bd0925dbca0c7f2dab9a11"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/test_full_scene-console.log",
+      "expected": "4dc6bea7c3cd68de109f87a4837a1cb9aa76a621d95590ac12118e4b174fcaa4",
+      "actual": "4dc6bea7c3cd68de109f87a4837a1cb9aa76a621d95590ac12118e4b174fcaa4"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/test_full_scene.log",
+      "expected": "46c2abb7d4a1212680b9246c4e8bb50d21e56b525eedc1285139076e46fbc636",
+      "actual": "46c2abb7d4a1212680b9246c4e8bb50d21e56b525eedc1285139076e46fbc636"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/web-exports.json",
+      "expected": "8cad823249b28195c3940a35687b2cc7e4c2d6ddefff222b3dd5ef205365b24b",
+      "actual": "8cad823249b28195c3940a35687b2cc7e4c2d6ddefff222b3dd5ef205365b24b"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/web-import-console.log",
+      "expected": "7093a0eec99fffd2be9e9d570aea8d76ae444e06121a1db48e0db43a4ed99c3d",
+      "actual": "7093a0eec99fffd2be9e9d570aea8d76ae444e06121a1db48e0db43a4ed99c3d"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/web-import.log",
+      "expected": "6767f45127a07b8e47a0caeb257dcd867a4abfc832dd2f13e0c2a86ea93ae7e0",
+      "actual": "6767f45127a07b8e47a0caeb257dcd867a4abfc832dd2f13e0c2a86ea93ae7e0"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/validation/web-preparation.json",
+      "expected": "67f9f7656321e547dfb7907db0e42af5e14cc58f9c27e7f7209c2f9e11eefba1",
+      "actual": "67f9f7656321e547dfb7907db0e42af5e14cc58f9c27e7f7209c2f9e11eefba1"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/web-harness/dave-walkthrough-bridge.js",
+      "expected": "2405ccd6db2ee411062d7f759d1a2efaa878a31539e113a72265f3e863665ab7",
+      "actual": "2405ccd6db2ee411062d7f759d1a2efaa878a31539e113a72265f3e863665ab7"
+    },
+    {
+      "path": "artifacts/3d-full-port/resident-refinement/web-harness/dave-walkthrough-shell.html",
+      "expected": "117d0dadead1bdc3f8b5b674386c9682235e5a50cb822d7f8144445801cadfc2",
+      "actual": "117d0dadead1bdc3f8b5b674386c9682235e5a50cb822d7f8144445801cadfc2"
+    }
+  ]
+}

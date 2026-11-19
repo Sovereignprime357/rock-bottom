@@ -1,0 +1,166 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+3D FULL STARTUP: {"elapsed_usec":11169992,"resources":{"build_usec":5427557,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":3808343,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":6186056,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":1170310,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+ERROR: source event invalidates continuation: death
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _alive (res://tests/campaign_continuation_probe.gd:552)
+       [2] _tick_campaign (res://tests/campaign_continuation_probe.gd:563)
+       [3] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: actual controller walking stalled at (0.48, 0.06, 0.56) toward (218.0, 0.06, 2.92)
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [2] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [3] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: forbidden lifecycle or write: deaths
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: rendered phase evidence
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: ordered finite campaign phases
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: required transaction count: mark
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: required transaction count: kingdom_reward
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: ordered claims/awards
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: five actual canonical fights
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: three real smoke loops
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: both source endings
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: durable four-claim Kingdom completion
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+ERROR: final real save/load/movement
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/office_acceptance_probe.gd:332)
+       [1] _finish_campaign (res://tests/campaign_continuation_probe.gd:1019)
+       [2] _run (res://tests/campaign_continuation_probe.gd:1011)
+       [3] _campaign_scenario (res://tests/campaign_continuation_probe.gd:920)
+       [4] _c_kingdom_scenario (res://tests/campaign_continuation_probe.gd:925)
+       [5] _c_court (res://tests/campaign_continuation_probe.gd:831)
+       [6] _visit (res://tests/campaign_continuation_probe.gd:649)
+       [7] _walk_to (res://tests/office_acceptance_probe.gd:895)
+       [8] _walk_frame (res://tests/campaign_continuation_probe.gd:279)
+       [9] _process (res://tests/office_acceptance_probe.gd:51)
+OFFICE PROBE FAILURE CONTEXT: {"actual_input":"(0.0, 0.0)","combat":{"active_ms":514528.87073833,"can_hit":true,"direct_segment":{"actual_end":"(1658.149, 942.5486)","from":"(1652.343, 955.8352)","ok":false,"reason":"static_sweep_blocked","to":"(1659.138, 940.7413)"},"distance":42.0396575927734,"phase":3,"player_center":"(1652.343, 955.8352)","reason":"blocked_retreat_or_dodge","revision":49,"target_center":"(1610.307, 956.4073)","target_id":"tony","wall_ms":542226},"combat_replans":1,"hp":60.103388,"mode":"playing","mouse_captured":true,"nearby":[{"h":18.0,"id":"pothole","neutral":true,"w":32.0,"x":980.0,"y":920.0}],"requested_motion":"(0.0, 0.0)","service_aim_context":{},"source_center":"(1062.0, 854.0)","walking_context":{"elapsed_ms":13476,"from":"(0.48, 0.06, 0.56)","goal":"(218.0, 0.06, 2.92)","local":{"candidates":[{"point":"(239.8216, 0.06, 0.951111)","reason":"live_peer_contact","steps":1},{"point":"(240.0498, 0.06, 0.220546)","reason":"live_peer_contact","steps":1},{"point":"(240.1769, 0.06, 1.629038)","reason":"live_peer_contact","steps":1},{"point":"(240.3196, 0.06, 0.906181)","reason":"live_peer_contact","steps":1},{"point":"(240.4972, 0.06, 1.245144)","reason":"live_peer_contact","steps":1},{"point":"(240.4337, 0.06, 0.540898)","reason":"live_peer_contact","steps":1},{"point":"(240.5686, 0.06, 0.883715)","reason":"live_peer_contact","steps":1},{"point":"(240.6574, 0.06, 1.053197)","reason":"live_peer_contact","steps":1},{"point":"(240.6256, 0.06, 0.701074)","reason":"live_peer_contact","steps":1},{"point":"(240.84, 0.06, 1.110239)","reason":"local_steps_clear","steps":7}],"from":"(240.8176, 0.06, 0.86125)","goal":"(218.0, 0.06, 2.92)","reason":"certified_outward_join","selected":"(240.84, 0.06, 1.110239)","steps":16,"tail_attempts":1},"no_progress_ms":0,"plans":18,"reason":"following_route","replans":17,"route":{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"from":"(241.3482, 0.06, 2.355613)","graph_points":10,"reason":"resident_detour_ready","route_points":3,"to":"(218.0, 0.06, 2.92)"}},"walking_goal":"(218.0, 0.06, 2.92)","walks":[{"blockers":["gutter_greg"],"graph_points":9,"route_points":6,"wall_ms":36757},{"blockers":["conductor"],"graph_points":16,"route_points":8,"wall_ms":54215},{"blockers":["conductor","mom"],"graph_points":24,"route_points":7,"wall_ms":86193},{"from":"(22.61513, 0.06, 4.096004)","joined_at":"(21.81766, 0.06, 4.699368)","reason":"actual_capsule_corner_link","steps":26,"tail_attempts":1,"wall_ms":104035},{"blockers":["meter_maid"],"graph_points":16,"route_points":12,"wall_ms":108714},{"from":"(28.98199, 0.06, 9.945064)","goal":"(154.8, 0.06, 95.71999)","reason":"actual500ms_stagnation","replans":0,"wall_ms":112404,"waypoint":"(28.892, 0.06, 9.908)"},{"details":{"candidates":[{"point":"(29.80825, 0.06, 10.50836)","reason":"local_steps_clear","steps":25}],"from":"(28.98199, 0.06, 9.945064)","goal":"(154.8, 0.06, 95.71999)","reason":"certified_outward_join","selected":"(29.80825, 0.06, 10.50836)","steps":25,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":112937},{"from":"(145.6708, 0.06, 95.6617)","joined_at":"(146.3734, 0.06, 96.37331)","reason":"actual_capsule_corner_link","steps":25,"tail_attempts":1,"wall_ms":131422},{"blockers":["cubscout","busker"],"graph_points":32,"route_points":9,"wall_ms":135431},{"blockers":["busker"],"graph_points":27,"route_points":4,"wall_ms":154408},{"blockers":["dave","cubscout","food_truck"],"graph_points":14,"route_points":3,"wall_ms":167473},{"blockers":["cubscout"],"graph_points":14,"route_points":3,"wall_ms":168235},{"blockers":["mom","busker","phoneguy"],"graph_points":29,"route_points":10,"wall_ms":172342},{"goal":"(154.8, 0.06, 95.71999)","query":{"actual_end":"(4684.706, 3217.609)","from":"(4683.942, 3217.346)","ok":false,"reason":"static_short_step_blocked","to":"(4684.942, 3217.361)"},"reason":"actual_short_step_refused","replans":0,"wall_ms":274698,"waypoint":"(154.087, 0.06, 95.772)"},{"details":{"candidates":[{"point":"(146.8376, 0.06, 95.66122)","reason":"world_endpoint_blocked","steps":0},{"point":"(146.5396, 0.06, 96.36615)","reason":"local_steps_clear","steps":26}],"from":"(145.8377, 0.06, 95.65385)","goal":"(154.8, 0.06, 95.71999)","reason":"certified_outward_join","selected":"(146.5396, 0.06, 96.36615)","steps":26,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":274746},{"goal":"(154.8, 0.06, 95.71999)","query":{"actual_end":"(4684.822, 3217.625)","from":"(4684.028, 3217.505)","ok":false,"reason":"static_short_step_blocked","to":"(4685.028, 3217.519)"},"reason":"actual_short_step_refused","replans":0,"wall_ms":348531,"waypoint":"(154.087, 0.06, 95.772)"},{"details":{"candidates":[{"point":"(146.8411, 0.06, 95.66689)","reason":"world_endpoint_blocked","steps":0},{"point":"(146.5435, 0.06, 96.37202)","reason":"local_steps_clear","steps":26}],"from":"(145.8411, 0.06, 95.66021)","goal":"(154.8, 0.06, 95.71999)","reason":"certified_outward_join","selected":"(146.5435, 0.06, 96.37202)","steps":26,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":348580},{"from":"(145.6421, 0.06, 95.64558)","joined_at":"(146.3434, 0.06, 96.35841)","reason":"actual_capsule_corner_link","steps":26,"tail_attempts":1,"wall_ms":453798},{"blockers":["price_guy"],"graph_points":12,"route_points":8,"wall_ms":455708},{"blockers":["price_guy"],"graph_points":13,"route_points":8,"wall_ms":478268},{"blockers":["price_guy"],"graph_points":17,"route_points":8,"wall_ms":500982},{"blockers":["meter_maid"],"graph_points":13,"route_points":4,"wall_ms":534453},{"from":"(13.08623, 0.06, 4.713913)","goal":"(23.36, 0.06, 3.09)","reason":"actual500ms_stagnation","replans":0,"wall_ms":536200,"waypoint":"(12.99302, 0.06, 4.6676)"},{"details":{"candidates":[{"point":"(14.07397, 0.06, 4.557788)","reason":"world_endpoint_blocked","steps":0},{"point":"(13.67427, 0.06, 3.90508)","reason":"world_endpoint_blocked","steps":0},{"point":"(13.89506, 0.06, 5.301951)","reason":"local_steps_clear","steps":25}],"from":"(13.08623, 0.06, 4.713913)","goal":"(23.36, 0.06, 3.09)","reason":"certified_outward_join","selected":"(13.89506, 0.06, 5.301951)","steps":25,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":536216},{"from":"(22.73166, 0.06, 4.161543)","goal":"(23.36, 0.06, 3.09)","reason":"actual500ms_stagnation","replans":1,"wall_ms":538237,"waypoint":"(22.647, 0.06, 4.172)"},{"details":{"candidates":[{"point":"(23.2375, 0.06, 3.298913)","reason":"local_steps_clear","steps":26}],"from":"(22.73166, 0.06, 4.161543)","goal":"(23.36, 0.06, 3.09)","reason":"certified_outward_join","selected":"(23.2375, 0.06, 3.298913)","steps":26,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":538250},{"blockers":["price_guy"],"graph_points":17,"route_points":8,"wall_ms":562234},{"blockers":["kingdom_guard_blue_tarp_10_1"],"graph_points":6,"route_points":3,"wall_ms":611504},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":4,"wall_ms":620315},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":4,"wall_ms":621086},{"goal":"(218.0, 0.06, 2.92)","query":{"actual_end":"(6876.718, 999.6298)","from":"(6876.959, 1000.565)","ok":false,"reason":"live_peer_contact","to":"(6876.604, 999.6298)"},"reason":"actual_short_step_refused","replans":1,"wall_ms":621230,"waypoint":"(233.1721, 0.06, 5.966211)"},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":621887},{"details":{"candidates":[{"point":"(232.9069, 0.06, 6.778243)","reason":"live_peer_contact","steps":8},{"point":"(233.0133, 0.06, 7.536181)","reason":"live_peer_contact","steps":9},{"point":"(233.3676, 0.06, 6.167082)","reason":"live_peer_contact","steps":15},{"point":"(233.3909, 0.06, 6.903525)","reason":"live_peer_contact","steps":9},{"point":"(233.6213, 0.06, 6.597945)","reason":"local_steps_clear","steps":13}],"from":"(233.875, 0.06, 7.028809)","goal":"(218.0, 0.06, 2.92)","reason":"certified_outward_join","selected":"(233.6213, 0.06, 6.597945)","steps":54,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":621887},{"goal":"(218.0, 0.06, 2.92)","query":{"actual_end":"(6881.387, 991.3206)","from":"(6881.387, 991.5153)","ok":false,"reason":"live_peer_contact","to":"(6880.406, 991.3206)"},"reason":"actual_short_step_refused","replans":2,"wall_ms":622045,"waypoint":"(233.6213, 0.06, 6.597945)"},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":622625},{"details":{"candidates":[{"point":"(233.0808, 0.06, 6.411355)","reason":"live_peer_contact","steps":1},{"point":"(233.2067, 0.06, 7.166303)","reason":"live_peer_contact","steps":1},{"point":"(233.5257, 0.06, 5.788529)","reason":"live_peer_contact","steps":1},{"point":"(233.5679, 0.06, 6.524127)","reason":"live_peer_contact","steps":1},{"point":"(233.6309, 0.06, 6.901601)","reason":"live_peer_contact","steps":1},{"point":"(233.7904, 0.06, 6.212714)","reason":"live_peer_contact","steps":1},{"point":"(233.8115, 0.06, 6.580513)","reason":"live_peer_contact","steps":1},{"point":"(233.9227, 0.06, 6.424807)","reason":"live_peer_contact","steps":1},{"point":"(233.843, 0.06, 6.76925)","reason":"live_peer_contact","steps":1},{"point":"(234.1115, 0.06, 6.393341)","reason":"local_steps_clear","steps":7}],"from":"(234.0551, 0.06, 6.636899)","goal":"(218.0, 0.06, 2.92)","reason":"certified_outward_join","selected":"(234.1115, 0.06, 6.393341)","steps":16,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":622625},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":623387},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":624162},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":624918},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":625684},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":626462},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":627248},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":4,"wall_ms":627999},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":628756},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":629815},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":630565},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":631334},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":632102},{"goal":"(218.0, 0.06, 2.92)","query":{"actual_end":"(7058.439, 848.5309)","from":"(7058.439, 847.5313)","ok":false,"reason":"live_peer_contact","to":"(7058.414, 848.5309)"},"reason":"actual_short_step_refused","replans":15,"wall_ms":632542,"waypoint":"(240.78, 0.06, 2.303391)"},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":14,"route_points":3,"wall_ms":632894},{"details":{"candidates":[{"point":"(239.8216, 0.06, 0.951111)","reason":"live_peer_contact","steps":1},{"point":"(240.0498, 0.06, 0.220546)","reason":"live_peer_contact","steps":1},{"point":"(240.1769, 0.06, 1.629038)","reason":"live_peer_contact","steps":1},{"point":"(240.3196, 0.06, 0.906181)","reason":"live_peer_contact","steps":1},{"point":"(240.4972, 0.06, 1.245144)","reason":"live_peer_contact","steps":1},{"point":"(240.4337, 0.06, 0.540898)","reason":"live_peer_contact","steps":1},{"point":"(240.5686, 0.06, 0.883715)","reason":"live_peer_contact","steps":1},{"point":"(240.6574, 0.06, 1.053197)","reason":"live_peer_contact","steps":1},{"point":"(240.6256, 0.06, 0.701074)","reason":"live_peer_contact","steps":1},{"point":"(240.84, 0.06, 1.110239)","reason":"local_steps_clear","steps":7}],"from":"(240.8176, 0.06, 0.86125)","goal":"(218.0, 0.06, 2.92)","reason":"certified_outward_join","selected":"(240.84, 0.06, 1.110239)","steps":16,"tail_attempts":1},"reason":"certified_outward_join","wall_ms":632894},{"blockers":["kingdom_guard_blue_tarp_10_1","kingdom_guard_blue_tarp_10_3"],"graph_points":10,"route_points":3,"wall_ms":633610}],"world_position":"(0.48, 0.06, 0.56)"}
+CAMPAIGN CONTINUATION: FAIL; five actual referenced fights; four claims; C:/Users/zenit/projects/Rock Bottom/.build/full-port/campaign-continuation/native-v4
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2514)

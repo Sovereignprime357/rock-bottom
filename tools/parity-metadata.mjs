@@ -18,10 +18,10 @@ export const INPUT = {
 export const TARGETS = ['windows_first_person','web_keyboard_mouse'];
 export const LIVE_MANIFEST='game3d/data/parity_manifest.json';
 export const CONTRACT_REPORT='.build/3d/gates/parity-metadata-contract.json';
-export const PIN_REVISIONS=Object.freeze({'metadata-v1':'reports/3d-parity-metadata/input-pins-metadata-v1.json'});
+export const PIN_REVISIONS=Object.freeze({'metadata-v1':'reports/3d-parity-metadata/input-pins-metadata-v1.json','metadata-v2':'reports/3d-parity-metadata/input-pins-metadata-v2.json'});
 export function selectedPins(args=process.argv.slice(2),reader=read) {
   const flags=args.filter(arg=>arg.startsWith('--pins='));
-  if(flags.length!==1)throw Error('Exactly one explicit --pins=metadata-v1 selection is required.');
+  if(flags.length!==1)throw Error('Exactly one explicit --pins=<named revision> selection is required.');
   const name=flags[0].slice(7);
   if(!Object.hasOwn(PIN_REVISIONS,name))throw Error('Unknown input-pin revision; no default or automatic refresh.');
   return {name,path:PIN_REVISIONS[name],value:JSON.parse(reader(PIN_REVISIONS[name]).toString('utf8'))};

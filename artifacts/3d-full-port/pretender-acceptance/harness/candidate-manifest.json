@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "format": "rock-bottom-pretender-continuation-draft",
+  "status": "held_draft",
+  "scope": "two new isolated test scripts, spec and inventory; no production changes",
+  "accepted_input": {
+    "path": ".build/full-port/campaign-continuation/resume-v6/campaign-two-run-aggregate.json",
+    "sha256": "c3c00e775243fa10d1d0caf2e88173b67e827b32cef423a502fdc5c4d31af1a9",
+    "source": "root accepted actual two-run aggregate; launch still checks actual supplied report/save pins and full inherited proof"
+  },
+  "campaign_dependency_repin": {
+    "authorized_by": "/root",
+    "previous": {
+      ".build/3d/campaign-continuation-draft/tests/campaign_continuation_probe.gd": "cad552c987335addd7223b318e7e2aa0f9b5a519d85ddea3a6185219e28d0301",
+      ".build/3d/campaign-continuation-draft/tests/test_campaign_continuation_contract.gd": "eb81d8587c03b97a8785968cbbe2eaaae05f52889c039f6ed9b9406062a6b136",
+      ".build/3d/campaign-continuation-draft/candidate-manifest.json": "68c6a95b35116a8e228f9048f037b4e3a26824247e1657be325e3c448692de30"
+    },
+    "reviewed": {
+      ".build/3d/campaign-continuation-draft/tests/campaign_continuation_probe.gd": "7801ef1f37a86703a14bda0fdbb9055a1326269bd4609030660710686f6b798c",
+      ".build/3d/campaign-continuation-draft/tests/test_campaign_continuation_contract.gd": "5091ba1f4fb5125a371e9282c6f2bb7829955adfcc7e33a1364b0b5b4a9bdaa2",
+      ".build/3d/campaign-continuation-draft/candidate-manifest.json": "3031226845db5bda4c179125892f514c7edb7d6a8d1bf91dba22614327e8064b"
+    },
+    "reason": "Reviewed hostile-only guard correction and exact parsed JSON admission; root reports actual-retained contract1072/11 PASS and actual resume-v6 composed campaign accepted.",
+    "campaign_files_written_by_this_packet": false
+  },
+  "admission_numeric_amendment": "Only stored-save nested identity delegates to the reviewed exact finite Campaign evidence helper. Raw SHA pins/full proof/status/failures/source inventory/final suffix selection and budgets unchanged.",
+  "native_v1_correction": {
+    "failed_report_sha256": "53fe58f5d50417fbbbb01fc7dfea8a700cc6c04b95f165dc9ef198332b8e637d",
+    "previous_probe_sha256": "1a0b8fd72b7d13aeac9a9cf2f9ea473f3181520a140f58192301d9e0f5bfe18c",
+    "changed_existing_methods": [
+      "_alive",
+      "assess_pretender_tour"
+    ],
+    "new_methods": [
+      "_court_defend",
+      "_court_defensive_target",
+      "assess_transit_defenses",
+      "guard_transit_allowed"
+    ],
+    "all_other_methods_unchanged": true,
+    "all_existing_constants_and_limits_unchanged": true,
+    "scope": "day_N proactive transit guard selector; inherited shared budget plus active watchdog and detached audit; no recovery policy, boss combat, admission or gameplay changes"
+  },
+  "input_requirement": "accepted uninterrupted full campaign or explicitly accepted two-run aggregate; complete inherited assessor, exact raw top-level report SHA and final save bytes; no standalone or failed prefix/suffix",
+  "files": [
+    {
+      "path": ".build/3d/pretender-continuation-draft/ALL11-FEASIBILITY.md",
+      "sha256": "25f388e3b89363b0a01d51c2d03da4b7338c18a53c1131b94ae493e0cdc16449"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/build_manifest.py",
+      "sha256": "32fcd6d313849ef1a8bebc23feb44e1e1512318bb3c3343ef76cfb9bc3fe50dc"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/evidence/native-v1-failure.json",
+      "sha256": "5de3bfde0b180770e236d7ddef7c105c680a192bfc505a0982e8f7fc32da6abc"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/evidence/native-v1-probe.gd.txt",
+      "sha256": "1a0b8fd72b7d13aeac9a9cf2f9ea473f3181520a140f58192301d9e0f5bfe18c"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/README.md",
+      "sha256": "2458519b5f31f7ec2284d1f625b2d857c7e8658fb39e0afc4c3001b2d641d2fa"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/REVIEW.md",
+      "sha256": "1d461951df0f9039a6d87b1f802fef28621c2cc58b5089397297105d14fa136d"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/SPEC-PRETENDER-CONTINUATION-DRAFT.md",
+      "sha256": "4a39a3c84d3251a11c647775f6326733ea7684c1a281caa78d6788b241a84b43"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/tests/pretender_continuation_probe.gd",
+      "sha256": "e10c58de4715524bb7dbf12628c209b145f62dc8b1bf581f69acc172288f6352"
+    },
+    {
+      "path": ".build/3d/pretender-continuation-draft/tests/test_pretender_continuation_contract.gd",
+      "sha256": "03eae44d00f21d852f9c24a23d3ea2a7fa267f81d49d39ef1998d343451ad669"
+    }
+  ],
+  "read_only_dependencies": [
+    {
+      "path": ".build/3d/campaign-continuation-draft/tests/campaign_continuation_probe.gd",
+      "sha256": "7801ef1f37a86703a14bda0fdbb9055a1326269bd4609030660710686f6b798c"
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/tests/test_campaign_continuation_contract.gd",
+      "sha256": "5091ba1f4fb5125a371e9282c6f2bb7829955adfcc7e33a1364b0b5b4a9bdaa2"
+    },
+    {
+      "path": ".build/3d/campaign-continuation-draft/candidate-manifest.json",
+      "sha256": "3031226845db5bda4c179125892f514c7edb7d6a8d1bf91dba22614327e8064b"
+    },
+    {
+      "path": "game3d/tests/office_endpoint_driver.gd",
+      "sha256": "69f6890b18e0c131d69e435fee2eecbaa8c8e39e049adcc0d070e4ad61b3fb6c"
+    },
+    {
+      "path": "game3d/tests/office_acceptance_probe.gd",
+      "sha256": "7433cf8ceaccb769f9034124e3dec62beb46801a71877ec659b699a0dab156b7"
+    },
+    {
+      "path": "game3d/tests/boss_acceptance_probe.gd",
+      "sha256": "a8d990dfcf5ebc71c78bccb16886868a9a07d3ef7585e03c5c70554083bd27d9"
+    },
+    {
+      "path": "game3d/scripts/campaign_system.gd",
+      "sha256": "1b5ed869454b0b4fe3320ef4dd47a9bf029d33d6fbc087dffbf692a10928a4ff"
+    },
+    {
+      "path": "game3d/scripts/kingdom_campaign.gd",
+      "sha256": "7ec8c958fc725fab1ab4458490aabf4c94aca1af71fc79b23a6d0f9638d19073"
+    },
+    {
+      "path": "game3d/scripts/travel_system.gd",
+      "sha256": "62590064ba18869292da4038bb856961fc299327406beb6c2271a57e872f27a5"
+    },
+    {
+      "path": "game3d/scripts/day_system.gd",
+      "sha256": "2eb5c3b28215223fb94049abff5b47abbaa7c78f1479a22a504054c8520321d3"
+    },
+    {
+      "path": "game3d/scripts/combat_system.gd",
+      "sha256": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75"
+    },
+    {
+      "path": "game3d/data/source_content.json",
+      "sha256": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0"
+    },
+    {
+      "path": "src/systems/campaigns.js",
+      "sha256": "9f9de65ed8c5fd169e73eef12bde722cc11e0cfc8a768498adb3e46d4c6e133c"
+    },
+    {
+      "path": "src/systems/daily_hideouts.js",
+      "sha256": "63bab30519539f0ab117cf6a847a188aa1a6b511da5d3769006e20e77aa0ba56"
+    },
+    {
+      "path": "VIBE.md",
+      "sha256": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5"
+    }
+  ],
+  "staging_overlays": [
+    {
+      "source": ".build/3d/pretender-continuation-draft/tests/pretender_continuation_probe.gd",
+      "target": "game3d/tests/pretender_continuation_probe.gd",
+      "sha256": "e10c58de4715524bb7dbf12628c209b145f62dc8b1bf581f69acc172288f6352"
+    },
+    {
+      "source": ".build/3d/pretender-continuation-draft/tests/test_pretender_continuation_contract.gd",
+      "target": "game3d/tests/test_pretender_continuation_contract.gd",
+      "sha256": "03eae44d00f21d852f9c24a23d3ea2a7fa267f81d49d39ef1998d343451ad669"
+    }
+  ],
+  "limits": {
+    "cold_ms": 120000,
+    "tour_ms": 600000,
+    "day_ms": 180000,
+    "approach_fight_ms": 90000,
+    "cot_commands": 9,
+    "captures": 12,
+    "finalizer_ms": 15000
+  },
+  "validation": {
+    "static": "pass",
+    "godot_parse": "not_run",
+    "headless_contract": "not_run",
+    "native": "not_run",
+    "web": "not_run"
+  }
+}

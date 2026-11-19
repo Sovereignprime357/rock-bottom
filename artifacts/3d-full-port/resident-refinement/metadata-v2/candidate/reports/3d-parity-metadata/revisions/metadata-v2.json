@@ -1,0 +1,2310 @@
+{
+  "schema": 1,
+  "revision": "metadata-v2",
+  "selectedExplicitly": true,
+  "previousPins": {
+    "path": "reports/3d-parity-metadata/input-pins-metadata-v1.json",
+    "sha256": "15fa21a1b0bdf41353155146f31b8365bbd1c0f3a21b3d3bdb3f8239cde5c171"
+  },
+  "newPins": {
+    "path": "reports/3d-parity-metadata/input-pins-metadata-v2.json",
+    "sha256": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276"
+  },
+  "pinCensus": 247,
+  "changes": [
+    {
+      "path": "game3d/scripts/cast_profiles.gd",
+      "oldSha256": "4bc71adc2c9d2e89ba6d207ec8bc7904d7655251cb74d9c30f3e966f1ea6d3cd",
+      "originalRawCopy": ".build/3d/campaign-continuation-integration/game3d/scripts/cast_profiles.gd",
+      "testedCandidateSha256": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+      "finalSha256": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+      "reason": "Approved Dave wake presentation and original folded laundry cloth; no weighted indexing or sleep-ground correction.",
+      "checkoutNormalization": null
+    },
+    {
+      "path": "game3d/tests/test_character_roster.gd",
+      "oldSha256": "75c992e163dd39756483b57ce6bb52dbfca8a8a6594bcc022515c733685c0c5c",
+      "originalRawCopy": ".build/3d/campaign-continuation-integration/game3d/tests/test_character_roster.gd",
+      "testedCandidateSha256": "b97b4bcd4481ee06b798bbb301c0b8e89f42b1b504480ddc428a9b055a63f217",
+      "finalSha256": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c",
+      "reason": "Approved folded laundry geometry regressions; explicit CRLF-to-LF checkout normalization only after the tested candidate.",
+      "checkoutNormalization": {
+        "kind": "CRLF_to_LF",
+        "lines": 1052,
+        "allOtherBytesUnchanged": true
+      }
+    },
+    {
+      "path": "game3d/tests/test_full_scene.gd",
+      "oldSha256": "355cdc4d93e0c045f8693bc1c0785f1a673e566391437c135e5dd6287d3b4378",
+      "originalRawCopy": ".build/3d/all11-2c32-v1/game3d/tests/test_full_scene.gd",
+      "testedCandidateSha256": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e",
+      "finalSha256": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e",
+      "reason": "Approved actual Dave wake/current-state presentation regression; source asleep authority stays unchanged.",
+      "checkoutNormalization": null
+    }
+  ],
+  "approvedResidentComposition": {
+    "path": ".build/3d/resident-art-integration/overlays.json",
+    "sha256": "27820b02b389bb70ae3bc7ffff7f102d0354ffa0bc5e4db66704de1c9dbc49c3",
+    "testedInputs": {
+      "game3d/scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+      "game3d/tests/test_character_roster.gd": "b97b4bcd4481ee06b798bbb301c0b8e89f42b1b504480ddc428a9b055a63f217",
+      "game3d/tests/test_full_scene.gd": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e",
+      "game3d/tests/dave_walkthrough_probe.gd": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2",
+      "game3d/tests/test_dave_walkthrough_contract.gd": "c2a7dec8778dd8121cf5f6218770504ca34c914925821e5998947ff65e64564f"
+    }
+  },
+  "unchangedOwner": {
+    "path": "game3d/scripts/character_roster.gd",
+    "sha256": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1"
+  },
+  "unchangedManifest": {
+    "path": "game3d/data/parity_manifest.json",
+    "sha256": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+    "handlers": 585,
+    "features": 32,
+    "existingEvidenceRefs": 96,
+    "statusesChanged": 0,
+    "referencesChanged": 0
+  },
+  "affectedDependencyLinks": [
+    {
+      "path": "game3d/scripts/cast_profiles.gd",
+      "directManifestLinks": [
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_npc_32.js\"][\"makeNpc32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_npc_32.js\"][\"makeSleepingDave32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makeDog32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makeHorseCop32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePigeon32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePossum32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePothole32\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"applyDogSignature\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"applyNpcSignature\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"buildSprites\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"cacheSprite\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"init_sprites\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeDog\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeHorseCop\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeNPC\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makePigeon\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makePossum\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makePothole\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeSleepingDave\"]",
+          "field": "implementation",
+          "references": [
+            "game3d/scripts/cast_profiles.gd"
+          ]
+        }
+      ],
+      "evidenceIndexSupportingFeatures": [],
+      "linkedExistingEvidenceIds": [],
+      "boundary": "These are dependency links, not new validation. Historical artifacts retain original bytes, qualifications, outcomes and reported source provenance; they do not automatically certify the revised implementation."
+    },
+    {
+      "path": "game3d/tests/test_character_roster.gd",
+      "directManifestLinks": [
+        {
+          "group": "features",
+          "id": "npc_agency_and_lifecycle",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"drawNpc\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"drawNpcContactShadow\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"init_actors_weather\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"resolveNpcPose\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_npc_32.js\"][\"makeNpc32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_npc_32.js\"][\"makeSleepingDave32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makeDog32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makeHorseCop32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePigeon32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePossum32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePothole32\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"anchorGridToBottom\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"applyVars\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"assertSupportedLogicalSize\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"blankSpriteGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"cloneGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridBox\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridEllipse\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridLine\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"gridPut\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"mirrorGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"parseGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprite_toolkit.js\"][\"rasterize\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"anchorGridToBottom\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"applyDogSignature\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"applyNpcSignature\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"applyVars\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"blankSpriteGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"buildSprites\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"cacheSprite\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"gridBox\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"gridLine\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"gridPut\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"init_sprites\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeDog\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeHorseCop\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeNPC\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makePigeon\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makePossum\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makePothole\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"makeSleepingDave\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"mirrorGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"parseGrid\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/sprites.js\"][\"rasterize\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_character_roster.gd"
+          ]
+        }
+      ],
+      "evidenceIndexSupportingFeatures": [
+        "npc_agency_and_lifecycle"
+      ],
+      "linkedExistingEvidenceIds": [
+        "npc_agency_and_lifecycle/windows_first_person/0",
+        "npc_agency_and_lifecycle/windows_first_person/1",
+        "npc_agency_and_lifecycle/windows_first_person/2",
+        "npc_agency_and_lifecycle/web_keyboard_mouse/0"
+      ],
+      "boundary": "These are dependency links, not new validation. Historical artifacts retain original bytes, qualifications, outcomes and reported source provenance; they do not automatically certify the revised implementation."
+    },
+    {
+      "path": "game3d/tests/test_full_scene.gd",
+      "directManifestLinks": [
+        {
+          "group": "features",
+          "id": "state_boot_and_modes",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "main_loop_and_withdrawal",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "input_and_interaction_arbitration",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "inventory_equipment_weapons_tools",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "dumpster_trash_pickups_and_lottery",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "office_claims_and_work_orders",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "kingdom_and_endless_succession",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "clock_weather_day_events_and_sleeping",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "cart_and_bus_travel",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "copper_sites_and_break_ins",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "cooking_heat_minigame",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "other_activities",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "hud_map_guidance_and_presentation",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "features",
+          "id": "persistence_and_recovery",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[0][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[10][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[11][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[12][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[13][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[14][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[15][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[16][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[17][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[18][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[19][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[1][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[20][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[21][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[22][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[23][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[24][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[25][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[26][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[27][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[28][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[29][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[30][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[31][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[32][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[33][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[34][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[35][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[36][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[37][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[3][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[4][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[5][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[6][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[7][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[8][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.base[9][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[0][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[10][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[11][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[12][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[13][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[14][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[15][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[16][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[17][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[18][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[19][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[1][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[20][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[21][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[22][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[23][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[24][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[25][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[26][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[27][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[28][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[29][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[30][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[31][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[32][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[33][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[34][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[35][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[36][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[37][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[3][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[4][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[5][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[6][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[7][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[8][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "actors.day1[9][\"interact\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/audio_save.js\"][\"init_audio_save\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/audio_save.js\"][\"loadGame\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/audio_save.js\"][\"saveGame\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/boot.js\"][\"init_boot\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"closeDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"closePanel\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"dialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"init_runtime_ui\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"renderInventory\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"renderQuests\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/runtime_ui.js\"][\"toast\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/start.js\"][\"init_start\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/start.js\"][\"startGame\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/storage.js\"][\"init_storage\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/update.js\"][\"init_update\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/update.js\"][\"update\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/core/update.js\"][\"updateWorld\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"daveDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"freeScrapDog\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"init_dialogue_a\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"lurchDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"momDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"paulieDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"peteDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"possumDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"priestDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"scrapDogDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"sherriDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"spawnFreedDogFollower\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"tonyDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_a.js\"][\"yuriDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"bigguDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"conductorDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"init_dialogue_b\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"larryDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"offerStripePackage\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"openStripePackage\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"pigeonDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/neighborhood_b.js\"][\"stripeDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/vendors_places.js\"][\"barbDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/vendors_places.js\"][\"hopperDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/vendors_places.js\"][\"init_vendors_places\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/vendors_places.js\"][\"mathematicianDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/vendors_places.js\"][\"philosopherDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/dialogue/vendors_places.js\"][\"pinkyDialogue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/input/keyboard.js\"][\"continueAfterEnding\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/input/keyboard.js\"][\"init_keyboard\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/input/keyboard.js\"][\"loadFromTitle\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/input/keyboard.js\"][\"releaseAllInput\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/input/mobile.js\"][\"titleLoadTap\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/minigames/activities.js\"][\"startRhythmMini\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"drawNpc\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"drawNpcContactShadow\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/actors_weather.js\"][\"init_actors_weather\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/frame.js\"][\"drawAll\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/frame.js\"][\"init_frame\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/landmarks_a.js\"][\"drawKingdomSites\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/landmarks_b.js\"][\"drawDogLeash\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"buildGraffiti\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"buildPosters\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"currentGraffitiLayout\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawBorderGlow\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawBuilding\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawClaimSites\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawGraffiti\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawHideoutDoors\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawOfficeExterior\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"drawPosters\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"graffitiPoolFor\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"init_structures\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"measureGraffitiText\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/render/structures.js\"][\"pickGraffitiLine\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/campaigns.js\"][\"currentPrimaryObjective\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/campaigns.js\"][\"hideGuidance\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/campaigns.js\"][\"objectiveDirection\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/campaigns.js\"][\"resolveActionHint\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/campaigns.js\"][\"updateGuidance\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/communications.js\"][\"renderPhone\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"fireDay14Inheritance\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"fireDay30Bus\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"fireDay3Visit\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"fireDay7Silence\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"fireDayEvents\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"officeUpgradeCount\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"openClaimLedger\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"openOffice\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"openOfficeUpgrades\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"rehydrateDay30Bus\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"rerollBlockRouteAtOffice\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"resetDailyCounters\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"takeTheBus\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/daily_hideouts.js\"][\"tryEnterOffice\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"discoverVenue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"discoveryActionHint\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"discoveryMenu\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"discoveryQLine\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"freshDiscovered\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"init_discovery\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"normalizeDiscovered\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"tellVenue\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/discovery.js\"][\"venueDiscovered\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/hitter.js\"][\"craftHitter\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/hitter.js\"][\"dumpsterHitterRoll\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/hitter.js\"][\"grantFoundHitter\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/hitter.js\"][\"hitEmergencyHitter\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/hitter.js\"][\"pocketHasBusiness\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/hitter.js\"][\"pocketMenu\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/interactions.js\"][\"endingScreen\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/interactions.js\"][\"init_ending_interactions\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/systems/interactions.js\"][\"tryInteract\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/ui/hud.js\"][\"init_hud\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/ui/hud.js\"][\"syncPresentationLayout\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        },
+        {
+          "group": "handlers",
+          "id": "definitions[\"src/ui/hud.js\"][\"updateHUD\"]",
+          "field": "tests",
+          "references": [
+            "game3d/tests/test_full_scene.gd"
+          ]
+        }
+      ],
+      "evidenceIndexSupportingFeatures": [
+        "state_boot_and_modes",
+        "main_loop_and_withdrawal",
+        "input_and_interaction_arbitration",
+        "inventory_equipment_weapons_tools",
+        "dumpster_trash_pickups_and_lottery"
+      ],
+      "linkedExistingEvidenceIds": [
+        "state_boot_and_modes/windows_first_person/0",
+        "state_boot_and_modes/windows_first_person/1",
+        "state_boot_and_modes/web_keyboard_mouse/0",
+        "main_loop_and_withdrawal/windows_first_person/0",
+        "main_loop_and_withdrawal/windows_first_person/1",
+        "main_loop_and_withdrawal/web_keyboard_mouse/0",
+        "input_and_interaction_arbitration/windows_first_person/0",
+        "input_and_interaction_arbitration/windows_first_person/1",
+        "input_and_interaction_arbitration/web_keyboard_mouse/0",
+        "input_and_interaction_arbitration/web_keyboard_mouse/1",
+        "input_and_interaction_arbitration/web_keyboard_mouse/2",
+        "inventory_equipment_weapons_tools/windows_first_person/0",
+        "inventory_equipment_weapons_tools/windows_first_person/1",
+        "inventory_equipment_weapons_tools/windows_first_person/2",
+        "inventory_equipment_weapons_tools/web_keyboard_mouse/0",
+        "inventory_equipment_weapons_tools/web_keyboard_mouse/1",
+        "dumpster_trash_pickups_and_lottery/windows_first_person/0",
+        "dumpster_trash_pickups_and_lottery/windows_first_person/1",
+        "dumpster_trash_pickups_and_lottery/web_keyboard_mouse/0",
+        "dumpster_trash_pickups_and_lottery/web_keyboard_mouse/1",
+        "office_claims_and_work_orders/windows_first_person/0",
+        "office_claims_and_work_orders/windows_first_person/1",
+        "office_claims_and_work_orders/windows_first_person/2",
+        "kingdom_and_endless_succession/windows_first_person/0",
+        "kingdom_and_endless_succession/windows_first_person/1",
+        "clock_weather_day_events_and_sleeping/windows_first_person/0",
+        "clock_weather_day_events_and_sleeping/windows_first_person/1",
+        "clock_weather_day_events_and_sleeping/windows_first_person/2",
+        "clock_weather_day_events_and_sleeping/web_keyboard_mouse/0",
+        "cart_and_bus_travel/windows_first_person/0",
+        "cart_and_bus_travel/windows_first_person/1",
+        "cart_and_bus_travel/web_keyboard_mouse/0",
+        "cart_and_bus_travel/web_keyboard_mouse/1",
+        "copper_sites_and_break_ins/windows_first_person/0",
+        "cooking_heat_minigame/windows_first_person/0",
+        "other_activities/windows_first_person/0",
+        "other_activities/windows_first_person/1",
+        "hud_map_guidance_and_presentation/windows_first_person/0",
+        "hud_map_guidance_and_presentation/windows_first_person/1",
+        "hud_map_guidance_and_presentation/windows_first_person/2",
+        "hud_map_guidance_and_presentation/web_keyboard_mouse/0",
+        "hud_map_guidance_and_presentation/web_keyboard_mouse/1",
+        "hud_map_guidance_and_presentation/web_keyboard_mouse/2",
+        "persistence_and_recovery/windows_first_person/0",
+        "persistence_and_recovery/windows_first_person/1",
+        "persistence_and_recovery/web_keyboard_mouse/0",
+        "persistence_and_recovery/web_keyboard_mouse/1"
+      ],
+      "boundary": "These are dependency links, not new validation. Historical artifacts retain original bytes, qualifications, outcomes and reported source provenance; they do not automatically certify the revised implementation."
+    }
+  ],
+  "separateAcceptedResidentReview": {
+    "rawInputs": [
+      {
+        "path": ".build/3d/resident-acceptance-review/REVIEW.md",
+        "sha256": "e3e32f704148cf280bdf1c851eb5387bdd3d3a75a01c339cd35691305fbf3f29"
+      },
+      {
+        "path": ".build/3d/resident-acceptance-review/evidence.json",
+        "sha256": "a249c73e70515b91be419c74c0de42472ac38d035a1687de87adfa3c002dcd03"
+      }
+    ],
+    "scope": "Native/Web Dave wake and dialogue plus folded laundry contents only. The review preserves its own capture-only Web/no-shutdown and unaccepted-performance boundaries. It is not appended to the 96-reference ledger.",
+    "indexOnlyLedgerChanged": false
+  },
+  "excluded": [
+    "weighted indexing",
+    "court eave",
+    "new Dave sleep-ground pose",
+    "ground-contact acceptance",
+    "engine-shutdown acceptance",
+    "performance acceptance",
+    "full-port completion"
+  ],
+  "groundFollowup": "Later passive ground diagnostics are separate: body/pillow clipping was observed, whole-body hover was not established. No new pose or speculative ground hash enters this revision.",
+  "gateRevision": {
+    "engineSuites": 86,
+    "sourceChecks": 45,
+    "total": 131,
+    "newEngineSuite": "test_dave_walkthrough_contract.gd",
+    "actualEngineExecutionClaim": false
+  },
+  "completeGate": "Must continue to refuse all 617 current obligations."
+}

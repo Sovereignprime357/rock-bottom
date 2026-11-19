@@ -18,6 +18,7 @@ class DelayedStore:
 var game: Node3D
 var checks: int = 0
 var failures: Array[String] = []
+var dave_wake_completed := false
 func _initialize() -> void: call_deferred("_run")
 func check(ok: bool,label: String) -> void:
 	checks += 1
@@ -324,6 +325,8 @@ func _run() -> void:
 	_test_utility_controls()
 	_test_interactive_controls()
 	await _test_cart_controls()
+	await _test_dave_wake_controls()
+	check(dave_wake_completed,"Dave wake scene regression reached its actual completion tail")
 	_test_site_menu()
 	await _load_arrival_race(false)
 	await _load_arrival_race(true)
@@ -421,6 +424,134 @@ func _test_cart_controls() -> void:
 	var reset: Dictionary = game.runtime.travel.cart_record()
 	check(reset.x == 1000 and reset.y == 1600 and not game.runtime.p.cartMounted,"fresh returns unique cart to canonical spawn")
 	game.player.rotation.y = 0; game.pitch = -0.04; game._resume(); game._sync_model_nodes(0.0)
+
+func _dave_sleep_marker_count() -> int:
+	if game.hud.actor_overlay == null or game.hud.actor_overlay._view == null: return -1
+	var facts: Dictionary = game.hud.actor_overlay._view.snapshot(0.0)
+	for row: Dictionary in facts.get("actors",[]):
+		if row.get("id") != "dave": continue
+		var count := 0
+		for marker: Dictionary in row.get("markers",[]):
+			if marker.get("kind") == "sleep": count += 1
+		return count
+	return -1
+
+func _test_dave_wake_controls() -> void:
+	# Only the player's existing service fixture is placed. Dave's source fields
+	# and Director snapshots are produced by fresh/ordinary active model ticks.
+	var fresh: bool = game.runtime.fresh()
+	check(fresh,"Dave regression starts from an actual fresh source epoch")
+	if not fresh: return
+	game._consume_events(); game._resume(); game._sync_model_nodes(0.0)
+	await physics_frame; await physics_frame
+	var dave: Dictionary = game.runtime.combat.actor("dave")
+	var service: Dictionary = game.world.service_points.get("dave",{})
+	var ready: bool = not dave.is_empty() and dave.get("asleep") == true and game.actors.has("dave") and service.get("approach") is Vector3 and service.get("target") is Vector3
+	if ready: ready = service.approach.is_finite() and service.target.is_finite()
+	check(ready,"canonical fresh Dave is asleep with a real actor and service")
+	if not ready: return
+	_place(service.approach)
+	var direction: Vector3 = service.target-game.camera.global_position
+	game.player.rotation.y = atan2(-direction.x,-direction.z)
+	game.pitch = atan2(direction.y,Vector2(direction.x,direction.z).length())
+	game.camera.rotation = Vector3(game.pitch,0,0)
+	await physics_frame
+	var stepped: bool = game.runtime.advance(1.0/60.0)
+	check(stepped,"real active Runtime step publishes Dave's sleeping snapshot")
+	if not stepped: return
+	game._sync_model_nodes(1.0/60.0)
+	var art: Node3D = game.actors.dave.get_node_or_null("Art")
+	check(art != null and art.has_meta("roster_rig"),"Dave has the actual authored rig")
+	if art == null or not art.has_meta("roster_rig"): return
+	var rig: Dictionary = art.get_meta("roster_rig")
+	var skeleton: Skeleton3D = rig.get("skeleton") as Skeleton3D
+	check(skeleton != null,"Dave's actual Skeleton3D exists")
+	if skeleton == null: return
+	var root_bone: int = skeleton.find_bone("root")
+	check(root_bone >= 0,"Dave's actual skeleton has a root bone")
+	if root_bone < 0: return
+	var pose: Dictionary = game.runtime.director.snapshot("dave")
+	check(pose.get("asleep") == true,"Director observes fresh Dave sleep without an authored action override")
+	check(absf(skeleton.get_bone_pose(root_bone).basis.y.normalized().dot(Vector3.UP)) < 0.2,"fresh source sleep rotates actual Dave root horizontally")
+	check(_dave_sleep_marker_count() == 2,"bound source ActorHud reports both asleep z markers")
+	var action: Dictionary = game.resolve_interaction()
+	check(action.get("kind") == "quest" and action.get("id") == "dave","actual near-service aim resolves Dave E")
+	if action.get("kind") != "quest" or action.get("id") != "dave": return
+	_key(KEY_E)
+	check(game.runtime.s.mode == "dialogue" and game.hud.modal.visible,"real E opens Dave's source dialogue")
+	if game.runtime.s.mode != "dialogue" or not game.hud.modal.visible: return
+	var player_before: Dictionary = game.runtime.p.duplicate(true)
+	var actor_before: Dictionary = dave.duplicate(true)
+	var rng_before: int = game.runtime.state.rng_seed
+	var origin: Vector3 = game.actors.dave.position
+	var pressed: bool = _press_prefix("wake him up.")
+	check(pressed,"actual enabled wake Button is pressed")
+	if not pressed: return
+	check(dave.get("asleep") == false and game.runtime.s.mode == "playing" and not game.hud.modal.visible,"source wake changes the real flag and releases the modal")
+	check(game.runtime.p == player_before and game.runtime.state.rng_seed == rng_before,"wake itself changes no player resource HP or RNG")
+	var actor_after: Dictionary = dave.duplicate(true)
+	actor_before.erase("asleep"); actor_after.erase("asleep")
+	check(actor_after == actor_before and game.actors.dave.position == origin,"wake changes no other actor field or source/visual origin")
+	stepped = game.runtime.advance(1.0/60.0)
+	check(stepped,"real next active step publishes the awake snapshot")
+	if not stepped: return
+	game._sync_model_nodes(1.0/60.0)
+	pose = game.runtime.director.snapshot("dave")
+	check(pose.get("asleep") == false and str(pose.get("action","")).is_empty() and pose.get("local_velocity",Vector3.INF).length_squared() < 0.01,"actual awake stationary action-free snapshot reaches the Scene cosmetic path")
+	check(skeleton.get_bone_pose(root_bone).basis.y.normalized().dot(Vector3.UP) > 0.95,"actual composed Scene wakes Dave upright instead of reinjecting sleep")
+	check(_dave_sleep_marker_count() == 0,"bound source ActorHud removes asleep markers after actual wake")
+	var presentation_player: Dictionary = game.runtime.p.duplicate(true)
+	var presentation_actor: Dictionary = dave.duplicate(true)
+	var presentation_rng: int = game.runtime.state.rng_seed
+	for frame: int in range(40):
+		game._sync_model_nodes(0.1)
+		check(skeleton.get_bone_pose(root_bone).basis.y.normalized().dot(Vector3.UP) > 0.95,"awake root remains upright across full cosmetic wrap: "+str(frame))
+	check(game.runtime.p == presentation_player and dave == presentation_actor and game.runtime.state.rng_seed == presentation_rng and game.actors.dave.position == origin,"four seconds of presentation own no resources actor motion or RNG")
+	var current_center := Vector2(float(dave.x)+float(dave.w)*0.5,float(dave.y)+float(dave.h)*0.5)
+	var current_target: Vector3 = Content.to_world(current_center,service.target.y)
+	var current_approach: Vector3 = Content.to_world(current_center,service.approach.y)+Vector3(service.approach.x-service.target.x,0,service.approach.z-service.target.z)
+	_place(current_approach)
+	direction = current_target-game.camera.global_position
+	game.player.rotation.y = atan2(-direction.x,-direction.z)
+	game.pitch = atan2(direction.y,Vector2(direction.x,direction.z).length())
+	game.camera.rotation = Vector3(game.pitch,0,0)
+	await physics_frame
+	action = game.resolve_interaction()
+	check(action.get("kind") == "quest" and action.get("id") == "dave","awake Dave remains the actual E target")
+	if action.get("kind") != "quest" or action.get("id") != "dave": return
+	_key(KEY_E)
+	var awake_text := false
+	var wake_option := false
+	for child: Node in game.hud.menu_box.get_children():
+		if child is Label and child.text == "dave is explaining a theory about pigeons.\nthe theory has 17 parts.": awake_text = true
+		if child is Button and child.text.begins_with("wake him up."): wake_option = true
+	check(game.runtime.s.mode == "dialogue" and game.hud.modal.visible and awake_text and not wake_option,"real second E shows the awake pigeon conversation without a wake option")
+	var left: bool = _press_prefix("leave.")
+	check(left and game.runtime.s.mode == "playing" and not game.hud.modal.visible,"actual awake dialogue Leave returns cleanly to play")
+	if not left: return
+	fresh = game.runtime.fresh()
+	check(fresh,"fresh lifecycle resets Dave through source authority")
+	if not fresh: return
+	game._consume_events(); game._resume(); game._sync_model_nodes(0.0)
+	await physics_frame; await physics_frame
+	dave = game.runtime.combat.actor("dave")
+	check(not dave.is_empty() and dave.get("asleep") == true,"fresh source Dave sleeps again without a test flag write")
+	if dave.is_empty(): return
+	_place(service.approach)
+	direction = service.target-game.camera.global_position
+	game.player.rotation.y = atan2(-direction.x,-direction.z)
+	game.pitch = atan2(direction.y,Vector2(direction.x,direction.z).length())
+	game.camera.rotation = Vector3(game.pitch,0,0)
+	stepped = game.runtime.advance(1.0/60.0)
+	check(stepped,"fresh reset produces another real Director snapshot")
+	if not stepped: return
+	game._sync_model_nodes(1.0/60.0)
+	var same_rig: bool = game.actors.has("dave") and game.actors.dave.get_node_or_null("Art") == art and is_instance_valid(skeleton)
+	check(same_rig,"fresh Dave reuses the real observed rig rather than a stale test reference")
+	if not same_rig: return
+	check(absf(skeleton.get_bone_pose(root_bone).basis.y.normalized().dot(Vector3.UP)) < 0.2 and _dave_sleep_marker_count() == 2,"fresh source sleep returns horizontal rig and both z markers")
+	game.player.rotation.y = 0; game.pitch = -0.04; game.camera.rotation = Vector3(game.pitch,0,0)
+	dave_wake_completed = true
 
 func _test_cooking_controls() -> void:
 	while game.saving or not game.pending_save.is_empty(): await process_frame

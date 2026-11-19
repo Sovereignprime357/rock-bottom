@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "scope": "Five-file metadata/runner overlay only; root separately composes approved five-file resident packet.",
+  "files": [
+    {
+      "path": "SPEC-3D-PARITY-METADATA-V2.md",
+      "sha256": "a4de98e822a392b07b79dabf6f25606cb83148aa5cd9fc34b915aa08c50e169a",
+      "oldSha256": null
+    },
+    {
+      "path": "reports/3d-parity-metadata/input-pins-metadata-v2.json",
+      "sha256": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276",
+      "oldSha256": null
+    },
+    {
+      "path": "reports/3d-parity-metadata/revisions/metadata-v2.json",
+      "sha256": "51097b8ff3611cca2dd5e5cdf1d76b9e1b6a5d4dab08e36bc0ff5b351e4b355d",
+      "oldSha256": null
+    },
+    {
+      "path": "tools/parity-metadata.mjs",
+      "sha256": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd",
+      "oldSha256": "bd26a4634bd15e58ccfa25b40f074ddbd755d4a089a5728e2e6c88c1454d1426"
+    },
+    {
+      "path": "game3d/tests/run-gates.ps1",
+      "sha256": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b",
+      "oldSha256": "04963dc185fba8118fb5a510cc55a414e17200473628b25520ef51fa1f5ec1fa"
+    }
+  ],
+  "residentFinalInputs": {
+    "game3d/scripts/cast_profiles.gd": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668",
+    "game3d/tests/test_character_roster.gd": "f85737b38e96d24cc4c0557eb9500f6f728116a99210b0cca6d9e11246119b6c",
+    "game3d/tests/test_full_scene.gd": "574073964fdcfd17e4e62d392c6c359e3eea0400551f07fadadcadf5f466831e"
+  },
+  "liveWrites": false,
+  "engineRun": false,
+  "gitRun": false
+}
