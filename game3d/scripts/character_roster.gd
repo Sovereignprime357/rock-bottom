@@ -144,6 +144,11 @@ static func _instantiate(visual_id: StringName, instance_seed: int, def: Diction
 			marker.name = marker_name
 			root.add_child(marker)
 		markers[marker_name] = {"node":marker,"bone":lookup[marker_bones[marker_name]]}
+	var weighted_markers: Array = []
+	if source.has("leash_binding"):
+		var marker := Node3D.new(); marker.name = "leash_collar"; root.add_child(marker)
+		var binding: Dictionary = source.leash_binding
+		weighted_markers.append({"node":marker,"bones":binding.bones,"weights":binding.weights,"points":binding.points})
 	var companions: Array = []
 	var metrics: Dictionary = source.metrics.duplicate(true)
 	for child_def: Dictionary in def.get("companions",[]):
@@ -162,7 +167,7 @@ static func _instantiate(visual_id: StringName, instance_seed: int, def: Diction
 		var child_metrics: Dictionary = child.get_meta("roster_metrics")
 		for key: String in ["meshes","surfaces","triangles","bones"]: metrics[key] += int(child_metrics[key])
 	var rig := {"skeleton":skeleton,"rests":rests,"base_poses":base_poses,"parents":parents,"lookup":lookup,"attachments":attachments,"prop_lookup":prop_lookup,"companions":companions,
-		"markers":markers,"layers":layers,"definition":def,"time":0.0,
+		"markers":markers,"weighted_markers":weighted_markers,"layers":layers,"definition":def,"time":0.0,
 		"phase":0.0,"motion":0.0,"seed":float(posmod(instance_seed,997))/997.0*TAU,
 		"detail":-1,"frame":0,"last_state":[],"pose_updates":0,"finger_updates":0,
 		"applied_poses":base_poses.duplicate(),"bone_writes":0,"last_coats":3,"visibility_writes":0,
@@ -190,6 +195,7 @@ static func _instantiate(visual_id: StringName, instance_seed: int, def: Diction
 
 
 static func _sync_attachments(rig: Dictionary) -> void:
+	var refresh_weighted: bool = rig.attachments_dirty or not rig.pose_cache_enabled
 	if rig.attachments_dirty:
 		rig.attachment_globals.clear()
 		rig.attachments_dirty = false
@@ -201,6 +207,12 @@ static func _sync_attachments(rig: Dictionary) -> void:
 		if key == "head": continue # The face attachment is also the legacy head marker.
 		var item: Dictionary = rig.markers[key]
 		_attachment_target(rig,item.node,_attachment_global(rig,item.bone))
+	if refresh_weighted:
+		for item: Dictionary in rig.get("weighted_markers",[]):
+			var point := Vector3.ZERO
+			for index: int in range(4):
+				point += (_attachment_global(rig,item.bones[index])*item.points[index])*float(item.weights[index])
+			_attachment_target(rig,item.node,Transform3D(Basis.IDENTITY,point))
 
 
 static func _attachment_global(rig: Dictionary, bone: int) -> Transform3D:
@@ -395,6 +407,7 @@ static func _build_template(id: StringName, memoize_weights: bool = true) -> Dic
 	var data := {"bones":[],"lookup":{},"attachments":[],"skip":[],"groups":{},"meshes":[],"errors":[],"skin_color":String(def.get("skin","")),
 		"memoize_weights":memoize_weights,"weight_caches":{},"weight_solves":0,"weight_cache_hits":0}
 	_build_bones(data,raw,def)
+	if id == &"scrap_dog": data["leash_binding"] = _leash_binding(data,raw)
 	_pack_attachment(data,raw,raw.get_node("head") as Node3D,"head")
 	var jaw := raw.get_node_or_null("jaw") as Node3D
 	if jaw != null: _pack_attachment(data,raw,jaw,"jaw")
@@ -449,6 +462,26 @@ static func _build_template(id: StringName, memoize_weights: bool = true) -> Dic
 	data.erase("weight_solves")
 	data.erase("weight_cache_hits")
 	return data
+
+
+static func _leash_binding(data: Dictionary,raw: Node3D) -> Dictionary:
+	# Use an authored collar vertex and the same weight solve as the unchanged skin.
+	# One immutable binding is cached with this template; no runtime mesh traversal.
+	var part := raw.get_node("broken_link") as MeshInstance3D
+	var transform: Transform3D = _relative(part,raw)
+	var point := Vector3(0,INF,0)
+	for surface: int in range(part.mesh.get_surface_count()):
+		var vertices: PackedVector3Array = part.mesh.surface_get_arrays(surface)[Mesh.ARRAY_VERTEX]
+		for vertex: Vector3 in vertices:
+			var at: Vector3 = transform*vertex
+			if at.y < point.y: point = at
+	var bounds: AABB = part.mesh.get_aabb()
+	var chain: Array[String] = _chain(data,"torso",part,transform*(bounds.position+bounds.size*0.5))
+	var weight: Array = _weights(data,chain,point)
+	var points := PackedVector3Array()
+	for index: int in range(4):
+		points.append((data.bones[weight[0][index]].global as Transform3D).affine_inverse()*point)
+	return {"bones":weight[0],"weights":weight[1],"points":points}
 
 
 static func _add_metrics(node: Node, metrics: Dictionary) -> void:

@@ -21,6 +21,10 @@ const WeatherView = preload("res://scripts/weather_presentation.gd")
 const EndingView = preload("res://scripts/ending_view.gd")
 const ProjectileView = preload("res://scripts/projectile_view.gd")
 const DynamicEmitters = preload("res://scripts/dynamic_emitters.gd")
+const WorldOwnership = preload("res://scripts/world_ownership_view.gd")
+const DogLeash = preload("res://scripts/dog_leash_view.gd")
+const KingdomView = preload("res://scripts/kingdom_world_view.gd")
+const WallMarkingView = preload("res://scripts/wall_marking_view.gd")
 const FULL_KEY := "rockbottom_3d_full_v2"
 var runtime: RefCounted
 var physics: RefCounted
@@ -54,6 +58,13 @@ var cart_view: Node3D
 var incident_view: Node3D
 var weather_view: Node3D
 var dynamic_emitters: Node3D
+var ownership_view: Node3D
+var kingdom_view: Node3D
+var wall_marking_view: Node3D
+var _wall_marking_surfaces: Array = []
+var _wall_marking_revision: int = -1
+var dog_leash: Node3D
+var _leash_post: Node3D
 var _cop_emitters: Array[Dictionary] = []
 var _ember_anchor: Node3D
 var heat_view: CanvasLayer
@@ -74,7 +85,14 @@ func _ready() -> void:
 	heat_view = CookingView.new(); add_child(heat_view)
 	if not qa_mode: get_tree().auto_accept_quit = false
 	await get_tree().process_frame
-	world = World.new(); world.dynamic_interactive = true; world.dynamic_cart = true; add_child(world); world.build()
+	world = World.new(); world.dynamic_interactive = true; world.dynamic_cart = true; world.dynamic_ownership = true; add_child(world); world.build()
+	ownership_view = WorldOwnership.new(); world.add_child(ownership_view); ownership_view.build(world)
+	kingdom_view = KingdomView.new(); world.add_child(kingdom_view)
+	if kingdom_view.build(world).is_empty():
+		push_error("Full scene Kingdom presentation failed."); return
+	dog_leash = DogLeash.create(); add_child(dog_leash); _leash_post = world.leash_post_anchor()
+	wall_marking_view = WallMarkingView.create(); world.add_child(wall_marking_view)
+	_wall_marking_surfaces = world.wall_marking_surfaces()
 	for light: Node in get_tree().root.find_children("*","Light3D",true,false): _pose_light_added(light)
 	get_tree().node_added.connect(_pose_light_added)
 	get_tree().node_removed.connect(_pose_light_removed)
@@ -167,6 +185,7 @@ func _make_actor(record: Dictionary) -> bool:
 	var art: Node3D = Roster.create(visual,id.hash())
 	if art == null: body.queue_free(); return false
 	art.name = "Art"; body.add_child(art); body.set_meta("visual_id",visual)
+	if id == "scrap_dog": body.set_meta("leash_collar",art.get_node_or_null("leash_collar"))
 	if DynamicEmitters.qualifies_cop(record):
 		var cap_path: String = "mounted_rider/head/hair_style" if str(record.get("sprite","")) == "horsecop" else "head/hair_style"
 		body.set_meta("beacon_anchor",art.get_node_or_null(cap_path))
@@ -188,6 +207,7 @@ func _sync_model_nodes(delta: float) -> void:
 	if cart_view != null:
 		physics.sync_cart(); cart_view.tick_pose(0.000001,player.global_transform,Vector3.ZERO)
 	var present: Dictionary = {}
+	var leash_snapshot: Dictionary = {"post_present":is_instance_valid(_leash_post),"dog":{}}
 	for record: Dictionary in runtime.state.npcs:
 		var id: String = str(record.id); present[id] = true
 		var visual: StringName = Roster.visual_for_actor(record)
@@ -196,10 +216,13 @@ func _sync_model_nodes(delta: float) -> void:
 			actors[id].free(); actors.erase(id)
 		if not actors.has(id) and not _make_actor(record): continue
 		var body: Node3D = actors[id]
-		body.visible = not record.get("departed",false) and runtime.days.actor_visible(record)
-		body.position = Content.to_world(Vector2(record.x+record.w*0.5,record.y+record.h*0.5),Adapter.FEET)
+		var live_leash: bool = id == "scrap_dog" and not record.get("dead",false) and is_instance_valid(_leash_post)
+		var body_visible: bool = not record.get("departed",false) and runtime.days.actor_visible(record)
+		if body.visible != body_visible: body.visible = body_visible
+		var body_position: Vector3 = Content.to_world(Vector2(record.x+record.w*0.5,record.y+record.h*0.5),Adapter.FEET)
+		if body.position != body_position: body.position = body_position
 		var pose: Dictionary = runtime.director.snapshot(id) if runtime.director != null else {}
-		if pose.has("yaw"): body.rotation.y = float(pose.yaw)
+		if pose.has("yaw") and body.rotation.y != float(pose.yaw): body.rotation.y = float(pose.yaw)
 		if delta > 0.0:
 			body.set_meta("cosmetic_ms",fmod(float(body.get_meta("cosmetic_ms"))+delta*1000.0,3800.0))
 			if str(pose.get("action","")).is_empty() and not pose.get("dead",false) and not pose.get("asleep",false) and pose.get("local_velocity",Vector3.ZERO).length_squared() < 0.01:
@@ -209,7 +232,10 @@ func _sync_model_nodes(delta: float) -> void:
 			var distance: float = player.position.distance_squared_to(body.position)
 			var art: Node3D = body.get_node("Art")
 			var live_beacon: bool = DynamicEmitters.qualifies_cop(record)
-			ActorPose.tick(art,delta,pose,0 if distance < 144.0 else (1 if distance < 1600.0 else 2),live_beacon or PoseVisibility.needs_pose(art,pose_context))
+			ActorPose.tick(art,delta,pose,0 if distance < 144.0 else (1 if distance < 1600.0 else 2),live_beacon or live_leash or PoseVisibility.needs_pose(art,pose_context))
+		if live_leash:
+			var collar: Node3D = body.get_meta("leash_collar",null)
+			if is_instance_valid(collar): leash_snapshot = {"post_present":true,"dog":{"id":id,"dead":false},"post_position":_leash_post.global_position,"collar_position":collar.global_position}
 		if DynamicEmitters.qualifies_cop(record):
 			var cap: Node3D = body.get_meta("beacon_anchor",null)
 			var cap_visible: bool = is_instance_valid(cap) and cap.is_visible_in_tree()
@@ -217,6 +243,7 @@ func _sync_model_nodes(delta: float) -> void:
 	for id: String in actors.keys():
 		if not present.has(id):
 			physics.unregister_body(id); actors[id].queue_free(); actors.erase(id)
+	if dog_leash != null: dog_leash.sync(leash_snapshot)
 	_sync_finds()
 	_sync_projectiles()
 
@@ -298,9 +325,16 @@ func _process(delta: float) -> void:
 	if incident_view != null: incident_view.sync(runtime.incidents.visual_snapshot(),active_ms)
 	heat_view.update(runtime.cooking.snapshot() if runtime.s.mode == "cookmini" else {},runtime.p,float(runtime.s.get("smokeT",0)),delta)
 	weather_view.sync({"dayTime":runtime.s.dayTime,"weather":runtime.s.weather,"office_generator":bool(runtime.s.office.upgrades.generator),"geometry_revision":physics._collision_revision},wall_ms)
+	ownership_view.sync({"office":runtime.s.office,"districtClaims":runtime.s.districtClaims,"flags":runtime.s.flags},runtime.state.player_center())
+	kingdom_view.sync({"kingdom":runtime.s.kingdom,"flags":runtime.s.flags})
 	hud.set_view_heading(player.rotation.y)
 	hud.update_runtime(runtime)
 	_consume_events()
+	if runtime.s.mode != "title":
+		if runtime.wall_markings.before_world_draw():
+			var revision: int = runtime.wall_markings.projection_revision()
+			if revision >= 0 and revision != _wall_marking_revision:
+				if wall_marking_view.sync(runtime.wall_markings.snapshot(),_wall_marking_surfaces): _wall_marking_revision = revision
 	if pending_load and not runtime.cooking.is_resolving() and not loading and not saving and pending_save.is_empty():
 		pending_load = false; _load()
 	if quit_requested and not runtime.cooking.is_resolving() and not loading and not saving and pending_save.is_empty():
@@ -626,6 +660,9 @@ func _reset_presentation() -> void:
 	squint_held = false; runtime.utilities.release_squint()
 	if weather_view != null: weather_view.clear()
 	if dynamic_emitters != null: dynamic_emitters.clear()
+	if dog_leash != null: dog_leash.clear()
+	if wall_marking_view != null: wall_marking_view.clear(); _wall_marking_revision = -1
+	if hud.district_border != null: hud.district_border.clear()
 	if incident_view != null: incident_view.sync(runtime.incidents.visual_snapshot(),active_ms)
 	hands.reset(); _hand_context.clear(); _sync_hand_context(); view_look_delta = Vector2.ZERO; pitch = -0.04; player.rotation = Vector3.ZERO
 	if physics.has_method(&"reset_navigation"): physics.call(&"reset_navigation")
@@ -690,6 +727,11 @@ func _load() -> void:
 			var clear: Variant = physics.clear_placement(body)
 			if clear is Vector2:
 				var envelope: Dictionary = candidate.snapshot(); envelope.player.x = clear.x; envelope.player.y = clear.y
+				# Candidate placement normalization fills missing fields with defaults.
+				# Keep normalized values; only original absence belongs across this boundary.
+				var raw_state: Dictionary = data.get("state",{}) if data.get("schema") == 2 else {}
+				for key: String in ["graffiti","posters"]:
+					if not raw_state.has(key): envelope.state.erase(key)
 				accepted = runtime.restore(envelope)
 	# Wall callbacks may request saves while Web's read awaits IndexedDB. Only a
 	# successful epoch replacement discards those old-session snapshots.

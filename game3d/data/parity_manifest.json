@@ -2431,12 +2431,14 @@
       "implementation": [
         "game3d/scripts/game_state.gd",
         "game3d/scripts/full_runtime.gd",
-        "game3d/scripts/full_scene.gd"
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/wall_markings.gd"
       ],
       "tests": [
         "game3d/tests/test_game_state.gd",
         "game3d/tests/test_full_runtime.gd",
-        "game3d/tests/test_full_scene.gd"
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_wall_markings.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -2444,7 +2446,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Fresh gameplay lifecycle is integrated. Per-save graffiti/poster generation and its world presentation remain unmapped; initial data alone is not that procedural lifecycle."
+      "auditNote": "Fresh/load modes and live per-save graffiti/poster lifecycle are composed. The aggregate source-start obligation retains partial status: fixed exported initial NPC/cash records and complete startup RNG/order equivalence are not promoted by these bounded presentation tests."
     },
     {
       "id": "definitions[\"src/core/start.js\"][\"startGame\"]",
@@ -2453,12 +2455,14 @@
       "implementation": [
         "game3d/scripts/game_state.gd",
         "game3d/scripts/full_runtime.gd",
-        "game3d/scripts/full_scene.gd"
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/wall_markings.gd"
       ],
       "tests": [
         "game3d/tests/test_game_state.gd",
         "game3d/tests/test_full_runtime.gd",
-        "game3d/tests/test_full_scene.gd"
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_wall_markings.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -2466,7 +2470,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Fresh gameplay lifecycle is integrated. Per-save graffiti/poster generation and its world presentation remain unmapped; initial data alone is not that procedural lifecycle."
+      "auditNote": "Fresh/load modes and live per-save graffiti/poster lifecycle are composed. The aggregate source-start obligation retains partial status: fixed exported initial NPC/cash records and complete startup RNG/order equivalence are not promoted by these bounded presentation tests."
     },
     {
       "id": "definitions[\"src/core/storage.js\"][\"init_storage\"]",
@@ -5043,13 +5047,22 @@
         "game3d/scripts/full_hud.gd",
         "game3d/scripts/actor_hud_overlay.gd",
         "game3d/scripts/find_view.gd",
-        "game3d/scripts/projectile_view.gd"
+        "game3d/scripts/projectile_view.gd",
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/kingdom_world_view.gd",
+        "game3d/scripts/dog_leash_view.gd",
+        "game3d/scripts/district_border_view.gd",
+        "game3d/scripts/wall_marking_view.gd"
       ],
       "tests": [
         "game3d/tests/test_full_scene.gd",
         "game3d/tests/test_actor_hud.gd",
         "game3d/tests/test_find_view.gd",
-        "game3d/tests/test_projectile_view.gd"
+        "game3d/tests/test_projectile_view.gd",
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_kingdom_view.gd",
+        "game3d/tests/test_leash_border.gd",
+        "game3d/tests/test_wall_marking_view.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5057,7 +5070,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Main 3D render orchestration exists. Remaining world-state signage/graffiti/leash and some source micro-animation obligations prevent whole-frame visual completion."
+      "auditNote": "Main 3D orchestration now includes state-driven ownership/Kingdom signs, wall layouts, living-dog tether and district perimeter. Aggregate frame remains partial for outstanding source facade/underpass micro-animation and broader presentation obligations; no whole-frame or platform completion claim."
     },
     {
       "id": "definitions[\"src/render/frame.js\"][\"init_frame\"]",
@@ -5068,13 +5081,22 @@
         "game3d/scripts/full_hud.gd",
         "game3d/scripts/actor_hud_overlay.gd",
         "game3d/scripts/find_view.gd",
-        "game3d/scripts/projectile_view.gd"
+        "game3d/scripts/projectile_view.gd",
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/kingdom_world_view.gd",
+        "game3d/scripts/dog_leash_view.gd",
+        "game3d/scripts/district_border_view.gd",
+        "game3d/scripts/wall_marking_view.gd"
       ],
       "tests": [
         "game3d/tests/test_full_scene.gd",
         "game3d/tests/test_actor_hud.gd",
         "game3d/tests/test_find_view.gd",
-        "game3d/tests/test_projectile_view.gd"
+        "game3d/tests/test_projectile_view.gd",
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_kingdom_view.gd",
+        "game3d/tests/test_leash_border.gd",
+        "game3d/tests/test_wall_marking_view.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5082,7 +5104,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Main 3D render orchestration exists. Remaining world-state signage/graffiti/leash and some source micro-animation obligations prevent whole-frame visual completion."
+      "auditNote": "Main 3D orchestration now includes state-driven ownership/Kingdom signs, wall layouts, living-dog tether and district perimeter. Aggregate frame remains partial for outstanding source facade/underpass micro-animation and broader presentation obligations; no whole-frame or platform completion claim."
     },
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"ambientGradeAt\"]",
@@ -5321,22 +5343,21 @@
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"drawKingdomSites\"]",
       "name": "drawKingdomSites",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd",
-        "game3d/scripts/guidance_view.gd"
+        "game3d/scripts/kingdom_world_view.gd",
+        "game3d/scripts/full_neighborhood.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd",
-        "game3d/tests/test_guidance.gd"
+        "game3d/tests/test_kingdom_view.gd",
+        "game3d/tests/test_full_scene.gd"
       ],
       "integration": [
-        "game3d/scripts/full_runtime.gd",
         "game3d/scripts/full_scene.gd"
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Static Kingdom structures/targets and map/objectives exist; state-dependent seal/mark/site decoration is not projected into the world."
+      "auditNote": "Source landmarks_a.js:174–192; four independent clear-flag banner fades and all three pending/done marks only in each exact marks stage. 1599 unchanged-source views passed centrally. Fence/newsbox surface projections preserve canonical interaction targets; all30 staged native captures pass after the surface corrections; this remains separate from full/platform verification."
     },
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"drawLandmarkFacades\"]",
@@ -5468,13 +5489,22 @@
     {
       "id": "definitions[\"src/render/landmarks_b.js\"][\"drawDogLeash\"]",
       "name": "drawDogLeash",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/dog_leash_view.gd",
+        "game3d/scripts/character_roster.gd",
+        "game3d/scripts/full_neighborhood.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_leash_border.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "The leash post and dog exist, but no live scrap_dog-to-post tether renderer is present."
+      "auditNote": "Source landmarks_b.js:90–113; actual weighted collar and real post drive six pooled segments/five links. Alive original scrap_dog only, deliberately ignoring chained/hidden like source. Dead/freed original clears; no follower substitution, RNG, collision or clock owner."
     },
     {
       "id": "definitions[\"src/render/landmarks_b.js\"][\"drawScrapFence\"]",
@@ -6877,56 +6907,103 @@
     {
       "id": "definitions[\"src/render/structures.js\"][\"buildGraffiti\"]",
       "name": "buildGraffiti",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/data/courier_canvas_metrics.json"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:255; source-order State RNG lifecycle, measured layoutV2 reuse/rebuild and poster trust/empty retry are owned by WallMarkings. Actual pinned 198 Canvas widths preserve eligibility; central 1277 checks/37 cases/66 steps passed. Raw missing-save keys remain meaningful through Scene placement; no automatic save or new random stream."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"buildPosters\"]",
       "name": "buildPosters",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/data/courier_canvas_metrics.json"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:316; source-order State RNG lifecycle, measured layoutV2 reuse/rebuild and poster trust/empty retry are owned by WallMarkings. Actual pinned 198 Canvas widths preserve eligibility; central 1277 checks/37 cases/66 steps passed. Raw missing-save keys remain meaningful through Scene placement; no automatic save or new random stream."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"currentGraffitiLayout\"]",
       "name": "currentGraffitiLayout",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/data/courier_canvas_metrics.json"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:247; source-order State RNG lifecycle, measured layoutV2 reuse/rebuild and poster trust/empty retry are owned by WallMarkings. Actual pinned 198 Canvas widths preserve eligibility; central 1277 checks/37 cases/66 steps passed. Raw missing-save keys remain meaningful through Scene placement; no automatic save or new random stream."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawBorderGlow\"]",
       "name": "drawBorderGlow",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/district_border_view.gd",
+        "game3d/scripts/full_hud.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_leash_border.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_hud.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No first-person presentation equivalent consumes the source faction-border flash."
+      "auditNote": "Source structures.js:368–379 and update.js:288–304; exact 600ms/alpha/color facts drive a separate three-pixel viewport perimeter after the territory tick. Modal/hitpause freeze and tint/input independence tested. Explicit 3D adaptation retains existing whole territory/border epoch reset, whereas source carries unsaved session history."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawBuilding\"]",
       "name": "drawBuilding",
       "status": "partial",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd"
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/wall_markings.gd",
+        "game3d/scripts/wall_marking_view.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd"
+        "game3d/tests/test_full_world.gd",
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_wall_marking_view.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -6934,76 +7011,100 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Static original 3D shells/signs are implemented; source state-driven exterior overlays and procedural wall text are incomplete."
+      "auditNote": "Original static shells/signs, current ownership surfaces and source procedural wall layouts are implemented. Aggregate structure rendering remains partial: source CORNER TV flicker, laundromat drum spin and Pawn night-steam/window details are not established by this bounded packet."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawClaimSites\"]",
       "name": "drawClaimSites",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd",
-        "game3d/scripts/guidance_view.gd",
-        "game3d/scripts/weather_presentation.gd"
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/full_neighborhood.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd",
-        "game3d/tests/test_guidance.gd",
-        "game3d/tests/test_weather_presentation.gd"
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_full_scene.gd"
       ],
       "integration": [
-        "game3d/scripts/full_runtime.gd",
         "game3d/scripts/full_scene.gd"
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Transactions and map feedback exist, but the world lacks live claimed-district signs, owned hideout decals and office ownership/upgrades/sign-stage projection; generator light is the implemented exception."
+      "auditNote": "Source structures.js:434; detached current ownership/upgrade/claim/hideout facts project cached original geometry. All 1078 source views and actual-world bank tests passed centrally; source truthiness, strict claim count/proximity and reverse snapshots retained. Office aperture stays clear; wall-less hideouts use registered nonblocking ground panels. Local sync target remains pending release measurement; no full/platform verification claim."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawGraffiti\"]",
       "name": "drawGraffiti",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/scripts/wall_marking_view.gd",
+        "game3d/scripts/full_neighborhood.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_wall_marking_view.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:296; render-time absent/empty retry remains with the shared-RNG owner; detached exact saved text/colors/layout map onto audited real facade panels. Registered side-wall/paper-fit adaptations avoid openings without changing saved records. Central presentation 6473 checks and20 staged native captures passed; staged native evidence does not certify earning/loading every campaign path."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawHideoutDoors\"]",
       "name": "drawHideoutDoors",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd",
-        "game3d/scripts/guidance_view.gd",
-        "game3d/scripts/weather_presentation.gd"
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/full_neighborhood.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd",
-        "game3d/tests/test_guidance.gd",
-        "game3d/tests/test_weather_presentation.gd"
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_full_scene.gd"
       ],
       "integration": [
-        "game3d/scripts/full_runtime.gd",
         "game3d/scripts/full_scene.gd"
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Transactions and map feedback exist, but the world lacks live claimed-district signs, owned hideout decals and office ownership/upgrades/sign-stage projection; generator light is the implemented exception."
+      "auditNote": "Source structures.js:380; detached current ownership/upgrade/claim/hideout facts project cached original geometry. All 1078 source views and actual-world bank tests passed centrally; source truthiness, strict claim count/proximity and reverse snapshots retained. Office aperture stays clear; wall-less hideouts use registered nonblocking ground panels. Local sync target remains pending release measurement; no full/platform verification claim."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawOfficeExterior\"]",
       "name": "drawOfficeExterior",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd",
-        "game3d/scripts/guidance_view.gd",
-        "game3d/scripts/weather_presentation.gd"
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/full_neighborhood.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd",
-        "game3d/tests/test_guidance.gd",
-        "game3d/tests/test_weather_presentation.gd"
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_scene.gd"
+      ],
+      "nativeEvidence": [],
+      "webEvidence": [],
+      "auditNote": "Source structures.js:409; detached current ownership/upgrade/claim/hideout facts project cached original geometry. All 1078 source views and actual-world bank tests passed centrally; source truthiness, strict claim count/proximity and reverse snapshots retained. Office aperture stays clear; wall-less hideouts use registered nonblocking ground panels. Local sync target remains pending release measurement; no full/platform verification claim."
+    },
+    {
+      "id": "definitions[\"src/render/structures.js\"][\"drawPosters\"]",
+      "name": "drawPosters",
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/scripts/wall_marking_view.gd",
+        "game3d/scripts/full_neighborhood.gd"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_wall_marking_view.gd",
+        "game3d/tests/test_full_scene.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -7011,39 +7112,44 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Transactions and map feedback exist, but the world lacks live claimed-district signs, owned hideout decals and office ownership/upgrades/sign-stage projection; generator light is the implemented exception."
-    },
-    {
-      "id": "definitions[\"src/render/structures.js\"][\"drawPosters\"]",
-      "name": "drawPosters",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
-      "nativeEvidence": [],
-      "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:345; render-time absent/empty retry remains with the shared-RNG owner; detached exact saved text/colors/layout map onto audited real facade panels. Registered side-wall/paper-fit adaptations avoid openings without changing saved records. Central presentation 6473 checks and20 staged native captures passed; staged native evidence does not certify earning/loading every campaign path."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"graffitiPoolFor\"]",
       "name": "graffitiPoolFor",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/data/courier_canvas_metrics.json"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:231; source-order State RNG lifecycle, measured layoutV2 reuse/rebuild and poster trust/empty retry are owned by WallMarkings. Actual pinned 198 Canvas widths preserve eligibility; central 1277 checks/37 cases/66 steps passed. Raw missing-save keys remain meaningful through Scene placement; no automatic save or new random stream."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"init_structures\"]",
       "name": "init_structures",
       "status": "partial",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd"
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/world_ownership_view.gd",
+        "game3d/scripts/wall_markings.gd",
+        "game3d/scripts/wall_marking_view.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd"
+        "game3d/tests/test_full_world.gd",
+        "game3d/tests/test_world_ownership.gd",
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_wall_marking_view.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -7051,29 +7157,49 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Static original 3D shells/signs are implemented; source state-driven exterior overlays and procedural wall text are incomplete."
+      "auditNote": "Original static shells/signs, current ownership surfaces and source procedural wall layouts are implemented. Aggregate structure rendering remains partial: source CORNER TV flicker, laundromat drum spin and Pawn night-steam/window details are not established by this bounded packet."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"measureGraffitiText\"]",
       "name": "measureGraffitiText",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/data/courier_canvas_metrics.json"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:237; source-order State RNG lifecycle, measured layoutV2 reuse/rebuild and poster trust/empty retry are owned by WallMarkings. Actual pinned 198 Canvas widths preserve eligibility; central 1277 checks/37 cases/66 steps passed. Raw missing-save keys remain meaningful through Scene placement; no automatic save or new random stream."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"pickGraffitiLine\"]",
       "name": "pickGraffitiLine",
-      "status": "planned",
-      "implementation": [],
-      "tests": [],
-      "integration": [],
+      "status": "integrated",
+      "implementation": [
+        "game3d/scripts/wall_markings.gd",
+        "game3d/data/courier_canvas_metrics.json"
+      ],
+      "tests": [
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "No 3D owner generates/rehydrates/projects persisted faction graffiti and posters; retaining source data is not executable behavior."
+      "auditNote": "Source structures.js:242; source-order State RNG lifecycle, measured layoutV2 reuse/rebuild and poster trust/empty retry are owned by WallMarkings. Actual pinned 198 Canvas widths preserve eligibility; central 1277 checks/37 cases/66 steps passed. Raw missing-save keys remain meaningful through Scene placement; no automatic save or new random stream."
     },
     {
       "id": "definitions[\"src/render/tiles.js\"][\"drawGroundTile\"]",

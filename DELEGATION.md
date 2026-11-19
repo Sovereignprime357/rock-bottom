@@ -850,3 +850,21 @@ Full exports rebuilt; actual browser menu exits, movement and reload-persistent
 isolated save passed. Handler mapping is 534 integrated / 39 partial / 12 planned.
 Boss acceptance, state-driven world adornments, tether/border feedback and frozen
 release performance are the next bounded tasks. These are not full-port completion.
+
+### World-details checkpoint — in final validation
+
+Root integrated source Office/claim/hatch, Kingdom banner/mark, weighted dog-chain,
+faction-border and graffiti/poster lifecycle/presentation packets. Native Tony now
+passes source-earned normal combat; strict fists-only remains failed separately.
+The mapping ledger records548 integrated/35partial/2planned handlers; no aggregate
+feature or platform is promoted solely by these mappings. Root owns final105-suite
+runner, exports, native/browser review, frozen profiling and pushed delivery.
+Characters holds wall geometry and audits remaining facade/district motion;
+Architecture reviews save boundaries and conservative performance opportunities;
+World drafts the bounded actual-input route-to-Office acceptance outside exports.
+Full campaigns, browser tours and the60-actor frame target remain open.
+
+World-details checkpoint validation: 105/105 3D and 19/19 original gates green;
+both Full exports rebuilt. Native wall20 views and browser menu/save/reload/pawn
+graffiti checks pass. See reports/2026-11-18-3d-world-details.md. Full port remains
+active; current frozen release performance and complete campaign tours are pending.

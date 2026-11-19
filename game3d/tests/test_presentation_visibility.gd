@@ -74,7 +74,7 @@ func _geometry_cases() -> void:
 		_check(Visibility.sphere_needs_pose(Vector3(20,4,0),1,broken),"unknown shadow/frustum data fails open: "+str(patch.keys()))
 	_check(Visibility.sphere_needs_pose(Vector3(20,4,0),INF,context) and Visibility.sphere_needs_pose(Vector3(20,4,0),0,context),"invalid bounds fail open")
 	context.shadow_distance = 30.0
-	_check(Visibility.sphere_needs_pose(Vector3(20,4,0),1,context),"all actors within shadow distance retain poses")
+	_check(not Visibility.sphere_needs_pose(Vector3(20,4,0),1,context),"complete outward shadow proof also excludes near separated bodies")
 	context.shadow_enabled = false
 	_check(not Visibility.sphere_needs_pose(Vector3(20,4,0),1,context),"explicitly disabled shadows do not manufacture a shadow region")
 	for basis: Basis in [Basis.from_scale(Vector3(1,3,0.5)),Basis(Vector3(1,0,0),Vector3(2,1,0),Vector3(0,0,1)),Basis.from_euler(Vector3(0.7,0.2,1.1))]:
@@ -127,7 +127,11 @@ func _floor_free_cases() -> void:
 	var missing: Dictionary = context.duplicate(true); missing.erase("sole_shadow_light")
 	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,missing),"missing light policy is not assumed")
 	context.shadow_distance = 30.0
-	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,context),"near shadow-distance guard is preserved even with outward extrusion proof")
+	_check(not Visibility.sphere_needs_pose(Vector3(20,0,0),1,context),"complete outward extrusion proof is independent of near shadow distance")
+	context.light_direction = Vector3.LEFT
+	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,context),"near incoming shadow still retains the whole current pose")
+	context.light_direction = Vector3.DOWN
+	_check(Visibility.sphere_needs_pose(Vector3(11,0,0),1,context),"near touching sphere cannot use the outward proof")
 	floor_free_completed = true
 
 
@@ -200,6 +204,19 @@ func _actor_cases(first: Node3D, reference: Node3D, id: String) -> bool:
 		_check(int(rig.attachment_queries) == queries and int(rig.attachment_writes) == writes,"unchanged inert bindings avoid global queries and transform setters")
 		Animator.tick(first,0.02,{"gaze":Vector2(0.000004,0)}); Animator.tick(reference,0.02,{"gaze":Vector2(0.000004,0)})
 		_check(int(rig.attachment_writes) > writes and _same_geometry(first,reference),"tiny gaze remains exact through attachment cache")
+	if id == "scrap_dog":
+		var marker: Node3D = first.get_node("leash_collar")
+		var extra := MeshInstance3D.new(); extra.mesh = BoxMesh.new(); marker.add_child(extra)
+		_check(not is_finite(Visibility.local_radius(first)),"geometry added under weighted marker invalidates already cached bounds")
+		extra.free()
+		_check(is_finite(Visibility.local_radius(first)),"restored nonrendering weighted marker retains audited bounds")
+		marker.top_level = true
+		_check(not is_finite(Visibility.local_radius(first)),"top-level weighted marker cannot bypass bound validation")
+		marker.top_level = false
+		var records: Array = rig.weighted_markers
+		rig.weighted_markers = [{"node":17}]
+		_check(not is_finite(Visibility.local_radius(first)),"invalid weighted marker fails open without invoking object methods")
+		rig.weighted_markers = records
 	if id == "tony":
 		Animator.reset(first)
 		for frame: int in range(4): Animator.tick(first,0.02,{"ambient_action":true},2,false)

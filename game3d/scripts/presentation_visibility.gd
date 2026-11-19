@@ -34,7 +34,6 @@ static func sphere_needs_pose(center: Vector3, radius: float, context: Dictionar
 	if not context.get("shadow_distance") is float and not context.get("shadow_distance") is int: return true
 	var distance: float = float(context.shadow_distance)
 	if not is_finite(distance) or distance <= 0.0: return true # Zero means unbounded, not absent.
-	if center.distance_to(context.camera) <= distance+radius: return true
 	if not context.get("light_direction") is Vector3: return true
 	var direction: Vector3 = context.light_direction
 	var direction_squared: float = direction.length_squared()
@@ -45,6 +44,9 @@ static func sphere_needs_pose(center: Vector3, radius: float, context: Dictionar
 	# shadow extrusion. This requires no minimum receiving-surface height.
 	for plane: Plane in context.planes:
 		if plane.distance_to(center) > radius*plane.normal.length() and plane.normal.dot(direction) >= 0.0: return false
+	# Complete infinite separation above is independent of caster distance. Keep
+	# the conservative near guard for every case without that complete proof.
+	if center.distance_to(context.camera) <= distance+radius: return true
 	if direction.y >= -0.0001: return true
 	if not context.get("min_receiver_y") is float and not context.get("min_receiver_y") is int: return true
 	var floor_y: float = float(context.min_receiver_y)
@@ -71,6 +73,7 @@ static func local_radius(art: Node3D) -> float:
 	var raw: Variant = art.get_meta("roster_rig")
 	if not raw is Dictionary: return INF
 	var rig: Dictionary = raw
+	if not _weighted_markers_safe(art,rig): return INF
 	if rig.has("presentation_radius"):
 		if not rig.presentation_radius is float and not rig.presentation_radius is int: return INF
 		return float(rig.presentation_radius) if int(rig.get("presentation_child_count",-1)) == art.get_child_count() else INF
@@ -110,6 +113,7 @@ static func _rig_radius(art: Node3D, rig: Dictionary) -> float:
 	# uses complete mesh AABBs and inverse binds, never a sampled rest-pose eye.
 	var known: Dictionary = {rig.skeleton:true}
 	for marker: Dictionary in rig.markers.values(): known[marker.node] = true
+	for marker: Dictionary in rig.get("weighted_markers",[]): known[marker.node] = true
 	for layers: Array in rig.layers:
 		for part: MeshInstance3D in layers:
 			known[part] = true
@@ -154,6 +158,16 @@ static func _static_radius(node: Node3D) -> float:
 		var child_bound: float = spatial.position.length()+_stretch(spatial.basis)*_static_radius(spatial)
 		radius = maxf(radius,child_bound)
 	return radius
+
+static func _weighted_markers_safe(art: Node3D, rig: Dictionary) -> bool:
+	var markers: Variant = rig.get("weighted_markers",[])
+	if not markers is Array: return false
+	for marker: Variant in markers:
+		if not marker is Dictionary: return false
+		var node: Variant = marker.get("node")
+		if not node is Node3D or not is_instance_valid(node) or node.get_class() != "Node3D": return false
+		if node.get_parent() != art or node.top_level or node.get_child_count() != 0 or not node.transform.is_finite(): return false
+	return true
 
 
 static func _box_radius(box: AABB) -> float:

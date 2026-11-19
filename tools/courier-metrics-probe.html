@@ -1,0 +1,33 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Courier source metrics evidence</title>
+<style>body{font:16px monospace;background:#1a1810;color:#d4c896;margin:24px}textarea{display:block;width:96%;height:65vh;background:#28251c;color:#d4c896}button{font:inherit;margin:12px 0;padding:8px}code{color:#e8c040}</style>
+<h1>Courier source metrics evidence</h1>
+<p>Measures the 66 source graffiti lines at 8, 9 and 10 CSS pixels. No network, external fonts, storage or application state is read.</p>
+<p>The installed font audit is separate evidence. This page records actual Canvas widths and browser font selection observations.</p>
+<p id="status">Waiting for document fonts.</p>
+<button id="download" disabled>Download measured JSON</button>
+<textarea id="output" aria-label="Canvas measurement JSON" readonly></textarea>
+<script>
+const pools={
+graffitiLines:[
+"if you are reading this you owe sherri money","crawdad on hudson","BAGGIE BARB CHEATS AT THE CROSSWORD","the priest knew. the priest knew.","call mom","the bus is late","don't trust pinky on tuesdays","yuri sees you in the metal","STRIPE LIED. STRIPE LIES.","ben is not your dad","the dog was here. the dog is here.","tony does not blink","i lost a sock here in 2011","the conductor is real","DAVE WAS RIGHT ABOUT THE PIGEONS","WHEN U SEE PAULIE LOOK AT THE FACE","i was a person once","FREE THE POSSUM (he is free)","carl owes dolores forty","the train is coming. the train is coming. the train is coming.","ECCLESIASTES 1:9","if found return to nobody","honk if you remember mondays","BRENDAN GOT TAZED HIMSELF","soap is a rock if you believe","BOOK 14 ACROSS IS BLAME","the underpass has ears","i traded a coat for a coat for a coat","PETE WEIGHED MY SOUL. $1.","the corner belongs to nobody","ROCK BOTTOM SAYS HI","i kissed lurch on a dare in 2007","the soup kitchen closed in 1998 (it is open)","MAYOR'S COUSIN IS NOT THE MAYOR","yell louder. larry is listening.","the pothole knows my name"],
+scrapGraffitiLines:["5/8 inch socket missing","PETE TAKES NUMBERS","yuri's bird is plastic","the wire is copper. probably.","DO NOT TRUST THE SCALE","the dog is not the dog","WEIGHED IT TWICE STILL OWED","rebar is rebar.","if it bends it bends. so do you.","MAGNET CHECKED. MAGNET LIED.","pete owes me a dollar from 2009","the gate squeaks louder on wednesdays","BRUTUS COUNTS IN BARKS","every pipe used to be a wall","WIRES OUT OF THE WALLS GO INTO THE WALLS"],
+spiritualGraffitiLines:["FATHER O'MALLEY KNOWS","the bus does not come for sinners","pigeons remember","MOM IS LISTENING","the wages of sin are eleven dollars","the bench is a pew if you sit right","PRAY FOR DOLORES","the fountain agrees","GOD IS A WEDNESDAY","the possum saw and the possum spoke","we are here. we were here. we will be here.","BLESSED ARE THE BROKE","the philosopher said the same thing twice","kneel where the chalk is","AMEN MEANS COME BACK TOMORROW"]};
+async function run(){
+ await document.fonts.ready;
+ const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
+ const entries=[];
+ for(const [pool,lines] of Object.entries(pools))for(const [index,text] of lines.entries())for(const size of [8,9,10]){
+  ctx.font='bold '+size+'px Courier New';
+  const width=ctx.measureText(text).width;
+  entries.push({pool,index,text,size,width,ceil:Math.ceil(width)});
+ }
+ const data={schema:1,format:'rock-bottom-courier-canvas-metrics',font:{family:'Courier New',style:'bold',sizeSet:[8,9,10]},evidence:{method:'canvas-measureText',userAgent:navigator.userAgent,platform:navigator.platform,fontSetStatus:document.fonts.status,fontCheck:document.fonts.check('bold 10px Courier New'),defaultKerning:ctx.fontKerning,cssFont:ctx.font,devicePixelRatio:devicePixelRatio},fontEvidence:{method:'installed-font-hmtx-audit-not-browser-font-verification',path:'C:/Windows/Fonts/courbd.ttf',version:'Courier New Bold 6.95',sha256:'11e629cef937cd08f942aa1bd994a71302dbe2819c72c6d4c183a623acbb421a',unitsPerEm:2048,advance:1229,glyphCount:62,missing:[],latinKernLookups:[],adjacentCorpusPairs:455},counts:{lines:66,measurements:entries.length},entries};
+ data.sourceHashes={'src/data/catalogs.js':'86cec397deba805e74b540d39ec0ecd0cc8759b1ab014733ebc358f32cbf2903','VIBE.md':'34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5','game3d/data/source_content.json':'dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0'};
+ const output=JSON.stringify(data,null,2)+'\n';document.getElementById('output').value=output;
+ document.getElementById('status').textContent='Measured '+entries.length+' Canvas widths. Font-set check: '+data.evidence.fontCheck+'.';
+ const button=document.getElementById('download');button.disabled=false;button.onclick=()=>{const url=URL.createObjectURL(new Blob([output],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='courier_canvas_metrics.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+}
+run().catch(error=>document.getElementById('status').textContent=String(error));
+</script>

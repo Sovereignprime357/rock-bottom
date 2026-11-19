@@ -1,0 +1,1538 @@
+{
+  "border": [
+    {
+      "call": true,
+      "current_zone": null,
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "",
+        "borderGlowRect": {},
+        "borderGlowT": 0,
+        "lastZoneId": null
+      },
+      "id": "first_unknown",
+      "previous": {},
+      "rngDraws": 0,
+      "territory_zone_id": null
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "block",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "",
+        "borderGlowRect": {},
+        "borderGlowT": 0,
+        "lastZoneId": "block"
+      },
+      "id": "first_zone_no_flash",
+      "previous": {},
+      "rngDraws": 0,
+      "territory_zone_id": "block"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "market",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "",
+        "borderGlowRect": {},
+        "borderGlowT": 0,
+        "lastZoneId": "block"
+      },
+      "id": "ticker_not_due",
+      "previous": {
+        "lastZoneId": "block"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "block"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "market",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#a04848",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#a04848",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "market"
+      },
+      "id": "ticker_transition",
+      "previous": {
+        "lastZoneId": "block"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "market"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "new_street",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#a04848",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#a04848",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "new_street"
+      },
+      "id": "destination_street",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "new_street"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "scrap",
+        "h": 250,
+        "id": "new_scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#c08038",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "new_scrap"
+      },
+      "id": "destination_scrap",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "new_scrap"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "spiritual",
+        "h": 250,
+        "id": "new_spiritual",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#d8c068",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#d8c068",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "new_spiritual"
+      },
+      "id": "destination_spiritual",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "new_spiritual"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "neutral",
+        "h": 250,
+        "id": "new_neutral",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#888",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#888",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "new_neutral"
+      },
+      "id": "destination_neutral",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "new_neutral"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "dealer",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 50,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#a04848",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#a04848",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "dealer"
+      },
+      "id": "same_faction_zone_crossing",
+      "previous": {
+        "lastZoneId": "block"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "dealer"
+    },
+    {
+      "call": true,
+      "current_zone": null,
+      "delta_ms": 100,
+      "draw": {
+        "alpha": 0.32083333333333336,
+        "color": "#c08038",
+        "rect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 350,
+        "lastZoneId": null
+      },
+      "id": "exit_no_new_flash",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": null
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "spiritual",
+        "h": 250,
+        "id": "park",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 100,
+      "draw": {
+        "alpha": 0.32083333333333336,
+        "color": "#c08038",
+        "rect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 350,
+        "lastZoneId": "park"
+      },
+      "id": "null_to_zone_no_flash",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": null
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "park"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "scrap",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 20,
+      "draw": {
+        "alpha": 0.3941666666666667,
+        "color": "#c08038",
+        "rect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 430,
+        "lastZoneId": "other"
+      },
+      "id": "current_zone_matches_previous",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "other"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "scrap",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 0,
+        "lastZoneId": "scrap"
+      },
+      "id": "decrement_zero",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 0,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "scrap"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "scrap",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 100,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 0,
+        "lastZoneId": "scrap"
+      },
+      "id": "decrement_exact",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 100,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "scrap"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "scrap",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 101,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 0,
+        "lastZoneId": "scrap"
+      },
+      "id": "decrement_over",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 100,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "scrap"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "spiritual",
+        "h": 250,
+        "id": "church",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 10000,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#d8c068",
+        "rect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#d8c068",
+        "borderGlowRect": {
+          "h": 250,
+          "w": 300,
+          "x": 100,
+          "y": 200
+        },
+        "borderGlowT": 600,
+        "lastZoneId": "church"
+      },
+      "id": "long_step_then_arm",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "church"
+    },
+    {
+      "call": false,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "market",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 500,
+      "draw": {
+        "alpha": 0.41250000000000003,
+        "color": "#c08038",
+        "rect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "id": "paused_not_called",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 450,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "market"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.26033333333333336,
+        "color": "#888",
+        "rect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 284,
+        "lastZoneId": "scrap"
+      },
+      "id": "falsy_color_fallback",
+      "previous": {
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 300,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "scrap"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0,
+        "visible": false,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": -10,
+        "lastZoneId": "scrap"
+      },
+      "id": "negative_prior_timer_preserved",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": -10,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "scrap"
+    },
+    {
+      "call": true,
+      "current_zone": {
+        "faction": "street",
+        "h": 250,
+        "id": "scrap",
+        "w": 300,
+        "x": 100,
+        "y": 200
+      },
+      "delta_ms": 16,
+      "draw": {
+        "alpha": 0.55,
+        "color": "#c08038",
+        "rect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "visible": true,
+        "width": 3
+      },
+      "expected": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 984,
+        "lastZoneId": "scrap"
+      },
+      "id": "alpha_cap",
+      "previous": {
+        "borderGlowColor": "#c08038",
+        "borderGlowRect": {
+          "h": 4,
+          "w": 3,
+          "x": 1,
+          "y": 2
+        },
+        "borderGlowT": 1000,
+        "lastZoneId": "scrap"
+      },
+      "rngDraws": 0,
+      "territory_zone_id": "scrap"
+    }
+  ],
+  "counts": {
+    "border": 20,
+    "leash": 11
+  },
+  "format": "rock-bottom-leash-border-reference",
+  "leash": [
+    {
+      "dog": {
+        "chained": true,
+        "dead": false,
+        "h": 24,
+        "id": "scrap_dog",
+        "sprite": "scrap_dog",
+        "w": 26,
+        "x": 600,
+        "y": 150
+      },
+      "dots": [
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 575.45,
+          "y": 127
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 583.19,
+          "y": 134.2
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 590.9300000000001,
+          "y": 141.4
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 598.67,
+          "y": 148.6
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 606.41,
+          "y": 155.79999999999998
+        }
+      ],
+      "drawn": true,
+      "id": "living_chained",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": [
+        {
+          "from": [
+            570,
+            122
+          ],
+          "to": [
+            591.5,
+            146
+          ]
+        },
+        {
+          "from": [
+            591.5,
+            146
+          ],
+          "to": [
+            613,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "dog": {
+        "chained": false,
+        "dead": false,
+        "h": 24,
+        "id": "scrap_dog",
+        "sprite": "scrap_dog",
+        "w": 26,
+        "x": 600,
+        "y": 150
+      },
+      "dots": [
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 575.45,
+          "y": 127
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 583.19,
+          "y": 134.2
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 590.9300000000001,
+          "y": 141.4
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 598.67,
+          "y": 148.6
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 606.41,
+          "y": 155.79999999999998
+        }
+      ],
+      "drawn": true,
+      "id": "attacked_chain_flag_false",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": false,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": [
+        {
+          "from": [
+            570,
+            122
+          ],
+          "to": [
+            591.5,
+            146
+          ]
+        },
+        {
+          "from": [
+            591.5,
+            146
+          ],
+          "to": [
+            613,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "dog": {
+        "chained": true,
+        "dead": false,
+        "h": 24,
+        "hidden": true,
+        "id": "scrap_dog",
+        "sprite": "scrap_dog",
+        "w": 26,
+        "x": 600,
+        "y": 150
+      },
+      "dots": [
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 575.45,
+          "y": 127
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 583.19,
+          "y": 134.2
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 590.9300000000001,
+          "y": 141.4
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 598.67,
+          "y": 148.6
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 606.41,
+          "y": 155.79999999999998
+        }
+      ],
+      "drawn": true,
+      "id": "hidden_living_quirk",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "hidden": true,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": [
+        {
+          "from": [
+            570,
+            122
+          ],
+          "to": [
+            591.5,
+            146
+          ]
+        },
+        {
+          "from": [
+            591.5,
+            146
+          ],
+          "to": [
+            613,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "dog": {},
+      "dots": [],
+      "drawn": false,
+      "id": "dead_original",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": true,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "dog": {},
+      "dots": [],
+      "drawn": false,
+      "id": "freed_follower_only",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": false,
+          "dead": false,
+          "h": 24,
+          "id": "freed_dog_follower",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "dog": {},
+      "dots": [],
+      "drawn": false,
+      "id": "paisley_only",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "paisley",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "dog": {},
+      "dots": [],
+      "drawn": false,
+      "id": "no_dog",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [],
+      "strokes": []
+    },
+    {
+      "dog": {
+        "chained": true,
+        "dead": false,
+        "h": 24,
+        "id": "scrap_dog",
+        "sprite": "scrap_dog",
+        "w": 26,
+        "x": 600,
+        "y": 150
+      },
+      "dots": [],
+      "drawn": false,
+      "id": "missing_post",
+      "post_present": false,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": []
+    },
+    {
+      "dog": {
+        "chained": true,
+        "dead": false,
+        "h": 24,
+        "id": "scrap_dog",
+        "sprite": "scrap_dog",
+        "w": 26,
+        "x": 610,
+        "y": 150
+      },
+      "dots": [
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 576.95,
+          "y": 127
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 586.49,
+          "y": 134.2
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 596.03,
+          "y": 141.4
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 605.5699999999999,
+          "y": 148.6
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 615.1099999999999,
+          "y": 155.79999999999998
+        }
+      ],
+      "drawn": true,
+      "id": "dead_then_living_original",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": true,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        },
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 610,
+          "y": 150
+        }
+      ],
+      "strokes": [
+        {
+          "from": [
+            570,
+            122
+          ],
+          "to": [
+            596.5,
+            146
+          ]
+        },
+        {
+          "from": [
+            596.5,
+            146
+          ],
+          "to": [
+            623,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "dog": {
+        "chained": true,
+        "dead": false,
+        "h": 24,
+        "id": "scrap_dog",
+        "sprite": "scrap_dog",
+        "w": 26,
+        "x": 600,
+        "y": 150
+      },
+      "dots": [
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 575.45,
+          "y": 127
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 583.19,
+          "y": 134.2
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 590.9300000000001,
+          "y": 141.4
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 598.67,
+          "y": 148.6
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 606.41,
+          "y": 155.79999999999998
+        }
+      ],
+      "drawn": true,
+      "id": "first_living_original_wins",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        },
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "scrap_dog",
+          "w": 26,
+          "x": 690,
+          "y": 150
+        }
+      ],
+      "strokes": [
+        {
+          "from": [
+            570,
+            122
+          ],
+          "to": [
+            591.5,
+            146
+          ]
+        },
+        {
+          "from": [
+            591.5,
+            146
+          ],
+          "to": [
+            613,
+            162
+          ]
+        }
+      ]
+    },
+    {
+      "dog": {
+        "chained": true,
+        "dead": false,
+        "h": 24,
+        "id": "scrap_dog",
+        "sprite": "brutus",
+        "w": 26,
+        "x": 600,
+        "y": 150
+      },
+      "dots": [
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 575.45,
+          "y": 127
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 583.19,
+          "y": 134.2
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 590.9300000000001,
+          "y": 141.4
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 598.67,
+          "y": 148.6
+        },
+        {
+          "color": "#5a4828",
+          "h": 2,
+          "w": 2,
+          "x": 606.41,
+          "y": 155.79999999999998
+        }
+      ],
+      "drawn": true,
+      "id": "exact_id_not_sprite",
+      "post_present": true,
+      "rngDraws": 0,
+      "source_npcs": [
+        {
+          "chained": true,
+          "dead": false,
+          "h": 24,
+          "id": "scrap_dog",
+          "sprite": "brutus",
+          "w": 26,
+          "x": 600,
+          "y": 150
+        }
+      ],
+      "strokes": [
+        {
+          "from": [
+            570,
+            122
+          ],
+          "to": [
+            591.5,
+            146
+          ]
+        },
+        {
+          "from": [
+            591.5,
+            146
+          ],
+          "to": [
+            613,
+            162
+          ]
+        }
+      ]
+    }
+  ],
+  "schema": 1,
+  "source": {
+    "authority": "unchanged drawDogLeash/drawBorderGlow and exact extracted updateWorld border statements",
+    "blockSha256": "558aa1179e620d79ca412c0fee5a71dfaa21274d1ee4a8f13c985de535154e7b",
+    "generatorSha256": "9db1fcf965757db43375a9a9da5a2a8712d4386ca9b05e1472a6af99d2ca86b9",
+    "harnessSha256": "8cd1c299ac5c7ff3bed637341ffb371639fb5fad27c6c01dbf50836b7d5a7867",
+    "hashes": {
+      "VIBE.md": "34b11b864f1e7b27e5a21dc76aa38c311cddb5c478043f11d7ccf503fd0bf1c5",
+      "src/core/runtime_ui.js": "b8db9270fba6b7542b9a8d61eaaa1be168845ebbd6f87f975b92a537ca58ba8c",
+      "src/core/update.js": "f21f8b4761209e953ebeb57d81f8f97253565f8c5de6eb432ff988ab2780108e",
+      "src/data/props.js": "45d17a3858f465391b43bc169758377784458db777960ac4725542d77b012787",
+      "src/render/canvas_geography.js": "d0c46907762ba2657fbc783d41bdb659814232ef999ac4eb85b51ade2f761c95",
+      "src/render/landmarks_b.js": "b4058dac204196cadbd8f77706043851cd67c18d4667e8ddd9ec1802fa526ada",
+      "src/render/structures.js": "b807236d0e6c3c7ba249688c61d5e7c8024a25c1c2dbc2713f651f1a7206bb72",
+      "src/systems/factions.js": "3238b7b5d19eb062d168188cb06046c7ec568f1771906af4eeee9a414f7dd50c"
+    },
+    "undefinedDefaults": {
+      "borderGlowColor": "",
+      "borderGlowRect": {},
+      "borderGlowT": 0,
+      "lastZoneId": null
+    }
+  }
+}

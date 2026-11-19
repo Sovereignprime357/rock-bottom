@@ -35,6 +35,8 @@ const Incidents = preload("res://scripts/incident_system.gd")
 const IncidentPaths = preload("res://scripts/incident_path_map.gd")
 const IncidentCorridors = preload("res://scripts/incident_corridors.gd")
 const AmbientAudio = preload("res://scripts/ambient_audio.gd")
+const DistrictBorder = preload("res://scripts/district_border_view.gd")
+const WallMarkings = preload("res://scripts/wall_markings.gd")
 const STEP_MS := 1000.0 / 60.0
 var state: RefCounted
 var memory: RefCounted
@@ -67,6 +69,7 @@ var incident_corridors: RefCounted
 var _incident_failure: String = ""
 var _cart_enabled: bool = false
 var ambient_audio: RefCounted
+var wall_markings: RefCounted
 var _pending_lifecycle: Dictionary = {}
 var _presentation_tasks: Array[Dictionary] = []
 var _transition_events: Array[Dictionary] = []
@@ -94,6 +97,7 @@ func _init(spatial_adapter: Object, boss_adapter: Object = null, unix_ms: Callab
 	_spatial = weakref(spatial_adapter) if spatial_adapter != null else null
 	state = State.new()
 	ambient_audio = AmbientAudio.new(state)
+	wall_markings = WallMarkings.new(state)
 	props = Props.new(state)
 	var clock_source: Callable = unix_ms if unix_ms.is_valid() else func(): return Time.get_unix_time_from_system()*1000.0
 	communications = Communications.new(state,props,clock_source)
@@ -142,6 +146,7 @@ func fresh() -> bool:
 	if interactive_props != null:
 		if not interactive_props.reset_session("fresh"): return false
 		_sync_interactive_props()
+	if not wall_markings.prepare_start("fresh"): return false
 	utilities.reset_session("fresh")
 	if kingdom != null: kingdom._sync_epoch()
 	if _actors_enabled and (not bosses.normalize_state() or not _prepare_actor_placements()):
@@ -181,6 +186,12 @@ func restore(data: Variant) -> bool:
 	if interactive_props != null:
 		if not interactive_props.reset_session("restore"): return false
 		_sync_interactive_props()
+	# Preserve original presence, but never reinsert unbounded save values after State.restore.
+	var wall_state: Dictionary = {}
+	if schema == 2:
+		for key: String in ["graffiti","posters"]:
+			if data.state.has(key): wall_state[key] = s.get(key)
+	if not wall_markings.prepare_start("restore",wall_state): return false
 	utilities.reset_session("restore")
 	if kingdom != null: kingdom._sync_epoch()
 	if days_enabled and not campaign.reconcile_loaded_state().get("ok",false): return false
@@ -759,6 +770,9 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 		profile_mark = _profile_stage("combat_timers",profile_mark)
 		world_props.tick_props(step)
 		progression.tick_territory(step,float(context.get("monotonic_ms",_elapsed_ms)))
+		var border_zone: Dictionary = progression.current_zone() if s.get("lastZoneId") != s.get("territoryZoneId") else {}
+		var border_patch: Dictionary = DistrictBorder.advance(s,s.get("territoryZoneId"),border_zone,step)
+		for key: String in border_patch: s[key] = border_patch[key]
 		utilities.tick_zone_entries()
 		world_props.tick_bench(step)
 		if days_enabled: days.tick_active(step)

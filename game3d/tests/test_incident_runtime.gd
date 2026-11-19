@@ -57,7 +57,7 @@ func _flush() -> void:
 		if not scene.saving and scene.pending_save.is_empty(): return
 		await process_frame
 	_check(false,"isolated scene save queue drains")
-func _bottles(expected: Dictionary,label: String) -> void:
+func _bottles(expected: Dictionary,label: String,wall_tail_seed: int = -1) -> void:
 	var rows: Array = scene.runtime.props.interactive_records()
 	_check(rows.size() == 14,label+" retains six cans/eight bottles")
 	if rows.size() != 14: return
@@ -71,7 +71,8 @@ func _bottles(expected: Dictionary,label: String) -> void:
 		if not pending.is_empty(): _check(pending.point.distance_to(point) < 0.001,label+" pending bottle retains exact three-draw source candidate "+id)
 		else: _check(Vector2(row.x,row.y).distance_to(point) <= 100.001,label+" physical bottle stays within source candidate bound "+id)
 		_check(row.type == "b_bottle" and not row.broken,label+" resets source bottle state "+id)
-	_check(scene.runtime.state.rng_seed == expected.seed,label+" consumes exactly one prefix draw then24 contiguous bottle draws")
+	var final_seed: int = int(expected.seed) if wall_tail_seed < 0 else wall_tail_seed
+	_check(scene.runtime.state.rng_seed == final_seed,label+" consumes one prefix and24 contiguous bottle draws, followed only by the source wall tail")
 func _cold_and_fresh() -> void:
 	var runtime: RefCounted = scene.runtime
 	for key: String in ["incidents","incident_paths","incident_corridors"]:
@@ -87,7 +88,13 @@ func _cold_and_fresh() -> void:
 	_check(runtime.s.mode == "playing" and runtime.s.incident == null and runtime.incident_corridors.status().active.is_empty(),"fresh actual Scene has no stale scene/reservation")
 	var expected: Dictionary = _draws(State.DEFAULT_SEED,25)
 	_check(is_equal_approx(float(runtime.s.publicPhoneT),240000.0+expected.values[0]*240000.0),"fresh source public-phone draw precedes bottle24")
-	_bottles(expected,"fresh")
+	# The independent source oracle begins immediately after the unchanged25-draw prefix.
+	var wall_fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://fixtures/wall_markings_reference.json"))
+	var wall_case: Dictionary = {}
+	for row: Dictionary in wall_fixture.cases:
+		if row.id == "fresh_boot_after_phone_and_bottles": wall_case = row; break
+	_check(not wall_case.is_empty() and int(wall_case.rng.seed) == int(expected.seed),"fresh wall source oracle starts after the actual phone/bottle prefix")
+	if not wall_case.is_empty(): _bottles(expected,"fresh",int(wall_case.steps[0].rng.seed))
 	groups += 1
 func _clock_and_menus() -> void:
 	var runtime: RefCounted = scene.runtime

@@ -922,3 +922,58 @@ and reviewed; the editor CPU target remains failed at 0.269 ms p95 pending relea
 The source audit also found omitted inventory fields. The read-only view now includes
 cred/bonus, wanted stars, cart status, source rounding and all eleven claim districts,
 with source lifetime labels and conditional supplies/hitter rows. FullHUD passes 27 checks.
+
+### IMPL-3D-FULL-17 — live ownership, tether and source world cues
+
+Executed on `codex/3d-full-port`, 2026-11-18. Office titles/upgrades, eleven claim
+signs and two ground hatch adaptations read current source facts without adding
+collision or interaction owners. The dog chain binds an actual weighted collar
+vertex and post staple; source alive-only selection deliberately retains the chain
+after the living original loses its chained flag. The separate three-pixel faction
+perimeter consumes the existing accepted world step after the territory ticker;
+pause/hitpause freeze it and high/crash tint remains independent. Native leash
+evidence has15 rendered views; ownership framing/performance corrections are active.
+Kingdom banners and marks project source predicates, with a declared fence-mounted
+cart mark. Remaining staged native evidence and combined runner are pending.
+
+The existing3D state-epoch policy resets the complete transient territory/border
+tuple on fresh/load. The source browser retains11 such fields in the same page
+session. Keep the established3D reset rather than carrying only the visual fields
+or covertly changing territory ticker/reward/greeting timing. This adaptation is
+explicit in P14f; cold startup, active border timing and pause/hitpause remain tested.
+
+### IMPL-3D-FULL-18 — complete shadow proof and query-local reuse
+
+The infinite separating-half-space proof applies before the near-shadow guard:
+distance cannot invalidate complete separation. Incoming/touching/unknown-light
+cases still fail open. Nonrendering weighted markers must remain direct leaf Node3Ds;
+new geometry beneath them immediately revokes cached eligibility. Visibility passes
+2,112 checks over72 original templates. Exact unchanged actor transform setters are
+omitted. Physics query construction reuses its already resolved height synchronously,
+without changing overlap/cast counts or certificate lifetime; adapter21/navigation4753
+pass. No full-frame performance improvement is claimed before a frozen measurement.
+
+### IMPL-3D-FULL-19 — measured graffiti width authority
+
+Actual Chromium Canvas measurements of all66 source lines at8/9/10px produced198
+widths. They match installed Courier New Bold6.95 advance1229/2048;90 rounded widths
+differ from the old exporter harness's0.6 approximation. The pinned measured table
+ships as data, without distributing the font. Source generation uses that table;
+valid saved textW/layouts are not rewritten. Normalized side-face placement and
+paper-width-only poster fitting are explicit3D visual adaptations. Source RNG order,
+empty-layout draw retries and save behavior remain separate owner responsibilities.
+
+### IMPL-3D-FULL-20 — source-earned Tony acceptance
+
+The original under90-second invariant permits ordinary earned equipment. The first
+strict fists-only native tour defeated Tony but correctly failed its own narrower
+contract: killing an ordinary reinforcement awards a pipe automatically in source.
+Keep that failed report. A separate source-earned mode records every accepted input,
+preceding weapon/cooldown, actor death and equipment award; it never writes equipment
+or damage. Frozen production c61d9c9 passed in3.988s wall/3.380s active, seven Tony
+hits totaling230 damage, all three phases and both reinforcements. Attack6 earned
+the pipe from a real Sherri; Tony's later fatal pipe hit awarded the shoe afterward.
+The same purchased rock completed18.049s high/7.995s crash and actual ending/continue.
+The isolated fresh$25 fixture and state-aware automated driver are disclosed; this
+proves one feasible native Tony fight, not human usability, browser/all-boss parity
+or whole-campaign completion. No production behavior changed for this acceptance.

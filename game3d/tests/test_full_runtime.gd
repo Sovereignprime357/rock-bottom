@@ -41,6 +41,8 @@ func _run() -> void:
 	_test_street_robbery_and_restore()
 	_test_communications_composition()
 	_test_day_composition()
+	_test_border_clock()
+	_test_wall_markings_composition()
 	if failures.is_empty():
 		print("3D FULL RUNTIME GATE: PASS (%d checks; composed intro/vendor/loop/save chain, pause, stale capabilities and physical access boundaries; full scene pending)" % checks)
 		quit(0)
@@ -48,6 +50,74 @@ func _run() -> void:
 		for failure: String in failures: push_error(failure)
 		print("3D FULL RUNTIME GATE: FAIL (%d failures / %d checks)" % [failures.size(),checks])
 		quit(1)
+
+func _test_wall_markings_composition() -> void:
+	var spatial := Spatial.new()
+	var runtime := Runtime.new(spatial)
+	_check(runtime.fresh() and runtime.wall_markings.inspect().bound,"fresh runtime prepares one source wall-layout owner")
+	_check(runtime.wall_markings.inspect().draws > 0 and runtime.s.graffiti.size() >= 12 and runtime.s.graffiti.size() <= 18,"fresh wall layouts consume shared RNG instead of replaying the captured fixture")
+	var saved: Dictionary = runtime.snapshot()
+	var draws: int = runtime.wall_markings.inspect().draws
+	_check(runtime.restore(saved) and runtime.s.graffiti == saved.state.graffiti and runtime.s.posters == saved.state.posters,"real restore preserves valid measured wall layouts")
+	_check(runtime.wall_markings.inspect().draws == draws,"valid restored layouts consume no wall generation draws")
+	var oversized: Dictionary = saved.duplicate(true)
+	oversized.state.graffiti = []
+	for index: int in range(1025): oversized.state.graffiti.append(saved.state.graffiti[0].duplicate(true))
+	var nested: Dictionary = {"end":"too deep"}
+	for depth: int in range(12): nested = {"next":nested}
+	var wide: Dictionary = {}
+	for index: int in range(513): wide[str(index)] = index
+	var row: Dictionary = {}
+	for index: int in range(32): row[str(index)] = index
+	var bulk: Array = []
+	for index: int in range(1025): bulk.append(row.duplicate())
+	oversized.state.posters = [{"text":"p".repeat(4097),"nested":nested,"wide":wide,"bulk":bulk}]
+	var normalized := Runtime.State.new()
+	_check(normalized.restore(oversized).ok,"stress save passes the real State codec")
+	_check(normalized.s.graffiti.size() == 1024 and normalized.s.posters[0].text.length() == 4096 and normalized.s.posters[0].wide.size() == 512 and normalized.s.posters[0].bulk.size() < 1024,"stress fixture reaches array/string/dictionary and nested total-budget limits")
+	_check(runtime.restore(oversized) and runtime.s.graffiti == normalized.s.graffiti and runtime.s.posters == normalized.s.posters,"Runtime cannot replace normalized wall records with raw oversized or deeply nested data")
+	_check(runtime.wall_markings.inspect().draws == draws,"bounded valid layouts retain source zero-draw reuse")
+	_check(runtime.wall_markings.prepare_start("restore",oversized.state) and runtime.s.graffiti == normalized.s.graffiti and runtime.s.posters == normalized.s.posters,"direct wall-owner restore uses the same codec and full nested budget")
+	_check(oversized.state.graffiti.size() == 1025 and oversized.state.posters[0].text.length() == 4097,"normalization cannot mutate the supplied raw save")
+	for value: Variant in [null,[],{"invalid":"layout"}]:
+		var malformed: Dictionary = saved.duplicate(true)
+		malformed.state.graffiti = value; malformed.state.posters = value
+		var builds: int = runtime.wall_markings.inspect().graffiti_builds
+		_check(runtime.restore(malformed) and runtime.wall_markings.inspect().graffiti_builds == builds+1,"explicit null/empty/malformed wall fields follow source rebuild semantics")
+	draws = runtime.wall_markings.inspect().draws
+	var legacy: Dictionary = saved.duplicate(true); legacy.state.erase("graffiti"); legacy.state.erase("posters")
+	_check(runtime.restore(legacy) and runtime.wall_markings.inspect().draws > draws,"missing raw save fields regenerate rather than inheriting fixed exported defaults")
+	var before: Dictionary = runtime.snapshot()
+	_check(not runtime.restore({"schema":999}) and runtime.snapshot() == before,"rejected save envelope cannot regenerate or replace live wall layouts")
+	runtime.set_mode("paused"); draws = runtime.wall_markings.inspect().draws
+	_check(runtime.wall_markings.before_world_draw() and runtime.wall_markings.inspect().draws == draws,"valid walls remain stable through paused world draws")
+	_check(runtime.restore({"schema":1,"state":"legacy unrelated value"}) and runtime.wall_markings.inspect().bound,"schema1 migration ignores unrelated legacy state fields when rebuilding wall layouts")
+
+func _test_border_clock() -> void:
+	var spatial := Spatial.new()
+	var runtime := Runtime.new(spatial)
+	runtime.fresh(); runtime.s.flags.introDone = true
+	runtime.s.lastZoneId = null; runtime.s.territoryZoneId = null; runtime.s.territoryT = 2000.0
+	runtime.advance(1.0/60.0)
+	var initial: String = runtime.progression.current_zone().id
+	_check(runtime.s.lastZoneId == initial and runtime.s.borderGlowT == 0.0,"first actual territory tick initializes border identity without flashing")
+	for zone: Dictionary in runtime.Content.load_content().world.zones:
+		_put(runtime,Vector2(zone.x+zone.w*0.5,zone.y+zone.h*0.5))
+		if runtime.progression.current_zone().get("id") != initial: break
+	runtime.s.territoryT = 2000.0
+	runtime.advance(1.0/60.0)
+	_check(runtime.s.borderGlowT == 600.0 and runtime.s.lastZoneId == runtime.s.territoryZoneId,"real territory change arms source border after the ticker")
+	runtime.set_mode("paused"); runtime.advance(0.1)
+	_check(runtime.s.borderGlowT == 600.0,"paused runtime freezes border source timer")
+	runtime.set_mode("playing"); runtime.s.hitPause = 5.0; runtime.advance(1.0/60.0)
+	_check(runtime.s.borderGlowT == 600.0,"hitpause skips the entire border step")
+	runtime.advance(1.0/60.0)
+	_check(is_equal_approx(runtime.s.borderGlowT,600.0-Runtime.STEP_MS),"active runtime consumes border time once on its accepted step")
+	var saved: Dictionary = runtime.snapshot()
+	_check(not saved.state.has("borderGlowT") and not saved.state.has("lastZoneId"),"transient border fields do not enter persistent saves")
+	_check(runtime.restore(saved) and not runtime.s.has("borderGlowT") and not runtime.s.has("territoryZoneId"),"accepted3D load epoch resets both border and territory tuple together")
+	runtime.s.borderGlowT = 415.0; runtime.s.lastZoneId = "park"; runtime.s.territoryZoneId = "park"; runtime.s.territoryT = 1900.0
+	_check(runtime.fresh() and not runtime.s.has("borderGlowT") and not runtime.s.has("lastZoneId") and not runtime.s.has("territoryT"),"fresh epoch cannot retain a previous border flash or partial territory tick")
 
 func _test_day_composition() -> void:
 	var spatial := DaySpatial.new()

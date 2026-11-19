@@ -251,3 +251,13 @@ input, governors or outcomes. Disabled normal play takes no timestamps. The actu
 reports these nested scopes to explain full frame failures; isolated planner timings are not
 substituted for the whole frame budget. Static prop ID dispatch indexes preserve source order
 and rebind only with their existing epoch/reset; they do not cache live action eligibility.
+
+### Query-local height reuse — 2026-11-18
+
+The frozen release attributes over4ms p95 to actor clearance. Within one synchronous
+query construction, resolve the current authored height once and pass that exact value
+to shape selection and vertical placement. `_clear` already resolves height for its
+certificate key and may pass it to the actual query. No cross-frame height assumption,
+new clearance certificate, reduced overlap/cast count or asynchronous retained snapshot
+is introduced. Calls without a resolved height still resolve the current actor profile.
+Existing shape-change, Fallen-priest, cache-invalidation and physical-contact gates apply.

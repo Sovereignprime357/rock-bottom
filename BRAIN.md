@@ -2845,3 +2845,71 @@ claim. Agents released bounded ownership-adornment and leash/border packets.
 The new real-input Tony probe passed its 68-check validator but its first native
 run stalled on the pre-fight walking route among real NPCs, then hit a test cleanup
 error. World owns only driver detours/cleanup fixes; no gameplay changes justified.
+
+### Resumed ownership/markings pass — 2026-11-18
+
+User resumed the full-port task. Pushed frozen performance evidence as92e3114 after
+c61d9c9; the playable export still represents c61d9c9 until rebuilt. Bound ownership,
+leash and source-clock border to FullScene/Runtime/HUD. Visibility2112, leash167,
+runtime134 and combinedScene377 pass. The native leash bank rendered15 views with
+zero queries/lights/shadows; editor incremental sync p95 .113ms. Ownership's first
+source test falsely differed on JSON float versus GDScript integer nesting; exact
+recursive numeric/type/key comparison fixed the harness, retaining counterexamples.
+Ownership now passes3552 checks/1078 source views, including output-cache equivalence.
+The first native ownership run missed Old School's sign behind a fence and measured
+.313ms p95: bounded clear-camera angles and detached semantic keys address those
+findings without moving the sign. Kingdom's first bank test found98 surfaces over
+its declared budget; the agent is combining only coplanar banner ink before fade.
+
+The Tony acceptance driver has not passed. Real walking encountered live residents;
+fixes so far addressed circular deadzone encoding, route detours, stale approaches
+and menu-released mouse capture. Actual resource transactions [10,5,5] succeeded.
+No source actor removal, HP boost, injected damage or production gameplay change
+was used to manufacture acceptance. All failures remain in ignored native evidence.
+
+Actual browser Canvas text measurements now underpin graffiti generation. The port
+previously replayed exported static tags/posters; full lifecycle repair is a new
+explicit shared-RNG owner, being validated before binding. Root caught missing raw
+JSON export inclusion and required the measured table under shipped data. Remaining
+work includes those owner bindings, native world details, final gate/export/commit
+checkpoint, boss/campaign tours, platform coverage and the failed60-actor frame budget.
+
+### World-detail verification continuation — 2026-11-18
+
+Current Office/claim/hatch views pass3552 checks and24 native captures. Kingdom
+banners/marks pass3488 checks and30 captures after locating one obscured mark on
+its existing newsbox face. Dog leash/border passes167 checks and15 captures.
+Graffiti/posters now own source lifecycle/shared RNG, measured text widths, saved
+layout reuse and frame retries; projection copies only when the owner revision
+changes. Actual front pier strips exclude ink, with complete long-line fitting.
+The native probe's two nominal night shots were corrected to request night.
+
+Review found two restore defects: candidate normalization hid missing original
+wall keys, then preserving their raw arrays bypassed existing nested-save limits.
+The final boundary preserves key absence but uses normalized values; direct wall
+restore delegates the same State codec. Focused Runtime153/Scene389 pass, including
+oversized/nested/malformed fields and legacy schema1 scalar-state handling.
+
+The first105-suite central run stopped at incident-runtime's old final-RNG
+assertion: fresh now correctly generates walls after the25 phone/bottle draws.
+An unchanged-source oracle case fixes the expected integration tail: seed65195085,
+156 wall draws, final4153385641,17 tags/8 posters. Bottle order is still checked;
+no gameplay RNG was removed to satisfy the old assertion. Full rerun remains pending.
+
+Frozen native Tony now passes the separate source-earned acceptance mode:3.988s
+wall/3.380s active, all phases/adds, ordinary pipe upgrade,230 actual Tony damage,
+18.049s high/7.995s crash and actual ending continuation. Earlier strict-fists
+failure remains recorded. No production combat fix was required. Next bounded
+proof is earned route-to-Office progression; drafts stay outside exported source
+while root freezes this checkpoint. Native/browser campaign and60-actor performance
+acceptance remain open.
+
+World-details final validation:105/1053D and19/19original runners pass; both Full
+exports rebuilt. Wall20-view native probe passes, with pier clearance/whole text
+and actual corrected night lighting reviewed. Browser wake-up/Q/I/pause/save,
+reload/remember/continue passed; physical pawn walk showed restored source graffiti.
+Subsequent ordinary damage/recovery returned to Block; Leave/pause worked. No
+death-free/Pete-transaction or full-campaign claim. Chromium pointer-capture errors
+remain; QA tab closed before profiling. A read-only review also noticed the source
+journal advertises arrow movement while Full input registration currently binds
+WASD only; reconcile that narrow alias gap in the next control packet.

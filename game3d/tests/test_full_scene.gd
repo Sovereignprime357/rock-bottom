@@ -50,6 +50,11 @@ func _run() -> void:
 	await physics_frame
 	game._process(1.0/60.0)
 	check(game.player.position.distance_to(Content.to_world(game.runtime.state.player_center(),game.Adapter.FEET)) < 0.00001,"player view mirrors the authoritative controller")
+	var wall_view: Dictionary = game.wall_marking_view.inspect()
+	check(wall_view.requested == game.runtime.s.graffiti.size()+game.runtime.s.posters.size() and wall_view.placed == wall_view.requested and wall_view.rejected.is_empty(),"actual fresh source layouts all bind audited facade panels")
+	var wall_builds: int = wall_view.builds
+	game._process(0.0)
+	check(game.wall_marking_view.inspect().builds == wall_builds,"unchanged actual scene does not rebuild wall text resources")
 	check(game.finds.has("cp_intro_remember") and game.finds.cp_intro_remember.source_id == "cp_intro_remember" and game.finds.cp_intro_remember.presentation_kind == "money","actual intro pickup uses the original cached find presenter")
 	var initial_weather := {"dayTime":game.runtime.s.dayTime,"weather":game.runtime.s.weather}
 	game.runtime.s.dayTime = 0.65; game.runtime.s.weather = "rain"
@@ -64,6 +69,45 @@ func _run() -> void:
 	check(game._sole_shadow_light(),"current light flags are read without stale certification")
 	added_shadow.free()
 	check(game._sole_shadow_light(),"removed lights leave no stale registry entry")
+	check(game.ownership_view.inspect().built and game.world.dynamic_ownership,"actual full scene owns the live ownership bank")
+	check(game.kingdom_view.inspect().built,"actual full scene owns the four Kingdom banner and nine-mark bank")
+	var kingdom_before: Dictionary = game.runtime.s.kingdom.duplicate(true)
+	var clan: Dictionary = Content.definition("src/systems/campaigns.js","KINGDOM_CLANS",{}).blue_tarp
+	game.runtime.s.kingdom.stage = clan.marksStage; game.runtime.s.kingdom.marks = 1; game._process(0.0)
+	var kingdom_facts: Dictionary = game.kingdom_view.inspect().facts
+	check(kingdom_facts.marks["blue_tarp:0"].done and kingdom_facts.marks["blue_tarp:1"].visible,"current source stage displays completed and pending Kingdom marks")
+	game.runtime.s.kingdom = kingdom_before; game._process(0.0)
+	check(not game.kingdom_view.inspect().facts.marks["blue_tarp:0"].visible,"stage replacement removes old marks without rebuilding the world")
+	var office_before: Dictionary = game.runtime.s.office.duplicate(true)
+	var claims_before: Dictionary = game.runtime.s.districtClaims.duplicate(true)
+	game.runtime.s.office.owned = true; game.runtime.s.office.upgrades.desk = true
+	for site: Dictionary in Content.definition("src/systems/campaigns.js","CLAIM_SITES",[]): game.runtime.s.districtClaims[site.id] = true
+	game._process(0.0)
+	var ownership: Dictionary = game.ownership_view.inspect()
+	check(ownership.facts.office.title == "PAPER AUTHORITY" and ownership.facts.office.paper_count == 6 and ownership.facts.office.trim,"current model projects all eleven claims and desk papers")
+	game.runtime.s.office = office_before; game.runtime.s.districtClaims = claims_before; game._process(0.0)
+	check(not game.ownership_view.inspect().facts.office.owned and game.ownership_view.inspect().facts.office.claims == 0,"revoked model ownership clears facade upgrades without a new world")
+	var source_dog: Dictionary = {}
+	for record: Dictionary in game.runtime.state.npcs:
+		if record.id == "scrap_dog": source_dog = record; break
+	check(game.dog_leash.inspect().active,"actual living original dog binds its current weighted collar to the real post")
+	var chained_before: Variant = source_dog.get("chained")
+	source_dog.chained = false; game._sync_model_nodes(0.016)
+	check(game.dog_leash.inspect().active,"living unchained original retains the source leash quirk")
+	source_dog.dead = true; game._sync_model_nodes(0.0)
+	check(not game.dog_leash.inspect().active,"dead/freed original removes leash rather than binding a follower")
+	source_dog.dead = false; source_dog.chained = chained_before; game._sync_model_nodes(0.016)
+	var collar: Node3D = game.actors.scrap_dog.get_meta("leash_collar")
+	var leash_points: PackedVector3Array = game.dog_leash.inspect().points
+	check(game.dog_leash.to_global(leash_points[6]).distance_to(collar.global_position) < 0.00001,"scene chain endpoint follows the actual current animated collar")
+	game.runtime.s.borderGlowT = 600.0; game.runtime.s.borderGlowColor = "#a04848"; game.runtime.s.borderGlowRect = {"x":0,"y":0,"w":100,"h":100}
+	game._process(0.0)
+	check(game.hud.district_border.inspect().visible and game.hud.district_border.inspect().alpha == 0.55,"separate district perimeter projects source timing/color")
+	game._pause(); game._process(0.25)
+	check(game.runtime.s.borderGlowT == 600.0,"paused composition cannot consume border time")
+	game._resume(); game.runtime.s.borderGlowRect = {}; game._process(0.0)
+	check(not game.hud.district_border.inspect().visible,"missing source rectangle hides border even with remaining time")
+	game.runtime.s.borderGlowT = 0.0
 	check(game.dynamic_emitters.inspect().allocated_lights == 6 and game.dynamic_emitters.inspect().dynamic_shadows == 0,"actual full scene owns exactly six shadowless moving fixtures")
 	check(game.dynamic_emitters.inspect().cop_count == 1,"resident Horse Cop binds its actual rider cap")
 	game.runtime.p.rockedT = 1000
@@ -187,6 +231,15 @@ func _run() -> void:
 	check(game.hud.modal.visible,"load cannot leave input captured behind a modal")
 	game._resume()
 	check(game.runtime.s.mode == "playing" and not game.hud.modal.visible,"Continue after load is playable")
+	var marking_draws: int = game.runtime.wall_markings.inspect().draws
+	await game._load()
+	check(game.runtime.wall_markings.inspect().draws == marking_draws and game.runtime.s.graffiti == saved.state.graffiti,"actual placed load preserves valid raw wall records without reroll")
+	var legacy_walls: Dictionary = saved.duplicate(true)
+	legacy_walls.state.erase("graffiti"); legacy_walls.state.erase("posters")
+	await game.store.write_save(legacy_walls); await game._load()
+	check(game.runtime.wall_markings.inspect().draws > marking_draws and game.runtime.wall_markings.inspect().bound,"actual Scene load retains missing-field migration through placement normalization")
+	await _test_bounded_wall_load(saved)
+	await game.store.write_save(saved); await game._load(); game._resume()
 	game.runtime.p.cash = 23
 	await game.store.write_save({"schema":900,"cash":999})
 	await game._load()
@@ -236,6 +289,31 @@ func _run() -> void:
 	await _load_arrival_race(true)
 	_test_ending_receipts()
 	await _finish()
+
+func _test_bounded_wall_load(saved: Dictionary) -> void:
+	# Process is disabled: inspect restored authority, then the caller reloads ordinary
+	# layouts before any world draw. This witness creates no thousand-label projection.
+	check(not game.is_processing(),"bounded-save regression runs before presentation")
+	var oversized: Dictionary = saved.duplicate(true)
+	oversized.state.graffiti = []
+	for index: int in range(1025): oversized.state.graffiti.append(saved.state.graffiti[0].duplicate(true))
+	var nested: Dictionary = {"end":"too deep"}
+	for depth: int in range(12): nested = {"next":nested}
+	var row: Dictionary = {}
+	for index: int in range(32): row[str(index)] = index
+	var bulk: Array = []
+	for index: int in range(1025): bulk.append(row.duplicate())
+	oversized.state.posters = [{"text":"p".repeat(4097),"nested":nested,"bulk":bulk}]
+	await game.store.write_save(oversized)
+	var raw: Dictionary = await game.store.read_save()
+	var normalized := Scene.Runtime.State.new()
+	check(normalized.restore(raw).ok,"actual oversized JSON uses the ordinary State decoder")
+	var builds: int = game.wall_marking_view.inspect().builds
+	await game._load()
+	check(game.runtime.s.graffiti == normalized.s.graffiti and game.runtime.s.graffiti.size() == 1024 and game.runtime.s.posters == normalized.s.posters,"actual placed load preserves normalized nested wall values rather than reinserting raw arrays")
+	check(game.wall_marking_view.inspect().builds == builds,"oversized load regression does not construct wall presentation resources")
+	await game.store.write_save({"schema":1,"state":"legacy unrelated value"}); await game._load()
+	check(game.runtime.wall_markings.inspect().bound and game.runtime.s.migration.from_schema == 1,"actual placed schema1 load ignores scalar legacy state")
 
 func _test_ending_receipts() -> void:
 	# Staged source events prove the facade/continuation only, not boss balance.

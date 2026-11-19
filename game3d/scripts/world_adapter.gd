@@ -229,9 +229,9 @@ func _height(id: String,hints: Dictionary = {}) -> float:
 		_height_profiles.erase(id)
 	elif not cached.is_empty(): return float(cached.height)
 	return 1.8
-func _shape(body: Dictionary) -> Shape3D:
+func _shape(body: Dictionary,resolved_height: float = -1.0) -> Shape3D:
 	var id: String = str(body.get("id","player"))
-	var height: float = _height(id,body)
+	var height: float = resolved_height if resolved_height > 0.0 else _height(id,body)
 	var key: String = "%s/%s/%s/%s" % [id == "player",body.w,body.h,height]
 	if _shapes.has(key): return _shapes[key]
 	var shape: Shape3D
@@ -243,11 +243,12 @@ func _shape(body: Dictionary) -> Shape3D:
 		box.size = Vector3(float(body.w)*SCALE,height,float(body.h)*SCALE); shape = box
 	_shapes[key] = shape
 	return shape
-func _query(body: Dictionary,point: Vector2) -> PhysicsShapeQueryParameters3D:
+func _query(body: Dictionary,point: Vector2,resolved_height: float = -1.0) -> PhysicsShapeQueryParameters3D:
 	var query := PhysicsShapeQueryParameters3D.new()
-	query.shape = _shape(body)
+	var height: float = resolved_height if resolved_height > 0.0 else _height(str(body.get("id","player")),body)
+	query.shape = _shape(body,height)
 	var center := point+Vector2(float(body.w),float(body.h))*0.5
-	query.transform = Transform3D(Basis.IDENTITY,Content.to_world(center,FEET+_height(str(body.get("id","player")),body)*0.5))
+	query.transform = Transform3D(Basis.IDENTITY,Content.to_world(center,FEET+height*0.5))
 	query.collision_mask = 1
 	query.margin = 0.002
 	return query
@@ -268,7 +269,7 @@ func _clear(body: Dictionary,point: Vector2,allow_certificate: bool = true) -> b
 			return true
 	query_count += 1
 	placement_overlap_queries += 1
-	var clear: bool = space.intersect_shape(_query(body,point),1).is_empty()
+	var clear: bool = space.intersect_shape(_query(body,point,height),1).is_empty()
 	if clear and _placement_render >= 0:
 		_placement_clear[id] = {"point":point,"width":body.w,"depth":body.h,"height":height,"revision":_collision_revision}
 	elif not clear: _placement_clear.erase(id)

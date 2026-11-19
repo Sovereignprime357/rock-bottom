@@ -439,3 +439,25 @@ create additional registry identities. Planned means not implemented, not a gene
 | THE GOOSE (MANAGER) | two-foot bird / desk | P05b3 central1898/native85; eye review passed |
 | THE LIFEGUARD (STILL CERTIFIED) | seated human / elevated chair | P05b3 central1898/native85; eye review passed |
 | THE DOCENT (SELF-GUIDED) | human | P05b3 central1898/native85; eye review passed |
+#### P04e — near offscreen casters with a complete separation proof
+
+Captured before code after the c61d9c9 release measurement (model projection p95
+7.055/7.151 ms). The P04d infinite-extrusion proof is independent of distance to the
+camera: if the entire caster sphere and every nonnegative ray extrusion stay beyond
+one outward frustum plane, neither body nor its directional shadow can enter the view.
+Therefore this complete proof may run before the old near-shadow-distance guard.
+The guard remains for all cases without this proof, including the finite-floor fallback.
+Visible/touching spheres, incoming shadow directions, invalid bounds/light policy and
+additional shadow lights still update. All source AI, clocks, pose time, transitions,
+death/hurt, coats and immediate visible return remain unchanged. This supersedes only
+P04d's blanket near-distance exclusion; no render setting or actor visibility changes.
+
+FullScene also omits identical root position/yaw and visibility setters, comparing
+current values rather than assuming prior state. Changed transforms still publish in
+the same frame. This is exact output equality, with no epsilon or quantization.
+P14f's weighted collar markers are non-rendering leaf `Node3D` children. Visibility
+bounds recognize only declared weighted markers that remain direct, finite, non-top-level
+leaf nodes; a changed type/parent/child graph fails open even after the radius cache exists.
+Their coordinates add no renderable geometry. The external chain presenter must force the
+original live dog's pose while bound, because the chain can cross the view independently
+of its actor sphere, just as a moving beacon can illuminate a visible receiver.

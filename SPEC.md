@@ -2321,3 +2321,14 @@ the active pixel release, frozen v19 and declared-size sprite contract remain un
 Ending text/continuation and departure timing retain source authority with the explicitly
 documented inside-edge pad adaptation. Fixture, HUD, equipment and projectile presenters
 own no gameplay clocks, collision authority, transactions or game RNG.
+
+### Full-3D ownership, markings and tether projection — 2026-11-18
+
+`SPEC-3D-WORLD-OWNERSHIP.md`, `SPEC-3D-LEASH-BORDER.md`,
+`SPEC-3D-KINGDOM-VIEW.md` and `SPEC-3D-WALL-MARKINGS.md` govern the next
+bounded full-port world details. Office/claim/hideout/Kingdom views consume existing
+facts; the leash follows the real weighted collar; the border uses the accepted
+world clock. Wall-marking generation is an explicit source shared-RNG owner, separate
+from its read-only presenter. Existing saved layouts remain authority. New layouts
+use pinned actual Canvas Courier widths, with source-order selection and documented
+first-person facade mapping. Engine, native and Web acceptance remain separate gates.

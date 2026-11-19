@@ -151,3 +151,27 @@ misses the 0.2 ms local budget after redundant-setter suppression (0.269 ms, pre
 0.290 ms). Preserve that failure and measure the frozen release template before further
 optimization. The full 60-actor frame target remains unaccepted. Next bounded work is the
 actual normal-damage boss tour and remaining state-driven world adornments.
+
+### World-details integration — bounded owners and release freeze
+
+Office/claims/hatches, Kingdom banners/marks, weighted dog tether, source border
+clock and graffiti/poster lifecycle now compose the Full scene. Original v22/v19
+remain unchanged. Native presentation evidence is staged and does not prove earning
+each upgrade. Frozen Tony independently passed source-earned real combat; the old
+fists-only failure is retained. Current manifest548/35/2 maps585 handlers and leaves
+all32 feature-level completion claims open.
+
+Current save-boundary review passed Runtime153/Scene389. The initial105-suite batch
+stopped at an obsolete integration seed expectation; the source oracle now captures
+the156 wall draws after the25 phone/bottle draws without relaxing bottle order.
+Root serializes the final complete runner, wall20-view probe, Windows/Web export,
+browser checks, commit/push and release performance. Other agents cannot launch
+Godot or mutate Git. Next-work drafts stay under .build until this freeze is lifted:
+World owns only actual-input three-routes/Office/canal/work/day/save acceptance;
+Characters owns a read-only facade/ambient motion proposal; Architecture owns a
+read-only conservative CPU audit. Full campaign and platform acceptance stay open.
+
+World-details checkpoint validation: 105/105 3D and 19/19 original gates green;
+both Full exports rebuilt. Native wall20 views and browser menu/save/reload/pawn
+graffiti checks pass. See reports/2026-11-18-3d-world-details.md. Full port remains
+active; current frozen release performance and complete campaign tours are pending.

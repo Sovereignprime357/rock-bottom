@@ -37,7 +37,10 @@ var _footprint_cells: Dictionary = {}
 var site_boards: Dictionary = {}
 var dynamic_interactive: bool = false # Production adopts these originals into the live prop view.
 var dynamic_cart: bool = false # The unique Travel cart adopts its original meshes.
+var dynamic_ownership: bool = false # A separate pure view owns the Office fascia.
+var _ownership_office: Dictionary = {}
 var _departure_pads: Array[Dictionary] = []
+var _leash_post_marker: Node3D
 
 
 func build() -> void:
@@ -84,9 +87,90 @@ func _make_site_boards() -> void:
 func set_site_available(id: String,available: bool) -> void:
 	if site_boards.has(id): site_boards[id].visible = available
 
+func ownership_surfaces() -> Dictionary:
+	if not built or not dynamic_ownership or _ownership_office.is_empty(): return {}
+	var claims: Dictionary = {}
+	for site: Dictionary in Content.definition("src/systems/campaigns.js","CLAIM_SITES",[]):
+		claims[str(site.id)] = Content.to_world(Vector2(site.sign.x,site.sign.y))
+	var hideouts: Dictionary = {}
+	for id: String in Content.definition("src/systems/daily_hideouts.js","HIDEOUT_DOORS",{}):
+		var door: Dictionary = Content.definition("src/systems/daily_hideouts.js","HIDEOUT_DOORS",{})[id]
+		hideouts[id] = _rect(door)
+	return {"office":_ownership_office.duplicate(true),"claims":claims,"hideouts":hideouts}
+
 
 func anchors() -> Dictionary:
 	return _anchors.duplicate()
+
+
+func leash_post_anchor() -> Node3D:
+	return _leash_post_marker if is_instance_valid(_leash_post_marker) else null
+
+
+func wall_marking_surfaces() -> Array[Dictionary]:
+	# Read-only facade survey. Wall panels come from the authored collider bounds;
+	# trim/window/sign envelopes match the existing facade builders above them.
+	var result: Array[Dictionary] = []
+	if not built: return result
+	for index: int in range(content.buildings.size()):
+		var source: Dictionary = content.buildings[index]
+		var rect: Rect2 = _rect(source)
+		var owner: String = "structures:"+_structure_id(index,source)
+		var height: float = 0.0
+		var front_panels: Array[Rect2] = []
+		for obstacle: Dictionary in _obstacles:
+			if obstacle.owner != owner: continue
+			var bounds: AABB = obstacle.bounds
+			if absf(bounds.position.z-rect.position.y) < 0.002 and absf(bounds.size.z-0.24) < 0.002 and bounds.position.y < 0.01 and bounds.size.y > 2.5:
+				height = maxf(height,bounds.size.y)
+			if absf(bounds.end.z-rect.end.y) < 0.002 and absf(bounds.size.z-0.24) < 0.002 and bounds.size.y > 0.3:
+				front_panels.append(Rect2(bounds.position.x-rect.position.x,bounds.position.y,bounds.size.x,bounds.size.y))
+		if height <= 0.0: continue
+		var gaps: Array[Vector2] = []
+		for witness: Dictionary in aperture_witnesses:
+			if witness.owner == owner:
+				gaps.append(Vector2(witness.from.x-rect.position.x-witness.width*0.5,witness.from.x-rect.position.x+witness.width*0.5))
+		var front_keepouts: Array[Rect2] = []
+		for gap: Vector2 in gaps:
+			front_keepouts.append(Rect2(gap.x-0.12,0,gap.y-gap.x+0.24,2.64))
+		if gaps.is_empty():
+			var door_width: float = minf(1.25,rect.size.x*0.24)
+			front_keepouts.append(Rect2((rect.size.x-door_width-0.50)*0.5,0,door_width+0.50,2.46))
+		var bays: int = maxi(1,int(rect.size.x/2.8))
+		for bay: int in range(bays):
+			# _facade_bays places a full-height0.20m pier at each bay's left edge.
+			# Pigment belongs on the flat wall between them, never in front of a pier.
+			front_keepouts.append(Rect2(float(bay)*rect.size.x/float(bays)-0.10,0,0.20,height))
+			var x: float = (float(bay)+0.5)*rect.size.x/float(bays)
+			var blocked: bool = false
+			for gap: Vector2 in gaps:
+				if x > gap.x-0.85 and x < gap.y+0.85: blocked = true
+			if not blocked and height > 3.3:
+				var width: float = minf(1.5,rect.size.x/float(bays)-0.55)+0.46
+				front_keepouts.append(Rect2(x-width*0.5,1.65-1.35*0.5-0.18,width,1.35+0.50))
+			if height > 5.8: front_keepouts.append(Rect2(x-0.86,4.65-1.35*0.5-0.18,1.72,1.35+0.50))
+		var title: String = str(source.get("name",source.get("sign","")))
+		if not title.is_empty():
+			var fascia_y: float = 3.12 if height >= 4.0 else 2.74
+			var fascia_width: float = minf(rect.size.x-0.5,maxf(2.3,title.length()*0.23))
+			front_keepouts.append(Rect2((rect.size.x-fascia_width)*0.5-0.04,fascia_y-0.34,fascia_width+0.08,0.68))
+		var side_keepouts: Array[Rect2] = []
+		var windows: int = mini(5,maxi(1,int(rect.size.y/3.5)))
+		for slot: int in range(windows):
+			var u: float = (float(slot)+0.5)*rect.size.y/float(windows)
+			side_keepouts.append(Rect2(u-0.79,minf(2.1,height-1.0)-0.78,1.58,1.70))
+		var faces: Dictionary = {}
+		# The4/6mm lettering offsets put pigment10/12mm outside the flat wall.
+		faces.bottom = {"transform":Transform3D(Basis.IDENTITY,Vector3(rect.position.x,0,rect.end.y+0.006)),"span":Vector2(rect.size.x,height),"panels":front_panels,"keepouts":front_keepouts}
+		for side: String in ["leftside","rightside"]:
+			var left: bool = side == "leftside"
+			var basis := Basis(Vector3.UP,-PI*0.5 if left else PI*0.5)
+			var origin := Vector3(rect.position.x-0.014 if left else rect.end.x+0.014,0,rect.position.y if left else rect.end.y)
+			var exclusions: Array[Rect2] = side_keepouts.duplicate()
+			exclusions.append(Rect2(0.22 if left else rect.size.y-0.38,0.08,0.16,height-0.16))
+			faces[side] = {"transform":Transform3D(basis,origin),"span":Vector2(rect.size.y,height),"panels":[Rect2(0,0,rect.size.y,height)],"keepouts":exclusions}
+		result.append({"building_index":index,"source":source.duplicate(true),"owner":owner,"faces":faces})
+	return result
 
 func departure_pads() -> Array[Dictionary]:
 	return _departure_pads.duplicate(true)
@@ -376,7 +460,11 @@ func _full_structures() -> void:
 				_box("roof_parapet_" + finish, Vector3(rect.size.x + 0.2, 0.50, 0.22), Vector3(center.x, height + 0.38, z), color)
 			_box("roof_airbox_metal", Vector3(1.3, 0.65, 0.9), Vector3(center.x + rect.size.x * 0.18, height + 0.55, center.y), "6b7567")
 		_facade_bays(rect, height, index, finish, color, openings)
-		if not title.is_empty():
+		if title == "THE OFFICE":
+			_ownership_office = {"front":Vector3(center.x,0,front+0.025),"width":rect.size.x,"height":height,
+				"fascia":Vector3(center.x,3.12,front+0.19),"aperture_half_width":1.2,
+				"source_center":Vector2(4920,3220)}
+		if not title.is_empty() and not (dynamic_ownership and title == "THE OFFICE"):
 			var fascia_y: float = 3.12 if height >= 4.0 else 2.74
 			var fascia_width: float = minf(rect.size.x - 0.5, maxf(2.3, title.length() * 0.23))
 			_box("shop_fascia_wood", Vector3(fascia_width, 0.58, 0.18), Vector3(center.x, fascia_y, front + 0.09), "35473c")
@@ -533,6 +621,10 @@ func _build_prop(prop: Dictionary, index: int) -> void:
 			_wreck(at, width, depth, rust)
 		"leash_post":
 			_cylinder("leash_wood_post", 0.075, 0.85, at + Vector3(0, 0.425, 0), "8d805d", true, 6)
+			_box("leash_post_staple",Vector3(0.055,0.032,0.025),at+Vector3(0,0.62,0.075),"746a4d")
+			var marker := Marker3D.new(); marker.name = "LeashPostAnchor"
+			marker.position = at+Vector3(0,0.62,0.0875); add_child(marker)
+			_leash_post_marker = marker
 		"pay_phone":
 			_box("phone_metal_stand", Vector3(0.12, 1.2, 0.12), at + Vector3(0, 0.6, 0), "67715e", true)
 			_box("phone_metal_back", Vector3(0.55, 0.94, 0.20), at + Vector3(0, 1.35, 0), "879580", true)

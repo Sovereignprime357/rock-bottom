@@ -3,6 +3,8 @@ extends "res://scripts/hud.gd"
 const Content = preload("res://scripts/content_catalog.gd")
 const GuideProjection = preload("res://scripts/guidance_projection.gd")
 const ActorHud = preload("res://scripts/actor_hud_overlay.gd")
+const DistrictBorder = preload("res://scripts/district_border_view.gd")
+var district_border: Control
 var actor_overlay: Control
 var menu_scroll: ScrollContainer
 var feed_panel: PanelContainer
@@ -116,6 +118,9 @@ func _ready() -> void:
 	actor_overlay = ActorHud.new(); root.add_child(actor_overlay)
 	actor_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.move_child(actor_overlay,root.get_children().find(guidance_overlay)+1)
+	district_border = DistrictBorder.new(); root.add_child(district_border)
+	district_border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	root.move_child(district_border,root.get_children().find(tint)+1)
 	get_viewport().size_changed.connect(_fit_guidance)
 	if _guidance_ref != null: _configure_guidance()
 
@@ -125,7 +130,7 @@ func bind_actor_hud(state: RefCounted,camera: Camera3D,anchor: Callable,sight: C
 func actor_hud_occupied_rects() -> Array[Rect2]:
 	var result: Array[Rect2] = []
 	for node: Node in root.get_children():
-		if not node is Control or not node.is_visible_in_tree() or node in [tint,actor_overlay,guidance_overlay]: continue
+		if not node is Control or not node.is_visible_in_tree() or node in [tint,actor_overlay,guidance_overlay,district_border]: continue
 		# Modal's full-screen CenterContainer is only layout, not an occupied plate.
 		if node is CenterContainer: continue
 		if node is Label and node.text.is_empty(): continue
@@ -235,6 +240,8 @@ func menu(title: String,body: String,options: Array,big: bool = false) -> void:
 func update_runtime(runtime: RefCounted) -> void:
 	var p: Dictionary = runtime.p
 	var s: Dictionary = runtime.s
+	var border_rect: Variant = s.get("borderGlowRect",{})
+	district_border.sync({"remaining_ms":s.get("borderGlowT",0),"color":s.get("borderGlowColor",""),"visible":s.mode != "title" and border_rect is Dictionary and not border_rect.is_empty()})
 	_guidance_playing = s.mode == "playing"
 	feed_panel.visible = _feed_requested and s.mode == "playing"
 	ticker.visible = s.mode == "playing"
