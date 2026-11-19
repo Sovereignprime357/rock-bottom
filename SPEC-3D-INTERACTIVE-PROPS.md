@@ -111,3 +111,13 @@ engines, physical integration and visual checks. Model/source passing alone is n
 Owned files: this spec; prop_state.gd interactive additions; combat_system.gd narrow optional seam;
 new interactive_prop_actions.gd; new test_interactive_props.gd; new source oracle and fixture.
 Runtime/Scene/World/first-person rig and source2D files are out of this packet.
+
+## Bounded live presentation reads — 2026-11-18
+
+`render_record(id)` returns exactly one detached current-epoch row, with the same
+id/index/placed/pending fields as `render_records`. Canonical IDs are strictly
+interactive:0 through interactive:13; aliases, malformed and expired epochs return
+an empty dictionary. This is a live read, never a cache: direct same-epoch source
+timer, position, broken, pending and placement changes remain immediately visible.
+Adapter reach queries use this one-row read instead of copying all14 records for
+each candidate. Physical collider, source reach and LOS checks remain unchanged.

@@ -1,6 +1,9 @@
 extends "res://scripts/hud.gd"
 ## Pure full-model view. No gameplay timers, resources, transactions or save ownership.
 const Content = preload("res://scripts/content_catalog.gd")
+const GuideProjection = preload("res://scripts/guidance_projection.gd")
+const ActorHud = preload("res://scripts/actor_hud_overlay.gd")
+var actor_overlay: Control
 var menu_scroll: ScrollContainer
 var feed_panel: PanelContainer
 var feed_scroll: ScrollContainer
@@ -16,6 +19,31 @@ var _objective_plate: Panel
 var guidance_map: GuidanceMap
 var guidance_refresh_count: int = 0
 var _receipt_default_offsets := Vector4.ZERO
+var _guidance_camera_ref: WeakRef
+var _guidance_visibility: Callable
+var _last_objective: Dictionary = {}
+var _target_visibility: int = -1
+var guidance_overlay: GuidanceOverlay
+var guidance_projection_count: int = 0
+
+class GuidanceOverlay:
+	extends Control
+	var marker: Dictionary = {}
+	func _draw() -> void:
+		if marker.is_empty(): return
+		var color := Color("e8c040")
+		if marker.kind == "arrow":
+			color.a = float(marker.arrow_alpha)
+			draw_set_transform(marker.center,float(marker.angle))
+			draw_colored_polygon(PackedVector2Array(marker.arrow),color)
+			return
+		color.a = float(marker.alpha)
+		if marker.dashed:
+			for index: int in range(12):
+				var start: float = float(index)*TAU/12.0
+				draw_arc(marker.center,float(marker.radius),start,start+TAU/20.0,5,color,float(marker.width),true)
+		else: draw_arc(marker.center,float(marker.radius),0.0,TAU,48,color,float(marker.width),true)
+		if marker.square: draw_rect(Rect2(marker.square_position,Vector2.ONE*float(marker.square_size)),Color("e8c040"))
 
 class GuidanceMap:
 	extends Control
@@ -80,13 +108,70 @@ func _ready() -> void:
 	guidance_map.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	guidance_map.offset_left = -260; guidance_map.offset_right = -20
 	guidance_map.offset_top = -246; guidance_map.offset_bottom = -54; guidance_map.hide()
+	guidance_overlay = GuidanceOverlay.new(); root.add_child(guidance_overlay)
+	guidance_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	guidance_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE; guidance_overlay.hide()
+	# Informational marker stays below every HUD control, even on compact viewports.
+	root.move_child(guidance_overlay,root.get_children().find(tint)+1)
+	actor_overlay = ActorHud.new(); root.add_child(actor_overlay)
+	actor_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	root.move_child(actor_overlay,root.get_children().find(guidance_overlay)+1)
 	get_viewport().size_changed.connect(_fit_guidance)
 	if _guidance_ref != null: _configure_guidance()
+
+func bind_actor_hud(state: RefCounted,camera: Camera3D,anchor: Callable,sight: Callable) -> bool:
+	return actor_overlay != null and actor_overlay.bind_model(state,camera,anchor,sight)
+
+func actor_hud_occupied_rects() -> Array[Rect2]:
+	var result: Array[Rect2] = []
+	for node: Node in root.get_children():
+		if not node is Control or not node.is_visible_in_tree() or node in [tint,actor_overlay,guidance_overlay]: continue
+		# Modal's full-screen CenterContainer is only layout, not an occupied plate.
+		if node is CenterContainer: continue
+		if node is Label and node.text.is_empty(): continue
+		var rect: Rect2 = (node as Control).get_global_rect()
+		if rect.has_area(): result.append(rect)
+	if modal.visible: result.append(modal.get_global_rect())
+	return result
+
+func update_actor_hud(visual_ms: float) -> void:
+	if actor_overlay != null: actor_overlay.update_frame(visual_ms,actor_hud_occupied_rects())
 
 func bind_guidance(view: RefCounted) -> void:
 	_guidance_ref = weakref(view) if view != null else null
 	_guidance_elapsed = 0.0
+	_last_objective.clear(); _target_visibility = -1
+	if guidance_overlay != null: guidance_overlay.marker = {}; guidance_overlay.hide()
 	if guidance_map != null: _configure_guidance()
+func bind_guidance_camera(camera: Camera3D) -> void:
+	_guidance_camera_ref = weakref(camera) if camera != null else null
+	_target_visibility = -1
+	if guidance_overlay != null: guidance_overlay.marker = {}; guidance_overlay.hide()
+func bind_guidance_visibility(callback: Callable) -> void:
+	_guidance_visibility = callback; _target_visibility = -1
+func guidance_safe_rect() -> Rect2:
+	var viewport: Vector2 = get_viewport().get_visible_rect().size
+	var left: float = 24.0; var right: float = viewport.x-(362.0 if _feed_requested else 24.0)
+	var top: float = minf(220.0,viewport.y*0.42); var bottom: float = viewport.y-264.0
+	return Rect2(left,top,maxf(0.0,right-left),maxf(0.0,bottom-top))
+func _target_world() -> Vector3:
+	if not _last_objective.has("x") or not _last_objective.has("y"): return Vector3.INF
+	return Content.to_world(Vector2(float(_last_objective.x),float(_last_objective.y)),0.08)
+func _sample_guidance_visibility() -> void:
+	_target_visibility = -1
+	var camera: Camera3D = _guidance_camera_ref.get_ref() if _guidance_camera_ref != null else null
+	var target: Vector3 = _target_world()
+	if not _guidance_playing or camera == null or not target.is_finite() or not _guidance_visibility.is_valid(): return
+	var result: Variant = _guidance_visibility.call(target)
+	if result is bool: _target_visibility = 1 if result else 0
+func _project_guidance() -> void:
+	if guidance_overlay == null: return
+	var camera: Camera3D = _guidance_camera_ref.get_ref() if _guidance_camera_ref != null else null
+	if not _guidance_playing or camera == null or not camera.is_inside_tree() or _last_objective.is_empty():
+		guidance_overlay.marker = {}; guidance_overlay.hide(); return
+	guidance_overlay.marker = GuideProjection.project(_target_world(),camera.global_transform,camera.get_camera_projection(),get_viewport().get_visible_rect().size,guidance_safe_rect(),float(Time.get_ticks_msec()),_target_visibility)
+	guidance_overlay.visible = not guidance_overlay.marker.is_empty()
+	guidance_overlay.queue_redraw(); guidance_projection_count += 1
 func _configure_guidance() -> void:
 	var view: Object = _guidance_ref.get_ref() if _guidance_ref != null else null
 	guidance_map.static_commands = view.map_static() if view != null else []
@@ -117,20 +202,26 @@ func _refresh_guidance() -> void:
 		if guidance_map != null: guidance_map.hide()
 		if _objective_plate != null: _objective_plate.hide()
 		objective.hide()
+		_last_objective.clear(); _target_visibility = -1
+		if guidance_overlay != null: guidance_overlay.marker = {}; guidance_overlay.hide()
 		return
 	var current: Dictionary = view.objective_view(_view_heading)
+	_last_objective = current.duplicate(true)
 	var bearing: float = float(current.get("bearing",0.0))
 	var facing: String = ["ahead","right","behind","left"][posmod(int(floor(bearing/(PI/2.0)+0.5)),4)]
 	objective.text = "BAD IDEA · "+str(current.get("text",""))+"\n"+("HERE" if current.get("here",false) else "%d paces · %s" % [current.get("paces",1),facing])
 	objective.modulate = CREAM
 	guidance_map.dynamic_view = view.map_dynamic(); guidance_map.heading = _view_heading; guidance_map.queue_redraw()
+	_sample_guidance_visibility()
 	guidance_refresh_count += 1
 func _process(delta: float) -> void:
 	super._process(delta)
-	if not _guidance_playing or _guidance_ref == null: return
+	if not _guidance_playing or _guidance_ref == null:
+		if guidance_overlay != null: guidance_overlay.hide()
+		return
 	_guidance_elapsed += delta
-	if _guidance_elapsed < 0.12: return
-	_guidance_elapsed = 0.0; _refresh_guidance()
+	if _guidance_elapsed >= 0.12: _guidance_elapsed = 0.0; _refresh_guidance()
+	_project_guidance()
 
 func _fit_menu() -> void:
 	var maximum: float = clampf(get_viewport().get_visible_rect().size.y-150.0,300.0,560.0)
@@ -154,6 +245,8 @@ func update_runtime(runtime: RefCounted) -> void:
 	guidance_map.visible = has_guidance and _guidance_playing
 	_loop_status.visible = has_guidance and _guidance_playing
 	objective.visible = _guidance_playing and (not bound_guidance or has_guidance)
+	if not _guidance_playing or not has_guidance: guidance_overlay.hide()
+	if not has_guidance: _last_objective.clear(); _target_visibility = -1
 	var zone: Dictionary = runtime.progression.current_zone()
 	status.text = "%s  /  DAY %d" % [str(zone.get("name",zone.get("id","THE BLOCK"))).to_upper(),int(s.day)]
 	pocket.text = "$%d  ·  rocks %d  ·  copper %d\nbrain %d  ·  cred %d  ·  wanted %d" % [p.cash,int(p.rocks)+int(p.soapRocks),p.copper,p.brain,p.cred,p.wanted]
@@ -207,9 +300,14 @@ func inventory_copy(runtime: RefCounted) -> String:
 	var s: Dictionary = runtime.s
 	var ranks: Array = Content.definition("src/data/world.js","RANKS",[])
 	var rank_name: String = str(ranks[clampi(int(p.rank),0,ranks.size()-1)].name) if not ranks.is_empty() else ""
-	var lines: Array[String] = [rank_name,"cash $%d · rocks %d · pure copper %d" % [p.cash,int(p.rocks)+int(p.soapRocks),p.copper],
-		"raw supplies %d · house cut %d · hitters %d" % [p.supplies,p.dirtySupplies,p.hitters],
-		"body %d/%d · shakes %d · brain %d" % [p.hp,p.maxHp,p.shakes,p.brain],"", "equipment"]
+	var lines: Array[String] = [rank_name,"cash $%d · rocks %d · pure copper %d" % [p.cash,int(p.rocks)+int(p.soapRocks),p.copper]]
+	if p.hitters > 0: lines.append("emergency hitter %d" % p.hitters)
+	lines.append("raw supplies %d" % p.supplies+(" (%d house cut)" % p.dirtySupplies if p.dirtySupplies > 0 else ""))
+	lines.append("hp %d / %d · shakes %d · brain %d" % [floori(float(p.hp)+0.5),p.maxHp,floori(float(p.shakes)+0.5),floori(float(p.brain)+0.5)])
+	lines.append("cred %d" % p.cred+(" (+%d)" % p.credBonus if p.credBonus != 0 else ""))
+	lines.append("wanted "+("★".repeat(int(p.wanted)) if p.wanted > 0 else "-"))
+	lines.append("cart "+("mounted" if p.cartMounted else "-"))
+	lines.append("\nequipment")
 	lines.append("weapon: " + str(runtime.state.content.catalogs.weapons.get(p.weapon,{}).get("n",p.weapon)))
 	for slot: String in ["hat","coat","shoes","tool"]:
 		lines.append(slot+": "+str(runtime.state.content.catalogs.equipment.get(p.equip.get(slot),{}).get("n","(none)")))
@@ -217,8 +315,10 @@ func inventory_copy(runtime: RefCounted) -> String:
 	if p.inventory.is_empty(): lines.append("nothing (yet)")
 	for item: Dictionary in p.inventory: lines.append("%s ×%d" % [item.get("n",item.id),item.get("q",1)])
 	lines.append("\nlifetime")
-	for key: String in ["rocksSmoked","rocksCooked","rocksFenced","routesCompleted","officeJobs","territoriesClaimed","copsKilled","arrests"]:
-		lines.append("%s: %d" % [key.to_snake_case().replace("_"," "),p.lifetime.get(key,0)])
+	var lifetime_labels := {"rocksSmoked":"rocks smoked","rocksCooked":"rocks cooked","rocksFenced":"rocks fenced","routesCompleted":"block routes filed","officeJobs":"office orders filed","territoriesClaimed":"districts entered","copsKilled":"cops killed","arrests":"arrests"}
+	for key: String in lifetime_labels:
+		var denominator: String = "/%d" % Content.definition("src/systems/campaigns.js","CLAIM_SITES",[]).size() if key == "territoriesClaimed" else ""
+		lines.append("%s: %d%s" % [lifetime_labels[key],p.lifetime.get(key,0),denominator])
 	lines.append("day %d · %s\n\ncursed accolades %d/%d" % [s.day,s.weather,s.achievements.size(),runtime.state.content.catalogs.achievements.size()])
 	for id: String in runtime.state.content.catalogs.achievements:
 		var entry: Dictionary = runtime.state.content.catalogs.achievements[id]

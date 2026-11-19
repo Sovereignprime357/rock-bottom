@@ -229,9 +229,12 @@ func _can_pose_and_reach(rig: Dictionary,id: String) -> void:
 	var revision: int = _revision(rig.adapter); var collider_transform: Transform3D = body.global_transform
 	var before: Dictionary = _model(rig)
 	for repeat: int in range(4): _check(rig.view.sync(rig.actions.render_records()),"identical source pose accepted")
+	_check(rig.view.sync_current(),"single-pull authoritative snapshot accepted")
 	_check(_revision(rig.adapter) == revision and _model(rig) == before,"identical snapshots never rebuild topology or mutate model")
 	var art: Node3D = slot.get_node("Art"); var resting: Transform3D = art.transform
 	row.tipT = 200.0; row.rotPulse = 200.0; _check(_sync(rig),"source kick pose accepted")
+	var supplied_pose: Transform3D = art.transform
+	_check(rig.view.sync_current() and art.transform == supplied_pose,"single-pull path applies identical live source pose")
 	_check(not art.transform.is_equal_approx(resting),"actual original meshes respond to source kick timers")
 	var paused_pose: Transform3D = art.transform
 	await process_frame; await physics_frame
@@ -329,6 +332,7 @@ func _invalid_and_cleanup(rig: Dictionary) -> void:
 	var old: Array = rig.actions.render_records()
 	rig.game.p = rig.game.p.duplicate(true)
 	_check(not rig.view.sync(old),"previous player epoch snapshot cannot revive presentation")
+	_check(not rig.view.sync_current(),"single-pull path also rejects expired owner epoch")
 	_inactive(rig,"old epoch")
 	_check(rig.actions.reset_session("restore") and _sync(rig),"explicit owner rebind restores current epoch")
 	var sentinel: Dictionary = {"owner":"view_test_unrelated","bounds":AABB(Vector3(250,0,150),Vector3(1,2,1))}

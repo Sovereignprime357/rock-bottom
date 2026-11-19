@@ -6,6 +6,7 @@ const Visibility = preload("res://scripts/presentation_visibility.gd")
 var checks: int = 0
 var failures: Array[String] = []
 var completed: int = 0
+var floor_free_completed: bool = false
 
 
 func _initialize() -> void: call_deferred("_run")
@@ -13,14 +14,20 @@ func _initialize() -> void: call_deferred("_run")
 
 func _run() -> void:
 	_geometry_cases()
+	_floor_free_cases()
 	var camera := Camera3D.new()
 	var sun := DirectionalLight3D.new()
+	camera.far = 380.0
 	root.add_child(camera); root.add_child(sun)
 	sun.rotation.x = -0.7
 	await process_frame
-	var context: Dictionary = Visibility.frame_context(camera,sun,-1.0)
+	var context: Dictionary = Visibility.frame_context(camera,sun,-1.0,true)
 	_check(Visibility.sphere_needs_pose(Vector3(0,0,-10),0.5,context),"real camera planes retain visible geometry")
 	_check(not Visibility.sphere_needs_pose(Vector3(1000,0,0),0.5,context),"real camera planes reject a distant separated caster")
+	sun.shadow_enabled = true; sun.directional_shadow_max_distance = 85
+	var no_floor: Dictionary = Visibility.frame_context(camera,sun,-INF,true)
+	_check(not Visibility.sphere_needs_pose(Vector3(1000,0,-1000),.5,no_floor),"real camera far-plane caster and outgoing sun extrusion separate without receiver floor")
+	_check(Visibility.sphere_needs_pose(Vector3(1000,0,0),.5,Visibility.frame_context(camera,sun)),"actual context defaults to no uncertified shadow-light assumption")
 	for id: String in Roster.supported_visuals():
 		var first: Node3D = Roster.create(StringName(id),71)
 		var reference: Node3D = Roster.create(StringName(id),71)
@@ -34,7 +41,7 @@ func _run() -> void:
 		await process_frame
 		if _actor_cases(first,reference,id): completed += 1
 		first.free(); reference.free()
-	_check(completed == 72,"all72 original templates finish hidden/cache/bounds cases without aborting")
+	_check(completed == 72 and floor_free_completed,"all72 original templates and floor-free proof cases finish without aborting")
 	var unknown := Node3D.new(); root.add_child(unknown)
 	_check(Visibility.needs_pose(unknown,context),"unknown art fails open")
 	unknown.set_meta("roster_rig",{})
@@ -56,13 +63,13 @@ func _check(condition: bool, label: String) -> void:
 
 func _geometry_cases() -> void:
 	var planes: Array[Plane] = [Plane(Vector3.RIGHT,10),Plane(Vector3.LEFT,10),Plane(Vector3.UP,10),Plane(Vector3.DOWN,10),Plane(Vector3.BACK,10),Plane(Vector3.FORWARD,10)]
-	var context := {"camera":Vector3.ZERO,"planes":planes,"shadow_enabled":true,"shadow_distance":2.0,"light_direction":Vector3(0,-1,0),"min_receiver_y":-20.0}
+	var context := {"camera":Vector3.ZERO,"planes":planes,"shadow_enabled":true,"shadow_distance":2.0,"light_direction":Vector3(0,-1,0),"min_receiver_y":-20.0,"sole_shadow_light":true}
 	_check(Visibility.sphere_needs_pose(Vector3(11,0,0),1,context),"whole bound touching the frustum cannot be rejected by its center")
 	_check(not Visibility.sphere_needs_pose(Vector3(20,4,0),1,context),"separated body and downward shadow can skip unchanged ambient work")
 	context.light_direction = Vector3(-1,-1,0)
 	_check(Visibility.sphere_needs_pose(Vector3(20,4,0),1,context),"offscreen caster outside shadow-distance sphere still updates when its shadow crosses view")
 	context.light_direction = Vector3(0,-1,0)
-	for patch: Dictionary in [{"min_receiver_y":-INF},{"light_direction":Vector3.RIGHT},{"light_direction":Vector3(INF,0,0)},{"shadow_distance":0.0},{"planes":[]},{"camera":Vector3(NAN,0,0)}]:
+	for patch: Dictionary in [{"light_direction":Vector3(INF,0,0)},{"shadow_distance":0.0},{"planes":[]},{"camera":Vector3(NAN,0,0)},{"sole_shadow_light":false}]:
 		var broken := context.duplicate(true); broken.merge(patch,true)
 		_check(Visibility.sphere_needs_pose(Vector3(20,4,0),1,broken),"unknown shadow/frustum data fails open: "+str(patch.keys()))
 	_check(Visibility.sphere_needs_pose(Vector3(20,4,0),INF,context) and Visibility.sphere_needs_pose(Vector3(20,4,0),0,context),"invalid bounds fail open")
@@ -77,6 +84,51 @@ func _geometry_cases() -> void:
 			var direction := Vector3(sin(i*0.31),cos(i*0.17),sin(i*0.73)).normalized()
 			bounded = bounded and (basis*direction).length() <= scale_bound
 		_check(bounded,"scale/shear bound contains transformed sphere samples")
+
+
+func _floor_free_cases() -> void:
+	var planes: Array[Plane] = [Plane(Vector3.RIGHT,10),Plane(Vector3.LEFT,10),Plane(Vector3.UP,10),Plane(Vector3.DOWN,10),Plane(Vector3.BACK,10),Plane(Vector3.FORWARD,10)]
+	var context := {"camera":Vector3.ZERO,"planes":planes,"shadow_enabled":true,"shadow_distance":2.0,"light_direction":Vector3.DOWN,"min_receiver_y":-INF,"sole_shadow_light":true}
+	var axes: Array[Vector3] = [Vector3.RIGHT,Vector3.LEFT,Vector3.UP,Vector3.DOWN,Vector3.BACK,Vector3.FORWARD]
+	for outward: Vector3 in axes:
+		var center: Vector3 = outward*20.0
+		var tangent: Vector3 = outward.cross(Vector3.UP)
+		if tangent.length_squared() < .5: tangent = outward.cross(Vector3.RIGHT)
+		for direction: Vector3 in [outward,tangent,tangent+outward*.01]:
+			context.light_direction = direction
+			_check(not Visibility.sphere_needs_pose(center,1,context),"whole outward or parallel infinite shadow can skip without any floor")
+			# Independently sample the actual extruded sphere surface against all
+			# camera half-spaces, including huge distances and the caster itself.
+			for distance: float in [0.0,.5,10.0,1000.0,1000000.0]:
+				for surface: Vector3 in axes:
+					var point: Vector3 = center+surface+direction.normalized()*distance
+					var outside: bool = false
+					for plane: Plane in planes:
+						if plane.distance_to(point) > 0.0: outside = true; break
+					_check(outside,"certified caster's surface/ray never enters viewport volume")
+		context.light_direction = -outward
+		_check(Visibility.sphere_needs_pose(center,1,context),"incoming shadow crosses view and retains current pose without floor")
+		_check(Visibility.sphere_needs_pose(outward*11.0,1,context),"touching whole sphere cannot be hidden")
+	context.light_direction = Vector3(-1,-.1,0)
+	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,context),"downward incoming offscreen shadow remains visible at an unknown low receiver")
+	context.light_direction = Vector3(-1,-4,0)
+	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,context),"absence of a common separating plane fails open even if sampled center ray misses")
+	context.light_direction = Vector3.DOWN
+	var overflowing: Dictionary = context.duplicate(true); overflowing.light_direction = Vector3(1e30,1e30,1e30)
+	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,overflowing),"finite light components with overflowing squared length fail open before normalization")
+	var almost_unit: Dictionary = context.duplicate(true); almost_unit.min_receiver_y = -20.0
+	almost_unit.planes[0] = Plane(Vector3(1.00002,0,0),10)
+	_check(Visibility.sphere_needs_pose(Vector3((10.0+1.00001)/1.00002,0,0),1,almost_unit),"tolerated near-unit plane scales sphere projection instead of rejecting a touching bound")
+	for certificate: Variant in [false,null,1,"true"]:
+		var unknown: Dictionary = context.duplicate(true); unknown.sole_shadow_light = certificate
+		_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,unknown),"unknown/extra shadow light revokes floor-free eligibility")
+		unknown.shadow_enabled = false
+		_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,unknown),"disabled sun does not certify an unmodeled shadow light")
+	var missing: Dictionary = context.duplicate(true); missing.erase("sole_shadow_light")
+	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,missing),"missing light policy is not assumed")
+	context.shadow_distance = 30.0
+	_check(Visibility.sphere_needs_pose(Vector3(20,0,0),1,context),"near shadow-distance guard is preserved even with outward extrusion proof")
+	floor_free_completed = true
 
 
 func _uncached(art: Node3D) -> void:

@@ -856,3 +856,69 @@ but their world presenters are separate activation dependencies.
 **Executed 2026-11-18 on `codex/3d-full-port`.** The accepted actor-contact rule exposed a static-only Kingdom walking controller: real traces stopped at `skid_brutus_1` and `skid_lurch`, with clear static capsules and zero-fraction actor contacts. The test now builds bounded, actual-sweep-certified resident detours and checks every walked position against live actor envelopes. Exact source service endpoints, production movement, NPC bodies and campaign assertions remain unchanged; the focused physical gate passes593 checks. Separately, native1280×720 images showed the new minimap outside the viewport: assigning Control.position after parenting overwrote its intended anchor-relative placement. FullHUD now uses anchored offsets for minimap/receipt, restores receipt offsets and objective visibility when guidance is unbound, and checks real viewport containment at1280×720 and960×540. The new contact index preserves exact live source records and per-frame/epoch identity validation; it caches neither collision outcomes nor actor flags. Its native diagnostic still fails performance, and no release-template or complete-port performance acceptance is claimed.
 
 Rendered browser follow-up to IMPL-3D-FULL-08: the source journal footer advertised Q/Escape close while FullScene only accepted those shortcuts from playing. Native/Web readonly journal/inventory pages now own a transient close key cleared by every new menu and resume. Same-key/Escape exit and echo/stale-menu boundaries pass the full300-check scene suite. Other dialogue and cooking paths retain their own exit rules. Browser QA uses a local export wrapper with existing --qa-interactive args; ?qa-full alone does not activate the isolated storage branch.
+### IMPL-3D-FULL-09 — dynamic cart, bounded visual correction and live incident corridors
+Executed on codex/3d-full-port, 2026-11-18; current checkpoint remains in flight.
+The single rideable cart adopts its17 original meshes and retains Travel source authority. Dynamic publication replaces the original parked solids/services and preserves six unrelated cart husks. Full-visible parking bounds include the original wheels'1.48cm overhang per side. Source strict36px/top-left reach, maxHP without healing, same-process unsaved parking continuity and fresh spawn remain exact. Mounted wall witnesses require a clear visible model; a bounded32cm presentation-only correction leaves player movement, source records and active physics unchanged. Offscreen handles release to relaxed hands and regrip their actual markers when visible. Enclosed presentation fails explicitly rather than claiming clearance. Headless cart3639 checks pass; new native review is running.
+
+Incidents now retain their model/path/reservation owners in FullRuntime and render through one presenter. Every prospective eligible scene is physically certified before source choice RNG/effects; active corridor reservations block same-frame prop/cart publication. Fresh/restore release old reservations before new geometry. Mattress uses the same bounded mapped point for effects and display. Ticketed luggage receives a12px northward visual arc near the rail signal, zero at canonical endpoints, without changing source actor position/avoidance/time/RNG. Pigeons now fit their declared swept geometry. Independent actual-world checks1413 and real-scene80 pass, including the18s/8s loop, source interruption and restore delay before24 bottle draws. A26s test naturally attracted two real aggressors; independent scenarios now start a real new game instead of disabling source combat suppression.
+
+### IMPL-3D-FULL-10 — Old School, projected guidance and bounded live reads
+Executed on codex/3d-full-port, 2026-11-18. Old School preserves source strict44px/rank gates and captured-page/corpse quirks. Bosses owns a staged, one-use p/s-bound spawn capability; the menu cannot charge resources or consume RNG before unavailable physical placement. Model1170 and actual-scene69 checks pass. Source E precedence and canonical door center are connected.
+Projected objective markers use the actual camera and static LOS without changing target/interaction eligibility; behind/occluded targets remain informational. Guidance projection362 and actual-scene320 pass. Interactive prop single-row reads and one-pull synchronization avoid redundant14-row copies while retaining live records, epoch rejection and externally supplied snapshot equality; model13040 and physical view3172 pass. This is an optimization, not a frame-budget claim.
+
+### IMPL-3D-FULL-11 — source audio with bounded independent cosmetic randomness
+Executed on codex/3d-full-port, 2026-11-18; native/Web audible checks pending. Full-only synthesis replaces the six-cue slice adapter with all24 source recipes; slice synth remains unchanged. Primitive PCM is cached in eight bounded variation banks,32voices and256scheduled notes. Each delayed note checks mute/readiness at its own firing time; uncancelled source delays survive mode/session changes. Independent cosmetic randomness intentionally removes source sample-rate/audio-ready-dependent coupling from new synthesis/ambient clocks; existing model compatibility draws remain. The source ambientT clock and thresholds run once at the source Runtime seam. Input unlock belongs to actual key/click/current enabled menu callbacks, not programmatic resume. Source model11225 checks pass; actual Scene320 and incident Runtime80 remain green after integration. Complete performance/platform acceptance remains open.
+
+### IMPL-3D-FULL-12 — original pickups and source-driven weather
+Executed on codex/3d-full-port, 2026-11-18. Pickup meshes preserve torch→collar→money source priority and a separate crown; unknown equipment still renders source money. Runtime/Utilities keep collection and visibility ownership.230checks and18native views pass; no world weapon-drop system was invented.
+Weather replaces only FullScene's sinusoidal lighting call with source .2/.3/.7/.8 boundaries, retaining the different gameplay isNight predicate. Existing39 fixture powers/generator gates are preserved. One160-instance rain mesh uses at most4 cached roof rays per sync, hiding uncertified columns until a new geometry revision has passed a physics frame. Compatibility fog density is an explicit presentation calibration.8045checks and30native captures pass; local rain p95.462ms and+1draw do not establish whole-scene performance. Headless checks decode the submitted buffer because the pinned dummy renderer's instance getter returns identity; native checks independently compare the actual160 instance transforms and roof clearance. A shelter capture obscured by a display NPC is being reframed before visual acceptance.
+
+Audio integration follow-up to IMPL-3D-FULL-11:40actualScene checks pass with one wall pump per rendered frame. Extra input/event pumps were removed because they could execute deferred-zero notes inside the originating callback. Headless waits now observe actual monotonic milliseconds, matching the production clock, rather than SceneTreeTimer delta. All exact queue/counter/timing assertions remain. Current native full-scene opening passes18.12s high/26.17s cycle,56actors, real transactions/menus and isolatedsave; this is not all-source-path or audible-Web acceptance.
+### IMPL-3D-FULL-13 — measured overlays and equipped first-person presentation
+
+Executed on `codex/3d-full-port`, 2026-11-18. NPC labels, partial health, windup/stun,
+chatter and global combat cues read the current source state and actual visible head/LOS.
+Measured glyph unions and bounded side placements keep the cluster clear of occupied HUD
+panels. The leader line identifies a displaced cluster. Final native evidence passes 14
+captures after correcting a real occlusion and the staged health flag. Tools occupy the
+off hand, clothing changes existing sleeves, and footwear appears in committed kicks;
+gestures stow and restore current equipment. Gear passes 715 checks and 36 native captures.
+Projectile art uses two cached original banks for bottle and holy types, retaining source
+positions/rotation/lifetime authority; 113 checks and 14 native captures pass.
+
+### IMPL-3D-FULL-14 — departure pads and ending continuation
+
+Executed on `codex/3d-full-port`, 2026-11-18. Source departure targets beyond world bounds
+cannot be reached by the actual movement clamp. The approved 3D adaptation uses visibly
+marked, certified inside-edge pads, the existing movement clock, and removal only within
+four source pixels. Bounded routing passes 6,390 checks; native input/clock evidence passes
+117 checks and five captures, with final arrival at 3.52 pixels. No off-map motion is claimed.
+Source ending variants now use their own receipts. A single Runtime continuation command
+preserves progression, clears ending state and emits the source toast; pending saves block
+button and Space continuation. This does not replace a full campaign/boss playthrough.
+
+### IMPL-3D-FULL-15 — conservative presentation and query savings
+
+Executed on `codex/3d-full-port`, 2026-11-18. Interaction candidates fail the existing
+strict distance bound before domain-support reads. A successful actual endpoint overlap
+query publishes its existing frame/geometry/body certificate, including when the caller
+requires a fresh query. Navigation passes 4,753 checks. Pose rejection requires a complete
+cached rig bound and proof that neither it nor its infinite sun-shadow extrusion enters
+the frustum. Scene light registration immediately revokes the sole-shadow-light premise
+when another shadow light appears. Eligible cop poses remain active for moving beacons.
+Visibility passes 2,106 checks and combined pre-emitter Scene passes 359. The previous
+frozen release failed performance; these changes await a new release measurement.
+### IMPL-3D-FULL-16 — fixture-backed lights and inventory fields
+
+Executed on `codex/3d-full-port`, 2026-11-18. Five pooled police fields and one player
+field follow the source colors, ranges, night levels and eligibility, with visible original
+cap/mouth fixtures and no dynamic shadows. Horse Cop uses the rider cap. The player fixture
+stows during acknowledged gestures and returns only for the current high state. Source
+pipe/torch tips use immutable emissive materials without adding lights. Detached current
+snapshots are validated every call; output-only caches suppress redundant renderer writes.
+149 focused checks and 367 combined Scene checks pass. All 16 native views were rendered
+and reviewed; the editor CPU target remains failed at 0.269 ms p95 pending release measurement.
+
+The source audit also found omitted inventory fields. The read-only view now includes
+cred/bonus, wanted stars, cart status, source rounding and all eleven claim districts,
+with source lifetime labels and conditional supplies/hitter rows. FullHUD passes 27 checks.

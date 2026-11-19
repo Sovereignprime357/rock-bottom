@@ -13,6 +13,8 @@ func _run() -> void:
 	if DisplayServer.get_name() == "headless": push_error("Full scene evidence requires a rendering device."); quit(1); return
 	root.size = Vector2i(1280,720)
 	output = ProjectSettings.globalize_path("res://../.build/full-port/p15a")
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--output="): output = argument.trim_prefix("--output=")
 	DirAccess.make_dir_recursive_absolute(output)
 	game = Scene.new(); root.add_child(game); game.qa_mode = true
 	for frame: int in range(600):
@@ -42,9 +44,13 @@ func _run() -> void:
 	if not _require(game.runtime.p.rocks == 1,"Native source menu purchased rock"): quit(1); return
 	if not await _walk_to(game.world.service_points["smoke:block"].approach): quit(1); return
 	game.camera.rotation = Vector3(-0.04,0,0)
-	game.interact()
+	var block_action: Dictionary = game.interact()
+	if not _require(block_action.get("kind") == "smoke" and block_action.get("id") == "block","Native controller resolves actual Block menu"): quit(1); return
+	var smoked: bool = false
 	for child: Node in game.hud.menu_box.get_children():
-		if child is Button and child.text == "smoke a rock.": child.pressed.emit(); break
+		if child is Button and not child.disabled and child.text.begins_with("smoke a rock. (-1 rock"):
+			child.pressed.emit(); smoked = true; break
+	if not _require(smoked,"Native source-priced smoke option exists and accepts input"): quit(1); return
 	if not _require(game.runtime.p.rockedT > 17900 and game.runtime.s.flags.introDone,"Native actual smoke starts source high"): quit(1); return
 	var started: int = Time.get_ticks_msec()
 	var crash: float = -1.0; var finished: float = -1.0

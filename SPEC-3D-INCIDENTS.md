@@ -319,3 +319,94 @@ Tests must exercise changed revisions, altered preparation tokens, replacement o
 either epoch, caller mutation of supplied segment arrays, actual source prop
 placement refusal/recovery, and all six prospective plans. Native/runtime activation
 is still root-owned after those gates.
+
+The concrete model seam is `preview_scene(id)->Dictionary` (detached canonical
+source start payload, no clock/history/RNG writes) and
+`bind_corridor_owner(owner)->bool`. Idle ticks whose existing countdown expires
+preflight the exact eligible source candidates before cosmetic decay, lazy daily
+history reset, timer subtraction or choice RNG. An unchanged failed preparation
+may be cached only by exact candidate values, collision revision and both epoch
+identities. Normal source selection then draws once and reserves its prepared
+candidate synchronously. Source-only oracle use remains unbound.
+
+`PathMap.synchronize_geometry(snapshot)` compares detached current bounds by
+owner and replans only roads touched by changed low-height bounds inside their
+100px lane envelope. New maps install together only after all affected plans pass
+actual casts. Failure preserves the previous usable maps but refuses new
+preparation for that revision; retry after a new revision remains possible.
+`mattress_segments(raw_start)` clips the cached monotonic lane to the source
+start/end range, retaining every corner and the complete three-pixel sine envelope.
+This does not replan during an active incident or replace source sx/ex records.
+
+Reservation checks both the current published obstacle bounds and actual physics
+overlaps/casts. The former prevents a same-frame new prop publication from relying
+on an old PhysicsServer transform; it does not replace actual geometry authority.
+Every environmental collider writer must publish through the existing obstacle
+update seam and respect the reservation predicate before committing its position.
+
+Counterexample found before live activation: the mapped model's prediction checked
+coordinates at t+dt against a payload still tagged t. The corrected validation
+receives a detached t+dt prediction; only the accepted normal tick advances the
+authoritative clock. Tests use repeated real tick_active calls through completion,
+not only direct visual seeks.
+
+The earlier cube pigeon exceeded its declared query: local forward extent .205m
+rotated into a world .10m half-width; feet reached .0075m and head .385m versus the
+declared .02..38m vertical interval. Approved original faceted body/head/beak/wing/
+feet meshes now fit within a .10m horizontal radius and that existing vertical
+interval at every heading. No query enlargement, NPC/model change or new clock.
+Regression checks transformed mesh AABB corners across actual event rotations
+and heading extrema, with native park/luggage recapture still required.
+
+The live six-scene gate exposed the previously untested full luggage avoidance
+envelope at rail signal decor:9 (source center1300,3020). Its baseline route clears;
+the source optional +28px Y displacement intersects the retained pole near
+x1290..1310. Approved display-only correction subtracts
+`12*sin(pi*clamp((actor.x-1200)/120,0,1))` pixels from displayed Y. Before1200 and
+at/after1320 the offset is exactly zero, retaining canonical physical endpoints.
+Source actor coordinates, avoidance condition, phase times, RNG and effects do not
+change. Reservation uses the same display mapping, inserts the x1200 phase knot
+and includes a .030m Z interpolation allowance: half .015m exceeds the combined
+200ms chord error of source sine plus the12px arc. All world solids remain fixed.
+
+Postcallback epoch guards cover prospective preparation, activation, release and
+mapped predictions before any following model write/RNG. P-only and S-only
+replacement witnesses must return false while preserving the replacement state.
+This enforces the existing single-authority lifecycle contract, without changing
+normal synchronous owner behavior.
+
+### P14d live composition gate
+
+Root owns production Runtime/Scene activation. Runtime retains strong
+`incidents`, `incident_paths`, `incident_corridors` and exposes
+`enable_incidents(world)`; Scene retains one `incident_view`. Cold composition
+publishes actual actors, cart and interactive colliders, waits for physics, then
+builds/binds maps and presentation before title readiness. Active ticks run after
+phone/hustle checks and before ambient random events/interactive respawns.
+Presentation consumes a detached snapshot and the existing visual clock.
+
+After successful core epoch replacement, static Props rebind first; clear old cart
+physics, release/reset incidents, reset/sync Travel cart, then rebuild/stage the
+interactive props. Restore consumes the one35–55s incident-delay draw before the
+24 contiguous bottle draws. Fresh consumes no new incident draw; the source public
+phone initialization draw precedes those24. Root owns that exact composition order.
+
+New isolated `test_incident_runtime.gd` boots the actual full Scene and uses an
+in-memory implementation of the existing IO interface. It never touches user saves.
+It verifies strong real owners, cold title pause, actual menu pause/resume,
+source-busy interruption, live start/finish presentation, one18s high/8s crash loop,
+fresh/restore epoch cleanup and source RNG order. Actual Cart/Prop staging must
+reject an active reserved corridor in the same frame, then accept the identical
+clear candidate after release. Test scenario setup may position authoritative
+records; accepted actions, time, physical staging and lifecycle run through the
+real composed owners. Missing cart/incident integration is a failed dependency,
+never a successful skipped group. This gate is functional evidence, not a60NPC
+frame-budget or browser/native-render performance claim.
+
+The first live gate proved clock/menu and RNG ordering, and correctly refused a
+later incident after26s of genuine NPC pursuit: skid_brutus_1 had reached69.678px
+and skid_lurch248.827px from the player. The independent cart fixture now begins
+through actual Scene new-game, retains all56 fresh actors and asserts source busy
+guards are false. It does not erase actors, clear aggro or weaken scheduling.
+The same gate exposed one stale visual frame after fresh/load; root added
+synchronous incident-view clearing at the existing presentation reset.

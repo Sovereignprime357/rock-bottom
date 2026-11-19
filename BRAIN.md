@@ -2760,3 +2760,77 @@ full UI/objective/map/audio/weather/OldSchool/cart, nativeWeb complete playthrou
 - NEXT: Finish dynamic event reservation and predicted-time path validation (incidents remain OFF); replace incident bird meshes to fit actual declared query bounds; live cart and handles; OldSchool facade; world marker; audio/weather; release/native/Web performance and complete progression tours. Full parity remains incomplete.
 Browser follow-up found and corrected the journal Q/Escape mismatch; fullScene300PASS after the change, both exports rebuilt again. Actual browser Q→Q and I→Escape now resume movement; F updates brain; fulljournal scrolling/leave and real IndexedDB save/load pass. Current screenshot/hash records are under artifacts/3d-full-port/systems. Browser tab closed. The current report explicitly distinguishes the75-suite pre-follow-up run from the300-check post-fix full-scene run. No full campaign or performance completion claim.
 Checkpoint delivery: `f77fb3862d4e00b68159a7e60e14a290b13e0876` pushed to origin/codex/3d-full-port. Current releasepack/UI fixes are served on8074. Goal remains active; next workers resume their bounded packets.
+
+## 2026-11-18 continuation — cart, incident and Old School composition
+- WHAT/WHY: Connected OldSchool, projected guidance, the unique dynamic cart and six source incidents to FullScene. Added original faceted birds, bottle rim/kick refinements and actual handle grip context. Retained all source authority/odd corpse branches and physical placement requirements.
+- DECISIONS: IMPL-3D-FULL-09..11 record dynamic corridor reservation, bounded mounted visual correction, source menu capability, detached live reads and full-only bounded audio. Source2D/frozen19 remain untouched.
+- COUNTEREXAMPLES: Real luggage sweep hit rail_signal decor:9; shared display arc now clears it with unchanged source endpoints/RNG. Cart original wheels exceed its frame width; drop checks include them. Rendered mounted poses clipped angled walls and hid hands below the viewport; bounded art clearance and visible-handle gating now pass3639 checks, native recapture in progress. A test compared nav revision across a legitimate movement initialization; it now measures only the presentation operation. Old incident meshes persisted for one reset frame; Scene resets their detached snapshot immediately.
+- TESTED: Incident21899/presenter11737/reservations1413/runtime80; OldSchool1170/physical69/Boss2200; Cart3639/Travel3739; Interactive13040/view3172; hands1145/native63; guidance projection362/FullScene320; full Runtime128; source audio11225. Audio has192recipe banks/6 gate timelines/94 ambient source cases. Registered runner expanded to83 (not yet rerun; audio registrations still pending). Last complete runner75/75 and original19/19 belong to previous pushed checkpoint.
+- MEASURED: Isolated official release-template probe at8f7f1ae,120frames/phase, sceneCPU22.159/19.986ms and engine29.171/27.970ms; performance still fails. New reproducible profile-release.ps1 archives exact committed code/hashes; diagnostics never imply acceptance.
+- NEXT: Complete corrected native cart/full opening tour, audio Scene gate and browser verification; weather/lighting presenter; distinct source pickup art; actor/boss/combo HUD; release performance and full progression/boss/campaign tours. Commit/push next bounded checkpoint with file ledger/gate output. Full port goal remains ACTIVE.
+
+## 2026-11-18 — audio, pickups and weather continuation
+
+WHAT/WHY: bound the complete source audio/ambient presenter, replaced placeholder pickup
+boxes with original cached cash/torch/collar/crown meshes, and connected source-curve weather
+to existing fixtures. Core collection, gameplay night predicates and 18/8 timing remain owned
+by the source models. Exact equipped tool and NPC HUD presentation are the next bounded jobs.
+
+DECISIONS: use one audio wall pump per render frame; delayed-zero callbacks cannot fire inside
+the input callback. Rain is160 deterministic depth-tested strips with a physics-frame fence on
+new geometry revisions. Headless geometry checks read back the submitted MultiMesh buffer;
+native checks compare actual instance transforms. Full-scene lighting alone uses the source
+render curve; gameplay night visibility keeps its distinct thresholds.
+
+TRIED/FAILED: extra audio pumps broke callback ordering and were removed. SceneTreeTimer waits
+were invalid evidence for monotonic audio under headless delta timing; replaced with real-wall
+waits retaining all exact assertions. New FindView required a class-cache import before its
+first direct-script run. Weather's dummy-renderer getter returned identity; actual buffer and
+native transform checks now agree. The first shelter image is obstructed by a display NPC and
+must be reframed. These are recorded as failed attempts, not accepted visual evidence.
+
+CHECKS: audio11225 + actualScene40; Find230/native18; Weather8045/native30 with incremental
+rain p95.462ms/+1draw; FullScene323. Rendered production opening uses real travel/choices and
+passes18.12s/26.17s,56actors, menus and isolated save. Whole-scene60-actor performance still
+fails the prior release sample; no new performance acceptance. Complete89-suite runner and
+current exports/browser validation remain pending. A missing physical departure adapter is a
+real remaining gameplay blocker; world audit is tracing the Day3/Price Guy path.
+## 2026-11-18 — live neighborhood presentation and composition
+
+Integrated original pickup meshes, source weather, all source audio recipes and ambient
+timing, actor combat/name/chatter overlays, equipped clothing/tools/footwear, differentiated
+projectiles, cart projection, incidents and Old School. The native opening again exercised
+actual navigation, purchase, smoke and save: high ended at 18.12 seconds and the complete
+cycle at 26.17 seconds. Individual native art probes were inspected, including corrected
+shelter framing and the actual departure pad approach/removal.
+
+The HUD probe exposed objective-panel occlusion. Layout now uses measured glyph bounds,
+outward pixel rounding and bounded side placement with a leader line. The first correction
+also exposed a missing showHp flag in the staged fixture; final native captures pass with
+the actual source gate. Audio's headless test originally waited on simulated frame delta;
+it now waits on the real monotonic clock used by delayed notes. Extra input-time audio pumps
+were removed to preserve deferred-zero source callbacks.
+
+Ending receipts now retain their source-specific text and continuation returns through the
+Runtime command after pending saves settle. Day visitors now walk to certified inside-edge
+departure pads; the unchanged pixel game clamps positions too, so no off-map walk is claimed.
+The final native departure measured arrival within 3.52 source pixels before removal.
+
+Performance work preserves all live AI: distance-filter NPC interaction candidates before
+domain queries, reuse successful current-frame endpoint certificates, and skip only pose
+writes proven outside the camera and the sole sun's infinite shadow extrusion. A registered
+additional shadow light disables that proof. Moving cop beacons retain pose updates. The
+previous frozen release still failed the frame target; no improvement is claimed until the
+new committed release is measured. Dynamic emitters are the final current presentation
+packet. Full progression tours, actual boss timing, Web validation and truthful handler
+coverage remain active work; this is not full-port completion.
+### Checkpoint validation and resumption
+
+The full runner passed 95/95 (62 engine suites and 33 source/parity checks), with
+clean import; original runner passed 19/19. Both Full exports rebuilt successfully.
+Actual browser UI verified menu/journal/inventory exits, movement, Block interaction,
+save/load and persistence through a page reload. Chromium pointer-capture requests
+reported UnknownError; the fallback remained playable. No full campaign/audio/60-actor
+performance claim follows from these bounded checks. The user resumed after a usage
+limit; all accepted production remained held, and the three bounded agents resumed
+the boss probe and read-only next-packet plans. Full-port work remains active.

@@ -18,6 +18,12 @@ const WEAPONS := {&"fists":{"duration":0.24,"family":"arc","grip":0.0},
 	&"microphone":{"duration":0.30,"family":"whip","grip":0.88},
 	&"knife":{"duration":0.22,"family":"stab","grip":0.86},
 	&"broken_bottle":{"duration":0.25,"family":"jagged","grip":0.82}}
+const TOOLS := [&"propane_torch",&"crowbar"]
+const COATS := {&"trench":{"body":"8a3a3a","trim":"d4c896","fullness":1.02},
+	&"windbreaker":{"body":"d488d4","trim":"e8c040","fullness":0.98},
+	&"bathrobe":{"body":"d4c896","trim":"d488d4","fullness":1.10},
+	&"parka":{"body":MOLD,"trim":"e8c040","fullness":1.08}}
+const FOOTWEAR := [&"airpods",&"crocs",&"walmart_sneak",&"vibrams"]
 static var _meshes: Dictionary = {}
 static var _materials: Dictionary = {}
 
@@ -41,6 +47,10 @@ var _arms: Dictionary = {}
 var _props: Dictionary = {}
 var weapon: StringName = &"fists"
 var attack_weapon: StringName = &""
+var tool: StringName = &""
+var coat: StringName = &""
+var shoes: StringName = &""
+var high_ember: bool = false
 var _walk_speed: float = 3.6
 var _seated: bool = false
 var _context_visible: bool = true
@@ -52,20 +62,64 @@ var _selected_weapon: StringName = &""
 var _cord: Array[Node3D] = []
 var _wheel: Node3D
 var _kick_base := Vector3(0.22,-0.88,-0.54)
+var _cart_grips: Dictionary = {}
+var _tool_nodes: Dictionary = {}
+var _tool_pool: Node3D
+var _tool_socket: Node3D
+var _selected_tool: StringName = &""
+var _sleeves: Array[Dictionary] = []
+var _footwear_nodes: Dictionary = {}
+var _applied_coat: StringName = &"__unapplied"
+var _applied_shoes: StringName = &"__unapplied"
+var _emitter_anchors: Dictionary = {}
+var _mouth_ember: Node3D
+
+func emitter_anchor(kind: StringName) -> Node3D:
+	return _emitter_anchors.get(kind) as Node3D
 
 static func supported_weapons() -> Array[StringName]:
 	var result: Array[StringName] = []
 	for id: StringName in WEAPONS: result.append(id)
 	return result
 
+static func supported_tools() -> Array[StringName]:
+	var result: Array[StringName] = []
+	for id: StringName in TOOLS: result.append(id)
+	return result
+
+static func _slot_valid(value: Variant, allowed: Variant) -> bool:
+	if value == null: return true
+	return (value is String or value is StringName) and (StringName(value).is_empty() or allowed.has(StringName(value)))
+
+static func _slot_id(value: Variant) -> StringName:
+	return &"" if value == null else StringName(value)
+
 func set_context(snapshot: Dictionary) -> bool:
 	var next: Variant = snapshot.get("weapon",weapon)
 	if not (next is String or next is StringName) or not WEAPONS.has(StringName(next)): return false
+	var next_tool: Variant = snapshot.get("tool",tool)
+	var next_coat: Variant = snapshot.get("coat",coat)
+	var next_shoes: Variant = snapshot.get("shoes",shoes)
+	if not _slot_valid(next_tool,TOOLS) or not _slot_valid(next_coat,COATS) or not _slot_valid(next_shoes,FOOTWEAR): return false
+	var next_ember: Variant = snapshot.get("high_ember",high_ember)
+	if not next_ember is bool: return false
 	var seated: Variant = snapshot.get("seated",_seated)
 	var shown: Variant = snapshot.get("visible",_context_visible)
 	var speed: Variant = snapshot.get("walk_speed",_walk_speed)
 	if not seated is bool or not shown is bool or not (speed is int or speed is float) or not is_finite(float(speed)) or speed < 1.0 or speed > 10.0: return false
+	var grips: Variant = snapshot.get("cart_grips",_cart_grips)
+	if not grips is Dictionary: return false
+	if not grips.is_empty():
+		if grips.size() != 2: return false
+		for key: String in ["left","right"]:
+			if not grips.get(key) is Vector3: return false
+			var point: Vector3 = grips[key]
+			if not point.is_finite() or point.z > -0.44 or point.z < -1.3 or absf(point.x) > 0.72 or point.y < -0.90 or point.y > 0.80: return false
 	weapon = StringName(next); _seated = seated; _context_visible = shown; _walk_speed = float(speed)
+	tool = _slot_id(next_tool); coat = _slot_id(next_coat); shoes = _slot_id(next_shoes)
+	high_ember = next_ember
+	_cart_grips = grips.duplicate()
+	_apply_clothing()
 	_apply_pose()
 	return true
 
@@ -96,7 +150,11 @@ func reset() -> void:
 	_high = false
 	_crash = false
 	weapon = &"fists"; attack_weapon = &""; _walk_speed = 3.6
+	tool = &""; coat = &""; shoes = &""
+	high_ember = false
 	_seated = false; _context_visible = true; _action_duration = 0.24
+	_cart_grips.clear()
+	_apply_clothing()
 	_apply_pose()
 
 
@@ -163,7 +221,11 @@ func _apply_pose() -> void:
 	visible = _context_visible
 	var held: StringName = attack_weapon if action == &"punch" else weapon
 	var stowed: bool = action in [&"interact",&"pickup",&"receipt",&"eat",&"smoke",&"equip",&"phone",&"bench",&"dumpster",&"kick"]
+	if not _cart_grips.is_empty() and action.is_empty(): stowed = true
 	_select_weapon(&"fists" if stowed else held)
+	var left_active: bool = (action == &"punch" and last_punch_side < 0) or action in [&"receipt",&"bench",&"dumpster"]
+	var tool_stowed: bool = left_active or action == &"smoke" or (_cart_grips.has("left") and not left_active)
+	_select_tool(&"" if tool_stowed else tool)
 	var gesture := sin(action_phase*PI)
 	var strike := 0.0
 	if action == &"punch":
@@ -194,6 +256,12 @@ func _apply_pose() -> void:
 			curl = float(WEAPONS[held].grip)
 			wrist_angles += Vector3(0.09,-0.35,0)
 			offset += Vector3(0.02,0.025,-0.015)
+		if side == -1 and not _selected_tool.is_empty():
+			# The shaft lies across the closed palm. Roll the wrist, rather than
+			# rotating the object through the fingers, for a low vertical carry.
+			curl = 0.83
+			wrist_angles += Vector3(0.09,0.18,-1.10)
+			offset += Vector3(-0.01,0.065,-0.03)
 		if action == &"punch":
 			if attack_weapon != &"fists":
 				if side == 1:
@@ -233,7 +301,7 @@ func _apply_pose() -> void:
 					wrist_angles.z += float(side)*0.10*sin((_action_age-0.035)/0.06*PI)
 			else:
 				offset.y += 0.035*strike
-				curl = strike*0.3
+				if side != -1 or _selected_tool.is_empty(): curl = strike*0.3
 		elif action in [&"bench",&"dumpster"]:
 			if action == &"bench":
 				offset += Vector3(float(side)*0.04,-0.06,-0.03)*gesture
@@ -274,16 +342,28 @@ func _apply_pose() -> void:
 		forearm.rotation.x = elbow
 		wrist.rotation = wrist_angles
 		_pose_fingers(rig,side,curl)
+		var active_hand: bool = (action == &"punch" and side == last_punch_side) or action in [&"bench",&"dumpster"] or (action == &"receipt" and side < 0) or (action in [&"interact",&"pickup",&"eat",&"smoke",&"equip",&"phone"] and side > 0)
+		var grip_key: String = "left" if side < 0 else "right"
+		if _cart_grips.has(grip_key) and not active_hand:
+			# Translate the existing connected sleeve chain so its closed fingers
+			# surround the real handle; no second handle or autonomous IK clock.
+			arm.rotation = Vector3(0.10,0.0,-float(side)*0.04)
+			forearm.rotation.x = 0.0; wrist.rotation = Vector3(0.15,0,0)
+			_pose_fingers(rig,side,0.83)
+			var local_grip := Vector3(0,-0.036,-0.082)
+			var current: Vector3 = arm.transform*forearm.transform*wrist.transform*local_grip
+			arm.position += Vector3(_cart_grips[grip_key])-current
 	for key: StringName in _props:
 		var prop: Node3D = _props[key]
 		prop.visible = action == key and action_phase > 0.12 and action_phase < 0.88
 	if _props.has(&"kick"):
-		_props[&"kick"].position = _kick_base+Vector3(0,0.13,-0.18)*(gesture if action == &"kick" else 0.0)
+		_props[&"kick"].position = _kick_base+Vector3(0,0.30,-0.23)*(gesture if action == &"kick" else 0.0)
 		_props[&"kick"].rotation.x = 0.15*gesture if action == &"kick" else 0.0
 	if _wheel != null: _wheel.rotation.z = strike*TAU*0.65 if held == &"cart_wheel" and action == &"punch" else 0.0
 	for index: int in range(_cord.size()):
 		var amplitude: float = strike if held == &"microphone" and action == &"punch" else 0.0
 		_cord[index].rotation = Vector3(0,sin(action_phase*TAU+index*0.6)*0.20*amplitude,sin(action_phase*TAU+index*0.8)*0.25*amplitude)
+	if _mouth_ember != null: _mouth_ember.visible = high_ember and _context_visible and action.is_empty()
 
 
 func _pose_fingers(rig: Dictionary, side: int, amount: float) -> void:
@@ -312,6 +392,8 @@ func _build() -> void:
 		_link(arm,Vector3(float(side)*0.035,-0.27,0.26),Vector3(0,-0.17,0.15),0.085,0.075,MOLD,"upper_sleeve")
 		_link(forearm,Vector3(0,-0.028,0.032),Vector3(0,0.190,-0.184),0.076,0.049,MOLD,"sleeve")
 		_link(forearm,Vector3(0,0.166,-0.165),Vector3(0,0.192,-0.192),0.053,0.047,"555d34","cuff")
+		for cloth: MeshInstance3D in [arm.get_node("upper_sleeve"),forearm.get_node("sleeve"),forearm.get_node("cuff")]:
+			_sleeves.append({"node":cloth,"material":cloth.material_override,"scale":cloth.scale,"trim":cloth.name == &"cuff"})
 		_shape(wrist,[Vector4(0.032,0.038,0.026,0.024),Vector4(0.035,0.018,0.023,0.021),Vector4(0.037,-0.012,0.023,0.022),Vector4(0.051,-0.040,0.025,0.024),Vector4(0.052,-0.069,0.022,0.020),Vector4(0.045,-0.083,0.016,0.017)],SKIN,"palm",0.62)
 		var fingers: Array = []
 		var lengths: Array[float] = [0.083,0.096,0.089,0.071]
@@ -348,7 +430,89 @@ func _build() -> void:
 			_shape(food,[Vector4(0.020,0.020,0.019,0.018),Vector4(0.030,0,0.025,0.023),Vector4(0.026,-0.035,0.021,0.020),Vector4(0.015,-0.049,0.012,0.012)],"b18648","food",0.70)
 			_props[&"eat"] = food
 	_build_weapons()
+	_build_tools()
 	_build_context_props()
+	_build_mouth_ember()
+
+func _build_mouth_ember() -> void:
+	# Abstract mouth-held fixture enters from below the frame. It never takes a
+	# hand, equipment slot, action, timer or inventory item from the simulation.
+	_mouth_ember = _pivot(self,"MouthEmber",Vector3.ZERO); _mouth_ember.visible = false
+	_link(_mouth_ember,Vector3(0.09,-0.22,-0.085),Vector3(0.12,-0.21,-0.23),0.007,0.008,"8b6038","stem")
+	_link(_mouth_ember,Vector3(0.12,-0.21,-0.23),Vector3(0.14,-0.21,-0.30),0.008,0.010,"8b6038","stem_bend")
+	var bowl := _shape(_mouth_ember,[Vector4(0.022,0.0175,0.022,0.022),Vector4(0.022,0.007,0.022,0.022),Vector4(0.014,-0.0175,0.014,0.014)],"8b6038","bowl",0.72)
+	bowl.position = Vector3(0.14,-0.205,-0.30); bowl.rotation.x = -PI*0.5
+	var ember := _shape(_mouth_ember,[Vector4(0.015,0.002,0.015,0.015),Vector4(0.015,-0.002,0.015,0.015)],"d06030","ember",0.80)
+	ember.position = Vector3(0.14,-0.1865,-0.30); ember.rotation.x = -PI*0.5
+	ember.material_override = _emissive("d06030",0.65)
+	var core := _shape(_mouth_ember,[Vector4(0.006,0.001,0.006,0.006),Vector4(0.006,-0.001,0.006,0.006)],"e8c040","core",0.82)
+	core.position = Vector3(0.139,-0.1835,-0.301); core.rotation.x = -PI*0.5
+	core.material_override = _emissive("e8c040",0.75)
+	_emitter_anchors[&"player_ember"] = _pivot(_mouth_ember,"Tip",Vector3(0.139,-0.1835,-0.301))
+
+func _apply_clothing() -> void:
+	if coat != _applied_coat:
+		for record: Dictionary in _sleeves:
+			var mesh: MeshInstance3D = record.node
+			if coat.is_empty():
+				mesh.material_override = record.material
+				mesh.scale = record.scale
+			else:
+				var style: Dictionary = COATS[coat]
+				mesh.material_override = _cloth_material(String(style.trim if record.trim else style.body))
+				var fullness: float = float(style.fullness)
+				mesh.scale = Vector3(record.scale)*Vector3(fullness,fullness,1.0)
+		_applied_coat = coat
+	if shoes != _applied_shoes:
+		var selected: StringName = &"" if shoes == &"airpods" else shoes
+		for id: StringName in _footwear_nodes:
+			_footwear_nodes[id].visible = id == selected
+		_applied_shoes = shoes
+
+func _select_tool(id: StringName) -> void:
+	if _tool_pool == null or _tool_socket == null or id == _selected_tool: return
+	if _tool_nodes.has(_selected_tool):
+		var previous: Node3D = _tool_nodes[_selected_tool]
+		previous.reparent(_tool_pool,false); previous.transform = Transform3D.IDENTITY; previous.visible = false
+	_selected_tool = id
+	if _tool_nodes.has(id):
+		var current: Node3D = _tool_nodes[id]
+		current.reparent(_tool_socket,false); current.transform = Transform3D.IDENTITY; current.visible = true
+
+func _build_tools() -> void:
+	_tool_pool = _pivot(self,"ToolPool",Vector3(0,-0.50,-0.70))
+	_tool_pool.visible = false
+	var wrist: Node3D = _arms[-1].wrist
+	_tool_socket = _pivot(wrist,"HeldTool",Vector3(0,-0.036,-0.082))
+	_pivot(wrist,"tool_grip_marker",_tool_socket.position)
+	for id: StringName in TOOLS:
+		var item := _pivot(_tool_pool,String(id),Vector3.ZERO)
+		item.set_meta("tool_id",id); item.visible = false; _tool_nodes[id] = item
+		match id:
+			&"propane_torch":
+				# Axis X passes through the finger curl. The reservoir hangs below
+				# the gripping neck after the left wrist rolls into its carry pose.
+				_xshape(item,[Vector4(0.039,0.245,0.039,0.039),Vector4(0.054,0.232,0.052,0.047),Vector4(0.057,0.075,0.055,0.049),Vector4(0.039,0.046,0.037,0.037),Vector4(0.018,0.035,0.018,0.018)],"b1813d","dented_reservoir",0.76)
+				_xrod(item,0.038,-0.060,0.018,"3d3a2b","gripping_neck")
+				_xrod(item,0.246,0.235,0.043,"604020","base_rim")
+				_xrod(item,0.061,0.051,0.043,"8a3a3a","shoulder_ring")
+				_link(item,Vector3(-0.060,0,0),Vector3(-0.097,0,-0.037),0.018,0.014,"3d3a2b","bent_neck")
+				_link(item,Vector3(-0.097,0,-0.037),Vector3(-0.118,0,-0.062),0.015,0.012,"604020","nozzle")
+				var pilot := _convex(item,[Vector3(-0.119,-0.008,-0.057),Vector3(-0.119,0.008,-0.057),Vector3(-0.116,0,-0.071),Vector3(-0.141,0,-0.087)],[[0,1,2],[0,3,1],[1,3,2],[2,3,0]],"e8c040","static_pilot")
+				pilot.material_override = _emissive("e8c040",0.35)
+				_emitter_anchors[&"torch_pilot"] = _pivot(item,"TorchTip",Vector3(-0.141,0,-0.087))
+				_box(item,Vector3(0.143,0.057,0.010),Vector3(0.063,0.003,0.039),"d4c896","paper_mark")
+				_box(item,Vector3(0.151,0.059,0.010),Vector3(0.027,0.001,0.004),"604020","paper_line")
+				_box(item,Vector3(0.205,0.040,-0.034),Vector3(0.021,0.004,0.020),"8a3a3a","rust_dent")
+			&"crowbar":
+				_xrod(item,0.345,-0.080,0.015,"8a3a3a","municipal_shaft")
+				_link(item,Vector3(-0.079,0,0),Vector3(-0.119,0,-0.035),0.015,0.014,"8a3a3a","hook_bend")
+				_link(item,Vector3(-0.119,0,-0.035),Vector3(-0.117,0,-0.074),0.014,0.012,"8a3a3a","hook_tip")
+				_box(item,Vector3(-0.113,0,-0.076),Vector3(0.018,0.023,0.020),"3a342a","worn_hook")
+				_convex(item,[Vector3(0.335,-0.014,-0.014),Vector3(0.335,0.014,-0.014),Vector3(0.335,0.014,0.014),Vector3(0.335,-0.014,0.014),Vector3(0.397,-0.006,-0.020),Vector3(0.397,0.006,-0.020),Vector3(0.397,0.006,0.020),Vector3(0.397,-0.006,0.020)],[[0,3,2,1],[4,5,6,7],[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7]],"504331","flattened_foot")
+				_box(item,Vector3(0.096,0.015,0),Vector3(0.042,0.002,0.018),"d4c896","property_mark")
+				_box(item,Vector3(0.103,0.0165,0),Vector3(0.003,0.001,0.012),"604020","property_ink")
+				_xrod(item,0.239,0.218,0.0155,"604020","worn_band")
 
 func _select_weapon(id: StringName) -> void:
 	if _weapon_pool == null or _weapon_socket == null: return
@@ -375,7 +539,9 @@ func _build_weapons() -> void:
 		match id:
 			&"pipe":
 				_xrod(item,0.060,-0.46,0.019,"a46b42","copper_pipe")
-				_xrod(item,-0.458,-0.465,0.015,"3b3024","pipe_open_end")
+				var tip := _xrod(item,-0.458,-0.465,0.015,"e8c040","pipe_open_end")
+				tip.material_override = _emissive("e8c040",0.35)
+				_emitter_anchors[&"weapon_pipe"] = _pivot(item,"PipeTip",Vector3(-0.465,0,0))
 				for x: float in [-0.24,-0.37]: _box(item,Vector3(x,0.019,0),Vector3(0.025,0.002,0.012),"6d7050","oxidized_seam")
 			&"brick":
 				var body := _xshape(item,[Vector4(0.033,0.055,0.025,0.025),Vector4(0.042,0.045,0.029,0.029),Vector4(0.042,-0.125,0.029,0.029),Vector4(0.032,-0.145,0.023,0.023)],"91584a","chipped_brick",0.22)
@@ -419,11 +585,17 @@ func _build_weapons() -> void:
 			&"broken_bottle":
 				_xshape(item,[Vector4(0.014,0.055,0.014,0.014),Vector4(0.017,0.045,0.017,0.017),Vector4(0.017,-0.055,0.017,0.017),Vector4(0.039,-0.085,0.039,0.039),Vector4(0.042,-0.150,0.042,0.042)],"657552","bottle_neck_body",1.0)
 				_xrod(item,-0.149,-0.152,0.034,"283d2b","broken_interior")
-				for index: int in range(6):
-					var angle: float = index*TAU/6.0
-					var y: float = cos(angle)*0.036; var z: float = sin(angle)*0.036
-					var tip_x: float = -0.185-0.012*float(index%3)
-					_convex(item,[Vector3(-0.145,y-0.009,z-0.005),Vector3(-0.145,y+0.009,z+0.005),Vector3(tip_x,y*1.04,z*1.04),Vector3(-0.145,y,z+0.008)],[[0,1,2],[1,3,2],[3,0,2],[0,3,1]],"8c9972","broken_rim")
+				# Broad shards follow the rim tangent; unequal breaks expose the dark
+				# interior instead of reading as parallel teeth from the player's eye.
+				var angles: Array[float] = [-0.20,0.55,1.50,2.40,3.00,4.15,5.05,TAU-0.20]
+				var tips: Array[float] = [-0.190,-0.161,-0.204,-0.173,-0.196,-0.154,-0.183]
+				for index: int in range(tips.size()):
+					var first: Vector3 = Vector3(0,cos(angles[index]),sin(angles[index]))
+					var last: Vector3 = Vector3(0,cos(angles[index+1]),sin(angles[index+1]))
+					var middle: float = lerpf(angles[index],angles[index+1],0.34 if index%2 == 0 else 0.65)
+					var tip: Vector3 = Vector3(0,cos(middle),sin(middle))
+					var base := Vector3(-0.146,0,0); var end := Vector3(tips[index],0,0)
+					_convex(item,[base+first*0.042,base+last*0.042,end+tip*0.043,base+first*0.033,base+last*0.033,end+tip*0.034],[[0,1,2],[3,5,4],[0,3,4,1],[1,4,5,2],[2,5,3,0]],"8c9972","broken_rim")
 
 func _build_context_props() -> void:
 	var wrist: Node3D = _arms[1].wrist
@@ -437,7 +609,37 @@ func _build_context_props() -> void:
 	_link(foot,Vector3(0,0.22,0.11),Vector3(0,0.04,0.015),0.071,0.052,MOLD,"trouser_cuff")
 	var shoe := _pivot(foot,"worn_shoe",Vector3(0,0.018,0)); shoe.rotation.y = -PI*0.5
 	_shoe(shoe,Vector3.ZERO,true)
+	shoe.set_meta("footwear_id",&""); _footwear_nodes[&""] = shoe
+	for id: StringName in [&"crocs",&"walmart_sneak",&"vibrams"]:
+		var footwear := _pivot(foot,"footwear_"+String(id),shoe.position)
+		footwear.rotation.y = shoe.rotation.y; footwear.visible = false
+		footwear.set_meta("footwear_id",id); _footwear_nodes[id] = footwear
+		_build_footwear(footwear,id)
 	_props[&"kick"] = foot
+
+static func _build_footwear(parent: Node3D, id: StringName) -> void:
+	match id:
+		&"crocs":
+			_xshape(parent,[Vector4(0.034,0.054,0.020,0.027),Vector4(0.047,0.015,0.028,0.028),Vector4(0.052,-0.095,0.043,0.027),Vector4(0.051,-0.180,0.037,0.026),Vector4(0.035,-0.216,0.016,0.021)],"8a3a3a","single_red_croc",0.65)
+			_box(parent,Vector3(-0.071,-0.030,0),Vector3(0.272,0.012,0.089),"604020","croc_sole")
+			for x: float in [-0.10,-0.14,-0.18]:
+				for z: float in [-0.023,0.023]:
+					_box(parent,Vector3(x,0.043+(x+0.10)*0.075,z),Vector3(0.010,0.003,0.011),"302a22","vent")
+			_box(parent,Vector3(0.026,0.029,0),Vector3(0.014,0.007,0.080),"604020","heel_strap")
+		&"walmart_sneak":
+			_xshape(parent,[Vector4(0.032,0.055,0.031,0.025),Vector4(0.042,0.020,0.047,0.026),Vector4(0.048,-0.090,0.047,0.026),Vector4(0.047,-0.177,0.031,0.026),Vector4(0.034,-0.216,0.018,0.023)],"d4c896","cream_sneaker",0.62)
+			_box(parent,Vector3(-0.075,-0.030,0),Vector3(0.272,0.012,0.088),"3d3a2b","rubber_sole")
+			for z: float in [-0.047,0.047]: _box(parent,Vector3(-0.065,0.010,z),Vector3(0.095,0.010,0.003),"604020","dirty_side_seam")
+			for x: float in [-0.020,-0.044,-0.068]: _box(parent,Vector3(x,0.046,0),Vector3(0.005,0.004,0.055),"e8c040","yellow_lace")
+			_box(parent,Vector3(-0.180,0.026,0.009),Vector3(0.022,0.003,0.033),"958367","toe_dirt")
+		&"vibrams":
+			_xshape(parent,[Vector4(0.031,0.054,0.030,0.025),Vector4(0.044,0.015,0.035,0.026),Vector4(0.049,-0.095,0.031,0.025),Vector4(0.044,-0.151,0.024,0.023)],"d06030","orange_foot",0.68)
+			_box(parent,Vector3(-0.049,-0.030,0),Vector3(0.213,0.010,0.084),"3d3a2b","foot_sole")
+			_box(parent,Vector3(0.004,0.031,0),Vector3(0.022,0.008,0.079),"604020","foot_strap")
+			for index: int in range(5):
+				var length: float = 0.070-float(index)*0.005
+				var toe := _xshape(parent,[Vector4(0.011,-0.139,0.022,0.018),Vector4(0.010,-0.139-length*0.80,0.018,0.017),Vector4(0.006,-0.139-length,0.010,0.011)],"d06030" if index%2 == 0 else "e8c040","toe_"+str(index),0.80)
+				toe.position.z = -0.038+float(index)*0.019
 
 static func _xshape(parent: Node3D,profiles: Array[Vector4],color: String,part_name: String,roundness: float) -> MeshInstance3D:
 	var part: MeshInstance3D = _shape(parent,profiles,color,part_name,roundness)
@@ -498,6 +700,24 @@ static func _material(color: String) -> StandardMaterial3D:
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED
 		_materials[color] = material
 	return _materials[color] as StandardMaterial3D
+
+static func _cloth_material(color: String) -> StandardMaterial3D:
+	# A shared color need not imply a shared surface type: the red municipal
+	# bar stays metal while a red trench sleeve uses object-space fabric grain.
+	var key: String = "cloth:"+color
+	if not _materials.has(key):
+		var material := Surfaces.material("fabric",color,0.97).duplicate() as StandardMaterial3D
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		_materials[key] = material
+	return _materials[key] as StandardMaterial3D
+
+static func _emissive(color: String,energy: float) -> StandardMaterial3D:
+	var key: String = "emissive:"+color+":"+str(energy)
+	if not _materials.has(key):
+		var material := _material(color).duplicate() as StandardMaterial3D
+		material.emission_enabled = true; material.emission = Color(color); material.emission_energy_multiplier = energy
+		_materials[key] = material
+	return _materials[key] as StandardMaterial3D
 
 
 static func _part(parent: Node3D, mesh: Mesh, color: String, part_name: String) -> MeshInstance3D:

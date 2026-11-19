@@ -826,3 +826,27 @@ Current bounded nextwork: architecture→projected objective marker; characters�
 
 ### Full neighborhood validation checkpoint — 2026-11-18
 Registered3D75/75 and original19/19 gates pass. Added current real Kingdom593 and Guidance1137 physical/HUD regressions; nine held weapons1141 and livepropview3169 remain green. Both Full Windows/Web exports rebuilt. See reports/2026-11-18-3d-neighborhood-systems.md for delivery/evidence. This ships a bounded checkpoint only: incident Runtime activation, projected marker integration, cart, OldSchool, audio/weather, complete tours and performance remain open.
+### Live neighborhood continuation — 2026-11-18
+
+Cart projection/handle grips, Old School controls, projected guidance and live incident
+reservations/activation now have bounded headless and native evidence. Original cached
+pickup models and all24 source audio recipes are connected; weather follows the source
+lighting curve and existing fixture powers with160 roof-clipped rain streaks. Current
+FullScene323 and native opening18.12s/26.17s pass. See WORKFLOW-3D-PORT.md for packet counts.
+Remaining active work: held tools/equipment appearance; NPC/combat HUD; departure routes;
+full native/Web progression and performance acceptance. This does not mark the full port
+shipped. The expanded89-suite runner still awaits its central batch run.
+## 2026-11-18 — bounded presentation checkpoint in verification
+
+Accepted central/native packets: cart, incidents, Old School, source audio, pickup art,
+weather, actor HUD, first-person equipment, projectiles and actual departure routing.
+Root owns combined gates, Windows/Web exports, on-screen acceptance and pushed delivery.
+Characters owns the final six-light fixture packet. Architecture owns only the truthful
+585-handler mapping audit. World owns only a real-input, normal-damage boss timing probe.
+No agent may run an engine/import/export or mutate Git while root serializes validation.
+Full progression, browser tours and measured 60-actor performance remain open.
+Presentation checkpoint validation: 95/95 3D and 19/19 original gates green; both
+Full exports rebuilt; actual browser menu exits, movement and reload-persistent
+isolated save passed. Handler mapping is 534 integrated / 39 partial / 12 planned.
+Boss acceptance, state-driven world adornments, tether/border feedback and frozen
+release performance are the next bounded tasks. These are not full-port completion.

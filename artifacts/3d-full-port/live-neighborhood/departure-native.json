@@ -1,0 +1,37 @@
+{
+  "acceptance": true,
+  "active_ms": 2589.5,
+  "actor_id": "day3_visitor_1795050573394",
+  "captures": [
+    "01_visitor_menu",
+    "02_departure_start",
+    "03_walking_to_exit",
+    "04_pad_approach",
+    "05_empty_marked_exit"
+  ],
+  "checks": 117,
+  "exit": {
+    "exit_id": "departure_east_2538",
+    "target": "(8572.0, 2538.0)"
+  },
+  "failures": [],
+  "last": "(8568.524, 2538.58)",
+  "planner": {
+    "cache_hits": 218,
+    "entries": 0,
+    "failed": 0,
+    "frame": 128,
+    "max_entries": 1,
+    "max_sweeps": 1,
+    "max_us": 1027,
+    "max_work": 18,
+    "microseconds": 0,
+    "queued": 0,
+    "ready": 1,
+    "started": 1,
+    "work": 0
+  },
+  "scope": "one real source Day visitor/menu/input/physical edge-pad departure; initial player fixture precedes spawn; no fight or60-AI performance claim",
+  "start": "(8392.0, 2568.0)",
+  "wall_ms": 2855
+}

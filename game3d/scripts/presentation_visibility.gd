@@ -2,12 +2,12 @@ class_name RockBottomPresentationVisibility
 extends RefCounted
 ## Conservative visual work eligibility. Never hides nodes or changes model state.
 
-static func frame_context(camera: Camera3D, sun: DirectionalLight3D, min_receiver_y: float = -INF) -> Dictionary:
+static func frame_context(camera: Camera3D, sun: DirectionalLight3D, min_receiver_y: float = -INF, sole_shadow_light: bool = false) -> Dictionary:
 	if camera == null or sun == null or not camera.is_inside_tree() or not sun.is_inside_tree(): return {}
 	var planes: Array[Plane] = camera.get_frustum()
 	return {"camera":camera.global_position,"planes":planes,"shadow_enabled":sun.shadow_enabled,
 		"shadow_distance":sun.directional_shadow_max_distance,"light_direction":-sun.global_basis.z,
-		"min_receiver_y":min_receiver_y}
+		"min_receiver_y":min_receiver_y,"sole_shadow_light":sole_shadow_light}
 
 
 static func needs_pose(art: Node3D, context: Dictionary) -> bool:
@@ -26,6 +26,9 @@ static func sphere_needs_pose(center: Vector3, radius: float, context: Dictionar
 		var plane: Plane = raw
 		if not plane.normal.is_finite() or not is_finite(plane.d) or absf(plane.normal.length_squared()-1.0) > 0.0001: return true
 	if not _separated(center,center,radius,context.planes): return true
+	# Root certifies all current fixture/beacon shadow flags; an unmodeled light
+	# could illuminate a visible receiver from another direction.
+	if not context.get("sole_shadow_light") is bool or not context.sole_shadow_light: return true
 	if not context.get("shadow_enabled") is bool: return true
 	if not context.shadow_enabled: return false
 	if not context.get("shadow_distance") is float and not context.get("shadow_distance") is int: return true
@@ -34,8 +37,14 @@ static func sphere_needs_pose(center: Vector3, radius: float, context: Dictionar
 	if center.distance_to(context.camera) <= distance+radius: return true
 	if not context.get("light_direction") is Vector3: return true
 	var direction: Vector3 = context.light_direction
-	if not direction.is_finite() or direction.length_squared() < 0.000001: return true
+	var direction_squared: float = direction.length_squared()
+	if not direction.is_finite() or not is_finite(direction_squared) or direction_squared < 0.000001: return true
 	direction = direction.normalized()
+	if not direction.is_finite() or direction.length_squared() < 0.9999: return true
+	# A common separating half-space remains separating for the whole infinite
+	# shadow extrusion. This requires no minimum receiving-surface height.
+	for plane: Plane in context.planes:
+		if plane.distance_to(center) > radius*plane.normal.length() and plane.normal.dot(direction) >= 0.0: return false
 	if direction.y >= -0.0001: return true
 	if not context.get("min_receiver_y") is float and not context.get("min_receiver_y") is int: return true
 	var floor_y: float = float(context.min_receiver_y)
@@ -52,7 +61,8 @@ static func _separated(start: Vector3, end: Vector3, radius: float, planes: Arra
 	# Godot camera planes face outward; is_position_in_frustum rejects positive
 	# plane distance. One common separating plane proves the capsule invisible.
 	for plane: Plane in planes:
-		if plane.distance_to(start) > radius and plane.distance_to(end) > radius: return true
+		var projected_radius: float = radius*plane.normal.length()
+		if plane.distance_to(start) > projected_radius and plane.distance_to(end) > projected_radius: return true
 	return false
 
 

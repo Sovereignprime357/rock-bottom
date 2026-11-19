@@ -16,6 +16,9 @@ var _wall_ms: float = 0.0
 var _queue: Array[Dictionary] = []
 var _serial: int = 0
 var _missing: Dictionary = {}
+var _old_school_pending: Dictionary = {}
+var _old_school_serial: int = 0
+var _old_school_preparing: bool = false
 
 func _init(owner: RefCounted, combat_system: RefCounted, campaign_adapter: Object = null) -> void:
 	_host_ref = weakref(owner); _combat_ref = weakref(combat_system)
@@ -26,7 +29,7 @@ func _sync_epoch() -> bool:
 	if host == null or combat == null: return false
 	if not is_same(_player_epoch, host.p) or not is_same(_state_epoch, host.s):
 		_player_epoch = host.p; _state_epoch = host.s
-		_normalized = false; _queue.clear(); _missing.clear()
+		_normalized = false; _queue.clear(); _missing.clear(); _old_school_pending.clear()
 	return true
 
 func _campaign_has(method: StringName) -> bool:
@@ -184,14 +187,49 @@ func transform_fallen_priest() -> bool:
 
 func spawn_old_school_brutus() -> bool:
 	if not normalize_state() or not _actor("os_brutus").is_empty(): return false
+	var plan: Dictionary = prepare_old_school_brutus()
+	if not plan.get("ok",false):
+		if plan.get("reason") == "missing_definition": _missing_once("old_school_door")
+		return false
+	return commit_old_school_brutus(plan)
+
+func prepare_old_school_brutus() -> Dictionary:
+	if _old_school_preparing: return {"ok":false,"reason":"preparing"}
+	if not _sync_epoch() or not _normalized: return {"ok":false,"reason":"state_not_normalized"}
+	_old_school_pending.clear()
+	var player_epoch: Dictionary = host.p; var state_epoch: Dictionary = host.s
 	var door: Dictionary = host.definition("src/dialogue/vendors_places.js","OLD_SCHOOL_DOOR",{})
-	if door.is_empty(): _missing_once("old_school_door"); return false
+	if door.is_empty(): return {"ok":false,"reason":"missing_definition"}
+	var noop: bool = not _actor("os_brutus").is_empty()
 	var body: Dictionary = {"id":"os_brutus","name":"OLD SCHOOL BRUTUS","sprite":"os_brutus",
 		"x":float(door.x)-30.0,"y":float(door.y)+80.0,"w":36,"h":28,"color":"#604030",
 		"hp":250,"maxHp":250,"speed":1.5,"hostile":true,"aggro":true,"dmg":35,"archetype":"charger","showHp":true,
 		"chargeState":"idle","chargeT":0.0,"grabFreezeT":0.0,"isOsBrutus":true}
-	body = _stage(body)
-	if body.is_empty(): return false
+	if not noop:
+		_old_school_preparing = true
+		body = _stage(body)
+		_old_school_preparing = false
+		# Physical adapters are external. Neither replacement p nor s may receive
+		# the prepared actor or any follow-on reward from an old action.
+		if not is_same(host.p,player_epoch) or not is_same(host.s,state_epoch): return {"ok":false,"reason":"replaced_state"}
+		if body.is_empty(): return {"ok":false,"reason":"blocked_placement"}
+		noop = not _actor("os_brutus").is_empty()
+	_old_school_serial += 1
+	var token: String = "%d:os:%d" % [get_instance_id(),_old_school_serial]
+	_old_school_pending = {"token":token,"player":player_epoch,"state":state_epoch,"body":{} if noop else body,"noop":noop}
+	return {"ok":true,"token":token,"noop":noop}
+
+func discard_old_school_brutus(plan: Dictionary) -> void:
+	if not _old_school_pending.is_empty() and plan.get("token") == _old_school_pending.get("token"): _old_school_pending.clear()
+
+func commit_old_school_brutus(plan: Dictionary) -> bool:
+	if host == null or _old_school_pending.is_empty() or plan.get("token") != _old_school_pending.get("token"): return false
+	var pending: Dictionary = _old_school_pending
+	_old_school_pending = {} # consume before effects; stale callers cannot erase a newer plan.
+	if not is_same(host.p,pending.player) or not is_same(host.s,pending.state): return false
+	if not _actor("os_brutus").is_empty(): return true # Exact source duplicate/corpse no-op.
+	if pending.noop or pending.body.is_empty(): return false
+	var body: Dictionary = pending.body
 	host.npcs.append(body)
 	_toast("OLD SCHOOL BRUTUS is loose.\nhe was sleeping in the gym.\nhe is no longer sleeping.",4200)
 	_feed("@blocklog: old school brutus is up. someone tore copper out of the gym.","@blocklog")

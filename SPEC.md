@@ -2301,3 +2301,23 @@ contracts for `SPEC-3D-SCENE-COMPOSITION.md`, `SPEC-3D-BOSSES.md`,
 These affect only `game3d/`; source v22/frozen v19 contracts remain unchanged.
 The actual full scene and separate full export presets are development entries,
 not claims that the32-feature/585-handler parity ledger is fully verified.
+
+### Full-only source audio and world presentation
+
+`SPEC-3D-AUDIO.md` governs the24 existing source sound recipes, source ambient clock,
+first-input unlock and per-note ready/mute gates. Godot caches synthesized PCM; the original
+browser audio and slice synth remain separate unchanged targets. `SPEC-3D-FIND-VIEW.md`
+owns original cash/tool/collar/crown meshes without collection authority.
+`SPEC-3D-WEATHER.md` owns source night/fog equations, existing real fixture energy and bounded
+roof-clipped rain, without feeding the lighting curve into gameplay night predicates.
+`SPEC-3D-OLD-SCHOOL.md`, `SPEC-3D-CART-VIEW.md` and `SPEC-3D-INCIDENTS.md` document their
+live full-scene composition and physical adaptations. These contracts apply only to game3d.
+### Scoped full-3D presentation continuation — 2026-11-18
+
+FullScene follows `SPEC-3D-ACTOR-HUD.md`, `SPEC-3D-VIEWMODEL-GEAR.md`,
+`SPEC-3D-PROJECTILE-VIEW.md`, `SPEC-3D-ENDINGS.md`, `SPEC-3D-DEPARTURES.md` and
+`SPEC-3D-DYNAMIC-EMITTERS.md`. These extend only the first-person full-port composition;
+the active pixel release, frozen v19 and declared-size sprite contract remain unchanged.
+Ending text/continuation and departure timing retain source authority with the explicitly
+documented inside-edge pad adaptation. Fixture, HUD, equipment and projectile presenters
+own no gameplay clocks, collision authority, transactions or game RNG.

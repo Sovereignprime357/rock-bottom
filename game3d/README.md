@@ -67,8 +67,11 @@ Full-world development entry: run `res://full_main.tscn` in Godot. Export it wit
 default slice and its save namespace. The full development scene includes real
 source NPCs, combat, dialogue, travel, cooking, heists, Office/Kingdom, world
 props, marketplace/Block actions, source objectives/journal/minimap, and nine held
-weapon contexts. Street-event activation, cart projection and remaining
-full-port validation are still being integrated. This is not yet complete game parity.
+weapon contexts. The cart, six street incidents, Old School, source weather/audio,
+authored pickups/projectiles, actor combat cues, equipped tools/clothing/footwear,
+moving light fixtures and visitor departures are connected. Remaining world adornments,
+full campaign tours, browser acceptance and the measured 60-actor frame target are tracked
+in the parity manifest and checkpoint reports. This is not yet complete game parity.
 
 Use the official [Godot 4.5.1 archive](https://godotengine.org/download/archive/4.5.1-stable/).
 The version is pinned because it is available locally and supports both targets; it is not a

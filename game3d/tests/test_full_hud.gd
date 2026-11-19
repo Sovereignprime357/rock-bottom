@@ -26,6 +26,16 @@ func _run() -> void:
 	_check(copy.contains("equipment") and copy.contains("lifetime") and copy.contains("cursed accolades"),"full inventory exposes actual source sections")
 	_check(not copy.contains("eat the food"),"full inventory adds no invented consumption action")
 	_check(JSON.stringify(runtime.snapshot()) == before,"HUD and ledger do not mutate authoritative state")
+	_check(copy.contains("wanted -") and copy.contains("cart -") and not copy.contains("emergency hitter"),"empty source inventory flags preserve source dash and conditional rows")
+	runtime.p.hp = 79.5; runtime.p.shakes = 30.7; runtime.p.brain = 21.5
+	runtime.p.cred = 12; runtime.p.credBonus = 3; runtime.p.wanted = 2; runtime.p.cartMounted = true
+	runtime.p.hitters = 2; runtime.p.dirtySupplies = 4; runtime.p.lifetime.territoriesClaimed = 2
+	before = JSON.stringify(runtime.snapshot()); copy = hud.inventory_copy(runtime)
+	_check(copy.contains("hp 80 / 100 · shakes 31 · brain 22"),"inventory follows source rounding instead of truncating values")
+	_check(copy.contains("cred 12 (+3)") and copy.contains("wanted ★★") and copy.contains("cart mounted"),"inventory retains equipment cred bonus wanted and mounted status")
+	_check(copy.contains("emergency hitter 2") and copy.contains("(4 house cut)"),"conditional source resource rows are present when owned")
+	_check(copy.contains("districts entered: 2/11") and copy.contains("block routes filed:") and copy.contains("office orders filed:"),"source lifetime labels and all eleven authored districts remain legible")
+	_check(JSON.stringify(runtime.snapshot()) == before,"corrected inventory remains read only")
 	runtime.p.rockedT = 18000.0
 	hud.update_runtime(runtime)
 	_check(hud.objective.text.contains("18.0s"),"source milliseconds displayed as high seconds")

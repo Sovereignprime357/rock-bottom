@@ -121,6 +121,15 @@ func _digit_center(rig: Rig,finger: String,in_wrist: bool = false) -> Vector3:
 	var point: Vector3 = mesh.global_transform*mesh.mesh.get_aabb().get_center()
 	return (rig.get_node(WRIST) as Node3D).to_local(point) if in_wrist else rig.to_local(point)
 func _knuckle(rig: Rig) -> Vector3: return rig.to_local((rig.get_node(WRIST+"/knuckle_marker") as Node3D).global_position)
+func _visible_fraction(rig: Rig,mesh: MeshInstance3D) -> float:
+	var shown: int = 0
+	var vertices: PackedVector3Array = _local_vertices(mesh.mesh)
+	var transform: Transform3D = rig.global_transform.affine_inverse()*mesh.global_transform
+	var vertical: float = tan(deg_to_rad(78.0)*0.5)
+	for vertex: Vector3 in vertices:
+		var point: Vector3 = transform*vertex
+		if point.z < -0.06 and absf(point.y) < -point.z*vertical and absf(point.x) < -point.z*vertical*1280.0/720.0: shown += 1
+	return float(shown)/float(maxi(1,vertices.size()))
 
 func _catalog_and_cache(first: Rig,second: Rig) -> void:
 	var expected: Array = Content.load_content().catalogs.weapons.keys(); expected.sort()
@@ -241,6 +250,9 @@ func _gestures(first: Rig) -> void:
 		_check(_snapshot(first) == before,"failed contextual outcome is visual no-op "+str(kind))
 		first.acknowledge(kind,true,false); _advance(first,0.12)
 		_check(first.action == kind and _snapshot(first).poses != before.poses and _safe(first),"accepted contextual outcome changes bounded real pose "+str(kind))
+		if kind == &"kick":
+			_check(_visible_fraction(first,first.get_node("kick_foot/worn_shoe/shoe_form/worn_leather")) > 0.33,"actual active shoe occupies the native78-degree view rather than a clipped toe sliver")
+			_check(_visible_fraction(first,first.get_node("kick_foot/trouser_cuff")) > 0.33,"active kick shows its connected trouser cuff")
 		first.acknowledge(&"punch",true,false,&"pipe")
 		_check(first.action == &"punch" and first.action_phase == 0.0,"context gesture never delays the next accepted hit "+str(kind))
 		_advance(first,0.6)

@@ -347,6 +347,13 @@ func _placement_certificates() -> void:
 	var moved: Dictionary = adapter.move_body(body,_position(body)+Vector2(1,0))
 	_check(moved.position.distance_to(_position(body)+Vector2(1,0)) < 0.0001 and adapter.placement_cache_hits > hits,"Director placement certificate reused by movement origin")
 	_check(adapter.query_count >= before+3,"cached origin still performs cast and uncached endpoint proof")
+	# Production Combat commits the returned point before the next fixed step.
+	body.x = moved.position.x; body.y = moved.position.y
+	before = adapter.query_count; hits = adapter.placement_cache_hits
+	_check(adapter.clear_placement(body) == _position(body) and adapter.query_count == before and adapter.placement_cache_hits == hits+1,"fresh swept endpoint publishes exact next-origin certificate")
+	_check(adapter._clear(body,_position(body),false) and adapter.query_count == before+1,"false-call bypasses a positive certificate and performs actual overlap")
+	before = adapter.query_count
+	_check(adapter._clear(body,_position(body)) and adapter.query_count == before,"successful false-call publishes its new exact proof for ordinary reads")
 	before = adapter.query_count; adapter.begin_navigation_frame(serial,active_ms)
 	adapter.clear_placement(body)
 	_check(adapter.query_count == before,"same render serial does not prematurely discard exact positive point")

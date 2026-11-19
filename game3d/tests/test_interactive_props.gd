@@ -294,6 +294,15 @@ func _placement() -> void:
 	for dt: float in [0.0,-1.0,50.001,INF,NAN]: _check(not rig.actions.tick(dt),"invalid world delta rejected")
 	var detached: Array = rig.actions.render_records(); detached[0].cdT = 99999
 	_check(_row(rig,0).cdT != 99999,"renderer receives detached shared records")
+	for index: int in range(14):
+		var id := "interactive:%d" % index
+		_check(rig.actions.render_record(id) == rig.actions.render_records()[index],"single live read matches full snapshot "+id)
+	for invalid: String in ["","interactive:-1","interactive:14","interactive:01","interactive:+1","interactive:1.0","interactive: 1","prop:1"]:
+		_check(rig.actions.render_record(invalid).is_empty(),"single read rejects malformed canonical ID "+invalid)
+	var one: Dictionary = rig.actions.render_record("interactive:0"); one.cdT = 88888
+	_check(_row(rig,0).cdT != 88888,"single-row result cannot mutate authoritative timer")
+	_row(rig,0).cdT = 312.0
+	_check(rig.actions.render_record("interactive:0").cdT == 312.0,"single row immediately observes same-epoch direct source write")
 	groups += 1
 
 func _continuity() -> void:
@@ -307,6 +316,7 @@ func _continuity() -> void:
 	var old: Dictionary = _row(rig,6)
 	rig.game.fresh()
 	_check(not rig.actions.ready() and rig.actions.render_records().is_empty() and not rig.actions.tick(50),"unexpected state replacement revokes presentation and pending work")
+	_check(rig.actions.render_record("interactive:0").is_empty(),"single row exposes no stale epoch")
 	rig.props.reset_session("fresh"); rig.actions.reset_session("fresh")
 	_check(rig.game.cursor == 24 and _row(rig,0).cdT == 0 and not _row(rig,6).broken,"fresh boundary creates exactly eight ordered three-draw bottles")
 	_check(rig.props.record(static_id).looted and rig.props.record(static_id).diveCdT == 54321.0,"interactive reset preserves source static PROPS continuity")

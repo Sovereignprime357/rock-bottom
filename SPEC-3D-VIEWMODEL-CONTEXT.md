@@ -89,3 +89,8 @@ No edits to existing test_viewmodel, Runtime/Scene/Combat or source2D. Root supp
 weapon event field and context snapshots, and performs engine, integration, export and git gates.
 
 Root composition clarification: dumpster reach follows a committed withdrawal/loot choice or source climb-out. Opening the modal emits no frozen hidden reach, so Escape cannot replay a stale entry motion on resume. Food keeps its eat gesture; phone/bench/kick remain active-play acknowledgements.
+
+Native refinement: the bottle rim uses uneven broad tangential glass wedges and one deep
+notch, preserving neck/grip/material/cache. The active kick raises the shoe and connected
+cuff into the lower78-degree view; hidden rest, duration and input semantics are unchanged.
+The context gate checks actual shoe/cuff vertex projection at the visible action phase.

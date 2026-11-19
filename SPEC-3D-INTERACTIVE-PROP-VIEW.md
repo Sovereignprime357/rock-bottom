@@ -107,3 +107,12 @@ reach and bottle-height LOS branches. Root owns composition and all engine/expor
 The production Scene selects dynamic interactive geometry before world construction. After State binding and Combat creation, Runtime installs the single shared Actions owner; the Scene binds the original-mesh View. Cold binding consumes no gameplay draws. Fresh/restore reset through Actions after ordinary Props rebind, clearing the previous physical epoch before the exact24 source bottle draws. Each admitted world step ticks interactive props immediately after random events; a narrow Adapter projection synchronizes current colliders before actor physics. Accepted swings synchronize broken bodies immediately. Source E precedence remains NPC/heist, bench, can, phone, cart, dumpster, zone. Can reach is strict50source pixels plus aim and actual LOS; exact boundary falls through to the zone action.
 
 Combat player_attack carries the weapon ID captured at acceptance, before NPC loot or a bottle can equip a replacement. This is presentation metadata only; captured damage/reach/cadence and all source effects remain authoritative in Combat.
+
+### Single authoritative read
+`sync_current()` accepts no caller-supplied rows. It checks its live bound owners,
+pulls one detached complete snapshot, validates its shape and applies it. Production
+Adapter synchronization uses this path to avoid copying the same14 records twice
+per simulation step. The existing `sync(rows)` API retains exact current-owner
+equality validation for externally supplied snapshots and still rejects forged,
+stale or malformed rows. Both paths share one geometry application method; neither
+caches state or bypasses epoch, navigation, collider or service publication rules.

@@ -93,10 +93,19 @@ func _disable(entry: Dictionary,id: String) -> void:
 func _hide_all() -> void:
 	for id: String in _slots: _disable(_slots[id],id)
 func clear_active() -> void: _hide_all()
+func sync_current() -> bool:
+	var world: Object = _object(_world_ref); var adapter: Object = _object(_adapter_ref); var actions: Object = _object(_actions_ref)
+	if not _bound or world == null or adapter == null or actions == null or not actions.ready():
+		_hide_all(); return false
+	var rows: Array = actions.render_records()
+	if not _valid(rows): _hide_all(); return false
+	return _apply_rows(rows,world,adapter)
 func sync(rows: Array) -> bool:
 	var world: Object = _object(_world_ref); var adapter: Object = _object(_adapter_ref); var actions: Object = _object(_actions_ref)
 	if not _bound or world == null or adapter == null or actions == null or not actions.ready() or not _valid(rows) or rows != actions.render_records():
 		_hide_all(); return false
+	return _apply_rows(rows,world,adapter)
+func _apply_rows(rows: Array,world: Object,adapter: Object) -> bool:
 	for row: Dictionary in rows:
 		var id: String = row.id; var entry: Dictionary = _slots[id]
 		var point := Vector2(row.x,row.y)

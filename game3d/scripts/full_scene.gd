@@ -6,13 +6,21 @@ const Adapter = preload("res://scripts/world_adapter.gd")
 const Content = preload("res://scripts/content_catalog.gd")
 const Roster = preload("res://scripts/character_roster.gd")
 const ActorPose = preload("res://scripts/actor_animation.gd")
+const PoseVisibility = preload("res://scripts/presentation_visibility.gd")
 const Hands = preload("res://scripts/first_person_rig.gd")
 const Hud = preload("res://scripts/full_hud.gd")
 const Store = preload("res://scripts/save_store.gd")
-const Synth = preload("res://scripts/synth.gd")
+const Synth = preload("res://scripts/source_audio.gd")
 const Startup = preload("res://scripts/startup_presentation.gd")
 const InteractiveView = preload("res://scripts/interactive_prop_view.gd")
 const CookingView = preload("res://scripts/cooking_presentation.gd")
+const CartView = preload("res://scripts/cart_view.gd")
+const IncidentView = preload("res://scripts/incident_presentation.gd")
+const FindView = preload("res://scripts/find_view.gd")
+const WeatherView = preload("res://scripts/weather_presentation.gd")
+const EndingView = preload("res://scripts/ending_view.gd")
+const ProjectileView = preload("res://scripts/projectile_view.gd")
+const DynamicEmitters = preload("res://scripts/dynamic_emitters.gd")
 const FULL_KEY := "rockbottom_3d_full_v2"
 var runtime: RefCounted
 var physics: RefCounted
@@ -42,12 +50,19 @@ var missing_visuals: Array[String] = []
 var qa_mode: bool = false
 var startup_report: Dictionary = {}
 var prop_view: Node3D
+var cart_view: Node3D
+var incident_view: Node3D
+var weather_view: Node3D
+var dynamic_emitters: Node3D
+var _cop_emitters: Array[Dictionary] = []
+var _ember_anchor: Node3D
 var heat_view: CanvasLayer
 var pending_load: bool = false
 var quit_requested: bool = false
 var save_failed: bool = false
 var squint_held: bool = false
 var _hand_context: Dictionary = {}
+var _pose_lights: Array[Light3D] = []
 
 func _ready() -> void:
 	qa_mode = "--qa-full" in OS.get_cmdline_user_args()
@@ -59,12 +74,23 @@ func _ready() -> void:
 	heat_view = CookingView.new(); add_child(heat_view)
 	if not qa_mode: get_tree().auto_accept_quit = false
 	await get_tree().process_frame
-	world = World.new(); world.dynamic_interactive = true; add_child(world); world.build()
+	world = World.new(); world.dynamic_interactive = true; world.dynamic_cart = true; add_child(world); world.build()
+	for light: Node in get_tree().root.find_children("*","Light3D",true,false): _pose_light_added(light)
+	get_tree().node_added.connect(_pose_light_added)
+	get_tree().node_removed.connect(_pose_light_removed)
 	startup.show_stage("the block.",1,1)
 	physics = Adapter.new(world)
 	runtime = Runtime.new(physics); physics.bind_state(runtime.state)
 	hud.update_communications(runtime.communications.snapshot())
 	_make_player()
+	dynamic_emitters = DynamicEmitters.create(); add_child(dynamic_emitters)
+	_ember_anchor = hands.emitter_anchor(&"player_ember")
+	weather_view = WeatherView.new(); add_child(weather_view)
+	if not weather_view.build(world,camera):
+		push_error("Full scene weather composition failed."); return
+	cart_view = CartView.new(); add_child(cart_view)
+	if not cart_view.bind(world,physics,runtime.travel) or not runtime.enable_cart_projection():
+		push_error("Full scene cart composition failed."); return
 	store = Store.new(); add_child(store)
 	store.save_path = "user://"+FULL_KEY+".json"; store.storage_key = FULL_KEY
 	if qa_mode or "--qa-interactive" in OS.get_cmdline_user_args():
@@ -89,11 +115,21 @@ func _ready() -> void:
 	if not runtime.enable_actor_simulation():
 		push_error("Full scene actor composition failed."); return
 	hud.bind_guidance(runtime.guidance)
+	hud.bind_guidance_camera(camera)
+	hud.bind_guidance_visibility(_guidance_target_visible)
+	if not hud.bind_actor_hud(runtime.state,camera,_actor_hud_anchor,_actor_hud_visible):
+		push_error("Full scene actor HUD composition failed."); return
 	if not runtime.enable_interactive_props():
 		push_error("Full scene interactive prop composition failed."); return
 	prop_view = InteractiveView.new(); add_child(prop_view)
 	if not prop_view.bind(world,physics,runtime.interactive_props) or not physics.sync_interactive_props():
 		push_error("Full scene interactive prop presentation failed."); return
+	await get_tree().physics_frame
+	if not runtime.enable_incidents(world):
+		push_error("Full scene incident composition failed."); return
+	incident_view = IncidentView.new(); add_child(incident_view)
+	if not incident_view.build(world).get("banks",0) == 6:
+		push_error("Full scene incident presentation failed."); return
 	_sync_model_nodes(0.0)
 	get_window().focus_exited.connect(_focus_lost)
 	ready_for_play = true
@@ -131,6 +167,10 @@ func _make_actor(record: Dictionary) -> bool:
 	var art: Node3D = Roster.create(visual,id.hash())
 	if art == null: body.queue_free(); return false
 	art.name = "Art"; body.add_child(art); body.set_meta("visual_id",visual)
+	if DynamicEmitters.qualifies_cop(record):
+		var cap_path: String = "mounted_rider/head/hair_style" if str(record.get("sprite","")) == "horsecop" else "head/hair_style"
+		body.set_meta("beacon_anchor",art.get_node_or_null(cap_path))
+	PoseVisibility.local_radius(art)
 	body.set_meta("identity_action",Roster.definition(visual).get("action",&""))
 	body.set_meta("cosmetic_ms",float(absi(id.hash())%3800))
 	actors[id] = body
@@ -143,6 +183,10 @@ func _sync_player() -> void:
 
 func _sync_model_nodes(delta: float) -> void:
 	_sync_player()
+	_cop_emitters.clear()
+	var pose_context: Dictionary = PoseVisibility.frame_context(camera,world.sun,-INF,_sole_shadow_light()) if delta > 0.0 else {}
+	if cart_view != null:
+		physics.sync_cart(); cart_view.tick_pose(0.000001,player.global_transform,Vector3.ZERO)
 	var present: Dictionary = {}
 	for record: Dictionary in runtime.state.npcs:
 		var id: String = str(record.id); present[id] = true
@@ -163,61 +207,73 @@ func _sync_model_nodes(delta: float) -> void:
 				pose.action_phase = float(body.get_meta("cosmetic_ms"))/3800.0
 				pose.ambient_action = true
 			var distance: float = player.position.distance_squared_to(body.position)
-			ActorPose.tick(body.get_node("Art"),delta,pose,0 if distance < 144.0 else (1 if distance < 1600.0 else 2))
+			var art: Node3D = body.get_node("Art")
+			var live_beacon: bool = DynamicEmitters.qualifies_cop(record)
+			ActorPose.tick(art,delta,pose,0 if distance < 144.0 else (1 if distance < 1600.0 else 2),live_beacon or PoseVisibility.needs_pose(art,pose_context))
+		if DynamicEmitters.qualifies_cop(record):
+			var cap: Node3D = body.get_meta("beacon_anchor",null)
+			var cap_visible: bool = is_instance_valid(cap) and cap.is_visible_in_tree()
+			_cop_emitters.append({"id":id,"isCop":bool(record.get("isCop",false)),"sprite":str(record.get("sprite","")),"dead":false,"hidden":false,"visible":cap_visible,"cap_transform":cap.global_transform if cap_visible else Transform3D.IDENTITY})
 	for id: String in actors.keys():
 		if not present.has(id):
 			physics.unregister_body(id); actors[id].queue_free(); actors.erase(id)
 	_sync_finds()
 	_sync_projectiles()
 
-func _simple_mesh(color: String, size: Vector3) -> MeshInstance3D:
-	var node := MeshInstance3D.new()
-	var mesh := BoxMesh.new(); mesh.size = size; node.mesh = mesh
-	var material := StandardMaterial3D.new(); material.albedo_color = Color(color); material.roughness = 0.92
-	node.material_override = material; add_child(node)
-	return node
+func _pose_light_added(node: Node) -> void:
+	if node is Light3D and not _pose_lights.has(node): _pose_lights.append(node)
+
+func _pose_light_removed(node: Node) -> void:
+	if node is Light3D: _pose_lights.erase(node)
+
+func _sole_shadow_light() -> bool:
+	for light: Light3D in _pose_lights:
+		if is_instance_valid(light) and light != world.sun and light.shadow_enabled: return false
+	return is_instance_valid(world.sun)
 
 func _sync_finds() -> void:
 	var present: Dictionary = {}
 	for pile: Dictionary in runtime.state.cash_piles:
 		var id: String = str(pile.id); present[id] = true
-		if not finds.has(id): finds[id] = _simple_mesh("9b9e67",Vector3(0.25,0.025,0.13))
-		finds[id].position = Content.to_world(Vector2(pile.x,pile.y),0.10)
-		finds[id].visible = runtime.utilities.cash_visible(pile)
+		if not finds.has(id):
+			finds[id] = FindView.create_cash(); add_child(finds[id])
+		finds[id].project_cash(pile,runtime.utilities.cash_visible(pile))
 	for id: String in finds.keys():
 		if not present.has(id) and id != "quest:crown": finds[id].queue_free(); finds.erase(id)
 	var crown: Variant = runtime.s.get("crownPickup")
 	if crown is Dictionary and not crown.get("collected",true):
 		if not finds.has("quest:crown"):
-			var art := Node3D.new(); add_child(art); finds["quest:crown"] = art
-			for index: int in range(8):
-				var segment: MeshInstance3D = _simple_mesh("a99b54",Vector3(0.09,0.07 if index%2 else 0.12,0.035))
-				remove_child(segment); art.add_child(segment)
-				var angle: float = float(index)*TAU/8.0
-				segment.position = Vector3(sin(angle)*0.10,0.0,cos(angle)*0.10); segment.rotation.y = angle
-		finds["quest:crown"].position = Content.to_world(Vector2(crown.x,crown.y),0.13)
+			finds["quest:crown"] = FindView.create_crown(); add_child(finds["quest:crown"])
+		finds["quest:crown"].project_crown(crown)
 	elif finds.has("quest:crown"):
 		finds["quest:crown"].queue_free(); finds.erase("quest:crown")
 
 func _sync_projectiles() -> void:
 	var present: Dictionary = {}
+	var render_ms: float = float(Time.get_ticks_msec())
 	for index: int in range(runtime.state.projectiles.size()):
 		var record: Dictionary = runtime.state.projectiles[index]
 		var id: String = str(index); present[id] = true
-		if not projectiles.has(id): projectiles[id] = _simple_mesh("7a8b56",Vector3(0.12,0.28,0.12))
-		projectiles[id].position = Content.to_world(Vector2(record.x,record.y),1.0)
+		if not projectiles.has(id):
+			projectiles[id] = ProjectileView.create(); add_child(projectiles[id])
+		projectiles[id].project(record,render_ms)
 	for id: String in projectiles.keys():
 		if not present.has(id): projectiles[id].queue_free(); projectiles.erase(id)
 
 func _sync_hand_context() -> void:
 	if hands == null or runtime == null: return
 	var context := {"weapon":str(runtime.p.weapon),"seated":bool(runtime.s.get("sittingOnBench",false)),"visible":runtime.s.mode == "playing" and not loading,"walk_speed":5.5}
+	context.high_ember = runtime.p.rockedT > 0 or bool(runtime.p.get("hitterHigh",false))
+	for slot: String in ["tool","coat","shoes"]: context[slot] = runtime.p.equip.get(slot)
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	context.cart_grips = cart_view.grip_context(camera.global_transform,camera.fov,viewport_size.x/maxf(viewport_size.y,1.0)) if cart_view != null and context.visible else {}
 	if context != _hand_context and hands.set_context(context): _hand_context = context
 
 func _process(delta: float) -> void:
 	if not ready_for_play: return
 	render_serial += 1
-	runtime.advance_wall(float(Time.get_ticks_msec()))
+	var wall_ms: float = float(Time.get_ticks_msec())
+	runtime.advance_wall(wall_ms); sound.advance_wall(wall_ms)
 	_sync_mouse_capture(Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
 	var active: bool = runtime.s.mode == "playing" and not loading
 	if active:
@@ -231,6 +287,7 @@ func _process(delta: float) -> void:
 		var pose_delta: float = runtime.last_advanced_ms/1000.0
 		_sync_model_nodes(pose_delta)
 		var local_velocity: Vector3 = player.basis.inverse()*(player.position-start)/maxf(delta,0.001)
+		if cart_view != null: cart_view.tick_pose(pose_delta,player.global_transform,local_velocity)
 		_sync_hand_context()
 		hands.tick(pose_delta,local_velocity,sprint,runtime.p.rockedT > 0,runtime.p.crashT > 0,runtime.p.shakes,view_look_delta)
 		view_look_delta = Vector2.ZERO
@@ -238,8 +295,9 @@ func _process(delta: float) -> void:
 		if runtime.s.mode == "cookmini" and not loading: runtime.advance(minf(delta,0.05))
 		_sync_model_nodes(0.0)
 	runtime.advance_presentation(delta)
+	if incident_view != null: incident_view.sync(runtime.incidents.visual_snapshot(),active_ms)
 	heat_view.update(runtime.cooking.snapshot() if runtime.s.mode == "cookmini" else {},runtime.p,float(runtime.s.get("smokeT",0)),delta)
-	world.set_day_time(float(runtime.s.dayTime)*240.0)
+	weather_view.sync({"dayTime":runtime.s.dayTime,"weather":runtime.s.weather,"office_generator":bool(runtime.s.office.upgrades.generator),"geometry_revision":physics._collision_revision},wall_ms)
 	hud.set_view_heading(player.rotation.y)
 	hud.update_runtime(runtime)
 	_consume_events()
@@ -253,6 +311,24 @@ func _process(delta: float) -> void:
 			if child is Button: child.disabled = saving or not pending_save.is_empty()
 	var interaction: Dictionary = resolve_interaction()
 	hud.prompt.text = str(interaction.get("prompt","")) if runtime.s.mode == "playing" else ""
+	hud.update_actor_hud(wall_ms)
+	_sync_dynamic_emitters(wall_ms)
+
+func _sync_dynamic_emitters(wall_ms: float) -> void:
+	if dynamic_emitters == null: return
+	var ember_visible: bool = is_instance_valid(_ember_anchor) and _ember_anchor.is_visible_in_tree()
+	dynamic_emitters.sync({"dayTime":runtime.s.dayTime,"cops":_cop_emitters,"player":{"rockedT":runtime.p.rockedT,"hitterHigh":bool(runtime.p.get("hitterHigh",false)),"visible":ember_visible,"ember_transform":_ember_anchor.global_transform if ember_visible else Transform3D.IDENTITY}},wall_ms)
+
+func _actor_hud_anchor(id: String) -> Vector3:
+	var body: Node3D = actors.get(id)
+	if not is_instance_valid(body) or not body.is_visible_in_tree(): return Vector3.INF
+	var head: Node3D = body.get_node_or_null("Art/head") as Node3D
+	if not is_instance_valid(head): return Vector3.INF
+	return head.global_position+Vector3.UP*0.12
+
+func _actor_hud_visible(id: String,target: Vector3) -> bool:
+	var body: Node3D = actors.get(id)
+	return is_instance_valid(body) and body.is_visible_in_tree() and target.is_finite() and _guidance_target_visible(target)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not ready_for_play or loading: return
@@ -269,6 +345,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_consume_events(); get_viewport().set_input_as_handled(); return
 	if event is InputEventKey and event.pressed and not event.echo:
 		sound.ready_for_sound = true
+		if runtime.s.mode == "ending" and event.physical_keycode == KEY_SPACE:
+			_continue_ending(); get_viewport().set_input_as_handled(); return
 		if runtime.s.mode == "dialogue" and ledger_key != 0 and event.physical_keycode in [ledger_key,KEY_ESCAPE]:
 			_resume(); get_viewport().set_input_as_handled(); return
 		if runtime.s.mode == "dialogue" and event.physical_keycode >= KEY_1 and event.physical_keycode <= KEY_9:
@@ -318,6 +396,11 @@ func _aimed(point: Vector3) -> bool:
 	var offset: Vector3 = point-camera.global_position
 	return offset.length_squared() < 0.0001 or (-camera.global_basis.z).dot(offset.normalized()) > 0.58
 
+func _guidance_target_visible(target: Vector3) -> bool:
+	if physics == null or camera == null or not target.is_finite() or not camera.is_inside_tree(): return false
+	# Presentation-only, sampled by the HUD at its existing120ms cadence.
+	return physics._ray(camera.global_position,target).is_empty()
+
 func resolve_interaction() -> Dictionary:
 	if runtime == null or runtime.s.mode != "playing" or runtime.p.stunT > 0 or runtime.s.get("bossKind","") == "kingdom": return {}
 	if physics.can_reach_target("office") and _aimed(world.service_points.office.target):
@@ -326,6 +409,8 @@ func resolve_interaction() -> Dictionary:
 		var id: String = "hideout:"+kind
 		if runtime.s.flags.get(kind+"HideoutOwned",false) and physics.can_reach_target(id) and _aimed(world.service_points[id].target):
 			return {"kind":"travel","id":id,"prompt":"E  /  go inside."}
+	if runtime.old_school != null and physics.can_reach_target("oldschool") and _aimed(world.service_points.oldschool.target):
+		return {"kind":"oldschool","id":"oldschool","prompt":"E  /  the old school."}
 	if runtime.kingdom != null:
 		for door: Dictionary in runtime.kingdom.doors:
 			var id: String = "kingdom:"+str(door.id)
@@ -344,8 +429,12 @@ func resolve_interaction() -> Dictionary:
 		var id: String = "route:"+str(stop.id)
 		if physics.can_reach_target(id) and _aimed(world.service_points[id].target): return {"kind":"route","id":id,"prompt":"E  /  stamp the route."}
 	var nearest: Dictionary = {}; var distance: float = 3600.0
+	var player_center: Vector2 = runtime.state.player_center()
 	for actor: Dictionary in runtime.state.npcs:
 		if actor.get("dead",false): continue
+		var center := Vector2(actor.x+actor.w*0.5,actor.y+actor.h*0.5)
+		var square: float = player_center.distance_squared_to(center)
+		if square >= distance: continue
 		var id: String = str(actor.id)
 		var domain: String = "vendor" if id in ["tony","pete","yuri"] else ("resident" if runtime.residents.supports(id) else ("travel" if id in ["pinky","biggu"] else ""))
 		if runtime.quests.supports(id): domain = "quest"
@@ -354,9 +443,7 @@ func resolve_interaction() -> Dictionary:
 		if runtime.office.supports(id): domain = "office"
 		if runtime.companions.supports(id): domain = "companion"
 		if domain.is_empty(): continue
-		var center := Vector2(actor.x+actor.w*0.5,actor.y+actor.h*0.5)
-		var square: float = runtime.state.player_center().distance_squared_to(center)
-		if square < distance and physics.can_reach_target(id) and _aimed(Content.to_world(center,1.2)):
+		if physics.can_reach_target(id) and _aimed(Content.to_world(center,1.2)):
 			nearest = {"kind":domain,"id":id,"prompt":"E  /  "+str(actor.get("name",id)).to_lower()}; distance = square
 	if not nearest.is_empty(): return nearest
 	var site: String = runtime.heists.site_at(runtime.state.player_center())
@@ -364,7 +451,13 @@ func resolve_interaction() -> Dictionary:
 		var target_id: String = ("copper:" if site in runtime.Heists.COPPER_IDS else "breakin:")+site
 		if physics.can_use_site(target_id) and _aimed(physics.site_focus(target_id)):
 			return {"kind":"heist","id":site,"prompt":"E  /  go inside."}
-	for prop_type: String in ["park_bench","trashcan","pay_phone","dumpster"]:
+	for prop_type: String in ["park_bench","trashcan","pay_phone","cart","dumpster"]:
+		if prop_type == "cart":
+			if runtime.p.cartMounted: return {"kind":"cart","id":runtime.travel._cart_id,"prompt":"E  /  abandon the cart."}
+			var cart_id: String = runtime.travel._cart_id
+			if world.service_points.has(cart_id) and physics.can_reach_target(cart_id) and _aimed(world.service_points[cart_id].target):
+				return {"kind":"cart","id":cart_id,"prompt":"E  /  take the cart."}
+			continue
 		if prop_type == "trashcan":
 			if runtime.interactive_props != null:
 				for index: int in range(6):
@@ -403,9 +496,11 @@ func interact() -> Dictionary:
 		"day": _domain_menu("day",runtime.open_day_actor(action.id))
 		"utilities": _domain_menu("utilities",runtime.open_zone(action.id))
 		"kick_can": runtime.kick_can(action.id)
+		"cart": runtime.interact_cart()
 		"world_props": _domain_menu("world_props",runtime.open_world_prop(action.id))
 		"companion": _domain_menu("companion",runtime.open_companion(action.id))
 		"office": _domain_menu("office",runtime.open_office(action.id))
+		"oldschool": _domain_menu("oldschool",runtime.open_old_school())
 		"office_field": runtime.use_office_field(action.id)
 		"kingdom_door": runtime.use_kingdom(action.id,true)
 		"kingdom_target": runtime.use_kingdom(action.id)
@@ -420,7 +515,10 @@ func interact() -> Dictionary:
 func _option(label: String, callback: Callable, disabled: bool = false) -> Dictionary:
 	var serial: int = menu_generation
 	return {"label":label,"disabled":disabled,"action":func():
-		if serial == menu_generation and not loading: callback.call()}
+		if serial == menu_generation and not loading and not disabled:
+			sound.ready_for_sound = true
+			if runtime.s.mode == "dialogue": sound.play_sound("dialogue")
+			callback.call()}
 
 func _begin_menu() -> void:
 	ledger_key = 0
@@ -458,6 +556,7 @@ func _choose(domain: String, token: Variant, action: String) -> void:
 		"day": result = runtime.select_day_actor(token,action)
 		"cooking": result = runtime.select_cooking(token,action)
 		"office": result = runtime.select_office(token,action)
+		"oldschool": result = runtime.select_old_school(token,action)
 		"kingdom": result = runtime.select_kingdom(token,action)
 		"utilities": result = runtime.select_utility(token,action)
 		"world_props": result = runtime.select_world_prop(token,action)
@@ -525,6 +624,9 @@ func _new_game() -> void:
 
 func _reset_presentation() -> void:
 	squint_held = false; runtime.utilities.release_squint()
+	if weather_view != null: weather_view.clear()
+	if dynamic_emitters != null: dynamic_emitters.clear()
+	if incident_view != null: incident_view.sync(runtime.incidents.visual_snapshot(),active_ms)
 	hands.reset(); _hand_context.clear(); _sync_hand_context(); view_look_delta = Vector2.ZERO; pitch = -0.04; player.rotation = Vector3.ZERO
 	if physics.has_method(&"reset_navigation"): physics.call(&"reset_navigation")
 	for body: Node3D in actors.values(): ActorPose.reset(body.get_node("Art"))
@@ -536,13 +638,21 @@ func _pause() -> void:
 
 func _resume() -> void:
 	if loading: return
-	if runtime.s.mode == "ending" and (saving or not pending_save.is_empty()): return
+	if runtime.s.mode == "ending":
+		_continue_ending(); return
 	if not runtime.set_mode("playing"): return
 	menu_generation += 1; runtime.close_dialogue()
 	ledger_key = 0
-	hud.close_menu(); view_look_delta = Vector2.ZERO; sound.ready_for_sound = true
+	hud.close_menu(); view_look_delta = Vector2.ZERO
 	capture_acquired = false
 	if not qa_mode: Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _continue_ending() -> void:
+	if loading or saving or not pending_save.is_empty(): return
+	if not runtime.continue_after_ending(): return
+	for action: String in ["forward","back","left","right","sprint"]: Input.action_release(action)
+	squint_held = false; runtime.utilities.release_squint(); view_look_delta = Vector2.ZERO
+	_resume(); _consume_events()
 
 func _manual_save() -> void:
 	runtime.request_save(); _consume_events()
@@ -595,6 +705,7 @@ func _consume_events() -> void:
 	for event: Dictionary in runtime.drain_events():
 		var payload: Dictionary = event.payload
 		match event.kind:
+			"cart_changed": _sync_model_nodes(0.0); _sync_hand_context()
 			"lifecycle_applied":
 				if payload.get("ok",false):
 					if payload.get("kind") in ["fresh","restore"]:
@@ -609,7 +720,7 @@ func _consume_events() -> void:
 			"site_availability_changed": world.set_site_available(str(payload.id),payload.get("available",false))
 			"dialogue_requested": _domain_menu(str(payload.domain),payload.menu)
 			"toast": hud.show_receipt(str(payload.get("text","")),float(payload.get("duration_ms",2200)))
-			"sound","audio": sound.play_sound("high" if payload.get("id") == "rockUp" else str(payload.get("id","")))
+			"sound","audio": sound.play_sound(str(payload.get("id","")))
 			"gesture": hands.acknowledge(StringName(payload.get("action","interact")))
 			"player_attack": hands.acknowledge(&"punch",true,payload.get("connected",false),StringName(payload.get("used_weapon","")))
 			"placement_reset","death","arrest": _reset_presentation(); _sync_player()
@@ -618,7 +729,8 @@ func _consume_events() -> void:
 			"ending_requested","ending":
 				if not runtime.set_mode("ending"): continue
 				_begin_menu()
-				hud.menu(str(payload.get("title","CRACK LORD SUPREME")),str(payload.get("text","the corner is yours.\nyou get tuesdays and thursdays.")),[_option("return to the block.",_resume)],true)
+				var ending: Dictionary = EndingView.receipt(payload)
+				hud.menu(ending.title,ending.text,[_option("return to the block.",_continue_ending)],true)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST and not qa_mode:

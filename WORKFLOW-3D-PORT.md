@@ -113,3 +113,41 @@ in both short samples: performance still fails. Report: reports/2026-11-18-3d-ne
 Both Full targets rebuilt after the browser-discovered journal shortcut fix; FullScene300PASS. Actual release-browser journal/inventory exits, minimap, movement, F and save/load verified. Local8074 now serves this systems checkpoint. Delivery is recorded in the checkpoint report; full port remains active.
 
 Systems checkpoint `f77fb3862d4e00b68159a7e60e14a290b13e0876` pushed to origin/codex/3d-full-port; report and177-file ledger contain evidence. Holds release after this delivery record. Full port remains ACTIVE.
+
+### Live neighborhood presentation continuation — 2026-11-18
+
+The cart, Old School, projected objective marker, dynamic incident reservations and
+Runtime incident activation are now integrated. Source audio (all24 recipes and ambient
+clock), authored cash/torch/collar/crown pickups and source-curve weather are connected.
+This is an active working checkpoint, not complete parity or a published release.
+
+Central bounded evidence: cart3639 plus18 corrected rendered poses; incidents21899,
+presentation11737, reservations1413 and actualRuntime80; OldSchool1170/physical69;
+projection362; audio11225 plus actualScene40; finds230 plus18 rendered views; weather8045
+plus30 rendered views and local rain p95.462ms/+1draw. The fullScene323 gate passes.
+The current native opening follows real input/navigation/transactions: high expires18.12s,
+cycle26.17s,56actors retained, menus and isolated schema2save pass. Weather shelter framing
+needs a probe correction because a display NPC obscured the camera; no roof acceptance is
+inferred from that obstructed image.
+
+Assignments now: architecture owns isolated NPC/combat HUD presentation; characters owns
+equipped tool/coat/footwear first-person presentation; world owns weather evidence correction
+and concrete remaining-parity audit. Root owns bindings, serial engine/native/Web validation,
+registered runners, documentation and pushed delivery. The full runner currently registers89
+checks but has not run as a complete batch. Actual60 whole-scene performance, full progression
+native/Web tours and complete parity ledger remain open. Local8074 still serves the previous
+pushed export until explicitly rebuilt.
+### Frozen presentation batch — current continuation
+
+All accepted production packets are held for the 95-suite regression batch, both exports
+and browser checks. Original runtime gate runner is green at 19/19. Current source includes
+actor HUD, gear, projectiles, ending continuation, departure pads, six moving fixtures and
+the inventory field correction. The complete Scene gate passes 367 and FullHUD passes 27.
+The handler audit maps 534 integrated, 39 partial and 12 planned obligations; these are
+implementation mappings, not 585 proven playthroughs. Platform evidence remains incomplete.
+
+Moving fixtures generated all 16 native views, visually accepted, but editor sync p95 still
+misses the 0.2 ms local budget after redundant-setter suppression (0.269 ms, previously
+0.290 ms). Preserve that failure and measure the frozen release template before further
+optimization. The full 60-actor frame target remains unaccepted. Next bounded work is the
+actual normal-damage boss tour and remaining state-driven world adornments.

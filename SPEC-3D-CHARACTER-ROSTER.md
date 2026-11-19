@@ -103,9 +103,10 @@ interpolation. Setters are omitted only on exact equality, never an epsilon. Pre
 counters (`global_pose_queries`, `global_pose_solves`, `attachment_queries`, `attachment_writes`,
 `hidden_pose_skips`) are observational only and reset with the rig.
 
-`presentation_visibility.gd` exposes `frame_context(camera, sun, min_receiver_y=-INF)` and
+`presentation_visibility.gd` exposes `frame_context(camera, sun, min_receiver_y=-INF, sole_shadow_light=false)` and
 `needs_pose(art, context)`. The caller computes one context per render. Missing/nonfinite
-camera, light, certified receiver floor or rig bounds fails open. The conservative radius is
+camera, light or rig bounds fails open. Missing receiver-floor data also fails open unless
+the floor-free proof below certifies the entire infinite shadow extrusion. The conservative radius is
 derived from bone-chain reach, full mesh bounds, rigid attachment transforms, released-prop
 targets and nested independent rigs, including mounts and furniture. Its translation envelope
 covers current root death/sleep, pelvis gait and mouth offsets; new translation animation must
@@ -124,6 +125,34 @@ exercise hidden-return, active actions, hurt/death, coats, reset and nested chil
 test frustum-edge, scale/shear, unknown bounds and offscreen-shadow counterexamples. Keep
 original initial-collision probe audits and both scene/whole-engine16ms thresholds. Model
 checks establish correctness only; report runtime gains only after central native measurement.
+
+#### P04d floor-free shadow separation (2026-11-18)
+
+Captured before implementation, approved to target the measured6.243ms pose/model scope.
+The caller must certify that the supplied sun is the only current shadow-casting light by
+passing `sole_shadow_light=true`. False/missing/invalid certification fails open even if the
+sun itself has shadows disabled. Current source fixtures and future cosmetic beacons must
+have `shadow_enabled=false`; a new shadow light revokes eligibility until incorporated into
+the proof. Root owns the actual light-policy check and FullScene binding. This packet does
+not change light/shadow settings, draw counts, actor/node visibility or model simulation.
+
+Retain the existing visible-sphere and near-shadow-distance guards. For a finite direction
+and an outward frustum plane with normal n, let the whole caster sphere have center c and
+radius r. If `plane.distance_to(c) > r*length(n)` and `dot(n,direction) >= 0`, every point of
+the sphere, extruded by any nonnegative distance along the sun ray, stays outside that same
+plane. Such a caster cannot cast a shadow into the view at any receiver height. The radius
+already bounds every current/future authored pose, attachment, death prop and nested rig;
+unknown bounds remain ineligible. No guessed floor or sampled pose is used as a certificate.
+
+Only this common-plane proof may bypass an unknown receiver floor. A ray entering a plane,
+touching sphere, ambiguous direction, missing light certificate or invalid data still receives
+its pose. The finite certified-floor capsule proof remains available as before. Root passes
+only the boolean result to the existing fifth `ActorAnimation.tick` argument; every AI,
+physics, RNG and model tick remains unchanged. Existing72-template hidden-return/current
+action/death/hurt/coats/reset/nested-clock tests stay mandatory. Focused added cases retain
+offscreen casters whose shadows enter view, reject only outward/parallel infinite rays,
+exercise current real Camera3D planes and distinguish an additional shadow light from a
+sun with shadows disabled. Release profiling is required before reporting savings.
 
 ## Prop contact refinement — P05b visual review
 

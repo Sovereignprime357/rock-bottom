@@ -1,8 +1,9 @@
-# SPEC — Unique cart projection P12c (proposal)
+# SPEC — Unique cart projection P12c
 
 Captured before implementation, 2026-11-18. This packet projects the existing Travel cart;
 it does not create another cart state, purchase, movement controller or combat owner.
-Implementation awaits parent approval of this contract and the small hand-grip extension.
+Parent approved this contract and the small hand-grip extension after checkpoint f77fb386.
+Root retains activation and central validation; code below is not a shipping claim.
 
 ## Source and existing authority
 
@@ -67,9 +68,11 @@ the intentionally invisible basket collision proxy. It preserves object/mesh/mat
 identities, authored palette, source-owner metadata and original transforms. Verify the
 full expected original set before any reparenting. Never adopt husks, notably props:143
 which remains the cart-cavalry route/Kingdom contact owner.
+The original frame/basket physical shapes share one parked StaticBody with two shape
+children. Their dimensions/positions remain exact; collision_rids returns that one body.
 
-`sync()` validates the bound host's existing travelRuntime/cart record, then reads
-current `travel.cart_record()` and the bound host's mounted flag; it does
+`sync()` validates and reads the bound host's existing Travel travelRuntime/cart record
+and mounted flag; it does
 not accept a caller-authored record or write model state. Parked mode enables original
 frame/basket physical shapes at committed coordinates and restores original part poses.
 Mounted mode immediately removes both parked solids, owner navigation entries and its
@@ -111,6 +114,14 @@ via Adapter `_reservation_clear(AABB)`. Do not introduce a parallel reservation 
 
 Test the actual cart envelope, including handle and wheels, with a narrow ground-contact
 skin. Do not rely on the old center service, a point ray, or an empty source rectangle.
+The original parked wheel cylinders extend past the .96m frame: their centers are
+at x±.3648m and radius is .13m, giving x±.4948m (.9896m total width). The unchanged
+visible extrema relative to source center are (-.4948,.07,-.4) to (.4948,1.065,.525).
+Staging covers that width, handle depth .925m, and y .01..1.065m; the source top-left
+is therefore inset .0148m from the staging envelope's left edge. Keep the original
+frame/basket collision shapes and meshes unchanged. Verify actual visible mesh
+containment plus real blockers touching only each exposed wheel edge; do not merely
+change a width assertion while retaining the undersized placement query.
 Require fresh player eye LOS, no cross-wall relocation, and an actual clear approach
 capsule at less than36px from proposed top-left. Recheck both host epochs before return.
 The query is presentation-only; Travel alone commits the returned source point.
@@ -120,6 +131,13 @@ any new interactive-prop staging or actor placement, not merely at the final car
 It clears previous view collision/services and certificates once per changed p/s identity,
 while retaining adopted meshes. This prevents a previously parked cart from perturbing
 fresh/restore placement elsewhere in the reset sequence. Same-epoch calls are no-ops.
+Accepted root order is begin_cart_epoch → Travel.reset_session(reason,previous_cart) →
+sync_cart → interactive-prop reset/staging. For same-frame PhysicsServer publication lag,
+stage_interactive_prop also rejects a candidate overlapping the current authoritative
+parked cart's full visible envelope, independent of the previous physical body's location.
+This narrow projection guard reads the shared Travel record and mounted flag, never a
+second position registry; mounted carts add no parked exclusion. A counterexample moves
+the record without syncing the old body, then attempts an exact bottle placement there.
 Do not relocate or rewrite source spawn/restored records to manufacture a valid
 state. Test actual spawn clearance and retain existing live-actor placement reconciliation.
 Mounted buy/death/arrest/restore changes follow the source flags immediately; resetting
@@ -141,18 +159,49 @@ the low bar; current weapon is stowed only as presentation. Accepted attacks/foo
 gestures release their active hand immediately and preserve original captured weapon and
 recovery. Returning to grip cannot delay input or effects. Extreme pitch/reach releases
 or hides a hand rather than falsely claiming contact; menu visibility remains root-owned.
+The cheap mounted preflight also verifies all weak owners and the current valid existing
+cart record; stale owners, missing/malformed records and replaced epochs release grips
+even when the caller has not issued sync first. It never invokes lazy source repair.
+
+cart_approach accepts only the current committed record point and recomputes its physical,
+live-peer and LOS certificate when requested. Static obstacle revision alone cannot make
+an old certificate valid after a live NPC walks into the approach.
 
 Native review must judge the deliberately low riding view at neutral pitch and looking
 down. The handle is approximately0.48m ahead and0.67m below the eye; raising the whole
 cart to fake an eye-level grip would float its wheels and is not proposed.
 
-**Mounted clearance boundary:** parked/drop collision is fully certified by this packet.
-The existing rectangular basket/handle extends beyond the player's round capsule at some
-corners. This proposal does not claim that unchanged movement collision guarantees every
-mounted visual corner clears walls. The native probe must include diagonal wall-skimming;
-if visible clipping occurs, root must select a bounded presentation retreat or separately
-approve a movement-envelope adaptation before declaring mounted visual acceptance. No
-silent enlargement of gameplay collision or hidden quality reduction is allowed.
+**Mounted native correction:** the first native probe exposed front/diagonal wall clipping
+and grips below the viewport at level pitch. Presentation now checks the actual static
+physics space before displaying a mounted pose. A cached oriented box encloses the whole
+upright-wheel cart (.96m width,1.055m height,.925m depth; local center0,.5375,.0625).
+Try the source-centered pose first. For a collision, use the actual contact normal/point
+and box support distance to separate horizontally, with at most4 corrections and total
+offset≤.32m. Each candidate is verified in the real physics space, excluding only the
+cart's disabled parked body. No source/player/camera/record, navigation or active collision
+changes; only the mounted holder retreats. Its existing child Body remains disabled and
+follows the holder, retaining its original RID/shapes; parked projection restores its
+exact record transform. Restore the neutral mounted pose
+when clear. Meshes, size, parked poses and source movement remain unchanged.
+
+Read-only `presentation_clear`, `presentation_offset`, `presentation_queries` expose the
+result. An enclosure with no bounded clear pose hides mounted art and releases grips,
+sets clearance false and reports that result explicitly; it is not a passing wall-skimming
+case. Ordinary front/diagonal native counterexamples must remain visible AND physically
+clear. No hidden acceptance flag or visual shrink is permitted. Query/shape objects are
+cached; no scene traversal or per-tick mesh construction is introduced.
+
+`grip_context(camera_transform, vertical_fov=78.0, aspect=16.0/9.0)` adds actual viewport
+eligibility to the existing reach limits. Both handle positions need a4cm screen-frustum
+inset. A handle outside the view returns{} so the existing relaxed idle hands remain
+visible; looking down re-grips the same grounded handle. Root passes actual camera FOV
+and viewport aspect on resize. Nonfinite/invalid projection inputs release grips.
+
+The initial probe used transformed mesh AABBs to report rolling-wheel minY<0. Rotating a
+square AABB around an octagonal cylinder inflates that bound; ground acceptance instead
+uses every actual mesh vertex across a full rolling revolution. The conservative AABB
+remains separately reported. Actual wheel vertices must stay≥0 at all phases with original
+resources unchanged. Any true vertex penetration requires a production correction.
 
 ## Required verification and root integration
 

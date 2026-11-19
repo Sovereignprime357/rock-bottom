@@ -116,13 +116,27 @@ func _receipt(bank: Node3D) -> void:
 		Batcher.batch_children(sheet); _sheets.append(sheet)
 func _pigeon(parent: Node3D,index: int) -> Node3D:
 	var bird: Node3D = _node(parent,"pigeon_%d" % index)
-	_box(bird,"body",Vector3(0.16,0.17,0.25),Vector3(0,0.15,0),"6a756b","fabric")
-	_box(bird,"wing",Vector3(0.18,0.10,0.20),Vector3(0,0.16,-0.015),"505d55","fabric")
-	_round(bird,"neck",0.055,0.14,Vector3(0,0.27,0.075),"627961","fabric",8)
-	_box(bird,"head",Vector3(0.10,0.09,0.12),Vector3(0,0.34,0.09),"718275","fabric")
-	_box(bird,"beak",Vector3(0.04,0.025,0.07),Vector3(0,0.325,0.17),"ac9a70","plain")
-	for x: float in [-0.04,0.04]: _box(bird,"foot",Vector3(0.022,0.025,0.08),Vector3(x,0.02,0.035),"9c6c4c","plain")
+	# Palette batching can combine disjoint shapes into a larger AABB. Contain that
+	# transformed box too, including corners with no authored vertex.
+	bird.scale = Vector3(0.86,1.0,0.86)
+	# Every mesh AABB corner stays within radius .10 and local Y .02..38.
+	# That also contains the whole bird in the existing world query at any heading.
+	_oval(bird,"breast",Vector3(0.104,0.15,0.15),Vector3(0,0.15,-0.005),"6a756b")
+	_oval(bird,"neck",Vector3(0.075,0.15,0.075),Vector3(0,0.265,0.032),"627961")
+	_oval(bird,"head",Vector3(0.065,0.075,0.07),Vector3(0,0.335,0.04),"718275")
+	for side: float in [-1.0,1.0]:
+		_oval(bird,"folded_wing",Vector3(0.025,0.086,0.126),Vector3(side*0.046,0.167,-0.011),"505d55")
+		_oval(bird,"eye",Vector3(0.012,0.012,0.012),Vector3(side*0.032,0.346,0.057),"303b31","plain")
+		_round(bird,"ankle",0.006,0.043,Vector3(side*0.033,0.046,0.012),"9c6c4c","plain",6)
+		for toe: float in [-0.006,0.006]:
+			_box(bird,"toe",Vector3(0.009,0.012,0.04),Vector3(side*0.033+toe,0.027,0.025),"9c6c4c","plain")
+	var tail: MeshInstance3D = _box(bird,"tail_feathers",Vector3(0.045,0.023,0.045),Vector3(0,0.135,-0.068),"4a584e","fabric"); tail.rotation.x = -0.20
+	var beak := CylinderMesh.new(); beak.bottom_radius = 0.018; beak.top_radius = 0; beak.height = 0.048; beak.radial_segments = 6; beak.rings = 1
+	_mesh(bird,"beak",beak,Vector3(0,0.327,0.071),"ac9a70","plain").rotation.x = PI*0.5
 	Batcher.batch_children(bird); return bird
+func _oval(parent: Node3D,label: String,size: Vector3,at: Vector3,hex: String,kind: String = "fabric") -> MeshInstance3D:
+	var mesh := SphereMesh.new(); mesh.radius = 0.5; mesh.height = 1.0; mesh.radial_segments = 8; mesh.rings = 4
+	var instance: MeshInstance3D = _mesh(parent,label,mesh,at,hex,kind); instance.scale = size; return instance
 func _sprinkler(bank: Node3D) -> void:
 	_round(bank,"rust_base",0.27,0.09,Vector3(0,0.10,0),"806544")
 	_round(bank,"water_pipe",0.055,0.48,Vector3(0,0.36,0),"728171")
@@ -153,6 +167,11 @@ func _suitcase(bank: Node3D) -> void:
 static func display_point(incident: Dictionary) -> Vector2:
 	var actor: Dictionary = incident.actors[0]
 	var source := Vector2(actor.x,actor.y)
+	if incident.id == "ticketed_luggage":
+		# The source optional28px avoidance remains in actor.y. Clear the retained
+		# signal with a display-only north arc that ends before the final stop.
+		if actor.x > 1200 and actor.x < 1320: source.y -= 12.0*sin(PI*(float(actor.x)-1200.0)/120.0)
+		return source
 	if incident.id == "possum_inventory":
 		# Two small southward arcs retain both canonical endpoints and source timing.
 		var trash_progress: float = clampf((float(actor.x)-720.0)/220.0,0.0,1.0)
@@ -187,6 +206,7 @@ func sync(view: Dictionary,visual_ms: float) -> bool:
 	var started: int = Time.get_ticks_usec(); var id: String = active.id; var bank: Node3D = _banks[id]
 	if id != _last_id:
 		for key: String in IDS: _banks[key].visible = key == id
+		_support_cache.clear()
 		_last_id = id
 	bank.position = Vector3.ZERO; bank.rotation = Vector3.ZERO
 	if ENVELOPES.has(id): bank.position = Content.to_world(display_point(active),0.055)

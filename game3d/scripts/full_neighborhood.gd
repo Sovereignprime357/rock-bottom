@@ -36,6 +36,8 @@ var _grid_clearance: float = -1.0
 var _footprint_cells: Dictionary = {}
 var site_boards: Dictionary = {}
 var dynamic_interactive: bool = false # Production adopts these originals into the live prop view.
+var dynamic_cart: bool = false # The unique Travel cart adopts its original meshes.
+var _departure_pads: Array[Dictionary] = []
 
 
 func build() -> void:
@@ -55,6 +57,7 @@ func build() -> void:
 	_full_decor()
 	_full_wires_and_lights()
 	_full_boundaries()
+	_make_departure_pads()
 	_register_services()
 	_resolve_services()
 	_prepare_grid(WALK_RADIUS)
@@ -84,6 +87,26 @@ func set_site_available(id: String,available: bool) -> void:
 
 func anchors() -> Dictionary:
 	return _anchors.duplicate()
+
+func departure_pads() -> Array[Dictionary]:
+	return _departure_pads.duplicate(true)
+
+func _make_departure_pads() -> void:
+	# Existing source road ends, inside the intact perimeter. These original
+	# flat markings are visible arrival pads, never collision-bypassing portals.
+	for edge: String in ["west","east"]:
+		var ys: Array = [554.0,1309.0,1936.0,2538.0,2648.0] if edge == "west" else [1396.0,2538.0,4036.0,5412.0]
+		for y: float in ys:
+			var source := Vector2(28.0 if edge == "west" else 8572.0,y)
+			var point: Vector3 = Content.to_world(source)
+			if not is_clear_position(point,0.7): continue
+			var id := "departure_%s_%d" % [edge,int(y)]
+			_departure_pads.append({"id":id,"edge":edge,"source":source})
+			for z: float in [-0.65,0.65]:
+				_box(id+"_paint",Vector3(1.4,0.008,0.035),point+Vector3(0,0.014,z),"a59f80")
+			_box(id+"_paint_end",Vector3(0.035,0.008,1.3),point+Vector3(-0.68 if edge == "west" else 0.68,0.014,0),"a59f80")
+			var face_x: float = WORLD_RECT.position.x+0.016 if edge == "west" else WORLD_RECT.end.x-0.016
+			_sign("exit",Vector3(face_x,1.95,point.z),42,0.006,"b9ae88",90.0 if edge == "west" else -90.0)
 
 
 func route_points() -> Dictionary:
@@ -455,18 +478,21 @@ func _build_prop(prop: Dictionary, index: int) -> void:
 			_box("dumpster_weathering", Vector3(width * 0.45, 0.18, 0.015), at + Vector3(0, 0.36, depth * 0.5 + 0.03), "856544")
 			_sign("NO ASHES", at + Vector3(0, 0.88, depth * 0.5 + 0.04), 25, 0.004, "b8ad87")
 		"cart", "cart_husk":
-			_box("cart_metal_frame", Vector3(width, 0.08, depth), at + Vector3(0, 0.28, 0), "7f8879", true)
+			var parked_solid: bool = not (kind == "cart" and dynamic_cart)
+			_box("cart_metal_frame", Vector3(width, 0.08, depth), at + Vector3(0, 0.28, 0), "7f8879", parked_solid)
 			for side: float in [-1, 1]:
 				_box("cart_metal_basket", Vector3(0.045, 0.52, depth * 0.90), at + Vector3(side * width * 0.47, 0.65, 0), "8c9480")
 				for slot: int in range(5):
 					_box("cart_metal_wire", Vector3(width, 0.025, 0.025), at + Vector3(0, 0.45 + slot * 0.10, side * depth * 0.47), "8c9480")
 				_cylinder("cart_wheel", 0.13, 0.14, at + Vector3(side * width * 0.38, 0.14, depth * 0.32), "303c32", false, 8)
-			_box("cart_basket_collision", Vector3(width, 0.55, depth), at + Vector3(0, 0.63, 0), "7b8574", true).visible = false
+			_box("cart_basket_collision", Vector3(width, 0.55, depth), at + Vector3(0, 0.63, 0), "7b8574", parked_solid).visible = false
 			_box("cart_rubber_handle", Vector3(width, 0.09, 0.09), at + Vector3(0, 1.02, depth * 0.6), "465547")
 			if kind == "cart":
 				for child_index: int in range(_record_start, get_child_count()):
 					var child: Node = get_child(child_index)
-					if child is MeshInstance3D: child.set_meta("source_owner", _owner)
+					if child is MeshInstance3D:
+						child.set_meta("source_owner", _owner)
+						if dynamic_cart: child.visible = false
 		"lamp":
 			_lamp(at, 90.0 if index % 2 == 0 else -90.0)
 		"hydrant":
@@ -778,7 +804,7 @@ func _register_services() -> void:
 	# the door center. Both exact source points stay independently addressable.
 	_service("office_objective", _point(office, true) + Vector3(0, 0, -0.4), "office", "", 1.76)
 	var old_school: Dictionary = Content.definition("src/dialogue/vendors_places.js", "OLD_SCHOOL_DOOR", {})
-	_service("oldschool", _point(old_school, true), "door", "", 1.76)
+	_service("oldschool", _point(old_school, true), "door", "", 1.76, Vector2(float(old_school.x)+float(old_school.w)*0.5,float(old_school.y)+float(old_school.h)*0.5))
 	var hideouts: Dictionary = Content.definition("src/systems/daily_hideouts.js", "HIDEOUT_DOORS", {})
 	for id: String in hideouts:
 		_service("hideout:" + id, _point(hideouts[id], true), "door", "", 1.6)

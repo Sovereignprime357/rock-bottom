@@ -7,6 +7,7 @@ var _host_ref: WeakRef
 var _spatial_ref: WeakRef
 var _comms_ref: WeakRef
 var _path_ref: WeakRef
+var _corridor_ref: WeakRef
 var _player_epoch: Dictionary = {}
 var _state_epoch: Dictionary = {}
 var definitions: Dictionary = {}
@@ -27,6 +28,9 @@ func ready() -> bool:
 	if _path_ref != null:
 		var mapper: Object = _dep(_path_ref,&"map_mattress")
 		if mapper == null or not mapper.has_method(&"ready") or not mapper.ready(): return false
+	if _corridor_ref != null:
+		var corridors: Object = _dep(_corridor_ref,&"ready")
+		if corridors == null or not corridors.ready(): return false
 	var comms: Object = _dep(_comms_ref,&"post")
 	if comms == null or not comms.has_method(&"ready") or not comms.ready(): return false
 	var ids: Array = host.definition(MODULE,"INCIDENT_IDS",[])
@@ -38,17 +42,29 @@ func bind_path_owner(mapper: Object) -> bool:
 	if mapper == null or not mapper.has_method(&"ready") or not mapper.has_method(&"map_mattress") or not mapper.ready(): return false
 	if host.s.get("incident") != null: return false
 	_path_ref = weakref(mapper); return true
+func bind_corridor_owner(corridors: Object) -> bool:
+	if corridors == null or _path_ref == null or host.s.get("incident") != null: return false
+	for method: StringName in [&"ready",&"preflight",&"activate",&"release"]:
+		if not corridors.has_method(method): return false
+	if not corridors.ready(): return false
+	_corridor_ref = weakref(corridors); return true
 func _mapped_mattress(incident: Dictionary,point: Vector2) -> Dictionary:
+	if not _bound(): return {"ok":false,"reason":"stale_epoch"}
 	var mapper: Object = _dep(_path_ref,&"map_mattress")
 	if mapper == null: return {"ok":false,"reason":"missing_path_owner"}
 	var result: Variant = mapper.map_mattress(incident,point)
+	if not _bound(): return {"ok":false,"reason":"replaced_epoch"}
 	if not result is Dictionary or result.get("ok") != true or not result.get("point") is Vector2 or not result.point.is_finite(): return {"ok":false,"reason":"invalid_path_point"}
 	var delta: Vector2 = result.point-point
 	if delta.length() > 100.001 or (absf(delta.x) > 0.001 if incident.road.axis == "h" else absf(delta.y) > 0.001): return {"ok":false,"reason":"invalid_lateral_offset"}
 	return result
 func reset_session(kind: String) -> bool:
-	if kind not in ["fresh","restore"] or not ready(): return false
+	if kind not in ["fresh","restore"] or host == null: return false
+	var player: Dictionary = host.p; var state: Dictionary = host.s
+	if not ready() or not is_same(player,host.p) or not is_same(state,host.s): return false
 	if _bound(): return true
+	if _corridor_ref != null and not _corridor_ref.get_ref().release(): return false
+	if not is_same(player,host.p) or not is_same(state,host.s): return false
 	_player_epoch = host.p; _state_epoch = host.s
 	host.s.incident = null; host.s.incidentPaperT = 0.0; host.s.incidentWetT = 0.0
 	if kind == "restore": host.s.incidentT = 35000.0+host.random_float()*20000.0
@@ -103,8 +119,8 @@ func _nearest_road() -> Dictionary:
 		var squared: float = dx*dx+dy*dy
 		if squared < distance: distance = squared; best = road
 	return best
-func _start(id: String) -> bool:
-	if not _bound() or not ready() or not definitions.has(id): return false
+func preview_scene(id: String) -> Dictionary:
+	if not _bound() or not ready() or not _bound() or not definitions.has(id): return {}
 	var definition: Dictionary = definitions[id]
 	var incident := {"id":id,"t":0.0,"beat":-1,"duration":definition.duration,"actors":[],"bumped":false}
 	match id:
@@ -126,19 +142,32 @@ func _start(id: String) -> bool:
 			if dog.is_empty(): incident.overrideBeat2 = "the wind wraps the leash post.\nthe post remains employed."
 		"park_dry_committee": incident.anchor = {"x":2600.0,"y":1280.0}; incident.sprayAngle = -0.4
 		"ticketed_luggage": incident.actors = [{"kind":"suitcase","x":360.0,"y":2985.0}]
+	return incident
+func _start(id: String,prepared: Dictionary = {}) -> bool:
+	var incident: Dictionary = preview_scene(id)
+	if incident.is_empty(): return false
+	var definition: Dictionary = definitions[id]; var raw: Dictionary = incident.duplicate(true)
+	if _corridor_ref != null:
+		if prepared.is_empty(): prepared = _corridor_ref.get_ref().preflight([raw])
+		if not _bound() or prepared.get("ok") != true: return false
 	if id == "runaway_mattress" and _path_ref != null:
 		var actor: Dictionary = incident.actors[0]; var mapped: Dictionary = _mapped_mattress(incident,Vector2(actor.x,actor.y))
 		if not mapped.ok: return false
 		actor.x = mapped.point.x; actor.y = mapped.point.y
+	if _corridor_ref != null and not _corridor_ref.get_ref().activate(prepared,raw): return false
+	if not _bound(): return false
 	host.s.incident = incident; _ensure_flags()
 	host.s.flags.incidentMask = int(host.s.flags.incidentMask)|(1<<IDS.find(id))
 	host.s.flags.incidentsToday += 1; host.s.flags.lastIncidentId = id
 	host.emit_event("save_requested")
 	_comms_ref.get_ref().post(str(definition.beats[0][1]).split("\n")[0],"@local_eyewitness")
+	if not _bound(): return false
 	host.emit_event("incident_changed",{"active":true,"id":id})
 	return true
 func _finish(interrupted: bool = false) -> bool:
 	if not _bound() or host.s.get("incident") == null: return false
+	if _corridor_ref != null and not _corridor_ref.get_ref().release(): return false
+	if not _bound(): return false
 	host.s.incident = null
 	host.s.incidentT = (45000.0 if interrupted else 70000.0)+host.random_float()*(20000.0 if interrupted else 40000.0)
 	host.emit_event("incident_changed",{"active":false,"interrupted":interrupted}); return true
@@ -153,6 +182,7 @@ func _bump(actor: Dictionary) -> void:
 	var body := {"id":"player","x":host.p.x,"y":host.p.y,"w":host.p.w,"h":host.p.h}
 	var origin := Vector2(body.x,body.y)
 	var result: Variant = _spatial_ref.get_ref().move_body(body,intended)
+	if not _bound(): return
 	if result is Dictionary and result.get("position") is Vector2 and result.position.is_finite() and result.get("blocked") is bool and result.position.x >= 0 and result.position.y >= 0 and result.position.x+body.w <= bounds.w and result.position.y+body.h <= bounds.h and result.position.distance_to(origin) <= intended.distance_to(origin)+0.001:
 		host.p.x = result.position.x; host.p.y = result.position.y
 	else: host.emit_event("dependency_missing",{"system":"incidents","key":"mattress_motion"})
@@ -166,7 +196,9 @@ func _update_active(incident: Dictionary) -> void:
 			actor.x = actor.sx+(actor.ex-actor.sx)*ease; actor.y = actor.sy+(actor.ey-actor.sy)*ease+sin(time/240.0)*3
 			if _path_ref != null:
 				var mapped: Dictionary = _mapped_mattress(incident,Vector2(actor.x,actor.y))
-				if not mapped.ok: host.emit_event("dependency_missing",{"system":"incidents","key":"mattress_path"}); return
+				if not mapped.ok:
+					if _bound(): host.emit_event("dependency_missing",{"system":"incidents","key":"mattress_path"})
+					return
 				actor.x = mapped.point.x; actor.y = mapped.point.y
 			if not incident.bumped and time > 1800 and absf(actor.x-cx) < 25 and absf(actor.y-cy) < 25:
 				incident.bumped = true; host.s.shake = maxf(float(host.s.get("shake",0)),5.0); _bump(actor)
@@ -188,27 +220,55 @@ func _update_active(incident: Dictionary) -> void:
 			actor.x = 360+(time/9000.0)*310 if time < 9000 else (670.0 if time < 14500 else 670+minf(1,(time-14500.0)/12500.0)*650)
 			actor.y = 2985+sin(time/260.0)*3
 			if absf(actor.x-cx) < 32 and absf(actor.y-cy) < 28: actor.y += 28
+func _choices(mask: int) -> Array[String]:
+	var zone: Dictionary = _current_zone(); var choices: Array[String] = []; var specific: Array[String] = []
+	for id: String in IDS:
+		var definition: Dictionary = definitions[id]
+		if mask&(1<<IDS.find(id)): continue
+		if definition.get("zone") and zone.get("id") != definition.zone: continue
+		if definition.get("clearDay",false) and (host.s.weather != "clear" or host.s.dayTime < 0.25 or host.s.dayTime > 0.75): continue
+		if not _required_valid({"id":id}): continue
+		choices.append(id)
+		if definition.get("zone"): specific.append(id)
+	return specific if not specific.is_empty() else choices
 func tick_active(dt_ms: float,intro_active: bool,silence_active: bool) -> bool:
-	if not _bound() or not ready() or not is_finite(dt_ms) or dt_ms <= 0 or dt_ms > 50: return false
+	if not _bound() or not ready() or not _bound() or not is_finite(dt_ms) or dt_ms <= 0 or dt_ms > 50: return false
 	if host.s.mode != "playing" or float(host.s.get("hitPause",0)) > 0: return true
 	var active: Variant = host.s.get("incident")
 	if active != null and (not active is Dictionary or not definitions.has(active.get("id"))): return false
+	var prepared: Dictionary = {}
+	if active == null and _corridor_ref != null and not intro_active and not silence_active and not _combat_busy() and not _script_busy():
+		var same_day: bool = host.s.flags.get("incidentDay") == host.s.day
+		var today: int = int(host.s.flags.get("incidentsToday",0)) if same_day else 0
+		var timer_before: Variant = host.s.get("incidentT")
+		if today < 3 and timer_before != null and float(timer_before) <= dt_ms:
+			var mask: int = int(host.s.flags.get("incidentMask",0)) if same_day else 0
+			var candidates: Array[Dictionary] = []
+			for id: String in _choices(mask):
+				var candidate: Dictionary = preview_scene(id)
+				if candidate.is_empty(): return false
+				candidates.append(candidate)
+			if not candidates.is_empty():
+				prepared = _corridor_ref.get_ref().preflight(candidates)
+				if not _bound() or prepared.get("ok") != true: return false
 	if active is Dictionary and active.id == "runaway_mattress" and _path_ref != null:
 		var time: float = float(active.t)+dt_ms; var progress: float = minf(1.0,time/float(active.duration)); var ease: float = progress*progress*(3-2*progress)
 		var actor: Dictionary = active.actors[0]
-		if not _mapped_mattress(active,Vector2(actor.sx+(actor.ex-actor.sx)*ease,actor.sy+(actor.ey-actor.sy)*ease+sin(time/240.0)*3)).ok: return false
+		var predicted: Dictionary = active.duplicate(); predicted.t = time
+		if not _mapped_mattress(predicted,Vector2(actor.sx+(actor.ex-actor.sx)*ease,actor.sy+(actor.ey-actor.sy)*ease+sin(time/240.0)*3)).ok: return false
 	host.s.incidentPaperT = maxf(0,float(host.s.get("incidentPaperT",0))-dt_ms)
 	host.s.incidentWetT = maxf(0,float(host.s.get("incidentWetT",0))-dt_ms)
 	if active is Dictionary:
-		if silence_active or _combat_busy() or _script_busy() or not _required_valid(active): _finish(true); return true
+		if silence_active or _combat_busy() or _script_busy() or not _required_valid(active): return _finish(true)
 		var definition: Dictionary = definitions[active.id]
 		active.t += dt_ms; _update_active(active)
+		if not _bound(): return false
 		while int(active.beat)+1 < definition.beats.size() and active.t >= definition.beats[int(active.beat)+1][0]:
 			active.beat += 1
 			var text: String = active.get("overrideBeat2",definition.beats[active.beat][1]) if active.beat == 2 else definition.beats[active.beat][1]
 			_toast(text,2600 if active.beat == definition.beats.size()-1 else 3200)
 			if active.beat == 1 and definition.get("sfx"): _sound(definition.sfx)
-		if active.t >= active.duration: _finish(false)
+		if active.t >= active.duration: return _finish(false)
 		return true
 	if intro_active or silence_active or _combat_busy() or _script_busy(): return true
 	_ensure_flags()
@@ -216,22 +276,13 @@ func tick_active(dt_ms: float,intro_active: bool,silence_active: bool) -> bool:
 	var timer: Variant = host.s.get("incidentT")
 	host.s.incidentT = (35000.0+host.random_float()*20000.0 if timer == null else float(timer))-dt_ms
 	if host.s.incidentT > 0: return true
-	var zone: Dictionary = _current_zone(); var choices: Array[String] = []; var specific: Array[String] = []
-	for id: String in IDS:
-		var definition: Dictionary = definitions[id]
-		if int(host.s.flags.incidentMask)&(1<<IDS.find(id)): continue
-		if definition.get("zone") and zone.get("id") != definition.zone: continue
-		if definition.get("clearDay",false) and (host.s.weather != "clear" or host.s.dayTime < 0.25 or host.s.dayTime > 0.75): continue
-		if not _required_valid({"id":id}): continue
-		choices.append(id)
-		if definition.get("zone"): specific.append(id)
-	if not specific.is_empty(): choices = specific
+	var choices: Array[String] = _choices(int(host.s.flags.incidentMask))
 	if choices.is_empty(): host.s.incidentT = 30000.0; return true
 	var picked: String = choices[host.random_index(choices.size())]
 	if choices.size() > 1 and picked == host.s.flags.lastIncidentId:
 		for id: String in choices:
 			if id != picked: picked = id; break
-	return _start(picked)
+	return _start(picked,prepared)
 func visual_snapshot() -> Dictionary:
 	if not _bound(): return {"active":null,"paper_ms":0.0,"wet_ms":0.0}
 	var active: Variant = host.s.get("incident")

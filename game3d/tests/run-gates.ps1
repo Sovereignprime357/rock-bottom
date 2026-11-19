@@ -93,6 +93,21 @@ Invoke-Gate -Name 'interactive-prop-view' -GodotArgs @('--script', 'res://tests/
 Invoke-Gate -Name 'viewmodel-context' -GodotArgs @('--script', 'res://tests/test_viewmodel_context.gd', '--quit-after', '12000') -PassPattern '3D VIEWMODEL CONTEXT GATE: PASS'
 Invoke-Gate -Name 'guidance' -GodotArgs @('--script', 'res://tests/test_guidance.gd', '--quit-after', '12000') -PassPattern '3D GUIDANCE: PASS'
 Invoke-Gate -Name 'incident-presentation' -GodotArgs @('--script', 'res://tests/test_incident_presentation.gd', '--quit-after', '12000') -PassPattern '3D INCIDENT PRESENTATION GATE: PASS'
+Invoke-Gate -Name 'guidance-projection' -GodotArgs @('--script', 'res://tests/test_guidance_projection.gd', '--quit-after', '12000') -PassPattern '3D GUIDANCE PROJECTION: PASS'
+Invoke-Gate -Name 'incident-reservations' -GodotArgs @('--script', 'res://tests/test_incident_reservations.gd', '--quit-after', '12000') -PassPattern '3D INCIDENT RESERVATION GATE: PASS'
+Invoke-Gate -Name 'incident-runtime' -GodotArgs @('--script', 'res://tests/test_incident_runtime.gd', '--quit-after', '12000') -PassPattern '3D INCIDENT RUNTIME GATE: PASS'
+Invoke-Gate -Name 'cart-view' -GodotArgs @('--script', 'res://tests/test_cart_view.gd', '--quit-after', '12000') -PassPattern '3D CART VIEW GATE: PASS'
+Invoke-Gate -Name 'old-school' -GodotArgs @('--script', 'res://tests/test_old_school.gd', '--quit-after', '12000') -PassPattern '3D OLD SCHOOL: PASS'
+Invoke-Gate -Name 'old-school-physical' -GodotArgs @('--script', 'res://tests/test_old_school_physical.gd', '--quit-after', '12000') -PassPattern '3D OLD SCHOOL PHYSICAL GATE: PASS'
+Invoke-Gate -Name 'source-audio' -GodotArgs @('--script', 'res://tests/test_source_audio.gd', '--quit-after', '12000') -PassPattern '3D SOURCE AUDIO GATE: PASS'
+Invoke-Gate -Name 'audio-runtime' -GodotArgs @('--script', 'res://tests/test_audio_runtime.gd', '--quit-after', '12000') -PassPattern '3D AUDIO RUNTIME GATE: PASS'
+Invoke-Gate -Name 'find-view' -GodotArgs @('--script', 'res://tests/test_find_view.gd', '--quit-after', '12000') -PassPattern '3D FIND VIEW GATE: PASS'
+Invoke-Gate -Name 'weather-presentation' -GodotArgs @('--script', 'res://tests/test_weather_presentation.gd', '--quit-after', '12000') -PassPattern '3D WEATHER PRESENTATION GATE: PASS'
+Invoke-Gate -Name 'actor-hud' -GodotArgs @('--script', 'res://tests/test_actor_hud.gd', '--quit-after', '12000') -PassPattern '3D ACTOR HUD: PASS'
+Invoke-Gate -Name 'viewmodel-gear' -GodotArgs @('--script', 'res://tests/test_viewmodel_gear.gd', '--quit-after', '12000') -PassPattern '3D VIEWMODEL GEAR GATE: PASS'
+Invoke-Gate -Name 'departures' -GodotArgs @('--script', 'res://tests/test_departures.gd', '--quit-after', '12000') -PassPattern '3D DEPARTURE PHYSICS GATE: PASS'
+Invoke-Gate -Name 'projectile-view' -GodotArgs @('--script', 'res://tests/test_projectile_view.gd', '--quit-after', '12000') -PassPattern '3D PROJECTILE VIEW GATE: PASS'
+Invoke-Gate -Name 'dynamic-emitters' -GodotArgs @('--script', 'res://tests/test_dynamic_emitters.gd', '--quit-after', '12000') -PassPattern '3D DYNAMIC EMITTER GATE: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
@@ -121,6 +136,11 @@ foreach ($entry in @(
     @{ Name = 'incidents-oracle'; Script = '3d-incidents-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'utilities-oracle'; Script = '3d-neighborhood-utilities-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'guidance-oracle'; Script = '3d-guidance-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'guidance-projection-oracle'; Script = '3d-guidance-projection-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'old-school-oracle'; Script = '3d-old-school-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'audio-oracle'; Script = '3d-audio-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'weather-oracle'; Script = '3d-weather-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'actor-hud-oracle'; Script = '3d-actor-hud-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -128,4 +148,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 75/75 PASS (import clean; 47 engine suites and 28 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 95/95 PASS (import clean; 62 engine suites and 33 source/parity checks; complete-port acceptance remains tracked separately)'

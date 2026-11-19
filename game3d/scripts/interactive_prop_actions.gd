@@ -173,14 +173,24 @@ func tick(dt_ms: float) -> bool:
 				if not is_same(player_epoch,host.p) or not is_same(state_epoch,host.s): return false
 	return true
 
+func render_record(id: String) -> Dictionary:
+	if not _same_epoch() or not id.begins_with("interactive:"): return {}
+	var suffix: String = id.trim_prefix("interactive:")
+	if not suffix.is_valid_int(): return {}
+	var index: int = int(suffix)
+	if index < 0 or index >= 14 or str(index) != suffix: return {}
+	var row: Dictionary = _record(id).duplicate(true)
+	if row.is_empty(): return {}
+	row.id = id; row.index = index; row.placed = _placed.get(id,false); row.pending = _pending.has(id)
+	return row
+
 func render_records() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	if not _same_epoch(): return result
 	for index: int in range(14):
 		var id := "interactive:%d" % index
-		var row: Dictionary = _record(id).duplicate(true)
+		var row: Dictionary = render_record(id)
 		if row.is_empty(): return []
-		row.id = id; row.index = index; row.placed = _placed.get(id,false); row.pending = _pending.has(id)
 		result.append(row)
 	return result
 func snapshot() -> Dictionary:

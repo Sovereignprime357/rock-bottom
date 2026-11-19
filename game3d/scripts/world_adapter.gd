@@ -44,6 +44,12 @@ var _interactive_approaches: Dictionary = {}
 var _interactive_shapes: Dictionary = {}
 var _interactive_epoch_player: Dictionary = {}
 var _interactive_epoch_state: Dictionary = {}
+var _cart_travel_ref: WeakRef
+var _cart_view_ref: WeakRef
+var _cart_player_epoch: Dictionary = {}
+var _cart_state_epoch: Dictionary = {}
+var _cart_certificate: Dictionary = {}
+var _cart_query_shape: BoxShape3D
 
 func _init(world_node: Node3D, game_state: RefCounted = null) -> void:
 	_world_ref = weakref(world_node)
@@ -68,9 +74,11 @@ func begin_navigation_frame(render_serial: int,active_ms: float) -> void:
 		_placement_clear.clear()
 		_placement_render = render_serial
 	_navigation.begin_frame(render_serial,active_ms)
+	_departure_pump()
 
 func reset_navigation() -> void:
 	_navigation.reset()
+	_departure_entries.clear(); _departure_queue.clear()
 	_height_profiles.clear()
 	invalidate_placement_cache()
 	var host: RefCounted = _host()
@@ -79,6 +87,7 @@ func reset_navigation() -> void:
 
 func invalidate_navigation_actor(id: String) -> void:
 	_navigation.invalidate_actor(id)
+	_departure_forget(id)
 	_placement_clear.erase(id)
 func invalidate_placement_cache() -> void:
 	_collision_revision += 1
@@ -135,8 +144,14 @@ func reserve_incident_corridor(id: String,expected_revision: int,segments: Array
 	if space == null or expected_revision != _collision_revision or not is_same(player_epoch,host.p) or not is_same(state_epoch,host.s): return false
 	if not _incident_reservation.is_empty(): return _incident_reservation.id == id and _incident_reservation.segments == segments
 	var frozen: Array = segments.duplicate(true)
+	var published: Dictionary = incident_geometry_snapshot()
+	if published.get("ok") != true or published.revision != expected_revision: return false
 	for segment: Variant in frozen:
 		if not _incident_segment_valid(segment): return false
+		# A collider writer can publish its bounds before PhysicsServer observes the
+		# transform. Keep the actual casts below and reject that logical overlap too.
+		for obstacle: Dictionary in published.records:
+			if _incident_hits_bounds(segment,obstacle.bounds): return false
 		var size: Vector3 = segment.size; var key: String = str(size)
 		if not _incident_query_shapes.has(key):
 			if _incident_query_shapes.size() >= 64: _incident_query_shapes.clear()
@@ -157,13 +172,15 @@ func release_incident_corridor(id: String) -> bool:
 	if _incident_reservation.is_empty(): return true
 	if _incident_reservation.id != id: return false
 	_incident_reservation.clear(); return true
+func _incident_hits_bounds(segment: Dictionary,bounds: AABB) -> bool:
+	var half: Vector3 = segment.size*0.5+Vector3.ONE*0.002
+	var expanded := AABB(bounds.position-half,bounds.size+half*2.0)
+	return expanded.has_point(segment.from) or expanded.has_point(segment.to) or expanded.intersects_segment(segment.from,segment.to) != null
 func _reservation_clear(bounds: AABB) -> bool:
 	if not bounds.position.is_finite() or not bounds.size.is_finite() or minf(bounds.size.x,minf(bounds.size.y,bounds.size.z)) < 0 or not _incident_epoch_current(): return false
 	if _incident_reservation.is_empty(): return true
 	for segment: Dictionary in _incident_reservation.segments:
-		var half: Vector3 = segment.size*0.5+Vector3.ONE*0.002
-		var expanded := AABB(bounds.position-half,bounds.size+half*2.0)
-		if expanded.has_point(segment.from) or expanded.has_point(segment.to) or expanded.intersects_segment(segment.from,segment.to) != null: return false
+		if _incident_hits_bounds(segment,bounds): return false
 	return true
 
 func register_body(id: String,node: Node3D,height: float = 1.8) -> void:
@@ -252,7 +269,7 @@ func _clear(body: Dictionary,point: Vector2,allow_certificate: bool = true) -> b
 	query_count += 1
 	placement_overlap_queries += 1
 	var clear: bool = space.intersect_shape(_query(body,point),1).is_empty()
-	if clear and allow_certificate and _placement_render >= 0:
+	if clear and _placement_render >= 0:
 		_placement_clear[id] = {"point":point,"width":body.w,"depth":body.h,"height":height,"revision":_collision_revision}
 	elif not clear: _placement_clear.erase(id)
 	return clear
@@ -481,7 +498,7 @@ func bind_interactive_props(actions: RefCounted,view: Node3D) -> bool:
 func sync_interactive_props() -> bool:
 	var view: Object = _interactive_view_ref.get_ref() if _interactive_view_ref != null else null
 	var actions: Object = _interactive_actions_ref.get_ref() if _interactive_actions_ref != null else null
-	return view != null and actions != null and view.sync(actions.render_records()) == true
+	return view != null and actions != null and view.sync_current() == true
 
 func begin_interactive_epoch() -> bool:
 	var host: RefCounted = _host()
@@ -555,9 +572,7 @@ func _interactive_record(id: String) -> Dictionary:
 	var view: Object = _interactive_view_ref.get_ref() if _interactive_view_ref != null else null
 	var index: int = _interactive_index(id)
 	if actions == null or view == null or index < 0 or not actions.ready(): return {}
-	var rows: Array = actions.render_records()
-	if rows.size() != 14 or not rows[index] is Dictionary: return {}
-	var row: Dictionary = rows[index]
+	var row: Dictionary = actions.render_record(id)
 	if row.get("id") != id or not row.get("placed",false) or row.get("pending",true) or row.get("broken",false): return {}
 	var body: StaticBody3D = view.collider(id)
 	if body == null or (body.collision_layer & 1) == 0: return {}
@@ -659,6 +674,11 @@ func stage_interactive_prop(id: String,kind: String,desired: Vector2,maximum_px:
 		if point.distance_to(desired) > maximum_px+0.0001 or point.x < radius/SCALE or point.y < radius/SCALE or point.x > float(bounds.w)-radius/SCALE or point.y > float(bounds.h)-radius/SCALE: continue
 		var prop_envelope: AABB = _interactive_envelope(kind,point)
 		if not _reservation_clear(prop_envelope): continue
+		# A newly committed parked cart may precede its PhysicsServer transform.
+		# Read its one authoritative record; mounted art has no parked exclusion.
+		if _world().get("dynamic_cart") == true and host.p.get("cartMounted") == false:
+			var cart: Dictionary = _cart_record()
+			if not cart.is_empty() and prop_envelope.intersects(_cart_envelope(Vector2(cart.x,cart.y))): continue
 		var actor_clear: bool = true
 		for actor_envelope: AABB in actor_envelopes:
 			if prop_envelope.intersects(actor_envelope): actor_clear = false; break
@@ -674,6 +694,154 @@ func stage_interactive_prop(id: String,kind: String,desired: Vector2,maximum_px:
 		if not is_same(player_epoch,host.p) or not is_same(state_epoch,host.s): return null
 		_interactive_approaches[id] = {"point":point,"approach":approach,"kind":kind,"player":player_epoch,"state":state_epoch}
 		return point
+	return null
+
+func bind_cart(travel: RefCounted,view: Node3D) -> bool:
+	var host: RefCounted = _host()
+	if host == null or _world() == null or _world().get("dynamic_cart") != true or travel == null or view == null or not is_same(travel.get("host"),host): return false
+	for method: StringName in [&"sync",&"clear_active",&"parked_body",&"collision_rids"]:
+		if not view.has_method(method): return false
+	if not travel.has_method(&"cart_record") or str(view.get("target_id")).is_empty(): return false
+	_cart_travel_ref = weakref(travel); _cart_view_ref = weakref(view)
+	return begin_cart_epoch()
+
+func begin_cart_epoch() -> bool:
+	var host: RefCounted = _host()
+	if host == null: return false
+	if is_same(_cart_player_epoch,host.p) and is_same(_cart_state_epoch,host.s): return true
+	var view: Object = _cart_view_ref.get_ref() if _cart_view_ref != null else null
+	if view != null: view.clear_active()
+	_cart_certificate.clear(); _cart_player_epoch = host.p; _cart_state_epoch = host.s
+	return true
+
+func sync_cart() -> bool:
+	if not begin_cart_epoch(): return false
+	var view: Object = _cart_view_ref.get_ref() if _cart_view_ref != null else null
+	return view != null and view.sync() == true
+
+func _cart_record() -> Dictionary:
+	var host: RefCounted = _host()
+	var travel: Object = _cart_travel_ref.get_ref() if _cart_travel_ref != null else null
+	if host == null or travel == null or not is_same(travel.get("host"),host) or not host.s.get("travelRuntime") is Dictionary or not host.s.travelRuntime.get("cart") is Dictionary: return {}
+	var cart: Dictionary = host.s.travelRuntime.cart
+	if cart.get("type") != "cart" or cart.get("w") != 24.0 or cart.get("h") != 20.0 or not host.p.get("cartMounted") is bool: return {}
+	for key: String in ["x","y"]:
+		if not (cart.get(key) is int or cart.get(key) is float) or not is_finite(float(cart[key])): return {}
+	var bounds: Dictionary = host.content.world.bounds
+	if cart.x < 0 or cart.y < 0 or cart.x+24.0 > bounds.w or cart.y+20.0 > bounds.h: return {}
+	return cart
+
+func _cart_envelope(point: Vector2) -> AABB:
+	# Parked wheels extend .0148m beyond each side of the .96m frame;
+	# the handle also extends beyond source h=20. Preserve all original art.
+	return AABB(Content.to_world(point,0.01)+Vector3(-0.0148,0,0),Vector3(0.9896,1.055,0.925))
+
+func _cart_exclude() -> Array[RID]:
+	var view: Object = _cart_view_ref.get_ref() if _cart_view_ref != null else null
+	var result: Array[RID] = []
+	if view != null: result.assign(view.collision_rids())
+	return result
+
+func _cart_capsule_clear(center: Vector2,box: AABB) -> bool:
+	var world_center: Vector3 = Content.to_world(center)
+	var nearest := Vector2(clampf(world_center.x,box.position.x,box.end.x),clampf(world_center.z,box.position.z,box.end.z))
+	return nearest.distance_squared_to(Vector2(world_center.x,world_center.z)) > pow(0.482,2)
+
+func _cart_approach_at(point: Vector2,exclude: Array[RID]) -> Vector3:
+	var host: RefCounted = _host(); var space: PhysicsDirectSpaceState3D = _space()
+	if host == null or space == null or not _valid_body(host.p): return Vector3.INF
+	var half := Vector2(host.p.w,host.p.h)*0.5
+	var body := {"id":"player","x":0.0,"y":0.0,"w":host.p.w,"h":host.p.h}
+	var peers: Array[Dictionary] = _contact_peers(body)
+	var bounds: Dictionary = host.content.world.bounds
+	var envelope: AABB = _cart_envelope(point)
+	var target: Vector3 = Content.to_world(point+Vector2(12,22),1.02)
+	for radius: float in [24.0,30.0,35.5]:
+		for sample: int in range(16):
+			var angle: float = float(sample)*TAU/16.0
+			var center: Vector2 = point+Vector2(cos(angle),sin(angle))*radius
+			var top_left: Vector2 = center-half
+			if top_left.x < 0 or top_left.y < 0 or top_left.x+body.w > bounds.w or top_left.y+body.h > bounds.h: continue
+			if not _cart_capsule_clear(center,envelope) or not _peer_clear(body,top_left,peers): continue
+			var query: PhysicsShapeQueryParameters3D = _query(body,top_left); query.exclude = exclude; query_count += 1
+			if not space.intersect_shape(query,1).is_empty(): continue
+			if not _interactive_ray(Content.to_world(center,FEET+1.63),target,exclude).is_empty(): continue
+			return Content.to_world(center,FEET)
+	return Vector3.INF
+
+func cart_approach(point: Vector2) -> Vector3:
+	var host: RefCounted = _host()
+	var cart: Dictionary = _cart_record()
+	if host == null or not point.is_finite() or cart.is_empty() or point != Vector2(cart.x,cart.y): return Vector3.INF
+	# A live NPC can enter an approach without changing static obstacle revision.
+	# This service is queried on placement/request, never during stable pose ticks.
+	var approach: Vector3 = _cart_approach_at(point,_cart_exclude())
+	if approach.is_finite(): _cart_certificate = {"point":point,"approach":approach,"player":host.p,"state":host.s,"revision":_collision_revision}
+	return approach
+
+func _cart_live_record(id: String) -> Dictionary:
+	var host: RefCounted = _host()
+	var view: Object = _cart_view_ref.get_ref() if _cart_view_ref != null else null
+	if host == null or view == null or id != str(view.get("target_id")) or host.p.get("cartMounted") != false or not is_same(_cart_player_epoch,host.p) or not is_same(_cart_state_epoch,host.s): return {}
+	var record: Dictionary = _cart_record()
+	if record.is_empty(): return {}
+	var body: StaticBody3D = view.parked_body()
+	if body == null or not body.is_inside_tree() or (body.collision_layer & 1) == 0: return {}
+	var expected: Vector3 = Content.to_world(Vector2(record.x+12.0,record.y+10.0))
+	if body.global_position.distance_squared_to(expected) > 0.0000001: return {}
+	return record
+
+func find_cart_drop(preferred: Vector2,maximum_px: float) -> Variant:
+	var host: RefCounted = _host(); var space: PhysicsDirectSpaceState3D = _space(); var world: Node3D = _world()
+	var view: Object = _cart_view_ref.get_ref() if _cart_view_ref != null else null
+	if host == null or space == null or world == null or world.get("dynamic_cart") != true or view == null or _cart_record().is_empty() or host.p.get("cartMounted") != true: return null
+	if not preferred.is_finite() or not is_finite(maximum_px) or maximum_px < 0 or maximum_px > 50 or not _valid_body(host.p): return null
+	if not begin_cart_epoch(): return null
+	var player_epoch: Dictionary = host.p; var state_epoch: Dictionary = host.s
+	var bounds: Dictionary = host.content.world.bounds
+	if preferred.x < 0 or preferred.y < 0 or preferred.x > bounds.w or preferred.y > bounds.h: return null
+	var exclude: Array[RID] = _cart_exclude()
+	var actor_boxes: Array[AABB] = _interactive_actor_envelopes(host)
+	var reserved: Array[Dictionary] = _interactive_reservations("")
+	var candidates: Array[Vector2] = [preferred]
+	var radii: Array[float] = []
+	for radius: float in [4.0,8.0,16.0,24.0,32.0,40.0,50.0]:
+		if radius <= maximum_px: radii.append(radius)
+	if maximum_px > 0 and (radii.is_empty() or radii[-1] != maximum_px): radii.append(maximum_px)
+	for radius: float in radii:
+		for sample: int in range(16):
+			var angle: float = float(sample)*TAU/16.0; candidates.append(preferred+Vector2(cos(angle),sin(angle))*radius)
+	if _cart_query_shape == null: _cart_query_shape = BoxShape3D.new(); _cart_query_shape.size = _cart_envelope(Vector2.ZERO).size
+	var player_rect := Rect2(host.p.x,host.p.y,host.p.w,host.p.h)
+	for candidate: Vector2 in candidates:
+		if candidate.distance_to(preferred) > maximum_px or candidate.x-0.37 < 0 or candidate.y < 0 or candidate.x+24.37 > bounds.w or candidate.y+23.125 > bounds.h: continue
+		var envelope: AABB = _cart_envelope(candidate)
+		if player_rect.intersects(Rect2(candidate,Vector2(24,20))) or not _cart_capsule_clear(host.player_center(),envelope) or not _reservation_clear(envelope): continue
+		var clear: bool = true
+		for box: AABB in actor_boxes:
+			if envelope.intersects(box): clear = false; break
+		if not clear: continue
+		for certificate: Dictionary in reserved:
+			if envelope.intersects(_interactive_envelope(certificate.kind,certificate.point)) or not _cart_capsule_clear(Content.to_source(certificate.approach),envelope): clear = false; break
+			var eye := Vector3(certificate.approach.x,FEET+1.63,certificate.approach.z)
+			if envelope.intersects_segment(eye,Content.to_world(certificate.point,0.50 if certificate.kind == "trashcan" else 0.17)) != null: clear = false; break
+		if not clear: continue
+		# The shared logical obstacle index covers same-frame collider publication.
+		for obstacle: Dictionary in _navigation._records:
+			if obstacle.owner == str(view.get("source_owner")): continue
+			var rect: Rect2 = obstacle.rect
+			var box := AABB(Content.to_world(rect.position,obstacle.low),Vector3(rect.size.x*SCALE,obstacle.high-obstacle.low,rect.size.y*SCALE))
+			if envelope.intersects(box): clear = false; break
+		if not clear: continue
+		if candidate != preferred and not _interactive_ray(Content.to_world(preferred+Vector2(12,10),0.5),Content.to_world(candidate+Vector2(12,10),0.5),exclude).is_empty(): continue
+		var query := PhysicsShapeQueryParameters3D.new(); query.shape = _cart_query_shape; query.transform = Transform3D(Basis.IDENTITY,envelope.get_center()); query.collision_mask = 1; query.exclude = exclude; query.margin = 0.002; query_count += 1
+		if not space.intersect_shape(query,1).is_empty(): continue
+		if not _interactive_ray(Content.to_world(host.player_center(),FEET+1.63),Content.to_world(candidate+Vector2(12,22),1.02),exclude).is_empty(): continue
+		var approach: Vector3 = _cart_approach_at(candidate,exclude)
+		if not approach.is_finite(): continue
+		if not is_same(player_epoch,host.p) or not is_same(state_epoch,host.s): return null
+		_cart_certificate = {"point":candidate,"approach":approach,"player":host.p,"state":host.s,"revision":_collision_revision}
+		return candidate
 	return null
 
 func _ray(from: Vector3,to: Vector3) -> Dictionary:
@@ -718,6 +886,16 @@ func can_reach_target(id: String) -> bool:
 	var world: Node3D = _world()
 	if host == null or world == null or not world.is_inside_tree(): return false
 	var origin: Vector2 = host.player_center()
+	if world.get("dynamic_cart") == true:
+		var cart_view: Object = _cart_view_ref.get_ref() if _cart_view_ref != null else null
+		var cart_service: Dictionary = world.service_points.get(id,{})
+		if cart_service.get("kind") == "cart" or (cart_view != null and id == str(cart_view.get("target_id"))):
+			var cart: Dictionary = _cart_live_record(id)
+			if cart.is_empty() or cart_service.is_empty(): return false
+			var point := Vector2(cart.x,cart.y)
+			if origin.distance_squared_to(point) >= 36.0*36.0: return false
+			var hit: Dictionary = _ray(Content.to_world(origin,FEET+1.63),cart_service.target)
+			return hit.is_empty() or (hit.get("collider") is CollisionObject3D and str(hit.collider.get_meta("source_owner","")) == str(cart_view.get("source_owner")))
 	if id.begins_with("interactive:") and _dynamic_interactive():
 		var prop: Dictionary = _interactive_record(id)
 		if prop.is_empty() or prop.get("type") != "trashcan": return false
@@ -805,3 +983,268 @@ func can_use_zone(id: String) -> bool:
 	if host == null: return false
 	var body := {"id":"player","x":host.p.x,"y":host.p.y,"w":host.p.w,"h":host.p.h}
 	return _valid_body(body) and _clear(body,Vector2(body.x,body.y))
+
+# P14 day-event exits. Geometry planning is bounded per existing render serial;
+# only ActorDirector may commit motion or remove a live actor.
+const DEPARTURE_STEP := 10.0
+const DEPARTURE_WIDTH := 860
+const DEPARTURE_HEIGHT := 560
+const DEPARTURE_EXPANSIONS := 120000
+const DEPARTURE_VISITED := 160000
+const DEPARTURE_WORK := 256
+const DEPARTURE_US := 1000
+var _departure_entries: Dictionary = {}
+var _departure_queue: Array[String] = []
+var _departure_frame: int = -1
+var _departure_work: int = 0
+var _departure_us: int = 0
+var _departure_sweeps: int = 0
+var _departure_totals: Dictionary = {"started":0,"ready":0,"failed":0,"cache_hits":0,"max_work":0,"max_us":0,"max_sweeps":0,"max_entries":0}
+
+func departure_metrics() -> Dictionary:
+	var result: Dictionary = _departure_totals.duplicate()
+	result.entries = _departure_entries.size(); result.queued = _departure_queue.size()
+	result.frame = _departure_frame; result.work = _departure_work; result.microseconds = _departure_us
+	return result
+
+func departure_status(id: String) -> Dictionary:
+	_sync_navigation_epoch()
+	var entry: Dictionary = _departure_entries.get(id,{})
+	if entry.is_empty(): return {"status":"absent"}
+	return {"status":entry.status,"reason":entry.get("reason",""),"expanded":entry.expanded,
+		"visited":entry.costs.size(),"revision":entry.revision,"exit_id":entry.get("exit_id","")}
+
+func _departure_forget(id: String) -> void:
+	_departure_entries.erase(id); _departure_queue.erase(id)
+
+func _departure_actor(body: Dictionary,edge: String) -> Dictionary:
+	var host: RefCounted = _host()
+	if host == null or edge not in ["east","west"] or not _valid_body(body): return {}
+	var id: String = str(body.get("id",""))
+	var actor: Dictionary = _indexed_contact_actor(id)
+	if not _contact_index_unique or actor.is_empty() or actor.get("dead",false) or not actor.get("wanderOff",false): return {}
+	var allowed: bool = (id == "price_guy" and actor.get("isPriceGuy",false)) or (id.begins_with("day3_visitor_") and actor.get("isDay3Visitor",false))
+	if not allowed: return {}
+	var target: Variant = actor.get("targetX")
+	if not (target is int or target is float) or not is_finite(float(target)): return {}
+	if edge == "west" and float(target) >= 0 or edge == "east" and float(target) <= 8600: return {}
+	for key: String in ["x","y","w","h"]:
+		if float(actor.get(key,NAN)) != float(body[key]): return {}
+	for key: String in ["sprite","name"]:
+		if body.has(key) and body[key] != actor.get(key): return {}
+	return actor
+
+func resolve_departure(body: Dictionary,edge: String) -> Dictionary:
+	_sync_navigation_epoch()
+	var actor: Dictionary = _departure_actor(body,edge)
+	var id: String = str(body.get("id",""))
+	if actor.is_empty(): _departure_forget(id); return {}
+	var shape := Vector3(float(body.w),float(body.h),_height(id,body))
+	var center := Vector2(float(body.x)+shape.x*0.5,float(body.y)+shape.y*0.5)
+	var entry: Dictionary = _departure_entries.get(id,{})
+	if not entry.is_empty():
+		var drift: float = center.distance_to(entry.last)
+		if not is_same(entry.actor,actor) or entry.shape != shape or entry.edge != edge or entry.revision != _collision_revision or drift > (24.0 if entry.status == "ready" else 1.0):
+			_departure_forget(id); entry = {}
+	if entry.is_empty():
+		if _departure_entries.size() >= 2: return {}
+		var world: Node3D = _world()
+		if world == null or not world.has_method(&"departure_pads"): return {}
+		var pads: Variant = world.call(&"departure_pads")
+		if not pads is Array or not is_same(_navigation_player,_host().p) or not is_same(_navigation_state,_host().s): return {}
+		var candidates: Array[Dictionary] = []
+		for pad: Variant in pads:
+			if pad is Dictionary and pad.get("edge") == edge and pad.get("id") is String and pad.get("source") is Vector2 and pad.source.is_finite():
+				candidates.append(pad.duplicate(true))
+		if candidates.is_empty() or candidates.size() > 9: return {}
+		entry = {"actor":actor,"body":body.duplicate(true),"shape":shape,"edge":edge,"last":center,"start":center,
+			"player":_host().p,"state":_host().s,"revision":_collision_revision,"physics":Engine.get_physics_frames(),
+			"status":"pending","reason":"","pads":candidates,"expanded":0,"costs":{},"parents":{},"closed":{},"blocked":{},
+			"heap":[],"goals":{},"raw":[],"route":[],"exit_id":"","target":Vector2.INF,"cursor":0,"probe":0}
+		_departure_entries[id] = entry; _departure_queue.append(id)
+		_departure_totals.started += 1
+		_departure_totals.max_entries = maxi(_departure_totals.max_entries,_departure_entries.size())
+	entry.last = center
+	_departure_pump()
+	if entry.status != "ready" or _departure_actor(body,edge).is_empty(): return {}
+	_departure_totals.cache_hits += 1
+	return {"exit_id":entry.exit_id,"target":entry.target,"route":entry.route.duplicate()}
+
+func _departure_valid(entry: Dictionary) -> bool:
+	var host: RefCounted = _host()
+	if host == null or not is_same(entry.player,host.p) or not is_same(entry.state,host.s) or entry.revision != _collision_revision: return false
+	var actor: Dictionary = _indexed_contact_actor(str(entry.body.id))
+	if actor.is_empty() or not is_same(actor,entry.actor) or _departure_actor(actor,entry.edge).is_empty(): return false
+	if Vector3(float(actor.w),float(actor.h),_height(str(actor.id),actor)) != entry.shape: return false
+	if entry.status != "ready" and entry.status != "failed" and (Vector2(actor.x,actor.y)+Vector2(actor.w,actor.h)*0.5).distance_to(entry.start) > 1.0: return false
+	return true
+
+func _departure_pump() -> void:
+	if _placement_render < 0: return
+	for id: String in _departure_entries.keys():
+		if not _departure_valid(_departure_entries[id]): _departure_forget(id)
+	if _departure_frame != _placement_render:
+		_departure_frame = _placement_render; _departure_work = 0; _departure_us = 0; _departure_sweeps = 0
+	var started: int = Time.get_ticks_usec()
+	var waiting: int = 0
+	while not _departure_queue.is_empty() and _departure_work < DEPARTURE_WORK and _departure_us+Time.get_ticks_usec()-started < DEPARTURE_US:
+		var id: String = _departure_queue.pop_front()
+		var entry: Dictionary = _departure_entries.get(id,{})
+		if entry.is_empty(): continue
+		if not _departure_valid(entry): _departure_entries.erase(id); continue
+		if entry.status == "certifying" and (_departure_sweeps >= 4 or Engine.get_physics_frames() <= entry.physics):
+			_departure_queue.append(id); waiting += 1
+			if waiting >= _departure_queue.size(): break
+			continue
+		waiting = 0; _departure_work += 1
+		_departure_step(entry)
+		if entry.status not in ["ready","failed"]: _departure_queue.append(id)
+	_departure_us += Time.get_ticks_usec()-started
+	_departure_totals.max_work = maxi(_departure_totals.max_work,_departure_work)
+	_departure_totals.max_us = maxi(_departure_totals.max_us,_departure_us)
+	_departure_totals.max_sweeps = maxi(_departure_totals.max_sweeps,_departure_sweeps)
+
+func _departure_point(index: int) -> Vector2:
+	return Vector2(float(index%DEPARTURE_WIDTH)*DEPARTURE_STEP+5.0,float(index/DEPARTURE_WIDTH)*DEPARTURE_STEP+5.0)
+
+func _departure_index(point: Vector2) -> int:
+	return clampi(int(floor(point.y/DEPARTURE_STEP)),0,DEPARTURE_HEIGHT-1)*DEPARTURE_WIDTH+clampi(int(floor(point.x/DEPARTURE_STEP)),0,DEPARTURE_WIDTH-1)
+
+func _departure_segment(a: Vector2,b: Vector2,shape: Vector3) -> bool:
+	var half := Vector2(shape.x,shape.y)*0.5
+	if not a.is_finite() or not b.is_finite() or a.x < half.x or a.y < half.y or b.x < half.x or b.y < half.y or a.x > 8600-half.x or b.x > 8600-half.x or a.y > 5600-half.y or b.y > 5600-half.y: return false
+	var padding: Vector2 = half+Vector2.ONE*0.05
+	var region := Rect2(a.min(b)-padding,(a-b).abs()+padding*2.0)
+	for index: int in _navigation._indices(region):
+		if not _navigation._height_matches(index,shape): continue
+		var rect: Rect2 = _navigation._expanded(index,shape)
+		if rect.has_point(a) or rect.has_point(b) or Navigation._segment_entry(a,b,rect) < INF: return false
+	return true
+
+func _departure_cell(entry: Dictionary,index: int) -> bool:
+	if index < 0 or index >= DEPARTURE_WIDTH*DEPARTURE_HEIGHT: return false
+	if not entry.blocked.has(index):
+		var point: Vector2 = _departure_point(index)
+		entry.blocked[index] = not _departure_segment(point,point,entry.shape)
+	return not entry.blocked[index]
+
+func _departure_near(entry: Dictionary,point: Vector2) -> int:
+	var base: int = _departure_index(point)
+	var best: int = -1; var distance: float = INF
+	for dy: int in range(-1,2):
+		for dx: int in range(-1,2):
+			var x: int = base%DEPARTURE_WIDTH+dx; var y: int = base/DEPARTURE_WIDTH+dy
+			if x < 0 or x >= DEPARTURE_WIDTH or y < 0 or y >= DEPARTURE_HEIGHT: continue
+			var index: int = y*DEPARTURE_WIDTH+x; var at: Vector2 = _departure_point(index)
+			if at.distance_squared_to(point) >= distance or not _departure_cell(entry,index) or not _departure_segment(point,at,entry.shape): continue
+			best = index; distance = at.distance_squared_to(point)
+	return best
+
+func _departure_heuristic(entry: Dictionary,index: int) -> float:
+	var result: float = INF
+	for goal: int in entry.goals:
+		var dx: int = absi(index%DEPARTURE_WIDTH-goal%DEPARTURE_WIDTH)
+		var dy: int = absi(index/DEPARTURE_WIDTH-goal/DEPARTURE_WIDTH)
+		result = minf(result,float(maxi(dx,dy))+0.41421356237*mini(dx,dy))
+	return result
+
+func _departure_less(a: Vector3,b: Vector3) -> bool:
+	return a.x < b.x or (a.x == b.x and (a.y < b.y or a.y == b.y and a.z < b.z))
+func _departure_push(entry: Dictionary,item: Vector3) -> void:
+	var index: int = entry.heap.size(); entry.heap.append(item)
+	while index > 0:
+		var parent: int = (index-1)/2
+		if not _departure_less(item,entry.heap[parent]): break
+		entry.heap[index] = entry.heap[parent]; index = parent
+	entry.heap[index] = item
+func _departure_pop(entry: Dictionary) -> Vector3:
+	var result: Vector3 = entry.heap[0]; var last: Vector3 = entry.heap.pop_back()
+	if entry.heap.is_empty(): return result
+	var index: int = 0
+	while index*2+1 < entry.heap.size():
+		var child: int = index*2+1
+		if child+1 < entry.heap.size() and _departure_less(entry.heap[child+1],entry.heap[child]): child += 1
+		if not _departure_less(entry.heap[child],last): break
+		entry.heap[index] = entry.heap[child]; index = child
+	entry.heap[index] = last; return result
+
+func _departure_fail(entry: Dictionary,reason: String) -> void:
+	entry.status = "failed"; entry.reason = reason
+	entry.heap.clear(); entry.parents.clear(); entry.closed.clear(); entry.blocked.clear()
+	_departure_totals.failed += 1
+
+func _departure_step(entry: Dictionary) -> void:
+	if entry.status == "pending":
+		# At most nine fixed authored targets; each nearest-cell scan is bounded9.
+		for pad: Dictionary in entry.pads:
+			var index: int = _departure_near(entry,pad.source)
+			if index >= 0: entry.goals[index] = pad
+		var start: int = _departure_near(entry,entry.start)
+		if start < 0 or entry.goals.is_empty(): _departure_fail(entry,"no_clear_pad_or_start"); return
+		entry.costs[start] = 0.0; entry.parents[start] = -1
+		var h: float = _departure_heuristic(entry,start)
+		_departure_push(entry,Vector3(h,h,start)); entry.status = "searching"; return
+	if entry.status == "searching":
+		if entry.heap.is_empty(): _departure_fail(entry,"unreachable"); return
+		if entry.expanded >= DEPARTURE_EXPANSIONS or entry.costs.size() > DEPARTURE_VISITED or entry.heap.size() > DEPARTURE_VISITED*2:
+			_departure_fail(entry,"work_cap"); return
+		var current: int = int(_departure_pop(entry).z)
+		if entry.closed.has(current): return
+		entry.closed[current] = true; entry.expanded += 1
+		if entry.goals.has(current):
+			var pad: Dictionary = entry.goals[current]
+			entry.exit_id = pad.id; entry.target = pad.source
+			entry.cursor = current; entry.raw = [pad.source]; entry.status = "backtracking"; return
+		var at: Vector2 = _departure_point(current)
+		var x: int = current%DEPARTURE_WIDTH; var y: int = current/DEPARTURE_WIDTH
+		for dy: int in range(-1,2):
+			for dx: int in range(-1,2):
+				if dx == 0 and dy == 0: continue
+				var nx: int = x+dx; var ny: int = y+dy
+				if nx < 0 or nx >= DEPARTURE_WIDTH or ny < 0 or ny >= DEPARTURE_HEIGHT: continue
+				var next: int = ny*DEPARTURE_WIDTH+nx
+				if entry.closed.has(next) or not _departure_cell(entry,next): continue
+				var cost: float = float(entry.costs[current])+(1.41421356237 if dx != 0 and dy != 0 else 1.0)
+				if cost >= float(entry.costs.get(next,INF)) or not _departure_segment(at,_departure_point(next),entry.shape): continue
+				entry.costs[next] = cost; entry.parents[next] = current
+				var h: float = _departure_heuristic(entry,next)
+				_departure_push(entry,Vector3(cost+h,h,next))
+		return
+	if entry.status == "backtracking":
+		if entry.cursor < 0:
+			entry.raw.append(entry.start); entry.raw.reverse()
+			entry.route = [entry.start]; entry.cursor = 0
+			entry.probe = mini(entry.raw.size()-1,64); entry.status = "compressing"; return
+		entry.raw.append(_departure_point(entry.cursor))
+		entry.cursor = int(entry.parents[entry.cursor]); return
+	if entry.status == "compressing":
+		if entry.cursor >= entry.raw.size()-1:
+			entry.cursor = 0; entry.status = "certifying"; return
+		if entry.probe <= entry.cursor: _departure_fail(entry,"compression_clearance"); return
+		if _departure_segment(entry.raw[entry.cursor],entry.raw[entry.probe],entry.shape):
+			entry.route.append(entry.raw[entry.probe]); entry.cursor = entry.probe
+			entry.probe = mini(entry.raw.size()-1,entry.cursor+64)
+			if entry.route.size() > 2048: _departure_fail(entry,"route_point_cap")
+		else: entry.probe -= 1
+		return
+	if entry.status == "certifying":
+		var space: PhysicsDirectSpaceState3D = _space()
+		if space == null: _departure_fail(entry,"space_unavailable"); return
+		var a: Vector2 = entry.route[entry.cursor]
+		var b: Vector2 = entry.route[mini(entry.cursor+1,entry.route.size()-1)]
+		_departure_sweeps += 1
+		if not _departure_segment(a,b,entry.shape): _departure_fail(entry,"logical_obstruction"); return
+		var half := Vector2(entry.shape.x,entry.shape.y)*0.5
+		var query: PhysicsShapeQueryParameters3D = _query(entry.body,a-half)
+		query_count += 1
+		if not space.intersect_shape(query,1).is_empty(): _departure_fail(entry,"physical_start"); return
+		query.motion = Vector3(b.x-a.x,0,b.y-a.y)*SCALE; query_count += 1
+		var fraction: PackedFloat32Array = space.cast_motion(query)
+		if fraction.size() != 2 or fraction[0] < 0.999999: _departure_fail(entry,"physical_segment"); return
+		query.motion = Vector3.ZERO; query.transform.origin = Content.to_world(b,FEET+entry.shape.z*0.5); query_count += 1
+		if not space.intersect_shape(query,1).is_empty(): _departure_fail(entry,"physical_end"); return
+		entry.cursor += 1
+		if entry.cursor >= entry.route.size()-1:
+			if not _departure_valid(entry): _departure_fail(entry,"epoch_changed"); return
+			entry.status = "ready"; entry.raw.clear(); entry.heap.clear(); entry.parents.clear(); entry.closed.clear(); entry.blocked.clear()
+			_departure_totals.ready += 1

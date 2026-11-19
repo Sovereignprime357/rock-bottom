@@ -127,3 +127,41 @@ choice once on key press, ignoring repeat and disabled choices. They invoke the
 same guarded Button callback as a click; no second transaction path. The
 Karaoke modal retains five source options (four notes and forfeit); Escape
 cancels it, so an extra sixth Leave button is not appended there.
+
+### Bounded interaction nomination optimization
+
+FullScene evaluates NPC source squared distance before read-only domain support lookups.
+Cache the current player center for this single resolver call; skip candidates outside the
+strict60px/current-nearest radius before dispatch, preserving source iteration order and ties.
+No position/eligibility is cached across frames. Surviving candidates retain the same current
+physical reach and aim tests. All supports predicates are read-only; this specifically avoids
+Day's repeated live-roster lookup for actors that cannot be nominated. Savings must be measured
+in a frozen release; no frame-budget claim follows from the reordering alone.
+
+### Conservative visual pose work in the full scene
+
+The Scene maintains the current actual Light3D set through one initial census plus node
+addition/removal signals. Before each animated model sync it verifies that only its sun has
+shadows enabled. Any extra shadow light disables pose rejection immediately. A single camera/
+sun context is shared for that frame; all original rig bounds are cached at construction.
+The visibility helper's proved rejection controls only ActorPose.tick's pose_needed argument.
+It never hides nodes, skips model ticks, changes dt/RNG or removes shadow casters. Unknown
+bounds/light geometry keep full pose work. Actors eligible for live cop beacons always pose,
+because a moving emitter can affect an onscreen receiver even without casting shadows.
+Existing animation clocks, child/transition state and current-pose recovery stay active.
+# Moving fixture composition (2026-11-18)
+
+FullScene owns one P14e presenter and caches each eligible actor's actual cap node at rig
+creation. The existing actor synchronization collects detached current live cop rows; no
+second model tick or actor traversal is introduced. After hand poses and acknowledged events,
+the presenter receives those transforms and the current visible mouth ember marker. The
+context gate is exactly `rockedT > 0 || hitterHigh`; gear selection does not own it. Fresh/load
+clears the pooled presentation. The pose visibility optimization always updates eligible cops
+because their moving fixtures can illuminate a visible receiver. All six added lights have
+shadows disabled, preserving the registered single shadow-light proof.
+### Inventory source-field correction
+
+The read-only inventory must retain source cred plus optional equipment bonus, wanted stars
+or dash, mounted-cart status, rounded nonnegative HP/shakes/brain, source lifetime labels and
+claimed-district denominator. Supplies/house-cut and emergency-hitter rows retain source
+conditions. This is a view correction only; no inventory command or model write is added.

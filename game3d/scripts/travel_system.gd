@@ -442,7 +442,9 @@ func interact_cart() -> Dictionary:
 		var adapter: Object = _spatial_ref.get_ref() if _spatial_ref != null else null
 		if adapter == null or not adapter.has_method(&"find_cart_drop"): return _fail("missing_cart_adapter")
 		var preferred := Vector2(float(host.p.x)+4.0,float(host.p.y)+8.0)
+		var player_epoch: Dictionary = host.p; var state_epoch: Dictionary = host.s
 		var drop: Variant = adapter.call(&"find_cart_drop",preferred,MAX_DROP_PX)
+		if host == null or not is_same(player_epoch,host.p) or not is_same(state_epoch,host.s): return _fail("stale_epoch")
 		if not drop is Vector2 or not drop.is_finite() or drop.distance_squared_to(preferred) > MAX_DROP_PX*MAX_DROP_PX: return _fail("blocked_cart_drop")
 		var bounds: Dictionary = host.content.world.bounds
 		if drop.x < 0 or drop.y < 0 or drop.x+24.0 > bounds.w or drop.y+20.0 > bounds.h: return _fail("blocked_cart_drop")

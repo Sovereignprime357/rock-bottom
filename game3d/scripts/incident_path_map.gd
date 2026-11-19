@@ -14,6 +14,9 @@ var _maps: Dictionary = {}
 var _ready: bool = false
 var _report: Dictionary = {"complete":false,"ok":false,"roads":[]}
 var _visibility_checks: int = 0
+var _geometry_revision: int = -1
+var _failed_revision: int = -1
+var _geometry_records: Array[Dictionary] = []
 
 func ready() -> bool: return _ready and _world_ref != null and _world_ref.get_ref() != null
 func report() -> Dictionary: return _report.duplicate(true)
@@ -24,6 +27,9 @@ func build(world: Node3D) -> Dictionary:
 	var started: int = Time.get_ticks_usec(); var roads: Array = Content.load_content().world.roadSegments
 	_report = {"complete":false,"ok":false,"roads":[],"failures":[]}
 	var obstacles: Array[Dictionary] = world.obstacle_records()
+	_geometry_revision = -1; _failed_revision = -1; _geometry_records.clear()
+	for obstacle: Dictionary in obstacles:
+		_geometry_records.append({"owner":str(obstacle.owner),"bounds":obstacle.bounds})
 	for road: Dictionary in roads:
 		var result: Dictionary = _plan(road,obstacles)
 		if result.ok:
@@ -35,6 +41,86 @@ func build(world: Node3D) -> Dictionary:
 	_ready = _maps.size() == 28 and roads.size() == 28
 	_report.complete = true; _report.ok = _ready; _report.build_usec = Time.get_ticks_usec()-started; _report.visibility_checks = _visibility_checks; _report.map_count = _maps.size()
 	return report()
+func _by_owner(records: Array[Dictionary]) -> Dictionary:
+	var result: Dictionary = {}
+	for record: Dictionary in records:
+		if not result.has(record.owner): result[record.owner] = []
+		result[record.owner].append(record.bounds)
+	return result
+func _touches_lane(bounds: AABB,road: Dictionary) -> bool:
+	if bounds.end.y <= FEET or bounds.position.y >= FEET+SIZE.y: return false
+	var horizontal: bool = road.axis == "h"
+	var lo: float = float(road.x if horizontal else road.y)+18.0-(0.0 if horizontal else 3.0)
+	var hi: float = float(road.x+road.w if horizontal else road.y+road.h)-18.0+(0.0 if horizontal else 3.0)
+	var half_long: float = (SIZE.x*0.5+SKIN)/0.04
+	var half_cross: float = (SIZE.z*0.5+SKIN)/0.04+(3.0 if horizontal else 0.0)
+	var a: Vector2 = _local(Content.to_source(bounds.position),road); var b: Vector2 = _local(Content.to_source(bounds.end),road)
+	return maxf(a.x,b.x)+half_long >= lo and minf(a.x,b.x)-half_long <= hi and maxf(a.y,b.y)+half_cross >= -MAX_OFFSET and minf(a.y,b.y)-half_cross <= MAX_OFFSET
+func synchronize_geometry(snapshot: Dictionary) -> Dictionary:
+	if not ready() or snapshot.get("ok") != true or not snapshot.get("revision") is int or not snapshot.get("records") is Array: return {"ok":false,"reason":"invalid_geometry"}
+	var revision: int = snapshot.revision
+	if revision == _geometry_revision: return {"ok":true,"revision":revision,"replanned":0}
+	if revision == _failed_revision: return {"ok":false,"reason":"uncertified_revision","revision":revision}
+	var records: Array[Dictionary] = []
+	for value: Variant in snapshot.records:
+		if not value is Dictionary or not value.get("owner") is String or not value.get("bounds") is AABB: return {"ok":false,"reason":"invalid_obstacle"}
+		var bounds: AABB = value.bounds
+		if not bounds.position.is_finite() or not bounds.size.is_finite() or minf(bounds.size.x,minf(bounds.size.y,bounds.size.z)) < 0: return {"ok":false,"reason":"invalid_bounds"}
+		records.append({"owner":value.owner,"bounds":bounds})
+	var old: Dictionary = _by_owner(_geometry_records); var current: Dictionary = _by_owner(records)
+	var owners: Array = old.keys()
+	for owner: String in current:
+		if not owners.has(owner): owners.append(owner)
+	var changed: Array[AABB] = []
+	for owner: String in owners:
+		if old.get(owner,[]) == current.get(owner,[]): continue
+		for bounds: AABB in old.get(owner,[]): changed.append(bounds)
+		for bounds: AABB in current.get(owner,[]): changed.append(bounds)
+	var staged: Dictionary = _maps.duplicate(); var count: int = 0; var started: int = Time.get_ticks_usec()
+	for road: Dictionary in Content.load_content().world.roadSegments:
+		var affected: bool = false
+		for bounds: AABB in changed:
+			if _touches_lane(bounds,road): affected = true; break
+		if not affected: continue
+		count += 1
+		var plan: Dictionary = _plan(road,records)
+		if plan.ok:
+			plan.physics = _certify(plan); plan.ok = plan.physics.ok
+		if not plan.ok:
+			_failed_revision = revision
+			_report.dynamic = {"ok":false,"revision":revision,"road":road.id,"reason":plan.get("reason","physical_collision"),"replanned":count,"usec":Time.get_ticks_usec()-started}
+			return _report.dynamic.duplicate(true)
+		staged[str(road.id)] = plan
+	_maps = staged; _geometry_records = records; _geometry_revision = revision; _failed_revision = -1
+	_report.roads = _maps.values(); _report.dynamic = {"ok":true,"revision":revision,"replanned":count,"usec":Time.get_ticks_usec()-started}
+	return _report.dynamic.duplicate(true)
+func _lane_point(plan: Dictionary,u: float) -> Vector2:
+	var path: PackedVector2Array = plan.points
+	for index: int in range(1,path.size()):
+		if u <= path[index].x:
+			return Vector2(u,lerpf(path[index-1].y,path[index].y,(u-path[index-1].x)/(path[index].x-path[index-1].x)))
+	return Vector2(u,path[-1].y)
+func mattress_segments(incident: Dictionary) -> Dictionary:
+	if not ready() or not incident.get("road") is Dictionary or not _maps.has(str(incident.road.get("id",""))): return {"ok":false,"reason":"unready_mattress_lane"}
+	var plan: Dictionary = _maps[str(incident.road.id)]
+	if not incident.get("actors") is Array or incident.actors.size() != 1 or not incident.actors[0] is Dictionary: return {"ok":false,"reason":"invalid_mattress"}
+	var actor: Dictionary = incident.actors[0]
+	if not (actor.get("x") is int or actor.get("x") is float) or not (actor.get("y") is int or actor.get("y") is float) or not _valid_source_point(incident,Vector2(actor.x,actor.y),plan.road) or incident.t != 0: return {"ok":false,"reason":"noncanonical_mattress_start"}
+	var horizontal: bool = plan.road.axis == "h"
+	var a: float = actor.sx if horizontal else actor.sy; var b: float = actor.ex if horizontal else actor.ey
+	var low: float = minf(a,b)-(0.0 if horizontal else 3.0); var high: float = maxf(a,b)+(0.0 if horizontal else 3.0)
+	var path: PackedVector2Array = plan.points
+	if low < path[0].x-0.001 or high > path[-1].x+0.001: return {"ok":false,"reason":"outside_mattress_lane"}
+	var clipped: Array[Vector2] = [_lane_point(plan,low)]
+	for point: Vector2 in path:
+		if point.x > low and point.x < high: clipped.append(point)
+	clipped.append(_lane_point(plan,high))
+	var size: Vector3 = SIZE if horizontal else Vector3(SIZE.z,SIZE.y,SIZE.x)
+	if horizontal: size.z += 0.24
+	var segments: Array[Dictionary] = []
+	for index: int in range(1,clipped.size()):
+		segments.append({"from":Content.to_world(_source(clipped[index-1],plan.road),FEET+SIZE.y*0.5),"to":Content.to_world(_source(clipped[index],plan.road),FEET+SIZE.y*0.5),"size":size})
+	return {"ok":true,"segments":segments,"road":str(plan.road.id)}
 func _local(point: Vector2,road: Dictionary) -> Vector2:
 	return Vector2(point.x,point.y-(float(road.y)+float(road.h)*0.5)) if road.axis == "h" else Vector2(point.y,point.x-(float(road.x)+float(road.w)*0.5))
 func _source(point: Vector2,road: Dictionary) -> Vector2:

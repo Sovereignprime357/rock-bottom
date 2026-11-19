@@ -104,3 +104,24 @@ and Web. This matches the journal's visible close instruction. A presentation-on
 cleared on every new menu/resume so these shortcuts cannot close or submit unrelated transactions.
 Key repeats are ignored. Web Escape on other dialogue pages retains the existing pause behavior;
 the ledger exit resets capture acquisition before any new pointer-lock request.
+
+### Cart and incidents production composition — 2026-11-18
+
+Scene selects dynamic cart geometry before World builds, adopts/publishes the cart
+before actor placement and interactive staging, and enables incident owners only
+after all dynamic colliders and a physics frame. Runtime retains strong references
+to the incident model, path map and corridor adapter. The Scene retains their one
+presenter and updates it from detached model snapshots and its existing visual time.
+Incident ticks run after ambient phone/hustles, before random events and interactive
+respawn. Refused certification emits a deduplicated dependency event, freezes the
+incident transaction only and retries when geometry permits; ordinary play continues.
+
+Successful fresh/restore replaces core state, resets Props, clears the old cart
+physical epoch, releases incident reservation via reset, resets/publishes Travel's
+current cart and then stages interactive props. WorldProps fresh phone initialization
+precedes the24 bottle draws; restore's single incident delay draw also precedes them,
+as in source. Source cart parking continuity and unsaved reset behavior remain Travel's.
+Cart receipts synchronize geometry before other physical effects. E cart selection is
+after phone and before dumpster, with strict source36px and aim/LOS for mounting;
+mounted dismount requires no aim after earlier source targets miss. Hands read actual
+camera-local handle markers each active pose and explicitly clear grips on release.

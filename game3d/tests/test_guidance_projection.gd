@@ -1,9 +1,27 @@
 extends SceneTree
 const GuideProjection = preload("res://scripts/guidance_projection.gd")
+const Hud = preload("res://scripts/full_hud.gd")
 var checks: int = 0
 var failures: Array[String] = []
 var completed: int = 0
 var groups: int = 0
+class CountingView:
+	extends RefCounted
+	var reads: int = 0
+	var x: float = 1050.0
+	func ready() -> bool: return true
+	func objective_view(_yaw: float = 0.0) -> Dictionary:
+		reads += 1
+		return {"x":x,"y":90.0,"text":"the target.","here":false,"paces":75,"bearing":0.0}
+	func map_static() -> Array: return [{"op":"fill","color":"#000","values":[0,0,120,96],"width":1}]
+	func map_dynamic() -> Dictionary: return {"commands":[],"player":[20,20]}
+class Visibility:
+	extends RefCounted
+	var calls: int = 0
+	var result: Variant = true
+	var last_target := Vector3.ZERO
+	func check_target(target: Vector3) -> Variant:
+		calls += 1; last_target = target; return result
 func _initialize() -> void: call_deferred("_run")
 func _check(ok: bool,label: String) -> void:
 	checks += 1
@@ -93,9 +111,54 @@ func _actual_camera() -> void:
 				_check(result.center.distance_to(actual) <= 0.002,"pure projection matches actual Camera3D unproject at FOV/yaw")
 	camera.queue_free(); await process_frame
 	groups += 1
+func _hud_binding() -> void:
+	var original_size: Vector2i = root.size; var original_scale: Vector2i = root.content_scale_size
+	root.content_scale_size = Vector2i.ZERO; root.size = Vector2i(1280,720)
+	var camera := Camera3D.new(); root.add_child(camera); camera.position = Vector3(0,1.63,0); camera.fov = 78; camera.near = 0.06; camera.make_current()
+	var hud := Hud.new(); root.add_child(hud); hud.set_process(false)
+	await process_frame; await process_frame
+	var view := CountingView.new(); var visibility := Visibility.new()
+	hud._guidance_playing = true
+	hud.bind_guidance_camera(camera); hud.bind_guidance_visibility(visibility.check_target); hud.bind_guidance(view)
+	_check(view.reads == 1 and visibility.calls == 1,"initial guidance snapshot samples optional physical callback once")
+	for index: int in range(60): hud._process(0.001)
+	_check(view.reads == 1 and visibility.calls == 1 and hud.guidance_projection_count == 60,"per-frame projection reuses snapshot with no duplicate owner/physics calls")
+	_check(hud.guidance_overlay.visible and hud.guidance_overlay.marker.kind == "ring" and hud.guidance_overlay.marker.square,"bound actual camera renders clear target ring")
+	var old_target: Vector3 = visibility.last_target
+	view.x += 10.0; hud._process(0.001)
+	_check(visibility.last_target == old_target and hud._last_objective.x != view.x,"source target changes wait for existing120ms cadence")
+	hud._process(0.060)
+	_check(view.reads == 2 and visibility.calls == 2 and hud._last_objective.x == view.x,"120ms updates one detached target and one visibility sample")
+	camera.rotation.y = PI; var reads: int = view.reads; var calls: int = visibility.calls
+	hud._process(0.001)
+	_check(hud.guidance_overlay.marker.kind == "arrow" and hud.guidance_overlay.marker.behind and view.reads == reads and visibility.calls == calls,"camera turn projects cached point immediately without gameplay query")
+	camera.rotation.y = 0.0; visibility.result = false; hud._process(0.12)
+	_check(hud.guidance_overlay.marker.dashed and not hud.guidance_overlay.marker.square,"real callback blocked result gives muted dashed target without arrival square")
+	visibility.result = 7; hud._process(0.12)
+	_check(not hud.guidance_overlay.marker.dashed and not hud.guidance_overlay.marker.square,"nonboolean callback is unknown, never clear")
+	hud.bind_guidance_visibility(Callable()); calls = visibility.calls; hud._process(0.12)
+	_check(visibility.calls == calls and not hud.guidance_overlay.marker.square,"absent callback retains hollow waypoint and makes no LOS claim")
+	for dimensions: Vector2i in [Vector2i(1280,720),Vector2i(960,540)]:
+		root.size = dimensions; await process_frame; await process_frame
+		hud._process(0.001)
+		var viewport := Rect2(Vector2.ZERO,root.get_visible_rect().size); var safe: Rect2 = hud.guidance_safe_rect()
+		_check(viewport.encloses(safe) and safe.size.y > 20.0,"safe guide rectangle exists inside actual resized viewport")
+		_check(hud.guidance_overlay.get_global_rect().is_equal_approx(viewport),"overlay occupies actual viewport, not negative anchored position")
+		_check(safe.position.y > hud._objective_plate.get_global_rect().end.y and safe.end.y < hud.guidance_map.get_global_rect().position.y,"safe guide edges avoid top objective and bottom minimap")
+		_check(hud.guidance_overlay.marker.center.x >= safe.position.x and hud.guidance_overlay.marker.center.x <= safe.end.x and hud.guidance_overlay.marker.center.y >= safe.position.y and hud.guidance_overlay.marker.center.y <= safe.end.y,"actual projected marker stays on safe viewport edges")
+	reads = view.reads; var projected: int = hud.guidance_projection_count
+	hud._guidance_playing = false; hud._process(2.0)
+	_check(not hud.guidance_overlay.visible and projected == hud.guidance_projection_count and reads == view.reads,"modal mode performs no projection or owner refresh")
+	hud._guidance_playing = true; var weak_camera: WeakRef = weakref(camera); camera.free(); hud._process(0.001)
+	_check(weak_camera.get_ref() == null and not hud.guidance_overlay.visible and hud.guidance_overlay.marker.is_empty(),"camera WeakRef expiry hides marker without retaining freed camera")
+	hud.bind_guidance(null); hud._process(0.001)
+	_check(hud._last_objective.is_empty() and not hud.guidance_overlay.visible,"explicit presenter unbind revokes cached projected target")
+	hud.queue_free(); await process_frame
+	root.size = original_size; root.content_scale_size = original_scale
+	groups += 1
 func _run() -> void:
-	_source(); _geometry(); _invalid(); await _actual_camera()
-	_check(completed == 30 and groups == 4,"all30draw samples and fourgroups completed")
+	_source(); _geometry(); _invalid(); await _actual_camera(); await _hud_binding()
+	_check(completed == 30 and groups == 5,"all30draw samples and fivegroups completed")
 	if failures.is_empty(): print("3D GUIDANCE PROJECTION: PASS (%d checks / 30 source draw cases)" % checks); quit(0)
 	else:
 		for failure: String in failures: print("FAIL: "+failure)

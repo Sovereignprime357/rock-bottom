@@ -50,6 +50,54 @@ func _run() -> void:
 	await physics_frame
 	game._process(1.0/60.0)
 	check(game.player.position.distance_to(Content.to_world(game.runtime.state.player_center(),game.Adapter.FEET)) < 0.00001,"player view mirrors the authoritative controller")
+	check(game.finds.has("cp_intro_remember") and game.finds.cp_intro_remember.source_id == "cp_intro_remember" and game.finds.cp_intro_remember.presentation_kind == "money","actual intro pickup uses the original cached find presenter")
+	var initial_weather := {"dayTime":game.runtime.s.dayTime,"weather":game.runtime.s.weather}
+	game.runtime.s.dayTime = 0.65; game.runtime.s.weather = "rain"
+	var weather_before: Dictionary = game.runtime.snapshot()
+	game._process(0.0)
+	check(game.weather_view.inspect().profile.night == 0.0 and game.weather_view.rain.visible,"actual full scene uses source daytime curve and current rain state")
+	check(game.runtime.snapshot() == weather_before,"zero-time weather presentation cannot change source state")
+	check(game._sole_shadow_light(),"actual full-world fixtures permit the sole-sun pose proof")
+	var added_shadow := OmniLight3D.new(); added_shadow.shadow_enabled = true; game.add_child(added_shadow)
+	check(not game._sole_shadow_light(),"a newly added actual shadow light immediately disables pose rejection")
+	added_shadow.shadow_enabled = false
+	check(game._sole_shadow_light(),"current light flags are read without stale certification")
+	added_shadow.free()
+	check(game._sole_shadow_light(),"removed lights leave no stale registry entry")
+	check(game.dynamic_emitters.inspect().allocated_lights == 6 and game.dynamic_emitters.inspect().dynamic_shadows == 0,"actual full scene owns exactly six shadowless moving fixtures")
+	check(game.dynamic_emitters.inspect().cop_count == 1,"resident Horse Cop binds its actual rider cap")
+	game.runtime.p.rockedT = 1000
+	game._process(0.0)
+	check(game.dynamic_emitters.inspect().player_active and game._ember_anchor.is_visible_in_tree(),"actual current high enables visible mouth fixture and light together")
+	check(game.dynamic_emitters._player.global_position.distance_to(game._ember_anchor.global_position) < 0.00001,"player light follows the actual authored ember tip")
+	game.hands.acknowledge(&"interact"); game._sync_dynamic_emitters(350.0)
+	check(not game.dynamic_emitters.inspect().player_active,"acknowledged hand gesture stows actual fixture and light")
+	game.runtime.p.rockedT = 0; game.runtime.p.hitterHigh = true
+	game.hands.reset(); game._hand_context.clear(); game._process(0.0)
+	check(game.dynamic_emitters.inspect().player_active,"current hitter high restores source light independently of weapon")
+	game._pause(); game._process(0.0)
+	check(not game.dynamic_emitters.inspect().player_active,"actual pause hides mouth fixture and its field")
+	game.runtime.p.hitterHigh = false; game._resume(); game._process(0.0)
+	check(not game.dynamic_emitters.inspect().player_active,"ending high leaves no stale player light")
+	game.runtime.s.dayTime = initial_weather.dayTime; game.runtime.s.weather = initial_weather.weather
+	game._process(0.0)
+	var initial_objective: Dictionary = game.runtime.guidance.primary_objective()
+	var objective_target := Content.to_world(Vector2(initial_objective.x,initial_objective.y),0.08)
+	check(game.hud._guidance_camera_ref.get_ref() == game.camera,"projected guidance binds actual player camera")
+	check(game._guidance_target_visible(objective_target),"opening objective has actual clear guidance ray")
+	var marker_before: Dictionary = game.runtime.snapshot()
+	var marker_blocker := StaticBody3D.new(); marker_blocker.collision_layer = 1; marker_blocker.collision_mask = 0
+	var marker_shape := CollisionShape3D.new(); var marker_box := BoxShape3D.new(); marker_box.size = Vector3.ONE*0.25
+	marker_shape.shape = marker_box; marker_blocker.add_child(marker_shape); game.world.add_child(marker_blocker)
+	marker_blocker.global_position = game.camera.global_position.lerp(objective_target,0.5)
+	await physics_frame; await physics_frame
+	check(not game._guidance_target_visible(objective_target),"unrelated live wall blocks informational target ray")
+	game.hud._refresh_guidance(); game.hud._project_guidance()
+	check(game.hud._target_visibility == 0 and game.hud.guidance_overlay.visible,"actual blocked target reaches projected HUD without claiming clear access")
+	check(game.runtime.snapshot() == marker_before,"guidance visibility and projection cannot mutate gameplay")
+	marker_blocker.free(); await physics_frame
+	check(game._guidance_target_visible(objective_target),"removing actual blocker restores guidance visibility")
+	check(not game._guidance_target_visible(Vector3.INF),"invalid guidance target fails closed")
 	for record: Dictionary in game.runtime.state.npcs:
 		check(game.actors[record.id].position.distance_to(Content.body_position(record,game.Adapter.FEET)) < 0.0001,"source actor position:"+record.id)
 	_key(KEY_ESCAPE)
@@ -182,10 +230,79 @@ func _run() -> void:
 	_test_room_views()
 	_test_utility_controls()
 	_test_interactive_controls()
+	await _test_cart_controls()
 	_test_site_menu()
 	await _load_arrival_race(false)
 	await _load_arrival_race(true)
+	_test_ending_receipts()
 	await _finish()
+
+func _test_ending_receipts() -> void:
+	# Staged source events prove the facade/continuation only, not boss balance.
+	game.runtime.fresh(); game._resume(); game.runtime.drain_events()
+	var player_epoch: Dictionary = game.runtime.p; var state_epoch: Dictionary = game.runtime.s
+	game.runtime.p.cash = 37; game.runtime.s.routesCompleted = 4
+	for item: Dictionary in [
+		{"payload":{"kind":"tony"},"title":"CRACK LORD SUPREME","copy":"the corner is yours · you get tuesdays and thursdays"},
+		{"payload":{"kind":"coop"},"title":"TUESDAYS AND THURSDAYS","copy":"you and stripe split the corner · you get the slow days"},
+		{"payload":{"kind":"kingdom"},"title":"ONE CRACKLORD","copy":"the kingdom is four curbs and a ditch · the throne is a folding chair"},
+		{"payload":{"title":"THE BUS","day":30,"rocks_smoked":17,"cred":88},"title":"THE BUS","copy":"days: 30 · rocks smoked: 17 · cred: 88"}
+	]:
+		game.runtime.s.mode = "ending"; game.runtime.s.endingContinue = true
+		game.runtime.state.emit_event("ending_requested",item.payload); game._consume_events()
+		check(game.hud.menu_box.get_child(0).text == item.title and item.copy in game.hud.menu_box.get_child(1).text,"source ending receipt preserves its committed kind and counters:"+item.title)
+		check(("vibekoded · the possum stayed" if item.title == "THE BUS" else "vibekoded · the possum still knows") in game.hud.menu_box.get_child(1).text,"source ending footer:"+item.title)
+		game.saving = true; _key(KEY_SPACE)
+		check(game.runtime.s.mode == "ending" and game.runtime.s.endingContinue,"Space cannot bypass ending save ownership")
+		game.saving = false; game.pending_save = {"pending_fixture":true}; _key(KEY_SPACE)
+		check(game.runtime.s.mode == "ending","Space cannot bypass queued ending save")
+		game.pending_save.clear(); Input.action_press("forward")
+		if item.title == "THE BUS": _press_prefix("return to the block.")
+		else: _key(KEY_SPACE)
+		check(game.runtime.s.mode == "playing" and not game.runtime.s.endingContinue and game.runtime.s.get("endingSavePromise") == null and not game.hud.modal.visible,"ending button/Space clears source continuation and closes receipt")
+		check(not Input.is_action_pressed("forward") and is_same(game.runtime.p,player_epoch) and is_same(game.runtime.s,state_epoch) and game.runtime.p.cash == 37 and game.runtime.s.routesCompleted == 4,"ending continuation releases movement and retains actual progress/epoch")
+		check(game.hud.receipt.text == "the block is still here.\nthe clipboard has another sheet." and is_equal_approx(game.hud.receipt_time,2.4),"ending continuation emits exact source2400ms receipt")
+		game.runtime.drain_events(); game._continue_ending()
+		check(game.runtime.drain_events().is_empty(),"repeated ending continuation emits nothing")
+
+func _test_cart_controls() -> void:
+	game.runtime.fresh(); game._resume(); game._sync_model_nodes(0.0)
+	await physics_frame; await physics_frame
+	check(game.world.dynamic_cart and game.runtime._cart_enabled and game.cart_view != null,"production cart has one dynamic projection")
+	var id: String = game.runtime.travel._cart_id
+	var service: Dictionary = game.world.service_points[id]
+	_place(service.approach)
+	var direction: Vector3 = service.target-game.camera.global_position
+	game.player.rotation.y = atan2(-direction.x,-direction.z)
+	game.pitch = atan2(direction.y,Vector2(direction.x,direction.z).length())
+	game.camera.rotation = Vector3(game.pitch,0,0)
+	check(game.resolve_interaction().get("kind") == "cart","actual source approach and aim resolve cart E")
+	var hp: float = game.runtime.p.hp
+	_key(KEY_E)
+	check(game.runtime.p.cartMounted and game.runtime.p.maxHp == 110 and game.runtime.p.hp == hp,"actual E mounts once and changes max HP without healing")
+	check(game.cart_view.parked_body().collision_layer == 0 and not game.world.service_points.has(id),"accepted mount immediately removes parked body and service")
+	game.pitch = -0.7; game.camera.rotation = Vector3(-0.7,0,0)
+	game._sync_model_nodes(0.0); game._sync_hand_context()
+	check(not game._hand_context.cart_grips.is_empty(),"downward view supplies actual handle markers to the hand rig")
+	var before: Dictionary = game.runtime.travel.cart_record()
+	var yaw: float = game.player.rotation.y
+	game._pause(); game._process(0.1)
+	check(game.runtime.travel.cart_record() == before and game.runtime.p.cartMounted,"pause preserves mounted source cart record")
+	game._resume(); game.player.rotation.y = yaw
+	# Looking above every nearby service must still allow source mounted dismount.
+	game.pitch = 1.15; game.camera.rotation = Vector3(1.15,0,0)
+	check(game.resolve_interaction().get("kind") == "cart","mounted E falls through to cart without aiming at it")
+	_key(KEY_E)
+	check(not game.runtime.p.cartMounted and game.cart_view.parked_body().collision_layer == 1,"actual E publishes a physically parked cart immediately")
+	check(game._hand_context.cart_grips.is_empty(),"dismount explicitly clears previous hand grips")
+	var parked: Dictionary = game.runtime.travel.cart_record()
+	var snapshot: Dictionary = game.runtime.snapshot()
+	check(game.runtime.restore(snapshot),"live cart scene restores source snapshot")
+	check(game.runtime.travel.cart_record() == parked and game.cart_view.parked_body().collision_layer == 1,"same-process load keeps unsaved parked coordinates and republishes current body")
+	check(game.runtime.fresh(),"live cart scene starts a fresh epoch")
+	var reset: Dictionary = game.runtime.travel.cart_record()
+	check(reset.x == 1000 and reset.y == 1600 and not game.runtime.p.cartMounted,"fresh returns unique cart to canonical spawn")
+	game.player.rotation.y = 0; game.pitch = -0.04; game._resume(); game._sync_model_nodes(0.0)
 
 func _test_cooking_controls() -> void:
 	while game.saving or not game.pending_save.is_empty(): await process_frame
