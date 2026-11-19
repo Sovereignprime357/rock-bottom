@@ -2913,3 +2913,17 @@ death-free/Pete-transaction or full-campaign claim. Chromium pointer-capture err
 remain; QA tab closed before profiling. A read-only review also noticed the source
 journal advertises arrow movement while Full input registration currently binds
 WASD only; reconcile that narrow alias gap in the next control packet.
+
+Frozen332be27711935bc1e3f04e6aba5685e5818f05bf is pushed. Diagnostic retains60/60
+but fails: scene p95 28.734/24.500ms, engine44.239/40.316ms. More elapsed time
+produces more16.667ms simulation substeps, so paired frame counts are not an isolated
+CPU regression proof. Original weighted rigs already batch palette colors; texture/
+roughness groups and shadows still contribute many draws. Ownership24/Kingdom30
+release views pass, local sync .087/.181ms still misses .05ms. Frozen Tony first
+won11.795s but failed because root omitted --qa-full; corrected QA run reachedphase2
+then chased into a wall until90.007s timeout. Both failures preserved; World diagnoses
+the input driver only. Oldc61d9 acceptance is not current-release acceptance.
+
+Next draft packets are held under .build/3d/{office-acceptance-draft,fixture-motion-draft,
+district-grade-draft}; no production integration or engine claim yet. Root retains
+serial engine ownership. Current local8074 and Full Windows export are332be27.

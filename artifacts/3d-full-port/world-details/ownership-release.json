@@ -1,0 +1,3782 @@
+{
+	"captures": [
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": false
+					},
+					"canal": {
+						"caption": false,
+						"visible": false
+					},
+					"market": {
+						"caption": false,
+						"visible": false
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": false
+					},
+					"park": {
+						"caption": false,
+						"visible": false
+					},
+					"projects": {
+						"caption": false,
+						"visible": false
+					},
+					"scrap": {
+						"caption": false,
+						"visible": false
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": false
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": false
+					},
+					"underpass": {
+						"caption": false,
+						"visible": false
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": false
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 0,
+					"door_color": "#2a211b",
+					"e_hint": false,
+					"knob_color": "#77665a",
+					"locked": true,
+					"mailbox": false,
+					"owned": false,
+					"panel_color": "#3a3028",
+					"paper_count": 0,
+					"sign_border": "#5a4838",
+					"sign_color": "#8a7868",
+					"title": "TAX HELP · NO TAX HELP",
+					"trim": false,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					}
+				}
+			},
+			"file": "office_locked.png",
+			"lighting": "day",
+			"projected": {
+				"door_locked": "[P: (553.5667, 381.9367), S: (35.40839, 81.5769)]",
+				"title_0": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"door_locked",
+				"title_0"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": false,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					}
+				}
+			},
+			"visible": [
+				"door_locked",
+				"title_0",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": false
+					},
+					"canal": {
+						"caption": false,
+						"visible": false
+					},
+					"market": {
+						"caption": false,
+						"visible": false
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": false
+					},
+					"park": {
+						"caption": false,
+						"visible": false
+					},
+					"projects": {
+						"caption": false,
+						"visible": false
+					},
+					"scrap": {
+						"caption": false,
+						"visible": false
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": false
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": false
+					},
+					"underpass": {
+						"caption": false,
+						"visible": false
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": false
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 0,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": false,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 0,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "THE OFFICE",
+					"trim": false,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					}
+				}
+			},
+			"file": "office_owned_empty.png",
+			"lighting": "day",
+			"projected": {
+				"door_owned": "[P: (553.5667, 381.9367), S: (35.40839, 81.5769)]",
+				"title_1": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"door_owned",
+				"title_1"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_1",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": false
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": false
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": false
+					},
+					"park": {
+						"caption": false,
+						"visible": false
+					},
+					"projects": {
+						"caption": false,
+						"visible": false
+					},
+					"scrap": {
+						"caption": false,
+						"visible": false
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": false
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": false
+					},
+					"underpass": {
+						"caption": false,
+						"visible": false
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": false
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 1,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 2,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "THE OFFICE",
+					"trim": false,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_claims_01.png",
+			"lighting": "day",
+			"projected": {
+				"mailbox": "[P: (435.3359, 441.0515), S: (46.91821, 23.81387)]",
+				"title_1": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"title_1",
+				"mailbox"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"canal": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_1",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"mailbox",
+				"claim_canal",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": false
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": false
+					},
+					"park": {
+						"caption": false,
+						"visible": false
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": false
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": false
+					},
+					"underpass": {
+						"caption": false,
+						"visible": false
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": false
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 4,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 5,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "REGIONAL OFFICE",
+					"trim": false,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_claims_04.png",
+			"lighting": "day",
+			"projected": {
+				"mailbox": "[P: (435.3359, 441.0515), S: (46.91821, 23.81387)]",
+				"title_2": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"title_2",
+				"mailbox"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"projects": true,
+					"skidrow": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_2",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"mailbox",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": false
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": false
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": false
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 8,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "REGIONAL OFFICE",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_claims_08.png",
+			"lighting": "day",
+			"projected": {
+				"mailbox": "[P: (435.3359, 441.0515), S: (46.91821, 23.81387)]",
+				"title_2": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"title_2",
+				"mailbox"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"oldschool": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_2",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_claims_11.png",
+			"lighting": "day",
+			"projected": {
+				"mailbox": "[P: (435.3359, 441.0515), S: (46.91821, 23.81387)]",
+				"title_3": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"title_3",
+				"mailbox"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.98122, 0.19289), Z: (0.0, -0.19289, 0.98122), O: (149.8, 1.65, 101.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_upgrade_left.png",
+			"lighting": "day",
+			"projected": {
+				"paper_5": "[P: (706.6071, 370.6263), S: (21.33087, 14.75095)]",
+				"upgrade_cot": "[P: (423.2151, 516.5134), S: (215.8755, 84.44861)]",
+				"upgrade_locker": "[P: (717.0308, 431.5605), S: (113.8424, 177.0973)]"
+			},
+			"required": [
+				"upgrade_locker",
+				"upgrade_cot",
+				"paper_5"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.98122, 0.19289), Z: (0.0, -0.19289, 0.98122), O: (159.8, 1.65, 101.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_upgrade_right.png",
+			"lighting": "day",
+			"projected": {
+				"upgrade_generator": "[P: (653.8017, 488.9656), S: (204.2391, 116.0601)]",
+				"upgrade_radio": "[P: (672.285, 112.3704), S: (94.57758, 120.5395)]",
+				"upgrade_route_board": "[P: (423.6631, 392.5205), S: (120.1338, 131.2105)]"
+			},
+			"required": [
+				"upgrade_generator",
+				"upgrade_route_board",
+				"upgrade_radio"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (133.2, 1.65, 54.4)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": true,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_canal.png",
+			"lighting": "day",
+			"projected": {
+				"caption_canal": "[P: (475.4489, 234.5598), S: (329.1023, 37.466)]",
+				"claim_canal": "[P: (556.2233, 297.4937), S: (167.5533, 221.5116)]"
+			},
+			"required": [
+				"claim_canal",
+				"caption_canal"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"caption_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (-17.2, 1.65, 35.6)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": true,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_alley.png",
+			"lighting": "day",
+			"projected": {
+				"caption_alley": "[P: (475.448, 234.5598), S: (329.104, 37.466)]",
+				"claim_alley": "[P: (556.223, 297.4937), S: (167.554, 221.5116)]"
+			},
+			"required": [
+				"claim_alley",
+				"caption_alley"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"caption_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (-36.8, 1.65, 42.4)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": true,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_projects.png",
+			"lighting": "day",
+			"projected": {
+				"caption_projects": "[P: (475.4477, 234.5598), S: (329.1045, 37.466)]",
+				"claim_projects": "[P: (556.2227, 297.4937), S: (167.5546, 221.5116)]"
+			},
+			"required": [
+				"claim_projects",
+				"caption_projects"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"caption_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (58.0, 1.65, 32.4)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": true,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_skidrow.png",
+			"lighting": "day",
+			"projected": {
+				"caption_skidrow": "[P: (475.4477, 234.5598), S: (329.1045, 37.466)]",
+				"claim_skidrow": "[P: (556.2227, 297.4937), S: (167.5546, 221.5116)]"
+			},
+			"required": [
+				"claim_skidrow",
+				"caption_skidrow"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"caption_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (-18.4, 1.65, -13.2)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": true,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_scrap.png",
+			"lighting": "day",
+			"projected": {
+				"caption_scrap": "[P: (475.4481, 234.5599), S: (329.1038, 37.46596)]",
+				"claim_scrap": "[P: (556.2231, 297.4938), S: (167.5538, 221.5115)]"
+			},
+			"required": [
+				"claim_scrap",
+				"caption_scrap"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"caption_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (12.4, 1.65, -20.0)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": true,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_underpass.png",
+			"lighting": "day",
+			"projected": {
+				"caption_underpass": "[P: (475.448, 234.5599), S: (329.1041, 37.46596)]",
+				"claim_underpass": "[P: (556.223, 297.4938), S: (167.5541, 221.5115)]"
+			},
+			"required": [
+				"claim_underpass",
+				"caption_underpass"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"caption_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (0.352648, 0.0, -0.935756), Y: (-0.134299, 0.989648, -0.050612), Z: (0.926069, 0.143519, 0.348997), O: (125.3553, 1.65, 2.104488)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": true,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_oldschool.png",
+			"lighting": "day",
+			"projected": {
+				"caption_oldschool": "[P: (592.4904, 215.2206), S: (122.6181, 60.36444)]",
+				"claim_oldschool": "[P: (603.0073, 296.7259), S: (97.56824, 253.9443)]"
+			},
+			"required": [
+				"claim_oldschool",
+				"caption_oldschool"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"caption_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (176.0, 1.65, 4.0)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": true,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_warehouse_row.png",
+			"lighting": "day",
+			"projected": {
+				"caption_warehouse_row": "[P: (475.4489, 234.5599), S: (329.1021, 37.46596)]",
+				"claim_warehouse_row": "[P: (556.2233, 297.4938), S: (167.5533, 221.5115)]"
+			},
+			"required": [
+				"claim_warehouse_row",
+				"caption_warehouse_row"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"caption_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (13.6, 1.65, 34.0)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": true,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_market.png",
+			"lighting": "day",
+			"projected": {
+				"caption_market": "[P: (475.448, 234.5599), S: (329.1041, 37.46596)]",
+				"claim_market": "[P: (556.223, 297.4938), S: (167.5541, 221.5115)]"
+			},
+			"required": [
+				"claim_market",
+				"caption_market"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"caption_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (77.2, 1.65, 24.4)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": true,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_park.png",
+			"lighting": "day",
+			"projected": {
+				"caption_park": "[P: (475.4478, 234.5599), S: (329.1044, 37.46596)]",
+				"claim_park": "[P: (556.2233, 297.4938), S: (167.5533, 221.5115)]"
+			},
+			"required": [
+				"claim_park",
+				"caption_park"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"caption_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.9895, -0.144534), Z: (0.0, 0.144534, 0.9895), O: (-30.0, 1.65, 98.0)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": true,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "claim_trainyard.png",
+			"lighting": "day",
+			"projected": {
+				"caption_trainyard": "[P: (475.4477, 234.5598), S: (329.1045, 37.466)]",
+				"claim_trainyard": "[P: (556.223, 297.4937), S: (167.554, 221.5116)]"
+			},
+			"required": [
+				"claim_trainyard",
+				"caption_trainyard"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"caption_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.8, -0.6), Z: (0.0, 0.6, 0.8), O: (-20.72, 1.68, -22.76)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": true,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "hideout_scrap.png",
+			"lighting": "day",
+			"projected": {
+				"hideout_scrap": "[P: (529.6267, 298.9962), S: (220.7466, 152.2467)]"
+			},
+			"required": [
+				"hideout_scrap"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.8, -0.6), Z: (0.0, 0.6, 0.8), O: (7.68, 1.68, 16.44)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": true,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "hideout_mom.png",
+			"lighting": "day",
+			"projected": {
+				"hideout_mom": "[P: (529.6266, 298.9961), S: (220.7468, 152.247)]"
+			},
+			"required": [
+				"hideout_mom"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "office_night.png",
+			"lighting": "night",
+			"projected": {
+				"title_3": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]",
+				"upgrade_radio": "[P: (834.0438, 241.7011), S: (45.17645, 58.62335)]"
+			},
+			"required": [
+				"title_3",
+				"upgrade_radio"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.8, -0.6), Z: (0.0, 0.6, 0.8), O: (7.68, 1.68, 16.44)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": true
+					},
+					"canal": {
+						"caption": false,
+						"visible": true
+					},
+					"market": {
+						"caption": false,
+						"visible": true
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": true
+					},
+					"park": {
+						"caption": false,
+						"visible": true
+					},
+					"projects": {
+						"caption": false,
+						"visible": true
+					},
+					"scrap": {
+						"caption": false,
+						"visible": true
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": true
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": true
+					},
+					"underpass": {
+						"caption": false,
+						"visible": true
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": true
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": true,
+						"panel_color": "#8a6440",
+						"visible": true
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": true
+					}
+				},
+				"office": {
+					"claims": 11,
+					"door_color": "#5a4028",
+					"e_hint": false,
+					"knob_color": "#e8c040",
+					"locked": false,
+					"mailbox": true,
+					"owned": true,
+					"panel_color": "#8a6840",
+					"paper_count": 6,
+					"sign_border": "#e8c040",
+					"sign_color": "#d4c896",
+					"title": "PAPER AUTHORITY",
+					"trim": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"file": "hideout_mom_small_night.png",
+			"lighting": "night",
+			"projected": {
+				"hideout_mom": "[P: (529.6266, 298.9961), S: (220.7468, 152.247)]"
+			},
+			"required": [
+				"hideout_mom"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				960,
+				540
+			],
+			"snapshot": {
+				"districtClaims": {
+					"alley": true,
+					"canal": true,
+					"market": true,
+					"oldschool": true,
+					"park": true,
+					"projects": true,
+					"scrap": true,
+					"skidrow": true,
+					"trainyard": true,
+					"underpass": true,
+					"warehouse_row": true
+				},
+				"flags": {
+					"momHideoutOwned": true,
+					"scrapHideoutOwned": true
+				},
+				"office": {
+					"owned": true,
+					"upgrades": {
+						"cot": true,
+						"desk": true,
+						"generator": true,
+						"locker": true,
+						"radio": true,
+						"route_board": true
+					}
+				}
+			},
+			"visible": [
+				"door_owned",
+				"title_3",
+				"upgrade_route_board",
+				"upgrade_locker",
+				"upgrade_cot",
+				"upgrade_generator",
+				"upgrade_radio",
+				"paper_0",
+				"paper_1",
+				"paper_2",
+				"paper_3",
+				"paper_4",
+				"paper_5",
+				"mailbox",
+				"trim",
+				"claim_canal",
+				"claim_alley",
+				"claim_projects",
+				"claim_skidrow",
+				"claim_scrap",
+				"claim_underpass",
+				"claim_oldschool",
+				"claim_warehouse_row",
+				"claim_market",
+				"claim_park",
+				"claim_trainyard",
+				"hideout_mom",
+				"hideout_scrap"
+			]
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.996571, 0.082748), Z: (0.0, -0.082748, 0.996571), O: (154.8, 1.65, 109.225)]",
+			"facts": {
+				"claims": {
+					"alley": {
+						"caption": false,
+						"visible": false
+					},
+					"canal": {
+						"caption": false,
+						"visible": false
+					},
+					"market": {
+						"caption": false,
+						"visible": false
+					},
+					"oldschool": {
+						"caption": false,
+						"visible": false
+					},
+					"park": {
+						"caption": false,
+						"visible": false
+					},
+					"projects": {
+						"caption": false,
+						"visible": false
+					},
+					"scrap": {
+						"caption": false,
+						"visible": false
+					},
+					"skidrow": {
+						"caption": false,
+						"visible": false
+					},
+					"trainyard": {
+						"caption": false,
+						"visible": false
+					},
+					"underpass": {
+						"caption": false,
+						"visible": false
+					},
+					"warehouse_row": {
+						"caption": false,
+						"visible": false
+					}
+				},
+				"hideouts": {
+					"mom": {
+						"door_color": "#6a4a30",
+						"e_hint": false,
+						"panel_color": "#8a6440",
+						"visible": false
+					},
+					"scrap": {
+						"door_color": "#4a3a28",
+						"e_hint": false,
+						"panel_color": "#5a4830",
+						"visible": false
+					}
+				},
+				"office": {
+					"claims": 0,
+					"door_color": "#2a211b",
+					"e_hint": false,
+					"knob_color": "#77665a",
+					"locked": true,
+					"mailbox": false,
+					"owned": false,
+					"panel_color": "#3a3028",
+					"paper_count": 0,
+					"sign_border": "#5a4838",
+					"sign_color": "#8a7868",
+					"title": "TAX HELP · NO TAX HELP",
+					"trim": false,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					}
+				}
+			},
+			"file": "ownership_revoked_small.png",
+			"lighting": "day",
+			"projected": {
+				"door_locked": "[P: (553.5667, 381.9367), S: (35.40839, 81.5769)]",
+				"title_0": "[P: (513.5397, 336.1379), S: (252.9205, 23.90796)]"
+			},
+			"required": [
+				"title_0",
+				"door_locked"
+			],
+			"scope": "staged presentation; no purchase/progression claim",
+			"size": [
+				960,
+				540
+			],
+			"snapshot": {
+				"districtClaims": {
+
+				},
+				"flags": {
+
+				},
+				"office": {
+					"owned": false,
+					"upgrades": {
+						"cot": false,
+						"desk": false,
+						"generator": false,
+						"locker": false,
+						"radio": false,
+						"route_board": false
+					}
+				}
+			},
+			"visible": [
+				"door_locked",
+				"title_0"
+			]
+		}
+	],
+	"engine": "4.5.1-stable (official)",
+	"failures": [],
+	"msaa_3d": 2,
+	"pass": true,
+	"renderer": "gl_compatibility",
+	"scope": "Pure staged ownership visuals; timing is local sync only, not whole-scene performance or earned campaign completion.",
+	"sync_p95_ms": 0.087,
+	"sync_target_ms": 0.05,
+	"sync_target_pass": false
+}

@@ -206,3 +206,31 @@ The displayed right-mouse-look fallback remains available; no menu loop recurred
 These checks do not establish audible Web audio, complete campaign progression,
 all saved world layouts, or browser frame-rate acceptance. Public GitHub Pages
 still serves the original pixel release.
+
+## Delivery and frozen performance
+
+Code/evidence commit `332be27711935bc1e3f04e6aba5685e5818f05bf` is pushed to
+`origin/codex/3d-full-port`. The 98-file ledger is
+`reports/2026-11-18-3d-world-details-files.txt`. This delivers the bounded checkpoint;
+the complete port remains active.
+
+The official release template exported from that exact Git archive retained60
+actors and60 rigs in both120-frame diagnostic phases, but failed the frame target.
+Scene CPU p95 measured28.734ms day /24.500ms night; engine process p95 measured
+44.239/40.316ms. Model sync measured5.995/5.458ms; actor simulation14.628/13.003ms.
+Draw-call p95 was2,039/1,642. The committed JSON and provenance retain these failures.
+This is a short diagnostic, not the long final performance acceptance run or a
+controlled isolated comparison: restoring source wall RNG also changes subsequent
+simulation draws. No NPC count, AI clock or visual-quality reduction was used.
+
+The same release passed24 ownership and30 Kingdom visual captures, but local sync
+still missed its .05ms target at .087/.181ms respectively. Those failed timing
+targets are retained alongside the passing placement evidence.
+
+Current-release Tony acceptance remains open. The first launch omitted the required
+QA flag; it won in11.795s with239 damage but failed the explicit capture-click
+condition. The correctly flagged run reached phase2, then its automated chase
+pressed against a building wall and timed out at90.007s with Tony at94HP. Both
+failed reports are preserved. This does not revoke the older c61d9c9 acceptance,
+but that older result is not a substitute for the current checkpoint. The bounded
+driver/collision diagnosis proceeds without changing combat or removing geometry.

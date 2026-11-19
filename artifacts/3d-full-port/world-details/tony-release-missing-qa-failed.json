@@ -1,0 +1,7296 @@
+{
+  "acceptance": false,
+  "arrests": 0,
+  "assessments": {
+    "fists_only": {
+      "acceptance": false,
+      "failures": [
+        "fight invariant: fists_only",
+        "strict fists-only input chain rejected earned weapon",
+        "actual controller input missing: capture_clicks"
+      ]
+    },
+    "source_earned": {
+      "acceptance": false,
+      "failures": [
+        "actual controller input missing: capture_clicks"
+      ]
+    }
+  },
+  "attack_receipts": [
+    {
+      "active_ms": 11699.1775555555,
+      "actors_after": {
+        "tony": {
+          "dead": false,
+          "hp": 174.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 200,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 280.0,
+      "after_weapon": "fists",
+      "before_cd": 0.0,
+      "before_weapon": "fists",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 11699.1775555555,
+          "high": 15386.5517777778,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 26,
+            "weapon": "fists"
+          },
+          "wall_ms": 25384,
+          "weapon": "fists"
+        },
+        {
+          "active_ms": 11699.1775555555,
+          "high": 15386.5517777778,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "fists"
+          },
+          "wall_ms": 25384,
+          "weapon": "fists"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 25383
+    },
+    {
+      "active_ms": 11989.6482222222,
+      "actors_after": {
+        "tony": {
+          "dead": false,
+          "hp": 147.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 174.0,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 280.0,
+      "after_weapon": "fists",
+      "before_cd": 0.0,
+      "before_weapon": "fists",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 11989.6482222222,
+          "high": 15096.0811111112,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 27,
+            "weapon": "fists"
+          },
+          "wall_ms": 25635,
+          "weapon": "fists"
+        },
+        {
+          "active_ms": 11989.6482222222,
+          "high": 15096.0811111112,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "fists"
+          },
+          "wall_ms": 25635,
+          "weapon": "fists"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 25634
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "actors_after": {
+        "tony": {
+          "dead": false,
+          "hp": 123.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 147.0,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 280.0,
+      "after_weapon": "fists",
+      "before_cd": 0.0,
+      "before_weapon": "fists",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 12273.3305555555,
+          "high": 14812.3987777778,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 24,
+            "weapon": "fists"
+          },
+          "wall_ms": 25981,
+          "weapon": "fists"
+        },
+        {
+          "active_ms": 12273.3305555555,
+          "high": 14812.3987777778,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "fists"
+          },
+          "wall_ms": 25981,
+          "weapon": "fists"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 25980
+    },
+    {
+      "active_ms": 12584.9902222222,
+      "actors_after": {
+        "tony": {
+          "dead": false,
+          "hp": 91.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 123.0,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 280.0,
+      "after_weapon": "fists",
+      "before_cd": 0.0,
+      "before_weapon": "fists",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 12584.9902222222,
+          "high": 14500.7391111111,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 32,
+            "weapon": "fists"
+          },
+          "wall_ms": 26434,
+          "weapon": "fists"
+        },
+        {
+          "active_ms": 12584.9902222222,
+          "high": 14500.7391111111,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "fists"
+          },
+          "wall_ms": 26434,
+          "weapon": "fists"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 26433
+    },
+    {
+      "active_ms": 14408.6075555555,
+      "actors_after": {
+        "sherri_boss_3d_-9223371435727119607_1": {
+          "dead": false,
+          "hp": 15.0
+        },
+        "sherri_boss_3d_-9223371435727119607_2": {
+          "dead": false,
+          "hp": 16.0
+        }
+      },
+      "actors_before": {
+        "sherri_boss_3d_-9223371435727119607_1": {
+          "dead": false,
+          "hp": 45,
+          "ordinary_reward": true
+        },
+        "sherri_boss_3d_-9223371435727119607_2": {
+          "dead": false,
+          "hp": 45,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 280.0,
+      "after_weapon": "fists",
+      "before_cd": 0.0,
+      "before_weapon": "fists",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 14408.6075555555,
+          "high": 12677.1217777778,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "sherri_boss_3d_-9223371435727119607_1",
+            "damage": 30,
+            "weapon": "fists"
+          },
+          "wall_ms": 28283,
+          "weapon": "fists"
+        },
+        {
+          "active_ms": 14408.6075555555,
+          "high": 12677.1217777778,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "sherri_boss_3d_-9223371435727119607_2",
+            "damage": 29,
+            "weapon": "fists"
+          },
+          "wall_ms": 28283,
+          "weapon": "fists"
+        },
+        {
+          "active_ms": 14408.6075555555,
+          "high": 12677.1217777778,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "sherri_boss_3d_-9223371435727119607_1",
+              "sherri_boss_3d_-9223371435727119607_2"
+            ],
+            "used_weapon": "fists"
+          },
+          "wall_ms": 28283,
+          "weapon": "fists"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 28282
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "actors_after": {
+        "sherri_boss_3d_-9223371435727119607_1": {
+          "dead": true,
+          "hp": -16.0
+        }
+      },
+      "actors_before": {
+        "sherri_boss_3d_-9223371435727119607_1": {
+          "dead": false,
+          "hp": 15.0,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 280.0,
+      "after_weapon": "pipe",
+      "before_cd": 0.0,
+      "before_weapon": "fists",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 14701.6252222222,
+          "high": 12384.1041111111,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "sherri_boss_3d_-9223371435727119607_1",
+            "damage": 31,
+            "weapon": "fists"
+          },
+          "wall_ms": 28635,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 14701.6252222222,
+          "high": 12384.1041111111,
+          "kind": "actor_died",
+          "payload": {
+            "actor_id": "sherri_boss_3d_-9223371435727119607_1"
+          },
+          "wall_ms": 28635,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 14701.6252222222,
+          "high": 12384.1041111111,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ 3 cred\nSPIDER-BITE SHERRI is on the ground."
+          },
+          "wall_ms": 28635,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 14701.6252222222,
+          "high": 12384.1041111111,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ a length of copper pipe\n(equipped.)"
+          },
+          "wall_ms": 28635,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 14701.6252222222,
+          "high": 12384.1041111111,
+          "kind": "feed",
+          "payload": {
+            "author": "@crackheadcent",
+            "text": "picked up a length of copper pipe. things are escalating."
+          },
+          "wall_ms": 28635,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 14701.6252222222,
+          "high": 12384.1041111111,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "sherri_boss_3d_-9223371435727119607_1"
+            ],
+            "used_weapon": "fists"
+          },
+          "wall_ms": 28635,
+          "weapon": "pipe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 28634
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "actors_after": {
+        "sherri_boss_3d_-9223371435727119607_2": {
+          "dead": true,
+          "hp": -25.0
+        }
+      },
+      "actors_before": {
+        "sherri_boss_3d_-9223371435727119607_2": {
+          "dead": false,
+          "hp": 16.0,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 320.0,
+      "after_weapon": "pipe",
+      "before_cd": 0.0,
+      "before_weapon": "pipe",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 17543.4228888888,
+          "high": 9542.30644444449,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "sherri_boss_3d_-9223371435727119607_2",
+            "damage": 41,
+            "weapon": "pipe"
+          },
+          "wall_ms": 31523,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 17543.4228888888,
+          "high": 9542.30644444449,
+          "kind": "actor_died",
+          "payload": {
+            "actor_id": "sherri_boss_3d_-9223371435727119607_2"
+          },
+          "wall_ms": 31523,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 17543.4228888888,
+          "high": 9542.30644444449,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ 3 cred\nSPIDER-BITE SHERRI is on the ground."
+          },
+          "wall_ms": 31523,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 17543.4228888888,
+          "high": 9542.30644444449,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "sherri_boss_3d_-9223371435727119607_2"
+            ],
+            "used_weapon": "pipe"
+          },
+          "wall_ms": 31523,
+          "weapon": "pipe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 31522
+    },
+    {
+      "active_ms": 21082.1275555555,
+      "actors_after": {
+        "skid_lurch": {
+          "dead": false,
+          "hp": 11.0
+        }
+      },
+      "actors_before": {
+        "skid_lurch": {
+          "dead": false,
+          "hp": 55.0,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 320.0,
+      "after_weapon": "pipe",
+      "before_cd": 0.0,
+      "before_weapon": "pipe",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 21082.1275555555,
+          "high": 6003.60177777782,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "skid_lurch",
+            "damage": 44,
+            "weapon": "pipe"
+          },
+          "wall_ms": 35100,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 21082.1275555555,
+          "high": 6003.60177777782,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "skid_lurch"
+            ],
+            "used_weapon": "pipe"
+          },
+          "wall_ms": 35100,
+          "weapon": "pipe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 35099
+    },
+    {
+      "active_ms": 21432.5517777777,
+      "actors_after": {
+        "skid_lurch": {
+          "dead": true,
+          "hp": -28.0
+        }
+      },
+      "actors_before": {
+        "skid_lurch": {
+          "dead": false,
+          "hp": 11.0,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 320.0,
+      "after_weapon": "pipe",
+      "before_cd": 0.0,
+      "before_weapon": "pipe",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 21432.5517777777,
+          "high": 5653.1775555556,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "skid_lurch",
+            "damage": 39,
+            "weapon": "pipe"
+          },
+          "wall_ms": 35584,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 21432.5517777777,
+          "high": 5653.1775555556,
+          "kind": "actor_died",
+          "payload": {
+            "actor_id": "skid_lurch"
+          },
+          "wall_ms": 35584,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 21432.5517777777,
+          "high": 5653.1775555556,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ 3 cred\nLURCH (SKID) is on the ground."
+          },
+          "wall_ms": 35584,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 21432.5517777777,
+          "high": 5653.1775555556,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 1400,
+            "text": "+ a few dollars"
+          },
+          "wall_ms": 35584,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 21432.5517777777,
+          "high": 5653.1775555556,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "skid_lurch"
+            ],
+            "used_weapon": "pipe"
+          },
+          "wall_ms": 35584,
+          "weapon": "pipe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 35583
+    },
+    {
+      "active_ms": 21949.2137777777,
+      "actors_after": {
+        "tony": {
+          "dead": false,
+          "hp": 42.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 91.0,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 320.0,
+      "after_weapon": "pipe",
+      "before_cd": 0.0,
+      "before_weapon": "pipe",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 21949.2137777777,
+          "high": 5136.5155555556,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 49,
+            "weapon": "pipe"
+          },
+          "wall_ms": 36134,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 21949.2137777777,
+          "high": 5136.5155555556,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "pipe"
+          },
+          "wall_ms": 36134,
+          "weapon": "pipe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 36133
+    },
+    {
+      "active_ms": 22290.0262222222,
+      "actors_after": {
+        "tony": {
+          "dead": false,
+          "hp": 1.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 42.0,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 320.0,
+      "after_weapon": "pipe",
+      "before_cd": 0.0,
+      "before_weapon": "pipe",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 22290.0262222222,
+          "high": 4795.70311111115,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 41,
+            "weapon": "pipe"
+          },
+          "wall_ms": 36588,
+          "weapon": "pipe"
+        },
+        {
+          "active_ms": 22290.0262222222,
+          "high": 4795.70311111115,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "pipe"
+          },
+          "wall_ms": 36588,
+          "weapon": "pipe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": false,
+      "wall_ms": 36587
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "actors_after": {
+        "tony": {
+          "dead": true,
+          "hp": -39.0
+        }
+      },
+      "actors_before": {
+        "tony": {
+          "dead": false,
+          "hp": 1.0,
+          "ordinary_reward": false
+        }
+      },
+      "after_cd": 320.0,
+      "after_weapon": "shoe",
+      "before_cd": 0.0,
+      "before_weapon": "pipe",
+      "boss_before": true,
+      "events": [
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "actor_died",
+          "payload": {
+            "actor_id": "tony"
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "· QUEST COMPLETE ·\nTHE FALLEN KING"
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ a shoe (tony's)\n(equipped.)"
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "feed",
+          "payload": {
+            "author": "@crackheadcent",
+            "text": "picked up a shoe (tony's). things are escalating."
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 5500,
+            "text": "tony is on the ground.\nthe corner is yours.\nyou get tuesdays and thursdays."
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "tony",
+            "damage": 40,
+            "weapon": "shoe"
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 1400,
+            "text": "· 5x COMBO ·\n+ 3 cred"
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 22610.1105555555,
+          "high": 4475.61877777782,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "tony"
+            ],
+            "used_weapon": "pipe"
+          },
+          "wall_ms": 36958,
+          "weapon": "shoe"
+        }
+      ],
+      "quest_before": false,
+      "victory_after": true,
+      "wall_ms": 36957
+    },
+    {
+      "active_ms": 24852.4725555555,
+      "actors_after": {
+        "skid_sherri": {
+          "dead": false,
+          "hp": 5.0
+        }
+      },
+      "actors_before": {
+        "skid_sherri": {
+          "dead": false,
+          "hp": 45.0,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 340.0,
+      "after_weapon": "shoe",
+      "before_cd": 0.0,
+      "before_weapon": "shoe",
+      "boss_before": false,
+      "events": [
+        {
+          "active_ms": 24852.4725555555,
+          "high": 2233.25677777781,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "skid_sherri",
+            "damage": 40,
+            "weapon": "shoe"
+          },
+          "wall_ms": 39328,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 24852.4725555555,
+          "high": 2233.25677777781,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "skid_sherri"
+            ],
+            "used_weapon": "shoe"
+          },
+          "wall_ms": 39328,
+          "weapon": "shoe"
+        }
+      ],
+      "quest_before": true,
+      "victory_after": true,
+      "wall_ms": 39327
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "actors_after": {
+        "skid_sherri": {
+          "dead": true,
+          "hp": -38.0
+        }
+      },
+      "actors_before": {
+        "skid_sherri": {
+          "dead": false,
+          "hp": 5.0,
+          "ordinary_reward": true
+        }
+      },
+      "after_cd": 340.0,
+      "after_weapon": "shoe",
+      "before_cd": 0.0,
+      "before_weapon": "shoe",
+      "boss_before": false,
+      "events": [
+        {
+          "active_ms": 25215.4376565656,
+          "high": 1870.29167676771,
+          "kind": "actor_hit",
+          "payload": {
+            "actor_id": "skid_sherri",
+            "damage": 43,
+            "weapon": "shoe"
+          },
+          "wall_ms": 39724,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 25215.4376565656,
+          "high": 1870.29167676771,
+          "kind": "actor_died",
+          "payload": {
+            "actor_id": "skid_sherri"
+          },
+          "wall_ms": 39724,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 25215.4376565656,
+          "high": 1870.29167676771,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 2200,
+            "text": "+ 3 cred\nSHERRI (SKID) is on the ground."
+          },
+          "wall_ms": 39724,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 25215.4376565656,
+          "high": 1870.29167676771,
+          "kind": "toast",
+          "payload": {
+            "duration_ms": 1400,
+            "text": "+ a few dollars"
+          },
+          "wall_ms": 39724,
+          "weapon": "shoe"
+        },
+        {
+          "active_ms": 25215.4376565656,
+          "high": 1870.29167676771,
+          "kind": "player_attack",
+          "payload": {
+            "connected": true,
+            "hits": [
+              "skid_sherri"
+            ],
+            "used_weapon": "shoe"
+          },
+          "wall_ms": 39724,
+          "weapon": "shoe"
+        }
+      ],
+      "quest_before": true,
+      "victory_after": true,
+      "wall_ms": 39723
+    }
+  ],
+  "canonical_roster_retained": true,
+  "captures": [
+    "01_two_source_offenses",
+    "02_real_rock_smoked",
+    "03_corner_approach_high",
+    "04_fight_coat_one",
+    "05_fight_coat_2",
+    "05_fight_coat_3",
+    "06_actual_victory",
+    "07_source_ending",
+    "08_same_rock_crash",
+    "09_same_loop_complete",
+    "failure"
+  ],
+  "claim": "initial fists and normal HP; only verified source-earned weapon transitions",
+  "contract_mode": "source_earned",
+  "costs": [
+    10,
+    5,
+    5,
+    5
+  ],
+  "deaths": 0,
+  "dependencies": [],
+  "diagnostic": false,
+  "engine": "4.5.1-stable (official)",
+  "epoch_replacements": 0,
+  "events": [
+    {
+      "active_ms": 0.0,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "text": "you arrive somewhere by walking. who knew."
+      },
+      "wall_ms": 13270,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 1059.15339393939,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "text": "+ $10\nyou bend down. the ten dollars is yours now.\n(it was always there.)"
+      },
+      "wall_ms": 14281,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 5100.44166666667,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 3400,
+        "text": "he charges ten dollars. that is the price.\nhe does not negotiate. sometimes he does."
+      },
+      "wall_ms": 18302,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 5100.44166666667,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "- $10\n+ 1 rock"
+      },
+      "wall_ms": 18305,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 5100.44166666667,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "tony stares. takes the $5. does not give a rock.\nyou now owe a kind of debt."
+      },
+      "wall_ms": 18311,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 5100.44166666667,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "tony stares. takes the $5. does not give a rock.\nyou now owe a kind of debt."
+      },
+      "wall_ms": 18317,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 9085.72933333332,
+      "high": 18000.0,
+      "kind": "feed",
+      "payload": {
+        "author": "@crackheadcent",
+        "text": "smoked a rock at the block. for the bit."
+      },
+      "wall_ms": 22421,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 9085.72933333332,
+      "high": 18000.0,
+      "kind": "toast",
+      "payload": {
+        "text": "· smoke a rock ·\nthe sun moves.\nbrain -4. shakes -50."
+      },
+      "wall_ms": 22421,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 9085.72933333332,
+      "high": 18000.0,
+      "kind": "toast",
+      "payload": {
+        "text": "· BLOCK ROUTE 1 ·\nthree boxes. one pen. the pen works."
+      },
+      "wall_ms": 22421,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 9085.72933333332,
+      "high": 18000.0,
+      "kind": "feed",
+      "payload": {
+        "author": "@crackheadcent",
+        "text": "smoked one on the crate.\nthe sun moved.\nthe loop greeted me."
+      },
+      "wall_ms": 22421,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11599.1775555555,
+      "high": 15486.5517777778,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 3500,
+        "text": "tony tears off coat #1. then coat #2.\nthe corner is now arena."
+      },
+      "wall_ms": 25177,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11599.1775555555,
+      "high": 15486.5517777778,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "tony is fighting at the corner. he had three coats. now two."
+      },
+      "wall_ms": 25177,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11599.1775555555,
+      "high": 15486.5517777778,
+      "kind": "boss_started",
+      "payload": {
+        "actor_id": "tony",
+        "coop": false
+      },
+      "wall_ms": 25177,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11599.1775555555,
+      "high": 15486.5517777778,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "tony's eye twitches. he remembers.\nthe boss fight will come."
+      },
+      "wall_ms": 25177,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11699.1775555555,
+      "high": 15386.5517777778,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 26,
+        "weapon": "fists"
+      },
+      "wall_ms": 25384,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11699.1775555555,
+      "high": 15386.5517777778,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "fists"
+      },
+      "wall_ms": 25384,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11989.6482222222,
+      "high": 15096.0811111112,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 27,
+        "weapon": "fists"
+      },
+      "wall_ms": 25635,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 11989.6482222222,
+      "high": 15096.0811111112,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "fists"
+      },
+      "wall_ms": 25635,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14812.3987777778,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 24,
+        "weapon": "fists"
+      },
+      "wall_ms": 25981,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14812.3987777778,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "fists"
+      },
+      "wall_ms": 25981,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14803.3655555556,
+      "kind": "actor_spawned",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_1"
+      },
+      "wall_ms": 26017,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14803.3655555556,
+      "kind": "actor_spawned",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_2"
+      },
+      "wall_ms": 26017,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14803.3655555556,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 3200,
+        "text": "tony tears off coat #2.\nhe is faster now.\nhe whistles. someone answers."
+      },
+      "wall_ms": 26017,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14803.3655555556,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "tony is on coat 2. and somebody else just showed up."
+      },
+      "wall_ms": 26017,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "high": 14803.3655555556,
+      "kind": "boss_phase_changed",
+      "payload": {
+        "actor_id": "tony",
+        "coats_off": 2,
+        "phase": 2
+      },
+      "wall_ms": 26017,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12584.9902222222,
+      "high": 14500.7391111111,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 32,
+        "weapon": "fists"
+      },
+      "wall_ms": 26434,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 12584.9902222222,
+      "high": 14500.7391111111,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "fists"
+      },
+      "wall_ms": 26434,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 14208.6939259259,
+      "high": 12841.3211216931,
+      "kind": "hurt",
+      "payload": {
+        "amount": 3.0,
+        "source_id": "sherri_boss_3d_-9223371435727119607_1"
+      },
+      "wall_ms": 28124,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 14408.6075555555,
+      "high": 12677.1217777778,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_1",
+        "damage": 30,
+        "weapon": "fists"
+      },
+      "wall_ms": 28283,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 14408.6075555555,
+      "high": 12677.1217777778,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_2",
+        "damage": 29,
+        "weapon": "fists"
+      },
+      "wall_ms": 28283,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 14408.6075555555,
+      "high": 12677.1217777778,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "sherri_boss_3d_-9223371435727119607_1",
+          "sherri_boss_3d_-9223371435727119607_2"
+        ],
+        "used_weapon": "fists"
+      },
+      "wall_ms": 28283,
+      "weapon": "fists"
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "high": 12384.1041111111,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_1",
+        "damage": 31,
+        "weapon": "fists"
+      },
+      "wall_ms": 28635,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "high": 12384.1041111111,
+      "kind": "actor_died",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_1"
+      },
+      "wall_ms": 28635,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "high": 12384.1041111111,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ 3 cred\nSPIDER-BITE SHERRI is on the ground."
+      },
+      "wall_ms": 28635,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "high": 12384.1041111111,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ a length of copper pipe\n(equipped.)"
+      },
+      "wall_ms": 28635,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "high": 12384.1041111111,
+      "kind": "feed",
+      "payload": {
+        "author": "@crackheadcent",
+        "text": "picked up a length of copper pipe. things are escalating."
+      },
+      "wall_ms": 28635,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 14701.6252222222,
+      "high": 12384.1041111111,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "sherri_boss_3d_-9223371435727119607_1"
+        ],
+        "used_weapon": "fists"
+      },
+      "wall_ms": 28635,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 14977.2932222222,
+      "high": 12080.6583333334,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 5500,
+        "text": "a school bus drives past.\nthe driver is the conductor.\nthe driver is also still at his post in the train yard."
+      },
+      "wall_ms": 28980,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "high": 9542.30644444449,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_2",
+        "damage": 41,
+        "weapon": "pipe"
+      },
+      "wall_ms": 31523,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "high": 9542.30644444449,
+      "kind": "actor_died",
+      "payload": {
+        "actor_id": "sherri_boss_3d_-9223371435727119607_2"
+      },
+      "wall_ms": 31523,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "high": 9542.30644444449,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ 3 cred\nSPIDER-BITE SHERRI is on the ground."
+      },
+      "wall_ms": 31523,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "high": 9542.30644444449,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "sherri_boss_3d_-9223371435727119607_2"
+        ],
+        "used_weapon": "pipe"
+      },
+      "wall_ms": 31523,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "high": 9530.63977777782,
+      "kind": "toast",
+      "payload": {
+        "text": "· RANK UP ·\nSIDEWALK TWEAKER"
+      },
+      "wall_ms": 31560,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 17543.4228888888,
+      "high": 9530.63977777782,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "promoted to sidewalk tweaker. the corner watches."
+      },
+      "wall_ms": 31560,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 20536.9036666666,
+      "high": 6521.04788888893,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 3200,
+        "text": "- $10\nLURCH (SKID) counts it in front of you.\nthe math is correct."
+      },
+      "wall_ms": 34573,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 20536.9036666666,
+      "high": 6521.04788888893,
+      "kind": "hurt",
+      "payload": {
+        "amount": 7.0,
+        "source_id": "skid_lurch"
+      },
+      "wall_ms": 34573,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21082.1275555555,
+      "high": 6003.60177777782,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "skid_lurch",
+        "damage": 44,
+        "weapon": "pipe"
+      },
+      "wall_ms": 35100,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21082.1275555555,
+      "high": 6003.60177777782,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "skid_lurch"
+        ],
+        "used_weapon": "pipe"
+      },
+      "wall_ms": 35100,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21432.5517777777,
+      "high": 5653.1775555556,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "skid_lurch",
+        "damage": 39,
+        "weapon": "pipe"
+      },
+      "wall_ms": 35584,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21432.5517777777,
+      "high": 5653.1775555556,
+      "kind": "actor_died",
+      "payload": {
+        "actor_id": "skid_lurch"
+      },
+      "wall_ms": 35584,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21432.5517777777,
+      "high": 5653.1775555556,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ 3 cred\nLURCH (SKID) is on the ground."
+      },
+      "wall_ms": 35584,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21432.5517777777,
+      "high": 5653.1775555556,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 1400,
+        "text": "+ a few dollars"
+      },
+      "wall_ms": 35584,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21432.5517777777,
+      "high": 5653.1775555556,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "skid_lurch"
+        ],
+        "used_weapon": "pipe"
+      },
+      "wall_ms": 35584,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21949.2137777777,
+      "high": 5136.5155555556,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 49,
+        "weapon": "pipe"
+      },
+      "wall_ms": 36134,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21949.2137777777,
+      "high": 5136.5155555556,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "pipe"
+      },
+      "wall_ms": 36134,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21949.2137777777,
+      "high": 5119.84888888893,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 3500,
+        "text": "tony tears off coat #3.\nhe is not slowing down.\nhe is speeding up."
+      },
+      "wall_ms": 36197,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21949.2137777777,
+      "high": 5119.84888888893,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "tony has no coats. tony is lunging now. like a dog."
+      },
+      "wall_ms": 36197,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 21949.2137777777,
+      "high": 5119.84888888893,
+      "kind": "boss_phase_changed",
+      "payload": {
+        "actor_id": "tony",
+        "coats_off": 3,
+        "phase": 3
+      },
+      "wall_ms": 36197,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 22290.0262222222,
+      "high": 4795.70311111115,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 41,
+        "weapon": "pipe"
+      },
+      "wall_ms": 36588,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 22290.0262222222,
+      "high": 4795.70311111115,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "pipe"
+      },
+      "wall_ms": 36588,
+      "weapon": "pipe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "actor_died",
+      "payload": {
+        "actor_id": "tony"
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "· QUEST COMPLETE ·\nTHE FALLEN KING"
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ a shoe (tony's)\n(equipped.)"
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "feed",
+      "payload": {
+        "author": "@crackheadcent",
+        "text": "picked up a shoe (tony's). things are escalating."
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 5500,
+        "text": "tony is on the ground.\nthe corner is yours.\nyou get tuesdays and thursdays."
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "tony",
+        "damage": 40,
+        "weapon": "shoe"
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 1400,
+        "text": "· 5x COMBO ·\n+ 3 cred"
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4475.61877777782,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "tony"
+        ],
+        "used_weapon": "pipe"
+      },
+      "wall_ms": 36958,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "toast",
+      "payload": {
+        "text": "· RANK UP ·\nALLEY RAT"
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "promoted to alley rat. the corner watches."
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "toast",
+      "payload": {
+        "text": "· RANK UP ·\nSTRIP-MALL FIEND"
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "promoted to strip-mall fiend. the corner watches."
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "toast",
+      "payload": {
+        "text": "· RANK UP ·\nBLOCK CAPTAIN"
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "promoted to block captain. the corner watches."
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "toast",
+      "payload": {
+        "text": "· RANK UP ·\nPIPE PROPHET"
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 22610.1105555555,
+      "high": 4471.30177777782,
+      "kind": "feed",
+      "payload": {
+        "author": "@the_corner",
+        "text": "promoted to pipe prophet. the corner watches."
+      },
+      "wall_ms": 36988,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 24852.4725555555,
+      "high": 2233.25677777781,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "skid_sherri",
+        "damage": 40,
+        "weapon": "shoe"
+      },
+      "wall_ms": 39328,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 24852.4725555555,
+      "high": 2233.25677777781,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "skid_sherri"
+        ],
+        "used_weapon": "shoe"
+      },
+      "wall_ms": 39328,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "high": 1870.29167676771,
+      "kind": "actor_hit",
+      "payload": {
+        "actor_id": "skid_sherri",
+        "damage": 43,
+        "weapon": "shoe"
+      },
+      "wall_ms": 39724,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "high": 1870.29167676771,
+      "kind": "actor_died",
+      "payload": {
+        "actor_id": "skid_sherri"
+      },
+      "wall_ms": 39724,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "high": 1870.29167676771,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "+ 3 cred\nSHERRI (SKID) is on the ground."
+      },
+      "wall_ms": 39724,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "high": 1870.29167676771,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 1400,
+        "text": "+ a few dollars"
+      },
+      "wall_ms": 39724,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "high": 1870.29167676771,
+      "kind": "player_attack",
+      "payload": {
+        "connected": true,
+        "hits": [
+          "skid_sherri"
+        ],
+        "used_weapon": "shoe"
+      },
+      "wall_ms": 39724,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 26386.4814276094,
+      "high": 699.247905723937,
+      "kind": "ending_requested",
+      "payload": {
+        "kind": "tony"
+      },
+      "wall_ms": 40943,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 26412.2390033669,
+      "high": 699.247905723937,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2400,
+        "text": "the block is still here.\nthe clipboard has another sheet."
+      },
+      "wall_ms": 41126,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 27109.5463367003,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 2200,
+        "text": "the crash arrives.\non schedule."
+      },
+      "wall_ms": 41782,
+      "weapon": "shoe"
+    },
+    {
+      "active_ms": 30007.6882255892,
+      "high": 0.0,
+      "kind": "toast",
+      "payload": {
+        "duration_ms": 5500,
+        "text": "📞 incoming call · YOUR MOM\n\nremember tony likes you.\nyou said you'd come see him.\nyou said it twice."
+      },
+      "wall_ms": 44671,
+      "weapon": "shoe"
+    }
+  ],
+  "failure_context": {
+    "actual_input": "(0.0, -0.999999)",
+    "hp": 100.0,
+    "mode": "playing",
+    "mouse_captured": true,
+    "nearby": [
+      {
+        "h": 26.0,
+        "id": "jogger",
+        "neutral": true,
+        "w": 22.0,
+        "x": 1060.98596191406,
+        "y": 730.977844238281
+      },
+      {
+        "h": 30.0,
+        "id": "meter_maid",
+        "neutral": true,
+        "w": 26.0,
+        "x": 1377.17358398438,
+        "y": 906.690002441406
+      }
+    ],
+    "requested_motion": "(-0.0, -0.999998)",
+    "source_center": "(1219.047, 865.7643)",
+    "walking_goal": "(2.552, 0.06, 0.658)",
+    "walks": [
+      {
+        "blockers": [
+          "meter_maid"
+        ],
+        "graph_points": 14,
+        "route_points": 6,
+        "wall_ms": 13251
+      },
+      {
+        "blockers": [
+          "meter_maid"
+        ],
+        "graph_points": 13,
+        "route_points": 5,
+        "wall_ms": 15988
+      },
+      {
+        "blockers": [
+          "meter_maid"
+        ],
+        "graph_points": 13,
+        "route_points": 5,
+        "wall_ms": 16250
+      },
+      {
+        "blockers": [
+          "jogger"
+        ],
+        "graph_points": 8,
+        "route_points": 5,
+        "wall_ms": 44363
+      }
+    ],
+    "world_position": "(6.76188, 0.06, 1.030571)"
+  },
+  "failures": [
+    "actual controller input missing: capture_clicks"
+  ],
+  "fight": {
+    "accepted_attacks": 12,
+    "active_ms": 11010.933,
+    "adds": [
+      "sherri_boss_3d_-9223371435727119607_1",
+      "sherri_boss_3d_-9223371435727119607_2"
+    ],
+    "cooldowns_valid": true,
+    "damage": 239,
+    "fists_only": false,
+    "globals_clear": true,
+    "high_hits": 7,
+    "phases": [
+      1,
+      2,
+      3
+    ],
+    "quest_done": true,
+    "shoe_reward": true,
+    "started": true,
+    "tony_dead": true,
+    "wall_ms": 11795.0,
+    "won": true
+  },
+  "final": {
+    "actors": 58,
+    "brain": 66.0,
+    "cart_mounted": false,
+    "cash": 7,
+    "cred": 220,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "hp": 100.0,
+    "inventory": [],
+    "max_hp": 100.0,
+    "offenses": 3,
+    "rng": 1481492582,
+    "rocks": 0,
+    "rocks_smoked": 1,
+    "shakes": 50.8251843420876,
+    "speed": 2.2,
+    "weapon": "shoe"
+  },
+  "fixture": {
+    "cash_grant": 25,
+    "hp": 100.0,
+    "kind": "fresh_cash_only",
+    "note": "$25 is a labeled normal-resource pre-fight fixture; no claim of earning it in this run. No other state edits, retry, teleports or injected damage.",
+    "weapon": "fists"
+  },
+  "format": "rock-bottom-boss-acceptance",
+  "initial": {
+    "actors": 56,
+    "brain": 70.0,
+    "cart_mounted": false,
+    "cash": 25,
+    "cred": 0,
+    "equip": {
+      "coat": null,
+      "hat": null,
+      "shoes": null,
+      "tool": null
+    },
+    "hp": 100.0,
+    "inventory": [],
+    "max_hp": 100.0,
+    "offenses": 0,
+    "rng": 4153385641,
+    "rocks": 0,
+    "rocks_smoked": 0,
+    "shakes": 20.0,
+    "speed": 2.2,
+    "weapon": "fists"
+  },
+  "initial_actor_ids": [
+    "tony",
+    "yuri",
+    "brutus",
+    "scrap_dog",
+    "pete",
+    "lurch",
+    "sherri",
+    "paulie",
+    "dave",
+    "mom",
+    "possum",
+    "priest",
+    "conductor",
+    "larry",
+    "stripe",
+    "pigeon",
+    "biggu",
+    "cubscout",
+    "jogger",
+    "dogwalker",
+    "busker",
+    "horsecop",
+    "vapelord",
+    "pothole",
+    "mayorscousin",
+    "phoneguy",
+    "barb",
+    "pinky",
+    "math",
+    "train_hopper",
+    "philosopher",
+    "lease_guy",
+    "gutter_greg",
+    "laundromat_lady",
+    "meter_maid",
+    "food_truck",
+    "priests_son",
+    "karaoke",
+    "skid_brutus_1",
+    "skid_lurch",
+    "skid_sherri",
+    "kingdom_guard_blue_tarp_1_0",
+    "kingdom_guard_blue_tarp_1_1",
+    "kingdom_guard_blue_tarp_1_2",
+    "kingdom_guard_blue_tarp_1_3",
+    "kingdom_guard_cart_cavalry_1_0",
+    "kingdom_guard_cart_cavalry_1_1",
+    "kingdom_guard_cart_cavalry_1_2",
+    "kingdom_guard_cart_cavalry_1_3",
+    "kingdom_guard_copper_choir_1_0",
+    "kingdom_guard_copper_choir_1_1",
+    "kingdom_guard_copper_choir_1_2",
+    "kingdom_guard_copper_choir_1_3",
+    "kingdom_guard_throne_1_0",
+    "kingdom_guard_throne_1_1",
+    "kingdom_guard_throne_1_2"
+  ],
+  "inputs": {
+    "capture_clicks": 0,
+    "clicks": 14,
+    "keys": 11,
+    "motion_frames": 955,
+    "mouse_motion": 1062
+  },
+  "loop": {
+    "continued": true,
+    "crash_ms": 7985.50433333331,
+    "ending_seen": true,
+    "high_ms": 18048.8170033669,
+    "initial_high": 18000.0,
+    "purchased": true,
+    "smokes": 1,
+    "spent": true
+  },
+  "renderer": "gl_compatibility",
+  "samples": [
+    {
+      "active_ms": 27.8393333333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1050.0,
+        840.0
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13280
+    },
+    {
+      "active_ms": 194.730666666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1050.0,
+        840.0
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13408
+    },
+    {
+      "active_ms": 311.397333333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1054.578125,
+        840.216552734375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13516
+    },
+    {
+      "active_ms": 419.444666666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1069.41772460938,
+        840.91845703125
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13622
+    },
+    {
+      "active_ms": 520.843666666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1083.34423828125,
+        841.577209472656
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13725
+    },
+    {
+      "active_ms": 621.779666666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1096.95422363281,
+        842.220825195313
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13819
+    },
+    {
+      "active_ms": 729.663666666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1108.67407226563,
+        843.762817382813
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 13925
+    },
+    {
+      "active_ms": 838.749666666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1123.42712402344,
+        846.468505859375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14034
+    },
+    {
+      "active_ms": 950.036444444444,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1138.47778320313,
+        849.228759765625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14147
+    },
+    {
+      "active_ms": 1059.15339393939,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1153.23510742188,
+        851.935241699219
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14256
+    },
+    {
+      "active_ms": 1168.2443030303,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1167.98901367188,
+        854.640930175781
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14369
+    },
+    {
+      "active_ms": 1278.064,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1182.84143066406,
+        857.364624023438
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14478
+    },
+    {
+      "active_ms": 1387.15490909091,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1197.59533691406,
+        860.070251464844
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14586
+    },
+    {
+      "active_ms": 1496.24581818182,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1212.34924316406,
+        862.77587890625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14695
+    },
+    {
+      "active_ms": 1605.33672727273,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1227.10314941406,
+        865.4814453125
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14809
+    },
+    {
+      "active_ms": 1714.42763636364,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1241.85705566406,
+        868.187072753906
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 14916
+    },
+    {
+      "active_ms": 1823.51854545454,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1256.61096191406,
+        870.892700195313
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15024
+    },
+    {
+      "active_ms": 1932.60945454545,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1271.36486816406,
+        873.598327636719
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15135
+    },
+    {
+      "active_ms": 2043.21551515151,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1286.32348632813,
+        876.341491699219
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15248
+    },
+    {
+      "active_ms": 2154.32662626263,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1301.35034179688,
+        879.09716796875
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15360
+    },
+    {
+      "active_ms": 2292.063,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1319.97814941406,
+        882.51318359375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15512
+    },
+    {
+      "active_ms": 2407.018,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1335.52478027344,
+        885.364196777344
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15627
+    },
+    {
+      "active_ms": 2514.618,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1350.07678222656,
+        888.032775878906
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15734
+    },
+    {
+      "active_ms": 2622.95133333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1364.72814941406,
+        890.719604492188
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15840
+    },
+    {
+      "active_ms": 2731.0943030303,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1379.35363769531,
+        893.262390136719
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 15945
+    },
+    {
+      "active_ms": 2858.02866666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1384.90515136719,
+        889.670349121094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16059
+    },
+    {
+      "active_ms": 2981.71566666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1389.18127441406,
+        886.903259277344
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16178
+    },
+    {
+      "active_ms": 3114.70233333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1400.99755859375,
+        880.77880859375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16327
+    },
+    {
+      "active_ms": 3218.74466666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1400.99755859375,
+        880.77880859375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16415
+    },
+    {
+      "active_ms": 3335.21166666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1411.53002929688,
+        886.064086914063
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16531
+    },
+    {
+      "active_ms": 3445.78966666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1425.11926269531,
+        892.883117675781
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16640
+    },
+    {
+      "active_ms": 3554.19744444444,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1438.44189453125,
+        899.568298339844
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16751
+    },
+    {
+      "active_ms": 3665.30855555556,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1452.0966796875,
+        906.420166015625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16861
+    },
+    {
+      "active_ms": 3772.59066666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1465.28112792969,
+        913.036071777344
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 16969
+    },
+    {
+      "active_ms": 3881.68157575758,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1478.68786621094,
+        919.763427734375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17083
+    },
+    {
+      "active_ms": 3991.78258585859,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1491.73095703125,
+        926.308471679688
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17197
+    },
+    {
+      "active_ms": 4105.576,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1501.96362304688,
+        927.634948730469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17322
+    },
+    {
+      "active_ms": 4211.202,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1515.77233886719,
+        928.303894042969
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17427
+    },
+    {
+      "active_ms": 4319.086,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1530.60290527344,
+        928.638854980469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17537
+    },
+    {
+      "active_ms": 4432.521,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1546.19665527344,
+        928.990966796875
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17650
+    },
+    {
+      "active_ms": 4542.583,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1561.32666015625,
+        929.332641601563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17759
+    },
+    {
+      "active_ms": 4647.11161904762,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1575.69604492188,
+        929.656982421875
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17853
+    },
+    {
+      "active_ms": 4752.71347089947,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1589.6318359375,
+        930.107482910156
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 17954
+    },
+    {
+      "active_ms": 4866.07666666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1602.87438964844,
+        930.282775878906
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18062
+    },
+    {
+      "active_ms": 4973.14066666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1602.87438964844,
+        930.282775878906
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18168
+    },
+    {
+      "active_ms": 5074.65122222222,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.75866699219,
+        927.619567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18269
+    },
+    {
+      "active_ms": 5236.797,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.75866699219,
+        927.619567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18586
+    },
+    {
+      "active_ms": 5338.939,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.75866699219,
+        927.619567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18664
+    },
+    {
+      "active_ms": 5453.46366666667,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.75866699219,
+        927.619567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18784
+    },
+    {
+      "active_ms": 5564.57477777778,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.75866699219,
+        927.619567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 18895
+    },
+    {
+      "active_ms": 5675.68588888889,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.75866699219,
+        927.619567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19008
+    },
+    {
+      "active_ms": 5808.433,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.10900878906,
+        930.602600097656
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19144
+    },
+    {
+      "active_ms": 5931.17933333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.10900878906,
+        930.602600097656
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19251
+    },
+    {
+      "active_ms": 6037.54633333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.10900878906,
+        930.602600097656
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19359
+    },
+    {
+      "active_ms": 6148.65744444444,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1592.6513671875,
+        930.474426269531
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19471
+    },
+    {
+      "active_ms": 6258.75845454545,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1579.24523925781,
+        930.324279785156
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19585
+    },
+    {
+      "active_ms": 6376.96066666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1564.88269042969,
+        929.998107910156
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19715
+    },
+    {
+      "active_ms": 6481.68066666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1550.48779296875,
+        929.644897460938
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19827
+    },
+    {
+      "active_ms": 6605.83233333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1533.421875,
+        929.22607421875
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 19952
+    },
+    {
+      "active_ms": 6728.82833333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1516.51477050781,
+        928.81103515625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20057
+    },
+    {
+      "active_ms": 6833.80433333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1502.08459472656,
+        928.456726074219
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20164
+    },
+    {
+      "active_ms": 6939.30133333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1491.09484863281,
+        927.311096191406
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20267
+    },
+    {
+      "active_ms": 7060.28333333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1474.84130859375,
+        923.76806640625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20385
+    },
+    {
+      "active_ms": 7178.95233333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1458.89855957031,
+        920.292785644531
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20502
+    },
+    {
+      "active_ms": 7291.90366666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1443.72387695313,
+        916.984924316406
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20616
+    },
+    {
+      "active_ms": 7404.87933333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1428.5458984375,
+        913.676330566406
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20734
+    },
+    {
+      "active_ms": 7518.21266666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1413.31982421875,
+        910.357238769531
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20848
+    },
+    {
+      "active_ms": 7631.54599999999,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1398.09375,
+        907.038146972656
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 20961
+    },
+    {
+      "active_ms": 7744.87933333332,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1382.86767578125,
+        903.719055175781
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21073
+    },
+    {
+      "active_ms": 7869.79266666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1366.08581542969,
+        900.060913085938
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21219
+    },
+    {
+      "active_ms": 7986.67466666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1350.38293457031,
+        896.637939453125
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21329
+    },
+    {
+      "active_ms": 8106.82833333332,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1334.24060058594,
+        893.119140625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21427
+    },
+    {
+      "active_ms": 8231.78233333332,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1317.45349121094,
+        889.459777832031
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21552
+    },
+    {
+      "active_ms": 8352.48933333332,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1301.23681640625,
+        885.924743652344
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21673
+    },
+    {
+      "active_ms": 8473.82460606059,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1284.93566894531,
+        882.371337890625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21799
+    },
+    {
+      "active_ms": 8598.06703030302,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1268.244140625,
+        878.73291015625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 21934
+    },
+    {
+      "active_ms": 8706.05166666665,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1253.73681640625,
+        875.570495605469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22044
+    },
+    {
+      "active_ms": 8816.14599999999,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1238.94592285156,
+        872.346313476563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22150
+    },
+    {
+      "active_ms": 8923.22933333332,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1224.55944824219,
+        869.210327148438
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22253
+    },
+    {
+      "active_ms": 9031.56266666665,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1210.00524902344,
+        866.037719726563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22363
+    },
+    {
+      "active_ms": 9218.20966666665,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17867.5196666667,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1206.36669921875,
+        865.244567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22666
+    },
+    {
+      "active_ms": 9340.97066666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17744.7586666667,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1206.36669921875,
+        865.244567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22774
+    },
+    {
+      "active_ms": 9446.81666666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17638.9126666667,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1206.36669921875,
+        865.244567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22882
+    },
+    {
+      "active_ms": 9560.19099999999,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17525.5383333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1206.36669921875,
+        865.244567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 22995
+    },
+    {
+      "active_ms": 9670.19099999999,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17415.5383333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1206.36669921875,
+        865.244567871094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23108
+    },
+    {
+      "active_ms": 9786.83599999998,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17298.8933333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1224.46508789063,
+        869.188842773438
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23225
+    },
+    {
+      "active_ms": 9893.22130303029,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17192.5080303031,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1250.19152832031,
+        874.795532226563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23324
+    },
+    {
+      "active_ms": 9996.27699999998,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 17089.4523333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1275.11291503906,
+        880.226745605469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23416
+    },
+    {
+      "active_ms": 10105.674,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16980.0553333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1301.56762695313,
+        885.992126464844
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23525
+    },
+    {
+      "active_ms": 10213.36,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16872.3693333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1327.60864257813,
+        891.667297363281
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23632
+    },
+    {
+      "active_ms": 10321.331,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16764.3983333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1353.71850585938,
+        897.357543945313
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23742
+    },
+    {
+      "active_ms": 10429.6396666666,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16656.0896666667,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1379.91027832031,
+        903.065551757813
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23853
+    },
+    {
+      "active_ms": 10538.3517878788,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16547.3775454546,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1406.19958496094,
+        908.794799804688
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 23966
+    },
+    {
+      "active_ms": 10647.4637272727,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16438.2656060607,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1432.58544921875,
+        914.545166015625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24086
+    },
+    {
+      "active_ms": 10770.8923333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16314.8370000001,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1462.43347167969,
+        921.050109863281
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24209
+    },
+    {
+      "active_ms": 10887.6933333333,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16198.0360000001,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1490.67883300781,
+        927.205688476563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24322
+    },
+    {
+      "active_ms": 11004.8229629629,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 16080.9063703704,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1517.353515625,
+        928.816467285156
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24434
+    },
+    {
+      "active_ms": 11121.4896296296,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 15964.2397037038,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1546.2197265625,
+        929.533508300781
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24545
+    },
+    {
+      "active_ms": 11238.1562962963,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 15847.5730370371,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1574.72888183594,
+        930.241760253906
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24668
+    },
+    {
+      "active_ms": 11355.2859259259,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 15730.4434074075,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1600.26440429688,
+        930.305358886719
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24783
+    },
+    {
+      "active_ms": 11469.31,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 15616.4193333334,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.73571777344,
+        930.299255371094
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24888
+    },
+    {
+      "active_ms": 11571.3997777777,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 15514.3295555556,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1608.43444824219,
+        924.504089355469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 120.0,
+      "wall_ms": 24993
+    },
+    {
+      "active_ms": 11699.1775555555,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 15386.5517777778,
+      "mode": "playing",
+      "phase": 1,
+      "player": [
+        1608.43444824219,
+        924.504089355469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 200,
+      "wall_ms": 25221
+    },
+    {
+      "active_ms": 11832.5108888889,
+      "actors": 56,
+      "attack_cd": 146.666666666667,
+      "crash": 0.0,
+      "high": 15253.2184444445,
+      "mode": "playing",
+      "phase": 1,
+      "player": [
+        1608.43444824219,
+        924.504089355469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 174.0,
+      "wall_ms": 25478
+    },
+    {
+      "active_ms": 11956.3148888889,
+      "actors": 56,
+      "attack_cd": 22.8626666666661,
+      "crash": 0.0,
+      "high": 15129.4144444445,
+      "mode": "playing",
+      "phase": 1,
+      "player": [
+        1608.43444824219,
+        924.504089355469
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 174.0,
+      "wall_ms": 25602
+    },
+    {
+      "active_ms": 12059.1205555555,
+      "actors": 56,
+      "attack_cd": 210.527666666667,
+      "crash": 0.0,
+      "high": 15026.6087777778,
+      "mode": "playing",
+      "phase": 1,
+      "player": [
+        1604.64660644531,
+        939.164001464844
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 147.0,
+      "wall_ms": 25759
+    },
+    {
+      "active_ms": 12160.9505555555,
+      "actors": 56,
+      "attack_cd": 108.697666666667,
+      "crash": 0.0,
+      "high": 14924.7787777778,
+      "mode": "playing",
+      "phase": 1,
+      "player": [
+        1609.52282714844,
+        920.292663574219
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 147.0,
+      "wall_ms": 25868
+    },
+    {
+      "active_ms": 12273.3305555555,
+      "actors": 56,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 14812.3987777778,
+      "mode": "playing",
+      "phase": 1,
+      "player": [
+        1603.31274414063,
+        944.328247070313
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 147.0,
+      "wall_ms": 25980
+    },
+    {
+      "active_ms": 12410.1415555555,
+      "actors": 58,
+      "attack_cd": 143.189,
+      "crash": 0.0,
+      "high": 14675.5877777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1607.31176757813,
+        928.852172851563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 123.0,
+      "wall_ms": 26277
+    },
+    {
+      "active_ms": 12510.1415555555,
+      "actors": 58,
+      "attack_cd": 43.1890000000001,
+      "crash": 0.0,
+      "high": 14575.5877777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1611.31079101563,
+        925.466735839844
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 123.0,
+      "wall_ms": 26361
+    },
+    {
+      "active_ms": 12632.9392222222,
+      "actors": 58,
+      "attack_cd": 232.051,
+      "crash": 0.0,
+      "high": 14452.7901111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1634.74621582031,
+        932.7744140625
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 26517
+    },
+    {
+      "active_ms": 12738.2638888889,
+      "actors": 58,
+      "attack_cd": 126.726333333333,
+      "crash": 0.0,
+      "high": 14347.4654444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1643.30798339844,
+        939.671997070313
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 26627
+    },
+    {
+      "active_ms": 12846.2735555555,
+      "actors": 58,
+      "attack_cd": 18.7166666666662,
+      "crash": 0.0,
+      "high": 14239.4557777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1651.70764160156,
+        944.55615234375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 26729
+    },
+    {
+      "active_ms": 12952.9402222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 14132.7891111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1670.75793457031,
+        933.665344238281
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 26828
+    },
+    {
+      "active_ms": 13056.6212222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 14029.1081111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1684.3134765625,
+        928.050048828125
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 26930
+    },
+    {
+      "active_ms": 13161.5023333333,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13924.227,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1694.86364746094,
+        928.050048828125
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27038
+    },
+    {
+      "active_ms": 13268.3235555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13817.4057777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1704.5048828125,
+        928.050048828125
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27146
+    },
+    {
+      "active_ms": 13374.5885555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13711.1407777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1715.08178710938,
+        925.833923339844
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27260
+    },
+    {
+      "active_ms": 13481.6568888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13604.0724444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1723.048828125,
+        906.928344726563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27371
+    },
+    {
+      "active_ms": 13595.7908888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13489.9384444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1723.24279785156,
+        883.315063476563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27486
+    },
+    {
+      "active_ms": 13720.7808888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13364.9484444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        869.826538085938
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27614
+    },
+    {
+      "active_ms": 13833.4118888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13252.3174444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        880.866088867188
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27727
+    },
+    {
+      "active_ms": 13947.9448888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13137.7844444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        889.986083984375
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27842
+    },
+    {
+      "active_ms": 14064.0538888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 13021.6754444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1722.35400390625,
+        889.499328613281
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 27959
+    },
+    {
+      "active_ms": 14172.0272592592,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 12913.7020740741,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        882.881896972656
+      ],
+      "player_hp": 100.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28059
+    },
+    {
+      "active_ms": 14279.8248783068,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 12805.9044550265,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        881.536376953125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28159
+    },
+    {
+      "active_ms": 14380.8285555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 12704.9007777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        869.850341796875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28254
+    },
+    {
+      "active_ms": 14500.6182222222,
+      "actors": 58,
+      "attack_cd": 187.989333333333,
+      "crash": 0.0,
+      "high": 12585.1111111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        875.504150390625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28433
+    },
+    {
+      "active_ms": 14614.0692222222,
+      "actors": 58,
+      "attack_cd": 74.5383333333334,
+      "crash": 0.0,
+      "high": 12471.6601111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        870.815307617188
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28546
+    },
+    {
+      "active_ms": 14733.0612222222,
+      "actors": 58,
+      "attack_cd": 248.564,
+      "crash": 0.0,
+      "high": 12352.6681111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        864.191528320313
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28697
+    },
+    {
+      "active_ms": 14841.92,
+      "actors": 58,
+      "attack_cd": 139.705222222222,
+      "crash": 0.0,
+      "high": 12243.8093333334,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        875.897644042969
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28805
+    },
+    {
+      "active_ms": 14949.8816767676,
+      "actors": 58,
+      "attack_cd": 31.7435454545454,
+      "crash": 0.0,
+      "high": 12135.8476565657,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        885.454772949219
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 28921
+    },
+    {
+      "active_ms": 15063.2345555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 12022.4947777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        893.56103515625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29046
+    },
+    {
+      "active_ms": 15179.4405555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11906.2887777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.55480957031,
+        874.375122070313
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29158
+    },
+    {
+      "active_ms": 15292.7738888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11792.9554444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        853.532897949219
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29270
+    },
+    {
+      "active_ms": 15406.1072222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11679.6221111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        833.943969726563
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29387
+    },
+    {
+      "active_ms": 15519.8175555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11565.9117777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1720.05004882813,
+        815.681640625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29498
+    },
+    {
+      "active_ms": 15633.1508888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11452.5784444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1717.68310546875,
+        798.827575683594
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29610
+    },
+    {
+      "active_ms": 15746.4842222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11339.2451111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1700.7841796875,
+        782.7587890625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29721
+    },
+    {
+      "active_ms": 15866.1635555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11219.5657777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1680.09582519531,
+        768.736450195313
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29851
+    },
+    {
+      "active_ms": 15981.8055555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11103.9237777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1658.20617675781,
+        758.537414550781
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 29967
+    },
+    {
+      "active_ms": 16081.8055555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 11003.9237777778,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1637.80383300781,
+        754.084289550781
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30054
+    },
+    {
+      "active_ms": 16205.9192222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10879.8101111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1631.97509765625,
+        775.046997070313
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30170
+    },
+    {
+      "active_ms": 16318.9212222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10766.8081111111,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1633.17785644531,
+        793.949584960938
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30283
+    },
+    {
+      "active_ms": 16434.2698888889,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10651.4594444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1634.2724609375,
+        793.949584960938
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30398
+    },
+    {
+      "active_ms": 16548.1932222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10537.5361111112,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1635.1279296875,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30512
+    },
+    {
+      "active_ms": 16661.2632222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10424.4661111112,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1635.77783203125,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30632
+    },
+    {
+      "active_ms": 16775.3108412698,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10310.4184920635,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1636.28076171875,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30748
+    },
+    {
+      "active_ms": 16889.4377460317,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10196.2915873016,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1636.66625976563,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30861
+    },
+    {
+      "active_ms": 17003.0091746031,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 10082.7201587302,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1636.958984375,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 30974
+    },
+    {
+      "active_ms": 17116.5806031746,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 9969.14873015878,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1637.18334960938,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31090
+    },
+    {
+      "active_ms": 17230.3276507936,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 9855.40168253974,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1637.35607910156,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31202
+    },
+    {
+      "active_ms": 17343.6609841269,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 9742.0683492064,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1627.86279296875,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31316
+    },
+    {
+      "active_ms": 17457.7086031745,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 9628.02073015878,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1613.91735839844,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31434
+    },
+    {
+      "active_ms": 17580.2638888888,
+      "actors": 58,
+      "attack_cd": 283.159000000001,
+      "crash": 0.0,
+      "high": 9505.46544444449,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1596.90698242188,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31593
+    },
+    {
+      "active_ms": 17693.5972222222,
+      "actors": 58,
+      "attack_cd": 169.825666666667,
+      "crash": 0.0,
+      "high": 9392.13211111115,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1575.94873046875,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31706
+    },
+    {
+      "active_ms": 17807.1686507936,
+      "actors": 58,
+      "attack_cd": 56.2542380952385,
+      "crash": 0.0,
+      "high": 9278.56068253973,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1555.92932128906,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31830
+    },
+    {
+      "active_ms": 17923.6272222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 9162.10211111116,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1536.92626953125,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 31962
+    },
+    {
+      "active_ms": 18048.6272222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 9037.10211111116,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1517.67907714844,
+        793.949951171875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32068
+    },
+    {
+      "active_ms": 18159.1618888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8926.5674444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1501.21435546875,
+        795.894775390625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32177
+    },
+    {
+      "active_ms": 18265.4378888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8820.2914444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1486.912109375,
+        812.379455566406
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32281
+    },
+    {
+      "active_ms": 18368.4098888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8717.3194444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1475.22631835938,
+        830.383056640625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32384
+    },
+    {
+      "active_ms": 18470.8458888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8614.8834444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1466.30395507813,
+        849.741027832031
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32480
+    },
+    {
+      "active_ms": 18578.2738888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8507.4554444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1460.66345214844,
+        871.357299804688
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32587
+    },
+    {
+      "active_ms": 18687.1812222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8398.54811111117,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1459.70166015625,
+        893.98388671875
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32697
+    },
+    {
+      "active_ms": 18796.9305555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8288.79877777784,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1463.52709960938,
+        916.4775390625
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32807
+    },
+    {
+      "active_ms": 18905.5738888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8180.1554444445,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1471.9130859375,
+        937.457336425781
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 32917
+    },
+    {
+      "active_ms": 19014.6647979797,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 8071.06453535359,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1484.51538085938,
+        956.335815429688
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33028
+    },
+    {
+      "active_ms": 19124.2032828282,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7961.5260505051,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1500.42041015625,
+        963.913696289063
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33142
+    },
+    {
+      "active_ms": 19234.1355555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7851.59377777783,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1518.01574707031,
+        943.160583496094
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33254
+    },
+    {
+      "active_ms": 19345.1393333333,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7740.59000000005,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1535.64709472656,
+        928.051696777344
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33367
+    },
+    {
+      "active_ms": 19456.2504444444,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7629.47888888893,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1552.4599609375,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33477
+    },
+    {
+      "active_ms": 19567.3615555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7518.36777777782,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1566.84094238281,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33589
+    },
+    {
+      "active_ms": 19678.4726666666,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7407.25666666671,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1578.67053222656,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33698
+    },
+    {
+      "active_ms": 19790.2322222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7295.49711111115,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.72631835938,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33818
+    },
+    {
+      "active_ms": 19918.4652222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7167.26411111115,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.72631835938,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 33947
+    },
+    {
+      "active_ms": 20038.0416666666,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 7047.68766666671,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.72631835938,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34055
+    },
+    {
+      "active_ms": 20153.0498888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6932.67944444448,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.72631835938,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34163
+    },
+    {
+      "active_ms": 20261.4288888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6824.30044444448,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.72631835938,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34274
+    },
+    {
+      "active_ms": 20371.4496666666,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6714.27966666671,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.72631835938,
+        928.050048828125
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34383
+    },
+    {
+      "active_ms": 20482.3564444444,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6603.37288888893,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1587.61315917969,
+        930.485534667969
+      ],
+      "player_hp": 97.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34493
+    },
+    {
+      "active_ms": 20592.4592222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6493.27011111115,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1596.25146484375,
+        933.632995605469
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34603
+    },
+    {
+      "active_ms": 20695.1265555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6390.60277777782,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1596.25146484375,
+        933.632995605469
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34703
+    },
+    {
+      "active_ms": 20796.9305555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6288.79877777782,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1596.25146484375,
+        933.632995605469
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34809
+    },
+    {
+      "active_ms": 20900.6342592592,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6185.09507407412,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1596.25146484375,
+        933.632995605469
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 34915
+    },
+    {
+      "active_ms": 21004.3379629629,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 6081.39137037041,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1596.25146484375,
+        933.632995605469
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35020
+    },
+    {
+      "active_ms": 21165.4608888888,
+      "actors": 58,
+      "attack_cd": 236.666666666667,
+      "crash": 0.0,
+      "high": 5920.26844444449,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1569.8173828125,
+        929.073791503906
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35329
+    },
+    {
+      "active_ms": 21266.1458888888,
+      "actors": 58,
+      "attack_cd": 135.981666666666,
+      "crash": 0.0,
+      "high": 5819.58344444448,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1588.95397949219,
+        937.784423828125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35416
+    },
+    {
+      "active_ms": 21376.9962222222,
+      "actors": 58,
+      "attack_cd": 25.1313333333327,
+      "crash": 0.0,
+      "high": 5708.73311111115,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1573.61865234375,
+        941.733642578125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35529
+    },
+    {
+      "active_ms": 21486.5357777777,
+      "actors": 58,
+      "attack_cd": 266.016,
+      "crash": 0.0,
+      "high": 5599.1935555556,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1582.326171875,
+        949.280334472656
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35673
+    },
+    {
+      "active_ms": 21586.5357777777,
+      "actors": 58,
+      "attack_cd": 166.016,
+      "crash": 0.0,
+      "high": 5499.1935555556,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1597.88745117188,
+        949.234130859375
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35788
+    },
+    {
+      "active_ms": 21687.3671111111,
+      "actors": 58,
+      "attack_cd": 65.1846666666665,
+      "crash": 0.0,
+      "high": 5398.36222222226,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1614.15551757813,
+        946.698974609375
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35895
+    },
+    {
+      "active_ms": 21791.6277777777,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 5294.1015555556,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1635.18969726563,
+        941.0771484375
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 35979
+    },
+    {
+      "active_ms": 21902.7777777777,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 5182.9515555556,
+      "mode": "playing",
+      "phase": 2,
+      "player": [
+        1623.99194335938,
+        946.077392578125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 91.0,
+      "wall_ms": 36090
+    },
+    {
+      "active_ms": 22082.5471111111,
+      "actors": 58,
+      "attack_cd": 186.666666666667,
+      "crash": 0.0,
+      "high": 5003.18222222226,
+      "mode": "playing",
+      "phase": 3,
+      "player": [
+        1605.91320800781,
+        919.316833496094
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 42.0,
+      "wall_ms": 36402
+    },
+    {
+      "active_ms": 22199.4734444444,
+      "actors": 58,
+      "attack_cd": 69.7403333333328,
+      "crash": 0.0,
+      "high": 4886.25588888893,
+      "mode": "playing",
+      "phase": 3,
+      "player": [
+        1608.99621582031,
+        916.752258300781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 42.0,
+      "wall_ms": 36499
+    },
+    {
+      "active_ms": 22306.5682222222,
+      "actors": 58,
+      "attack_cd": 303.458,
+      "crash": 0.0,
+      "high": 4779.16111111115,
+      "mode": "playing",
+      "phase": 3,
+      "player": [
+        1631.17272949219,
+        915.192138671875
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 1.0,
+      "wall_ms": 36632
+    },
+    {
+      "active_ms": 22409.5345555555,
+      "actors": 58,
+      "attack_cd": 200.491666666667,
+      "crash": 0.0,
+      "high": 4676.19477777782,
+      "mode": "playing",
+      "phase": 3,
+      "player": [
+        1631.29016113281,
+        909.775512695313
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 1.0,
+      "wall_ms": 36745
+    },
+    {
+      "active_ms": 22513.7012222222,
+      "actors": 58,
+      "attack_cd": 96.325,
+      "crash": 0.0,
+      "high": 4572.02811111115,
+      "mode": "playing",
+      "phase": 3,
+      "player": [
+        1625.44702148438,
+        910.369018554688
+      ],
+      "player_hp": 90.0,
+      "tony_hp": 1.0,
+      "wall_ms": 36859
+    },
+    {
+      "active_ms": 22614.4275555555,
+      "actors": 58,
+      "attack_cd": 315.683000000001,
+      "crash": 0.0,
+      "high": 4471.30177777782,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 36992
+    },
+    {
+      "active_ms": 22714.4275555555,
+      "actors": 58,
+      "attack_cd": 215.683000000001,
+      "crash": 0.0,
+      "high": 4371.30177777782,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37206
+    },
+    {
+      "active_ms": 22818.6308888888,
+      "actors": 58,
+      "attack_cd": 111.479666666667,
+      "crash": 0.0,
+      "high": 4267.09844444448,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37285
+    },
+    {
+      "active_ms": 22924.4275555555,
+      "actors": 58,
+      "attack_cd": 5.68300000000053,
+      "crash": 0.0,
+      "high": 4161.30177777782,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37382
+    },
+    {
+      "active_ms": 23044.3616464646,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 4041.36768686872,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37503
+    },
+    {
+      "active_ms": 23164.4354949494,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3921.29383838387,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37625
+    },
+    {
+      "active_ms": 23287.1548282828,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3798.57450505054,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37746
+    },
+    {
+      "active_ms": 23390.5715555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3695.15777777781,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37866
+    },
+    {
+      "active_ms": 23504.8548888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3580.87444444448,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 37976
+    },
+    {
+      "active_ms": 23614.2502222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3471.47911111114,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38072
+    },
+    {
+      "active_ms": 23735.0772222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3350.65211111115,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38192
+    },
+    {
+      "active_ms": 23856.6432222222,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3229.08611111115,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38314
+    },
+    {
+      "active_ms": 23975.698070707,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 3110.0312626263,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38433
+    },
+    {
+      "active_ms": 24093.8002698412,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2991.9290634921,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38553
+    },
+    {
+      "active_ms": 24212.8478888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2872.88144444448,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38679
+    },
+    {
+      "active_ms": 24332.9537089946,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2752.77562433866,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38801
+    },
+    {
+      "active_ms": 24453.324079365,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2632.40525396829,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 38925
+    },
+    {
+      "active_ms": 24573.6944497354,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2512.03488359792,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39046
+    },
+    {
+      "active_ms": 24680.2175555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2405.51177777781,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.94030761719,
+        895.105773925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39156
+    },
+    {
+      "active_ms": 24796.5665555555,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 2289.16277777781,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1637.31970214844,
+        874.164672851563
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39273
+    },
+    {
+      "active_ms": 24906.697111111,
+      "actors": 58,
+      "attack_cd": 285.775444444444,
+      "crash": 0.0,
+      "high": 2179.03222222225,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.95703125,
+        865.531188964844
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39410
+    },
+    {
+      "active_ms": 25009.4877777777,
+      "actors": 58,
+      "attack_cd": 182.984777777778,
+      "crash": 0.0,
+      "high": 2076.24155555559,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.95703125,
+        865.531188964844
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39511
+    },
+    {
+      "active_ms": 25112.4073535353,
+      "actors": 58,
+      "attack_cd": 80.0652020202027,
+      "crash": 0.0,
+      "high": 1973.32197979801,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.53271484375,
+        849.651489257813
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39616
+    },
+    {
+      "active_ms": 25215.4376565656,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 1870.29167676771,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39723
+    },
+    {
+      "active_ms": 25327.3905185184,
+      "actors": 58,
+      "attack_cd": 228.047138047138,
+      "crash": 0.0,
+      "high": 1758.33881481485,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39882
+    },
+    {
+      "active_ms": 25434.3563703703,
+      "actors": 58,
+      "attack_cd": 121.081286195286,
+      "crash": 0.0,
+      "high": 1651.37296296299,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 39994
+    },
+    {
+      "active_ms": 25536.6497777777,
+      "actors": 58,
+      "attack_cd": 18.7878787878789,
+      "crash": 0.0,
+      "high": 1549.07955555559,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40096
+    },
+    {
+      "active_ms": 25640.3534814814,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 1445.37585185188,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40197
+    },
+    {
+      "active_ms": 25744.0571851851,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 1341.67214814818,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40299
+    },
+    {
+      "active_ms": 25847.7608888888,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 1237.96844444448,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40402
+    },
+    {
+      "active_ms": 25951.2962424242,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 1134.43309090912,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40503
+    },
+    {
+      "active_ms": 26053.148094276,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 1032.58123905727,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40605
+    },
+    {
+      "active_ms": 26156.1783973063,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 929.550936026967,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40704
+    },
+    {
+      "active_ms": 26259.2087003366,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 826.520632996664,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40804
+    },
+    {
+      "active_ms": 26360.7238518518,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 725.005481481513,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1636.02734375,
+        830.741577148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 40909
+    },
+    {
+      "active_ms": 26512.2390033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 599.247905723937,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1628.48559570313,
+        854.314575195313
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41183
+    },
+    {
+      "active_ms": 26620.2940033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 491.192905723937,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1620.33630371094,
+        879.786376953125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41272
+    },
+    {
+      "active_ms": 26733.1723367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 378.314572390604,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1611.82312011719,
+        906.395080566406
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41376
+    },
+    {
+      "active_ms": 26836.2974795574,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 275.189429533461,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.52624511719,
+        929.201965332031
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41479
+    },
+    {
+      "active_ms": 26960.9069124578,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 150.579996633028,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1604.52624511719,
+        929.201965332031
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41604
+    },
+    {
+      "active_ms": 27084.5463367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 26.940572390604,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1592.83850097656,
+        930.06298828125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41730
+    },
+    {
+      "active_ms": 27186.0614882154,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7925.42542087545,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1579.77758789063,
+        930.259338378906
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41842
+    },
+    {
+      "active_ms": 27301.0486700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7810.43823905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1572.70349121094,
+        930.129638671875
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 41963
+    },
+    {
+      "active_ms": 27405.8473367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7705.63957239061,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1565.50073242188,
+        929.958374023438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42063
+    },
+    {
+      "active_ms": 27513.3473367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7598.13957239061,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1558.1123046875,
+        929.78271484375
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42164
+    },
+    {
+      "active_ms": 27620.0140033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7491.47290572394,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1550.78125,
+        929.608459472656
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42263
+    },
+    {
+      "active_ms": 27744.9089124579,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7366.57799663303,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1542.19702148438,
+        929.404479980469
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42388
+    },
+    {
+      "active_ms": 27867.2333367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7244.25357239061,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1533.78967285156,
+        929.204711914063
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42511
+    },
+    {
+      "active_ms": 27989.1563367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7122.33057239061,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1525.40979003906,
+        929.005615234375
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42632
+    },
+    {
+      "active_ms": 28108.97803367,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 7002.50887542091,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1517.17456054688,
+        928.809875488281
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42757
+    },
+    {
+      "active_ms": 28230.3874276094,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6881.09948148152,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1508.83020019531,
+        928.611633300781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 42882
+    },
+    {
+      "active_ms": 28351.5995488215,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6759.8873602694,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1501.05798339844,
+        928.427185058594
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43001
+    },
+    {
+      "active_ms": 28472.8116700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6638.67523905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1495.38696289063,
+        927.977416992188
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43121
+    },
+    {
+      "active_ms": 28594.0237912457,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6517.46311784515,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1487.24365234375,
+        926.2080078125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43246
+    },
+    {
+      "active_ms": 28715.6734276094,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6395.81348148151,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1479.07092285156,
+        924.432189941406
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43367
+    },
+    {
+      "active_ms": 28838.4007003366,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6273.08620875424,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1470.82580566406,
+        922.640686035156
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43490
+    },
+    {
+      "active_ms": 28959.4928518518,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6151.99405723909,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1462.69055175781,
+        920.873046875
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43608
+    },
+    {
+      "active_ms": 29080.7049730639,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 6030.78193602697,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1454.54724121094,
+        919.103637695313
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43726
+    },
+    {
+      "active_ms": 29204.6336700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5906.85323905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1446.22143554688,
+        917.29443359375
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43864
+    },
+    {
+      "active_ms": 29309.3936700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5802.09323905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1439.18322753906,
+        915.765014648438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 43970
+    },
+    {
+      "active_ms": 29417.3668215488,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5694.12008754212,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1431.92919921875,
+        914.188781738281
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44076
+    },
+    {
+      "active_ms": 29522.7406700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5588.74623905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1424.84985351563,
+        912.650329589844
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44182
+    },
+    {
+      "active_ms": 29629.1806700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5482.30623905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1417.69885253906,
+        911.096374511719
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44288
+    },
+    {
+      "active_ms": 29755.3456700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5356.14123905727,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1412.67736816406,
+        908.878784179688
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44410
+    },
+    {
+      "active_ms": 29855.6243367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5255.8625723906,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1407.76159667969,
+        904.045227050781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44498
+    },
+    {
+      "active_ms": 29962.5493367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5148.9375723906,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1402.51989746094,
+        898.891357421875
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44606
+    },
+    {
+      "active_ms": 30073.5257811447,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 5037.96112794616,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1397.07971191406,
+        893.542236328125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44732
+    },
+    {
+      "active_ms": 30186.3241144781,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4925.16279461282,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1391.55017089844,
+        888.105346679688
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44845
+    },
+    {
+      "active_ms": 30298.2251649831,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4813.26174410778,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1386.06469726563,
+        882.711730957031
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 44956
+    },
+    {
+      "active_ms": 30412.5140033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4698.97290572394,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1380.46203613281,
+        877.202941894531
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45066
+    },
+    {
+      "active_ms": 30524.1301649831,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4587.35674410777,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1374.99047851563,
+        871.823059082031
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45175
+    },
+    {
+      "active_ms": 30635.2412760942,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4476.24563299666,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1370.45361328125,
+        867.361938476563
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45285
+    },
+    {
+      "active_ms": 30746.3523872053,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4365.13452188555,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1369.18420410156,
+        866.113891601563
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45391
+    },
+    {
+      "active_ms": 30857.4634983164,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4254.02341077443,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1363.09680175781,
+        865.575073242188
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45504
+    },
+    {
+      "active_ms": 30968.5746094276,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4142.91229966332,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1355.48754882813,
+        864.901550292969
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45618
+    },
+    {
+      "active_ms": 31080.6958215488,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 4030.79108754211,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1347.80920410156,
+        864.221923828125
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45733
+    },
+    {
+      "active_ms": 31193.8162760942,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3917.67063299665,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1340.0625,
+        863.536254882813
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45846
+    },
+    {
+      "active_ms": 31306.9475892255,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3804.53931986534,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1332.31506347656,
+        862.850524902344
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 45960
+    },
+    {
+      "active_ms": 31420.5839528619,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3690.90295622898,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1324.53308105469,
+        862.161743164063
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46078
+    },
+    {
+      "active_ms": 31540.2036700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3571.28323905726,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1316.34130859375,
+        861.436706542969
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46201
+    },
+    {
+      "active_ms": 31641.9106700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3469.57623905726,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1309.37622070313,
+        860.820373535156
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46302
+    },
+    {
+      "active_ms": 31745.5066700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3365.98023905726,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1302.28173828125,
+        860.192565917969
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46403
+    },
+    {
+      "active_ms": 31847.0218215488,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3264.46508754211,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1295.32983398438,
+        859.577331542969
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46502
+    },
+    {
+      "active_ms": 31949.6965791245,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3161.79032996635,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1288.29846191406,
+        858.955017089844
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46602
+    },
+    {
+      "active_ms": 32050.4541548821,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 3061.03275420877,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1281.3984375,
+        858.344421386719
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46702
+    },
+    {
+      "active_ms": 32151.3000033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2960.18690572392,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1274.49243164063,
+        857.733276367188
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46804
+    },
+    {
+      "active_ms": 32252.6440033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2858.84290572392,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1267.55224609375,
+        857.119140625
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 46905
+    },
+    {
+      "active_ms": 32353.6170033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2757.86990572392,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1260.63745117188,
+        856.507202148438
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47006
+    },
+    {
+      "active_ms": 32456.6473063972,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2654.83960269362,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1253.58178710938,
+        855.882690429688
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47110
+    },
+    {
+      "active_ms": 32558.92003367,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2552.5668754209,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1246.57800292969,
+        855.262817382813
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47210
+    },
+    {
+      "active_ms": 32659.6050033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2451.88190572393,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1239.68298339844,
+        854.652648925781
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47310
+    },
+    {
+      "active_ms": 32760.3660033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2351.12090572393,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1232.78259277344,
+        854.0419921875
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47408
+    },
+    {
+      "active_ms": 32879.3793367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2232.10757239059,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1224.63232421875,
+        853.320678710938
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47524
+    },
+    {
+      "active_ms": 32998.3363367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 2113.15057239059,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1216.48596191406,
+        852.599731445313
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47642
+    },
+    {
+      "active_ms": 33113.0505589225,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1998.43635016837,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1208.63012695313,
+        851.904418945313
+      ],
+      "player_hp": 90.0,
+      "tony_hp": -39.0,
+      "wall_ms": 47757
+    },
+    {
+      "active_ms": 33259.2663367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1852.22057239059,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 90.8772946666667,
+      "tony_hp": -39.0,
+      "wall_ms": 47992
+    },
+    {
+      "active_ms": 33362.8363367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1748.65057239059,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 91.4987146666667,
+      "tony_hp": -39.0,
+      "wall_ms": 48080
+    },
+    {
+      "active_ms": 33479.0596700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1632.42723905726,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 92.1960546666667,
+      "tony_hp": -39.0,
+      "wall_ms": 48188
+    },
+    {
+      "active_ms": 33585.5183843193,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1525.96852477154,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 92.834806952381,
+      "tony_hp": -39.0,
+      "wall_ms": 48296
+    },
+    {
+      "active_ms": 33693.3453843193,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1418.14152477154,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 93.481768952381,
+      "tony_hp": -39.0,
+      "wall_ms": 48406
+    },
+    {
+      "active_ms": 33800.4882414622,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1310.99866762869,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 94.1246260952381,
+      "tony_hp": -39.0,
+      "wall_ms": 48515
+    },
+    {
+      "active_ms": 33907.631098605,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1203.85581048583,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 94.7674832380952,
+      "tony_hp": -39.0,
+      "wall_ms": 48623
+    },
+    {
+      "active_ms": 34014.7739557479,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 1096.71295334297,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 95.4103403809524,
+      "tony_hp": -39.0,
+      "wall_ms": 48730
+    },
+    {
+      "active_ms": 34121.9168128908,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 989.570096200116,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 96.0531975238095,
+      "tony_hp": -39.0,
+      "wall_ms": 48842
+    },
+    {
+      "active_ms": 34230.2501462241,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 881.236762866782,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 96.7031975238095,
+      "tony_hp": -39.0,
+      "wall_ms": 48952
+    },
+    {
+      "active_ms": 34339.0596700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 772.427239057259,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 97.3560546666666,
+      "tony_hp": -39.0,
+      "wall_ms": 49062
+    },
+    {
+      "active_ms": 34450.8360033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 660.650905723925,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 98.0267126666667,
+      "tony_hp": -39.0,
+      "wall_ms": 49176
+    },
+    {
+      "active_ms": 34576.5170033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 534.969905723925,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 98.7807986666667,
+      "tony_hp": -39.0,
+      "wall_ms": 49304
+    },
+    {
+      "active_ms": 34686.4190033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 425.067905723925,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 99.4402106666667,
+      "tony_hp": -39.0,
+      "wall_ms": 49415
+    },
+    {
+      "active_ms": 34793.6093367002,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 317.877572390591,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": -39.0,
+      "wall_ms": 49517
+    },
+    {
+      "active_ms": 34901.1713367003,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 210.315572390591,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": -39.0,
+      "wall_ms": 49619
+    },
+    {
+      "active_ms": 35007.8380033669,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 103.648905723925,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": -39.0,
+      "wall_ms": 49720
+    },
+    {
+      "active_ms": 35120.0506700336,
+      "actors": 58,
+      "attack_cd": 0.0,
+      "crash": 0.0,
+      "high": 0.0,
+      "mode": "playing",
+      "phase": 0,
+      "player": [
+        1207.04699707031,
+        851.764282226563
+      ],
+      "player_hp": 100.0,
+      "tony_hp": -39.0,
+      "wall_ms": 49830
+    }
+  ],
+  "schema": 1,
+  "scope": "actual native Tony fight from fresh fists/HP, verified source rewards, real purchase/offenses/smoke/input/physics and same18s/8s loop; not full campaign/Web/performance acceptance",
+  "transactions": [
+    {
+      "after_cash": 25,
+      "before_cash": 35,
+      "cost": 10,
+      "option": "buy a rock"
+    },
+    {
+      "after_cash": 20,
+      "before_cash": 25,
+      "cost": 5,
+      "option": "short him"
+    },
+    {
+      "after_cash": 15,
+      "before_cash": 20,
+      "cost": 5,
+      "option": "short him"
+    },
+    {
+      "after_cash": 10,
+      "before_cash": 15,
+      "cost": 5,
+      "option": "short him"
+    }
+  ],
+  "walking": [
+    {
+      "blockers": [
+        "meter_maid"
+      ],
+      "graph_points": 14,
+      "route_points": 6,
+      "wall_ms": 13251
+    },
+    {
+      "blockers": [
+        "meter_maid"
+      ],
+      "graph_points": 13,
+      "route_points": 5,
+      "wall_ms": 15988
+    },
+    {
+      "blockers": [
+        "meter_maid"
+      ],
+      "graph_points": 13,
+      "route_points": 5,
+      "wall_ms": 16250
+    },
+    {
+      "blockers": [
+        "jogger"
+      ],
+      "graph_points": 8,
+      "route_points": 5,
+      "wall_ms": 44363
+    }
+  ],
+  "weapon_audit": {
+    "accepted_attacks": 12,
+    "errors": [],
+    "fists_only": false,
+    "ok": true,
+    "transitions": [
+      {
+        "active_ms": 14701.6252222222,
+        "actor_id": "sherri_boss_3d_-9223371435727119607_1",
+        "from": "fists",
+        "to": "pipe",
+        "wall_ms": 28634
+      },
+      {
+        "active_ms": 22610.1105555555,
+        "actor_id": "tony",
+        "from": "pipe",
+        "to": "shoe",
+        "wall_ms": 36957
+      }
+    ],
+    "victory": true,
+    "weapons_used": [
+      "fists",
+      "pipe"
+    ]
+  }
+}

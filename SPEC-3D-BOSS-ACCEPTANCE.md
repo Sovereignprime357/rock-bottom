@@ -171,7 +171,16 @@ rejects duplicate/substituted add identities and rejects non-finite loop timing.
 This checks the acceptance boundary, not a substitute simulated fight.
 
 Root command (pinned4.5.1 native):
-`Godot_v4.5.1-stable_win64_console.exe --path game3d --script res://tests/boss_acceptance_probe.gd -- --output=<directory>`
+`Godot_v4.5.1-stable_win64_console.exe --path game3d --script res://tests/boss_acceptance_probe.gd -- --qa-full --output=<directory>`
+
+The `--qa-full` launch flag is required: FullScene reads QA mode from user arguments
+in _ready, replacing any pre-tree property assignment. Without it, ordinary resume
+automatically captures the mouse and the probe's explicit capture-click requirement
+correctly fails. The332be27 release invocation first omitted this flag, won the actual
+fight in11.795s with239 Tony damage, but failed only that input-contract condition.
+Keep its failed report and repeat the correctly launched scenario; do not relax the
+validator or count an unlabeled input branch as the required capture test. The probe
+sets its isolated save path before scenario actions regardless of that launch flag.
 
 Headless report-contract gate (does not execute a fight):
 `Godot_v4.5.1-stable_win64_console.exe --headless --path game3d --script res://tests/test_boss_acceptance_contract.gd`
