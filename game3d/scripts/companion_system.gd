@@ -296,18 +296,31 @@ func tick_world(dt_ms: float) -> bool:
 	return true
 func _reveal_pending() -> bool:
 	if _pending_reveal.is_empty(): return true
-	var pile: Dictionary = _pending_reveal.pile
+	# Identity witnesses must retain the raw objects, not value-equal deep copies.
+	var owner: RefCounted = host
+	if owner == null: return false
+	var player_epoch: Dictionary = owner.p
+	var state_epoch: Dictionary = owner.s
+	var pending: Dictionary = _pending_reveal
+	var pile: Dictionary = pending.pile
 	var present: bool = false
-	for current: Dictionary in host.cash_piles:
+	for current: Dictionary in owner.cash_piles:
 		if is_same(current,pile): present = true; break
 	if not present or pile.get("collected",false): _pending_reveal.clear(); return true
 	var spatial: Object = _object(_spatial_ref,&"stage_cash_pickup")
 	if spatial == null: return false
-	var origin: Vector2 = _pending_reveal.position
+	var origin: Vector2 = pending.position
 	var point: Variant = spatial.call(&"stage_cash_pickup",origin,RECOVERY_PX)
+	if not is_same(host,owner) or not is_same(owner.p,player_epoch) or not is_same(owner.s,state_epoch) or not is_same(_pending_reveal,pending): return false
+	if not is_same(pending.get("pile"),pile) or not pending.get("position") is Vector2 or pending.position != origin: return false
+	# The callback may consume/remove a pile without replacing its pending object.
+	present = false
+	for current: Dictionary in owner.cash_piles:
+		if is_same(current,pile): present = true; break
+	if not present or pile.get("collected",false): _pending_reveal.clear(); return false
 	if not _valid_point(point,origin): return false
 	pile.x = point.x; pile.y = point.y; _pending_reveal.clear()
-	host.emit_event("cash_revealed",{"pile_id":pile.id})
+	host.emit_event("cash_revealed",{"pile_id":pile.id,"feedback":[{"recipe":"possum_reveal","source_point":Vector2(pile.x,pile.y),"anchor_kind":"ground"}]})
 	_toast("the possum has placed something for you.\n(look around your feet.)",2400)
 	return true
 func tick_possum_reveal(body: Dictionary,dt_ms: float) -> bool:

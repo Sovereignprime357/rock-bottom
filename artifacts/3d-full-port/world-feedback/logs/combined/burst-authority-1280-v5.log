@@ -1,0 +1,18 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+3D FULL STARTUP: {"elapsed_usec":11067472,"resources":{"build_usec":5487509,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":3680157,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":6244388,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":1138594,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+ERROR: Feedback visual: birth serials expire at real source boundary ranged-impact
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/world_feedback_visual_probe.gd:47)
+       [1] _context (res://tests/world_feedback_visual_probe.gd:399)
+       [2] _advance_until (res://tests/world_feedback_visual_probe.gd:346)
+ERROR: Feedback visual: birth serials expire at real source boundary fallen-impact
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/world_feedback_visual_probe.gd:47)
+       [1] _context (res://tests/world_feedback_visual_probe.gd:399)
+       [2] _advance_until (res://tests/world_feedback_visual_probe.gd:346)
+ACTUAL DOMAIN FEEDBACK VISUAL: FAIL authority 674 checks; 13 contexts; 35 captures

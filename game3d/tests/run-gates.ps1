@@ -123,6 +123,14 @@ Invoke-Gate -Name 'karaoke-acceptance-contract' -GodotArgs @('--script', 'res://
 Invoke-Gate -Name 'fixture-motion' -GodotArgs @('--script', 'res://tests/test_fixture_motion.gd', '--quit-after', '6000') -PassPattern '3D FIXTURE MOTION GATE: PASS'
 Invoke-Gate -Name 'fixture-motion-world' -GodotArgs @('--script', 'res://tests/test_fixture_motion_world.gd', '--quit-after', '6000') -PassPattern '3D FIXTURE MOTION WORLD GATE: PASS'
 Invoke-Gate -Name 'startup-parity' -GodotArgs @('--script', 'res://tests/test_startup_parity.gd', '--quit-after', '6000') -PassPattern '3D STARTUP PARITY GATE: PASS'
+Invoke-Gate -Name 'world-feedback' -GodotArgs @('--script', 'res://tests/test_world_feedback.gd', '--quit-after', '6000') -PassPattern 'WORLD FEEDBACK DRAFT: PASS'
+Invoke-Gate -Name 'feedback-integration' -GodotArgs @('--script', 'res://tests/test_world_feedback_integration.gd', '--quit-after', '6000') -PassPattern 'WORLD FEEDBACK INTEGRATION DRAFT: PASS'
+Invoke-Gate -Name 'companion-reveal-epoch' -GodotArgs @('--script', 'res://tests/test_companion_reveal_epoch.gd', '--quit-after', '6000') -PassPattern 'COMPANION REVEAL EPOCH: PASS'
+Invoke-Gate -Name 'world-dust' -GodotArgs @('--script', 'res://tests/test_world_dust.gd', '--quit-after', '6000') -PassPattern 'WORLD DUST DRAFT: PASS'
+Invoke-Gate -Name 'dust-runtime' -GodotArgs @('--script', 'res://tests/test_world_dust_runtime.gd', '--quit-after', '6000') -PassPattern 'WORLD DUST RUNTIME DRAFT: PASS'
+Invoke-Gate -Name 'feedback-art' -GodotArgs @('--script', 'res://tests/test_feedback_view_art.gd', '--quit-after', '6000') -PassPattern '3D FEEDBACK VIEW ART GATE: PASS'
+Invoke-Gate -Name 'dust-visual-contract' -GodotArgs @('--script', 'res://tests/test_world_dust_visual_contract.gd', '--quit-after', '6000') -PassPattern 'WORLD DUST VISUAL CONTRACT: PASS'
+Invoke-Gate -Name 'feedback-visual-contract' -GodotArgs @('--script', 'res://tests/test_world_feedback_visual_contract.gd', '--quit-after', '6000') -PassPattern 'ACTUAL DOMAIN FEEDBACK VISUAL CONTRACT: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
@@ -163,6 +171,8 @@ foreach ($entry in @(
     @{ Name = 'district-grade-oracle'; Script = 'district-grade-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'fixture-motion-oracle'; Script = '3d-fixture-motion-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'startup-oracle'; Script = '3d-startup-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'world-feedback-oracle'; Script = 'world-feedback-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'world-dust-oracle'; Script = 'world-dust-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -170,4 +180,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 117/117 PASS (import clean; 77 engine suites and 40 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 127/127 PASS (import clean; 85 engine suites and 42 source/parity checks; complete-port acceptance remains tracked separately)'

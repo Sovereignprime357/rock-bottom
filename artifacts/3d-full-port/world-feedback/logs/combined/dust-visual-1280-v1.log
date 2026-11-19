@@ -1,0 +1,19 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3080
+
+3D FULL STARTUP: {"elapsed_usec":11146954,"resources":{"build_usec":5372992,"templates":72,"total":72,"weight_cache_hits":1125426,"weight_solves":233115},"stages":[{"completed":1,"elapsed_usec":3873336,"stage":"the block.","total":1},{"completed":72,"elapsed_usec":6107236,"stage":"the neighbors.","total":72},{"completed":56,"elapsed_usec":1161822,"stage":"everybody has a place.","total":56}]}
+3D FULL SCENE READY: 56 source actors; 72 visual templates
+ERROR: Dust visual: live wall blocks every actual mote vertex from clear eye
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/world_dust_visual_probe.gd:29)
+       [1] _case (res://tests/world_dust_visual_probe.gd:335)
+       [2] _capture (res://tests/world_dust_visual_probe.gd:240)
+ERROR: Dust visual: all eight contexts complete in canonical order
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/world_dust_visual_probe.gd:29)
+       [1] _run (res://tests/world_dust_visual_probe.gd:400)
+       [2] _case (res://tests/world_dust_visual_probe.gd:352)
+       [3] _capture (res://tests/world_dust_visual_probe.gd:240)
+ACTUAL FULLSCENE DUST VISUAL: FAIL; 319 checks; 7 contexts; 15 captures; human visual review pending

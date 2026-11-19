@@ -229,7 +229,8 @@ func _apply_loot(item: Dictionary,id: String) -> void:
 		"event": _toast("a possum.\nhe is annoyed.\nhe leaves through the lid.")
 		"rats":
 			_toast("the rats are upset.\nthey have lives.",2000)
-			host.emit_event("prop_effect",{"id":id,"kind":"rats","count":10})
+			var source_prop: Dictionary = _prop(id)
+			host.emit_event("prop_effect",{"id":id,"kind":"rats","count":10,"feedback":[{"recipe":"dumpster_rats","source_point":Vector2(source_prop.x,source_prop.y),"source_rect":Rect2(source_prop.x,source_prop.y,source_prop.w,source_prop.h),"anchor_kind":"ground","width":float(source_prop.w)}]})
 		"junkdrop":
 			inventory.append_item("junk","a piece of junk")
 			_toast("+ a piece of junk.\n(pete will take it. for one dollar.)",2200)

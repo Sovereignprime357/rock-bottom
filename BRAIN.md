@@ -3070,3 +3070,63 @@ inventory→Escape, and arrow movement were observed. Known Chromium pointer-loc
 UnknownError persists with right-mouse fallback; no hardware-capture/audio claim.
 The identical648 release workload retains60 but still fails16ms at25.474/22.038ms
 scene p95; both complete frozen reports and exact overlays/provenance are retained.
+
+## 2026-11-19 — resumed usage, effects and campaign acceptance in progress
+
+Kept production at pushed2a1f6ca while composing the eighteen source feedback
+recipes, walking dust, ambient motes and original flash/splinter meshes in one
+isolated candidate. Root alone runs Godot and browser checks. Native dust passes
+all eight actual input/physics contexts at1280 and960. Actual Web passes356 checks,
+eight contexts and17 original PNGs at each size, zero engine/browser errors;
+downloaded JSON/PNGs are byte-hash verified. Initial Web import's missing empty
+exclude_filter is retained and corrected in the test preset only.
+
+The burst probe formerly froze ActorPose while Runtime advanced. Earlier v5/v6
+effect/physical receipts stay valid within their documented limits, but those
+images cannot establish active actor coats/actions. Revised probe advances poses
+once per admitted Runtime delta, leaves capture pairs clock-frozen, and records
+current Director/rig/layer correspondence. Its219-check contract passes. The960
+HUD proof now combines exact opaque meter fill with glyphs, preserving the12-pixel
+minimum; the original3-glyph failure is not retroactively passed.
+
+Campaign native-v1 earned its resources then died from withdrawal during alley
+installation. Native-v2 uses ordinary Office cot recovery; actual sleep healed
+to100HP and advanced day3→4, but its observer failed to see day_started because
+the inherited Office trace filters that event. Preserve both failed runs. A
+separate bounded read-only day-event observer is reviewed; it needs the next
+contract and native replay. No gameplay HP/day/RNG/timer was repaired by a test.
+
+Exact weighted-vertex indexing remains isolated. Its first two engine contracts
+retained failures in renderer-resource comparison despite all72 raw expanded
+tuples/poses passing; generated tangent channels need correct index expansion
+in the test reader. No reduced-triangle, speed or performance acceptance claim.
+Measured current60-actor frame budget still fails16ms. Next: finish live-pose
+native/Web burst views, campaign replay, indexing diagnostics, approved scoped
+parity bookkeeping, then integrate/regress/export/register/commit/push.
+
+### Effects checkpoint validation
+
+Promoted the exact reviewed effects composition. The final runner passes 127/127
+(85 engine suites plus 42 source/parity checks); the original runner passes 19/19.
+Full Windows and Web exports pass with clean import/export logs. The Web pack is
+`c1b71f9563b24a46305b0236c3b1241d5f62c2e2c8bc4b6be0906d71c698da88`.
+Actual refreshed browser play observed wake, movement, pause/continue, journal and
+inventory Escape returns, and further movement. The ordinary Save button was
+clicked in the isolated QA namespace, but this smoke does not claim a storage
+round-trip. Chromium's existing pointer-capture UnknownError recurred; the visible
+right-mouse fallback remains. Original screenshot and logs are retained in
+`artifacts/3d-full-port/world-feedback`. No hardware-input/audio claim.
+
+Campaign native-v3 passed Tony in 3.454 seconds and observed the source ending,
+but died after the first court's three marks because its test driver navigated
+around hostile guards without defending. The entire run remains failed. A bounded
+campaign-only defensive-input revision and independently validated save-prefix
+continuation are being drafted; no damage, collision, HP or deadline is weakened.
+
+The isolated indexing contract now passes 1,047 checks across 72 templates, plus
+the original roster/startup/pose/visibility/leash regressions. Its renderer reader
+now correctly expands generated tangent channels. Native/Web indexed images and
+performance remain pending; indexing has not entered production. A separate exact
+source snapshot adds diagnostic pose timers only. Next: profile the committed
+effects build against the unchanged 60-actor / 16ms requirement, resume campaign
+acceptance, and finish reviewed additive parity metadata without verified claims.

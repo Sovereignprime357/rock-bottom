@@ -224,10 +224,16 @@ func attack_player(horizontal_forward: Vector2) -> Dictionary:
 			if float(body.get("essentialToastAt", 0.0)) <= _wall_ms:
 				body.essentialToastAt = _wall_ms + 2500.0
 				_toast(str(body.name) + " enters the hit as a clerical error.\nno displacement authorized.", 1800)
-			host.emit_event("essential_contact", {"actor_id":body.id})
+			host.emit_event("essential_contact", {"actor_id":body.id,"feedback":[{"recipe":"essential","source_point":center(body),"source_rect":Rect2(body.x,body.y,body.w,body.h),"anchor_kind":"body","actor_id":str(body.id),"source_actor":{"id":body.get("id",""),"name":body.get("name"),"sprite":body.get("sprite"),"isOmalleyFallen":body.get("isOmalleyFallen",false)}}]})
 			continue
 		var vulnerability: float = 1.25 if body.get("archetype") in ["charger", "charger_older"] and body.get("chargeState") == "cooldown" else 1.0
 		var damage: int = int(floor((14.0 + host.random_float() * 8.0 + float(weapon.dmg)) * (1.5 if host.p.rockedT > 0 else 1.0) * (1.3 if host.p.cartMounted else 1.0) * vulnerability))
+		# Capture before special death/reward and before the accepted knockback.
+		var feedback_point: Vector2 = center(body)
+		var feedback_rect := Rect2(body.x,body.y,body.w,body.h)
+		var feedback_actor_id: String = str(body.id)
+		var feedback_actor := {"id":body.get("id",""),"name":body.get("name"),"sprite":body.get("sprite"),"isOmalleyFallen":body.get("isOmalleyFallen",false)}
+		var feedback_sings: bool = weapon.get("sings",false) == true
 		if not _subtract_hp(body, damage): continue
 		body.showHp = true; body.hitFlash = 200.0; body.hitStun = 120.0
 		connected = true; rewardable = rewardable or not body.get("noComboReward", false)
@@ -243,7 +249,10 @@ func attack_player(horizontal_forward: Vector2) -> Dictionary:
 		if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
 		move_actor(body, Vector2(body.x, body.y) + forward * 8.0)
 		if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
-		host.emit_event("actor_hit", {"actor_id":body.id, "damage":damage, "weapon":host.p.weapon})
+		host.emit_event("actor_hit", {"actor_id":body.id, "damage":damage, "weapon":host.p.weapon,"feedback":[
+			{"recipe":"melee_sparks","source_point":feedback_point,"source_rect":feedback_rect,"anchor_kind":"body","actor_id":feedback_actor_id,"source_actor":feedback_actor,"sings":feedback_sings},
+			{"recipe":"melee_rust","source_point":feedback_point,"source_rect":feedback_rect,"anchor_kind":"body","actor_id":feedback_actor_id,"source_actor":feedback_actor},
+			{"recipe":"melee_flash","source_point":feedback_point,"source_rect":feedback_rect,"anchor_kind":"body","actor_id":feedback_actor_id,"source_actor":feedback_actor,"sings":feedback_sings}]})
 		if body.hp <= 0: kill_actor(body.id)
 	_resolve_prop_swing(origin,forward,reach,swing_player,swing_state)
 	if not is_same(swing_player,host.p) or not is_same(swing_state,host.s): return {"ok":false,"reason":"replaced_state"}
@@ -511,7 +520,7 @@ func tick_projectiles(dt_ms: float) -> bool:
 			_hurt_player(float(projectile.dmg), projectile.from)
 			if projectile.slowMs > 0: host.p.slowT = maxf(float(host.p.slowT), float(projectile.slowMs))
 			_sound("bottleHit" if projectile.kind == "bottle" else "holyWaterHit")
-			host.emit_event("projectile_impact", {"position":impact, "kind":projectile.kind, "player":true})
+			host.emit_event("projectile_impact", {"position":impact, "kind":projectile.kind, "player":true,"feedback":[{"recipe":"bottle_impact" if projectile.kind == "bottle" else "holy_impact","source_point":impact,"anchor_kind":"projectile"}]})
 			dead = true
 		elif collision.blocked:
 			host.emit_event("projectile_impact", {"position":collision.position, "kind":projectile.kind, "player":false})
@@ -586,6 +595,7 @@ func tick_police(dt_ms: float, wall_ms: float) -> bool:
 		if cop.radioCdT <= 0.0 and host.random_float() < 0.25 * dt_ms / 1000.0:
 			cop.radioCdT = 5000.0; cop.radioVisualT = 800.0
 			_sound("radio")
+			host.emit_event("world_feedback",{"feedback":[{"recipe":"radio","source_point":Vector2(float(cop.x)+float(cop.w)*0.5,float(cop.y)-6.0),"source_rect":Rect2(cop.x,cop.y,cop.w,cop.h),"anchor_kind":"head","actor_id":str(cop.id),"source_actor":{"id":cop.get("id",""),"name":cop.get("name"),"sprite":cop.get("sprite"),"isOmalleyFallen":cop.get("isOmalleyFallen",false)}}]})
 			_wall_queue.append({"kind":"radio", "caller":str(cop.id), "due":_wall_ms + 800.0 + host.random_float() * 4000.0})
 		if cop.get("radioVisualT", 0.0) > 0.0: cop.radioVisualT = maxf(0.0, float(cop.radioVisualT) - dt_ms)
 	return true

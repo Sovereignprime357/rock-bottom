@@ -292,7 +292,7 @@ func _tony_phase(body: Dictionary) -> void:
 		_news("BREAKING: TRE BAG TONY BARE-KNUCKLE. CALL TIME OF DEATH ALREADY.")
 		_feed("tony has no coats. tony is lunging now. like a dog.","@the_corner")
 	_sound("bossRoar"); host.s.shake = 12.0
-	host.emit_event("boss_phase_changed", {"actor_id":body.id,"phase":next,"coats_off":body.coatsOff})
+	host.emit_event("boss_phase_changed", {"actor_id":body.id,"phase":next,"coats_off":body.coatsOff,"feedback":[{"recipe":"tony_coat","source_point":Combat.center(body),"source_rect":Rect2(body.x,body.y,body.w,body.h),"anchor_kind":"body","actor_id":str(body.id),"source_actor":{"id":body.get("id",""),"name":body.get("name"),"sprite":body.get("sprite"),"isOmalleyFallen":body.get("isOmalleyFallen",false)},"phase":next}]})
 
 func _older_phase(body: Dictionary, dt: float) -> void:
 	var pct: float = float(body.hp) / float(body.maxHp)
@@ -306,7 +306,7 @@ func _older_phase(body: Dictionary, dt: float) -> void:
 		else:
 			body.berserk = true; body.grabber = true; body.chargeState = "idle"
 			_toast("he doesn't bite anymore.\nhe grabs.",3200)
-		host.emit_event("boss_phase_changed", {"actor_id":body.id,"phase":next})
+		host.emit_event("boss_phase_changed", {"actor_id":body.id,"phase":next,"feedback":[{"recipe":"older_phase","source_point":Combat.center(body),"source_rect":Rect2(body.x,body.y,body.w,body.h),"anchor_kind":"body","actor_id":str(body.id),"source_actor":{"id":body.get("id",""),"name":body.get("name"),"sprite":body.get("sprite"),"isOmalleyFallen":body.get("isOmalleyFallen",false)}}]})
 	if host.s.brutusOlderPhase >= 2:
 		body.addsT = float(body.get("addsT",0.0)) + dt
 		if body.addsT >= 8000.0:

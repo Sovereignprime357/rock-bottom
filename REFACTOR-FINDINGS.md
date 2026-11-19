@@ -1139,3 +1139,34 @@ The three new evidence directories explicitly disable Git text conversion so
 retained report/log/PNG bytes continue matching their recorded hashes across
 Windows checkouts. Source files retain the existing repository line-ending rules.
 Raw engine log whitespace is preserved; source diff whitespace checks pass.
+
+### IMPL-3D-FULL-35 — ordered world feedback and original street atmosphere
+
+Promote the reviewed current-base composition of eighteen burst recipes plus
+walking dust and ambient motes. Keep one220-slot pool/four banks/two meshes and
+materials, independent cosmetic RNG, exact source births and ordered event cursors.
+The four-triangle flash fan and asymmetric fragments retain880 maximum triangles.
+Only the named dust recipes permit their longer lifetimes. Read source shake in
+the existing district pass, with a physical-framebuffer offset bound and fixed
+camera/aim/HUD. Preserve source transaction/RNG/actor/clock behavior; reject stale
+Companion reveal commits at their current identity/epoch boundary.
+
+Central combined pure/integration/geometry and native real-upload checks pass.
+Live-pose native core452/authority664 checks pass at1280 and960; actual Web core481/
+authority699 pass at both sizes, zero engine/browser errors. Dust native339 and
+Web356 checks pass at both sizes, eight contexts/seventeen PNGs each. Original
+downloaded bytes and source-overlay provenance are retained; representative images
+were reviewed, including actual coat removal, taser pose, prop emergence, wall
+occlusion and the small-window HUD. These are disclosed staged visual fixtures,
+not earned campaign, hardware input, audio or performance acceptance.
+
+Retain earlier invalid disabled-tree physics fixtures and frozen-ActorPose images
+with explicit limits. The revised probe uses callback-only suspension, real-wall
+sentinels, admitted-time poses and separate exact opaque glyph/meter masks. Do not
+retroactively pass the old reports. Full regression/export/delivery and unchanged
+60-actor16ms acceptance remain required after this integration.
+
+Final integration validation: 127/127 3D and 19/19 original gates pass; Full
+Windows/Web exports pass. Local 8074 serves the rebuilt pack. Browser menu exits
+and movement pass with the existing pointer-capture fallback limitation retained.
+The original-byte package includes full runner/build output and manual screenshot.

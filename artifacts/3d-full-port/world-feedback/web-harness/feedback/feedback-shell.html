@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rock Bottom — actual feedback Web evidence</title>
+<style>
+body{margin:0;background:#252925;color:#d4c896;font:14px/1.4 monospace}header,section{padding:10px 14px}h1{font-size:17px;margin:0}p{margin:6px 0}button,select{font:inherit;color:inherit;background:#38433a;border:1px solid #777d6a;padding:6px;margin:4px 6px 4px 0}button:disabled,select:disabled{opacity:.45}#stage{position:relative;max-width:1280px}#canvas,#held-frame{display:block;width:100%;height:auto;background:#1a1810}#held-frame{position:absolute;inset:0}#held-frame[hidden]{display:none}#frame-label{color:#e8c040}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:330px;overflow:auto;background:#1a1810;padding:10px}.failure{color:#dc9290}
+</style>
+$GODOT_HEAD_INCLUDE
+</head><body>
+<header><h1>Actual-domain feedback — staged Web evidence</h1>
+<p id="status" role="status">NOT STARTED — select one bounded packet and size.</p>
+<label for="packet">Packet</label><select id="packet"><option value="core">A · core/props ·9 recipes</option><option value="authority">B · actors/lifecycle ·9 recipes</option></select>
+<label for="size">Framebuffer</label><select id="size"><option value="1280">1280×720</option><option value="960">960×540</option></select>
+<button id="start">Start actual engine and packet</button><button id="reload">Reload for another run</button>
+<select id="frames" disabled aria-label="Original captured Web frame"></select>
+<button id="live" disabled>Show live held canvas</button><button id="png" disabled>Download selected PNG</button><button id="json" disabled>Download JSON</button>
+<p id="frame-label">No actual framebuffer capture yet.</p>
+<p>One user-started run; explicit initial visual fixtures and fresh epoch per case. No gameplay acceptance. Capture selection does not advance the source model.</p></header>
+<div id="stage"><canvas id="canvas" width="1280" height="720" tabindex="0" data-ready="false" aria-label="Actual Godot WebGL2 rendering"></canvas><img id="held-frame" hidden alt="Original downloaded Godot Web frame; not a live replacement canvas"></div>
+<section><details open><summary>Selected real frame</summary><pre id="frame-result">No evidence.</pre></details>
+<details><summary>Complete bounded report</summary><pre id="report">No evidence.</pre></details>
+<details><summary>Engine/browser log</summary><pre id="log"></pre></details>
+<p>The source backdrop is translucent beneath HUD plates. Text-mask and transform checks distinguish world shake from HUD movement. Review images separately; machine checks never certify visual quality.</p></section>
+<script src="storage.js"></script><script src="$GODOT_URL"></script><script src="feedback-bridge.js"></script>
+<script>window.rbFeedbackConfigure($GODOT_CONFIG);</script></body></html>

@@ -1,0 +1,827 @@
+{
+  "schema": 1,
+  "scope": "staged native/Web visual and physical contexts; no earned gameplay/performance/hardware/audio claim",
+  "runs": [
+    {
+      "run": "combined-core-1280-v7",
+      "platform": "native",
+      "family": "feedback",
+      "report": {
+        "path": "runs/combined-core-1280-v7/feedback-visual.json",
+        "sha256": "27ce924479beaa3c4802a6dd667db79f22d08faffee945daade1eee9833681e6"
+      },
+      "checks": 452,
+      "all_capture_hashes": {
+        "essential-birth.png": "b102c3839955bf91b7ae2fa2606f4f0d56a221c26bc8d79cadde97756d99065d",
+        "essential-active.png": "94aad430d8e825b708e81f0e1395ceec8598e348fe84354e533d4b13813aacbf",
+        "essential-recovery.png": "b227d955d64dc1ba007e419adea1f34bd247494fb28d33f6fcbf982f5b2395cf",
+        "melee-birth.png": "c92f5dfc1a6a90e50bf9b812bbaf7bda4f364f08eabf1497b7018faa0eec9048",
+        "melee-near.png": "f938daa2abd9df14374fcda6e843562404712484c4b5e11c1855dee94f18866e",
+        "melee-shake-zero.png": "e28acbbc347e8a6bfc2b7873a02107a131d68f6d291099e4d08ad1f3a8aee742",
+        "melee-shake-source.png": "c92f5dfc1a6a90e50bf9b812bbaf7bda4f364f08eabf1497b7018faa0eec9048",
+        "melee-occluded.png": "ff967b769c8977fc80a00ccc797184f0bae914947adee14466dfcff94483333d",
+        "melee-active.png": "975011e808a5928549a94acd3249d6553d701fcb931dfe1874e25ff5d0f8804c",
+        "melee-recovery.png": "4778385eba1236464091aeca283e1626b47d0861f45bdf37be36f02245fa4882",
+        "bottle-birth.png": "1134bbefbcfd761253078b107e195538792293fc9092ef0d70272a9cf7291e45",
+        "bottle-active.png": "6251ca34b159f6a68557cf4eae3f44fbe35b356d7dcc5779a47226da52dd91f5",
+        "bottle-recovery.png": "1824eeaaa8e329c9beac664bbba295c0297b5fad479df929d1ccfed2861524d3",
+        "trash_cash-birth.png": "2370773509d615b5794f0a0fcae1ea6c82870e0f8921ea0aab48894b50ee260d",
+        "trash_cash-active.png": "b68ed80443517c0f3c76565008ba97a99ecd480b66a7828f69ad115d8bb86610",
+        "trash_cash-midlife.png": "d1e4bfa9c078882ab2b5a6df001a36a508cb0f1be5e621f8d59d1a25c87cbfe3",
+        "trash_cash-recovery.png": "4e93915ea1cf52466214fce2bef36ea8c3ae694976d91598bc4df729120b46c1",
+        "trash_rats-birth.png": "feeb130208be6033c79996dc8f811f6bc192aaaaad6f69527fcb5dcd5d105325",
+        "trash_rats-active.png": "de623f011c386521aa8ca69044216c1c364ad5560eef55951f47b835a8cebba7",
+        "trash_rats-midlife.png": "78379f45569a6982b6431f15fcb163bba14f81893f1fef29ff81c2cb534763da",
+        "trash_rats-recovery.png": "8be8af9f7d590384dda38667b8c19b081e28f601f7b0162b1fb6dfb79ff51a2e",
+        "dumpster-birth.png": "a6e1ef662bff4939201637f55cf009ac6304ddfbef1740dc55ffb471e6cdc5a4",
+        "dumpster-active.png": "ffe35aba97ffe458d84904e2d7d159bcb5c5fbc3098fdb9149e74042951628bc",
+        "dumpster-midlife.png": "9488fb3987358ffef9d6be7645cfd5459dac30d177ad068146ec0d9bd180d717",
+        "dumpster-recovery.png": "10dda2d02e8bf18b4bf89f4ef99671aa058277e7f89a06231893ed43ecdb55a0",
+        "possum-birth.png": "0bd0bbea404476f1202c9043a5c0515fcfda8aacad4f9b739c7ac312f50e2cb6",
+        "possum-active.png": "d12bf5a997a2c23a7ded87dc4f535e7c0ebce30c1c0707bc37fa8a5c9ef65bc8",
+        "possum-midlife.png": "bf06d1f0007daf68ca82db5135b09d070b142cc200551d8e6edf197e73def4b3",
+        "possum-recovery.png": "e287cc1e83176dcb38ebe81714777eddbc1e2d77c7c6ef2244024f8134a93891"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/combined-core-1280-v7/essential-active.png",
+          "sha256": "94aad430d8e825b708e81f0e1395ceec8598e348fe84354e533d4b13813aacbf"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/melee-near.png",
+          "sha256": "f938daa2abd9df14374fcda6e843562404712484c4b5e11c1855dee94f18866e"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/melee-shake-zero.png",
+          "sha256": "e28acbbc347e8a6bfc2b7873a02107a131d68f6d291099e4d08ad1f3a8aee742"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/melee-shake-source.png",
+          "sha256": "c92f5dfc1a6a90e50bf9b812bbaf7bda4f364f08eabf1497b7018faa0eec9048"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/melee-occluded.png",
+          "sha256": "ff967b769c8977fc80a00ccc797184f0bae914947adee14466dfcff94483333d"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/melee-active.png",
+          "sha256": "975011e808a5928549a94acd3249d6553d701fcb931dfe1874e25ff5d0f8804c"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/bottle-active.png",
+          "sha256": "6251ca34b159f6a68557cf4eae3f44fbe35b356d7dcc5779a47226da52dd91f5"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/trash_cash-midlife.png",
+          "sha256": "d1e4bfa9c078882ab2b5a6df001a36a508cb0f1be5e621f8d59d1a25c87cbfe3"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/trash_rats-midlife.png",
+          "sha256": "78379f45569a6982b6431f15fcb163bba14f81893f1fef29ff81c2cb534763da"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/dumpster-active.png",
+          "sha256": "ffe35aba97ffe458d84904e2d7d159bcb5c5fbc3098fdb9149e74042951628bc"
+        },
+        {
+          "path": "runs/combined-core-1280-v7/possum-active.png",
+          "sha256": "d12bf5a997a2c23a7ded87dc4f535e7c0ebce30c1c0707bc37fa8a5c9ef65bc8"
+        }
+      ]
+    },
+    {
+      "run": "web-core-1280-v2",
+      "platform": "web",
+      "family": "feedback",
+      "report": {
+        "path": "runs/web-core-1280-v2/feedback-web-evidence.json",
+        "sha256": "ccb2e3cecb335b25a4f7031fe2bcbc5192b7c85bf1c0a2892aea17f33df06069"
+      },
+      "checks": 481,
+      "all_capture_hashes": {
+        "essential-birth.png": "cccbf1a305d0ec8192d6a4b0aa818df02005a82d9038b60dfeb6f53f7f36e9b8",
+        "essential-active.png": "2d88a379ae45ff738991b5536521139297c9d38d37040b7d51f12f1ce4165a3f",
+        "essential-recovery.png": "d188f7203a6ad9167bf53baf79a2d4c46123945d83344f726304a7892374e220",
+        "melee-birth.png": "222ad83bc7f9258257253da5824e358afd2de3c6fc86b63d015a396be704e9d3",
+        "melee-near.png": "085dd0f42b440e831c849998f2e99516872760dcc377ba2f6ccb64b967e1150e",
+        "melee-shake-zero.png": "0fabe9ec22fbea4661e020801b80d4bcf0615b7dd8a72c861514f1c09ce8b3df",
+        "melee-shake-source.png": "307b3e1ecae1acca5e9e1987adefd8593422587a103678e0b7a67eaafdcabf01",
+        "melee-occluded.png": "1958932e954578e13188a00cd5a1a354e8576c995791e02eaec02b9260a28e2c",
+        "melee-active.png": "981d2cb67c95bb6d7d7604b0a31ecb4d4f40ad013a19d6195d0977bc13ef8a9c",
+        "melee-recovery.png": "0e0179ea02f973317bae679b26ffba785432aa9b538e79abb8c2df9cf54dee29",
+        "bottle-birth.png": "1d81de7e0c71a8d4a107fe408cef533eb25cb7bf5980f9794be63eb61f242ab8",
+        "bottle-active.png": "2433c337dc689442225252b902c1252a87d6d3ec6ffa185d38a6a6e3eda58a11",
+        "bottle-recovery.png": "d8a429c9bda7dbad3f4ea169c35287b3cfa72cf203a1e09fd94f745cdac14212",
+        "trash_cash-birth.png": "e743aa03c81b5f69f6afdbcc7542dd60edea3f88909c3ceef08f31939cf5fda0",
+        "trash_cash-active.png": "4d2b15063b1cf65b6ee00b2f9ece97e052952ab887d688a6faf9eb8826163d3f",
+        "trash_cash-midlife.png": "9f2727cacfa619702d563d487e83c89afdd96a4bfdaf094eb85175f77b069453",
+        "trash_cash-recovery.png": "32e4e785f02c2aea44f8101471c2479e076afe27fd684b2138472d7300402a7e",
+        "trash_rats-birth.png": "c1298a59ef8be1efccbd70266816d37b7c3614fa9de71592eea4efdb17c3a4dc",
+        "trash_rats-active.png": "1c57066d1ee59b280dc4c99cd916ffc98d16c86185e6a464b32b33c3f24431f9",
+        "trash_rats-midlife.png": "77d9f0417e6649363f21d55c476fdc70394e5760211740cdc15c1170e9feeb1c",
+        "trash_rats-recovery.png": "8cc95b38b8f995bed975776a91a8920367fff4d895a07a5b68fa7b5988e084d6",
+        "dumpster-birth.png": "7e8143086d9d5bfc032eb2c3b90bd0bcd7c6d5a88136ac65a028e8e9d0ed2b95",
+        "dumpster-active.png": "ba58d0dcb41e4910c2ec9555a21e435aca338636d0f8d7582c9a76f873afe69e",
+        "dumpster-midlife.png": "fedd826c44bf7f4e566892220e93885fd5ec527878f72aa4584ad8586c9a7e71",
+        "dumpster-recovery.png": "502023e648babe0042fce0d276b66dd58c78347c51115d2d98b91fd41c13e9f3",
+        "possum-birth.png": "1aafcef94c806cd1938f47c54c4c1b555215cdab434b97eeaffd5c53a4017e80",
+        "possum-active.png": "a68a393406053d8823141dcb45e978535bfbf90c1082f547c84121837f05a04e",
+        "possum-midlife.png": "f01ce14bdbf3b5b6e0c0630ab523567544208ea8acc6af1a318a9f117db71337",
+        "possum-recovery.png": "4c8e1388b0328ecaff3089629376762c543cf8ed15bb204b5ca6c684d80c3df5"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/web-core-1280-v2/essential-active.png",
+          "sha256": "2d88a379ae45ff738991b5536521139297c9d38d37040b7d51f12f1ce4165a3f"
+        },
+        {
+          "path": "runs/web-core-1280-v2/melee-near.png",
+          "sha256": "085dd0f42b440e831c849998f2e99516872760dcc377ba2f6ccb64b967e1150e"
+        },
+        {
+          "path": "runs/web-core-1280-v2/melee-shake-zero.png",
+          "sha256": "0fabe9ec22fbea4661e020801b80d4bcf0615b7dd8a72c861514f1c09ce8b3df"
+        },
+        {
+          "path": "runs/web-core-1280-v2/melee-shake-source.png",
+          "sha256": "307b3e1ecae1acca5e9e1987adefd8593422587a103678e0b7a67eaafdcabf01"
+        },
+        {
+          "path": "runs/web-core-1280-v2/melee-occluded.png",
+          "sha256": "1958932e954578e13188a00cd5a1a354e8576c995791e02eaec02b9260a28e2c"
+        },
+        {
+          "path": "runs/web-core-1280-v2/melee-active.png",
+          "sha256": "981d2cb67c95bb6d7d7604b0a31ecb4d4f40ad013a19d6195d0977bc13ef8a9c"
+        },
+        {
+          "path": "runs/web-core-1280-v2/bottle-active.png",
+          "sha256": "2433c337dc689442225252b902c1252a87d6d3ec6ffa185d38a6a6e3eda58a11"
+        },
+        {
+          "path": "runs/web-core-1280-v2/trash_cash-midlife.png",
+          "sha256": "9f2727cacfa619702d563d487e83c89afdd96a4bfdaf094eb85175f77b069453"
+        },
+        {
+          "path": "runs/web-core-1280-v2/trash_rats-midlife.png",
+          "sha256": "77d9f0417e6649363f21d55c476fdc70394e5760211740cdc15c1170e9feeb1c"
+        },
+        {
+          "path": "runs/web-core-1280-v2/dumpster-active.png",
+          "sha256": "ba58d0dcb41e4910c2ec9555a21e435aca338636d0f8d7582c9a76f873afe69e"
+        },
+        {
+          "path": "runs/web-core-1280-v2/possum-active.png",
+          "sha256": "a68a393406053d8823141dcb45e978535bfbf90c1082f547c84121837f05a04e"
+        }
+      ]
+    },
+    {
+      "run": "combined-authority-1280-v7",
+      "platform": "native",
+      "family": "feedback",
+      "report": {
+        "path": "runs/combined-authority-1280-v7/feedback-visual.json",
+        "sha256": "b955efa36074c7a7aeab2219d6afbe46a28d81a5c221cee8b58c6d59f97c8696"
+      },
+      "checks": 664,
+      "all_capture_hashes": {
+        "ranged-aim-birth.png": "6f00f5a32fc12d629f6beebecff4ed6087930aa6421c4ecd160a111648dad635",
+        "ranged-impact-birth.png": "47281bd653ff65083baae527f501cbc153125987fe59b3c7971583895491be94",
+        "ranged-impact-active.png": "d0b279bc32c343b450bb9ee089ea97fab0d67fbf906845a30a3ef3099a218920",
+        "ranged-impact-recovery.png": "43fa6be9c619459d40421b9ada007d52ea99091265a6c53381ead14e8d45c384",
+        "fallen-aim-birth.png": "6defb607ae3f37bbc7dd67f545785828c850cb5c513f9fc1d028f0801b290c8b",
+        "fallen-impact-birth.png": "6fff27af4303c81f969aced8b29b07c6f3318431a2452647b3d1c31ef0f1e3e9",
+        "fallen-impact-active.png": "4e93cb9fde2ea7334abf1959797d96f705dfbe4eb94e03ceda74b2afd91d4892",
+        "fallen-impact-recovery.png": "4cd653139bf4ca37da07824c7136f72f16f4ddb834cb24ccb527e872a54ac8d3",
+        "tony2-birth.png": "d85e6ba53f665c2fd8b5d169a29d08bbc467635eadd917aaca6e4a580b5521f8",
+        "tony2-active.png": "24d5f2be728e2853fec7a760e8a49d72cf5b4a19e32223db09f0bec27ff8ee26",
+        "tony2-recovery.png": "5d8b64a42195ed9a9a57c38c1e891c25be1bbedb60d415cc33ef49a7fc6eb8a7",
+        "tony3-birth.png": "d99b9ff59238bc5620c042f69b958456f860cc254fe384d97c8f6d5c6d409f75",
+        "tony3-active.png": "a35f05d9f73ba8ac79dd9659328cdb231c916d3e126cb500b3bd6effbe8d3f21",
+        "tony3-recovery.png": "48f3015143623126ebe42ae1c74fe41b121304e560a2ff8cd73a37acd8e02cbd",
+        "older2-birth.png": "82ec19bd8347cb6e22db20ec323dbccaca11010cebc68fdb692e5a2a965ebee1",
+        "older2-active.png": "2374fe265598f3d2ecc03225fb8355406dcd04e0ee35459c9e0603b2b6345b13",
+        "older2-recovery.png": "bae0712d1e402d9b2f7b00cac48f30fbc0ca0d8aa7f9134c7164e68450243ab5",
+        "older3-birth.png": "bbb8cf770df2617fb48f48afb5d5adce1860c8ac797e719f17d2fc96739fb59b",
+        "older3-active.png": "d5c3fa33d0656b2c5c866ec2d687aca3405b41b03df6da9be99512f9345adda5",
+        "older3-recovery.png": "b1dd3f8a5621fdfd0396aea2878a94a8d9d4f74d237248ec02f80257992d3b21",
+        "ally-birth.png": "9419399df316efa2c70123b2c9ee1f9ce7ba14938d6f273e44fc0849ff34bd64",
+        "ally-active.png": "366a08e729b1bfe64dd6f367a74ab1b64ec992339c06ac4b497332ff7792d061",
+        "ally-recovery.png": "4555a82015224c3a86226576ebef3fdb1034ef2535a42f92bd60aa3915029a3e",
+        "radio-birth.png": "f2582dd76576c0fa00e52871245219533fc7502fb15989a3dfeb5af56d2b6b01",
+        "radio-active.png": "d368a6f04f3f9ee54594916d83f258fb25096e455e83d611e4cdfc5ff3b4e29f",
+        "radio-recovery.png": "5f2ac45714f134d9d401b6a26ef3c61560026e028be97831389e75a9f1ad47a3",
+        "taser-birth.png": "54623146bc4f6900fa22ca6869c1718c59d9f6421b48c50cfd73cefa06b3e6ab",
+        "taser-active.png": "ea5ff2ff45d44a424d8480fc30c7f0b5a44183d717c028d1c8dec434790bd107",
+        "taser-recovery.png": "30d66f9a6cfe5fe8bdb7b7c870e5b1d8652e8677cf81a50db29356093204cc93",
+        "taser_fatal-birth.png": "35515f2f6b62591d30490a1b2e4e57a060d74887f0f64f8e69a832a18a270720",
+        "taser_fatal-active.png": "6e9f28dc2ef7e29016568ab2ed762698e8a5c947c4e6a4f14025d88e92b33657",
+        "taser_fatal-recovery.png": "1fbef16f263f0f7afed398a6a912a612d73d09dbd0fed3b3147918fe8a48949c",
+        "death_then_taser-birth.png": "72e250dcecbc95442898e3849d7af7b09f301a9a3c6dc5d7fc43f741b763650e",
+        "death_then_taser-active.png": "1512a7c64623061810423ed0ddaf0332d74ce203e3883449fdb63c6fee79ab34",
+        "death_then_taser-recovery.png": "3dc73d2da634173f50782d47291b3e569f6de1014bc88ca9e0bcef2a62cad27e"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/combined-authority-1280-v7/ranged-aim-birth.png",
+          "sha256": "6f00f5a32fc12d629f6beebecff4ed6087930aa6421c4ecd160a111648dad635"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/ranged-impact-active.png",
+          "sha256": "d0b279bc32c343b450bb9ee089ea97fab0d67fbf906845a30a3ef3099a218920"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/fallen-impact-active.png",
+          "sha256": "4e93cb9fde2ea7334abf1959797d96f705dfbe4eb94e03ceda74b2afd91d4892"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/tony2-active.png",
+          "sha256": "24d5f2be728e2853fec7a760e8a49d72cf5b4a19e32223db09f0bec27ff8ee26"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/tony3-active.png",
+          "sha256": "a35f05d9f73ba8ac79dd9659328cdb231c916d3e126cb500b3bd6effbe8d3f21"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/older3-active.png",
+          "sha256": "d5c3fa33d0656b2c5c866ec2d687aca3405b41b03df6da9be99512f9345adda5"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/ally-active.png",
+          "sha256": "366a08e729b1bfe64dd6f367a74ab1b64ec992339c06ac4b497332ff7792d061"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/radio-active.png",
+          "sha256": "d368a6f04f3f9ee54594916d83f258fb25096e455e83d611e4cdfc5ff3b4e29f"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/taser-active.png",
+          "sha256": "ea5ff2ff45d44a424d8480fc30c7f0b5a44183d717c028d1c8dec434790bd107"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/taser_fatal-birth.png",
+          "sha256": "35515f2f6b62591d30490a1b2e4e57a060d74887f0f64f8e69a832a18a270720"
+        },
+        {
+          "path": "runs/combined-authority-1280-v7/death_then_taser-active.png",
+          "sha256": "1512a7c64623061810423ed0ddaf0332d74ce203e3883449fdb63c6fee79ab34"
+        }
+      ]
+    },
+    {
+      "run": "web-authority-1280-v2",
+      "platform": "web",
+      "family": "feedback",
+      "report": {
+        "path": "runs/web-authority-1280-v2/feedback-web-evidence.json",
+        "sha256": "de331ddc68c79b6d2713c96bd864bc373d937aea636321a375cb6bbbe7b634f2"
+      },
+      "checks": 699,
+      "all_capture_hashes": {
+        "ranged-aim-birth.png": "f2e4d270f3ed57a80204fc098b6ef1548cf2ff00a911b31102ac7a491ab1bad0",
+        "ranged-impact-birth.png": "b89bd8ecad7141ffb4e60e0c204e0a49ab5de09559b36fe4ddf8fe1dc78e7c8a",
+        "ranged-impact-active.png": "78e92276bf0aafcd8f45a61444669a1904680fafa578822b25638361d60196c8",
+        "ranged-impact-recovery.png": "4e64ce845c98a1b2d2d4d97896c4803925ee2f91da1f09267205338a96b0a8a1",
+        "fallen-aim-birth.png": "c277d75a67106ce6f6e93b43b8be217309349e2724f21bfa559b33c3396ed753",
+        "fallen-impact-birth.png": "9464ed4c85cdb11e880a27ed0439a77c7d1f98681a6ddf0eefb9d2928bf62030",
+        "fallen-impact-active.png": "7dc1e22d7f5c538a40ac32b67933d25169985bee79ba31365d8c7613b42130cc",
+        "fallen-impact-recovery.png": "ee07f7c784f549decb4a203414271af413e72ab8b3c2338c667c909fc70b0e9f",
+        "tony2-birth.png": "a8fe08a52d6d46883c5073717e1d42c7648a335dd862d3fabc683704e712d9c7",
+        "tony2-active.png": "071a95c867810d2605b69ac688ccfdea7610d1bfba0373b00d39190db584e262",
+        "tony2-recovery.png": "89745a9d22ce6d31834d36acc23c9845689521a77a340821751800cc545116db",
+        "tony3-birth.png": "52653d1e720da60c8f9a5381d43353334fe802f16b18e8d2ff640977a471c3cd",
+        "tony3-active.png": "aafb32a22e6ff00cf3851932df2962bf2d1a18aed1796b4bde9c2bb684762d7a",
+        "tony3-recovery.png": "8f2e2856c7d196ebaa8a806e1f72464b985c541206ce9c9b6926fb298820a827",
+        "older2-birth.png": "2e4a8d20c551cc84a14e0bd816f67515ed6c72f45fb12e84aedeac77448fe552",
+        "older2-active.png": "3f580900d40e91b0c678ddf58b5ec31fefffc0355b52803b3c6c8500f2f0af5a",
+        "older2-recovery.png": "fe18c03bca314f3c019f25ea1895f2fdd310a915969944a1582419f514264f08",
+        "older3-birth.png": "6f229b0ed8d9bcf47dbf41d3b2ce77cd628398407cf6869c453eba34065292ba",
+        "older3-active.png": "4f2b0d344b48558eff11e9339f486b59abfdff9a5792cbaff3460f49fa695b8e",
+        "older3-recovery.png": "dd1ed0f18a9cfe7a5a12dbc84452ff30fb27759c9d92c460c07787155d3a7a43",
+        "ally-birth.png": "0e66f47947fccd53d02a5dad9b7659808ea65e639cebac8b8608907fd26e79db",
+        "ally-active.png": "be68863b50b6b2ee0e2617f7e05b537838064ac0a9d2bee5b01495f48fd5e6b0",
+        "ally-recovery.png": "cceb3b1e780c3e7a40379b054227be857011a9c2995e838820ddfc031f11dd43",
+        "radio-birth.png": "444cff9c61d69e2ab19fe5a35161325871f40ba196de38283b95e0ae62973e8b",
+        "radio-active.png": "7e4bb7c0277d8eb24855c131797380c9095cfdfc4fc316f86ca3a4cd9390cf88",
+        "radio-recovery.png": "309cc56acd5cb3d01bfd8a81250b9abc66fae329979487742b0b4640e29d060c",
+        "taser-birth.png": "7ee7d8c4a08ea2e34a80a59bd9f0ac132d3433477d13981cb95a66af04d524b5",
+        "taser-active.png": "238447410385e7496104569e100950e163cd8aa782b16c180feef950693bda5f",
+        "taser-recovery.png": "315dd53737d9b4b1aa0b6a01a8f2f6dd473ee431b8f1543604f749e8500536a0",
+        "taser_fatal-birth.png": "cad91750f288188a5b2c350f361aa0755113c69690bf671fe4b85829d0ededbb",
+        "taser_fatal-active.png": "a0be2b4decc68a2379ebaa22268473800018c1f34158d29776ee999a084046e2",
+        "taser_fatal-recovery.png": "547ada678f615e69ec4408586b79584345c15fb7acb6ac01a6d541e62974ebe7",
+        "death_then_taser-birth.png": "6280febefec59381ace04196e1f5c93675fd187578f6d8efbd46fdc386bc9855",
+        "death_then_taser-active.png": "9ea6ad6c761bed8d14b9b1b5c8294c8374018aac20eaf5fa2a0789a4a06a6576",
+        "death_then_taser-recovery.png": "4ac6c6869aab598a715637fd8755490cdb39d6654099b265ee7867393ceb2fe7"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/web-authority-1280-v2/ranged-aim-birth.png",
+          "sha256": "f2e4d270f3ed57a80204fc098b6ef1548cf2ff00a911b31102ac7a491ab1bad0"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/ranged-impact-active.png",
+          "sha256": "78e92276bf0aafcd8f45a61444669a1904680fafa578822b25638361d60196c8"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/fallen-impact-active.png",
+          "sha256": "7dc1e22d7f5c538a40ac32b67933d25169985bee79ba31365d8c7613b42130cc"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/tony2-active.png",
+          "sha256": "071a95c867810d2605b69ac688ccfdea7610d1bfba0373b00d39190db584e262"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/tony3-active.png",
+          "sha256": "aafb32a22e6ff00cf3851932df2962bf2d1a18aed1796b4bde9c2bb684762d7a"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/older3-active.png",
+          "sha256": "4f2b0d344b48558eff11e9339f486b59abfdff9a5792cbaff3460f49fa695b8e"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/ally-active.png",
+          "sha256": "be68863b50b6b2ee0e2617f7e05b537838064ac0a9d2bee5b01495f48fd5e6b0"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/radio-active.png",
+          "sha256": "7e4bb7c0277d8eb24855c131797380c9095cfdfc4fc316f86ca3a4cd9390cf88"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/taser-active.png",
+          "sha256": "238447410385e7496104569e100950e163cd8aa782b16c180feef950693bda5f"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/taser_fatal-birth.png",
+          "sha256": "cad91750f288188a5b2c350f361aa0755113c69690bf671fe4b85829d0ededbb"
+        },
+        {
+          "path": "runs/web-authority-1280-v2/death_then_taser-active.png",
+          "sha256": "9ea6ad6c761bed8d14b9b1b5c8294c8374018aac20eaf5fa2a0789a4a06a6576"
+        }
+      ]
+    },
+    {
+      "run": "combined-core-960-v7",
+      "platform": "native",
+      "family": "feedback",
+      "report": {
+        "path": "runs/combined-core-960-v7/feedback-visual.json",
+        "sha256": "5a22b406fcabc561df418e81c606bcf2b9c4061afa1ee66a4dcd42f07c8b0ebc"
+      },
+      "checks": 452,
+      "all_capture_hashes": {
+        "essential-birth.png": "c18967668e080fb1e73aa8306406d41eb1b50df0976651ef2ae5ba7b60f4e155",
+        "essential-active.png": "8cf1e59cfe7684fea7fc068b69e2ab7625b847490317933f10e439deb7a364c4",
+        "essential-recovery.png": "a82dcd51ed1403d93dbde401b761d1e2a49fffd9dcfb35f4c91d22b45d9fd82c",
+        "melee-birth.png": "fff003482f69b61d5c037cc083b1d0b9dee1151b7bd28185e85227df5de0a6c9",
+        "melee-near.png": "bac065c811ebe42db074fb8fb226282875f776d2752e2aae55846a10fa530b5c",
+        "melee-shake-zero.png": "8790cef0327822414657ef9339cbbcd581f3a2149ee0d592bd52603ee869649f",
+        "melee-shake-source.png": "fff003482f69b61d5c037cc083b1d0b9dee1151b7bd28185e85227df5de0a6c9",
+        "melee-occluded.png": "7735c289414854fdd7c677e9e037188ff25feaa732d9c16cabc6b2ed4927f2c2",
+        "melee-active.png": "19e805d5639649340d2ebd1700ec97874e7c4edd8e3cc19738a79fafd6a22360",
+        "melee-recovery.png": "7fb14215fb920d71c16257306ed332f8c64c394528cf253e55bcf899f74dcd26",
+        "bottle-birth.png": "8c844726ecc2016ed902f40e7067b5ecdd07f80df6fa845d200027e126d80801",
+        "bottle-active.png": "1c93bba2751a0f900ecc877563a6fea96be14b822cc92eea08b786c3f3bf74f6",
+        "bottle-recovery.png": "a3a8313c2e9c8ac29838fb583bd5864ce7a6f997d3133ad2a090a6ba53926557",
+        "trash_cash-birth.png": "de2784054dbe4f513d177214ffd46b454688c5d4ae3823b771edaf5234004aad",
+        "trash_cash-active.png": "d66365ca17a2cae0e58dd82d4b86286d744eac8356f9ebf6058bf3d3549ca333",
+        "trash_cash-midlife.png": "564f081005e3bc637c987d04b83a26a1e757607197f0ab2fb3fad56432a7736d",
+        "trash_cash-recovery.png": "34bb9575c2f83e02bf79b176b9c61fa0d116b135762be62baa450eb567435c29",
+        "trash_rats-birth.png": "99b6dc71e88c5ef0c35f0b90b796c0176e930ef0835aeaccdc0b743a34c6f367",
+        "trash_rats-active.png": "394dc036f2c5f332f512c432b89df73833e4d57d9a81c58e562ae395d959d31a",
+        "trash_rats-midlife.png": "0f70b13126b4ee81c811d205b4ffa58d190cf64537da44f487bb898798c0612d",
+        "trash_rats-recovery.png": "2d0b0819a0f14f0e3ea29486a8be075c194b586b2c11d2b35cc08c73c13cefc8",
+        "dumpster-birth.png": "dfa340089672dcba8347dc108f0510e08a1905200f0772ed14da4f48786f8f25",
+        "dumpster-active.png": "04f6fab159a65ec23cf26147f75d4356b8109122cfdf651e278df718bc549d55",
+        "dumpster-midlife.png": "78c8d375cdf11c8eff2455a423f0bc0f66f41a3c505cf4711825fb4677395ee3",
+        "dumpster-recovery.png": "f666df14e8c88701e704b6df19ca94bdd3283185dcab59469f2b1090b4c29718",
+        "possum-birth.png": "a3a55df95a7d7b4d4d443243b148c68ce7ecfad6bc574cb817cce28151037ab7",
+        "possum-active.png": "4faf2bdcfdd69783ac9fc5769a0ee63557cbf317cd1c844c4590122e8f9d9e53",
+        "possum-midlife.png": "5c05460d9b5771a6e7f073da78200fe9c647d3ac38d386d108afea6181c8b707",
+        "possum-recovery.png": "c93b25c948dd8293cf4efd33d6eb39a2aa56373bf8fbe6686639cc9135e16977"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/combined-core-960-v7/melee-shake-zero.png",
+          "sha256": "8790cef0327822414657ef9339cbbcd581f3a2149ee0d592bd52603ee869649f"
+        },
+        {
+          "path": "runs/combined-core-960-v7/melee-shake-source.png",
+          "sha256": "fff003482f69b61d5c037cc083b1d0b9dee1151b7bd28185e85227df5de0a6c9"
+        },
+        {
+          "path": "runs/combined-core-960-v7/trash_rats-midlife.png",
+          "sha256": "0f70b13126b4ee81c811d205b4ffa58d190cf64537da44f487bb898798c0612d"
+        }
+      ]
+    },
+    {
+      "run": "web-core-960-v2",
+      "platform": "web",
+      "family": "feedback",
+      "report": {
+        "path": "runs/web-core-960-v2/feedback-web-evidence.json",
+        "sha256": "81a21c4a383bf9b6d52fbdca92842a9054f1e45df35fd5b22570821b102b9f97"
+      },
+      "checks": 481,
+      "all_capture_hashes": {
+        "essential-birth.png": "05b2d65f25da0b762b6840f2d6d5c4f36fe8cc74567c904f0b63086781e66ead",
+        "essential-active.png": "45d6b1d8cebc6ae3089e9278caaf9cbefa249d841c0772a2e457995b9087bc6b",
+        "essential-recovery.png": "4519ca630f7056d2d35bc9abb014b064bdd440c8943ee11f2f74f1df0d40ed7e",
+        "melee-birth.png": "3e4b61544407e63635a0ba832b1ed09092974eeb02dbb55ae715202e030de099",
+        "melee-near.png": "76e27bd601e74ac9dbe0973e6b693c27a39990f66e97043ad84aac5b9464325b",
+        "melee-shake-zero.png": "073dfc45c1664b6580f74b024e11b6ea4f58b52eff75cd4f016f9ae00c1dd665",
+        "melee-shake-source.png": "3e4b61544407e63635a0ba832b1ed09092974eeb02dbb55ae715202e030de099",
+        "melee-occluded.png": "2438d976b9681d286fe7e1c39cebe512634282682f3159a97cce289c03e8bb31",
+        "melee-active.png": "0ea3c629f6a9020dd0375ebc56b0e12ff9de563f467f821ef6ef38f2ca8e4e7c",
+        "melee-recovery.png": "b6f64213499f587911e8e120062a9b9a77a935771c131af1dc000b7c7610173c",
+        "bottle-birth.png": "8ec1167928e8e383a679ccd397440aa6d06037c6c227a075a938d7362714b98c",
+        "bottle-active.png": "1cea934b27a1a183daab55ae60a1fe0677bfb8f2893ee4b63baf4241689add46",
+        "bottle-recovery.png": "725a697c46a7e543fcac670358f7cb2ae8b1c04cdbd60f6e712edba1336a86cd",
+        "trash_cash-birth.png": "54b6f890cb7924bef7c57f9a7a99fa0163c1ac08bfd74f7f6f7d0ab244abde4b",
+        "trash_cash-active.png": "97d539b0f76673e177c716e066a1332450f063729a25e1154576f5d8c30d569b",
+        "trash_cash-midlife.png": "97ed4754fa6f689e66e08ee11c15bdd58a1b0187ebf35776685dc0f7cbcb405c",
+        "trash_cash-recovery.png": "6c70d2b692b4a676d8581280d1a1578606703bdbdb408e6c253731d4f003a631",
+        "trash_rats-birth.png": "994508d814dbfb513c0010b94937aa384323b6eb80daf4c8d53fd53597916c90",
+        "trash_rats-active.png": "6f72286b772a8d28922a4dd286f4211e7a0bf3dc00ac5155a13947e584a5ce56",
+        "trash_rats-midlife.png": "7494ff5f02ada91d59c76bad6a82be312ef6ce12c387401b3ccb2a23895fadee",
+        "trash_rats-recovery.png": "7ab132f6e33937411e386366d5d8f6ca63d2ad041d58a170edb0ca111697781c",
+        "dumpster-birth.png": "e4ffa186fddc01e38eb55b85a54a4b13213c157f65d79d36c61e168e4dede467",
+        "dumpster-active.png": "2c2042f7586dda07d061e82834c903c40476c39c6ddf9553956d9b8b25802c0f",
+        "dumpster-midlife.png": "6498dea442cd2a771e304dc37d74aa0999a71999d1a76304a69de7ff2d3fea92",
+        "dumpster-recovery.png": "8b45f57cc0d5bc3346f523a7dc3b406ab715f766c5c82475041a5597e4c33aaf",
+        "possum-birth.png": "6d1aac7c5ea9bc1ce7f1ea969e331d6ad6812929984a8723b190df540d2836d0",
+        "possum-active.png": "726707d153d20548cfcbfa72677cc0cbf45f33c141d1f8a015766a0269bd2107",
+        "possum-midlife.png": "7094407f3940b1a64a1500ca560f3ecf6abab57cd4a5f9c73a25da8422186c46",
+        "possum-recovery.png": "bf1023181679efb83ad26548db81d63f10aea26684599b9fa6990e3c058603a1"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/web-core-960-v2/melee-shake-zero.png",
+          "sha256": "073dfc45c1664b6580f74b024e11b6ea4f58b52eff75cd4f016f9ae00c1dd665"
+        },
+        {
+          "path": "runs/web-core-960-v2/melee-shake-source.png",
+          "sha256": "3e4b61544407e63635a0ba832b1ed09092974eeb02dbb55ae715202e030de099"
+        },
+        {
+          "path": "runs/web-core-960-v2/trash_rats-midlife.png",
+          "sha256": "7494ff5f02ada91d59c76bad6a82be312ef6ce12c387401b3ccb2a23895fadee"
+        }
+      ]
+    },
+    {
+      "run": "combined-authority-960-v7",
+      "platform": "native",
+      "family": "feedback",
+      "report": {
+        "path": "runs/combined-authority-960-v7/feedback-visual.json",
+        "sha256": "e5c95969209bfe16c3996f95c26a9f159e9eb97b8c3a624559b13ee96924cc3f"
+      },
+      "checks": 664,
+      "all_capture_hashes": {
+        "ranged-aim-birth.png": "8c7c411407fe9e65491b29f45659280801a308cd28ef211a2505abd18a8efc90",
+        "ranged-impact-birth.png": "744c8e5f54bef4d80ef5a389af595890b5b14027d27c4c0047a1c857eddd4939",
+        "ranged-impact-active.png": "a203f92f5b44731c1f09074587efa4e5104d7c17d662e0999690fddb3da5a1e2",
+        "ranged-impact-recovery.png": "48b184bfc8b75a7b87a22e15c72b8b550e7e231219b113ee59c98fb73843fda8",
+        "fallen-aim-birth.png": "4f5d701be6ebca61362227e21323122781f7e5897fa6e9209bc662b640cfda43",
+        "fallen-impact-birth.png": "180b3a27c490e18b550f934be0ddf30893f258a47a6a6b9fa85d7183e0945a62",
+        "fallen-impact-active.png": "ee72298183bbfd87a186695e3fa84aabd53af831ffb63546eff22ee51db26061",
+        "fallen-impact-recovery.png": "b33624e67f6ff546ffe6dda034e3e163305e160ed30b25cdf8c4e06f9ada0fd4",
+        "tony2-birth.png": "4faf0a3ecea5a3f83754f245ad23e3cf1260918b85ebaea5f4527fbe88a8233e",
+        "tony2-active.png": "37c074d70055a83869e1dba778de71265630e361458e8f2bf59fec55e869840c",
+        "tony2-recovery.png": "c7450f36d0400d3ac98575bc5616e77a7f6520730b4f1a9f6eb35efbdf141095",
+        "tony3-birth.png": "ec9aad0dbb91b2be1b7a089c34d18ead7f70edebe4b952e583192a85072e47ea",
+        "tony3-active.png": "435f24c7324cd955f3d45db950ec371efba1f2d840ec849337de4a33d8d0ef30",
+        "tony3-recovery.png": "24c8c7584a2edac39c32a7b5e971652c94a715345d4b39116e9cd164166f0999",
+        "older2-birth.png": "fe13baaccf538b69c7fc830060e2e37ec4299a14d5d486e8548f14e2bfbd7143",
+        "older2-active.png": "51dd2ddd970e274c8caa6b34ed6bf998755f6b8067ba7aa6454bc009be785510",
+        "older2-recovery.png": "594ebf5397bd712261d35ed09a29a17619f2b9bbba79745619bb2528e05335d1",
+        "older3-birth.png": "5108d995dd970a901e49b8b7194153b769981e2fbfe5ba1289d671301d73091a",
+        "older3-active.png": "c61847c27f91a110a4e749f5e1d2683ad68bf509096a95f603c5347b45e0370b",
+        "older3-recovery.png": "bc34973033eaf38325bc73a1a92548f39c6bbeac985e52617d0392b23a0a01f9",
+        "ally-birth.png": "7d57da43c0c073a539b9248de24d6516b19597ff6931c373bfdc64871be4914d",
+        "ally-active.png": "4559795417ff52a3d3e538cf8326b2336ba7ac5ed44bada37c53c6a926d39272",
+        "ally-recovery.png": "7b736677959fadfcaef9558a3fb76f4d06649e1ef856d17caa15783282f3c6aa",
+        "radio-birth.png": "b45bbef1e8fbdc5f9e914f6e092a7d89926d2b3fe43890e387ba42dab16180e7",
+        "radio-active.png": "30af6e37ebcf2870400fe86f078f2eedc78c15f8af16cd8327d95434d131637d",
+        "radio-recovery.png": "f2b17aabceca49ddbae179cc001e00da476e2e348cf2fa3ef5ca290fdae9f92a",
+        "taser-birth.png": "7d825e8e441b1c289e090ff1e0b71079bfc0b229edfa559eca5657398bf0e9ef",
+        "taser-active.png": "2406b3d770d97d037ffa0107ee3fed4ac09f039cfe429eaa02d04699c5d5d3d4",
+        "taser-recovery.png": "699063cf8e75114f24dd90b70a87d86c54be7d084819b1470e921c32baea3f60",
+        "taser_fatal-birth.png": "f6ccb8e0c3699ea30fbbeeacdcbc185dd3333d6fe57b7860839167f5a55b0fa9",
+        "taser_fatal-active.png": "d489d8c804f5282d88d59d1f41286df1f26b2cb6def0dc7dc33392823de3629b",
+        "taser_fatal-recovery.png": "dee97244df26d2fe394af534dac9d7931d5907b77cada069933ad53f5f3b4cd0",
+        "death_then_taser-birth.png": "d750566a2681995a84d3881a44557c4a1bb604a1f3596c1df6fe209b483f501c",
+        "death_then_taser-active.png": "fb59e9971739183f5c95a57701af35b7374fdf6299889a76853a7a830d570229",
+        "death_then_taser-recovery.png": "f00e7e4f5d6064e4398bb9442ee14652f09f90069c12090dc6437f1ba36d0ede"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/combined-authority-960-v7/tony3-active.png",
+          "sha256": "435f24c7324cd955f3d45db950ec371efba1f2d840ec849337de4a33d8d0ef30"
+        },
+        {
+          "path": "runs/combined-authority-960-v7/taser-active.png",
+          "sha256": "2406b3d770d97d037ffa0107ee3fed4ac09f039cfe429eaa02d04699c5d5d3d4"
+        }
+      ]
+    },
+    {
+      "run": "web-authority-960-v2",
+      "platform": "web",
+      "family": "feedback",
+      "report": {
+        "path": "runs/web-authority-960-v2/feedback-web-evidence.json",
+        "sha256": "958ec3d8b39429841e4be30f1936c7d0981d2bef741b80e05e913fbcd8ab5fdc"
+      },
+      "checks": 699,
+      "all_capture_hashes": {
+        "ranged-aim-birth.png": "163a0327327cb2f7d421f2b145f2d443cf792c08626dd050f5b5b6c7e09cb819",
+        "ranged-impact-birth.png": "6f4729eeee7444698a9d624fedecb06c3cfc45e7f277163b0df5926962b308a4",
+        "ranged-impact-active.png": "d5b9345b78217271fe36c56f55402461fdf971d4dc622ad1ca50e6a890151cd6",
+        "ranged-impact-recovery.png": "7b46d0eb8a7a6f061d46a0011f0ff9a451bb4bc0979b3f7c1f74052e4ed9935d",
+        "fallen-aim-birth.png": "c7749c184047d6bb5918b0fc5264840bbc345a5afd0a8ff433fd0e60a0445b09",
+        "fallen-impact-birth.png": "bb63816bfd91a4df9754793104b0689aa126769c3076444e9cb4e7f60541dc05",
+        "fallen-impact-active.png": "81fd716046a97b39f87769790d1c40f45f9c1fdd6b5b6b9608eb279cdba814c9",
+        "fallen-impact-recovery.png": "f2c0e1e9790fe142218fafb0aa0f4ee9c25a863fb9cb4a3fedda9e56bd79c30b",
+        "tony2-birth.png": "20a1ce51b59ce8bdb4f6b0bd55f4c835e1d22556dc7fcbffa45181a1b386eb69",
+        "tony2-active.png": "8b7809f1cb73b2e1f7370922132a2065c566035ad97eea183ff0b43650393427",
+        "tony2-recovery.png": "0b8dc6bb83eb9ebf655e34260d73fbe196086f7f415fd5f41970991424cc3df8",
+        "tony3-birth.png": "56b89832f6b35773f0e58ddfc3f927f4731217f181b6fdb17901c4252eb4f8af",
+        "tony3-active.png": "3eba96883c9242e0d76accb92947f5003d1adf35ce01013407d84241a50497df",
+        "tony3-recovery.png": "9ca45d86f0c3a5a1782ac4a1924c39248992ece723a9a0940ac98e3910076506",
+        "older2-birth.png": "bd57f363b5cf913c17407f6f4a517b35cbc0bbd53c71cb4023e0308f49422232",
+        "older2-active.png": "9dc56e1a5480752c2664408796aa543ac71474e4404ef9a0a4d4dc11a658bb17",
+        "older2-recovery.png": "18a99392de747218573d603637991124306c6a85ba6de8d0132fe272c2f0fce3",
+        "older3-birth.png": "2d72ab65a8029fa1cc5180b56dce98c4fb7c83e667b881a6cec4bbecace27fbc",
+        "older3-active.png": "dcc8299754cc53c774a0996ca4b19cb6fc51d19bfc15cd456da92b2fd8d8782d",
+        "older3-recovery.png": "3171e2f30a2cf1c2487f2260a967c3d54b35ae874595c03728ede2fbfb838cd6",
+        "ally-birth.png": "322f73eba1f021132cc7f2c4fe41a37ccded0090ea1d6a94a43738a520a8c7ca",
+        "ally-active.png": "b3fde38d1321654f5ab164ef1f01c9cbffb9698911a012a331808580b08c0764",
+        "ally-recovery.png": "79712b8c1272dd5d34e461b04294c989decc2be8c87fe8e2126cee7f132547fd",
+        "radio-birth.png": "eff0231f4dd4f2cbdcaf6334d663af6f1156a23a56c2e7b4747266380b74265c",
+        "radio-active.png": "c1e5b4bc254a16b33f8b1ab5870efe608c674144a6746fd7355ea70686379b0f",
+        "radio-recovery.png": "d006f1f23a09bd96733796921b6997b598cfe729aea00754d2c112ee759caed7",
+        "taser-birth.png": "eed76eebb5798feeba71ba3faabcb20599926b59fe6b4e4d27ff02f3b9682dea",
+        "taser-active.png": "11cfd1c0a5722e1f9ed7131545a84fb714c21b76cbadfa9f64aad40de7277efd",
+        "taser-recovery.png": "fab201db0a5267a426d8499b35c4e1610e5dcdd652cef29d3aa8b13680175bb0",
+        "taser_fatal-birth.png": "17a1094c1abfad3b3864cda61bee302b0ad8ad773125ec297e90a1a0f06c9ad8",
+        "taser_fatal-active.png": "e36b8282bf5ab079260f83e98d1937f5e8b31784587af71e79d1da48ef88fbe5",
+        "taser_fatal-recovery.png": "928ffea3bb6595a5f1371ce800e0fa56589bf4705a42ba718a9b564b749e7aca",
+        "death_then_taser-birth.png": "ef0d0c6eaf4c7383704536c520e20848ce7f3bfc9417298e06d0d8a667f1bc88",
+        "death_then_taser-active.png": "2538ab131a46968b11f66d6e7d41018da6bc3f4e5e0ee2dc0953730f7131f0a4",
+        "death_then_taser-recovery.png": "666b342f79bf95c8ce888475566b6bf802817e2482de0ef5dd32c1aa36c0055a"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/web-authority-960-v2/tony3-active.png",
+          "sha256": "3eba96883c9242e0d76accb92947f5003d1adf35ce01013407d84241a50497df"
+        },
+        {
+          "path": "runs/web-authority-960-v2/taser-active.png",
+          "sha256": "11cfd1c0a5722e1f9ed7131545a84fb714c21b76cbadfa9f64aad40de7277efd"
+        }
+      ]
+    },
+    {
+      "run": "combined-1280-v2",
+      "platform": "native",
+      "family": "dust",
+      "report": {
+        "path": "runs/combined-1280-v2/dust-visual.json",
+        "sha256": "d79424b116f099c96c009ace80b412a3fbf3ce9bdc690f9f7d134395f6d0bc2d"
+      },
+      "checks": 339,
+      "all_capture_hashes": {
+        "walk_down-shown.png": "7cff7ad9b77d9a2ef03c518f5f9ca4f63f4feb4a382eccf9fbb68cb21b5225eb",
+        "walk_down-hidden.png": "4acecb2d6105fee3976e6b5198af80b52b984e230b70dde8b2cfa02b0088d597",
+        "blocked_intent-shown.png": "7f8e3cd0937e443b821c3a52f764ef855efe261f88200fb1029aa37bc85199eb",
+        "blocked_intent-hidden.png": "9dfa5c3dd35febb19978f990b51152b1eb648e948ca74ccced1a707d3a74aaa8",
+        "clear_day-shown.png": "6c03d7f5a4f948308e618384e266fd72dcbaf8b3d18da18ddec57f362cb99d6e",
+        "clear_day-hidden.png": "3e25505851702ca3082f465666588b44550e92b1e6b2aa982ea05227b43064e6",
+        "clear_night-shown.png": "4c2e9a6d865ba61523c14e76e5051283bbecc2cf62b1e2e6618b2bfcc3d7455d",
+        "clear_night-hidden.png": "9e3b10843a5f34ede2578b881c88fd9836e607d81271898d573241f70017518a",
+        "rain-shown.png": "6f97824643057fea91d8fbb35505b59ae9ea2b4507c672a926897771fd3a14d0",
+        "rain-hidden.png": "ed0c150a5d3cb94ed9b8db3bd867cfd7acb6700b5b37319b64cb10146b6b5dca",
+        "camera_turn-before.png": "7b3af56fda33115902621432a5293b5f55046b3bc1b40df219b5cc7407c494df",
+        "camera_turn-after.png": "b23d0f7799493c53d7168f9c61414c06dbc4f76135fde1ead5b9598d6ab7ae0f",
+        "wall_occlusion-birth.png": "5bdd6e0080edf71db5a3a5031831d8e356a285fd6da2186d16de5e5809484fe1",
+        "wall_occlusion-shown.png": "281ca081574ec5be29444b32f77c94486753d90b6c472c652f954e830564db05",
+        "wall_occlusion-hidden.png": "281ca081574ec5be29444b32f77c94486753d90b6c472c652f954e830564db05",
+        "expiry-birth.png": "d4a6d78b4239219de49ebf643cd3c54fe60dbe66b45fddb463d86ca4f60f70bc",
+        "expiry-expired.png": "a086377f19331dbb3d93f228f9d8c25f7fec30701a0475a9a957bb000ec7d360"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/combined-1280-v2/walk_down-shown.png",
+          "sha256": "7cff7ad9b77d9a2ef03c518f5f9ca4f63f4feb4a382eccf9fbb68cb21b5225eb"
+        },
+        {
+          "path": "runs/combined-1280-v2/blocked_intent-shown.png",
+          "sha256": "7f8e3cd0937e443b821c3a52f764ef855efe261f88200fb1029aa37bc85199eb"
+        },
+        {
+          "path": "runs/combined-1280-v2/clear_day-shown.png",
+          "sha256": "6c03d7f5a4f948308e618384e266fd72dcbaf8b3d18da18ddec57f362cb99d6e"
+        },
+        {
+          "path": "runs/combined-1280-v2/clear_night-shown.png",
+          "sha256": "4c2e9a6d865ba61523c14e76e5051283bbecc2cf62b1e2e6618b2bfcc3d7455d"
+        },
+        {
+          "path": "runs/combined-1280-v2/rain-shown.png",
+          "sha256": "6f97824643057fea91d8fbb35505b59ae9ea2b4507c672a926897771fd3a14d0"
+        },
+        {
+          "path": "runs/combined-1280-v2/camera_turn-before.png",
+          "sha256": "7b3af56fda33115902621432a5293b5f55046b3bc1b40df219b5cc7407c494df"
+        },
+        {
+          "path": "runs/combined-1280-v2/camera_turn-after.png",
+          "sha256": "b23d0f7799493c53d7168f9c61414c06dbc4f76135fde1ead5b9598d6ab7ae0f"
+        },
+        {
+          "path": "runs/combined-1280-v2/wall_occlusion-shown.png",
+          "sha256": "281ca081574ec5be29444b32f77c94486753d90b6c472c652f954e830564db05"
+        },
+        {
+          "path": "runs/combined-1280-v2/wall_occlusion-hidden.png",
+          "sha256": "281ca081574ec5be29444b32f77c94486753d90b6c472c652f954e830564db05"
+        },
+        {
+          "path": "runs/combined-1280-v2/expiry-birth.png",
+          "sha256": "d4a6d78b4239219de49ebf643cd3c54fe60dbe66b45fddb463d86ca4f60f70bc"
+        },
+        {
+          "path": "runs/combined-1280-v2/expiry-expired.png",
+          "sha256": "a086377f19331dbb3d93f228f9d8c25f7fec30701a0475a9a957bb000ec7d360"
+        }
+      ]
+    },
+    {
+      "run": "web-1280-v1",
+      "platform": "web",
+      "family": "dust",
+      "report": {
+        "path": "runs/web-1280-v1/dust-visual.json",
+        "sha256": "64d790786306733422d14d7c765c0bd95df7daf5a44e56489bad3583b4592ff4"
+      },
+      "checks": 356,
+      "all_capture_hashes": {
+        "walk_down-shown.png": "819ad0992131feb261395c3961dc874144e8197e964ced42cc7671f746c6f91e",
+        "walk_down-hidden.png": "ac0fab347fe74fea5270c8c80365dfe82e16d922101419c4f1c9adc5d18076d4",
+        "blocked_intent-shown.png": "ee63caf3d62cd5b6a704d28c1894d75ce0f8ac2c58ed53256fbff7d5da65aab5",
+        "blocked_intent-hidden.png": "9bf2868d911792033345a503ca7daae9fa1ea1650ffc5261b54d757dcae2135d",
+        "clear_day-shown.png": "46b60b6d457c3893773125587c5a39e31d12de141b25ada975542ce01123b678",
+        "clear_day-hidden.png": "a0c270a302e06a725be27a88adf92cff008c27bc07c52f79f14a38225de6d16a",
+        "clear_night-shown.png": "1da9d62bd20d22478c8580de8a77383c4245b37c0ab83d022a4d1eb857361f56",
+        "clear_night-hidden.png": "8ecfd41bfc60377063c377fd77da71a7cacdf87c2b60087e42c52869829e12f1",
+        "rain-shown.png": "cf1a07c1216c0ac503652c9d5684eef4aa04d8675bced6049d656366ad736979",
+        "rain-hidden.png": "7e0d5921b54012b90bb99b8d7597a6b97e7e6e8b3a4483f4d5d51e8b0e2007c9",
+        "camera_turn-before.png": "0894a56fba32aec587741c71e4204823ba1d8da6124a0ac669c43dfc75d2e073",
+        "camera_turn-after.png": "48f62fa36d6e25802fa134d28f2f943f2a7b128f30da9d9f77c1a7a461196a52",
+        "wall_occlusion-birth.png": "7abc6297da5a440f5b5b03b109e5d6cff676f56a0c954852eb222eea94f8a780",
+        "wall_occlusion-shown.png": "559cf0bd98e0f15b8035f3d6882f2855d958e6fba26cf1e3dbaaa6b57589809a",
+        "wall_occlusion-hidden.png": "559cf0bd98e0f15b8035f3d6882f2855d958e6fba26cf1e3dbaaa6b57589809a",
+        "expiry-birth.png": "a2212b7eedee5414b8cd8ba5762cb8f009178f59112ceaea251ac7c2fb175a5b",
+        "expiry-expired.png": "491b7c6a9d6f24e710016dc3dc80a7b95b6a18fc2856b59c9935e10c4d93022e"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/web-1280-v1/walk_down-shown.png",
+          "sha256": "819ad0992131feb261395c3961dc874144e8197e964ced42cc7671f746c6f91e"
+        },
+        {
+          "path": "runs/web-1280-v1/blocked_intent-shown.png",
+          "sha256": "ee63caf3d62cd5b6a704d28c1894d75ce0f8ac2c58ed53256fbff7d5da65aab5"
+        },
+        {
+          "path": "runs/web-1280-v1/clear_day-shown.png",
+          "sha256": "46b60b6d457c3893773125587c5a39e31d12de141b25ada975542ce01123b678"
+        },
+        {
+          "path": "runs/web-1280-v1/clear_night-shown.png",
+          "sha256": "1da9d62bd20d22478c8580de8a77383c4245b37c0ab83d022a4d1eb857361f56"
+        },
+        {
+          "path": "runs/web-1280-v1/rain-shown.png",
+          "sha256": "cf1a07c1216c0ac503652c9d5684eef4aa04d8675bced6049d656366ad736979"
+        },
+        {
+          "path": "runs/web-1280-v1/camera_turn-before.png",
+          "sha256": "0894a56fba32aec587741c71e4204823ba1d8da6124a0ac669c43dfc75d2e073"
+        },
+        {
+          "path": "runs/web-1280-v1/camera_turn-after.png",
+          "sha256": "48f62fa36d6e25802fa134d28f2f943f2a7b128f30da9d9f77c1a7a461196a52"
+        },
+        {
+          "path": "runs/web-1280-v1/wall_occlusion-shown.png",
+          "sha256": "559cf0bd98e0f15b8035f3d6882f2855d958e6fba26cf1e3dbaaa6b57589809a"
+        },
+        {
+          "path": "runs/web-1280-v1/wall_occlusion-hidden.png",
+          "sha256": "559cf0bd98e0f15b8035f3d6882f2855d958e6fba26cf1e3dbaaa6b57589809a"
+        },
+        {
+          "path": "runs/web-1280-v1/expiry-birth.png",
+          "sha256": "a2212b7eedee5414b8cd8ba5762cb8f009178f59112ceaea251ac7c2fb175a5b"
+        },
+        {
+          "path": "runs/web-1280-v1/expiry-expired.png",
+          "sha256": "491b7c6a9d6f24e710016dc3dc80a7b95b6a18fc2856b59c9935e10c4d93022e"
+        }
+      ]
+    },
+    {
+      "run": "combined-960-v2",
+      "platform": "native",
+      "family": "dust",
+      "report": {
+        "path": "runs/combined-960-v2/dust-visual.json",
+        "sha256": "75cc2e39f4b07c6051109fdf9ca8c108e81e5ad6b41f4837f73a08fd86fae30a"
+      },
+      "checks": 339,
+      "all_capture_hashes": {
+        "walk_down-shown.png": "bdc5c9e12a3f21378a285a480d9a87d508caab60796ac5edd5ca50f6ad197438",
+        "walk_down-hidden.png": "39b13eb081c03a6dfea2b9c840a7507b36804ca86f80d323b442832e1a0e2612",
+        "blocked_intent-shown.png": "a57df846127da2a06d9eeff3146cd2e96e52d9455d013878cfd29e4c671faca0",
+        "blocked_intent-hidden.png": "4b4656c5cf876ffa13febb4bf93b201c1fbcbcfc229fa572f252f4e0b987db97",
+        "clear_day-shown.png": "5c42006439a71c737e4ed4ffdbd8054626bed00d3771cb749cb3671741d46bf8",
+        "clear_day-hidden.png": "8054e68535274e14fad3997fec49da23b528fac35455103bfbc87b2230676bf3",
+        "clear_night-shown.png": "54f148994aac9187024dd0e1ad12de6e7ae8f09e18ad7d43f1b003d2db95a250",
+        "clear_night-hidden.png": "5df95d3e05597ae0d7b704aeb43cdd9ececba9ce584ef9d920cc20026037791d",
+        "rain-shown.png": "52a34355c5d3d1eb4dd3b437a3e03069416374755dfd0bf5cae51d64020a9da8",
+        "rain-hidden.png": "cf80df2670e353f997e8671c7dad142df312d614b781c0671f35379a206a0772",
+        "camera_turn-before.png": "b4ca9c3e054371974390291df34d06a9b1df7fa85f368b79465659a9d3c3b50a",
+        "camera_turn-after.png": "6f3c640cad2d3f5885086efcb1be695ed46f9987dd99b5e5fdeab51cea44cf81",
+        "wall_occlusion-birth.png": "abff40312202f3c073b69fc447d3f71e021a5bf4cdc4991474452b4390bea50e",
+        "wall_occlusion-shown.png": "33493aae4b70902ccf92e4a6755e23c974b288c47c9b25ef91baeeded7da8687",
+        "wall_occlusion-hidden.png": "33493aae4b70902ccf92e4a6755e23c974b288c47c9b25ef91baeeded7da8687",
+        "expiry-birth.png": "2785331c7db0e641bff5ad86b857f984501b50c01c400a94dc1f09e8908c8e94",
+        "expiry-expired.png": "efab7d699cb63c8f15075427f6915127d2802ddb6386eec4a128af156f6d5d1a"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/combined-960-v2/walk_down-shown.png",
+          "sha256": "bdc5c9e12a3f21378a285a480d9a87d508caab60796ac5edd5ca50f6ad197438"
+        },
+        {
+          "path": "runs/combined-960-v2/clear_day-shown.png",
+          "sha256": "5c42006439a71c737e4ed4ffdbd8054626bed00d3771cb749cb3671741d46bf8"
+        },
+        {
+          "path": "runs/combined-960-v2/wall_occlusion-shown.png",
+          "sha256": "33493aae4b70902ccf92e4a6755e23c974b288c47c9b25ef91baeeded7da8687"
+        }
+      ]
+    },
+    {
+      "run": "web-960-v1",
+      "platform": "web",
+      "family": "dust",
+      "report": {
+        "path": "runs/web-960-v1/dust-visual.json",
+        "sha256": "15bb5564bb72c0b1b9a81f8b8057c20bd27fcaac788299263160c6be142093c7"
+      },
+      "checks": 356,
+      "all_capture_hashes": {
+        "walk_down-shown.png": "8b410da9e0cb3cf917809661e51a8cf04650293d26771d893234e1bf4e7f133c",
+        "walk_down-hidden.png": "58e237d1b8944207cd7b2f1179fb423961048463a1fb13aac68e46f68230d02e",
+        "blocked_intent-shown.png": "84fb85390acfd75e34ab0fe322b63b53fdf6cb3f6220f304994b0e2fce0aad13",
+        "blocked_intent-hidden.png": "704bfa43b85a1c8bf25fd01c8629696a23d6f558a5e5a4403897fb42c705fd9f",
+        "clear_day-shown.png": "37bfd9c9fa6bba0b47ed0c58a2e7cf5e88b0f8cf6975b4dc44558672b5818106",
+        "clear_day-hidden.png": "13fa2c72597cbcc2ff98498d2c3b2b39268c9fdead7574a5e99623a61741ad0a",
+        "clear_night-shown.png": "96e68547606176863dbfb0777a85cd1d41b2346e63653f631261acfccbe25244",
+        "clear_night-hidden.png": "322b8944844050a1c7dc71d7af00ef3a8f8db1c51d3118273786bb58d58da2b1",
+        "rain-shown.png": "ee4ed86ae73288786b1debac52b37ccb997d6188a738ce6f3420b2dd99b2883d",
+        "rain-hidden.png": "689b0a541b023d32a0552efddfd692257cc6f9aa7450ae977462a865ef48736b",
+        "camera_turn-before.png": "9e22ff95acdd11111127870e980f9eb53b75c4c072fec278b3a41d425fea8cd4",
+        "camera_turn-after.png": "0739e187516fb4cc1a90aa490f5135eafcc996aaaaec640adfa07e1dfa887229",
+        "wall_occlusion-birth.png": "3688c9360e41ded9e65c5915cd89f7cc272c7cef77ac13769b489103540e774e",
+        "wall_occlusion-shown.png": "8c0b13e4794ed50145537e8d8dc6dfa815d779a6ff148e4a5e26a766fd892cc5",
+        "wall_occlusion-hidden.png": "8c0b13e4794ed50145537e8d8dc6dfa815d779a6ff148e4a5e26a766fd892cc5",
+        "expiry-birth.png": "b8c0d084ccab229168bb3aed640c63f5cef9bd1e6c193bb4cb19a861cc1dcc19",
+        "expiry-expired.png": "ccb7c9c537b4ae03628117f80063caec125daa1a1b6779713208188632bbc142"
+      },
+      "retained_capture_files": [
+        {
+          "path": "runs/web-960-v1/walk_down-shown.png",
+          "sha256": "8b410da9e0cb3cf917809661e51a8cf04650293d26771d893234e1bf4e7f133c"
+        },
+        {
+          "path": "runs/web-960-v1/clear_day-shown.png",
+          "sha256": "37bfd9c9fa6bba0b47ed0c58a2e7cf5e88b0f8cf6975b4dc44558672b5818106"
+        },
+        {
+          "path": "runs/web-960-v1/wall_occlusion-shown.png",
+          "sha256": "8c0b13e4794ed50145537e8d8dc6dfa815d779a6ff148e4a5e26a766fd892cc5"
+        }
+      ]
+    }
+  ],
+  "capture_policy": "All original captures remain in named .build runs; this portable package retains selected original PNGs and the complete report/hash census. No report acceptance flags were rewritten."
+}

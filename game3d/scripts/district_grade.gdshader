@@ -7,9 +7,14 @@ uniform vec3 multiply_rgb = vec3(1.0);
 uniform float multiply_alpha = 0.0;
 uniform vec3 overlay_rgb = vec3(0.5);
 uniform float overlay_alpha = 0.0;
+uniform vec2 world_feedback_offset_px = vec2(0.0);
 
 void fragment() {
-	vec4 screen = textureLod(screen_texture, SCREEN_UV, 0.0);
+	vec2 world_uv = SCREEN_UV;
+	if (world_feedback_offset_px != vec2(0.0)) {
+		world_uv = clamp(SCREEN_UV-world_feedback_offset_px*SCREEN_PIXEL_SIZE,0.5*SCREEN_PIXEL_SIZE,vec2(1.0)-0.5*SCREEN_PIXEL_SIZE);
+	}
+	vec4 screen = textureLod(screen_texture, world_uv, 0.0);
 	vec3 q = (1.0-multiply_alpha)*screen.rgb + multiply_alpha*screen.rgb*multiply_rgb;
 	vec3 dark = 2.0*q*overlay_rgb;
 	vec3 light = 1.0-2.0*(1.0-q)*(1.0-overlay_rgb);

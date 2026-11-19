@@ -37,7 +37,21 @@ const IncidentCorridors = preload("res://scripts/incident_corridors.gd")
 const AmbientAudio = preload("res://scripts/ambient_audio.gd")
 const DistrictBorder = preload("res://scripts/district_border_view.gd")
 const WallMarkings = preload("res://scripts/wall_markings.gd")
+const Feedback = preload("res://scripts/world_feedback.gd")
+const FeedbackAnchors = preload("res://scripts/world_feedback_anchors.gd")
+const WorldDust = preload("res://scripts/world_dust.gd")
 const STEP_MS := 1000.0 / 60.0
+var feedback: RefCounted = Feedback.new(9137)
+var world_dust: RefCounted = WorldDust.new(19723)
+var _dust_context: Dictionary = {}
+var _feedback_anchors: RefCounted = FeedbackAnchors.new()
+var _feedback_player: Dictionary = {}
+var _feedback_state: Dictionary = {}
+var _feedback_bound: bool = false
+var _feedback_epoch: int = 0
+var _feedback_cursor: int = 0
+var _feedback_right := Vector3.RIGHT
+var _feedback_stats := {"accepted":0,"rejected":0,"resets":0,"last_reset":""}
 var state: RefCounted
 var memory: RefCounted
 var progression: RefCounted
@@ -97,6 +111,7 @@ var s: Dictionary:
 func _init(spatial_adapter: Object, boss_adapter: Object = null, unix_ms: Callable = Callable()) -> void:
 	_spatial = weakref(spatial_adapter) if spatial_adapter != null else null
 	state = State.new()
+	_feedback_reset("cold",true)
 	ambient_audio = AmbientAudio.new(state)
 	wall_markings = WallMarkings.new(state)
 	props = Props.new(state)
@@ -140,6 +155,7 @@ func fresh() -> bool:
 	travel.cancel_travel("fresh")
 	_outbox.clear(); _save_wanted = false; _elapsed_ms = 0.0
 	if not state.fresh(): return false
+	_feedback_reset("fresh",true)
 	companions.ready()
 	props.reset_session("fresh")
 	if not _reset_cart_incidents("fresh"): return false
@@ -184,6 +200,7 @@ func restore(data: Variant) -> bool:
 	var previous_cart: Dictionary = travel.cart_record()
 	var restored: Dictionary = state.restore(data)
 	if restored.get("ok") != true: return false
+	_feedback_reset("restore",true)
 	companions.ready()
 	props.reset_session("restore")
 	if not _reset_cart_incidents("restore",previous_cart): return false
@@ -773,6 +790,7 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 		last_advanced_ms += step
 		var profile_mark: int = Time.get_ticks_usec() if profile_enabled else 0
 		var body_context: Dictionary = _move_player(step,context)
+		_dust_walk(step,body_context)
 		profile_mark = _profile_stage("movement",profile_mark)
 		memory.sync_visit()
 		if not state.tick(step/1000.0,body_context): return false
@@ -806,6 +824,7 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 		memory.tick(step)
 		companions.tick_world(step)
 		ambient_audio.tick_active(step)
+		_dust_ambient(step)
 		profile_mark = _profile_stage("memory_day_territory",profile_mark)
 		quests.tick_before_pickups(step)
 		_auto_collect()
@@ -821,6 +840,10 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 			profile_mark = _profile_stage("actors",profile_mark)
 			if profile_enabled:
 				for key: String in director.profile_us: profile_us["actor_"+key] = director.profile_us[key]
+		_drain_feedback_metadata()
+		if _feedback_is_bound(): feedback.advance_particles(step)
+		profile_mark = _profile_stage("world_feedback",profile_mark)
+		if _actors_enabled:
 			combat.tick_projectiles(step)
 			bosses.tick_after_actors(step,_wall_ms)
 			_resolve_events()
@@ -828,6 +851,7 @@ func advance(seconds: float, context: Dictionary = {}) -> bool:
 		try_intro_remember()
 		progression.update_ranks()
 		heists.sync_rank_unlock()
+		s.shake = Feedback.decayed_shake(s.get("shake",0),step)
 		utilities.finish_world_step(step)
 		_resolve_events()
 		_profile_stage("progression",profile_mark)
@@ -858,6 +882,7 @@ func _move_player(step_ms: float,context: Dictionary) -> Dictionary:
 	var result: Dictionary = context.duplicate()
 	var input: Vector2 = context.input_vector.limit_length(1.0)
 	if float(p.stunT) > step_ms: input = Vector2.ZERO
+	result._feedback_intent = input
 	result.moving = input.length_squared() > 0.0
 	result.sprinting = context.get("sprinting",false) == true and result.moving
 	if not result.moving: return result
@@ -947,6 +972,7 @@ func _resolve_events() -> void:
 	while not state.events.is_empty():
 		var batch: Array = state.drain_events()
 		for event: Dictionary in batch:
+			_feedback_event(event)
 			match event.kind:
 				"cart_changed":
 					_sync_cart(); _outbox.append(event)
@@ -1008,3 +1034,83 @@ func drain_events() -> Array[Dictionary]:
 
 func _toast(text: String) -> void: state.emit_event("toast",{"text":text})
 func _feed(text: String, author: String) -> void: state.emit_event("feed",{"text":text,"author":author})
+
+# Cosmetic metadata cursor. This observes no domain consequences and never drains events.
+func set_feedback_context(right: Vector3) -> bool:
+	if not right.is_finite() or not is_finite(right.length_squared()): return false
+	var horizontal := Vector3(right.x,0,right.z)
+	if horizontal.length_squared() < 0.000001: return false
+	_feedback_right = horizontal.normalized()
+	return true
+
+func _feedback_reset(reason: String,bind_epoch: bool = false) -> void:
+	_feedback_epoch += 1
+	feedback.reset_epoch(_feedback_epoch)
+	world_dust.reset_epoch(_feedback_epoch)
+	_feedback_stats.resets += 1
+	_feedback_stats.last_reset = reason
+	if bind_epoch:
+		_feedback_player = p; _feedback_state = s; _feedback_bound = true
+
+func _feedback_is_bound() -> bool:
+	if not _feedback_bound: return false
+	if not is_same(_feedback_player,p) or not is_same(_feedback_state,s):
+		_feedback_bound = false
+		_feedback_reset("unexpected_epoch")
+		return false
+	return true
+
+func _feedback_event(event: Dictionary) -> void:
+	if event.has("_world_feedback_cursor"): return
+	var payload: Variant = event.get("payload",{})
+	var lifecycle: bool = event.get("kind","") in ["death","arrest"]
+	if not lifecycle and (not payload is Dictionary or not payload.has("feedback")): return
+	_feedback_cursor += 1
+	event["_world_feedback_cursor"] = _feedback_cursor
+	if not _feedback_is_bound(): return
+	if lifecycle: _feedback_reset(str(event.kind))
+	if not payload is Dictionary or not payload.has("feedback"): return
+	if not payload.feedback is Array:
+		_feedback_stats.rejected += 1; return
+	for raw: Variant in payload.feedback:
+		if not raw is Dictionary:
+			_feedback_stats.rejected += 1; continue
+		var receipt: Dictionary = _feedback_anchors.decorate(raw,_feedback_right,_feedback_epoch)
+		if receipt.is_empty() or not feedback.accept(receipt): _feedback_stats.rejected += 1
+		else: _feedback_stats.accepted += 1
+
+func _drain_feedback_metadata() -> void:
+	_feedback_is_bound()
+	for event: Dictionary in state.events: _feedback_event(event)
+
+func feedback_snapshot() -> Dictionary:
+	_feedback_is_bound()
+	return feedback.snapshot()
+
+func feedback_inspect() -> Dictionary:
+	_feedback_is_bound()
+	return {"epoch":_feedback_epoch,"bound":_feedback_bound,"cursor":_feedback_cursor,"bridge":_feedback_stats.duplicate(),"pool":feedback.inspect(),"dust":world_dust.inspect()}
+
+func set_dust_context(camera: Transform3D,vertical_fov: float,aspect: float) -> bool:
+	if not WorldDust.valid_camera(camera,vertical_fov,aspect):
+		_dust_context.clear(); return false
+	_dust_context = {"camera":camera,"fov":vertical_fov,"aspect":aspect}
+	return true
+
+func _admit_dust(receipt: Dictionary) -> void:
+	if receipt.is_empty(): return
+	if feedback.accept(receipt): _feedback_stats.accepted += 1
+	else: _feedback_stats.rejected += 1
+
+func _dust_walk(step: float,context: Dictionary) -> void:
+	# Metadata only: preserve domain consequences at their original resolver seams.
+	_drain_feedback_metadata()
+	if not _feedback_is_bound(): return
+	var rect := Rect2(float(p.x),float(p.y),float(p.w),float(p.h))
+	_admit_dust(world_dust.walk(step,_feedback_epoch,rect,context.get("_feedback_intent",Vector2.ZERO),_feedback_right))
+
+func _dust_ambient(step: float) -> void:
+	# Observe an earlier death/arrest once before a later source ambient birth.
+	_drain_feedback_metadata()
+	if not _feedback_is_bound() or _dust_context.is_empty(): return
+	_admit_dust(world_dust.ambient(step,_feedback_epoch,str(s.get("weather","clear")),_dust_context.camera,_dust_context.fov,_dust_context.aspect))

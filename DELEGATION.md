@@ -932,3 +932,23 @@ Hand/Office checkpoint validated:117 completed3D checks, original19/19, both Ful
 exports and refreshed browser menu exits/movement pass. Local8074 is rebuilt.
 Raw batch's stale115 footer and independent117 census are both retained. Exact
 paired sustained60 release reports remain failed above16ms; no scope waiver.
+
+### Source effects and campaign replay — 2026-11-19
+
+The reviewed eighteen burst recipes plus walking dust/ambient motes are integrated
+into production source. Native core452/authority664 and actual Web core481/
+authority699 checks pass at1280 and960 with live poses; dust native339/Web356 pass
+both sizes. Original PNGs/reports and explicit fixture limitations are retained.
+The expanded 127/127 regression and original 19/19 gates pass. Full Windows/Web
+exports pass; local 8074 serves the effects build. Browser wake, movement and
+pause/journal/inventory exits were visually checked. Root owns the evidence
+package and pushed checkpoint; full-port acceptance remains separate.
+
+Campaign continuation remains separate: three failed actual runs are retained.
+The third passed Tony in 3.454 seconds but died at the first court after the
+driver failed to defend while navigating. Characters owns the bounded defensive
+driver/save-prefix revision and conditional pretender continuation; World owns
+additive scoped parity metadata with unchanged statuses; Architecture owns exact
+weighted-index GPU preparation and isolated pose-cost instrumentation. No worker
+runs Godot/Git. Sustained 60 actors under 16ms and aggregate native/Web gameplay
+acceptance remain open.

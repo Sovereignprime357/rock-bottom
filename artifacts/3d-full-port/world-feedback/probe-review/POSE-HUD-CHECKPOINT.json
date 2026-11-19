@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "packet": "probe-only admitted pose and opaque HUD correction",
+  "status": "atomic; static and independent review complete; central parser/native/Web pending",
+  "draft_hashes": {
+    "SPEC-DRAFT.md": "1c2c4cb0e9c90992504d2dea0d3eb3fceb1ae4c178822a1092644bb1aa4baf9f",
+    "README.md": "70bee2e370d16535771ef900f1e3a281f626aa032cd7621d76ffbb269d5e3be2",
+    "world_feedback_visual_probe.gd": "89e09a3c8312e2500fe8a3f162c6c2475f1d918c074deb7a2cf276e05eb134f3",
+    "test_world_feedback_visual_contract.gd": "9865056e48e702e8a3745cd056d17bff7ae65979a0843cb32a2ce1b5b9547e35",
+    "web_feedback_visual_probe.gd": "b723960d4f62dbcd653033a52087e14f7523ac0b4b278b29c72986712dbd8a9b",
+    "validate-static.py": "d9c35d0450499a2e0a2ef9595e235d78c4a0b0bfc6d93d57f32ffc5238e87627",
+    "INDEPENDENT-REVIEW.md": "2449fff62655f814f2be51d2a0a5f3868f795e4c9f8f0f80e039b6784a5ef0fc"
+  },
+  "original_baseline_sha256": "6d229e981f57412f4f1de2b0f731f4ea5f0ea4c4210fd60d7c1f42ec31f3ccca",
+  "reviewed_candidate": ".build/3d/world-feedback-combined/game3d",
+  "reviewed_source_hashes": {
+    "scripts/full_scene.gd": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+    "scripts/full_runtime.gd": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+    "scripts/actor_animation.gd": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+    "scripts/actor_director.gd": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc",
+    "scripts/hud.gd": "013d35a95ae371bae3274e54ad31b1a15db84ca1d17770e5f1333de5f0698b93",
+    "scripts/full_hud.gd": "d07ead67f77cb4e1addd8dc9341c66a639232910b13cd7a30bd809ab351e4a31"
+  },
+  "production_changes": [],
+  "static": {
+    "original_pins": 87,
+    "contract_completion_groups": 11,
+    "engine_run": false
+  },
+  "retained_evidence": {
+    "v5_v6": "effects/physics retained; no full actor pose acceptance because old driver never advanced ActorPose",
+    "core960_v6": "old report remains failed; 3 exact glyph pixels; independent actual-image readback additionally found1815 exact opaque health-fill pixels",
+    "fill_rect": [
+      26,
+      476,
+      191,
+      487
+    ],
+    "fill_rgba_sha256": "a744a3f0b13643f8df8254f3c962cf5ca306c0faac3465e09acc3523bace6cd9"
+  },
+  "copy_only": [
+    "world_feedback_visual_probe.gd",
+    "test_world_feedback_visual_contract.gd",
+    "web_feedback_visual_probe.gd"
+  ],
+  "central_required": [
+    "headless contract",
+    "native core1280 and960",
+    "native authority1280 and960",
+    "fresh Web exports and actual browser capture review"
+  ]
+}

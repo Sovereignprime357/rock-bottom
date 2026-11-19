@@ -229,3 +229,20 @@ motes are a separate pinned overlay; their first engine test retained a variate
 comparison failure while source RNG-state/derived fields passed. Full parity and
 60-actor16ms acceptance remain open. Same frozen workload is being measured on
 8bcd and648 with original production hashes separated from test overlays.
+
+### Effects integration freeze and active campaign continuation
+
+Source effects/dust/mesh-art composition passed actual native and Web staged
+visual packets at both desktop sizes and is promoted by an exact base-checked
+59-file overlay, with two source oracle tools. Root owns the complete127-check
+runner, original runner, final exports/manual smoke, original-byte evidence and
+commit/push. Other agents continue isolated metadata/pretender/index work only.
+The campaign runs in its separate retained production snapshot through normal
+input and source owners; it cannot establish the effects build's performance.
+No full-port verified status follows from these visual checks or source mappings.
+
+Integration validation now passes 127/127 plus original 19/19 and both exports.
+The refreshed browser smoke observed normal play and menu recovery. Freeze this
+source for commit/push and the identical committed-revision performance workload.
+Campaign defense, additive metadata, index GPU checks and pose diagnostics remain
+isolated, with root serializing every engine/browser/export run.

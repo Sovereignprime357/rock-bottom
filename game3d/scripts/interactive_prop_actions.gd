@@ -111,7 +111,10 @@ func kick(id: String) -> Dictionary:
 		_toast("+ a can of food (unmarked).\nthe label is in a language.\nthe language is not yours.",2600)
 		effect = "food"
 	else: _toast("the rats are upset. they have lives.",2000)
-	host.emit_event("interactive_prop_effect",{"id":id,"effect":effect,"count":6 if effect == "cash" else (8 if effect == "rats" else 0)})
+	var feedback: Array[Dictionary] = []
+	if effect in ["cash","rats"]:
+		feedback.append({"recipe":"trash_cash" if effect == "cash" else "trash_rats","source_point":Vector2(row.x,row.y),"anchor_kind":"ground"})
+	host.emit_event("interactive_prop_effect",{"id":id,"effect":effect,"count":6 if effect == "cash" else (8 if effect == "rats" else 0),"feedback":feedback})
 	_changed(id); host.emit_event("save_requested")
 	host.emit_event("gesture",{"action":"kick"})
 	return {"ok":true,"committed":true,"effect":effect}
@@ -133,7 +136,7 @@ func resolve_swing(capability: Variant) -> Dictionary:
 		var row: Dictionary = _record(id)
 		if row.is_empty() or row.get("type") != "b_bottle" or row.get("broken",false) or not _placed.get(id,false) or _pending.has(id): continue
 		row.broken = true; row.respawnT = 60000.0+host.random_float()*60000.0
-		_sound("glassBreak"); host.emit_event("interactive_prop_effect",{"id":id,"effect":"glass","count":12})
+		_sound("glassBreak"); host.emit_event("interactive_prop_effect",{"id":id,"effect":"glass","count":12,"feedback":[{"recipe":"bottle_break","source_point":Vector2(row.x,float(row.y)-4.0),"source_rect":Rect2(float(row.x)-4.0,float(row.y)-12.0,8.0,16.0),"anchor_kind":"ground"}]})
 		var chance: float = host.random_float() # Source rolls even when already equipped.
 		if chance < 0.25 and host.p.weapon != "broken_bottle":
 			host.p.weapon = "broken_bottle"

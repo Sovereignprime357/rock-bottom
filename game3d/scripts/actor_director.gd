@@ -140,7 +140,13 @@ func _ally(body: Dictionary, dt: float) -> void:
 		var delta := _position(target) - _position(body)
 		if delta.length() > 30.0: _move(body, delta.normalized() * _speed(body, 1.4) * dt / 16.0, Combat.center(target))
 		elif body.attackCd <= 0.0 and combat.can_hit(Combat.center(body), Combat.center(target), str(body.id), str(target.id)):
-			if combat.damage_actor(str(target.id), 10.0): body.attackCd = 700.0
+			var feedback_point: Vector2 = Combat.center(target)
+			var feedback_rect := Rect2(target.x,target.y,target.w,target.h)
+			var feedback_actor_id: String = str(target.id)
+			var feedback_actor := {"id":target.get("id",""),"name":target.get("name"),"sprite":target.get("sprite"),"isOmalleyFallen":target.get("isOmalleyFallen",false)}
+			if combat.damage_actor(str(target.id), 10.0):
+				body.attackCd = 700.0
+				host.emit_event("world_feedback",{"feedback":[{"recipe":"ally_hit","source_point":feedback_point,"source_rect":feedback_rect,"anchor_kind":"body","actor_id":feedback_actor_id,"source_actor":feedback_actor}]})
 	else:
 		var delta := _position(host.p) - _position(body)
 		if delta.length() > 80.0: _move(body, delta.normalized() * _speed(body, 1.2) * dt / 16.0, host.player_center())
@@ -182,6 +188,8 @@ func _hostile(body: Dictionary, dt: float) -> void:
 				if body.get("isBrendan", false):
 					if body.taserChargeT >= 4000.0:
 						_hit(body, 50.0, 1000.0); body.taserChargeT = 0.0; host.emit_event("sound", {"id":"copSiren"})
+						# Source emits after damagePlayer: post-knockback/reset, even on iframes.
+						host.emit_event("world_feedback",{"feedback":[{"recipe":"taser","source_point":host.player_center(),"source_rect":Rect2(host.p.x,host.p.y,host.p.w,host.p.h),"anchor_kind":"body","actor_id":"player"}]})
 				else: _hit(body, _damage(body, 8.0), 800.0)
 
 
@@ -238,7 +246,9 @@ func _ranged(body: Dictionary, dt: float, toward: Vector2, distance: float) -> v
 	elif distance > 260.0: motion = toward
 	_move(body, motion * _speed(body, 1.5) * dt / 16.0, host.player_center())
 	if body.throwT <= 0.0 and distance >= 160.0 and distance <= 280.0:
-		if body.throwAimT <= 0.0 and not body.get("aimingThrow", false): body.aimingThrow = true; body.throwAimT = 300.0
+		if body.throwAimT <= 0.0 and not body.get("aimingThrow", false):
+			body.aimingThrow = true; body.throwAimT = 300.0
+			host.emit_event("world_feedback",{"feedback":[{"recipe":"ranged_aim","source_point":Vector2(float(body.x)+float(body.w)*0.5+8.0,float(body.y)+4.0),"source_rect":Rect2(body.x,body.y,body.w,body.h),"anchor_kind":"head","actor_id":str(body.id),"source_actor":{"id":body.get("id",""),"name":body.get("name"),"sprite":body.get("sprite"),"isOmalleyFallen":body.get("isOmalleyFallen",false)}}]})
 		elif body.get("aimingThrow", false) and body.throwAimT <= 0.0:
 			body.aimingThrow = false; body.throwT = 1500.0
 			var origin := Combat.center(body)
@@ -261,7 +271,9 @@ func _fallen_priest(body: Dictionary, dt: float, toward: Vector2, distance: floa
 		body.throwT = float(body.get("throwT",0.0))-dt
 		body.throwAimT = maxf(0.0,float(body.get("throwAimT",0.0))-dt)
 		if body.throwT <= 0.0 and distance >= 160.0 and distance <= 300.0:
-			if body.throwAimT <= 0.0 and not body.get("aimingThrow",false): body.aimingThrow = true; body.throwAimT = 350.0
+			if body.throwAimT <= 0.0 and not body.get("aimingThrow",false):
+				body.aimingThrow = true; body.throwAimT = 350.0
+				host.emit_event("world_feedback",{"feedback":[{"recipe":"fallen_aim","source_point":Vector2(float(body.x)+float(body.w)*0.5,float(body.y)+8.0),"source_rect":Rect2(body.x,body.y,body.w,body.h),"anchor_kind":"head","actor_id":str(body.id),"source_actor":{"id":body.get("id",""),"name":body.get("name"),"sprite":body.get("sprite"),"isOmalleyFallen":body.get("isOmalleyFallen",false)}}]})
 			elif body.get("aimingThrow",false) and body.throwAimT <= 0.0:
 				body.aimingThrow = false; body.throwT = 1200.0
 				var origin := Combat.center(body)

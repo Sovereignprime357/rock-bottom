@@ -2353,3 +2353,13 @@ faceted shaft/opposing digit wrap. Original action clocks, non-cart poses, sourc
 transactions and physical placement remain authoritative. The extended Office
 acceptance specification permits only test-driver selection among legal live
 service endpoints. Original v22/v19 art, storage and gameplay are unchanged.
+
+### Full3D source feedback and street atmosphere — 2026-11-19
+
+SPEC-3D-WORLD-FEEDBACK.md governs the original depth-tested impact fragments,
+flash fans, walking dust and ambient motes. One bounded cosmetic pool receives
+ordered receipts from existing owners, with an independent random stream and no
+resource/damage authority. Existing shake amplitude drives only the district
+screen pass; camera/aim/HUD remain fixed. The companion return guard rejects stale
+reentrant reveal commits. Exact source recipes, active clocks, epoch reset and
+native/Web physical/visual evidence remain separate acceptance requirements.

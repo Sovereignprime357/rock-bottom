@@ -1,5 +1,7 @@
 extends Node3D
 ## Production composition under development. All gameplay is owned by FullRuntime.
+const WorldFeedback = preload("res://scripts/world_feedback.gd")
+const WorldFeedbackView = preload("res://scripts/world_feedback_view.gd")
 const Runtime = preload("res://scripts/full_runtime.gd")
 const World = preload("res://scripts/full_neighborhood.gd")
 const Adapter = preload("res://scripts/world_adapter.gd")
@@ -27,6 +29,8 @@ const KingdomView = preload("res://scripts/kingdom_world_view.gd")
 const WallMarkingView = preload("res://scripts/wall_marking_view.gd")
 const FixtureMotion = preload("res://scripts/fixture_motion_view.gd")
 const FULL_KEY := "rockbottom_3d_full_v2"
+var feedback_view: Node3D
+var feedback_strength: float = 1.0
 var runtime: RefCounted
 var physics: RefCounted
 var world: Node3D
@@ -105,6 +109,7 @@ func _ready() -> void:
 	startup.show_stage("the block.",1,1)
 	physics = Adapter.new(world)
 	runtime = Runtime.new(physics); physics.bind_state(runtime.state)
+	feedback_view = WorldFeedbackView.new(); feedback_view.name = "WorldFeedback"; add_child(feedback_view); feedback_view.build()
 	hud.update_communications(runtime.communications.snapshot())
 	_make_player()
 	dynamic_emitters = DynamicEmitters.create(); add_child(dynamic_emitters)
@@ -307,6 +312,7 @@ func _process(delta: float) -> void:
 	if not ready_for_play: return
 	render_serial += 1
 	var wall_ms: float = float(Time.get_ticks_msec())
+	_sync_feedback_context()
 	runtime.advance_wall(wall_ms); sound.advance_wall(wall_ms)
 	_sync_mouse_capture(Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
 	var active: bool = runtime.s.mode == "playing" and not loading
@@ -355,6 +361,7 @@ func _process(delta: float) -> void:
 	hud.prompt.text = str(interaction.get("prompt","")) if runtime.s.mode == "playing" else ""
 	hud.update_actor_hud(wall_ms)
 	_sync_dynamic_emitters(wall_ms)
+	_sync_world_feedback(wall_ms)
 
 func _sync_dynamic_emitters(wall_ms: float) -> void:
 	if dynamic_emitters == null: return
@@ -373,6 +380,7 @@ func _actor_hud_visible(id: String,target: Vector3) -> bool:
 	return is_instance_valid(body) and body.is_visible_in_tree() and target.is_finite() and _guidance_target_visible(target)
 
 func _unhandled_input(event: InputEvent) -> void:
+	_sync_feedback_context()
 	if not ready_for_play or loading: return
 	if event is InputEventKey and not event.pressed and event.physical_keycode == KEY_F:
 		squint_held = false; runtime.utilities.release_squint()
@@ -574,6 +582,7 @@ func _option(label: String, callback: Callable, disabled: bool = false) -> Dicti
 		if serial == menu_generation and not loading and not disabled:
 			sound.ready_for_sound = true
 			if runtime.s.mode == "dialogue": sound.play_sound("dialogue")
+			_sync_feedback_context()
 			callback.call()}
 
 func _begin_menu() -> void:
@@ -680,6 +689,8 @@ func _new_game() -> void:
 
 func _reset_presentation() -> void:
 	squint_held = false; runtime.utilities.release_squint()
+	if feedback_view != null: feedback_view.clear()
+	if hud.district_grade != null: hud.district_grade.set_world_feedback_offset(Vector2.ZERO)
 	if weather_view != null: weather_view.clear()
 	if fixture_motion != null: fixture_motion.clear()
 	if dynamic_emitters != null: dynamic_emitters.clear()
@@ -808,3 +819,25 @@ func _notification(what: int) -> void:
 func _request_quit() -> void:
 	quit_requested = true; pending_load = false
 	runtime.request_save(); _consume_events()
+
+func _sync_feedback_context() -> void:
+	if runtime == null or camera == null: return
+	runtime.set_feedback_context(camera.global_basis.x)
+	var size: Vector2 = camera.get_viewport().get_visible_rect().size
+	runtime.set_dust_context(camera.global_transform,camera.fov,size.x/maxf(size.y,1.0))
+
+func _sync_world_feedback(wall_ms: float) -> void:
+	if feedback_view == null or runtime == null: return
+	if runtime.s.mode == "title": feedback_view.clear()
+	else: feedback_view.sync(runtime.feedback_snapshot())
+	if hud.district_grade != null:
+		var offset: Vector2 = WorldFeedback.world_offset(runtime.s.get("shake",0),wall_ms,_feedback_render_size(),str(runtime.s.mode),feedback_strength,get_window().has_focus(),loading)
+		hud.district_grade.set_world_feedback_offset(offset)
+
+func _feedback_render_size() -> Vector2:
+	# Native raster proved ViewportTexture.get_size double-applies canvas stretch.
+	# These concrete target sizes match the actual framebuffer without readback.
+	var viewport: Viewport = get_viewport()
+	if viewport is Window: return Vector2(viewport.size)
+	if viewport is SubViewport: return Vector2(viewport.size)
+	return Vector2.ZERO

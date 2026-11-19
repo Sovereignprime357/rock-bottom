@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "base_commit": "2a1f6ca7204238be7f8ca334e86501130f3aaa13",
+  "production_files": {
+    "scripts/actor_director.gd": "49db6e6e7dc1a079f222012502ee287c8e2361ec01f4fc8dffee0b4e88e114dc",
+    "scripts/boss_system.gd": "76a0b58cbd1b555963fd811d0e0c9b4a415cfa62fd8a1cc879fdbf44cb9b1d08",
+    "scripts/combat_system.gd": "194982d44f651baedf78b109a9f567e9c2f457c151d64952153587000abfba75",
+    "scripts/companion_system.gd": "07f14c99a48e2adf736361e287af756920d6c65a16daaf2fbb2c05c7e96537c8",
+    "scripts/district_grade.gdshader": "77f80686d17bbb7548fbb3d7e9fbcc1388cc4cb79f70d6681e06a43b0b1a8df6",
+    "scripts/district_grade_view.gd": "f6210fb4ef6e5f4ab6a9b4b92fdb9da2269530d9e0b5c59a07d6f91067dc3b38",
+    "scripts/full_runtime.gd": "2debc876169ad7515a398895c97210df8036be9db35c5e860a018dca28ee16a9",
+    "scripts/full_scene.gd": "101b85ea0200a506a742dca79030f1f31c8426847d2d89959ec6e48ed36b7d43",
+    "scripts/interactive_prop_actions.gd": "b56d56868f4c91867ff917b327a5b203feebb859a694e011845386564200f7fe",
+    "scripts/world_dust.gd": "38aa4c3ec0382b5381be78c41f63141523d010b8fe873aac6e2308a13d7226a8",
+    "scripts/world_dust.gd.uid": "6d6cfd2351718ed910dc373cdf5095e093ffdb2be8c8984dddfe3fc1ecb4436d",
+    "scripts/world_feedback.gd": "0149d7863adaa9ddf43f807ac2ddb8666f121a7290700d10d466f32a13d64b52",
+    "scripts/world_feedback.gd.uid": "8020c7c1f8ead6ce26043fdc64d22932992e644b8f6ddc5cb6899be6e2c5b57a",
+    "scripts/world_feedback_anchors.gd": "d3e3ccc88515c7cebdc9eac4f815e456b01bfb5f6a90eec419bba31aa9cc898c",
+    "scripts/world_feedback_anchors.gd.uid": "cbd1e2d577407f3e4a931393a424ad4dc148d22a73a92ff77eea952644fc2169",
+    "scripts/world_feedback_view.gd": "bebfa883cb9b3a1044e557531b2f85cf1173a3944c9b6e2a68c6775be6d63c45",
+    "scripts/world_feedback_view.gd.uid": "72db7712788b21ab6bcf6abf13af0077e4e69a5a6a38c3ca1f5cd592ac8c6311",
+    "scripts/world_prop_actions.gd": "1d44fa2613314feafd31a59a4c0139d29632334e293e2819f5b3f3331ac703b7",
+    "tests/run_world_feedback_raster.gd": "5029ae3dea35398636efb8a24cfe2cef679bdc3d132241587a2bc52cfed01292",
+    "tests/run_world_feedback_raster.gd.uid": "c1ccc17d001c986331162fa6fff903a8e9fc485dd3431206d94f2e453471555f",
+    "tests/test_companion_reveal_epoch.gd": "2bfbd3ad6fdf98a6e7a5d478391380308723b644c52668e6f990d316562d7e9f",
+    "tests/test_companion_reveal_epoch.gd.uid": "d30a7d22d08cd4c4b707c8bdf50808c691a5dc9579369713c5f88e1e92a230eb",
+    "tests/test_feedback_view_art.gd": "e3214cdc3670cf87d36c40670fab75a7efdf36b550a83593c1409249f2e4015a",
+    "tests/test_feedback_view_art.gd.uid": "b8cc63436883f5e33d9e0ffdef3faf4abb81ae2c4bae681e3ba084fe1164abd3",
+    "tests/test_world_dust.gd": "ab66f3f49b5f68570f5e133a932a22486f61ddd2e0c00fff7e6d74b0de2840a7",
+    "tests/test_world_dust.gd.uid": "db3bfaca50085329f36a382a76825cf17b40d650445198b22138770c2251d63d",
+    "tests/test_world_dust_runtime.gd": "8b0c1b43d5dd1f63ebd751aff7abbe2384ee4af47f3ce7b81c64524d1f07e561",
+    "tests/test_world_dust_runtime.gd.uid": "0647bbb5dc591aeb0302ff38fddfdc1f08c0951f4556c4a6a0abb4e6ddaa061c",
+    "tests/test_world_dust_visual_contract.gd": "5a3e200f6b0cc4fe19164cb5d238f86a3bfce5992969103d98a95d1cce5ef916",
+    "tests/test_world_feedback.gd": "b21b662d9b7f982a35e142b4b4c29cdf50d3e3dd1a24414eee6245111232fb67",
+    "tests/test_world_feedback.gd.uid": "6a45b0c8b417501977efe900abd2c858edf0ff7e668419d70f63950caedbfe95",
+    "tests/test_world_feedback_integration.gd": "7e83fe7c64cd5011a3110233f7cfa586d20bf242b73cca78132f179a8276f2ba",
+    "tests/test_world_feedback_integration.gd.uid": "beae430c45247efbbdbdcdfd645618db906efcab21f96266ee0a35de0ce7da09",
+    "tests/test_world_feedback_visual_contract.gd": "9865056e48e702e8a3745cd056d17bff7ae65979a0843cb32a2ce1b5b9547e35",
+    "tests/web_dust_visual_probe.gd": "af4a69581a2b623754b26859a55d5f8c065da72f9148cca2f7065f019d45d752",
+    "tests/web_feedback_visual_probe.gd": "b723960d4f62dbcd653033a52087e14f7523ac0b4b278b29c72986712dbd8a9b",
+    "tests/world_dust_visual_probe.gd": "309a834f58ccded071c4688eacbe92538424260cdfbc440ba5733e031f49874d",
+    "tests/world_feedback_raster.tscn": "14bcad6978b7cc36ab76eb975267b9cb00c51eda2af9ac894276b5f31999aa91",
+    "tests/world_feedback_raster_probe.gd": "343ca59a5ff350d2c8ab4a20ed8a553aa79f34fe05557cad1f7566b60ae5af1f",
+    "tests/world_feedback_raster_probe.gd.uid": "745080c0a5d1e14d6daffdf5644de69ea67b17fa37248994bd64050e661b0e23",
+    "tests/world_feedback_visual_probe.gd": "89e09a3c8312e2500fe8a3f162c6c2475f1d918c074deb7a2cf276e05eb134f3",
+    "tests/feedback_reference/actor_director.gd": "b86aa681d2665a4a94b856532f7c5b393bd64ae2374d58537b453131f1917cdd",
+    "tests/feedback_reference/actor_director.gd.uid": "f7ee1a5f4ebc76bf46d3ecee23d497f77f36b8ad7c0f35619b3b7ed65a3b4b03",
+    "tests/feedback_reference/boss_system.gd": "5f12759f90f7171dccdf06353c667b21791c61615a854c26fbf3a51d4a2ea6a3",
+    "tests/feedback_reference/boss_system.gd.uid": "2c8800022df9e71fe7666b8edcf3ddce02d744800fe4fe9375429024797dd359",
+    "tests/feedback_reference/combat_system.gd": "c3c637b7961019395bfa316fedc13f91ffa635a71a0f881bde518bd40cee0d08",
+    "tests/feedback_reference/combat_system.gd.uid": "a1f59f55afeb6b3932f4c2cf35a643076dacf899fd1a5886607ca61be75ab042",
+    "tests/feedback_reference/companion_system.gd": "ebafadaa4778d87ae22f2cf182ec0a61b2bd875d1ec61349270857fe2697095d",
+    "tests/feedback_reference/companion_system.gd.uid": "6db645dd7a8acb0591e570da347c77de171554530bac9c38dbfe84d2db50d99c",
+    "tests/feedback_reference/full_runtime.gd": "7a02cfb4470cf75da072790d5b8b51d1bd525ceb4efacfd05c1109724b866ebe",
+    "tests/feedback_reference/full_runtime.gd.uid": "d4ef330268c67bc7b0bdeb42a44262b96d5d3f38f67750e970206f29d3ad49d3",
+    "tests/feedback_reference/interactive_prop_actions.gd": "0499a15ce644cba21e78600904adab7f72ac2d18c4348336b456af03b5817430",
+    "tests/feedback_reference/interactive_prop_actions.gd.uid": "a29d66b2711d9afbc1ae8f9c35b02724c82552e990d760548aaf08d726bba564",
+    "tests/feedback_reference/world_prop_actions.gd": "10840886efe610d3563e6caac3a21a543cc175f5a5c2f7800c400a3235bf596b",
+    "tests/feedback_reference/world_prop_actions.gd.uid": "265a61f2a543d4fc42e2c571c2ef996aca3f7aecfb56ba23532e7a4f2eeaf17c",
+    "tests/fixtures/dust_baseline_runtime.gd": "8013c18d268792928cda6867d7c851011c491e1084daeea8baffd7baa6ec1b0f",
+    "tests/fixtures/dust_baseline_runtime.gd.uid": "24d3b28a4c23d18abd0e33e0b78a7cf31dedf15219a7b8bb25b2b34a2f4e474d",
+    "tests/fixtures/world_dust_reference.json": "227af33e83ef0fd3470042299d91bfe84c673e4aafc1fe43405d3d836e1ff3a2",
+    "tests/fixtures/world_feedback_reference.json": "b559ccee74fc980838e1d9927b82a0204f6676ade6435471d3efb8ebf5196080"
+  },
+  "evidence": [
+    {
+      "path": ".build\\full-port\\feedback-visual\\combined-core-1280-v7\\feedback-visual.json",
+      "sha256": "27ce924479beaa3c4802a6dd667db79f22d08faffee945daade1eee9833681e6",
+      "checks": 452
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\web-core-1280-v2\\feedback-web-evidence.json",
+      "sha256": "ccb2e3cecb335b25a4f7031fe2bcbc5192b7c85bf1c0a2892aea17f33df06069",
+      "checks": 481
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\combined-authority-1280-v7\\feedback-visual.json",
+      "sha256": "b955efa36074c7a7aeab2219d6afbe46a28d81a5c221cee8b58c6d59f97c8696",
+      "checks": 664
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\web-authority-1280-v2\\feedback-web-evidence.json",
+      "sha256": "de331ddc68c79b6d2713c96bd864bc373d937aea636321a375cb6bbbe7b634f2",
+      "checks": 699
+    },
+    {
+      "path": ".build\\full-port\\dust-visual\\combined-1280-v2\\dust-visual.json",
+      "sha256": "d79424b116f099c96c009ace80b412a3fbf3ce9bdc690f9f7d134395f6d0bc2d",
+      "checks": 339
+    },
+    {
+      "path": ".build\\full-port\\dust-visual\\web-1280-v1\\dust-visual.json",
+      "sha256": "64d790786306733422d14d7c765c0bd95df7daf5a44e56489bad3583b4592ff4",
+      "checks": 356
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\combined-core-960-v7\\feedback-visual.json",
+      "sha256": "5a22b406fcabc561df418e81c606bcf2b9c4061afa1ee66a4dcd42f07c8b0ebc",
+      "checks": 452
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\web-core-960-v2\\feedback-web-evidence.json",
+      "sha256": "81a21c4a383bf9b6d52fbdca92842a9054f1e45df35fd5b22570821b102b9f97",
+      "checks": 481
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\combined-authority-960-v7\\feedback-visual.json",
+      "sha256": "e5c95969209bfe16c3996f95c26a9f159e9eb97b8c3a624559b13ee96924cc3f",
+      "checks": 664
+    },
+    {
+      "path": ".build\\full-port\\feedback-visual\\web-authority-960-v2\\feedback-web-evidence.json",
+      "sha256": "958ec3d8b39429841e4be30f1936c7d0981d2bef741b80e05e913fbcd8ab5fdc",
+      "checks": 699
+    },
+    {
+      "path": ".build\\full-port\\dust-visual\\combined-960-v2\\dust-visual.json",
+      "sha256": "75cc2e39f4b07c6051109fdf9ca8c108e81e5ad6b41f4837f73a08fd86fae30a",
+      "checks": 339
+    },
+    {
+      "path": ".build\\full-port\\dust-visual\\web-960-v1\\dust-visual.json",
+      "sha256": "15bb5564bb72c0b1b9a81f8b8057c20bd27fcaac788299263160c6be142093c7",
+      "checks": 356
+    }
+  ],
+  "scope": "exact effects candidate promotion; final gates/export/commit pending"
+}
