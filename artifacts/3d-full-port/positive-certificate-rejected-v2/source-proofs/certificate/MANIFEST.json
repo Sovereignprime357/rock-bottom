@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "format": "rock-bottom-positive-clearance-retention-candidate",
+  "baseline_archive_sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+  "baseline_adapter_sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+  "production_modified": false,
+  "engine_run": false,
+  "performance_acceptance": false,
+  "indexing": false,
+  "resource_pooling": false,
+  "static_checks": 524,
+  "overlays": [
+    {
+      "source": "candidate/game3d/scripts/world_adapter.gd",
+      "target": "game3d/scripts/world_adapter.gd",
+      "sha256": "3687e6a9fce244a6db98b000e9ead53dc225689e70929605b55dbcd5f38aaba0"
+    },
+    {
+      "source": "candidate/game3d/tests/reference_positive_clearance_adapter.gd",
+      "target": "game3d/tests/reference_positive_clearance_adapter.gd",
+      "sha256": "1a66c5962013fde3af83b868c7672d89385b98b66889b0f130fcf10ee02ab6e9"
+    },
+    {
+      "source": "candidate/game3d/tests/test_positive_clearance_retention.gd",
+      "target": "game3d/tests/test_positive_clearance_retention.gd",
+      "sha256": "cc3e3b6e7a624c79e4c607d603cf3bfb3fc58e9511424967ba18dd04623efd76"
+    }
+  ],
+  "files": {
+    "BASELINE.json": {
+      "sha256": "1d1d75594faebbcd00572ac1bd3bcb7033fffba27cdbd9079473c742ab4261e4",
+      "bytes": 56675
+    },
+    "candidate/game3d/scripts/world_adapter.gd": {
+      "sha256": "3687e6a9fce244a6db98b000e9ead53dc225689e70929605b55dbcd5f38aaba0",
+      "bytes": 74460
+    },
+    "candidate/game3d/tests/reference_positive_clearance_adapter.gd": {
+      "sha256": "1a66c5962013fde3af83b868c7672d89385b98b66889b0f130fcf10ee02ab6e9",
+      "bytes": 74048
+    },
+    "candidate/game3d/tests/test_positive_clearance_retention.gd": {
+      "sha256": "cc3e3b6e7a624c79e4c607d603cf3bfb3fc58e9511424967ba18dd04623efd76",
+      "bytes": 12891
+    },
+    "original/game3d/scripts/world_adapter.gd": {
+      "sha256": "0dc4bbca7c969104da2c400884ea04a24ea30b14c61a4e85249ce8aa7f3f8802",
+      "bytes": 74082
+    },
+    "prepare.py": {
+      "sha256": "ab05488df35124f987fa5ee87a4f12f944334e3f0605da91f37177d5860de253",
+      "bytes": 3330
+    },
+    "README.md": {
+      "sha256": "b36261234e1b94980d470365f91c7a4e7b3173d004922a18170258482bbe636c",
+      "bytes": 2042
+    },
+    "source.zip": {
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+      "bytes": 3001680
+    },
+    "SPEC-DRAFT.md": {
+      "sha256": "a29630d0400dea3bb2a7008bb36337318c6d2e5aadb33f6761ad353863170f94",
+      "bytes": 3332
+    },
+    "static-check.py": {
+      "sha256": "6091c94a4c4ad21c4cf42f3b80b868f3a95fbb7565931ada2601658ca9e0e2d6",
+      "bytes": 3453
+    },
+    "transform.json": {
+      "sha256": "55910bda3807074a883c8e412221f19fc1aaabd5dd12214fdd90bb6bae5a9c4d",
+      "bytes": 590
+    }
+  }
+}

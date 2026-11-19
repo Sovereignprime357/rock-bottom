@@ -1,0 +1,415 @@
+{
+  "schema": 1,
+  "inputs": {
+    ".build/3d/positive-certificate-performance-v2-draft/MANIFEST.json": {
+      "sha256": "02d955d69c45c3991bc03333db053d6680f2d060008c3a8659a531e700a69eb7",
+      "bytes": 3343,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/certificate/scripts/world_adapter.gd": {
+      "sha256": "3687e6a9fce244a6db98b000e9ead53dc225689e70929605b55dbcd5f38aaba0",
+      "bytes": 74460,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/certificate/tests/reference_positive_clearance_adapter.gd": {
+      "sha256": "1a66c5962013fde3af83b868c7672d89385b98b66889b0f130fcf10ee02ab6e9",
+      "bytes": 74048,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/certificate/tests/test_positive_clearance_retention.gd": {
+      "sha256": "cc3e3b6e7a624c79e4c607d603cf3bfb3fc58e9511424967ba18dd04623efd76",
+      "bytes": 12891,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/compare-pair.py": {
+      "sha256": "01e12b7ec46ae03ca6e3570c6767236cc2f46890af95ed59603c4022e6c4f0e2",
+      "bytes": 14203,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/pins.json": {
+      "sha256": "076315125c3b03f4fe253117034f3b31d6c58def70dbbc403681012afcda5941",
+      "bytes": 57356,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/prepare.py": {
+      "sha256": "6a7a5e3f088e23aea526d37b02539eb9485dba5c26bcb8167d6557441e21edee",
+      "bytes": 8933,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/profile-one.ps1": {
+      "sha256": "6f796f30ca30eb2710e59b0fb74ed489ebb547ec512d6bf302c3ed5bae268c7a",
+      "bytes": 22510,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/README.md": {
+      "sha256": "e7f971e038aa1231f1f3e07b3239c466bf999b4ec7031ba505a689aadc0dcd2c",
+      "bytes": 2339,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/run-paired.ps1": {
+      "sha256": "b4278aa1307603c773f855a62ce9633235e7917f7d15dcf3db9ed763d2d95c84",
+      "bytes": 1609,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/source.zip": {
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+      "bytes": 3001680,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/SPEC-DRAFT.md": {
+      "sha256": "70f379e447bd8b61d0750190eec539aeb3c3f649dca15328a3a5a2e1e0723ba0",
+      "bytes": 2076,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/static-check.py": {
+      "sha256": "08c2559ce7f2f96f077e64cc0c6ec21e0a35a24182a6a4e76ded0ee5c5306efc",
+      "bytes": 5320,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/test-comparison.py": {
+      "sha256": "a693310a890979d7ea84296887ca43b54d40b9b2fb5cc45dd513853501e96095",
+      "bytes": 9032,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/tests/full_actor_performance_probe.gd": {
+      "sha256": "86eb4175a218db728283e103a51af25565aad16e347578ffdfedf4bb2b8ea199",
+      "bytes": 31415,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/tests/sustained_actor_driver.gd": {
+      "sha256": "0732e2d8d6994be3f44e13576da09bfd46d09fb7cda050cf0113a10f936d08fb",
+      "bytes": 11022,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/tests/test_performance_phase_snapshot.gd": {
+      "sha256": "dec496b40f17e3f43036026cb7a47d7ef1f43122283bf356b86aa141e5c4c4a2",
+      "bytes": 9159,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/tests/test_sustained_actor_driver.gd": {
+      "sha256": "85038f4c7a679585da3d285a1d727fa1b89b2a8a0463784130d68f32cdadf818",
+      "bytes": 11829,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/transforms.json": {
+      "sha256": "e785d1a6ce59d64af2d5da9f3c020f693b6a5d67a03a7328f865c4e9a9f4abae",
+      "bytes": 8439,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-performance-v2-draft/VALIDATION.json": {
+      "sha256": "5d02bd9b3f1a4527dd1929281eb929d58c7ca30f0a71784e04540009707edda7",
+      "bytes": 348,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-retention-draft/MANIFEST.json": {
+      "sha256": "8b0b2b770338261ac6d0d14a6b929c0d9fa88d1dbe65f0902c87838f6d66dd50",
+      "bytes": 2805,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-retention-draft/BASELINE.json": {
+      "sha256": "1d1d75594faebbcd00572ac1bd3bcb7033fffba27cdbd9079473c742ab4261e4",
+      "bytes": 56675,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-retention-draft/SPEC-DRAFT.md": {
+      "sha256": "a29630d0400dea3bb2a7008bb36337318c6d2e5aadb33f6761ad353863170f94",
+      "bytes": 3332,
+      "retention": "copy"
+    },
+    ".build/3d/positive-certificate-retention-draft/transform.json": {
+      "sha256": "55910bda3807074a883c8e412221f19fc1aaabd5dd12214fdd90bb6bae5a9c4d",
+      "bytes": 590,
+      "retention": "copy"
+    },
+    ".build/3d/performance-phase-snapshot-draft/MANIFEST.json": {
+      "sha256": "5f0bf42e75cf19c5c399b099d7591acb5871108d0822c9c1b2b730143ba21c9f",
+      "bytes": 2112,
+      "retention": "copy"
+    },
+    ".build/3d/performance-phase-snapshot-draft/PINS.json": {
+      "sha256": "1d3848efc019f47d496d2cf1b13ebad83103786214cf211d8876bbfbde9497c6",
+      "bytes": 600,
+      "retention": "copy"
+    },
+    ".build/3d/performance-phase-snapshot-draft/SPEC-DRAFT.md": {
+      "sha256": "bb1601d6f0c574c8769d585a608a5b0e0eb3b2501168872613fba57a5fd244fc",
+      "bytes": 3035,
+      "retention": "copy"
+    },
+    ".build/3d/performance-phase-snapshot-draft/EDITS.json": {
+      "sha256": "40eae01dccae4fb381f61ca02347023c0a979384640ad07dad85d86b7ce1688c",
+      "bytes": 694,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-comparison.json": {
+      "sha256": "0e04d6f0ad302e41eb161c5a0c74f1147253fb8b06403ba4a05a72a0e003059a",
+      "bytes": 27988,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/full-actor-performance.json": {
+      "sha256": "2d77d5621f9b91de3cc329c833b5e610809471df5549df630a8c3ff7950590c9",
+      "bytes": 4425633,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/provenance.json": {
+      "sha256": "f8e5804b027dca7783e0921d62672769ecbc300d2596fab67bc5eec59ff0dc39",
+      "bytes": 226865,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/source.zip": {
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+      "bytes": 3001680,
+      "retention": "hash_only"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/RockBottomSustained.exe": {
+      "sha256": "34a38a822345200fb31282ecf471c28c4e0cfdd9d5692678c340b0a6f40edd7e",
+      "bytes": 101536392,
+      "retention": "hash_only"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/import.godot.log": {
+      "sha256": "83793031b9f7e1356e24bc2f905d10fd702d5dbf151277628264d9d2213de725",
+      "bytes": 10211,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/contract.godot.log": {
+      "sha256": "2cdfec8b48ca531916c022a0eb5fb66d237d6052328f8b9e296e9862132c18e9",
+      "bytes": 170,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/snapshot_contract.godot.log": {
+      "sha256": "2a1a8fa3ce0f4c32ae158c9a5b651a387978da8303f881deda98311ec423579f",
+      "bytes": 183,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/export.godot.log": {
+      "sha256": "cf25196fc4a309a9f51cb0e7b4320349482e0d6d21ace5ae620b63f2d4da32cd",
+      "bytes": 33790,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/native.log": {
+      "sha256": "e3cfa9ed6bcef87194b33feccfcbfb9ce4b43c6195be196fa2d1a17f0548f0d3",
+      "bytes": 2081,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/contract.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/contract.stdout.log": {
+      "sha256": "b7974ddb6dacc4bc5edf2d16d11b15aaea2046664255c533aa20648a22444e7c",
+      "bytes": 173,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/export.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/export.stdout.log": {
+      "sha256": "db8d41d8b1bcf71b1e3a026b48dac9450c651fdc19aae9f139997eac17f59926",
+      "bytes": 44954,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/import.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/import.stdout.log": {
+      "sha256": "ecbeb37b09e8ea1b6d0c218844175865f6d3b70dce403c85597226c16a89bae7",
+      "bytes": 15856,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/native.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/native.stdout.log": {
+      "sha256": "f002f37765840529a2e7259c8cb350327896f8318dd54747b1d054087fa8dd48",
+      "bytes": 2105,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/snapshot_contract.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/snapshot_contract.stdout.log": {
+      "sha256": "98cb4d069b206b7c8da73e1971971c2d1c4dc73c09b5fc9c156a7d8e3e08bedf",
+      "bytes": 186,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/version.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/version.stdout.log": {
+      "sha256": "b3bd5778343d3006c6e938c87aa3ffab582916a6c653e518a40fe4add480e8c3",
+      "bytes": 33,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/core_day_end.png": {
+      "sha256": "d6bab85e36306a1e24fd0136d366c540e7d25d42f47fc3c52ee1a3ba18f012b0",
+      "bytes": 469102,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/core_day_initial.png": {
+      "sha256": "c21e01c70110c0dd256db02afe4fe28e12e089faecff44acc3200745b5f68cd7",
+      "bytes": 614215,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/trainyard_night_end.png": {
+      "sha256": "cd84bc178c12262cfe33992bad07e89d7188bae05071245ec1d29b60b4c8c015",
+      "bytes": 309521,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/trainyard_night_initial.png": {
+      "sha256": "0922fe4ba6bee5ca47f8b627b06e3dc0733936546bf6a7abc0af9541cc7feddb",
+      "bytes": 603169,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/full-actor-performance.json": {
+      "sha256": "58f2f86e2f34d54c33ed6433ce9b5d8620b29012c4aff62fcb12428c160cc69f",
+      "bytes": 4350237,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/provenance.json": {
+      "sha256": "1d83a1220361cb436550c2f8121febcbc7c0d9c4721620533b822b73a2f9bd45",
+      "bytes": 229541,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/source.zip": {
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+      "bytes": 3001680,
+      "retention": "hash_only"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/RockBottomSustained.exe": {
+      "sha256": "5c22457369391d7f4d9d4f8792b2a7b9258d4653db74ad434414542cfa9d1d5e",
+      "bytes": 101591928,
+      "retention": "hash_only"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/import.godot.log": {
+      "sha256": "62dcfd6561595c17112bc9f9aa7b8ba6cfcb16f2787eb3eec95c67f9349a2d96",
+      "bytes": 10281,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/contract.godot.log": {
+      "sha256": "2cdfec8b48ca531916c022a0eb5fb66d237d6052328f8b9e296e9862132c18e9",
+      "bytes": 170,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/snapshot_contract.godot.log": {
+      "sha256": "2a1a8fa3ce0f4c32ae158c9a5b651a387978da8303f881deda98311ec423579f",
+      "bytes": 183,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/retention_contract.godot.log": {
+      "sha256": "8a04624716c7e22620c191b259fcfd856c8a72f5c17a4cce614b5b698e37a03f",
+      "bytes": 179,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/export.godot.log": {
+      "sha256": "53caa8a88ac6b15de60c54db30c4e5ad08cc02227ac76f0177e884b5d1b5081b",
+      "bytes": 34142,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/native.log": {
+      "sha256": "ad9e2ae0a990caf58b746dc7cc331ed3f6f1268a905c68619b32bb5c06526f90",
+      "bytes": 2093,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/contract.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/contract.stdout.log": {
+      "sha256": "b7974ddb6dacc4bc5edf2d16d11b15aaea2046664255c533aa20648a22444e7c",
+      "bytes": 173,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/export.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/export.stdout.log": {
+      "sha256": "8e6d2ea3adc7c3eb64c1205ddd0625416dab267c4f977997c269834a268497c6",
+      "bytes": 45402,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/import.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/import.stdout.log": {
+      "sha256": "116f0f5370ec3f67c1db96b1845e157394b0e562b70cd78d34c7338e911ddaf2",
+      "bytes": 15974,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/native.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/native.stdout.log": {
+      "sha256": "f023d05b1c33461c258f2c3b3dbae60d9cd0f96dd3a4eb2031ab2b991daa70e1",
+      "bytes": 2117,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/retention_contract.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/retention_contract.stdout.log": {
+      "sha256": "0efd66a151614f731d6f548a9413f0fa419b6802f4cd7e2750ad9e61781b1e15",
+      "bytes": 182,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/snapshot_contract.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/snapshot_contract.stdout.log": {
+      "sha256": "98cb4d069b206b7c8da73e1971971c2d1c4dc73c09b5fc9c156a7d8e3e08bedf",
+      "bytes": 186,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/version.stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/version.stdout.log": {
+      "sha256": "b3bd5778343d3006c6e938c87aa3ffab582916a6c653e518a40fe4add480e8c3",
+      "bytes": 33,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/core_day_end.png": {
+      "sha256": "2bbcfb27b1b221e75d65c20ace72d7c4132296b4a0de8fda9133f00eba89fb07",
+      "bytes": 509586,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/core_day_initial.png": {
+      "sha256": "c21e01c70110c0dd256db02afe4fe28e12e089faecff44acc3200745b5f68cd7",
+      "bytes": 614215,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/trainyard_night_end.png": {
+      "sha256": "c1ec77e98bfc474137ef1ffa28fa259926b62622225cdcd6ee207e77dd07c803",
+      "bytes": 351869,
+      "retention": "copy"
+    },
+    ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/trainyard_night_initial.png": {
+      "sha256": "ed42fd5162b5e427f4622f448f19ae81d04e869575835a6cb3eb018e8d057086",
+      "bytes": 592162,
+      "retention": "copy"
+    }
+  }
+}

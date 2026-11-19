@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "decision": "reject_positive_certificate_promotion",
+  "source_scope": "frozen495 d1b9b87 resident pair only",
+  "engine_run": false,
+  "production_modified": false,
+  "performance_acceptance": false,
+  "retry_recommended": false,
+  "files": {
+    "AUDIT.md": {
+      "sha256": "892b9c6765aebc0dcf6218d50ab434d6cf6e8a2da51a488c783cadf48aad5856",
+      "bytes": 3695
+    },
+    "audit.py": {
+      "sha256": "d169d18bc7e77f1f2d6df029ceea71491277ace318f54c471b29726dd00f5053",
+      "bytes": 9587
+    },
+    "FINDINGS.json": {
+      "sha256": "036978caaea04c7048020f59b959faf582e125af10cf48fc6009e59679a0c4b8",
+      "bytes": 11618
+    },
+    "INPUTS.json": {
+      "sha256": "360f3e56df29d86d98f12fa85f14e327172f98a58b77bb9ab48517be6da8add3",
+      "bytes": 20101
+    },
+    "SCOPE.md": {
+      "sha256": "f98f2f43c43f270fa69a1517a79b14e118e87de603292261e8a6b9d035cfa322",
+      "bytes": 1224
+    }
+  }
+}

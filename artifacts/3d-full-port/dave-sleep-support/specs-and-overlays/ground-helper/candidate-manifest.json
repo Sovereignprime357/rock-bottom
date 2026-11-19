@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "status": "atomic_ready_held",
+  "scope": "one passive helper overlay; pose/accessory proposal only",
+  "source_and_baseline": [
+    {
+      "path": "game3d/scripts/cast_profiles.gd",
+      "sha256": "40d04a6b282c3710d9babeba2f8314f5838ed449f3f77ca15fc5590b124d3668"
+    },
+    {
+      "path": "game3d/scripts/actor_animation.gd",
+      "sha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d"
+    },
+    {
+      "path": "game3d/scripts/character_roster.gd",
+      "sha256": "1e8d46483e3cae1304800e781590a534500515821f888cc8807bebf45331c4a1"
+    },
+    {
+      "path": ".build/3d/dave-ground-diagnostic/posed_ground_diagnostic.gd",
+      "sha256": "3cf6d457fac1563d1c40ae086dd85f425695b6bf97d1e791bf0c0bd51dd83674"
+    },
+    {
+      "path": ".build/3d/dave-ground-diagnostic/manifest.json",
+      "sha256": "017e34877f0f951ef31e07fbf685a5fa7a30a99d337a071c53ec7ae6c6093d83"
+    },
+    {
+      "path": ".build/3d/dave-wake-acceptance-draft/tests/dave_walkthrough_probe.gd",
+      "sha256": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2"
+    }
+  ],
+  "immutable_v1_evidence": [
+    {
+      "path": ".build/full-port/dave-wake/ground-native-v1/01_sleeping_dave.png",
+      "sha256": "9492451cccdf85073cfbfc69b60ae7726de3ba7495c5bad4a450e547b42221de"
+    },
+    {
+      "path": ".build/full-port/dave-wake/ground-native-v1/02_awake_dave.png",
+      "sha256": "c2d0f5bbd9ecc03a112cc13bf16b58b6817e912e1fcc13cb6a1c311caa9eef41"
+    },
+    {
+      "path": ".build/full-port/dave-wake/ground-native-v1/03_pigeon_dialogue.png",
+      "sha256": "fe34d0c2e2d6fc90898f4ce04388f513323585791e5425d6d2971e6ad2f7d24e"
+    },
+    {
+      "path": ".build/full-port/dave-wake/ground-native-v1/dave-walkthrough.json",
+      "sha256": "46b2737a04ec1a5d48283d7c296c462c54139b35e5ea8b001994cee3371eced8"
+    }
+  ],
+  "overlays": [
+    {
+      "source": ".build/3d/dave-ground-support-draft/tests/posed_ground_diagnostic.gd",
+      "target": "game3d/tests/posed_ground_diagnostic.gd",
+      "sha256": "64cfe67a4f118f7349c4d134a3f44d393114a243659f1d217cde4f714b4ffac4"
+    }
+  ],
+  "files": [
+    {
+      "path": ".build/3d/dave-ground-support-draft/README.md",
+      "sha256": "40a5f4ccb3c90862d9b6b25647b9278b9cdc82d9b02bf4525bd6949f5ffb4969"
+    },
+    {
+      "path": ".build/3d/dave-ground-support-draft/SPEC-DAVE-SLEEP-SUPPORT.md",
+      "sha256": "c1324ccbe5841f904bac20c669871dc3b2d960e76ed2411ff7916bdd1828bf70"
+    },
+    {
+      "path": ".build/3d/dave-ground-support-draft/tests/posed_ground_diagnostic.gd",
+      "sha256": "64cfe67a4f118f7349c4d134a3f44d393114a243659f1d217cde4f714b4ffac4"
+    }
+  ],
+  "static": {
+    "delimiter_scan": "pass",
+    "caps_unchanged": true,
+    "actual_support_ray_retained": true,
+    "no_pose_or_simulation_writes": true
+  },
+  "engine": "not_run",
+  "production_changed": false
+}

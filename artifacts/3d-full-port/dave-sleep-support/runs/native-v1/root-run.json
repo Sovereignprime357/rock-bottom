@@ -1,0 +1,39 @@
+{
+  "mode": "Native",
+  "status": "pass",
+  "stages": [
+    {
+      "name": "import",
+      "pid": 9808,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\native-v1\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\native-v1\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "elapsed_ms": 6521,
+      "exit_code": 0
+    },
+    {
+      "name": "native",
+      "pid": 28416,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\native-v1\\native.godot.log",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\native-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\native-v1\\game3d\\tests\\dave_walkthrough_probe.gd",
+        "--",
+        "--qa-full",
+        "--output=C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\native-v1\\evidence"
+      ],
+      "elapsed_ms": 27844,
+      "exit_code": 0
+    }
+  ]
+}

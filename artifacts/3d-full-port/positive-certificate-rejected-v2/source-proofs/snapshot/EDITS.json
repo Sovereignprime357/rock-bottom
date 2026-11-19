@@ -1,0 +1,18 @@
+{
+  "original_path": ".build/3d/query-resource-performance-draft/tests/full_actor_performance_probe.gd",
+  "original_sha256": "5013ed6ed7bee55213bc9f84060d9a5fbb68e44ddc9cf95fe3526fd4bcf58bef",
+  "edits": [
+    {
+      "old": "\treturn {\"id\":spec.id,\"seed\":spec.seed,",
+      "new": "\treturn snapshot_phase({\"id\":spec.id,\"seed\":spec.seed,"
+    },
+    {
+      "old": "\"sampled_oldest_pending_ms\":max_pending_ms}",
+      "new": "\"sampled_oldest_pending_ms\":max_pending_ms})"
+    },
+    {
+      "old": "func _append_frame_series(",
+      "new": "static func snapshot_phase(record: Dictionary) -> Dictionary:\n\treturn record.duplicate(true)\n\nfunc _append_frame_series("
+    }
+  ]
+}

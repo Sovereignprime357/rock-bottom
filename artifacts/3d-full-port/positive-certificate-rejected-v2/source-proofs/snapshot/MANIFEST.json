@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "format": "rock-bottom-performance-phase-snapshot-successor",
+  "production_modified": false,
+  "engine_run": false,
+  "performance_acceptance": false,
+  "static_checks": 48,
+  "pending_engine_groups": 5,
+  "files": {
+    "AUDIT-LIMITS.md": {
+      "sha256": "b869681393584a708aa7429abf65b06797d204eec223cc494a6d6cb89d19e244",
+      "bytes": 3185
+    },
+    "candidate/game3d/tests/full_actor_performance_probe.gd": {
+      "sha256": "86eb4175a218db728283e103a51af25565aad16e347578ffdfedf4bb2b8ea199",
+      "bytes": 31415
+    },
+    "candidate/game3d/tests/test_performance_phase_snapshot.gd": {
+      "sha256": "dec496b40f17e3f43036026cb7a47d7ef1f43122283bf356b86aa141e5c4c4a2",
+      "bytes": 9159
+    },
+    "DRIVER-COST-NOTE.md": {
+      "sha256": "fa79614e5c41b312e8c5feb2255f6cf1660ce6712cfd9551df4af8fc02f6b1df",
+      "bytes": 3995
+    },
+    "EDITS.json": {
+      "sha256": "40eae01dccae4fb381f61ca02347023c0a979384640ad07dad85d86b7ce1688c",
+      "bytes": 694
+    },
+    "original/full_actor_performance_probe.gd": {
+      "sha256": "5013ed6ed7bee55213bc9f84060d9a5fbb68e44ddc9cf95fe3526fd4bcf58bef",
+      "bytes": 31305
+    },
+    "PINS.json": {
+      "sha256": "1d3848efc019f47d496d2cf1b13ebad83103786214cf211d8876bbfbde9497c6",
+      "bytes": 600
+    },
+    "prepare.py": {
+      "sha256": "0ed04aaf0918c929b5969b29e192bed3f1063397810c0c11d4f397644c55fcf9",
+      "bytes": 3765
+    },
+    "README.md": {
+      "sha256": "ee081acdcc248dd193c79ecef3dd740879f5f79a54c388e506932199ba286895",
+      "bytes": 2040
+    },
+    "RETURN-FIELDS.json": {
+      "sha256": "54f1e6a2426ed896473d4dd14f195abcd3232182fdc98339999406faf42172fd",
+      "bytes": 2042
+    },
+    "SPEC-DRAFT.md": {
+      "sha256": "bb1601d6f0c574c8769d585a608a5b0e0eb3b2501168872613fba57a5fd244fc",
+      "bytes": 3035
+    },
+    "static-check.py": {
+      "sha256": "f9a7729a4220224bd15a6dd677b619e43ee83b2e571cca281f3ec813c6d9ff6a",
+      "bytes": 4612
+    },
+    "test-phase-snapshot.template": {
+      "sha256": "46274926b83692dede3e22a848e15b70b5eb5db02d6fd4a31b56425fcf038375",
+      "bytes": 7827
+    }
+  }
+}

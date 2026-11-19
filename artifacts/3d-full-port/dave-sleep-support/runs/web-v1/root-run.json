@@ -1,0 +1,38 @@
+{
+  "mode": "Web",
+  "status": "pass",
+  "stages": [
+    {
+      "elapsed_ms": 6969,
+      "pid": 42152,
+      "exit_code": 0,
+      "name": "import",
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\web-v1\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\web-v1\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ]
+    },
+    {
+      "elapsed_ms": 6974,
+      "pid": 41016,
+      "exit_code": 0,
+      "name": "web_export",
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\web-v1\\web_export.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\web-v1\\game3d",
+        "--export-release",
+        "Web Dave Sleep",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\web-v1\\web\\index.html"
+      ]
+    }
+  ]
+}

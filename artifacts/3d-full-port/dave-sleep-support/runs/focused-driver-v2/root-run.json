@@ -1,0 +1,37 @@
+{
+  "mode": "Focused",
+  "status": "pass",
+  "stages": [
+    {
+      "name": "import",
+      "exit_code": 0,
+      "elapsed_ms": 6145,
+      "pid": 12444,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-driver-v2\\import.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-driver-v2\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ]
+    },
+    {
+      "name": "test_dave_walkthrough_contract",
+      "exit_code": 0,
+      "elapsed_ms": 1790,
+      "pid": 33700,
+      "arguments": [
+        "--log-file",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-driver-v2\\test_dave_walkthrough_contract.godot.log",
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-driver-v2\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-driver-v2\\game3d\\tests\\test_dave_walkthrough_contract.gd"
+      ]
+    }
+  ]
+}

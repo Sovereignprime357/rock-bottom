@@ -124,6 +124,12 @@ static func tick(art: Node3D, delta: float, snapshot: Dictionary, detail: int = 
 		for bone: String in rig.definition.get("death_pose",{}): _pose(rig,bone,rig.definition.death_pose[bone]*fall)
 	_apply_bones(rig,poses)
 	Roster._sync_attachments(rig)
+	if not dead and action == &"sleep" and rig.definition.visual_id == &"dave":
+		# Repose the existing cushion under the cheek; waking restores its wrist binding.
+		var pillow: Node3D = rig.prop_lookup.pillow.node
+		var head: Node3D = rig.prop_lookup.head.node
+		var cushion_basis := Basis(Vector3(0,0,1),Vector3(1,0,0),Vector3(0,2.2,0))
+		Roster._attachment_target(rig,pillow,Transform3D(cushion_basis,Vector3(head.position.x-0.07,0.091,head.position.z)))
 	if dead:
 		var release := clampf(death*death*(3.0-2.0*death)*1.35,0.0,1.0)
 		for label: String in rig.definition.get("death_props",{}):
@@ -302,7 +308,7 @@ static func _human_action(rig: Dictionary, action: StringName, phase: float, ser
 			grip = 0.42
 		&"sleep":
 			# Dave's source state is a horizontal sleeper, not a blinking idle.
-			_pose(rig,"root",Vector3(0,0,1.48),Vector3(0,0.27,0))
+			_pose(rig,"root",Vector3(0,0,1.48),Vector3(0,0.31 if rig.definition.visual_id == &"dave" else 0.27,0))
 			_pose(rig,"left_shoulder",Vector3(-0.54,0,0))
 			_pose(rig,"left_elbow",Vector3(-1.0,0,0))
 			_pose(rig,"right_elbow",Vector3(-0.24,0,0))

@@ -246,3 +246,18 @@ The refreshed browser smoke observed normal play and menu recovery. Freeze this
 source for commit/push and the identical committed-revision performance workload.
 Campaign defense, additive metadata, index GPU checks and pose diagnostics remain
 isolated, with root serializing every engine/browser/export run.
+
+### Current bounded continuation — 2026-11-19
+
+Root owns serialized engine/import/export/browser runs, raw evidence, production
+integration and Git. Characters owns the All11 normal-input test-driver repair
+and a read-only feature acceptance inventory. Architecture owns the Dave sleep
+support candidate, its narrow post-dialogue movement check and explicit pin
+revision draft. World owns collision-cost analysis and isolated certificate
+retention work after the query-resource pool measured worse and was rejected.
+
+Each worker keeps changes under its named `.build/3d/` draft until reviewed;
+no worker changes production or runs an engine. Prior unsuccessful runs remain
+failed and immutable. Root tests one exact candidate at a time, accepts art only
+after original-image review, and measures optimizations before promotion. The
+pushed resident build remains playable while those candidates are evaluated.

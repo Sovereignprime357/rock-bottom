@@ -1,0 +1,848 @@
+{
+  "schema": 1,
+  "status": "byte-copy-verified",
+  "scope": "No acceptance promotion or source edits.",
+  "source_archive": {
+    "path": "artifacts/3d-full-port/query-resource-rejected-v1/wrapper/source.zip",
+    "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+    "files": 495,
+    "copy": false
+  },
+  "files": [
+    {
+      "source": ".build/3d/dave-sleep-art-draft/BASELINE.json",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/BASELINE.json",
+      "bytes": 1055,
+      "sha256": "f3968d169c84fc838a061201ae4b5f35dd9f0fe712438ee927eadee9a383f45e"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/candidate/game3d/scripts/actor_animation.gd",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/candidate/game3d/scripts/actor_animation.gd",
+      "bytes": 28325,
+      "sha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/candidate/game3d/tests/reference_actor_animation_sleep_original.gd",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/candidate/game3d/tests/reference_actor_animation_sleep_original.gd",
+      "bytes": 27785,
+      "sha256": "c011b33175a4562543de7464785df9615a89d473b694e180cdb8556bc0111df7"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/candidate/game3d/tests/test_dave_sleep_support.gd",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/candidate/game3d/tests/test_dave_sleep_support.gd",
+      "bytes": 10583,
+      "sha256": "ca1c03ce09da5367dae615faea7d5edffd347d138d42918aed47907b1f3f2f35"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/MANIFEST.json",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/MANIFEST.json",
+      "bytes": 3210,
+      "sha256": "6bd74a9df548ded1633cf83f122f4aaafc344b743042bf42f058c80ecb04224d"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/original/game3d/scripts/actor_animation.gd",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/original/game3d/scripts/actor_animation.gd",
+      "bytes": 27821,
+      "sha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/prepare.py",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/prepare.py",
+      "bytes": 2855,
+      "sha256": "a9c07a4b976be1c3b375b5843ff6dba51f2da3a7e199fdba729691d07ad55a81"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/README.md",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/README.md",
+      "bytes": 3507,
+      "sha256": "b0a021630a03ecaddc1ad55bdbbfc38816a68aeeb43eba8f3f795a2654cfe833"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/SPEC-DRAFT.md",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/SPEC-DRAFT.md",
+      "bytes": 5097,
+      "sha256": "0bdab948b65ace56144b3b91d2e72134035f0459554828f0d447989df7758388"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/static-check.py",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/static-check.py",
+      "bytes": 3524,
+      "sha256": "50cfa979725de248be5cb0188240f6ebfe69f717bb0f18884ce90ac021ed4611"
+    },
+    {
+      "source": ".build/3d/dave-sleep-art-draft/transforms.json",
+      "destination": "specs-and-overlays/dave-sleep-art-draft/transforms.json",
+      "bytes": 878,
+      "sha256": "600d43d50698d6cead612f6a366ca7f0ff0a1e93826fd30e4635cda6903b1f4e"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/candidate/game3d/tests/dave_walkthrough_probe.gd",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/candidate/game3d/tests/dave_walkthrough_probe.gd",
+      "bytes": 21569,
+      "sha256": "28c7ad41f8452d1ccc13b7599ceb6128f09d95b1ee9c6b5902f7c82b58f5328c"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/candidate/game3d/tests/test_dave_walkthrough_contract.gd",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/candidate/game3d/tests/test_dave_walkthrough_contract.gd",
+      "bytes": 11427,
+      "sha256": "c56c05c1fcff807757becb5820b10654cb89a00918f6a93c45f324c82f9df12f"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/EDITS.json",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/EDITS.json",
+      "bytes": 5726,
+      "sha256": "09e2696fd76666d123655e478b51cdd49998209d5e8f81d9a66522a14f697828"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/ground-wrapper/dave_walkthrough_probe.gd",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/ground-wrapper/dave_walkthrough_probe.gd",
+      "bytes": 21684,
+      "sha256": "d941161e952e3f9eccaa3c077c90c5cce40267580c2b5d5862b528a7d5e4c0fb"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/MANIFEST.json",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/MANIFEST.json",
+      "bytes": 1765,
+      "sha256": "edd0d2bf727211745da9d0e1293e2c68bb23f534d9cd4d5142d2892386295230"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/original/game3d/tests/dave_walkthrough_probe.gd",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/original/game3d/tests/dave_walkthrough_probe.gd",
+      "bytes": 20257,
+      "sha256": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/original/game3d/tests/test_dave_walkthrough_contract.gd",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/original/game3d/tests/test_dave_walkthrough_contract.gd",
+      "bytes": 8809,
+      "sha256": "c2a7dec8778dd8121cf5f6218770504ca34c914925821e5998947ff65e64564f"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/prepare.py",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/prepare.py",
+      "bytes": 8194,
+      "sha256": "e8d12cfa1388c0466f256de164e0b238d1842480a7658cd68df8aaf787a5c8ee"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/README.md",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/README.md",
+      "bytes": 2173,
+      "sha256": "20328c06e0ae8d3b9f059a8e1e8caa27df719d2891d00de961c87f4a698b202a"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/SPEC-DRAFT.md",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/SPEC-DRAFT.md",
+      "bytes": 2665,
+      "sha256": "a3e9c551381cbde74a8f576acb09e42e66f564738e4a8eea2ff90b2936ee6809"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/stage.py",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/stage.py",
+      "bytes": 2264,
+      "sha256": "08f2a129c1f102004032dd1c053d0ccdb0aa9d2c3f2d1bc947aa1183da61b682"
+    },
+    {
+      "source": ".build/3d/dave-resume-driver-draft/static-check.py",
+      "destination": "specs-and-overlays/dave-resume-driver-draft/static-check.py",
+      "bytes": 2695,
+      "sha256": "01d0bbd86c2014332e2bd28938c2b0bb6c9faac5ca070d06152c58b02b6f9645"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/game3d/scripts/actor_animation.gd",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/game3d/scripts/actor_animation.gd",
+      "bytes": 28325,
+      "sha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/game3d/tests/reference_actor_animation_sleep_original.gd",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/game3d/tests/reference_actor_animation_sleep_original.gd",
+      "bytes": 27785,
+      "sha256": "c011b33175a4562543de7464785df9615a89d473b694e180cdb8556bc0111df7"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/game3d/tests/run-gates.ps1",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/game3d/tests/run-gates.ps1",
+      "bytes": 22892,
+      "sha256": "788ca3413b6a6e68e55a6b87a56118c78a74717db23fa2ce499202eaad97fbe2"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/game3d/tests/test_dave_sleep_support.gd",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/game3d/tests/test_dave_sleep_support.gd",
+      "bytes": 10583,
+      "sha256": "ca1c03ce09da5367dae615faea7d5edffd347d138d42918aed47907b1f3f2f35"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/reports/3d-parity-metadata/input-pins-metadata-v3.json",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/reports/3d-parity-metadata/input-pins-metadata-v3.json",
+      "bytes": 27752,
+      "sha256": "b3405c53964d95087d0de0a138f62d34075ad270fc641f5acb1f226f0099e93c"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/reports/3d-parity-metadata/revisions/metadata-v3.json",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/reports/3d-parity-metadata/revisions/metadata-v3.json",
+      "bytes": 8889,
+      "sha256": "50a6bd31a8bd7f035a356986bf1cfecd5c1535c7997c073abd8aa61bfc9a14c6"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/SPEC-3D-CHARACTER-ROSTER.md",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/SPEC-3D-CHARACTER-ROSTER.md",
+      "bytes": 39423,
+      "sha256": "9e5fa35874f327ff5973122f7b6cfa276b4b79800b25aaa2e68d6695c6e82313"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/SPEC-3D-PARITY-METADATA-V3.md",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/SPEC-3D-PARITY-METADATA-V3.md",
+      "bytes": 3038,
+      "sha256": "1f1de6ad590ce63d7f1e9be2385efea0d71ab9d1a7fad96aa73ce504dd51f641"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/candidate/tools/parity-metadata.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/candidate/tools/parity-metadata.mjs",
+      "bytes": 18157,
+      "sha256": "c4fa0552d03189f188ed24f11af79398bc5816b113d8848f358f61859fda83d1"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/DELIVERY.json",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/DELIVERY.json",
+      "bytes": 2223,
+      "sha256": "018482dd3b8086e90b42c5f609d0b6a537aae7e1cacc3865f9467731d8828d59"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/MANIFEST.json",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/MANIFEST.json",
+      "bytes": 3334,
+      "sha256": "a96a33feecd5886f9e7470630926b4d91ea85d83e4709e9e62fa457747c3782c"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/originals/game3d/scripts/actor_animation.gd",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/originals/game3d/scripts/actor_animation.gd",
+      "bytes": 27821,
+      "sha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/originals/game3d/tests/run-gates.ps1",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/originals/game3d/tests/run-gates.ps1",
+      "bytes": 22643,
+      "sha256": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/originals/SPEC-3D-CHARACTER-ROSTER.md",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/originals/SPEC-3D-CHARACTER-ROSTER.md",
+      "bytes": 36961,
+      "sha256": "55a87e8e681fbaa59da5772a6ca4e623b43fa499d27c9ba89fd27c7a673c5640"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/originals/tools/parity-metadata.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/originals/tools/parity-metadata.mjs",
+      "bytes": 18086,
+      "sha256": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/prepare.py",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/prepare.py",
+      "bytes": 7510,
+      "sha256": "49b67fa1530d90c6b271dc9b0063114932ba0919d86b67df60664f474f4e9e90"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/README.md",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/README.md",
+      "bytes": 2594,
+      "sha256": "296f676685b599cd5e4f89266d6778933f396773ad6009d9303f6363d67a8cfa"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/results/metadata-contract.json",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/results/metadata-contract.json",
+      "bytes": 7093,
+      "sha256": "561e9db342d98eadb40a63837871920e2b0b894495348b317a3ef2fa41c985c1"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/results/metadata.log",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/results/metadata.log",
+      "bytes": 307,
+      "sha256": "c390e7e8ee00dd826a244d8db3e465fe93bb0f9ed399d1cb16841eeeb84ce6bf"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/results/revision-contract.json",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/results/revision-contract.json",
+      "bytes": 409,
+      "sha256": "3701f2e7d800af11e1a1de0d8ba75151cf4e067e4f88b827fd63021a06e6c6cd"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/ROSTER-AMENDMENT.md",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/ROSTER-AMENDMENT.md",
+      "bytes": 2462,
+      "sha256": "c4bef36e1d7e4927a94c256b6c07bef29cc9aa6398b4160864b10350a9ad0460"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/SPEC-DRAFT.md",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/SPEC-DRAFT.md",
+      "bytes": 3038,
+      "sha256": "1f1de6ad590ce63d7f1e9be2385efea0d71ab9d1a7fad96aa73ce504dd51f641"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/test-revision.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/test-revision.mjs",
+      "bytes": 7376,
+      "sha256": "0a89d4b1c380258d48081346ac10d3696c0361491f4b474fe5bca7a97fe54158"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/validation/tools/parity-metadata-gate.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/validation/tools/parity-metadata-gate.mjs",
+      "bytes": 1056,
+      "sha256": "d84c4579ae8052d2edeeda7b7be2e9ad9c4b4c9f71219a0a93312851a1bf364d"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/validation/tools/parity-metadata-migrate.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/validation/tools/parity-metadata-migrate.mjs",
+      "bytes": 1399,
+      "sha256": "fa960f41a3a391859409519792a3e0edd8748465c0a81a70fbc626f16560c2c3"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/validation/tools/parity-metadata-test.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/validation/tools/parity-metadata-test.mjs",
+      "bytes": 15293,
+      "sha256": "2388c4874d86dfe6895725a37404acfd7657f7ccdc542cdf4e55951ec129d6c3"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/validation/tools/parity-metadata.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/validation/tools/parity-metadata.mjs",
+      "bytes": 18157,
+      "sha256": "c4fa0552d03189f188ed24f11af79398bc5816b113d8848f358f61859fda83d1"
+    },
+    {
+      "source": ".build/3d/dave-sleep-promotion-draft/validation/tools/parity-source-proof.mjs",
+      "destination": "specs-and-overlays/dave-sleep-promotion-draft/validation/tools/parity-source-proof.mjs",
+      "bytes": 6820,
+      "sha256": "fc73e21c21d83442072feeba1f3557c47fa70e4036e6decb97e00e39815c0e47"
+    },
+    {
+      "source": ".build/3d/dave-sleep-validation-draft/MANIFEST.json",
+      "destination": "specs-and-overlays/dave-sleep-validation-draft/MANIFEST.json",
+      "bytes": 598,
+      "sha256": "96c8f10580bc1ab97928fcd4277aa770b4062441c995ac1a12fbc322375868a7"
+    },
+    {
+      "source": ".build/3d/dave-sleep-validation-draft/README.md",
+      "destination": "specs-and-overlays/dave-sleep-validation-draft/README.md",
+      "bytes": 2584,
+      "sha256": "731c09b2f9bdf2584ed55f5ca18cc7673cf0e6798dd9735a98be344044d3b7fa"
+    },
+    {
+      "source": ".build/3d/dave-sleep-validation-draft/run-focused.ps1",
+      "destination": "specs-and-overlays/dave-sleep-validation-draft/run-focused.ps1",
+      "bytes": 4329,
+      "sha256": "28e13d423c94a32588896bd6b684f092aa73397a75725f652a343072541ba1a9"
+    },
+    {
+      "source": ".build/3d/dave-sleep-validation-draft/SPEC-DRAFT.md",
+      "destination": "specs-and-overlays/dave-sleep-validation-draft/SPEC-DRAFT.md",
+      "bytes": 2750,
+      "sha256": "95527cedd7c9a52c0f61d310233445bcb04d6afc2ef797fd500a117f580340d1"
+    },
+    {
+      "source": ".build/3d/dave-sleep-validation-draft/stage.py",
+      "destination": "specs-and-overlays/dave-sleep-validation-draft/stage.py",
+      "bytes": 8832,
+      "sha256": "79e8c19635c1886d6cb6c791ec0f8c14c657e9ffca11d8d2b8b2adcd32435037"
+    },
+    {
+      "source": ".build/3d/dave-sleep-validation-draft/static-check.py",
+      "destination": "specs-and-overlays/dave-sleep-validation-draft/static-check.py",
+      "bytes": 2366,
+      "sha256": "ba900fd47092ca06ae1a32e895dbae977ef71ae6410ac6008a3ece750a4fa36b"
+    },
+    {
+      "source": ".build/3d/dave-ground-support-draft/README.md",
+      "destination": "specs-and-overlays/ground-helper/README.md",
+      "bytes": 1719,
+      "sha256": "40a5f4ccb3c90862d9b6b25647b9278b9cdc82d9b02bf4525bd6949f5ffb4969"
+    },
+    {
+      "source": ".build/3d/dave-ground-support-draft/SPEC-DAVE-SLEEP-SUPPORT.md",
+      "destination": "specs-and-overlays/ground-helper/SPEC-DAVE-SLEEP-SUPPORT.md",
+      "bytes": 5140,
+      "sha256": "c1324ccbe5841f904bac20c669871dc3b2d960e76ed2411ff7916bdd1828bf70"
+    },
+    {
+      "source": ".build/3d/dave-ground-support-draft/candidate-manifest.json",
+      "destination": "specs-and-overlays/ground-helper/candidate-manifest.json",
+      "bytes": 2941,
+      "sha256": "f7714f524ff6b9c5e6b71aa6db8246eba770b2ab245571fa124266cf053d8662"
+    },
+    {
+      "source": ".build/3d/dave-ground-support-draft/tests/posed_ground_diagnostic.gd",
+      "destination": "specs-and-overlays/ground-helper/tests/posed_ground_diagnostic.gd",
+      "bytes": 8073,
+      "sha256": "64cfe67a4f118f7349c4d134a3f44d393114a243659f1d217cde4f714b4ffac4"
+    },
+    {
+      "source": ".build/3d/resident-index-composition-draft/manifest.json",
+      "destination": "provenance/resident-archive-manifest.json",
+      "bytes": 57547,
+      "sha256": "2075ab863cbca0e2a072f39c77b0e961f51ebbe7047a6a7e922351bf3dbdf315"
+    },
+    {
+      "source": ".build/3d/run-dave-visual.ps1",
+      "destination": "provenance/run-dave-visual.ps1",
+      "bytes": 4073,
+      "sha256": "197e8fea8e29ef16cab279bcca34b22dcbf27ae72a5e00eceb461f037305ef88"
+    },
+    {
+      "source": ".build/3d/run-dave-staged-v2.ps1",
+      "destination": "provenance/run-dave-staged-v2.ps1",
+      "bytes": 4083,
+      "sha256": "202c942ab4c2eb8b7c1031fedb75da525665734afe655c2b900c651317277299"
+    },
+    {
+      "source": ".build/3d/promote-dave-sleep.py",
+      "destination": "provenance/promote-dave-sleep.py",
+      "bytes": 3161,
+      "sha256": "0173beca275214a6b89a9a448ce3f85dfc22f928691a8ebc822a87d8c8642ed3"
+    },
+    {
+      "source": ".build/3d/dave-wake-acceptance-draft/dave-walkthrough-shell.html",
+      "destination": "specs-and-overlays/browser/dave-walkthrough-shell.html",
+      "bytes": 1902,
+      "sha256": "117d0dadead1bdc3f8b5b674386c9682235e5a50cb822d7f8144445801cadfc2"
+    },
+    {
+      "source": ".build/3d/dave-wake-acceptance-draft/dave-walkthrough-bridge.js",
+      "destination": "specs-and-overlays/browser/dave-walkthrough-bridge.js",
+      "bytes": 4978,
+      "sha256": "2405ccd6db2ee411062d7f759d1a2efaa878a31539e113a72265f3e863665ab7"
+    },
+    {
+      "source": ".build/3d/dave-ground-native-v2/game3d/tests/dave_walkthrough_probe.gd",
+      "destination": "specs-and-overlays/ground-helper/dave_walkthrough_probe.gd",
+      "bytes": 20372,
+      "sha256": "66eb032356c1fe8a34607a537ca9645164d7cab88fe5d934e8de7a597b3dd242"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/game3d/export_presets.cfg",
+      "destination": "specs-and-overlays/browser/export_presets.cfg",
+      "bytes": 588,
+      "sha256": "b997c5dc2985015c81dbf8bd6a3d75f081b16d3206239595f7855210841b78dd"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/focused-result.json",
+      "destination": "runs/focused-v1/focused-result.json",
+      "bytes": 3042,
+      "sha256": "8126f026b68ec3ebd448d3a98ce10f2d867722c58c2df2514bca9166a9ed0841"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/import.stderr.log",
+      "destination": "runs/focused-v1/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/import.stdout.log",
+      "destination": "runs/focused-v1/import.stdout.log",
+      "bytes": 15797,
+      "sha256": "e369be837599be3fae8ef969dcfbfc17769b98c335264535a7c410a4ee680e1b"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/staging.json",
+      "destination": "runs/focused-v1/staging.json",
+      "bytes": 58835,
+      "sha256": "7becb8bc500b51965b8396e3e2fb470e3e5638a088d910029c77cd99fb999fa7"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_character_roster.stderr.log",
+      "destination": "runs/focused-v1/test_character_roster.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_character_roster.stdout.log",
+      "destination": "runs/focused-v1/test_character_roster.stdout.log",
+      "bytes": 12062,
+      "sha256": "501fdd7bce68248adf78c406386674bdbedf2d88905248d2e91afda9a024c8d4"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_dave_sleep_support.stderr.log",
+      "destination": "runs/focused-v1/test_dave_sleep_support.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_dave_sleep_support.stdout.log",
+      "destination": "runs/focused-v1/test_dave_sleep_support.stdout.log",
+      "bytes": 290,
+      "sha256": "3452ad376a019a41daf2e5e900de72d2a853a1a050d994d0e26720e68055e50a"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_dave_walkthrough_contract.stderr.log",
+      "destination": "runs/focused-v1/test_dave_walkthrough_contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_dave_walkthrough_contract.stdout.log",
+      "destination": "runs/focused-v1/test_dave_walkthrough_contract.stdout.log",
+      "bytes": 157,
+      "sha256": "17be87aeb53e96e0b3c2796cd3383ff7868432f96c17c9f40fd942901a09515d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_pose_input_memo.stderr.log",
+      "destination": "runs/focused-v1/test_pose_input_memo.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_pose_input_memo.stdout.log",
+      "destination": "runs/focused-v1/test_pose_input_memo.stdout.log",
+      "bytes": 229,
+      "sha256": "3062c372c993ea34c1c11e217869e73b1ef7b9effa128e910d5d9d3768fca0b3"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_presentation_visibility.stderr.log",
+      "destination": "runs/focused-v1/test_presentation_visibility.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-v1/test_presentation_visibility.stdout.log",
+      "destination": "runs/focused-v1/test_presentation_visibility.stdout.log",
+      "bytes": 196,
+      "sha256": "9d9c74f8aa2df19bf9e8e2fc780153b11e35d44137c784380d708ad0f244c791"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/import.godot.log",
+      "destination": "runs/native-v1/import.godot.log",
+      "bytes": 10141,
+      "sha256": "ac8739cc6f2a67b0391ea091bb6e2b1a092c7399aba616cf06402323e175ea8d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/import.stderr.log",
+      "destination": "runs/native-v1/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/import.stdout.log",
+      "destination": "runs/native-v1/import.stdout.log",
+      "bytes": 15738,
+      "sha256": "03c3131a3fa2a7c55199a755e785e5042e6c6af873072a231cc8fe927a05756c"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/native.godot.log",
+      "destination": "runs/native-v1/native.godot.log",
+      "bytes": 742,
+      "sha256": "c793349f0d26ec882959e309656d1fcb94945f8a20b0ae236da2ae1c4574cd80"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/native.stderr.log",
+      "destination": "runs/native-v1/native.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/native.stdout.log",
+      "destination": "runs/native-v1/native.stdout.log",
+      "bytes": 748,
+      "sha256": "33e741ad3c1bfe303960c431ad2c5773b7e0c0c575c3232f4ab2e4a235fca0f2"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/root-run.json",
+      "destination": "runs/native-v1/root-run.json",
+      "bytes": 1316,
+      "sha256": "43222824201909497e471a7e5fb2b6708ecd2861e931c15b733cbf3e2641551d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/staging.json",
+      "destination": "runs/native-v1/staging.json",
+      "bytes": 56459,
+      "sha256": "4090f95a326c6b587ba6f92fc90da04955bd25a89b1ce1679c040cf363e4a0ca"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/evidence/01_sleeping_dave.png",
+      "destination": "runs/native-v1/evidence/01_sleeping_dave.png",
+      "bytes": 608059,
+      "sha256": "0d5070ea4fc966bd197a3733d3a70270704bafc87f687c7a042acf97cc5d9008"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/evidence/02_awake_dave.png",
+      "destination": "runs/native-v1/evidence/02_awake_dave.png",
+      "bytes": 590316,
+      "sha256": "d92c6655b2c980587b617f62982251bdc241d8367a4ff077a088971645154b50"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/evidence/03_pigeon_dialogue.png",
+      "destination": "runs/native-v1/evidence/03_pigeon_dialogue.png",
+      "bytes": 496407,
+      "sha256": "0377de31f4a6ecb666437fc4274103ebdd3e75ef94dcd571e382b2894067c737"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/native-v1/evidence/dave-walkthrough.json",
+      "destination": "runs/native-v1/evidence/dave-walkthrough.json",
+      "bytes": 75593,
+      "sha256": "4a9741e09fe7fbc9e1167b61f4c30da79a38059a2b971bb110f033027d042a00"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/import.godot.log",
+      "destination": "runs/web-v1/import.godot.log",
+      "bytes": 10141,
+      "sha256": "ac8739cc6f2a67b0391ea091bb6e2b1a092c7399aba616cf06402323e175ea8d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/import.stderr.log",
+      "destination": "runs/web-v1/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/import.stdout.log",
+      "destination": "runs/web-v1/import.stdout.log",
+      "bytes": 15738,
+      "sha256": "03c3131a3fa2a7c55199a755e785e5042e6c6af873072a231cc8fe927a05756c"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/root-run.json",
+      "destination": "runs/web-v1/root-run.json",
+      "bytes": 1178,
+      "sha256": "7ef0594d1cecb8404f4830ce83c4b58ae3ef287ac83a2004594544d3c4d4a39f"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/served-copy.json",
+      "destination": "runs/web-v1/served-copy.json",
+      "bytes": 1320,
+      "sha256": "a93f1f192dcdd9083eab9eeca7d8bceedb6a5022d75f69c215902a851358ee96"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/staging.json",
+      "destination": "runs/web-v1/staging.json",
+      "bytes": 57177,
+      "sha256": "943943ee5da9ce54f176b2d58836c1bb94d4ac8d0b4aac6d8d523715f6e46d4b"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/web_export.godot.log",
+      "destination": "runs/web-v1/web_export.godot.log",
+      "bytes": 33528,
+      "sha256": "ec0c49256900ded8d433cff3febaf845f51ff3267e9d3974b811c5c464a03b14"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/web_export.stderr.log",
+      "destination": "runs/web-v1/web_export.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/web_export.stdout.log",
+      "destination": "runs/web-v1/web_export.stdout.log",
+      "bytes": 44620,
+      "sha256": "e29033fb1e7b99ffcbf3fa3449a80d4e05ed7e1159c0cf640e0bf088662f4819"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/01_sleeping_dave_960.png",
+      "destination": "runs/web-v1/browser-evidence/01_sleeping_dave_960.png",
+      "bytes": 369229,
+      "sha256": "014fc5b19d294924c321999d7942adcca7c53ba6f240ec28ef268dce555592bf"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/02_awake_dave_960.png",
+      "destination": "runs/web-v1/browser-evidence/02_awake_dave_960.png",
+      "bytes": 359270,
+      "sha256": "ce45b0eb5602eede0a447b7cc4233a0a4550b6397558a8149c34c7696065e202"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/03_pigeon_dialogue_960.png",
+      "destination": "runs/web-v1/browser-evidence/03_pigeon_dialogue_960.png",
+      "bytes": 306461,
+      "sha256": "87f1a180e4a6d7a86b192b8093b426debe404aaa4d4ddd603e50c566e4740350"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/browser-report.json",
+      "destination": "runs/web-v1/browser-evidence/browser-report.json",
+      "bytes": 89654,
+      "sha256": "dc1db1b8314945ce8ceb82c56c40645f2e12835fe2d510de69130c6d0e3c1b33"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/browser.jpg",
+      "destination": "runs/web-v1/browser-evidence/browser.jpg",
+      "bytes": 46825,
+      "sha256": "86e0daa02e7d34dc54dbbba736640ad551d6a700ccac7cc147865806b82d9a1e"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/console.json",
+      "destination": "runs/web-v1/browser-evidence/console.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/import.godot.log",
+      "destination": "runs/focused-driver-v2/import.godot.log",
+      "bytes": 10176,
+      "sha256": "da8a1c1b37c50e939655663a2218eb0cc571872ec06e8f1e451c0ef64e941b52"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/import.stderr.log",
+      "destination": "runs/focused-driver-v2/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/import.stdout.log",
+      "destination": "runs/focused-driver-v2/import.stdout.log",
+      "bytes": 15797,
+      "sha256": "e369be837599be3fae8ef969dcfbfc17769b98c335264535a7c410a4ee680e1b"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/root-run.json",
+      "destination": "runs/focused-driver-v2/root-run.json",
+      "bytes": 1275,
+      "sha256": "93ed43e7dd48661c10b822127e43099a87bd693d655f1fa3b5ff37dcc493649c"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/staging.json",
+      "destination": "runs/focused-driver-v2/staging.json",
+      "bytes": 57802,
+      "sha256": "7f2d79ff620c1647e8647b41471e551f64f0a064fef4f6c899ca8947457c229f"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/test_dave_walkthrough_contract.godot.log",
+      "destination": "runs/focused-driver-v2/test_dave_walkthrough_contract.godot.log",
+      "bytes": 154,
+      "sha256": "b5f2ee42981114488bc93ef10b97f49c7e48206367c60a840fafb685350e3946"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/test_dave_walkthrough_contract.stderr.log",
+      "destination": "runs/focused-driver-v2/test_dave_walkthrough_contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/focused-driver-v2/test_dave_walkthrough_contract.stdout.log",
+      "destination": "runs/focused-driver-v2/test_dave_walkthrough_contract.stdout.log",
+      "bytes": 157,
+      "sha256": "98d09706fe6c66a86a5afb2dce8fdc860ca2ea07595e4dbb83b0d7a6c8b5ea71"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/import.godot.log",
+      "destination": "runs/web-v2/import.godot.log",
+      "bytes": 10141,
+      "sha256": "ac8739cc6f2a67b0391ea091bb6e2b1a092c7399aba616cf06402323e175ea8d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/import.stderr.log",
+      "destination": "runs/web-v2/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/import.stdout.log",
+      "destination": "runs/web-v2/import.stdout.log",
+      "bytes": 15738,
+      "sha256": "03c3131a3fa2a7c55199a755e785e5042e6c6af873072a231cc8fe927a05756c"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/root-run.json",
+      "destination": "runs/web-v2/root-run.json",
+      "bytes": 1178,
+      "sha256": "7c9731fbd88d311618315e1b53cd8489b3478ede182b494a02b7fd0c9916c88d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/served-copy.json",
+      "destination": "runs/web-v2/served-copy.json",
+      "bytes": 1320,
+      "sha256": "66f1245fe65b4fbf53ba000374c03a93d87b3b9a8409bec8a95d1d3f7af45c27"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/staging.json",
+      "destination": "runs/web-v2/staging.json",
+      "bytes": 58231,
+      "sha256": "03e7d14f9f8a48497b526deaf724afe5f35290ba71f6fe5102cd766d61c2e41f"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/web_export.godot.log",
+      "destination": "runs/web-v2/web_export.godot.log",
+      "bytes": 33528,
+      "sha256": "ec0c49256900ded8d433cff3febaf845f51ff3267e9d3974b811c5c464a03b14"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/web_export.stderr.log",
+      "destination": "runs/web-v2/web_export.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/web_export.stdout.log",
+      "destination": "runs/web-v2/web_export.stdout.log",
+      "bytes": 44620,
+      "sha256": "e29033fb1e7b99ffcbf3fa3449a80d4e05ed7e1159c0cf640e0bf088662f4819"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/browser-evidence/01_sleeping_dave_960.png",
+      "destination": "runs/web-v2/browser-evidence/01_sleeping_dave_960.png",
+      "bytes": 365449,
+      "sha256": "a01b6691b06845b4ac5a2200eb06625c89f50b6c12a7584fc2915d97ae4e1a20"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/browser-evidence/02_awake_dave_960.png",
+      "destination": "runs/web-v2/browser-evidence/02_awake_dave_960.png",
+      "bytes": 359702,
+      "sha256": "75a5b5da9c029c029b2046088c3bfd222bf97c9c32c6790f43738dc4e2c8a1f1"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/browser-evidence/03_pigeon_dialogue_960.png",
+      "destination": "runs/web-v2/browser-evidence/03_pigeon_dialogue_960.png",
+      "bytes": 305858,
+      "sha256": "78af27183cca9ce82d3b3d3ea32709a0d6c10f07a0869bd2151403bc5104fff9"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/browser-evidence/browser-report.json",
+      "destination": "runs/web-v2/browser-evidence/browser-report.json",
+      "bytes": 90475,
+      "sha256": "638aed3c87b09560cc7674e8c2f5309e85fff7df950a720030f211adeebce808"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/browser-evidence/browser.jpg",
+      "destination": "runs/web-v2/browser-evidence/browser.jpg",
+      "bytes": 46701,
+      "sha256": "88519ee7d50fc05d783ccd0fa54254bb78e4ac9d8351fac6e11ade4f91d7102d"
+    },
+    {
+      "source": ".build/full-port/dave-sleep-validation/web-v2/browser-evidence/console.json",
+      "destination": "runs/web-v2/browser-evidence/console.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "source": ".build/3d/dave-support-evidence-draft/SPEC-DRAFT.md",
+      "destination": "packager/SPEC-DRAFT.md",
+      "bytes": 3652,
+      "sha256": "fa08785acebf4ead3355841b8d54dafb51be9255a820b89ed2c18b78cbeb13bc"
+    },
+    {
+      "source": ".build/3d/dave-support-evidence-draft/README.md",
+      "destination": "packager/README.md",
+      "bytes": 4378,
+      "sha256": "73a758442ea00f5d467e8ebbc69ffe11301bd892b9dab0bb9b1f095af24c17e6"
+    },
+    {
+      "source": ".build/3d/dave-support-evidence-draft/allowlist.json",
+      "destination": "packager/allowlist.json",
+      "bytes": 39065,
+      "sha256": "697fb926e20eb2441cfb260a25f1d0c66c4882a7734efa338f2a844e3bcc3d60"
+    },
+    {
+      "source": ".build/3d/dave-support-evidence-draft/AUDIT.json",
+      "destination": "packager/AUDIT.json",
+      "bytes": 9159,
+      "sha256": "e841719b765f0fcceae8ed2a79353498ea6b2b03275de67b86ae8ebebeb59d26"
+    },
+    {
+      "source": ".build/3d/dave-support-evidence-draft/package.py",
+      "destination": "packager/package.py",
+      "bytes": 13680,
+      "sha256": "fd4cb680357ec2e83e0d13fa733842a7a7588e10950b8050a5887a44019d1ba0"
+    },
+    {
+      "source": ".build/3d/dave-support-evidence-draft/MANIFEST.json",
+      "destination": "packager/MANIFEST.json",
+      "bytes": 720,
+      "sha256": "bb926a7d842686aa1a4d82e8eccbe92eb8c35a93c6a9f7e8f369040ef974b0b8"
+    }
+  ],
+  "packager_manifest_sha256": "bb926a7d842686aa1a4d82e8eccbe92eb8c35a93c6a9f7e8f369040ef974b0b8"
+}

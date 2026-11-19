@@ -1,0 +1,278 @@
+{
+  "schema": 1,
+  "revision": "metadata-v3",
+  "selectedExplicitly": true,
+  "previousPins": {
+    "path": "reports/3d-parity-metadata/input-pins-metadata-v2.json",
+    "sha256": "54904feef56e31ebd967d818bf946dc8b6ba1c728986c13d671ef6cac433f276"
+  },
+  "newPins": {
+    "path": "reports/3d-parity-metadata/input-pins-metadata-v3.json",
+    "sha256": "b3405c53964d95087d0de0a138f62d34075ad270fc641f5acb1f226f0099e93c"
+  },
+  "pinCensus": 247,
+  "changes": [
+    {
+      "path": "game3d/scripts/actor_animation.gd",
+      "oldSha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "finalSha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+      "testedCandidateSha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+      "checkoutNormalization": null,
+      "reason": "Dave-only sleep visual lift and original pillow under-cheek support; awake/rest/other identities and all gameplay remain unchanged."
+    }
+  ],
+  "deliveryTests": {
+    "game3d/tests/reference_actor_animation_sleep_original.gd": "c011b33175a4562543de7464785df9615a89d473b694e180cdb8556bc0111df7",
+    "game3d/tests/test_dave_sleep_support.gd": "ca1c03ce09da5367dae615faea7d5edffd347d138d42918aed47907b1f3f2f35"
+  },
+  "testedPacket": {
+    "path": ".build/3d/dave-sleep-art-draft/MANIFEST.json",
+    "sha256": "6bd74a9df548ded1633cf83f122f4aaafc344b743042bf42f058c80ecb04224d"
+  },
+  "unchangedManifest": {
+    "path": "game3d/data/parity_manifest.json",
+    "sha256": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+    "handlers": 585,
+    "features": 32,
+    "existingEvidenceRefs": 96,
+    "statusesChanged": 0,
+    "referencesChanged": 0
+  },
+  "affectedDependencyLinks": [
+    {
+      "group": "features",
+      "id": "npc_agency_and_lifecycle",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/actors_weather.js\"][\"drawNpc\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/actors_weather.js\"][\"drawNpcContactShadow\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/actors_weather.js\"][\"init_actors_weather\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/actors_weather.js\"][\"resolveNpcPose\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_npc_32.js\"][\"makeNpc32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_npc_32.js\"][\"makeSleepingDave32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makeDog32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makeHorseCop32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePigeon32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePossum32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprite_art_special_32.js\"][\"makePothole32\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"applyDogSignature\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"applyNpcSignature\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"buildSprites\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"cacheSprite\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"init_sprites\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makeDog\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makeHorseCop\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makeNPC\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makePigeon\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makePossum\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makePothole\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    },
+    {
+      "group": "handlers",
+      "id": "definitions[\"src/render/sprites.js\"][\"makeSleepingDave\"]",
+      "field": "implementation",
+      "references": [
+        "game3d/scripts/actor_animation.gd"
+      ]
+    }
+  ],
+  "linkedExistingEvidenceIds": [
+    "npc_agency_and_lifecycle/windows_first_person/0",
+    "npc_agency_and_lifecycle/windows_first_person/1",
+    "npc_agency_and_lifecycle/windows_first_person/2",
+    "npc_agency_and_lifecycle/web_keyboard_mouse/0"
+  ],
+  "historicalEvidenceBoundary": "Dependency information only. Original raw bytes, qualifiers, outcomes and source provenance remain unchanged; no older evidence automatically validates this Animator.",
+  "separateFocusedNativeEvidence": [
+    {
+      "path": ".build/full-port/dave-sleep-validation/focused-v1/focused-result.json",
+      "sha256": "8126f026b68ec3ebd448d3a98ce10f2d867722c58c2df2514bca9166a9ed0841"
+    },
+    {
+      "path": ".build/full-port/dave-sleep-validation/focused-v1/test_dave_sleep_support.stdout.log",
+      "sha256": "3452ad376a019a41daf2e5e900de72d2a853a1a050d994d0e26720e68055e50a"
+    },
+    {
+      "path": ".build/full-port/dave-sleep-validation/native-v1/staging.json",
+      "sha256": "4090f95a326c6b587ba6f92fc90da04955bd25a89b1ce1679c040cf363e4a0ca"
+    },
+    {
+      "path": ".build/full-port/dave-sleep-validation/native-v1/evidence/dave-walkthrough.json",
+      "sha256": "4a9741e09fe7fbc9e1167b61f4c30da79a38059a2b971bb110f033027d042a00"
+    }
+  ],
+  "webAtPreparation": "Pending root browser outcome; no Web acceptance inferred here.",
+  "gateRevision": {
+    "engineSuites": 87,
+    "sourceChecks": 45,
+    "total": 132,
+    "newEngineSuite": "test_dave_sleep_support.gd",
+    "actualNewFullRunnerClaim": false
+  },
+  "completeGate": "Must refuse all 617 current obligations.",
+  "excluded": [
+    "weighted indexing",
+    "query-resource optimization",
+    "eave",
+    "gameplay changes",
+    "engine shutdown acceptance",
+    "performance acceptance",
+    "full-port completion"
+  ]
+}

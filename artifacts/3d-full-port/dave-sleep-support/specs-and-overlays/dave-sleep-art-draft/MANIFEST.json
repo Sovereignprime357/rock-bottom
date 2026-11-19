@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "format": "rock-bottom-dave-sleep-art-candidate",
+  "sourceMutation": false,
+  "engineRun": false,
+  "renderAcceptance": false,
+  "performanceAcceptance": false,
+  "indexDependency": false,
+  "sourcePins": "BASELINE.json",
+  "spec": "SPEC-DRAFT.md",
+  "reverseProof": "transforms.json",
+  "staticResult": "PASS 63 checks",
+  "overlays": [
+    {
+      "target": "game3d/scripts/actor_animation.gd",
+      "candidate": "candidate/game3d/scripts/actor_animation.gd",
+      "sha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+      "baseSha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "kind": "production_owner"
+    },
+    {
+      "target": "game3d/tests/reference_actor_animation_sleep_original.gd",
+      "candidate": "candidate/game3d/tests/reference_actor_animation_sleep_original.gd",
+      "sha256": "c011b33175a4562543de7464785df9615a89d473b694e180cdb8556bc0111df7",
+      "baseSha256": null,
+      "kind": "test_only"
+    },
+    {
+      "target": "game3d/tests/test_dave_sleep_support.gd",
+      "candidate": "candidate/game3d/tests/test_dave_sleep_support.gd",
+      "sha256": "ca1c03ce09da5367dae615faea7d5edffd347d138d42918aed47907b1f3f2f35",
+      "baseSha256": null,
+      "kind": "test_only"
+    }
+  ],
+  "files": {
+    "BASELINE.json": {
+      "sha256": "f3968d169c84fc838a061201ae4b5f35dd9f0fe712438ee927eadee9a383f45e",
+      "bytes": 1055
+    },
+    "candidate/game3d/scripts/actor_animation.gd": {
+      "sha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e",
+      "bytes": 28325
+    },
+    "candidate/game3d/tests/reference_actor_animation_sleep_original.gd": {
+      "sha256": "c011b33175a4562543de7464785df9615a89d473b694e180cdb8556bc0111df7",
+      "bytes": 27785
+    },
+    "candidate/game3d/tests/test_dave_sleep_support.gd": {
+      "sha256": "ca1c03ce09da5367dae615faea7d5edffd347d138d42918aed47907b1f3f2f35",
+      "bytes": 10583
+    },
+    "original/game3d/scripts/actor_animation.gd": {
+      "sha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "bytes": 27821
+    },
+    "prepare.py": {
+      "sha256": "a9c07a4b976be1c3b375b5843ff6dba51f2da3a7e199fdba729691d07ad55a81",
+      "bytes": 2855
+    },
+    "README.md": {
+      "sha256": "b0a021630a03ecaddc1ad55bdbbfc38816a68aeeb43eba8f3f795a2654cfe833",
+      "bytes": 3507
+    },
+    "SPEC-DRAFT.md": {
+      "sha256": "0bdab948b65ace56144b3b91d2e72134035f0459554828f0d447989df7758388",
+      "bytes": 5097
+    },
+    "static-check.py": {
+      "sha256": "50cfa979725de248be5cb0188240f6ebfe69f717bb0f18884ce90ac021ed4611",
+      "bytes": 3524
+    },
+    "transforms.json": {
+      "sha256": "600d43d50698d6cead612f6a366ca7f0ff0a1e93826fd30e4635cda6903b1f4e",
+      "bytes": 878
+    }
+  },
+  "groundHelper": {
+    "path": ".build/3d/dave-ground-support-draft/tests/posed_ground_diagnostic.gd",
+    "sha256": "64cfe67a4f118f7349c4d134a3f44d393114a243659f1d217cde4f714b4ffac4",
+    "reuse": "unchanged after focused gates; root stages existing diagnostic wrapper"
+  },
+  "pending": [
+    "central import and focused CPU/pose gates",
+    "existing three-capture native/Web visual and ground review"
+  ]
+}

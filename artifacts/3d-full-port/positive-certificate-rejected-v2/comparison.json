@@ -1,0 +1,823 @@
+{
+  "schema": 1,
+  "comparison_complete": true,
+  "diagnostic": true,
+  "performance_acceptance": false,
+  "promotion_authorized": false,
+  "gpu_or_web_claim": false,
+  "archive_sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+  "workload_hashes": {
+    "tests/full_actor_performance_probe.gd": "86eb4175a218db728283e103a51af25565aad16e347578ffdfedf4bb2b8ea199",
+    "tests/sustained_actor_driver.gd": "0732e2d8d6994be3f44e13576da09bfd46d09fb7cda050cf0113a10f936d08fb",
+    "tests/test_sustained_actor_driver.gd": "85038f4c7a679585da3d285a1d727fa1b89b2a8a0463784130d68f32cdadf818",
+    "tests/test_performance_phase_snapshot.gd": "dec496b40f17e3f43036026cb7a47d7ef1f43122283bf356b86aa141e5c4c4a2"
+  },
+  "certificate_overlay_hashes": {
+    "scripts/world_adapter.gd": "3687e6a9fce244a6db98b000e9ead53dc225689e70929605b55dbcd5f38aaba0",
+    "tests/reference_positive_clearance_adapter.gd": "1a66c5962013fde3af83b868c7672d89385b98b66889b0f130fcf10ee02ab6e9",
+    "tests/test_positive_clearance_retention.gd": "cc3e3b6e7a624c79e4c607d603cf3bfb3fc58e9511424967ba18dd04623efd76"
+  },
+  "measured_scene_sha256": "3b5eaf2ee0a6a94b283c0d7bd360cb4bc8226748c82ca15b9a8e3bc6d1c58d27",
+  "pins_sha256": "076315125c3b03f4fe253117034f3b31d6c58def70dbbc403681012afcda5941",
+  "report_inputs": {
+    "baseline": {
+      "report": "2d77d5621f9b91de3cc329c833b5e610809471df5549df630a8c3ff7950590c9",
+      "provenance": "f8e5804b027dca7783e0921d62672769ecbc300d2596fab67bc5eec59ff0dc39"
+    },
+    "positive_certificate": {
+      "report": "58f2f86e2f34d54c33ed6433ce9b5d8620b29012c4aff62fcb12428c160cc69f",
+      "provenance": "1d83a1220361cb436550c2f8121febcbc7c0d9c4721620533b822b73a2f9bd45"
+    }
+  },
+  "original_acceptance": {
+    "baseline": false,
+    "positive_certificate": false
+  },
+  "original_failures": {
+    "baseline": [
+      "core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+      "trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+    ],
+    "positive_certificate": [
+      "core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+      "trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+    ]
+  },
+  "rows": [
+    {
+      "id": "core_day",
+      "baseline": {
+        "id": "core_day",
+        "scene_cpu_ms": {
+          "p50": 24.013,
+          "p95": 29.964,
+          "p99": 33.815,
+          "max": 40.167
+        },
+        "driver_cpu_ms": {
+          "p50": 1.191,
+          "p95": 14.366,
+          "p99": 15.727,
+          "max": 21.627
+        },
+        "active_seconds": 46.5562163333332,
+        "elapsed_ms": 46539,
+        "actor_stage_calls": 3320.0,
+        "actor_calls_per_render_frame": 3.074074074074074,
+        "actor_calls_per_active_second": 71.31163701597794,
+        "actor_cpu_total_ms": 12282.256,
+        "actor_cpu_ms_per_call": 3.6994746987951808,
+        "actor_cpu_ms_per_active_second": 263.8155968702762,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 4312.183,
+            "cpu_ms_per_actor_stage_call": 1.2988503012048194,
+            "cpu_ms_per_active_second": 92.62314121761167
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 3722.073,
+            "cpu_ms_per_actor_stage_call": 1.1211063253012048,
+            "cpu_ms_per_active_second": 79.94792732619639
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1415.116,
+            "cpu_ms_per_actor_stage_call": 0.4262397590361446,
+            "cpu_ms_per_active_second": 30.39585497816344
+          }
+        },
+        "models_cpu_ms_per_render_frame": 5.073772222222232,
+        "driver_cpu_ms_per_render_frame": 3.668985185185185,
+        "driver_cpu_ms_per_active_second": 85.1122430489038,
+        "scene_physics_queries": 231625,
+        "scene_physics_queries_per_active_second": 4975.168049345147,
+        "driver_physics_queries": 26687,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60,
+        "driver_work": {
+          "candidate_sweeps": 3776,
+          "decisions": 236,
+          "retained_sweeps": 1197,
+          "short_sweeps": 4173
+        },
+        "player_walked_m": 281.817112941742,
+        "source_stage_counts": {
+          "actors": {
+            "cpu_ms_per_active_second": 263.815596870276,
+            "cpu_ms_per_call": 3.69947469879518,
+            "cpu_total_ms": 12282.256,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "combat_timers": {
+            "cpu_ms_per_active_second": 4.97695084027054,
+            "cpu_ms_per_call": 0.0697915662650602,
+            "cpu_total_ms": 231.708,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "memory_day_territory": {
+            "cpu_ms_per_active_second": 23.5211339375095,
+            "cpu_ms_per_call": 0.329835843373494,
+            "cpu_total_ms": 1095.055,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "movement": {
+            "cpu_ms_per_active_second": 37.6965126941266,
+            "cpu_ms_per_call": 0.52861656626506,
+            "cpu_total_ms": 1755.007,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "progression": {
+            "cpu_ms_per_active_second": 1.60489846221682,
+            "cpu_ms_per_call": 0.022505421686747,
+            "cpu_total_ms": 74.7179999999999,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "projectiles_boss": {
+            "cpu_ms_per_active_second": 1.24741666256112,
+            "cpu_ms_per_call": 0.017492469879518,
+            "cpu_total_ms": 58.0749999999999,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "quests_pickups": {
+            "cpu_ms_per_active_second": 2.87336494534289,
+            "cpu_ms_per_call": 0.0402930722891566,
+            "cpu_total_ms": 133.773,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "state_ambient": {
+            "cpu_ms_per_active_second": 28.1514715589467,
+            "cpu_ms_per_call": 0.394766867469879,
+            "cpu_total_ms": 1310.626,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          },
+          "world_feedback": {
+            "cpu_ms_per_active_second": 1.81558998254504,
+            "cpu_ms_per_call": 0.025459939759036,
+            "cpu_total_ms": 84.5269999999997,
+            "frames": {
+              "max": 5.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3320.0
+          }
+        }
+      },
+      "positive_certificate": {
+        "id": "core_day",
+        "scene_cpu_ms": {
+          "p50": 23.742,
+          "p95": 30.128,
+          "p99": 33.837,
+          "max": 39.86
+        },
+        "driver_cpu_ms": {
+          "p50": 1.204,
+          "p95": 14.311,
+          "p99": 16.246,
+          "max": 25.494
+        },
+        "active_seconds": 44.330172,
+        "elapsed_ms": 44319,
+        "actor_stage_calls": 3142.0,
+        "actor_calls_per_render_frame": 2.9092592592592594,
+        "actor_calls_per_active_second": 70.87723458415637,
+        "actor_cpu_total_ms": 11760.518,
+        "actor_cpu_ms_per_call": 3.7430038192234245,
+        "actor_cpu_ms_per_active_second": 265.29375974449187,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 4166.663,
+            "cpu_ms_per_actor_stage_call": 1.3261180776575427,
+            "cpu_ms_per_active_second": 93.99158207642415
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 3539.577,
+            "cpu_ms_per_actor_stage_call": 1.1265362826225336,
+            "cpu_ms_per_active_second": 79.84577637100078
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1340.843,
+            "cpu_ms_per_actor_stage_call": 0.4267482495225971,
+            "cpu_ms_per_active_second": 30.24673578979121
+          }
+        },
+        "models_cpu_ms_per_render_frame": 5.001301851851852,
+        "driver_cpu_ms_per_render_frame": 3.6135898148148056,
+        "driver_cpu_ms_per_active_second": 88.03658600738095,
+        "scene_physics_queries": 214971,
+        "scene_physics_queries_per_active_second": 4849.3157211300695,
+        "driver_physics_queries": 26059,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60,
+        "driver_work": {
+          "candidate_sweeps": 3648,
+          "decisions": 228,
+          "retained_sweeps": 1194,
+          "short_sweeps": 4301
+        },
+        "player_walked_m": 261.402715997696,
+        "source_stage_counts": {
+          "actors": {
+            "cpu_ms_per_active_second": 265.293759744492,
+            "cpu_ms_per_call": 3.74300381922343,
+            "cpu_total_ms": 11760.518,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "combat_timers": {
+            "cpu_ms_per_active_second": 5.17130860669794,
+            "cpu_ms_per_call": 0.0729614894971355,
+            "cpu_total_ms": 229.245,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "memory_day_territory": {
+            "cpu_ms_per_active_second": 23.7324141219213,
+            "cpu_ms_per_call": 0.334838319541693,
+            "cpu_total_ms": 1052.062,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "movement": {
+            "cpu_ms_per_active_second": 38.1146502206218,
+            "cpu_ms_per_call": 0.537755887969447,
+            "cpu_total_ms": 1689.629,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "progression": {
+            "cpu_ms_per_active_second": 1.64777163508411,
+            "cpu_ms_per_call": 0.0232482495225971,
+            "cpu_total_ms": 73.046,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "projectiles_boss": {
+            "cpu_ms_per_active_second": 1.31533439572488,
+            "cpu_ms_per_call": 0.0185579248886059,
+            "cpu_total_ms": 58.3089999999998,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "quests_pickups": {
+            "cpu_ms_per_active_second": 2.91916304768679,
+            "cpu_ms_per_call": 0.0411861871419477,
+            "cpu_total_ms": 129.407,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "state_ambient": {
+            "cpu_ms_per_active_second": 28.2790917210969,
+            "cpu_ms_per_call": 0.398986950986633,
+            "cpu_total_ms": 1253.617,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          },
+          "world_feedback": {
+            "cpu_ms_per_active_second": 1.85122223301999,
+            "cpu_ms_per_call": 0.0261187141947804,
+            "cpu_total_ms": 82.065,
+            "frames": {
+              "max": 6.0,
+              "p50": 3.0,
+              "p95": 4.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 3142.0
+          }
+        }
+      },
+      "signed_candidate_minus_baseline": {
+        "active_seconds": -2.226044333333199,
+        "elapsed_ms": -2220,
+        "actor_stage_calls": -178.0,
+        "actor_calls_per_render_frame": -0.16481481481481453,
+        "actor_calls_per_active_second": -0.43440243182156735,
+        "actor_cpu_ms_per_call": 0.04352912042824375,
+        "actor_cpu_ms_per_active_second": 1.478162874215684,
+        "models_cpu_ms_per_render_frame": -0.07247037037037973,
+        "driver_cpu_ms_per_render_frame": -0.05539537037037956,
+        "driver_cpu_ms_per_active_second": 2.9243429584771405,
+        "scene_physics_queries": -16654,
+        "scene_physics_queries_per_active_second": -125.85232821507725,
+        "driver_physics_queries": -628,
+        "scene_p95_ms": 0.16400000000000148,
+        "driver_p95_ms": -0.054999999999999716,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": -145.52000000000044,
+            "cpu_ms_per_actor_stage_call": 0.02726777645272338,
+            "cpu_ms_per_active_second": 1.3684408588124768
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": -182.49599999999964,
+            "cpu_ms_per_actor_stage_call": 0.005429957321328782,
+            "cpu_ms_per_active_second": -0.10215095519561146
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": -74.27299999999991,
+            "cpu_ms_per_actor_stage_call": 0.0005084904864525175,
+            "cpu_ms_per_active_second": -0.14911918837223226
+          }
+        }
+      }
+    },
+    {
+      "id": "trainyard_night",
+      "baseline": {
+        "id": "trainyard_night",
+        "scene_cpu_ms": {
+          "p50": 17.275,
+          "p95": 25.536,
+          "p99": 29.228,
+          "max": 36.931
+        },
+        "driver_cpu_ms": {
+          "p50": 1.178,
+          "p95": 14.227,
+          "p99": 14.871,
+          "max": 18.83
+        },
+        "active_seconds": 35.0432366666668,
+        "elapsed_ms": 35025,
+        "actor_stage_calls": 2444.0,
+        "actor_calls_per_render_frame": 2.262962962962963,
+        "actor_calls_per_active_second": 69.74241629697231,
+        "actor_cpu_total_ms": 9029.39800000001,
+        "actor_cpu_ms_per_call": 3.6945163666121155,
+        "actor_cpu_ms_per_active_second": 257.6644984562397,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 3329.961,
+            "cpu_ms_per_actor_stage_call": 1.3625045008183305,
+            "cpu_ms_per_active_second": 95.02435610257045
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 2553.013,
+            "cpu_ms_per_actor_stage_call": 1.0446043371522094,
+            "cpu_ms_per_active_second": 72.8532305472922
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1047.669,
+            "cpu_ms_per_actor_stage_call": 0.4286698036006547,
+            "cpu_ms_per_active_second": 29.896467896658216
+          }
+        },
+        "models_cpu_ms_per_render_frame": 4.236220370370371,
+        "driver_cpu_ms_per_render_frame": 3.144467592592593,
+        "driver_cpu_ms_per_active_second": 96.90957009203166,
+        "scene_physics_queries": 153462,
+        "scene_physics_queries_per_active_second": 4379.218776499985,
+        "driver_physics_queries": 21422,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60,
+        "driver_work": {
+          "candidate_sweeps": 2992,
+          "decisions": 187,
+          "retained_sweeps": 1200,
+          "short_sweeps": 3961
+        },
+        "player_walked_m": 209.963482093811,
+        "source_stage_counts": {
+          "actors": {
+            "cpu_ms_per_active_second": 257.66449845624,
+            "cpu_ms_per_call": 3.69451636661212,
+            "cpu_total_ms": 9029.39800000001,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "combat_timers": {
+            "cpu_ms_per_active_second": 5.02539196579156,
+            "cpu_ms_per_call": 0.0720564648117838,
+            "cpu_total_ms": 176.106,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "memory_day_territory": {
+            "cpu_ms_per_active_second": 23.5816973146791,
+            "cpu_ms_per_call": 0.338125613747955,
+            "cpu_total_ms": 826.379000000001,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "movement": {
+            "cpu_ms_per_active_second": 37.5652800716371,
+            "cpu_ms_per_call": 0.538628887070377,
+            "cpu_total_ms": 1316.409,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "progression": {
+            "cpu_ms_per_active_second": 1.5634685951288,
+            "cpu_ms_per_call": 0.0224177577741406,
+            "cpu_total_ms": 54.7889999999997,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "projectiles_boss": {
+            "cpu_ms_per_active_second": 1.18248209759162,
+            "cpu_ms_per_call": 0.0169549918166939,
+            "cpu_total_ms": 41.4379999999999,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "quests_pickups": {
+            "cpu_ms_per_active_second": 2.91753872430541,
+            "cpu_ms_per_call": 0.0418330605564646,
+            "cpu_total_ms": 102.24,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "state_ambient": {
+            "cpu_ms_per_active_second": 28.1308775606818,
+            "cpu_ms_per_call": 0.403353927986907,
+            "cpu_total_ms": 985.797,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          },
+          "world_feedback": {
+            "cpu_ms_per_active_second": 1.77925916470233,
+            "cpu_ms_per_call": 0.0255118657937806,
+            "cpu_total_ms": 62.3509999999998,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2444.0
+          }
+        }
+      },
+      "positive_certificate": {
+        "id": "trainyard_night",
+        "scene_cpu_ms": {
+          "p50": 17.754,
+          "p95": 28.434,
+          "p99": 32.958,
+          "max": 40.87
+        },
+        "driver_cpu_ms": {
+          "p50": 1.196,
+          "p95": 14.357,
+          "p99": 15.61,
+          "max": 23.565
+        },
+        "active_seconds": 35.5488477037038,
+        "elapsed_ms": 35531,
+        "actor_stage_calls": 2531.0,
+        "actor_calls_per_render_frame": 2.3435185185185183,
+        "actor_calls_per_active_second": 71.19780705961666,
+        "actor_cpu_total_ms": 9454.01299999999,
+        "actor_cpu_ms_per_call": 3.7352876333464993,
+        "actor_cpu_ms_per_active_second": 265.9442882311762,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 3459.768,
+            "cpu_ms_per_actor_stage_call": 1.3669569340181746,
+            "cpu_ms_per_active_second": 97.32433604703114
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 2730.832,
+            "cpu_ms_per_actor_stage_call": 1.078953773212169,
+            "cpu_ms_per_active_second": 76.81914257140541
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1080.251,
+            "cpu_ms_per_actor_stage_call": 0.42680798103516393,
+            "cpu_ms_per_active_second": 30.38779228524613
+          }
+        },
+        "models_cpu_ms_per_render_frame": 4.27395462962963,
+        "driver_cpu_ms_per_render_frame": 3.1982175925925924,
+        "driver_cpu_ms_per_active_second": 97.16419020918428,
+        "scene_physics_queries": 162934,
+        "scene_physics_queries_per_active_second": 4583.383443481463,
+        "driver_physics_queries": 21410,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60,
+        "driver_work": {
+          "candidate_sweeps": 3024,
+          "decisions": 189,
+          "retained_sweeps": 1200,
+          "short_sweeps": 3968
+        },
+        "player_walked_m": 216.168123807908,
+        "source_stage_counts": {
+          "actors": {
+            "cpu_ms_per_active_second": 265.944288231176,
+            "cpu_ms_per_call": 3.7352876333465,
+            "cpu_total_ms": 9454.01299999999,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "combat_timers": {
+            "cpu_ms_per_active_second": 5.25294101109623,
+            "cpu_ms_per_call": 0.0737795337811141,
+            "cpu_total_ms": 186.736,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "memory_day_territory": {
+            "cpu_ms_per_active_second": 24.1900105220683,
+            "cpu_ms_per_call": 0.339757803239826,
+            "cpu_total_ms": 859.926999999999,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "movement": {
+            "cpu_ms_per_active_second": 38.4921899974111,
+            "cpu_ms_per_call": 0.540637297510865,
+            "cpu_total_ms": 1368.353,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "progression": {
+            "cpu_ms_per_active_second": 1.66728329688797,
+            "cpu_ms_per_call": 0.0234176214934807,
+            "cpu_total_ms": 59.2699999999997,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "projectiles_boss": {
+            "cpu_ms_per_active_second": 1.28794610676592,
+            "cpu_ms_per_call": 0.0180896878704069,
+            "cpu_total_ms": 45.7849999999998,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "quests_pickups": {
+            "cpu_ms_per_active_second": 3.01264336027525,
+            "cpu_ms_per_call": 0.0423137099960487,
+            "cpu_total_ms": 107.095999999999,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "state_ambient": {
+            "cpu_ms_per_active_second": 28.6439101623513,
+            "cpu_ms_per_call": 0.402314500197551,
+            "cpu_total_ms": 1018.258,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          },
+          "world_feedback": {
+            "cpu_ms_per_active_second": 1.90034289052248,
+            "cpu_ms_per_call": 0.0266910312129592,
+            "cpu_total_ms": 67.5549999999998,
+            "frames": {
+              "max": 5.0,
+              "p50": 2.0,
+              "p95": 3.0,
+              "p99": 4.0,
+              "samples": 1080
+            },
+            "total": 2531.0
+          }
+        }
+      },
+      "signed_candidate_minus_baseline": {
+        "active_seconds": 0.5056110370369993,
+        "elapsed_ms": 506,
+        "actor_stage_calls": 87.0,
+        "actor_calls_per_render_frame": 0.08055555555555527,
+        "actor_calls_per_active_second": 1.455390762644356,
+        "actor_cpu_ms_per_call": 0.040771266734383804,
+        "actor_cpu_ms_per_active_second": 8.27978977493649,
+        "models_cpu_ms_per_render_frame": 0.037734259259258884,
+        "driver_cpu_ms_per_render_frame": 0.05374999999999952,
+        "driver_cpu_ms_per_active_second": 0.25462011715262634,
+        "scene_physics_queries": 9472,
+        "scene_physics_queries_per_active_second": 204.16466698147724,
+        "driver_physics_queries": -12,
+        "scene_p95_ms": 2.8979999999999997,
+        "driver_p95_ms": 0.129999999999999,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 129.80700000000024,
+            "cpu_ms_per_actor_stage_call": 0.004452433199844119,
+            "cpu_ms_per_active_second": 2.299979944460688
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 177.81899999999996,
+            "cpu_ms_per_actor_stage_call": 0.03434943605995966,
+            "cpu_ms_per_active_second": 3.9659120241132086
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 32.58199999999988,
+            "cpu_ms_per_actor_stage_call": -0.0018618225654907783,
+            "cpu_ms_per_active_second": 0.49132438858791616
+          }
+        }
+      }
+    }
+  ],
+  "limits": "One identical-driver native pair. Normal input/physics timing may diverge; per-call and active-second denominators are disclosed. Scope timings overlap and p95 values must not be added. Original16ms failures retained; no causal percentage or promotion claim."
+}

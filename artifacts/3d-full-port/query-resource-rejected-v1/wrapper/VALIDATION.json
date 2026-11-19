@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "static_checks": 572,
+  "static_pass": true,
+  "offline_test_groups": 12,
+  "offline_test_pass": true,
+  "powershell_parse_errors": 0,
+  "source_archive_files": 495,
+  "unchanged_workload_files": 3,
+  "validated_candidate_files": 5,
+  "engine_run": false,
+  "performance_acceptance": false,
+  "peer_review": "pending",
+  "notes": [
+    "Initial comparator scalar active_ms assumption rejected by the actual pinned report fixture, corrected to frames/total before READY.",
+    "Both variants preserve the strict120+1080 workload and all minimum60/16ms conditions."
+  ]
+}

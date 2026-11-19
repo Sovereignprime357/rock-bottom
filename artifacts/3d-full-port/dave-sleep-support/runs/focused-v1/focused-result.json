@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "staging_sha256": "7becb8bc500b51965b8396e3e2fb470e3e5638a088d910029c77cd99fb999fa7",
+  "stages": [
+    {
+      "name": "import",
+      "exit_code": 0,
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "elapsed_ms": 6155,
+      "pid": 19640
+    },
+    {
+      "name": "test_dave_sleep_support",
+      "exit_code": 0,
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d\\tests\\test_dave_sleep_support.gd"
+      ],
+      "elapsed_ms": 12169,
+      "pid": 21520
+    },
+    {
+      "name": "test_character_roster",
+      "exit_code": 0,
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d\\tests\\test_character_roster.gd"
+      ],
+      "elapsed_ms": 23644,
+      "pid": 48908
+    },
+    {
+      "name": "test_pose_input_memo",
+      "exit_code": 0,
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d\\tests\\test_pose_input_memo.gd"
+      ],
+      "elapsed_ms": 11327,
+      "pid": 46576
+    },
+    {
+      "name": "test_presentation_visibility",
+      "exit_code": 0,
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d\\tests\\test_presentation_visibility.gd"
+      ],
+      "elapsed_ms": 22262,
+      "pid": 26776
+    },
+    {
+      "name": "test_dave_walkthrough_contract",
+      "exit_code": 0,
+      "arguments": [
+        "--headless",
+        "--path",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d",
+        "--script",
+        "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\dave-sleep-validation\\focused-v1\\game3d\\tests\\test_dave_walkthrough_contract.gd"
+      ],
+      "elapsed_ms": 1917,
+      "pid": 32624
+    }
+  ],
+  "engine_tests_pass": true,
+  "visual_acceptance": false,
+  "performance_acceptance": false
+}

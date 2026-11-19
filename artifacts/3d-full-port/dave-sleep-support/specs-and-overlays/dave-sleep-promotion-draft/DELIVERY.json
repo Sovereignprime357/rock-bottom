@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "scope": "Isolated nine-file Dave sleep promotion plan; root applies exact bytes after final visual decision",
+  "files": [
+    {
+      "path": "game3d/scripts/actor_animation.gd",
+      "oldSha256": "3317d7a885e96a288828914b9289c4668ed89fb268bee300a3b92d938397603d",
+      "sha256": "d35234cd61c3a489f459da420b26d00118b66be1497ab83d500a95a46306b45e"
+    },
+    {
+      "path": "game3d/tests/reference_actor_animation_sleep_original.gd",
+      "oldSha256": null,
+      "sha256": "c011b33175a4562543de7464785df9615a89d473b694e180cdb8556bc0111df7"
+    },
+    {
+      "path": "game3d/tests/test_dave_sleep_support.gd",
+      "oldSha256": null,
+      "sha256": "ca1c03ce09da5367dae615faea7d5edffd347d138d42918aed47907b1f3f2f35"
+    },
+    {
+      "path": "SPEC-3D-CHARACTER-ROSTER.md",
+      "oldSha256": "55a87e8e681fbaa59da5772a6ca4e623b43fa499d27c9ba89fd27c7a673c5640",
+      "sha256": "9e5fa35874f327ff5973122f7b6cfa276b4b79800b25aaa2e68d6695c6e82313"
+    },
+    {
+      "path": "SPEC-3D-PARITY-METADATA-V3.md",
+      "oldSha256": null,
+      "sha256": "1f1de6ad590ce63d7f1e9be2385efea0d71ab9d1a7fad96aa73ce504dd51f641"
+    },
+    {
+      "path": "reports/3d-parity-metadata/input-pins-metadata-v3.json",
+      "oldSha256": null,
+      "sha256": "b3405c53964d95087d0de0a138f62d34075ad270fc641f5acb1f226f0099e93c"
+    },
+    {
+      "path": "reports/3d-parity-metadata/revisions/metadata-v3.json",
+      "oldSha256": null,
+      "sha256": "50a6bd31a8bd7f035a356986bf1cfecd5c1535c7997c073abd8aa61bfc9a14c6"
+    },
+    {
+      "path": "tools/parity-metadata.mjs",
+      "oldSha256": "1d4293917ee5c23c9cb4c92bc84d60829a9a3d7c4c43d80273ac3ec5a12051fd",
+      "sha256": "c4fa0552d03189f188ed24f11af79398bc5816b113d8848f358f61859fda83d1"
+    },
+    {
+      "path": "game3d/tests/run-gates.ps1",
+      "oldSha256": "a1e50f8a3eeff81851893bbbfb022525d51f9e61e5ae6e01496014a45fac0f0b",
+      "sha256": "788ca3413b6a6e68e55a6b87a56118c78a74717db23fa2ce499202eaad97fbe2"
+    }
+  ],
+  "onlyChangedExistingPin": "game3d/scripts/actor_animation.gd",
+  "manifestUnchanged": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+  "engineRunByThisPacket": false,
+  "sourceWrites": false,
+  "gitRun": false
+}

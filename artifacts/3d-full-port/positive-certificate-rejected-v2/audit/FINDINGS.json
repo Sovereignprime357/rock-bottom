@@ -1,0 +1,304 @@
+{
+  "schema": 1,
+  "decision": "reject_positive_certificate_promotion",
+  "scope": "frozen495 d1b9b87 resident archive only; not latest working source",
+  "archive_sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2",
+  "comparison_sha256": "0e04d6f0ad302e41eb161c5a0c74f1147253fb8b06403ba4a05a72a0e003059a",
+  "variants": {
+    "baseline": {
+      "phases": [
+        {
+          "id": "core_day",
+          "warmup_rows": 120,
+          "measured_rows": 1080,
+          "min_row_live": 60,
+          "min_row_supported": 60,
+          "min_row_rigged": 60,
+          "first_source_position": [
+            673.750122070313,
+            1296.0
+          ],
+          "frame_rows_sha256": "f1f6611a155dc21124261ac2271251e6cd64a1574c72e4acf425b02b534268ca",
+          "decision_receipts": 236,
+          "scene_p95_ms": 29.964,
+          "driver_p95_ms": 14.366,
+          "driver_mean_ms": 3.668985185185185,
+          "actor_ms_per_stage_call": 3.6994746987951808,
+          "clearance_ms_per_stage_call": 1.2988503012048194,
+          "clearance_ms_per_active_second": 92.62314121761139,
+          "motion_ms_per_stage_call": 1.1211063253012048,
+          "active_seconds": 46.55621633333334,
+          "actor_stage_calls": 3320,
+          "scene_queries": 231625,
+          "scene_queries_per_stage_call": 69.76656626506023,
+          "scene_queries_per_active_second": 4975.168049345132,
+          "driver_queries": 26687,
+          "inclusive_placement_overlaps": 180354,
+          "inclusive_positive_hits": 233284,
+          "held_engine_process_p95_ms": 70.478
+        },
+        {
+          "id": "trainyard_night",
+          "warmup_rows": 120,
+          "measured_rows": 1080,
+          "min_row_live": 60,
+          "min_row_supported": 60,
+          "min_row_rigged": 60,
+          "first_source_position": [
+            757.750122070313,
+            2634.0
+          ],
+          "frame_rows_sha256": "911f5863225b349c1d684e45906a8f59adba0cf4412016dbc69669b41dd8a30b",
+          "decision_receipts": 187,
+          "scene_p95_ms": 25.536,
+          "driver_p95_ms": 14.227,
+          "driver_mean_ms": 3.144467592592593,
+          "actor_ms_per_stage_call": 3.6945163666121155,
+          "clearance_ms_per_stage_call": 1.3625045008183305,
+          "clearance_ms_per_active_second": 95.02435610257079,
+          "motion_ms_per_stage_call": 1.0446043371522094,
+          "active_seconds": 35.04323666666667,
+          "actor_stage_calls": 2444,
+          "scene_queries": 153462,
+          "scene_queries_per_stage_call": 62.791325695581016,
+          "scene_queries_per_active_second": 4379.218776500001,
+          "driver_queries": 21422,
+          "inclusive_placement_overlaps": 124781,
+          "inclusive_positive_hits": 154771,
+          "held_engine_process_p95_ms": 61.162
+        }
+      ],
+      "stage_names": [
+        "version",
+        "import",
+        "contract",
+        "snapshot_contract",
+        "export",
+        "native"
+      ],
+      "source_files_after_native": 501,
+      "acceptance": false,
+      "failures": [
+        "core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+        "trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+      ]
+    },
+    "positive_certificate": {
+      "phases": [
+        {
+          "id": "core_day",
+          "warmup_rows": 120,
+          "measured_rows": 1080,
+          "min_row_live": 60,
+          "min_row_supported": 60,
+          "min_row_rigged": 60,
+          "first_source_position": [
+            673.750122070313,
+            1296.0
+          ],
+          "frame_rows_sha256": "f7569f5bf0299ef59198fd4de5813553f2ef68d124c98db32d6f4e6787fc7ae1",
+          "decision_receipts": 228,
+          "scene_p95_ms": 30.128,
+          "driver_p95_ms": 14.311,
+          "driver_mean_ms": 3.6135898148148056,
+          "actor_ms_per_stage_call": 3.7430038192234245,
+          "clearance_ms_per_stage_call": 1.3261180776575427,
+          "clearance_ms_per_active_second": 93.99158207642415,
+          "motion_ms_per_stage_call": 1.1265362826225336,
+          "active_seconds": 44.330172,
+          "actor_stage_calls": 3142,
+          "scene_queries": 214971,
+          "scene_queries_per_stage_call": 68.41852323360916,
+          "scene_queries_per_active_second": 4849.3157211300695,
+          "driver_queries": 26059,
+          "inclusive_placement_overlaps": 165235,
+          "inclusive_positive_hits": 217070,
+          "held_engine_process_p95_ms": 70.018
+        },
+        {
+          "id": "trainyard_night",
+          "warmup_rows": 120,
+          "measured_rows": 1080,
+          "min_row_live": 60,
+          "min_row_supported": 60,
+          "min_row_rigged": 60,
+          "first_source_position": [
+            757.750122070313,
+            2634.0
+          ],
+          "frame_rows_sha256": "8bcdb70aa835d851bb1dd7d3e6696dca9cf99982d3e13127b8903c998c25b83e",
+          "decision_receipts": 189,
+          "scene_p95_ms": 28.434,
+          "driver_p95_ms": 14.357,
+          "driver_mean_ms": 3.1982175925925924,
+          "actor_ms_per_stage_call": 3.7352876333464993,
+          "clearance_ms_per_stage_call": 1.3669569340181746,
+          "clearance_ms_per_active_second": 97.3243360470314,
+          "motion_ms_per_stage_call": 1.078953773212169,
+          "active_seconds": 35.54884770370371,
+          "actor_stage_calls": 2531,
+          "scene_queries": 162934,
+          "scene_queries_per_stage_call": 64.37534571315686,
+          "scene_queries_per_active_second": 4583.383443481474,
+          "driver_queries": 21410,
+          "inclusive_placement_overlaps": 131921,
+          "inclusive_positive_hits": 163083,
+          "held_engine_process_p95_ms": 64.038
+        }
+      ],
+      "stage_names": [
+        "version",
+        "import",
+        "contract",
+        "snapshot_contract",
+        "retention_contract",
+        "export",
+        "native"
+      ],
+      "source_files_after_native": 505,
+      "acceptance": false,
+      "failures": [
+        "core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+        "trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+      ]
+    }
+  },
+  "delta": [
+    {
+      "id": "core_day",
+      "candidate_minus_baseline": {
+        "scene_p95_ms": 0.16400000000000148,
+        "actor_ms_per_stage_call": 0.04352912042824375,
+        "clearance_ms_per_stage_call": 0.02726777645272338,
+        "clearance_ms_per_active_second": 1.368440858812761,
+        "motion_ms_per_stage_call": 0.005429957321328782,
+        "scene_queries": -16654,
+        "scene_queries_per_stage_call": -1.3480430314510699,
+        "scene_queries_per_active_second": -125.8523282150627,
+        "inclusive_placement_overlaps": -15119,
+        "inclusive_positive_hits": -16214,
+        "active_seconds": -2.2260443333333413,
+        "actor_stage_calls": -178
+      },
+      "relative_percent": {
+        "scene_p95_ms": 0.5473234548124539,
+        "actor_ms_per_stage_call": 1.1766297642857193,
+        "clearance_ms_per_stage_call": 2.099377921183798,
+        "clearance_ms_per_active_second": 1.4774286866364283,
+        "motion_ms_per_stage_call": 0.48433919234822653,
+        "scene_queries": -7.19007015650297,
+        "scene_queries_per_stage_call": -1.9322192614862566,
+        "scene_queries_per_active_second": -2.5296095924162487,
+        "inclusive_placement_overlaps": -8.38295796045555,
+        "inclusive_positive_hits": -6.950326640489701,
+        "active_seconds": -4.7814116108476306,
+        "actor_stage_calls": -5.361445783132535
+      }
+    },
+    {
+      "id": "trainyard_night",
+      "candidate_minus_baseline": {
+        "scene_p95_ms": 2.8979999999999997,
+        "actor_ms_per_stage_call": 0.040771266734383804,
+        "clearance_ms_per_stage_call": 0.004452433199844119,
+        "clearance_ms_per_active_second": 2.2999799444606026,
+        "motion_ms_per_stage_call": 0.03434943605995966,
+        "scene_queries": 9472,
+        "scene_queries_per_stage_call": 1.5840200175758454,
+        "scene_queries_per_active_second": 204.1646669814736,
+        "inclusive_placement_overlaps": 7140,
+        "inclusive_positive_hits": 8312,
+        "active_seconds": 0.5056110370370348,
+        "actor_stage_calls": 87
+      },
+      "relative_percent": {
+        "scene_p95_ms": 11.348684210526304,
+        "actor_ms_per_stage_call": 1.103561675970366,
+        "clearance_ms_per_stage_call": 0.3267830085823542,
+        "clearance_ms_per_active_second": 2.4204109754534686,
+        "motion_ms_per_stage_call": 3.2882723954222426,
+        "scene_queries": 6.17221201339746,
+        "scene_queries_per_stage_call": 2.5226733151890057,
+        "scene_queries_per_active_second": 4.662125310502252,
+        "inclusive_placement_overlaps": 5.7220249877785845,
+        "inclusive_positive_hits": 5.370515148186672,
+        "active_seconds": 1.4428205985835163,
+        "actor_stage_calls": 3.559738134206225
+      }
+    }
+  ],
+  "original_pngs": [
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/core_day_end.png",
+      "sha256": "d6bab85e36306a1e24fd0136d366c540e7d25d42f47fc3c52ee1a3ba18f012b0",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/core_day_initial.png",
+      "sha256": "c21e01c70110c0dd256db02afe4fe28e12e089faecff44acc3200745b5f68cd7",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/trainyard_night_end.png",
+      "sha256": "cd84bc178c12262cfe33992bad07e89d7188bae05071245ec1d29b60b4c8c015",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/trainyard_night_initial.png",
+      "sha256": "0922fe4ba6bee5ca47f8b627b06e3dc0733936546bf6a7abc0af9541cc7feddb",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/core_day_end.png",
+      "sha256": "2bbcfb27b1b221e75d65c20ace72d7c4132296b4a0de8fda9133f00eba89fb07",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/core_day_initial.png",
+      "sha256": "c21e01c70110c0dd256db02afe4fe28e12e089faecff44acc3200745b5f68cd7",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/trainyard_night_end.png",
+      "sha256": "c1ec77e98bfc474137ef1ffa28fa259926b62622225cdcd6ee207e77dd07c803",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/trainyard_night_initial.png",
+      "sha256": "ed42fd5162b5e427f4622f448f19ae81d04e869575835a6cb3eb018e8d057086",
+      "dimensions": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "corrected_phase_snapshots_verified": true,
+  "all_source_and_log_pins_verified": true,
+  "performance_acceptance": false,
+  "promotion_authorized": false,
+  "causal_improvement_claim": false,
+  "retry_recommended": false,
+  "engine_run_by_auditor": false,
+  "production_modified": false
+}

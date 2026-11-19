@@ -1270,3 +1270,87 @@ pass. Actual exported browser loads the existing save and exits pause, journal
 and inventory back to movement. Preserve Chromium pointer-capture errors and the
 right-mouse fallback limitation. The separate all11v1 attempt refuses pre-start
 on a one-ULP serialized cot comparison; no additional gameplay is accepted by it.
+
+### IMPL-3D-FULL-41 — reject query-resource pooling after measurement
+
+Keep the existing production WorldAdapter. The isolated query-resource reuse
+candidate passed correctness checks but provided no consistent performance
+benefit in the unchanged sustained 60-actor workload. Day/night Scene CPU p95
+increased from 30.467/26.950ms to 31.764/30.274ms; clearance cost per actor-stage
+call increased 4.60%/6.11%. Both variants retain their strict performance FAIL.
+Different live trajectories prevent attributing a causal percentage to pooling.
+
+Retain the two raw reports, eight original images, exact common source archive,
+candidate overlays, wrapper, logs and normalized audit under
+`artifacts/3d-full-port/query-resource-rejected-v1/`: 69 byte-exact copied files,
+with exported executables hash-recorded separately. No retry, reduced workload,
+population cap, simulation-rate change or performance waiver is authorized by
+this result. Correctness alone does not justify promotion of an optimization.
+
+Subsequent observer review found that four per-phase detail arrays were returned
+by reference and overwritten when the next phase cleared/repopulated them. Keep
+the raw reports and their scalar timing failures unchanged. The original audit's
+claim of independently retained day/night per-frame detail is therefore limited;
+night rows cannot establish the missing day rows. A snapshot-only reporting
+successor must run identically on both sides of any new comparison. This is not
+a reason to reclassify the rejected candidate as fast or to change the target.
+
+### IMPL-3D-FULL-42 — scoped indexed Web appearance review
+
+Accept the observed appearance of the exact current-resident browser pair for
+continued optimization evaluation, while retaining all strict pixel failures.
+The three comparisons differ by35/39/46 RGB channel bytes respectively; each
+delta is one byte level, with exact alpha and at most eight channel changes per
+frame. The baseline repeat does not explain21 designated-pair coordinates.
+This is a visual judgment based on their magnitude, actual original-image
+review, matching pose receipts and separate exact source/native evidence; it
+is not a claim that the repeat proves every difference has the same cause.
+
+No generic tolerance, rewritten comparator, production promotion, performance,
+startup, shutdown or metadata acceptance follows. Retain the exact three-bundle
+scope and image-review limits in the current resident Web VISUAL-DISPOSITION.md.
+A later composition requires its own evidence.
+
+### IMPL-3D-FULL-43 — supported sleeping pose and bounded movement proof
+
+Promote the exact Dave-only sleep Animator after2028 geometry checks/384 samples,
+unchanged output checks for71 other identities, native three-view walkthrough
+and actual Web-v2 three-view walkthrough. Raise the sleeping visual root4cm and
+repose the existing pillow under the cheek. Awake grip, death precedence, actor
+origin/collider, source wake state and all mesh/material resources are unchanged.
+Root reviewed sleeping/awake native originals and all three new Web originals.
+
+Retain Web-v1's failed final movement proof. Its test-only successor replaces an
+unnecessary full route to spawn with a bounded certified local step; it preserves
+the15cm requirement,5s tail,120s whole limit and normal input. Contract121/5 passes;
+actual Web-v2 moves0.294327m after Leave with three hash-verified originals and no
+reported errors. This does not certify trusted hardware capture/audio.
+
+Promote explicit metadata-v3 with exactly one changed existing Animator pin and
+unchanged247 referenced paths,617 parity statuses and96 evidence references.
+Register the new support gate for132 total checks. Final full gates, exports,
+byte-exact checkout and commit/push remain required for this checkpoint. Indexing,
+query pooling and positive-certificate retention are not included.
+
+Checkpoint validation subsequently passes132/1323D,19/19original and Full
+Windows/Web export. The actual exported browser loads its existing save and
+returns from pause/inventory/journal to movement. The staged checkout verifies
+922 raw-byte paths and metadata-v3. Preserve the initial preflight refusal caused
+by the prior release hash manifest's already-committed finalization; the explicit
+successor pins its unchanged d1b9b87 bytes. No historical evidence was rewritten.
+
+### IMPL-3D-FULL-44 — reject retained clearance certificates after measurement
+
+Keep the production Adapter unchanged. The isolated candidate passed its focused
+correctness checks but the actual corrected-observer pair provided no consistent
+benefit. Baseline day/night Scene CPU p95 was29.964/25.536ms; candidate was
+30.128/28.434ms. Clearance cost per call worsened2.10%/0.33%, and per active second
+worsened1.48%/2.42%. Both strict performance failures remain.
+
+The common observer now deep-copies all returned phase detail, with27 checks in
+five groups reproducing the original alias defect and verifying the correction.
+Independent review verifies4800 distinct phase frame receipts with at least60
+actors, source hashes and raw logs. This experiment uses the frozen d1b9b87
+resident source, not the later Dave support working tree. Preserve its88 exact
+files in artifacts/3d-full-port/positive-certificate-rejected-v2, including eight
+original PNGs; executables remain hash-only. No retry or production promotion.

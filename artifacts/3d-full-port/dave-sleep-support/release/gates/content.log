@@ -1,0 +1,11 @@
+3D CONTENT GATE PASS: 4116 assertions
+source: 52 hashes; 50 modules; 632 exports (145 data)
+world: 23 zones / 53 solids / 193 props / 14 interactive props / 29 cash piles
+actors: 41 base / 56 real day-one / 63 canonical registry rows; exact IDs and order
+catalogs: 16 equipment / 9 weapons / 49 achievements / 24 quests / 23 route stops / 13 inventory IDs (19 variants)
+items: 52 audited declarations / 29 dumpster outcomes / 6 explicit computed-field omissions
+omissions: 627 explicit callback/resource/undefined/computed paths; data coverage is not gameplay parity
+determinism: two fresh seeded/fixed-clock runs and committed artifact byte-identical
+counterexamples: missing prop, replaced actor, stale alias, hidden callback, host resource, cycle and non-finite data rejected
+(node:39152) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

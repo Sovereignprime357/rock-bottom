@@ -1,0 +1,297 @@
+{
+  "format": "dave-support-independent-evidence-audit",
+  "source_archive_files": 495,
+  "stages": [
+    {
+      "name": "focused-v1",
+      "prepared_files": 497,
+      "declared_overlays": [
+        "scripts/actor_animation.gd",
+        "tests/reference_actor_animation_sleep_original.gd",
+        "tests/test_dave_sleep_support.gd"
+      ],
+      "stage_exits_zero": true
+    },
+    {
+      "name": "native-v1",
+      "prepared_files": 496,
+      "declared_overlays": [
+        "scripts/actor_animation.gd",
+        "tests/dave_walkthrough_probe.gd",
+        "tests/posed_ground_diagnostic.gd"
+      ],
+      "stage_exits_zero": true
+    },
+    {
+      "name": "web-v1",
+      "prepared_files": 498,
+      "declared_overlays": [
+        "scripts/actor_animation.gd",
+        "tests/dave_walkthrough_probe.gd",
+        "tests/posed_ground_diagnostic.gd",
+        "dave-walkthrough-shell.html",
+        "dave-walkthrough-bridge.js",
+        "export_presets.cfg"
+      ],
+      "stage_exits_zero": true
+    },
+    {
+      "name": "focused-driver-v2",
+      "prepared_files": 497,
+      "declared_overlays": [
+        "scripts/actor_animation.gd",
+        "tests/reference_actor_animation_sleep_original.gd",
+        "tests/test_dave_sleep_support.gd",
+        "tests/dave_walkthrough_probe.gd",
+        "tests/test_dave_walkthrough_contract.gd"
+      ],
+      "stage_exits_zero": true
+    },
+    {
+      "name": "web-v2",
+      "prepared_files": 498,
+      "declared_overlays": [
+        "scripts/actor_animation.gd",
+        "tests/dave_walkthrough_probe.gd",
+        "tests/posed_ground_diagnostic.gd",
+        "dave-walkthrough-shell.html",
+        "dave-walkthrough-bridge.js",
+        "export_presets.cfg",
+        "tests/test_dave_walkthrough_contract.gd"
+      ],
+      "stage_exits_zero": true
+    }
+  ],
+  "reports": [
+    {
+      "run": "native-v1",
+      "report_sha256": "4a9741e09fe7fbc9e1167b61f4c30da79a38059a2b971bb110f033027d042a00",
+      "machine_pass": true,
+      "failures": [],
+      "inputs": {
+        "capture_clicks": 3,
+        "clicks": 3,
+        "keys": 2,
+        "motion_frames": 186,
+        "mouse_motion": 242
+      },
+      "idle_samples": 163,
+      "movement": {
+        "input_frames": 2,
+        "metres": 0.286348909139633,
+        "modal": false,
+        "mode": "playing"
+      },
+      "wall_ms": 22642,
+      "frames": [
+        {
+          "label": "01_sleeping_dave",
+          "sha256": "0d5070ea4fc966bd197a3733d3a70270704bafc87f687c7a042acf97cc5d9008",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "clearance_m": {
+            "all_visible": 0.00800009816884995,
+            "head": 0.279446221888065,
+            "pillow": 0.00800009816884995,
+            "rigid_attachments": 0.00800009816884995,
+            "rigid_head": 0.279446221888065,
+            "skinned_body": 0.00893121212720871
+          },
+          "root_up": 0.0906714797019959,
+          "sleep_markers": 2
+        },
+        {
+          "label": "02_awake_dave",
+          "sha256": "d92c6655b2c980587b617f62982251bdc241d8367a4ff077a088971645154b50",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "clearance_m": {
+            "all_visible": 0.0750000849366188,
+            "head": 1.40282831341028,
+            "pillow": 0.535062946379185,
+            "rigid_attachments": 0.535062946379185,
+            "rigid_head": 1.40282831341028,
+            "skinned_body": 0.0750000849366188
+          },
+          "root_up": 1.0,
+          "sleep_markers": 0
+        },
+        {
+          "label": "03_pigeon_dialogue",
+          "sha256": "0377de31f4a6ecb666437fc4274103ebdd3e75ef94dcd571e382b2894067c737",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "clearance_m": {
+            "all_visible": 0.0750000849366188,
+            "head": 1.40282831341028,
+            "pillow": 0.535062946379185,
+            "rigid_attachments": 0.535062946379185,
+            "rigid_head": 1.40282831341028,
+            "skinned_body": 0.0750000849366188
+          },
+          "root_up": 1.0,
+          "sleep_markers": 0
+        }
+      ]
+    },
+    {
+      "run": "web-v1",
+      "report_sha256": "dc1db1b8314945ce8ceb82c56c40645f2e12835fe2d510de69130c6d0e3c1b33",
+      "machine_pass": false,
+      "failures": [
+        "certified normal return direction"
+      ],
+      "inputs": {
+        "capture_clicks": 0,
+        "clicks": 3,
+        "keys": 3,
+        "motion_frames": 89,
+        "mouse_motion": 103
+      },
+      "idle_samples": 83,
+      "movement": {},
+      "wall_ms": 36874,
+      "frames": [
+        {
+          "label": "01_sleeping_dave",
+          "sha256": "014fc5b19d294924c321999d7942adcca7c53ba6f240ec28ef268dce555592bf",
+          "dimensions": [
+            960,
+            540
+          ],
+          "clearance_m": {
+            "all_visible": 0.00800009816884995,
+            "head": 0.279433883726597,
+            "pillow": 0.00800009816884995,
+            "rigid_attachments": 0.00800009816884995,
+            "rigid_head": 0.279433883726597,
+            "skinned_body": 0.00892141088843346
+          },
+          "root_up": 0.0906714797019958,
+          "sleep_markers": 2
+        },
+        {
+          "label": "02_awake_dave",
+          "sha256": "ce45b0eb5602eede0a447b7cc4233a0a4550b6397558a8149c34c7696065e202",
+          "dimensions": [
+            960,
+            540
+          ],
+          "clearance_m": {
+            "all_visible": 0.0750000849366188,
+            "head": 1.40304861217737,
+            "pillow": 0.534001685678959,
+            "rigid_attachments": 0.534001685678959,
+            "rigid_head": 1.40304861217737,
+            "skinned_body": 0.0750000849366188
+          },
+          "root_up": 1,
+          "sleep_markers": 0
+        },
+        {
+          "label": "03_pigeon_dialogue",
+          "sha256": "87f1a180e4a6d7a86b192b8093b426debe404aaa4d4ddd603e50c566e4740350",
+          "dimensions": [
+            960,
+            540
+          ],
+          "clearance_m": {
+            "all_visible": 0.0750000849366188,
+            "head": 1.40304861217737,
+            "pillow": 0.534001685678959,
+            "rigid_attachments": 0.534001685678959,
+            "rigid_head": 1.40304861217737,
+            "skinned_body": 0.0750000849366188
+          },
+          "root_up": 1,
+          "sleep_markers": 0
+        }
+      ]
+    },
+    {
+      "run": "web-v2",
+      "report_sha256": "638aed3c87b09560cc7674e8c2f5309e85fff7df950a720030f211adeebce808",
+      "machine_pass": true,
+      "failures": [],
+      "inputs": {
+        "capture_clicks": 0,
+        "clicks": 3,
+        "keys": 3,
+        "motion_frames": 99,
+        "mouse_motion": 118
+      },
+      "idle_samples": 90,
+      "movement": {
+        "input_frames": 1,
+        "metres": 0.294327020645142,
+        "modal": false,
+        "mode": "playing"
+      },
+      "wall_ms": 56286,
+      "frames": [
+        {
+          "label": "01_sleeping_dave",
+          "sha256": "a01b6691b06845b4ac5a2200eb06625c89f50b6c12a7584fc2915d97ae4e1a20",
+          "dimensions": [
+            960,
+            540
+          ],
+          "clearance_m": {
+            "all_visible": 0.00800009816884995,
+            "head": 0.279433764517307,
+            "pillow": 0.00800009816884995,
+            "rigid_attachments": 0.00800009816884995,
+            "rigid_head": 0.279433764517307,
+            "skinned_body": 0.00892018154263496
+          },
+          "root_up": 0.0906714797019958,
+          "sleep_markers": 2
+        },
+        {
+          "label": "02_awake_dave",
+          "sha256": "75a5b5da9c029c029b2046088c3bfd222bf97c9c32c6790f43738dc4e2c8a1f1",
+          "dimensions": [
+            960,
+            540
+          ],
+          "clearance_m": {
+            "all_visible": 0.0750000849366188,
+            "head": 1.40303275734186,
+            "pillow": 0.533968903124332,
+            "rigid_attachments": 0.533968903124332,
+            "rigid_head": 1.40303275734186,
+            "skinned_body": 0.0750000849366188
+          },
+          "root_up": 1,
+          "sleep_markers": 0
+        },
+        {
+          "label": "03_pigeon_dialogue",
+          "sha256": "78af27183cca9ce82d3b3d3ea32709a0d6c10f07a0869bd2151403bc5104fff9",
+          "dimensions": [
+            960,
+            540
+          ],
+          "clearance_m": {
+            "all_visible": 0.0750000849366188,
+            "head": 1.40303275734186,
+            "pillow": 0.533968903124332,
+            "rigid_attachments": 0.533968903124332,
+            "rigid_head": 1.40303275734186,
+            "skinned_body": 0.0750000849366188
+          },
+          "root_up": 1,
+          "sleep_markers": 0
+        }
+      ]
+    }
+  ],
+  "original_pngs_verified": 9,
+  "scope": "Retained evidence verification only; no engine, export or browser run by this copier."
+}

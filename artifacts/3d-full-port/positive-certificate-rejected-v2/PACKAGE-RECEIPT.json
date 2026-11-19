@@ -1,0 +1,559 @@
+{
+  "schema": 1,
+  "decision": "reject_positive_certificate_promotion",
+  "allowlist_sha256": "d09b50ff8c1ebaed6f61136da731b25dd805376ff4e65102754f130f3b9a2c19",
+  "packager_sha256": "5b4d869abd0d21736fb41bb56b5df4e1ac61d8ebfaf91f3c40beb4f2218ab444",
+  "copies": [
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/MANIFEST.json",
+      "destination": "orchestration/MANIFEST.json",
+      "bytes": 3343,
+      "sha256": "02d955d69c45c3991bc03333db053d6680f2d060008c3a8659a531e700a69eb7"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/certificate/scripts/world_adapter.gd",
+      "destination": "orchestration/certificate/scripts/world_adapter.gd",
+      "bytes": 74460,
+      "sha256": "3687e6a9fce244a6db98b000e9ead53dc225689e70929605b55dbcd5f38aaba0"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/certificate/tests/reference_positive_clearance_adapter.gd",
+      "destination": "orchestration/certificate/tests/reference_positive_clearance_adapter.gd",
+      "bytes": 74048,
+      "sha256": "1a66c5962013fde3af83b868c7672d89385b98b66889b0f130fcf10ee02ab6e9"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/certificate/tests/test_positive_clearance_retention.gd",
+      "destination": "orchestration/certificate/tests/test_positive_clearance_retention.gd",
+      "bytes": 12891,
+      "sha256": "cc3e3b6e7a624c79e4c607d603cf3bfb3fc58e9511424967ba18dd04623efd76"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/compare-pair.py",
+      "destination": "orchestration/compare-pair.py",
+      "bytes": 14203,
+      "sha256": "01e12b7ec46ae03ca6e3570c6767236cc2f46890af95ed59603c4022e6c4f0e2"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/pins.json",
+      "destination": "orchestration/pins.json",
+      "bytes": 57356,
+      "sha256": "076315125c3b03f4fe253117034f3b31d6c58def70dbbc403681012afcda5941"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/prepare.py",
+      "destination": "orchestration/prepare.py",
+      "bytes": 8933,
+      "sha256": "6a7a5e3f088e23aea526d37b02539eb9485dba5c26bcb8167d6557441e21edee"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/profile-one.ps1",
+      "destination": "orchestration/profile-one.ps1",
+      "bytes": 22510,
+      "sha256": "6f796f30ca30eb2710e59b0fb74ed489ebb547ec512d6bf302c3ed5bae268c7a"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/README.md",
+      "destination": "orchestration/README.md",
+      "bytes": 2339,
+      "sha256": "e7f971e038aa1231f1f3e07b3239c466bf999b4ec7031ba505a689aadc0dcd2c"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/run-paired.ps1",
+      "destination": "orchestration/run-paired.ps1",
+      "bytes": 1609,
+      "sha256": "b4278aa1307603c773f855a62ce9633235e7917f7d15dcf3db9ed763d2d95c84"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/source.zip",
+      "destination": "source/source.zip",
+      "bytes": 3001680,
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/SPEC-DRAFT.md",
+      "destination": "orchestration/SPEC-DRAFT.md",
+      "bytes": 2076,
+      "sha256": "70f379e447bd8b61d0750190eec539aeb3c3f649dca15328a3a5a2e1e0723ba0"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/static-check.py",
+      "destination": "orchestration/static-check.py",
+      "bytes": 5320,
+      "sha256": "08c2559ce7f2f96f077e64cc0c6ec21e0a35a24182a6a4e76ded0ee5c5306efc"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/test-comparison.py",
+      "destination": "orchestration/test-comparison.py",
+      "bytes": 9032,
+      "sha256": "a693310a890979d7ea84296887ca43b54d40b9b2fb5cc45dd513853501e96095"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/tests/full_actor_performance_probe.gd",
+      "destination": "orchestration/tests/full_actor_performance_probe.gd",
+      "bytes": 31415,
+      "sha256": "86eb4175a218db728283e103a51af25565aad16e347578ffdfedf4bb2b8ea199"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/tests/sustained_actor_driver.gd",
+      "destination": "orchestration/tests/sustained_actor_driver.gd",
+      "bytes": 11022,
+      "sha256": "0732e2d8d6994be3f44e13576da09bfd46d09fb7cda050cf0113a10f936d08fb"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/tests/test_performance_phase_snapshot.gd",
+      "destination": "orchestration/tests/test_performance_phase_snapshot.gd",
+      "bytes": 9159,
+      "sha256": "dec496b40f17e3f43036026cb7a47d7ef1f43122283bf356b86aa141e5c4c4a2"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/tests/test_sustained_actor_driver.gd",
+      "destination": "orchestration/tests/test_sustained_actor_driver.gd",
+      "bytes": 11829,
+      "sha256": "85038f4c7a679585da3d285a1d727fa1b89b2a8a0463784130d68f32cdadf818"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/transforms.json",
+      "destination": "orchestration/transforms.json",
+      "bytes": 8439,
+      "sha256": "e785d1a6ce59d64af2d5da9f3c020f693b6a5d67a03a7328f865c4e9a9f4abae"
+    },
+    {
+      "source": ".build/3d/positive-certificate-performance-v2-draft/VALIDATION.json",
+      "destination": "orchestration/VALIDATION.json",
+      "bytes": 348,
+      "sha256": "5d02bd9b3f1a4527dd1929281eb929d58c7ca30f0a71784e04540009707edda7"
+    },
+    {
+      "source": ".build/3d/positive-certificate-retention-draft/MANIFEST.json",
+      "destination": "source-proofs/certificate/MANIFEST.json",
+      "bytes": 2805,
+      "sha256": "8b0b2b770338261ac6d0d14a6b929c0d9fa88d1dbe65f0902c87838f6d66dd50"
+    },
+    {
+      "source": ".build/3d/positive-certificate-retention-draft/BASELINE.json",
+      "destination": "source-proofs/certificate/BASELINE.json",
+      "bytes": 56675,
+      "sha256": "1d1d75594faebbcd00572ac1bd3bcb7033fffba27cdbd9079473c742ab4261e4"
+    },
+    {
+      "source": ".build/3d/positive-certificate-retention-draft/SPEC-DRAFT.md",
+      "destination": "source-proofs/certificate/SPEC-DRAFT.md",
+      "bytes": 3332,
+      "sha256": "a29630d0400dea3bb2a7008bb36337318c6d2e5aadb33f6761ad353863170f94"
+    },
+    {
+      "source": ".build/3d/positive-certificate-retention-draft/transform.json",
+      "destination": "source-proofs/certificate/transform.json",
+      "bytes": 590,
+      "sha256": "55910bda3807074a883c8e412221f19fc1aaabd5dd12214fdd90bb6bae5a9c4d"
+    },
+    {
+      "source": ".build/3d/performance-phase-snapshot-draft/MANIFEST.json",
+      "destination": "source-proofs/snapshot/MANIFEST.json",
+      "bytes": 2112,
+      "sha256": "5f0bf42e75cf19c5c399b099d7591acb5871108d0822c9c1b2b730143ba21c9f"
+    },
+    {
+      "source": ".build/3d/performance-phase-snapshot-draft/PINS.json",
+      "destination": "source-proofs/snapshot/PINS.json",
+      "bytes": 600,
+      "sha256": "1d3848efc019f47d496d2cf1b13ebad83103786214cf211d8876bbfbde9497c6"
+    },
+    {
+      "source": ".build/3d/performance-phase-snapshot-draft/SPEC-DRAFT.md",
+      "destination": "source-proofs/snapshot/SPEC-DRAFT.md",
+      "bytes": 3035,
+      "sha256": "bb1601d6f0c574c8769d585a608a5b0e0eb3b2501168872613fba57a5fd244fc"
+    },
+    {
+      "source": ".build/3d/performance-phase-snapshot-draft/EDITS.json",
+      "destination": "source-proofs/snapshot/EDITS.json",
+      "bytes": 694,
+      "sha256": "40eae01dccae4fb381f61ca02347023c0a979384640ad07dad85d86b7ce1688c"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-comparison.json",
+      "destination": "comparison.json",
+      "bytes": 27988,
+      "sha256": "0e04d6f0ad302e41eb161c5a0c74f1147253fb8b06403ba4a05a72a0e003059a"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/full-actor-performance.json",
+      "destination": "baseline/evidence/full-actor-performance.json",
+      "bytes": 4425633,
+      "sha256": "2d77d5621f9b91de3cc329c833b5e610809471df5549df630a8c3ff7950590c9"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/provenance.json",
+      "destination": "baseline/evidence/provenance.json",
+      "bytes": 226865,
+      "sha256": "f8e5804b027dca7783e0921d62672769ecbc300d2596fab67bc5eec59ff0dc39"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/import.godot.log",
+      "destination": "baseline/logs/import.godot.log",
+      "bytes": 10211,
+      "sha256": "83793031b9f7e1356e24bc2f905d10fd702d5dbf151277628264d9d2213de725"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/contract.godot.log",
+      "destination": "baseline/logs/contract.godot.log",
+      "bytes": 170,
+      "sha256": "2cdfec8b48ca531916c022a0eb5fb66d237d6052328f8b9e296e9862132c18e9"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/snapshot_contract.godot.log",
+      "destination": "baseline/logs/snapshot_contract.godot.log",
+      "bytes": 183,
+      "sha256": "2a1a8fa3ce0f4c32ae158c9a5b651a387978da8303f881deda98311ec423579f"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/export.godot.log",
+      "destination": "baseline/logs/export.godot.log",
+      "bytes": 33790,
+      "sha256": "cf25196fc4a309a9f51cb0e7b4320349482e0d6d21ace5ae620b63f2d4da32cd"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/native.log",
+      "destination": "baseline/evidence/native.log",
+      "bytes": 2081,
+      "sha256": "e3cfa9ed6bcef87194b33feccfcbfb9ce4b43c6195be196fa2d1a17f0548f0d3"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/contract.stderr.log",
+      "destination": "baseline/logs/contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/contract.stdout.log",
+      "destination": "baseline/logs/contract.stdout.log",
+      "bytes": 173,
+      "sha256": "b7974ddb6dacc4bc5edf2d16d11b15aaea2046664255c533aa20648a22444e7c"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/export.stderr.log",
+      "destination": "baseline/logs/export.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/export.stdout.log",
+      "destination": "baseline/logs/export.stdout.log",
+      "bytes": 44954,
+      "sha256": "db8d41d8b1bcf71b1e3a026b48dac9450c651fdc19aae9f139997eac17f59926"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/import.stderr.log",
+      "destination": "baseline/logs/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/import.stdout.log",
+      "destination": "baseline/logs/import.stdout.log",
+      "bytes": 15856,
+      "sha256": "ecbeb37b09e8ea1b6d0c218844175865f6d3b70dce403c85597226c16a89bae7"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/native.stderr.log",
+      "destination": "baseline/logs/native.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/native.stdout.log",
+      "destination": "baseline/logs/native.stdout.log",
+      "bytes": 2105,
+      "sha256": "f002f37765840529a2e7259c8cb350327896f8318dd54747b1d054087fa8dd48"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/snapshot_contract.stderr.log",
+      "destination": "baseline/logs/snapshot_contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/snapshot_contract.stdout.log",
+      "destination": "baseline/logs/snapshot_contract.stdout.log",
+      "bytes": 186,
+      "sha256": "98cb4d069b206b7c8da73e1971971c2d1c4dc73c09b5fc9c156a7d8e3e08bedf"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/version.stderr.log",
+      "destination": "baseline/logs/version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/version.stdout.log",
+      "destination": "baseline/logs/version.stdout.log",
+      "bytes": 33,
+      "sha256": "b3bd5778343d3006c6e938c87aa3ffab582916a6c653e518a40fe4add480e8c3"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/core_day_end.png",
+      "destination": "baseline/evidence/core_day_end.png",
+      "bytes": 469102,
+      "sha256": "d6bab85e36306a1e24fd0136d366c540e7d25d42f47fc3c52ee1a3ba18f012b0"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/core_day_initial.png",
+      "destination": "baseline/evidence/core_day_initial.png",
+      "bytes": 614215,
+      "sha256": "c21e01c70110c0dd256db02afe4fe28e12e089faecff44acc3200745b5f68cd7"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/trainyard_night_end.png",
+      "destination": "baseline/evidence/trainyard_night_end.png",
+      "bytes": 309521,
+      "sha256": "cd84bc178c12262cfe33992bad07e89d7188bae05071245ec1d29b60b4c8c015"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/evidence/trainyard_night_initial.png",
+      "destination": "baseline/evidence/trainyard_night_initial.png",
+      "bytes": 603169,
+      "sha256": "0922fe4ba6bee5ca47f8b627b06e3dc0733936546bf6a7abc0af9541cc7feddb"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/full-actor-performance.json",
+      "destination": "positive_certificate/evidence/full-actor-performance.json",
+      "bytes": 4350237,
+      "sha256": "58f2f86e2f34d54c33ed6433ce9b5d8620b29012c4aff62fcb12428c160cc69f"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/provenance.json",
+      "destination": "positive_certificate/evidence/provenance.json",
+      "bytes": 229541,
+      "sha256": "1d83a1220361cb436550c2f8121febcbc7c0d9c4721620533b822b73a2f9bd45"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/import.godot.log",
+      "destination": "positive_certificate/logs/import.godot.log",
+      "bytes": 10281,
+      "sha256": "62dcfd6561595c17112bc9f9aa7b8ba6cfcb16f2787eb3eec95c67f9349a2d96"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/contract.godot.log",
+      "destination": "positive_certificate/logs/contract.godot.log",
+      "bytes": 170,
+      "sha256": "2cdfec8b48ca531916c022a0eb5fb66d237d6052328f8b9e296e9862132c18e9"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/snapshot_contract.godot.log",
+      "destination": "positive_certificate/logs/snapshot_contract.godot.log",
+      "bytes": 183,
+      "sha256": "2a1a8fa3ce0f4c32ae158c9a5b651a387978da8303f881deda98311ec423579f"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/retention_contract.godot.log",
+      "destination": "positive_certificate/logs/retention_contract.godot.log",
+      "bytes": 179,
+      "sha256": "8a04624716c7e22620c191b259fcfd856c8a72f5c17a4cce614b5b698e37a03f"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/export.godot.log",
+      "destination": "positive_certificate/logs/export.godot.log",
+      "bytes": 34142,
+      "sha256": "53caa8a88ac6b15de60c54db30c4e5ad08cc02227ac76f0177e884b5d1b5081b"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/native.log",
+      "destination": "positive_certificate/evidence/native.log",
+      "bytes": 2093,
+      "sha256": "ad9e2ae0a990caf58b746dc7cc331ed3f6f1268a905c68619b32bb5c06526f90"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/contract.stderr.log",
+      "destination": "positive_certificate/logs/contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/contract.stdout.log",
+      "destination": "positive_certificate/logs/contract.stdout.log",
+      "bytes": 173,
+      "sha256": "b7974ddb6dacc4bc5edf2d16d11b15aaea2046664255c533aa20648a22444e7c"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/export.stderr.log",
+      "destination": "positive_certificate/logs/export.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/export.stdout.log",
+      "destination": "positive_certificate/logs/export.stdout.log",
+      "bytes": 45402,
+      "sha256": "8e6d2ea3adc7c3eb64c1205ddd0625416dab267c4f977997c269834a268497c6"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/import.stderr.log",
+      "destination": "positive_certificate/logs/import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/import.stdout.log",
+      "destination": "positive_certificate/logs/import.stdout.log",
+      "bytes": 15974,
+      "sha256": "116f0f5370ec3f67c1db96b1845e157394b0e562b70cd78d34c7338e911ddaf2"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/native.stderr.log",
+      "destination": "positive_certificate/logs/native.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/native.stdout.log",
+      "destination": "positive_certificate/logs/native.stdout.log",
+      "bytes": 2117,
+      "sha256": "f023d05b1c33461c258f2c3b3dbae60d9cd0f96dd3a4eb2031ab2b991daa70e1"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/retention_contract.stderr.log",
+      "destination": "positive_certificate/logs/retention_contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/retention_contract.stdout.log",
+      "destination": "positive_certificate/logs/retention_contract.stdout.log",
+      "bytes": 182,
+      "sha256": "0efd66a151614f731d6f548a9413f0fa419b6802f4cd7e2750ad9e61781b1e15"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/snapshot_contract.stderr.log",
+      "destination": "positive_certificate/logs/snapshot_contract.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/snapshot_contract.stdout.log",
+      "destination": "positive_certificate/logs/snapshot_contract.stdout.log",
+      "bytes": 186,
+      "sha256": "98cb4d069b206b7c8da73e1971971c2d1c4dc73c09b5fc9c156a7d8e3e08bedf"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/version.stderr.log",
+      "destination": "positive_certificate/logs/version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/version.stdout.log",
+      "destination": "positive_certificate/logs/version.stdout.log",
+      "bytes": 33,
+      "sha256": "b3bd5778343d3006c6e938c87aa3ffab582916a6c653e518a40fe4add480e8c3"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/core_day_end.png",
+      "destination": "positive_certificate/evidence/core_day_end.png",
+      "bytes": 509586,
+      "sha256": "2bbcfb27b1b221e75d65c20ace72d7c4132296b4a0de8fda9133f00eba89fb07"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/core_day_initial.png",
+      "destination": "positive_certificate/evidence/core_day_initial.png",
+      "bytes": 614215,
+      "sha256": "c21e01c70110c0dd256db02afe4fe28e12e089faecff44acc3200745b5f68cd7"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/trainyard_night_end.png",
+      "destination": "positive_certificate/evidence/trainyard_night_end.png",
+      "bytes": 351869,
+      "sha256": "c1ec77e98bfc474137ef1ffa28fa259926b62622225cdcd6ee207e77dd07c803"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/evidence/trainyard_night_initial.png",
+      "destination": "positive_certificate/evidence/trainyard_night_initial.png",
+      "bytes": 592162,
+      "sha256": "ed42fd5162b5e427f4622f448f19ae81d04e869575835a6cb3eb018e8d057086"
+    },
+    {
+      "source": ".build/3d/positive-certificate-pair-audit/AUDIT.md",
+      "destination": "audit/AUDIT.md",
+      "bytes": 3695,
+      "sha256": "892b9c6765aebc0dcf6218d50ab434d6cf6e8a2da51a488c783cadf48aad5856"
+    },
+    {
+      "source": ".build/3d/positive-certificate-pair-audit/audit.py",
+      "destination": "audit/audit.py",
+      "bytes": 9587,
+      "sha256": "d169d18bc7e77f1f2d6df029ceea71491277ace318f54c471b29726dd00f5053"
+    },
+    {
+      "source": ".build/3d/positive-certificate-pair-audit/FINDINGS.json",
+      "destination": "audit/FINDINGS.json",
+      "bytes": 11618,
+      "sha256": "036978caaea04c7048020f59b959faf582e125af10cf48fc6009e59679a0c4b8"
+    },
+    {
+      "source": ".build/3d/positive-certificate-pair-audit/INPUTS.json",
+      "destination": "audit/INPUTS.json",
+      "bytes": 20101,
+      "sha256": "360f3e56df29d86d98f12fa85f14e327172f98a58b77bb9ab48517be6da8add3"
+    },
+    {
+      "source": ".build/3d/positive-certificate-pair-audit/MANIFEST.json",
+      "destination": "audit/MANIFEST.json",
+      "bytes": 923,
+      "sha256": "3d0453b32f47487345c205d7ef2d40d28a22d95150df3f2e1ccee40eacf37a0b"
+    },
+    {
+      "source": ".build/3d/positive-certificate-pair-audit/SCOPE.md",
+      "destination": "audit/SCOPE.md",
+      "bytes": 1224,
+      "sha256": "f98f2f43c43f270fa69a1517a79b14e118e87de603292261e8a6b9d035cfa322"
+    },
+    {
+      "source": ".build/3d/performance-phase-snapshot-draft/AUDIT-LIMITS.md",
+      "destination": "source-proofs/snapshot/AUDIT-LIMITS.md",
+      "bytes": 3185,
+      "sha256": "b869681393584a708aa7429abf65b06797d204eec223cc494a6d6cb89d19e244"
+    },
+    {
+      "source": ".build/3d/performance-phase-snapshot-draft/DRIVER-COST-NOTE.md",
+      "destination": "source-proofs/snapshot/DRIVER-COST-NOTE.md",
+      "bytes": 3995,
+      "sha256": "fa79614e5c41b312e8c5feb2255f6cf1660ce6712cfd9551df4af8fc02f6b1df"
+    },
+    {
+      "source": ".build/3d/positive-certificate-evidence-package-draft/package.py",
+      "destination": "packaging/package.py",
+      "bytes": 3816,
+      "sha256": "5b4d869abd0d21736fb41bb56b5df4e1ac61d8ebfaf91f3c40beb4f2218ab444"
+    },
+    {
+      "source": ".build/3d/positive-certificate-evidence-package-draft/README.md",
+      "destination": "packaging/README.md",
+      "bytes": 1652,
+      "sha256": "383d6b707b25bf1be94e7a6ffc6cee2fdc840c067995f75b9bdbff6205137a6d"
+    }
+  ],
+  "hash_only": [
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/source.zip",
+      "bytes": 3001680,
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-baseline/RockBottomSustained.exe",
+      "bytes": 101536392,
+      "sha256": "34a38a822345200fb31282ecf471c28c4e0cfdd9d5692678c340b0a6f40edd7e"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/source.zip",
+      "bytes": 3001680,
+      "sha256": "ede8f5bf42ed80f4227d3d1d17b69f89c30eab65722932557ed3334c26a46ee2"
+    },
+    {
+      "source": ".build/full-port/positive-certificate-performance-v2/certificate-pair-v2-positive_certificate/RockBottomSustained.exe",
+      "bytes": 101591928,
+      "sha256": "5c22457369391d7f4d9d4f8792b2a7b9258d4653db74ad434414542cfa9d1d5e"
+    }
+  ],
+  "performance_acceptance": false
+}

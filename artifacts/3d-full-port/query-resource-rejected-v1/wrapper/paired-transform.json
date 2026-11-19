@@ -1,0 +1,23 @@
+{
+  "original_path": ".build/3d/indexed-performance-draft/run-paired.ps1",
+  "original_sha256": "be2e67507d4bb3164db7bef3511e3a23e1572ed541064814f16d12f943e0f137",
+  "normalized_original_sha256": "be2e67507d4bb3164db7bef3511e3a23e1572ed541064814f16d12f943e0f137",
+  "edits": [
+    {
+      "old": "'.build/full-port/indexed-performance'",
+      "new": "'.build/full-port/query-resource-performance'"
+    },
+    {
+      "old": "($RunName+'-indexed')",
+      "new": "($RunName+'-query_resource')"
+    },
+    {
+      "old": "foreach($variant in @('baseline','indexed')){& (Join-Path $PSScriptRoot 'profile-one.ps1') -Variant $variant -RunName ($RunName+'-'+$variant)}",
+      "new": "foreach($variant in @('baseline','query_resource')){& (Join-Path $PSScriptRoot 'profile-one.ps1') -Variant $variant -RunName ($RunName+'-'+$variant)}"
+    },
+    {
+      "old": "$reports=@{};$provenance=@{};$hashes=@{}\nforeach($variant in @('baseline','indexed')){\n    $evidence=Join-Path $parent ($RunName+'-'+$variant+'/evidence')\n    $reportPath=Join-Path $evidence 'full-actor-performance.json'\n    $reports[$variant]=Get-Content -LiteralPath $reportPath -Raw|ConvertFrom-Json -AsHashtable\n    $provenance[$variant]=Get-Content -LiteralPath (Join-Path $evidence 'provenance.json') -Raw|ConvertFrom-Json -AsHashtable\n    $hashes[$variant]=(Get-FileHash -LiteralPath $reportPath -Algorithm SHA256).Hash.ToLowerInvariant()\n    if(-not $provenance[$variant].complete_fixed_workload -or $provenance[$variant].status -ne 'complete'){throw 'Incomplete paired workload.'}\n    if($provenance[$variant].archive_input_sha256 -ne $pins.archive_sha256){throw 'Pair archive differs.'}\n}\n$rows=@()\nfor($i=0;$i -lt 2;$i++){\n    $a=$reports.baseline.phases[$i];$b=$reports.indexed.phases[$i]\n    $rows+=@{id=$a.id;baseline_scene_p95_ms=$a.scene_cpu_ms.p95;indexed_scene_p95_ms=$b.scene_cpu_ms.p95;signed_scene_p95_ms=$b.scene_cpu_ms.p95-$a.scene_cpu_ms.p95;baseline_min_live=$a.min_live_actors;indexed_min_live=$b.min_live_actors;baseline_stage_calls=$a.stage_calls;indexed_stage_calls=$b.stage_calls}\n}\n$summary=[ordered]@{schema=1;diagnostic=$true;performance_acceptance=$false;source_archive_sha256=$pins.archive_sha256;workload_hashes=$pins.overlay;measured_scene_sha256=$pins.measured_scene_sha256;report_hashes=$hashes;baseline_failures=$reports.baseline.failures;indexed_failures=$reports.indexed.failures;rows=$rows;note='Single identical-driver pair; normal physics/inputs may diverge. Original16ms gate retained; no causal speed or full-port acceptance claim.'}\n[IO.File]::WriteAllText($summaryPath,($summary|ConvertTo-Json -Depth 25),[Text.UTF8Encoding]::new($false))\nWrite-Output \"INDEXED PERFORMANCE PAIR: complete diagnostic; original failure lists retained; $summaryPath\"\n",
+      "new": "$helper=Join-Path $PSScriptRoot 'compare-pair.py'\nif((Get-FileHash -LiteralPath $helper -Algorithm SHA256).Hash.ToLowerInvariant() -ne $pins.comparison_helper_sha256){throw 'Comparison helper changed.'}\n& python $helper --run-name $RunName\nif($LASTEXITCODE -ne 0){throw 'Strict diagnostic comparison refused the pair; raw run evidence retained.'}\nWrite-Output \"QUERY RESOURCE PERFORMANCE PAIR: complete diagnostic; original failure lists retained; $summaryPath\"\n"
+    }
+  ]
+}

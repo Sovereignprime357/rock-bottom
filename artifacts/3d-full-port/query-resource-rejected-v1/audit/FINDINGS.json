@@ -1,0 +1,205 @@
+{
+  "schema": 1,
+  "recommendation": "reject promotion; keep isolated candidate held; no retries",
+  "performance_acceptance": false,
+  "production_changed": false,
+  "engine_run_for_audit": false,
+  "git_run_for_audit": false,
+  "source_and_log_hashes_verified": true,
+  "all1200_receipts_per_phase_at_least60": true,
+  "lifecycle_discontinuities": 0,
+  "original_failures": {
+    "baseline": [
+      "core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+      "trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+    ],
+    "query_resource": [
+      "core_day: scene CPU or held engine-process monitor p95 exceeds16ms",
+      "trainyard_night: scene CPU or held engine-process monitor p95 exceeds16ms"
+    ]
+  },
+  "rows": [
+    {
+      "phase": "core_day",
+      "baseline": {
+        "scene_cpu_ms": {
+          "p50": 23.776,
+          "p95": 30.467,
+          "p99": 34.009,
+          "max": 41.577
+        },
+        "driver_cpu_ms": {
+          "p50": 1.177,
+          "p95": 14.189,
+          "p99": 15.067,
+          "max": 18.138
+        },
+        "active_seconds": 44.8875883968254,
+        "actor_stage_calls": 3266.0,
+        "actor_calls_per_render_frame": 3.024074074074074,
+        "actor_calls_per_active_second": 72.75953368506164,
+        "actor_cpu_ms_per_call": 3.7612804654011023,
+        "actor_cpu_ms_per_active_second": 273.6690127213159,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 4212.908,
+            "cpu_ms_per_actor_stage_call": 1.2899289650949175,
+            "cpu_ms_per_active_second": 93.85462998716035
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 3921.121,
+            "cpu_ms_per_actor_stage_call": 1.200588181261482,
+            "cpu_ms_per_active_second": 87.3542362163817
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1390.026,
+            "cpu_ms_per_actor_stage_call": 0.42560502143294554,
+            "cpu_ms_per_active_second": 30.966822893481783
+          }
+        },
+        "scene_physics_queries": 267264,
+        "scene_physics_queries_per_active_second": 5954.073487692687,
+        "models_cpu_ms_per_render_frame": 4.887166666666676,
+        "driver_cpu_ms_per_render_frame": 3.553482407407407,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60
+      },
+      "query_resource": {
+        "scene_cpu_ms": {
+          "p50": 24.799,
+          "p95": 31.764,
+          "p99": 34.676,
+          "max": 41.744
+        },
+        "driver_cpu_ms": {
+          "p50": 1.173,
+          "p95": 14.191,
+          "p99": 15.264,
+          "max": 18.31
+        },
+        "active_seconds": 48.410987111111,
+        "actor_stage_calls": 3403.0,
+        "actor_calls_per_render_frame": 3.150925925925926,
+        "actor_calls_per_active_second": 70.2939601745688,
+        "actor_cpu_ms_per_call": 3.746504848662944,
+        "actor_cpu_ms_per_active_second": 263.35666262574193,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 4591.487,
+            "cpu_ms_per_actor_stage_call": 1.349246841022627,
+            "cpu_ms_per_active_second": 94.84390370850731
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 3831.418,
+            "cpu_ms_per_actor_stage_call": 1.1258942109903027,
+            "cpu_ms_per_active_second": 79.1435628281299
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1448.264,
+            "cpu_ms_per_actor_stage_call": 0.4255844842785777,
+            "cpu_ms_per_active_second": 29.91601878879274
+          }
+        },
+        "scene_physics_queries": 236046,
+        "scene_physics_queries_per_active_second": 4875.876615740895,
+        "models_cpu_ms_per_render_frame": 5.551936111111112,
+        "driver_cpu_ms_per_render_frame": 3.732610185185185,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60
+      }
+    },
+    {
+      "phase": "trainyard_night",
+      "baseline": {
+        "scene_cpu_ms": {
+          "p50": 21.907,
+          "p95": 26.95,
+          "p99": 30.832,
+          "max": 37.944
+        },
+        "driver_cpu_ms": {
+          "p50": 1.182,
+          "p95": 14.023,
+          "p99": 14.865,
+          "max": 17.536
+        },
+        "active_seconds": 42.587565999999995,
+        "actor_stage_calls": 3081.0,
+        "actor_calls_per_render_frame": 2.852777777777778,
+        "actor_calls_per_active_second": 72.34505958851935,
+        "actor_cpu_ms_per_call": 3.5963369036027264,
+        "actor_cpu_ms_per_active_second": 260.17720759153036,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 4006.13799999999,
+            "cpu_ms_per_actor_stage_call": 1.3002719896137584,
+            "cpu_ms_per_active_second": 94.06825456988996
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 3183.189,
+            "cpu_ms_per_actor_stage_call": 1.0331674780915288,
+            "cpu_ms_per_active_second": 74.7445627674519
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1284.296,
+            "cpu_ms_per_actor_stage_call": 0.4168438818565401,
+            "cpu_ms_per_active_second": 30.15659547202111
+          }
+        },
+        "scene_physics_queries": 181010,
+        "scene_physics_queries_per_active_second": 4250.30160211551,
+        "models_cpu_ms_per_render_frame": 4.717926851851852,
+        "driver_cpu_ms_per_render_frame": 3.4333064814814813,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60
+      },
+      "query_resource": {
+        "scene_cpu_ms": {
+          "p50": 23.152,
+          "p95": 30.274,
+          "p99": 34.495,
+          "max": 42.202
+        },
+        "driver_cpu_ms": {
+          "p50": 1.181,
+          "p95": 14.258,
+          "p99": 15.239,
+          "max": 19.52
+        },
+        "active_seconds": 43.751118185185305,
+        "actor_stage_calls": 3136.0,
+        "actor_calls_per_render_frame": 2.903703703703704,
+        "actor_calls_per_active_second": 71.6781680122153,
+        "actor_cpu_ms_per_call": 3.7542101403061223,
+        "actor_cpu_ms_per_active_second": 269.0949051900246,
+        "actor_subscopes": {
+          "runtime_actor_clearance": {
+            "cpu_total_ms": 4326.886,
+            "cpu_ms_per_actor_stage_call": 1.37974681122449,
+            "cpu_ms_per_active_second": 98.89772374926729
+          },
+          "runtime_actor_motion": {
+            "cpu_total_ms": 3439.312,
+            "cpu_ms_per_actor_stage_call": 1.096719387755102,
+            "cpu_ms_per_active_second": 78.61083653776409
+          },
+          "runtime_actor_pose": {
+            "cpu_total_ms": 1331.999,
+            "cpu_ms_per_actor_stage_call": 0.42474457908163266,
+            "cpu_ms_per_active_second": 30.444913301690928
+          }
+        },
+        "scene_physics_queries": 213008,
+        "scene_physics_queries_per_active_second": 4868.629850748072,
+        "models_cpu_ms_per_render_frame": 4.826923148148149,
+        "driver_cpu_ms_per_render_frame": 3.5326212962962966,
+        "min_live": 60,
+        "min_supported": 60,
+        "min_rigged": 60
+      }
+    }
+  ]
+}

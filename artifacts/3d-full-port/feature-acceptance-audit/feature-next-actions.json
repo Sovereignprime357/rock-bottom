@@ -1,0 +1,1092 @@
+{
+  "schema": 1,
+  "scope": "read_only_planning_no_acceptance_promotion",
+  "manifest_sha256": "a24f663ad71cda9dc9879caca7d7df9a9fc89bfc88e998f462d40725902eaa42",
+  "features": [
+    {
+      "ordinal": 0,
+      "id": "state_boot_and_modes",
+      "manifest_status_unchanged": "partial",
+      "source": "`core/runtime_ui.js:init_runtime_ui`, `core/start.js:startGame`, `core/boot.js`, `core/update.js:update`",
+      "owners": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/game_state.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_game_state.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Full-scene opening plus earned Office/Campaign transitions and recent exported Web Remember/Continue smoke are retained.",
+      "remaining_native": "No missing boot command established. On the final candidate retain title fresh/missing/refused-load behavior and resumed control; use existing fault-injection gates for async races rather than replay every malformed save.",
+      "remaining_web": "Cold fresh and Remember with present/missing/refused save; cancel or finish loading, then interact and move. Recent Remember success covers only the present-save case.",
+      "evidence_refs": [
+        "opening",
+        "office",
+        "campaign",
+        "release"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 1,
+      "id": "movement_and_physicality",
+      "manifest_status_unchanged": "integrated",
+      "source": "`core/update.js:updateWorld`; `systems/physicality.js` motion, door-gap, clear-placement and detour functions",
+      "owners": [
+        "game3d/scripts/actor_navigation.gd",
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/world_adapter.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_actor_navigation.gd",
+        "game3d/tests/test_full_integration.gd",
+        "game3d/tests/test_full_world.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Actual Office/Campaign/Pretender travel covers real geometry, live peers, source endpoints and combat approach. Web hands/cart and Dave walks provide shorter actual movement.",
+      "remaining_native": "Use pending All11 final routes instead of another general walk tour. If a route fails, preserve the actual blocker and distinguish a driver error from an unreachable gameplay endpoint.",
+      "remaining_web": "Carry normal movement through paid objectives and one bus/court approach; do not infer the entire map from a short title smoke.",
+      "evidence_refs": [
+        "office",
+        "campaign",
+        "pretender",
+        "hands",
+        "dave"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 2,
+      "id": "main_loop_and_withdrawal",
+      "manifest_status_unchanged": "integrated",
+      "source": "`concessions.js:smokeRockAt`; `update.js:updateWorld`; `runtime_ui.js:applyEquipStats`",
+      "owners": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/game_state.gd",
+        "game3d/scripts/memory_loop.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_game_state.gd",
+        "game3d/tests/test_memory_loop.gd",
+        "tools/3d-memory-oracle.mjs"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Campaign proves three complete18s/8s loops; source-earned Tony release also proves the loop. Withdrawal hurt is observed in failed runs, not an accepted survival scenario.",
+      "remaining_native": "No additional happy-path native rock loop needed. Keep source/model soap-first, hitter separation, iframes and fixed-step withdrawal checks.",
+      "remaining_web": "Perform an actual purchase/earn -> legal smoke -> full18s high ->8s crash -> resumed movement, retaining HUD/timing/resource receipts and pause behavior.",
+      "evidence_refs": [
+        "campaign",
+        "tony",
+        "opening"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 3,
+      "id": "input_and_interaction_arbitration",
+      "manifest_status_unchanged": "partial",
+      "source": "`input/keyboard.js`, `input/mobile.js`, `interactions.js:tryInteract`, `campaigns.js:resolveActionHint`",
+      "owners": [
+        "game3d/scripts/full_scene.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Native real-input tours and actual Web hand/cart and Dave interactions exist. Latest manual browser checks I/Q/Escape/pause/movement; synthetic harnesses do not prove hardware capture or audio.",
+      "remaining_native": "Final native keyboard/mouse arbitration smoke: Space versus cooking, E versus nearby props, I/Q and Escape, held-input release. Reuse current Scene tests for exhaustive priorities.",
+      "remaining_web": "Trusted input check at960x540 and1280x720: E, Space/click, I/Q, cooking lock, M and pause/capture refusal/recovery. Known Chromium captureUnknownError requires documented fallback or a genuine fix, not false capture success.",
+      "evidence_refs": [
+        "release",
+        "hands",
+        "dave",
+        "karaoke"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 4,
+      "id": "inventory_equipment_weapons_tools",
+      "manifest_status_unchanged": "integrated",
+      "source": "`catalogs.js:EQUIPMENT`, `activities.js:WEAPONS/pickupWeapon`, `runtime_ui.js:applyEquipStats/equipTool/renderInventory`, `heat.js:ownsTool/hasPropane`",
+      "owners": [
+        "game3d/scripts/inventory.gd",
+        "game3d/scripts/vendors_core.gd",
+        "game3d/scripts/first_person_rig.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_viewmodel_context.gd",
+        "game3d/tests/test_viewmodel_gear.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Catalog rigs render all nine weapons/tools; genuine earned pipe/shoe appear in campaign. Actual Web fists and cart grips pass.",
+      "remaining_native": "One normal equipment/tool acquisition -> equip -> displaced-tool locker retrieval -> save/load. Read derived stats and held mesh from actual inventory; do not call gallery fixtures transactions.",
+      "remaining_web": "Repeat an equipment/tool change and one actual contact/recovery from an earned save. Existing Web hand/cart captures already cover empty-hand movement.",
+      "evidence_refs": [
+        "campaign",
+        "hands",
+        "gear"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 5,
+      "id": "core_vendors_and_economy",
+      "manifest_status_unchanged": "integrated",
+      "source": "`dialogue/neighborhood_a.js:tonyDialogue/yuriDialogue/peteDialogue`; `catalogs.js:vendorPrice`",
+      "owners": [
+        "game3d/scripts/vendors_core.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_economy.gd",
+        "game3d/tests/test_full_integration.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Native Tony and Conductor transactions are accepted; exhaustive source economy gates exist. The failed All11 Yuri attempt did not reach its sale.",
+      "remaining_native": "Accept successful All11 Yuri receipts if v3 completes; add a short Pete buy/sell/locker or cap/refusal interaction, preserving source price and quantity. No missing vendor owner found.",
+      "remaining_web": "One actual paid Tony purchase plus Pete or Yuri transaction, refund/refusal boundary and subsequent save/load. Model matrices cover all price combinations.",
+      "evidence_refs": [
+        "campaign",
+        "office"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 6,
+      "id": "supply_fencing_and_cooking_economy",
+      "manifest_status_unchanged": "partial",
+      "source": "`vendors_places.js:barbDialogue/pinkyDialogue/mathematicianDialogue`; `neighborhood_b.js:stripeDialogue`",
+      "owners": [
+        "game3d/scripts/quest_dialogue.gd",
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_quest_dialogue.gd",
+        "game3d/tests/test_street_dialogue.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Supply/Stripe/Pinky/Barb owners and source-oracle gates are integrated. No completed rendered supply/cooking transaction chain found in retained accepted tours.",
+      "remaining_native": "Use existing All11 Barb/cook receipts if completed. A short legitimate Stripe fence/betrayal or Pinky purchase remains a distinct source interaction; no need to sample every soap outcome.",
+      "remaining_web": "Actual packet purchase -> slow cook/reveal -> usable result; one source-priced alternate supplier/fence menu can be checked from an earned save.",
+      "evidence_refs": [
+        "campaign",
+        "all11_pending"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 7,
+      "id": "dumpster_trash_pickups_and_lottery",
+      "manifest_status_unchanged": "integrated",
+      "source": "`interactions.js:startDumpsterDive/kickTrashCan`; `update.js` pickups/cooldowns; `npc_spawns.js:spawnCashPiles`; `activities.js:scratchLottery`; `communications.js:garbageTruckRumble`",
+      "owners": [
+        "game3d/scripts/world_prop_actions.gd",
+        "game3d/scripts/neighborhood_utilities.gd",
+        "game3d/scripts/find_view.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_world_prop_actions.gd",
+        "game3d/tests/test_neighborhood_utilities.gd",
+        "game3d/tests/test_find_view.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Dynamic props/source/model/physical checks and original finds are integrated; Web actual cash pickup passes. Effects fixtures render cans/rats but do not prove earned prop transactions.",
+      "remaining_native": "Real dumpster choice, can kick/bottle break and one lottery transaction through current input, including a reused/cooldown refusal. Preserve pending physical-point tests for exceptional branches.",
+      "remaining_web": "One dumpster choice and actual pickup/can feedback, plus lottery UI/return to play. Avoid forcing each random loot table result.",
+      "evidence_refs": [
+        "hands",
+        "feedback",
+        "finds"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 8,
+      "id": "npc_agency_and_lifecycle",
+      "manifest_status_unchanged": "partial",
+      "source": "`npc_spawns.js:spawnNpcs`, `npc_ai.js:updateNpcActors`, `update.js` schedules, `start.js` rehydration",
+      "owners": [
+        "game3d/scripts/actor_animation.gd",
+        "game3d/scripts/actor_director.gd",
+        "game3d/scripts/character_roster.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_character_roster.gd",
+        "game3d/tests/test_combat.gd"
+      ],
+      "review_classification": "implementation_present_known_local_cosmetic_followup",
+      "current_evidence": "All canonical visual families are registered; Dave actual wake -> upright wait -> pigeon menu -> movement passes native and Web. Pretenders/guards prove live spawn/combat/reload paths.",
+      "remaining_native": "Distinct schedule/shop-close, essential-actor and companion lifecycle witnesses remain. Dave sleep support is a localized known cosmetic issue in an isolated candidate, not a missing wake command or general hover.",
+      "remaining_web": "One moving/adopted companion or timed resident interaction, plus a hostile pursuit/return. Do not repeat the accepted Dave wake tour.",
+      "evidence_refs": [
+        "dave",
+        "resident",
+        "pretender",
+        "departure"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 9,
+      "id": "basic_combat",
+      "manifest_status_unchanged": "partial",
+      "source": "`combat.js:aggroNpc/playerAttack/damagePlayer/onNpcDeath`; `npc_ai.js`; `update.js` projectile and combo updates",
+      "owners": [
+        "game3d/scripts/combat_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_combat.gd",
+        "game3d/tests/test_full_runtime.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Actual Tony, rulers, pretenders and defensive guards prove contact/cooldown/damage/rewards. Source effects now have accepted native/Web owner-driven fixture evidence.",
+      "remaining_native": "A short ordinary NPC hit/kill/loot/combo encounter and breakable bottle establishes non-boss input behavior; geometry galleries do not prove combat. Retain authority/cooldown checks.",
+      "remaining_web": "Actual NPC contact, hurt/recovery, hit feedback and one kill/loot or escape using normal input. Existing air punches are not damage acceptance.",
+      "evidence_refs": [
+        "campaign",
+        "pretender",
+        "feedback",
+        "hands"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 10,
+      "id": "combat_archetypes_projectiles",
+      "manifest_status_unchanged": "integrated",
+      "source": "`npc_ai.js:updateNpcActors`; `combat.js:spawnProjectile/spawnSwarmerSibling`; `update.js` projectile physics",
+      "owners": [
+        "game3d/scripts/actor_director.gd",
+        "game3d/scripts/combat_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_combat.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Pretender native fights exercise ranged, charger and grabber; campaign adds actual rulers. Projectiles and Brendan effects have staged native/Web views.",
+      "remaining_native": "Targeted real Fallen holy projectile/Brendan taser or swarmer encounter remains distinct. Do not repeat the three accepted pretender archetypes.",
+      "remaining_web": "One actual telegraphed charge/grab and ranged projectile contact or dodge; staged emitter/pose capture is only visual evidence.",
+      "evidence_refs": [
+        "campaign",
+        "pretender",
+        "feedback",
+        "projectiles"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 11,
+      "id": "police_death_and_arrest",
+      "manifest_status_unchanged": "integrated",
+      "source": "`combat.js:manageCops/spawnCopAtEdge/damagePlayer/die/arrestScene`",
+      "owners": [
+        "game3d/scripts/combat_system.gd",
+        "game3d/scripts/game_state.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_combat.gd",
+        "game3d/tests/test_game_state.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Source combat/death/arrest matrices are integrated. Failed progression/profile runs show actual deaths/arrests, but they are not a positive recovery acceptance packet.",
+      "remaining_native": "One deliberate normal death and one arrest: exact differing cash/items/HP/shakes consequences, release of modal/input, safe return and save/load. Source fixtures may establish prerequisites if clearly labeled.",
+      "remaining_web": "Repeat the short penalty/recovery paths in actual IndexedDB context; verify controls and no duplicated rewards after reload.",
+      "evidence_refs": [
+        "failed_profile",
+        "campaign",
+        "pretender"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 12,
+      "id": "tony_co_op_and_other_local_bosses",
+      "manifest_status_unchanged": "integrated",
+      "source": "`combat.js:spawnBoss/onNpcDeath`; `update.js` boss phases; `neighborhood_b.js:spawnCoopBoss/triggerFallenPriestTransform`; `activities.js:spawnBrutusOlder`; `vendors_places.js:spawnOldSchoolBrutus`",
+      "owners": [
+        "game3d/scripts/boss_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_bosses.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Tony actual native phases/adds/ending/continue are accepted; Kingdom rulers are a separate feature. Other local-boss source branches have model tests.",
+      "remaining_native": "Reuse existing boss/OldSchool seams for actual co-op choice, Older, Fallen and OldSchool fights, each<90s, exact reward/retry/ending distinctions. No new damage or broad framework. These remain real playability unknowns, not proven missing code.",
+      "remaining_web": "Actual Tony fight/ending/continue is the minimum browser combat milestone. Alternate local-boss branches need explicit browser coverage or a declared cross-platform evidence rationale, not silent inheritance from native.",
+      "evidence_refs": [
+        "tony",
+        "campaign",
+        "feedback"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 13,
+      "id": "intro_quests_ranks_and_achievements",
+      "manifest_status_unchanged": "partial",
+      "source": "`runtime_ui.js` quests; `combat.js:tryCompleteIntroRemember/completeIntroSmoke/startPigeonCrownQuest`; dialogue/update completion hooks; `progression_routes.js:ACHIEVEMENTS`; `world.js:RANKS`",
+      "owners": [
+        "game3d/scripts/progression_routes.gd",
+        "game3d/scripts/quest_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_progression.gd",
+        "game3d/tests/test_quest_dialogue.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Intro smoke, route/rank progress, Tony quests, Dave wake/pigeon opening and Kingdom achievements are observed. Model/source matrices cover24quest IDs/49achievements.",
+      "remaining_native": "Complete one currently unobserved actual quest chain (for example pigeon crown/crossword) and inspect rank/achievement persistence; collect All11 paper_everywhere receipt if successful. Do not rerun49 achievements through a new giant driver.",
+      "remaining_web": "Fresh intro earn10 ->Tony->smoke and a later quest completion/Q ledger/save. Browser Dave opens the pigeon dialogue but does not complete the whole quest.",
+      "evidence_refs": [
+        "opening",
+        "office",
+        "campaign",
+        "dave",
+        "all11_pending"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 14,
+      "id": "daily_hustles_and_block_routes",
+      "manifest_status_unchanged": "integrated",
+      "source": "`progression_routes.js:rollHustles/checkHustles/hustleProgress/rollBlockRoute/tryStampBlockRoute`",
+      "owners": [
+        "game3d/scripts/progression_routes.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_integration.gd",
+        "game3d/tests/test_progression.gd",
+        "tools/3d-progression-oracle.mjs"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Office tour earns three real three-stop routes and work/unlock receipts; campaign retains resulting progression. Hustles are source-gated but no distinct completed daily hustle render proof found.",
+      "remaining_native": "One currently offered hustle through ordinary actions -> once-only reward, plus the next-day reroll receipt. Existing route endpoint tour need not be repeated.",
+      "remaining_web": "Complete one actual three-stop route and inspect new route/unlock progress, with save/load. This can form the early browser progression leg.",
+      "evidence_refs": [
+        "office",
+        "campaign"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 15,
+      "id": "factions_and_territory",
+      "manifest_status_unchanged": "partial",
+      "source": "`factions.js:adjustFaction/applyRep/factionTier/updateTerritory`; all action call sites",
+      "owners": [
+        "game3d/scripts/game_state.gd",
+        "game3d/scripts/progression_routes.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_game_state.gd",
+        "game3d/tests/test_progression.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Campaign and Pretenders retain genuine action-driven faction changes and territory state. All11 is intended to prove six reputation circuits and all claim thresholds, currently unaccepted.",
+      "remaining_native": "Use completed All11 donation/Greg/Yuri and nonneutral filing receipts. Add one actual tier-sensitive vendor refusal/price boundary only if not witnessed; border visual fixture alone is not reputation gameplay.",
+      "remaining_web": "Enter two districts, retain border/HUD behavior, and complete one real reputation action with changed conditional menu/price. Do not conflate Kingdom allegiance with the three reputations.",
+      "evidence_refs": [
+        "campaign",
+        "pretender",
+        "all11_pending",
+        "world_details"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 16,
+      "id": "office_claims_and_work_orders",
+      "manifest_status_unchanged": "integrated",
+      "source": "`campaigns.js` office functions/data; `daily_hideouts.js` office menus/rest/sleep/ledger",
+      "owners": [
+        "game3d/scripts/office_campaign.gd",
+        "game3d/scripts/campaign_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_office_campaign.gd",
+        "game3d/tests/test_campaign.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Office actual menus, Canal claim/work/payment and pending/paid reloads; campaign adds Alley/Projects/Skid Row: four earned claims.",
+      "remaining_native": "Finish the existing seven-claim continuation. A previously unseen upgrade/shared-locker transaction can accompany it; no second giant driver.",
+      "remaining_web": "From an earned Office save perform a real work/claim transaction and save/load. This is representative browser continuation, not proof of eleven browser filings.",
+      "evidence_refs": [
+        "office",
+        "campaign",
+        "all11_pending"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 17,
+      "id": "kingdom_and_endless_succession",
+      "manifest_status_unchanged": "integrated",
+      "source": "`campaigns.js` kingdom functions/data; `concessions.js` Block royal-static hook",
+      "owners": [
+        "game3d/scripts/kingdom_campaign.gd",
+        "game3d/scripts/campaign_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_kingdom_campaign.gd",
+        "game3d/tests/test_kingdom_physics.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Composed native campaign proves five bosses, nine marks, three complete18s/8s loops, two endings and persistence; Pretenders adds all three modulo profiles, rewards and reloads.",
+      "remaining_native": "No new core native campaign or three-day pretender rerun is needed merely because old metadata predates them. Preserve the explicit two-run/fixture qualifications.",
+      "remaining_web": "Earned checkpoint: actual radio/admission ->mark->court fight/reward->save/load. A connected browser main progression must still reach its ending; one court is not the entire browser campaign.",
+      "evidence_refs": [
+        "campaign",
+        "pretender"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 18,
+      "id": "clock_weather_day_events_and_sleeping",
+      "manifest_status_unchanged": "integrated",
+      "source": "`update.js`; `daily_hideouts.js:resetDailyCounters/fireDayEvents`; `activities.js:blockMenu`; `runtime_ui.js:rollWeather`",
+      "owners": [
+        "game3d/scripts/day_system.gd",
+        "game3d/scripts/weather_presentation.gd",
+        "game3d/scripts/world_adapter.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_day_system.gd",
+        "game3d/tests/test_weather_presentation.gd",
+        "game3d/tests/test_departures.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Real cot/day progression appears in Office/Campaign and three successive Pretender days. Day3 departure has a disclosed placement fixture.",
+      "remaining_native": "Distinct hideout sleep/day receipt; day7 silence, inheritance collection and day30 choice remain unobserved rendered event interactions. Use genuinely eligible checkpoints without gratuitous day grinding or clock writes.",
+      "remaining_web": "Actual rest/sleep ->day/weather/event state->save/load. Explicit-clock weather renders prove visuals, not elapsed gameplay.",
+      "evidence_refs": [
+        "office",
+        "campaign",
+        "pretender",
+        "departure"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 19,
+      "id": "hideouts_and_shared_stash",
+      "manifest_status_unchanged": "partial",
+      "source": "`daily_hideouts.js:openHideout/openHideoutChest`; Yuri/Mom offers",
+      "owners": [
+        "game3d/scripts/travel_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_travel.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Office cot is exercised. No actual-input hideout purchase plus shared stash round trip located; hideout image is a presentation fixture.",
+      "remaining_native": "Normal admission/rent ->deposit->rest/sleep->withdraw->save/load, cross-check the same stash through an earned Office locker.",
+      "remaining_web": "Repeat that short stash transaction from its legitimate save. Model matrices cover death/arrest resource branches.",
+      "evidence_refs": [
+        "office",
+        "campaign",
+        "world_details"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 20,
+      "id": "cart_and_bus_travel",
+      "manifest_status_unchanged": "integrated",
+      "source": "`props.js:rideableCart/resetRideableCart`; `neighborhood_b.js:bigguDialogue`; `interactions.js`; `vendors_places.js` bus helpers",
+      "owners": [
+        "game3d/scripts/travel_system.gd",
+        "game3d/scripts/cart_view.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_travel.gd",
+        "game3d/tests/test_cart_view.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Native cart physics/poses and actual browser mount, grip, rolling, mounted attack/regrip, dismount pass at both sizes.",
+      "remaining_native": "One actual Pinky pass purchase/use ->destination->bus arrival->movement. Do not redo accepted cart art/input views.",
+      "remaining_web": "The same short bus transaction. Browser cart input is already covered; source day30 irreversible bus choice is separate.",
+      "evidence_refs": [
+        "hands",
+        "cart"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 21,
+      "id": "recognition_concessions_discovery",
+      "manifest_status_unchanged": "partial",
+      "source": "`recognition.js`, `concessions.js`, `discovery.js`; dialogue hooks",
+      "owners": [
+        "game3d/scripts/memory_loop.gd",
+        "game3d/scripts/quest_dialogue.gd",
+        "game3d/scripts/resident_dialogue.gd",
+        "game3d/scripts/street_dialogue.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_memory_loop.gd",
+        "game3d/tests/test_quest_dialogue.gd",
+        "game3d/tests/test_resident_dialogue.gd",
+        "game3d/tests/test_street_dialogue.gd",
+        "tools/3d-memory-oracle.mjs"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Recognition owner/source conditional menus exist; no retained naturally earned concession-unlock tour found. Scene tests use recognition fixture.",
+      "remaining_native": "Earn one venue ledger normally ->conditional menu->one legitimate concession smoke loop. One venue is a representative presentation proof, not all four grinds.",
+      "remaining_web": "Load that earned ledger, inspect conditional/refused versus available smoke, use real action. Keep discovery text and normal legal-smoke governor.",
+      "evidence_refs": [
+        "campaign",
+        "world_details"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 22,
+      "id": "emergency_hitter",
+      "manifest_status_unchanged": "integrated",
+      "source": "`hitter.js`; `update.js` high boundary; dumpster and pocket hooks",
+      "owners": [
+        "game3d/scripts/memory_loop.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_memory_loop.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Source/model craft/grants and independent6s/14s hitter loop are covered; no actual crafted-use walkthrough located.",
+      "remaining_native": "Craft with two genuinely held copper, use pocket menu, observe6s/14s and unchanged ordinary-rock accounting. No forced random dumpster grant.",
+      "remaining_web": "Same roughly20-second real use sequence; source high ember fixture is not gameplay usage proof.",
+      "evidence_refs": [
+        "emitters",
+        "campaign"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 23,
+      "id": "robbery",
+      "manifest_status_unchanged": "integrated",
+      "source": "`robbery.js:attemptRobbery`; `npc_ai.js` skid grab",
+      "owners": [
+        "game3d/scripts/actor_director.gd",
+        "game3d/scripts/robbery_system.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_runtime.gd",
+        "game3d/tests/test_robbery.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Thirty source cases/model owner coverage; no actual skid-Lurch robbery interaction located. Pretender grabber is not this resource-loss feature.",
+      "remaining_native": "Reach skid Lurch with a known eligible possession, allow landed grab, retain loss/HP/toast, escape normally.",
+      "remaining_web": "Same eligible-loss encounter from disclosed earned state; do not require every inventory-loss variant.",
+      "evidence_refs": [
+        "pretender"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 24,
+      "id": "copper_sites_and_break_ins",
+      "manifest_status_unchanged": "integrated",
+      "source": "`props.js:COPPER_SITES/BREAKIN_SITES`; `activities.js:startHeist/heistStage`",
+      "owners": [
+        "game3d/scripts/heist_system.gd",
+        "game3d/scripts/world_adapter.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_heists.gd",
+        "game3d/tests/test_site_integration.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Campaign prefix has three real COLD visits with entry/strip/exit and earned copper; physical tests cover nine endpoints.",
+      "remaining_native": "One actual break-in with four-pin input, take/exit receipt, resumed movement. COLD native happy path need not be repeated.",
+      "remaining_web": "One real COLD visit plus lockpick transaction; nine-site exhaustive geometry coverage stays in existing physical gates.",
+      "evidence_refs": [
+        "campaign"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 25,
+      "id": "cooking_heat_minigame",
+      "manifest_status_unchanged": "integrated",
+      "source": "`heat.js` all domain functions and `COOK_MODES`",
+      "owners": [
+        "game3d/scripts/cooking_system.gd",
+        "game3d/scripts/cooking_presentation.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_cooking.gd",
+        "game3d/tests/test_cooking_runtime.gd",
+        "game3d/tests/test_cooking_presentation.gd",
+        "game3d/tests/test_full_scene.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Model, pure heat presentation and composed Scene controls pass; no accepted rendered cooking playthrough located.",
+      "remaining_native": "Reuse pending All11 cooking receipts if it completes; otherwise actual packet->slow cook->real lock input->reveal/resource receipt.",
+      "remaining_web": "Same packet/lock/reveal sequence, including Escape/re-entry and M without accidental duplicate result. Five modes/stochastic branches retain model coverage.",
+      "evidence_refs": [
+        "all11_pending",
+        "opening"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 26,
+      "id": "other_activities",
+      "manifest_status_unchanged": "integrated",
+      "source": "`activities.js:startRhythmMini/startLockpickMini/panhandle/sitOnCrate/scratchLottery`; `vendors_places.js:tryParkBenchSit/openOldSchoolInterior/priceGuyDialogue`",
+      "owners": [
+        "game3d/scripts/rhythm_system.gd",
+        "game3d/scripts/old_school.gd",
+        "game3d/scripts/world_prop_actions.gd",
+        "game3d/scripts/neighborhood_utilities.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_rhythm.gd",
+        "game3d/tests/test_old_school.gd",
+        "game3d/tests/test_old_school_physical.gd",
+        "game3d/tests/test_world_prop_actions.gd",
+        "game3d/tests/test_neighborhood_utilities.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Native Karaoke: actual approach/E/$5/eight notes, receipt/persistence/movement; sole initial$5 fixture disclosed.",
+      "remaining_native": "A continuous bench sit then actual movement cancellation is a small distinct activity witness; lockpick is covered with break-ins. Do not redo Karaoke native.",
+      "remaining_web": "Use existing Karaoke input probe/bridge for its eight-note outcome and movement. Its native result does not prove browser timing.",
+      "evidence_refs": [
+        "karaoke"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 27,
+      "id": "communications_possum_and_ambient_events",
+      "manifest_status_unchanged": "partial",
+      "source": "`communications.js`, `catalogs.js` phone/chatter tables, `neighborhood_a.js:possumDialogue`, `update.js` timers",
+      "owners": [
+        "game3d/scripts/communications_system.gd",
+        "game3d/scripts/prop_state.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_communications.gd",
+        "game3d/tests/test_full_runtime.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Campaign/Pretender contain ambient/feed and real delivery payments. Possum effect captures are staged birth receipts, not acquisition/follow behavior.",
+      "remaining_native": "Actual prophecy->acquire->follow/reveal->release with moving companion and physical reveal. Answer a real ringing phone separately when eligible.",
+      "remaining_web": "Same companion/menu interaction from legitimate state. No need to render all calls/random events to validate a shared presenter.",
+      "evidence_refs": [
+        "campaign",
+        "pretender",
+        "feedback"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 28,
+      "id": "living_neighborhood_incidents",
+      "manifest_status_unchanged": "integrated",
+      "source": "`incidents.js` scheduler, required-actor checks, six definitions and actor updates",
+      "owners": [
+        "game3d/scripts/incident_system.gd",
+        "game3d/scripts/incident_corridors.gd",
+        "game3d/scripts/incident_path_map.gd",
+        "game3d/scripts/incident_presentation.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_incidents.gd",
+        "game3d/tests/test_incident_reservations.gd",
+        "game3d/tests/test_incident_presentation.gd",
+        "game3d/tests/test_incident_runtime.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Extensive runtime/physical/source coverage; existing incident presentation probe deliberately disables Runtime and stages visual phases.",
+      "remaining_native": "One naturally scheduled eligible incident through beats, applicable proximity effect and departure/cleanup while moving normally.",
+      "remaining_web": "Equivalent live scheduled encounter; no forced clock/RNG and no replay of all six visual banks required for representative presentation.",
+      "evidence_refs": [
+        "incidents"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 29,
+      "id": "hud_map_guidance_and_presentation",
+      "manifest_status_unchanged": "partial",
+      "source": "`ui/hud.js`, `ui/layout.js`, `runtime_ui.js` inventory/quests, `campaigns.js:currentPrimaryObjective/updateGuidance`, `render/*`",
+      "owners": [
+        "game3d/scripts/full_hud.gd",
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/actor_hud_overlay.gd",
+        "game3d/scripts/guidance_view.gd",
+        "game3d/scripts/guidance_projection.gd",
+        "game3d/scripts/weather_presentation.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_hud.gd",
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_actor_hud.gd",
+        "game3d/tests/test_guidance.gd",
+        "game3d/tests/test_guidance_projection.gd",
+        "game3d/tests/test_weather_presentation.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Eye-level environment, feedback, heat/ledger fixtures and campaign screenshots retained. Latest actual browser I/Q and resized hands/Dave views pass. Source has no separate full-map command.",
+      "remaining_native": "Inspect final earned late-state I/Q/BAD IDEA/minimap and combat readability at960/1280; reuse current capture seams. Update stale metadata claiming feedback/dust absent.",
+      "remaining_web": "Actual populated late I/Q, a transaction/cooking menu and combat cues at both sizes, including clipping/close/resume. Do not invent a full-map feature.",
+      "evidence_refs": [
+        "release",
+        "campaign",
+        "hands",
+        "dave",
+        "feedback",
+        "world_details"
+      ],
+      "priority": 2,
+      "verified": false
+    },
+    {
+      "ordinal": 30,
+      "id": "persistence_and_recovery",
+      "manifest_status_unchanged": "partial",
+      "source": "`core/audio_save.js:saveGame/loadGame`; `core/storage.js`; normalizers throughout systems",
+      "owners": [
+        "game3d/scripts/full_scene.gd",
+        "game3d/scripts/game_state.gd",
+        "game3d/scripts/save_store.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_full_scene.gd",
+        "game3d/tests/test_game_state.gd"
+      ],
+      "review_classification": "implementation_present_acceptance_gap",
+      "current_evidence": "Native Office pending/paid work, composed Kingdom save/load and all three Pretender reward-once reloads are accepted. Actual browser Remember success exists.",
+      "remaining_native": "No new main native save roundtrip needed. Retain schema1/failure/epoch gates and a current-candidate failure-facing check; clean ObjectDB exit warning separately if required.",
+      "remaining_web": "Real paid transaction->Pause save->reload/Remember->same durable values/control/no double reward; exercise denied storage feedback through existing adapter fault seam. Isolated hand harness save is not campaign persistence.",
+      "evidence_refs": [
+        "office",
+        "campaign",
+        "pretender",
+        "release",
+        "hands"
+      ],
+      "priority": 1,
+      "verified": false
+    },
+    {
+      "ordinal": 31,
+      "id": "audio_and_packaging",
+      "manifest_status_unchanged": "integrated",
+      "source": "`core/audio_save.js:init_audio_save`; `core/boot.js`; 3D `synth.gd`, `save_store.gd`, export shell/build tools",
+      "owners": [
+        "game3d/scripts/synth.gd",
+        "game3d/scripts/source_audio.gd",
+        "game3d/scripts/ambient_audio.gd",
+        "game3d/scripts/save_store.gd"
+      ],
+      "integration": [
+        "game3d/scripts/full_runtime.gd",
+        "game3d/scripts/full_scene.gd"
+      ],
+      "registered_tests": [
+        "game3d/tests/test_scene.gd",
+        "game3d/tests/test_source_audio.gd",
+        "game3d/tests/test_audio_runtime.gd"
+      ],
+      "review_classification": "known_performance_failure_and_platform_acceptance",
+      "current_evidence": "Current131/1313D,19/19original and Full Windows/Web exports retained. Effects/dust native/Web render. Hardware-audible sound is not certified; sustained60 frame target fails.",
+      "remaining_native": "Genuine blocker: meet unchanged<16ms at60+ with controlled full-frame evidence. Also audible first-input/M/per-note checks and clean shutdown/build provenance. Do not promote rejected query/indexing experiments or compare mismatched workloads.",
+      "remaining_web": "Trusted first interaction/audio/mute plus cold export/storage/input check. Browser campaign still needs end-to-end evidence; current captureUnknownError/fallback must be candidly retained. Public hosting is a separate action.",
+      "evidence_refs": [
+        "release",
+        "effects_profile",
+        "sustained",
+        "feedback"
+      ],
+      "priority": 0,
+      "verified": false
+    }
+  ],
+  "evidence_registry": {
+    "opening": {
+      "path": "artifacts/3d-full-port/p15a/native-tour.json",
+      "kind": "retained_evidence",
+      "sha256": "a9b77bae480aedc2b0024a633c1024a1330acc34ae68f90941ed9b7906379d73"
+    },
+    "office": {
+      "path": "artifacts/3d-full-port/office-endpoint-acceptance/tour/office-tour.json",
+      "kind": "retained_evidence",
+      "sha256": "002bf2fb7f9ecb59e826b2f9a964f3049d93cc4ecc7a38f217cfac4bcc304708"
+    },
+    "campaign": {
+      "path": "artifacts/3d-full-port/campaign-composed/README.md",
+      "kind": "retained_evidence",
+      "sha256": "0a269804abbaf763a74c1e1fcb3a00eff06628deebf27ee322c8669d474aefd9"
+    },
+    "pretender": {
+      "path": "artifacts/3d-full-port/pretender-acceptance/native-v2/pretender-continuation.json",
+      "kind": "retained_evidence",
+      "sha256": "5b79e40158f15eae1f0885bd8faf6cf9d223f27786d99c43f13eef0700650b1b"
+    },
+    "tony": {
+      "path": "artifacts/3d-full-port/input-and-acceptance/tony-8bcd-release.json",
+      "kind": "retained_evidence",
+      "sha256": "9530415a5e920733a50a9bfe8f820c983eb73e5904a168e86b354b050fc93465"
+    },
+    "karaoke": {
+      "path": "artifacts/3d-full-port/input-and-acceptance/karaoke-native.json",
+      "kind": "retained_evidence",
+      "sha256": "5173612239441a37785ff6977a093cad6d815f657667f5f44bbab11830ae58e8"
+    },
+    "hands": {
+      "path": "artifacts/3d-full-port/hand-art-refinement/web-hands-960.json",
+      "kind": "retained_evidence",
+      "sha256": "2830847aa5265bcf677e363157ea285db8a2161b04055f5990cb76a0af908e9e"
+    },
+    "dave": {
+      "path": "artifacts/3d-full-port/resident-refinement/dave/web/dave-walkthrough-web-960.json",
+      "kind": "retained_evidence",
+      "sha256": "f3819cc97fd5945f986602d09c84eca364cf7cb515d22b0bc5a46c6f4331e745"
+    },
+    "resident": {
+      "path": "artifacts/3d-full-port/resident-refinement/README.md",
+      "kind": "retained_evidence",
+      "sha256": "ececbf55ee9041f3a36d8fca0abca2d33953f96035e9350868f999f59b396246"
+    },
+    "release": {
+      "path": "artifacts/3d-full-port/resident-refinement/release/README.md",
+      "kind": "retained_evidence",
+      "sha256": "33cdcda86d0523ef4bfd0e1750c2e3f87cb07c6e505bf9e939a044c6893f58fa"
+    },
+    "feedback": {
+      "path": "artifacts/3d-full-port/world-feedback/README.md",
+      "kind": "retained_evidence",
+      "sha256": "2d4f16a05b4bfe8d87479c426440389bb1021e6e3091cef19d88225641a39da5"
+    },
+    "effects_profile": {
+      "path": "artifacts/3d-full-port/effects-profile/README.md",
+      "kind": "retained_evidence",
+      "sha256": "8b2fcaa4aa997ac890867eea14a15f636e5b272a6527c35cba3d1334fbbfe913"
+    },
+    "sustained": {
+      "path": "artifacts/3d-full-port/sustained-population-profile/candidate648-sustained-v2-01/evidence/full-actor-performance.json",
+      "kind": "retained_evidence",
+      "sha256": "c24174d216c927fdbcf82aae2c6c64b850c380b09ec006082746a3a0c01582d7"
+    },
+    "failed_profile": {
+      "path": "artifacts/3d-full-port/input-and-acceptance/8bcd-performance-failed.json",
+      "kind": "retained_evidence",
+      "sha256": "e86a24b7f8bdd6787ee67bb4d13c3cea1d0c8fb7c75e33d2656e4f5c081f2b21"
+    },
+    "departure": {
+      "path": "artifacts/3d-full-port/live-neighborhood/departure-native.json",
+      "kind": "retained_evidence",
+      "sha256": "f917b7de7ff13bf2191a8fa9e5245f02fcc09e02bda01fd74a9886dbbeb229fa"
+    },
+    "all11_pending": {
+      "path": ".build/full-port/all11-claims-continuation/native-v2/all11-claims.json",
+      "kind": "failed_run_v3_pending",
+      "sha256": "46c56a460f69bde05438ad402e9d0d427bafbf17625dd93b427deddd4579b667"
+    },
+    "gear": {
+      "path": "game3d/tests/viewmodel_gear_probe.gd",
+      "kind": "existing_probe_not_acceptance",
+      "sha256": "567a0c9bea0505b87ae07e1e6bbd72c7ab9e72b3971841541fa15bfdda8108db"
+    },
+    "finds": {
+      "path": "game3d/tests/find_view_probe.gd",
+      "kind": "existing_probe_not_acceptance",
+      "sha256": "435ea09bf5f63ebe1edd01be06e5df5694dad4792e7c0bccb9541bdd61272059"
+    },
+    "cart": {
+      "path": "game3d/tests/cart_view_probe.gd",
+      "kind": "existing_probe_not_acceptance",
+      "sha256": "8d4d9f7a1c1900a798352589d3777378bbe806626e23c945636ceb0a180dad07"
+    },
+    "emitters": {
+      "path": "game3d/tests/dynamic_emitters_probe.gd",
+      "kind": "existing_probe_not_acceptance",
+      "sha256": "661326262b332beb9fa83daeaf5f57980c77c2cdbee377fffab7ae6253060c12"
+    },
+    "projectiles": {
+      "path": "game3d/tests/projectile_view_probe.gd",
+      "kind": "existing_probe_not_acceptance",
+      "sha256": "f2c83774d5dec6d197a2dbb80cc4407763172ad524b094cb4bfd93b8157d570f"
+    },
+    "incidents": {
+      "path": "game3d/tests/incident_presentation_probe.gd",
+      "kind": "existing_probe_not_acceptance",
+      "sha256": "fc9db0756f86e6b15d3958fc2c30922a447ef6dacaea66264c892ec9c20d47e7"
+    },
+    "world_details": {
+      "path": "artifacts/3d-full-port/world-details",
+      "kind": "retained_evidence",
+      "sha256": null
+    }
+  },
+  "review": "Parent reviewed0-15,29-31; independent child reviewed16-28; no engine or metadata edits."
+}

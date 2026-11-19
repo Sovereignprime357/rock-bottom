@@ -1,0 +1,184 @@
+[
+  {
+    "file": "profile-one.ps1",
+    "original_path": ".build/3d/positive-certificate-performance-draft/profile-one.ps1",
+    "original_sha256": "517081b6ab3bcae78a34c3f017bdad03c741c8eb6262b887abde051a5d082a1b",
+    "edits": [
+      {
+        "old": "'.build/full-port/positive-certificate-performance'",
+        "new": "'.build/full-port/positive-certificate-performance-v2'",
+        "positions": [
+          5673
+        ]
+      },
+      {
+        "old": "'tests/test_sustained_actor_driver.gd')",
+        "new": "'tests/test_sustained_actor_driver.gd','tests/test_performance_phase_snapshot.gd')",
+        "positions": [
+          868
+        ]
+      },
+      {
+        "old": "'tests/test_sustained_actor_driver.gd.uid')",
+        "new": "'tests/test_sustained_actor_driver.gd.uid','tests/test_performance_phase_snapshot.gd.uid')",
+        "positions": [
+          1015
+        ]
+      },
+      {
+        "old": "$pins.overlay.Count -ne 3",
+        "new": "$pins.overlay.Count -ne 4",
+        "positions": [
+          4530
+        ]
+      },
+      {
+        "old": "exactly the three approved tests",
+        "new": "the three workload files and snapshot regression",
+        "positions": [
+          4668
+        ]
+      },
+      {
+        "old": "candidate_proof_sha256=$pins.candidate_proof;",
+        "new": "candidate_proof_sha256=$pins.candidate_proof; snapshot_proof_sha256=$pins.snapshot_proof;",
+        "positions": [
+          6795
+        ]
+      },
+      {
+        "old": "foreach ($relative in $pins.candidate_proof.Keys)",
+        "new": "foreach ($relative in $pins.snapshot_proof.Keys) {\n    $path = Assert-Within $repoRoot (Join-Path $repoRoot $relative)\n    if ((Get-Sha $path) -ne $pins.snapshot_proof[$relative]) { throw \"Common observer proof changed: $relative\" }\n}\nforeach ($relative in $pins.candidate_proof.Keys)",
+        "positions": [
+          3892
+        ]
+      },
+      {
+        "old": "    if ($contract -notmatch 'SUSTAINED60 DRIVER CONTRACT: PASS') { throw 'Detached contract did not complete all required groups.' }",
+        "new": "    if ($contract -notmatch 'SUSTAINED60 DRIVER CONTRACT: PASS') { throw 'Detached contract did not complete all required groups.' }\n    $snapshot = Invoke-IsolatedChild 'snapshot_contract' $engine @('--headless','--path',$project,'--log-file',(Join-Path $runRoot 'snapshot_contract.godot.log'),'--script','res://tests/test_performance_phase_snapshot.gd')\n    if ($snapshot -notmatch '(?m)^PERFORMANCE PHASE SNAPSHOT: PASS; [1-9][0-9]* checks; 5/5 groups; original_alias_reproduced=true; no performance claim\\r?$') { throw 'Snapshot contract did not complete all five groups and original alias witness.' }\n    $provenance.snapshot_contract_complete = $true",
+        "positions": [
+          16675
+        ]
+      }
+    ]
+  },
+  {
+    "file": "run-paired.ps1",
+    "original_path": ".build/3d/positive-certificate-performance-draft/run-paired.ps1",
+    "original_sha256": "0c98de6ff63da3dc63dd148f4663cb8504b3393c508154e332ae2d6871a84017",
+    "edits": [
+      {
+        "old": "'.build/full-port/positive-certificate-performance'",
+        "new": "'.build/full-port/positive-certificate-performance-v2'",
+        "positions": [
+          523
+        ]
+      },
+      {
+        "old": "POSITIVE CERTIFICATE PERFORMANCE PAIR:",
+        "new": "POSITIVE CERTIFICATE PERFORMANCE V2 PAIR:",
+        "positions": [
+          1499
+        ]
+      }
+    ]
+  },
+  {
+    "file": "compare-pair.py",
+    "original_path": ".build/3d/positive-certificate-performance-draft/compare-pair.py",
+    "original_sha256": "e950979c8690b17af4e027f5848b1d626b2f605978120000885a7d60fb9a87c4",
+    "edits": [
+      {
+        "old": "PARENT=ROOT/'.build/full-port/positive-certificate-performance'",
+        "new": "PARENT=ROOT/'.build/full-port/positive-certificate-performance-v2'",
+        "positions": [
+          208
+        ]
+      },
+      {
+        "old": "('candidate_proof_sha256','candidate_proof'),",
+        "new": "('candidate_proof_sha256','candidate_proof'),('snapshot_proof_sha256','snapshot_proof'),",
+        "positions": [
+          7024
+        ]
+      },
+      {
+        "old": "'tests/test_sustained_actor_driver.gd.uid'}",
+        "new": "'tests/test_sustained_actor_driver.gd.uid','tests/test_performance_phase_snapshot.gd.uid'}",
+        "positions": [
+          7985
+        ]
+      },
+      {
+        "old": "['version','import','contract']+(['retention_contract'] if variant=='positive_certificate' else [])",
+        "new": "['version','import','contract','snapshot_contract']+(['retention_contract'] if variant=='positive_certificate' else [])",
+        "positions": [
+          8429
+        ]
+      },
+      {
+        "old": "    require([x['stage'] for x in stages]==expected_stages,'child stage census')",
+        "new": "    require([x['stage'] for x in stages]==expected_stages,'child stage census')\n    require(provenance.get('snapshot_contract_complete') is True,'five-group actual observer snapshot contract completed')",
+        "positions": [
+          8569
+        ]
+      },
+      {
+        "old": "        if variant=='positive_certificate':\n            receipt=(run/'retention_contract.stdout.log').read_text(errors='replace')",
+        "new": "        snapshot_receipt=(run/'snapshot_contract.stdout.log').read_text(errors='replace')\n        require(re.search(r'^PERFORMANCE PHASE SNAPSHOT: PASS; [1-9][0-9]* checks; 5/5 groups; original_alias_reproduced=true; no performance claim\\r?$',snapshot_receipt,re.M) is not None,'retained actual common snapshot contract receipt')\n        if variant=='positive_certificate':\n            receipt=(run/'retention_contract.stdout.log').read_text(errors='replace')",
+        "positions": [
+          12160
+        ]
+      },
+      {
+        "old": "POSITIVE CERTIFICATE PAIR:",
+        "new": "POSITIVE CERTIFICATE V2 PAIR:",
+        "positions": [
+          14106
+        ]
+      }
+    ]
+  },
+  {
+    "file": "test-comparison.py",
+    "original_path": ".build/3d/positive-certificate-performance-draft/test-comparison.py",
+    "original_sha256": "fdeb139938d39dad113e394cd90c24ba67af9935c484fbcc46c50494f45b5ef2",
+    "edits": [
+      {
+        "old": "('candidate_proof_sha256','candidate_proof'),",
+        "new": "('candidate_proof_sha256','candidate_proof'),('snapshot_proof_sha256','snapshot_proof'),",
+        "positions": [
+          1227
+        ]
+      },
+      {
+        "old": "['version','import','contract']+(['retention_contract'] if variant=='positive_certificate' else [])",
+        "new": "['version','import','contract','snapshot_contract']+(['retention_contract'] if variant=='positive_certificate' else [])",
+        "positions": [
+          1844
+        ]
+      },
+      {
+        "old": "    if variant=='positive_certificate':p['retention_contract_complete']=True",
+        "new": "    p['snapshot_contract_complete']=True\n    if variant=='positive_certificate':p['retention_contract_complete']=True",
+        "positions": [
+          2132
+        ]
+      },
+      {
+        "old": "lambda p:p['stages'].pop(3),lambda p:p['stages'][3].update(exit_code=1),lambda p:p['stages'][3].update(timeout=True),lambda p:p.pop('retention_contract_complete')",
+        "new": "lambda p:p['stages'].pop(4),lambda p:p['stages'][4].update(exit_code=1),lambda p:p['stages'][4].update(timeout=True),lambda p:p.pop('retention_contract_complete')",
+        "positions": [
+          7052
+        ]
+      },
+      {
+        "old": "if __name__=='__main__':",
+        "new": "    def test_common_snapshot_stage_required_in_both_variants(self):\n        for variant in pair.VARIANTS:\n            for mutation in [lambda p:p['stages'].pop(3),lambda p:p['stages'][3].update(exit_code=1),lambda p:p['stages'][3].update(timeout=True),lambda p:p.pop('snapshot_contract_complete'),lambda p:p.update(snapshot_contract_complete=False)]:\n                p=provenance(variant);mutation(p)\n                with self.assertRaises(ValueError):pair.validate_sources(p,PINS,variant)\n    def test_original_shared_alias_probe_is_not_successor(self):\n        p=provenance();p['prepared_source_sha256']['tests/full_actor_performance_probe.gd']='5013ed6ed7bee55213bc9f84060d9a5fbb68e44ddc9cf95fe3526fd4bcf58bef'\n        with self.assertRaises(ValueError):pair.validate_sources(p,PINS,'baseline')\n\nif __name__=='__main__':",
+        "positions": [
+          8182
+        ]
+      }
+    ]
+  }
+]

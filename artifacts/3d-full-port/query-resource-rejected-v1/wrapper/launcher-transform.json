@@ -1,0 +1,55 @@
+{
+  "original_path": ".build/3d/indexed-performance-draft/profile-one.ps1",
+  "original_sha256": "975017862f58722299d3926245f3880ca029fe19dc0fb075a411f398a98843fa",
+  "normalized_original_sha256": "975017862f58722299d3926245f3880ca029fe19dc0fb075a411f398a98843fa",
+  "edits": [
+    {
+      "old": "[ValidateSet('baseline','indexed')]",
+      "new": "[ValidateSet('baseline','query_resource')]"
+    },
+    {
+      "old": "if ($relative -notin @('tests/sustained_actor_driver.gd.uid','tests/test_sustained_actor_driver.gd.uid','scripts/exact_vertex_indexer.gd.uid'))",
+      "new": "if ($relative -notin $allowedGeneratedUids)"
+    },
+    {
+      "old": "$overlayNames = @('tests/full_actor_performance_probe.gd','tests/sustained_actor_driver.gd','tests/test_sustained_actor_driver.gd')",
+      "new": "$overlayNames = @('tests/full_actor_performance_probe.gd','tests/sustained_actor_driver.gd','tests/test_sustained_actor_driver.gd')\n$allowedGeneratedUids = @('tests/sustained_actor_driver.gd.uid','tests/test_sustained_actor_driver.gd.uid')\nif ($Variant -eq 'query_resource') { $allowedGeneratedUids += @('tests/fixtures/query_resource_candidate.gd.uid','tests/fixtures/query_resource_reference.gd.uid') }"
+    },
+    {
+      "old": "# Import may assign identity files to the two new test scripts. They are\n        # generated artifacts, recorded separately; no other source is allowed.",
+      "new": "# Import may assign only the named new workload/observer script UIDs.\n        # They are generated artifacts, recorded separately, never original source."
+    },
+    {
+      "old": "'Exact GPU source archive drift.'",
+      "new": "'Exact resident source archive drift.'"
+    },
+    {
+      "old": "'pinned-effects-working-source-'+$Variant",
+      "new": "'pinned-resident-query-resource-'+$Variant"
+    },
+    {
+      "old": "'.build/full-port/indexed-performance'",
+      "new": "'.build/full-port/query-resource-performance'"
+    },
+    {
+      "old": "index_overlay_sha256=$pins.index_overlay",
+      "new": "query_overlay_sha256=$pins.query_overlay; central_proof_sha256=$pins.central_proof; source_runtime_pins=$pins.runtime_sources"
+    },
+    {
+      "old": "    $indexNames = @('scripts/character_roster.gd','scripts/exact_vertex_indexer.gd')\n    if ($pins.index_overlay.Count -ne 2 -or @($pins.index_overlay.Keys | Where-Object { $_ -notin $indexNames }).Count -ne 0) { throw 'Only two accepted indexing files are allowed.' }\n    foreach ($relative in $indexNames) {\n        $indexSourcePath = Assert-Within $PSScriptRoot (Join-Path $PSScriptRoot ('index/'+$relative))\n        $bytes = [IO.File]::ReadAllBytes($indexSourcePath)\n        if ((Get-ByteSha $bytes) -ne $pins.index_overlay[$relative]) { throw \"Index overlay changed: $relative\" }\n        if ($Variant -eq 'indexed') { [IO.File]::WriteAllBytes((Assert-Within $project (Join-Path $project $relative)),$bytes) }\n    }\n",
+      "new": "    $queryNames = @('scripts/world_adapter.gd','tests/test_world_adapter.gd','tests/test_actor_navigation.gd','tests/fixtures/query_resource_candidate.gd','tests/fixtures/query_resource_reference.gd')\n    if ($pins.query_overlay.Count -ne 5 -or @($pins.query_overlay.Keys | Where-Object { $_ -notin $queryNames }).Count -ne 0) { throw 'Only five centrally tested query-resource files are allowed.' }\n    foreach ($relative in $queryNames) {\n        $candidatePath = Assert-Within $PSScriptRoot (Join-Path $PSScriptRoot ('query/'+$relative))\n        $bytes = [IO.File]::ReadAllBytes($candidatePath)\n        if ((Get-ByteSha $bytes) -ne $pins.query_overlay[$relative]) { throw \"Query overlay changed: $relative\" }\n        if ($Variant -eq 'query_resource') {\n            $destination = Assert-Within $project (Join-Path $project $relative)\n            $null = New-Item -ItemType Directory -Path ([IO.Path]::GetDirectoryName($destination)) -Force\n            [IO.File]::WriteAllBytes($destination,$bytes)\n        }\n    }\n"
+    },
+    {
+      "old": "($Variant -eq 'indexed' -and $relative -in $indexNames)",
+      "new": "($Variant -eq 'query_resource' -and $relative -in $queryNames)"
+    },
+    {
+      "old": "    $reportPath = Join-Path $evidence 'full-actor-performance.json'",
+      "new": "    $provenance.post_native_source_sha256 = Get-Inventory $project $true\n    Assert-SourceUnchanged $provenance.exported_source_sha256 $provenance.post_native_source_sha256\n    if ((Get-Sha $archive) -ne $pins.archive_sha256 -or (Get-Sha $archivePin) -ne $pins.archive_sha256) { throw 'Source archive changed during run.' }\n    $reportPath = Join-Path $evidence 'full-actor-performance.json'"
+    },
+    {
+      "old": "$wrapperHash = Get-Sha $PSCommandPath",
+      "new": "foreach ($relative in $pins.central_proof.Keys) {\n    $path = Assert-Within $repoRoot (Join-Path $repoRoot $relative)\n    if ((Get-Sha $path) -ne $pins.central_proof[$relative]) { throw \"Central proof input changed: $relative\" }\n}\n$wrapperHash = Get-Sha $PSCommandPath"
+    }
+  ]
+}

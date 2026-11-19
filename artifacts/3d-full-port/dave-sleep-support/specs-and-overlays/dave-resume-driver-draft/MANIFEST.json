@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "scope": "test-only final movement successor; original source/art/physics unchanged",
+  "old": {
+    "game3d/tests/dave_walkthrough_probe.gd": "5ccad87002e44292bb517dbe2f7c77a1daae1034b8307858ed761e31825878b2",
+    "game3d/tests/test_dave_walkthrough_contract.gd": "c2a7dec8778dd8121cf5f6218770504ca34c914925821e5998947ff65e64564f"
+  },
+  "candidate": {
+    "game3d/tests/dave_walkthrough_probe.gd": "28c7ad41f8452d1ccc13b7599ceb6128f09d95b1ee9c6b5902f7c82b58f5328c",
+    "game3d/tests/test_dave_walkthrough_contract.gd": "c56c05c1fcff807757becb5820b10654cb89a00918f6a93c45f324c82f9df12f"
+  },
+  "groundWrapper": "d941161e952e3f9eccaa3c077c90c5cce40267580c2b5d5862b528a7d5e4c0fb",
+  "failedWebV1": {
+    ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/01_sleeping_dave_960.png": "014fc5b19d294924c321999d7942adcca7c53ba6f240ec28ef268dce555592bf",
+    ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/02_awake_dave_960.png": "ce45b0eb5602eede0a447b7cc4233a0a4550b6397558a8149c34c7696065e202",
+    ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/03_pigeon_dialogue_960.png": "87f1a180e4a6d7a86b192b8093b426debe404aaa4d4ddd603e50c566e4740350",
+    ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/browser-report.json": "dc1db1b8314945ce8ceb82c56c40645f2e12835fe2d510de69130c6d0e3c1b33",
+    ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/browser.jpg": "86e0daa02e7d34dc54dbbba736640ad551d6a700ccac7cc147865806b82d9a1e",
+    ".build/full-port/dave-sleep-validation/web-v1/browser-evidence/console.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "engineRun": false,
+  "nativeArtEvidenceUnchanged": true,
+  "newWebExecutionPending": true
+}

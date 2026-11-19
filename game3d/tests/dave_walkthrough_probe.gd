@@ -31,6 +31,19 @@ static func wake_unchanged(before: Dictionary,after: Dictionary) -> bool:
 	var expected: Dictionary = before.duplicate(true); expected.actor.asleep = false
 	return expected == after
 
+static func resume_choice(origin: Vector3, preferred: Vector3, certify: Callable) -> Dictionary:
+	if not origin.is_finite() or not preferred.is_finite() or not certify.is_valid(): return {"ok":false,"attempts":0}
+	var heading := Vector2(preferred.x-origin.x,preferred.z-origin.z)
+	if heading.length_squared() < 0.000001: return {"ok":false,"attempts":0}
+	var angle: float = heading.angle()
+	var attempts: int = 0
+	for offset: float in [0.0,PI*0.25,-PI*0.25,PI*0.5,-PI*0.5,PI*0.75,-PI*0.75,PI]:
+		var point := origin+Vector3(cos(angle+offset),0,sin(angle+offset))*0.35
+		attempts += 1
+		var receipt: Dictionary = certify.call(origin,point)
+		if receipt.get("ok") == true: return {"ok":true,"point":point,"attempts":attempts,"certificate":receipt.duplicate(true)}
+	return {"ok":false,"attempts":attempts}
+
 static func report_errors(row: Dictionary) -> Array[String]:
 	var errors: Array[String] = []
 	if row.get("format") != "rock-bottom-dave-walkthrough" or row.get("fixture") != "none" or row.get("title_input") != true: errors.append("ordinary title start without fixtures")
@@ -208,13 +221,26 @@ func _dave_scenario() -> void:
 	if not _check(game.runtime.s.mode == "dialogue" and PIGEONS in _menu().labels,"actual reopened awake pigeon dialogue"): return
 	if not await _capture_dave(2) or not await _click_option("leave."): return
 	var origin: Vector3 = game.player.position; var input_count: int = int(inputs.motion_frames)
-	var route: PackedVector3Array = _resident_route(origin,spawn)
-	if not _check(route.size() >= 2,"certified normal return direction"): return
-	var point: Vector3 = route[1]; var move_start: int = Time.get_ticks_msec()
+	var point := Vector3.INF
+	var move_start: int = Time.get_ticks_msec()
+	var last_choice: int = move_start-250
+	var choices: int = 0
+	proof.resume_choices = []
 	while game.player.position.distance_to(origin) < 0.15:
 		if not _alive() or not _check(Time.get_ticks_msec()-move_start < 5000,"finite resumed movement"): _release(); return
-		var alignment: float = _aim(Vector3(point.x,game.camera.global_position.y,point.z),_dt())
-		_motion(Vector2(point.x-game.player.position.x,point.z-game.player.position.z).normalized() if alignment > 0.96 else Vector2.ZERO)
+		var now: int = Time.get_ticks_msec()
+		var clear: bool = point.is_finite() and bool(_combat_segment(game.player.position,point).ok)
+		if not clear:
+			_release()
+			if now-last_choice >= 250 and choices < 20:
+				last_choice = now; choices += 1
+				var selected: Dictionary = resume_choice(game.player.position,spawn,Callable(self,"_combat_segment"))
+				proof.resume_choices.append({"wall_ms":now-boot_wall,"choice":choices,"result":selected.duplicate(true)})
+				point = selected.point if selected.ok else Vector3.INF
+				clear = bool(selected.ok)
+		if clear:
+			var alignment: float = _aim(Vector3(point.x,game.camera.global_position.y,point.z),_dt())
+			_motion(Vector2(point.x-game.player.position.x,point.z-game.player.position.z).normalized() if alignment > 0.96 else Vector2.ZERO)
 		await game.frame_sampled
 	_release(); proof.movement = {"metres":game.player.position.distance_to(origin),"input_frames":int(inputs.motion_frames)-input_count,"mode":game.runtime.s.mode,"modal":game.hud.modal.visible}
 

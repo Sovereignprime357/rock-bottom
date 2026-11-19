@@ -3235,3 +3235,70 @@ A separate four-comparison test-proof amendment uses the source JSON scalar
 encoding, retains finite numeric guards and all resource/calendar checks. Original
 report/save/failure bytes remain unchanged. Fresh v2 is staged with an actual
 retained-JSON gate before the normal eight-group contract and bounded native run.
+
+### Continued resident and campaign work — 2026-11-19
+
+Checkpoint d1b9b87 is pushed, with the actual raw-byte checkout proof retained.
+The query-resource reuse experiment measured worse in the paired sustained
+60-actor workload; keep production unchanged and retain the rejected experiment
+under artifacts/3d-full-port/query-resource-rejected-v1 (69 exact copied files).
+Scene p95 remains above16ms; no performance scope or workload changed.
+
+All11v2 failed at the first Yuri approach. Actual damage receipts show withdrawal
+and one Cart Cavalry hit, not Brutus bites. The test driver repeatedly selected a
+rejected route edge and never requested its existing local detour. A bounded
+driver correction preserves limits and reorders the same smoke before this long
+leg; fresh v3 must start from the accepted Pretender save, never the failed save.
+
+Current resident indexing passed90 native exact frames, but32 browser frames
+failed strict equality at12 frames/35 RGB channels, maximum one byte level.
+Run one unchanged-export baseline control and preserve all strict failures;
+old acceptance proposals do not automatically apply. Dave's sleeping support
+candidate stays isolated pending actual geometry/native/Web checks. Next work is
+those bounded runs, the remaining full-port feature audit and measured contact
+cost analysis. No full-port completion or production indexing claim.
+
+The new Dave sleep geometry gate passes2028 checks across384 samples; its native
+three-frame walkthrough passes. Web-v1 produced all three original images but
+failed the final resumed-movement proof because the test demanded a full route
+to spawn for a15cm step. Preserve that failure. A separate bounded local-step
+driver successor is staged for central contract and one new Web run; production
+art and metadata remain held until then.
+
+All11v3's first launcher stopped before Godot because three installed Python
+paths were treated as one executable. Keep that stage and its explicit root
+failure account. The separately pinned single-path successor passed cot80/6,
+Office1151, All11343/8 and resource-order62/4 gates and entered the actual run.
+At the latest observation all six earning circuits are complete; claim filing
+continues. Progress is not final acceptance.
+
+World found a reporting defect in the retained sustained performance observer:
+four arrays alias across phases, so saved day detail rows were later replaced
+with night detail. Scalar timing totals remain separate and failing. Preserve
+all raw reports, correct the evidence scope, and use one reviewed deep-snapshot
+successor identically on both sides of future pairs. Do not subtract driver
+p95 from Scene p95 or call the resulting difference a performance pass.
+
+Dave support Web-v2 passes the revised local movement contract: three original
+images, ordinary E wake,4.025s upright idle and0.294327m movement after Leave.
+Root reviewed all three originals and promoted the exact sleep pose plus explicit
+metadata-v3. Full132/132 and original19/19 gates pass, as do Full Windows/Web
+exports. The actual rebuilt browser remembered its existing save and returned
+from pause, inventory and journal to movement. Chromium pointer-capture errors
+remain; do not claim clean console or trusted hardware/audio acceptance.
+
+All11v3 finished six earning circuits and claimed Scrap, then failed a Pigeon
+contact route after33 plans/32 replans. Its earned autosave retains five claims,
+$537,18copper,64HP and an Underpass FILE job. The original remains failed.
+A single separately specified normal-load suffix is allowed, carrying all time,
+cot and guard budgets; normal Shift is allowed only on its two remaining
+Underpass travel legs. The49.178s phase remainder includes startup and can fail.
+No saved-state repair, deadline extension or automatic retry is allowed.
+
+The corrected observer passes27 checks/five groups. Its positive-certificate
+pair still worsens clearance cost per call and Scene p95, so reject promotion.
+Keep the88-file raw package and original production Adapter. Current-resident
+indexing remains isolated with strict browser pixel failures explicitly retained;
+the scoped image review only permits continued evaluation. Next are fresh paid
+Web progression, the one campaign suffix, and a measured index comparison using
+the corrected common observer. Full port and sustained16ms are still incomplete.

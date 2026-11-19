@@ -995,3 +995,39 @@ Local8074 serves this build; pointer-capture fallback remains disclosed. Root
 finishes byte-exact checkout and push before the next isolated native continuation.
 All11v1 refused before startup on serialized cot arithmetic; the bounded proof
 amendment and fresh v2 are staged, with no new gameplay acceptance yet.
+
+### Resident continuation after usage reset — 2026-11-19
+
+Resident checkpoint d1b9b87 is pushed and local8074 serves it. Root retains the
+failed All11v2 and rejects query-resource pooling after the actual pair measured
+worse. Characters owns the fresh-v3 test-driver route/resource-order staging and
+a read-only remaining-feature audit. Architecture owns Dave sleep-support staging
+and the current resident Web indexing audit; World reviews those changes and
+investigates measured collision costs. Root alone runs engines, exports, browser,
+integration and Git. All pending candidates stay isolated.
+
+The retained32-feature acceptance inventory is now in
+`artifacts/3d-full-port/feature-acceptance-audit/`. It distinguishes unverified
+interaction/platform branches from missing implementation; it establishes no
+new missing command and changes no parity status. Characters next builds the
+bounded fresh Web earn/Karaoke/paid-score/Tony/storage session. Cooking and late
+browser campaign remain separate required work. Existing accepted native
+Kingdom/Pretender and Web cart evidence are reused with their original limits.
+
+### Dave support checkpoint and remaining acceptance — 2026-11-19
+
+Dave sleep support and the bounded post-dialogue movement proof are integrated.
+132/1323D and19/19original checks pass; Full Windows/Web exports and actual
+remembered-save/menu-exit/movement playcheck pass. Local8074 serves this build.
+Metadata-v3 changes exactly the Animator pin and no parity statuses. Root retains
+the failed first Web tail and all accepted native/Web originals in
+artifacts/3d-full-port/dave-sleep-support. Root owns checkout, commit and push.
+
+The positive-certificate candidate is rejected after its corrected-observer pair
+measured worse; raw evidence is retained. Current-resident indexing stays held.
+The original All11v3 run failed after six earning circuits and five claims; its
+single qualified normal-load suffix must retain cumulative time/cot/guard limits.
+Architecture owns that bounded driver and the isolated index comparison wrapper;
+Characters owns the fresh paid browser progression stage; World provides peer
+review and the next visible hand improvement recommendation. Only root runs
+engines, native/browser work, export, integration and Git. Full port remains open.

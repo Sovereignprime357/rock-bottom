@@ -112,9 +112,45 @@ func _completion_checks() -> void:
 	for elapsed: float in [0.0,-1.0,120000.0,NAN,INF]: _bad(["wall_ms"],elapsed,"finite strict whole-attempt deadline: "+str(elapsed))
 	completed_groups += 1
 
+class ResumeCertificates:
+	extends RefCounted
+	var accepted_call: int = 0
+	var points: Array[Vector3] = []
+	func certify(from: Vector3,to: Vector3) -> Dictionary:
+		points.append(to)
+		return {"ok":accepted_call > 0 and points.size() == accepted_call,"from":from,"to":to,"reason":"fixture certificate"}
+
+func _resume_checks() -> void:
+	var witness := ResumeCertificates.new()
+	var from := Vector3(2,0.06,3)
+	var preferred := from+Vector3(0,0,-25)
+	witness.accepted_call = 2
+	var alternate: Dictionary = Probe.resume_choice(from,preferred,witness.certify)
+	_check(alternate.ok and alternate.attempts == 2 and witness.points.size() == 2,"blocked return heading chooses actual certified alternate, without requiring a distant route")
+	_check(alternate.point == witness.points[1] and alternate.point != witness.points[0],"chosen point is the accepted alternate only")
+	_check(alternate.certificate.to == alternate.point,"choice retains the actual matching certificate")
+	witness.points.clear(); witness.accepted_call = 0
+	var blocked: Dictionary = Probe.resume_choice(from,preferred,witness.certify)
+	_check(not blocked.ok and blocked.attempts == 8 and witness.points.size() == 8,"all eight blocked directions refuse without blind movement")
+	for point: Vector3 in witness.points:
+		_check(point.is_finite() and point.y == from.y and absf(point.distance_to(from)-0.35) < 0.000001,"every finite local heading keeps the bounded horizontal radius")
+	_check(witness.points[0].distance_to(from+Vector3(0,0,-0.35)) < 0.000001,"preferred original-spawn heading stays first")
+	var first_order: Array[Vector3] = witness.points.duplicate()
+	witness.points.clear(); Probe.resume_choice(from,preferred,witness.certify)
+	_check(witness.points == first_order,"same inputs retain exact finite choice order without RNG")
+	witness.points.clear(); witness.accepted_call = 1
+	var forward: Dictionary = Probe.resume_choice(from,preferred,witness.certify)
+	_check(forward.ok and forward.attempts == 1 and witness.points.size() == 1,"first clear direction needs no unnecessary alternatives")
+	witness.points.clear(); witness.accepted_call = 0
+	_check(not Probe.resume_choice(from,preferred,witness.certify).ok,"fresh blocked certificates cannot reuse a previous successful selection")
+	witness.points.clear()
+	_check(not Probe.resume_choice(Vector3.INF,preferred,witness.certify).ok and witness.points.is_empty(),"invalid origin makes no certificate query")
+	_check(not Probe.resume_choice(from,from,witness.certify).ok and witness.points.is_empty(),"degenerate desired heading makes no blind motion")
+	completed_groups += 1
+
 func _run() -> void:
-	_valid_checks(); _wake_checks(); _frame_checks(); _completion_checks()
-	_check(completed_groups == 4,"all four contract groups reached their actual tails")
+	_valid_checks(); _wake_checks(); _frame_checks(); _completion_checks(); _resume_checks()
+	_check(completed_groups == 5,"all five contract groups reached their actual tails")
 	for failure: String in failures: push_error(failure)
-	print("DAVE WALKTHROUGH CONTRACT: ","PASS" if failures.is_empty() else "FAIL"," (",checks," checks; ",completed_groups,"/4 groups; no rendered acceptance)")
+	print("DAVE WALKTHROUGH CONTRACT: ","PASS" if failures.is_empty() else "FAIL"," (",checks," checks; ",completed_groups,"/5 groups; no rendered acceptance)")
 	quit(0 if failures.is_empty() else 1)

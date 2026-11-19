@@ -1,0 +1,10 @@
+{
+  "failed_attempt": "verify-dave-checkout.py",
+  "failure": "preflight prior resident release hash manifest was finalized after its earlier checkout proof; no checkout was created",
+  "old_pin": "4b7c31413bccb9721f5ba49424fa15538f6e07b73e8ea27b3f7ac214b49749b7",
+  "new_pin": "4ad45ac2a9417f6ec3b1ae5ce9a94e00d89f45cddbcca6aa0aea771ca2b2c4e2",
+  "path": "artifacts/3d-full-port/resident-refinement/release/release-file-hashes.json",
+  "basis": "exact unchanged HEAD d1b9b8788f7340976bbc02837a90fa10439b6f22 bytes",
+  "production_pin_changes": "only separately declared Dave promotion",
+  "successor_sha256": "92073a364b8f99e81f34a943f5575bdd45e00b784230d6206fa0a539fe6faccb"
+}

@@ -1,0 +1,67 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+import {selectedPins,readInputs,validate,build,load,LIVE_MANIFEST} from './validation/tools/parity-metadata.mjs';
+import {runContract} from './validation/tools/parity-metadata-test.mjs';
+import {runGate} from './validation/tools/parity-metadata-gate.mjs';
+import {runMigration} from './validation/tools/parity-metadata-migrate.mjs';
+const draft=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(draft,'../../..');
+const raw=ref=>fs.readFileSync(path.join(root,ref)),local=ref=>fs.readFileSync(path.join(draft,ref));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const v2ref='reports/3d-parity-metadata/input-pins-metadata-v2.json',v3ref='reports/3d-parity-metadata/input-pins-metadata-v3.json';
+const owner='game3d/scripts/actor_animation.gd',v2=JSON.parse(raw(v2ref)),v3=JSON.parse(local('candidate/'+v3ref));
+const old=local('originals/'+owner),next=local('candidate/'+owner);
+const reader=(body)=>ref=>ref===owner?body:ref===v3ref?local('candidate/'+v3ref):raw(ref);
+const oldReader=reader(old),newReader=reader(next);
+let checks=0;const check=(ok,msg)=>{checks++;assert.ok(ok,msg);};const eq=(a,b,msg)=>{checks++;assert.deepEqual(a,b,msg);};
+const retained=new Map([...new Set([v2ref,'reports/3d-parity-metadata/input-pins-metadata-v1.json',LIVE_MANIFEST,'.gitattributes',...Object.keys(v2.hashes)])].map(ref=>[ref,sha(raw(ref))]));
+eq(Object.keys(v3.hashes),Object.keys(v2.hashes),'same ordered247 pins');
+eq(Object.keys(v2.hashes).filter(ref=>v2.hashes[ref]!==v3.hashes[ref]),[owner],'only Animator pin changes');
+check(Object.keys(v3.hashes).length===247,'exact247 referenced paths');
+eq(v3.previousPins,{path:v2ref,sha256:sha(raw(v2ref))},'raw previous revision link');
+for(const ref of Object.keys(v2.hashes)){
+ check(sha(oldReader(ref))===v2.hashes[ref],'old view '+ref);
+ check(sha(newReader(ref))===v3.hashes[ref],'new view '+ref);
+}
+const ledger=load(LIVE_MANIFEST,newReader),inputs=readInputs(newReader);
+check(validate(ledger,readInputs(oldReader),v2,{reader:oldReader}).ok,'v2 old view passes');
+check(validate(ledger,inputs,v3,{reader:newReader}).ok,'v3 candidate view passes');
+eq(validate(ledger,inputs,v2,{reader:newReader}).errors,['Referenced input/source drift: '+owner],'v2 rejects only revised Animator');
+eq(validate(ledger,readInputs(oldReader),v3,{reader:oldReader}).errors,['Referenced input/source drift: '+owner],'v3 rejects old Animator');
+for(const mutation of [Buffer.concat([next,Buffer.from('\n')]),Buffer.from(next.toString().replaceAll('\n','\r\n'))]){
+ const r=reader(mutation);eq(validate(ledger,readInputs(r),v3,{reader:r}).errors,['Referenced input/source drift: '+owner],'unapproved byte/EOL change refuses');
+}
+for(const args of [[],['--pins=latest'],['--pins=metadata-v4'],['--pins=../metadata-v3.json'],['--pins=C:/metadata-v3.json'],['--pins=metadata-v2','--pins=metadata-v3'],['--pins=metadata-v3','--pins=metadata-v3']]){checks++;assert.throws(()=>selectedPins(args,newReader));}
+eq(selectedPins(['--pins=metadata-v2'],oldReader).value,v2,'retainedv2 literal');
+eq(selectedPins(['--pins=metadata-v3'],newReader).value,v3,'explicitv3 literal');
+check(selectedPins(['--pins=metadata-v1'],oldReader).name==='metadata-v1','retainedv1 selector');
+const logs=[],logger={log:v=>logs.push(String(v)),error:v=>logs.push(String(v))};
+const reportPath=path.join(draft,'results/metadata-contract.json');
+const contract=runContract({readFile:newReader,pinArgs:['--pins=metadata-v3'],reportPath});
+check(contract.pass&&contract.groups===5&&contract.checks===152,'existing full metadata negative contract');
+const gate=runGate(['--pins=metadata-v3'],{reader:newReader,logger});check(gate.ok&&gate.checks===1315,'actual gate API');
+const migration=runMigration(['--pins=metadata-v3','--check'],{reader:newReader,outputPath:path.join(root,LIVE_MANIFEST),logger});check(migration.ok&&migration.checks===1315,'actual deterministic check API');
+check(Buffer.from(JSON.stringify(build(inputs,newReader),null,2)+'\n').equals(raw(LIVE_MANIFEST)),'ledger bytes unchanged');
+const complete=runGate(['--pins=metadata-v3','--complete'],{reader:newReader,logger:{log:logger.log,error:()=>{}}});
+check(!complete.ok&&complete.errors.length===617&&complete.errors.every(x=>x.startsWith('Incomplete ')),'all617 still refuse');
+check(ledger.handlers.length===585&&ledger.features.length===32&&ledger.features.flatMap(f=>f.evidenceRefs).length===96,'unchanged585/32/96 census');
+const tool=local('candidate/tools/parity-metadata.mjs').toString();
+check(Buffer.from(tool.replace(",'metadata-v3':'reports/3d-parity-metadata/input-pins-metadata-v3.json'",'')).equals(local('originals/tools/parity-metadata.mjs')),'one exact selector edit reverse');
+const runner=local('candidate/game3d/tests/run-gates.ps1').toString();
+const line="Invoke-Gate -Name 'dave-sleep-support' -GodotArgs @('--script', 'res://tests/test_dave_sleep_support.gd', '--quit-after', '12000') -PassPattern 'DAVE SLEEP SUPPORT: PASS'\r\n";
+const reversed=runner.replaceAll('--pins=metadata-v3','--pins=metadata-v2').replace("'test_dave_walkthrough_contract.gd', 'test_dave_sleep_support.gd', 'reference_actor_animation_sleep_original.gd')) {","'test_dave_walkthrough_contract.gd')) {").replace(line,'').replace('132/132 PASS (import clean; 87 engine suites and 45 source/parity checks;','131/131 PASS (import clean; 86 engine suites and 45 source/parity checks;');
+check(Buffer.from(reversed).equals(local('originals/game3d/tests/run-gates.ps1')),'exact runner reverse');
+check((runner.match(/^Invoke-Gate -Name '/gm)??[]).length===88,'87 suites plusimport');
+check((runner.match(/@\{ Name = '/g)??[]).length===45,'45 sourcechecks');
+check((runner.match(/--pins=metadata-v3/g)??[]).length===3,'three literalv3 selections');
+const test=local('candidate/game3d/tests/test_dave_sleep_support.gd').toString();
+check(test.includes('completed_groups == 3 and sleep_samples == 384 and registry_samples == 71')&&test.includes('print("DAVE SLEEP SUPPORT: ","PASS"'),'registered actualmarker/completion');
+const reference=local('candidate/game3d/tests/reference_actor_animation_sleep_original.gd');
+check(reference.equals(Buffer.from(old.toString().replace('class_name RockBottomActorAnimation\n',''))),'only class_name removed from historical test oracle');
+check(Buffer.concat([local('originals/SPEC-3D-CHARACTER-ROSTER.md'),local('ROSTER-AMENDMENT.md')]).equals(local('candidate/SPEC-3D-CHARACTER-ROSTER.md')),'append-only roster contract');
+for(const [ref,digest] of retained)check(sha(raw(ref))===digest,'live bytes retained '+ref);
+const result={schema:1,pass:true,checks,revision:'metadata-v3',changedExistingPins:[owner],metadataContract:contract.checks,gateChecks:gate.checks,completeRefusals:complete.errors.length,manifestSha256:sha(raw(LIVE_MANIFEST)),statusesChanged:0,evidenceRefsChanged:0,engineRun:false,gitRun:false};
+fs.mkdirSync(path.join(draft,'results'),{recursive:true});fs.writeFileSync(path.join(draft,'results/revision-contract.json'),JSON.stringify(result,null,2)+'\n');fs.writeFileSync(path.join(draft,'results/metadata.log'),logs.join('\n')+'\n');
+console.log(`DAVE SLEEP METADATA REVISION: PASS ${checks} checks;1 revised pin;617 complete refusals;no production writes`);

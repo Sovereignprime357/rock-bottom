@@ -1,0 +1,6 @@
+{
+  "file": "game3d/scripts/world_adapter.gd",
+  "before": "\telif not clear: _placement_clear.erase(id)\n",
+  "after": "\telif not clear:\n\t\t# A refusal at another point does not invalidate this exact positive proof.\n\t\t# Keep the existing render/physics/revision lifetime; never cache a refusal.\n\t\tvar prior: Dictionary = _placement_clear.get(id,{})\n\t\tif prior.is_empty() or prior.point == point or prior.width != body.w or prior.depth != body.h or prior.height != height or prior.revision != _collision_revision:\n\t\t\t_placement_clear.erase(id)\n",
+  "exact_reverse": true
+}

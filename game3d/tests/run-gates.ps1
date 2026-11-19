@@ -41,7 +41,7 @@ function Invoke-Gate {
 }
 
 Invoke-Gate -Name 'import' -GodotArgs @('--editor', '--import', '--quit')
-foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd', 'test_bosses.gd', 'test_travel.gd', 'test_actor_navigation.gd', 'test_full_hud.gd', 'test_full_scene.gd', 'test_resident_dialogue.gd', 'test_quest_dialogue.gd', 'test_street_dialogue.gd', 'test_rhythm.gd', 'test_robbery.gd', 'test_day_system.gd', 'test_communications.gd', 'test_heists.gd', 'test_site_integration.gd', 'test_campaign.gd', 'test_office_campaign.gd', 'test_cooking.gd', 'test_cooking_presentation.gd', 'test_startup.gd', 'test_cooking_runtime.gd', 'test_companions.gd', 'test_kingdom_campaign.gd', 'test_kingdom_physics.gd', 'test_world_prop_actions.gd', 'test_interactive_props.gd', 'test_actor_contact.gd', 'test_presentation_visibility.gd', 'test_incidents.gd', 'test_neighborhood_utilities.gd', 'test_interactive_prop_view.gd', 'test_viewmodel_context.gd', 'test_guidance.gd', 'test_incident_presentation.gd', 'test_dave_walkthrough_contract.gd')) {
+foreach ($script in @('test_simulation.gd', 'test_scene.gd', 'test_art.gd', 'test_viewmodel.gd', 'test_game_state.gd', 'test_memory_loop.gd', 'test_progression.gd', 'test_economy.gd', 'test_full_world.gd', 'test_character_roster.gd', 'test_combat.gd', 'test_full_runtime.gd', 'test_world_adapter.gd', 'test_full_integration.gd', 'test_bosses.gd', 'test_travel.gd', 'test_actor_navigation.gd', 'test_full_hud.gd', 'test_full_scene.gd', 'test_resident_dialogue.gd', 'test_quest_dialogue.gd', 'test_street_dialogue.gd', 'test_rhythm.gd', 'test_robbery.gd', 'test_day_system.gd', 'test_communications.gd', 'test_heists.gd', 'test_site_integration.gd', 'test_campaign.gd', 'test_office_campaign.gd', 'test_cooking.gd', 'test_cooking_presentation.gd', 'test_startup.gd', 'test_cooking_runtime.gd', 'test_companions.gd', 'test_kingdom_campaign.gd', 'test_kingdom_physics.gd', 'test_world_prop_actions.gd', 'test_interactive_props.gd', 'test_actor_contact.gd', 'test_presentation_visibility.gd', 'test_incidents.gd', 'test_neighborhood_utilities.gd', 'test_interactive_prop_view.gd', 'test_viewmodel_context.gd', 'test_guidance.gd', 'test_incident_presentation.gd', 'test_dave_walkthrough_contract.gd', 'test_dave_sleep_support.gd', 'reference_actor_animation_sleep_original.gd')) {
     if (-not (Test-Path -LiteralPath (Join-Path $PSScriptRoot $script) -PathType Leaf)) {
         throw "Required gate $script is missing. Simulation, scene and art checks must exist before this runner can pass."
     }
@@ -132,6 +132,7 @@ Invoke-Gate -Name 'feedback-art' -GodotArgs @('--script', 'res://tests/test_feed
 Invoke-Gate -Name 'dust-visual-contract' -GodotArgs @('--script', 'res://tests/test_world_dust_visual_contract.gd', '--quit-after', '6000') -PassPattern 'WORLD DUST VISUAL CONTRACT: PASS'
 Invoke-Gate -Name 'feedback-visual-contract' -GodotArgs @('--script', 'res://tests/test_world_feedback_visual_contract.gd', '--quit-after', '6000') -PassPattern 'ACTUAL DOMAIN FEEDBACK VISUAL CONTRACT: PASS'
 Invoke-Gate -Name 'dave-walkthrough-contract' -GodotArgs @('--script', 'res://tests/test_dave_walkthrough_contract.gd', '--quit-after', '6000') -PassPattern 'DAVE WALKTHROUGH CONTRACT: PASS'
+Invoke-Gate -Name 'dave-sleep-support' -GodotArgs @('--script', 'res://tests/test_dave_sleep_support.gd', '--quit-after', '12000') -PassPattern 'DAVE SLEEP SUPPORT: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
@@ -174,9 +175,9 @@ foreach ($entry in @(
     @{ Name = 'startup-oracle'; Script = '3d-startup-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'world-feedback-oracle'; Script = 'world-feedback-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'world-dust-oracle'; Script = 'world-dust-oracle.mjs'; Arguments = @('--check') },
-    @{ Name = 'parity-metadata-contract'; Script = 'parity-metadata-test.mjs'; Arguments = @('--pins=metadata-v2') },
-    @{ Name = 'parity-metadata-check'; Script = 'parity-metadata-migrate.mjs'; Arguments = @('--pins=metadata-v2','--check') },
-    @{ Name = 'parity-metadata-gate'; Script = 'parity-metadata-gate.mjs'; Arguments = @('--pins=metadata-v2') },
+    @{ Name = 'parity-metadata-contract'; Script = 'parity-metadata-test.mjs'; Arguments = @('--pins=metadata-v3') },
+    @{ Name = 'parity-metadata-check'; Script = 'parity-metadata-migrate.mjs'; Arguments = @('--pins=metadata-v3','--check') },
+    @{ Name = 'parity-metadata-gate'; Script = 'parity-metadata-gate.mjs'; Arguments = @('--pins=metadata-v3') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -184,4 +185,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 131/131 PASS (import clean; 86 engine suites and 45 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 132/132 PASS (import clean; 87 engine suites and 45 source/parity checks; complete-port acceptance remains tracked separately)'

@@ -1,0 +1,1641 @@
+{
+  "status": "static_index_checked_not_acceptance",
+  "checks": 408,
+  "failures": [],
+  "engine_executed": false,
+  "metadata_edits": false,
+  "checks_detail": [
+    {
+      "pass": true,
+      "label": "all32 rows present"
+    },
+    {
+      "pass": true,
+      "label": "exact feature ordering/IDs retained"
+    },
+    {
+      "pass": true,
+      "label": "production manifest unchanged since audit snapshot"
+    },
+    {
+      "pass": true,
+      "label": "statuses untouched"
+    },
+    {
+      "pass": true,
+      "label": "state_boot_and_modes: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "state_boot_and_modes: valid evidence key opening"
+    },
+    {
+      "pass": true,
+      "label": "state_boot_and_modes: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "state_boot_and_modes: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "state_boot_and_modes: valid evidence key release"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "movement_and_physicality: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "movement_and_physicality: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "movement_and_physicality: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "movement_and_physicality: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "movement_and_physicality: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "movement_and_physicality: valid evidence key dave"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/actor_navigation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_neighborhood.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/world_adapter.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_actor_navigation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_integration.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_world.gd"
+    },
+    {
+      "pass": true,
+      "label": "main_loop_and_withdrawal: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "main_loop_and_withdrawal: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "main_loop_and_withdrawal: valid evidence key tony"
+    },
+    {
+      "pass": true,
+      "label": "main_loop_and_withdrawal: valid evidence key opening"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/memory_loop.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_memory_loop.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:tools/3d-memory-oracle.mjs"
+    },
+    {
+      "pass": true,
+      "label": "input_and_interaction_arbitration: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "input_and_interaction_arbitration: valid evidence key release"
+    },
+    {
+      "pass": true,
+      "label": "input_and_interaction_arbitration: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "input_and_interaction_arbitration: valid evidence key dave"
+    },
+    {
+      "pass": true,
+      "label": "input_and_interaction_arbitration: valid evidence key karaoke"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "inventory_equipment_weapons_tools: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "inventory_equipment_weapons_tools: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "inventory_equipment_weapons_tools: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "inventory_equipment_weapons_tools: valid evidence key gear"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/inventory.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/vendors_core.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/first_person_rig.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_economy.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_viewmodel_context.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_viewmodel_gear.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "core_vendors_and_economy: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "core_vendors_and_economy: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "core_vendors_and_economy: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/vendors_core.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_economy.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_integration.gd"
+    },
+    {
+      "pass": true,
+      "label": "supply_fencing_and_cooking_economy: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "supply_fencing_and_cooking_economy: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "supply_fencing_and_cooking_economy: valid evidence key all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/quest_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/street_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_quest_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_street_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "dumpster_trash_pickups_and_lottery: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "dumpster_trash_pickups_and_lottery: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "dumpster_trash_pickups_and_lottery: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "dumpster_trash_pickups_and_lottery: valid evidence key finds"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/world_prop_actions.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/neighborhood_utilities.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/find_view.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_world_prop_actions.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_neighborhood_utilities.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_find_view.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "npc_agency_and_lifecycle: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "npc_agency_and_lifecycle: valid evidence key dave"
+    },
+    {
+      "pass": true,
+      "label": "npc_agency_and_lifecycle: valid evidence key resident"
+    },
+    {
+      "pass": true,
+      "label": "npc_agency_and_lifecycle: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "npc_agency_and_lifecycle: valid evidence key departure"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/actor_animation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/actor_director.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/character_roster.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_character_roster.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_combat.gd"
+    },
+    {
+      "pass": true,
+      "label": "basic_combat: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "basic_combat: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "basic_combat: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "basic_combat: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "basic_combat: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/combat_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_combat.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "combat_archetypes_projectiles: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "combat_archetypes_projectiles: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "combat_archetypes_projectiles: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "combat_archetypes_projectiles: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "combat_archetypes_projectiles: valid evidence key projectiles"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/actor_director.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/combat_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_combat.gd"
+    },
+    {
+      "pass": true,
+      "label": "police_death_and_arrest: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "police_death_and_arrest: valid evidence key failed_profile"
+    },
+    {
+      "pass": true,
+      "label": "police_death_and_arrest: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "police_death_and_arrest: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/combat_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_combat.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "tony_co_op_and_other_local_bosses: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "tony_co_op_and_other_local_bosses: valid evidence key tony"
+    },
+    {
+      "pass": true,
+      "label": "tony_co_op_and_other_local_bosses: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "tony_co_op_and_other_local_bosses: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/boss_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_bosses.gd"
+    },
+    {
+      "pass": true,
+      "label": "intro_quests_ranks_and_achievements: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "intro_quests_ranks_and_achievements: valid evidence key opening"
+    },
+    {
+      "pass": true,
+      "label": "intro_quests_ranks_and_achievements: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "intro_quests_ranks_and_achievements: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "intro_quests_ranks_and_achievements: valid evidence key dave"
+    },
+    {
+      "pass": true,
+      "label": "intro_quests_ranks_and_achievements: valid evidence key all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/progression_routes.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/quest_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_progression.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_quest_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "daily_hustles_and_block_routes: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "daily_hustles_and_block_routes: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "daily_hustles_and_block_routes: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/progression_routes.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_integration.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_progression.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:tools/3d-progression-oracle.mjs"
+    },
+    {
+      "pass": true,
+      "label": "factions_and_territory: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "factions_and_territory: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "factions_and_territory: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "factions_and_territory: valid evidence key all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "factions_and_territory: valid evidence key world_details"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/progression_routes.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_progression.gd"
+    },
+    {
+      "pass": true,
+      "label": "office_claims_and_work_orders: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "office_claims_and_work_orders: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "office_claims_and_work_orders: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "office_claims_and_work_orders: valid evidence key all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/office_campaign.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/campaign_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_office_campaign.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_campaign.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "kingdom_and_endless_succession: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "kingdom_and_endless_succession: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "kingdom_and_endless_succession: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/kingdom_campaign.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/campaign_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_kingdom_campaign.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_kingdom_physics.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "clock_weather_day_events_and_sleeping: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "clock_weather_day_events_and_sleeping: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "clock_weather_day_events_and_sleeping: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "clock_weather_day_events_and_sleeping: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "clock_weather_day_events_and_sleeping: valid evidence key departure"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/day_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/weather_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/world_adapter.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_day_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_weather_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_departures.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "hideouts_and_shared_stash: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "hideouts_and_shared_stash: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "hideouts_and_shared_stash: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "hideouts_and_shared_stash: valid evidence key world_details"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/travel_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_travel.gd"
+    },
+    {
+      "pass": true,
+      "label": "cart_and_bus_travel: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "cart_and_bus_travel: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "cart_and_bus_travel: valid evidence key cart"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/travel_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/cart_view.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_travel.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_cart_view.gd"
+    },
+    {
+      "pass": true,
+      "label": "recognition_concessions_discovery: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "recognition_concessions_discovery: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "recognition_concessions_discovery: valid evidence key world_details"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/memory_loop.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/quest_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/resident_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/street_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_memory_loop.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_quest_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_resident_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_street_dialogue.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:tools/3d-memory-oracle.mjs"
+    },
+    {
+      "pass": true,
+      "label": "emergency_hitter: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "emergency_hitter: valid evidence key emitters"
+    },
+    {
+      "pass": true,
+      "label": "emergency_hitter: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/memory_loop.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_memory_loop.gd"
+    },
+    {
+      "pass": true,
+      "label": "robbery: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "robbery: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/actor_director.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/robbery_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_robbery.gd"
+    },
+    {
+      "pass": true,
+      "label": "copper_sites_and_break_ins: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "copper_sites_and_break_ins: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/heist_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/world_adapter.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_heists.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_site_integration.gd"
+    },
+    {
+      "pass": true,
+      "label": "cooking_heat_minigame: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "cooking_heat_minigame: valid evidence key all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "cooking_heat_minigame: valid evidence key opening"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/cooking_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/cooking_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_cooking.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_cooking_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_cooking_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "other_activities: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "other_activities: valid evidence key karaoke"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/rhythm_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/old_school.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/world_prop_actions.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/neighborhood_utilities.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_rhythm.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_old_school.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_old_school_physical.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_world_prop_actions.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_neighborhood_utilities.gd"
+    },
+    {
+      "pass": true,
+      "label": "communications_possum_and_ambient_events: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "communications_possum_and_ambient_events: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "communications_possum_and_ambient_events: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "communications_possum_and_ambient_events: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/communications_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/prop_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_communications.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "living_neighborhood_incidents: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "living_neighborhood_incidents: valid evidence key incidents"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/incident_system.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/incident_corridors.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/incident_path_map.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/incident_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_incidents.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_incident_reservations.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_incident_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_incident_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: valid evidence key release"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: valid evidence key dave"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "hud_map_guidance_and_presentation: valid evidence key world_details"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_hud.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/actor_hud_overlay.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/guidance_view.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/guidance_projection.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/weather_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_hud.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_actor_hud.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_guidance.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_guidance_projection.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_weather_presentation.gd"
+    },
+    {
+      "pass": true,
+      "label": "persistence_and_recovery: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "persistence_and_recovery: valid evidence key office"
+    },
+    {
+      "pass": true,
+      "label": "persistence_and_recovery: valid evidence key campaign"
+    },
+    {
+      "pass": true,
+      "label": "persistence_and_recovery: valid evidence key pretender"
+    },
+    {
+      "pass": true,
+      "label": "persistence_and_recovery: valid evidence key release"
+    },
+    {
+      "pass": true,
+      "label": "persistence_and_recovery: valid evidence key hands"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/save_store.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_game_state.gd"
+    },
+    {
+      "pass": true,
+      "label": "audio_and_packaging: bothplatform boundary no promotion"
+    },
+    {
+      "pass": true,
+      "label": "audio_and_packaging: valid evidence key release"
+    },
+    {
+      "pass": true,
+      "label": "audio_and_packaging: valid evidence key effects_profile"
+    },
+    {
+      "pass": true,
+      "label": "audio_and_packaging: valid evidence key sustained"
+    },
+    {
+      "pass": true,
+      "label": "audio_and_packaging: valid evidence key feedback"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/synth.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/source_audio.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/ambient_audio.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/save_store.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/scripts/full_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_scene.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_source_audio.gd"
+    },
+    {
+      "pass": true,
+      "label": "current owner/test exists:game3d/tests/test_audio_runtime.gd"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:opening"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:opening"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:office"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:office"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:campaign"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:campaign"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:pretender"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:pretender"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:tony"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:tony"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:karaoke"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:karaoke"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:hands"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:hands"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:dave"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:dave"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:resident"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:resident"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:release"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:release"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:feedback"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:feedback"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:effects_profile"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:effects_profile"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:sustained"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:sustained"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:failed_profile"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:failed_profile"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:departure"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:departure"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:all11_pending"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:gear"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:gear"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:finds"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:finds"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:cart"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:cart"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:emitters"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:emitters"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:projectiles"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:projectiles"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:incidents"
+    },
+    {
+      "pass": true,
+      "label": "evidence bytes retained:incidents"
+    },
+    {
+      "pass": true,
+      "label": "evidence path exists:world_details"
+    }
+  ]
+}
