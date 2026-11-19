@@ -37,6 +37,15 @@ func _run() -> void:
 		if game.ready_for_play: break
 	check(game.ready_for_play,"actual full scene reaches title")
 	if not game.ready_for_play: await _finish(); return
+	for pair: Array in [["forward",KEY_W,KEY_UP],["back",KEY_S,KEY_DOWN],["left",KEY_A,KEY_LEFT],["right",KEY_D,KEY_RIGHT]]:
+		for code: int in [pair[1],pair[2]]:
+			var alias := InputEventKey.new(); alias.physical_keycode = code
+			check(InputMap.action_has_event(pair[0],alias),"advertised movement alias exists: "+str(code))
+	var input_sizes: Array = []
+	for action: String in ["forward","back","left","right","sprint"]: input_sizes.append(InputMap.action_get_events(action).size())
+	game._register_inputs()
+	for index: int in range(input_sizes.size()):
+		check(InputMap.action_get_events(["forward","back","left","right","sprint"][index]).size() == input_sizes[index],"input registration keeps existing events without duplicate aliases")
 	game.set_process(false); game.qa_mode = true
 	game.store.save_path = ProjectSettings.globalize_path("res://../.build/3d/full-scene-test-save.json")
 	game.store.storage_key = "rockbottom_3d_full_test"
@@ -45,8 +54,33 @@ func _run() -> void:
 	for actor: Dictionary in game.runtime.state.npcs:
 		check(game.physics._clear(game.runtime.combat._geometry(actor),Vector2(actor.x,actor.y),false),"initial actor is physically clear before first tick:"+actor.id)
 	check(game.runtime.s.mode == "title" and game.hud.modal.visible,"startup title mode agrees with surface")
+	check(game.fixture_motion.inspect().built and game.world.dynamic_fixture_motion,"actual full scene adopts source fixture anchors")
+	check(is_instance_valid(game._pete_food) and game._pete_food.name == "hot_pocket","steam binds the actual retained food prop")
+	game._sync_fixture_motion(150,1600)
+	check(not game.fixture_motion.inspect().tv_visible,"source fixture motion is hidden at title")
 	game._new_game()
 	check(game.runtime.s.mode == "playing" and not game.hud.modal.visible,"new game closes menu once")
+	var fixture_before: Dictionary = game.runtime.snapshot()
+	game._sync_fixture_motion(0,0)
+	check(game.fixture_motion.inspect().tv_visible and not game.fixture_motion.inspect().sample.tv_on,"world fixture projection uses supplied monotonic clock")
+	game._sync_fixture_motion(100,1600)
+	check(game.fixture_motion.inspect().sample.tv_on and not game.fixture_motion.inspect().sample.shadow_visible,"independent visual and Unix clocks reach source boundaries")
+	check(game.runtime.snapshot() == fixture_before,"fixture projection cannot mutate shared source state")
+	var fixture_day: float = game.runtime.s.dayTime
+	game.runtime.s.dayTime = 0.9
+	game._sync_model_nodes(0.0)
+	check(not game.actors.pete.visible and not game._pete_food.is_visible_in_tree(),"actual Day owner hides Pete and food during source night")
+	var night_before: Dictionary = game.runtime.snapshot()
+	check(game._sync_fixture_motion(400,1600) and game.fixture_motion.inspect().steam_visible,"actual normal night still renders steam through the counter fallback")
+	var counter: Dictionary = game.world.fixture_motion_bindings().pawn_counter
+	var counter_basis: Basis = counter.transform.basis.orthonormalized()
+	var expected_steam: Vector3 = counter.transform*Vector3(0,counter.size.y*0.5,0)+counter_basis.x*sin(1.0)*0.08+Vector3.UP*0.125
+	check(game.fixture_motion._steam.global_position.distance_to(expected_steam) < 0.00001,"live night steam uses the existing pawn service aperture")
+	check(game.runtime.snapshot() == night_before,"night fixture fallback cannot change actor or source state")
+	for boundary: float in [0.25,0.75]:
+		game.runtime.s.dayTime = boundary; game._sync_model_nodes(0.0); game._sync_fixture_motion(400,1600)
+		check(game.actors.pete.visible and not game.fixture_motion.inspect().steam_visible,"strict night boundary keeps daytime Pete without steam: "+str(boundary))
+	game.runtime.s.dayTime = fixture_day; game._sync_model_nodes(0.0); game._sync_fixture_motion(100,1600)
 	await physics_frame
 	game._process(1.0/60.0)
 	check(game.player.position.distance_to(Content.to_world(game.runtime.state.player_center(),game.Adapter.FEET)) < 0.00001,"player view mirrors the authoritative controller")
@@ -239,6 +273,12 @@ func _run() -> void:
 	await game.store.write_save(legacy_walls); await game._load()
 	check(game.runtime.wall_markings.inspect().draws > marking_draws and game.runtime.wall_markings.inspect().bound,"actual Scene load retains missing-field migration through placement normalization")
 	await _test_bounded_wall_load(saved)
+	for kind: String in ["missing","null","scalar","empty"]:
+		var hustle_save: Dictionary = saved.duplicate(true)
+		if kind == "missing": hustle_save.state.erase("hustles")
+		else: hustle_save.state.hustles = [] if kind == "empty" else (17 if kind == "scalar" else null)
+		await game.store.write_save(hustle_save); await game._load()
+		check(game.runtime.s.hustles.size() == (0 if kind == "empty" else 3),"actual placement-normalized load preserves hustle fallback decision: "+kind)
 	await game.store.write_save(saved); await game._load(); game._resume()
 	game.runtime.p.cash = 23
 	await game.store.write_save({"schema":900,"cash":999})

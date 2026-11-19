@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rock Bottom — actual Web fixture evidence</title>
+<style>
+body{margin:0;background:#252925;color:#d4c896;font:14px/1.35 monospace}
+header,section{padding:10px 14px}header{border-bottom:1px solid #606457}
+h1{font-size:16px;margin:0 0 6px}p{margin:5px 0}button,select{font:inherit;color:#d4c896;background:#38433a;border:1px solid #777d6a;padding:5px;margin:3px 4px 3px 0}
+button:disabled,select:disabled{opacity:.45}#canvas{display:block;width:min(1280px,100%);height:auto;outline:none;background:#514b3b}
+#status{font-weight:bold}pre{white-space:pre-wrap;word-break:break-word;max-height:330px;overflow:auto;background:#1d221f;padding:10px}
+.failure{color:#dc9290}summary{cursor:pointer}#current-step{color:#e8c040}
+</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+<header>
+<h1>Actual WebGL fixture evidence</h1>
+<p id="status" role="status">LOADING — waiting for the real engine</p>
+<p id="current-step">No rendered step yet.</p>
+<label for="step-select">View</label>
+<select id="step-select" disabled><option>Loading real world…</option></select>
+<button id="render-step" disabled>Render step</button>
+<button id="previous" disabled>Previous</button>
+<button id="next" disabled>Next</button>
+<button id="download" disabled>Download JSON</button>
+<p>Fixed source clocks. Capture the canvas only after READY. No automatic advance.</p>
+</header>
+<canvas id="canvas" width="1280" height="720" tabindex="0" data-ready="false" data-step="none" aria-label="Actual Godot WebGL2 fixture rendering"></canvas>
+<section>
+<details open><summary>Current rendered-step result</summary><pre id="step-result">Waiting for Godot framebuffer readback.</pre></details>
+<details><summary>Complete bounded report</summary><pre id="result">No evidence yet.</pre></details>
+<details><summary>Engine output</summary><pre id="engine-log"></pre></details>
+<p>This checks staged presentation and actual framebuffer contribution. It does not claim earned gameplay, Canvas color equality, or a full-frame performance budget.</p>
+</section>
+<script src="$GODOT_URL"></script>
+<script>
+(() => {
+  'use strict';
+  const canvas=document.getElementById('canvas'),status=document.getElementById('status');
+  const current=document.getElementById('current-step'),select=document.getElementById('step-select');
+  const controls=['render-step','previous','next'].map(id=>document.getElementById(id));
+  const logs=[],engineErrors=[],browserErrors=[];
+  let last=null,webgl=null,catalogKey='',booted=false;
+  window.rbFixtureEvidence={ready:false,acceptance:false,phase:'loading'};
+  function bounded(list,value,cap){if(list.length<cap)list.push(String(value).slice(0,1500));}
+  function log(value,error=false){
+    bounded(logs,value,100);
+    if(error)bounded(engineErrors,value,50);
+    document.getElementById('engine-log').textContent=logs.join('\n');
+    if(error){status.textContent='ENGINE ERROR — inspect report';status.className='failure';canvas.dataset.ready='false';}
+    if(last)publish(last);
+  }
+  function actualWebGL(){
+    try{
+      const gl=canvas.getContext('webgl2');
+      return gl?{webgl2:true,version:gl.getParameter(gl.VERSION),shading_language:gl.getParameter(gl.SHADING_LANGUAGE_VERSION),renderer:gl.getParameter(gl.RENDERER),vendor:gl.getParameter(gl.VENDOR),attributes:gl.getContextAttributes(),drawing_buffer:[gl.drawingBufferWidth,gl.drawingBufferHeight]}:{webgl2:false};
+    }catch(error){bounded(browserErrors,error,50);return {webgl2:false,error:String(error)};}
+  }
+  function publish(report){
+    last=report;
+    if(report.ready&&!webgl)webgl=actualWebGL();
+    const ready=report.ready===true&&engineErrors.length===0&&browserErrors.length===0;
+    const evidence={...report,ready,webgl,userAgent:navigator.userAgent,engine_errors:[...engineErrors],browser_errors:[...browserErrors],acceptance:report.model_and_framebuffer_pass===true&&ready&&webgl?.webgl2===true};
+    window.rbFixtureEvidence=evidence;
+    const key=JSON.stringify((report.steps||[]).map(step=>step.id));
+    if(key!==catalogKey){
+      catalogKey=key;select.replaceChildren();
+      (report.steps||[]).forEach((step,index)=>{const option=document.createElement('option');option.value=String(index);option.textContent=String(index+1).padStart(2,'0')+' — '+step.id;select.appendChild(option);});
+    }
+    if(report.current>=0)select.value=String(report.current);
+    const step=report.steps?.[report.current],record=step&&report.results?.[step.id];
+    current.textContent=step?`${report.current+1}/${report.steps.length} ${step.id} | dayTime=${step.day} | visual_ms=${step.visual_ms} | unix_ms=${step.unix_ms}`:'No rendered step.';
+    canvas.dataset.ready=String(ready);canvas.dataset.step=step?.id||'none';
+    const stepPass=record?.pass===true;
+    status.textContent=ready?`READY — ${stepPass?'step checks PASS':'step checks FAIL'} | ${report.visited}/15 visited | all-view acceptance ${evidence.acceptance?'PASS':'pending/FAIL'}`:'FAILED/NOT READY — inspect result and engine output';
+    status.className=ready&&stepPass?'':'failure';
+    select.disabled=!report.ready;controls.forEach(button=>button.disabled=!report.ready);
+    document.getElementById('download').disabled=false;
+    document.getElementById('step-result').textContent=JSON.stringify({ready,webgl,record,engine_errors:engineErrors,browser_errors:browserErrors},null,2);
+    document.getElementById('result').textContent=JSON.stringify(evidence,null,2);
+  }
+  window.rbFixtureBusy=index=>{
+    canvas.dataset.ready='false';window.rbFixtureEvidence.ready=false;
+    status.textContent=`RENDERING — step ${index+1}; waiting for actual frames`;
+    status.className='';select.disabled=true;controls.forEach(button=>button.disabled=true);
+  };
+  window.rbFixtureReport=report=>{
+    booted=true;clearTimeout(watchdog);publish(report);
+  };
+  function request(index){
+    if(typeof window.rbFixtureControl!=='function'||!last?.ready)return;
+    const number=Number(index);
+    if(Number.isInteger(number)&&number>=0&&number<last.steps.length)window.rbFixtureControl(number);
+  }
+  document.getElementById('render-step').onclick=()=>request(select.value);
+  document.getElementById('previous').onclick=()=>request(Math.max(0,Number(select.value)-1));
+  document.getElementById('next').onclick=()=>request(Math.min((last?.steps.length||1)-1,Number(select.value)+1));
+  document.getElementById('download').onclick=()=>{
+    const blob=new Blob([JSON.stringify(window.rbFixtureEvidence,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='fixture-web-evidence.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  addEventListener('error',event=>{bounded(browserErrors,event.message,50);if(last)publish(last);else log(event.message,true);});
+  addEventListener('unhandledrejection',event=>{bounded(browserErrors,event.reason,50);if(last)publish(last);else log(event.reason,true);});
+  const watchdog=setTimeout(()=>{if(!booted)log('Startup120s watchdog: no Godot framebuffer result.',true);},120000);
+  const config=$GODOT_CONFIG;
+  config.args=['--script','res://tests/fixture_web_probe.gd'];
+  config.canvas=canvas;config.canvasResizePolicy=0;config.focusCanvas=false;
+  config.onPrint=(...parts)=>log(parts.join(' '));
+  config.onPrintError=(...parts)=>log(parts.join(' '),true);
+  config.onProgress=(loaded,total)=>{if(!booted)status.textContent=total>0?`LOADING — ${Math.round(loaded*100/total)}%`:'LOADING — engine files';};
+  const engine=new Engine(config);
+  engine.startGame().catch(error=>log(error,true));
+})();
+</script>
+</body>
+</html>

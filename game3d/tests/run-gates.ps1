@@ -114,6 +114,12 @@ Invoke-Gate -Name 'kingdom-view' -GodotArgs @('--script', 'res://tests/test_king
 Invoke-Gate -Name 'wall-markings' -GodotArgs @('--script', 'res://tests/test_wall_markings.gd', '--quit-after', '6000') -PassPattern '3D WALL MARKINGS GATE: PASS'
 Invoke-Gate -Name 'wall-marking-view' -GodotArgs @('--script', 'res://tests/test_wall_marking_view.gd', '--quit-after', '6000') -PassPattern '3D WALL MARKING VIEW GATE: PASS'
 Invoke-Gate -Name 'boss-acceptance-contract' -GodotArgs @('--script', 'res://tests/test_boss_acceptance_contract.gd', '--quit-after', '6000') -PassPattern '3D BOSS ACCEPTANCE CONTRACT: PASS'
+Invoke-Gate -Name 'pose-input-memo' -GodotArgs @('--script', 'res://tests/test_pose_input_memo.gd', '--quit-after', '6000') -PassPattern '3D POSE INPUT MEMO GATE: PASS'
+Invoke-Gate -Name 'district-grade' -GodotArgs @('--script', 'res://tests/test_district_grade.gd', '--quit-after', '6000') -PassPattern 'DISTRICT GRADE DRAFT GATE: PASS'
+Invoke-Gate -Name 'office-acceptance-contract' -GodotArgs @('--script', 'res://tests/test_office_acceptance_contract.gd', '--quit-after', '6000') -PassPattern '3D OFFICE ACCEPTANCE CONTRACT: PASS'
+Invoke-Gate -Name 'fixture-motion' -GodotArgs @('--script', 'res://tests/test_fixture_motion.gd', '--quit-after', '6000') -PassPattern '3D FIXTURE MOTION GATE: PASS'
+Invoke-Gate -Name 'fixture-motion-world' -GodotArgs @('--script', 'res://tests/test_fixture_motion_world.gd', '--quit-after', '6000') -PassPattern '3D FIXTURE MOTION WORLD GATE: PASS'
+Invoke-Gate -Name 'startup-parity' -GodotArgs @('--script', 'res://tests/test_startup_parity.gd', '--quit-after', '6000') -PassPattern '3D STARTUP PARITY GATE: PASS'
 foreach ($entry in @(
     @{ Name = 'content'; Script = '3d-content-gate.mjs'; Arguments = @() },
     @{ Name = 'content-drift'; Script = 'export-3d-content.mjs'; Arguments = @('--check') },
@@ -151,6 +157,9 @@ foreach ($entry in @(
     @{ Name = 'leash-border-oracle'; Script = 'leash-border-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'kingdom-view-oracle'; Script = '3d-kingdom-view-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'wall-markings-oracle'; Script = 'wall-markings-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'district-grade-oracle'; Script = 'district-grade-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'fixture-motion-oracle'; Script = '3d-fixture-motion-oracle.mjs'; Arguments = @('--check') },
+    @{ Name = 'startup-oracle'; Script = '3d-startup-oracle.mjs'; Arguments = @('--check') },
     @{ Name = 'parity-coverage'; Script = '3d-parity-gate.mjs'; Arguments = @() }
 )) {
     $scriptPath = Join-Path $repoRoot ('tools/' + $entry.Script)
@@ -158,4 +167,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 105/105 PASS (import clean; 68 engine suites and 37 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 114/114 PASS (import clean; 74 engine suites and 40 source/parity checks; complete-port acceptance remains tracked separately)'

@@ -94,3 +94,30 @@ Native refinement: the bottle rim uses uneven broad tangential glass wedges and 
 notch, preserving neck/grip/material/cache. The active kick raises the shoe and connected
 cuff into the lower78-degree view; hidden rest, duration and input semantics are unchanged.
 The context gate checks actual shoe/cuff vertex projection at the visible action phase.
+
+## P05f — relaxed empty hands, captured before implementation
+
+The actual 1280 Block and 960 crash captures show mirrored, nearly flat palms. Retain
+the authored palm/digit meshes and add a separate empty-hand relaxation profile: the
+left wrist rests slightly lower and farther back, both wrists turn away from the flat
+forward presentation, and fingers curl progressively from index to little finger with
+a quieter thumb spread. Neither hand becomes a permanent guard fist. Existing gait,
+sprint, breathing, look and crash motion remain the only stance clocks.
+
+Apply this profile only to a hand with no equipped/captured weapon, tool or cart grip.
+Do not change the shared grip evaluator: all weapon/tool/cart finger and wrist anchors
+keep their current transforms. Blend the empty profile out with the existing action
+envelope and restore it through recovery, including phase zero and the action-to-idle
+boundary. Full-extension fist contact keeps the existing pose, cuff clearance, immediate
+acknowledgement and duration. No cosmetic queue or interpolation delays accepted combat.
+Replace only the pickup/dumpster open-to-close finger discontinuities with short smooth
+phase transitions; their acknowledgement, reaches, peak/end timing and outcomes stay
+unchanged. No geometry, shared resource, API, camera, input or model changes.
+
+Extend the existing context gate with actual skin geometry/projection at 1280x720 and
+960x540, reflected palm/digit asymmetry, nonuniform relaxed joint flexion, uninterrupted
+gesture start/recovery, unchanged occupied grip poses, and finite near-plane/center
+clearance during gait/crash/sprint. Retain the original 41 P01 checks unchanged. Extend
+the context native probe with both sizes, empty idle/crash/walk/settle/sprint, pickup and
+dumpster transition poses, and alternating fist contact. Native review remains required;
+mathematical bounds alone do not establish that the new stance reads naturally.

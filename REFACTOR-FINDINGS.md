@@ -977,3 +977,76 @@ The same purchased rock completed18.049s high/7.995s crash and actual ending/con
 The isolated fresh$25 fixture and state-aware automated driver are disclosed; this
 proves one feasible native Tony fight, not human usability, browser/all-boss parity
 or whole-campaign completion. No production behavior changed for this acceptance.
+
+### IMPL-3D-FULL-21 — encoded district color pass
+
+Adopt original ordered closed-edge zone/terrain grade selection and all39 recipe IDs
+through one SDR screen pass beneath HUD. Six material recipes are initialized once;
+no added light, gameplay state, RNG or clock. Explicit adaptation: final3D rain,
+emissives and hands share grading, unlike the original separate2D layering. Actual
+Chromium Canvas reference versus native and WebGL2 patches has maximum2/255 channel
+error across270 channels; the UI patch is unchanged. This is quantization-bounded,
+not byte-identical Canvas rasterization. Full-scene visual and performance acceptance
+remain separately required.
+
+### IMPL-3D-FULL-22 — passive original fixture motion
+
+One adopted CORNER screen and four actual laundry drums retain existing3D counts
+instead of introducing the source's5/6 facade tally. TV/washer phases and food steam
+read monotonic visual time; the passing shadow reads Unix time; title alone hides
+world motion. Pete steam uses the existing visible food prop when supplied; normal
+night play hides Pete, so the existing front pawn service aperture supplies its
+fallback anchor. The3D facade has no front framed pane at that opening. This is an
+explicit counter/window adaptation, with no invented alive check or new geometry.
+The shadow is split over bounded preexisting ground receiver rectangles,
+with ordinary depth testing; its late tail at.017m is occluded by the actual later
+building floor at.021m. No collider, source location, light, particle, gameplay timer
+or save field changes. Native acceptance and local/whole-scene budgets remain open.
+
+### IMPL-3D-FULL-23 — exact reuse and honest workload measurement
+
+Reuse identical per-bone rest/angle/offset results while always reinstalling poses
+through existing overlay/IK invalidation. Reuse overlap/sweep query setup only inside
+a synchronous call; keep all actual physical proofs and lifetime invalidations.
+Diagnostic stage-call counts and active milliseconds accompany future performance
+reports because equal render-frame counts do not imply equal simulation work. No
+AI clock, NPC count, model detail, renderer setting or frame target is reduced.
+
+### IMPL-3D-FULL-24 — movement aliases and physical acceptance drivers
+
+Bind the source journal's advertised arrow keys to the existing WASD movement actions
+idempotently. Keep boss/Office acceptance as isolated normal-input tests, with actual
+LOS/capsule approaches, explicit fixtures and finite work/time limits. Failed driver
+runs remain evidence; driver repairs never change production damage or obstacles.
+
+### IMPL-3D-FULL-25 — startup publications and conditional restore
+
+Fresh/load publishes the source wake toast, two ordered feed entries and ranked
+news through the existing Communications owner. Call-time silence and queued work
+remain authoritative; there is no second feed. Restore removes the conditional
+intro pile only when the source start/spawn boundary requires it, preserving its
+same-session availability and rejecting stale pickup references. Missing/non-array
+saved hustles invoke the existing owner after wall restoration and before route
+generation; explicit arrays retain sanitized contents, including empty arrays.
+Source fixtures cover exact bottle/wall/hustle/route RNG order and schema1 migration.
+Central startup parity321, State211, Runtime160 and Communications1219 pass.
+
+### IMPL-3D-FULL-26 — relaxed empty-hand stance
+
+Lower and asymmetrically relax unoccupied hands through additive pose offsets and
+progressive finger/thumb curl. Existing gesture envelopes fade the rest pose out
+and back; occupied tool/weapon/cart grips and peak punches retain their prior
+targets. Smooth pickup/dumpster finger ramps remove abrupt closing transitions.
+No mesh, material, gameplay input or action receipt changes. Context1329 and Gear729
+pass;93 native views include1280x720/960x540, both punch hands and recovery. Browser
+acceptance remains a separate obligation.
+
+### IMPL-3D-FULL-27 — retain truthful source obligations
+
+Update seven source-handler mappings for centrally checked startup, grade and
+fixture integration; retain all585 rows and every platform evidence obligation.
+The result is555 integrated/28partial/2planned, with0verified features. Original
+fixed spawn definitions do not imply omitted random generation. Aggregate frame
+rows remain partial for explicit first-person/pixel-helper/touch-scope dispositions
+and platform/performance acceptance. No original sprite contract or completion
+gate is relaxed to admit3D geometry or to convert incomplete evidence into a pass.

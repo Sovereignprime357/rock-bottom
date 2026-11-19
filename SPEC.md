@@ -2332,3 +2332,16 @@ world clock. Wall-marking generation is an explicit source shared-RNG owner, sep
 from its read-only presenter. Existing saved layouts remain authority. New layouts
 use pinned actual Canvas Courier widths, with source-order selection and documented
 first-person facade mapping. Engine, native and Web acceptance remain separate gates.
+
+### Full3D presentation continuation — 2026-11-18
+
+The full-port target now additionally follows SPEC-3D-DISTRICT-GRADE.md for the
+original ordered district multiply/overlay washes and SPEC-3D-FIXTURE-MOTION.md for
+shop-screen/washer/food-steam/underpass-shadow motion. These are passive3D views;
+source timings, geography, RNG and saved gameplay remain authoritative. District
+grading covers the final opaque3D world (including hands, rain and emissives), below
+all HUD/status/modal layers: an explicit adaptation of source draw order. Original
+v22/v19 pixel contracts are unchanged. Exact-input animation memo/query-local physics
+reuse and diagnostic workload counters are documented in their existing character/
+navigation specs. Actual-input Office acceptance is separately bounded by
+SPEC-3D-OFFICE-ACCEPTANCE.md; a test driver is not proof of a completed campaign.

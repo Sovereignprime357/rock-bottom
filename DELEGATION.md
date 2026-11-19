@@ -868,3 +868,20 @@ World-details checkpoint validation: 105/105 3D and 19/19 original gates green;
 both Full exports rebuilt. Native wall20 views and browser menu/save/reload/pawn
 graffiti checks pass. See reports/2026-11-18-3d-world-details.md. Full port remains
 active; current frozen release performance and complete campaign tours are pending.
+
+### Motion/color/startup checkpoint — central validation
+
+Bounded production packets now include district grade, facade/underpass clocked
+motion, relaxed empty hands, smaller-window HUD, advertised arrows, source startup
+publications and load fallbacks, and exact pose/query reuse. Native93 hand views
+and23 district views are reviewed; Scene418 and focused source/model checks pass.
+Final114-suite regression, fixture native/Web, exports and delivery are root-owned.
+Agents hold production and draft only next clearance/Karaoke/Web-evidence tasks.
+Do not mark full parity shipped from these packets: actual Office/Web campaigns
+and sustained60-actor performance remain required.
+
+Motion/color packet locally validated:114/1143D,19/19original,bothFull exports,
+93hand/31fixture/23district native views and15fixtureWebviews pass. Browser opening,
+menu exits,arrows,isolatedsave/reload/feed verified. Commit/push and frozen60 follow;
+actual Office/Web campaigns remain open. Nexttinyinput packet corrects advertised
+Space attack and cooking mute; draft held while the baseline is frozen.

@@ -175,3 +175,24 @@ World-details checkpoint validation: 105/105 3D and 19/19 original gates green;
 both Full exports rebuilt. Native wall20 views and browser menu/save/reload/pawn
 graffiti checks pass. See reports/2026-11-18-3d-world-details.md. Full port remains
 active; current frozen release performance and complete campaign tours are pending.
+
+### Motion/color/startup batch — current bounded freeze
+
+Root composes district grading, passive facade/underpass motion, lower relaxed
+hands, responsive headers/arrows, startup/load corrections and exact pose/query
+reuse. Central Scene418, startup321, fixture1286/world195 and hand1329/gear729 pass.
+Native hand93 and district23 views exist; district native/Web raster max error is
+2/255 with UI unchanged. Final fixture31 views and complete114-suite runner remain
+in validation. Public Pages and local8074 do not change until explicit Full export.
+
+Root alone runs engine/import/native/Web/export/Git. Architecture prepares only a
+far-player clearance draft; Characters prepares only a real-input Karaoke acceptance
+draft; World prepares only an isolated fixture-Web evidence wrapper. These drafts
+stay outside exports until reviewed. Current Office260 contract is not a campaign
+playthrough. Full60 frame budget and aggregate native/Web progression remain open.
+
+Motion/color validation completed:114/1143D plus19/19original and both Full exports
+pass. Browser menus/arrows/isolated save reload and source feed pass; fixture WebGL2
+15views/568checks/6pulsepairs pass. Raw reports/harness/source hashes are retained.
+Local8074 serves this build. Root next freezes/pushes and measures actual60, then
+runs Office. Pending bounded shortcuts: Space attack and M during cooking.

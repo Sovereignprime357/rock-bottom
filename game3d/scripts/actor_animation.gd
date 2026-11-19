@@ -10,6 +10,9 @@ const AMBIENT_ACTIONS: Array[StringName] = [&"",&"talk",&"eat",&"inspect",&"read
 static func reset(art: Node3D) -> void:
 	if art == null or not art.has_meta("roster_rig"): return
 	var rig: Dictionary = art.get_meta("roster_rig")
+	_prepare_pose_input_memo(rig)
+	rig.pose_input_hits = 0
+	rig.pose_input_solves = 0
 	rig.time = 0.0
 	rig.phase = 0.0
 	rig.motion = 0.0
@@ -32,6 +35,7 @@ static func reset(art: Node3D) -> void:
 static func tick(art: Node3D, delta: float, snapshot: Dictionary, detail: int = 0, pose_needed: bool = true) -> void:
 	if art == null or not art.has_meta("roster_rig") or not is_finite(delta) or delta <= 0.0: return
 	var rig: Dictionary = art.get_meta("roster_rig")
+	_prepare_pose_input_memo(rig)
 	var dt := minf(delta,0.10)
 	var velocity := _vector3(snapshot.get("local_velocity",Vector3.ZERO))
 	velocity.y = 0.0
@@ -173,11 +177,35 @@ static func _vector2(value: Variant) -> Vector2:
 	return Vector2(_number(value.x),_number(value.y))
 
 
+static func _prepare_pose_input_memo(rig: Dictionary) -> void:
+	if rig.has("pose_input_memo") and rig.pose_input_memo.size() == rig.base_poses.size(): return
+	var entries: Array[Array] = []
+	for unused: int in range(rig.base_poses.size()):
+		entries.append([Transform3D.IDENTITY,Vector3.ZERO,Vector3.ZERO,Transform3D.IDENTITY,false])
+	rig.pose_input_memo = entries
+	if not rig.has("pose_input_cache_enabled"): rig.pose_input_cache_enabled = true
+	rig.pose_input_hits = 0
+	rig.pose_input_solves = 0
+
+
 static func _pose(rig: Dictionary, bone: String, angles: Vector3, offset: Vector3 = Vector3.ZERO) -> void:
 	if not rig.lookup.has(bone): return
 	var index: int = rig.lookup[bone]
 	var rest: Transform3D = rig.base_poses[index]
-	_set_local_pose(rig,index,Transform3D(rest.basis*Basis.from_euler(angles),rest.origin+offset))
+	if rig.pose_cache_enabled and rig.pose_input_cache_enabled:
+		var entry: Array = rig.pose_input_memo[index]
+		if entry[4] and entry[0] == rest and entry[1] == angles and entry[2] == offset:
+			rig.pose_input_hits += 1
+			# The working pose may now contain an overlay or IK result. Even a
+			# hit must reinstall its target and invalidate populated descendants.
+			_set_local_pose(rig,index,entry[3])
+			return
+		var target := Transform3D(rest.basis*Basis.from_euler(angles),rest.origin+offset)
+		entry[0] = rest; entry[1] = angles; entry[2] = offset; entry[3] = target; entry[4] = true
+		_set_local_pose(rig,index,target)
+	else:
+		_set_local_pose(rig,index,Transform3D(rest.basis*Basis.from_euler(angles),rest.origin+offset))
+	rig.pose_input_solves += 1
 
 
 static func _add(rig: Dictionary, bone: String, angles: Vector3) -> void:

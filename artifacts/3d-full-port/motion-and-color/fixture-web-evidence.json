@@ -1,0 +1,2123 @@
+{
+  "checks": 568,
+  "complete": true,
+  "current": 14,
+  "engine": "4.5.1-stable (official)",
+  "failures": [],
+  "format": "rock-bottom-fixture-web-evidence",
+  "hashes": {
+    "res://data/source_content.json": "dd075543b837e35d4026a708de8e023674282af82f7a60e1faf2f040593c5bb0",
+    "res://scripts/fixture_motion_view.gd": "",
+    "res://scripts/full_neighborhood.gd": "",
+    "res://scripts/weather_presentation.gd": "",
+    "res://tests/fixture_motion_probe.gd": "",
+    "res://tests/fixture_web_probe.gd": ""
+  },
+  "model_and_framebuffer_pass": true,
+  "pairs": [
+    {
+      "negative_delta": 0,
+      "pair": "sodium_0_day_",
+      "pass": true,
+      "positive_delta": 296,
+      "same_camera": true
+    },
+    {
+      "negative_delta": 0,
+      "pair": "sodium_0_night_",
+      "pass": true,
+      "positive_delta": 267,
+      "same_camera": true
+    },
+    {
+      "negative_delta": 0,
+      "pair": "sodium_1_day_",
+      "pass": true,
+      "positive_delta": 347,
+      "same_camera": true
+    },
+    {
+      "negative_delta": 0,
+      "pair": "sodium_1_night_",
+      "pass": true,
+      "positive_delta": 274,
+      "same_camera": true
+    },
+    {
+      "negative_delta": 0,
+      "pair": "sodium_2_day_",
+      "pass": true,
+      "positive_delta": 350,
+      "same_camera": true
+    },
+    {
+      "negative_delta": 0,
+      "pair": "sodium_2_night_",
+      "pass": true,
+      "positive_delta": 271,
+      "same_camera": true
+    }
+  ],
+  "provenance_note": "Empty hashes are unavailable: exported compiled GDScript may replace source paths. This is not a runtime failure or source-identity proof. Root retains external copied-source/archive/export-pack hashes; the source_content JSON hash remains separately reported.",
+  "ready": true,
+  "renderer": "gl_compatibility",
+  "request_cap": 60,
+  "requests": 15,
+  "results": {
+    "pawn_counter_steam_hidden_day": {
+      "camera": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473), O: (-31.09, 2.7, -2.19)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 14,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 24,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.394054379482448,
+          "steam_rise": 2.67375,
+          "steam_visible": false,
+          "steam_x": 1.95534869596411,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.44286722450966,
+              "y": 1.38496720987748
+            },
+            {
+              "x": -1.94499421048637,
+              "y": -0.465829927306614
+            },
+            {
+              "x": -0.658902489142282,
+              "y": -1.88834517760978
+            },
+            {
+              "x": 1.23298114203471,
+              "y": -1.57472458016848
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 73,
+        "tv_visible": true,
+        "uniform_writes": 15,
+        "visibility_writes": 37,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "counter": {
+          "mount": "service_aperture",
+          "size": "(2.400002, 2.5)",
+          "source_index": 0,
+          "transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+        },
+        "steam_position": "(-31.46294, 2.77095, -4.49)",
+        "steam_visible": false
+      },
+      "step": {
+        "day": 0.5,
+        "id": "pawn_counter_steam_hidden_day",
+        "kind": "steam",
+        "unix_ms": 3000,
+        "visual_ms": 713
+      }
+    },
+    "pawn_counter_steam_night_phase0": {
+      "camera": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473), O: (-31.09, 2.7, -2.19)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 12,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 20,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.394054379482448,
+          "steam_rise": 2.67375,
+          "steam_visible": true,
+          "steam_x": 1.95534869596411,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.44286722450966,
+              "y": 1.38496720987748
+            },
+            {
+              "x": -1.94499421048637,
+              "y": -0.465829927306614
+            },
+            {
+              "x": -0.658902489142282,
+              "y": -1.88834517760978
+            },
+            {
+              "x": 1.23298114203471,
+              "y": -1.57472458016848
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 64,
+        "tv_visible": true,
+        "uniform_writes": 13,
+        "visibility_writes": 36,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "counter": {
+          "mount": "service_aperture",
+          "size": "(2.400002, 2.5)",
+          "source_index": 0,
+          "transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+        },
+        "steam_position": "(-31.36178, 2.67195, -4.49)",
+        "steam_visible": true
+      },
+      "step": {
+        "day": 0.9,
+        "id": "pawn_counter_steam_night_phase0",
+        "kind": "steam",
+        "unix_ms": 3000,
+        "visual_ms": 713
+      }
+    },
+    "pawn_counter_steam_night_phase1": {
+      "camera": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473), O: (-31.09, 2.7, -2.19)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 13,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 20,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.396986740117185,
+          "steam_rise": 5.14875,
+          "steam_visible": true,
+          "steam_x": -0.573643132834148,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -0.270612034918936,
+              "y": -1.98160771258012
+            },
+            {
+              "x": 1.52125308694535,
+              "y": -1.29837939195724
+            },
+            {
+              "x": 1.91448513629013,
+              "y": 0.578572953847788
+            },
+            {
+              "x": 0.547548380430326,
+              "y": 1.92358799411104
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 69,
+        "tv_visible": true,
+        "uniform_writes": 14,
+        "visibility_writes": 36,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "counter": {
+          "mount": "service_aperture",
+          "size": "(2.400002, 2.5)",
+          "source_index": 0,
+          "transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+        },
+        "steam_position": "(-31.46294, 2.77095, -4.49)",
+        "steam_visible": true
+      },
+      "step": {
+        "day": 0.9,
+        "id": "pawn_counter_steam_night_phase1",
+        "kind": "steam",
+        "unix_ms": 3000,
+        "visual_ms": 1373
+      }
+    },
+    "sodium_0_day_max": {
+      "camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (2.0, 2.62, -16.6)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 1,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 0,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.4,
+          "steam_rise": 4.1233403578366,
+          "steam_visible": false,
+          "steam_x": 0.765366864730181,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.73205080756888,
+              "y": -0.999999999999999
+            },
+            {
+              "x": -0.0943600604023429,
+              "y": -1.99777280465044
+            },
+            {
+              "x": 1.63008489113439,
+              "y": -1.15880250590658
+            },
+            {
+              "x": 1.8558373112838,
+              "y": 0.745565472676225
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 13,
+        "tv_visible": true,
+        "uniform_writes": 2,
+        "visibility_writes": 21,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          84,
+          85,
+          80,
+          75,
+          77,
+          72,
+          66,
+          68,
+          63,
+          83,
+          85,
+          79,
+          76,
+          78,
+          73,
+          68,
+          70,
+          65,
+          84,
+          86,
+          80,
+          80,
+          81,
+          76,
+          73,
+          74,
+          69
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1477,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.127014160156
+        ],
+        "shown": [
+          177,
+          141,
+          95,
+          168,
+          133,
+          87,
+          159,
+          124,
+          79,
+          176,
+          141,
+          94,
+          169,
+          134,
+          88,
+          161,
+          126,
+          80,
+          177,
+          142,
+          95,
+          173,
+          138,
+          91,
+          165,
+          130,
+          84
+        ]
+      },
+      "step": {
+        "day": 0.5,
+        "id": "sodium_0_day_max",
+        "kind": "sodium",
+        "patch": 0,
+        "unix_ms": 3000,
+        "visual_ms": 1099.55742875643
+      }
+    },
+    "sodium_0_day_min": {
+      "camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (2.0, 2.62, -16.6)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 0,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 0,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.32,
+          "steam_rise": 0.370021073509811,
+          "steam_visible": false,
+          "steam_x": 1.84775906502257,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -8.57252759403147e-16,
+              "y": -2
+            },
+            {
+              "x": 1.68294196961579,
+              "y": -1.08060461173628
+            },
+            {
+              "x": 1.81859485365136,
+              "y": 0.832293673094284
+            },
+            {
+              "x": 0.282240016119735,
+              "y": 1.97998499320089
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 9,
+        "tv_visible": true,
+        "uniform_writes": 1,
+        "visibility_writes": 20,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          84,
+          85,
+          80,
+          75,
+          77,
+          72,
+          66,
+          68,
+          63,
+          83,
+          85,
+          79,
+          76,
+          78,
+          73,
+          68,
+          70,
+          65,
+          84,
+          86,
+          80,
+          80,
+          81,
+          76,
+          73,
+          74,
+          69
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1181,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.127014160156
+        ],
+        "shown": [
+          158,
+          130,
+          92,
+          149,
+          122,
+          84,
+          140,
+          112,
+          76,
+          157,
+          130,
+          91,
+          150,
+          123,
+          85,
+          142,
+          115,
+          78,
+          159,
+          131,
+          92,
+          154,
+          126,
+          88,
+          147,
+          119,
+          81
+        ]
+      },
+      "step": {
+        "day": 0.5,
+        "id": "sodium_0_day_min",
+        "kind": "sodium",
+        "patch": 0,
+        "unix_ms": 3000,
+        "visual_ms": 3298.67228626928
+      }
+    },
+    "sodium_0_night_max": {
+      "camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497704, 0.803984), O: (3.7, 2.62, -16.6)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 3,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 4,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.4,
+          "steam_rise": 4.1233403578366,
+          "steam_visible": true,
+          "steam_x": 0.765366864730181,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.73205080756888,
+              "y": -0.999999999999999
+            },
+            {
+              "x": -0.0943600604023429,
+              "y": -1.99777280465044
+            },
+            {
+              "x": 1.63008489113439,
+              "y": -1.15880250590658
+            },
+            {
+              "x": 1.8558373112838,
+              "y": 0.745565472676225
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 23,
+        "tv_visible": true,
+        "uniform_writes": 4,
+        "visibility_writes": 24,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          37,
+          35,
+          31,
+          37,
+          35,
+          31,
+          34,
+          32,
+          27,
+          38,
+          36,
+          31,
+          34,
+          32,
+          28,
+          30,
+          28,
+          24,
+          37,
+          35,
+          30,
+          34,
+          32,
+          27,
+          29,
+          27,
+          23
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1480,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.12255859375
+        ],
+        "shown": [
+          130,
+          91,
+          46,
+          130,
+          91,
+          46,
+          126,
+          88,
+          43,
+          131,
+          92,
+          47,
+          127,
+          88,
+          43,
+          123,
+          84,
+          40,
+          130,
+          91,
+          46,
+          126,
+          88,
+          43,
+          122,
+          83,
+          39
+        ]
+      },
+      "step": {
+        "day": 0.9,
+        "id": "sodium_0_night_max",
+        "kind": "sodium",
+        "patch": 0,
+        "unix_ms": 3000,
+        "visual_ms": 1099.55742875643
+      }
+    },
+    "sodium_0_night_min": {
+      "camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497704, 0.803984), O: (3.7, 2.62, -16.6)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 2,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 4,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.32,
+          "steam_rise": 0.370021073509811,
+          "steam_visible": true,
+          "steam_x": 1.84775906502257,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -8.57252759403147e-16,
+              "y": -2
+            },
+            {
+              "x": 1.68294196961579,
+              "y": -1.08060461173628
+            },
+            {
+              "x": 1.81859485365136,
+              "y": 0.832293673094284
+            },
+            {
+              "x": 0.282240016119735,
+              "y": 1.97998499320089
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 18,
+        "tv_visible": true,
+        "uniform_writes": 3,
+        "visibility_writes": 23,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          38,
+          36,
+          32,
+          38,
+          37,
+          32,
+          34,
+          33,
+          29,
+          39,
+          37,
+          33,
+          35,
+          34,
+          29,
+          31,
+          29,
+          25,
+          38,
+          36,
+          32,
+          34,
+          33,
+          29,
+          30,
+          28,
+          25
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1181,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.12255859375
+        ],
+        "shown": [
+          112,
+          81,
+          44,
+          112,
+          81,
+          45,
+          108,
+          78,
+          41,
+          113,
+          82,
+          45,
+          109,
+          79,
+          42,
+          105,
+          74,
+          38,
+          112,
+          81,
+          44,
+          108,
+          78,
+          41,
+          104,
+          73,
+          37
+        ]
+      },
+      "step": {
+        "day": 0.9,
+        "id": "sodium_0_night_min",
+        "kind": "sodium",
+        "patch": 0,
+        "unix_ms": 3000,
+        "visual_ms": 3298.67228626928
+      }
+    },
+    "sodium_1_day_max": {
+      "camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (7.6, 2.62, -14.2)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 5,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 8,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.4,
+          "steam_rise": 4.1233403578366,
+          "steam_visible": false,
+          "steam_x": 0.765366864730181,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.73205080756888,
+              "y": -0.999999999999999
+            },
+            {
+              "x": -0.0943600604023429,
+              "y": -1.99777280465044
+            },
+            {
+              "x": 1.63008489113439,
+              "y": -1.15880250590658
+            },
+            {
+              "x": 1.8558373112838,
+              "y": 0.745565472676225
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 31,
+        "tv_visible": true,
+        "uniform_writes": 6,
+        "visibility_writes": 27,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          85,
+          87,
+          81,
+          85,
+          87,
+          81,
+          86,
+          87,
+          81,
+          85,
+          86,
+          80,
+          85,
+          87,
+          81,
+          86,
+          87,
+          81,
+          85,
+          86,
+          80,
+          84,
+          85,
+          80,
+          84,
+          86,
+          80
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1477,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.127014160156
+        ],
+        "shown": [
+          178,
+          143,
+          96,
+          178,
+          143,
+          96,
+          179,
+          143,
+          96,
+          177,
+          142,
+          95,
+          178,
+          143,
+          96,
+          179,
+          144,
+          97,
+          177,
+          142,
+          95,
+          177,
+          142,
+          95,
+          177,
+          142,
+          95
+        ]
+      },
+      "step": {
+        "day": 0.5,
+        "id": "sodium_1_day_max",
+        "kind": "sodium",
+        "patch": 1,
+        "unix_ms": 3000,
+        "visual_ms": 1099.55742875643
+      }
+    },
+    "sodium_1_day_min": {
+      "camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (7.6, 2.62, -14.2)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 4,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 8,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.32,
+          "steam_rise": 0.370021073509811,
+          "steam_visible": false,
+          "steam_x": 1.84775906502257,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -8.57252759403147e-16,
+              "y": -2
+            },
+            {
+              "x": 1.68294196961579,
+              "y": -1.08060461173628
+            },
+            {
+              "x": 1.81859485365136,
+              "y": 0.832293673094284
+            },
+            {
+              "x": 0.282240016119735,
+              "y": 1.97998499320089
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 27,
+        "tv_visible": true,
+        "uniform_writes": 5,
+        "visibility_writes": 26,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          84,
+          85,
+          78,
+          84,
+          85,
+          79,
+          84,
+          85,
+          79,
+          83,
+          84,
+          78,
+          84,
+          84,
+          78,
+          85,
+          85,
+          79,
+          83,
+          84,
+          78,
+          83,
+          83,
+          77,
+          83,
+          83,
+          77
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1184,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.127014160156
+        ],
+        "shown": [
+          158,
+          130,
+          91,
+          158,
+          130,
+          91,
+          158,
+          130,
+          91,
+          157,
+          129,
+          90,
+          158,
+          129,
+          91,
+          159,
+          130,
+          92,
+          157,
+          129,
+          90,
+          157,
+          128,
+          90,
+          157,
+          128,
+          90
+        ]
+      },
+      "step": {
+        "day": 0.5,
+        "id": "sodium_1_day_min",
+        "kind": "sodium",
+        "patch": 1,
+        "unix_ms": 3000,
+        "visual_ms": 3298.67228626928
+      }
+    },
+    "sodium_1_night_max": {
+      "camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (9.3, 2.62, -14.2)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 7,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 12,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.4,
+          "steam_rise": 4.1233403578366,
+          "steam_visible": true,
+          "steam_x": 0.765366864730181,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.73205080756888,
+              "y": -0.999999999999999
+            },
+            {
+              "x": -0.0943600604023429,
+              "y": -1.99777280465044
+            },
+            {
+              "x": 1.63008489113439,
+              "y": -1.15880250590658
+            },
+            {
+              "x": 1.8558373112838,
+              "y": 0.745565472676225
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 41,
+        "tv_visible": true,
+        "uniform_writes": 8,
+        "visibility_writes": 30,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          45,
+          42,
+          32,
+          44,
+          42,
+          32,
+          44,
+          42,
+          32,
+          44,
+          41,
+          31,
+          44,
+          41,
+          32,
+          45,
+          42,
+          32,
+          44,
+          41,
+          31,
+          44,
+          41,
+          31,
+          44,
+          41,
+          32
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1478,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640.000061035156,
+          360.122528076172
+        ],
+        "shown": [
+          137,
+          98,
+          47,
+          137,
+          98,
+          47,
+          137,
+          98,
+          47,
+          137,
+          97,
+          47,
+          137,
+          97,
+          47,
+          138,
+          98,
+          48,
+          136,
+          97,
+          47,
+          137,
+          97,
+          47,
+          137,
+          97,
+          47
+        ]
+      },
+      "step": {
+        "day": 0.9,
+        "id": "sodium_1_night_max",
+        "kind": "sodium",
+        "patch": 1,
+        "unix_ms": 3000,
+        "visual_ms": 1099.55742875643
+      }
+    },
+    "sodium_1_night_min": {
+      "camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (9.3, 2.62, -14.2)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 6,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 12,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.32,
+          "steam_rise": 0.370021073509811,
+          "steam_visible": true,
+          "steam_x": 1.84775906502257,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -8.57252759403147e-16,
+              "y": -2
+            },
+            {
+              "x": 1.68294196961579,
+              "y": -1.08060461173628
+            },
+            {
+              "x": 1.81859485365136,
+              "y": 0.832293673094284
+            },
+            {
+              "x": 0.282240016119735,
+              "y": 1.97998499320089
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 36,
+        "tv_visible": true,
+        "uniform_writes": 7,
+        "visibility_writes": 29,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          45,
+          43,
+          33,
+          45,
+          43,
+          33,
+          45,
+          43,
+          33,
+          44,
+          42,
+          33,
+          45,
+          42,
+          33,
+          45,
+          43,
+          33,
+          44,
+          42,
+          32,
+          44,
+          42,
+          33,
+          45,
+          42,
+          33
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1180,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640.000061035156,
+          360.122528076172
+        ],
+        "shown": [
+          119,
+          87,
+          46,
+          119,
+          87,
+          46,
+          119,
+          87,
+          46,
+          118,
+          87,
+          45,
+          119,
+          87,
+          45,
+          119,
+          88,
+          46,
+          118,
+          86,
+          45,
+          118,
+          87,
+          45,
+          119,
+          87,
+          45
+        ]
+      },
+      "step": {
+        "day": 0.9,
+        "id": "sodium_1_night_min",
+        "kind": "sodium",
+        "patch": 1,
+        "unix_ms": 3000,
+        "visual_ms": 3298.67228626928
+      }
+    },
+    "sodium_2_day_max": {
+      "camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (11.6, 2.62, -17.0)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 9,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 16,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.4,
+          "steam_rise": 4.1233403578366,
+          "steam_visible": false,
+          "steam_x": 0.765366864730181,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.73205080756888,
+              "y": -0.999999999999999
+            },
+            {
+              "x": -0.0943600604023429,
+              "y": -1.99777280465044
+            },
+            {
+              "x": 1.63008489113439,
+              "y": -1.15880250590658
+            },
+            {
+              "x": 1.8558373112838,
+              "y": 0.745565472676225
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 49,
+        "tv_visible": true,
+        "uniform_writes": 10,
+        "visibility_writes": 33,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          35,
+          38,
+          37,
+          35,
+          38,
+          37,
+          35,
+          38,
+          37,
+          35,
+          38,
+          37,
+          35,
+          38,
+          37,
+          35,
+          38,
+          37,
+          35,
+          38,
+          37,
+          34,
+          37,
+          36,
+          33,
+          36,
+          34
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1481,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.126983642578
+        ],
+        "shown": [
+          128,
+          94,
+          52,
+          128,
+          94,
+          52,
+          128,
+          94,
+          53,
+          128,
+          94,
+          53,
+          128,
+          94,
+          53,
+          128,
+          94,
+          53,
+          128,
+          94,
+          53,
+          127,
+          93,
+          51,
+          125,
+          92,
+          50
+        ]
+      },
+      "step": {
+        "day": 0.5,
+        "id": "sodium_2_day_max",
+        "kind": "sodium",
+        "patch": 2,
+        "unix_ms": 3000,
+        "visual_ms": 1099.55742875643
+      }
+    },
+    "sodium_2_day_min": {
+      "camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (11.6, 2.62, -17.0)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 8,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 16,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.665,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.32,
+          "steam_rise": 0.370021073509811,
+          "steam_visible": false,
+          "steam_x": 1.84775906502257,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -8.57252759403147e-16,
+              "y": -2
+            },
+            {
+              "x": 1.68294196961579,
+              "y": -1.08060461173628
+            },
+            {
+              "x": 1.81859485365136,
+              "y": 0.832293673094284
+            },
+            {
+              "x": 0.282240016119735,
+              "y": 1.97998499320089
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": false,
+        "transform_writes": 45,
+        "tv_visible": true,
+        "uniform_writes": 9,
+        "visibility_writes": 32,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          33,
+          36,
+          34,
+          34,
+          36,
+          35,
+          34,
+          36,
+          35,
+          34,
+          36,
+          35,
+          34,
+          36,
+          35,
+          34,
+          36,
+          35,
+          34,
+          36,
+          35,
+          33,
+          35,
+          33,
+          31,
+          33,
+          32
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1181,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640,
+          360.126983642578
+        ],
+        "shown": [
+          107,
+          81,
+          47,
+          108,
+          81,
+          47,
+          108,
+          81,
+          47,
+          108,
+          81,
+          47,
+          108,
+          81,
+          47,
+          108,
+          81,
+          47,
+          108,
+          81,
+          47,
+          107,
+          80,
+          46,
+          105,
+          78,
+          44
+        ]
+      },
+      "step": {
+        "day": 0.5,
+        "id": "sodium_2_day_min",
+        "kind": "sodium",
+        "patch": 2,
+        "unix_ms": 3000,
+        "visual_ms": 3298.67228626928
+      }
+    },
+    "sodium_2_night_max": {
+      "camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (13.3, 2.62, -17.0)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 11,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 20,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.4,
+          "steam_rise": 4.1233403578366,
+          "steam_visible": true,
+          "steam_x": 0.765366864730181,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -1.73205080756888,
+              "y": -0.999999999999999
+            },
+            {
+              "x": -0.0943600604023429,
+              "y": -1.99777280465044
+            },
+            {
+              "x": 1.63008489113439,
+              "y": -1.15880250590658
+            },
+            {
+              "x": 1.8558373112838,
+              "y": 0.745565472676225
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 59,
+        "tv_visible": true,
+        "uniform_writes": 12,
+        "visibility_writes": 36,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          25,
+          24,
+          19,
+          24,
+          24,
+          18,
+          24,
+          24,
+          19,
+          25,
+          24,
+          19,
+          24,
+          24,
+          19,
+          24,
+          24,
+          18,
+          24,
+          24,
+          18,
+          23,
+          22,
+          17,
+          23,
+          22,
+          17
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1480,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640.000061035156,
+          360.122528076172
+        ],
+        "shown": [
+          117,
+          80,
+          34,
+          117,
+          80,
+          34,
+          117,
+          80,
+          34,
+          117,
+          80,
+          34,
+          117,
+          80,
+          34,
+          117,
+          80,
+          34,
+          117,
+          80,
+          34,
+          116,
+          78,
+          33,
+          116,
+          79,
+          33
+        ]
+      },
+      "step": {
+        "day": 0.9,
+        "id": "sodium_2_night_max",
+        "kind": "sodium",
+        "patch": 2,
+        "unix_ms": 3000,
+        "visual_ms": 1099.55742875643
+      }
+    },
+    "sodium_2_night_min": {
+      "camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (13.3, 2.62, -17.0)]",
+      "failures": [],
+      "framebuffer": [
+        1280,
+        720
+      ],
+      "index": 10,
+      "inspection": {
+        "built": true,
+        "lights": 0,
+        "material_writes": 20,
+        "particles": 0,
+        "physics_queries": 0,
+        "sample": {
+          "pane_alpha": 0.8,
+          "shadow_phase": 0.375,
+          "shadow_visible": false,
+          "sodium_alpha": 0.32,
+          "steam_rise": 0.370021073509811,
+          "steam_visible": true,
+          "steam_x": 1.84775906502257,
+          "tv_on": false,
+          "washers": [
+            {
+              "x": -8.57252759403147e-16,
+              "y": -2
+            },
+            {
+              "x": 1.68294196961579,
+              "y": -1.08060461173628
+            },
+            {
+              "x": 1.81859485365136,
+              "y": 0.832293673094284
+            },
+            {
+              "x": 0.282240016119735,
+              "y": 1.97998499320089
+            }
+          ]
+        },
+        "shadow_parts": 6,
+        "shadow_visible": false,
+        "sodium_surfaces": 1,
+        "sodium_triangles": 12,
+        "sodium_visible": true,
+        "steam_visible": true,
+        "transform_writes": 54,
+        "tv_visible": true,
+        "uniform_writes": 11,
+        "visibility_writes": 35,
+        "washer_count": 4
+      },
+      "inventory": {
+        "lights": 0,
+        "meshes": 22,
+        "particles": 0,
+        "physics": 0,
+        "timers": 0
+      },
+      "pass": true,
+      "pixels": {
+        "baseline": [
+          25,
+          25,
+          20,
+          25,
+          25,
+          20,
+          25,
+          25,
+          20,
+          25,
+          25,
+          20,
+          25,
+          25,
+          20,
+          25,
+          25,
+          20,
+          25,
+          25,
+          20,
+          24,
+          23,
+          19,
+          24,
+          23,
+          19
+        ],
+        "negative_delta": 0,
+        "positive_delta": 1179,
+        "sample": "actual3x3 rendered center RGB bytes",
+        "screen_point": [
+          640.000061035156,
+          360.122528076172
+        ],
+        "shown": [
+          99,
+          70,
+          32,
+          99,
+          70,
+          32,
+          99,
+          70,
+          32,
+          99,
+          70,
+          32,
+          99,
+          70,
+          32,
+          99,
+          70,
+          32,
+          99,
+          70,
+          32,
+          98,
+          68,
+          31,
+          98,
+          68,
+          31
+        ]
+      },
+      "step": {
+        "day": 0.9,
+        "id": "sodium_2_night_min",
+        "kind": "sodium",
+        "patch": 2,
+        "unix_ms": 3000,
+        "visual_ms": 3298.67228626928
+      }
+    }
+  },
+  "schema": 1,
+  "scope": "Actual Web3D staged framebuffer/geometry evidence only; no Runtime, gameplay, source RNG/save, Canvas pixel parity or frame-budget claim.",
+  "source_content_hash_available": true,
+  "source_hashes_available": false,
+  "steps": [
+    {
+      "day": 0.5,
+      "id": "sodium_0_day_min",
+      "kind": "sodium",
+      "patch": 0,
+      "unix_ms": 3000,
+      "visual_ms": 3298.67228626928
+    },
+    {
+      "day": 0.5,
+      "id": "sodium_0_day_max",
+      "kind": "sodium",
+      "patch": 0,
+      "unix_ms": 3000,
+      "visual_ms": 1099.55742875643
+    },
+    {
+      "day": 0.9,
+      "id": "sodium_0_night_min",
+      "kind": "sodium",
+      "patch": 0,
+      "unix_ms": 3000,
+      "visual_ms": 3298.67228626928
+    },
+    {
+      "day": 0.9,
+      "id": "sodium_0_night_max",
+      "kind": "sodium",
+      "patch": 0,
+      "unix_ms": 3000,
+      "visual_ms": 1099.55742875643
+    },
+    {
+      "day": 0.5,
+      "id": "sodium_1_day_min",
+      "kind": "sodium",
+      "patch": 1,
+      "unix_ms": 3000,
+      "visual_ms": 3298.67228626928
+    },
+    {
+      "day": 0.5,
+      "id": "sodium_1_day_max",
+      "kind": "sodium",
+      "patch": 1,
+      "unix_ms": 3000,
+      "visual_ms": 1099.55742875643
+    },
+    {
+      "day": 0.9,
+      "id": "sodium_1_night_min",
+      "kind": "sodium",
+      "patch": 1,
+      "unix_ms": 3000,
+      "visual_ms": 3298.67228626928
+    },
+    {
+      "day": 0.9,
+      "id": "sodium_1_night_max",
+      "kind": "sodium",
+      "patch": 1,
+      "unix_ms": 3000,
+      "visual_ms": 1099.55742875643
+    },
+    {
+      "day": 0.5,
+      "id": "sodium_2_day_min",
+      "kind": "sodium",
+      "patch": 2,
+      "unix_ms": 3000,
+      "visual_ms": 3298.67228626928
+    },
+    {
+      "day": 0.5,
+      "id": "sodium_2_day_max",
+      "kind": "sodium",
+      "patch": 2,
+      "unix_ms": 3000,
+      "visual_ms": 1099.55742875643
+    },
+    {
+      "day": 0.9,
+      "id": "sodium_2_night_min",
+      "kind": "sodium",
+      "patch": 2,
+      "unix_ms": 3000,
+      "visual_ms": 3298.67228626928
+    },
+    {
+      "day": 0.9,
+      "id": "sodium_2_night_max",
+      "kind": "sodium",
+      "patch": 2,
+      "unix_ms": 3000,
+      "visual_ms": 1099.55742875643
+    },
+    {
+      "day": 0.9,
+      "id": "pawn_counter_steam_night_phase0",
+      "kind": "steam",
+      "unix_ms": 3000,
+      "visual_ms": 713
+    },
+    {
+      "day": 0.9,
+      "id": "pawn_counter_steam_night_phase1",
+      "kind": "steam",
+      "unix_ms": 3000,
+      "visual_ms": 1373
+    },
+    {
+      "day": 0.5,
+      "id": "pawn_counter_steam_hidden_day",
+      "kind": "steam",
+      "unix_ms": 3000,
+      "visual_ms": 713
+    }
+  ],
+  "unavailable_source_hashes": [
+    "res://scripts/fixture_motion_view.gd",
+    "res://scripts/full_neighborhood.gd",
+    "res://scripts/weather_presentation.gd",
+    "res://tests/fixture_motion_probe.gd",
+    "res://tests/fixture_web_probe.gd"
+  ],
+  "visited": 15,
+  "web": true,
+  "webgl": {
+    "webgl2": true,
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "shading_language": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "vendor": "WebKit",
+    "attributes": {
+      "alpha": false,
+      "antialias": false,
+      "depth": true,
+      "desynchronized": false,
+      "failIfMajorPerformanceCaveat": false,
+      "powerPreference": "default",
+      "premultipliedAlpha": true,
+      "preserveDrawingBuffer": true,
+      "stencil": false,
+      "xrCompatible": false
+    },
+    "drawing_buffer": [
+      1280,
+      720
+    ]
+  },
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+  "engine_errors": [],
+  "browser_errors": [],
+  "acceptance": true
+}

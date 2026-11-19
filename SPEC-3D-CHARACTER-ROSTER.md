@@ -461,3 +461,34 @@ leaf nodes; a changed type/parent/child graph fails open even after the radius c
 Their coordinates add no renderable geometry. The external chain presenter must force the
 original live dog's pose while bound, because the chain can cross the view independently
 of its actor sphere, just as a moving beacon can illuminate a visible receiver.
+
+#### P04f — exact per-bone authored-pose input memo
+
+Captured before implementation, after the world-details checkpoint332be27. Each actor
+instance may retain one last `_pose` input/output tuple per bone: the actual current
+`base_poses[index]` Transform3D, Euler angles, translation offset and computed local target.
+Only exact equality of all three inputs permits reuse. A miss evaluates the original
+expression unchanged: `Transform3D(rest.basis*Basis.from_euler(angles),rest.origin+offset)`.
+No reassociation, approximate comparison, rounded key, identity shortcut or angle threshold.
+Changing only base-pose origin or basis must miss, even if skeletal rest data is unchanged.
+
+Every hit still calls `_set_local_pose`. An earlier overlay, contact IK or working-pose reset
+may have replaced that bone, so an input hit must restore the authored target and invalidate
+any populated descendant global cache exactly as a fresh calculation would. Reset may keep
+these value-only tuples while restoring poses and clearing observational counters; it never
+assumes the memo's target is currently applied. Independent instances/companion rigs own
+independent tuples. No mesh, material, skin, root, clock, culling, scheduling or action change.
+
+The diagnostic-only `pose_input_cache_enabled=false` isolates this memo from existing global
+and attachment caching. The existing `pose_cache_enabled=false` also bypasses the new memo,
+retaining a complete uncached reference. `pose_input_hits` and `pose_input_solves` count only
+reused/computed targets and reset with the rig; they cannot drive gameplay or pose scheduling.
+Storage is bounded by authored bone count and reused without per-miss tuple allocation.
+
+Focused tests compare cache-on/off real Skeleton poses, rigid and weighted attachments and
+actual four-weight mesh vertices across all original templates, actions, overlays, detail
+and hidden-return transitions. Direct counterexamples cover repeated same-bone writes,
+four-microradian angles/offsets, warmed targets after reset, changed base/rest data, populated
+descendant caches after overlays/IK and disabling/re-enabling a warm memo. Mesh/skin/material
+resources and caller snapshots remain unchanged. Reduced Euler solves establish work avoided,
+not frame-time acceptance; Root owns central gates and frozen-release measurement.

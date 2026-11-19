@@ -27,7 +27,7 @@ $project = Join-Path $runRoot 'source/game3d'
 $probeSource = Join-Path $project 'tests/full_actor_performance_probe.gd'
 if (-not (Test-Path -LiteralPath $probeSource -PathType Leaf)) { throw 'Selected revision has no full actor probe.' }
 $sourceHashes = [ordered]@{}
-Get-ChildItem -LiteralPath $project -Recurse -File | Where-Object { $_.Extension -in @('.gd','.godot','.cfg','.json') } | Sort-Object FullName | ForEach-Object {
+Get-ChildItem -LiteralPath $project -Recurse -File | Where-Object { $_.Extension -in @('.gd','.gdshader','.godot','.cfg','.json','.tscn','.tres') } | Sort-Object FullName | ForEach-Object {
     $relative = [IO.Path]::GetRelativePath($project,$_.FullName).Replace('\','/')
     $sourceHashes[$relative] = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
 }
@@ -107,6 +107,9 @@ if ($process.ExitCode -ne 0 -or $body -match '(?m)^\s*(?:SCRIPT ERROR|ERROR|Pars
     throw "Release probe failed (exit $($process.ExitCode)). Evidence: $evidence"
 }
 $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
-Write-Output ($report.phases | ForEach-Object { '{0}: scene p95={1}ms; engine p95={2}ms' -f $_.id,$_.scene_cpu_ms.p95,$_.engine_process_ms.p95 })
+Write-Output ($report.phases | ForEach-Object {
+    $monitor = if ($_.PSObject.Properties.Name -contains 'engine_process_monitor_window_max_ms') { $_.engine_process_monitor_window_max_ms } else { $_.engine_process_ms }
+    '{0}: scene p95={1}ms; held engine-process monitor p95={2}ms' -f $_.id,$_.scene_cpu_ms.p95,$monitor.p95
+})
 Write-Output "RELEASE PROFILE: acceptance=$($report.acceptance); diagnostic=$Diagnostic; evidence=$evidence"
 if (-not $Diagnostic -and -not $report.acceptance) { throw 'Release performance is not accepted.' }

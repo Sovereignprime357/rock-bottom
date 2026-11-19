@@ -9,14 +9,18 @@ class MeasuredScene:
 	var probe_running: bool = false
 	var sample_cpu_us: int = 0
 	var sample_interval_us: int = 0
+	var sample_delta_ms: float = 0.0
 	var previous_started: int = 0
 	var observed_events: Dictionary = {}
 	var scope_us: Dictionary = {}
+	var grade_disabled: bool = false
 	func _process(delta: float) -> void:
 		var started: int = Time.get_ticks_usec()
 		scope_us.clear()
 		super._process(delta)
+		if grade_disabled and hud != null: hud.district_grade.hide()
 		if not probe_running: return
+		sample_delta_ms = delta*1000.0
 		for key: String in runtime.profile_us: scope_us["runtime_"+key] = runtime.profile_us[key]
 		sample_cpu_us = Time.get_ticks_usec()-started
 		sample_interval_us = started-previous_started if previous_started != 0 else 0
@@ -45,6 +49,8 @@ class MeasuredScene:
 var game: MeasuredScene
 var output_dir: String = ""
 var diagnostic: bool = false
+var grade_disabled: bool = false
+var pose_input_disabled: bool = false
 var sample_frames: int = 1080
 var warmup_frames: int = 120
 var failures: Array[String] = []
@@ -67,12 +73,18 @@ func _run() -> void:
 	output_dir = ProjectSettings.globalize_path("res://../.build/full-port/p04b/actual60")
 	for argument: String in OS.get_cmdline_user_args():
 		if argument == "--diagnostic": diagnostic = true
+		elif argument == "--without-grade": grade_disabled = true
+		elif argument == "--without-pose-input-memo": pose_input_disabled = true
 		elif argument.begins_with("--frames="): sample_frames = clampi(int(argument.trim_prefix("--frames=")),120,1200)
 		elif argument.begins_with("--output="): output_dir = argument.trim_prefix("--output=")
 	if DirAccess.make_dir_recursive_absolute(output_dir) != OK:
 		push_error("Cannot create full actor evidence directory."); quit(1); return
+	if grade_disabled or pose_input_disabled:
+		if not diagnostic: push_error("Alternative rendering requires --diagnostic"); quit(1); return
+		_fail("diagnostic alternative: production acceptance not eligible")
 	root.size = Vector2i(1280,720)
 	root.msaa_3d = Viewport.MSAA_4X
+	RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(),true)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	Engine.max_fps = 60
 	var started: int = Time.get_ticks_msec()
@@ -87,6 +99,7 @@ func _run() -> void:
 		_fail("production scene did not reach ready state")
 		_write_report([],started); quit(1); return
 	game.set_process(false)
+	game.grade_disabled = grade_disabled
 	game.store.save_path = output_dir.path_join("probe-only-save.json")
 	game.store.storage_key = "rockbottom_3d_full_actual60_probe"
 	game.sound.muted = true
@@ -136,6 +149,8 @@ func _phase(spec: Dictionary) -> Dictionary:
 	game.probe_running = true; game.set_process(true)
 	# Police use their real source spawn transaction inside Runtime.advance.
 	for frame: int in range(warmup_frames):
+		if pose_input_disabled:
+			for body: Node3D in game.actors.values(): _set_pose_memo(body.get_node("Art"),false)
 		_drive()
 		await game.frame_sampled
 	game.set_process(false); _release_input()
@@ -152,7 +167,13 @@ func _phase(spec: Dictionary) -> Dictionary:
 	for actor: Dictionary in game.runtime.state.npcs: previous[actor.id] = Vector2(actor.x,actor.y)
 	var cpu := PackedFloat64Array()
 	var scopes: Dictionary = {}
+	var active_ms := PackedFloat64Array()
+	var supplied_delta_ms := PackedFloat64Array()
+	var step_counts: Dictionary = {}
 	var process_ms := PackedFloat64Array()
+	var render_cpu_ms := PackedFloat64Array()
+	var render_gpu_ms := PackedFloat64Array()
+	var render_setup_ms := PackedFloat64Array()
 	var intervals_ms := PackedFloat64Array()
 	var draws := PackedFloat64Array()
 	var primitives := PackedFloat64Array()
@@ -174,10 +195,14 @@ func _phase(spec: Dictionary) -> Dictionary:
 		_drive()
 		await game.frame_sampled
 		cpu.append(float(game.sample_cpu_us)/1000.0)
-		for key: String in game.scope_us:
-			if not scopes.has(key): scopes[key] = PackedFloat64Array()
-			scopes[key].append(float(game.scope_us[key])/1000.0)
+		active_ms.append(game.runtime.last_advanced_ms)
+		supplied_delta_ms.append(game.sample_delta_ms)
+		_append_frame_series(step_counts,game.runtime.profile_calls,frame)
+		_append_frame_series(scopes,game.scope_us,frame,0.001)
 		process_ms.append(Performance.get_monitor(Performance.TIME_PROCESS)*1000.0)
+		render_cpu_ms.append(RenderingServer.viewport_get_measured_render_time_cpu(root.get_viewport_rid()))
+		render_gpu_ms.append(RenderingServer.viewport_get_measured_render_time_gpu(root.get_viewport_rid()))
+		render_setup_ms.append(RenderingServer.get_frame_setup_time_cpu())
 		if game.sample_interval_us > 0: intervals_ms.append(float(game.sample_interval_us)/1000.0)
 		draws.append(Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
 		primitives.append(Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME))
@@ -231,7 +256,15 @@ func _phase(spec: Dictionary) -> Dictionary:
 	var process_stats: Dictionary = _stats(process_ms)
 	var scope_stats: Dictionary = {}
 	for key: String in scopes: scope_stats[key] = _stats(scopes[key])
-	if cpu_stats.get("p95",INF) >= 16.0 or process_stats.get("p95",INF) >= 16.0: _fail(spec.id+": measured native CPU p95 exceeds16ms")
+	var scope_totals: Dictionary = {}
+	for key: String in scopes: scope_totals[key] = _sum(scopes[key])
+	var call_stats: Dictionary = {}
+	var active_total: float = _sum(active_ms)
+	for key: String in step_counts:
+		var calls: float = _sum(step_counts[key])
+		var elapsed: float = float(scope_totals.get("runtime_"+key,0))
+		call_stats[key] = {"frames":_stats(step_counts[key],false),"total":calls,"cpu_total_ms":elapsed,"cpu_ms_per_call":elapsed/calls if calls > 0 else 0,"cpu_ms_per_active_second":elapsed*1000.0/active_total if active_total > 0 else 0}
+	if cpu_stats.get("p95",INF) >= 16.0 or process_stats.get("p95",INF) >= 16.0: _fail(spec.id+": scene CPU or held engine-process monitor p95 exceeds16ms")
 	if player_distance_m < 10.0: _fail(spec.id+": controller tour did not walk10m")
 	if cpu.size() != sample_frames: _fail(spec.id+": incomplete measured frame count")
 	var source_route: Array = []
@@ -243,13 +276,35 @@ func _phase(spec: Dictionary) -> Dictionary:
 		"min_live_actors":min_alive,"min_supported_live_actors":min_supported,"min_live_rigs":min_rigs,
 		"moving_actor_ids":movers.keys(),"charging_actor_ids":chargers.keys(),"born_ids":born.keys(),"dead_ids":dead.keys(),"removed_ids":removed.keys(),
 		"projectile_peak":projectile_peak,"events":game.observed_events.duplicate(),"dependencies":dependencies,
-		"scene_cpu_ms":cpu_stats,"engine_process_ms":process_stats,"frame_interval_ms":_stats(intervals_ms),
-		"scene_scopes_ms":scope_stats,
+		"scene_cpu_ms":cpu_stats,"engine_process_monitor_window_max_ms":process_stats,"frame_interval_ms":_stats(intervals_ms),
+		"viewport_render_cpu_ms":_stats(render_cpu_ms),"viewport_render_gpu_ms":_stats(render_gpu_ms),"render_setup_cpu_ms":_stats(render_setup_ms),
+		"gpu_timing_available":_sum(render_gpu_ms) > 0.0,
+		"scene_scopes_ms":scope_stats,"scene_scope_totals_ms":scope_totals,
+		"supplied_delta_ms":_stats(supplied_delta_ms),"active_ms":{"frames":_stats(active_ms),"total":active_total},"stage_calls":call_stats,
+		"physics_queries_per_active_second":physics_queries*1000.0/active_total if active_total > 0 else 0,
+		"diagnostic_switches":{"without_grade":grade_disabled,"without_pose_input_memo":pose_input_disabled},
 		"draw_calls":_stats(draws,false),"rendered_objects":_stats(objects,false),"rendered_primitives":_stats(primitives,false),
 		"max_video_memory_bytes":max_video_bytes,"max_nodes":max_nodes,"physics_queries":physics_queries,
 		"navigation_before":navigation_before,"navigation_after":game.physics.navigation_metrics(),
 		"navigation_phase_max_tests":max_tests,"navigation_phase_max_starts":max_starts,"navigation_phase_max_queue":max_queue,"sampled_oldest_pending_ms":max_pending_ms}
 
+
+func _append_frame_series(series: Dictionary,current: Dictionary,frame: int,scale: float = 1.0) -> void:
+	for key: String in current:
+		if not series.has(key):
+			var prior := PackedFloat64Array(); prior.resize(frame); prior.fill(0.0)
+			series[key] = prior
+	for key: String in series: series[key].append(float(current.get(key,0))*scale)
+
+func _sum(values: PackedFloat64Array) -> float:
+	var total: float = 0.0
+	for value: float in values: total += value
+	return total
+
+func _set_pose_memo(node: Node3D,enabled: bool) -> void:
+	if node.has_meta("roster_rig"):
+		var rig: Dictionary = node.get_meta("roster_rig"); rig.pose_input_cache_enabled = enabled
+		for companion: Dictionary in rig.companions: _set_pose_memo(companion.node,enabled)
 
 func _plan_loop(streets: Array) -> bool:
 	route.clear(); route_cursor = 1; completed_laps = 0
@@ -325,14 +380,20 @@ func _stats(samples: PackedFloat64Array,time_metric: bool = true) -> Dictionary:
 
 func _write_report(phases: Array,started: int) -> void:
 	var scripts: Dictionary = {}
+	var script_hashes_available: bool = true
 	for path: String in ["scripts/full_scene.gd","scripts/full_runtime.gd","scripts/world_adapter.gd","scripts/actor_navigation.gd","scripts/actor_director.gd","scripts/combat_system.gd","scripts/character_roster.gd","scripts/cast_profiles.gd","scripts/actor_animation.gd","scripts/full_neighborhood.gd","tests/full_actor_performance_probe.gd"]:
-		scripts[path] = FileAccess.get_sha256("res://"+path)
+		scripts[path] = FileAccess.get_sha256("res://"+path) if FileAccess.file_exists("res://"+path) else ""
+		if str(scripts[path]).length() != 64: script_hashes_available = false
 	var report: Dictionary = {"schema":1,"acceptance":failures.is_empty() and phases.size() == 2,"diagnostic":diagnostic,
-		"scope":"Actual FullScene/Runtime/Combat/ActorDirector, actual source police spawning and authored rigs/animation/HUD in native Compatibility. This is not a Web result or GPU timing measurement.",
+		"scope":"Actual FullScene/Runtime/Combat/ActorDirector, source police spawning and authored rigs/animation/HUD in native Compatibility. This is not a Web result. Viewport GPU timing is reported only when the driver returns nonzero measurements.",
 		"frame_intervals_include_probe_bookkeeping":true,"timing_boundary":"scene_cpu_ms wraps the complete unchanged FullScene._process plus event counters; route setup and probe validation are outside it",
+		"engine_monitor_semantics":"Frame-weighted samples of TIME_PROCESS's held approximately one-second maximum, not independent engine-frame CPU times. The existing16ms p95 gate is retained conservatively.",
+		"render_timing_semantics":"Delayed completed-frame viewport CPU/GPU distributions; not paired to current scene samples. Timestamp instrumentation enabled; zero-only GPU means unavailable. Frame setup excludes scripts.",
+		"workload_semantics":"Stage calls include final partial subdivisions; distributions include zero-call frames. Query rate is whole-scene, not actor-only.",
 		"engine":Engine.get_version_info().string,"renderer":RenderingServer.get_current_rendering_method(),"gpu":RenderingServer.get_video_adapter_name(),
 		"processor":OS.get_processor_name(),"platform":OS.get_name(),"resolution":[1280,720],"msaa":4,"fps_cap":60,"vsync":false,
-		"source_corpus":Content.load_content().source.corpusSha256,"script_sha256":scripts,"elapsed_ms":Time.get_ticks_msec()-started,
+		"source_corpus":Content.load_content().source.corpusSha256,"script_sha256":scripts,"script_hashes_available":script_hashes_available,
+		"source_provenance":"Compiled exports may omit raw GDScript; use profile-release.ps1's external archived-source and executable hashes. Empty in-package script hashes are unavailable, not proof of equality.","elapsed_ms":Time.get_ticks_msec()-started,
 		"world":game.world.build_metrics if game != null and game.world != null else {},"phases":phases,"failures":failures}
 	var file := FileAccess.open(output_dir.path_join("full-actor-performance.json"),FileAccess.WRITE)
 	if file == null: _fail("cannot write full actor performance JSON"); return

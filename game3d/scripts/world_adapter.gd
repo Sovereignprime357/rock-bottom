@@ -8,6 +8,21 @@ const Contact = preload("res://scripts/actor_contact.gd")
 const SCALE := 0.04
 const FEET := 0.06
 const CONTACT_SKIN := 0.0025
+
+# Private synchronous-call setup, never a physical-result or cross-frame cache.
+# Overlap probes must not overwrite the sweep used for the later wall normal.
+class BodyQuery:
+	extends RefCounted
+	var body: Dictionary
+	var space: PhysicsDirectSpaceState3D
+	var bounds: Dictionary
+	var id: String
+	var height: float
+	var half: Vector2
+	var shape: Shape3D
+	var overlap: PhysicsShapeQueryParameters3D
+	var sweep: PhysicsShapeQueryParameters3D
+
 var _world_ref: WeakRef
 var _state_ref: WeakRef
 var _bodies: Dictionary = {}
@@ -252,16 +267,44 @@ func _query(body: Dictionary,point: Vector2,resolved_height: float = -1.0) -> Ph
 	query.collision_mask = 1
 	query.margin = 0.002
 	return query
+
+func _body_query(body: Dictionary,space: PhysicsDirectSpaceState3D) -> BodyQuery:
+	var prepared := BodyQuery.new()
+	prepared.body = body
+	prepared.space = space
+	prepared.bounds = Content.load_content().world.bounds
+	prepared.id = str(body.get("id","player"))
+	prepared.height = _height(prepared.id,body)
+	prepared.half = Vector2(float(body.w),float(body.h))*0.5
+	return prepared
+
+func _prepared_query(prepared: BodyQuery,point: Vector2,sweep: bool = false) -> PhysicsShapeQueryParameters3D:
+	var query: PhysicsShapeQueryParameters3D = prepared.sweep if sweep else prepared.overlap
+	if query == null:
+		if prepared.shape == null: prepared.shape = _shape(prepared.body,prepared.height)
+		query = PhysicsShapeQueryParameters3D.new()
+		query.shape = prepared.shape
+		query.collision_mask = 1
+		query.margin = 0.002
+		if sweep: prepared.sweep = query
+		else: prepared.overlap = query
+	query.transform = Transform3D(Basis.IDENTITY,Content.to_world(point+prepared.half,FEET+prepared.height*0.5))
+	query.motion = Vector3.ZERO
+	return query
+
 func _clear(body: Dictionary,point: Vector2,allow_certificate: bool = true) -> bool:
-	var space: PhysicsDirectSpaceState3D = _space()
+	return _clear_prepared(body,point,allow_certificate)
+
+func _clear_prepared(body: Dictionary,point: Vector2,allow_certificate: bool = true,prepared: BodyQuery = null) -> bool:
+	var space: PhysicsDirectSpaceState3D = prepared.space if prepared != null else _space()
 	if space == null: return false
-	var bounds: Dictionary = Content.load_content().world.bounds
+	var bounds: Dictionary = prepared.bounds if prepared != null else Content.load_content().world.bounds
 	if point.x < 0 or point.y < 0 or point.x+float(body.w) > float(bounds.w) or point.y+float(body.h) > float(bounds.h): return false
 	var physics_frame: int = Engine.get_physics_frames()
 	if physics_frame != _placement_physics:
 		_placement_clear.clear(); _placement_physics = physics_frame
-	var id: String = str(body.get("id","player"))
-	var height: float = _height(id,body)
+	var id: String = prepared.id if prepared != null else str(body.get("id","player"))
+	var height: float = prepared.height if prepared != null else _height(id,body)
 	if allow_certificate and _placement_render >= 0:
 		var cached: Dictionary = _placement_clear.get(id,{})
 		if not cached.is_empty() and cached.point == point and cached.width == body.w and cached.depth == body.h and cached.height == height and cached.revision == _collision_revision:
@@ -269,7 +312,8 @@ func _clear(body: Dictionary,point: Vector2,allow_certificate: bool = true) -> b
 			return true
 	query_count += 1
 	placement_overlap_queries += 1
-	var clear: bool = space.intersect_shape(_query(body,point,height),1).is_empty()
+	var query: PhysicsShapeQueryParameters3D = _prepared_query(prepared,point) if prepared != null else _query(body,point,height)
+	var clear: bool = space.intersect_shape(query,1).is_empty()
 	if clear and _placement_render >= 0:
 		_placement_clear[id] = {"point":point,"width":body.w,"depth":body.h,"height":height,"revision":_collision_revision}
 	elif not clear: _placement_clear.erase(id)
@@ -356,17 +400,21 @@ func _peer_clear(body: Dictionary,point: Vector2,peers: Array[Dictionary]) -> bo
 	return true
 
 func _repair_peer_placement(body: Dictionary,point: Vector2,original: Vector2) -> Vector2:
+	return _repair_peer_prepared(body,point,original)
+
+func _repair_peer_prepared(body: Dictionary,point: Vector2,original: Vector2,prepared: BodyQuery = null) -> Vector2:
 	var peers: Array[Dictionary] = _contact_peers(body)
 	if _peer_clear(body,point,peers): return point
-	var space: PhysicsDirectSpaceState3D = _space()
+	var space: PhysicsDirectSpaceState3D = prepared.space if prepared != null else _space()
 	if space == null: return point
+	if prepared == null: prepared = _body_query(body,space)
 	for candidate: Vector2 in Contact.repair_candidates(body,point,peers):
 		if candidate.distance_to(original) > 100.0001 or not _peer_clear(body,candidate,peers): continue
 		body_contact_tests += peers.size()
 		var crossing: Dictionary = Contact.first_hit(body,point,candidate-point,peers)
 		if not crossing.is_empty() and float(crossing.fraction) < 0.999999: continue
-		if not _clear(body,candidate,false): continue
-		var query: PhysicsShapeQueryParameters3D = _query(body,point)
+		if not _clear_prepared(body,candidate,false,prepared): continue
+		var query: PhysicsShapeQueryParameters3D = _prepared_query(prepared,point,true)
 		query.motion = Vector3(candidate.x-point.x,0,candidate.y-point.y)*SCALE
 		query_count += 1
 		var fractions: PackedFloat32Array = space.cast_motion(query)
@@ -382,7 +430,14 @@ func _move_body_raw(body: Dictionary,intended: Vector2,stop_on_block: bool) -> D
 	var origin := Vector2(float(body.x),float(body.y))
 	var failed := {"position":origin,"blocked":true,"body_contact":false}
 	var space: PhysicsDirectSpaceState3D = _space()
-	if space == null or not _clear(body,origin): return failed
+	if space == null: return failed
+	# Keep the origin proof even for a stationary body; charge/cache handling has
+	# already run in move_body. Exact equality alone avoids building unused peers.
+	if intended == origin:
+		if not _clear(body,origin): return failed
+		return {"position":origin,"blocked":false,"body_contact":false}
+	var prepared: BodyQuery = _body_query(body,space)
+	if not _clear_prepared(body,origin,true,prepared): return failed
 	var position: Vector2 = origin
 	var motion: Vector3 = Vector3(intended.x-origin.x,0,intended.y-origin.y)*SCALE
 	var blocked: bool = false
@@ -396,7 +451,7 @@ func _move_body_raw(body: Dictionary,intended: Vector2,stop_on_block: bool) -> D
 		var hit: Dictionary = Contact.first_hit(body,position,full_plane_motion,peers)
 		var contact_fraction: float = float(hit.fraction) if not hit.is_empty() else 1.0
 		var cast_motion: Vector3 = motion*contact_fraction
-		var query: PhysicsShapeQueryParameters3D = _query(body,position)
+		var query: PhysicsShapeQueryParameters3D = _prepared_query(prepared,position,true)
 		query.motion = cast_motion
 		var fractions := PackedFloat32Array([1.0,1.0])
 		if cast_motion.length_squared() > 0.000000000001:
@@ -407,7 +462,7 @@ func _move_body_raw(body: Dictionary,intended: Vector2,stop_on_block: bool) -> D
 		var step_from: Vector2 = position
 		var plane_motion := Vector2(cast_motion.x,cast_motion.z)/SCALE
 		var proposed: Vector2 = step_from+plane_motion*safe
-		var endpoint_clear: bool = _clear(body,proposed,false)
+		var endpoint_clear: bool = _clear_prepared(body,proposed,false,prepared)
 		if safe >= 0.999999 and endpoint_clear:
 			position = proposed
 			if hit.is_empty(): break
@@ -425,7 +480,7 @@ func _move_body_raw(body: Dictionary,intended: Vector2,stop_on_block: bool) -> D
 		# next frame. Retain skin before contact; never weaken _clear to hide it.
 		var skinned: float = maxf(0.0,safe-CONTACT_SKIN/maxf(cast_motion.length(),0.000001))
 		proposed = step_from+plane_motion*skinned
-		if _clear(body,proposed,false): position = proposed
+		if _clear_prepared(body,proposed,false,prepared): position = proposed
 		else:
 			# Rare glancing-contact fallback: find a verified point on this same
 			# already cast segment, bounded to8 overlap probes, never a teleport.
@@ -435,7 +490,7 @@ func _move_body_raw(body: Dictionary,intended: Vector2,stop_on_block: bool) -> D
 			for probe: int in range(8):
 				var fraction: float = (low+high)*0.5
 				var candidate: Vector2 = step_from+plane_motion*fraction
-				if _clear(body,candidate,false): low = fraction; position = candidate
+				if _clear_prepared(body,candidate,false,prepared): low = fraction; position = candidate
 				else: high = fraction
 		if stop_on_block or wall_responses >= 2: break
 		# Query the first unsafe overlap for the current live wall normal.
@@ -453,11 +508,13 @@ func clear_placement(body: Dictionary) -> Variant:
 	_sync_navigation_epoch()
 	var origin := Vector2(float(body.x),float(body.y))
 	if _clear(body,origin): return _repair_peer_placement(body,origin,origin)
+	var space: PhysicsDirectSpaceState3D = _space()
+	var prepared: BodyQuery = _body_query(body,space)
 	for radius: float in [4.0,8.0,16.0,24.0,40.0,64.0,100.0]:
 		for index: int in range(16):
 			var angle: float = float(index)*TAU/16.0
 			var candidate := origin+Vector2(cos(angle),sin(angle))*radius
-			if _clear(body,candidate): return _repair_peer_placement(body,candidate,origin)
+			if _clear_prepared(body,candidate,true,prepared): return _repair_peer_prepared(body,candidate,origin,prepared)
 	var id: String = str(body.get("id","player"))
 	if not _bodies.has(id): _height_profiles.erase(id)
 	return null

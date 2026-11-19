@@ -122,6 +122,80 @@ unblocked capsule/contact sweep, then walk that short link through normal input.
 Test at most 24 local candidates (eight headings at .25/.5/1m), with no relocated
 player, changed radius, ignored contact, collider edit or substituted service goal.
 
+### Combat obstacle steering correction (frozen332 counterexample)
+
+The correctly launched frozen332 run timed out at90.007s. The player center was
+at(1560.415,807.95), exactly one capsule radius plus query margin north of CORNER's
+solid back wall at source y820. Tony's actual center was(1608.440,842.050), inside
+the building. The old combat driver kept approaching the center and clicking
+through the wall; ordinary combat correctly rejected those obstructed swings.
+Keep that failed report. This is a test-driver correction, not a gameplay change.
+
+Combat retains the100ms steering cadence and normal bounded mouse/input path.
+Before a direct approach it checks the actual detached player capsule/contact
+sweep to its melee stand-off point. A blocked approach or blocked attack ray
+uses a cached route to a clear melee-ring point: twelve headings at44px and30px
+from the current target center, ordered by distance from the actual player.
+Each endpoint must pass real capsule placement, live-peer clearance and the
+same WorldAdapter.can_hit query used by combat. At most four endpoint routes
+are attempted per replan, using the existing static/capsule/live-peer helpers.
+No target, resident, collider, source coordinate or movement speed is changed.
+
+An existing route is retained until target identity/phase/collision revision
+changes, target drift exceeds24px, its endpoint loses melee range/LOS, or the
+next actual swept segment blocks. Replanning is at most once per500ms and32
+times across the run; exhausted work fails explicitly. A currently unavailable
+route holds uncertified motion and retries within that same budget as specified below.
+Each next segment is swept again at the100ms cadence and only ordinary input
+follows it. A visible target with a clear direct approach ends the detour early.
+Blocked dodge/retreat inputs stop instead of manufacturing motion through a wall.
+An attack additionally requires fresh actual can_hit immediately before its normal
+click; false or non-finite range/aim facts cannot authorize it. Existing source
+cooldown, stun, weapon reward and strict90s wall/admitted limits stay unchanged.
+
+The report adds driver version2, mandatory QA-launch evidence, bounded combat
+navigation events and a current combat context. These record actual target and
+player centers, current route endpoint/segment, phase, collision revision,
+blocked sweep/ray reasons and collider owner when a blocking ray identifies one.
+The old pre-fight walking goal is explicitly labeled as such in failure context.
+Accepted attack receipts include their actual target/range/LOS facts. A route
+is steering evidence only; victory still requires ordinary source damage/death.
+Contract witnesses cover the observed wall/near-range refusal, finite24-point
+rings, invalidation thresholds, blocked segment refusal and the strict replan cap.
+Fresh native evidence must prove the corrected movement; unit fixtures do not.
+
+### Transient resident blockage — retained v2 native counterexample
+
+The next correctly launched native run stopped at2776ms in phase3 with85HP and
+Tony54HP. Its first plan tested four certified melee endpoints; every live-resident
+graph returned no path. `_plan_combat_route` incorrectly turned that temporary
+observation into an assertion failure, making `_alive` false before another input
+frame could defend against the approaching Sherris. Keep the failed report.
+
+An unavailable plan is now an observed retryable state, not victory or immediate
+scenario failure. Discard its invalid path, record the exact attempts and next
+eligible plan time, and return zero uncertified movement. Retry no sooner than the
+existing500ms interval; every unsuccessful plan still consumes one of the same32
+whole-run plans and at most four route attempts. No plan budget resets on target,
+phase or collision changes. Exhausting32 plans remains fatal when another valid
+route is needed. Permanent obstruction therefore cannot wait indefinitely.
+
+The existing target selection and normal attack path remain active while holding:
+nearby hostile adds may be defended against only with fresh range/aim/LOS/cooldown
+and stun checks. A newly clear direct approach can resume immediately without
+waiting for another route plan. No uncertified retreat, stale path, resource
+repair, enemy movement or relaxed collision is introduced. The100ms decisions,
+90s wall/admitted fight bounds and180s run timeout remain unchanged.
+
+Contract scripts exercise the actual inherited planning/steering methods using
+OFF-tree scene dependencies with controlled geometry answers, never a second
+SceneTree or a simulated victory. Witnesses cover one transient four-attempt miss,
+499/500ms retry boundaries, zero eligible endpoints, valid recovery, final-segment
+rejection, direct reacquisition and cumulative exhaustion across target/phase
+changes. These are orchestration checks; actual physics and victory still require
+a fresh native run. The Office driver receives the identical dynamic correction
+while preserving its own defense/leg/phase/tour watchdogs and cumulative budget.
+
 A test-only FullScene subclass calls the unchanged super._process and observes
 its actual admitted world milliseconds (`last_advanced_ms`) only when the frame
 entered active play. This excludes source hitpause and modal/ending pauses. It
@@ -181,6 +255,8 @@ fight in11.795s with239 Tony damage, but failed only that input-contract conditi
 Keep its failed report and repeat the correctly launched scenario; do not relax the
 validator or count an unlabeled input branch as the required capture test. The probe
 sets its isolated save path before scenario actions regardless of that launch flag.
+The probe now rejects a missing exact `--qa-full` argument before constructing
+FullScene or touching a save; assigning a property before _ready is not a substitute.
 
 Headless report-contract gate (does not execute a fight):
 `Godot_v4.5.1-stable_win64_console.exe --headless --path game3d --script res://tests/test_boss_acceptance_contract.gd`

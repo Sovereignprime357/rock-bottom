@@ -488,8 +488,14 @@ func _rehydrate_deaths() -> void:
 	for actor: Dictionary in npcs:
 		if _dead_ids.has(str(actor.get("id", ""))) and actor.get("essential", false) != true and actor.get("kingdomGuard", false) != true and actor.get("kingdomPretender", false) != true:
 			actor.dead = true
-	for pile: Dictionary in cash_piles:
-		if s.cashPilesCollected.has(str(pile.get("id", ""))): pile.collected = true
+	for index: int in range(cash_piles.size()-1,-1,-1):
+		var pile: Dictionary = cash_piles[index]
+		var collected: bool = s.cashPilesCollected.has(str(pile.get("id", "")))
+		# spawnCashPiles reconstructs this conditional membership at start/load.
+		# Existing in-session piles intentionally survive later intro completion.
+		if pile.get("id") == "cp_intro_remember" and (s.flags.get("introDone",false) or collected):
+			cash_piles.remove_at(index)
+		elif collected: pile.collected = true
 
 
 func _catalog(key: String) -> Variant:

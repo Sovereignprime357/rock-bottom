@@ -1,75 +1,91 @@
-# SPEC — Full-scene startup preparation
+# SPEC — source startup publications and conditional cash
 
-Captured before implementation, 2026-11-18. Root approved a bounded startup correction:
-retain all 72 original character templates, improve exact template preparation, and present
-an opaque loading surface. Root owns FullScene integration, engine runs and exports.
+Captured before implementation on 2026-11-18. This bounded correction composes existing
+GameState, Runtime and Communications owners. Source authority is `src/core/start.js:143–153`
+and `src/data/npc_spawns.js:368–390`. It does not change original source or save schema.
 
-## Boundary and observed problem
+After a successful fresh/load reconciliation, mode is playing. Before Runtime returns, emit
+the original wake toast: fresh unfinished intro uses the four-line4200ms text; loaded uses
+the three-line3500ms text. Then publish the exact `@crackheadcent` wake post, the exact
+`@tony_observer` morning post, and current source rank-name news, in that order. Existing
+queued feed/news from earlier startup work must precede these publications. Use the real
+Communications queue flush so its current silence predicate applies at call time. No second
+feed, ticker, RNG or timer owner. Feed remains session-global, newest-first and capped at8;
+repeat fresh/load appends another source pair, and active silence suppresses feed/news but
+never the wake toast. Invalid/rejected load cannot publish. Cold title construction does not
+publish. The existing3D load modal remains a separate presentation choice.
 
-The current FullScene constructs day-one actors at their default origin, then prepares all
-remaining templates by creating and freeing complete actors. Final position synchronization
-occurs after that loop. In the browser this exposes overlapping models behind the translucent
-menu and makes a long cold build appear broken. Root will position every real actor before
-adding it to the visible tree. This packet does not change FullScene, gameplay or actor art.
+The publication suffix consumes zero gameplay RNG: both handles are explicit, rank lookup
+is deterministic, and source toast/news do not randomize. Characterize this with unchanged
+`startGame` and real source Communications, including all rank names, exact silence boundary,
+repeat start and current-day posts. This packet does not claim whole-start RNG equivalence.
+Missing/non-array hustle fallback is a separately identified integration obligation.
 
-Template skinning currently solves bone influences independently for every emitted triangle
-corner. Subdivision duplicates many positions; the same ordered bone chain and exact Vector3
-produce identical weights. Cache those results only within one template build. Do not round
-positions, merge vertices, change normals/UVs/materials, approximate weights or share poses.
-Discard temporary influence caches when construction ends. All final mesh arrays, skin binds,
-attachments and contacts must remain byte-equivalent to uncached construction.
+Fresh cash roster uses source fixed positions. On restore, regenerate conditional intro
+membership as source `spawnCashPiles`: omit `cp_intro_remember` when introDone or already
+collected; retain all ordinary piles with collected flags. Schema1 migration already sets
+introDone and must omit the intro pile too. No resource/reward/collected-ID mutation accompanies
+this reconciliation. The current cash-pile array is the sole pickup authority: existing
+Runtime ID lookup must reject a stale removed intro ID before cost/reward/receipt changes.
 
-## APIs
+Preserve the source lifecycle quirk: completing intro in an already-running session does
+**not** remove its existing uncollected intro pile. Do not add a blanket `introDone` guard to
+every pickup. Its eligibility ends at the next source start/load roster construction. Fresh
+starts create it again; repeated restore neither adds duplicates nor pays a reward.
 
-```gdscript
-# CharacterRoster: preparation constructs immutable resources, never a live actor rig.
-static func prepare(visual_id: StringName) -> bool
-static func is_prepared(visual_id: StringName) -> bool
-static func preparation_stats() -> Dictionary
-# Existing create(id, seed) remains unchanged and uses prepare internally.
+Evidence: new unchanged-source startup oracle/fixture and focused `test_startup_parity.gd`,
+plus the existing State/Runtime/Communications suites. Test cold/no publications, source suffix
+RNG independence, fresh/load/repeat/silence, invalid load, collected/uncollected intro variants,
+same-session late pickup, stale removed pickup and schema1 migration. Parent serializes engine
+checks and actual Scene/native/Web validation; this spec is not a completion claim.
 
-# New startup_presentation.gd, RockBottomStartupPresentation extends CanvasLayer.
-func show_stage(text: String, completed: int, total: int) -> void
-func stage_timings() -> Array[Dictionary]
-func finish() -> void
-```
+## Missing/non-array saved hustles — separate approved correction
 
-prepare includes every authored companion template, succeeds repeatedly without rebuilding,
-and rejects unknown IDs. It retains only the existing immutable resource cache; each later
-create still owns an independent Skeleton, pose/write caches, markers and mutable attachment
-transforms. is_prepared requires both the requested template and its companions. Diagnostics
-report completed template count, construction microseconds, exact weight solves and cache hits.
-Diagnostics are observational and consume no authoritative RNG or simulation time.
+Source `audio_save.js:135` maps absent/non-array hustles to null; `start.js:124–140` performs
+cash/interactive initialization, wall layouts, equipment stats, conditional `rollHustles`,
+`ensureBlockRoute`, then Office/Kingdom reconciliation and forces. Preserve the **raw array
+shape decision** before core normalization: absent, null, scalar and object request one roll;
+an explicit empty or populated array never requests a replacement roll. Existing safe hustle
+normalization still drops invalid IDs and replaces saved descriptions/rewards with canonical
+definitions. No raw reward data is copied back after normalization.
 
-The startup CanvasLayer covers the entire viewport with an alpha-one panel above the HUD.
-It blocks pointer delivery, displays the caller's stage and actual completed/total count,
-and uses a determinate progress bar only when a positive total exists. Stage changes record
-monotonic elapsed time for evidence. It creates no 3D models, timers, gameplay state or input
-actions. finish records the final stage and hides the layer; it never starts or resumes play.
-Use plain world-compatible stage labels such as "the block." and "the neighbors.".
+Runtime invokes the existing progression owner after wall preparation and before route rolling.
+The existing merged Campaign reconciliation includes source `audio_save.js:199–219` loaded
+defeat/flag witness repairs; it must retain its position before route unlock filtering. This
+packet does not move that accepted reconciliation or claim full load/start phase equivalence.
+Core already applies equipment stats during validated player restore;
+this earlier pure normalization consumes no RNG and cannot influence wall layout. Equipment
+must be applied by the first hustle draw. Completed/dead actor eligibility uses the restored
+roster. Intro-incomplete fallback produces no jobs/draws; schema1 migration completes intro
+and has no saved hustle field, so it requests the same fallback explicitly.
 
-Root creates the overlay before world construction and yields a frame so it can paint. It
-updates stage progress before/after real preparation work, calls prepare for all 72 templates
-with yields between identities, creates/positions the actual actors, and removes the overlay
-only once the synchronized title view is ready. Yielding between identities does not claim a
-hard per-frame budget for synchronous work inside a single identity.
+Actual Scene loading first builds a safely placed normalized candidate. Root's Scene seam must
+preserve only this raw shape distinction: absent/non-array/schema1 becomes a null or absent
+hustles field in the candidate envelope; an array keeps its normalized contents. It must never
+reinsert raw arrays or rewards. Runtime does not add a new persistent marker or schema field.
 
-## Rendering and evidence
+Before changing production, extend the unchanged-source startup oracle with seeded actual
+`startGame(true)` observations. Trace RNG stage order (interactive bottle, graffiti/poster,
+hustles, route), exact resulting seed/jobs/route, equipment at first hustle draw, valid versus
+regenerated walls, missing versus valid route, dead-vendor eligibility, intro suppression and
+raw hustle shape. Real captured Courier metrics must supply wall widths. Focused tests compare
+the same source seeds and outputs; existing explicit-array saves must retain their former RNG
+and no refreshed jobs. This correction intentionally changes only source-missing fallback paths.
 
-This bounded pass does not create GPU proxy characters. Material/layout equality alone does
-not establish complete light/shadow shader coverage. Initial actual actors render at their
-authored positions beneath the opaque surface; fresh browser measurements must establish the
-remaining first-use rendering cost. There is no first-encounter fallback to simpler geometry.
+Seed characterization from the unchanged-source oracle (`0x19c0ffee` =432078830):
 
-Tests compare every prepared template's final mesh arrays and skin binds against the same
-authored builder with memoization disabled; cache hits must occur without changing any byte.
-They verify repeated preparation preserves resource identity, companions prepare recursively,
-two created instances retain independent poses/resources as specified, and temporary weight
-caches are not retained. UI tests verify full viewport coverage/opacity, actual progress,
-resize behavior, observational timing and finish semantics without constructing 3D warmups.
+| Restored shape / setup | RNG stages | Correct final seed |
+| --- | --- | --- |
+| Missing/null/scalar/object; valid walls and route |24 bottles →13 hustles |1519427481 |
+| Explicit empty or valid jobs; valid walls and route |24 bottles |1123532582 |
+| Missing jobs and route; valid walls |24 bottles →13 hustles →10 route |1817249595 |
+| Missing jobs/walls/route, seed432078830 |24 bottles →85 graffiti →31 posters →13 hustles →10 route |174564623 |
+| Same rebuild, seed1 |24 bottles →85 graffiti →36 posters →13 hustles →10 route |357326185 |
+| Same rebuild, seed4294967295 |24 bottles →127 graffiti →36 posters →13 hustles →10 route |345046489 |
+| Missing jobs/route, three dead fighters; valid walls |24 bottles →12 hustles →10 route |944564300 |
+| Intro unfinished; missing jobs/walls/route |24 bottles →85 graffiti →31 posters |987771242 |
 
-Root measures cold native and fresh browser startup with stage/template timings, first title
-frame, console errors and subsequent conditional spawns/gestures. Preserve the existing roster
-geometry/contact gates. Report improvements only from comparable runs. If runtime procedural
-construction remains excessive, an export-baked library of these exact authored resources is
-a separate measured follow-up, not a silent quality reduction or an unverified claim here.
+These are whole observed-start seeds with real interactive initialization enabled. Models
+without that owner have a different starting stream; do not use this table to loosen arbitrary
+seed assertions. Explicit-array saves retain prior seeds. Equipment stats at the first hustle
+draw are observed in the fixture, and publication suffix still adds zero draws.

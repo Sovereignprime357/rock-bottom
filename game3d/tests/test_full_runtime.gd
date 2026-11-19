@@ -43,6 +43,7 @@ func _run() -> void:
 	_test_day_composition()
 	_test_border_clock()
 	_test_wall_markings_composition()
+	_test_profile_workload()
 	if failures.is_empty():
 		print("3D FULL RUNTIME GATE: PASS (%d checks; composed intro/vendor/loop/save chain, pause, stale capabilities and physical access boundaries; full scene pending)" % checks)
 		quit(0)
@@ -50,6 +51,24 @@ func _run() -> void:
 		for failure: String in failures: push_error(failure)
 		print("3D FULL RUNTIME GATE: FAIL (%d failures / %d checks)" % [failures.size(),checks])
 		quit(1)
+
+func _test_profile_workload() -> void:
+	var spatial := Spatial.new(); var runtime := Runtime.new(spatial)
+	runtime.fresh(); runtime.profile_enabled = true
+	var control_spatial := Spatial.new(); var control := Runtime.new(control_spatial)
+	control.fresh()
+	runtime.advance(0.05); control.advance(0.05)
+	_check(runtime.profile_calls.get("movement",0) == 3 and runtime.profile_calls.get("progression",0) == 3,"50ms reports three actual source world subdivisions")
+	_check(is_equal_approx(runtime.last_advanced_ms,50.0),"active diagnostic retains exact supplied time")
+	_check(runtime.snapshot() == control.snapshot(),"diagnostic counters cannot mutate saved source state or RNG")
+	runtime.set_mode("paused"); runtime.advance(0.05)
+	_check(runtime.profile_calls.is_empty() and runtime.last_advanced_ms == 0.0,"paused advance clears diagnostic work")
+	runtime.set_mode("playing"); runtime.s.hitPause = 100.0; runtime.advance(0.05)
+	_check(runtime.profile_calls.is_empty() and runtime.last_advanced_ms == 0.0,"hitpause does not claim active stage work")
+	runtime.advance(NAN)
+	_check(runtime.profile_calls.is_empty(),"invalid advance retains no stale workload")
+	runtime.profile_enabled = false; runtime.s.hitPause = 0.0; runtime.advance(0.05)
+	_check(runtime.profile_calls.is_empty(),"normal release leaves counters disabled")
 
 func _test_wall_markings_composition() -> void:
 	var spatial := Spatial.new()
@@ -163,17 +182,17 @@ func _test_communications_composition() -> void:
 	_check(runtime.props.ready() and runtime.communications.day_capabilities_ready(),"actual prop/feed owners composed")
 	runtime.state.emit_event("feed",{"text":"the ledger has a page.","author":"@phone_guy"})
 	runtime.drain_events()
-	_check(runtime.communications.snapshot().posts.size() == 1,"queued source post reaches real feed once")
+	_check(runtime.communications.snapshot().posts.size() == 3,"queued source post reaches real feed once after two source startup posts")
 	runtime.drain_events()
-	_check(runtime.communications.snapshot().posts.size() == 1,"draining event sink cannot duplicate source feed")
+	_check(runtime.communications.snapshot().posts.size() == 3,"draining event sink cannot duplicate source feed")
 	runtime.fresh()
-	_check(runtime.communications.snapshot().posts.size() == 1 and runtime.props.ready(),"fresh retains source session feed and rebinds actual props")
+	_check(runtime.communications.snapshot().posts.size() == 5 and runtime.communications.snapshot().posts[2].t == "the ledger has a page." and runtime.props.ready(),"fresh retains source session feed, adds its source pair and rebinds actual props")
 	runtime.s.momTipT = 1.0; runtime.s.flags.silenceUntilT = 9000
 	runtime.s.phoneT = 1.0; runtime.s.eventT = 1.0
 	var seed: int = runtime.state.rng_seed
 	runtime.advance(1.0/60.0)
 	_check(runtime.s.flags.momIntroFired and runtime.s.phoneT >= 90000 and runtime.s.eventT >= 15000,"intro/silence reset ambient clocks while forced Mom tip fires")
-	_check(runtime.state.rng_seed != seed and runtime.communications.snapshot().posts.size() == 1,"suppressed ambient reset consumes source RNG without feed")
+	_check(runtime.state.rng_seed != seed and runtime.communications.snapshot().posts.size() == 5,"suppressed ambient reset consumes source RNG without feed")
 	runtime.set_mode("paused")
 	var timer: float = runtime.s.phoneT
 	runtime.advance(1.0)

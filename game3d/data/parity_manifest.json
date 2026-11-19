@@ -2427,18 +2427,21 @@
     {
       "id": "definitions[\"src/core/start.js\"][\"init_start\"]",
       "name": "init_start",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
         "game3d/scripts/game_state.gd",
         "game3d/scripts/full_runtime.gd",
         "game3d/scripts/full_scene.gd",
-        "game3d/scripts/wall_markings.gd"
+        "game3d/scripts/wall_markings.gd",
+        "game3d/scripts/communications_system.gd"
       ],
       "tests": [
         "game3d/tests/test_game_state.gd",
         "game3d/tests/test_full_runtime.gd",
         "game3d/tests/test_full_scene.gd",
-        "game3d/tests/test_wall_markings.gd"
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_startup_parity.gd",
+        "tools/3d-startup-oracle.mjs"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -2446,23 +2449,26 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Fresh/load modes and live per-save graffiti/poster lifecycle are composed. The aggregate source-start obligation retains partial status: fixed exported initial NPC/cash records and complete startup RNG/order equivalence are not promoted by these bounded presentation tests."
+      "auditNote": "Fresh/load composes source wake/feed/news publications, conditional intro cash, wall layouts and missing-hustle fallback. Twelve actual-source seeded starts pin bottle/wall/hustle/route ordering within the registered 3D incident-epoch adaptation. Fixed canonical base spawn definitions are not an omitted random spawn step. Integrated mapping is not complete native/Web progression acceptance."
     },
     {
       "id": "definitions[\"src/core/start.js\"][\"startGame\"]",
       "name": "startGame",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
         "game3d/scripts/game_state.gd",
         "game3d/scripts/full_runtime.gd",
         "game3d/scripts/full_scene.gd",
-        "game3d/scripts/wall_markings.gd"
+        "game3d/scripts/wall_markings.gd",
+        "game3d/scripts/communications_system.gd"
       ],
       "tests": [
         "game3d/tests/test_game_state.gd",
         "game3d/tests/test_full_runtime.gd",
         "game3d/tests/test_full_scene.gd",
-        "game3d/tests/test_wall_markings.gd"
+        "game3d/tests/test_wall_markings.gd",
+        "game3d/tests/test_startup_parity.gd",
+        "tools/3d-startup-oracle.mjs"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -2470,7 +2476,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Fresh/load modes and live per-save graffiti/poster lifecycle are composed. The aggregate source-start obligation retains partial status: fixed exported initial NPC/cash records and complete startup RNG/order equivalence are not promoted by these bounded presentation tests."
+      "auditNote": "Fresh/load composes source wake/feed/news publications, conditional intro cash, wall layouts and missing-hustle fallback. Twelve actual-source seeded starts pin bottle/wall/hustle/route ordering within the registered 3D incident-epoch adaptation. Fixed canonical base spawn definitions are not an omitted random spawn step. Integrated mapping is not complete native/Web progression acceptance."
     },
     {
       "id": "definitions[\"src/core/storage.js\"][\"init_storage\"]",
@@ -2968,7 +2974,8 @@
       "tests": [
         "game3d/tests/test_game_state.gd",
         "game3d/tests/test_full_runtime.gd",
-        "game3d/tests/test_full_world.gd"
+        "game3d/tests/test_full_world.gd",
+        "game3d/tests/test_startup_parity.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -2976,7 +2983,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Canonical actor/cash definitions are deep-instanced from the exported source defaults; full scene placement uses the registered physical adapter."
+      "auditNote": "Canonical fixed cash definitions are instantiated with collected IDs and the source introDone predicate at restore/spawn. Completing intro in the same session does not delete an existing pile; stale restored pickup references are rejected. Schema1 is covered."
     },
     {
       "id": "definitions[\"src/data/npc_spawns.js\"][\"spawnNpcs\"]",
@@ -5052,7 +5059,9 @@
         "game3d/scripts/kingdom_world_view.gd",
         "game3d/scripts/dog_leash_view.gd",
         "game3d/scripts/district_border_view.gd",
-        "game3d/scripts/wall_marking_view.gd"
+        "game3d/scripts/wall_marking_view.gd",
+        "game3d/scripts/fixture_motion_view.gd",
+        "game3d/scripts/district_grade_view.gd"
       ],
       "tests": [
         "game3d/tests/test_full_scene.gd",
@@ -5062,7 +5071,9 @@
         "game3d/tests/test_world_ownership.gd",
         "game3d/tests/test_kingdom_view.gd",
         "game3d/tests/test_leash_border.gd",
-        "game3d/tests/test_wall_marking_view.gd"
+        "game3d/tests/test_wall_marking_view.gd",
+        "game3d/tests/test_fixture_motion.gd",
+        "game3d/tests/test_district_grade.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5070,7 +5081,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Main 3D orchestration now includes state-driven ownership/Kingdom signs, wall layouts, living-dog tether and district perimeter. Aggregate frame remains partial for outstanding source facade/underpass micro-animation and broader presentation obligations; no whole-frame or platform completion claim."
+      "auditNote": "Full orchestration now includes ownership/Kingdom signs, walls, living-dog tether, district border/grade and facade/underpass source-clock motion. Aggregate remains partial pending explicit off-camera player/pixel-helper dispositions, complete native/Web progression and whole-frame acceptance."
     },
     {
       "id": "definitions[\"src/render/frame.js\"][\"init_frame\"]",
@@ -5086,7 +5097,9 @@
         "game3d/scripts/kingdom_world_view.gd",
         "game3d/scripts/dog_leash_view.gd",
         "game3d/scripts/district_border_view.gd",
-        "game3d/scripts/wall_marking_view.gd"
+        "game3d/scripts/wall_marking_view.gd",
+        "game3d/scripts/fixture_motion_view.gd",
+        "game3d/scripts/district_grade_view.gd"
       ],
       "tests": [
         "game3d/tests/test_full_scene.gd",
@@ -5096,7 +5109,9 @@
         "game3d/tests/test_world_ownership.gd",
         "game3d/tests/test_kingdom_view.gd",
         "game3d/tests/test_leash_border.gd",
-        "game3d/tests/test_wall_marking_view.gd"
+        "game3d/tests/test_wall_marking_view.gd",
+        "game3d/tests/test_fixture_motion.gd",
+        "game3d/tests/test_district_grade.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5104,19 +5119,26 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Main 3D orchestration now includes state-driven ownership/Kingdom signs, wall layouts, living-dog tether and district perimeter. Aggregate frame remains partial for outstanding source facade/underpass micro-animation and broader presentation obligations; no whole-frame or platform completion claim."
+      "auditNote": "Full orchestration now includes ownership/Kingdom signs, walls, living-dog tether, district border/grade and facade/underpass source-clock motion. Aggregate remains partial pending explicit off-camera player/pixel-helper dispositions, complete native/Web progression and whole-frame acceptance."
     },
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"ambientGradeAt\"]",
       "name": "ambientGradeAt",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
         "game3d/scripts/weather_presentation.gd",
-        "game3d/scripts/full_neighborhood.gd"
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/district_grade.gd",
+        "game3d/scripts/district_grade_view.gd",
+        "game3d/scripts/district_grade.gdshader",
+        "game3d/scripts/full_hud.gd"
       ],
       "tests": [
         "game3d/tests/test_weather_presentation.gd",
-        "game3d/tests/test_full_world.gd"
+        "game3d/tests/test_full_world.gd",
+        "game3d/tests/test_district_grade.gd",
+        "tools/district-grade-oracle.mjs",
+        "game3d/tests/test_full_hud.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5124,7 +5146,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Current 3D lighting owns a global day/weather wash; source district AMBIENT_GRADES field blending has no current reader."
+      "auditNote": "All39 source grade IDs, ordered closed-edge zone/region/default selection and six multiply/overlay recipes are live through one below-HUD SDR pass. Native/Web versus actual Canvas maximum channel error2/255 across270 channels is bounded evidence. Final3D hands/rain/emissive layering adaptation is registered in SPEC-3D-DISTRICT-GRADE.md; no full performance claim."
     },
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"buildFogSheet\"]",
@@ -5235,14 +5257,21 @@
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"drawAmbientGrade\"]",
       "name": "drawAmbientGrade",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
         "game3d/scripts/weather_presentation.gd",
-        "game3d/scripts/full_neighborhood.gd"
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/district_grade.gd",
+        "game3d/scripts/district_grade_view.gd",
+        "game3d/scripts/district_grade.gdshader",
+        "game3d/scripts/full_hud.gd"
       ],
       "tests": [
         "game3d/tests/test_weather_presentation.gd",
-        "game3d/tests/test_full_world.gd"
+        "game3d/tests/test_full_world.gd",
+        "game3d/tests/test_district_grade.gd",
+        "tools/district-grade-oracle.mjs",
+        "game3d/tests/test_full_hud.gd"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5250,7 +5279,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Current 3D lighting owns a global day/weather wash; source district AMBIENT_GRADES field blending has no current reader."
+      "auditNote": "All39 source grade IDs, ordered closed-edge zone/region/default selection and six multiply/overlay recipes are live through one below-HUD SDR pass. Native/Web versus actual Canvas maximum channel error2/255 across270 channels is bounded evidence. Final3D hands/rain/emissive layering adaptation is registered in SPEC-3D-DISTRICT-GRADE.md; no full performance claim."
     },
     {
       "id": "definitions[\"src/render/landmarks_a.js\"][\"drawContactBand\"]",
@@ -5527,12 +5556,16 @@
     {
       "id": "definitions[\"src/render/landmarks_b.js\"][\"drawUnderpass\"]",
       "name": "drawUnderpass",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
-        "game3d/scripts/full_neighborhood.gd"
+        "game3d/scripts/full_neighborhood.gd",
+        "game3d/scripts/fixture_motion_view.gd"
       ],
       "tests": [
-        "game3d/tests/test_full_world.gd"
+        "game3d/tests/test_full_world.gd",
+        "game3d/tests/test_fixture_motion.gd",
+        "game3d/tests/test_fixture_motion_world.gd",
+        "tools/3d-fixture-motion-oracle.mjs"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -5540,7 +5573,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Static overhead structure exists; source periodic overhead-car shadow/rumble visual and local pulse have no counterpart."
+      "auditNote": "Existing underpass composes Unix8s passing-car shadow and allthree monotonic700ms sodium pulses. Cached depth-tested receivers follow actual ground/curbs and later floor occlusion. Additive renderer-color adaptation is explicit; no new lights, timers, gameplay or purported rumble sound."
     },
     {
       "id": "definitions[\"src/render/landmarks_b.js\"][\"init_landmarks_b\"]",
@@ -6992,18 +7025,23 @@
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawBuilding\"]",
       "name": "drawBuilding",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
         "game3d/scripts/full_neighborhood.gd",
         "game3d/scripts/world_ownership_view.gd",
         "game3d/scripts/wall_markings.gd",
-        "game3d/scripts/wall_marking_view.gd"
+        "game3d/scripts/wall_marking_view.gd",
+        "game3d/scripts/fixture_motion_view.gd"
       ],
       "tests": [
         "game3d/tests/test_full_world.gd",
         "game3d/tests/test_world_ownership.gd",
         "game3d/tests/test_wall_markings.gd",
-        "game3d/tests/test_wall_marking_view.gd"
+        "game3d/tests/test_wall_marking_view.gd",
+        "game3d/tests/test_fixture_motion.gd",
+        "game3d/tests/test_fixture_motion_world.gd",
+        "game3d/tests/test_full_scene.gd",
+        "tools/3d-fixture-motion-oracle.mjs"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -7011,7 +7049,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Original static shells/signs, current ownership surfaces and source procedural wall layouts are implemented. Aggregate structure rendering remains partial: source CORNER TV flicker, laundromat drum spin and Pawn night-steam/window details are not established by this bounded packet."
+      "auditNote": "Static shells/signs, ownership and source wall layouts now compose TV flicker, washer phases/pane day state and night steam. Existing3D counts remain oneTV/fourwashers. Food absence during actual source night uses the existing pawn service aperture. These declared3D adaptations preserve source clocks/predicates and gameplay/collision; staged native views do not establish earned progression."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"drawClaimSites\"]",
@@ -7138,18 +7176,23 @@
     {
       "id": "definitions[\"src/render/structures.js\"][\"init_structures\"]",
       "name": "init_structures",
-      "status": "partial",
+      "status": "integrated",
       "implementation": [
         "game3d/scripts/full_neighborhood.gd",
         "game3d/scripts/world_ownership_view.gd",
         "game3d/scripts/wall_markings.gd",
-        "game3d/scripts/wall_marking_view.gd"
+        "game3d/scripts/wall_marking_view.gd",
+        "game3d/scripts/fixture_motion_view.gd"
       ],
       "tests": [
         "game3d/tests/test_full_world.gd",
         "game3d/tests/test_world_ownership.gd",
         "game3d/tests/test_wall_markings.gd",
-        "game3d/tests/test_wall_marking_view.gd"
+        "game3d/tests/test_wall_marking_view.gd",
+        "game3d/tests/test_fixture_motion.gd",
+        "game3d/tests/test_fixture_motion_world.gd",
+        "game3d/tests/test_full_scene.gd",
+        "tools/3d-fixture-motion-oracle.mjs"
       ],
       "integration": [
         "game3d/scripts/full_runtime.gd",
@@ -7157,7 +7200,7 @@
       ],
       "nativeEvidence": [],
       "webEvidence": [],
-      "auditNote": "Original static shells/signs, current ownership surfaces and source procedural wall layouts are implemented. Aggregate structure rendering remains partial: source CORNER TV flicker, laundromat drum spin and Pawn night-steam/window details are not established by this bounded packet."
+      "auditNote": "Static shells/signs, ownership and source wall layouts now compose TV flicker, washer phases/pane day state and night steam. Existing3D counts remain oneTV/fourwashers. Food absence during actual source night uses the existing pawn service aperture. These declared3D adaptations preserve source clocks/predicates and gameplay/collision; staged native views do not establish earned progression."
     },
     {
       "id": "definitions[\"src/render/structures.js\"][\"measureGraffitiText\"]",
@@ -12150,5 +12193,5 @@
     }
   ],
   "corpusSha256": "04c8bff447a8de30d9fee156ca80a8331e10028d0b047eb09a22498541339224",
-  "checkpointNote": "Live implementation references updated after bounded central checks; source acceptance text remains the original audit baseline. Integrated is not verified. Complete native/Web progression, performance and remaining presentation evidence are still required; no handler or feature receives a blanket verified promotion."
+  "checkpointNote": "Motion/color/startup integration: {\"integrated\":555,\"planned\":2,\"partial\":28}. All585 source handlers retained; no feature or handler promoted to verified. Full campaign/platform acceptance, explicit first-person/pixel-helper/touch-scope dispositions and sustained60-actor16ms performance remain open."
 }

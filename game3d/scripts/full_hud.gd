@@ -4,7 +4,12 @@ const Content = preload("res://scripts/content_catalog.gd")
 const GuideProjection = preload("res://scripts/guidance_projection.gd")
 const ActorHud = preload("res://scripts/actor_hud_overlay.gd")
 const DistrictBorder = preload("res://scripts/district_border_view.gd")
+const DistrictGrade = preload("res://scripts/district_grade.gd")
+const DistrictGradeView = preload("res://scripts/district_grade_view.gd")
 var district_border: Control
+var district_grade: ColorRect
+var _status_plate: Panel
+var _pocket_plate: Panel
 var actor_overlay: Control
 var menu_scroll: ScrollContainer
 var feed_panel: PanelContainer
@@ -68,6 +73,11 @@ class GuidanceMap:
 
 func _ready() -> void:
 	super._ready()
+	var grade_model := DistrictGrade.new(Content.load_content().world)
+	district_grade = DistrictGradeView.new(grade_model)
+	district_grade.name = "DistrictGrade"
+	root.add_child(district_grade); root.move_child(district_grade,0)
+	district_grade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_receipt_default_offsets = Vector4(receipt.offset_left,receipt.offset_top,receipt.offset_right,receipt.offset_bottom)
 	var margin: Node = menu_box.get_parent()
 	margin.remove_child(menu_box)
@@ -86,6 +96,9 @@ func _ready() -> void:
 	for child: Node in root.get_children():
 		if child is Panel and child.anchor_left == 1.0:
 			child.offset_left = -508; child.offset_right = -20
+			_pocket_plate = child
+		elif child is Panel and child.anchor_left == 0.0 and child.offset_top == 16.0:
+			_status_plate = child
 	feed_panel = PanelContainer.new(); root.add_child(feed_panel)
 	feed_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	feed_panel.offset_left = -338; feed_panel.offset_right = -20
@@ -122,7 +135,22 @@ func _ready() -> void:
 	district_border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.move_child(district_border,root.get_children().find(tint)+1)
 	get_viewport().size_changed.connect(_fit_guidance)
+	get_viewport().size_changed.connect(_fit_header)
+	_fit_header()
 	if _guidance_ref != null: _configure_guidance()
+
+func _fit_header() -> void:
+	var available: float = maxf(300.0,get_viewport().get_visible_rect().size.x-60.0)
+	var left_width: float = minf(510.0,available*0.48)
+	var right_width: float = minf(488.0,available*0.52)
+	if _status_plate != null: _status_plate.offset_right = 20.0+left_width
+	if _pocket_plate != null: _pocket_plate.offset_left = -20.0-right_width
+	pocket.offset_left = -8.0-right_width
+	status.size.x = left_width-24.0; status.clip_text = true
+	status.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	if _loop_status != null:
+		_loop_status.size.x = left_width-24.0; _loop_status.clip_text = true
+		_loop_status.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 
 func bind_actor_hud(state: RefCounted,camera: Camera3D,anchor: Callable,sight: Callable) -> bool:
 	return actor_overlay != null and actor_overlay.bind_model(state,camera,anchor,sight)
@@ -130,7 +158,7 @@ func bind_actor_hud(state: RefCounted,camera: Camera3D,anchor: Callable,sight: C
 func actor_hud_occupied_rects() -> Array[Rect2]:
 	var result: Array[Rect2] = []
 	for node: Node in root.get_children():
-		if not node is Control or not node.is_visible_in_tree() or node in [tint,actor_overlay,guidance_overlay,district_border]: continue
+		if not node is Control or not node.is_visible_in_tree() or node in [tint,actor_overlay,guidance_overlay,district_border,district_grade]: continue
 		# Modal's full-screen CenterContainer is only layout, not an occupied plate.
 		if node is CenterContainer: continue
 		if node is Label and node.text.is_empty(): continue
@@ -240,6 +268,7 @@ func menu(title: String,body: String,options: Array,big: bool = false) -> void:
 func update_runtime(runtime: RefCounted) -> void:
 	var p: Dictionary = runtime.p
 	var s: Dictionary = runtime.s
+	district_grade.sync(float(p.x)+float(p.w)*0.5,float(p.y)+float(p.h)*0.5,str(s.mode))
 	var border_rect: Variant = s.get("borderGlowRect",{})
 	district_border.sync({"remaining_ms":s.get("borderGlowT",0),"color":s.get("borderGlowColor",""),"visible":s.mode != "title" and border_rect is Dictionary and not border_rect.is_empty()})
 	_guidance_playing = s.mode == "playing"

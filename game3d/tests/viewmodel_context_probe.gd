@@ -25,7 +25,29 @@ func _capture(label: String) -> void:
 	var error: Error = frame.save_png(output_dir.path_join(label+".png"))
 	if error != OK:
 		failed = true; push_error("Cannot save viewmodel context frame "+label+": "+str(error)); return
-	captures.append({"file":label+".png","weapon":str(hands.weapon),"attack_weapon":str(hands.attack_weapon),"action":str(hands.action),"phase":hands.action_phase,"visible":hands.visible})
+	captures.append({"file":label+".png","weapon":str(hands.weapon),"attack_weapon":str(hands.attack_weapon),"action":str(hands.action),"phase":hands.action_phase,"visible":hands.visible,"size":[frame.get_width(),frame.get_height()]})
+
+func _empty_stance_views() -> void:
+	for size: Vector2i in [Vector2i(1280,720),Vector2i(960,540)]:
+		root.size = size
+		await process_frame; await process_frame
+		var prefix: String = "empty_"+str(size.x)+"_"
+		_reset(); await _capture(prefix+"rest")
+		_advance(0.5,Vector3.ZERO,false,false,true); await _capture(prefix+"crash")
+		_reset(); _advance(0.35,Vector3(0,0,-5.5)); await _capture(prefix+"walk")
+		_advance(0.12); await _capture(prefix+"stopping")
+		_advance(0.9); await _capture(prefix+"settled")
+		_reset(); _advance(0.30,Vector3(0,0,-16.83),true,true); await _capture(prefix+"sprint")
+		_reset(&"fists",true); await _capture(prefix+"seated")
+		_reset(); hands.acknowledge(&"punch",true,true,&"fists"); _advance(0.045); await _capture(prefix+"right_contact")
+		_advance(0.3); hands.acknowledge(&"punch",true,true,&"fists"); _advance(0.045); await _capture(prefix+"left_contact")
+		for kind: StringName in [&"pickup",&"dumpster"]:
+			_reset(); hands.acknowledge(kind,true,false)
+			_advance(float(Rig.ACTION_LENGTHS[kind])*0.25); await _capture(prefix+str(kind)+"_open")
+			_advance(float(Rig.ACTION_LENGTHS[kind])*0.30); await _capture(prefix+str(kind)+"_closing")
+			_advance(float(Rig.ACTION_LENGTHS[kind])*0.44); await _capture(prefix+str(kind)+"_recovering")
+	root.size = Vector2i(1280,720)
+	_reset()
 func _output() -> String:
 	var selected: String = ProjectSettings.globalize_path("res://../.build/full-port/p05c")
 	var args: PackedStringArray = OS.get_cmdline_user_args()
@@ -68,6 +90,7 @@ func _run() -> void:
 	_reset(); hands.acknowledge(&"punch",true,true,&"fists"); _advance(0.025)
 	hands.set_context({"weapon":&"broken_bottle"}); await _capture("capture_original_fists_after_bottle_receipt")
 	_advance(0.35); await _capture("capture_new_bottle_after_recovery")
+	await _empty_stance_views()
 	var metadata: Dictionary = {"camera":{"fov":camera.fov,"near":camera.near,"size":[1280,720]},"count":captures.size(),"captures":captures,
 		"scope":"Production first-person rig, explicit presentation time, original full-world lighting; no gameplay/Runtime/save actions."}
 	var file := FileAccess.open(output_dir.path_join("captures.json"),FileAccess.WRITE)

@@ -19,6 +19,13 @@ func _run() -> void:
 	await process_frame
 	var before: String = JSON.stringify(runtime.snapshot())
 	hud.update_runtime(runtime)
+	_check(hud.district_grade.visible and hud.root.get_child(0) == hud.district_grade,"district screen pass precedes tint and every HUD plate")
+	_check(not hud.actor_hud_occupied_rects().has(hud.district_grade.get_global_rect()),"full-screen grade never blocks actor label placement")
+	_check(JSON.stringify(runtime.snapshot()) == before,"district grading consumes no authority or RNG")
+	runtime.set_mode("title"); hud.update_runtime(runtime)
+	_check(not hud.district_grade.visible,"title removes the screen grade")
+	runtime.set_mode("playing"); hud.update_runtime(runtime)
+	hud.update_runtime(runtime)
 	_check(hud.status.text.contains("DAY 1") and hud.pocket.text.contains("rocks 0"),"full source HUD reads fresh resources")
 	var pocket_rect: Rect2 = hud.pocket.get_global_rect()
 	_check(pocket_rect.position.x >= 720 and pocket_rect.end.x <= 1280 and pocket_rect.position.y >= 0,"actual resource panel stays on right side of viewport")
@@ -78,6 +85,14 @@ func _run() -> void:
 	_check(not hud.feed_panel.visible,"dialogue hides feed without resetting visibility")
 	runtime.close_dialogue(); hud.update_runtime(runtime)
 	_check(hud.feed_panel.visible,"closing dialogue restores requested phone view")
+	for dimensions: Vector2i in [Vector2i(960,540),Vector2i(1280,720)]:
+		root.size = dimensions; root.content_scale_size = dimensions
+		await process_frame; await process_frame
+		var left: Rect2 = hud._status_plate.get_global_rect()
+		var right: Rect2 = hud._pocket_plate.get_global_rect()
+		_check(left.end.x+19.9 <= right.position.x,"top status and resource plates remain separated at "+str(dimensions))
+		_check(left.encloses(hud.status.get_global_rect()) and right.encloses(Rect2(hud.pocket.global_position,Vector2(hud.pocket.size.x,40))),"header copy fits its actual plates at "+str(dimensions))
+		_check(left.position.x >= 0 and right.end.x <= dimensions.x,"header stays within viewport at "+str(dimensions))
 	hud.free(); runtime = null; spatial = null
 	await process_frame
 	if failures.is_empty():

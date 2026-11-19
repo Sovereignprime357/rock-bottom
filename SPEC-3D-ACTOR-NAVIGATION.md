@@ -261,3 +261,79 @@ certificate key and may pass it to the actual query. No cross-frame height assum
 new clearance certificate, reduced overlap/cast count or asynchronous retained snapshot
 is introduced. Calls without a resolved height still resolve the current actor profile.
 Existing shape-change, Fallen-priest, cache-invalidation and physical-contact gates apply.
+
+### Call-local physics query setup and exact-zero motion — 2026-11-18
+
+Approved after the frozen332be27 diagnostic. A single synchronous raw movement or
+bounded placement search may retain its current direct-space reference, body dimensions,
+resolved height and shape, plus two lazy PhysicsShapeQueryParameters3D instances:
+one for overlap checks and one for sweeps/rest normals. This is construction reuse,
+not a physical-result cache. Nothing survives the call or is stored on an actor.
+
+Keep the current query order, mask1, margin0.002m, feet0.06m, bounds comparisons,
+cast fractions, skin/bisection arithmetic and contact behavior. Every query rewrites
+its transform and motion. In particular, endpoint/bisection overlap checks must not
+overwrite the sweep origin/motion later used for the unsafe-overlap wall normal.
+Shape/height are resolved against the current registration/model epoch on the next
+call. No callback, await, topology writer or authoritative body mutation may occur
+inside the retained setup. Existing exact positive placement certificates and their
+publication/invalidation policy are unchanged; a certificate hit need not allocate
+either query or a shape. All casts and uncached endpoint/skin checks remain real.
+
+After the existing input checks, bounds clamp, epoch synchronization, navigation
+handling and actual/certified origin check, raw movement with intended exactly equal
+to origin returns the same unblocked/non-contact result before building contact-peer
+arrays or sweep setup. Do not turn this into an epsilon shortcut: tiny nonzero inputs
+retain the old path and arithmetic. stop_on_block still invalidates navigation before
+this return. An obstructed zero-motion origin still fails; this does not repair or
+suppress any source AI step. Placement's peer-overlap repair remains separate and live.
+
+Focused regression compares optimized physical movement and placement against the
+pre-optimization query construction on the same actual world: clear travel, wall
+slide/charge, contact, placement recovery and refusal. Assert equal returned positions,
+blocked/contact flags, actual total/overlap counts and certificate contents/hits.
+Cover zero movement at clear/blocked origins, a retained ordinary navigation path,
+charge invalidation, tiny nonzero motion, and p-only/s-only epoch replacement. Existing
+render/physics-frame, dimensions, registration and collider-revision witnesses still
+apply. Root runs engine gates and frozen native measurement; no speedup is accepted
+from source inspection alone.
+
+### Measured workload denominator — 2026-11-18
+
+Native performance reports must retain actual Runtime active milliseconds and exact
+number of profiled stage calls per measured frame. Runtime's existing diagnostic
+profile switch owns counters only; each stage increments beside its existing timer,
+and advance resets counters before input rejection/mode handling. Counters do not
+enter saved state or change steps, clocks, RNG, AI, physics or presentation. Report
+per-frame distributions, totals and physics queries per active second. This prevents
+same-render-frame counts from being mistaken for equal simulation workloads when
+render slowdown causes additional <=16.667ms world subdivisions. Diagnostic switches
+may disable only district grading or the new pose-input memo for labeled A/B runs;
+normal release defaults retain both. Those comparisons do not replace full16ms gates.
+
+Native diagnostics enable RenderingServer viewport render-time measurement and
+record viewport CPU/GPU milliseconds plus frame-setup CPU time separately. A zero-only
+GPU series is explicitly unavailable, never a0ms performance pass. Script-inclusive
+Scene/engine metrics and the unchanged16ms criterion remain decisive. API reference:
+https://docs.godotengine.org/en/4.5/classes/class_renderingserver.html#class-renderingserver-method-viewport-set-measure-render-time
+
+Measurement correction: Godot4.5.1 `Performance.TIME_PROCESS` publishes the maximum
+process duration accumulated over roughly one second. Repeated reads are samples of
+that held monitor value, not independent per-frame engine CPU times. Rename the
+report field `engine_process_monitor_window_max_ms`; preserve the same conservative
+16ms threshold alongside actual `scene_cpu_ms` p95. Keep old reports unchanged and
+correct their interpretation, without converting a previous failure into a pass.
+Record original supplied delta, actual admitted active time and wall frame cadence
+separately. The latter includes the limiter and probe bookkeeping. Stage call counts
+include final partial subdivisions, not just fixed60Hz ticks; zero-call frames stay
+in distributions. Report total stage CPU and CPU per call/active second. Whole-scene
+query rate includes presentation/navigation as well as actor queries.
+
+Compatibility viewport CPU/GPU timestamps report delayed completed render frames
+(the GLES3 timestamp ring reads frame-2). Use warmed phase distributions without
+summing or pairing a current script sample to a same-index renderer sample. Timestamp
+measurement overhead is part of this diagnostic run. Frame-setup CPU excludes scripts.
+Pinned implementation references:
+https://github.com/godotengine/godot/blob/4.5.1-stable/main/main.cpp#L4484-L4518
+https://github.com/godotengine/godot/blob/4.5.1-stable/drivers/gles3/storage/utilities.cpp#L315-L350
+https://github.com/godotengine/godot/blob/4.5.1-stable/servers/rendering/renderer_viewport.cpp#L1493-L1510

@@ -2,6 +2,9 @@ extends SceneTree
 ## Real native input fight, never a direct-damage or simulated boss substitute.
 const Content = preload("res://scripts/content_catalog.gd")
 const Contact = preload("res://scripts/actor_contact.gd")
+const COMBAT_MAX_REPLANS := 32
+const COMBAT_REPLAN_MS := 500
+const COMBAT_ROUTE_ATTEMPTS := 4
 
 class ObservedScene:
 	extends "res://scripts/full_scene.gd"
@@ -71,6 +74,43 @@ var failure_context: Dictionary = {}
 var walking_goal := Vector3.INF
 var last_requested_motion := Vector2.ZERO
 var last_actual_input := Vector2.ZERO
+var combat_plan: Dictionary = {}
+var combat_context: Dictionary = {}
+var combat_navigation: Array[Dictionary] = []
+var combat_replans := 0
+var combat_last_plan := -1000
+var combat_endpoint_attempts := 0
+var combat_occluded_decisions := 0
+
+static func launch_error(arguments: PackedStringArray) -> String:
+	return "" if "--qa-full" in arguments else "Tony acceptance requires --qa-full before FullScene creation"
+
+static func melee_ring(origin: Vector2,target: Vector2) -> Array[Vector2]:
+	var result: Array[Vector2] = []
+	if not origin.is_finite() or not target.is_finite(): return result
+	var heading: float = (origin-target).angle()
+	for radius: float in [44.0,30.0]:
+		for step: int in range(12):
+			result.append(target+Vector2.from_angle(heading+TAU*float(step)/12.0)*radius)
+	result.sort_custom(func(a: Vector2,b: Vector2) -> bool: return a.distance_squared_to(origin) < b.distance_squared_to(origin))
+	return result
+
+static func combat_attack_ready(distance: float,alignment: float,cooldown: float,stun: float,line_clear: bool) -> bool:
+	return line_clear and is_finite(distance) and is_finite(alignment) and is_finite(cooldown) and is_finite(stun) and distance >= 0.0 and distance < 57.0 and alignment > 0.985 and cooldown <= 0.0 and stun <= 0.0
+
+static func combat_replan_ready(now: int,last: int,count: int) -> bool:
+	return count >= 0 and count < COMBAT_MAX_REPLANS and now-last >= COMBAT_REPLAN_MS
+
+static func combat_route_reason(plan: Dictionary,target_id: String,target: Vector2,phase: int,revision: int,endpoint_clear: bool,segment_clear: bool) -> String:
+	if plan.is_empty(): return "no_cached_route"
+	if plan.get("target_id") != target_id: return "target_changed"
+	if plan.get("phase") != phase: return "phase_changed"
+	if plan.get("revision") != revision: return "collision_revision_changed"
+	var captured: Vector2 = plan.get("target_center",Vector2.INF)
+	if not captured.is_finite() or not target.is_finite() or captured.distance_to(target) > 24.0: return "target_drift"
+	if not endpoint_clear: return "endpoint_no_longer_melee_clear"
+	if not segment_clear: return "next_segment_blocked"
+	return ""
 
 static func encode_motion(desired: Vector2) -> Vector2:
 	var length: float = minf(desired.length(),1.0)
@@ -148,6 +188,13 @@ static func weapon_chain(rows: Array) -> Dictionary:
 
 static func assess(report: Dictionary,mode: String = "") -> Array[String]:
 	var errors: Array[String] = []
+	var driver: Dictionary = report.get("driver",{})
+	if driver.get("version") != 2 or driver.get("qa_full") != true: errors.append("version2 driver requires the exact --qa-full launch flag")
+	var replans: float = float(driver.get("combat_replans",-1)); var attempts: float = float(driver.get("endpoint_route_attempts",-1))
+	if not is_finite(replans) or not is_finite(attempts) or replans != floorf(replans) or attempts != floorf(attempts) or replans < 0 or replans > COMBAT_MAX_REPLANS or attempts < 0 or attempts > replans*COMBAT_ROUTE_ATTEMPTS: errors.append("combat driver exceeded its bounded route work")
+	for row: Dictionary in report.get("attack_receipts",[]):
+		var geometry: Dictionary = row.get("geometry",{})
+		if str(geometry.get("target_id","")).is_empty() or not combat_attack_ready(float(geometry.get("distance",NAN)),float(geometry.get("alignment",NAN)),float(geometry.get("cooldown",NAN)),float(geometry.get("stun",NAN)),geometry.get("can_hit") == true): errors.append("accepted click lacks current clear melee/aim/cooldown evidence")
 	var selected: String = mode if not mode.is_empty() else str(report.get("contract_mode","fists_only"))
 	if selected not in ["source_earned","fists_only"]: errors.append("unknown weapon acceptance contract")
 	var f: Dictionary = report.get("fight",{}); var l: Dictionary = report.get("loop",{})
@@ -255,7 +302,7 @@ func _capture_failure() -> void:
 	var nearby: Array[Dictionary] = []
 	for peer: Dictionary in game.physics._contact_peers(game.runtime.p):
 		if _center(peer).distance_to(game.runtime.state.player_center()) <= 200.0: nearby.append(peer.duplicate(true))
-	failure_context = {"world_position":game.player.position,"source_center":game.runtime.state.player_center(),"mode":game.runtime.s.mode,"hp":game.runtime.p.hp,"nearby":nearby,"walks":walking.duplicate(true),"walking_goal":walking_goal,"requested_motion":last_requested_motion,"actual_input":last_actual_input,"mouse_captured":Input.mouse_mode == Input.MOUSE_MODE_CAPTURED}
+	failure_context = {"world_position":game.player.position,"source_center":game.runtime.state.player_center(),"mode":game.runtime.s.mode,"hp":game.runtime.p.hp,"nearby":nearby,"walks":walking.duplicate(true),"last_pre_fight_walking_goal":walking_goal,"combat":combat_context.duplicate(true),"combat_replans":combat_replans,"requested_motion":last_requested_motion,"actual_input":last_actual_input,"mouse_captured":Input.mouse_mode == Input.MOUSE_MODE_CAPTURED}
 	print("TONY PROBE FAILURE CONTEXT: ",JSON.stringify(failure_context))
 	# Freeze only an already-failed scenario; unwind frame_sampled before readback.
 	game.set_process(false)
@@ -434,11 +481,12 @@ func _target(tony_only: bool = false) -> Dictionary:
 			best = actor; nearest = distance
 	if tony_only and best.is_empty(): return tony
 	return best
-func _send_attack() -> void:
+func _send_attack(geometry: Dictionary) -> void:
 	var before: Dictionary = {}
 	for actor: Dictionary in game.runtime.state.npcs:
 		before[str(actor.id)] = {"hp":actor.get("hp",0),"dead":actor.get("dead",false),"ordinary_reward":not actor.get("essential",false) and not actor.get("kingdomGuard",false) and not actor.get("kingdomAdd",false) and not game.runtime.combat._special_death(actor)}
 	var row := {"wall_ms":Time.get_ticks_msec(),"active_ms":game.admitted_ms,"before_weapon":game.runtime.p.weapon,"before_cd":game.runtime.p.attackCd,"boss_before":game.runtime.s.bossActive and game.runtime.s.bossKind == "tony","quest_before":game.runtime.s.quests.fallen_king.done,"actors_before":{},"actors_after":{}}
+	row.geometry = geometry.duplicate(true)
 	var event_start: int = game.trace.size()
 	var event := InputEventMouseButton.new(); event.button_index = MOUSE_BUTTON_LEFT; event.pressed = true
 	game._unhandled_input(event); inputs.clicks += 1
@@ -454,6 +502,116 @@ func _send_attack() -> void:
 	row.after_weapon = game.runtime.p.weapon; row.after_cd = game.runtime.p.attackCd
 	row.victory_after = _actor("tony").get("dead",false) and game.runtime.s.quests.fallen_king.done and not game.runtime.s.bossActive and game.runtime.s.bossKind == ""
 	attack_receipts.append(row)
+func _combat_segment(from: Vector3,to: Vector3) -> Dictionary:
+	var body: Dictionary = _probe_body(from)
+	var destination: Dictionary = _probe_body(to)
+	var goal := Vector2(destination.x,destination.y)
+	# A detached body performs the same sweep/contact query, never a model write.
+	var moved: Dictionary = game.physics.move_body(body,goal)
+	var reached: Vector2 = moved.get("position",Vector2.INF)
+	var reason := ""
+	if moved.get("blocked",true): reason = "static_sweep_blocked"
+	elif moved.get("body_contact",false): reason = "live_peer_contact"
+	elif not reached.is_finite() or reached.distance_to(goal) >= 0.005: reason = "sweep_endpoint_not_reached"
+	return {"ok":reason.is_empty(),"reason":reason,"from":Content.to_source(from),"to":Content.to_source(to),"actual_end":reached+Vector2(body.w,body.h)*0.5}
+func _combat_endpoint(point: Vector3,target: Dictionary,peers: Array[Dictionary]) -> bool:
+	var center: Vector2 = Content.to_source(point)
+	if center.distance_to(_center(target)) >= 57.0: return false
+	var body: Dictionary = _probe_body(point); var origin := Vector2(body.x,body.y)
+	return game.physics._clear(body,origin,false) and game.physics._peer_clear(body,origin,peers) and game.physics.can_hit(center,_center(target),"player",str(target.id))
+func _combat_blocker(target: Dictionary) -> Dictionary:
+	var hit: Dictionary = game.physics._ray(Content.to_world(game.runtime.state.player_center(),game.physics.FEET+game.physics._height("player")*0.6),Content.to_world(_center(target),game.physics.FEET+game.physics._height(str(target.id))*0.6))
+	if hit.is_empty(): return {}
+	var collider: Object = hit.get("collider")
+	return {"owner":str(collider.get_meta("source_owner","")) if is_instance_valid(collider) else "","position":hit.get("position"),"normal":hit.get("normal")}
+func _plan_combat_route(target: Dictionary,reason: String) -> bool:
+	if not _check(combat_replans < COMBAT_MAX_REPLANS,"bounded combat replans remain below32"): return false
+	combat_replans += 1; combat_last_plan = Time.get_ticks_msec(); combat_plan = {}
+	var started: int = Time.get_ticks_msec()
+	var origin: Vector3 = game.player.position
+	var peers: Array[Dictionary] = game.physics._contact_peers(game.runtime.p)
+	var attempts := 0; var certified := 0
+	for center: Vector2 in melee_ring(game.runtime.state.player_center(),_center(target)):
+		var point: Vector3 = Content.to_world(center,origin.y)
+		if not _combat_endpoint(point,target,peers) or not game.world.is_clear_position(point): continue
+		certified += 1; attempts += 1; combat_endpoint_attempts += 1
+		var route: PackedVector3Array = _resident_route(origin,point)
+		if route.size() >= 2:
+			combat_plan = {"target_id":str(target.id),"target_center":_center(target),"phase":int(game.runtime.s.bossPhase),"revision":int(game.physics._collision_revision),"endpoint":point,"route":route,"index":1}
+			combat_navigation.append({"wall_ms":started,"active_ms":game.admitted_ms,"reason":reason,"target_id":target.id,"target_center":_center(target),"from":Content.to_source(origin),"endpoint":center,"route":route,"attempts":attempts,"planner_ms":Time.get_ticks_msec()-started,"replan":combat_replans})
+			return true
+		if attempts >= COMBAT_ROUTE_ATTEMPTS: break
+	combat_navigation.append({"wall_ms":started,"active_ms":game.admitted_ms,"reason":"route_unavailable","trigger":reason,"target_id":target.id,"target_center":_center(target),"from":Content.to_source(origin),"certified_endpoints":certified,"attempts":attempts,"planner_ms":Time.get_ticks_msec()-started,"replan":combat_replans,"retryable":combat_replans < COMBAT_MAX_REPLANS,"next_plan_ms":combat_last_plan+COMBAT_REPLAN_MS})
+	# Live peers can close every current route without ending a lawful fight.
+	# This spent plan stays counted; steering holds until the same bounded retry.
+	combat_context.reason = "route_unavailable"
+	combat_context.next_plan_ms = combat_last_plan+COMBAT_REPLAN_MS
+	return false
+func _combat_steering(target: Dictionary,now: int,line_clear: bool) -> Vector2:
+	var center: Vector2 = game.runtime.state.player_center()
+	var target_center: Vector2 = _center(target)
+	var delta: Vector2 = target_center-center; var distance: float = delta.length()
+	var toward: Vector2 = delta.normalized() if distance > 0.001 else Vector2.RIGHT
+	var desired: Vector2 = toward*clampf((distance-45.0)/16.0,-1.0,1.0) if distance < 40.0 or distance > 50.0 else Vector2.ZERO
+	var dodging: bool = line_clear and target.get("chargeState","") in ["windup","lunge"]
+	if dodging:
+		desired = (Vector2(-toward.y,toward.x)*0.75-toward*(0.35 if distance < 45.0 else 0.0)).limit_length(1.0)
+	var goal: Vector2 = target_center-toward*44.0 if distance > 50.0 and not dodging else center+desired*20.0
+	var direct: Dictionary = _combat_segment(game.player.position,Content.to_world(goal,game.player.position.y))
+	combat_context = {"wall_ms":now,"active_ms":game.admitted_ms,"target_id":target.id,"target_center":target_center,"player_center":center,"distance":distance,"can_hit":line_clear,"phase":game.runtime.s.bossPhase,"revision":game.physics._collision_revision,"direct_segment":direct}
+	if line_clear and (direct.ok or distance <= 50.0):
+		if not combat_plan.is_empty():
+			combat_navigation.append({"wall_ms":now,"active_ms":game.admitted_ms,"reason":"direct_melee_reacquired","target_id":target.id,"target_center":target_center,"from":center})
+		combat_plan = {}
+		combat_context.reason = "direct_melee" if direct.ok else "blocked_retreat_or_dodge"
+		return desired if direct.ok else Vector2.ZERO
+	if not line_clear:
+		combat_occluded_decisions += 1
+		combat_context.line_blocker = _combat_blocker(target)
+	var peers: Array[Dictionary] = game.physics._contact_peers(game.runtime.p)
+	var endpoint_clear := false; var next_clear := false
+	var segment: Dictionary = {}
+	if not combat_plan.is_empty():
+		var route: PackedVector3Array = combat_plan.route
+		while int(combat_plan.index) < route.size() and game.player.position.distance_to(route[int(combat_plan.index)]) <= 0.085:
+			combat_plan.index += 1
+		endpoint_clear = _combat_endpoint(combat_plan.endpoint,target,peers)
+		if int(combat_plan.index) < route.size():
+			segment = _combat_segment(game.player.position,route[int(combat_plan.index)])
+			next_clear = segment.ok
+	var reason: String = combat_route_reason(combat_plan,str(target.id),target_center,int(game.runtime.s.bossPhase),int(game.physics._collision_revision),endpoint_clear,next_clear)
+	if not reason.is_empty():
+		combat_context.reason = reason; combat_context.current_segment = segment
+		combat_plan = {} # Never follow an invalidated route while awaiting a retry.
+		if not _check(combat_replans < COMBAT_MAX_REPLANS,"bounded combat replans remain below32"): return Vector2.ZERO
+		if not combat_replan_ready(now,combat_last_plan,combat_replans):
+			combat_context.reason = "waiting_for_replan_budget"
+			combat_context.waiting_for_replan_budget = true
+			combat_context.next_plan_ms = combat_last_plan+COMBAT_REPLAN_MS
+			return Vector2.ZERO
+		if not _plan_combat_route(target,reason):
+			combat_context.waiting_for_replan_budget = true
+			_check(combat_replans < COMBAT_MAX_REPLANS,"bounded combat replans remain below32")
+			return Vector2.ZERO
+	var points: PackedVector3Array = combat_plan.route
+	var point: Vector3 = points[int(combat_plan.index)]
+	segment = _combat_segment(game.player.position,point)
+	combat_context.reason = "following_melee_route"; combat_context.endpoint = Content.to_source(combat_plan.endpoint)
+	combat_context.current_segment = segment; combat_context.route_index = combat_plan.index
+	if not segment.ok: combat_context.reason = "new_route_segment_blocked"; return Vector2.ZERO
+	var direction := Vector2(point.x-game.player.position.x,point.z-game.player.position.z)
+	return direction.normalized()*minf(1.0,direction.length()/0.4)
+func _combat_route_motion() -> Vector2:
+	# Steering converges each render frame; only costly route decisions use100ms.
+	# Otherwise high-speed movement can overshoot a short corner between decisions.
+	var route: PackedVector3Array = combat_plan.route
+	while int(combat_plan.index) < route.size() and game.player.position.distance_to(route[int(combat_plan.index)]) <= 0.085:
+		combat_plan.index += 1
+	if int(combat_plan.index) >= route.size(): return Vector2.ZERO
+	var point: Vector3 = route[int(combat_plan.index)]
+	combat_context.current_input_segment = {"from":Content.to_source(game.player.position),"to":Content.to_source(point)}
+	var direction := Vector2(point.x-game.player.position.x,point.z-game.player.position.z)
+	return direction.normalized()*minf(1.0,direction.length()/0.4)
 func _combat_input(preferred: Dictionary = {}) -> void:
 	var target: Dictionary = preferred if not preferred.is_empty() else _target()
 	if target.is_empty(): _release(); return
@@ -461,15 +619,14 @@ func _combat_input(preferred: Dictionary = {}) -> void:
 	var distance: float = delta.length()
 	var aligned: float = _aim(Content.to_world(_center(target),1.35),_dt())
 	var now: int = Time.get_ticks_msec()
+	var line_clear: bool = game.physics.can_hit(game.runtime.state.player_center(),_center(target),"player",str(target.id))
 	if now-decision_wall >= 100:
 		decision_wall = now
-		var toward: Vector2 = delta.normalized() if distance > 0.001 else Vector2.RIGHT
-		motion = toward*clampf((distance-45.0)/16.0,-1.0,1.0) if distance < 40 or distance > 50 else Vector2.ZERO
-		if target.get("chargeState","") in ["windup","lunge"]:
-			motion = (Vector2(-toward.y,toward.x)*0.75-toward*(0.35 if distance < 45 else 0.0)).limit_length(1.0)
+		motion = _combat_steering(target,now,line_clear)
+	if not combat_plan.is_empty() and combat_plan.target_id == str(target.id) and combat_context.get("reason") == "following_melee_route": motion = _combat_route_motion()
 	_motion(motion)
-	if game.runtime.p.attackCd <= 0 and game.runtime.p.stunT <= 0 and aligned > 0.985 and distance < 57.0:
-		_send_attack()
+	if failures.is_empty() and combat_attack_ready(distance,aligned,float(game.runtime.p.attackCd),float(game.runtime.p.stunT),line_clear):
+		_send_attack({"target_id":target.id,"target_center":_center(target),"player_center":game.runtime.state.player_center(),"distance":distance,"alignment":aligned,"cooldown":game.runtime.p.attackCd,"stun":game.runtime.p.stunT,"can_hit":line_clear})
 func _fight() -> bool:
 	fight.started = game.runtime.s.bossActive and game.runtime.s.bossKind == "tony"
 	if not _check(fight.started and _actor("tony").hp == 200 and game.runtime.p.tonyOffenses == 3,"actual third-short callback starts canonical200HP Tony"): return false
@@ -566,8 +723,11 @@ func _report() -> Dictionary:
 	var retained: bool = true
 	for id: String in initial_actor_ids:
 		if _actor(id).is_empty(): retained = false
-	return {"schema":1,"format":"rock-bottom-boss-acceptance","contract_mode":contract_mode,"claim":"initial fists and normal HP; only verified source-earned weapon transitions" if contract_mode == "source_earned" else "strict fists-only accepted attacks through Tony defeat","fixture":{"kind":"fresh_cash_only","cash_grant":25,"weapon":initial.get("weapon"),"hp":initial.get("hp"),"note":"$25 is a labeled normal-resource pre-fight fixture; no claim of earning it in this run. No other state edits, retry, teleports or injected damage."},"initial":initial,"final":_summary(),"fight":fight,"loop":loop,"costs":costs,"transactions":receipts,"inputs":inputs,"deaths":deaths,"arrests":arrests,"epoch_replacements":game.replacements,"dependencies":dependencies,"canonical_roster_retained":retained,"initial_actor_ids":initial_actor_ids,"events":game.trace,"attack_receipts":attack_receipts,"weapon_audit":weapon_chain(attack_receipts),"samples":game.samples,"captures":captures,"walking":walking,"failure_context":failure_context,"engine":Engine.get_version_info().string,"renderer":RenderingServer.get_current_rendering_method(),"scope":"actual native Tony fight from fresh fists/HP, verified source rewards, real purchase/offenses/smoke/input/physics and same18s/8s loop; not full campaign/Web/performance acceptance"}
+	return {"schema":1,"format":"rock-bottom-boss-acceptance","contract_mode":contract_mode,"claim":"initial fists and normal HP; only verified source-earned weapon transitions" if contract_mode == "source_earned" else "strict fists-only accepted attacks through Tony defeat","fixture":{"kind":"fresh_cash_only","cash_grant":25,"weapon":initial.get("weapon"),"hp":initial.get("hp"),"note":"$25 is a labeled normal-resource pre-fight fixture; no claim of earning it in this run. No other state edits, retry, teleports or injected damage."},"initial":initial,"final":_summary(),"fight":fight,"loop":loop,"costs":costs,"transactions":receipts,"inputs":inputs,"deaths":deaths,"arrests":arrests,"epoch_replacements":game.replacements,"dependencies":dependencies,"canonical_roster_retained":retained,"initial_actor_ids":initial_actor_ids,"events":game.trace,"attack_receipts":attack_receipts,"weapon_audit":weapon_chain(attack_receipts),"samples":game.samples,"captures":captures,"walking":walking,"driver":{"version":2,"qa_full":launch_error(OS.get_cmdline_user_args()).is_empty(),"combat_replans":combat_replans,"endpoint_route_attempts":combat_endpoint_attempts,"occluded_decisions":combat_occluded_decisions},"combat_navigation":combat_navigation,"combat_context":combat_context,"failure_context":failure_context,"engine":Engine.get_version_info().string,"renderer":RenderingServer.get_current_rendering_method(),"scope":"actual native Tony fight from fresh fists/HP, verified source rewards, real purchase/offenses/smoke/input/physics and same18s/8s loop; not full campaign/Web/performance acceptance"}
 func _run() -> void:
+	var launch_failure: String = launch_error(OS.get_cmdline_user_args())
+	if not launch_failure.is_empty():
+		push_error(launch_failure); print("3D TONY FIGHT ACCEPTANCE: FAIL; missing_qa_full"); quit(1); return
 	if DisplayServer.get_name() == "headless": push_error("Tony acceptance requires a native renderer"); quit(1); return
 	output = ProjectSettings.globalize_path("res://../.build/full-port/boss-acceptance/tony")
 	for argument: String in OS.get_cmdline_user_args():

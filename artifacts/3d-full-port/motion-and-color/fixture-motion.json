@@ -1,0 +1,2430 @@
+{
+	"acceptance": true,
+	"bindings": {
+		"pawn_counter": {
+			"mount": "service_aperture",
+			"size": "(2.400002, 2.5)",
+			"source_index": 0,
+			"transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+		},
+		"sodium": [
+			{
+				"receivers": [
+					{
+						"height": 0.0170000004321337,
+						"polygon": "[(-0.8, -22.66666), (-0.8, -23.6), (4.799999, -23.6), (4.799999, -18.0), (-0.8, -18.0)]"
+					}
+				],
+				"source_center": "(1100.0, 320.0)"
+			},
+			{
+				"receivers": [
+					{
+						"height": 0.0170000004321337,
+						"polygon": "[(4.8, -21.2), (10.4, -21.2), (10.4, -15.6), (4.8, -15.6)]"
+					}
+				],
+				"source_center": "(1240.0, 380.0)"
+			},
+			{
+				"receivers": [
+					{
+						"height": 0.048499999076128,
+						"polygon": "[(13.14, -24.0), (13.26, -24.0), (13.26, -18.4), (13.14, -18.4)]"
+					},
+					{
+						"height": 0.0290000005364418,
+						"polygon": "[(13.26, -24.0), (14.4, -24.0), (14.4, -23.99998)]"
+					},
+					{
+						"height": 0.0290000005364418,
+						"polygon": "[(13.26, -24.0), (14.4, -23.99998), (14.4, -18.4), (13.26, -18.4)]"
+					},
+					{
+						"height": 0.0170000004321337,
+						"polygon": "[(8.799999, -24.0), (13.14, -24.0), (13.14, -18.4), (8.799999, -18.4)]"
+					}
+				],
+				"source_center": "(1340.0, 310.0)"
+			}
+		],
+		"tv_window": {
+			"size": "(1.5, 1.35)",
+			"source_index": 0,
+			"transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (20.8, 1.65, 3.625)]"
+		},
+		"underpass": {
+			"receivers": [
+				{
+					"height": 0.003,
+					"rect": "[P: (-1.2, -24.4), S: (14.34, 0.32)]"
+				},
+				{
+					"height": 0.048499999076128,
+					"rect": "[P: (13.14, -24.4), S: (0.120001, 0.32)]"
+				},
+				{
+					"height": 0.0290000005364418,
+					"rect": "[P: (13.26, -24.4), S: (4.040001, 0.32)]"
+				},
+				{
+					"height": 0.048499999076128,
+					"rect": "[P: (17.3, -24.4), S: (0.119999, 0.32)]"
+				},
+				{
+					"height": 0.003,
+					"rect": "[P: (17.42, -24.4), S: (0.58, 0.32)]"
+				},
+				{
+					"height": 0.0170000004321337,
+					"rect": "[P: (18.0, -24.4), S: (3.84, 0.32)]"
+				}
+			],
+			"source_rect": "[P: (1020.0, 240.0), S: (380.0, 220.0)]"
+		},
+		"washers": [
+			"[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (19.6, 0.55, 11.49)]",
+			"[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (20.7, 0.55, 11.49)]",
+			"[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (21.8, 0.55, 11.49)]",
+			"[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (22.9, 0.55, 11.49)]"
+		]
+	},
+	"captures": [
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998371, -0.05705), Z: (0.0, 0.05705, 0.998371), O: (20.7568, 1.83, 5.89)]",
+			"dayTime": 0.5,
+			"file": "tv_close_off.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 0,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.36,
+					"steam_rise": 0.0,
+					"steam_visible": false,
+					"steam_x": 0.0,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": 2.0,
+							"y": 0.0
+						},
+						{
+							"x": 1.08060461173628,
+							"y": 1.68294196961579
+						},
+						{
+							"x": -0.832293673094285,
+							"y": 1.81859485365136
+						},
+						{
+							"x": -1.97998499320089,
+							"y": 0.282240016119734
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 8,
+				"tv_visible": true,
+				"uniform_writes": 1,
+				"visibility_writes": 19,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"CornerTelevision/Screen": "[P: (494.9462, 266.6308), S: (290.1077, 185.4077)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998371, -0.05705), Z: (0.0, 0.05705, 0.998371)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 0.0
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998371, -0.05705), Z: (0.0, 0.05705, 0.998371), O: (20.7568, 1.83, 5.89)]",
+			"dayTime": 0.5,
+			"file": "tv_close_on.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 1,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.369619076151754,
+					"steam_rise": 0.6375,
+					"steam_visible": false,
+					"steam_x": 0.824641563486849,
+					"tv_on": true,
+					"washers": [
+						{
+							"x": 1.68739013620736,
+							"y": 1.07364543878792
+						},
+						{
+							"x": 0.00825929678061097,
+							"y": 1.99998294593146
+						},
+						{
+							"x": -1.67846510201653,
+							"y": 1.08754535597953
+						},
+						{
+							"x": -1.82201642665808,
+							"y": -0.824776418787613
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 12,
+				"tv_visible": true,
+				"uniform_writes": 2,
+				"visibility_writes": 19,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"CornerTelevision/Screen": "[P: (494.9462, 266.6308), S: (290.1077, 185.4077)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998371, -0.05705), Z: (0.0, 0.05705, 0.998371)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 170.0
+		},
+		{
+			"camera": "[X: (0.859293, 0.0, -0.511484), Y: (-0.025085, 0.998797, -0.042143), Z: (0.510868, 0.049043, 0.858259), O: (22.0068, 1.83, 5.89)]",
+			"dayTime": 0.5,
+			"file": "tv_oblique_off.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 2,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.36,
+					"steam_rise": 0.0,
+					"steam_visible": false,
+					"steam_x": 0.0,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": 2.0,
+							"y": 0.0
+						},
+						{
+							"x": 1.08060461173628,
+							"y": 1.68294196961579
+						},
+						{
+							"x": -0.832293673094285,
+							"y": 1.81859485365136
+						},
+						{
+							"x": -1.97998499320089,
+							"y": 0.282240016119734
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 16,
+				"tv_visible": true,
+				"uniform_writes": 3,
+				"visibility_writes": 19,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"CornerTelevision/Screen": "[P: (541.533, 275.7126), S: (215.4979, 174.3566)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.859293, 0.0, -0.511484), Y: (-0.025085, 0.998797, -0.042143), Z: (0.510868, 0.049043, 0.858259)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 0.0
+		},
+		{
+			"camera": "[X: (0.859293, 0.0, -0.511484), Y: (-0.025085, 0.998797, -0.042143), Z: (0.510868, 0.049043, 0.858259), O: (22.0068, 1.83, 5.89)]",
+			"dayTime": 0.5,
+			"file": "tv_oblique_on.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 3,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.369619076151754,
+					"steam_rise": 0.6375,
+					"steam_visible": false,
+					"steam_x": 0.824641563486849,
+					"tv_on": true,
+					"washers": [
+						{
+							"x": 1.68739013620736,
+							"y": 1.07364543878792
+						},
+						{
+							"x": 0.00825929678061097,
+							"y": 1.99998294593146
+						},
+						{
+							"x": -1.67846510201653,
+							"y": 1.08754535597953
+						},
+						{
+							"x": -1.82201642665808,
+							"y": -0.824776418787613
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 20,
+				"tv_visible": true,
+				"uniform_writes": 4,
+				"visibility_writes": 19,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"CornerTelevision/Screen": "[P: (541.533, 275.7126), S: (215.4979, 174.3566)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.859293, 0.0, -0.511484), Y: (-0.025085, 0.998797, -0.042143), Z: (0.510868, 0.049043, 0.858259)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 170.0
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834), O: (21.25, 1.5, 14.74)]",
+			"dayTime": 0.5,
+			"file": "washers_day_phase0.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 4,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.36,
+					"steam_rise": 0.0,
+					"steam_visible": false,
+					"steam_x": 0.0,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": 2.0,
+							"y": 0.0
+						},
+						{
+							"x": 1.08060461173628,
+							"y": 1.68294196961579
+						},
+						{
+							"x": -0.832293673094285,
+							"y": 1.81859485365136
+						},
+						{
+							"x": -1.97998499320089,
+							"y": 0.282240016119734
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 24,
+				"tv_visible": true,
+				"uniform_writes": 5,
+				"visibility_writes": 19,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"Washer0/TurningPatch": "[P: (278.7114, 351.839), S: (37.19196, 16.75623)]",
+				"Washer1/TurningPatch": "[P: (512.2338, 365.9536), S: (35.45001, 16.57062)]",
+				"Washer2/TurningPatch": "[P: (734.4224, 367.0845), S: (35.44806, 16.55582)]",
+				"Washer3/TurningPatch": "[P: (963.968, 354.2171), S: (37.15619, 16.72488)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 0.0
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834), O: (21.25, 1.5, 14.74)]",
+			"dayTime": 0.5,
+			"file": "washers_day_phase1.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 4,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.384939592074349,
+					"steam_rise": 1.76714586764426,
+					"steam_visible": false,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": 0.000000000000000122460635382238,
+							"y": 2.0
+						},
+						{
+							"x": -1.68294196961579,
+							"y": 1.08060461173628
+						},
+						{
+							"x": -1.81859485365136,
+							"y": -0.832293673094285
+						},
+						{
+							"x": -0.282240016119735,
+							"y": -1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 28,
+				"tv_visible": true,
+				"uniform_writes": 6,
+				"visibility_writes": 19,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"Washer0/TurningPatch": "[P: (263.7, 368.5952), S: (37.04626, 16.53601)]",
+				"Washer1/TurningPatch": "[P: (487.8606, 360.92), S: (35.68106, 16.63666)]",
+				"Washer2/TurningPatch": "[P: (726.6471, 344.8), S: (35.7099, 16.84915)]",
+				"Washer3/TurningPatch": "[P: (981.2764, 335.0292), S: (37.55389, 16.97858)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 471.238898038469
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834), O: (21.25, 1.5, 14.74)]",
+			"dayTime": 0.9,
+			"file": "washers_night_phase0.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 8,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.36,
+					"steam_rise": 0.0,
+					"steam_visible": true,
+					"steam_x": 0.0,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": 2.0,
+							"y": 0.0
+						},
+						{
+							"x": 1.08060461173628,
+							"y": 1.68294196961579
+						},
+						{
+							"x": -0.832293673094285,
+							"y": 1.81859485365136
+						},
+						{
+							"x": -1.97998499320089,
+							"y": 0.282240016119734
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 33,
+				"tv_visible": true,
+				"uniform_writes": 7,
+				"visibility_writes": 20,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"Washer0/TurningPatch": "[P: (278.7114, 351.839), S: (37.19196, 16.75623)]",
+				"Washer1/TurningPatch": "[P: (512.2338, 365.9536), S: (35.45001, 16.57062)]",
+				"Washer2/TurningPatch": "[P: (734.4224, 367.0845), S: (35.44806, 16.55582)]",
+				"Washer3/TurningPatch": "[P: (963.968, 354.2171), S: (37.15619, 16.72488)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 0.0
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834), O: (21.25, 1.5, 14.74)]",
+			"dayTime": 0.9,
+			"file": "washers_night_phase1.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 8,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.384939592074349,
+					"steam_rise": 1.76714586764426,
+					"steam_visible": true,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": 0.000000000000000122460635382238,
+							"y": 2.0
+						},
+						{
+							"x": -1.68294196961579,
+							"y": 1.08060461173628
+						},
+						{
+							"x": -1.81859485365136,
+							"y": -0.832293673094285
+						},
+						{
+							"x": -0.282240016119735,
+							"y": -1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 38,
+				"tv_visible": true,
+				"uniform_writes": 8,
+				"visibility_writes": 20,
+				"washer_count": 4
+			},
+			"kind": "fixture",
+			"projected": {
+				"Washer0/TurningPatch": "[P: (263.7, 368.5952), S: (37.04626, 16.53601)]",
+				"Washer1/TurningPatch": "[P: (487.8606, 360.92), S: (35.68106, 16.63666)]",
+				"Washer2/TurningPatch": "[P: (726.6471, 344.8), S: (35.7099, 16.84915)]",
+				"Washer3/TurningPatch": "[P: (981.2764, 335.0292), S: (37.55389, 16.97858)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.959834, -0.280567), Z: (0.0, 0.280567, 0.959834)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 471.238898038469
+		},
+		{
+			"camera": "[X: (0.934998, 0.0, -0.354654), Y: (-0.029626, 0.996505, -0.078104), Z: (0.353414, 0.083534, 0.93173), O: (-30.48398, 1.454121, -3.282944)]",
+			"dayTime": 0.9,
+			"file": "pete_steam_night_phase0.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 8,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": true,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 43,
+				"tv_visible": true,
+				"uniform_writes": 9,
+				"visibility_writes": 20,
+				"washer_count": 4
+			},
+			"kind": "food",
+			"projected": {
+				"PocketSteam": "[P: (648.6998, 268.5306), S: (57.32147, 57.32117)]",
+				"hot_pocket": "[P: (525.1792, 289.4813), S: (143.2129, 116.5022)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.934998, 0.0, -0.354654), Y: (-0.029626, 0.996505, -0.078104), Z: (0.353414, 0.083534, 0.93173)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (0.934998, 0.0, -0.354654), Y: (-0.029626, 0.996505, -0.078104), Z: (0.353414, 0.083534, 0.93173), O: (-30.48398, 1.454121, -3.282944)]",
+			"dayTime": 0.9,
+			"file": "pete_steam_night_phase1.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 8,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.396986740117185,
+					"steam_rise": 5.14875,
+					"steam_visible": true,
+					"steam_x": -0.573643132834148,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.270612034918936,
+							"y": -1.98160771258012
+						},
+						{
+							"x": 1.52125308694535,
+							"y": -1.29837939195724
+						},
+						{
+							"x": 1.91448513629013,
+							"y": 0.578572953847788
+						},
+						{
+							"x": 0.547548380430327,
+							"y": 1.92358799411104
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 48,
+				"tv_visible": true,
+				"uniform_writes": 10,
+				"visibility_writes": 20,
+				"washer_count": 4
+			},
+			"kind": "food",
+			"projected": {
+				"PocketSteam": "[P: (600.1656, 220.6604), S: (57.63007, 57.62993)]",
+				"hot_pocket": "[P: (525.1792, 289.4813), S: (143.2129, 116.5022)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.934998, 0.0, -0.354654), Y: (-0.029626, 0.996505, -0.078104), Z: (0.353414, 0.083534, 0.93173)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1373.0
+		},
+		{
+			"camera": "[X: (0.934998, 0.0, -0.354654), Y: (-0.029626, 0.996505, -0.078104), Z: (0.353414, 0.083534, 0.93173), O: (-30.48398, 1.454121, -3.282944)]",
+			"dayTime": 0.5,
+			"file": "pete_steam_hidden_day.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 12,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 52,
+				"tv_visible": true,
+				"uniform_writes": 11,
+				"visibility_writes": 21,
+				"washer_count": 4
+			},
+			"kind": "food",
+			"projected": {
+				"hot_pocket": "[P: (525.1792, 289.4813), S: (143.2129, 116.5022)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.934998, 0.0, -0.354654), Y: (-0.029626, 0.996505, -0.078104), Z: (0.353414, 0.083534, 0.93173)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473), O: (-31.09, 2.7, -2.19)]",
+			"dayTime": 0.9,
+			"file": "pawn_counter_steam_night_phase0.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 16,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": true,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 53,
+				"tv_visible": true,
+				"uniform_writes": 11,
+				"visibility_writes": 22,
+				"washer_count": 4
+			},
+			"kind": "window_steam",
+			"projected": {
+				"PocketSteam": "[P: (645.7167, 337.0758), S: (38.04254, 38.41055)]",
+				"steam_anchor": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": false,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473), O: (-31.09, 2.7, -2.19)]",
+			"dayTime": 0.9,
+			"file": "pawn_counter_steam_night_phase1.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 16,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.396986740117185,
+					"steam_rise": 5.14875,
+					"steam_visible": true,
+					"steam_x": -0.573643132834148,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.270612034918936,
+							"y": -1.98160771258012
+						},
+						{
+							"x": 1.52125308694535,
+							"y": -1.29837939195724
+						},
+						{
+							"x": 1.91448513629013,
+							"y": 0.578572953847788
+						},
+						{
+							"x": 0.547548380430327,
+							"y": 1.92358799411104
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 58,
+				"tv_visible": true,
+				"uniform_writes": 12,
+				"visibility_writes": 22,
+				"washer_count": 4
+			},
+			"kind": "window_steam",
+			"projected": {
+				"PocketSteam": "[P: (614.0935, 305.6108), S: (37.56958, 38.2417)]",
+				"steam_anchor": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": false,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1373.0
+		},
+		{
+			"camera": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473), O: (-31.09, 2.7, -2.19)]",
+			"dayTime": 0.5,
+			"file": "pawn_counter_steam_hidden_day.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 20,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 62,
+				"tv_visible": true,
+				"uniform_writes": 13,
+				"visibility_writes": 23,
+				"washer_count": 4
+			},
+			"kind": "window_steam",
+			"projected": {
+				"steam_anchor": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-31.44, 1.25, -4.49)]"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.988619, 0.0, -0.150442), Y: (-0.002586, 0.999852, -0.016995), Z: (0.15042, 0.017191, 0.988473)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": false,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (2.0, 2.62, -16.6)]",
+			"dayTime": 0.5,
+			"file": "sodium_0_day_min.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 20,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.32,
+					"steam_rise": 0.370021073509811,
+					"steam_visible": false,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.000000000000000857224447675664,
+							"y": -2.0
+						},
+						{
+							"x": 1.68294196961579,
+							"y": -1.08060461173628
+						},
+						{
+							"x": 1.81859485365136,
+							"y": 0.832293673094284
+						},
+						{
+							"x": 0.282240016119735,
+							"y": 1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 66,
+				"tv_visible": true,
+				"uniform_writes": 14,
+				"visibility_writes": 23,
+				"washer_count": 4
+			},
+			"kind": "sodium:0",
+			"projected": {
+				"sodium_center": "(640.0, 360.127)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1100.0, 320.0)",
+					"inner_alpha": 0.32,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 3298.67228626928
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (2.0, 2.62, -16.6)]",
+			"dayTime": 0.5,
+			"file": "sodium_0_day_max.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 20,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.4,
+					"steam_rise": 4.1233403578366,
+					"steam_visible": false,
+					"steam_x": 0.765366864730181,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.73205080756888,
+							"y": -0.999999999999999
+						},
+						{
+							"x": -0.0943600604023429,
+							"y": -1.99777280465044
+						},
+						{
+							"x": 1.63008489113439,
+							"y": -1.15880250590658
+						},
+						{
+							"x": 1.8558373112838,
+							"y": 0.745565472676225
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 70,
+				"tv_visible": true,
+				"uniform_writes": 15,
+				"visibility_writes": 23,
+				"washer_count": 4
+			},
+			"kind": "sodium:0",
+			"projected": {
+				"sodium_center": "(640.0, 360.127)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1100.0, 320.0)",
+					"inner_alpha": 0.4,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1099.55742875643
+		},
+		{
+			"camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497704, 0.803984), O: (3.7, 2.62, -16.6)]",
+			"dayTime": 0.9,
+			"file": "sodium_0_night_min.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 24,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.32,
+					"steam_rise": 0.370021073509811,
+					"steam_visible": true,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.000000000000000857224447675664,
+							"y": -2.0
+						},
+						{
+							"x": 1.68294196961579,
+							"y": -1.08060461173628
+						},
+						{
+							"x": 1.81859485365136,
+							"y": 0.832293673094284
+						},
+						{
+							"x": 0.282240016119735,
+							"y": 1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 75,
+				"tv_visible": true,
+				"uniform_writes": 16,
+				"visibility_writes": 24,
+				"washer_count": 4
+			},
+			"kind": "sodium:0",
+			"projected": {
+				"sodium_center": "(640.0, 360.1226)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1100.0, 320.0)",
+					"inner_alpha": 0.32,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497704, 0.803984)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 3298.67228626928
+		},
+		{
+			"camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497704, 0.803984), O: (3.7, 2.62, -16.6)]",
+			"dayTime": 0.9,
+			"file": "sodium_0_night_max.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 24,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.4,
+					"steam_rise": 4.1233403578366,
+					"steam_visible": true,
+					"steam_x": 0.765366864730181,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.73205080756888,
+							"y": -0.999999999999999
+						},
+						{
+							"x": -0.0943600604023429,
+							"y": -1.99777280465044
+						},
+						{
+							"x": 1.63008489113439,
+							"y": -1.15880250590658
+						},
+						{
+							"x": 1.8558373112838,
+							"y": 0.745565472676225
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 80,
+				"tv_visible": true,
+				"uniform_writes": 17,
+				"visibility_writes": 24,
+				"washer_count": 4
+			},
+			"kind": "sodium:0",
+			"projected": {
+				"sodium_center": "(640.0, 360.1226)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1100.0, 320.0)",
+					"inner_alpha": 0.4,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497704, 0.803984)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1099.55742875643
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (7.6, 2.62, -14.2)]",
+			"dayTime": 0.5,
+			"file": "sodium_1_day_min.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 28,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.32,
+					"steam_rise": 0.370021073509811,
+					"steam_visible": false,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.000000000000000857224447675664,
+							"y": -2.0
+						},
+						{
+							"x": 1.68294196961579,
+							"y": -1.08060461173628
+						},
+						{
+							"x": 1.81859485365136,
+							"y": 0.832293673094284
+						},
+						{
+							"x": 0.282240016119735,
+							"y": 1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 84,
+				"tv_visible": true,
+				"uniform_writes": 18,
+				"visibility_writes": 25,
+				"washer_count": 4
+			},
+			"kind": "sodium:1",
+			"projected": {
+				"sodium_center": "(640.0, 360.127)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1240.0, 380.0)",
+					"inner_alpha": 0.32,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 3298.67228626928
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (7.6, 2.62, -14.2)]",
+			"dayTime": 0.5,
+			"file": "sodium_1_day_max.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 28,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.4,
+					"steam_rise": 4.1233403578366,
+					"steam_visible": false,
+					"steam_x": 0.765366864730181,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.73205080756888,
+							"y": -0.999999999999999
+						},
+						{
+							"x": -0.0943600604023429,
+							"y": -1.99777280465044
+						},
+						{
+							"x": 1.63008489113439,
+							"y": -1.15880250590658
+						},
+						{
+							"x": 1.8558373112838,
+							"y": 0.745565472676225
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 88,
+				"tv_visible": true,
+				"uniform_writes": 19,
+				"visibility_writes": 25,
+				"washer_count": 4
+			},
+			"kind": "sodium:1",
+			"projected": {
+				"sodium_center": "(640.0, 360.127)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1240.0, 380.0)",
+					"inner_alpha": 0.4,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1099.55742875643
+		},
+		{
+			"camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (9.3, 2.62, -14.2)]",
+			"dayTime": 0.9,
+			"file": "sodium_1_night_min.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 32,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.32,
+					"steam_rise": 0.370021073509811,
+					"steam_visible": true,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.000000000000000857224447675664,
+							"y": -2.0
+						},
+						{
+							"x": 1.68294196961579,
+							"y": -1.08060461173628
+						},
+						{
+							"x": 1.81859485365136,
+							"y": 0.832293673094284
+						},
+						{
+							"x": 0.282240016119735,
+							"y": 1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 93,
+				"tv_visible": true,
+				"uniform_writes": 20,
+				"visibility_writes": 26,
+				"washer_count": 4
+			},
+			"kind": "sodium:1",
+			"projected": {
+				"sodium_center": "(640.0, 360.1225)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1240.0, 380.0)",
+					"inner_alpha": 0.32,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 3298.67228626928
+		},
+		{
+			"camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (9.3, 2.62, -14.2)]",
+			"dayTime": 0.9,
+			"file": "sodium_1_night_max.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 32,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.4,
+					"steam_rise": 4.1233403578366,
+					"steam_visible": true,
+					"steam_x": 0.765366864730181,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.73205080756888,
+							"y": -0.999999999999999
+						},
+						{
+							"x": -0.0943600604023429,
+							"y": -1.99777280465044
+						},
+						{
+							"x": 1.63008489113439,
+							"y": -1.15880250590658
+						},
+						{
+							"x": 1.8558373112838,
+							"y": 0.745565472676225
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 98,
+				"tv_visible": true,
+				"uniform_writes": 21,
+				"visibility_writes": 26,
+				"washer_count": 4
+			},
+			"kind": "sodium:1",
+			"projected": {
+				"sodium_center": "(640.0, 360.1225)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1240.0, 380.0)",
+					"inner_alpha": 0.4,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1099.55742875643
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (11.6, 2.62, -17.0)]",
+			"dayTime": 0.5,
+			"file": "sodium_2_day_min.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 36,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.32,
+					"steam_rise": 0.370021073509811,
+					"steam_visible": false,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.000000000000000857224447675664,
+							"y": -2.0
+						},
+						{
+							"x": 1.68294196961579,
+							"y": -1.08060461173628
+						},
+						{
+							"x": 1.81859485365136,
+							"y": 0.832293673094284
+						},
+						{
+							"x": 0.282240016119735,
+							"y": 1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 102,
+				"tv_visible": true,
+				"uniform_writes": 22,
+				"visibility_writes": 27,
+				"washer_count": 4
+			},
+			"kind": "sodium:2",
+			"projected": {
+				"sodium_center": "(640.0, 360.127)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1340.0, 310.0)",
+					"inner_alpha": 0.32,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 3298.67228626928
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265), O: (11.6, 2.62, -17.0)]",
+			"dayTime": 0.5,
+			"file": "sodium_2_day_max.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 36,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.4,
+					"steam_rise": 4.1233403578366,
+					"steam_visible": false,
+					"steam_x": 0.765366864730181,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.73205080756888,
+							"y": -0.999999999999999
+						},
+						{
+							"x": -0.0943600604023429,
+							"y": -1.99777280465044
+						},
+						{
+							"x": 1.63008489113439,
+							"y": -1.15880250590658
+						},
+						{
+							"x": 1.8558373112838,
+							"y": 0.745565472676225
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 106,
+				"tv_visible": true,
+				"uniform_writes": 23,
+				"visibility_writes": 27,
+				"washer_count": 4
+			},
+			"kind": "sodium:2",
+			"projected": {
+				"sodium_center": "(640.0, 360.127)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1340.0, 310.0)",
+					"inner_alpha": 0.4,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.850265, -0.526355), Z: (0.0, 0.526355, 0.850265)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1099.55742875643
+		},
+		{
+			"camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (13.3, 2.62, -17.0)]",
+			"dayTime": 0.9,
+			"file": "sodium_2_night_min.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 40,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.32,
+					"steam_rise": 0.370021073509811,
+					"steam_visible": true,
+					"steam_x": 1.84775906502257,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -0.000000000000000857224447675664,
+							"y": -2.0
+						},
+						{
+							"x": 1.68294196961579,
+							"y": -1.08060461173628
+						},
+						{
+							"x": 1.81859485365136,
+							"y": 0.832293673094284
+						},
+						{
+							"x": 0.282240016119735,
+							"y": 1.97998499320089
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 111,
+				"tv_visible": true,
+				"uniform_writes": 24,
+				"visibility_writes": 28,
+				"washer_count": 4
+			},
+			"kind": "sodium:2",
+			"projected": {
+				"sodium_center": "(640.0001, 360.1225)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1340.0, 310.0)",
+					"inner_alpha": 0.32,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 3298.67228626928
+		},
+		{
+			"camera": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984), O: (13.3, 2.62, -17.0)]",
+			"dayTime": 0.9,
+			"file": "sodium_2_night_max.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 40,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.8,
+					"shadow_phase": 0.375,
+					"shadow_visible": false,
+					"sodium_alpha": 0.4,
+					"steam_rise": 4.1233403578366,
+					"steam_visible": true,
+					"steam_x": 0.765366864730181,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.73205080756888,
+							"y": -0.999999999999999
+						},
+						{
+							"x": -0.0943600604023429,
+							"y": -1.99777280465044
+						},
+						{
+							"x": 1.63008489113439,
+							"y": -1.15880250590658
+						},
+						{
+							"x": 1.8558373112838,
+							"y": 0.745565472676225
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": true,
+				"transform_writes": 116,
+				"tv_visible": true,
+				"uniform_writes": 25,
+				"visibility_writes": 28,
+				"washer_count": 4
+			},
+			"kind": "sodium:2",
+			"projected": {
+				"sodium_center": "(640.0001, 360.1225)",
+				"sodium_source": {
+					"blend": "additive3D; displayed color is not Canvas pixel parity",
+					"center": "(1340.0, 310.0)",
+					"inner_alpha": 0.4,
+					"inner_radius_px": 4,
+					"middle_alpha": 0.18,
+					"middle_radius_px": 37,
+					"outer_alpha": 0,
+					"outer_radius_px": 70
+				}
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.926947, 0.0, -0.375193), Y: (-0.186735, 0.867347, -0.461346), Z: (0.325422, 0.497705, 0.803984)]",
+				"dayTime": 0.9,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 3000.0,
+			"visual_ms": 1099.55742875643
+		},
+		{
+			"camera": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139), O: (10.32, 14.02, -32.24)]",
+			"dayTime": 0.5,
+			"file": "shadow_0000.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 44,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.0,
+					"shadow_visible": true,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": true,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 121,
+				"tv_visible": true,
+				"uniform_writes": 26,
+				"visibility_writes": 30,
+				"washer_count": 4
+			},
+			"kind": "shadow",
+			"projected": {
+
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 0.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139), O: (10.32, 14.02, -32.24)]",
+			"dayTime": 0.5,
+			"file": "shadow_0800.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 44,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.1,
+					"shadow_visible": true,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": true,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 122,
+				"tv_visible": true,
+				"uniform_writes": 26,
+				"visibility_writes": 30,
+				"washer_count": 4
+			},
+			"kind": "shadow",
+			"projected": {
+
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 800.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139), O: (10.32, 14.02, -32.24)]",
+			"dayTime": 0.5,
+			"file": "shadow_1599.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 44,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.199875,
+					"shadow_visible": true,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": true,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 126,
+				"tv_visible": true,
+				"uniform_writes": 26,
+				"visibility_writes": 35,
+				"washer_count": 4
+			},
+			"kind": "shadow",
+			"projected": {
+
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 1599.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139), O: (10.32, 14.02, -32.24)]",
+			"dayTime": 0.5,
+			"file": "shadow_1600.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 44,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.2,
+					"shadow_visible": false,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": false,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 126,
+				"tv_visible": true,
+				"uniform_writes": 26,
+				"visibility_writes": 39,
+				"washer_count": 4
+			},
+			"kind": "shadow",
+			"projected": {
+
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 0.496139, 0.868243), Z: (-0.0, 0.868243, -0.496139)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 1600.0,
+			"visual_ms": 713.0
+		},
+		{
+			"camera": "[X: (0.878624, 0.0, -0.477513), Y: (-0.292625, 0.790231, -0.538429), Z: (0.377346, 0.612809, 0.694316), O: (22.2, 1.65, -22.4)]",
+			"dayTime": 0.5,
+			"file": "shadow_tail_covered_1599.png",
+			"inspection": {
+				"built": true,
+				"lights": 0,
+				"material_writes": 44,
+				"particles": 0,
+				"physics_queries": 0,
+				"sample": {
+					"pane_alpha": 0.665,
+					"shadow_phase": 0.199875,
+					"shadow_visible": true,
+					"sodium_alpha": 0.394054379482448,
+					"steam_rise": 2.67375,
+					"steam_visible": false,
+					"steam_x": 1.95534869596411,
+					"tv_on": false,
+					"washers": [
+						{
+							"x": -1.44286722450966,
+							"y": 1.38496720987748
+						},
+						{
+							"x": -1.94499421048637,
+							"y": -0.465829927306614
+						},
+						{
+							"x": -0.658902489142282,
+							"y": -1.88834517760978
+						},
+						{
+							"x": 1.23298114203471,
+							"y": -1.57472458016848
+						}
+					]
+				},
+				"shadow_parts": 6,
+				"shadow_visible": true,
+				"sodium_surfaces": 1,
+				"sodium_triangles": 12,
+				"sodium_visible": true,
+				"steam_visible": false,
+				"transform_writes": 126,
+				"tv_visible": true,
+				"uniform_writes": 26,
+				"visibility_writes": 43,
+				"washer_count": 4
+			},
+			"kind": "covered_tail",
+			"projected": {
+				"covered_floor": "(640.0, 359.9999)"
+			},
+			"scope": "staged actual-world presentation, no earned gameplay/input claim",
+			"size": [
+				1280,
+				720
+			],
+			"snapshot": {
+				"camera_basis": "[X: (0.878624, 0.0, -0.477513), Y: (-0.292625, 0.790231, -0.538429), Z: (0.377346, 0.612809, 0.694316)]",
+				"dayTime": 0.5,
+				"food_transform": "[X: (0.970442, 0.052477, 0.235558), Y: (0.2234, -0.564567, -0.79458), Z: (0.091291, 0.823717, -0.559603), O: (-31.07521, 1.347457, -4.619637)]",
+				"food_visible": true,
+				"world_visible": true
+			},
+			"unix_ms": 1599.0,
+			"visual_ms": 713.0
+		}
+	],
+	"checks": 539,
+	"engine": "4.5.1-stable (official)",
+	"existing_world_lights": 74,
+	"failures": [],
+	"format": "rock-bottom-fixture-motion-native",
+	"output_config": {
+		"camera_fov": 52.0,
+		"directory": "C:\\Users\\zenit\\projects\\Rock Bottom\\.build\\full-port\\fixture-motion-final",
+		"far": 380.0,
+		"max_fps": 60,
+		"msaa_3d": 2,
+		"near": 0.0500000007450581,
+		"resolution": [
+			1280,
+			720
+		]
+	},
+	"pete_source": {
+		"attackCd": 0.0,
+		"color": "#4a4028",
+		"h": 32.0,
+		"hostile": false,
+		"hp": 80.0,
+		"hpMax": 80.0,
+		"id": "pete",
+		"legacyStructureIndex": 0.0,
+		"maxHp": 80.0,
+		"name": "PAWN SHOP PETE",
+		"showHp": false,
+		"speed": 0.0,
+		"sprite": "pete",
+		"targetX": 250.0,
+		"targetY": 700.0,
+		"vendor": true,
+		"w": 28.0,
+		"wanderT": 0.0,
+		"x": 250.0,
+		"y": 700.0
+	},
+	"presenter_inventory": {
+		"lights": 0,
+		"meshes": 22,
+		"particles": 0,
+		"physics": 0,
+		"timers": 0
+	},
+	"presenter_physics_queries": 0,
+	"probe_validation_physics_queries": 74,
+	"profile": {
+		"boundary": "Only fixture view.sync; excludes capture/readback, Weather, pose, world build and rendered frame CPU/GPU. Not full-scene/60-actor/Web acceptance.",
+		"samples": 180,
+		"sync_max_ms": 0.225,
+		"sync_p50_ms": 0.105,
+		"sync_p95_ms": 0.159,
+		"target_ms": 0.2,
+		"target_pass": true,
+		"warmup_frames": 60
+	},
+	"renderer": "gl_compatibility",
+	"schema": 1,
+	"scope": "Actual full-world attachments and Roster Pete, explicitly staged supplied clocks. No Runtime, gameplay input/tick, source RNG, save, earned progression or full-frame performance claim."
+}

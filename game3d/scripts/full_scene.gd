@@ -25,6 +25,7 @@ const WorldOwnership = preload("res://scripts/world_ownership_view.gd")
 const DogLeash = preload("res://scripts/dog_leash_view.gd")
 const KingdomView = preload("res://scripts/kingdom_world_view.gd")
 const WallMarkingView = preload("res://scripts/wall_marking_view.gd")
+const FixtureMotion = preload("res://scripts/fixture_motion_view.gd")
 const FULL_KEY := "rockbottom_3d_full_v2"
 var runtime: RefCounted
 var physics: RefCounted
@@ -61,6 +62,8 @@ var dynamic_emitters: Node3D
 var ownership_view: Node3D
 var kingdom_view: Node3D
 var wall_marking_view: Node3D
+var fixture_motion: Node3D
+var _pete_food: Node3D
 var _wall_marking_surfaces: Array = []
 var _wall_marking_revision: int = -1
 var dog_leash: Node3D
@@ -85,7 +88,10 @@ func _ready() -> void:
 	heat_view = CookingView.new(); add_child(heat_view)
 	if not qa_mode: get_tree().auto_accept_quit = false
 	await get_tree().process_frame
-	world = World.new(); world.dynamic_interactive = true; world.dynamic_cart = true; world.dynamic_ownership = true; add_child(world); world.build()
+	world = World.new(); world.dynamic_interactive = true; world.dynamic_cart = true; world.dynamic_ownership = true; world.dynamic_fixture_motion = true; add_child(world); world.build()
+	fixture_motion = FixtureMotion.create(); world.add_child(fixture_motion)
+	if not fixture_motion.build(world.fixture_motion_bindings()):
+		push_error("Full scene source fixture motion binding failed."); return
 	ownership_view = WorldOwnership.new(); world.add_child(ownership_view); ownership_view.build(world)
 	kingdom_view = KingdomView.new(); world.add_child(kingdom_view)
 	if kingdom_view.build(world).is_empty():
@@ -158,11 +164,11 @@ func _ready() -> void:
 	print("3D FULL SCENE READY: %d source actors; %d visual templates" % [actors.size(),Roster._templates.size()])
 
 func _register_inputs() -> void:
-	for pair: Array in [["forward",KEY_W],["back",KEY_S],["left",KEY_A],["right",KEY_D],["sprint",KEY_SHIFT]]:
-		if InputMap.has_action(pair[0]): continue
-		InputMap.add_action(pair[0])
-		var key := InputEventKey.new(); key.physical_keycode = pair[1]
-		InputMap.action_add_event(pair[0],key)
+	for pair: Array in [["forward",[KEY_W,KEY_UP]],["back",[KEY_S,KEY_DOWN]],["left",[KEY_A,KEY_LEFT]],["right",[KEY_D,KEY_RIGHT]],["sprint",[KEY_SHIFT]]]:
+		if not InputMap.has_action(pair[0]): InputMap.add_action(pair[0])
+		for code: int in pair[1]:
+			var key := InputEventKey.new(); key.physical_keycode = code
+			if not InputMap.action_has_event(pair[0],key): InputMap.action_add_event(pair[0],key)
 
 func _make_player() -> void:
 	player = Node3D.new(); player.name = "Player"; add_child(player)
@@ -186,6 +192,7 @@ func _make_actor(record: Dictionary) -> bool:
 	if art == null: body.queue_free(); return false
 	art.name = "Art"; body.add_child(art); body.set_meta("visual_id",visual)
 	if id == "scrap_dog": body.set_meta("leash_collar",art.get_node_or_null("leash_collar"))
+	if id == "pete": _pete_food = art.find_child("hot_pocket",true,false) as Node3D
 	if DynamicEmitters.qualifies_cop(record):
 		var cap_path: String = "mounted_rider/head/hair_style" if str(record.get("sprite","")) == "horsecop" else "head/hair_style"
 		body.set_meta("beacon_anchor",art.get_node_or_null(cap_path))
@@ -325,6 +332,7 @@ func _process(delta: float) -> void:
 	if incident_view != null: incident_view.sync(runtime.incidents.visual_snapshot(),active_ms)
 	heat_view.update(runtime.cooking.snapshot() if runtime.s.mode == "cookmini" else {},runtime.p,float(runtime.s.get("smokeT",0)),delta)
 	weather_view.sync({"dayTime":runtime.s.dayTime,"weather":runtime.s.weather,"office_generator":bool(runtime.s.office.upgrades.generator),"geometry_revision":physics._collision_revision},wall_ms)
+	_sync_fixture_motion(wall_ms,Time.get_unix_time_from_system()*1000.0)
 	ownership_view.sync({"office":runtime.s.office,"districtClaims":runtime.s.districtClaims,"flags":runtime.s.flags},runtime.state.player_center())
 	kingdom_view.sync({"kingdom":runtime.s.kingdom,"flags":runtime.s.flags})
 	hud.set_view_heading(player.rotation.y)
@@ -413,6 +421,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			var forward: Vector3 = -camera.global_basis.z
 			runtime.attack(Vector2(forward.x,forward.z)); _consume_events()
+
+func _sync_fixture_motion(visual_ms: float,unix_ms: float) -> bool:
+	var food_visible: bool = is_instance_valid(_pete_food) and _pete_food.is_visible_in_tree()
+	return fixture_motion.sync({"world_visible":runtime.s.mode != "title","dayTime":runtime.s.dayTime,"food_visible":food_visible,"food_transform":_pete_food.global_transform if food_visible else Transform3D.IDENTITY,"camera_basis":camera.global_basis},visual_ms,unix_ms)
 
 func _sync_mouse_capture(captured: bool) -> void:
 	hud.look_hint.visible = web_controls and runtime.s.mode == "playing" and not captured
@@ -659,6 +671,7 @@ func _new_game() -> void:
 func _reset_presentation() -> void:
 	squint_held = false; runtime.utilities.release_squint()
 	if weather_view != null: weather_view.clear()
+	if fixture_motion != null: fixture_motion.clear()
 	if dynamic_emitters != null: dynamic_emitters.clear()
 	if dog_leash != null: dog_leash.clear()
 	if wall_marking_view != null: wall_marking_view.clear(); _wall_marking_revision = -1
@@ -732,6 +745,9 @@ func _load() -> void:
 				var raw_state: Dictionary = data.get("state",{}) if data.get("schema") == 2 else {}
 				for key: String in ["graffiti","posters"]:
 					if not raw_state.has(key): envelope.state.erase(key)
+				# Carry only the source load fallback decision. Never reinsert raw
+				# hustle rows/rewards that the candidate codec has normalized away.
+				if not raw_state.get("hustles") is Array: envelope.state.hustles = null
 				accepted = runtime.restore(envelope)
 	# Wall callbacks may request saves while Web's read awaits IndexedDB. Only a
 	# successful epoch replacement discards those old-session snapshots.

@@ -4,6 +4,7 @@ class_name FullNeighborhood
 
 const Content = preload("res://scripts/content_catalog.gd")
 const BodyContact = preload("res://scripts/actor_contact.gd")
+const FixtureMotion = preload("res://scripts/fixture_motion_view.gd")
 const WORLD_RECT := Rect2(-42.0, -33.6, 344.0, 224.0)
 const WALK_RADIUS := 0.48
 const GRID_STEP := 0.4
@@ -41,6 +42,8 @@ var dynamic_ownership: bool = false # A separate pure view owns the Office fasci
 var _ownership_office: Dictionary = {}
 var _departure_pads: Array[Dictionary] = []
 var _leash_post_marker: Node3D
+var dynamic_fixture_motion: bool = false
+var _fixture_motion_data: Dictionary = {"washers":[]}
 
 
 func build() -> void:
@@ -55,6 +58,9 @@ func build() -> void:
 	_lighting()
 	_full_ground()
 	_full_streets()
+	if dynamic_fixture_motion:
+		_capture_fixture_shadow_receivers()
+		_capture_fixture_sodium_receivers()
 	_full_structures()
 	_full_props()
 	_full_decor()
@@ -171,6 +177,92 @@ func wall_marking_surfaces() -> Array[Dictionary]:
 			faces[side] = {"transform":Transform3D(basis,origin),"span":Vector2(rect.size.y,height),"panels":[Rect2(0,0,rect.size.y,height)],"keepouts":exclusions}
 		result.append({"building_index":index,"source":source.duplicate(true),"owner":owner,"faces":faces})
 	return result
+
+func fixture_motion_bindings() -> Dictionary:
+	return _fixture_motion_data.duplicate(true) if built and dynamic_fixture_motion else {}
+
+
+func _capture_fixture_shadow_receivers() -> void:
+	# Once before batching: derive the real ground steps beneath the source strip.
+	# No physics query, new collider or per-frame geometry traversal.
+	var zone: Dictionary = {}
+	for row: Dictionary in content.world.zones:
+		if row.id == "underpass": zone = row; break
+	if zone.is_empty(): return
+	var source := Rect2(zone.x,zone.y,zone.w,zone.h)
+	var start: Vector3 = Content.to_world(Vector2(source.position.x,source.position.y-10.0))
+	var band := Rect2(Vector2(start.x,start.z),Vector2((source.size.x*1.2+120.0)*0.04,0.32))
+	var surfaces: Array[Dictionary] = []
+	var xs: Array[float] = [band.position.x,band.end.x]
+	var zs: Array[float] = [band.position.y,band.end.y]
+	for child: Node in get_children():
+		if not child is MeshInstance3D or child.mesh == null: continue
+		var bounds: AABB = child.transform*child.mesh.get_aabb()
+		if bounds.end.y > 0.08 or bounds.end.y < -0.001 or bounds.size.y > 0.21: continue
+		var region := Rect2(bounds.position.x,bounds.position.z,bounds.size.x,bounds.size.z)
+		var clipped: Rect2 = band.intersection(region)
+		if not clipped.has_area(): continue
+		surfaces.append({"rect":clipped,"height":bounds.end.y+0.003})
+		for x: float in [clipped.position.x,clipped.end.x]:
+			if not xs.has(x): xs.append(x)
+		for z: float in [clipped.position.y,clipped.end.y]:
+			if not zs.has(z): zs.append(z)
+	xs.sort(); zs.sort()
+	var receivers: Array[Dictionary] = []
+	for zi: int in range(zs.size()-1):
+		for xi: int in range(xs.size()-1):
+			var cell := Rect2(Vector2(xs[xi],zs[zi]),Vector2(xs[xi+1]-xs[xi],zs[zi+1]-zs[zi]))
+			if not cell.has_area(): continue
+			var top: float = -INF
+			for surface: Dictionary in surfaces:
+				if surface.rect.has_point(cell.get_center()): top = maxf(top,float(surface.height))
+			if not is_finite(top): push_error("Fixture shadow corridor has an uncovered ground cell."); return
+			var merged: bool = false
+			if not receivers.is_empty():
+				var previous: Dictionary = receivers[-1]; var rect: Rect2 = previous.rect
+				if rect.position.y == cell.position.y and rect.size.y == cell.size.y and absf(rect.end.x-cell.position.x) < 0.00001 and absf(float(previous.height)-top) < 0.000001:
+					rect.size.x = cell.end.x-rect.position.x; previous.rect = rect; merged = true
+			if not merged: receivers.append({"rect":cell,"height":top})
+	if receivers.size() > 16: push_error("Fixture shadow receiver budget exceeded."); return
+	_fixture_motion_data.underpass = {"source_rect":source,"receivers":receivers}
+
+
+func _capture_fixture_sodium_receivers() -> void:
+	# Only build-time original top polygons. AABB bounds never become receivers.
+	if not _fixture_motion_data.has("underpass"): return
+	var source: Rect2 = _fixture_motion_data.underpass.source_rect
+	var patches: Array[Dictionary] = []
+	for offset: Vector2 in FixtureMotion.SODIUM_OFFSETS:
+		var source_center: Vector2 = source.position+offset
+		var center: Vector3 = Content.to_world(source_center)
+		var region := Rect2(Vector2(center.x-2.8,center.z-2.8),Vector2(5.6,5.6))
+		var surfaces: Array[Dictionary] = []
+		for child: Node in get_children():
+			if not child is MeshInstance3D or child.mesh == null: continue
+			var bounds: AABB = child.transform*child.mesh.get_aabb()
+			if bounds.end.y > 0.08 or bounds.end.y < -0.001 or bounds.size.y > 0.21: continue
+			if not region.intersects(Rect2(bounds.position.x,bounds.position.z,bounds.size.x,bounds.size.z)): continue
+			if not child.mesh is BoxMesh:
+				push_error("Sodium receiver is not an audited original ground box."); return
+			var local: AABB = child.mesh.get_aabb()
+			var polygon := PackedVector2Array(); var height: float = NAN
+			for corner: Vector2 in FixtureMotion.rect_polygon(Rect2(local.position.x,local.position.z,local.size.x,local.size.z)):
+				var point: Vector3 = child.transform*Vector3(corner.x,local.end.y,corner.y)
+				if not point.is_finite() or (is_finite(height) and absf(height-point.y) > 0.00001):
+					push_error("Sodium receiver top is not horizontal."); return
+				height = point.y; polygon.append(Vector2(point.x,point.z))
+			if FixtureMotion.polygon_area(polygon) < 0.0: polygon.reverse()
+			var clipped: PackedVector2Array = FixtureMotion.polygon_intersection(polygon,FixtureMotion.rect_polygon(region))
+			if FixtureMotion.polygon_area(clipped) <= 0.00000001: continue
+			surfaces.append({"polygon":clipped,"height":height+0.003})
+			if surfaces.size() > FixtureMotion.SODIUM_SURFACE_CAP:
+				push_error("Sodium receiver surface cap exceeded."); return
+		var receivers: Array[Dictionary] = FixtureMotion.partition_receivers(region,surfaces)
+		if receivers.is_empty():
+			push_error("Sodium receiver partition failed coverage or finite caps."); return
+		patches.append({"source_center":source_center,"receivers":receivers})
+	_fixture_motion_data.sodium = patches
+
 
 func departure_pads() -> Array[Dictionary]:
 	return _departure_pads.duplicate(true)
@@ -448,6 +540,10 @@ func _full_structures() -> void:
 			for x: float in [gap.x - 0.055, gap.y + 0.055]:
 				_box("door_metal_jamb", Vector3(0.10, 2.58, 0.32), Vector3(x, 1.29, front - 0.08), "6f776a", true)
 			aperture_witnesses.append({"owner": _owner, "from": Vector3((gap.x + gap.y) * 0.5, 1.3, front + 0.55), "to": Vector3((gap.x + gap.y) * 0.5, 1.3, front - 0.55), "width": gap.y - gap.x})
+			if dynamic_fixture_motion and index == 0 and not _fixture_motion_data.has("pawn_counter"):
+				# Both decorative front panes are excluded by this real Pete aperture.
+				# Its original lintel is the source counter/window equivalent; no new geometry.
+				_fixture_motion_data.pawn_counter = {"transform":global_transform*Transform3D(Basis.IDENTITY,Vector3((gap.x+gap.y)*0.5,1.25,front+0.31)),"size":Vector2(gap.y-gap.x,2.5),"source_index":0,"mount":"service_aperture"}
 			cursor = gap.y
 		_front_wall(cursor, rect.end.x, front, height, finish, color)
 		if openings.is_empty():
@@ -488,7 +584,20 @@ func _facade_bays(rect: Rect2, height: float, index: int, finish: String, color:
 		for gap: Vector2 in openings:
 			if x > gap.x - 0.85 and x < gap.y + 0.85: blocked = true
 		if not blocked and height > 3.3:
-			_framed_window(Vector3(x, 1.65, rect.end.y + 0.01), minf(1.5, rect.size.x / bays - 0.55), 1.35, "a19b83", index + bay)
+			var window_start: int = get_child_count()
+			var window_width: float = minf(1.5,rect.size.x/bays-0.55)
+			_framed_window(Vector3(x, 1.65, rect.end.y + 0.01), window_width, 1.35, "a19b83", index + bay)
+			if dynamic_fixture_motion and index == 1 and not _fixture_motion_data.has("tv_window"):
+				# _framed_window emits reveal, glass, four frame pieces, two
+				# mullions, sill, lintel, then optional inner dressing in that order.
+				# Names are not stable after sibling auto-renaming. Outer pieces stay.
+				for child_index: int in range(window_start,get_child_count()):
+					var relative: int = child_index-window_start
+					if relative in [1,6,7] or relative >= 10:
+						var piece := get_child(child_index) as MeshInstance3D
+						if piece == null: push_error("CORNER window attachment order changed."); return
+						piece.set_meta("fixture_motion_original",relative); piece.visible = false
+				_fixture_motion_data.tv_window = {"transform":global_transform*Transform3D(Basis.IDENTITY,Vector3(x,1.65,rect.end.y+0.025)),"size":Vector2(window_width,1.35),"source_index":0}
 		if height > 5.8:
 			_framed_window(Vector3(x, 4.65, rect.end.y + 0.01), 1.25, 1.35, "929782", index + bay + 1)
 		_box("facade_" + finish + "_pier", Vector3(0.20, height, 0.13), Vector3(rect.position.x + bay * rect.size.x / bays, height * 0.5, rect.end.y + 0.03), color)
@@ -519,6 +628,8 @@ func _interior_details(rect: Rect2, height: float, index: int, title: String) ->
 			_box("laundry_metal_machine", Vector3(0.9, 1.1, 0.7), at + Vector3(0, 0.55, 0), "a0a491", true)
 			var drum: MeshInstance3D = _cylinder("laundry_window", 0.28, 0.04, at + Vector3(0, 0.55, 0.37), "354a42", false, 12)
 			drum.rotation_degrees.x = 90
+			if dynamic_fixture_motion:
+				_fixture_motion_data.washers.append(global_transform*Transform3D(Basis.IDENTITY,at+Vector3(0,0.55,0.39)))
 	if index == 0:
 		_sign("AS IS", Vector3(center.x, 2.5, rect.position.y + 0.26), 36, 0.006, "c4b692")
 	if title == "CHURCH":

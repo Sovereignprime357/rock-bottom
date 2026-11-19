@@ -343,6 +343,16 @@ func _placement_certificates() -> void:
 	var before: int = adapter.query_count
 	_check(adapter.clear_placement(body) == _position(body),"certificate starts from actual clear overlap")
 	_check(adapter.clear_placement(body) == _position(body) and adapter.query_count == before+1,"same-frame exact positive origin uses one overlap")
+	var entry: Dictionary = adapter._navigation._entry(body,1.8)
+	entry.path = PackedVector2Array([Vector2(250,250),Vector2(300,250)])
+	entry.goal = Vector2(500,250); entry.status = "ready"
+	var retained: Dictionary = adapter.navigation_status(body.id).duplicate(true)
+	var zero_before: int = adapter.query_count
+	var stationary: Dictionary = adapter.move_body(body,_position(body),entry.goal,false)
+	_check(stationary.position == _position(body) and not stationary.blocked and not stationary.body_contact,"exact-zero actor movement retains original stationary result")
+	_check(adapter.query_count == zero_before and adapter.navigation_status(body.id) == retained,"ordinary zero zone clamp retains its exact navigation path and existing origin certificate")
+	stationary = adapter.move_body(body,_position(body),entry.goal,true)
+	_check(not stationary.blocked and adapter.navigation_status(body.id).status == "absent","zero-length charge still invalidates navigation before returning")
 	var hits: int = adapter.placement_cache_hits
 	var moved: Dictionary = adapter.move_body(body,_position(body)+Vector2(1,0))
 	_check(moved.position.distance_to(_position(body)+Vector2(1,0)) < 0.0001 and adapter.placement_cache_hits > hits,"Director placement certificate reused by movement origin")

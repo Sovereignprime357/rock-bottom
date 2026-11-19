@@ -88,6 +88,7 @@ var _elapsed_ms: float = 0.0
 var last_advanced_ms: float = 0.0
 var profile_enabled: bool = false
 var profile_us: Dictionary = {}
+var profile_calls: Dictionary = {}
 var p: Dictionary:
 	get: return state.p
 var s: Dictionary:
@@ -155,6 +156,7 @@ func fresh() -> bool:
 	s.mode = "playing"
 	memory.normalize_state()
 	state.emit_event("placement_reset",{"source_position":state.player_center(),"reason":"fresh"})
+	_publish_start(false)
 	return true
 
 func restore(data: Variant) -> bool:
@@ -165,6 +167,9 @@ func restore(data: Variant) -> bool:
 	if not (schema is int or schema is float) or not is_finite(float(schema)): return false
 	if schema != 1 and schema != 2: return false
 	if schema == 2 and (data.get("format") != State.SAVE_FORMAT or not data.get("player") is Dictionary or not data.get("state") is Dictionary): return false
+	# Source load preserves the array/non-array distinction until startGame.
+	# The normalized rows remain authoritative; never restore raw saved rewards.
+	var needs_hustles: bool = schema == 1 or not data.state.get("hustles") is Array
 	if _actors_enabled:
 		var candidate: RefCounted = State.new()
 		var candidate_progression := Progression.new(candidate)
@@ -192,6 +197,10 @@ func restore(data: Variant) -> bool:
 		for key: String in ["graffiti","posters"]:
 			if data.state.has(key): wall_state[key] = s.get(key)
 	if not wall_markings.prepare_start("restore",wall_state): return false
+	# Source start order: interactive props -> walls -> equipment (already
+	# normalized by State.restore) -> missing hustles -> route. Existing merged
+	# campaign load-witness repairs must still precede the route unlock filter.
+	if needs_hustles: progression.roll_hustles()
 	utilities.reset_session("restore")
 	if kingdom != null: kingdom._sync_epoch()
 	if days_enabled and not campaign.reconcile_loaded_state().get("ok",false): return false
@@ -210,7 +219,21 @@ func restore(data: Variant) -> bool:
 		if not campaign.refresh_forces(): return false
 		days.rehydrate()
 	state.emit_event("placement_reset",{"source_position":state.player_center(),"reason":"restore"})
+	_publish_start(true)
 	return true
+
+func _publish_start(loaded: bool) -> void:
+	# Source start.js143–153: these explicit handles consume no random draws.
+	var first_intro: bool = not loaded and not s.flags.get("introDone",false)
+	var text: String = "you wake up on the sidewalk.\nyour mouth tastes like a battery.\nyou do not remember.\n(Q to see what's next.)" if first_intro else "you wake up on the sidewalk.\nyour mouth tastes like a battery.\n(Q to see today's hustles.)"
+	state.emit_event("toast",{"text":text,"duration_ms":4200 if first_intro else 3500})
+	_feed("woke up.\nstill in the neighborhood.\nfeels like a tuesday.","@crackheadcent")
+	_feed("good morning. tony has not blinked.","@tony_observer")
+	var ranks: Array = state.content.catalogs.ranks
+	state.emit_event("news",{"text":"good evening. "+str(ranks[int(p.rank)].name)+" is once again at large."})
+	# Preserve earlier queued publications and source call-time silence, even if
+	# presentation does not drain until a later input or frame.
+	communications.flush_pending_events()
 
 func snapshot() -> Dictionary: return state.snapshot()
 
@@ -720,10 +743,12 @@ func _profile_stage(key: String,started: int) -> int:
 	if not profile_enabled: return 0
 	var now: int = Time.get_ticks_usec()
 	profile_us[key] = int(profile_us.get(key,0))+now-started
+	profile_calls[key] = int(profile_calls.get(key,0))+1
 	return now
 
 func advance(seconds: float, context: Dictionary = {}) -> bool:
 	profile_us.clear()
+	profile_calls.clear()
 	if director != null:
 		director.profile_enabled = profile_enabled; director.profile_us.clear()
 	last_advanced_ms = 0.0

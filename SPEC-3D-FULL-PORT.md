@@ -125,3 +125,20 @@ Cart receipts synchronize geometry before other physical effects. E cart selecti
 after phone and before dumpster, with strict source36px and aim/LOS for mounting;
 mounted dismount requires no aim after earlier source targets miss. Hands read actual
 camera-local handle markers each active pose and explicitly clear grips on release.
+
+## Advertised movement aliases — 2026-11-18
+
+The source journal lists WASD or arrow movement. FullScene input registration
+therefore binds W/Up, S/Down, A/Left, D/Right and Shift sprint. Registration is
+idempotent, preserves existing action events, and adds only missing aliases.
+Aliases feed the same InputMap actions, movement resolver and world clock; no
+second movement handler or camera-turning meaning is introduced.
+
+### Narrow desktop HUD separation — 2026-11-18
+
+Actual960x540 review exposed overlapping left status and right resource plates.
+FullHUD gives both cached top plates bounded shares of available width, with a20px
+gap, preserving their1280x720 sizes. Labels stay inside those plates; long district
+names use visual ellipsis while retaining their complete text property. Source copy,
+resource values, input, menu choices and all gameplay remain unchanged. Resize must
+reflow the same controls, not rebuild them. Verify both960x540 and1280x720.

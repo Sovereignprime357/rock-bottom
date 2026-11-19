@@ -262,6 +262,124 @@ func _gestures(first: Rig) -> void:
 	_advance(first,1.0); _check(first.action.is_empty(),"repeated contextual receipts coalesce without action queue")
 	groups += 1
 
+func _skin_points(rig: Rig,side: String) -> PackedVector3Array:
+	var result := PackedVector3Array()
+	var wrist: Node3D = rig.get_node(side+"_arm/forearm/wrist")
+	for part: String in ["palm","index","middle","ring","little","thumb"]:
+		for mesh: MeshInstance3D in _meshes(wrist.get_node(part)):
+			var transform: Transform3D = rig.global_transform.affine_inverse()*mesh.global_transform
+			for point: Vector3 in _local_vertices(mesh.mesh): result.append(transform*point)
+	return result
+
+func _skin_delta(a: PackedVector3Array,b: PackedVector3Array) -> float:
+	if a.size() != b.size(): return INF
+	var result: float = 0.0
+	for index: int in range(a.size()): result = maxf(result,a[index].distance_to(b[index]))
+	return result
+
+func _relaxed_hands(first: Rig,second: Rig) -> void:
+	first.reset(); second.reset()
+	var original_resources: Dictionary = _resources(first)
+	var original_contents: Dictionary = _resource_contents(first)
+	var left: Node3D = first.get_node("left_arm/forearm/wrist")
+	var right: Node3D = first.get_node(WRIST)
+	var reflected_normal: Vector3 = left.global_basis.y
+	reflected_normal.x = -reflected_normal.x
+	_check(reflected_normal.angle_to(right.global_basis.y) > 0.04,"empty palms have actual asymmetric orientation rather than a mirrored flat pose")
+	_check(left.global_position.y < right.global_position.y-0.008,"empty left wrist rests lower than the dominant wrist")
+	for side: String in ["left","right"]:
+		var wrist: Node3D = first.get_node(side+"_arm/forearm/wrist")
+		var flexions: Array[float] = []
+		for finger: String in ["index","middle","ring","little"]:
+			var tip: Node3D = wrist.get_node(finger+"/middle/tip")
+			flexions.append((-wrist.global_basis.z).angle_to(-tip.global_basis.z))
+		_check(flexions[3] > flexions[0]+0.30 and flexions[0] > 0.35 and flexions[3] < 1.9,"actual digit directions form a relaxed open cascade "+side)
+		var points: PackedVector3Array = _skin_points(first,side)
+		var low: bool = true
+		for point: Vector3 in points: low = low and point.y < -0.25 and point.z < -0.06
+		_check(low,"all resting skin remains below the central view and clear of the near plane "+side)
+	# Match both actual native/browser review sizes using authored skin vertices.
+	for size: Vector2i in [Vector2i(1280,720),Vector2i(960,540)]:
+		for crash: bool in [false,true]:
+			first.reset(); first.tick(0.1,Vector3.ZERO,false,false,crash)
+			for side: String in ["left","right"]:
+				var shown: int = 0
+				var points: PackedVector3Array = _skin_points(first,side)
+				for point: Vector3 in points:
+					var half_height: float = -point.z*tan(deg_to_rad(78.0)*0.5)
+					if absf(point.y) < half_height and absf(point.x) < half_height*float(size.x)/float(size.y): shown += 1
+				_check(float(shown)/float(maxi(1,points.size())) > 0.18,"substantial relaxed skin remains visible at "+str(size)+" crash="+str(crash)+" "+side)
+	for velocity: Vector3 in [Vector3.ZERO,Vector3(0,0,-5.5),Vector3(0,0,-16.83)]:
+		first.reset(); first.set_context({"walk_speed":5.5})
+		_advance(first,0.6,velocity,velocity.length() > 6.0,true)
+		_check(_safe(first),"empty relaxed anatomy remains finite and near-plane safe through gait/sprint/look/crash "+str(velocity))
+		_advance(first,1.0)
+		_check(_safe(first),"gait settles safely back into empty stance")
+	# No acknowledgement/end pop: compare the same clock on two real rigs, and
+	# prove that the measured geometric boundary error shrinks with epsilon.
+	for kind: StringName in [&"interact",&"pickup",&"receipt",&"eat",&"smoke",&"equip",&"phone",&"bench",&"dumpster",&"kick"]:
+		first.reset(); second.reset()
+		var before_left: PackedVector3Array = _skin_points(first,"left")
+		var before_right: PackedVector3Array = _skin_points(first,"right")
+		first.acknowledge(kind,true,false)
+		_check(_skin_delta(before_left,_skin_points(first,"left")) < 0.000001 and _skin_delta(before_right,_skin_points(first,"right")) < 0.000001,"empty gesture begins from the actual resting skin without a pose jump "+str(kind))
+		var errors: Array[float] = []
+		for epsilon: float in [0.001,0.00001]:
+			first.reset(); second.reset(); first.acknowledge(kind,true,false)
+			var age: float = float(Rig.ACTION_LENGTHS[kind])-epsilon
+			_advance(first,age); _advance(second,age)
+			errors.append(maxf(_skin_delta(_skin_points(first,"left"),_skin_points(second,"left")),_skin_delta(_skin_points(first,"right"),_skin_points(second,"right"))))
+		_check(errors[1] < 0.0001 and (errors[1] < errors[0]*0.05 or errors[0] < 0.000001),"actual recovery approaches the same-clock rest continuously "+str(kind))
+		first.tick(0.001,Vector3.ZERO,false); second.tick(0.001,Vector3.ZERO,false)
+		_check(first.action.is_empty() and _skin_delta(_skin_points(first,"left"),_skin_points(second,"left")) < 0.000001 and _skin_delta(_skin_points(first,"right"),_skin_points(second,"right")) < 0.000001,"action expiry returns both hands exactly to current empty stance "+str(kind))
+	# Original hard thresholds caused a finite finger jump even at vanishing dt.
+	for kind: StringName in [&"pickup",&"dumpster"]:
+		first.reset(); first.acknowledge(kind,true,false)
+		var age: float = float(Rig.ACTION_LENGTHS[kind])*(0.35 if kind == &"pickup" else 0.5)
+		_advance(first,age-0.00001)
+		var before: PackedVector3Array = _skin_points(first,"right")
+		first.tick(0.00002,Vector3.ZERO,false)
+		_check(_skin_delta(before,_skin_points(first,"right")) < 0.0001,"open-to-close gesture has no finger discontinuity "+str(kind))
+	_check(_resources(first) == original_resources and _resource_contents(first) == original_contents,"empty relaxation and transitions preserve all authored immutable resources")
+	first.reset(); second.reset(); groups += 1
+
+func _occupied_pose_preservation(first: Rig) -> void:
+	# Captured pre-polish rest contract, independent of the new relaxation helper.
+	for id: StringName in Rig.supported_weapons():
+		if id == &"fists": continue
+		first.reset(); first.set_context({"weapon":id})
+		var arm: Node3D = first.get_node("right_arm")
+		var wrist: Node3D = first.get_node(WRIST)
+		_check(arm.position.is_equal_approx(Vector3(0.305,-0.410+sin(0.24)*0.002,-0.515)) and arm.rotation.is_equal_approx(Vector3(0.10,-0.08,-0.06)) and wrist.rotation.is_equal_approx(Vector3(0.15,-0.35,-0.055)),"occupied weapon arm/wrist retains its original rest anchors "+str(id))
+		_check(_original_finger_pose(wrist,1,float(Rig.WEAPONS[id].grip)),"occupied weapon finger endpoints remain unchanged "+str(id))
+	for id: StringName in Rig.supported_tools():
+		first.reset(); first.set_context({"tool":id})
+		var arm: Node3D = first.get_node("left_arm")
+		var wrist: Node3D = first.get_node("left_arm/forearm/wrist")
+		_check(arm.position.is_equal_approx(Vector3(-0.295,-0.370+sin(-0.24)*0.002,-0.530)) and arm.rotation.is_equal_approx(Vector3(0.10,0.08,0.06)) and wrist.rotation.is_equal_approx(Vector3(0.15,0.18,-1.045)),"occupied tool arm/wrist retains its original rest anchors "+str(id))
+		_check(_original_finger_pose(wrist,-1,0.83),"occupied tool finger endpoints remain unchanged "+str(id))
+	var grips: Dictionary = {"left":Vector3(-0.25,-0.34,-0.66),"right":Vector3(0.25,-0.34,-0.66)}
+	first.reset(); first.set_context({"cart_grips":grips})
+	for side: String in ["left","right"]:
+		var wrist: Node3D = first.get_node(side+"_arm/forearm/wrist")
+		var marker: Vector3 = first.to_local(wrist.to_global(Vector3(0,-0.036,-0.082)))
+		_check(marker.distance_to(grips[side]) < 0.000001 and _original_finger_pose(wrist,-1 if side == "left" else 1,0.83),"cart grip correction and finger endpoints remain exact "+side)
+	first.reset(); first.acknowledge(&"punch",true,false,&"fists"); _advance(first,0.045)
+	var wrist: Node3D = first.get_node(WRIST)
+	_check(wrist.rotation.is_equal_approx(Vector3(0.78,0,-0.055)) and _original_finger_pose(wrist,1,1.0),"full-extension fist keeps its accepted wrist/finger contact pose")
+	first.reset(); groups += 1
+
+func _original_finger_pose(wrist: Node3D,side: int,curl: float) -> bool:
+	var fingers: Array[String] = ["index","middle","ring","little"]
+	for index: int in range(fingers.size()):
+		var base: Node3D = wrist.get_node(fingers[index])
+		var middle: Node3D = base.get_node("middle")
+		var tip: Node3D = middle.get_node("tip")
+		if not base.rotation.is_equal_approx(Vector3(-lerpf(0.10+float(index)*0.035,1.10,curl),float(side)*float(index-1)*0.045*(1.0-curl),0)): return false
+		if not is_equal_approx(middle.rotation.x,-lerpf(0.24+float(index)*0.025,1.35,curl)) or not is_equal_approx(tip.rotation.x,-lerpf(0.12,0.72,curl)): return false
+	var thumb: Node3D = wrist.get_node("thumb")
+	return thumb.rotation.is_equal_approx(Vector3(-lerpf(0.13,0.55,curl),float(side)*lerpf(0.58,-0.95,curl),float(side)*lerpf(0.10,0.20,curl))) and is_equal_approx((thumb.get_node("tip") as Node3D).rotation.x,-lerpf(0.20,0.90,curl))
+
 func _run() -> void:
 	var first: Rig = Rig.create() as Rig; var second: Rig = Rig.create() as Rig; root.add_child(first); root.add_child(second)
 	_catalog_and_cache(first,second)
@@ -269,7 +387,9 @@ func _run() -> void:
 	_grips(first)
 	_attacks_and_geometry(first,second)
 	_gestures(first)
-	_check(groups == 5,"all context/cache/grip/phase/gesture groups complete")
+	_relaxed_hands(first,second)
+	_occupied_pose_preservation(first)
+	_check(groups == 7,"all context/cache/grip/phase/gesture/empty-stance/preservation groups complete")
 	first.free(); second.free()
 	if failures.is_empty(): print("3D VIEWMODEL CONTEXT GATE: PASS (%d checks;9canonical weapons, original grip geometry, immutable accepted weapon, camera bounds, contexts/caches)" % checks); quit(0)
 	else:

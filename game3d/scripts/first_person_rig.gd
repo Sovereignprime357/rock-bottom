@@ -308,7 +308,7 @@ func _apply_pose() -> void:
 				wrist_angles.x -= 0.15*gesture; curl = -0.12*gesture
 			else:
 				offset += Vector3(-float(side)*0.04,-0.035,-0.11)*gesture
-				wrist_angles.x -= 0.28*gesture; curl = gesture*(0.65 if action_phase > 0.5 else -0.15)
+				wrist_angles.x -= 0.28*gesture; curl = gesture*lerpf(-0.15,0.65,_ease((action_phase-0.42)/0.16))
 		elif side == 1 and action in [&"interact",&"pickup",&"eat",&"smoke",&"equip",&"phone"]:
 			match action:
 				&"interact":
@@ -318,7 +318,7 @@ func _apply_pose() -> void:
 				&"pickup":
 					offset += Vector3(-0.09,-0.015,-0.11)*gesture
 					wrist_angles.x -= 0.35*gesture
-					curl = gesture*(0.65 if action_phase > 0.35 else -0.15)
+					curl = gesture*lerpf(-0.15,0.65,_ease((action_phase-0.28)/0.14))
 				&"eat":
 					offset += Vector3(-0.16,0.245,0.085)*gesture
 					wrist_angles += Vector3(0.35,-0.28,-0.10)*gesture
@@ -337,13 +337,24 @@ func _apply_pose() -> void:
 			offset += Vector3(0.09,0.085,-0.025)*gesture
 			wrist_angles += Vector3(0.25,-0.13,0.12)*gesture
 			curl = 0.20*gesture
+		var active_hand: bool = (action == &"punch" and side == last_punch_side) or action in [&"bench",&"dumpster"] or (action == &"receipt" and side < 0) or (action in [&"interact",&"pickup",&"eat",&"smoke",&"equip",&"phone"] and side > 0)
+		var grip_key: String = "left" if side < 0 else "right"
+		# Separate from the shared grip evaluator: even a partly closed item grip
+		# must retain its authored relaxed endpoint. Stowed equipment also keeps
+		# the established gesture pose, and the final cart solve remains exact.
+		var free_hand: bool = (held == &"fists" if side > 0 else tool.is_empty()) and not _cart_grips.has(grip_key)
+		var relaxation: float = 0.0
+		if free_hand:
+			relaxation = 1.0-_ease(strike) if action == &"punch" else (1.0-_ease(gesture) if active_hand else 1.0)
+			offset += (Vector3(-0.012,-0.018,0.012) if side < 0 else Vector3(0.005,-0.006,-0.004))*relaxation
+			angles += (Vector3(0.025,-0.03,0.035) if side < 0 else Vector3(-0.015,0.02,-0.02))*relaxation
+			wrist_angles += (Vector3(-0.14,0.18,0.18) if side < 0 else Vector3(-0.08,-0.10,-0.11))*relaxation
 		arm.position = rig.rest+offset
 		arm.rotation = angles
 		forearm.rotation.x = elbow
 		wrist.rotation = wrist_angles
 		_pose_fingers(rig,side,curl)
-		var active_hand: bool = (action == &"punch" and side == last_punch_side) or action in [&"bench",&"dumpster"] or (action == &"receipt" and side < 0) or (action in [&"interact",&"pickup",&"eat",&"smoke",&"equip",&"phone"] and side > 0)
-		var grip_key: String = "left" if side < 0 else "right"
+		if relaxation > 0.0: _relax_fingers(rig,side,relaxation)
 		if _cart_grips.has(grip_key) and not active_hand:
 			# Translate the existing connected sleeve chain so its closed fingers
 			# surround the real handle; no second handle or autonomous IK clock.
@@ -382,6 +393,21 @@ func _pose_fingers(rig: Dictionary, side: int, amount: float) -> void:
 	var thumb_tip: Node3D = rig.thumb_tip
 	thumb.rotation = Vector3(-lerpf(0.13,0.55,curl),float(side)*lerpf(0.58,-0.95,curl),float(side)*lerpf(0.10,0.20,curl))
 	thumb_tip.rotation.x = -lerpf(0.20,0.90,curl)
+
+
+func _relax_fingers(rig: Dictionary, side: int, weight: float) -> void:
+	# An open, resting cascade rather than four parallel fingers or a guard fist.
+	# No mesh work, new clock or change to the occupied-hand grip endpoints.
+	var fingers: Array = rig.fingers
+	var amount: float = weight*(1.0 if side < 0 else 0.88)
+	for index: int in range(fingers.size()):
+		var chain: Array = fingers[index]
+		(chain[0] as Node3D).rotation.x -= (0.08+float(index)*0.073)*amount
+		(chain[1] as Node3D).rotation.x -= (0.10+float(index)*0.083)*amount
+		(chain[2] as Node3D).rotation.x -= (0.05+float(index)*0.043)*amount
+	var thumb: Node3D = rig.thumb
+	thumb.rotation += Vector3(-0.16,-float(side)*0.23,0.0)*amount
+	(rig.thumb_tip as Node3D).rotation.x -= 0.13*amount
 
 
 func _build() -> void:

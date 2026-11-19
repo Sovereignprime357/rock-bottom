@@ -2927,3 +2927,58 @@ the input driver only. Oldc61d9 acceptance is not current-release acceptance.
 Next draft packets are held under .build/3d/{office-acceptance-draft,fixture-motion-draft,
 district-grade-draft}; no production integration or engine claim yet. Root retains
 serial engine ownership. Current local8074 and Full Windows export are332be27.
+
+### Motion, color and restored startup — continuation
+
+Integrated ordered district grading under HUD; actual Chromium Canvas versus native
+and WebGL2 samples differ by at most2 channel bytes across270 channels, with UI
+unchanged. Native23-view district gallery covers six recipes, rain/night/high/crash,
+pause/cooking and title exclusion at1280x720/960x540. The gallery exposed overlapping
+header plates at960; bounded shared-width sizing fixes the overlap without rebuilding
+controls or losing underlying text. Arrow aliases now match the advertised journal.
+
+P05f lowers/asymmetrically relaxes empty hands and smooths pickup/dumpster finger
+closing. Existing occupied grips and punch endpoints remain. Central Context1329,
+Gear729 and93 native views pass; reviewed rest/crash/reach/punch/pipe/seated views
+at both desktop sizes. Exact bone-input reuse and call-local physics setup are
+integrated, with paired equivalence checks; no speedup claim before frozen profiling.
+
+Source fixture motion uses the existing CORNER TV/four drums, real counter/food
+steam, depth-tested passing shadow and three pulsing sodium patches. Counterexample:
+Pete is hidden during normal night play, so a staged visible-food probe could not
+prove live steam. Final binding uses the actual front service aperture when food is
+absent; no front framed pawn pane exists in this geometry. FullScene418 now verifies
+actual Day invisibility, source night boundaries and unchanged state. Fixture model
+1286/world195 and source53 cases pass; final native/Web and full-runner work continues.
+
+Startup now publishes through existing Comms and restores the conditional intro
+pile/missing jobs at source ordering boundaries. Startup321/State211/Runtime160/
+Comms1219 pass. Twelve seeded fixtures pin bottle/wall/hustle/route order. Explicit
+empty arrays retain emptiness; normalized rows cannot restore injected rewards.
+
+Retained failures: initial Web color probe used the browser's default300x150 canvas
+until explicit640x360 sizing; passing-shadow tail test initially assumed the wrong
+ground height (.003 rather than actual.017); Office contract fixture merging failed
+to replace its event list; Tony's first v2 route miss aborted instead of bounded
+hold/retry. Corrected Tony driver on frozen332 production source passes3.364s wall,
+all phases/two adds,249damage,18.032s high/8.019s crash. Updated test scripts were
+copied into that archived source, so this is editor-native production evidence,
+not a newly frozen release executable. Current Office contract260 passes; actual
+Office and Web progression remain unproven.
+
+Performance reporting audit found TIME_PROCESS is a held roughly one-second engine
+maximum, not a per-frame timer. Preserve old failures and the strict16ms comparison,
+rename the new field truthfully, and record active time/call totals/supplied delta.
+Viewport CPU/GPU values are delayed render samples, not same-frame script pairs.
+Next: final gates/exports, refreshed browser review, pushed checkpoint, frozen60
+measurement and actual Office tour. Bounded follow-ups stay under.build during freeze.
+
+Final current checkpoint:114/1143D and19/19original pass; both Full exports rebuilt.
+Local8074 now serves motion/color. Isolated Webfixture15views/568checks/6pulsepairs
+PASS with real readbacks and zero shader/browser errors; raw download and external
+hashes retained. Corrected missing empty export exclude_filter in harness only.
+PlayableWeb wake/arrows/Q/I/pause/manualsave/reload/remember/continue/feed and idle
+hands verified. Chromium pointer-lock UnknownError persists; fallback is displayed.
+No browser campaign or mounted-cart claim. Source audit found Space ordinary attack
+and M while cooking remain missing; draft narrow fixes after frozen baseline, with
+no status promotion from this discovery. Nextroot actions:commit/push,frozen60,Office.
