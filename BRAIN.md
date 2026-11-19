@@ -2834,3 +2834,14 @@ reported UnknownError; the fallback remained playable. No full campaign/audio/60
 performance claim follows from these bounded checks. The user resumed after a usage
 limit; all accepted production remained held, and the three bounded agents resumed
 the boss probe and read-only next-packet plans. Full-port work remains active.
+### Pushed live presentation checkpoint
+
+Code/evidence `c61d9c98cdab4a7c950c1a46759442a797df09e0` pushed on
+`codex/3d-full-port`; report and file ledger are under reports/2026-11-18-3d-live-neighborhood*.
+The frozen release retains 60/60 but still fails: scene p95 23.664/21.970 ms,
+engine 31.558/28.518 ms. Dynamic fixtures separately pass the release probe at
+0.061 ms p95, with the unchanged six-light/16-view contract. No full performance
+claim. Agents released bounded ownership-adornment and leash/border packets.
+The new real-input Tony probe passed its 68-check validator but its first native
+run stalled on the pre-fight walking route among real NPCs, then hit a test cleanup
+error. World owns only driver detours/cleanup fixes; no gameplay changes justified.

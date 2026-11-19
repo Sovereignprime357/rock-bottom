@@ -162,3 +162,22 @@ fallback, and no menu loop recurred. The QA tab was closed before native profili
 The source-handler ledger now records 534 integrated, 39 partial and 12 planned
 obligations. Feature and platform verification remain open. New boss-acceptance
 probe files are intentionally outside this checkpoint until centrally exercised.
+## Delivery and frozen release measurement
+
+Code/evidence commit `c61d9c98cdab4a7c950c1a46759442a797df09e0` is pushed to
+`origin/codex/3d-full-port`. The files-touched ledger is
+`reports/2026-11-18-3d-live-neighborhood-files.txt`. Gate output above is all green;
+executed decisions are recorded through `IMPL-3D-FULL-16`.
+
+The exact committed release was exported from a Git archive with the official
+4.5.1 template. The 120-frame diagnostic retained 60 actors and 60 rigs in both
+phases, but **failed** the full-frame target: scene CPU p95 was 23.664 ms by day
+and 21.970 ms at night; engine process p95 was 31.558/28.518 ms. The report and
+provenance are committed in the artifact directory. This short diagnostic is not
+the required long final acceptance run. The measured workload points to actor
+simulation and pose/render work; no NPCs, AI clocks or quality settings were disabled.
+
+The same release executable passed the unchanged six-emitter probe: all 16 views,
+six active lights, zero queries/shadows and incremental sync p95 **0.061 ms**.
+The editor's earlier 0.269 ms failure is retained separately. This local presenter
+result does not override the failed whole-scene measurement.
