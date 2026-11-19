@@ -1093,3 +1093,49 @@ band that short controller steps correctly refuse. Add exact-source short-step
 checks and a finite local detour (24 candidates, four tail joins, at most 26 local
 steps per candidate), retaining all original time/replan limits. Contract 1138 and
 the focused native exact-origin replay pass; whole-tour acceptance stays separate.
+
+### IMPL-3D-FULL-32 — legal Office service endpoints and native progression
+
+An actual overlap identifies the late alley-can collider at its fixed guidance
+point. Keep production collision unchanged; a derived test driver selects from33
+finite endpoints within the original strict source/physical range, current capsule,
+peer and target-ray checks. Four route attempts share each750ms window. Original
+1138 routing checks remain and the separate85-check endpoint contract passes.
+Focused retained-save replay advances the real route once. The complete native
+tour passes in231.446s: same18.020s/7.999s loop, three sheets, Office/upgrades,
+Canal sign, pending/paid persistence and next-day order, zero deaths/arrests.
+Initial300cash/6copper is disclosed; resource earning, other claims, Kingdom and
+Web are not proven. Evidence: artifacts/3d-full-port/office-endpoint-acceptance.
+
+### IMPL-3D-FULL-33 — shaped hands and physical cart wrap
+
+Original cached palms/thumb roots gain authored planes within a7.7047% triangle
+increase, retaining all non-cart poses, durations, materials and shared resources.
+The unique cart receives a .038m faceted shaft and opposing finger/thumb wrap;
+its collider and conservative placement envelope remain. Actual triangle contact
+checks replace only obsolete box/curl implementation pins. Generated engine node
+suffixes are normalized in cross-instance comparisons; authored structure and
+transforms remain exact. Initial failed comparison is retained.
+Focused1537 and retained41/1329/729/3640 checks pass. Native18+93+36+18 capture
+sets complete; both actual Web16-phase sequences pass with zero engine/browser
+errors and selected images reviewed. No performance or hardware capture claim.
+Contract: SPEC-3D-HAND-ART.md. Evidence: artifacts/3d-full-port/hand-art-refinement.
+
+### IMPL-3D-FULL-34 — frozen sustained-population comparison
+
+Replace only the diagnostic workload overlay for paired release measurements:
+normal input avoids depopulation, fixed120 warm-up plus1080 measured frames per
+phase, every-frame60 living/supported/rendered actors, unchanged MeasuredScene.
+Archive committed8bcd and648 separately; pin original production, the same three
+test overlays, wrapper, official launcher/runtime/template and final EXE/report.
+No production profiler or gameplay change; no frame/population/16ms relaxation.
+Both retain60 and both fail16ms:8bcd27.484/24.976ms versus64825.474/22.038ms scene
+p95. Driver cost and trajectory/source-step differences are explicit; this is not
+an isolated causal speedup estimate. Raw evidence and harness are retained in
+artifacts/3d-full-port/sustained-population-profile. Earlier56-survivor failures
+remain valid failures, not overwritten baselines.
+
+The three new evidence directories explicitly disable Git text conversion so
+retained report/log/PNG bytes continue matching their recorded hashes across
+Windows checkouts. Source files retain the existing repository line-ending rules.
+Raw engine log whitespace is preserved; source diff whitespace checks pass.

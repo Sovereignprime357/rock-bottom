@@ -62,6 +62,9 @@ func _record() -> Dictionary:
 	return cart
 
 func _part_kind(mesh: MeshInstance3D) -> String:
+	if mesh.get_meta("cart_part","") == "handle" and mesh.mesh is ArrayMesh:
+		var bounds: AABB = mesh.mesh.get_aabb()
+		if bounds.position.is_equal_approx(Vector3(-0.48,-0.019,-0.019)) and bounds.size.is_equal_approx(Vector3(0.96,0.038,0.038)) and mesh.mesh.get_surface_count() == 1: return "handle"
 	if mesh.mesh is CylinderMesh:
 		var cylinder: CylinderMesh = mesh.mesh as CylinderMesh
 		if is_equal_approx(cylinder.height,0.14) and is_equal_approx(cylinder.top_radius,0.13) and is_equal_approx(cylinder.bottom_radius,0.13): return "wheel"
@@ -71,7 +74,6 @@ func _part_kind(mesh: MeshInstance3D) -> String:
 		if size.is_equal_approx(Vector3(0.045,0.52,0.72)): return "side"
 		if size.is_equal_approx(Vector3(0.96,0.025,0.025)): return "wire"
 		if size.is_equal_approx(Vector3(0.96,0.55,0.80)): return "proxy"
-		if size.is_equal_approx(Vector3(0.96,0.09,0.09)): return "handle"
 	return ""
 
 func bind(world: Node3D,adapter: RefCounted,travel: RefCounted) -> bool:

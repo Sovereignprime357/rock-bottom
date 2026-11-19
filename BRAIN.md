@@ -3033,3 +3033,40 @@ inventory exits and arrow movement observed. Chromium capture UnknownError remai
 fallback visible, no pointer-lock claim. Current8074 serves this checkpoint.
 Root next commits/pushes, then validates isolated feedback/Companion and the live
 service-endpoint correction. Hand anatomy/cart wrap candidates remain separate.
+
+## 2026-11-19 — resumed usage, hands and Office progress
+
+Continued the full first-person port. The completed live-endpoint Office native
+tour passed all five phases in231.446s with no deaths/arrests, preserving the
+same purchased-rock18.020s/7.999s loop. The test's300cash/6copper starting fixture
+is explicit. Integrated only derived test routing and85 contract checks; retained
+the occupied-guidance failure and actual collider/replay proof.
+
+Integrated original shaped palms/thumb roots and narrower faceted cart shaft with
+opposed digit wrap. Actual hand geometry grows7.7047%, no new materials or dynamic
+mesh work. The first cross-instance gate failed on generated node suffixes; exact
+authored hierarchy/state/pose checks now normalize only those suffixes and pass1537.
+Retained hand/context/gear/cart gates pass. Native18/93/36/18 capture sets complete;
+actual Web16phase sequences pass at1280 and960 without engine/browser errors.
+Selected native/browser images reviewed;11browser PNG hashes/dimensions verified.
+
+Effects/dust remain isolated. Native core feedback renders actual source receipts
+but first run fails deferred HUD-layout and absent nearby-wall fixture checks;
+agent is repairing fixtures with explicit diagnostics. Dust peer caught a missing
+source-origin subtraction before central import; fixed with a canonical foot
+anchor witness. First pure dust engine gate then found exact variate comparison
+failures despite source RNG-state/derived-field agreement; diagnostic pending.
+Frozen8bcd sustained60 release profile is running with reviewed same-workload
+overlay/provenance; no performance pass inferred. Next: profile648, resolve draft
+failures, visual acceptance, full runners/exports, registered pushed checkpoint,
+then authentic resource/claims/Tony/Kingdom continuation.
+
+Hand/Office delivery validation: complete batch executed77 engine and40 source
+checks, all green, plus original19/19. Its raw footer still said115; retained raw
+output and independently audited117-check census, corrected only the future
+summary literal. Full Windows/Web exports pass. Local8074 now serves the new
+hand/cart build. Actual refreshed browser wake→play, pause→continue, journal and
+inventory→Escape, and arrow movement were observed. Known Chromium pointer-lock
+UnknownError persists with right-mouse fallback; no hardware-capture/audio claim.
+The identical648 release workload retains60 but still fails16ms at25.474/22.038ms
+scene p95; both complete frozen reports and exact overlays/provenance are retained.

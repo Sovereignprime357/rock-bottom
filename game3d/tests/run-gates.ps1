@@ -117,6 +117,8 @@ Invoke-Gate -Name 'boss-acceptance-contract' -GodotArgs @('--script', 'res://tes
 Invoke-Gate -Name 'pose-input-memo' -GodotArgs @('--script', 'res://tests/test_pose_input_memo.gd', '--quit-after', '6000') -PassPattern '3D POSE INPUT MEMO GATE: PASS'
 Invoke-Gate -Name 'district-grade' -GodotArgs @('--script', 'res://tests/test_district_grade.gd', '--quit-after', '6000') -PassPattern 'DISTRICT GRADE DRAFT GATE: PASS'
 Invoke-Gate -Name 'office-acceptance-contract' -GodotArgs @('--script', 'res://tests/test_office_acceptance_contract.gd', '--quit-after', '6000') -PassPattern '3D OFFICE ACCEPTANCE CONTRACT: PASS'
+Invoke-Gate -Name 'office-endpoint-contract' -GodotArgs @('--script', 'res://tests/test_office_endpoint_contract.gd', '--quit-after', '6000') -PassPattern 'OFFICE SERVICE ENDPOINT CONTRACT: PASS'
+Invoke-Gate -Name 'hand-art-refinement' -GodotArgs @('--script', 'res://tests/test_hand_art_refinement.gd', '--quit-after', '6000') -PassPattern 'DRAFT HAND ART REFINEMENT: PASS'
 Invoke-Gate -Name 'karaoke-acceptance-contract' -GodotArgs @('--script', 'res://tests/test_karaoke_acceptance_contract.gd', '--quit-after', '6000') -PassPattern '3D KARAOKE ACCEPTANCE CONTRACT: PASS'
 Invoke-Gate -Name 'fixture-motion' -GodotArgs @('--script', 'res://tests/test_fixture_motion.gd', '--quit-after', '6000') -PassPattern '3D FIXTURE MOTION GATE: PASS'
 Invoke-Gate -Name 'fixture-motion-world' -GodotArgs @('--script', 'res://tests/test_fixture_motion_world.gd', '--quit-after', '6000') -PassPattern '3D FIXTURE MOTION WORLD GATE: PASS'
@@ -168,4 +170,4 @@ foreach ($entry in @(
     & node @nodeArgs 2>&1 | Tee-Object -FilePath (Join-Path $logRoot ($entry.Name + '.log'))
     if ($LASTEXITCODE -ne 0) { throw "3D gate $($entry.Name) failed." }
 }
-Write-Output '3D GATE RUNNER: 115/115 PASS (import clean; 75 engine suites and 40 source/parity checks; complete-port acceptance remains tracked separately)'
+Write-Output '3D GATE RUNNER: 117/117 PASS (import clean; 77 engine suites and 40 source/parity checks; complete-port acceptance remains tracked separately)'

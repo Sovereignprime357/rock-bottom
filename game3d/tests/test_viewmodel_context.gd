@@ -363,7 +363,9 @@ func _occupied_pose_preservation(first: Rig) -> void:
 	for side: String in ["left","right"]:
 		var wrist: Node3D = first.get_node(side+"_arm/forearm/wrist")
 		var marker: Vector3 = first.to_local(wrist.to_global(Vector3(0,-0.036,-0.082)))
-		_check(marker.distance_to(grips[side]) < 0.000001 and _original_finger_pose(wrist,-1 if side == "left" else 1,0.83),"cart grip correction and finger endpoints remain exact "+side)
+		# The dedicated cart wrap supersedes only the generic .83 tool-curl pin.
+		# Real opposed skin/shaft contact is checked in test_hand_art_refinement.
+		_check(marker.distance_to(grips[side]) < 0.000001,"cart grip correction retains its exact original target "+side)
 	first.reset(); first.acknowledge(&"punch",true,false,&"fists"); _advance(first,0.045)
 	var wrist: Node3D = first.get_node(WRIST)
 	_check(wrist.rotation.is_equal_approx(Vector3(0.78,0,-0.055)) and _original_finger_pose(wrist,1,1.0),"full-extension fist keeps its accepted wrist/finger contact pose")

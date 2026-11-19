@@ -908,3 +908,27 @@ Input checkpoint validation:115/1153D,19/19original,Full Windows/Web builds and
 refreshed browser menu/mute/movement smoke pass. Current local8074 is refreshed.
 Whole Office/other campaign tours, browser progression and sustained60 performance
 remain open. No draft particle/hand-art work is included in this frozen packet.
+
+### Hand-art and Office continuation — 2026-11-19
+
+Native Office endpoint tour now passes its five phases with the declared initial
+300cash/6copper fixture. Three routes, Office/upgrades, Canal claim, work/save/load
+and next-day order are covered; resource earning and Kingdom remain open. The
+derived endpoint driver and85-check contract are integrated without production
+collision changes. The original1138 routing contract remains.
+
+Shaped hands and cart wrap are integrated after focused1537 and retained hand/
+gear/cart gates, four completed native capture sets and actual browser16/16 phases
+at both desktop sizes. Selected images and exact hashes are retained. Root owns
+the complete regression/export/delivery checkpoint. No full-port completion claim.
+
+Bounded agents: World owns source-effects native/Web visual fixtures and a separate
+view-only art proposal; Architecture owns isolated dust/mote integration and fixed
+release-profile review; Characters owns the earned Office-to-Kingdom continuation
+draft. Root serializes all engine/profile/browser runs, merges only reviewed files,
+and preserves failed evidence. Local8074 still serves648 until the next export.
+
+Hand/Office checkpoint validated:117 completed3D checks, original19/19, both Full
+exports and refreshed browser menu exits/movement pass. Local8074 is rebuilt.
+Raw batch's stale115 footer and independent117 census are both retained. Exact
+paired sustained60 release reports remain failed above16ms; no scope waiver.

@@ -2345,3 +2345,11 @@ v22/v19 pixel contracts are unchanged. Exact-input animation memo/query-local ph
 reuse and diagnostic workload counters are documented in their existing character/
 navigation specs. Actual-input Office acceptance is separately bounded by
 SPEC-3D-OFFICE-ACCEPTANCE.md; a test driver is not proof of a completed campaign.
+
+### Full3D hand-art continuation — 2026-11-19
+
+SPEC-3D-HAND-ART.md governs shaped cached palms/thumb roots and the unique cart's
+faceted shaft/opposing digit wrap. Original action clocks, non-cart poses, source
+transactions and physical placement remain authoritative. The extended Office
+acceptance specification permits only test-driver selection among legal live
+service endpoints. Original v22/v19 art, storage and gameplay are unchanged.

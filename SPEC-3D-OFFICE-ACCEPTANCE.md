@@ -263,3 +263,32 @@ unchanged walk caps and retain all actor identities. This is physical driver pro
 not earned Office progression or permission to rewrite retained failed reports.
 The sustained-population performance draft needs the same short-step consideration
 before adoption; a long-edge certificate alone does not prove small-step traversal.
+
+## Live service endpoints — 2026-11-19
+
+The retained short-step tour stopped at the alley can because its original guidance
+point lies inside the later-published interactive can collider. Detached native
+overlap evidence identifies `interactiveProps:4`; the player's physical refusal is
+correct. Guidance is not the only legal place to use the unchanged source service.
+
+`office_endpoint_driver.gd` extends the original acceptance probe. Only route and
+claim visits may choose the original approach or32 alternatives: eight headings on
+source radii24/36/48/56px, nearest first with stable ties. Every endpoint must pass
+the strict58px source range, existing2.30m physical reach, real capsule clearance,
+live peer clearance, conservative static clearance and actual eye-to-target ray.
+It never changes the player, actors, service geometry or source progression.
+
+At most33 endpoint proofs and four existing resident-route attempts share each750ms
+window, including local corner joins. Existing initial-plus32 replans,80-node graph,
+20s no-progress and120s leg deadlines remain. Cached endpoints are revalidated;
+unchanged failed-aim positions are suppressed. Defense temporarily suspends the
+service override. Only the live resolver followed by ordinary E proves success.
+
+The focused probe loads the unchanged earned save through the actual remember
+button. Its diagnostic mode confirms the collider and legal alternatives; `--walk`
+must reach the current stop by input and advance its cursor exactly once. Neither
+mode grants progress. A separate complete native tour exercises the inherited five
+phases. Its original300cash/6copper fixture is disclosed, so it proves progression
+and persistence, not resource earning, all claims, Kingdom or browser acceptance.
+The failed earlier tours remain retained. The endpoint contract is a separate gate;
+the original1138-check routing contract remains intact.

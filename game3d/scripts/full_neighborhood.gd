@@ -44,6 +44,7 @@ var _departure_pads: Array[Dictionary] = []
 var _leash_post_marker: Node3D
 var dynamic_fixture_motion: bool = false
 var _fixture_motion_data: Dictionary = {"washers":[]}
+static var _cart_handle_meshes: Dictionary = {}
 
 
 func build() -> void:
@@ -685,7 +686,8 @@ func _build_prop(prop: Dictionary, index: int) -> void:
 					_box("cart_metal_wire", Vector3(width, 0.025, 0.025), at + Vector3(0, 0.45 + slot * 0.10, side * depth * 0.47), "8c9480")
 				_cylinder("cart_wheel", 0.13, 0.14, at + Vector3(side * width * 0.38, 0.14, depth * 0.32), "303c32", false, 8)
 			_box("cart_basket_collision", Vector3(width, 0.55, depth), at + Vector3(0, 0.63, 0), "7b8574", parked_solid).visible = false
-			_box("cart_rubber_handle", Vector3(width, 0.09, 0.09), at + Vector3(0, 1.02, depth * 0.6), "465547")
+			if kind == "cart": _cart_handle(at + Vector3(0, 1.02, depth * 0.6),width)
+			else: _box("cart_rubber_handle", Vector3(width, 0.09, 0.09), at + Vector3(0, 1.02, depth * 0.6), "465547")
 			if kind == "cart":
 				for child_index: int in range(_record_start, get_child_count()):
 					var child: Node = get_child(child_index)
@@ -810,6 +812,44 @@ func _build_prop(prop: Dictionary, index: int) -> void:
 			_breakin_shell(prop, at, width, depth, rust)
 		_:
 			push_error("Unimplemented full-world prop type: " + kind)
+
+
+func _cart_handle(at: Vector3, width: float) -> MeshInstance3D:
+	# One original shaft surface, same center/length/material and conservative physics.
+	if not _cart_handle_meshes.has(width):
+		var vertices := PackedVector3Array()
+		var normals := PackedVector3Array()
+		var indices := PackedInt32Array()
+		for segment: int in range(12):
+			var a: float = TAU*float(segment)/12.0
+			var b: float = TAU*float(segment+1)/12.0
+			var p := Vector3(-width*0.5,cos(a)*0.019,sin(a)*0.019)
+			var q := Vector3(-width*0.5,cos(b)*0.019,sin(b)*0.019)
+			var r := p+Vector3(width,0,0)
+			var s := q+Vector3(width,0,0)
+			var normal: Vector3 = (q-p).cross(r-p).normalized()
+			var start: int = vertices.size()
+			vertices.append_array(PackedVector3Array([p,r,q,s]))
+			normals.append_array(PackedVector3Array([normal,normal,normal,normal]))
+			indices.append_array(PackedInt32Array([start,start+1,start+2,start+1,start+3,start+2]))
+			for side: int in [-1,1]:
+				var center := Vector3(float(side)*width*0.5,0,0)
+				var first: Vector3 = p if side < 0 else s
+				var second: Vector3 = q if side < 0 else r
+				start = vertices.size()
+				vertices.append_array(PackedVector3Array([center,first,second]))
+				normal = Vector3(float(side),0,0)
+				normals.append_array(PackedVector3Array([normal,normal,normal]))
+				indices.append_array(PackedInt32Array([start,start+1,start+2]))
+		var arrays: Array = []; arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = vertices; arrays[Mesh.ARRAY_NORMAL] = normals; arrays[Mesh.ARRAY_INDEX] = indices
+		var mesh := ArrayMesh.new(); mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+		_cart_handle_meshes[width] = mesh
+	var item := MeshInstance3D.new(); item.name = "cart_rubber_handle"
+	item.mesh = _cart_handle_meshes[width] as Mesh
+	item.material_override = _mat("465547",0.94,0.0,_surface("cart_rubber_handle"))
+	item.position = at; item.set_meta("cart_part","handle"); add_child(item)
+	return item
 
 
 func _wreck(at: Vector3, width: float, depth: float, color: String) -> void:

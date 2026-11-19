@@ -213,3 +213,19 @@ Office correction stays under .build/3d/office-service-endpoint-draft until this
 input checkpoint is committed. Actual browser hand/cart16 phases pass at both
 desktop sizes, with synthetic input limits disclosed. Feedback/Companion/hand-art
 and sustained60 drafts cannot mutate this frozen production tree or launch engines.
+
+### Hand-art/Office checkpoint and bounded follow-ups
+
+648 is pushed. Root has promoted three hand/cart art owners, their finite tests,
+and the derived legal-endpoint Office test driver. Native Office231.446s passes
+with disclosed resource fixture; hand native and actual Web16-phase checks pass
+both sizes. Complete regression/export and commit/push remain required before
+calling this new checkpoint shipped.
+
+World-effects18-recipe pool/bridge and Companion guard remain isolated pending
+actual source-context visual acceptance. The first core rendering run preserved
+two fixture failures (first deferred HUD layout and distant wall viewpoint). Dust/
+motes are a separate pinned overlay; their first engine test retained a variate
+comparison failure while source RNG-state/derived fields passed. Full parity and
+60-actor16ms acceptance remain open. Same frozen workload is being measured on
+8bcd and648 with original production hashes separated from test overlays.

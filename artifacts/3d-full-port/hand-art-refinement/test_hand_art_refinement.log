@@ -1,0 +1,1958 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+ERROR: all existing mesh paths retained without added mesh leaves
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _geometry (res://tests/test_hand_art_refinement.gd:103)
+       [2] _run (res://tests/test_hand_art_refinement.gd:397)
+HAND ART METRICS: baseline=4984 triangles; candidate=5368; surfaces=133; materials=51
+ERROR: rest fists/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait fists/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest fists/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait fists/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest fists/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait fists/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/false/1 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack fists/true/1 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest pipe/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait pipe/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest pipe/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait pipe/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest pipe/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait pipe/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack pipe/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest brick/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait brick/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest brick/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait brick/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest brick/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait brick/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack brick/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest cart_wheel/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait cart_wheel/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest cart_wheel/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait cart_wheel/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest cart_wheel/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait cart_wheel/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack cart_wheel/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest shoe/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait shoe/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest shoe/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait shoe/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest shoe/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait shoe/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack shoe/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest baguette/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait baguette/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest baguette/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait baguette/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest baguette/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait baguette/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack baguette/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest microphone/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait microphone/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest microphone/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait microphone/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest microphone/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait microphone/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack microphone/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest knife/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait knife/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest knife/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait knife/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest knife/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait knife/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack knife/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest broken_bottle/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait broken_bottle/ preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest broken_bottle/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait broken_bottle/propane_torch preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: rest broken_bottle/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:154)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: stressed gait broken_bottle/crowbar preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:156)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/false/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.02 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.035 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.055 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.12 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.22 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.34 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: attack broken_bottle/true/0 at 0.45 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:165)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture interact/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture interact/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture interact/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture interact/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture interact/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture pickup/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture pickup/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture pickup/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture pickup/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture pickup/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture receipt/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture receipt/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture receipt/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture receipt/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture receipt/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture eat/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture eat/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture eat/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture eat/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture eat/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture smoke/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture smoke/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture smoke/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture smoke/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture smoke/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture equip/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture equip/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture equip/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture equip/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture equip/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture phone/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture phone/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture phone/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture phone/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture phone/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture bench/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture bench/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture bench/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture bench/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture bench/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture dumpster/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture dumpster/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture dumpster/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture dumpster/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture dumpster/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture kick/0.0 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture kick/0.2 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture kick/0.5 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture kick/0.8 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: gesture kick/1.001 preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _unchanged_motion (res://tests/test_hand_art_refinement.gd:175)
+       [3] _run (res://tests/test_hand_art_refinement.gd:399)
+ERROR: cart arm solve preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:367)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+CART PAD rest left index gap=0.00223568151705
+CART PAD rest left middle gap=0.00207514828071
+CART PAD rest left ring gap=0.00257034879178
+CART PAD rest left little gap=0.00266237766482
+CART PAD rest right index gap=0.00223568128422
+CART PAD rest right middle gap=0.00207514688373
+CART PAD rest right ring gap=0.00257035042159
+CART PAD rest right little gap=0.00266237766482
+ERROR: cart peak preserves non-finger transforms preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:377)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+ERROR: active cart fist restores exact accepted contact finger pose
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _cart (res://tests/test_hand_art_refinement.gd:380)
+       [2] _run (res://tests/test_hand_art_refinement.gd:400)
+CART PAD during right attack left index gap=0.00223568151705
+CART PAD during right attack left middle gap=0.00207514828071
+CART PAD during right attack left ring gap=0.00257034879178
+CART PAD during right attack left little gap=0.00266237766482
+ERROR: cart recovery state preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:384)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+CART PAD recovery right index gap=0.00223568128422
+CART PAD recovery right middle gap=0.00207514688373
+CART PAD recovery right ring gap=0.00257035042159
+CART PAD recovery right little gap=0.00266237766482
+ERROR: level-look grip release preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:387)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+ERROR: cart arm solve preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:367)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+CART PAD rest left index gap=0.00223568151705
+CART PAD rest left middle gap=0.00207514828071
+CART PAD rest left ring gap=0.00257034879178
+CART PAD rest left little gap=0.00266237766482
+CART PAD rest right index gap=0.00223568128422
+CART PAD rest right middle gap=0.00207514688373
+CART PAD rest right ring gap=0.00257035042159
+CART PAD rest right little gap=0.00266237766482
+ERROR: cart peak preserves non-finger transforms preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:377)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+ERROR: active cart fist restores exact accepted contact finger pose
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _cart (res://tests/test_hand_art_refinement.gd:380)
+       [2] _run (res://tests/test_hand_art_refinement.gd:400)
+CART PAD during right attack left index gap=0.00223568151705
+CART PAD during right attack left middle gap=0.00207514828071
+CART PAD during right attack left ring gap=0.00257034879178
+CART PAD during right attack left little gap=0.00266237766482
+ERROR: cart recovery state preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:384)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+CART PAD recovery right index gap=0.00223568128422
+CART PAD recovery right middle gap=0.00207514688373
+CART PAD recovery right ring gap=0.00257035042159
+CART PAD recovery right little gap=0.00266237766482
+ERROR: level-look grip release preserves exact stable transforms and visibility
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _check (res://tests/test_hand_art_refinement.gd:18)
+       [1] _same_pose (res://tests/test_hand_art_refinement.gd:92)
+       [2] _cart (res://tests/test_hand_art_refinement.gd:387)
+       [3] _run (res://tests/test_hand_art_refinement.gd:400)
+DRAFT HAND ART REFINEMENT: FAIL; 1428 checks; 3 groups. Geometry/contract evidence, not visual acceptance.

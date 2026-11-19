@@ -1,19 +1,23 @@
-# Rock Bottom — The Block in 3D
+# Rock Bottom — first-person 3D
 
-A first-person desktop slice, with a secondary browser export from the same Godot project.
-This is the start of the port, not full v22 parity. The existing 2D release remains at `../index.html`.
+The active full-neighborhood port targets first-person Windows play and a secondary
+browser export. Full campaign/platform validation and the60-actor frame budget
+remain in progress. The original2D release stays at `../index.html`; the earlier
+Block-only slice remains a separate build and save namespace.
 
 ## Play the local builds
 
-- Windows: `../.build/3d/windows/RockBottom.exe` (standalone, embedded data).
-- Browser: serve `../.build/3d/web/` over HTTP and open its `index.html` in Chromium or Firefox.
-  To start a hidden background preview: `pwsh -File game3d/tools/serve.ps1` from the repo root.
-  From the repository root: `python -m http.server 8073 --bind 127.0.0.1 --directory .build/3d/web`.
-  Open `http://127.0.0.1:8073/`. WebAssembly/WebGL2 are required; double-clicking the HTML is not supported.
-- Editor: open `project.godot` in **Godot 4.5.1 stable**, then run the main scene.
+- Windows: `../.build/3d/full/windows/RockBottom.exe` (standalone, embedded data).
+- Browser: from the repo root run `pwsh -File game3d/tools/serve.ps1 -Entry Full -Port 8074`.
+  Open `http://127.0.0.1:8074/`. WebAssembly/WebGL2 are required; double-clicking HTML is unsupported.
+- Build both: `pwsh -File game3d/tools/build.ps1 -Entry Full`.
+- Editor: open `project.godot` in **Godot4.5.1 stable**, then run `full_main.tscn`.
+- Earlier slice: omit `-Entry Full`; its exports stay in `.build/3d/windows/` and
+  `.build/3d/web/`, with the separate preview at8073.
 
-WASD moves, mouse looks, Shift sprints, E interacts, left mouse punches, I opens pockets,
-Escape pauses/releases capture, M mutes. Start or resume by clicking. Conversations pause the world.
+WASD or arrow keys move, mouse looks, Shift sprints, E interacts, left mouse or
+Space attacks, I opens pockets, Q opens bad ideas, Escape pauses/releases capture,
+and M mutes. Start or resume by clicking. Conversations pause the world.
 If the browser refuses mouse capture, hold the right mouse button and drag to look; movement,
 interaction and left-click punching still work. In the browser, Escape only pauses; click
 **continue.** to resume. Refresh the page after rebuilding the Web export.
@@ -98,8 +102,8 @@ This imports the project and runs production simulation, scene integration and a
 on engine error text as well as nonzero exits, because Godot can report a script error with exit0.
 The original suite remains `node tools/run-gates.mjs`.
 
-The full-port runner now registers75 checks:47 engine suites and28 source/provenance/
-parity checks, in addition to a clean import. It exercises the real full scene,
+The full-port runner registers its engine and source/provenance/parity checks in
+`tests/run-gates.ps1`, including a clean import. It exercises the real full scene,
 physical source world, full cast, combat/bosses, navigation, travel, dialogue,
 robbery, Karaoke, communications and day model. The32-feature/585-handler ledger
 is `data/parity_manifest.json`; `node tools/3d-parity-gate.mjs --complete`

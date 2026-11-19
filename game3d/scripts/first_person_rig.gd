@@ -24,6 +24,7 @@ const COATS := {&"trench":{"body":"8a3a3a","trim":"d4c896","fullness":1.02},
 	&"bathrobe":{"body":"d4c896","trim":"d488d4","fullness":1.10},
 	&"parka":{"body":MOLD,"trim":"e8c040","fullness":1.08}}
 const FOOTWEAR := [&"airpods",&"crocs",&"walmart_sneak",&"vibrams"]
+const CART_DIGIT_ANGLES := [Vector3(0.400,0.900,0.466),Vector3(0.326,1.099,0.897),Vector3(0.303,1.163,0.244),Vector3(0.344,0.686,0.644)]
 static var _meshes: Dictionary = {}
 static var _materials: Dictionary = {}
 
@@ -360,7 +361,7 @@ func _apply_pose() -> void:
 			# surround the real handle; no second handle or autonomous IK clock.
 			arm.rotation = Vector3(0.10,0.0,-float(side)*0.04)
 			forearm.rotation.x = 0.0; wrist.rotation = Vector3(0.15,0,0)
-			_pose_fingers(rig,side,0.83)
+			_pose_cart_fingers(rig,side)
 			var local_grip := Vector3(0,-0.036,-0.082)
 			var current: Vector3 = arm.transform*forearm.transform*wrist.transform*local_grip
 			arm.position += Vector3(_cart_grips[grip_key])-current
@@ -395,6 +396,20 @@ func _pose_fingers(rig: Dictionary, side: int, amount: float) -> void:
 	thumb_tip.rotation.x = -lerpf(0.20,0.90,curl)
 
 
+func _pose_cart_fingers(rig: Dictionary, side: int) -> void:
+	# Fixed wrap around the .038m shaft; the source handle marker stays unchanged.
+	# Finger lengths differ, so one common tool curl cannot place all pads on it.
+	var fingers: Array = rig.fingers
+	for index: int in range(fingers.size()):
+		var angles: Vector3 = CART_DIGIT_ANGLES[index]
+		var chain: Array = fingers[index]
+		(chain[0] as Node3D).rotation = Vector3(-angles.x,0,0)
+		(chain[1] as Node3D).rotation.x = -angles.y
+		(chain[2] as Node3D).rotation.x = -angles.z
+	(rig.thumb as Node3D).rotation = Vector3(-0.15,-float(side),-float(side)*0.20)
+	(rig.thumb_tip as Node3D).rotation.x = -0.40
+
+
 func _relax_fingers(rig: Dictionary, side: int, weight: float) -> void:
 	# An open, resting cascade rather than four parallel fingers or a guard fist.
 	# No mesh work, new clock or change to the occupied-hand grip endpoints.
@@ -420,7 +435,7 @@ func _build() -> void:
 		_link(forearm,Vector3(0,0.166,-0.165),Vector3(0,0.192,-0.192),0.053,0.047,"555d34","cuff")
 		for cloth: MeshInstance3D in [arm.get_node("upper_sleeve"),forearm.get_node("sleeve"),forearm.get_node("cuff")]:
 			_sleeves.append({"node":cloth,"material":cloth.material_override,"scale":cloth.scale,"trim":cloth.name == &"cuff"})
-		_shape(wrist,[Vector4(0.032,0.038,0.026,0.024),Vector4(0.035,0.018,0.023,0.021),Vector4(0.037,-0.012,0.023,0.022),Vector4(0.051,-0.040,0.025,0.024),Vector4(0.052,-0.069,0.022,0.020),Vector4(0.045,-0.083,0.016,0.017)],SKIN,"palm",0.62)
+		_palm(wrist,side)
 		var fingers: Array = []
 		var lengths: Array[float] = [0.083,0.096,0.089,0.071]
 		var names: Array[String] = ["index","middle","ring","little"]
@@ -438,7 +453,7 @@ func _build() -> void:
 			_box(tip,Vector3(0,radius*0.73,-c*0.54),Vector3(radius*1.15,0.0015,c*0.48),"b3a077","nail")
 			fingers.append([first,middle,tip])
 		var thumb := _pivot(wrist,"thumb",Vector3(-float(side)*0.046,-0.008,-0.028))
-		_digit(thumb,0.035,0.016,"thumb_base")
+		_shape(thumb,[Vector4(0.020,0.003,0.012,0.015),Vector4(0.020,0,0.0125,0.015),Vector4(0.0175,-0.014,0.013,0.014),Vector4(0.0130,-0.0294,0.011,0.0117),Vector4(0.00752,-0.035,0.00672,0.00688)],SKIN,"thumb_base",0.76)
 		var thumb_tip := _pivot(thumb,"tip",Vector3(0,0,-0.031))
 		_digit(thumb_tip,0.028,0.0125,"thumb_tip")
 		_box(thumb_tip,Vector3(0,0.009,-0.017),Vector3(0.014,0.0015,0.014),"b3a077","nail")
@@ -763,6 +778,57 @@ static func _box(parent: Node3D, at: Vector3, size: Vector3, color: String, part
 		mesh.size = size
 		_meshes[key] = mesh
 	_part(parent,_meshes[key] as Mesh,color,part_name).position = at
+
+
+static func _palm(parent: Node3D, side: int) -> void:
+	var key := "sculpted_palm_v1:"+str(side)
+	if not _meshes.has(key):
+		# The lower/contact surface retains its authored profile; extra volume sits
+		# on the thumb heel and dorsal knuckle planes, not inside held objects.
+		var profiles: Array[Vector4] = [Vector4(0.032,0.038,0.026,0.024),Vector4(0.035,0.018,0.023,0.021),Vector4(0.037,-0.012,0.023,0.022),Vector4(0.045,-0.028,0.024,0.023),Vector4(0.051,-0.040,0.025,0.024),Vector4(0.0515,-0.055,0.0235,0.022),Vector4(0.052,-0.069,0.022,0.020),Vector4(0.045,-0.083,0.016,0.017)]
+		var heel: Array[float] = [0,0,0.002,0.006,0.006,0.003,0,0]
+		var ridge: Array[float] = [0,0,0,0,0,0.45,1.0,0.35]
+		var heights: Array[float] = [0.003,0.004,0.0035,0.0025]
+		var vertices := PackedVector3Array(); var normals := PackedVector3Array(); var indices := PackedInt32Array()
+		const SIDES := 24
+		for row: int in range(profiles.size()):
+			var p: Vector4 = profiles[row]
+			for column: int in range(SIDES):
+				var angle: float = TAU*float(column)/float(SIDES)
+				var s: float = sin(angle); var c: float = cos(angle)
+				var x: float = signf(s)*pow(absf(s),0.62)*p.x
+				var y: float = signf(c)*pow(absf(c),0.62)*(p.z if c > 0.0 else p.w)
+				if c > 0.0:
+					var knuckle: float = 0.0
+					for digit: int in range(4):
+						var center: float = float(side)*(-0.038+float(digit)*0.025)
+						knuckle = maxf(knuckle,exp(-pow((x-center)/0.010,2.0))*heights[digit])
+					y += knuckle*ridge[row]*c*c
+					x -= float(side)*heel[row]*pow(maxf(0.0,-float(side)*s),2.0)*c
+				vertices.append(Vector3(x,y,p.y))
+		normals.resize(vertices.size())
+		for row: int in range(profiles.size()-1):
+			for column: int in range(SIDES):
+				var a: int = row*SIDES+column; var b: int = row*SIDES+(column+1)%SIDES
+				var c: int = (row+1)*SIDES+column; var d: int = (row+1)*SIDES+(column+1)%SIDES
+				for face: Vector3i in [Vector3i(a,b,c),Vector3i(b,d,c)]:
+					var normal: Vector3 = (vertices[face.y]-vertices[face.x]).cross(vertices[face.z]-vertices[face.x])
+					for vertex: int in [face.x,face.y,face.z]: normals[vertex] += normal
+					indices.append_array(PackedInt32Array([face.z,face.y,face.x]))
+		for vertex: int in range(normals.size()): normals[vertex] = normals[vertex].normalized()
+		for end: int in [0,profiles.size()-1]:
+			var center := Vector3(0,0,profiles[end].y)
+			var normal := Vector3.BACK if end == 0 else Vector3.FORWARD
+			for column: int in range(SIDES):
+				var a: Vector3 = vertices[end*SIDES+column]; var b: Vector3 = vertices[end*SIDES+(column+1)%SIDES]
+				var start: int = vertices.size()
+				vertices.append_array(PackedVector3Array([center,b,a] if end == 0 else [center,a,b]))
+				normals.append_array(PackedVector3Array([normal,normal,normal]))
+				indices.append_array(PackedInt32Array([start+2,start+1,start]))
+		var arrays: Array = []; arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = vertices; arrays[Mesh.ARRAY_NORMAL] = normals; arrays[Mesh.ARRAY_INDEX] = indices
+		var mesh := ArrayMesh.new(); mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays); _meshes[key] = mesh
+	_part(parent,_meshes[key] as Mesh,SKIN,"palm")
 
 
 static func _digit(parent: Node3D, length: float, radius: float, part_name: String) -> void:

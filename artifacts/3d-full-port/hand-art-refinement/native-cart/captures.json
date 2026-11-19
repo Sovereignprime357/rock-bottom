@@ -1,0 +1,823 @@
+{
+	"camera": {
+		"fov": 78,
+		"near": 0.06,
+		"size": [
+			1280,
+			720
+		]
+	},
+	"captures": [
+		{
+			"action": "",
+			"actual_geometry_physics_clear": null,
+			"actual_vertex_bounds": "[P: (-2.0148, 0.07, 30.4), S: (0.9896, 0.969, 0.898998)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.786318, 0.0, -0.617822), Y: (-0.226058, 0.930656, -0.287711), Z: (0.574979, 0.365896, 0.731792), O: (0.68, 1.95, 33.6)]",
+			"collision_active": true,
+			"conservative_mesh_aabb_bounds": "[P: (-2.0148, 0.07, 30.4), S: (0.9896, 0.969, 0.898998)]",
+			"file": "parked_original.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 0,
+				"right": 0
+			},
+			"mounted": false,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": false,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 0,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1050.0,
+				840.0
+			],
+			"view_bounds": "[P: (-2.0148, 0.07, 30.4), S: (0.9896, 0.969, 0.898998)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": null,
+			"actual_vertex_bounds": "[P: (-2.0148, 0.07, 30.4), S: (0.9896, 0.969, 0.898998)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.233933, 0.0, 0.972253), Y: (0.67202, 0.722664, -0.161694), Z: (-0.702612, 0.691199, 0.169055), O: (-2.678823, 1.69, 31.07882)]",
+			"collision_active": true,
+			"conservative_mesh_aabb_bounds": "[P: (-2.0148, 0.07, 30.4), S: (0.9896, 0.969, 0.898998)]",
+			"file": "parked_approach.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 891,
+				"right": 945
+			},
+			"mounted": false,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": false,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 0,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				971.029418945313,
+				1602.97058105469
+			],
+			"view_bounds": "[P: (-2.0148, 0.07, 30.4), S: (0.9896, 0.969, 0.898998)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (-2.678823, 1.69, 31.07882)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"file": "mounted_forward.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 891,
+				"right": 945
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 7,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				971.029418945313,
+				1602.97058105469
+			],
+			"view_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.764842, -0.644218), Z: (0.0, 0.644218, 0.764842), O: (-2.678823, 1.69, 31.07882)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"file": "mounted_down_look.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516230203211308,
+				"right": 0.0516230203211308
+			},
+			"grips": {
+				"left": "(-0.25, -0.20322, -0.798748)",
+				"right": "(0.25, -0.20322, -0.798748)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 13,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				971.029418945313,
+				1602.97058105469
+			],
+			"view_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.796084, 0.605186), Z: (0.0, -0.605186, 0.796084), O: (-2.678823, 1.69, 31.07882)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"file": "mounted_up_release.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 892,
+				"right": 945
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 19,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				971.029418945313,
+				1602.97058105469
+			],
+			"view_bounds": "[P: (-3.158823, 0.01, 30.57982), S: (0.96, 1.029, 0.898998)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.852525, -0.522687), Z: (0.0, 0.522687, 0.852525), O: (0.0, 1.69, -0.990007)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.017036, -1.489007), S: (0.96, 1.056036, 0.899)]",
+			"file": "mounted_rolling.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516236685216427,
+				"right": 0.0516236685216427
+			},
+			"grips": {
+				"left": "(-0.25, -0.320302, -0.759412)",
+				"right": "(0.25, -0.320302, -0.759412)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 101,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				801.249816894531
+			],
+			"view_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.900447, -0.434966), Z: (0.0, 0.434966, 0.900447), O: (0.0, 1.69, -0.990007)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.017036, -1.489007), S: (0.96, 1.056036, 0.899)]",
+			"file": "mounted_stationary.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516234934329987,
+				"right": 0.0516236238181591
+			},
+			"grips": {
+				"left": "(-0.25, -0.394516, -0.723641)",
+				"right": "(0.25, -0.394516, -0.723641)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 137,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				801.249816894531
+			],
+			"view_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.900447, -0.434966), Z: (0.0, 0.434966, 0.900447), O: (0.0, 1.69, -0.990007)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.017036, -1.489007), S: (0.96, 1.056036, 0.899)]",
+			"file": "mounted_weapon_stowed.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516234934329987,
+				"right": 0.0516236238181591
+			},
+			"grips": {
+				"left": "(-0.25, -0.394516, -0.723641)",
+				"right": "(0.25, -0.394516, -0.723641)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 140,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				801.249816894531
+			],
+			"view_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"attack_weapon": "pipe",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.900447, -0.434966), Z: (0.0, 0.434966, 0.900447), O: (0.0, 1.69, -0.990007)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.017036, -1.489007), S: (0.96, 1.056036, 0.899)]",
+			"file": "mounted_weapon_contact.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516234934329987,
+				"right": 0.130462989211082
+			},
+			"grips": {
+				"left": "(-0.25, -0.394516, -0.723641)",
+				"right": "(0.25, -0.394516, -0.723641)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.160714285714286,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 146,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				801.249816894531
+			],
+			"view_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.900447, -0.434966), Z: (0.0, 0.434966, 0.900447), O: (0.0, 1.69, -0.990007)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.017036, -1.489007), S: (0.96, 1.056036, 0.899)]",
+			"file": "mounted_weapon_regrip.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516234934329987,
+				"right": 0.0516234934329987
+			},
+			"grips": {
+				"left": "(-0.25, -0.394516, -0.723641)",
+				"right": "(0.25, -0.394516, -0.723641)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 188,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				801.249816894531
+			],
+			"view_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "phone",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.900447, -0.434966), Z: (0.0, 0.434966, 0.900447), O: (0.0, 1.69, -0.990007)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.017036, -1.489007), S: (0.96, 1.056036, 0.899)]",
+			"file": "mounted_phone_release.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516234934329987,
+				"right": 0.277140885591507
+			},
+			"grips": {
+				"left": "(-0.25, -0.394516, -0.723641)",
+				"right": "(0.25, -0.394516, -0.723641)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.409090909090909,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 210,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				801.249816894531
+			],
+			"view_bounds": "[P: (-0.48, 0.013681, -1.489007), S: (0.96, 1.025319, 0.899)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": false,
+			"actual_vertex_bounds": "[P: (0.0, 0.0, 0.0), S: (0.0, 0.0, 0.0)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.707107, 0.0, -0.707107), Y: (-0.318788, 0.892607, -0.318788), Z: (0.631169, 0.450835, 0.631169), O: (4.2, 3.7, 4.2)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (0.0, 0.0, 0.0), S: (0.0, 0.0, 0.0)]",
+			"expected_hidden_uncertifiable_art": true,
+			"file": "blocked_drop.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 0,
+				"right": 0
+			},
+			"intentional_player_enclosure": true,
+			"mounted": true,
+			"original_art_visible": false,
+			"original_resources_unchanged": true,
+			"outcome": {
+				"ok": false,
+				"reason": "blocked_cart_drop"
+			},
+			"phase": 0.0,
+			"presentation_clear": false,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 279,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1000.0,
+				"y": 1600.0
+			},
+			"source_player": [
+				1038.0,
+				826.0
+			],
+			"view_bounds": "[P: (0.0, 0.0, 0.0), S: (0.0, 0.0, 0.0)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": null,
+			"actual_vertex_bounds": "[P: (0.6252, 0.07, -0.24), S: (0.9896, 0.969, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.786318, 0.0, -0.617822), Y: (-0.226058, 0.930656, -0.287711), Z: (0.574979, 0.365896, 0.731792), O: (3.32, 1.95, 2.96)]",
+			"collision_active": true,
+			"conservative_mesh_aabb_bounds": "[P: (0.6252, 0.07, -0.24), S: (0.9896, 0.969, 0.899)]",
+			"file": "successful_drop.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 0,
+				"right": 0
+			},
+			"mounted": false,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"outcome": {
+				"mounted": false,
+				"ok": true,
+				"preferred_source_drop": "(1042.0, 834.0)",
+				"source_drop": "(1066.0, 834.0)"
+			},
+			"phase": 0.0,
+			"presentation_clear": false,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 282,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1066.0,
+				"y": 834.0
+			},
+			"source_player": [
+				1038.0,
+				826.0
+			],
+			"view_bounds": "[P: (0.6252, 0.07, -0.24), S: (0.9896, 0.969, 0.899)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": null,
+			"actual_vertex_bounds": "[P: (0.6252, 0.07, -0.24), S: (0.9896, 0.969, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.786318, 0.0, -0.617822), Y: (-0.226058, 0.930656, -0.287711), Z: (0.574979, 0.365896, 0.731792), O: (3.32, 1.95, 2.96)]",
+			"collision_active": true,
+			"conservative_mesh_aabb_bounds": "[P: (0.6252, 0.07, -0.24), S: (0.9896, 0.969, 0.899)]",
+			"file": "same_process_restored.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 0,
+				"right": 0
+			},
+			"mounted": false,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": false,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 282,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1066.0,
+				"y": 834.0
+			},
+			"source_player": [
+				1038.0,
+				826.0
+			],
+			"view_bounds": "[P: (0.6252, 0.07, -0.24), S: (0.9896, 0.969, 0.899)]",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.0, 0.01, 0.061), S: (0.96, 1.029, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.825336, -0.564642), Z: (0.0, 0.564642, 0.825336), O: (0.48, 1.69, 0.56)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.0, 0.01, 0.061), S: (0.96, 1.029, 0.899)]",
+			"file": "death_retains_mount.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516236871480942,
+				"right": 0.0516236051917076
+			},
+			"grips": {
+				"left": "(-0.25, -0.281947, -0.774471)",
+				"right": "(0.25, -0.281947, -0.774471)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.0)",
+			"presentation_queries": 287,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1066.0,
+				"y": 834.0
+			},
+			"source_player": [
+				1050.0,
+				840.0
+			],
+			"view_bounds": "[P: (-0.0, 0.01, 0.061), S: (0.96, 1.029, 0.899)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.48, 0.013201, -1.24), S: (0.96, 1.0258, 0.899)]",
+			"attack_weapon": "",
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.852525, -0.522687), Z: (0.0, 0.522687, 0.852525), O: (0.0, 1.69, -0.787908)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.48, -0.015468, -1.24), S: (0.96, 1.054468, 0.899)]",
+			"file": "narrow_wall_front.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.0516236685216427,
+				"right": 0.0516236685216427
+			},
+			"grips": {
+				"left": "(-0.25, -0.34482, -0.719422)",
+				"right": "(0.25, -0.34482, -0.719422)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 1040,
+				"right": 1040
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(0.0, 0.0, 0.046908)",
+			"presentation_queries": 384,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1066.0,
+				"y": 834.0
+			},
+			"source_player": [
+				1038.0,
+				806.302307128906
+			],
+			"view_bounds": "[P: (-0.48, 0.013201, -1.24), S: (0.96, 1.0258, 0.899)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.186896, 0.015841, -2.031329), S: (1.314511, 1.023159, 1.314511)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.707107, 0.0, 0.707107), Y: (0.369596, 0.852525, -0.369596), Z: (-0.602826, 0.522687, 0.602826), O: (0.667998, 1.69, -1.339072)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.186896, -0.022689, -2.031329), S: (1.314511, 1.061689, 1.314511)]",
+			"file": "diagonal_wall_skimming.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+				"left": 0.051623709499836,
+				"right": 0.051623672246933
+			},
+			"grips": {
+				"left": "(-0.414502, -0.406285, -0.61917)",
+				"right": "(0.085498, -0.406285, -0.61917)"
+			},
+			"hand_vertices_in_frustum": {
+				"left": 980,
+				"right": 980
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(-0.23264, 0.0, 0.0)",
+			"presentation_queries": 486,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1066.0,
+				"y": 834.0
+			},
+			"source_player": [
+				1054.69995117188,
+				792.523193359375
+			],
+			"view_bounds": "[P: (-0.186896, 0.015841, -2.031329), S: (1.314511, 1.023159, 1.314511)]",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"actual_geometry_physics_clear": true,
+			"actual_vertex_bounds": "[P: (-0.186896, 0.015841, -2.031329), S: (1.314511, 1.023159, 1.314511)]",
+			"attack_weapon": "",
+			"camera": "[X: (0.737154, 0.0, 0.675725), Y: (0.326945, 0.875155, -0.356667), Z: (-0.591364, 0.483843, 0.645124), O: (-1.532002, 2.4, 1.060928)]",
+			"collision_active": false,
+			"conservative_mesh_aabb_bounds": "[P: (-0.186896, -0.022689, -2.031329), S: (1.314511, 1.061689, 1.314511)]",
+			"file": "diagonal_wall_external.png",
+			"fixture_actual_vertex_overlap": false,
+			"fixture_envelope_overlap": false,
+			"grip_to_palm_m": {
+
+			},
+			"grips": {
+
+			},
+			"hand_vertices_in_frustum": {
+				"left": 0,
+				"right": 0
+			},
+			"mounted": true,
+			"original_art_visible": true,
+			"original_resources_unchanged": true,
+			"phase": 0.0,
+			"presentation_clear": true,
+			"presentation_offset": "(-0.23264, 0.0, 0.0)",
+			"presentation_queries": 486,
+			"resource_count": 17,
+			"source_cart": {
+				"h": 20.0,
+				"type": "cart",
+				"w": 24.0,
+				"x": 1066.0,
+				"y": 834.0
+			},
+			"source_player": [
+				1054.69995117188,
+				792.523193359375
+			],
+			"view_bounds": "[P: (-0.186896, 0.015841, -2.031329), S: (1.314511, 1.023159, 1.314511)]",
+			"weapon": "fists"
+		}
+	],
+	"count": 18,
+	"explicit_rolling_sweep_revolutions": 3,
+	"maximum_queries_per_pose": 3,
+	"rolling_actual_vertex_minimum_y": 0.010000005364418,
+	"scope": "Original unique cart; actual Travel and player physics; explicit rig pose. Front/diagonal evidence requires visible, independently physics-clear geometry. Actual vertex bounds are separate from conservative rotated mesh AABBs; the enclosing blocked-drop fixture deliberately reports hidden uncertifiable art."
+}

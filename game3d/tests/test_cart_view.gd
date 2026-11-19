@@ -230,7 +230,8 @@ func _adoption() -> Dictionary:
 	var visual_bounds: AABB = _geometry_bounds(view)
 	var expected_center: Vector3 = Content.to_world(Vector2(1012,1610))
 	# Original upright wheel cylinders reach beyond the frame: .96*.38+.13=.4948.
-	_check(visual_bounds.position.is_equal_approx(expected_center+Vector3(-0.4948,0.07,-0.40)) and visual_bounds.end.is_equal_approx(expected_center+Vector3(0.4948,1.065,0.525)),"actual original visible envelope includes full width, handle extension and height: "+str(visual_bounds))
+	_check(visual_bounds.position.is_equal_approx(expected_center+Vector3(-0.4948,0.07,-0.40)) and visual_bounds.end.is_equal_approx(expected_center+Vector3(0.4948,1.039,0.499)),"actual revised shaft envelope retains original wheel width and handle center: "+str(visual_bounds))
+	_check(AABB(expected_center+Vector3(-0.4948,0.07,-0.40),Vector3(0.9896,0.995,0.925)).grow(0.00001).encloses(visual_bounds),"slimmer visible art stays inside the unchanged original conservative envelope")
 	_check(adapter._cart_envelope(Vector2(1000,1600)).grow(0.00001).encloses(visual_bounds),"drop envelope contains actual original parked meshes including both exposed wheels")
 	_check(_ray_owner(world,Vector2(1000,1600)) == _owner(),"actual ray finds parked source cart")
 	var revision: int = _revision(adapter); var resources: Dictionary = _resources(view)
@@ -341,8 +342,8 @@ func _hand_grips(rig: Dictionary) -> void:
 	camera.rotation.x = -0.55
 	var handle: MeshInstance3D
 	for mesh: MeshInstance3D in _parts(rig.view):
-		if mesh.mesh is BoxMesh and mesh.mesh.size.is_equal_approx(Vector3(0.96,0.09,0.09)): handle = mesh
-	_check(handle != null,"real original handle is available for hand geometry contact")
+		if mesh.get_meta("cart_part","") == "handle" and mesh.mesh is ArrayMesh: handle = mesh
+	_check(handle != null,"real authored shaft is available for hand geometry contact")
 	var grips: Dictionary = rig.view.grip_context(camera.global_transform)
 	_check(grips.size() == 2,"looking down exposes both actual handle grips")
 	for fov: float in [0.0,-1.0,180.0,NAN,INF]: _check(rig.view.grip_context(camera.global_transform,fov,16.0/9.0).is_empty(),"invalid vertical FOV fails closed")

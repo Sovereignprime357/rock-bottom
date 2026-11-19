@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "draft": true,
+  "status": "READY for root serialized engine/render checks; unaccepted candidate",
+  "production_written": false,
+  "engine_executed": false,
+  "git_executed": false,
+  "source_copy_excludes": [
+    ".godot"
+  ],
+  "changed": {
+    "scripts/cart_view.gd": {
+      "base_sha256": "2391ee45803017d91db4253035b6dfd895a656b5b3b31999c6ebb16b18e60042",
+      "candidate_sha256": "75045b6da57ce5f1cd9d47aeb57ba1485932fe2ad2e8762a6a12a7b09ac688a7",
+      "changed_functions": [
+        "_part_kind"
+      ]
+    },
+    "scripts/first_person_rig.gd": {
+      "base_sha256": "853175ce070789e1690d6e850f5c23f506662c4415beb6435afee00f1347a827",
+      "candidate_sha256": "7c40fc0aead4285bf975a2847631685a0642822656fffb794ba604a31d4a59e2",
+      "changed_functions": [
+        "_apply_pose",
+        "_build",
+        "_palm",
+        "_pose_cart_fingers"
+      ]
+    },
+    "scripts/full_neighborhood.gd": {
+      "base_sha256": "90b401b7b96e02369ff657a9241b92e05c064f7148cffa3913622ac838e03e59",
+      "candidate_sha256": "4f36a454128a86d8d37880245378ac3bb5776cb2767fa41a10b31a422d7eb5f9",
+      "changed_functions": [
+        "_build_prop",
+        "_cart_handle"
+      ]
+    },
+    "tests/test_cart_view.gd": {
+      "base_sha256": "b6d84e0781aee7ba8e7e627a282e55c9412bb470dcec01177c5c5bf8a84f515c",
+      "candidate_sha256": "0073121f0e302f25b1308774aecd8136567a4d841395b8d92bf27e8df349b48b",
+      "changed_functions": []
+    },
+    "tests/test_viewmodel_context.gd": {
+      "base_sha256": "8f926faba80a602cc6af77761548149adf7854b9399fd771e65a69ed8ebe78f9",
+      "candidate_sha256": "27750aa7c770b1bdd35e4c89dd6115e7f25f038dd33192130bf63c8c0be7fe61",
+      "changed_functions": []
+    }
+  },
+  "new_files": {
+    "tests/test_hand_art_refinement.gd": "124d4b33c49fb8fd3727f51e2988a3dd621f720f6c5578623176c5bf9c63dd07",
+    "tests/hand_art_refinement_probe.gd": "1b5876aedb0499c815a0cba8be0189239d718356baa9d804afb3e5f83030d86d",
+    "tests/fixtures/hand_art_baseline_rig.gd": "9ff913f6778f73a265d007dbb32388c87c37a94932ccf8152f75b8996dbdb3d6"
+  },
+  "superseded_assertions": [
+    {
+      "file": "tests/test_viewmodel_context.gd",
+      "function": "_occupied_pose_preservation",
+      "old": "Exact generic .83 curl for cart",
+      "new": "Exact same local marker; real opposed thumb+3 pads / palm exclusion in focused gate. Weapon/tool/peak-fist pins unchanged."
+    },
+    {
+      "file": "tests/test_cart_view.gd",
+      "function": "_adoption",
+      "old": "Old visible maximum y1.065/z.525",
+      "new": "Revised y1.039/z.499 plus containment by the full old .9896x.995x.925 visible envelope. Physical queries remain original."
+    },
+    {
+      "file": "tests/test_cart_view.gd",
+      "function": "_hand_grips",
+      "old": "Identify only BoxMesh(.96,.09,.09)",
+      "new": "Identify authored ArrayMesh with cart_part=handle; actual surface/bounds checked independently. No broad distance tolerance changed."
+    }
+  ],
+  "authority_invariants": [
+    "All existing gameplay owners, records, collision shapes, navigation, conservative placement envelope unchanged",
+    "All non-cart Rig pose/action bodies unchanged; exact marker/arm/wrist cart solve unchanged",
+    "One unique-cart mesh replaced, six husks unchanged; no extra mesh nodes/surfaces/materials",
+    "Original hand baseline fixture only renames both self-class references"
+  ],
+  "executed_checks": [
+    "Node source staging excluding .godot",
+    "Offline actual-profile coordinate calibration (not engine evidence)",
+    "Static unchanged-function / approved-file / original-production-hash guards"
+  ],
+  "pending_checks": [
+    "Godot import and focused actual triangle gate",
+    "Legacy hand/context/gear/cart gates",
+    "Native18 focused images and existing93 context plus gear/cart views",
+    "Real Web16 phases at1280x720 and960x540",
+    "Human visual approval"
+  ]
+}

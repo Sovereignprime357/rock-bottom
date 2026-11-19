@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "workload_version": "sustained60_normal_input_v2_draft",
+  "wrapper_sha256": "338dd5509873a29b9a6f25711794b9a369c1ea65b6e9dc41085de8dada213754",
+  "overlay": {
+    "tests/full_actor_performance_probe.gd": "5013ed6ed7bee55213bc9f84060d9a5fbb68e44ddc9cf95fe3526fd4bcf58bef",
+    "tests/sustained_actor_driver.gd": "0732e2d8d6994be3f44e13576da09bfd46d09fb7cda050cf0113a10f936d08fb",
+    "tests/test_sustained_actor_driver.gd": "85038f4c7a679585da3d285a1d727fa1b89b2a8a0463784130d68f32cdadf818"
+  },
+  "measured_scene_sha256": "3b5eaf2ee0a6a94b283c0d7bd360cb4bc8226748c82ca15b9a8e3bc6d1c58d27",
+  "engine_launcher_sha256": "f0336c8b2ae039d39767a64c416f01b1b49d95d8dde87724012874dd4be1c1a8",
+  "engine_runtime_sha256": "a829242096d640007de9fa93ea923d0f666d13d6a3b472a0231c820be6dc7627",
+  "release_template_sha256": "78ccc576e8f8bffd7ef6ad6f36ebd72a41e609a1052225a55b3407c96ea84065",
+  "engine_distribution": "Godot4.5.1-stable official Windows x86_64; installed repository .tools binaries",
+  "timing_baseline": "BASELINE.json; exact normalized MeasuredScene class is verified against each archived revision",
+  "note": "Pinned before execution; no engine/export/profile executed by this worker. Reuse identical wrapper and overlay on both frozen revisions."
+}

@@ -1,0 +1,446 @@
+{
+	"actual_overlaps": [
+		{
+			"name": "Body",
+			"owner": "interactiveProps:4",
+			"shapes": [
+				{
+					"height": 0.759999990463257,
+					"position": "(-30.0, 0.38, 28.8)",
+					"radius": 0.300000011920929,
+					"type": "CylinderShape3D"
+				}
+			]
+		}
+	],
+	"after": {
+		"actors": 56,
+		"brain": 66.0,
+		"cart_mounted": false,
+		"cash": 306,
+		"charisma": 0,
+		"claims": {
+
+		},
+		"copper": 6,
+		"crash": 0.0,
+		"cred": 14,
+		"day": 1,
+		"day_time": 0.537562402020205,
+		"equip": {
+			"coat": null,
+			"hat": null,
+			"shoes": null,
+			"tool": null
+		},
+		"faction": {
+			"scrap": 0,
+			"spiritual": -1,
+			"street": 2
+		},
+		"high": 0.0,
+		"hp": 100.0,
+		"intro": true,
+		"inventory": [],
+		"max_hp": 100.0,
+		"offenses": 0,
+		"office": {
+			"claimJob": null,
+			"jobsCompleted": 0,
+			"lastWorkId": "",
+			"orderSerial": 0,
+			"owned": false,
+			"rerollDay": 0,
+			"upgrades": {
+				"cot": false,
+				"desk": false,
+				"generator": false,
+				"locker": false,
+				"radio": false,
+				"route_board": false
+			},
+			"workDay": 1,
+			"workJob": null,
+			"workToday": 0
+		},
+		"office_available": false,
+		"office_jobs": 0,
+		"paper_done": false,
+		"rng": 380932911,
+		"rocks": 0,
+		"rocks_smoked": 1,
+		"route": {
+			"cursor": 1,
+			"lastStopId": "",
+			"serial": 1,
+			"stops": [
+				"laundry_sock",
+				"alley_can",
+				"bus_glass"
+			]
+		},
+		"routes": 0,
+		"shakes": 58.2870173656571,
+		"source_position": "(1778.578, 1136.093)",
+		"speed": 2.2,
+		"wanted": 0,
+		"weapon": "pipe"
+	},
+	"before": {
+		"actors": 56,
+		"brain": 66.0,
+		"cart_mounted": false,
+		"cash": 306,
+		"charisma": 0,
+		"claims": {
+
+		},
+		"copper": 6,
+		"crash": 0.0,
+		"cred": 14,
+		"day": 1,
+		"day_time": 0.537562402020205,
+		"equip": {
+			"coat": null,
+			"hat": null,
+			"shoes": null,
+			"tool": null
+		},
+		"faction": {
+			"scrap": 0,
+			"spiritual": -1,
+			"street": 2
+		},
+		"high": 0.0,
+		"hp": 100.0,
+		"intro": true,
+		"inventory": [],
+		"max_hp": 100.0,
+		"offenses": 0,
+		"office": {
+			"claimJob": null,
+			"jobsCompleted": 0,
+			"lastWorkId": "",
+			"orderSerial": 0,
+			"owned": false,
+			"rerollDay": 0,
+			"upgrades": {
+				"cot": false,
+				"desk": false,
+				"generator": false,
+				"locker": false,
+				"radio": false,
+				"route_board": false
+			},
+			"workDay": 1,
+			"workJob": null,
+			"workToday": 0
+		},
+		"office_available": false,
+		"office_jobs": 0,
+		"paper_done": false,
+		"rng": 380932911,
+		"rocks": 0,
+		"rocks_smoked": 1,
+		"route": {
+			"cursor": 1,
+			"lastStopId": "",
+			"serial": 1,
+			"stops": [
+				"laundry_sock",
+				"alley_can",
+				"bus_glass"
+			]
+		},
+		"routes": 0,
+		"shakes": 58.2870173656571,
+		"source_position": "(1778.578, 1136.093)",
+		"speed": 2.2,
+		"wanted": 0,
+		"weapon": "pipe"
+	},
+	"candidate_proofs": [
+		{
+			"ok": false,
+			"point": "(-30.0, 0.06, 29.32)",
+			"reason": "actual_capsule_overlap",
+			"source_center": "(300.0, 1573.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-27.76, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(356.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": false,
+			"point": "(-28.41608, 0.06, 27.21608)",
+			"reason": "live_peer_overlap",
+			"source_center": "(339.598, 1520.402)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.08, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(348.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.64235, 0.06, 27.44235)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(333.9412, 1526.059)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.56, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(336.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.98177, 0.06, 27.78177)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(325.4558, 1534.544)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.41608, 0.06, 30.38392)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(339.598, 1599.598)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-29.04, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(324.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.64235, 0.06, 30.15765)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(333.9412, 1593.941)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-29.32118, 0.06, 28.12118)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(316.9706, 1543.029)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-28.98177, 0.06, 29.81823)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(325.4558, 1585.456)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 26.56)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1504.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 26.88)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1512.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-29.32118, 0.06, 29.47882)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(316.9706, 1576.971)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 27.36)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1524.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 27.84)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1536.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 29.76)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1584.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 30.24)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1596.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.67882, 0.06, 28.12118)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(283.0294, 1543.029)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 30.72)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1608.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.0, 0.06, 31.04)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(300.0, 1616.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.01823, 0.06, 27.78177)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(274.5442, 1534.544)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.67882, 0.06, 29.47882)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(283.0294, 1576.971)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-30.96, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(276.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.35765, 0.06, 27.44235)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(266.0588, 1526.059)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.58392, 0.06, 27.21608)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(260.402, 1520.402)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.01823, 0.06, 29.81823)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(274.5442, 1585.456)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.44, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(264.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.35765, 0.06, 30.15765)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(266.0588, 1593.941)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.92, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(252.0, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-31.58392, 0.06, 30.38392)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(260.402, 1599.598)",
+			"source_target": "(300.0, 1560.0)"
+		},
+		{
+			"ok": true,
+			"point": "(-32.24, 0.06, 28.8)",
+			"reason": "current_endpoint_clear",
+			"source_center": "(244.0001, 1560.0)",
+			"source_target": "(300.0, 1560.0)"
+		}
+	],
+	"captures": [
+		"loaded_confirmation"
+	],
+	"complete": true,
+	"diagnostic_only": true,
+	"endpoint_history": [],
+	"engine": "4.5.1-stable (official)",
+	"events": [],
+	"failures": [],
+	"headless": false,
+	"inputs": {
+		"capture_clicks": 0,
+		"clicks": 0,
+		"keys": 0,
+		"menu_clicks": 1,
+		"motion_frames": 0,
+		"mouse_motion": 0
+	},
+	"legal_candidates": 31,
+	"legs": [],
+	"loaded_source_position": [
+		1778.57788085938,
+		1136.09252929688
+	],
+	"office_acceptance": false,
+	"original_proof": {
+		"ok": false,
+		"point": "(-30.0, 0.06, 29.32)",
+		"reason": "actual_capsule_overlap",
+		"source_center": "(300.0, 1573.0)",
+		"source_target": "(300.0, 1560.0)"
+	},
+	"original_service": {
+		"approach": "(-30.0, 0.06, 29.32)",
+		"kind": "route",
+		"reach": 2.3,
+		"source_point": "(300.0, 1560.0)",
+		"structure_id": "",
+		"target": "(-30.0, 1.25, 28.8)"
+	},
+	"rows": [],
+	"schema": 1,
+	"source_save_sha256": "09014f2c4a8d01c43cc442cc8131c5ad37f46157fddd9eacc054413a60e406c6",
+	"stamp": {
+
+	},
+	"walk_requested": false,
+	"walking": [],
+	"walking_context": {
+
+	}
+}

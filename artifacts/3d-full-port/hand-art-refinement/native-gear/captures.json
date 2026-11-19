@@ -1,0 +1,1032 @@
+{
+	"camera": {
+		"fov": 78.0,
+		"near": 0.0599999986588955,
+		"size": [
+			1280,
+			720
+		]
+	},
+	"captures": [
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "propane_torch_fists_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.372881948947906,
+					-0.219511359930038,
+					-0.206998959183693
+				],
+				"camera_min": [
+					-0.442418575286865,
+					-0.788132607936859,
+					-0.765802025794983
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 10,
+				"mesh_resources": 34,
+				"visible_meshes": 56,
+				"visible_vertices": 7764
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "propane_torch_pipe_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.403913378715515,
+					-0.219511359930038,
+					-0.222024068236351
+				],
+				"camera_min": [
+					-0.442418575286865,
+					-0.759678483009338,
+					-0.829118728637695
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 37,
+				"visible_meshes": 60,
+				"visible_vertices": 8068
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "pipe",
+			"coat": "",
+			"file": "propane_torch_right_pipe_contact.png",
+			"geometry": {
+				"camera_max": [
+					0.353154361248016,
+					-0.201370567083359,
+					-0.237024053931236
+				],
+				"camera_min": [
+					-0.442418575286865,
+					-0.702488422393799,
+					-1.11749279499054
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 37,
+				"visible_meshes": 60,
+				"visible_vertices": 8068
+			},
+			"phase": 0.160714285714286,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"coat": "",
+			"file": "propane_torch_left_fist_stowed.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.174800649285316,
+					-0.207024082541466
+				],
+				"camera_min": [
+					-0.218057870864868,
+					-0.748730421066284,
+					-0.847211837768555
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.1875,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "receipt",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "propane_torch_receipt_stowed.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.245553538203239,
+					-0.207024082541466
+				],
+				"camera_min": [
+					-0.279579192399979,
+					-0.784230351448059,
+					-0.710377275943756
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 6,
+				"mesh_resources": 26,
+				"visible_meshes": 48,
+				"visible_vertices": 6848
+			},
+			"phase": 0.46875,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "",
+			"weapon": "pipe"
+		},
+		{
+			"action": "smoke",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "propane_torch_smoke_stowed.png",
+			"geometry": {
+				"camera_max": [
+					0.400982946157455,
+					-0.138282552361488,
+					-0.147898003458977
+				],
+				"camera_min": [
+					-0.369145810604095,
+					-0.784994125366211,
+					-0.69711446762085
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.363636363636364,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "",
+			"weapon": "pipe"
+		},
+		{
+			"action": "phone",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "propane_torch_phone_carried.png",
+			"geometry": {
+				"camera_max": [
+					0.429605782032013,
+					-0.213777109980583,
+					-0.176794096827507
+				],
+				"camera_min": [
+					-0.442418575286865,
+					-0.720249891281128,
+					-0.765802025794983
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 13,
+				"mesh_resources": 37,
+				"visible_meshes": 61,
+				"visible_vertices": 7884
+			},
+			"phase": 0.272727272727273,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "propane_torch_replacement_after_recovery.png",
+			"geometry": {
+				"camera_max": [
+					0.397282302379608,
+					-0.226732239127159,
+					-0.222024068236351
+				],
+				"camera_min": [
+					-0.442266941070557,
+					-0.758262395858765,
+					-0.790466010570526
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 41,
+				"visible_meshes": 63,
+				"visible_vertices": 7956
+			},
+			"phase": 0.0,
+			"previous_tool": "propane_torch",
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crowbar_fists_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.372881948947906,
+					-0.228585466742516,
+					-0.206998959183693
+				],
+				"camera_min": [
+					-0.442266941070557,
+					-0.788132607936859,
+					-0.790466010570526
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 9,
+				"mesh_resources": 32,
+				"visible_meshes": 54,
+				"visible_vertices": 7484
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crowbar_pipe_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.403913378715515,
+					-0.228585466742516,
+					-0.222024068236351
+				],
+				"camera_min": [
+					-0.442266941070557,
+					-0.759678483009338,
+					-0.829118728637695
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 35,
+				"visible_meshes": 58,
+				"visible_vertices": 7788
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "pipe",
+			"coat": "",
+			"file": "crowbar_right_pipe_contact.png",
+			"geometry": {
+				"camera_max": [
+					0.353154361248016,
+					-0.210444673895836,
+					-0.237024053931236
+				],
+				"camera_min": [
+					-0.442266941070557,
+					-0.702488422393799,
+					-1.11749279499054
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 35,
+				"visible_meshes": 58,
+				"visible_vertices": 7788
+			},
+			"phase": 0.160714285714286,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "pipe"
+		},
+		{
+			"action": "punch",
+			"attack_weapon": "fists",
+			"coat": "",
+			"file": "crowbar_left_fist_stowed.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.174800649285316,
+					-0.207024082541466
+				],
+				"camera_min": [
+					-0.218057870864868,
+					-0.748730421066284,
+					-0.847211837768555
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.1875,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "receipt",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crowbar_receipt_stowed.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.245553538203239,
+					-0.207024082541466
+				],
+				"camera_min": [
+					-0.279579192399979,
+					-0.784230351448059,
+					-0.710377275943756
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 6,
+				"mesh_resources": 26,
+				"visible_meshes": 48,
+				"visible_vertices": 6848
+			},
+			"phase": 0.46875,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "",
+			"weapon": "pipe"
+		},
+		{
+			"action": "smoke",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crowbar_smoke_stowed.png",
+			"geometry": {
+				"camera_max": [
+					0.400982946157455,
+					-0.138282552361488,
+					-0.147898003458977
+				],
+				"camera_min": [
+					-0.369145810604095,
+					-0.784994125366211,
+					-0.69711446762085
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.363636363636364,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "",
+			"weapon": "pipe"
+		},
+		{
+			"action": "phone",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crowbar_phone_carried.png",
+			"geometry": {
+				"camera_max": [
+					0.429605782032013,
+					-0.213777109980583,
+					-0.176794096827507
+				],
+				"camera_min": [
+					-0.442266941070557,
+					-0.720249891281128,
+					-0.790466010570526
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 35,
+				"visible_meshes": 59,
+				"visible_vertices": 7604
+			},
+			"phase": 0.272727272727273,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crowbar_replacement_after_recovery.png",
+			"geometry": {
+				"camera_max": [
+					0.397282302379608,
+					-0.217658132314682,
+					-0.222024068236351
+				],
+				"camera_min": [
+					-0.442418575286865,
+					-0.758262395858765,
+					-0.765802025794983
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 13,
+				"mesh_resources": 43,
+				"visible_meshes": 65,
+				"visible_vertices": 8236
+			},
+			"phase": 0.0,
+			"previous_tool": "crowbar",
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "broken_bottle"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "trench",
+			"file": "trench_sleeves_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.374556839466095,
+					-0.389012485742569,
+					-0.199519798159599
+				],
+				"camera_min": [
+					-0.380295544862747,
+					-0.808984160423279,
+					-0.693687379360199
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "bench",
+			"attack_weapon": "",
+			"coat": "trench",
+			"file": "trench_sleeves_bench.png",
+			"geometry": {
+				"camera_max": [
+					0.410825103521347,
+					-0.448402166366577,
+					-0.23581138253212
+				],
+				"camera_min": [
+					-0.410825103521347,
+					-0.846232771873474,
+					-0.728856682777405
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.5,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "windbreaker",
+			"file": "windbreaker_sleeves_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.371207028627396,
+					-0.389012485742569,
+					-0.202039480209351
+				],
+				"camera_min": [
+					-0.376951456069946,
+					-0.806901276111603,
+					-0.693687379360199
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "bench",
+			"attack_weapon": "",
+			"coat": "windbreaker",
+			"file": "windbreaker_sleeves_bench.png",
+			"geometry": {
+				"camera_max": [
+					0.407466471195221,
+					-0.448402166366577,
+					-0.238236725330353
+				],
+				"camera_min": [
+					-0.407466471195221,
+					-0.84407514333725,
+					-0.728856682777405
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.5,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "bathrobe",
+			"file": "bathrobe_sleeves_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.381256401538849,
+					-0.389012485742569,
+					-0.194480448961258
+				],
+				"camera_min": [
+					-0.386983692646027,
+					-0.813149929046631,
+					-0.693687379360199
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "bench",
+			"attack_weapon": "",
+			"coat": "bathrobe",
+			"file": "bathrobe_sleeves_bench.png",
+			"geometry": {
+				"camera_max": [
+					0.417542397975922,
+					-0.448402166366577,
+					-0.230960711836815
+				],
+				"camera_min": [
+					-0.417542397975922,
+					-0.850548088550568,
+					-0.728856682777405
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.5,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "parka",
+			"file": "parka_sleeves_rest.png",
+			"geometry": {
+				"camera_max": [
+					0.37958151102066,
+					-0.389012485742569,
+					-0.195740282535553
+				],
+				"camera_min": [
+					-0.385311663150787,
+					-0.81210845708847,
+					-0.693687379360199
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "bench",
+			"attack_weapon": "",
+			"coat": "parka",
+			"file": "parka_sleeves_bench.png",
+			"geometry": {
+				"camera_max": [
+					0.41586309671402,
+					-0.448402166366577,
+					-0.232173383235931
+				],
+				"camera_min": [
+					-0.41586309671402,
+					-0.849469244480133,
+					-0.728856682777405
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.5,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "default_kick.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.367716133594513,
+					-0.200779646635056
+				],
+				"camera_min": [
+					-0.378623485565186,
+					-0.807627022266388,
+					-0.96093612909317
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 9,
+				"mesh_resources": 30,
+				"visible_meshes": 54,
+				"visible_vertices": 7280
+			},
+			"phase": 0.357142857142857,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "shoe"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "airpods_kick.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.367716133594513,
+					-0.200779646635056
+				],
+				"camera_min": [
+					-0.378623485565186,
+					-0.807627022266388,
+					-0.96093612909317
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 9,
+				"mesh_resources": 30,
+				"visible_meshes": 54,
+				"visible_vertices": 7280
+			},
+			"phase": 0.357142857142857,
+			"shoes": "airpods",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "shoe"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "crocs_kick.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.367716133594513,
+					-0.200779646635056
+				],
+				"camera_min": [
+					-0.378623485565186,
+					-0.807627022266388,
+					-0.961657524108887
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 7,
+				"mesh_resources": 29,
+				"visible_meshes": 56,
+				"visible_vertices": 7328
+			},
+			"phase": 0.357142857142857,
+			"shoes": "crocs",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "shoe"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "walmart_sneak_kick.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.367716133594513,
+					-0.200779646635056
+				],
+				"camera_min": [
+					-0.378623485565186,
+					-0.807627022266388,
+					-0.961926996707916
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 9,
+				"mesh_resources": 30,
+				"visible_meshes": 55,
+				"visible_vertices": 7304
+			},
+			"phase": 0.357142857142857,
+			"shoes": "walmart_sneak",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "shoe"
+		},
+		{
+			"action": "kick",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "vibrams_kick.png",
+			"geometry": {
+				"camera_max": [
+					0.369145810604095,
+					-0.367716133594513,
+					-0.200779646635056
+				],
+				"camera_min": [
+					-0.378623485565186,
+					-0.807627022266388,
+					-0.953374028205872
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 8,
+				"mesh_resources": 33,
+				"visible_meshes": 55,
+				"visible_vertices": 7888
+			},
+			"phase": 0.357142857142857,
+			"shoes": "vibrams",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "shoe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"cart_clear": true,
+			"coat": "",
+			"file": "propane_torch_actual_cart_grip.png",
+			"geometry": {
+				"camera_max": [
+					0.357143968343735,
+					-0.265455961227417,
+					-0.343104869127274
+				],
+				"camera_min": [
+					-0.357144087553024,
+					-0.674058973789215,
+					-0.80023992061615
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"grips": 2,
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"cart_clear": true,
+			"coat": "",
+			"file": "propane_torch_cart_look_release.png",
+			"geometry": {
+				"camera_max": [
+					0.403913378715515,
+					-0.219132035970688,
+					-0.222024068236351
+				],
+				"camera_min": [
+					-0.442418575286865,
+					-0.759316563606262,
+					-0.829118728637695
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 37,
+				"visible_meshes": 60,
+				"visible_vertices": 8068
+			},
+			"grips": 0,
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"cart_clear": true,
+			"coat": "",
+			"file": "crowbar_actual_cart_grip.png",
+			"geometry": {
+				"camera_max": [
+					0.357143968343735,
+					-0.265455961227417,
+					-0.343104869127274
+				],
+				"camera_min": [
+					-0.357144087553024,
+					-0.674058973789215,
+					-0.80023992061615
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"grips": 2,
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"cart_clear": true,
+			"coat": "",
+			"file": "crowbar_cart_look_release.png",
+			"geometry": {
+				"camera_max": [
+					0.403913378715515,
+					-0.228206142783165,
+					-0.222024068236351
+				],
+				"camera_min": [
+					-0.442266941070557,
+					-0.759316563606262,
+					-0.829118728637695
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 35,
+				"visible_meshes": 58,
+				"visible_vertices": 7788
+			},
+			"grips": 0,
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "parka",
+			"file": "torch_sprint_stress.png",
+			"geometry": {
+				"camera_max": [
+					0.401658862829208,
+					-0.289034605026245,
+					-0.213597923517227
+				],
+				"camera_min": [
+					-0.449292808771133,
+					-0.825344502925873,
+					-0.833224833011627
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 12,
+				"mesh_resources": 37,
+				"visible_meshes": 60,
+				"visible_vertices": 8068
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "propane_torch",
+			"visible_tool": "propane_torch",
+			"weapon": "pipe"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "trench",
+			"file": "crowbar_walk.png",
+			"geometry": {
+				"camera_max": [
+					0.397611975669861,
+					-0.225142315030098,
+					-0.221770584583282
+				],
+				"camera_min": [
+					-0.441964149475098,
+					-0.760726988315582,
+					-0.789938926696777
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 13,
+				"mesh_resources": 36,
+				"visible_meshes": 61,
+				"visible_vertices": 7750
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "crowbar",
+			"visible_tool": "crowbar",
+			"weapon": "knife"
+		},
+		{
+			"action": "",
+			"attack_weapon": "",
+			"coat": "",
+			"file": "reset_original_mold_and_empty_tools.png",
+			"geometry": {
+				"camera_max": [
+					0.372881948947906,
+					-0.389012485742569,
+					-0.200779646635056
+				],
+				"camera_min": [
+					-0.378623485565186,
+					-0.807942688465118,
+					-0.693687379360199
+				],
+				"finite_near_plane_bounds": true,
+				"material_resources": 4,
+				"mesh_resources": 24,
+				"visible_meshes": 46,
+				"visible_vertices": 6800
+			},
+			"phase": 0.0,
+			"shoes": "",
+			"tool": "",
+			"visible_tool": "",
+			"weapon": "fists"
+		}
+	],
+	"count": 36,
+	"scope": "Production rig and full-world lighting; actual Cart/Travel handle projection. Explicit fixture and presentation time; no Runtime, gameplay input, save IO, performance claim or automatic visual acceptance."
+}
